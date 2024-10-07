@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Equation Solver</title>
+    
+    <!-- Use an alternative CDN for MathLive CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mathlive@0.101.0/dist/mathlive.core.min.css">
+    
+    <!-- PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />    
+    <script type="module" src="https://pyscript.net/releases/2024.8.1/core.js"></script>
+
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #math-input {
+            width: 100%;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        #solve-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+        #solution {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
+        }
+    </style>    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+    <script type="text/javascript">
+      async function main() {
+        let pyodide = await loadPyodide();
+        await pyodide.loadPackage("micropip");
+        const micropip = pyodide.pyimport("micropip");
+        await micropip.install("snowballstemmer");
+        await pyodide.runPython(`
+        from sympy import *
+      `);
+      }
+      main();
+      </script>
+</head>
+<body>
+
+    <h1>Equation Solver</h1>
+
+    <!-- MathLive Input -->
+    <p>Enter your equation below:</p>
+    <math-field id="math-input"></math-field>
+
+    <!-- Button to solve the equation -->
+    <button id="solve-btn" onclick="change_text()">Solve Equation</button>
+    <!-- Solution Display -->
+    <div id="solution"></div>
+
+    <div id="content">Original Text</div>
+
+    <!-- MathLive JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mathlive@0.101.0/dist/mathlive.min.js"></script>
+    <div id="output">text</div>
+    <script type="py" terminal>    
+    def change_text():
+        element = document.getElementById("content")
+        element.textContent = "Hello World"    
+    </script>
+
+</body>
+</html>

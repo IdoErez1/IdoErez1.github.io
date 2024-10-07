@@ -1,0 +1,211 @@
+@media print {
+    /* All your print styles go here */
+    body{
+        background-color: #FFF;
+        
+    }
+    div.content{
+        margin:0;
+        padding: 0;
+    }
+    ul.top-navigation{
+        display: none;
+    }
+  }
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+    /* Remove side margins for smaller devices */
+    .content {
+        margin: 4pt !important;
+        padding: 10pt; /* Add some padding for small screens */
+        box-shadow: none; /* Remove or reduce shadow for cleaner look */
+        overflow-x: scroll;
+    }
+
+    /* Adjust navigation for mobile */
+    ul.top-navigation {
+        margin: 4pt !important; /* Smaller margins for better fit on mobile */
+        /*flex-direction: column;/* /* Stack navigation items vertically */
+        text-align: center; /* Center align items for better readability */
+    }
+
+    ul.top-navigation li {
+        padding: 10pt 0; /* Add more padding between navigation items */
+    }
+
+    /* General body font size for mobile */
+    body {
+        font-size: small; /* Decrease font size slightly for mobile */
+    }
+    .MathJax_Display{
+        overflow-x: scroll;
+    }
+    ul.top-navigation li:hover .dropdown {
+        display: none; /* Disable hover effect on mobile */
+    }
+    
+    /* Show dropdown when the parent is clicked (focused) */
+    ul.top-navigation li:focus-within .dropdown {
+        display: block;
+    }
+
+}
+
+/* For very small screens like smartphones */
+@media screen and (max-width: 480px) {
+    div.content {
+        padding: 5pt; /* Make padding even smaller */
+    }
+
+    ul.top-navigation {
+        margin: 5pt; /* Remove margins entirely for small screens */
+        border-radius: 0; /* Remove rounded corners */
+        box-shadow: none; /* Remove shadow to simplify the layout */
+    }
+
+    ul.top-navigation li {
+        padding: 8pt 0;
+        font-size: small; /* Further reduce the font size for small devices */
+    }
+}
+  
+body {
+    direction: rtl;
+    font-family: Arial, sans-serif;
+    font-size: medium;
+    background-color: #aed9fa;
+    padding: 0;
+    margin: 0;
+}
+
+div.content {
+    margin: 0 20%;
+    padding: 2pt 5% 20pt 5%;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f0f4f7;
+}
+
+/* Main navigation */
+ul.top-navigation {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 5pt 20% 7pt 20%;
+    background-color: #f0f4f7;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+/* Ensure equal width for all items */
+ul.top-navigation li {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    padding: 0;
+    min-height: 40px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Styling the links */
+ul.top-navigation li {
+    display: block;
+    text-decoration: none;
+    color: #007acc;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+/* Hover effect: Apply only to hovered `li`, not nested `ul` */
+ul.top-navigation  li:hover {
+    background-color: #d0e8ff;
+    border-radius: 5px;
+}
+
+/* Only the link inside the `li` should change color */
+ul.top-navigation li:hover{
+    color: #003d66;
+}
+
+/* Dropdown menu (hidden by default) */
+ul.parent-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #e5f0f7;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 100;
+    border-radius: 5px;
+}
+
+/* Show the dropdown when hovering on the parent item */
+ul.top-navigation li.parent-page:hover > ul.parent-dropdown {
+    display: block;
+}
+
+/* Dropdown items styling */
+
+/* Change background only on hovered dropdown `li` */
+ul.parent-dropdown li:hover, .parent-page-dropdown:hover {
+    background-color: #d0e8ff;
+}
+ul.top-navigation li a {
+    display: block;         /* Make the <a> tag behave like a block */
+    width: 100%;            /* Make <a> take up the full width of the <li> */
+    height: 100%;           /* Ensure <a> takes the full height of the <li> */
+    padding: 10px 0 3pt 0;          /* Padding for visual spacing */
+    text-decoration: none;  /* Remove underline from text */
+    color: #007acc;         /* Default text color */
+    box-sizing: border-box; /* Ensure padding is included in the height/width */
+}
+/* Prevent the nested `ul` from inheriting the background color 
+ul.parent-dropdown li ul {
+    background-color: #fff; 
+}
+*/
+/* Change color of hovered dropdown link */
+ul.parent-dropdown li a:hover {
+    color: #003d66;
+}
+
+/* Previous page: Add custom left arrow (SVG) */
+ul.top-navigation li.prev-page a::after {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%23555" d="M14 7l-5 5 5 5V7z"/></svg>');
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Next page: Add custom right arrow (SVG) */
+ul.top-navigation li.next-page a::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%23555" d="M10 17l5-5-5-5v10z"/></svg>');
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+/* Dropdown visible */
+.parent-dropdown-dropdown-visible {
+    display: block !important; 
+    background-color: #f4f9ff !important;
+}
+.parent-dropdown-dropdown {
+    display: none;
+    padding: 0;
+}
+.dropdown-div{
+    padding: 10pt 0;
+    margin: 1px;
+    display: block;
+    width:100%;
+    height: 100%;
+}
