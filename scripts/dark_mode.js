@@ -68,13 +68,18 @@ window.onload = () =>{
     /**
     * 4. Add an event listener to toggle the theme
     */
+    if(localStorageTheme=="light"){
+        sun.classList.add("visible")
+    }
+    else{
+        moon.classList.add("visible")
+    }
+
     button.addEventListener("click", (event) => {
       const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
     
-      button.addEventListener("click", () => {
-        sun.classList.toggle("visible")
-        moon.classList.toggle("visible")
-      })
+      sun.classList.toggle("visible")
+      moon.classList.toggle("visible")
       localStorage.setItem("theme", newTheme);
       updateButton({ buttonEl: button, isDark: newTheme === "dark" });
       updateThemeOnHtmlEl({ theme: newTheme });
