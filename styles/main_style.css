@@ -1,144 +1,178 @@
-
-body {
+[data-theme="light"]{
+    /* Light Mode Colors */
+    --background-color: #aed9fa;
+    --content-bg: #f0f4f7;
+    --nav-bg: #f0f4f7;
+    --nav-text-color: #007acc;
+    --nav-hover-bg: #d0e8ff;
+    --nav-hover-text-color: #003d66;
+    --dropdown-bg: #e5f0f7;
+    --dropdown-hover-bg: #d0e8ff;
+    --dropdown-text-color: #003d66;
+    --svg-arrow-color: #555;
+    --dropdown-visible-bg: #f4f9ff;
+    --box-shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-theme="dark"]{
+      /* Dark Mode Colors */
+      --background-color: #2b3e50;
+      --content-bg: #35495e;
+      --nav-bg: #3c5a73;
+      --nav-text-color: #d4eafd;
+      --nav-hover-bg: #507891;
+      --nav-hover-text-color: #e0f1ff;
+      --dropdown-bg: #3e5365;
+      --dropdown-hover-bg: #507891;
+      --dropdown-text-color: #e0f1ff;
+      --svg-arrow-color: #bbb;
+      --dropdown-visible-bg: #3b4755;
+      --box-shadow: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+    body * {
+        -webkit-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+    }
+  body {
     direction: rtl;
     font-family: Arial, sans-serif;
     font-size: medium;
-    background-color: #aed9fa;
+    background-color: var(--background-color);
     padding: 0;
     margin: 0;
-}
+    -webkit-transition: background-color 500ms linear;
+    -ms-transition: background-color 500ms linear;
+    transition: background-color 500ms linear;
+  }
+  
+  div.content {
 
-div.content {
     margin: 0 20%;
     padding: 2pt 5% 20pt 5%;
-    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f0f4f7;
-}
-
-/* Main navigation */
-ul.top-navigation {
+    box-shadow: 1px 4px 6px var(--box-shadow);
+    background-color: var(--content-bg);
+  }
+  
+  /* Main navigation */
+  ul.top-navigation {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
     padding: 0;
     margin: 5pt 20% 7pt 20%;
-    background-color: #f0f4f7;
+    background-color: var(--nav-bg);
     border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px var(--box-shadow);
     max-width: 100%;
-}
-
-/* Ensure equal width for all items */
-ul.top-navigation li {
+  }
+  
+  /* Ensure equal width for all items */
+  ul.top-navigation li {
     flex: 1;
     position: relative;
     text-align: center;
     padding: 0;
     min-height: 40px;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Styling the links */
-ul.top-navigation li {
+  }
+  
+  /* Styling the links */
+  ul.top-navigation li {
     display: block;
     text-decoration: none;
-    color: #007acc;
+    color: var(--nav-text-color);
+    font-weight: bolder;
     padding: 0;
     width: 100%;
     height: 100%;
     transition: color 0.3s ease;
     text-align: center;
-}
-
-/* Hover effect: Apply only to hovered `li`, not nested `ul` */
-ul.top-navigation  li:hover {
-    background-color: #d0e8ff;
+  }
+  
+  /* Hover effect */
+  ul.top-navigation li:hover {
+    background-color: var(--nav-hover-bg);
     border-radius: 5px;
-}
-
-/* Only the link inside the `li` should change color */
-ul.top-navigation li:hover{
-    color: #003d66;
-}
-
-/* Dropdown menu (hidden by default) */
-ul.parent-dropdown {
+    color: var(--nav-hover-text-color);
+  }
+  
+  /* Dropdown menu */
+  ul.parent-dropdown {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #e5f0f7;
+    background-color: var(--dropdown-bg);
     padding: 0;
     margin: 0;
     list-style: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px var(--box-shadow);
     width: 100%;
     z-index: 100;
     border-radius: 5px;
-}
-
-/* Show the dropdown when hovering on the parent item */
-ul.top-navigation li.parent-page:hover > ul.parent-dropdown {
+  }
+  
+  /* Show dropdown on hover */
+  ul.top-navigation li.parent-page:hover > ul.parent-dropdown {
     display: block;
-}
-
-/* Dropdown items styling */
-
-/* Change background only on hovered dropdown `li` */
-ul.parent-dropdown li:hover, .parent-page-dropdown:hover {
-    background-color: #d0e8ff;
-}
-ul.top-navigation li a {
-    display: block;         /* Make the <a> tag behave like a block */
-    width: 100%;            /* Make <a> take up the full width of the <li> */
-    height: 100%;           /* Ensure <a> takes the full height of the <li> */
-    padding: 10px 0 3pt 0;          /* Padding for visual spacing */
-    text-decoration: none;  /* Remove underline from text */
-    color: #007acc;         /* Default text color */
-    box-sizing: border-box; /* Ensure padding is included in the height/width */
-}
-/* Prevent the nested `ul` from inheriting the background color 
-ul.parent-dropdown li ul {
-    background-color: #fff; 
-}
-*/
-/* Change color of hovered dropdown link */
-ul.parent-dropdown li a:hover {
-    color: #003d66;
-}
-
-/* Previous page: Add custom left arrow (SVG) */
-ul.top-navigation li.prev-page a::after {
+  }
+  
+  /* Dropdown items styling */
+  ul.parent-dropdown li:hover {
+    background-color: var(--dropdown-hover-bg);
+  }
+  
+  ul.top-navigation li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 3pt 0;
+    text-decoration: none;
+    color: var(--nav-text-color);
+    box-sizing: border-box;
+  }
+  
+  /* Change color of hovered dropdown link */
+  ul.parent-dropdown li a:hover {
+    color: var(--dropdown-text-color);
+  }
+  
+  /* Previous page: Left arrow */
+  ul.top-navigation li.prev-page a::after {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%23555" d="M14 7l-5 5 5 5V7z"/></svg>');
     margin-left: 5px;
     display: inline-block;
     vertical-align: middle;
-}
-
-/* Next page: Add custom right arrow (SVG) */
-ul.top-navigation li.next-page a::before {
+  }
+  
+  /* Next page: Right arrow */
+  ul.top-navigation li.next-page a::before {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="%23555" d="M10 17l5-5-5-5v10z"/></svg>');
     margin-right: 5px;
     display: inline-block;
     vertical-align: middle;
-}
-/* Dropdown visible */
-.parent-dropdown-dropdown-visible {
-    display: block !important; 
-    background-color: #f4f9ff !important;
-}
-.parent-dropdown-dropdown {
+  }
+  
+  /* Dropdown visible */
+  .parent-dropdown-dropdown-visible {
+    display: block !important;
+    background-color: var(--dropdown-visible-bg) !important;
+  }
+  
+  .parent-dropdown-dropdown {
     display: none;
     padding: 0;
-}
-.dropdown-div{
+  }
+  
+  .dropdown-div {
     padding: 10pt 0;
     margin: 1px;
     display: block;
-    width:100%;
+    width: 100%;
     height: 100%;
-}
-
+  }
 
 
 @media print {
@@ -213,4 +247,136 @@ ul.top-navigation li.next-page a::before {
         font-size: small; 
     }
 } 
+.container {
+    width: 46px;
+    height: 46px;
+    box-sizing: border-box;
+    padding: 12px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .sun {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.6) rotate(0deg);
+    transition: transform 0.3s ease-in, opacity 0.2s ease-in 0.1s;
+    /*  white transparent for Safari  */
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0) 50%,
+      #f0f0f0 50%
+    );
+  }
+  
+  .sun:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      #f0f0f0 30%,
+      rgba(0, 0, 0, 0) 31%,
+      rgba(0, 0, 0, 0) 50%,
+      #f0f0f0 50%
+    );
+    transform: rotate(45deg);
+  }
+  
+  .sun.visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+    transition: transform 0.3s ease-in, opacity 0.2s ease-in 0.1s;
+  }
+  
+  .moon {
+    width: 50%;
+    height: 50%;
+    pointer-events: none;
+    position: absolute;
+    left: 12.5%;
+    top: 18.75%;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    box-shadow: 9px 3px 0px 0px #f0f0f0;
+    opacity: 0;
+    transform: scale(0.3) rotate(65deg);
+    transition: transform 0.3s ease-in, opacity 0.2s ease-in 0.1s;
+  }
+  
+  .moon.visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition: transform 0.3s ease-in, opacity 0.2s ease-in 0.1s;
+  }
+  
+  .star {
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-right: 7px solid rgba(0, 0, 0, 0);
+    border-bottom: 5px solid #f0f0f0;
+    border-left: 7px solid rgba(0, 0, 0, 0);
+    transform: scale(0.55) rotate(35deg);
+    opacity: 0;
+    transition: all 0.2s ease-in 0.4s;
+  }
+  
+  .star:before {
+    border-bottom: 5px solid #f0f0f0;
+    border-left: 3px solid rgba(0, 0, 0, 0);
+    border-right: 3px solid rgba(0, 0, 0, 0);
+    position: absolute;
+    height: 0;
+    width: 0;
+    top: -3px;
+    left: -5px;
+    display: block;
+    content: "";
+    transform: rotate(-35deg);
+  }
+  .star:after {
+    position: absolute;
+    display: block;
+    color: red;
+    top: 0px;
+    left: -7px;
+    width: 0px;
+    height: 0px;
+    border-right: 7px solid rgba(0, 0, 0, 0);
+    border-bottom: 5px solid #f0f0f0;
+    border-left: 7px solid rgba(0, 0, 0, 0);
+    transform: rotate(-70deg);
+    content: "";
+  }
+  .moon.visible .star {
+    opacity: 0.8;
+  }
+  .star.small {
+    transform: scale(0.35) rotate(35deg);
+    position: relative;
+    top: 50%;
+    left: 37.5%;
+    opacity: 0;
+    transition: all 0.2s ease-in 0.45s;
+  }
+  .moon.visible .star.small {
+    opacity: 0.7;
+    transform: scale(0.45) rotate(35deg);
+  }
   
