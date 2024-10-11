@@ -10,9 +10,11 @@ console.log("load point 3")
 def process_latex(e):
     output = document.querySelector("#display")
     input_math = document.querySelector("#math-input")
-    expr = parse_latex(input_math.innerHTML)
+    console.log(input_math)
+    expr = parse_latex(input_math.value)
+    console.log(expr)
     output.innerHTML = latex(solve(expr))
-    console.log(output)
+    #console.log(output)
 
 
 console.log("load point 4")
@@ -23,3 +25,24 @@ loader = document.querySelector("#loader")
 loader.style.display = "none"
 
 console.log("load point 5")
+
+
+
+RANDOM JAVASCRIPT
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
+  let textInput = document.getElementById("math-input")
+  textInput.addEventListener(onchange, )
+  // helpDiv = document.getElementsByClassName["help"][0];
+  // helpDiv.onclick = () =>{
+  //   helpDiv.classList.toggle("hidden")
+  // }
+</script>

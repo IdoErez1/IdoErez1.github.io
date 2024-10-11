@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+            <link rel="stylesheet" href='./styles/style.css'> 
+            <link rel="stylesheet" href='./styles/questions_style.css'> 
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
+            },
+            config: ["MMLorHTML.js"],
+            jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+            extensions: ["MathMenu.js", "MathZoom.js"]
+        });
+    </script>
+        <title>Quiz</title>
+        <style>
+            .hidden { display: none; }
+        </style>
+      <script type="text/javascript">
+        window.onload = function() {
+          const subjects = {}
+          let selectedSubjects = [];
+          let currentQuestions = [];
+          let currentQuestionIndex = 0;
+
+          window.startQuiz = function() {
+            selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+            if (selectedSubjects.length === 0) {
+                alert("Please select at least one subject.");
+                return;
+            }
+            currentQuestions = [];
+            selectedSubjects.forEach(subject => {
+                currentQuestions = currentQuestions.concat(subjects[subject]);
+            });
+            shuffle(currentQuestions);
+            document.getElementById('subject-selection').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            showQuestion();
+          }
+
+          function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                document.getElementById('quiz-section').classList.add('hidden');
+                document.getElementById('end-section').classList.remove('hidden');
+                return;
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question').innerHTML = q.question;
+            document.getElementById('answer').innerHTML = q.answer;
+            document.getElementById('answer').classList.add('hidden');
+            document.getElementById('show-answer').classList.remove('hidden');
+            document.getElementById('next-question').classList.add('hidden');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"question"]);
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"answer"]);
+          }
+
+          window.showAnswer = function() {
+            document.getElementById('answer').classList.remove('hidden');
+            document.getElementById('show-answer').classList.add('hidden');
+            document.getElementById('next-question').classList.remove('hidden');
+          }
+
+          window.nextQuestion = function() {
+            currentQuestionIndex++;
+            showQuestion();
+          }
+
+          function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+        };
+      </script>
+</head>
+<body>
+<div class="content"><ul class='top-navigation'>
+        <li class="parent-page"> <a href=".//home/ido/Documents/SummariesWebsite/Mechanics"></a>חזרה לספר</li>
+        </li>
+    <div id="subject-selection">
+        <h1>Select Subjects</h1>
+        
+        <br>
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+    <div id="quiz-section" class="hidden">
+        <h1>Quiz</h1>
+        <div id="question"></div>
+        <div id="answer" class="hidden"></div>
+        <br>
+        <button id="show-answer" onclick="showAnswer()">Show Answer</button>
+        <button id="next-question" class="hidden" onclick="nextQuestion()">Next Question</button>
+    </div>
+    <div id="end-section" class="hidden">
+        <h1>End of Quiz</h1>
+        <button onclick="location.reload()">End Quiz</button>
+    </div>            
+    </div>
+</body>
+</html>
+    

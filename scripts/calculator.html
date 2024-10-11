@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href='../styles/main_style.css'>
+        <title>Pyscrpt Test</title>
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+          <style>
+            body{
+              direction: ltr !important;
+            }
+        #math-input {
+            width: 100%;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+        #solution {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
+        } 
+        #display{
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+        #loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 49%;
+}
+.solve-buttons{
+  display: flex;
+}
+.hidden{
+  display: none;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
+    </style>
+    <script src="//unpkg.com/@cortex-js/compute-engine"></script>
+    <script>
+        const ce = new ComputeEngine.ComputeEngine();
+        ce.latexDictionary = [
+  // Include all the entries from the default dictionary...
+  ...ce.latexDictionary,
+  // ...and add the `\smoll{}{}` command
+  {
+    kind: "function",
+  identifierTrigger: "y",
+  parse: "Function"
+  },
+  {
+    kind: "function",
+  identifierTrigger: "f",
+  parse: "Function"
+  },
+  {
+    kind: "function",
+  identifierTrigger: "h",
+  parse: "Function"
+  }
+];
+
+console.log(ce.parse('f(x,y,z)').json);
+    </script>    
+
+        </head>
+        <body>
+          <div id="loader"></div> 
+          <div class="content">
+            <!-- Math input field for user expression -->
+            <math-field id="math-input">x^2=2</math-field>
+            <div class="help">
+              Simplify:
+              <ul>
+                <li>Receives an Expression and simplifies it the best it can</li>
+                <li>Does not support matrices</li>
+                <li>Derivatives are represented by standard notation</li>
+              </ul>
+            </div>
+            <div class="solve-buttons">
+              <!-- Buttons to trigger Python actions -->
+              <button id="solve-btn" py-click="simplify_expression">Simplify</button>
+              <button id="solve-btn1" py-click="solve_equation">Solve</button>
+            </div>
+            <!-- Math display field -->
+            <math-field read-only id="display"></math-field>
+            
+            <!-- Hidden element for JavaScript-preprocessed LaTeX expression -->
+            <input type="hidden" id="processed-math" value="">
+        
+          </div>
+        
+          <script src="https://unpkg.com/mathlive"></script>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => MathLive.renderMathInDocument());
+        
+            // Function to preprocess the LaTeX in JavaScript
+            function preprocessLatex(latex) {
+              // Example of preprocessing steps:
+              // - Remove unnecessary spaces
+              // - Replace specific symbols or operators if needed
+              //latex = latex.replace(/\s+/g, '');  // Remove extra spaces as an example
+              // Further manipulations could go here...
+        
+              return latex;  // Return the modified LaTeX
+            }
+        
+            // Listen for when the user inputs or changes the expression
+            const inputMathField = document.querySelector("#math-input");
+            inputMathField.addEventListener('input', () => {
+              // Get the current LaTeX expression from the math field
+              let latex = inputMathField.value;
+        
+              // Preprocess it in JavaScript
+              let preprocessedLatex = preprocessLatex(latex);
+        
+              // Store the preprocessed value in the hidden input
+              document.querySelector("#processed-math").value = JSON.stringify(ce.parse(inputMathField.value).json)//preprocessedLatex;
+              //console.log()
+              console.log("Preprocessed LaTeX: ", preprocessedLatex);  // For debugging
+            });
+        
+          </script>
+        
+          <script type="py" config="./pyscript.toml" async>
+            from pyscript import document
+            from js import console
+            from sympy import solve, latex
+            
+            import sympy as sp
+            import json
+            
+            # Dictionary to map MathJSON operations to SymPy functions
+            operation_map = {
+                "Add": sp.Add,
+                "Subtract": lambda a, b: sp.Add(a, -b),
+                "Multiply": sp.Mul,
+                "Divide": sp.Rational,  # Rational handles divisions (a/b)
+                "Power": sp.Pow,
+                "Derivative": sp.Derivative,  # Symbolic derivative
+                "Integrate": sp.Integral,     # Symbolic integration
+                "Sum": sp.summation,          # Summation
+                "Limit": sp.Limit,            # Limits
+                "Exp": sp.exp,                # Exponentiation
+                "Log": sp.log,                # Logarithms
+                "Sin": sp.sin,                # Trigonometric sine
+                "Cos": sp.cos,                # Trigonometric cosine
+                "Tan": sp.tan,                # Trigonometric tangent
+                "Abs": sp.Abs,                # Absolute value
+                "Equal": sp.Eq,               # Equality
+                "Less": sp.Lt,                # Less than
+                "Greater": sp.Gt,             # Greater than
+                "Factorial": sp.factorial,    # Factorial
+                "Sqrt": sp.sqrt,              # Square root
+                "Piecewise": sp.Piecewise,    # Piecewise function
+                "Product": sp.product         # Product of sequences
+            }
+            
+            # Cache for dynamically created symbols and functions
+            symbol_cache = {}
+            
+            # Function to convert MathJSON to a SymPy object
+            def mathjson_to_sympy(expr):
+                if isinstance(expr, list):
+                    if expr[0] == "Matrix":
+                        return matrix_to_sympy(expr[1])
+                    elif expr[0] == "Derivative":
+                        # Handle derivative ["Derivative", var1, var2, ...]
+                        return sp.Derivative(*[mathjson_to_sympy(arg) for arg in expr[1:]])
+                    elif expr[0] == "Integrate":
+                        return handle_integral(expr)
+                    elif expr[0] == "Sum":
+                        return handle_sum(expr)
+                    elif expr[0] == "Limit":
+                        return handle_limit(expr)
+                    elif expr[0] == "Piecewise":
+                        return handle_piecewise(expr)
+                    elif expr[0] == "Product":
+                        return handle_product(expr)
+                    elif expr[0] in operation_map:
+                        # Convert arguments recursively
+                        args = [mathjson_to_sympy(arg) for arg in expr[1:]]
+                        return operation_map[expr[0]](*args)
+                elif isinstance(expr, str):
+                    # Handle symbols or functions
+                    return handle_symbol_or_function(expr)
+                elif isinstance(expr, int) or isinstance(expr, float):
+                    # Numbers are returned as SymPy numbers
+                    return sp.Integer(expr) if isinstance(expr, int) else sp.Float(expr)
+                return None
+            
+            # Helper function to handle definite integrals (with tuple bounds)
+            def handle_integral(expr):
+                if len(expr) == 3 and isinstance(expr[2], list) and expr[2][0] == "Tuple":
+                    variable = mathjson_to_sympy(expr[2][1])
+                    lower_bound = mathjson_to_sympy(expr[2][2])
+                    upper_bound = mathjson_to_sympy(expr[2][3])
+                    expression = mathjson_to_sympy(expr[1])
+                    return sp.Integral(expression, (variable, lower_bound, upper_bound))
+                else:
+                    return sp.Integral(*[mathjson_to_sympy(arg) for arg in expr[1:]])
+            
+            # Helper function to handle sums
+            def handle_sum(expr):
+                expression = mathjson_to_sympy(expr[1])
+                if isinstance(expr[2], list) and expr[2][0] == "Tuple":
+                    index_var = mathjson_to_sympy(expr[2][1])
+                    lower_bound = mathjson_to_sympy(expr[2][2])
+                    upper_bound = mathjson_to_sympy(expr[2][3])
+                    return sp.summation(expression, (index_var, lower_bound, upper_bound))
+                return None
+            
+            # Helper function to handle products
+            def handle_product(expr):
+                expression = mathjson_to_sympy(expr[1])
+                if isinstance(expr[2], list) and expr[2][0] == "Tuple":
+                    index_var = mathjson_to_sympy(expr[2][1])
+                    lower_bound = mathjson_to_sympy(expr[2][2])
+                    upper_bound = mathjson_to_sympy(expr[2][3])
+                    return sp.product(expression, (index_var, lower_bound, upper_bound))
+                return None
+            
+            # Helper function to handle limits
+            def handle_limit(expr):
+                expression = mathjson_to_sympy(expr[1])
+                variable = mathjson_to_sympy(expr[2])
+                value = mathjson_to_sympy(expr[3])
+                return sp.Limit(expression, variable, value)
+            
+            # Helper function to handle piecewise expressions
+            def handle_piecewise(expr):
+                conditions = []
+                for piece in expr[1][1:]:
+                    condition = (mathjson_to_sympy(piece[1]), mathjson_to_sympy(piece[0]))
+                    conditions.append(condition)
+                return sp.Piecewise(*conditions)
+            
+            def sympy_from_mathjson_string(s):
+                console.log("I run!"+s)
+                expr = json.loads(s)
+                console.log(str(expr))
+                return mathjson_to_sympy(expr)
+
+            # Python function to solve the equation
+            def solve_equation(e):
+                output = document.querySelector("#display")
+                processed_input = document.querySelector("#processed-math")  # Read the preprocessed input
+                try:
+                    console.log("pre-parsed expression: ", processed_input.value)
+                    expr = sympy_from_mathjson_string(processed_input.value)
+                    console.log("Parsed expression: ", str(expr))
+                    solution = solve(expr)
+                    output.innerHTML = latex(solution)
+                except Exception as ex:
+                    console.log(ex)
+                    output.innerHTML = f"Cannot Parse equation: {processed_input.value}"
+        
+            # Python function to simplify the expression
+            def simplify_expression(e):
+                output = document.querySelector("#display")
+                processed_input = document.querySelector("#processed-math")  # Read the preprocessed input
+                try:
+                    console.log("pre-parsed expression: ", processed_input.value)
+                    expr = sympy_from_mathjson_string(processed_input.value)
+                    simplified = expr.simplify()
+                    done = simplified.doit()
+                    output_string = latex(simplified)
+                    if simplified != done:
+                        output_string += " = " + latex(done)
+                    output.innerHTML = output_string
+                except Exception as ex:
+                    console.log(ex)
+                    output.innerHTML = f"Cannot Parse expression: {processed_input.value}"
+        
+            loader = document.querySelector("#loader")
+            loader.style.display = "none"
+          </script>
+        </body>
+</html>

@@ -38,6 +38,7 @@
   --table-hover: coral;
   --table-even-bg: #f2f2f2;
   --svg-hover-bg: beige;
+  --svg-path-color: #111;
 }
 
 [data-theme="dark"] {
@@ -80,8 +81,11 @@
     --table-hover: darkorange;
     --table-even-bg: #222;
     --svg-hover-bg: #444;
+  --svg-path-color: #EEE;
   }
-
+path{
+  fill: white;
+}
 /* Reminder Block */
 .reminder {
   background-color: var(--reminder-bg);
@@ -320,4 +324,43 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: var(--table-hover);
+}
+
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+  /* Allow the flex items to wrap */
+ul.top-navigation {
+  flex-wrap: wrap;
+}
+
+/* Make sure all items still share equal width */
+ul.top-navigation li {
+  flex: 1 1 100%; /* Full width by default */
+  text-align: center; /* Center text */
+}
+
+/* Move the middle item (parent-page) to a new row above */
+ul.top-navigation li.parent-page {
+  flex-basis: 100%; /* Full width row */
+  order: -1; /* Moves it to the first row */
+  border-bottom: 0.2pt solid #283A4B;
+}
+
+/* Keep the left and right items on the same row */
+ul.top-navigation li.prev-page,
+ul.top-navigation li.next-page {
+  flex-basis: 50%; /* Each takes half the width */
+  order: 0; /* Normal order */
+}
+
+/*
+ul.top-navigation li.next-page a{
+  border-left: 0.05pt solid #283A4B;
+}
+ul.top-navigation li.prev-page a{
+  border-right: 0.05pt solid #283A4B;
+}
+*/
+
 }

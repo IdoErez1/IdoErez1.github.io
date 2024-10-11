@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href='../styles/main_style.css'>
+        <title>Pyscrpt Test</title>
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+        <script type="text/javascript" src="./dark_mode.js"></script>
+          <style>
+            body{
+              direction: ltr !important;
+            }
+        #math-input {
+            width: 100%;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+        #solution {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
+        } 
+        #display{
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+        #loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 49%;
+}
+.solve-buttons{
+  display: flex;
+}
+.hidden{
+  display: none;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
+    </style>
+    <script src="//unpkg.com/@cortex-js/compute-engine"></script>
+    <script>
+        const ce = new ComputeEngine.ComputeEngine();
+        ce.latexDictionary = [
+  // Include all the entries from the default dictionary...
+  ...ce.latexDictionary,
+  // ...and add the `\smoll{}{}` command
+  {
+    kind: "function",
+  identifierTrigger: "y",
+  parse: "Function"
+  },
+  {
+    kind: "function",
+  identifierTrigger: "f",
+  parse: "Function"
+  },
+  {
+    kind: "function",
+  identifierTrigger: "h",
+  parse: "Function"
+  }
+];
+
+console.log(ce.parse('f(x,y,z)').json);
+    </script>    
+        </head>
+        <body>
+          <div id="loader"></div> 
+          <div class="content">
+            <!-- Math input field for user expression -->
+            <math-field id="math-input">x^2=2</math-field>
+            <div class="help">
+              Under Development. can currently simplify simple expressions and solve simple equations algebrically.
+            </div>
+            <div class="solve-buttons">
+              <!-- Buttons to trigger Python actions -->
+              <button id="solve-btn" py-click="simplify_expression">Simplify</button>
+              <button id="solve-btn1" py-click="solve_equation">Solve</button>
+            </div>
+            <!-- Math display field -->
+            <math-field read-only id="display"></math-field>
+            
+            <!-- Hidden element for JavaScript-preprocessed LaTeX expression -->
+            <input type="hidden" id="processed-math" value="">
+        
+          </div>
+        
+          <script src="https://unpkg.com/mathlive"></script>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => MathLive.renderMathInDocument());
+        
+            // Function to preprocess the LaTeX in JavaScript
+            function preprocessLatex(latex) {
+              // Example of preprocessing steps:
+              // - Remove unnecessary spaces
+              // - Replace specific symbols or operators if needed
+              latex = latex.replace(/\s+/g, '');  // Remove extra spaces as an example
+              // Further manipulations could go here...
+        
+              return latex;  // Return the modified LaTeX
+            }
+        
+            // Listen for when the user inputs or changes the expression
+            const inputMathField = document.querySelector("#math-input");
+            inputMathField.addEventListener('input', () => {
+              // Get the current LaTeX expression from the math field
+              let latex = inputMathField.value;
+        
+              // Preprocess it in JavaScript
+              let preprocessedLatex = preprocessLatex(latex);
+        
+              // Store the preprocessed value in the hidden input
+              document.querySelector("#processed-math").value = preprocessedLatex;
+              console.log(JSON.stringify(ce.parse(inputMathField.value).json))
+              console.log("Preprocessed LaTeX: ", preprocessedLatex);  // For debugging
+            });
+        
+          </script>
+        
+          <script type="py" config="./pyscript.toml" async>
+            from pyscript import document
+            from js import console
+            from sympy import solve, latex
+            from sympy.parsing.latex import parse_latex
+        
+            # Python function to solve the equation
+            def solve_equation(e):
+                output = document.querySelector("#display")
+                processed_input = document.querySelector("#processed-math")  # Read the preprocessed input
+                try:
+                    expr = parse_latex(processed_input.value)
+                    console.log("Parsed expression: ", str(expr))
+                    solution = solve(expr)
+                    output.innerHTML = latex(solution)
+                except Exception as ex:
+                    console.log(ex)
+                    output.innerHTML = f"Cannot Parse equation: {processed_input.value}"
+        
+            # Python function to simplify the expression
+            def simplify_expression(e):
+                output = document.querySelector("#display")
+                processed_input = document.querySelector("#processed-math")  # Read the preprocessed input
+                try:
+                    expr = parse_latex(processed_input.value)
+                    simplified = expr.simplify()
+                    done = simplified.doit()
+                    output_string = latex(simplified)
+                    if simplified != done:
+                        output_string += " = " + latex(done)
+                    output.innerHTML = output_string
+                except Exception as ex:
+                    console.log(ex)
+                    output.innerHTML = f"Cannot Parse expression: {processed_input.value}"
+        
+            loader = document.querySelector("#loader")
+            loader.style.display = "none"
+          </script>
+        </body>
+</html>

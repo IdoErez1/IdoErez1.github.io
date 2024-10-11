@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+            <link rel="stylesheet" href='./styles/style.css'> 
+            <link rel="stylesheet" href='./styles/questions_style.css'> 
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
+            },
+            config: ["MMLorHTML.js"],
+            jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+            extensions: ["MathMenu.js", "MathZoom.js"]
+        });
+    </script>
+        <title>שאלות - פיזיקה תרמית</title>
+        <style>
+            .hidden { display: none; }
+        </style>
+      <script type="text/javascript">
+        window.onload = function() {
+          const subjects = {"פוטנציאלים תרמודינאמיים": [{"question": "<p>מהם המשתנים הטבעיים הטבעיים של אנרגיה פנימית והביטויי של הדיפרנציאל בעזרתם?</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">d U=T d S-P d V<\/script>\n</p>"}, {"question": "<p>מהו ההגדרה של אנטלפיה? מהם במשתנים הטבעיים ומה הביטוי לדיפרנציאל בעזרתם?</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">H=U+PV\\qquad d H=T d S+V d P<\/script>\n</p>"}, {"question": "<p>בעזרת יחסי מקסוואל למה שווה <script type=\"math/tex\">\\left( \\frac{\\partial T}{\\partial P} \\right)_{S}<\/script>?</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\left( \\frac{\\partial T}{\\partial P} \\right)_{S}=\\left( \\frac{\\partial V}{\\partial S}  \\right)_{P} <\/script>\n</p>"}, {"question": "<p>מהו ההגדרה של האנרגיה החופשית של הלמהולדס? מהם במשתנים הטבעיים ומה הביטוי לדיפרנציאל בעזרתם?</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">F(T,V)=U-TS\\qquad dF=-SdT-PdV<\/script>\n</p>"}, {"question": "<p>מהי ההגדרה של האנרגיה החופשית של גיבס? מהם המשנים הטבעיים ומה הביטוי לדיפרנציאל בעזרתם?\n<script type=\"math/tex; mode=display\">G(P,T)=H-TS\\qquad dG=VdP-SdT<\/script>\n</p>\n<p>מהי משוואת האנרגיה? כלומר ביטוי ל-<script type=\"math/tex\">\\left( \\frac{\\partial U}{\\partial P} \\right)_{T}<\/script> ול-<script type=\"math/tex\">\\left( \\frac{\\partial U}{\\partial V} \\right)_{T}<\/script>.</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\begin{gather}\n\\left({\\frac{\\partial U}{\\partial P}}\\right)_{T}=-\\Biggl[T\\biggl({\\frac{\\partial V}{\\partial T}}\\biggr)_{P}+P\\biggl({\\frac{\\partial V}{\\partial P}}\\biggr)_{T}\\Biggr]  \\\\\n\\Biggl({\\frac{\\partial U}{\\partial V}}\\Biggr)_{T}=T\\Biggl({\\frac{\\partial P}{\\partial T}}\\Biggr)_{V}-P\n\\end{gather}<\/script>\n</p>"}, {"question": "", "answer": ""}]}
+          let selectedSubjects = [];
+          let currentQuestions = [];
+          let currentQuestionIndex = 0;
+
+          window.startQuiz = function() {
+            selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+            if (selectedSubjects.length === 0) {
+                alert("Please select at least one subject.");
+                return;
+            }
+            currentQuestions = [];
+            selectedSubjects.forEach(subject => {
+                currentQuestions = currentQuestions.concat(subjects[subject]);
+            });
+            shuffle(currentQuestions);
+            document.getElementById('subject-selection').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            showQuestion();
+          }
+
+          function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length){
+            location.reload()
+            return;
+            }
+            if (currentQuestionIndex >= currentQuestions.length - 1) {
+                document.getElementById('next-question').innerHTML = "לסיים";
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question').innerHTML = q.question;
+            document.getElementById('answer').innerHTML = q.answer;
+            document.getElementById('answer').classList.add('hidden');
+            document.getElementById('show-answer').classList.remove('hidden');
+            document.getElementById('next-question').classList.add('hidden');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"question"]);
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"answer"]);
+            document.getElementById('question-counter').innerHTML = "שאלה "+ (currentQuestionIndex + 1) +" מתוך "+ currentQuestions.length;
+          }
+
+          window.showAnswer = function() {
+            document.getElementById('answer').classList.remove('hidden');
+            document.getElementById('show-answer').classList.add('hidden');
+            document.getElementById('next-question').classList.remove('hidden');
+          }
+
+          window.nextQuestion = function() {
+            currentQuestionIndex++;
+            showQuestion();
+          }
+
+          function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+        };
+      </script>
+</head>
+<body>
+<ul class='top-navigation'>
+        <li class="parent-page"> <a href="./Thermal"> 
+         חזרה לספר
+         </a></li></ul><div class="content">
+    <div id="subject-selection">
+        <h1>נושאים:</h1>
+    <div class="all-checkboxes-container">
+        <label class="checkbox-container">פוטנציאלים תרמודינאמיים<input type="checkbox" name="subject" value="פוטנציאלים תרמודינאמיים" checked="checked"> <span class="checkmark"></span></label>
+        </div>
+    <button class="quiz-button" onclick="startQuiz()">להתחיל</button>
+    </div>
+    <div id="quiz-section" class="hidden">
+        <h1>שאלות</h1>
+        <div class="question-answer-container">
+        <div id="question-counter"></div>
+        <div id="question"></div>
+        <div id="answer" class="hidden"></div>
+        </div>
+        <button class="quiz-button" id="show-answer" onclick="showAnswer()">Show Answer</button>
+        <button class="quiz-button" id="next-question" class="hidden" onclick="nextQuestion()">Next Question</button>
+    </div>
+    </div>
+</body>
+</html>
+    
