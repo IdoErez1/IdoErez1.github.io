@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+            <link rel="stylesheet" href='./styles/style.css'> 
+            <link rel="stylesheet" href='./styles/questions_style.css'> 
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
+            },
+            config: ["MMLorHTML.js"],
+            jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+            extensions: ["MathMenu.js", "MathZoom.js"]
+        });
+    </script>
+        <title>שאלות - משוואות דיפרנציאליות</title>
+        <style>
+            .hidden { display: none; }
+        </style>
+      <script type="text/javascript">
+        window.onload = function() {
+          const subjects = {"התמרות פורייה": [{"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F} [f(x)]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\frac{1}{\\sqrt{ 2\\pi }}\\int_{-\\infty}^\\infty f(x)e^{-ikx}dx <\/script>\nהטלה על בסיס של אקספוננטים מרוכבים(טור פורייה מרוכב) תוך כדי שלוקחים את הגבולות לאינסוף ומוסיפים פאקטור נרמול.</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F} [f(t)]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\frac{1}{\\sqrt{ 2\\pi }}\\int_{-\\infty}^\\infty f(t)e^{-i\\omega t}dt <\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F} [f(x-a)]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">e^{ika}\\cdot \\mathcal{F} [f(x)]<\/script>\nאם מסתכלים על האינטגרל של ההתמרה, ומציבים <script type=\"math/tex\">x\\mapsto x+a<\/script> נקבל:\n<script type=\"math/tex; mode=display\">\\frac{1}{\\sqrt{ 2 \\pi}} \\int_{-\\infty}^\\infty f(x-a)e^{ikx}dx=\\frac{1}{\\sqrt{ 2\\pi }}\\int_{-\\infty}^\\infty f(x)e^{ik(x+a)}dx =e^{ika}\\underbrace{ \\left( \\frac{1}{\\sqrt{ 2\\pi }}\\int_{-\\infty}^{\\infty} f(x)e^{ikx} dx\\right) }_{ \\mathcal{F} [f(x)] }<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F} [{e^{-\\frac{x^2}{2\\sigma^2}}}]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\sigma e^{-\\frac{\\sigma^2 k^2 }{2}}<\/script>\nכיוון שהגאוסיאן פונקציה זוגית, ההתמרת פורייה תהיה ממשית ואי זוגית. וכן ניתן לכפול\n<script type=\"math/tex; mode=display\">\\int e<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F}\\left[  \\mathrm{sinc}\\left( \\frac{x}{a} \\right) \\right] <\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\frac{|a|}{\\sqrt{ 2\\pi }}\\mathrm{rect}\\left( \\frac{ak}{2\\pi} \\right)<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F} \\left[ f(x)\\cdot g(x) \\right]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\frac{1}{\\sqrt{ 2\\pi }}(\\mathcal{F}[f](x)*\\mathcal{F}[g](x))(k)<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F}[ f(x)*g(x)]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\sqrt{ 2\\pi }\\mathcal{F}[f](k)\\cdot \\mathcal{F}[g](k)<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">f(x)*\\delta(x-x_{0})<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">f(x-x_{0})<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">\\mathcal{F}[ \\delta(x-a)]<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\frac{1}{\\sqrt{2\\pi}} e^{ika}<\/script>\n</p>"}, {"question": "<p>\n<script type=\"math/tex; mode=display\">f(x)*g(x)<\/script>\n</p>", "answer": "<p>\n<script type=\"math/tex; mode=display\">\\int_{-\\infty}^\\infty f(x)f(y-x)\\;\\mathrm{d}x<\/script>\n</p>"}]}
+          let selectedSubjects = [];
+          let currentQuestions = [];
+          let currentQuestionIndex = 0;
+
+          window.startQuiz = function() {
+            selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+            if (selectedSubjects.length === 0) {
+                alert("Please select at least one subject.");
+                return;
+            }
+            currentQuestions = [];
+            selectedSubjects.forEach(subject => {
+                currentQuestions = currentQuestions.concat(subjects[subject]);
+            });
+            shuffle(currentQuestions);
+            document.getElementById('subject-selection').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            showQuestion();
+          }
+
+          function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length){
+            location.reload()
+            return;
+            }
+            if (currentQuestionIndex >= currentQuestions.length - 1) {
+                document.getElementById('next-question').innerHTML = "לסיים";
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question').innerHTML = q.question;
+            document.getElementById('answer').innerHTML = q.answer;
+            document.getElementById('answer').classList.add('hidden');
+            document.getElementById('show-answer').classList.remove('hidden');
+            document.getElementById('next-question').classList.add('hidden');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"question"]);
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"answer"]);
+            document.getElementById('question-counter').innerHTML = "שאלה "+ (currentQuestionIndex + 1) +" מתוך "+ currentQuestions.length;
+          }
+
+          window.showAnswer = function() {
+            document.getElementById('answer').classList.remove('hidden');
+            document.getElementById('show-answer').classList.add('hidden');
+            document.getElementById('next-question').classList.remove('hidden');
+          }
+
+          window.nextQuestion = function() {
+            currentQuestionIndex++;
+            showQuestion();
+          }
+
+          function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+        };
+      </script>
+</head>
+<body>
+<ul class='top-navigation'>
+        <li class="parent-page"> <a href="./diffeq.html"> 
+         חזרה לספר
+         </a></li></ul><div class="content">
+    <div id="subject-selection">
+        <h1>נושאים:</h1>
+    <div class="all-checkboxes-container">
+        <label class="checkbox-container">התמרות פורייה<input type="checkbox" name="subject" value="התמרות פורייה" checked="checked"> <span class="checkmark"></span></label>
+        </div>
+    <button class="quiz-button" onclick="startQuiz()">להתחיל</button>
+    </div>
+    <div id="quiz-section" class="hidden">
+        <h1>שאלות</h1>
+        <div class="question-answer-container">
+        <div id="question-counter"></div>
+        <div id="question"></div>
+        <div id="answer" class="hidden"></div>
+        </div>
+        <button class="quiz-button" id="show-answer" onclick="showAnswer()">הצג תשובה</button>
+        <button class="quiz-button" id="next-question" class="hidden" onclick="nextQuestion()">שאלה הבאה</button>
+    </div>
+    </div>
+</body>
+</html>
+    
