@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>אינטגרציה על תיבות</title>
         </head>
         <body>
@@ -88,109 +89,92 @@
         <div class="content">
         <h1>7.1  אינטגרציה על תיבות</h1>
     <div class="definition"> (תיבה)<p>תיבה היא קבוצה מהצורה:
-<script type="math/tex; mode=display">A=[a_{1},b_{1}]\times[a_{2},b_{2}]\times\dots\times[a_{k},b_{k}],</script>
+$$A=[a_{1},b_{1}]\times[a_{2},b_{2}]\times\dots\times[a_{k},b_{k}],$$
 כאשר הנפח שלו מוגדר:
-<script type="math/tex; mode=display">V(A)=\prod_{i=1}^{k}(b_{i}-a_{i}).</script>
-כאשר הרוחב של <script type="math/tex">A</script>:
-<script type="math/tex; mode=display">\max_{1\leq i\leq k}(b_{i}-a_{i})</script>
-</p>
+$$V(A)=\prod_{i=1}^{k}(b_{i}-a_{i}).$$
+כאשר הרוחב של $A$:
+$$\max_{1\leq i\leq k}(b_{i}-a_{i})$$</p>
 </div>
 <p>כיוון שאנו מתעסקים עם תיבות, נוח לעיתים להשתמש בנורמת האינסוף
-<script type="math/tex; mode=display">||x||_{\infty}=\operatorname*{max}\left\{\left|x_{1}\right|,\ldots,\left|x_{k}\right|\right\}.</script>
-כיוון שכדור סגור בנורמה זו היא התיבה <script type="math/tex">[-1,1]</script>.</p>
-<div class="definition"> (חלוקה)<p>תהא <script type="math/tex">A=[a_{1},b_{1}]\times\dots \times[a_{k},b_{k}]</script> תיבה. חלוקה <script type="math/tex">P</script> של <script type="math/tex">A</script> היא <script type="math/tex">P=P_{1}\times P_{2}\times\dots \times P_{k}</script>
-כאשר <script type="math/tex">P_{j}</script> היא חלוקה של הקטע <script type="math/tex">[a_{j},b_{j}]</script>. כלומר:
-<script type="math/tex; mode=display">P_{j}=\left\{  t_{j}^0,\dots,t_{j}^{m_{j}}  \right\}</script>
-כאשר <script type="math/tex; mode=display">a_{j}=t_{j}^{0}<t_{j}^{1}<\cdots<t_{j}^{m_{j}}=b_{j}.</script> חלוקה כזו משרה חלוקה של התיבה <script type="math/tex">A</script> לתיבות:
-<script type="math/tex; mode=display">C_{i_{1},\dots,i_{k}}=[t_{1}^{i_{1}-1},t_{1}^{i_{1}}]\times\cdots\times[t_{k}^{i_{k}-1},t_{k}^{i_{k}}].</script>
-כאשר הנפח המקורי <script type="math/tex">A</script> מקיים:
-<script type="math/tex; mode=display">V(A)=\sum_{i_{1},...,i_{k}}V(C_{i_{1},...,i_{k}}).</script>
-</p>
+$$||x||_{\infty}=\operatorname*{max}\left\{\left|x_{1}\right|,\ldots,\left|x_{k}\right|\right\}.$$
+כיוון שכדור סגור בנורמה זו היא התיבה $[-1,1]$.</p>
+<div class="definition"> (חלוקה)<p>תהא $A=[a_{1},b_{1}]\times\dots \times[a_{k},b_{k}]$ תיבה. חלוקה $P$ של $A$ היא $P=P_{1}\times P_{2}\times\dots \times P_{k}$
+כאשר $P_{j}$ היא חלוקה של הקטע $[a_{j},b_{j}]$. כלומר:
+$$P_{j}=\left\{  t_{j}^0,\dots,t_{j}^{m_{j}}  \right\}$$
+כאשר $$a_{j}=t_{j}^{0}&lt;t_{j}^{1}&lt;\cdots&lt;t_{j}^{m_{j}}=b_{j}.$$ חלוקה כזו משרה חלוקה של התיבה $A$ לתיבות:
+$$C_{i_{1},\dots,i_{k}}=[t_{1}^{i_{1}-1},t_{1}^{i_{1}}]\times\cdots\times[t_{k}^{i_{k}-1},t_{k}^{i_{k}}].$$
+כאשר הנפח המקורי $A$ מקיים:
+$$V(A)=\sum_{i_{1},...,i_{k}}V(C_{i_{1},...,i_{k}}).$$</p>
 </div>
-<div class="definition"> (סכום תחתון)<p>בהנתן פונקציה <script type="math/tex">f</script> וחלוקה <script type="math/tex">P=A_{1}\times\dots \times A_{r}</script>. נגדיר <script type="math/tex">m_{i}=\inf_{x \in A_{i}}f(x)</script>. הסכום התחתון של <script type="math/tex">f</script> ביחס ל-<script type="math/tex">P</script> יהיה:
-<script type="math/tex; mode=display">s(f,P)=\sum_{i=1}^{r}m_{i}\,V(A_{i})</script>
-</p>
+<div class="definition"> (סכום תחתון)<p>בהנתן פונקציה $f$ וחלוקה $P=A_{1}\times\dots \times A_{r}$. נגדיר $m_{i}=\inf_{x \in A_{i}}f(x)$. הסכום התחתון של $f$ ביחס ל-$P$ יהיה:
+$$s(f,P)=\sum_{i=1}^{r}m_{i}\,V(A_{i})$$</p>
 </div>
-<div class="definition"> (סכום עליון)<p>בהנתן פונקציה <script type="math/tex">f</script> וחלוקה <script type="math/tex">P=A_{1}\times\dots \times A_{r}</script>. נגדיר <script type="math/tex">M_{i}=\sup_{x \in A_{i}}f(x)</script>. הסכום התחתון של <script type="math/tex">f</script> ביחס ל-<script type="math/tex">P</script> יהיה:
-<script type="math/tex; mode=display">S(f,P)=\sum_{i=1}^{r}M_{i}\,V(A_{i})</script>
-</p>
+<div class="definition"> (סכום עליון)<p>בהנתן פונקציה $f$ וחלוקה $P=A_{1}\times\dots \times A_{r}$. נגדיר $M_{i}=\sup_{x \in A_{i}}f(x)$. הסכום התחתון של $f$ ביחס ל-$P$ יהיה:
+$$S(f,P)=\sum_{i=1}^{r}M_{i}\,V(A_{i})$$</p>
 </div>
-<div class="definition"> (עידון של חלוקה)<p>חלוקה <script type="math/tex">P'</script> המקיימת <script type="math/tex">P\subseteq P'</script> נקראת עידון</p>
+<div class="definition"> (עידון של חלוקה)<p>חלוקה $P'$ המקיימת $P\subseteq P'$ נקראת עידון</p>
 </div>
 <div class="proposition">
-<p>אם <script type="math/tex">P'</script> עידון של חלוקה מתקיים:
-<script type="math/tex; mode=display">s(f,P)\leq s(f,P^{\prime})\leq S\left(f,P^{\prime}\right)\leq S\left(f,P\right).</script>
-</p>
+<p>אם $P'$ עידון של חלוקה מתקיים:
+$$s(f,P)\leq s(f,P^{\prime})\leq S\left(f,P^{\prime}\right)\leq S\left(f,P\right).$$</p>
 </div>
-<div class="definition"> (אינטגרל תחתון)<p>
-<script type="math/tex; mode=display">\underline{\int}_{A}f(x) \;\mathrm{d}x=\operatorname*{sup}\left\{s(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.</script>
-</p>
+<div class="definition"> (אינטגרל תחתון)<p>$$\underline{\int}_{A}f(x) \;\mathrm{d}x=\operatorname*{sup}\left\{s(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</p>
 </div>
-<div class="definition"> (אינטגרל עליון)<p>
-<script type="math/tex; mode=display">{\overline{{\int}_{A}}}f(x)\,\mathrm{d} x=\operatorname*{inf}\left\{S(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.</script>
-</p>
+<div class="definition"> (אינטגרל עליון)<p>$${\overline{{\int}_{A}}}f(x)\,\mathrm{d} x=\operatorname*{inf}\left\{S(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</p>
 </div>
 <div class="definition"> (אינטגרבליות לפי רימן)<p>פונקציה שהאינטגרל העליון שווה לאינטגרל התחתון נקראת אינטגרבילית רימן, כלומר אם:
-<script type="math/tex; mode=display">\underline{\int_{A}} f(x)\;\mathrm{d}x=\overline{\int}_{A}f(x)\mathrm{d}x</script>
+$$\underline{\int_{A}} f(x)\;\mathrm{d}x=\overline{\int}_{A}f(x)\mathrm{d}x$$
 ובמקרה זה נקרא לביטוי זה האינטגרל ונסמן:
-<script type="math/tex; mode=display">\int_{A}f(x)\,d x\quad \text{או}\quad\int_{A}f\left( x_{1},\ldots,x_{k} \right)\,d x_{1}d x_{2}\ldots d x_{k}</script>
-</p>
+$$\int_{A}f(x)\,d x\quad \text{או}\quad\int_{A}f\left( x_{1},\ldots,x_{k} \right)\,d x_{1}d x_{2}\ldots d x_{k}$$</p>
 </div>
 <div class="remark">
 <p>פונקציה אינטגרבילית צריכה להיות חסומה, אחרת אין בכלל משמעות לסכום עליון ותחתון.</p>
 </div>
 <div class="proposition"> (תכונות בסיסיות של אינטגרלים)<ol>
 <li>
-<p>סכום של אינטגרלים - אם <script type="math/tex">f,g</script> אינטגרביליים אז <script type="math/tex">f+g</script>  אינטגרבילים, ומתקיים: 
-<script type="math/tex; mode=display">\int_{A}(f+g)(x)\,d x=\int_{A}f(x)\,d x+\int_{A}g(x)\,d x.</script>
-</p>
+<p>סכום של אינטגרלים - אם $f,g$ אינטגרביליים אז $f+g$  אינטגרבילים, ומתקיים: 
+$$\int_{A}(f+g)(x)\,d x=\int_{A}f(x)\,d x+\int_{A}g(x)\,d x.$$</p>
 </li>
 <li>
-<p>כפל בסקלר - אם <script type="math/tex">f</script> אינטגרבילי אז <script type="math/tex">cf</script> אינטגרבילי ומתקיים: 
-<script type="math/tex; mode=display">\int_{A}(c f)(x)\,d x=c\int_{A}f(x)\,d x.</script>
-</p>
+<p>כפל בסקלר - אם $f$ אינטגרבילי אז $cf$ אינטגרבילי ומתקיים: 
+$$\int_{A}(c f)(x)\,d x=c\int_{A}f(x)\,d x.$$</p>
 </li>
 <li>
 <p>אינטגרל על יחידה - פונקציית היחידה היא אינטגרבילית, ומקיימת: 
-<script type="math/tex; mode=display">\int_{A}1\,d x=V(A).</script>
-</p>
+$$\int_{A}1\,d x=V(A).$$</p>
 </li>
 <li>
-<p>חיוביות - אם <script type="math/tex">f(x)\geq 0</script> לכל <script type="math/tex">x \in A</script> אז מתקיים: 
-<script type="math/tex; mode=display">\int_{A}f(x)\,d x\geq0.</script>
-</p>
+<p>חיוביות - אם $f(x)\geq 0$ לכל $x \in A$ אז מתקיים: 
+$$\int_{A}f(x)\,d x\geq0.$$</p>
 </li>
 <li>
-<p>מונוטוניות - אם <script type="math/tex">f(x)\leq g(x)</script> לכל <script type="math/tex">x</script> אז מתקיים: 
-<script type="math/tex; mode=display">\int_{A}f(x)\,d x\leq\int_{A}g(x)\,d x.</script>
-</p>
+<p>מונוטוניות - אם $f(x)\leq g(x)$ לכל $x$ אז מתקיים: 
+$$\int_{A}f(x)\,d x\leq\int_{A}g(x)\,d x.$$</p>
 </li>
 <li>
-<p>אם <script type="math/tex">|f(x)|\leq M</script> לכל <script type="math/tex">x</script> אז: 
-<script type="math/tex; mode=display">\left|\int_{A}f(x)\,d x\right|\leq M\,V(A).</script>
-</p>
+<p>אם $|f(x)|\leq M$ לכל $x$ אז: 
+$$\left|\int_{A}f(x)\,d x\right|\leq M\,V(A).$$</p>
 </li>
 </ol>
 </div>
 <div class="proposition">
-<p>יהיו <script type="math/tex">A,B\subseteq \mathbb{R}^k</script> תיבות כך ש-<script type="math/tex">A^{\circ},B^{\circ}</script> זרים ו-<script type="math/tex">A\cup B</script> תיבה. פונקציה <script type="math/tex">f: A\cup B\to\mathbb{R}</script> אינטגרבילית על <script type="math/tex">A</script> ועל <script type="math/tex">B</script> אם"ם אינטגרבילית על <script type="math/tex">A\cup B</script>, ובמקרה זה מתקיים:
-<script type="math/tex; mode=display">\int_{A\cup B}f\,d x=\int_{A}f\,d x+\int_{B}f\,d x.</script>
-</p>
+<p>יהיו $A,B\subseteq \mathbb{R}^k$ תיבות כך ש-$A^{\circ},B^{\circ}$ זרים ו-$A\cup B$ תיבה. פונקציה $f: A\cup B\to\mathbb{R}$ אינטגרבילית על $A$ ועל $B$ אם"ם אינטגרבילית על $A\cup B$, ובמקרה זה מתקיים:
+$$\int_{A\cup B}f\,d x=\int_{A}f\,d x+\int_{B}f\,d x.$$</p>
 </div>
 <div class="proof">
-<p>נניח כי <script type="math/tex">f</script> אינטגרבילית ב-<script type="math/tex">A</script> וב-<script type="math/tex">B</script>. יהיו <script type="math/tex">P_{A},P_{B}</script> חלוקות של <script type="math/tex">A</script> ושל <script type="math/tex">B</script>. נניח... לסיים עמוד 139.</p>
+<p>נניח כי $f$ אינטגרבילית ב-$A$ וב-$B$. יהיו $P_{A},P_{B}$ חלוקות של $A$ ושל $B$. נניח... לסיים עמוד 139.</p>
 </div>
 <div class="proposition">
-<p>יהי <script type="math/tex">A\subseteq \mathbb{R}^k</script> תיבה, ו-<script type="math/tex">f:A\to\mathbb{R}</script> פונקציה רציפה, אזי <script type="math/tex">f</script> אינטגרבילית ב-<script type="math/tex">A</script>.</p>
+<p>יהי $A\subseteq \mathbb{R}^k$ תיבה, ו-$f:A\to\mathbb{R}$ פונקציה רציפה, אזי $f$ אינטגרבילית ב-$A$.</p>
 </div>
 <div class="proof">
-<p>כיוון ש-<script type="math/tex">A</script> קומפקטית, פונקציה <script type="math/tex">f</script> היא חסומה ורציפה במידה שווה ב-<script type="math/tex">A</script>.
-יהי <script type="math/tex">\varepsilon>0</script>. מרציפות במידה שווה נקבל <script type="math/tex">\delta>0</script> כך ש:
-<script type="math/tex; mode=display">\|x-y\|\leq\delta\implies|f(x)-f(y)|\leq{\frac{\varepsilon}{V(A)}}.</script>
-יהי <script type="math/tex">P</script> חלוקה של <script type="math/tex">A</script> כך שקוטר החלוקה של כל תת תיבא קטן מ-<script type="math/tex">\delta</script>. לכן:
-<script type="math/tex; mode=display">S\left(f,P\right)-s(f,P)=\sum_{i}(M_{i}-m_{i})\,V(A_{i})\leq \sum_{i}\delta V(A)=\varepsilon</script>
+<p>כיוון ש-$A$ קומפקטית, פונקציה $f$ היא חסומה ורציפה במידה שווה ב-$A$.
+יהי $\varepsilon&gt;0$. מרציפות במידה שווה נקבל $\delta&gt;0$ כך ש:
+$$\|x-y\|\leq\delta\implies|f(x)-f(y)|\leq{\frac{\varepsilon}{V(A)}}.$$
+יהי $P$ חלוקה של $A$ כך שקוטר החלוקה של כל תת תיבא קטן מ-$\delta$. לכן:
+$$S\left(f,P\right)-s(f,P)=\sum_{i}(M_{i}-m_{i})\,V(A_{i})\leq \sum_{i}\delta V(A)=\varepsilon$$
 וכעת נקבל:
-<script type="math/tex; mode=display">{\overline{{\int_{A}}}}f\,d x-\underline{\int}_{A}f\,d x\leq\varepsilon</script>
+$${\overline{{\int_{A}}}}f\,d x-\underline{\int}_{A}f\,d x\leq\varepsilon$$
 ולכן אינטגרבילי.</p>
 </div>
     </div>

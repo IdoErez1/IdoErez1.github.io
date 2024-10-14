@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>נגזרות מסדר גבוה</title>
         </head>
         <body>
@@ -89,108 +90,89 @@
         <h1>6.3  נגזרות מסדר גבוה</h1>
     <p>נרצה להכליל את המושג של נגזרת לסדרים גבוההים יותר. ראשית נרצה למצוא מה מקבלים כשלקחים את הנגזרת של הנגזרת.
 <strong>הגדרה</strong> נגזרת שנייה בנקודה
-יהי <script type="math/tex">f:A\to\mathbb{R}^m</script> פונקציה גזירה כאשר <script type="math/tex">A\subseteq \mathbb{R}^k</script> קבוצה פתוחה. הפונקציה תקרא גזירה פעמיים בנקודה <script type="math/tex">x</script> אם קיים הטנסור <script type="math/tex">D^2f(v):\mathrm{Hom}\left( \mathbb{R}^k,\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^m \right) \right)</script> (יקרא הנגזרת השנייה) אשר מקיים:
-<script type="math/tex; mode=display"> \lim\limits_{ v \to0}\frac{(Df)_{x+ v }-(Df)_x-(D^2f)_x\left(  v  \right)}{\| v \|_{\mathbb{R}^k}}=0_{\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)}</script>
-</p>
+יהי $f:A\to\mathbb{R}^m$ פונקציה גזירה כאשר $A\subseteq \mathbb{R}^k$ קבוצה פתוחה. הפונקציה תקרא גזירה פעמיים בנקודה $x$ אם קיים הטנסור $D^2f(v):\mathrm{Hom}\left( \mathbb{R}^k,\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^m \right) \right)$ (יקרא הנגזרת השנייה) אשר מקיים:
+$$ \lim\limits_{ v \to0}\frac{(Df)_{x+ v }-(Df)_x-(D^2f)_x\left(  v  \right)}{\| v \|_{\mathbb{R}^k}}=0_{\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)}$$</p>
 <p>זהו בדיוק ההגדרה של הנגזרת עבור הפונקציית הנגזרת. נשים לב כי זהו גבול מטריציוני, כלומר נדרש שכל איבר במטריצה יתכנס לגבול. נשים לב כי הנגזרת השנייה מקבלת וקטור ומחזירה מטריצה, כאשר המטריצה הזאת תקבל וקטור ותחזיר וקטור אחר.</p>
 <div class="remark">
 <p>הנגזרת השנייה לעיתים מכונת הסיאן</p>
 </div>
-<div class="definition"> (נגזרת חלקית מסדר שני)<p>
-<script type="math/tex; mode=display">\partial_{i}\partial_{j}\left(f\left(x\right)\right)=\lim_{ t \to 0 } \frac{\partial_{j}f\left(x+t e_{i}\right)-\partial_{j}f\left(x\right)}{t}</script>
-</p>
+<div class="definition"> (נגזרת חלקית מסדר שני)<p>$$\partial_{i}\partial_{j}\left(f\left(x\right)\right)=\lim_{ t \to 0 } \frac{\partial_{j}f\left(x+t e_{i}\right)-\partial_{j}f\left(x\right)}{t}$$</p>
 </div>
-<p>זה למעשה מציאה של הנגזרת הכיווני של הפונקציה <script type="math/tex">\partial_{j}f(x)</script>.</p>
+<p>זה למעשה מציאה של הנגזרת הכיווני של הפונקציה $\partial_{j}f(x)$.</p>
 <p>לכן בפועל נקבל כי:
-<script type="math/tex; mode=display">\left(D^{2}f\right)\left(v\right)\left(w\right)=\sum_{i=1}^{k}\sum_{j=1}^{k}\partial_{i}\partial_{j}f\left(x\right)v_{i}w_{j}</script>
-</p>
-<div class="proposition"> (תנאי מספיק לדיפרנציביליות של הנגזרת השנייה)<p>תהי <script type="math/tex">f:A\to\mathbb{R}^m</script> כך ש-<script type="math/tex">A\subseteq \mathbb{R}^k</script> פתוחה. אם לכל <script type="math/tex">j=1,\dots,k</script> הפונקציה <script type="math/tex">\partial_{j}f:A\to\mathbb{R}^m</script> קיימת, ולכל <script type="math/tex">i=1,\dots,k</script> הנגזרת החלקית <script type="math/tex">\partial_{i}\partial _j(f)</script>, אז <script type="math/tex">f</script> דיפרנציאבילית פעמיים ב-<script type="math/tex">x</script>.</p>
+$$\left(D^{2}f\right)\left(v\right)\left(w\right)=\sum_{i=1}^{k}\sum_{j=1}^{k}\partial_{i}\partial_{j}f\left(x\right)v_{i}w_{j}$$</p>
+<div class="proposition"> (תנאי מספיק לדיפרנציביליות של הנגזרת השנייה)<p>תהי $f:A\to\mathbb{R}^m$ כך ש-$A\subseteq \mathbb{R}^k$ פתוחה. אם לכל $j=1,\dots,k$ הפונקציה $\partial_{j}f:A\to\mathbb{R}^m$ קיימת, ולכל $i=1,\dots,k$ הנגזרת החלקית $\partial_{i}\partial _j(f)$, אז $f$ דיפרנציאבילית פעמיים ב-$x$.</p>
 </div>
 <div class="proposition">
 <p>הנגזרת השנייה היא תבנית בילינארית. כלומר מתקיים:
-<script type="math/tex; mode=display">\begin{array}{c}{{\left(D^{2}f\right)_{x}\left(\alpha v_{1}+\beta v_{2}\right)\left(w\right)=\alpha\left(D^{2}f\right)_{x}\left(v_{1}\right)\left(w\right)+\beta\left(D^{2}f\right)_{x}\left(v_{2}\right)\left(w\right)}}\\ {{\left(D^{2}f\right)_{x}\left(v\right)\left(\alpha w_{1}+\beta w_{2}\right)=\alpha\left(D^{2}f\right)_{x}\left(v\right)\left(w_{1}\right)+\beta\left(D^{2}f\right)_{x}\left(v\right)\left(w_{2}\right)}}\end{array}</script>
-</p>
+$$\begin{array}{c}{{\left(D^{2}f\right)_{x}\left(\alpha v_{1}+\beta v_{2}\right)\left(w\right)=\alpha\left(D^{2}f\right)_{x}\left(v_{1}\right)\left(w\right)+\beta\left(D^{2}f\right)_{x}\left(v_{2}\right)\left(w\right)}}\\ {{\left(D^{2}f\right)_{x}\left(v\right)\left(\alpha w_{1}+\beta w_{2}\right)=\alpha\left(D^{2}f\right)_{x}\left(v\right)\left(w_{1}\right)+\beta\left(D^{2}f\right)_{x}\left(v\right)\left(w_{2}\right)}}\end{array}$$</p>
 </div>
 <div class="proof">
-<p>זוהי מסקנה מיידית מכך ש- <script type="math/tex">v\mapsto (D^2f)_{x}(v)</script> לינארי ו-<script type="math/tex">w\mapsto (D^2f)_{x}(v)</script> לינארי</p>
+<p>זוהי מסקנה מיידית מכך ש- $v\mapsto (D^2f)_{x}(v)$ לינארי ו-$w\mapsto (D^2f)_{x}(v)$ לינארי</p>
 </div>
-<p>כיוון שזהו תבנית לינארית נסמן <script type="math/tex">(D^2f)_{x}(w,v)=(D^2f)_{x}(w)(v)</script>.</p>
+<p>כיוון שזהו תבנית לינארית נסמן $(D^2f)_{x}(w,v)=(D^2f)_{x}(w)(v)$.</p>
 <p><strong>משפט קלרו</strong>
-אם <script type="math/tex">f_{xy}</script> ו-<script type="math/tex">f_{yx}</script> רציפות אז <script type="math/tex">f_{xy}=f_{yx}</script>.</p>
+אם $f_{xy}$ ו-$f_{yx}$ רציפות אז $f_{xy}=f_{yx}$.</p>
 <p>נראה עם הוכחה יפה בעזרת פוביני
 <strong>הוכחה</strong>
-נניח כי קיים מלבן <script type="math/tex">R=[a,b]\times[c,d]</script> עבורה מוגדרת ורציפה <script type="math/tex">f_{xy},f_{yx}</script>. כעת, כיוון שהפונקציות רציפות הם אינטגרביליות, ומתקיים:
-<script type="math/tex; mode=display">\begin{gather}
-\int_c^d \!\!\!\int_{a}^b f_{yx}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{y}(x,y))_{x}dxdy=\int_{c}^d f_{y}(b,y)-f_{y}(a,y)\;dy \\
-=f(b,d)-f(b,c)-f(a,d)+f(a,c)  
-\end{gather}</script>
-כאשר עבור <script type="math/tex">f_{xy}</script> נשתמש בפוביני(ניתן כיוון שרציפות) כדי להחליף את <script type="math/tex">dxdy</script> ל-<script type="math/tex">dydx</script> ונקבל:
-<script type="math/tex; mode=display">\begin{gather}
-\int_c^d \!\!\!\int_{a}^b f_{xy}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{x}(x,y))_{y}dxdy= \int_{a}^b \int_{c}^d (f_{x}(x,y))_{y} dy\;dx\\
-\int_{c}^d f_{x}(x,d)-f_{y}(x,c)\;dy=f(b,d)-f(b,c)-f(a,d)+f(a,c)
-\end{gather}</script>
+נניח כי קיים מלבן $R=[a,b]\times[c,d]$ עבורה מוגדרת ורציפה $f_{xy},f_{yx}$. כעת, כיוון שהפונקציות רציפות הם אינטגרביליות, ומתקיים:
+$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{yx}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{y}(x,y))_{x}dxdy=\int_{c}^d f_{y}(b,y)-f_{y}(a,y)\;dy \\=f(b,d)-f(b,c)-f(a,d)+f(a,c)   \end{gather}$$
+כאשר עבור $f_{xy}$ נשתמש בפוביני(ניתן כיוון שרציפות) כדי להחליף את $dxdy$ ל-$dydx$ ונקבל:
+$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{xy}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{x}(x,y))_{y}dxdy= \int_{a}^b \int_{c}^d (f_{x}(x,y))_{y} dy\;dx\\\int_{c}^d f_{x}(x,d)-f_{y}(x,c)\;dy=f(b,d)-f(b,c)-f(a,d)+f(a,c) \end{gather}$$
 וכעת קיבלנו:
-<script type="math/tex; mode=display">\int_c^d \!\!\!\int_{a}^b \!\!f_{yx}\;dxdy=\int_c^d \!\!\!\int_{a}^b \!\!f_{xy}\;dxdy\implies \int_c^d \!\!\!\int_{a}^b \!f_{yx}-f_{xy}\;dxdy=0</script>
-לכן מספיק להראות כי <script type="math/tex">f_{yx}-f_{xy}</script> זהותית אפס. נניח בשלילה שלא זהותית אפס, לכן קיים נקודה שאינה אפס, ומרציפות יש לנקודה זו סביבה שאינה אפס. כיוון שזה נכון עבור כל מלבן, זה נכון עבור מלבן שנמצא בסביבה הזו, ולכן עבור מלבן זה יהיה נפח שאינו אפס, בסתירה.</p>
+$$\int_c^d \!\!\!\int_{a}^b \!\!f_{yx}\;dxdy=\int_c^d \!\!\!\int_{a}^b \!\!f_{xy}\;dxdy\implies \int_c^d \!\!\!\int_{a}^b \!f_{yx}-f_{xy}\;dxdy=0$$
+לכן מספיק להראות כי $f_{yx}-f_{xy}$ זהותית אפס. נניח בשלילה שלא זהותית אפס, לכן קיים נקודה שאינה אפס, ומרציפות יש לנקודה זו סביבה שאינה אפס. כיוון שזה נכון עבור כל מלבן, זה נכון עבור מלבן שנמצא בסביבה הזו, ולכן עבור מלבן זה יהיה נפח שאינו אפס, בסתירה.</p>
 <div class="example">
 <p>נסתכל על הפונקציה:
-$$f(x,y)=\begin{cases}
-\frac{xy(x^2-y^2)}{x^2+y^2} &amp; (x,y)\neq(0,0) \</p>
-<p>0 &amp; (x,y)=(0,0) 
-\end{cases}$$
-נראה <script type="math/tex">f_{xy}\neq f_{yx}</script>. מתקיים ב-<script type="math/tex">(0,0)</script>:
-<script type="math/tex; mode=display">f_{x}(0,0)=\lim_{ h \to 0 } \frac{f(h,0)-f(0,0)}{h}=\lim_{ h \to 0 } \frac{0-0}{h}=0</script>
-<script type="math/tex; mode=display">f_{y}(0,0)=\lim_{ h \to 0 } \frac{f(0,h)-f(0,0)}{h}=0</script>
+$$f(x,y)=\begin{cases}\frac{xy(x^2-y^2)}{x^2+y^2} &amp; (x,y)\neq(0,0) \\0 &amp; (x,y)=(0,0) \end{cases}$$
+נראה $f_{xy}\neq f_{yx}$. מתקיים ב-$(0,0)$:
+$$f_{x}(0,0)=\lim_{ h \to 0 } \frac{f(h,0)-f(0,0)}{h}=\lim_{ h \to 0 } \frac{0-0}{h}=0$$
+$$f_{y}(0,0)=\lim_{ h \to 0 } \frac{f(0,h)-f(0,0)}{h}=0$$
 כעת נחשב את הנגזרות השניות:
-<script type="math/tex; mode=display">f_{xy}(0,0)=(f_{x})_{y}(0,0)=\lim_{ h \to 0 } \frac{f_{x}(0,h)-\cancelto{ 0 }{ f_{x}(0,0) }}{h}</script>
-נחשב לשם כך את <script type="math/tex">f_{x}(0,h)</script> בעזרת חוקי גזירה ונקבל:
-<script type="math/tex; mode=display">f_{x}(x,y)= \frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}\implies f_{x}(0,h)=-\frac{h^5}{h^4}=-h</script>
-ולכן נקבל <script type="math/tex">f_{xy}(0,0)=-1</script>. כעת נחשב את <script type="math/tex">f_{yx}(0,0)</script>, ראשית נחשב את <script type="math/tex">f_{y}(x,y)</script> בנקודה שונה מ-<script type="math/tex">(0,0)</script> ונקבל:
-<script type="math/tex; mode=display">f_{y}(x,y)= \frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}\implies f(h,0)=h</script>
+$$f_{xy}(0,0)=(f_{x})_{y}(0,0)=\lim_{ h \to 0 } \frac{f_{x}(0,h)-\cancelto{ 0 }{ f_{x}(0,0) }}{h}$$
+נחשב לשם כך את $f_{x}(0,h)$ בעזרת חוקי גזירה ונקבל:
+$$f_{x}(x,y)= \frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}\implies f_{x}(0,h)=-\frac{h^5}{h^4}=-h$$
+ולכן נקבל $f_{xy}(0,0)=-1$. כעת נחשב את $f_{yx}(0,0)$, ראשית נחשב את $f_{y}(x,y)$ בנקודה שונה מ-$(0,0)$ ונקבל:
+$$f_{y}(x,y)= \frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}\implies f(h,0)=h$$
 ומזה ניתן לקבל:
-<script type="math/tex; mode=display">f_{yx}(0,0)=(f_{y})_{x}(0,0)=\lim_{ h \to 0 } \frac{f_{y}(h,0)-\cancelto{ 0 }{ f_{y}(0,0) }}{h}=1\neq f_{xy}=-1</script>
-</p>
+$$f_{yx}(0,0)=(f_{y})_{x}(0,0)=\lim_{ h \to 0 } \frac{f_{y}(h,0)-\cancelto{ 0 }{ f_{y}(0,0) }}{h}=1\neq f_{xy}=-1$$</p>
 </div>
-<div class="definition"> (נגזרת מסדר n)<p>פונקציה <script type="math/tex">f</script> גזירה מסדר <script type="math/tex">n</script> אם היא גזירה מסדר <script type="math/tex">n-1</script> והנגזרת <script type="math/tex">D^{n-1}f</script> היא גזירה. <script type="math/tex; mode=display">(D^{n}f)_{x}\in\operatorname{Hom}(\mathbb{R}^{k},\operatorname{Hom}(\mathbb{R}^{k},\dots,\operatorname{Hom}(\mathbb{R}^{k},\mathbb{R}^{m}))),</script>
+<div class="definition"> (נגזרת מסדר n)<p>פונקציה $f$ גזירה מסדר $n$ אם היא גזירה מסדר $n-1$ והנגזרת $D^{n-1}f$ היא גזירה. $$(D^{n}f)_{x}\in\operatorname{Hom}(\mathbb{R}^{k},\operatorname{Hom}(\mathbb{R}^{k},\dots,\operatorname{Hom}(\mathbb{R}^{k},\mathbb{R}^{m}))),$$
 זוהי תבנית מולטילינארית.</p>
 </div>
 <h2>טיילור רב מימדי</h2>
-<div class="theorem"> (טיילור)<p>תהי <script type="math/tex">A\subseteq \mathbb{R}^k</script> פתוחה, <script type="math/tex">f:A\to\mathbb{R}^m</script> דיפרנציאבילית <script type="math/tex">p</script> פעמים ברציפות ב-<script type="math/tex">x \in A</script>. אזי, לכל <script type="math/tex">v</script> קטן מספיק כך ש-<script type="math/tex">x+v\in A</script> נוכל לכתוב:
-<script type="math/tex; mode=display">\!\!\!\!f\left(x+v\right)\!=\!f\left(x\right)\!+\!\left(D f\right)_{x}\left(v\right)\!+\!\frac12\left(D^{2}f\right)_{x}\left(v,v\right),\ldots,\frac1{p!}\left(D^{(p)}f\right)_{x}\left(v,\ldots,v\right)\!+\!R_{p}\left(v\right)_{x}\left(v,\ldots,v\right)</script>
-כאשר <script type="math/tex">R_{p}(v)</script> היא פונקציית השארית המקיימת:
-<script type="math/tex; mode=display">\operatorname*{lim}_{\nu\to0}{\frac{R_{p}(\nu)}{\|\nu\|_{\mathbb{R}^{k}}^{p}}}=0.</script>
-</p>
+<div class="theorem"> (טיילור)<p>תהי $A\subseteq \mathbb{R}^k$ פתוחה, $f:A\to\mathbb{R}^m$ דיפרנציאבילית $p$ פעמים ברציפות ב-$x \in A$. אזי, לכל $v$ קטן מספיק כך ש-$x+v\in A$ נוכל לכתוב:
+$$\!\!\!\!f\left(x+v\right)\!=\!f\left(x\right)\!+\!\left(D f\right)_{x}\left(v\right)\!+\!\frac12\left(D^{2}f\right)_{x}\left(v,v\right),\ldots,\frac1{p!}\left(D^{(p)}f\right)_{x}\left(v,\ldots,v\right)\!+\!R_{p}\left(v\right)_{x}\left(v,\ldots,v\right)$$
+כאשר $R_{p}(v)$ היא פונקציית השארית המקיימת:
+$$\operatorname*{lim}_{\nu\to0}{\frac{R_{p}(\nu)}{\|\nu\|_{\mathbb{R}^{k}}^{p}}}=0.$$</p>
 </div>
-<div class="theorem"> (שארית לגרנג')<p>אם הפונקציה <script type="math/tex">f</script> גזירה <script type="math/tex">p+1</script> פעמים, פונקציית השארית מקיימת 
-<script type="math/tex; mode=display">R_{p}(\nu)=\frac{1}{(p+1)!}({D}^{p+1}f)_{x+\theta\nu}(\nu,\nu,\ldots,\nu)</script>
-עבור <script type="math/tex">\theta \in(0,1)</script> כלשהו</p>
+<div class="theorem"> (שארית לגרנג')<p>אם הפונקציה $f$ גזירה $p+1$ פעמים, פונקציית השארית מקיימת 
+$$R_{p}(\nu)=\frac{1}{(p+1)!}({D}^{p+1}f)_{x+\theta\nu}(\nu,\nu,\ldots,\nu)$$
+עבור $\theta \in(0,1)$ כלשהו</p>
 </div>
 <h2>סיווג נקודות קיצון</h2>
-<div class="definition"> (חיובית בהחלט)<p>תבנית בילינארית סימטרית <script type="math/tex">T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)</script> נקראת חיובית בהחלט אם:
-<script type="math/tex; mode=display">\forall v \in \mathbb{R}^k\qquad T(v,v)>0</script>
-</p>
+<div class="definition"> (חיובית בהחלט)<p>תבנית בילינארית סימטרית $T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)$ נקראת חיובית בהחלט אם:
+$$\forall v \in \mathbb{R}^k\qquad T(v,v)&gt;0$$</p>
 </div>
-<div class="definition"> (חיובית למחצה)<p>תבנית בילינארית סימטרית <script type="math/tex">T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)</script> נקראת חיובית למצה אם:
-<script type="math/tex; mode=display">\forall v \in \mathbb{R}^k\qquad T(v,v)\geq0</script>
-</p>
+<div class="definition"> (חיובית למחצה)<p>תבנית בילינארית סימטרית $T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)$ נקראת חיובית למצה אם:
+$$\forall v \in \mathbb{R}^k\qquad T(v,v)\geq0$$</p>
 </div>
-<div class="proposition"> (תנאים שקולים לחיוביות בהחלט)<p>מטריצה <script type="math/tex">S</script> של תבנית בילינארית סימטרית תהיה חיובית בהחלט אם כל אחד מהתנאים הבאים מתקיים:</p>
+<div class="proposition"> (תנאים שקולים לחיוביות בהחלט)<p>מטריצה $S$ של תבנית בילינארית סימטרית תהיה חיובית בהחלט אם כל אחד מהתנאים הבאים מתקיים:</p>
 <ol>
 <li>
-<p>כל הערכים העצמיים חיוביים ממש - <script type="math/tex">\lambda>0</script>
-</p>
+<p>כל הערכים העצמיים חיוביים ממש - $\lambda&gt;0$ </p>
 </li>
 <li>
 <p>כל הערכים על האלכסון בצורה המדורגת חיוביים ממש </p>
 </li>
 <li>
-<p>אם מסתכלים על כל ה-<script type="math/tex">n</script> מרובעים שמכילים את המספר הקודקוד הימיני העליון אז הדטרמיננטה של כולם חיוביים ממש </p>
+<p>אם מסתכלים על כל ה-$n$ מרובעים שמכילים את המספר הקודקוד הימיני העליון אז הדטרמיננטה של כולם חיוביים ממש </p>
 </li>
 <li>
-<p>קיים <script type="math/tex">A</script> כך ש-<script type="math/tex">S=A^TA</script> כאשר ל-<script type="math/tex">A</script> יש עמודות בלתי תלויות(אם לא משתמשים בתנאי על העמודות נקבל שיכול להיות חיובי למחצה) </p>
+<p>קיים $A$ כך ש-$S=A^TA$ כאשר ל-$A$ יש עמודות בלתי תלויות(אם לא משתמשים בתנאי על העמודות נקבל שיכול להיות חיובי למחצה) </p>
 </li>
 <li>
-<p>מתקיים <script type="math/tex">x^T S x>0</script> לכל <script type="math/tex">x</script> פרט ל-<script type="math/tex">x=0</script> (שוב התנאי האחרון בשביל המקרה שחיובי למחצה) </p>
+<p>מתקיים $x^T S x&gt;0$ לכל $x$ פרט ל-$x=0$ (שוב התנאי האחרון בשביל המקרה שחיובי למחצה) </p>
 </li>
 </ol>
 </div>
@@ -198,33 +180,33 @@ $$f(x,y)=\begin{cases}
 <p>תנאים 1,2,3 שקולים לתבנית חיובית למחצה אם מסתכלים גם על המקרה של אי שיוויון חלש. כלומר המקרה שהם חיוביים אך לא ממש.</p>
 </div>
 <p>קיימים הגדרות ותנאי שקולים עבור המקרה של תבנית בילינארית סימטרית שלילית בהחלטת ושלילית למחצה.</p>
-<div class="definition"> (נקודת מינימום)<p>עבור פונקציה <script type="math/tex">f:A\to\mathbb{R}</script> כאשר <script type="math/tex">A\subseteq \mathbb{R}^k</script> פתוחה, נקודה <script type="math/tex">x \in A</script> תהיה נקודת מינימום אם קיים קבוצה <script type="math/tex">B\subseteq A</script> כך שלכל <script type="math/tex">b\in B</script> מתקיים <script type="math/tex">f(b)\geq f(x)</script>.</p>
+<div class="definition"> (נקודת מינימום)<p>עבור פונקציה $f:A\to\mathbb{R}$ כאשר $A\subseteq \mathbb{R}^k$ פתוחה, נקודה $x \in A$ תהיה נקודת מינימום אם קיים קבוצה $B\subseteq A$ כך שלכל $b\in B$ מתקיים $f(b)\geq f(x)$.</p>
 </div>
-<div class="definition"> (נקודת מקסימום)<p>עבור פונקציה <script type="math/tex">f:A\to\mathbb{R}</script> כאשר <script type="math/tex">A\subseteq \mathbb{R}^k</script> פתוחה, נקודה <script type="math/tex">x \in A</script> תהיה נקודת מקסימום אם קיים קבוצה <script type="math/tex">B\subseteq A</script> כך שלכל <script type="math/tex">b\in B</script> מתקיים <script type="math/tex">f(b)\leq f(x)</script>.</p>
+<div class="definition"> (נקודת מקסימום)<p>עבור פונקציה $f:A\to\mathbb{R}$ כאשר $A\subseteq \mathbb{R}^k$ פתוחה, נקודה $x \in A$ תהיה נקודת מקסימום אם קיים קבוצה $B\subseteq A$ כך שלכל $b\in B$ מתקיים $f(b)\leq f(x)$.</p>
 </div>
-<div class="definition"> (נקודה קריטית)<p>נקודה שמאפסת את הנגזרת. כלומר נקודה <script type="math/tex">x</script> המקיימת <script type="math/tex">(Df)_{x}=0</script>.</p>
+<div class="definition"> (נקודה קריטית)<p>נקודה שמאפסת את הנגזרת. כלומר נקודה $x$ המקיימת $(Df)_{x}=0$.</p>
 </div>
 <div class="theorem">
-<p>יהי <script type="math/tex">f:A\to \mathbb{R}</script> כאשר <script type="math/tex">A\subseteq \mathbb{R}^k</script> פתוחה, וגזירה פעמיים ברציפות. תהי <script type="math/tex">A</script> נקודה קריטית, אזי אם <script type="math/tex">D^2f</script> רציפה ב-<script type="math/tex">x</script>, מתקיים:</p>
+<p>יהי $f:A\to \mathbb{R}$ כאשר $A\subseteq \mathbb{R}^k$ פתוחה, וגזירה פעמיים ברציפות. תהי $A$ נקודה קריטית, אזי אם $D^2f$ רציפה ב-$x$, מתקיים:</p>
 <ol>
 <li>
-<p>אם <script type="math/tex">(D^2f)_{x}</script> חיובית בהחלט אז <script type="math/tex">x</script> נקודת מינימום. </p>
+<p>אם $(D^2f)_{x}$ חיובית בהחלט אז $x$ נקודת מינימום. </p>
 </li>
 <li>
-<p>אם <script type="math/tex">x</script> נקודת מינימום אז <script type="math/tex">(D^2f)_{x}</script> חיובית למחצה. </p>
+<p>אם $x$ נקודת מינימום אז $(D^2f)_{x}$ חיובית למחצה. </p>
 </li>
 </ol>
 </div>
 <p>עבור מקסימום מקומי נקבל משפט זהה עבור תבנית בילינארית שלילית בהחלט ולמחצה.</p>
-<p>עבור מטריצה <script type="math/tex">2\times 2</script> ניתן להשתמש בזה ש-<script type="math/tex">\det A=\lambda_{1}\lambda_{2}</script> ו-<script type="math/tex">\mathrm{Tr}(A)=\lambda_{1}+\lambda_{2}</script> כדי להסיק את הסימן של הערכים העצמיים ללא חישוב.</p>
+<p>עבור מטריצה $2\times 2$ ניתן להשתמש בזה ש-$\det A=\lambda_{1}\lambda_{2}$ ו-$\mathrm{Tr}(A)=\lambda_{1}+\lambda_{2}$ כדי להסיק את הסימן של הערכים העצמיים ללא חישוב.</p>
 <p><strong>תבנית כללית למציאת נקודות קיצון:</strong>
-עבור פונקציה <script type="math/tex">f:\mathbb{R}^n\to\mathbb{R}</script> נבצע את השלבים הבאים</p>
+עבור פונקציה $f:\mathbb{R}^n\to\mathbb{R}$ נבצע את השלבים הבאים</p>
 <ol>
 <li>
 <p>נחשב את הנגזרות החלקיות מסדר שני. אם לא כולם קיימות, הפונקציה לא גזירה ברציפות פעמיים ולא ניתן להמשיך בתהליך. </p>
 </li>
 <li>
-<p>נוכיח שהנגזרות החלקיות מסדר שני רציפות, ונסיק כי <script type="math/tex">f</script> גזירה פעמיים ברציפות </p>
+<p>נוכיח שהנגזרות החלקיות מסדר שני רציפות, ונסיק כי $f$ גזירה פעמיים ברציפות </p>
 </li>
 <li>
 <p>לחפש נקודות קריטיות - נקודות שמאפסות את הנגזרת. </p>

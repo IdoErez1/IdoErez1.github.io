@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>מערכות ב-3 מימדים</title>
         </head>
         <body>
@@ -69,7 +70,7 @@
 </div>
 <div class="definition"> (מערכת צירים)<p>נקודה במרחב הנקראת ראשית הצירים ביחד עם 3 כיוונים בלתי לתלויים נקרא מערכת צירים.</p>
 </div>
-<p>זהו למעשה דרך לתאר מיקום במרחב. לרוב נבחר את המערכת צירים להיות אורתוגונאלים, ונסמן אותו ב-<script type="math/tex">x,y,z</script> כך ששלושה ימינית - כלומר <script type="math/tex">\hat{x} \times \hat{y} = \hat{z}</script>.</p>
+<p>זהו למעשה דרך לתאר מיקום במרחב. לרוב נבחר את המערכת צירים להיות אורתוגונאלים, ונסמן אותו ב-$x,y,z$ כך ששלושה ימינית - כלומר $\hat{x} \times \hat{y} = \hat{z}$.</p>
 <p>כמובן שיש מספר דרכים להגדיר מערכות צירים.
 <strong>הגדרה</strong> טרנספורמציה של מערכת צירים
 פונקציה המעבירה ממערכת צירים אחת למערכת צירים אחרת.</p>
@@ -85,10 +86,6 @@
 <div class="proposition">
 <p>כל טרנספורמציה של מערכת צירים ניתן לייצג ע"י שינוי של הכיוונים, מתיחה של הצירים, והמיקום של הראשית.</p>
 </div>
-<p>נסתכל ראשית על שינוי הכיוונים של הצירים. ניתן לשנות את הכיוונים של הצירים במספר דרכים. דרך אחת למשל היא סיבוב. הטרנספורמציה של סיבוב בציר אחד יהיה מהצורה:
-<script type="math/tex; mode=display">\left(\begin{array}{c}{{\Delta x^{\prime}}}\\ {{\Delta y^{\prime}}}\\ {{\Delta z^{\prime}}}\end{array}\right)=\left(\begin{array}{c c c}{{\cos\theta}}&{{\sin\theta}}&0\\ -\sin\theta & \cos\theta & 0\\ {{0}}&{{0}}&{{1}}\end{array}\right)\left(\begin{array}{c}{{\Delta x}}\\ {{\Delta y}}\\ {{\Delta z}}\end{array}\right)</script>
-וניתן לראות את הטרנספורמציה בצורה הבאה:
-```tikz</p>
 <div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="227.17" height="227.17" viewBox="0 0 227.17 227.17">
 <defs>
 <g>
@@ -170,53 +167,19 @@
 </div>
 <div class="proposition">
 <p>כל מעבר מערכת צירים ניתנת לייצוג ע"י טרנספורמציה לינארית(מתיחה + סיבוב) והזזה, לכן ניתן לייצג מעבר קורדינטות כללי ע"י:
-<script type="math/tex; mode=display">\left(\begin{array}{c}{{\Delta x^{\prime}}}\\ {{\Delta y^{\prime}}}\\ {{\Delta z^{\prime}}}\end{array}\right)=T\left(\begin{array}{c}{{\Delta x}}\\ {{\Delta y}}\\ {{\Delta z}}\end{array}\right)</script>
-</p>
+$$\left(\begin{array}{c}{{\Delta x^{\prime}}}\\ {{\Delta y^{\prime}}}\\ {{\Delta z^{\prime}}}\end{array}\right)=T\left(\begin{array}{c}{{\Delta x}}\\ {{\Delta y}}\\ {{\Delta z}}\end{array}\right)$$</p>
 </div>
 <p>המצב נהיה קצת יותר מסובך כאשר מכניסים זמן.
 <strong>הגדרה</strong> מערכת ייחוס
 מערכת צירים שהיא פונקציה של זמן. ניתן לחשוב על זה שכל אחד מהמאפיינים של מערכת צירים היא פונקציה של הזמן. כלומר גם כל אחד מהצירים וגם המיקום של הראשית זה פונקציה של הזמן.</p>
 <p>באופן כללי אנחנו מניחים שהטבע לא מאיץ באופן פתאומי בלי סיבה, לכן נניח שהמערכת ייחוס היא פונקציה גזירה, ולכן ניתן לבצע קירוב לינארי לשינוי במערכת ייחוס:
-<script type="math/tex; mode=display">\begin{pmatrix}
-dx' \\
-dy' \\
-dz' \\
-dt'
-\end{pmatrix}=T\begin{pmatrix}
-dx\\ dy \\ dz \\ dt
-\end{pmatrix}</script>
-כאשר כמו במעבר של מערכת קורדינטות, נקבל כי <script type="math/tex">dx,dy,dz,dt</script> מייצגות את השינוי במיקום של הראשית, וההעתקה <script type="math/tex">T</script> מייצג כמה שמשתנה כל רכיב.
+$$\begin{pmatrix}dx' \\dy' \\dz' \\dt'\end{pmatrix}=T\begin{pmatrix}dx\\ dy \\ dz \\ dt \end{pmatrix}$$
+כאשר כמו במעבר של מערכת קורדינטות, נקבל כי $dx,dy,dz,dt$ מייצגות את השינוי במיקום של הראשית, וההעתקה $T$ מייצג כמה שמשתנה כל רכיב.
 כפי שניתן לתאר, יש מספר רב של דרכים שניתן לעבור דרכם מערכות ייחוס. </p>
-<div class="definition"> (טרנספורמציית גלילאו)<p>דרך לעבור ממערכת ייחוס <script type="math/tex">\mathcal{O}</script> למערכת ייחוס <script type="math/tex">\mathcal{O}'</script> הנעה במהירות קבועה <script type="math/tex">v</script> ביחס ל-<script type="math/tex">\mathcal{O}</script>. מעבר מהמערכת <script type="math/tex">x,y,z</script> למערכת <script type="math/tex">x',y',z'</script> מוגדרת:
-$$<script type="math/tex; mode=display">\begin{pmatrix}
-d x' \\
-d y' \\
-d  z' \\
-dt' 
-\end{pmatrix}</script>=<script type="math/tex; mode=display">\begin{pmatrix}
-d x-v_{x}t \\
-d y-v_{y}t \\
-d z-v_{z}t \\
-t'
-\end{pmatrix}</script>\implies <script type="math/tex; mode=display">\begin{pmatrix}
-d x' \\
-d y' \\
-d z' \\
-dt'
-\end{pmatrix}</script>=\begin{pmatrix}</p>
-<p>1  &amp; 0 &amp; 0 &amp; -v_{x} \ </p>
-<p>0 &amp; 1 &amp; 0 &amp; -v_{y} \ </p>
-<p>0 &amp; 0 &amp; 1 &amp; -v_{z} \ </p>
-<p>0 &amp; 0 &amp; 0 &amp; 1 
-\end{pmatrix}<script type="math/tex; mode=display">\begin{pmatrix}
-dx \\
-dy \\
-dz  \\
-dt
-\end{pmatrix}</script>$$
-כאשר אם נסמן את המטריצה ב-<script type="math/tex">A</script> ניתן בעזרת הסכם הסכמיה של אינשטיין לכתוב:
-<script type="math/tex; mode=display">dx'^i=A_{i}dx^i</script>
-</p>
+<div class="definition"> (טרנספורמציית גלילאו)<p>דרך לעבור ממערכת ייחוס $\mathcal{O}$ למערכת ייחוס $\mathcal{O}'$ הנעה במהירות קבועה $v$ ביחס ל-$\mathcal{O}$. מעבר מהמערכת $x,y,z$ למערכת $x',y',z'$ מוגדרת:
+$$\begin{pmatrix}d x' \\d y' \\d  z' \\dt' \end{pmatrix}=\begin{pmatrix}d x-v_{x}t \\d y-v_{y}t \\d z-v_{z}t \\t'\end{pmatrix}\implies \begin{pmatrix}d x' \\d y' \\d z' \\dt'\end{pmatrix}=\begin{pmatrix}1  &amp; 0 &amp; 0 &amp; -v_{x} \\0 &amp; 1 &amp; 0 &amp; -v_{y} \\0 &amp; 0 &amp; 1 &amp; -v_{z} \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\begin{pmatrix}dx \\dy \\dz  \\dt \end{pmatrix}$$
+כאשר אם נסמן את המטריצה ב-$A$ ניתן בעזרת הסכם הסכמיה של אינשטיין לכתוב:
+$$dx'^i=A_{i}dx^i$$</p>
 </div>
 <div class="proposition">
 <p>הטרנספורמציה היחידה שמשמרת את חוקי ניוטון תחת מעבר במערכות צירים היא טרספונמציית גלילי.</p>

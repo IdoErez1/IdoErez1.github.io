@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>משפט פוביני</title>
         </head>
         <body>
@@ -88,59 +89,48 @@
         <div class="content">
         <h1>7.5  משפט פוביני</h1>
     <p><strong>אינטואיציה</strong> אם מחלקים את התיבות לקוביות וסוכמים אותם, ניתן לסכום אותם לפי השורות או לפי העמודות, וכיוון שכמות התיבות היא סופית נצפה לקבל אותו דבר.</p>
-<div class="theorem"> (פוביני)<p>יהיו <script type="math/tex">A\subseteq \mathbb{R}^k,B\subseteq \mathbb{R}^m</script> תיבות סגורות ו-<script type="math/tex">f:A\times B\to\mathbb{R}</script> פונקציה אינטגרבילית. לכל <script type="math/tex">x  \in A</script> ו-<script type="math/tex">y\in B</script> נגדיר:
-<script type="math/tex; mode=display">f_{x}(y):=f(x,y),\;f_{y}(x):=f(x,y)</script>
-אם לכל <script type="math/tex">x \in A,y \in B</script> האינטגרלים<script type="math/tex; mode=display">\int_{B}f_{x}(y)d y,\;\int_{A}f_{y}(x)d x</script>
+<div class="theorem"> (פוביני)<p>יהיו $A\subseteq \mathbb{R}^k,B\subseteq \mathbb{R}^m$ תיבות סגורות ו-$f:A\times B\to\mathbb{R}$ פונקציה אינטגרבילית. לכל $x  \in A$ ו-$y\in B$ נגדיר:
+$$f_{x}(y):=f(x,y),\;f_{y}(x):=f(x,y)$$
+אם לכל $x \in A,y \in B$ האינטגרלים$$\int_{B}f_{x}(y)d y,\;\int_{A}f_{y}(x)d x$$
 קיימים אז:
-<script type="math/tex; mode=display">\int_{A\times B}f(x,y)d x d y=\int_{A}\left( \int_{B}f_{x}(y)d y \right)d x=\int_{A}\left( \int_{B}f_{y}(x)d x \right)d y</script>
-</p>
+$$\int_{A\times B}f(x,y)d x d y=\int_{A}\left( \int_{B}f_{x}(y)d y \right)d x=\int_{A}\left( \int_{B}f_{y}(x)d x \right)d y$$</p>
 </div>
 <p>זה מאפשר לנו לבצע אינטגרציה לכל משתנה בנפרד, ולהחליף סדר אינטגרציה.</p>
 <div class="proof">
-<p>כיוון ש-<script type="math/tex">f</script> אינטגרבילית ב-<script type="math/tex">A\times B</script> לכל <script type="math/tex">\varepsilon>0</script> קיימת חלוקה <script type="math/tex">P</script> כך ש-
-<script type="math/tex; mode=display">S\left(f,P\right)-s(f,P)\leq\varepsilon.</script>
-כאשר כל חלוקה <script type="math/tex">P</script> של <script type="math/tex">A\times B</script> היא מכפלה של חלוקות <script type="math/tex">P_{A},P_{B}</script> של תיבות <script type="math/tex">A</script> ושל תיבות <script type="math/tex">B</script>. נסמן:
-<script type="math/tex; mode=display">G(y)=\overline{{{\int_{A}}}}f(x,y)\,d x\qquad{\mathrm{and}}\qquad H(y)=\underline{{{\int_{A}}}}f(x,y)\,d x.</script>
+<p>כיוון ש-$f$ אינטגרבילית ב-$A\times B$ לכל $\varepsilon&gt;0$ קיימת חלוקה $P$ כך ש-
+$$S\left(f,P\right)-s(f,P)\leq\varepsilon.$$
+כאשר כל חלוקה $P$ של $A\times B$ היא מכפלה של חלוקות $P_{A},P_{B}$ של תיבות $A$ ושל תיבות $B$. נסמן:
+$$G(y)=\overline{{{\int_{A}}}}f(x,y)\,d x\qquad{\mathrm{and}}\qquad H(y)=\underline{{{\int_{A}}}}f(x,y)\,d x.$$
 כעת:
-<script type="math/tex; mode=display">
-\begin{aligned} {{s ( f, P )}} & {{} {{} {} {} {{}=} \sum_{i} \sum_{j} V ( A_{i} ) V ( B_{j} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}} \\ {{}} & {{} {{} {{}=\sum_{j} V ( B_{j} ) \sum_{i} V ( A_{i} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}}} \\ {{}} & {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} \sum_{j} V ( A_{i} ) \operatorname* {i n f}_{x \in A_{i}} f ( x, y )}}} \\ {{}} & {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} H ( y )=s ( H, P_{B} ).}}} \\ \end{aligned}
-</script>
+$$\begin{aligned} {{s ( f, P )}} &amp; {{} {{} {} {} {{}=} \sum_{i} \sum_{j} V ( A_{i} ) V ( B_{j} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}} \\ {{}} &amp; {{} {{} {{}=\sum_{j} V ( B_{j} ) \sum_{i} V ( A_{i} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}}} \\ {{}} &amp; {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} \sum_{j} V ( A_{i} ) \operatorname* {i n f}_{x \in A_{i}} f ( x, y )}}} \\ {{}} &amp; {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} H ( y )=s ( H, P_{B} ).}}} \\ \end{aligned} $$
 ובאופן דומה נקבל:
-<script type="math/tex; mode=display">S\left(f,P\right)\geq S\left(G,P_{B}\right).</script>
+$$S\left(f,P\right)\geq S\left(G,P_{B}\right).$$
 כעת נוכל להסיק כי:
-<script type="math/tex; mode=display">\begin{aligned}
-\int_{A\times B}f(x,y) dxdy-\varepsilon & \leq s(f,P)\leq s(H,P_{B}) \\
-&\leq\underline{\int}_{B}H(y) dy\leq\overline{\int}_{B}H(y) dy \\
-&\leq S\left(H,P_{B}\right)\leq S\left(G,P_{B}\right)\leq S\left(f,P\right) \\
-&\leq\int_{A\times B}f(x,y) dxdy+\varepsilon.
-\end{aligned}</script>
-כיוון שנכון לכל <script type="math/tex">\varepsilon</script> נקבל כי:
-<script type="math/tex; mode=display">\int_{A\times B}f(x,y)\,d x d y=\int_{B}H(y)\,d y=\int_{B}{\underline{{\int_{A}}}}f(x,y)\,d x\,d y.</script>
+$$\begin{aligned}\int_{A\times B}f(x,y) dxdy-\varepsilon &amp; \leq s(f,P)\leq s(H,P_{B}) \\&amp;\leq\underline{\int}_{B}H(y) dy\leq\overline{\int}_{B}H(y) dy \\&amp;\leq S\left(H,P_{B}\right)\leq S\left(G,P_{B}\right)\leq S\left(f,P\right) \\&amp;\leq\int_{A\times B}f(x,y) dxdy+\varepsilon. \end{aligned}$$
+כיוון שנכון לכל $\varepsilon$ נקבל כי:
+$$\int_{A\times B}f(x,y)\,d x d y=\int_{B}H(y)\,d y=\int_{B}{\underline{{\int_{A}}}}f(x,y)\,d x\,d y.$$
 ובאופן דומה, נקבל:
-<script type="math/tex; mode=display">\int_{A\times B}f(x,y)\,d x d y=\int_{B}G(y)\,d y=\int_{B}{\overline{{\int_{A}}}}f(x,y)\,d x\,d y.</script>
-</p>
+$$\int_{A\times B}f(x,y)\,d x d y=\int_{B}G(y)\,d y=\int_{B}{\overline{{\int_{A}}}}f(x,y)\,d x\,d y.$$</p>
 </div>
 <p>משפט זה מאוד חשוב כיוון שהופך אינטגרל על קבוצה לאוסף אינטגרלים חד מימדיים.</p>
 <div class="example">
-<p>ננסה למצוא נפח של גוף סיבוב. יהי <script type="math/tex">f:[a,b]\to\left[ 0,\infty \right]</script> פונקציה רציפה. וכן נגדיר:
-<script type="math/tex; mode=display">C=\left\{(x,y,z)\in\mathbb{R}^{3}:\;x\in[a,b],\;y^{2}+z^{2}\leq f^{2}(x)\right\}.</script>
-נשים לב כי <script type="math/tex">C</script> קבוצה בעלת נפח. כעת מפוביני מתקיים:
-<script type="math/tex; mode=display">V(C)=\int_{a}^{b}\left(\int\chi_{C}(x,y,z)\,d y d z\right)\,d x=\int_{a}^{b}\pi f^{2}(x)\,d x,</script>
-כיוון שהאינטגרל הפנימי הוא נשטח של דיסטה ברדיוס <script type="math/tex">f(x)</script>. </p>
+<p>ננסה למצוא נפח של גוף סיבוב. יהי $f:[a,b]\to\left[ 0,\infty \right]$ פונקציה רציפה. וכן נגדיר:
+$$C=\left\{(x,y,z)\in\mathbb{R}^{3}:\;x\in[a,b],\;y^{2}+z^{2}\leq f^{2}(x)\right\}.$$
+נשים לב כי $C$ קבוצה בעלת נפח. כעת מפוביני מתקיים:
+$$V(C)=\int_{a}^{b}\left(\int\chi_{C}(x,y,z)\,d y d z\right)\,d x=\int_{a}^{b}\pi f^{2}(x)\,d x,$$
+כיוון שהאינטגרל הפנימי הוא נשטח של דיסטה ברדיוס $f(x)$. </p>
 </div>
 <div class="corollary">
-<p>יהיו <script type="math/tex">g_{0},g_{1}:[a,b]\to \mathbb{R}</script> פונקציות רציפות כך ש-<script type="math/tex">g_{0}\leq g_{1}</script> ותהי:
-<script type="math/tex; mode=display">D=\left\{\left(x,y\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right]\right\}</script>
-אזי <script type="math/tex">D</script> היא קבוצת בעלת נפח ולכל פונקציה רציפה <script type="math/tex">f:D\to\mathbb{R}</script> נקבל:
-<script type="math/tex; mode=display">\int_{D}f\left(x,y\right)d x d y=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}f\left(x,y\right)d y\right)d x</script>
-</p>
+<p>יהיו $g_{0},g_{1}:[a,b]\to \mathbb{R}$ פונקציות רציפות כך ש-$g_{0}\leq g_{1}$ ותהי:
+$$D=\left\{\left(x,y\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right]\right\}$$
+אזי $D$ היא קבוצת בעלת נפח ולכל פונקציה רציפה $f:D\to\mathbb{R}$ נקבל:
+$$\int_{D}f\left(x,y\right)d x d y=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}f\left(x,y\right)d y\right)d x$$</p>
 </div>
 <div class="corollary">
-<p>יהיו <script type="math/tex">h_{0},h_{1}:D\to\mathbb{R}</script> פונקציות רציפות כך ש-<script type="math/tex">h_{0}\leq h_{1}</script> ותהי:
-<script type="math/tex; mode=display">E=\left\{\left(x,y,z\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right],z\in\left[h_{0}\left(x,y\right),h_{1}\left(x,y\right)\right]\right\}</script>
-אזי <script type="math/tex">E</script> קבוצת בעלת נפח ולכל פונקציה רציפה <script type="math/tex">f:E\to\mathbb{R}</script> נקבל:
-<script type="math/tex; mode=display">\int_{E}f\left(x,y,z\right)d x d y d z=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}\left(\int_{h_{0}\left(x,y\right)}^{h_{1}\left(x,y\right)}f\left(x,y,z\right)d z\right)d y\right)d x</script>
-</p>
+<p>יהיו $h_{0},h_{1}:D\to\mathbb{R}$ פונקציות רציפות כך ש-$h_{0}\leq h_{1}$ ותהי:
+$$E=\left\{\left(x,y,z\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right],z\in\left[h_{0}\left(x,y\right),h_{1}\left(x,y\right)\right]\right\}$$
+אזי $E$ קבוצת בעלת נפח ולכל פונקציה רציפה $f:E\to\mathbb{R}$ נקבל:
+$$\int_{E}f\left(x,y,z\right)d x d y d z=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}\left(\int_{h_{0}\left(x,y\right)}^{h_{1}\left(x,y\right)}f\left(x,y,z\right)d z\right)d y\right)d x$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

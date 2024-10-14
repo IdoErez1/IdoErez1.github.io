@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>חזרה - אלגברה לינארית</title>
         </head>
         <body>
@@ -65,58 +66,47 @@
         <div class="content">
         <h1>1.1  חזרה - אלגברה לינארית</h1>
     <h2>הגדרות בסיסיות</h2>
-<div class="definition"> (צמוד מרוכב)<p>הצמוד של מספר מרוכב <script type="math/tex">z=a+bi</script> יהיה המספר <script type="math/tex">\overline{z}=a-bi</script>.</p>
+<div class="definition"> (צמוד מרוכב)<p>הצמוד של מספר מרוכב $z=a+bi$ יהיה המספר $\overline{z}=a-bi$.</p>
 </div>
-<div class="definition"> (צמוד הרמיטי של מטריצה)<p>הצמוד ההרימטי של מטריצה <script type="math/tex">U</script> יהיה השיחלוף של הצמוד המרוכב של כל האיברים. מסומן <script type="math/tex">U^{\dagger}</script>
-</p>
+<div class="definition"> (צמוד הרמיטי של מטריצה)<p>הצמוד ההרימטי של מטריצה $U$ יהיה השיחלוף של הצמוד המרוכב של כל האיברים. מסומן $U^{\dagger}$</p>
 </div>
 <div class="remark">
-<p>הגדרה זו רלוונטית גם עבור ווקטורים. ניתן להעביר את הווקטור לווקטור עמודה ולקחת את הצמוד המרוכב שלהם. מסמן <script type="math/tex">\vec{v}^{\dagger}</script>.</p>
+<p>הגדרה זו רלוונטית גם עבור ווקטורים. ניתן להעביר את הווקטור לווקטור עמודה ולקחת את הצמוד המרוכב שלהם. מסמן $\vec{v}^{\dagger}$.</p>
 </div>
-<div class="definition"> (מטריצה אוניטרי)<p>מטריצה המקיימת <script type="math/tex">U U^{\dagger}=U^{\dagger} U=Id</script>.</p>
+<div class="definition"> (מטריצה אוניטרי)<p>מטריצה המקיימת $U U^{\dagger}=U^{\dagger} U=Id$.</p>
 </div>
-<div class="definition"> (מטריצה הרמיטית)<p>מטריצה שמקיימת <script type="math/tex">U^{\dagger}=U</script>.</p>
+<div class="definition"> (מטריצה הרמיטית)<p>מטריצה שמקיימת $U^{\dagger}=U$.</p>
 </div>
-<div class="definition"> (מרחב הילברט)<p>מרחב מכפלה פנימית שלם. לעיתים מסמנים ב-<script type="math/tex">\mathcal{H}</script>.</p>
+<div class="definition"> (מרחב הילברט)<p>מרחב מכפלה פנימית שלם. לעיתים מסמנים ב-$\mathcal{H}$.</p>
 </div>
-<div class="definition"> (מכפלה פנימית)<p>תבנית ססקילינארית <script type="math/tex">\left\langle  \cdot \mid\cdot  \right\rangle:\mathbb{C}\times \mathbb{C}\to \mathbb{R}</script> מוגדרת על ידי:
-<script type="math/tex; mode=display">\left\langle  \vec{v},\vec{u}  \right\rangle ={\vec{v}}^{\dagger} \vec{u}</script>
-</p>
+<div class="definition"> (מכפלה פנימית)<p>תבנית ססקילינארית $\left\langle  \cdot \mid\cdot  \right\rangle:\mathbb{C}\times \mathbb{C}\to \mathbb{R}$ מוגדרת על ידי:
+$$\left\langle  \vec{v},\vec{u}  \right\rangle ={\vec{v}}^{\dagger} \vec{u}$$</p>
 </div>
-<div class="definition"> (קאט)<p>נקרא לאיבר(ווקטור) במרחב הילברט קאט. נסמן אותו <script type="math/tex">\ket{\psi}</script>
-</p>
+<div class="definition"> (קאט)<p>נקרא לאיבר(ווקטור) במרחב הילברט קאט. נסמן אותו $\ket{\psi}$</p>
 </div>
-<div class="definition"> (ברא)<p>עבור קאט <script type="math/tex">\ket{\psi}</script> נגדיר את הברא המתאים בתור <script type="math/tex">\bra{\psi}</script> אשר מקיים <script type="math/tex">\bra{\psi}=\ket{\psi}^{\dagger}</script>.</p>
+<div class="definition"> (ברא)<p>עבור קאט $\ket{\psi}$ נגדיר את הברא המתאים בתור $\bra{\psi}$ אשר מקיים $\bra{\psi}=\ket{\psi}^{\dagger}$.</p>
 </div>
 <div class="proposition">
 <p>כפל של קאט וברא מחזיר את המכפלה הפנימית הסטנדרטית תחת המרוכבים:
-<script type="math/tex; mode=display">\left\langle  \bra{\phi} \mid \ket{\psi}   \right\rangle =\bra{\phi}\ket{\psi} :=\left\langle  \phi \mid \psi  \right\rangle  </script>
-</p>
+$$\left\langle  \bra{\phi} \mid \ket{\psi}   \right\rangle =\bra{\phi}\ket{\psi} :=\left\langle  \phi \mid \psi  \right\rangle  $$</p>
 </div>
 <div class="definition"> (קומוטטור של חוגים)<p>עבור 2 איברים בחוג
-<script type="math/tex; mode=display">[a,b]=a b-b a</script>
-</p>
+$$[a,b]=a b-b a$$</p>
 </div>
 <div class="remark">
 <p>הקומוטטור של חוגים, בדומה לקומוטטור של חבורות בודק כמה שהחוג קומוטטיבי.</p>
 </div>
-<div class="proposition"> (תכונות של קומוטטור)<p>
-<script type="math/tex; mode=display">\begin{array}{l}{{[A+B,C]=[A,C]+[B,C]}}\\ {{{[A,A]=0}}}\\ {{{[A,B]=-[B,A]}}}\\ {{{[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0}}}\end{array}</script>
-</p>
+<div class="proposition"> (תכונות של קומוטטור)<p>$$\begin{array}{l}{{[A+B,C]=[A,C]+[B,C]}}\\ {{{[A,A]=0}}}\\ {{{[A,B]=-[B,A]}}}\\ {{{[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0}}}\end{array}$$</p>
 </div>
-<div class="definition"> (אנטי קומוטטור)<p>
-<script type="math/tex; mode=display">\{a,b\}=a b+b a</script>
-</p>
+<div class="definition"> (אנטי קומוטטור)<p>$$\{a,b\}=a b+b a$$</p>
 </div>
 <h3>אופרטורים לינארים</h3>
-<div class="definition"> (אופרטור לינארי)<p>עבור מרחב הילברט <script type="math/tex">\mathcal{H}</script> אופרטור <script type="math/tex">\hat{X}</script> נקרא אופרטור לינארי אם לכל <script type="math/tex">v,u \in \mathcal{H}</script> ו-<script type="math/tex">c \in \mathbb{R}</script> מתקיים:
-<script type="math/tex; mode=display">\hat{X}(v+cu)=\hat{X}v+c\hat{X}u</script>
-</p>
+<div class="definition"> (אופרטור לינארי)<p>עבור מרחב הילברט $\mathcal{H}$ אופרטור $\hat{X}$ נקרא אופרטור לינארי אם לכל $v,u \in \mathcal{H}$ ו-$c \in \mathbb{R}$ מתקיים:
+$$\hat{X}(v+cu)=\hat{X}v+c\hat{X}u$$</p>
 </div>
 <p>האופרטור בניגוד למטריצה לא מיוצג תחת בסיס מסויים. זוהי פונקציה כללית. כאשר הטענה המרכזית שמקשרת ביניהם היא שאופרטור הוא לינארי אם"ם ניתן להציג אותו בעזרת מטריצה בבסיס כלשהו.</p>
-<div class="definition"> (אופרטור הצמוד)<p>יהי <script type="math/tex">\mathcal{H}</script> מרחב הילברט. עבור אופרטור <script type="math/tex">\hat{X}</script> נגדיר את <script type="math/tex">\hat{X}^{\dagger}</script> ע"י האופרטור היחיד שמקיים לכל <script type="math/tex">\ket{v},\ket{w}</script>:
-<script type="math/tex; mode=display">\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} </script>
-</p>
+<div class="definition"> (אופרטור הצמוד)<p>יהי $\mathcal{H}$ מרחב הילברט. עבור אופרטור $\hat{X}$ נגדיר את $\hat{X}^{\dagger}$ ע"י האופרטור היחיד שמקיים לכל $\ket{v},\ket{w}$:
+$$\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} $$</p>
 </div>
 <p>כלומר זה האופרטור שלהפעיל אותו  על הקאט שקול ללהפעיל את האופרטור המקורי על הברא.</p>
 <div class="proposition"> (תכונות של אופרטור הצמוד)<ol>
@@ -124,36 +114,30 @@
 <p>קיים ויחיד </p>
 </li>
 <li>
-<p>לינארי לסכום - <script type="math/tex">(S+T)^{\dagger}=S^{\dagger}+T^{\dagger}</script>
-</p>
+<p>לינארי לסכום - $(S+T)^{\dagger}=S^{\dagger}+T^{\dagger}$ </p>
 </li>
 <li>
-<p>הרכבה של צמודים מקיים - <script type="math/tex">\left( S\circ T \right)^{\dagger}=T^{\dagger}\circ S^{\dagger}</script>
-</p>
+<p>הרכבה של צמודים מקיים - $\left( S\circ T \right)^{\dagger}=T^{\dagger}\circ S^{\dagger}$ </p>
 </li>
 <li>
-<p>כפל עם סקלר מקיים - <script type="math/tex">(aT)^{\dagger}=\overline{a}T^{\dagger}</script>
-</p>
+<p>כפל עם סקלר מקיים - $(aT)^{\dagger}=\overline{a}T^{\dagger}$ </p>
 </li>
 <li>
-<p>הצמוד של הצמוד  מקיים - <script type="math/tex">\left( T^{\dagger} \right)^{\dagger}=T</script>
-</p>
+<p>הצמוד של הצמוד  מקיים - $\left( T^{\dagger} \right)^{\dagger}=T$ </p>
 </li>
 <li>
-<p>הצמוד של מכפלה פנימית - <script type="math/tex">\left( \left\langle  \psi \mid \phi  \right\rangle \right)^{\dagger}=\ket{\psi}^{\dagger}\bra{\phi}^{\dagger}</script>
-</p>
+<p>הצמוד של מכפלה פנימית - $\left( \left\langle  \psi \mid \phi  \right\rangle \right)^{\dagger}=\ket{\psi}^{\dagger}\bra{\phi}^{\dagger}$ </p>
 </li>
 <li>
-<p>הצמוד של ברא הוא הקאט המתאים ולהפך - <script type="math/tex">\bra{\psi}^{\dagger}=\ket{\psi},\ket{\psi}^{\dagger}=\bra{\psi}</script>
-</p>
+<p>הצמוד של ברא הוא הקאט המתאים ולהפך - $\bra{\psi}^{\dagger}=\ket{\psi},\ket{\psi}^{\dagger}=\bra{\psi}$ </p>
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור נורמלי)<p>אופרטור <script type="math/tex">\hat{X}</script> המקיים <script type="math/tex">\hat{X}^{\dagger}\hat{X}=\hat{X}\hat{X}^{\dagger}</script>.</p>
+<div class="definition"> (אופרטור נורמלי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}\hat{X}=\hat{X}\hat{X}^{\dagger}$.</p>
 </div>
 <div class="proposition"> (המשפט הספקטרלי)<p>אופרטור נורמלי הוא לכסין אורתונורמלי ופורש את כל המרחב. כלומר קיים בסיס למרחב של ווקטורים עצמיים אשר עבורו ווקטורים עצמיים עם ערכים עצמיים שונים יהיו אורתוגונאלים אחד לשני. עבור מטריצות זה אומר כי המטריצה המלכסנת היא אוניטרית.</p>
 </div>
-<div class="definition"> (אופרטור הרמיטי)<p>אופרטור <script type="math/tex">\hat{X}</script> המקיים <script type="math/tex">\hat{X}^{\dagger}=\hat{X}</script>.</p>
+<div class="definition"> (אופרטור הרמיטי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}=\hat{X}$.</p>
 </div>
 <div class="remark">
 <p>זהו המקביל המרוכב לאופרטור צמוד לעצמו.</p>
@@ -170,8 +154,7 @@
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור אנטי-הרמיטי)<p>אופרטור <script type="math/tex">\hat{X}</script> המקיים <script type="math/tex">\hat{X}=-\hat{X}^{\dagger}</script>
-</p>
+<div class="definition"> (אופרטור אנטי-הרמיטי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}=-\hat{X}^{\dagger}$</p>
 </div>
 <div class="proposition"> (תכונות של אופרטור אנטי-הרמיטי)<ol>
 <li>
@@ -187,46 +170,42 @@
 <p>נורמלי. </p>
 </li>
 <li>
-<p>אופרטור <script type="math/tex">\hat{X}</script> הוא אנטי הרמיטי אם"ם <script type="math/tex">i\hat{X}</script> הרמטי. </p>
+<p>אופרטור $\hat{X}$ הוא אנטי הרמיטי אם"ם $i\hat{X}$ הרמטי. </p>
 </li>
 <li>
-<p>אופרטור <script type="math/tex">\hat{X}</script> הוא אנטי הארמיטי אם"ם החלק המדומה אנטי סימטרי והחלק הממשי סימטרי. </p>
+<p>אופרטור $\hat{X}$ הוא אנטי הארמיטי אם"ם החלק המדומה אנטי סימטרי והחלק הממשי סימטרי. </p>
 </li>
 <li>
-<p>אם <script type="math/tex">A</script> מטריצה אנטי הרמיטית, אז עבור <script type="math/tex">k</script> זוגי נקבל <script type="math/tex">A^k</script> הרמיטית ועבור <script type="math/tex">k</script> אי זוגי <script type="math/tex">A^k</script> אנטי הרמיטית. </p>
+<p>אם $A$ מטריצה אנטי הרמיטית, אז עבור $k$ זוגי נקבל $A^k$ הרמיטית ועבור $k$ אי זוגי $A^k$ אנטי הרמיטית. </p>
 </li>
 <li>
-<p>אם <script type="math/tex">A</script> אנטי ברמיטית, אז <script type="math/tex">e^A</script> אוניטרית. </p>
+<p>אם $A$ אנטי ברמיטית, אז $e^A$ אוניטרית. </p>
 </li>
 <li>
 <p>הנגזרת של אופרטור הרמיטי יהיה אנטי הרמיטי. ונגזרת של אופרטור אנטי הרמיטי יהיה הרמיטי </p>
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור אוניטרי)<p>יהי <script type="math/tex">\mathcal{H}</script> מרחב הילברט. האופרטור <script type="math/tex">\hat{X}</script> יקרא אניטרי אם לכל <script type="math/tex">v,w \in \mathcal{H}</script> מתקיים:
-<script type="math/tex; mode=display">\bra{T(v)}\ket{T(w)} =\bra{v} \ket{w}  </script>
-</p>
+<div class="definition"> (אופרטור אוניטרי)<p>יהי $\mathcal{H}$ מרחב הילברט. האופרטור $\hat{X}$ יקרא אניטרי אם לכל $v,w \in \mathcal{H}$ מתקיים:
+$$\bra{T(v)}\ket{T(w)} =\bra{v} \ket{w}  $$</p>
 </div>
 <div class="proposition">
 <p>הטענות הבאות שקולות:</p>
 <ol>
 <li>
-<p>האופרטור <script type="math/tex">\hat{X}</script> אוניטרי, כלומר: 
-<script type="math/tex; mode=display">\hat{X}^{\dagger} \circ \hat{X} = Id \iff \hat{X}^{\dagger} =\hat{X}^{-1} \iff \hat{X}\circ \hat{X}^{\dagger} = Id</script>
-</p>
+<p>האופרטור $\hat{X}$ אוניטרי, כלומר: 
+$$\hat{X}^{\dagger} \circ \hat{X} = Id \iff \hat{X}^{\dagger} =\hat{X}^{-1} \iff \hat{X}\circ \hat{X}^{\dagger} = Id$$</p>
 </li>
 <li>
 <p>קיים בסיס אורתונורמלי כך שתחת הבסיס המטריצה המייצגת אוניטרית </p>
 </li>
 <li>
-<p>אופרטור <script type="math/tex">\hat{X}</script> משמרת נורמה. כלומר: 
-<script type="math/tex; mode=display">\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \hat{X}\ket{\psi}  \right\rVert =\left\lVert  \ket{\psi}   \right\rVert  </script>
-</p>
+<p>אופרטור $\hat{X}$ משמרת נורמה. כלומר: 
+$$\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \hat{X}\ket{\psi}  \right\rVert =\left\lVert  \ket{\psi}   \right\rVert  $$</p>
 </li>
 <li>
 <p>כל הווקטורים בנורמה 1 נשלחים לווקטור בנורמה 1. כלומר: 
-<script type="math/tex; mode=display">\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \ket{\psi}   \right\rVert =1\implies \left\lVert  \hat{X}\ket{\psi}   \right\rVert =1  </script>
-</p>
+$$\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \ket{\psi}   \right\rVert =1\implies \left\lVert  \hat{X}\ket{\psi}   \right\rVert =1  $$</p>
 </li>
 </ol>
 </div>
@@ -249,7 +228,7 @@
 </ol>
 </div>
 <h2>תכונות נוספות של אופרטורים</h2>
-<div class="definition"> (תת מרחב ווקטורי)<p>עבור מרחב הילברט <script type="math/tex">\mathcal{H}</script> כל מרחב ווקטורי שמוכל ב-<script type="math/tex">\mathcal{H}</script> יהיה תת מרחב ווקטורי.</p>
+<div class="definition"> (תת מרחב ווקטורי)<p>עבור מרחב הילברט $\mathcal{H}$ כל מרחב ווקטורי שמוכל ב-$\mathcal{H}$ יהיה תת מרחב ווקטורי.</p>
 </div>
 <div class="definition"> (סכום ישר)<p>שתי מרחבים נמצאים בסכום ישר אם החיתוך שלהם הוא אפס והסכום שלהם הוא המרחב כולו.</p>
 </div>
@@ -260,50 +239,39 @@
 </div>
 <p>קיים העתקה יחידה כזו.
 <strong>טענה</strong>
-אופרטור הטלה <script type="math/tex">P</script> מקיים <script type="math/tex">P=P^2</script>.</p>
+אופרטור הטלה $P$ מקיים $P=P^2$.</p>
 <div class="remark">
 <p>האינטואיציה זה שאם אנחנו מטלים אז אנחנו נמצאים כבר במרחב של ההטלה, ולכן הטלה נוספת לא תעשה כלום.</p>
 </div>
-<div class="definition"> (אופרטור הטלה אורתוגונאלי)<p>יהי <script type="math/tex">V</script> מרחב ווקטורי ו- <script type="math/tex">W\leq V</script> תת מרחב וקטורי עם בסיס <script type="math/tex">\ket{1},\dots \ket{n}{}</script>. 
-נגדיר אופרטור <script type="math/tex">\Pi_{n}= \ket{n}\bra{n}</script> אופרטור מעל המרחב <script type="math/tex">W</script>.</p>
+<div class="definition"> (אופרטור הטלה אורתוגונאלי)<p>יהי $V$ מרחב ווקטורי ו- $W\leq V$ תת מרחב וקטורי עם בסיס $\ket{1},\dots \ket{n}{}$. 
+נגדיר אופרטור $\Pi_{n}= \ket{n}\bra{n}$ אופרטור מעל המרחב $W$.</p>
 </div>
 <p>כאשר כפל של קאט באופרטור יחזיר את הקאט שמוטל על התת מרחב. כמו כן מתקיים:
-<script type="math/tex; mode=display">\Pi_{n}\ket{\psi} =\sum_{n}\bra{n} \left( \ket{n} \bra{\psi}  \right)</script>
+$$\Pi_{n}\ket{\psi} =\sum_{n}\bra{n} \left( \ket{n} \bra{\psi}  \right)$$
 שזה למעשה כפל של קאט בסקלר.</p>
-<div class="definition"> (מרחב הניצב)<p>עבור תת מרחב ווקטור <script type="math/tex">V</script> קיים מרחב מאונך <script type="math/tex">V^\perp</script> אשר כל ווקטור ב-<script type="math/tex">V</script> באונך לכל ווקטור ב-<script type="math/tex">V^\perp</script>. מרחבים אלו נמצאים בסכום ישר.</p>
+<div class="definition"> (מרחב הניצב)<p>עבור תת מרחב ווקטור $V$ קיים מרחב מאונך $V^\perp$ אשר כל ווקטור ב-$V$ באונך לכל ווקטור ב-$V^\perp$. מרחבים אלו נמצאים בסכום ישר.</p>
 </div>
-<div class="proposition"> (הטלה אורתוגונאלית)<p>אם <script type="math/tex">P</script> הטלה על המרחב <script type="math/tex">V</script>, אז <script type="math/tex">Id-P</script> יהיה ההטלה על המרחב הניצב <script type="math/tex">V^\perp</script>
-</p>
+<div class="proposition"> (הטלה אורתוגונאלית)<p>אם $P$ הטלה על המרחב $V$, אז $Id-P$ יהיה ההטלה על המרחב הניצב $V^\perp$</p>
 </div>
-<div class="definition"> (אקספוננט של מטריצה)<p>
-<script type="math/tex; mode=display">e^{X}=\sum_{k=0}^{\infty}{\frac{1}{k!}}X^{k}</script>
-</p>
+<div class="definition"> (אקספוננט של מטריצה)<p>$$e^{X}=\sum_{k=0}^{\infty}{\frac{1}{k!}}X^{k}$$</p>
 </div>
-<div class="proposition"> (אקספוננט של מטריצה אלכסונית)<p>
-<script type="math/tex; mode=display">A={\left[\begin{array}{l l l l}{a_{1}}&{0}&{\cdot\cdot\cdot}&{0}\\ {0}&{a_{2}}&{\cdot\cdot\cdot}&{0}\\ {\vdots}&{\vdots}&{\cdot\cdot\cdot}&{\vdots}\\ {0}&{0}&{\cdot\cdot\cdot}&{a_{n}}\end{array}\right]} \implies e^{A}={\left[\begin{array}{l l l l}{e^{a_{1}}}&{0}&{\cdot\cdot\cdot}&{0}\\ {0}&{e^{a_{2}}}&{\cdot\cdot\cdot}&{0}\\ {\vdots}&{\vdots}&{\cdot\cdot\cdot}&{\vdots}\\ {0}&{0}&{\cdot\cdot\cdot}&{e^{a_{n}}}\end{array}\right]}</script>
-</p>
+<div class="proposition"> (אקספוננט של מטריצה אלכסונית)<p>$$A={\left[\begin{array}{l l l l}{a_{1}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{a_{2}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{a_{n}}\end{array}\right]} \implies e^{A}={\left[\begin{array}{l l l l}{e^{a_{1}}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{e^{a_{2}}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{e^{a_{n}}}\end{array}\right]}$$</p>
 </div>
 <div class="corollary">
-<p>עבור מטריצה לכסינה, מתקיים <script type="math/tex">A= UDU^{-1}</script> ולכן <script type="math/tex">e^A=Ue^DU^{-1}</script>
-</p>
+<p>עבור מטריצה לכסינה, מתקיים $A= UDU^{-1}$ ולכן $e^A=Ue^DU^{-1}$</p>
 </div>
 <div class="example">
-<p>
-<script type="math/tex; mode=display">A={\left[\begin{array}{l l}{1}&{4}\\ {1}&{1}\end{array}\right]}=\left[{\begin{array}{c c}{-2}&{2}\\ {1}&{1}\end{array}}\right]\left[{\begin{array}{c c}{-1}&{0}\\ {0}&{3}\end{array}}\right]\left[{\begin{array}{c c}{-2}&{2}\\ {1}&{1}\end{array}}\right]^{-1}</script>
+<p>$$A={\left[\begin{array}{l l}{1}&amp;{4}\\ {1}&amp;{1}\end{array}\right]}=\left[{\begin{array}{c c}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}}\right]\left[{\begin{array}{c c}{-1}&amp;{0}\\ {0}&amp;{3}\end{array}}\right]\left[{\begin{array}{c c}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}}\right]^{-1}$$
 ולכן:
-<script type="math/tex; mode=display">e^{A}={\left[\begin{array}{l l}{-2}&{2}\\ {1}&{1}\end{array}\right]}e^{{\left[\begin{array}{l l}{-1}&{0}\\ {0}&{3}\end{array}\right]}}{\left[\begin{array}{l l}{-2}&{2}\\ {1}&{1}\end{array}\right]}^{-1}={\left[\begin{array}{l l}{-2}&{2}\\ {1}&{1}\end{array}\right]}{\left[\begin{array}{l l}{{\frac{1}{e}}}&{0}\\ {0}&{e^{3}}\end{array}\right]}{\left[\begin{array}{l l}{-2}&{2}\\ {1}&{1}\end{array}\right]}^{-1}={\left[\begin{array}{l l}{{\frac{e^{4}+1}{2e}}}&{{\frac{e^{4}-1}{e}}}\\ {{\frac{e^{4}-1}{4e}}}&{{\frac{e^{4}+1}{2e}}}\end{array}\right]}</script>
-</p>
+$$e^{A}={\left[\begin{array}{l l}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}\right]}e^{{\left[\begin{array}{l l}{-1}&amp;{0}\\ {0}&amp;{3}\end{array}\right]}}{\left[\begin{array}{l l}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}\right]}^{-1}={\left[\begin{array}{l l}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}\right]}{\left[\begin{array}{l l}{{\frac{1}{e}}}&amp;{0}\\ {0}&amp;{e^{3}}\end{array}\right]}{\left[\begin{array}{l l}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}\right]}^{-1}={\left[\begin{array}{l l}{{\frac{e^{4}+1}{2e}}}&amp;{{\frac{e^{4}-1}{e}}}\\ {{\frac{e^{4}-1}{4e}}}&amp;{{\frac{e^{4}+1}{2e}}}\end{array}\right]}$$</p>
 </div>
 <div class="remark">
 <p>ניתן לבצע תהליך זהה עבור צורת ג'ורדן.</p>
 </div>
-<div class="proposition"> (אקספוננט של הטלה)<p>עבור אופרטור הטלה מתקיים <script type="math/tex">P^2 = P</script>. ולכן ניתן לקצר את הטור טיילור לשתי איברים ולקבל:
-<script type="math/tex; mode=display">e^{P}=\sum_{k=0}^{\infty}{\frac{P^{k}}{k!}}=I+\left(\sum_{k=1}^{\infty}{\frac{1}{k!}}\right)P=I+(e-1)P</script>
-</p>
+<div class="proposition"> (אקספוננט של הטלה)<p>עבור אופרטור הטלה מתקיים $P^2 = P$. ולכן ניתן לקצר את הטור טיילור לשתי איברים ולקבל:
+$$e^{P}=\sum_{k=0}^{\infty}{\frac{P^{k}}{k!}}=I+\left(\sum_{k=1}^{\infty}{\frac{1}{k!}}\right)P=I+(e-1)P$$</p>
 </div>
-<div class="proposition"> (פתרון משוואה דיפרנציאלית)<p>
-<script type="math/tex; mode=display">y' = Ay\implies y(t)=e^{At}y(0)</script>
-</p>
+<div class="proposition"> (פתרון משוואה דיפרנציאלית)<p>$$y' = Ay\implies y(t)=e^{At}y(0)$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

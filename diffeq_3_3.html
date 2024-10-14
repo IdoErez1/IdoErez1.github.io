@@ -7,24 +7,25 @@
         <link rel="stylesheet" href='./styles/main_style.css'>
         <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
         <link rel="stylesheet" href='./styles/style.css'>      
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [["$", "$"], ["\\(", "\\)"]],
-        displayMath: [["$$", "$$"], ["\[", "\]"]],
-        processEscapes: true
-    },
-    TeX: {
-        extensions: ['AMSmath.js', 'AMSsymbols.js', 'cancel.js']
-    },
-    config: ["MMLorHTML.js"],
-    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-    extensions: ["MathMenu.js", "MathZoom.js"]
-});
-
-    </script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+    
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
             <title>לפלס - פתרון משוואות וקונבולוציה</title>
         </head>
         <body>
@@ -77,114 +78,97 @@
 </div>
 <div class="example">
 <p>נפתור את המשוואה:
-<script type="math/tex; mode=display">y^{\prime\prime}-4y^{\prime}+4y=3\,e^{t},\qquad y(0)=0,\qquad y^{\prime}(0)=0.</script>
+$$y^{\prime\prime}-4y^{\prime}+4y=3\,e^{t},\qquad y(0)=0,\qquad y^{\prime}(0)=0.$$
 מלינאריות:
-<script type="math/tex; mode=display">{\mathcal{L}}[y^{\prime\prime}-4y^{\prime}+4y]={\mathcal{L}}[3\,e^{t}]=3\left({\frac{1}{s-1}}\right)</script>
-<script type="math/tex; mode=display">\left[s^{2}\,{\mathcal{L}}[y]-s\,y(0)-y^{\prime}(0)\right]-4\left[s\,{\mathcal{L}}[y]-y(0)\right]+4\,{\mathcal{L}}[y]={\frac{3}{s-1}}</script>
+$${\mathcal{L}}[y^{\prime\prime}-4y^{\prime}+4y]={\mathcal{L}}[3\,e^{t}]=3\left({\frac{1}{s-1}}\right)$$
+$$\left[s^{2}\,{\mathcal{L}}[y]-s\,y(0)-y^{\prime}(0)\right]-4\left[s\,{\mathcal{L}}[y]-y(0)\right]+4\,{\mathcal{L}}[y]={\frac{3}{s-1}}$$
 כאשר נציב את תהאי ההתחלה ונקבל:
-<script type="math/tex; mode=display">\left(s^{2}-4s+4\right){\mathcal{L}}[y]={\frac{3}{s-1}}\implies{\mathcal{L}}[y]={\frac{3}{(s-1)(s^{2}-4s+4)}}</script>
+$$\left(s^{2}-4s+4\right){\mathcal{L}}[y]={\frac{3}{s-1}}\implies{\mathcal{L}}[y]={\frac{3}{(s-1)(s^{2}-4s+4)}}$$
 כאשר בעזרת שברים חלקיים ניתן לקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[y]={\frac{3}{s-1}}-{\frac{3}{(s-2)}}+{\frac{3}{(s-2)^{2}}}</script>
+$${\mathcal{L}}[y]={\frac{3}{s-1}}-{\frac{3}{(s-2)}}+{\frac{3}{(s-2)^{2}}}$$
 כאשר על ידי שימוש בטבלה נקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[y]=3\,{\mathcal{L}}[e^{t}]-3\,{\mathcal{L}}[e^{2t}]+3\,{\mathcal{L}}[t\,e^{2t}]={\mathcal{L}}\big[3\,(e^{t}-e^{2t}+t\,e^{2t})\big]</script>
+$${\mathcal{L}}[y]=3\,{\mathcal{L}}[e^{t}]-3\,{\mathcal{L}}[e^{2t}]+3\,{\mathcal{L}}[t\,e^{2t}]={\mathcal{L}}\big[3\,(e^{t}-e^{2t}+t\,e^{2t})\big]$$
 ולכן:
-<script type="math/tex; mode=display">y(t)=3\,(e^{t}-\,e^{2t}+t\,e^{2t}).</script>
-</p>
+$$y(t)=3\,(e^{t}-\,e^{2t}+t\,e^{2t}).$$</p>
 </div>
-<div class="definition"> (קונבולוציה)<p>
-<script type="math/tex; mode=display">f * g = \int_0^t f(x) \cdot g(t-x) \; dx</script>
-</p>
+<div class="definition"> (קונבולוציה)<p>$$f * g = \int_0^t f(x) \cdot g(t-x) \; dx$$</p>
 </div>
 <div class="proposition"> (תכונות של קונבולוציה)<ol>
 <li>
-<p>קומוטטיביות - <script type="math/tex">f * g = g * f</script>. </p>
+<p>קומוטטיביות - $f * g = g * f$. </p>
 </li>
 <li>
-<p>פילוגי - <script type="math/tex">f * (g + h) = f * g + f * h</script>. </p>
+<p>פילוגי - $f * (g + h) = f * g + f * h$. </p>
 </li>
 <li>
-<p>אסוצייטבי - <script type="math/tex">f*(g*h)=(f*g)*h</script>. </p>
+<p>אסוצייטבי - $f*(g*h)=(f*g)*h$. </p>
 </li>
 <li>
-<p>איבר זהות - <script type="math/tex">f * \delta = f</script>. </p>
+<p>איבר זהות - $f * \delta = f$. </p>
 </li>
 <li>
-<p>איבר ניטרלי - <script type="math/tex">f * 0 = 0</script>. </p>
+<p>איבר ניטרלי - $f * 0 = 0$. </p>
 </li>
 </ol>
 </div>
-<div class="proposition"> (התמרת לפלס של קונבולוציה)<p>
-<script type="math/tex; mode=display">\mathcal{L}(f * g) = \mathcal{L}(f) \cdot \mathcal{L}(g)</script>
-</p>
+<div class="proposition"> (התמרת לפלס של קונבולוציה)<p>$$\mathcal{L}(f * g) = \mathcal{L}(f) \cdot \mathcal{L}(g)$$</p>
 </div>
 <div class="proof">
-<p>
-<script type="math/tex; mode=display">\mathcal{L}[f]\,\mathcal{L}[g]=\left[\int_{0}^{\infty}e^{-s t}f(t)\,d t\right]\left[\int_{0}^{\infty}e^{-s\tilde{t}}g(\tilde{t})\,d\tilde{t}\right]</script>
-<script type="math/tex; mode=display">=\int_{0}^{\infty}e^{-s\tilde{t}}g(\tilde{t})\Big{(}\int_{0}^{\infty}e^{-s t}f(t)\,d t\Big{)}\,d\tilde{t}</script>
-<script type="math/tex; mode=display">=\int_{0}^{\infty}g(\tilde{t})\Big{(}\int_{0}^{\infty}e^{-s(t+\tilde{t})}f(t)\,d t\Big{)}\,d\tilde{t},</script>
-כעת נגדיר החלפת משתנה <script type="math/tex">\tau=t+\tilde{t}</script> ונקבל <script type="math/tex">d\tau=dt</script> ולכן:
-<script type="math/tex; mode=display">\begin{gather}{{{\mathcal{L}}[f]\,{\mathcal{L}}[g]=\int_{0}^{\infty}g(\tilde{t})\Big(\int_{\tilde{t}}^{\infty}e^{-s\tau}f(\tau-\tilde{t})\,d\tau\Big)\,d\tilde{t}}}\\ {{=\int_{0}^{\infty}\int_{\tilde{t}}^{\infty}e^{-s\tau}\,g(\tilde{t})\,f(\tau-\tilde{t})\,d\tau\,d\tilde{t}.}}\end{gather}</script>
-ניתן כעת להחליף את הסדר אינטגרציה ולקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[f]\,{\mathcal{L}}[g]=\int_{0}^{\infty}\int_{0}^{\tau}e^{-s\tau}\,g(\tilde{t})\,f(\tau-\tilde{t})\,d\tilde{t}\,d\tau.</script>
-וכעת:
-<script type="math/tex; mode=display">\mathcal{L}[f]\,\mathcal{L}[g]=\int_{0}^{\infty}e^{-s\tau}\,\left(\int_{0}^{\tau}\,g(\hat{t})\,f(\tau-\hat{t})\,d\hat{t}\right)d\tau</script>
-<script type="math/tex; mode=display">=\int_{0}^{\infty}e^{-s\tau}(g*f)(\tau)\,dt</script>
-<script type="math/tex; mode=display">=\mathcal{L}[g*f]\quad\Rightarrow\quad\mathcal{L}[f]\,\mathcal{L}[g]=\mathcal{L}[f*g].</script>
-</p>
+<p>$$\begin{gather}{{{\mathcal{L}}[f]\,{\mathcal{L}}[g]=\int_{0}^{\infty}g(\tilde{t})\Big(\int_{\tilde{t}}^{\infty}e^{-s\tau}f(\tau-\tilde{t})\,d\tau\Big)\,d\tilde{t}}}\\ {{=\int_{0}^{\infty}\int_{\tilde{t}}^{\infty}e^{-s\tau}\,g(\tilde{t})\,f(\tau-\tilde{t})\,d\tau\,d\tilde{t}.}}\end{gather}$$
+$${\mathcal{L}}[f]\,{\mathcal{L}}[g]=\int_{0}^{\infty}\int_{0}^{\tau}e^{-s\tau}\,g(\tilde{t})\,f(\tau-\tilde{t})\,d\tilde{t}\,d\tau.$$
+$$\mathcal{L}[f]\,\mathcal{L}[g]=\left[\int_{0}^{\infty}e^{-s t}f(t)\,d t\right]\left[\int_{0}^{\infty}e^{-s\tilde{t}}g(\tilde{t})\,d\tilde{t}\right]$$ $$=\int_{0}^{\infty}e^{-s\tilde{t}}g(\tilde{t})\Big{(}\int_{0}^{\infty}e^{-s t}f(t)\,d t\Big{)}\,d\tilde{t}$$ $$=\int_{0}^{\infty}g(\tilde{t})\Big{(}\int_{0}^{\infty}e^{-s(t+\tilde{t})}f(t)\,d t\Big{)}\,d\tilde{t},$$כעת נגדיר החלפת משתנה $\tau=t+\tilde{t}$ ונקבל $d\tau=dt$ ולכן:ניתן כעת להחליף את הסדר אינטגרציה ולקבל:וכעת:
+$$\mathcal{L}[f]\,\mathcal{L}[g]=\int_{0}^{\infty}e^{-s\tau}\,\left(\int_{0}^{\tau}\,g(\hat{t})\,f(\tau-\hat{t})\,d\hat{t}\right)d\tau$$ $$=\int_{0}^{\infty}e^{-s\tau}(g*f)(\tau)\,dt$$ $$=\mathcal{L}[g*f]\quad\Rightarrow\quad\mathcal{L}[f]\,\mathcal{L}[g]=\mathcal{L}[f*g].$$</p>
 </div>
 <div class="proposition"> (פירוק משוואה עם קינבולוציה)<p>נסתכל על בעיית התנאי התחלה:
-<script type="math/tex; mode=display">y^{\prime\prime}+a_{1}\,y^{\prime}+a_{0}\,y=g(t),\quad y(0)=y_{0},\quad y^{\prime}(0)=y_{1},</script>
+$$y^{\prime\prime}+a_{1}\,y^{\prime}+a_{0}\,y=g(t),\quad y(0)=y_{0},\quad y^{\prime}(0)=y_{1},$$
 ניתן לפרק את המשוואה בצורה הבאה קונבולוציה:
-<script type="math/tex; mode=display">y(t)=y_{h}(t)+\left( y_{\delta}*g \right)(t)=y_{h}(t)+\int_{0}^{t}y_{\delta}\left( \tau \right)g\left( t-\tau \right)d\tau</script>
-כאשר <script type="math/tex">y_{h}</script> זה הפתרון ההומגני, אשר יהיה תנאי התחלה של המשוואה:
-<script type="math/tex; mode=display">y_{h}^{\prime\prime}+a_{1}\,y_{h}^{\prime}+a_{0}\,y_{h}=0,\quad y_{h}(0)=y_{0},\quad y_{h}^{\prime}(0)=y_{1},</script>
-והפתרון <script type="math/tex">y_{\delta}</script> יהיה הפתרון המאולץ הרגעי, כלומר הפתרון של המשוואה:
-<script type="math/tex; mode=display">y_{\delta}^{\prime\prime}+a_{1}\,y_{\delta}^{\prime}+a_{0}\,y_{\delta}=\delta(t),\quad y_{\delta}(0)=0,\quad y_{\delta}^{\prime}(0)=0.</script>
-</p>
+$$y(t)=y_{h}(t)+\left( y_{\delta}*g \right)(t)=y_{h}(t)+\int_{0}^{t}y_{\delta}\left( \tau \right)g\left( t-\tau \right)d\tau$$
+כאשר $y_{h}$ זה הפתרון ההומגני, אשר יהיה תנאי התחלה של המשוואה:
+$$y_{h}^{\prime\prime}+a_{1}\,y_{h}^{\prime}+a_{0}\,y_{h}=0,\quad y_{h}(0)=y_{0},\quad y_{h}^{\prime}(0)=y_{1},$$
+והפתרון $y_{\delta}$ יהיה הפתרון המאולץ הרגעי, כלומר הפתרון של המשוואה:
+$$y_{\delta}^{\prime\prime}+a_{1}\,y_{\delta}^{\prime}+a_{0}\,y_{\delta}=\delta(t),\quad y_{\delta}(0)=0,\quad y_{\delta}^{\prime}(0)=0.$$</p>
 </div>
 <div class="proof">
 <p>ניתן להפעיל את התמרת לפלס על המשוואה הדיפרנציאלית ולקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[y^{\prime\prime}]+a_{1}\,{\mathcal{L}}[y^{\prime}]+a_{0}\,{\mathcal{L}}[y]={\mathcal{L}}[g(t)]</script>
+$${\mathcal{L}}[y^{\prime\prime}]+a_{1}\,{\mathcal{L}}[y^{\prime}]+a_{0}\,{\mathcal{L}}[y]={\mathcal{L}}[g(t)]$$
 כאשר נשתמש בטענה של הנגזרת:
-<script type="math/tex; mode=display">{\mathcal{L}}[y^{\prime\prime}]=s^{2}\,{\mathcal{L}}[y]-s y_{0}-y_{1},\qquad{\mathcal{L}}[y^{\prime}]=s\,{\mathcal{L}}[y]-y_{0}.</script>
+$${\mathcal{L}}[y^{\prime\prime}]=s^{2}\,{\mathcal{L}}[y]-s y_{0}-y_{1},\qquad{\mathcal{L}}[y^{\prime}]=s\,{\mathcal{L}}[y]-y_{0}.$$
 ונקבל את המשוואה האלגברית:
-<script type="math/tex; mode=display">\left(s^{2}+a_{1}s+a_{0}\right){\mathcal{L}}[y]-s y_{0}-y_{1}-a_{1}y_{0}={\mathcal{L}}[g(t)].</script>
-כאשר ניתן לבודד את <script type="math/tex">\mathcal{L}y</script> ולקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[y]={\frac{(s+a_{1})y_{0}+y_{1}}{(s^{2}+a_{1}s+a_{0})}}+{\frac{1}{(s^{2}+a_{1}s+a_{0})}}\,{\mathcal{L}}[g(t)].</script>
-כאשר נשים לב כי הגורם הראשון יפתור את המשוואה ההומגנית(כאשר <script type="math/tex">g(t)=0</script>):
-<script type="math/tex; mode=display">{\mathcal{L}}[y_{h}]={\frac{(s+a_{1})y_{0}+y_{1}}{(s^{2}+a_{1}s+a_{0})}}</script>
-וכן עבור <script type="math/tex">g(t)=\delta</script> כאשר תנאי ההתחלה <script type="math/tex">y_{0},y_{1}=0</script> נקבל את האיבר השני ללא <script type="math/tex">\mathcal{L}[g(t)]</script>
-<script type="math/tex; mode=display">{\mathcal{L}}[y_{\delta}]={\frac{1}{(s^{2}+a_{1}s+a_{0})}}</script>
+$$\left(s^{2}+a_{1}s+a_{0}\right){\mathcal{L}}[y]-s y_{0}-y_{1}-a_{1}y_{0}={\mathcal{L}}[g(t)].$$
+כאשר ניתן לבודד את $\mathcal{L}y$ ולקבל:
+$${\mathcal{L}}[y]={\frac{(s+a_{1})y_{0}+y_{1}}{(s^{2}+a_{1}s+a_{0})}}+{\frac{1}{(s^{2}+a_{1}s+a_{0})}}\,{\mathcal{L}}[g(t)].$$
+כאשר נשים לב כי הגורם הראשון יפתור את המשוואה ההומגנית(כאשר $g(t)=0$):
+$${\mathcal{L}}[y_{h}]={\frac{(s+a_{1})y_{0}+y_{1}}{(s^{2}+a_{1}s+a_{0})}}$$
+וכן עבור $g(t)=\delta$ כאשר תנאי ההתחלה $y_{0},y_{1}=0$ נקבל את האיבר השני ללא $\mathcal{L}[g(t)]$
+$${\mathcal{L}}[y_{\delta}]={\frac{1}{(s^{2}+a_{1}s+a_{0})}}$$
 ולכן קיבלנו סה"כ כי:
-<script type="math/tex; mode=display">{\mathcal{L}}[y]={\mathcal{L}}[y_{h}]+{\mathcal{L}}\left[ y_{\delta} \right]\,{\mathcal{L}}[g(t)]\implies y(t)=y_{h}(t)+{\mathcal{L}}^{-1}\left[{\mathcal{L}}[y_{\delta}]\;{\mathcal{L}}[g(t)]\right]</script>
+$${\mathcal{L}}[y]={\mathcal{L}}[y_{h}]+{\mathcal{L}}\left[ y_{\delta} \right]\,{\mathcal{L}}[g(t)]\implies y(t)=y_{h}(t)+{\mathcal{L}}^{-1}\left[{\mathcal{L}}[y_{\delta}]\;{\mathcal{L}}[g(t)]\right]$$
 כאשר קיבלנו סה"כ כי:
-<script type="math/tex; mode=display">y(t)=y_{h}(t)+(y_{\delta}*g)(t)</script>
-</p>
+$$y(t)=y_{h}(t)+(y_{\delta}*g)(t)$$</p>
 </div>
 <p>היתרון הגדול בטענה הזו היא שמאפשרת למצוא הביטוי עבור תנאי התחלה כללי. </p>
 <div class="proposition">
 <p>עבור משוואה דיפרנציאלית עם מקדמים קבועים נקבל:
-<script type="math/tex; mode=display">y_{\delta}=\mathcal{L}^{-1}\left[ \frac{e^{ -cs }}{p(s)} \right] \iff \mathcal{L}\left[ y_{\delta} \right]=\frac{e^{ -cs }}{p(s)}</script>
-כאשר <script type="math/tex">p(s)</script> זה הפולינום האופייני כפונקציה של <script type="math/tex">s</script>.</p>
+$$y_{\delta}=\mathcal{L}^{-1}\left[ \frac{e^{ -cs }}{p(s)} \right] \iff \mathcal{L}\left[ y_{\delta} \right]=\frac{e^{ -cs }}{p(s)}$$
+כאשר $p(s)$ זה הפולינום האופייני כפונקציה של $s$.</p>
 </div>
 <div class="example">
 <p>ננסה למצוא ביטוי לבעיית תנאי התחלה הבאה:
-<script type="math/tex; mode=display">y^{\prime\prime}+2\,y^{\prime}+2\,y=g(t),\quad y(0)=1,\quad y^{\prime}(0)=-1.</script>
-נמצא את <script type="math/tex">y_{\delta}(t)</script>. הפלינום האופייני כפונקציה של <script type="math/tex">s</script> יהיה:
-<script type="math/tex; mode=display">p(s)=s ^{2}+2s+2= (s+1)^{2}+1</script>
+$$y^{\prime\prime}+2\,y^{\prime}+2\,y=g(t),\quad y(0)=1,\quad y^{\prime}(0)=-1.$$
+נמצא את $y_{\delta}(t)$. הפלינום האופייני כפונקציה של $s$ יהיה:
+$$p(s)=s ^{2}+2s+2= (s+1)^{2}+1$$
 ולכן נקבל מהטענה:
-<script type="math/tex; mode=display">y_{\delta}(t)=\mathcal{L}^{-1}[(s+1)^{2}+1]=e^{ -t }\sin(t)</script>
+$$y_{\delta}(t)=\mathcal{L}^{-1}[(s+1)^{2}+1]=e^{ -t }\sin(t)$$
 כעת נמצא את הפתרון ההומוגני:
-<script type="math/tex; mode=display">\mathcal{L}\left[ y''_{h}+2y'_{h}+2 \right]=\mathcal{L}\left[ y_{h}^{\prime\prime} \right]+2\,\mathcal{L}\left[ y_{h}^{\prime} \right]+2\,\mathcal{L}[y_{h}]=0</script>
+$$\mathcal{L}\left[ y''_{h}+2y'_{h}+2 \right]=\mathcal{L}\left[ y_{h}^{\prime\prime} \right]+2\,\mathcal{L}\left[ y_{h}^{\prime} \right]+2\,\mathcal{L}[y_{h}]=0$$
 כאשר מהנוסחא לנגזרת נקבל:
-<script type="math/tex; mode=display">\left(s^{2}\,{\mathcal{L}}[y_{h}]-s\,y_{h}(0)-y_{h}^{\prime}(0)\right)+2\big({\mathcal{L}}[y_{h}^{\prime}]=s\,{\mathcal{L}}[y_{h}]-y_{h}(0)\big)+2{\mathcal{L}}[y_{h}]=0,</script>
+$$\left(s^{2}\,{\mathcal{L}}[y_{h}]-s\,y_{h}(0)-y_{h}^{\prime}(0)\right)+2\big({\mathcal{L}}[y_{h}^{\prime}]=s\,{\mathcal{L}}[y_{h}]-y_{h}(0)\big)+2{\mathcal{L}}[y_{h}]=0,$$
 לאחר הצבת תנאי התחלה והעברת אגפים נקבל:
-<script type="math/tex; mode=display">{\mathcal{L}}[y_{h}]={\frac{(s+1)}{(s^{2}+2s+2)}}={\frac{(s+1)}{(s+1)^{2}+1}}</script>
+$${\mathcal{L}}[y_{h}]={\frac{(s+1)}{(s^{2}+2s+2)}}={\frac{(s+1)}{(s+1)^{2}+1}}$$
 וזוהי התמרה של קוסינוס מוזז:
-<script type="math/tex; mode=display">y_{h}(t)={\mathcal{L}}\Big[e^{-t}\,\cos(t)\Big]</script>
+$$y_{h}(t)={\mathcal{L}}\Big[e^{-t}\,\cos(t)\Big]$$
 ולכן נקבל כי הפתרון הכללי למשוואה תהיה:
-<script type="math/tex; mode=display">y(t)=y_{h}(t)+\left( y_{\delta}*g \right)(t)\implies y(t)=e^{-t}\,\cos(t)+\int_{0}^{t}e^{-\tau}\,\sin\left( \tau \right)\,g\left( t-\tau \right)\,d\tau</script>
-</p>
+$$y(t)=y_{h}(t)+\left( y_{\delta}*g \right)(t)\implies y(t)=e^{-t}\,\cos(t)+\int_{0}^{t}e^{-\tau}\,\sin\left( \tau \right)\,g\left( t-\tau \right)\,d\tau$$</p>
 </div>
     </div>
     <ul class='top-navigation'>
