@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!--    <link rel="stylesheet" href="../styles/main_style.css" />-->
+    <script src="//unpkg.com/@cortex-js/compute-engine"></script>
+    <script src="https://unpkg.com/mathlive"></script>
+    <title>Calculator</title>
+    <style>
+      body {
+        direction: ltr !important;
+      }
+      #math-input {
+        width: 100%;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        direction: ltr;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+      #solution {
+        margin-top: 20px;
+        font-size: 1.5em;
+        color: green;
+      }
+      #display {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+      .solve-buttons {
+        display: flex;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+
+    <script>
+      const ce = new ComputeEngine.ComputeEngine();
+      ce.latexDictionary = [
+        {
+          kind: "function",
+          identifierTrigger: "y",
+          parse: "Function",
+        },
+        {
+          kind: "function",
+          identifierTrigger: "f",
+          parse: "Function",
+        },
+        {
+          kind: "function",
+          identifierTrigger: "h",
+          parse: "Function",
+        },
+      ];
+          window.onload = function() {
+    // Get references to the elements
+    const mathInput = document.getElementById('math-input');
+    const outputDiv = document.getElementById('output');
+    const button = document.getElementById('solve-btn');
+
+    // Add event listener to the button
+    button.addEventListener('click', function() {
+        // Get values from the input field
+        const mathValue1 = mathInput.getValue();
+        const mathValue2 = mathInput.getValue("spoken-text");
+        const mathValue3 = mathInput.getValue('math-json');
+        const mathValue4 = ce.parse(mathValue1)
+        const mathValue5 = ce.parse(mathValue3)
+
+        // Combine the values with line breaks
+        const combinedValues = `<p>Value 1: ${mathValue1}</p><p>Value 2: ${mathValue2}</p><p>Value 3: ${mathValue3}</p><p>Value 4: ${mathValue4}</p><p>Value 5: ${mathValue5}</p>`;
+
+        // Change the text of the output div
+        outputDiv.innerHTML = combinedValues;
+    });
+
+};
+      </script>
+  </head>
+  <body>
+    <div id="loader"></div>
+    <div class="content">
+      <!-- Math input field for user expression -->
+      <math-field id="math-input"></math-field>
+
+    <label>
+        <input type="radio" name="environment" value="algebra" checked>
+        Algebra
+    </label>
+    <label>
+        <input type="radio" name="environment" value="matrices">
+        Matrices
+    </label>
+    <label>
+        <input type="radio" name="environment" value="differential-equations">
+        Differential Equations
+    </label>
+    <label>
+        <input type="radio" name="environment" value="quantum-physics">
+        Quantum Physics
+    </label>
+      <div class="solve-buttons">
+        <!-- Buttons to trigger Python actions -->
+        <button id="solve-btn">Simplify</button>
+        <button id="solve-btn1">Solve</button>
+      </div>
+      <!-- Math display field -->
+        <div id="output"></div>
+    </div>
+  <script src="math_input_virtual_keyboard.js"></script>
+  </body>
+</html>

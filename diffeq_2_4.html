@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פתרון בעזרת טור חזקות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_5'>2.5 שטרום ליוביל</a></li>
+<li class='parent-page'><a href='./diffeq'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2'>2.2 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4'>2.4 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5'>2.5 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1'>4.1 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2'>4.2 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3'>4.3 תנאי שפה ותנאי התחלה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מד"חים בתחום חסום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1'>5.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2'>5.2 משוואת החום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3'>5.3 משוואת לפלס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1'>6.1 פתרון בתחום חסום</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_2_3'>2.3 פתרון באמצעות טור</a></li>
+</ul></li>
+        <div class="content">
+        <h1>2.4  פתרון בעזרת טור חזקות</h1>
+    <div class="definition"> (נקודה רגולרית וסינגולארית)<p>עבור משוואה מהצורה:
+$$P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0$$
+כאשר $P(x),Q(x),R(x)$ אנילטיות, נקרא לנקודה $x_{0} \in \mathbb{R}$ נקודה רגולרית אם $P(x_{0})\neq 0$ ונקודה סינגולארית אם $P(x_{0})=0$.</p>
+</div>
+<div class="proposition"> (קיום פתרון בעזרת טור חזקות)<p>תהי $x_{0}$ נקודה רגולרית של המשוואה $P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0$. אזי קיים פתרון כללי מהצורה של טור חזקות:
+$$y\left(x\right)=\sum_{n=0}^{\infty}a_{n}\left(x-x_{0}\right)^{n}$$
+או לחלופין ניתן להציג כצירוף לינארי $y=ay_{1}+by_{2}$ של שתי פונקציות אנליטיות בלתי תלויות לינארית $y_{1},y_{2}$ כאשר רדיוס ההתכנסות יהיה לפחות המינימום בין הרדיוסים של $y_{1},y_{2}$. </p>
+</div>
+<div class="proposition"> (שיטת פתרון בעזרת טור חזקות)<ol>
+<li>
+<p>נציב טור חזקות מהצורה $y=\sum_{n=0}^\infty a_{n}x^n$ </p>
+</li>
+<li>
+<p>כיוון שטור חזקות גזיר איבר איבר מתקיים: 
+$$\begin{gather}y'=\sum_{n=0}^\infty na_{n}x^{n-1}=\sum_{n=1}^\infty n a_{n}x^{n-1}=\sum_{n=0}^\infty (n+1)a_{n}x^{n} \\y''=\sum_{n=0}^\infty n(n-1)a_{n}x^{n-2}=\sum_{n=2}n(n-1)a_{n}x^{n-2}=\sum_{n=0}(n+2)(n+1)a_{n}x^n \end{gather}$$</p>
+</li>
+<li>
+<p>נאחד את כל הטורים ואנו יודעים כי טור חזקות שווה ל-0 אם"ם כל אחד מהמקדמים שלו שווים ל-0. ולכן נשוואה מקדם כללי של טור ל-0 </p>
+</li>
+<li>
+<p>נקבל נוסחת נסיגה. נעביר אותה לצורה $a_{n}=f(n)a_{n-1}$(יתכן וצריך לפרק לזוגיים ואי זוגיים) כעת נזכור את הנוסחה: 
+$$a_{n}=f(n)a_{n-1}\implies a_{n}= \prod_{k=0}^n f(n)$$</p>
+</li>
+</ol>
+</div>
+<div class="definition"> (סינגולאריות רגילה)<p>עבור משוואה מהצורה $P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0$ נקודה $x_{0}\in \mathbb{R}$ תקרא סינגולראית אם הפונקציות:
+$$(x-x_{0})\,\frac{Q(x)}{P(x)},\,\,\left(x-x_{0}\right)^{2}\frac{R(x)}{P(x)}$$
+אנליטיות ב-$x_{0}$</p>
+</div>
+<div class="corollary">
+<p>נקודה $x_{0}$ היא סינגולארית רגילה אם"ם קיימים שתי הגבולות:
+$$\operatorname*{lim}_{x\to x_{0}}\,\left(x-x_{0}\right){\frac{Q\left(x\right)}{P\left(x\right)}}\;,\quad\operatorname*{lim}_{x\to x_{0}}\,\left(x-x_{0}\right)^{2}{\frac{R\left(x\right)}{P\left(x\right)}}$$</p>
+</div>
+<div class="proposition"> (שיטת פרוביניוס)<ol>
+<li>
+<p>נניח פתרון מהצורה: 
+$$y(x)=(x-x_{0})^{r}\sum_{k=0}^{\infty}a_{k}(x-x_{0})^{k}=\sum_{k=0}^{\infty}a_{k}(x-x_{0})^{k+r}$$</p>
+</li>
+<li>
+<p>בעזרת גזירה איבר איבר והזזה נקבל: </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_5'>2.5 שטרום ליוביל</a></li>
+<li class='prev-page'><a href='./diffeq_2_3'>2.3 פתרון באמצעות טור</a></li>
+</ul></li>
+        </body>
+        </html>
+        
