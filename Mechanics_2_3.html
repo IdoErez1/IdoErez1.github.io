@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -56,7 +65,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Mechanics_2_4`;}if (event.key === 'ArrowLeft'){window.location.href = `./Mechanics_2_2`;}});</script>
         <div class="content">
         <h1>2.3  גוף קשיח</h1>
-    <div class="definition"> (גוף קשיח)<p>גוף אשר אינו יכול להתעוות או להשתנות. המרחק בין כל שתי נקודות בגוף הוא קבוע.</p>
+    <div class="definition"><span class="keyword">גוף קשיח</span><p>גוף אשר אינו יכול להתעוות או להשתנות. המרחק בין כל שתי נקודות בגוף הוא קבוע.</p>
 </div>
 <p>ההבדל העיקרי כשאנחנו עוסקים בגוף קשיח לעומת גוף נקודתי זה שיש גם אנרגיה מהסיבוב של המערכת.</p>
 <p>נסתכל על אוסף חלקיקים עם מסה $m_{i}$ אשר נמצאים במרחק $r_{i}$ מנקודת הסיבוב. כיוון שזהו גוף קשיח, כל הלקיקים מסתובבים באותה מהירות זוויתית $\omega$. נקבל:
@@ -64,12 +73,12 @@ $$\omega=\frac{\dot{r}_{i}}{r_{i}}\implies \dot{r}_{i}=\omega r_{i}\implies E_{i
 ולכן האנרגיה הכוללת תהיה
 $$E=\sum_{i}E_{i}=\sum_{i} \frac{1}{2}m_{i}r_{i}^2\omega^2=\frac{1}{2}\omega^2 \sum_{i}m_{i}r_{i}^2 $$
 כאשר נסמן את האיבר בסכום ב-$I$.  זהו גודל שתלוי אך ורק בגאומטריה והצורה של הגוף.</p>
-<div class="definition"> (מומנט התמד)<p>כאשר החלקיקים דיסקרטים נגדיר $I=\sum_{i}m_{i}r_{i}^{2}$. בגבול הרצף נגדיר:
+<div class="definition"><span class="keyword">מומנט התמד</span><p>כאשר החלקיקים דיסקרטים נגדיר $I=\sum_{i}m_{i}r_{i}^{2}$. בגבול הרצף נגדיר:
 $$I=\int r^2 \, \mathrm{d}m $$</p>
 </div>
 <p>כאשר נזכור כי במקרה של צפיפות נפחית $dm=\rho(r)dV$, במקרה של צפיפות משטחית $dm=\sigma(r)dS$ ומקרה של צפיפות חד מימדית $dm=\lambda(x)dx$
 המומנט התמד מופיע בכמעט כל הגדלים המעניים שקשורים לגוף קשיח, לדוגמא התנע הזוויתי - $\vec{L}=I \dot{\vec{\theta}}=I\vec{\omega}$, המומנט - $\vec{\tau}=I \ddot{\vec{\theta}}=I \dot{\vec{\omega}}$ והגודל שאותנו מעניין במיוחד - האנרגיה הקינטית - $T =\frac{1}{2}I\omega^2$. הגודל הזה למעשה מתאר את היכולת של הגוף להסתובב. ככל שהוא גדול יותר, נדרש יותר אנרגיה כדי לסובב את הגוף. גודל זה כמובן תלוי בציר הסיבוב. כל עוד אין ציר מקובע. זה יהיה מרכז המסה.</p>
-<div class="theorem"> (פירוק אנרגיה סביב מרכז מסה)<p>תמיד ניתן לפרק אנרגיה קינטית של גוף קשיח לאנרגיה של מרכז מסה ולאנרגיה סביב מרכז המסה. כלומר:
+<div class="theorem"><span class="keyword">פירוק אנרגיה סביב מרכז מסה</span><p>תמיד ניתן לפרק אנרגיה קינטית של גוף קשיח לאנרגיה של מרכז מסה ולאנרגיה סביב מרכז המסה. כלומר:
 $$T=T_{c m}+T_{r o t}=\frac12m v_{c m}^{2}+\frac12I_{c m}{\omega}^{2}$$</p>
 </div>
 <p>זה נכון במקרה של סיבוב סביב המרכז מסה, כאשר $I_{cm}$ זה המומנט התמד סביב המרכז מסה. ניתן לפרק באופן דומה את התנע הזוויתי:
@@ -132,7 +141,7 @@ $$I_{\hat{n}}=I_{\hat{n},c m}+m d^{2}$$
 <h2>מומנט התמד בתלת מימד</h2>
 <p>במקרה התלת מימדי, לא בהכרח סביב כל ציר הסיבוב היא אותה מהירות זוויתית $\omega$. ייתכן ו-$\omega_{x}\neq \omega_{y}\neq \omega_{z}$,  כאשר במקרה זה $\vec{\omega}=\left( \omega _{x},\omega_{y},\omega_{z} \right)$ יסמן את הסיבוב בכל ציר. המקרה זה נקבל כי:
 $$T=T_{c m}+T_{r o t}=\frac{1}{2}M v_{c m}^{2}+\frac{1}{2}\vec{\omega}^{T}{\stackrel{\leftrightarrow}{ I}}_{c m}\vec{\omega}$$</p>
-<div class="definition"> (טנזור התמד)<p>זהו מטריצה $\stackrel{\leftrightarrow}{ I}$ מהמקיימת
+<div class="definition"><span class="keyword">טנזור התמד</span><p>זהו מטריצה $\stackrel{\leftrightarrow}{ I}$ מהמקיימת
 $$T_{rot}=\frac{1}{2}\vec{\omega}^t\!\!\stackrel{\leftrightarrow}{I}\!\!\vec{\omega}\qquad \vec{L}=\stackrel{\leftrightarrow}{ I}\!\!\vec{\omega}$$</p>
 </div>
 <p>במקרה התלת מימדי שאנחנו נשתמש בו, זה יהיה פשוט מטריצה $3\times 3$.
@@ -143,7 +152,7 @@ $$I=\left(\begin{array}{c c c}{{\sum_{\alpha}m_{\alpha}\left(y_{\alpha}^{2}+z_{\
 או במקרה הרציף:
 $$I=\left(\begin{array}{c c c}{\int (y^2+z^2) \, \mathrm{d}m }&amp;{-\int xy \, \mathrm{d}m }&amp;-\int xz \, \mathrm{d}m \\ -\int xy \, \mathrm{d}m &amp;\int (x^2+z^2) \, \mathrm{d}m &amp;-\int yz \, \mathrm{d}m \\ -\int xz \, \mathrm{d}m &amp;-\int yz \, \mathrm{d}m &amp;\int (x^2+y^2) \, \mathrm{d}m \end{array}\right)$$</p>
 <p>כיוון שזוהי מטריצה סימטרית, קיים מערכת צירים שעבורה היא תהיה אלסונית. מערכת זאת נקראת מערכת צירים ראשית. ובמקרה זה אפשר להשתמש בנוסחה הפשוטה $T=\frac{1}{2}I\omega^2$. כלומר אם אנחנו יודעים שמסתובב סביב ציר, תמיד ניתן לחשב $$I_{\hat{n}}=I_{\hat{n},c m}+m d^{2}$$ ואז להתייחס לבעיה באופן שראינו קודם.</p>
-<div class="theorem"> (הצירים המאונכים)<p>עבור גוף דו מימדי, או לפחות גוף שטוח, מתקיים $I_{x x}+I_{yy}=I_{zz}$.</p>
+<div class="theorem"><span class="keyword">הצירים המאונכים</span><p>עבור גוף דו מימדי, או לפחות גוף שטוח, מתקיים $I_{x x}+I_{yy}=I_{zz}$.</p>
 </div>
     </div>
     <ul class='top-navigation'>

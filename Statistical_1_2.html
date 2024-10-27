@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -44,13 +53,13 @@ window.MathJax = {
 <p>האנרגיה הממוצעת של מערכת תהיה:
 $$E=\sum_{i} P_{i}E_{i}$$</p>
 </div>
-<div class="definition"> (טמפרטורה)<p>$$\frac{1}{T}=\frac{dS}{dE}$$</p>
+<div class="definition"><span class="keyword">טמפרטורה</span><p>$$\frac{1}{T}=\frac{dS}{dE}$$</p>
 </div>
-<div class="definition"> (אי ידיעה מוחלטת על המערכת)<p>כאשר לא יודעים כלום על המערכת. במקרה זה כל מצב הוא שווה הסתברות. כלומר אם מספר האפשרויות הוא $m$ נקבל כי $P_{i}=\frac{1}{m}$.</p>
+<div class="definition"><span class="keyword">אי ידיעה מוחלטת על המערכת</span><p>כאשר לא יודעים כלום על המערכת. במקרה זה כל מצב הוא שווה הסתברות. כלומר אם מספר האפשרויות הוא $m$ נקבל כי $P_{i}=\frac{1}{m}$.</p>
 </div>
-<div class="definition"> (ידיעה מוחלטת על המערכת)<p>כאשר אנחנו יודעים שהמערכת נמצאת במצב $i$ ולכן $P(i)=1$ ו-$P\left( j\neq i \right)=0$.</p>
+<div class="definition"><span class="keyword">ידיעה מוחלטת על המערכת</span><p>כאשר אנחנו יודעים שהמערכת נמצאת במצב $i$ ולכן $P(i)=1$ ו-$P\left( j\neq i \right)=0$.</p>
 </div>
-<div class="definition"> (אנטרופיה)<p>ממד לאינפורציה. מוגדר בצורה הבאה:
+<div class="definition"><span class="keyword">אנטרופיה</span><p>ממד לאינפורציה. מוגדר בצורה הבאה:
 $$S=-\sum_{i} P(i)\ln(P(i))$$</p>
 </div>
 <div class="remark">
@@ -62,7 +71,7 @@ $$S=-\sum_{i} P(i)\ln(P(i))$$</p>
 <li>כאשר לא יודעים כלום נקבל כי $S$ מקסימלית.</li>
 </ul>
 </div>
-<div class="reminder"> (כופלי לגרנג')<p>משומש למצוא נקודות קריטיות בפונקציה $f$ בהנתן אילוץ $g=0$. משפט כופלי לגרנג' אומר כי בנקודה הקריטית קיים $\lambda$ כך ש:
+<div class="reminder"><span class="keyword">כופלי לגרנג'</span><p>משומש למצוא נקודות קריטיות בפונקציה $f$ בהנתן אילוץ $g=0$. משפט כופלי לגרנג' אומר כי בנקודה הקריטית קיים $\lambda$ כך ש:
 $$\bar{\nabla} f = \lambda\bar{\nabla} g$$
 כאשר יש שתי אילוצים $g=0$ ו-$h=0$ ניתן לדרוש:
 $$\bar{\nabla} f=\lambda \bar{\nabla} g+\mu \bar{\nabla} h$$</p>
@@ -111,12 +120,12 @@ $$\frac{\partial Z}{\partial \beta} =-\sum E_{i}e^{ -\beta E_{i} }$$</p>
 <div class="corollary">
 <p>$$E=-\frac{1}{Z}\frac{\partial Z}{\partial \beta} =-\frac{\partial \ln Z}{\partial \beta} $$</p>
 </div>
-<div class="proposition"> (אנטרופיה בעזרת פונקציית החלוקה)<p>$$S=\beta E+\ln Z$$</p>
+<div class="proposition"><span class="keyword">אנטרופיה בעזרת פונקציית החלוקה</span><p>$$S=\beta E+\ln Z$$</p>
 </div>
 <div class="proof">
 <p>$$\begin{gather}S=-\sum_{i}P_{i}\ln P_{i}=\sum_{i} \frac{1}{Z}e^{ -\beta E_{i} }\left[ \beta E_{i}+\ln Z \right] = \\=\beta E+\frac{1}{Z}\ln Z \sum_{i}e^{ \beta E_{i} }=\beta E+\frac{1}{Z}\left( \ln Z \right)Z=\beta E +\ln Z \end{gather}$$</p>
 </div>
-<div class="definition"> (טמפרטורה)<p>גודל במערכת המכריע את כיוון זרימת האנרגיה. משתווה כאשר אין זרמה של אנרגיה ויש שיווי משקל תרמי. מוגדר בעזרת אנטרופיה ע"י:
+<div class="definition"><span class="keyword">טמפרטורה</span><p>גודל במערכת המכריע את כיוון זרימת האנרגיה. משתווה כאשר אין זרמה של אנרגיה ויש שיווי משקל תרמי. מוגדר בעזרת אנטרופיה ע"י:
 $$\frac{1}{T}=\frac{\mathrm{d} S}{\mathrm{d} E} $$</p>
 </div>
 <div class="proposition">
@@ -136,7 +145,7 @@ $$T=\frac{1}{k_{B}\beta}$$
 </div>
 <p><strong>סיכום</strong>
 $$P_{i}=\frac{1}{Z}e^{ -\beta E_{i}}\qquad Z=\sum_{i}e^{ -\beta E_{i} } \qquad E=-\frac{\partial \ln Z}{\partial \beta} \qquad T=\frac{1}{\beta}\qquad S=\beta E+\ln Z$$</p>
-<div class="proposition"> (פונקציית החלוקה של גז אידיאלי)<p>עבור מערכת של $N$ חלקיקים בנפח $V$ ללא אינטרקציה ביניהם תתן פונקציית חלוקה:
+<div class="proposition"><span class="keyword">פונקציית החלוקה של גז אידיאלי</span><p>עבור מערכת של $N$ חלקיקים בנפח $V$ ללא אינטרקציה ביניהם תתן פונקציית חלוקה:
 $$Z=\frac{V^{N}}{N!}\left( \frac{2m\pi}{\beta} \right)^{3N/2}$$</p>
 </div>
     </div>

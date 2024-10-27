@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -91,7 +100,7 @@ $${\frac{\partial S}{\partial t}}+{\mathcal{H}}\left({\boldsymbol{q}},{\frac{\pa
 <p>מוצאים את הקבועים $\alpha,\beta$ בעזרת התנאי התחלה $p(0),q(0)$ </p>
 </li>
 </ol>
-<div class="example"> (אסצילטור הרמוני)<p>ניתן לכתוב את ההמילטוניאן של אסצילטור הרמוני בצורה הבאה:
+<div class="example"><span class="keyword">אסצילטור הרמוני</span><p>ניתן לכתוב את ההמילטוניאן של אסצילטור הרמוני בצורה הבאה:
 $$\mathcal{H}=\frac{1}{2m}\left(p^{2}+m^{2}\omega^{2}q^{2}\right)$$
 כאשר $\omega=\sqrt{ \frac{k}{m} }$. כיוון ש-$\mathcal{H}$ לא תלוי מפורשות בזמן, $\mathcal{H}$ קבוע. משוואת המילטון יעקובי במקרה הזה יחסית פשוט כיוון שלא תלוי בזמן וניתן להפריד משתנים.  נכתוב:
 $$\frac{1}{2m}\left[\left(\frac{\partial S}{\partial q}\right)^{2}+m^{2}\omega^{2}q^{2}\right]=-\frac{\partial S}{\partial t}$$</p>

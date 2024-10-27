@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -66,7 +75,7 @@ window.MathJax = {
         <div class="content">
         <h1>4.3  פיתוח מולטיפולי</h1>
     <p>את הפיתוח הזה אנו צריכים כדי לפשט את צורת השדה רחוק מאוד מאיזור הזרמים(מקורות).</p>
-<div class="proposition"> (פיתוח סדר שני)<p>השתי איברים הראשונים של הפיתוח טיילור של הפוטנציאל יהיה:
+<div class="proposition"><span class="keyword">פיתוח סדר שני</span><p>השתי איברים הראשונים של הפיתוח טיילור של הפוטנציאל יהיה:
 $$\vec{A}\left( \vec{R}_{0} \right)=\frac{1}{cR_{0}^3}\int d^3R\vec{J}\cdot\left( \vec{R}_{0}\vec{R} \right)+\dots$$</p>
 </div>
 <div class="proof">
@@ -88,22 +97,22 @@ $$\int\!(\vec{x}\cdot\vec{x}^{\prime})\vec{J}(\vec{x}^{\prime})\,d^{3}x^{\prime}
 <p>ניתן לכתוב את הגורם הדיפולי של הפוטנציאל בצורה הבאה:
 $$\vec{A}\left( \vec{x} \right)={\frac{1}{2c|\vec{x}|^3}}\vec{x} \times\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</p>
 </div>
-<div class="definition"> (מומנט דיפולי מגנטי)<p>$$\vec{\mu}={\frac{1}{2c}}\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</p>
+<div class="definition"><span class="keyword">מומנט דיפולי מגנטי</span><p>$$\vec{\mu}={\frac{1}{2c}}\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</p>
 </div>
 <div class="corollary">
 <p>ניתן לכתוב את הקירוב הדיפולי של הפוטנציאל בצורה הפשוטה בעזרת המומנט הדיפול:
 $$\vec{A}\left( \vec{x} \right)={\frac{\vec{\mu}\times\vec{x}}{|\vec{x}|^{3}}}$$</p>
 </div>
-<div class="proposition"> (מומנט דיפול של לולאת זרם)<p>$${\vec{\mu}}={\frac{I}{2c}}\oint\left({\vec{R}}\times d{\vec{\ell}}\right)$$</p>
+<div class="proposition"><span class="keyword">מומנט דיפול של לולאת זרם</span><p>$${\vec{\mu}}={\frac{I}{2c}}\oint\left({\vec{R}}\times d{\vec{\ell}}\right)$$</p>
 </div>
-<div class="proposition"> (שדה מגנטי של דיפול)<p>$$\vec{B} =\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{|x|^{3}}$$</p>
+<div class="proposition"><span class="keyword">שדה מגנטי של דיפול</span><p>$$\vec{B} =\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{|x|^{3}}$$</p>
 </div>
 <div class="proof">
 <p>$$\begin{gather}\vec{B}=\vec{\nabla}_{\vec{R}_{0}}\times\vec{A}\left(\vec{R}_{0}\right)=\vec{\nabla}_{\vec{R}_{0}}\times\left(\frac{\vec{\mu}\times\vec{R}}{R_{0}^{3}}\right)=-\vec{\nabla}_{\vec{R}_{0}}\times\left(\vec{\mu}\times\vec{\nabla}_{\vec{R}_{0}}\frac{1}{R_{0}}\right)\\=\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{R_{0}^{3}}  \end{gather}$$</p>
 </div>
-<div class="proposition"> (כוח ומומנט שפועל על דיפול)<p>$$\begin{gather}\vec{F}=\nabla\times\left( \vec{B}\times\vec{\mu} \right)=\left( \vec{\mu}\cdot\nabla \right)\vec{B}=\nabla\left( \vec{\mu}\cdot\vec{B} \right)  \\{\vec{\tau}}={\vec{\mu}}\times{\textbf{B}} \end{gather}$$</p>
+<div class="proposition"><span class="keyword">כוח ומומנט שפועל על דיפול</span><p>$$\begin{gather}\vec{F}=\nabla\times\left( \vec{B}\times\vec{\mu} \right)=\left( \vec{\mu}\cdot\nabla \right)\vec{B}=\nabla\left( \vec{\mu}\cdot\vec{B} \right)  \\{\vec{\tau}}={\vec{\mu}}\times{\textbf{B}} \end{gather}$$</p>
 </div>
-<div class="proposition"> (אנרגיה פוטנציאלית שפועלת על דיפול)<p>$$U=-\,\vec{m}\cdot\vec{B}$$</p>
+<div class="proposition"><span class="keyword">אנרגיה פוטנציאלית שפועלת על דיפול</span><p>$$U=-\,\vec{m}\cdot\vec{B}$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -64,7 +73,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_3_3`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_3_1`;}});</script>
         <div class="content">
         <h1>3.2  חלקיק חופשי</h1>
-    <div class="definition"> (חלקיק חופשי)<p>חלקיק שבו הפוטנציאל הוא אפס. כלומר ההמילטוניאן מקיים:
+    <div class="definition"><span class="keyword">חלקיק חופשי</span><p>חלקיק שבו הפוטנציאל הוא אפס. כלומר ההמילטוניאן מקיים:
 $$\mathcal{H}= \frac{P^{2}}{2m}$$</p>
 </div>
 <p>זוהי בעיה שטבעי לפתור אותה בבסיס התנע כיוון שההמילטוניאן תלוי ב-$P$ בלבד, ואין השפעה של המיקום בפוטנציאל, לכן נקבל ישירות משוואה עבור התנע.
@@ -79,10 +88,10 @@ $$E_{p}={\frac{p^{2}}{2m}}$$</p>
 $$\mathcal{H}\ket{p} =\frac{p^{2}}{2m}\ket{p} $$
 עבור מצב בבסיס התנע $\ket{p}$.</p>
 </div>
-<div class="proposition"> (משוואת הגל כפונקציה של התנע)<p>$$\ket{\psi(t)} = \int \mathrm{d}p \;\mathrm{Prob}(p) e^{-i E_{p}/\hbar}=\int\mathrm{d}p\;\psi(p,t)e^{ -ip^{2}t/2m\hbar  }$$
+<div class="proposition"><span class="keyword">משוואת הגל כפונקציה של התנע</span><p>$$\ket{\psi(t)} = \int \mathrm{d}p \;\mathrm{Prob}(p) e^{-i E_{p}/\hbar}=\int\mathrm{d}p\;\psi(p,t)e^{ -ip^{2}t/2m\hbar  }$$
 כאשר באופן כללי נדרש לבצע אינטגרציה לפי בסיס האנרגיה, אך כיוון שההמילטוניאן מתחלף עם התנע, קיים בסיס משותף וניתן לבצע אינטגרציה לפי בסיס זה.</p>
 </div>
-<div class="proposition"> (משוואת התנועה בבסיס המיקום)<p>$$\psi\left(x,t\right)=\left\langle x|\psi\left(t\right)\right\rangle={\frac{1}{\sqrt{2\pi\hbar}}}\int d p e^{i p x/\hbar}e^{-i{\frac{p^{2}}{2m\hbar}}t}{\psi}\left(p,t=0\right)$$</p>
+<div class="proposition"><span class="keyword">משוואת התנועה בבסיס המיקום</span><p>$$\psi\left(x,t\right)=\left\langle x|\psi\left(t\right)\right\rangle={\frac{1}{\sqrt{2\pi\hbar}}}\int d p e^{i p x/\hbar}e^{-i{\frac{p^{2}}{2m\hbar}}t}{\psi}\left(p,t=0\right)$$</p>
 </div>
 <div class="proposition">
 <p>ערך התצפית של התנע לא משתנה בזמן</p>
@@ -94,7 +103,7 @@ $$\left\langle\psi\left(t\right)\right|P\left|\psi\left(t\right)\right\rangle=\i
 <div class="corollary">
 <p>אי וודואות של התנע $\triangle P$ לא משתנה בזמן.</p>
 </div>
-<div class="proposition"> (ערך התצפית של המיקום)<p>לפי משפט אהרנפסט מתקיים:
+<div class="proposition"><span class="keyword">ערך התצפית של המיקום</span><p>לפי משפט אהרנפסט מתקיים:
 $$\frac{d x\left(t\right)}{d t}=\frac{d\left\langle X\right\rangle}{d t}=\frac{i}{\hbar}\left\langle\left[H,X\right]\right\rangle=\frac{\left\langle P\right\rangle}{m}=\frac{p_{0}}{m}$$
 ולכן:
 $$x\left(t\right)=x_{0}+{\frac{p_{0}}{m}}t$$</p>

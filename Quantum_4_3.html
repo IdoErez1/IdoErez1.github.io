@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -64,12 +73,12 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_4_2`;}});</script>
         <div class="content">
         <h1>4.3  אופרטור הצפיפות ושזירה</h1>
-    <div class="definition"> (צבר של מצבים קוונטים)<p>מערכת שבה יש לנו אוסף של מצבים קוונטים כאשר יש לנו הסתברות(קלאסית) שונה להיות בכל מצב קוונטי.</p>
+    <div class="definition"><span class="keyword">צבר של מצבים קוונטים</span><p>מערכת שבה יש לנו אוסף של מצבים קוונטים כאשר יש לנו הסתברות(קלאסית) שונה להיות בכל מצב קוונטי.</p>
 </div>
-<div class="definition"> (אופרטור הצפיפות)<p>עבור צבר של מצבים קוונטים $\left\{  \ket{\psi_{\mu}}  \right\}$ כאשר ההסתברות להיות במצב קוונטי $\ket{\psi_{\mu}}$ יהיה $p_{\mu}$ נגדיר את מטריצת הצפיפות להיות:
+<div class="definition"><span class="keyword">אופרטור הצפיפות</span><p>עבור צבר של מצבים קוונטים $\left\{  \ket{\psi_{\mu}}  \right\}$ כאשר ההסתברות להיות במצב קוונטי $\ket{\psi_{\mu}}$ יהיה $p_{\mu}$ נגדיר את מטריצת הצפיפות להיות:
 $$\rho=\sum_{\mu=1}^{N}p_{\mu}\left|\psi_{\mu}\right\rangle\left\langle\psi_{\mu}\right|$$</p>
 </div>
-<div class="definition"> (עקבה של אופרטור)<p>נגדיר את העקבה של אופרטור בצורה הבאה:
+<div class="definition"><span class="keyword">עקבה של אופרטור</span><p>נגדיר את העקבה של אופרטור בצורה הבאה:
 $${\mathrm{Tr}}\left[Q\right]=\sum_{n}\left\langle n\right|Q\left|n\right\rangle$$
 כאשר נשים לב כי כאשר האופרטור הוא אופרטור שנוצר ממכפלה טנזורית העקבה תחזיר אופרטור.</p>
 </div>
@@ -80,7 +89,7 @@ $$\langle M\rangle=\mathrm{Tr}\left[\rho M\right]=\mathrm{Tr}\left[M\rho\right]$
 <div class="proof">
 <p>$$ \begin{aligned}\left\langle M\right\rangle&amp;=\sum_{\mu=1}^{N}p_{\mu}\left\langle\psi_{\mu}\right|M\left|\psi_{\mu}\right\rangle=\sum_{\mu=1}^{N}p_{\mu}\left\langle\psi_{\mu}\right|\sum_{n}\left|n\right\rangle\left\langle n\right|M\left|\psi_{\mu}\right\rangle\\&amp;=\sum_{n}\sum_{\mu=1}^{N}p_{\mu}\left\langle n\right|\left(M\left|\psi_{\mu}\right\rangle\left\langle\psi_{\mu}\right|\right)\left|n\right\rangle=\sum_{n}\left\langle n\right|M\left(\sum_{\mu=1}^{N}p_{\mu}\left|\psi_{\mu}\right\rangle\left\langle\psi_{\mu}\right|\right)\left|n\right\rangle\\&amp;=\sum_{n}\left\langle n\right|M\rho\left|n\right\rangle=\mathrm{Tr}\left[M\rho\right]=\mathrm{Tr}\left[\rho M\right]\end{aligned}$$</p>
 </div>
-<div class="definition"> (עקבה חלקית ומטריצת צפיפות מצומצמת)<p>יהי $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבי הילברט בלתי תלויים עם מימדים $d_{A},d_{B}$ ואיברי בסיס $\{\left|e_{i}\right\rangle_{A}\}_{i=1}^{d_{A}},\left\{\left|f_{j}\right\rangle_{B}\right\}_{j=1}^{d_{B}}$ כך ש-$\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$. 
+<div class="definition"><span class="keyword">עקבה חלקית ומטריצת צפיפות מצומצמת</span><p>יהי $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבי הילברט בלתי תלויים עם מימדים $d_{A},d_{B}$ ואיברי בסיס $\{\left|e_{i}\right\rangle_{A}\}_{i=1}^{d_{A}},\left\{\left|f_{j}\right\rangle_{B}\right\}_{j=1}^{d_{B}}$ כך ש-$\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$. 
 $$\rho_{A}=\sum_{j}\left\langle f_{j}\right|_{B}\rho\left|f_{j}\right\rangle_{B}\equiv\mathrm{Tr}_{B}\left[\rho\right]$$</p>
 </div>
 <p>ההסבר להגדרה זה שאם נרצה להסתכל על אופרטור $M_{A}$ שפועל רק על $A$ אזי נקבל:
@@ -88,10 +97,10 @@ $$\begin{array}{r c l}{{\left&lt;M_{A}\right&gt;=\mathrm{Tr}\left[M_{A}\rho\righ
 <p>כעת נסתכל על מספר תכונות של מטריצת הצפיפות
 <strong>טענה</strong> הרמיטיות
 אופרטור הצפיפות הוא אופרטור הרמיטי. כלומר $\rho ^{\dagger}=\rho$.</p>
-<div class="proposition"> (חיוביות)<p>מטריצת הצפיפות היא חיובית. כלומר לכל מצב קוונטי $\ket{\psi}$ מתקיים:
+<div class="proposition"><span class="keyword">חיוביות</span><p>מטריצת הצפיפות היא חיובית. כלומר לכל מצב קוונטי $\ket{\psi}$ מתקיים:
 $$\forall\left|\psi\right\rangle\;\;\left\langle\psi\right|\rho\left|\psi\right\rangle\geq0$$</p>
 </div>
-<div class="proposition"> (נרמול)<p>העקבה של אופרטור הצפיפות הוא 1.</p>
+<div class="proposition"><span class="keyword">נרמול</span><p>העקבה של אופרטור הצפיפות הוא 1.</p>
 </div>
 <div class="proof">
 <p>$$T r\left(\rho\right)=\sum_{i}\left\langle\psi_{i}\right|\rho\left|\psi_{i}\right\rangle=\sum_{i}\sum_{n}p_{n}\langle\psi_{i}|\psi_{n}\rangle\langle\psi_{n}|\psi_{i}\rangle=\sum_{n}\sum_{i}p_{n}\langle\psi_{n}|\psi_{i}\rangle\langle\psi_{i}|\psi_{n}\rangle=\sum_{n}p_{n}=1$$</p>
@@ -102,13 +111,13 @@ $$\forall\left|\psi\right\rangle\;\;\left\langle\psi\right|\rho\left|\psi\right\
 <div class="proof">
 <p>$$T r\left(\rho^{2}\right)=\sum_{i,n,m}p_{n}p_{m}\langle\psi_{i}|\psi_{m}\rangle\langle\psi_{m}|\psi_{n}\rangle\langle\psi_{n}|\psi_{i}\rangle=\sum_{n,m}p_{n}p_{m}\delta_{n m}=\sum_{n}p_{n}^{2}\leq1$$</p>
 </div>
-<div class="definition"> (מצב טהור)<p>כאשר בצבר שלנו כל האובייקטים עם מצב קוונטי יחיד $\ket{\psi}$. במקרה זה ניתן לכתוב $\rho=\ket{\psi}\bra{\psi}$.</p>
+<div class="definition"><span class="keyword">מצב טהור</span><p>כאשר בצבר שלנו כל האובייקטים עם מצב קוונטי יחיד $\ket{\psi}$. במקרה זה ניתן לכתוב $\rho=\ket{\psi}\bra{\psi}$.</p>
 </div>
 <div class="proposition">
 <p>מצב טהור הוא אופרטור הטלה. לכן מתקיים $\rho^{2}=\rho$ וכן מתקיים:
 $$\mathrm{Tr}\left( \rho \right)=\mathrm{Tr}\left( \rho^{2} \right)=1$$</p>
 </div>
-<div class="proposition"> (מצב מעורב)<p>כאשר יש לנו צבר המכיל מצבים קוונטים שונים. מטריצת הצפיפות תהיה:
+<div class="proposition"><span class="keyword">מצב מעורב</span><p>כאשר יש לנו צבר המכיל מצבים קוונטים שונים. מטריצת הצפיפות תהיה:
 $$\rho_{\mathrm{mix}}\,=\,\sum_{\mathrm{i}}\,p_{\mathrm{i}}\,\rho_{\mathrm{i}}^{\mathrm{pure}}\,=\,\sum_{\mathrm{i}}\,p_{\mathrm{i}}\,\left|\,\psi_{\mathrm{i}}\,\right&gt;\left&lt;\,\psi_{\mathrm{i}}\,\right|$$</p>
 </div>
 <div class="proposition">
@@ -119,16 +128,16 @@ $$\rho_{\mathrm{mix}}\,=\,\sum_{\mathrm{i}}\,p_{\mathrm{i}}\,\rho_{\mathrm{i}}^{
 </div>
 <p>כאשר נשים לב כי הערך של $\mathrm{Tr}\left( \rho^{2} \right)$ זה מדד טוב לכמה מעורב מצב. ככל שזה יותר קטן - המצב יותר מעורב - ככל שזה יותר קרוב ל-1 - המצב יותר טהור. אופרטור מעורב מקסימלית של מעורב מקסימלית של מערכת ממימד $d$ יקיים $\mathrm{Tr}\left( \rho^{2} \right)=\frac{1}{d}&gt;0$.</p>
 <h3>שזירה</h3>
-<div class="definition"> (מצב מכפלה)<p>יהיו $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבים הילברט. מצב $\ket{\Psi}\in \mathcal{H}_{A}\times \mathcal{H}_{B}$ נקרא מצב מכפלה אם קיימים $\ket{\psi}_{A}\in A,\ket{\psi}_{B}\in B$ כך שמתקיים:
+<div class="definition"><span class="keyword">מצב מכפלה</span><p>יהיו $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבים הילברט. מצב $\ket{\Psi}\in \mathcal{H}_{A}\times \mathcal{H}_{B}$ נקרא מצב מכפלה אם קיימים $\ket{\psi}_{A}\in A,\ket{\psi}_{B}\in B$ כך שמתקיים:
 $$\ket{\Psi} =\ket{\psi} _{A}\otimes \ket{\psi} _{B}$$</p>
 </div>
-<div class="definition"> (מצב שזור)<p>מצב שאינו מצב מכפלה. כלומר עבור $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבי הילברט. מצב $\ket{\Psi}\in \mathcal{H}_{A}\times \mathcal{H}_{B}$ נקרא מצב שזור אם לא קיימים $\ket{\psi}_{A}\in A,\ket{\psi}_{B}\in B$ כך שמתקיים:
+<div class="definition"><span class="keyword">מצב שזור</span><p>מצב שאינו מצב מכפלה. כלומר עבור $\mathcal{H}_{A},\mathcal{H}_{B}$ מרחבי הילברט. מצב $\ket{\Psi}\in \mathcal{H}_{A}\times \mathcal{H}_{B}$ נקרא מצב שזור אם לא קיימים $\ket{\psi}_{A}\in A,\ket{\psi}_{B}\in B$ כך שמתקיים:
 $$\ket{\Psi} =\ket{\psi} _{A}\otimes \ket{\psi} _{B}$$</p>
 </div>
 <p>כלומר במצב מכפלה נקבל כי שתי המרחבי הילברט לא תלויים אחד בשני לחלוטין, כאשר אנחנו לא במצב מכפלה, תהיה איזשהי תלות בין מרחבי ההילברט. כלומר אם אנחנו יודעים משהו על מרחב הילברט אחד אז זה נותן לנו מידע על מרחב הילברט אחר.</p>
-<div class="definition"> (שזירה)<p>שזירה בין שתי מערכות אומרת לנו עד כמה אי ידיעת מצבה של מערכת אחת מונעת מאיתנו לדעת את מצבה של השנייה.</p>
+<div class="definition"><span class="keyword">שזירה</span><p>שזירה בין שתי מערכות אומרת לנו עד כמה אי ידיעת מצבה של מערכת אחת מונעת מאיתנו לדעת את מצבה של השנייה.</p>
 </div>
-<div class="definition"> (אנטרופיית שאנון)<p>דרך לכמת את כמות האי ידיעה במערכת. אם הסתבריות נתונות ע"י $\{ p_{i} \}$ אנטרופיית שאנון מוגדרת:
+<div class="definition"><span class="keyword">אנטרופיית שאנון</span><p>דרך לכמת את כמות האי ידיעה במערכת. אם הסתבריות נתונות ע"י $\{ p_{i} \}$ אנטרופיית שאנון מוגדרת:
 $$S=-\sum_{i}p_{i}\ln p_{i}$$</p>
 </div>
 <div class="proposition">

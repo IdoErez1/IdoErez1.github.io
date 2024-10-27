@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -65,7 +74,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Electrodynamics_4_3`;}if (event.key === 'ArrowLeft'){window.location.href = `./Electrodynamics_4_1`;}});</script>
         <div class="content">
         <h1>4.2  ביו סבר</h1>
-    <div class="theorem"> (חוק ביו סבר)<p>עבור צפיפות זרם קבוע נקבל
+    <div class="theorem"><span class="keyword">חוק ביו סבר</span><p>עבור צפיפות זרם קבוע נקבל
 $$\vec{B} = \frac{I}{c}\oint \frac{d\vec{l} \times \vec{r}}{r^3}$$
 כאשר עבור צפיפות זרם משתנה נקבל:
 $$\vec{B}\left( \vec{x} \right)={\frac{1}{c}}\int\!\vec{J}\left( \vec{x}^{\prime} \right)\,\times\,{\frac{\left( \vec{x}-\vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|^{3}}}\,d^{3}x^{\prime}$$</p>
@@ -73,7 +82,7 @@ $$\vec{B}\left( \vec{x} \right)={\frac{1}{c}}\int\!\vec{J}\left( \vec{x}^{\prime
 <div class="proof">
 <p>נפעיל דיברגנץ על הביטוי:
 $$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$
-נראה שהפתרון שמצאנו מקיימת את התנאי כיול $\bar{\nabla} \cdot \vec{A}=0$:
+נראה שהפתרון שמצאנו מקיים $\bar{\nabla} \cdot \vec{A}=0$. כלומר מקיים את התנאי כיול:
 $$\begin{gather}\bar{\nabla} \cdot \vec{A} = \partial_{i}A^i = \frac{\partial }{\partial x^i} \int\mathrm{d^3}\tilde{x} \frac{\frac{1}{c}J^i\left( \tilde{x} \right)}{\left\lvert  \vec{x}  -\tilde{\vec{x}}\right\rvert }=-\int\mathrm{d^3}\tilde{x} \left( \frac{\partial }{\partial \tilde{x}} \cdot \frac{1}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right) \frac{1}{c} \vec{J}'\left( \tilde{x} \right)  \\=\frac{\partial }{\partial \tilde{x}^{i}} \left( \frac{1}{c} \frac{J'\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)-\cancelto{ 0 }{ \frac{1}{c} \frac{\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } } = -\iint\vec{V} d\vec{\Sigma}=0 \end{gather}$$
 כאשר ה$\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)$ התאפס בגלל משוואת הרציפות - $0 = \frac{\partial \rho}{\partial t}=\bar{\nabla} \cdot \vec{J}$, והאינטגרל על הנפח מתאפס עבור מעטפת מספיק גדולה.</p>
 <p>$$\vec{B} = \bar{\nabla} \times \vec{A} = \frac{1}{c}\int\mathrm{d^3}\tilde{x} \;\bar{\nabla}_{x} \times \left( \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)$$
@@ -91,10 +100,10 @@ $$\vec{E}(\vec{x})=\!\int\!\rho(\vec{x}^{\prime})\,{\frac{(\vec{x}-\vec{x}^{\pri
 <p>הגודל של השדה המגנטי של תיל אינסופי הנושא זרם $I$ יהיה:
 $$|\vec{B}|={\frac{I R}{c}}\!\!\int_{-\infty}^{\infty}\!{\frac{d l}{(R^{2}+l^{2})^{3\zeta}}}={\frac{2I}{c R}}$$</p>
 </div>
-<div class="proposition"> (כוח של אלמנט תיל)<p>$$d\vec{F}={\frac{I_{1}}{c}}\left(d\vec{I}_{1}\,\times\,\vec{B}\right)$$</p>
+<div class="proposition"><span class="keyword">כוח של אלמנט תיל</span><p>$$d\vec{F}={\frac{I_{1}}{c}}\left(d\vec{I}_{1}\,\times\,\vec{B}\right)$$</p>
 </div>
 <p>בעזרת החוק ניתן לרשום את הביטוי לכוח בין שתי לולאות זרם קבועות. </p>
-<div class="proposition"> (כוח בין שתי תילים)<p>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</p>
+<div class="proposition"><span class="keyword">כוח בין שתי תילים</span><p>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</p>
 </div>
 <div class="proof">
 <p>נסתכל על הכוח שפועל בין שתי תילים עם זרמים  $I_{1},I_{2}$. הכוח בין שתי אלמנטים על התיל $d\vec{l}_{1},d\vec{l}_{2}$.
@@ -111,7 +120,7 @@ $$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d
 <p>עבור שני תילים אינסופיים ומקבילים
 $$\frac{d\vec{F}_{1\leftarrow {2}}}{dl}=\frac{2I_{1}I_{2}}{c^2d}$$</p>
 </div>
-<div class="proposition"> (כוח ומומנט בעזרת צפיפות זרם)<p>$$\vec{F}={\frac{1}{c}}\int\vec{J(x)}\;\times\;\vec{B(x)}\;d^{3}x\qquad {{{\vec{N}}={\frac{1}{c}}\int\vec{x\,\times\,(J\,\times\,B)}\;d^{3}x}}$$</p>
+<div class="proposition"><span class="keyword">כוח ומומנט בעזרת צפיפות זרם</span><p>$$\vec{F}={\frac{1}{c}}\int\vec{J(x)}\;\times\;\vec{B(x)}\;d^{3}x\qquad {{{\vec{N}}={\frac{1}{c}}\int\vec{x\,\times\,(J\,\times\,B)}\;d^{3}x}}$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -64,10 +73,10 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_4_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_3_6`;}});</script>
         <div class="content">
         <h1>3.7  אוסצילטור הרמוני קוונטי</h1>
-    <div class="definition"> (פוטנציאל הרמוני)<p>פוטנציאל מהצורה:
+    <div class="definition"><span class="keyword">פוטנציאל הרמוני</span><p>פוטנציאל מהצורה:
 $$V(x)={\frac{1}{2}}m\omega^{2}X^{2}$$</p>
 </div>
-<div class="definition"> (אוסצילטור הרמוני קוונטי)<p>מערכת שבה יש פוטנציאל הרמוני, כלומר מערכת שההמילטוניאן שלה יהיה:
+<div class="definition"><span class="keyword">אוסצילטור הרמוני קוונטי</span><p>מערכת שבה יש פוטנציאל הרמוני, כלומר מערכת שההמילטוניאן שלה יהיה:
 $$H={\frac{p^{2}}{2m}}+{\frac{m\omega^{2}x^{2}}{2}}$$</p>
 </div>
 <p>ניתן לפתור מערכת זו בשתי דרכים - הדרך הראשונה בעזרת טור חזקות(נקבל את משוואת הרמיט) והדרך השנייה זה בעזרת אופרטורי העלה והרדה</p>
@@ -81,12 +90,12 @@ $$\hat{\mathcal{H}}=\frac{1}{2}\left(\hat{P}^{2}+\hat{X}^{2}\right)$$
 $$\left( \hat{X}-i\hat{P} \right)\left( \hat{X}+i\hat{P} \right)=\hat{X}^2-i\hat{P}\hat{X}+i\hat{X}\hat{P} + \hat{P}^2=\hat{X}^2 +\hat{P}^2 -i\left[ \hat{X},\hat{P} \right]$$
 כאשר אומנם לא קיבלנו השלמה לריבוע מושלמת בגלל החוסר חילופיות, אבל ניתן למצוא ביטוי בעזרת הקומוטטור כאשר מתקיים $\left[ \hat{X},\hat{P} \right]=\frac{i}{2}I$ ולכן נקבל:
 $$\hat{\mathcal{H}}=\left( \hat{X}+i\hat{P} \right)\left( \hat{X}-i\hat{P} \right)+\frac{1}{2}I$$</p>
-<div class="definition"> (אופרטורי העלה והורדה)<p>$$a=\left( \hat{X}+i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x+\frac{i p}{m\omega}\right)\quad a^{\dagger}=\left( \hat{X}-i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x-\frac{i p}{m\omega}\right)$$
+<div class="definition"><span class="keyword">אופרטורי העלה והורדה</span><p>$$a=\left( \hat{X}+i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x+\frac{i p}{m\omega}\right)\quad a^{\dagger}=\left( \hat{X}-i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x-\frac{i p}{m\omega}\right)$$
 לעיתים אופרטור הורדה $a$ נקרא אופרטור השמדה ואופרטור העלה $a^{\dagger}$ נקרא אופרטור יצירה.</p>
 </div>
-<div class="proposition"> (יחסי חילוף של אופרטורי העלה והורדה)<p>$$\left[a,a^{\dagger}\right]=\left(\frac{1}{2\hbar}\right)\left(-i[x,p]+i[p,x]\right)=1$$</p>
+<div class="proposition"><span class="keyword">יחסי חילוף של אופרטורי העלה והורדה</span><p>$$\left[a,a^{\dagger}\right]=\left(\frac{1}{2\hbar}\right)\left(-i[x,p]+i[p,x]\right)=1$$</p>
 </div>
-<div class="definition"> (אופרטור המספר)<p>$$N=a^{\dagger}a=\left(\frac{m\omega}{2\hbar}\right)\left(x^{2}+\frac{p^{2}}{m^{2}\omega^{2}}\right)+\left(\frac{i}{2\hbar}\right)[x,p]=\frac{H}{\hbar \omega}-\frac{1}{2}$$</p>
+<div class="definition"><span class="keyword">אופרטור המספר</span><p>$$N=a^{\dagger}a=\left(\frac{m\omega}{2\hbar}\right)\left(x^{2}+\frac{p^{2}}{m^{2}\omega^{2}}\right)+\left(\frac{i}{2\hbar}\right)[x,p]=\frac{H}{\hbar \omega}-\frac{1}{2}$$</p>
 </div>
 <div class="remark">
 <p>אופרטורי העלה והורדה הם לא הרמיטים בפני עצמם, כאשר אופרטור המספר הוא כמובן יהיה אופרטור הרמיטי כמכפלה של אופרטור עם הצמוד ההרמיטי שלו.</p>
@@ -149,9 +158,9 @@ $$a^{\dagger}\ket{H} =0\implies aa^{\dagger}\ket{H} =0\implies a^{\dagger}a\ket{
 <p>מיחסי האורטונורמליות מתקיים:
 $$\langle n^{\prime}|a|n\rangle=\sqrt{n}\delta_{n^{\prime},n-1},\quad\langle n^{\prime}|a^{\dagger}|n\rangle=\sqrt{n+1}\delta_{n^{\prime},n+1}.$$</p>
 </div>
-<div class="proposition"> (אופרטורי התנע והמיקום בבסיס האנרגיה)<p>$$\begin{gather}\left\langle  n^{\prime}|x|n \right\rangle=\sqrt{\frac{\hbar}{2m\omega}}\left( \sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1} \right)  \\\langle n^{\prime}|p|n\rangle=i\sqrt{\frac{m\hbar\omega}{2}}(-\sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1}) \end{gather}$$</p>
+<div class="proposition"><span class="keyword">אופרטורי התנע והמיקום בבסיס האנרגיה</span><p>$$\begin{gather}\left\langle  n^{\prime}|x|n \right\rangle=\sqrt{\frac{\hbar}{2m\omega}}\left( \sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1} \right)  \\\langle n^{\prime}|p|n\rangle=i\sqrt{\frac{m\hbar\omega}{2}}(-\sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1}) \end{gather}$$</p>
 </div>
-<div class="proposition"> (מצבים עצמיים של האנרגיה בבסיס המקום)<p>$$\langle x^{\prime}|n\rangle=\left(\frac{1}{\pi^{1/4}\sqrt{2^{n}n!}}\right)\left(\frac{1}{x_{0}^{n+1/2}}\right)\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)^{n}\exp{\left[-\frac{1}{2}\left(\frac{x^{\prime}}{x_{0}}\right)^{2}\right]}$$</p>
+<div class="proposition"><span class="keyword">מצבים עצמיים של האנרגיה בבסיס המקום</span><p>$$\langle x^{\prime}|n\rangle=\left(\frac{1}{\pi^{1/4}\sqrt{2^{n}n!}}\right)\left(\frac{1}{x_{0}^{n+1/2}}\right)\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)^{n}\exp{\left[-\frac{1}{2}\left(\frac{x^{\prime}}{x_{0}}\right)^{2}\right]}$$</p>
 </div>
 <div class="proof">
 <p>נסתכל על המצב היסוד המוגדר ע"י $a\ket{0}=\ket{0}$. ע"י ההגדרה של אופרטור ההורדה, נקבל:
@@ -164,16 +173,16 @@ $$\langle x^{\prime}|0\rangle=\left(\frac{1}{\pi^{1/4}\sqrt{x_{0}}}\right)\exp{\
 $$\begin{gather}\left\langle  x^{\prime}|1 \right\rangle=\left\langle  x^{\prime}|a^{\dagger}|0 \right\rangle=\left(\frac{1}{\sqrt{2}x_{0}}\right)\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)\left\langle  x^{\prime}|0 \right\rangle  \\\langle x^{\prime}|2\rangle=\left(\frac{1}{\sqrt{2}}\right)\langle x^{\prime}|(a^{\dagger})^{2}|0\rangle=\left(\frac{1}{\sqrt{2!}}\right)\left(\frac{1}{\sqrt{2}x_{0}}\right)^{2}\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)^{2}\langle x^{\prime}|0\rangle \end{gather}$$
 כאשר אם נמשיך את זה באופן כללי נקבל את המבוקש.</p>
 </div>
-<div class="proposition"> (ערך התצפית של המיקום והתנע בריבוע במצב יסוד)<p>$$\left\langle x^{2}\right\rangle=\frac\hbar{2m\omega}=\frac{x_{0}^{2}}2 \qquad \left\langle p^{2}\right\rangle=\frac{\hbar m\omega}{2}$$</p>
+<div class="proposition"><span class="keyword">ערך התצפית של המיקום והתנע בריבוע במצב יסוד</span><p>$$\left\langle x^{2}\right\rangle=\frac\hbar{2m\omega}=\frac{x_{0}^{2}}2 \qquad \left\langle p^{2}\right\rangle=\frac{\hbar m\omega}{2}$$</p>
 </div>
 <div class="proof">
 <p>מתקיים:
 $$x^{2}=\left(\frac{\hbar}{2m\omega}\right)\left(a^{2}+a^{\dagger2}+a^{\dagger}a+a a^{\dagger}\right)$$
 כאשר אם ניקח את הערך המצופה, כל הערכים פרט לאחרון יתאפס.</p>
 </div>
-<div class="proposition"> (ערך התצפית של האנרגיה הקינטית והפוטנציאלית)<p>$$\left\langle\frac{p^{2}}{2m}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}\qquad \left\langle\frac{m\omega^{2}x^{2}}{2}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}$$</p>
+<div class="proposition"><span class="keyword">ערך התצפית של האנרגיה הקינטית והפוטנציאלית</span><p>$$\left\langle\frac{p^{2}}{2m}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}\qquad \left\langle\frac{m\omega^{2}x^{2}}{2}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}$$</p>
 </div>
-<div class="proposition"> (אי וודאות במצב יסוד)<p>$$\left\langle \left( \triangle x \right)^{2} \right\rangle=\langle x^{2}\rangle={\frac{\hbar}{2m\omega}}\qquad  \langle(\triangle p)^{2}\rangle=\langle p^{2}\rangle=\frac{\hbar m\omega}{2}$$
+<div class="proposition"><span class="keyword">אי וודאות במצב יסוד</span><p>$$\left\langle \left( \triangle x \right)^{2} \right\rangle=\langle x^{2}\rangle={\frac{\hbar}{2m\omega}}\qquad  \langle(\triangle p)^{2}\rangle=\langle p^{2}\rangle=\frac{\hbar m\omega}{2}$$
 כאשר מתקיים:
 $$\langle(\triangle x)^{2}\rangle\langle(\triangle p)^{2}\rangle={\frac{\hbar^{2}}{4}}$$
 כאשר נשים לב כי זו האי וודאות המינימלית האפשרית לפי עקרון האי וודאות.</p>
@@ -188,7 +197,7 @@ $$\langle x^{2}\rangle_{0}\langle p^{2}\rangle_{0}=-\frac{\hbar^{2}}{4}1(-1)=\fr
 כאשר כיוון שהערך תצפית של אופרטור המקום והתנע הוא 0, נקבל:
 $$\langle(\triangle x)^{2}\rangle_{0}\langle(\triangle p)^{2}\rangle_{0}=\frac{\hbar^{2}}{4}$$</p>
 </div>
-<div class="proposition"> (אי וודאות עבור רמת אנרגיה כללית)<p>$$\left\langle \left( \triangle x \right)^{2} \right\rangle\left\langle \left( \triangle p \right)^{2} \right\rangle=\left(n+\frac{1}{2}\right)^{2}\hbar^{2}=\frac{\hbar^{2}}{4}(2n+1)^{2}$$</p>
+<div class="proposition"><span class="keyword">אי וודאות עבור רמת אנרגיה כללית</span><p>$$\left\langle \left( \triangle x \right)^{2} \right\rangle\left\langle \left( \triangle p \right)^{2} \right\rangle=\left(n+\frac{1}{2}\right)^{2}\hbar^{2}=\frac{\hbar^{2}}{4}(2n+1)^{2}$$</p>
 </div>
 <div class="proof">
 <p>מתקיים:
@@ -213,7 +222,7 @@ $$\begin{array}{l}{{\langle(\Delta x)^{2}\rangle_{\alpha}=\langle x^{2}\rangle_{
 ולכן נקבל:
 $$\langle(\Delta x)^{2}\rangle_{\alpha}\langle(\Delta p)^{2}\rangle_{\alpha}=\frac{\hbar}{4}$$</p>
 </div>
-<div class="proposition"> (מצבים קוהרנטים בבסים המספר)<p>המצב הקוהרנטי שווה:
+<div class="proposition"><span class="keyword">מצבים קוהרנטים בבסים המספר</span><p>המצב הקוהרנטי שווה:
 $$|\alpha\rangle=e^{-{\frac{1}{2}}|\alpha|^{2}}\sum_{n=0}^{\infty}{\frac{\alpha^{n}}{\sqrt{n!}}}|n\rangle$$</p>
 </div>
 <div class="proof">
@@ -249,7 +258,7 @@ $$\begin{array}{c}{{\displaystyle{\int d^{2}\alpha\,e^{-\left|\alpha\right|^{2}}
 $$\int d^{2}\alpha\,|\alpha\rangle\langle\alpha|=\pi\sum_{n}|n\rangle\langle n|=\pi \implies \int\frac{d^{2}\alpha}{\pi}\,|\alpha\rangle\langle\alpha|=1$$</p>
 </div>
 <p>אנחנו אומרים שקבוצת המצבים הקוהרנטיים $\left\{  \ket{\alpha}  \right\}$ מקיים שלמות יתר, כלומר גם אם נוריד ממנו איברים, עדיין יקיים המרחב שיוצר יהיה שלם.</p>
-<div class="proposition"> (הצגת המקום של מצב קוהרנטי)<p>מתקיים:
+<div class="proposition"><span class="keyword">הצגת המקום של מצב קוהרנטי</span><p>מתקיים:
 $$\psi_{\alpha}\left( x^{\prime} \right)=\left( \frac{m\omega}{\pi\hbar} \right)^{1/4}e^{\frac{i}{\hbar}\langle p\rangle_{\alpha}x^{\prime}-\frac{m\omega}{2\hbar}\left( x^{\prime}-\langle x\rangle_{\alpha} \right)^{2}}$$</p>
 </div>
 <div class="proof">

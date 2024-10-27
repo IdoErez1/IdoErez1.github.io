@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -91,7 +100,7 @@ $$ \frac{\partial^2\psi(x,t)}{\partial t^2}=c^2\frac{\partial^2\psi(x,t)}{\parti
 ובמקרה זה אם נציב גל מונוכרומטי, נקבל:
 $$ \omega^2=c^2k^2-i\Gamma\omega $$
 מזה ניתן לקבל כי אומנם לכל תדירות תהיה את אותה מהירות גל, אבל לתדירויות שונות יהיה מהירות גל שונה. המהירות של כל תדירות בנפרד נקרא מהירות הפאזה של הרכיב.</p>
-<div class="definition"> (מהירות החבורה)<p>אומנם לתדירים שונים תהיה מהירות גל שונה, אבל לערכים קרובים יהיה מהירות קרובה, לכן יראה כאילו נעים ביחד בתוך איזושהי "מעטפת". מהירות זו תקרא מהירות חבורה.</p>
+<div class="definition"><span class="keyword">מהירות החבורה</span><p>אומנם לתדירים שונים תהיה מהירות גל שונה, אבל לערכים קרובים יהיה מהירות קרובה, לכן יראה כאילו נעים ביחד בתוך איזושהי "מעטפת". מהירות זו תקרא מהירות חבורה.</p>
 </div>
 <p>נמצא את מהירות החבורה. אנחנו מניחים כי תדירויות קרובות יהיו מסביב לאיזוהו אורך גל ממוצע של המערכת. מקירוב טיילור של התדירות נקבל כי סביב האורך גל הממוצע:
 $$ \omega(k)=\omega(k_{\mathrm{a}})+\left.\frac{d\omega}{dk}\right|_{k=k_{\mathrm{a}}}(k-k_{\mathrm{a}})+\left.\frac{1}{2!}\frac{d^{2}\omega}{dk^{2}}\right|_{k=k_{\mathrm{a}}}(k-k_{\mathrm{a}})^{2}+\cdots$$
@@ -101,7 +110,7 @@ $$ \omega(k)\approx\omega\left( k_{\mathrm{a}} \right)+\left.\frac{d\omega}{dk}\
 $$ \nu_\mathrm{group}=\frac{\omega(k)-\omega(k_\mathrm{a})}{k-k_\mathrm{a}}\approx\frac{d\omega}{dk}\bigg|_{k=k_\mathrm{a}}$$
 כאשר כיוון שאמרנו שלכל תדר מהירות קבוע, כאשר המהירות הקבוע של התדר יהיה:
 $$ v_{\mathrm{phase}}=\omega/k$$</p>
-<div class="definition"> (דיספרסיה)<p>כאשר מהירות הפאזה שונה ממהירות החבורה, יש דיספרסיה. כלומר כאשר היחס הנפיצה לא לינארי.</p>
+<div class="definition"><span class="keyword">דיספרסיה</span><p>כאשר מהירות הפאזה שונה ממהירות החבורה, יש דיספרסיה. כלומר כאשר היחס הנפיצה לא לינארי.</p>
 </div>
 <h2>פתרון בעיה של מיתר אינסופי עם יחס נפיצה</h2>
 <p>במקרה של מיתר אינסופי עם יחס נפיצה, כבר לא ניתן להשתמש בפתרון דלמבר, ונדרש לפתור עם התמרת פורייה. ניתן לכתוב את פונקציית הגל באמצעות:

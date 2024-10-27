@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -65,7 +74,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Electrodynamics_5_3`;}if (event.key === 'ArrowLeft'){window.location.href = `./Electrodynamics_5_1`;}});</script>
         <div class="content">
         <h1>5.2  קרינה של חלקיק</h1>
-    <div class="definition"> (קרינה)<p>ההספק הכולל יהיה האינטגרל המשטחי על ספרה ברדיוס $r$ של הווקטור פוינטינג. כלומר ההספק הכולל יהיה:
+    <div class="definition"><span class="keyword">קרינה</span><p>ההספק הכולל יהיה האינטגרל המשטחי על ספרה ברדיוס $r$ של הווקטור פוינטינג. כלומר ההספק הכולל יהיה:
 $$P\left(r,t\right)=\oint\vec{S}\cdot d\vec{a}={\frac{c}{4\pi}}\oint\left( \vec{E}\times\vec{B} \right)\cdot d\vec{a}.$$
 כאשר נגדיר את הקרינה בתור הגבול כאשר הרדיוס שואף לאינסוף:
 $$P_{\mathrm{rad}}(t_{0})=\operatorname*{lim}_{r\to\infty}P\left(r,t_{0}+{\frac{r}{c}}\right)$$</p>
@@ -74,9 +83,9 @@ $$P_{\mathrm{rad}}(t_{0})=\operatorname*{lim}_{r\to\infty}P\left(r,t_{0}+{\frac{
 <div class="remark">
 <p>השטח פנים של ספרה זה $4\pi r^{2}$. כדי שקרינה תתרחש, נדרש שהווקטור פוינטינג תקטן בקצב שלא יותר מהיר מ-$\frac{1}{r^{2}}$(כלומר אם ילך כמו $\frac{1}{r^{3}}$ נקבל כי האינטגרל על הווקטור פוינטינג ישאף ל-0, וההספק של הקרינה יהיה 0).  כלומר קרינה זה למעשה מתיחחס לגורמים של השדה האלקטרומגנטי שהאנרגיה שלהם אינה דועכת ל-0 באינסוף.</p>
 </div>
-<div class="definition"> (איזור הקרינה/radiation zone)<p>האיזור שבו האנרגיה היחידה שנשאר היא הקרינה - כלומר במרחק גדול מהמקור.</p>
+<div class="definition"><span class="keyword">איזור הקרינה/radiation zone</span><p>האיזור שבו האנרגיה היחידה שנשאר היא הקרינה - כלומר במרחק גדול מהמקור.</p>
 </div>
-<div class="proposition"> (נוסחאת לינרארד-ויכארט)<p>עבור חלקיק הנע במיקום $\vec{R}=\vec{r}-\vec{r}_{0}(t)=R(t)\hat{n}(t)$ ו-$\beta=\frac{v}{c}$ מתקיים:
+<div class="proposition"><span class="keyword">נוסחאת לינרארד-ויכארט</span><p>עבור חלקיק הנע במיקום $\vec{R}=\vec{r}-\vec{r}_{0}(t)=R(t)\hat{n}(t)$ ו-$\beta=\frac{v}{c}$ מתקיים:
 $$\Phi(\vec{x},\,t)\,=\,\left[{\frac{q}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}},\qquad\vec{A}(\vec{x},\,t)\,=\,\left[{\frac{q{\vec{\beta}}}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}}$$</p>
 </div>
 <div class="proof">
@@ -97,14 +106,14 @@ $$\varphi(\vec{r},t)={ }\left[{\frac{q}{R(t)g(t)}}\right]_{t=t_{\mathrm{ret}}}={
 כאשר עבור הפוטנציאל הווקטורי נדרש להכפיל ב-$v$ כדי לקבל זרם ולכן:
 $$\vec{A}(\vec{r},t)={ \frac{1}{c}}\left[{\frac{q\vec{v}(t)}{R(t)g(t)}}\right]_{t=t_{\mathrm{rel}}}={ \frac{1}{c}}\left[{\frac{q\vec{v}}{R-{\vec{\beta}}\cdot\vec{R}}}\right]_{\mathrm{ret}}$$</p>
 </div>
-<div class="proposition"> (שדות לינרארד-ויכארט)<p>השדות שנוצרות עבור חלקיק נע יהיו:
+<div class="proposition"><span class="keyword">שדות לינרארד-ויכארט</span><p>השדות שנוצרות עבור חלקיק נע יהיו:
 $$\begin{gather}\vec{E}(\vec{r},t)=q\left[{\frac{\hat{\vec{n}}}{g R^{2}}}\right]_{\mathrm{ret}}+q{\frac{d}{d t}}\left[{\frac{\hat{\vec{n}}-\beta}{g c R}}\right]_{\mathrm{ret}} \\\vec{B}(\vec{r},t)={\frac{q}{c}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g R^{2}}}\right]_{\mathrm{ret}}+{\frac{q}{c}}{\frac{d}{d t}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g c R}}\right]_{\mathrm{ret}} \end{gather}$$</p>
 </div>
 <p>ניתן להראות את זה ע"י שימוש בפוטנציאלים מהטענה הקודמת, או אם אנחנו מרגישים מספיק נוח אם טנזורים, ניתן לחשב את ה-4 פוטנציאל $A^{\alpha}$ ואז לגזור אותו ולקבל:
 $$\partial^{\alpha}A^{\beta}\,=\,2e\,\int\,d\tau\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}}{V\,\cdot\,(x\,-\,r)}\right]\,\theta[x_{0}\,-\,r_{0}(\tau)]\,\,\delta\{[x\,-\,r(\tau)]^{2}\}\,$$
 כאשר בעזרת זה ניתן לקבל את טנזור השדה האלקטרומגנטי:
 $$F^{\alpha\beta}=\frac{e}{V\cdot\,(x\,-\,r)}\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}\,-\,(x\,-\,r)^{\beta}V^{\alpha}}{V\cdot\,(x\,-\,r)}\right]$$</p>
-<div class="proposition"> (נוסחאת לאמור)<p>בגבול שבו $v\ll c$ נקבל כי ההספק יהיה:
+<div class="proposition"><span class="keyword">נוסחאת לאמור</span><p>בגבול שבו $v\ll c$ נקבל כי ההספק יהיה:
 $$P={\frac{2}{3}}\,{\frac{q^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}$$</p>
 </div>
 <div class="proof">
@@ -116,7 +125,7 @@ $${\textbf{S}}={\frac{c}{4\pi}}{\textbf{E}}\times{\textbf{B}}={\frac{c}{4\pi}}\,
 $$\frac{d P}{d\Omega}=\frac{c}{4\pi}\,|R{\vec E}_{a}|^{2}=\frac{e^{2}}{4\pi c}\,|{\vec n}\,\times\,({\vec n}\,\times\,{\dot{\vec\beta}})|^{2}={\frac{e^{2}}{4\pi c^{3}}}\,\vert{\dot{\vec{v}}}\vert^{2}\,\sin^{2}\!\Theta$$
 כאשר $\Theta$ זה הזווית בין התאוצה $\dot{\vec{v}}$ לבין $\vec{n}$. אם נבצע אינטגרל על כל הזווית המרחבית נקבל כי $P={\frac{2}{3}}\,{\frac{e^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}$.</p>
 </div>
-<div class="proposition"> (נוסחא להספק של לינרארד)<p>$$P=\frac{2}{3}\,\frac{e^{2}}{c}\,\gamma^{6}[(\dot{\vec\beta})^{2}\,-\,({\vec\beta}\,\times\,\dot{\vec\beta})^{2}]$$</p>
+<div class="proposition"><span class="keyword">נוסחא להספק של לינרארד</span><p>$$P=\frac{2}{3}\,\frac{e^{2}}{c}\,\gamma^{6}[(\dot{\vec\beta})^{2}\,-\,({\vec\beta}\,\times\,\dot{\vec\beta})^{2}]$$</p>
 </div>
 <div class="remark">
 <p>בשתי המקרים, ניתן לראות כי אם אין תאוצה - אין קרינה.</p>

@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -60,7 +69,7 @@ window.MathJax = {
         <div class="content">
         <h1>5.1  פוטנציאל כימי</h1>
     <p>נרצה להסתכל כעת על מערכות פתוחות, כלומר מערכות שיש מעבר של חלקיקים עם הסביבה. דוגמא למשל היא גוש קרח הצף במים ומאבד חלקיקים.</p>
-<div class="definition"> (פוטנציאל כימי)<p>זה יהיה כמה שמשתנה האנרגיה הפנימית שמספר החלקיקים משתנה:
+<div class="definition"><span class="keyword">פוטנציאל כימי</span><p>זה יהיה כמה שמשתנה האנרגיה הפנימית שמספר החלקיקים משתנה:
 $$\mu\!=\!\left({\frac{\partial U}{\partial N}}\right)_{S,V}$$</p>
 </div>
 <p>ננסה להסביר:
@@ -107,7 +116,7 @@ $$\mu=\phi^{\prime}+N\Biggl(\frac{\partial\phi^{\prime}}{\partial N}\Biggr)_{S,V
 <p>באופן כללי במערכת אם סוגים שונים של חלקיקים נקבל:
 $$G=\sum_{i}\mu_{i}N_{i}$$</p>
 </div>
-<div class="example"> (שיווי משקל בין שתי מערכות המחליפות חלקיקים)<p>נסתכל על מערכת בו יש שתי חלקיקים($A,B$) שיכולים להחליף חלקיקים חום ואנרגיה ביניהם אבל המערכת הכוללת סגורה, כלומר מתקיים:
+<div class="example"><span class="keyword">שיווי משקל בין שתי מערכות המחליפות חלקיקים</span><p>נסתכל על מערכת בו יש שתי חלקיקים($A,B$) שיכולים להחליף חלקיקים חום ואנרגיה ביניהם אבל המערכת הכוללת סגורה, כלומר מתקיים:
 $$\begin{gather}N_{\mathrm{A}}+N_{\mathrm{B}}=N \\V_{\mathrm{{A}}}+V_{\mathrm{{B}}}=V \\U_{\mathrm{{A}}}+U_{\mathrm{{B}}}=U \end{gather}$$
 נשים לב כי האנטרופיה תהיה שווה:
 $$\begin{gather}{S\,=S\bigl(U_{\mathrm{A}},V_{\mathrm{A}},N_{\mathrm{A}},U_{\mathrm{B}},V_{\mathrm{B}},N_{\mathrm{B}}\bigr)}{=S_{\mathrm{A}}\bigl(U_{\mathrm{A}},V_{\mathrm{A}},N_{\mathrm{A}}\bigr)\!+\!S_{\mathrm{B}}\bigl(U_{\mathrm{B}},V_{\mathrm{B}},N_{\mathrm{B}}\bigr)}\end{gather}$$

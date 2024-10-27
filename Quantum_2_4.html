@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -64,7 +73,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_2_5`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_2_3`;}});</script>
         <div class="content">
         <h1>2.4  עקרון אי וודאות</h1>
-    <div class="definition"> (אי וודאות של אופרטור)<p>$$\triangle A = \sqrt{\left\langle\psi\right|\left(A-\left\langle A\right\rangle\right)^{2}\left|\psi\right\rangle}$$</p>
+    <div class="definition"><span class="keyword">אי וודאות של אופרטור</span><p>$$\triangle A = \sqrt{\left\langle\psi\right|\left(A-\left\langle A\right\rangle\right)^{2}\left|\psi\right\rangle}$$</p>
 </div>
 <div class="remark">
 <p>זה הסטיית תקן של הערכים - מדד של התפלגות הערכים סביב הממוצע. גודל נמצא בסופרפוזציה של ערכים סביב הערך הממוצע. ולכן אם נבצע ממדידה, ככל שהאי וודאות קטן יותר, יש סיכוי גבוה יותר שמדידה תתן ערך קרוב לערך המצופה. כאשר אם זה גדול, הערכים יהיו רחוקים יותר מהערך המצופה.</p>
@@ -72,7 +81,7 @@ window.MathJax = {
 <div class="proposition">
 <p>$$\triangle A=\sqrt{\left\langle\psi\right|A^{2}\left|\psi\right\rangle-2\left\langle A\right\rangle\left\langle\psi\right|A\left|\psi\right\rangle+\left\langle A\right\rangle^{2}\left\langle\psi|\psi\right\rangle}=\sqrt{\left\langle A^{2}\right\rangle-\left\langle A\right\rangle^{2}}$$</p>
 </div>
-<div class="theorem"> (אי הוודאות)<p>$$\triangle A \triangle B \geq \frac{1}{2}\left\lvert  \langle [A,B] \rangle   \right\rvert $$</p>
+<div class="theorem"><span class="keyword">אי הוודאות</span><p>$$\triangle A \triangle B \geq \frac{1}{2}\left\lvert  \langle [A,B] \rangle   \right\rvert $$</p>
 </div>
 <div class="proof">
 <p>נכתוב:
@@ -85,7 +94,7 @@ $$\left\lvert  \left\langle  \Delta A\Delta B  \right\rangle   \right\rvert ^2 \
 <div class="remark">
 <p>אם אנחנו במצב עצמי של $A$, שעבורו $\triangle A = 0$ אין שום וודאות לגבי ערכו של $B$.</p>
 </div>
-<div class="proposition"> (משפט אהרנפסט)<p>$$\frac{d\left&lt;Q\right&gt;}{d t}=\frac{i}{\hbar}\left&lt;[H,Q]\right&gt;+\left&lt;\frac{\partial Q}{\partial t}\right&gt;$$</p>
+<div class="proposition"><span class="keyword">משפט אהרנפסט</span><p>$$\frac{d\left&lt;Q\right&gt;}{d t}=\frac{i}{\hbar}\left&lt;[H,Q]\right&gt;+\left&lt;\frac{\partial Q}{\partial t}\right&gt;$$</p>
 </div>
 <div class="proof">
 <p>נכתוב:
@@ -95,7 +104,7 @@ $$=\frac{i}{\hbar}\bra{\psi} HQ \ket{\psi} -\frac{i}{\hbar}\bra{\psi} QH \ket{\p
 כאשר נשתמש בהגדרת הקומוטטור ובערת הממוצע של התוכלת ונקבל:
 $$\frac{\mathrm{d} }{\mathrm{d} t} \langle Q \rangle =\frac{i}{\hbar}\langle [H,Q] \rangle + \left\langle  \frac{\partial Q}{\partial t}   \right\rangle $$</p>
 </div>
-<div class="proposition"> (משפט הלכסון המשותף)<p>שני אופרטורים ניתנים ללכסון משותף(כלומר בעלי אותם מצבים עצמיים אך ספקרטום שונה) אם"ם הם מתחלפים.</p>
+<div class="proposition"><span class="keyword">משפט הלכסון המשותף</span><p>שני אופרטורים ניתנים ללכסון משותף(כלומר בעלי אותם מצבים עצמיים אך ספקרטום שונה) אם"ם הם מתחלפים.</p>
 </div>
 <div class="remark">
 <p>זה אומר שאם אנחנו נמצאים במצב עצמי של $A$, הערך של $B$ ידוע בוודאות אם"ם הם מתחלפים.</p>

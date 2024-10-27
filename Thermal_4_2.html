@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -59,7 +68,7 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Thermal_5_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Thermal_4_1`;}});</script>
         <div class="content">
         <h1>4.2  הצבר הקנוני והתפלגות בולצמן</h1>
-    <div class="definition"> (צבר קנוני)<p>מאגר חום עם אנרגיה $E_{R}$ המחובר למערכת עם אנרגיה $E_{A}$ כך ש-$E_{R}\gg E_{A}$ והאנרגיה הכוללת $E_{0}=E_{A}+E_{R}$ היא קבועה.</p>
+    <div class="definition"><span class="keyword">צבר קנוני</span><p>מאגר חום עם אנרגיה $E_{R}$ המחובר למערכת עם אנרגיה $E_{A}$ כך ש-$E_{R}\gg E_{A}$ והאנרגיה הכוללת $E_{0}=E_{A}+E_{R}$ היא קבועה.</p>
 </div>
 <div class="proposition">
 <p>ההסתברות של מצב להיות באנרגיה $E_{A}$ יהיה פרופורציונאלי ל-$e^{ -E_{A}/k_{B}T }$</p>
@@ -73,9 +82,9 @@ $$S(E_{\mathrm{R}})=S(E_{0})-{\frac{E_{\mathrm{A}}}{T}}$$
 $$P(E_{R})\propto e^{S(E_R)/k_{B}}\approx e^{S(E_{0})-E_{A}/k_{B}T}=e^{ S(E_{0}) }e^{ -E_{A}/k_{B}T }$$
 כלומר נקבל כי ההסתברות ברופורצינאלית ל-$e^{ -E_{A}/k_{B}T }$.</p>
 </div>
-<div class="definition"> (ניוון)<p>כמות המיקרו מצבים עם רמת אנרגיה $E_{i}$. לכרגע נסמן את זה ב-$g_{i}$.</p>
+<div class="definition"><span class="keyword">ניוון</span><p>כמות המיקרו מצבים עם רמת אנרגיה $E_{i}$. לכרגע נסמן את זה ב-$g_{i}$.</p>
 </div>
-<div class="definition"> (פונקצייית החלוקה)<p>הפקטור נרמול של ההסתברות:
+<div class="definition"><span class="keyword">פונקצייית החלוקה</span><p>הפקטור נרמול של ההסתברות:
 $$Z=\sum_{i}g_{i}e^{-E_{i}/k_{\mathrm{{B}}}T}$$
 כאשר:
 $$ P(E_{i})={\frac{1}{Z}}g_{i}e^{-E_{i}/k_{\mathrm{B}}T}$$</p>
@@ -86,7 +95,7 @@ $$Z=\sum_{\alpha}\mathrm{e}^{-\beta E_{\alpha}}=\mathrm{e}^{\beta\Delta/2}+\math
 עבור מערכת $N$ רמות עם רמות אנרגיה $0,\hbar \omega,2\hbar \omega, \dots, (N-1)\hbar \omega$ נקבל:
 $$Z=\sum_{\alpha}\mathrm{e}^{-\beta E_{\alpha}}=\sum_{j=0}^{N-1}\mathrm{e}^{-j\beta\hbar\omega}=\frac{1-\mathrm{e}^{-N\beta\hbar\omega}}{1-\mathrm{e}^{-\beta\hbar\omega}}$$</p>
 </div>
-<div class="proposition"> (אנרגיה פנימית בעזרת התפלגות בולצמן)<p>$$U=k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}}$$</p>
+<div class="proposition"><span class="keyword">אנרגיה פנימית בעזרת התפלגות בולצמן</span><p>$$U=k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}}$$</p>
 </div>
 <div class="proof">
 <p>אם נגדיר $\beta=\frac{1}{k_{B}T}$ נקבל כי האנרגיה הפנימית תהיה שווה ל:
@@ -96,7 +105,7 @@ $$-{\frac{\mathrm{d}Z}{\mathrm{d}\beta}}=\sum_{i}E_{i}\mathrm{e}^{-\beta E_{i}}$
 ולכן:
 $$U=-\frac{1}{Z}\left( \frac{\mathrm{d} Z}{\mathrm{d} \beta}  \right)\implies U=-\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta} \implies U=k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}}$$</p>
 </div>
-<div class="proposition"> (אנטרופיה בעזרת פונקציית החלוקה)<p>$$S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z$$</p>
+<div class="proposition"><span class="keyword">אנטרופיה בעזרת פונקציית החלוקה</span><p>$$S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z$$</p>
 </div>
 <div class="proof">
 <p>כמו מקודם נגדיר $\beta = \frac{1}{k_{B}T}$. אנו יודעים כי $P_{j}=\frac{e^{ -\beta E_{j} }}{Z}$ ולכן:
@@ -106,7 +115,7 @@ $${{S}}={{-k_{\mathrm{B}}\sum_{i}P_{i}\ln P_{i}}}= k_{\mathrm{B}}\sum_{i}P_{i}(\
 נציב חזרה את $\beta$ ונקבל:
 $$S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z$$</p>
 </div>
-<div class="proposition"> (אנרגיה חופשית של הלמהולדס בעזרת פונקציית החלוקה)<p>$$F=-k_{\mathrm{B}}T\ln Z$$
+<div class="proposition"><span class="keyword">אנרגיה חופשית של הלמהולדס בעזרת פונקציית החלוקה</span><p>$$F=-k_{\mathrm{B}}T\ln Z$$
 ולכן גם ניתן לכתוב:
 $$Z=e^{ -F/k_{B}T }$$</p>
 </div>

@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -70,9 +79,9 @@ $$\vec{m} = \frac{I}{c}\vec{A}$$
 כאשר באופן כללי נקבל כי עבור דיפול מתקיים:
 $$\vec{A}\left( \vec{r} \right)={\frac{\vec{m}\times\vec{r}}{r^{3}}}\implies\vec{B}\left( \vec{r} \right)={\frac{3\left( \vec{m}\cdot{\hat{\vec{r}}} \right){\hat{\vec{r}}}-\vec{m}}{r^{3}}}$$
 לחומרים יש זרמים פנימיים שנובעים מכך שהאלקטרונים באטום יוצרים סוג של דיפול מגנטי. בממוצע ברוב החומרים, הכיוונים מקזזים זה את זה כשאין שדה מגנטי. אך כאשר יש שדה מגנטי, הכיוונים של הזרמים משתנה, כך שנוצר זרם בחומר. מדובר בתופעות קוונטיות במהותם ולכם לא נתעסק בהם כעת.</p>
-<div class="definition"> (זרם מגנטיזציה)<p>הזרם שנוצר בחומר כתוצאה מהשדה המגנטי המופעל. מסומן $\vec{J}_{M}$. כאשר יש זרם מגנטיזציה משטחי נסמן אותו ב-$\vec{K}_{M}$.</p>
+<div class="definition"><span class="keyword">זרם מגנטיזציה</span><p>הזרם שנוצר בחומר כתוצאה מהשדה המגנטי המופעל. מסומן $\vec{J}_{M}$. כאשר יש זרם מגנטיזציה משטחי נסמן אותו ב-$\vec{K}_{M}$.</p>
 </div>
-<div class="definition"> (מגנטיזציה)<p>ערך הממוצע של סך הדיפולים $\vec{m}$ בחומר. כלומר:
+<div class="definition"><span class="keyword">מגנטיזציה</span><p>ערך הממוצע של סך הדיפולים $\vec{m}$ בחומר. כלומר:
 $$\vec{M}(\vec{r})=n\langle\vec{m}(\vec{r})\rangle$$</p>
 </div>
 <div class="proposition">
@@ -81,12 +90,12 @@ $$\vec{B}_{tot}=\vec{B}_{ext}+\vec{B}_{self}$$
 כאשר ניתן גם לכתוב את הזרם הכולל עם הזרם החופשי:
 $$\vec{J}_{t o t}=\vec{J}_{f}+\vec{J}_{M}$$</p>
 </div>
-<div class="proposition"> (הקשר בין מגנטיזציה לשדה המגנטי)<p>ביחידות גאוסיות עבור חומר מגנטי לינארי מתקיים:
+<div class="proposition"><span class="keyword">הקשר בין מגנטיזציה לשדה המגנטי</span><p>ביחידות גאוסיות עבור חומר מגנטי לינארי מתקיים:
 $$\vec{M}=\frac{\chi}{1+4\pi\chi}\vec{B}=\frac{\chi}{\mu}\vec{B} \qquad \vec{B}_{self}=4\pi \vec{M}$$
 כאשר $\chi$ נקרא הסספקפילות המגנטית ו-${\mu}=1+4\pi\chi$ נקרא פרמביליות מגנטית תכונות שתלויות בחומר.</p>
 </div>
 <p>טענה זו תופיע בהמשך.</p>
-<div class="definition"> (סיווג חומרים לינארים)<ul>
+<div class="definition"><span class="keyword">סיווג חומרים לינארים</span><ul>
 <li>דיאמגנט - כאשר $-1&lt;\chi_{m}&lt;0$. במקרה זה השדה המגנטי של החומר יהיה בכיוון ההפוך מהשדה המגנטי של השדה המופעל.</li>
 <li>מוליך על - כאשר $\chi_{m}=-1$ נשים לב כי זה אומר שהמגנטיזיציה בדיוק תבטל את השדה המגנטי המופעל. ולכן בחומר לא יהיה שדה מגנטי בתוכו.</li>
 <li>פאראמגנטי - כאשר $\chi_{m}&gt; 0$. השדה המגנטי שבתוך החומר יחזק את השדה המגנטי המופעל.</li>
@@ -99,7 +108,7 @@ $$\vec{M}=\frac{\chi}{1+4\pi\chi}\vec{B}=\frac{\chi}{\mu}\vec{B} \qquad \vec{B}_
 <p>ה-$c$ מופיע בגלל המרה מ-$mks$. ננסה לפתח אינטואיציה לסימון זה. כאשר המגטיזציה קבועה, נקבל כי הצפיפות דיפולים מגנטיים קבועה, ולכן ניתן לדמיין את המגנטיזציה בצורה הבאה:</p>
 <p>כאשר נשים לב כי כל הזרמים של הדיפולים מבטלים אחד את השני, כאשר זה יהיה כמו שיהיה מגנטיזציה על השפה בלבד. ולכן נצפה כי $\vec{K}_{M}\propto \vec{M} \times \vec{n}$ כאשר $\vec{n}$ זה הנורמל למשטח. כאשר צפיפות הדיפולים אינה קבועה, ניתן לדמיין את המערכת בצורה הבאה:</p>
 <p>כאשר כעת המגנטיזציה בפנים אינה מתאפסת, וזה נובע מהשינוי במגנטיזציה. כאשר הזרם יהיה מאונך למגנטיזציה וללולאה שעליה עושים אינטגרל. ולכן נצפה כי $\vec{J}_{M}\propto \bar{\nabla} \times \vec{M}$</p>
-<div class="proposition"> (פוטנציאל של שדה המגנטיזציה)<p>$$\vec{A}_{M}\left(\vec{r}\right)=\int d^{3}\vec{r}^{\prime}\frac{\vec{M}\left(\vec{r}^{\prime}\right)\times\left(\vec{r}-\vec{r}^{\prime}\right)}{|\vec{r}-\vec{r}^{\prime}|^{3}}$$</p>
+<div class="proposition"><span class="keyword">פוטנציאל של שדה המגנטיזציה</span><p>$$\vec{A}_{M}\left(\vec{r}\right)=\int d^{3}\vec{r}^{\prime}\frac{\vec{M}\left(\vec{r}^{\prime}\right)\times\left(\vec{r}-\vec{r}^{\prime}\right)}{|\vec{r}-\vec{r}^{\prime}|^{3}}$$</p>
 </div>
 <p>ההסבר זה שזה למעשה סכימה על הדיפולים המגנטיים בחומר. ניתן לכתוב את זה בדרך נוחה יותר.</p>
 <div class="proposition">
@@ -118,7 +127,7 @@ $$\vec{A}_{M}\left(\vec{r}\right)=\int_{V}d^{3}\vec{r}\frac{\vec{\nabla}\times\v
 </div>
 <p>כאשר נשתמש בהגדרה של $\vec{J}_{m},\vec{K}_{m}$ ונקבל:
 $$\vec{A}_{M}=\frac{1}{c}\int_{V}d^{3}\vec{r}^{\prime}\frac{\vec{J}_{M}\left(\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid}+\frac{1}{c}\oint_{\partial V}\frac{\vec{K}_{M}}{\mid\vec{r}-\vec{r}^{\prime}\mid}dS'$$</p>
-<div class="definition"> (עוצמה מגנטית)<p>$$\vec{H}=\vec{B}-4\pi\vec{M}$$
+<div class="definition"><span class="keyword">עוצמה מגנטית</span><p>$$\vec{H}=\vec{B}-4\pi\vec{M}$$
 ולכן נקבל גם $\vec{M}=\chi \vec{H}$ וגם $\vec{B}=\mu \vec{H}$.</p>
 </div>
 <div class="proposition">
@@ -129,7 +138,7 @@ $$\vec{\nabla}\times \bar{H}=\frac{4\pi}{c}\vec{J}_{f}$$</p>
 <p>$$\bar{\nabla} \times \vec{B} =\frac{4\pi}{c}\vec{J}\implies\vec{\nabla}\times\vec{B}={\frac{4\pi}{c}}\left(\vec{J}_{f}+\vec{J}_{M}\right)={\frac{4\pi}{c}}\left(\vec{J}_{f}+c\vec{\nabla}\times\vec{M}\right)$$
 כעת ניתן להעביר את האיבר עם הרוטור אגף השני ולהציב את ההגדרה של $\vec{H}$.</p>
 </div>
-<div class="definition"> (מטען מדומה)<p>$$\rho^{*}(\vec{r})=-\nabla\cdot\vec{M}(\vec{r})\qquad\qquad\sigma^{*}(\vec{r})=\vec{M}(\vec{r})\cdot\hat{n}(\vec{r})$$</p>
+<div class="definition"><span class="keyword">מטען מדומה</span><p>$$\rho^{*}(\vec{r})=-\nabla\cdot\vec{M}(\vec{r})\qquad\qquad\sigma^{*}(\vec{r})=\vec{M}(\vec{r})\cdot\hat{n}(\vec{r})$$</p>
 </div>
 <p>כאשר ניתן לפתח אינטואיציה בדומה לפוטנציאל ווקטורי.</p>
 <div class="proposition">

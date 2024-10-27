@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -59,11 +68,11 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Thermal_4_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Thermal_3_2`;}});</script>
         <div class="content">
         <h1>4.1  אנטרופיה סטטיסטית</h1>
-    <div class="definition"> (מיקרו מצב)<p>ניתן לחלק את המצבים האפשריים של מערכת לאוסף מצבים שווי הסתברות</p>
+    <div class="definition"><span class="keyword">מיקרו מצב</span><p>ניתן לחלק את המצבים האפשריים של מערכת לאוסף מצבים שווי הסתברות</p>
 </div>
-<div class="definition"> (מאקרו מצב)<p>קונפיגורציה כלשהי של המערכת. לא בהכרח שוות הסתברות</p>
+<div class="definition"><span class="keyword">מאקרו מצב</span><p>קונפיגורציה כלשהי של המערכת. לא בהכרח שוות הסתברות</p>
 </div>
-<div class="theorem"> (העקרון היסודי של פיזיקה סטטיסטית.)<p>כל אחד מהמיקרו מצבים הם שווי הסתברות</p>
+<div class="theorem"><span class="keyword">העקרון היסודי של פיזיקה סטטיסטית.</span><p>כל אחד מהמיקרו מצבים הם שווי הסתברות</p>
 </div>
 <p>כאשר העקרון הזה זה בעצם ההגדרה של מיקרו מצב.</p>
 <div class="example">
@@ -104,11 +113,11 @@ $$\frac{\mathrm{d}}{\mathrm{d}E_{1}}\left(\Omega_{1}(E_{1})\Omega_{2}(E_{2})\rig
 $$\frac{1}{\Omega_{1}}\frac{\mathrm{d}\Omega_{1}}{\mathrm{d}E_{1}}-\frac{1}{\Omega_{2}}\frac{\mathrm{d}\Omega_{2}}{\mathrm{d}E_{2}}=0 \implies {\frac{\mathrm{d}\ln\Omega_{1}}{\mathrm{d}E_{1}}}={\frac{\mathrm{d}\ln\Omega_{2}}{\mathrm{d}E_{2}}}$$</p>
 </div>
 <p>כעת נזכור כי הגדרנו את הטמפרטורה של המערכת בתור גודל המאפיין את המערכת ומשתווה בין שתי מערכות המגיעות לשיווי משקל תרמי. כעת ראינו שהגודל שהתקבל הוא גודל כזה, וניתן להגדיר את הטמפרטורה בצורה יותר ריגורוזית:</p>
-<div class="definition"> (טמפרטורה)<p>גודל $T$ המוגדר ע"י המשוואה:
+<div class="definition"><span class="keyword">טמפרטורה</span><p>גודל $T$ המוגדר ע"י המשוואה:
 $${\frac{1}{k_{\mathrm{B}}T}}={\frac{\mathrm{d}\ln\Omega}{\mathrm{d}E}}$$
 כאשר $k_{B}$ זה קבוע בולצמן, $\Omega$ זה מספר המיקרומצבים כתלות באנרגיה, ו-$E$ זה האנרגיה.</p>
 </div>
-<div class="proposition"> (הגדרה סטטיסטית לאנטרופיה)<p>$$S=k_{B}\ln \Omega$$
+<div class="proposition"><span class="keyword">הגדרה סטטיסטית לאנטרופיה</span><p>$$S=k_{B}\ln \Omega$$
 כאשר $k_{B}$ זה קבוע בולצמן ו-$\Omega$ זה כמות המיקרו מצבים המתאימים למאקרו מצב הנמדד. </p>
 </div>
 <div class="proof">
@@ -118,7 +127,7 @@ $$T=\left({\frac{\partial U}{\partial S}}\right)_{V}\implies {\frac{1}{T}}=\left
 $${\frac{1}{k_{\mathrm{B}}T}}={\frac{\mathrm{d}\ln\Omega}{\mathrm{d}E}}\implies \frac{1}{k_{B}T}=\frac{1}{k_{B}}\left( \frac{\partial S}{\partial U} \right)_{V}=\frac{d\ln \Omega}{dE} $$
 כאשר עבור $E=U$ המשוואה מתקיימת עבור $S=k_{B}\ln \Omega$.</p>
 </div>
-<div class="example"> (מערכת 2 רמות)<p>נניח מערכת חליקים שהם יכולים להיות או $\uparrow$ או $\downarrow$. כאשר אם הם מצביעים למעלה האנרגיה שלהם היא $u_{\uparrow}=\varepsilon$ ואם הם מצביעים למטה הם מקיימים $u_{\downarrow}=0$ כאשר:
+<div class="example"><span class="keyword">מערכת 2 רמות</span><p>נניח מערכת חליקים שהם יכולים להיות או $\uparrow$ או $\downarrow$. כאשר אם הם מצביעים למעלה האנרגיה שלהם היא $u_{\uparrow}=\varepsilon$ ואם הם מצביעים למטה הם מקיימים $u_{\downarrow}=0$ כאשר:
 $$U=U(T)=N_{\uparrow}\cdot\varepsilon$$
 כאשר סך החלקיקים יהיה $N=N_{\uparrow}+N_{\downarrow}$. כאשר סך המצבים יהיה:
 $$\Omega\left(N_{1};N\right)={\binom{N}{N_{1}}}=\frac{N!}{N_{1}!\left(N-N_{1}\right)!}\;.$$

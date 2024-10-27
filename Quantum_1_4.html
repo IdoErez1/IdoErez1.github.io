@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -64,9 +73,9 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_2_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_1_3`;}});</script>
         <div class="content">
         <h1>1.4  מרחבים רציפים</h1>
-    <div class="definition"> (מרחב הילברט)<p>מרחב הילברט זה מרחב מכפלה פנימית שלם(כלומר כל סדרת קושי של איברים במרחב מתכנסת).</p>
+    <div class="definition"><span class="keyword">מרחב הילברט</span><p>מרחב הילברט זה מרחב מכפלה פנימית שלם(כלומר כל סדרת קושי של איברים במרחב מתכנסת).</p>
 </div>
-<div class="definition"> (בסיס של מרחב הילברט)<p>אוסף של ווקטורים אשר צירוף לינארי שלהם(לאו דווקא סופי) פורש את המרחב, וכל איבר יהיה בלתי תלוי לינארי ביתר האיברים.</p>
+<div class="definition"><span class="keyword">בסיס של מרחב הילברט</span><p>אוסף של ווקטורים אשר צירוף לינארי שלהם(לאו דווקא סופי) פורש את המרחב, וכל איבר יהיה בלתי תלוי לינארי ביתר האיברים.</p>
 </div>
 <div class="remark">
 <p>במתמטיקה הרבה פעמים דורשים כי בסיס יהיה כך שכל איבר הוא צירוף לינארי סופי של איברים. זה נובע ממהגדרה של צירוף לינארי - שאנו דורשים שיהיה סופי כיוון שצירוף לינארי אינסופי לא מוגדר עבור כל מרחב ווקטורי, וזה דורש לשנות את המבנה האלגברי. למה שאנחנו קוראים בסיס, מתמטיקאים קוראים סט שלם.</p>
@@ -74,24 +83,24 @@ window.MathJax = {
 <div class="proposition">
 <p>בדומה למרחב ווקטורי סופי, גם במרחב ווקטורי אין סופי לכל בסיס יש את אותה עוצמה.</p>
 </div>
-<div class="definition"> (מרחב הילברט רציף)<p>מרחב הילברט כאשר הקבוצה של האיברי בסיס שלו בעוצמת הרצף.</p>
+<div class="definition"><span class="keyword">מרחב הילברט רציף</span><p>מרחב הילברט כאשר הקבוצה של האיברי בסיס שלו בעוצמת הרצף.</p>
 </div>
-<div class="definition"> (פונקציית הגל)<p>בהנתן בסיס $\left\{  \ket{x}  \right\}$ ניתן להציג כל $\ket{\psi}$ במרחב הילברט ע"י צירוף לינארי אינסופי של איברים מ-$\left\{  \ket{x}  \right\}$. נסמן את מקדמים הנרמול של האיבר $\ket{x}$ ב-$\psi(x)$ ולכן מתקיים:
+<div class="definition"><span class="keyword">פונקציית הגל</span><p>בהנתן בסיס $\left\{  \ket{x}  \right\}$ ניתן להציג כל $\ket{\psi}$ במרחב הילברט ע"י צירוף לינארי אינסופי של איברים מ-$\left\{  \ket{x}  \right\}$. נסמן את מקדמים הנרמול של האיבר $\ket{x}$ ב-$\psi(x)$ ולכן מתקיים:
 $$\left|\psi\right\rangle=\int d x\psi\left(x\right)\left|x\right\rangle$$</p>
 </div>
-<div class="definition"> (ווקטור עצמי)<p>עבור אופרטור $X$, ווקטור עצמי $\ket{x}$ של $X$ יהיה ווקטור המקיים:
+<div class="definition"><span class="keyword">ווקטור עצמי</span><p>עבור אופרטור $X$, ווקטור עצמי $\ket{x}$ של $X$ יהיה ווקטור המקיים:
 $$X\left|x\right\rangle=x\left|x\right\rangle$$
 עבור $x \in \mathbb{C}$ כלשהו.</p>
 </div>
 <div class="symbolize">
 <p>עבור ווקטור עצמי $\ket{x}$ בדרך כלל נסמן ב-$x$ את הע"ע המתאים.</p>
 </div>
-<div class="definition"> (אורתוגונאליות)<p>ווקטורים $x,x'$ נקראים אורתוגונאלים אם:
+<div class="definition"><span class="keyword">אורתוגונאליות</span><p>ווקטורים $x,x'$ נקראים אורתוגונאלים אם:
 $$\left\langle  x|x^{\prime} \right\rangle=\begin{cases}0 &amp; \ket{x} \neq \ket{x'} \\1 &amp; \ket{x} =\ket{x'}   \end{cases}$$
 כאשר עבור ווקטורים עצמיים אורתוגונאלים נקבל כי:
 $$\braket{ x | x' } =\delta(x-x')  $$</p>
 </div>
-<div class="proposition"> (המשפט הספקטרלי במרחבי הילברט רציפים)<p>כאשר $X$ אופרטור הרמיטי, הע"ע של האופרטור יוצרים בסיס אורתונורמלי למרחב הילברט, כך שהע"ע כולם ממשיים.</p>
+<div class="proposition"><span class="keyword">המשפט הספקטרלי במרחבי הילברט רציפים</span><p>כאשר $X$ אופרטור הרמיטי, הע"ע של האופרטור יוצרים בסיס אורתונורמלי למרחב הילברט, כך שהע"ע כולם ממשיים.</p>
 </div>
 <div class="remark">
 <p>זה מקביל למערכת הסוף מימדית שבו $\langle x_{n}|x_{m} \rangle=\delta_{mn}$. זה מראה שהדלתא של קרונקר ההרחבה הרציפה של הדלתא של דיראק.</p>
@@ -100,20 +109,20 @@ $$\braket{ x | x' } =\delta(x-x')  $$</p>
 <p>פונקציית הגל מקיימת:
 $$\psi\left(x\right)=\left\langle x|\psi\right\rangle=\int d x^{\prime}\psi\left(x^{\prime}\right)\left\langle x|x^{\prime}\right\rangle=\int d x^{\prime}\psi\left(x^{\prime}\right)\delta\left(x-x^{\prime}\right)$$</p>
 </div>
-<div class="proposition"> (תכונות של הפונקציית גל)<p>במרחב הילברט רציף מתקיים התכונות הבאות עבור פונקציות גל:
+<div class="proposition"><span class="keyword">תכונות של הפונקציית גל</span><p>במרחב הילברט רציף מתקיים התכונות הבאות עבור פונקציות גל:
 - <strong>חד ערכית</strong> - לכל ערך קיים ערך יחיד של הפונקציית גל. זה כיוון שייתכן הסתברות יחידה שהגל יהיה בערך מסויים.
 - <strong>חלקה -</strong> הנגזרת הראשונה צריכה להיות חלקה. אחרת משוואת שרדינגר לא מוגדרת היטב(יש יוצאי מן הכלל - לדוגמא בור פוטנציאל אינסופי)
 - <strong>הריבוע שלה אינטגרבילי -</strong> אחרת ההסתברות לא מוגדרת היטב.
 זה נובע מהתכונות הפיזיקלות הפונקציית גל ולא מתכונות מתמטיות.</p>
 </div>
-<div class="proposition"> (נירמול של מצב)<p>$$\left\langle  \psi|\psi  \right\rangle = \int dx \left\lvert  \psi(x)  \right\rvert ^2$$</p>
+<div class="proposition"><span class="keyword">נירמול של מצב</span><p>$$\left\langle  \psi|\psi  \right\rangle = \int dx \left\lvert  \psi(x)  \right\rvert ^2$$</p>
 </div>
 <div class="proof">
 <p>$$ \begin{array}{rcl}\langle\psi|\psi\rangle&amp;=&amp;\left(\int dx'\left\langle x'\right|\overline{\psi\left(x'\right)}\right)\left(\int dx\psi\left(x\right)|x\rangle\right)=\int dxdx'\left\langle x'|x\right\rangle\overline{\psi\left(x'\right)}f\left(x\right)\\&amp;=&amp;\int dxdx'\delta\left(x-x'\right)\overline{\psi\left(x'\right)}\psi\left(x\right)=\int dx\left|\psi\left(x\right)\right|^{2}\end{array}$$</p>
 </div>
-<div class="definition"> (פונקציית גל מנורמלת)<p>$$\int d x\left|\psi\left(x\right)\right|^{2}=1$$</p>
+<div class="definition"><span class="keyword">פונקציית גל מנורמלת</span><p>$$\int d x\left|\psi\left(x\right)\right|^{2}=1$$</p>
 </div>
-<div class="proposition"> (מכפלה פנימית של שתי מצבים בעזרת פונקציות הגל)<p>$$\braket{ \psi | \phi } =\int \overline{\phi(x)} \psi(x) \;\mathrm{d}x$$</p>
+<div class="proposition"><span class="keyword">מכפלה פנימית של שתי מצבים בעזרת פונקציות הגל</span><p>$$\braket{ \psi | \phi } =\int \overline{\phi(x)} \psi(x) \;\mathrm{d}x$$</p>
 </div>
 <div class="proof">
 <p>$$ \begin{array}{rcl}\langle\phi|\psi\rangle&amp;=&amp;\left(\int dx'\left\langle x'\right|\overline{\phi\left(x'\right)}\right)\left(\int dx\psi\left(x\right)|x\rangle\right)=\int dxdx'\left\langle x'|x\right\rangle\overline{\phi\left(x'\right)}\psi\left(x\right)\\&amp;=&amp;\int dxdx'\delta\left(x-x'\right)\overline{\phi\left(x'\right)}\psi\left(x\right)=\int dx\overline{\phi\left(x\right)}\psi\left(x\right)\end{array}$$</p>

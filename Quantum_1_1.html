@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -65,50 +74,50 @@ window.MathJax = {
         <div class="content">
         <h1>1.1  חזרה - אלגברה לינארית</h1>
     <h2>הגדרות בסיסיות</h2>
-<div class="definition"> (צמוד מרוכב)<p>הצמוד של מספר מרוכב $z=a+bi$ יהיה המספר $\overline{z}=a-bi$.</p>
+<div class="definition"><span class="keyword">צמוד מרוכב</span><p>הצמוד של מספר מרוכב $z=a+bi$ יהיה המספר $\overline{z}=a-bi$.</p>
 </div>
-<div class="definition"> (צמוד הרמיטי של מטריצה)<p>הצמוד ההרימטי של מטריצה $U$ יהיה השיחלוף של הצמוד המרוכב של כל האיברים. מסומן $U^{\dagger}$</p>
+<div class="definition"><span class="keyword">צמוד הרמיטי של מטריצה</span><p>הצמוד ההרימטי של מטריצה $U$ יהיה השיחלוף של הצמוד המרוכב של כל האיברים. מסומן $U^{\dagger}$</p>
 </div>
 <div class="remark">
 <p>הגדרה זו רלוונטית גם עבור ווקטורים. ניתן להעביר את הווקטור לווקטור עמודה ולקחת את הצמוד המרוכב שלהם. מסמן $\vec{v}^{\dagger}$.</p>
 </div>
-<div class="definition"> (מטריצה אוניטרי)<p>מטריצה המקיימת $U U^{\dagger}=U^{\dagger} U=Id$.</p>
+<div class="definition"><span class="keyword">מטריצה אוניטרי</span><p>מטריצה המקיימת $U U^{\dagger}=U^{\dagger} U=Id$.</p>
 </div>
-<div class="definition"> (מטריצה הרמיטית)<p>מטריצה שמקיימת $U^{\dagger}=U$.</p>
+<div class="definition"><span class="keyword">מטריצה הרמיטית</span><p>מטריצה שמקיימת $U^{\dagger}=U$.</p>
 </div>
-<div class="definition"> (מרחב הילברט)<p>מרחב מכפלה פנימית שלם. לעיתים מסמנים ב-$\mathcal{H}$.</p>
+<div class="definition"><span class="keyword">מרחב הילברט</span><p>מרחב מכפלה פנימית שלם. לעיתים מסמנים ב-$\mathcal{H}$.</p>
 </div>
-<div class="definition"> (מכפלה פנימית)<p>תבנית ססקילינארית $\left\langle  \cdot \mid\cdot  \right\rangle:\mathbb{C}\times \mathbb{C}\to \mathbb{R}$ מוגדרת על ידי:
+<div class="definition"><span class="keyword">מכפלה פנימית</span><p>תבנית ססקילינארית $\left\langle  \cdot \mid\cdot  \right\rangle:\mathbb{C}\times \mathbb{C}\to \mathbb{R}$ מוגדרת על ידי:
 $$\left\langle  \vec{v},\vec{u}  \right\rangle ={\vec{v}}^{\dagger} \vec{u}$$</p>
 </div>
-<div class="definition"> (קאט)<p>נקרא לאיבר(ווקטור) במרחב הילברט קאט. נסמן אותו $\ket{\psi}$</p>
+<div class="definition"><span class="keyword">קאט</span><p>נקרא לאיבר(ווקטור) במרחב הילברט קאט. נסמן אותו $\ket{\psi}$</p>
 </div>
-<div class="definition"> (ברא)<p>עבור קאט $\ket{\psi}$ נגדיר את הברא המתאים בתור $\bra{\psi}$ אשר מקיים $\bra{\psi}=\ket{\psi}^{\dagger}$.</p>
+<div class="definition"><span class="keyword">ברא</span><p>עבור קאט $\ket{\psi}$ נגדיר את הברא המתאים בתור $\bra{\psi}$ אשר מקיים $\bra{\psi}=\ket{\psi}^{\dagger}$.</p>
 </div>
 <div class="proposition">
 <p>כפל של קאט וברא מחזיר את המכפלה הפנימית הסטנדרטית תחת המרוכבים:
 $$\left\langle  \bra{\phi} \mid \ket{\psi}   \right\rangle =\bra{\phi}\ket{\psi} :=\left\langle  \phi \mid \psi  \right\rangle  $$</p>
 </div>
-<div class="definition"> (קומוטטור של חוגים)<p>עבור 2 איברים בחוג
+<div class="definition"><span class="keyword">קומוטטור של חוגים</span><p>עבור 2 איברים בחוג
 $$[a,b]=a b-b a$$</p>
 </div>
 <div class="remark">
 <p>הקומוטטור של חוגים, בדומה לקומוטטור של חבורות בודק כמה שהחוג קומוטטיבי.</p>
 </div>
-<div class="proposition"> (תכונות של קומוטטור)<p>$$\begin{array}{l}{{[A+B,C]=[A,C]+[B,C]}}\\ {{{[A,A]=0}}}\\ {{{[A,B]=-[B,A]}}}\\ {{{[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0}}}\end{array}$$</p>
+<div class="proposition"><span class="keyword">תכונות של קומוטטור</span><p>$$\begin{array}{l}{{[A+B,C]=[A,C]+[B,C]}}\\ {{{[A,A]=0}}}\\ {{{[A,B]=-[B,A]}}}\\ {{{[A,[B,C]]+[B,[C,A]]+[C,[A,B]]=0}}}\end{array}$$</p>
 </div>
-<div class="definition"> (אנטי קומוטטור)<p>$$\{a,b\}=a b+b a$$</p>
+<div class="definition"><span class="keyword">אנטי קומוטטור</span><p>$$\{a,b\}=a b+b a$$</p>
 </div>
 <h3>אופרטורים לינארים</h3>
-<div class="definition"> (אופרטור לינארי)<p>עבור מרחב הילברט $\mathcal{H}$ אופרטור $\hat{X}$ נקרא אופרטור לינארי אם לכל $v,u \in \mathcal{H}$ ו-$c \in \mathbb{R}$ מתקיים:
+<div class="definition"><span class="keyword">אופרטור לינארי</span><p>עבור מרחב הילברט $\mathcal{H}$ אופרטור $\hat{X}$ נקרא אופרטור לינארי אם לכל $v,u \in \mathcal{H}$ ו-$c \in \mathbb{R}$ מתקיים:
 $$\hat{X}(v+cu)=\hat{X}v+c\hat{X}u$$</p>
 </div>
 <p>האופרטור בניגוד למטריצה לא מיוצג תחת בסיס מסויים. זוהי פונקציה כללית. כאשר הטענה המרכזית שמקשרת ביניהם היא שאופרטור הוא לינארי אם"ם ניתן להציג אותו בעזרת מטריצה בבסיס כלשהו.</p>
-<div class="definition"> (אופרטור הצמוד)<p>יהי $\mathcal{H}$ מרחב הילברט. עבור אופרטור $\hat{X}$ נגדיר את $\hat{X}^{\dagger}$ ע"י האופרטור היחיד שמקיים לכל $\ket{v},\ket{w}$:
+<div class="definition"><span class="keyword">אופרטור הצמוד</span><p>יהי $\mathcal{H}$ מרחב הילברט. עבור אופרטור $\hat{X}$ נגדיר את $\hat{X}^{\dagger}$ ע"י האופרטור היחיד שמקיים לכל $\ket{v},\ket{w}$:
 $$\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} $$</p>
 </div>
 <p>כלומר זה האופרטור שלהפעיל אותו  על הקאט שקול ללהפעיל את האופרטור המקורי על הברא.</p>
-<div class="proposition"> (תכונות של אופרטור הצמוד)<ol>
+<div class="proposition"><span class="keyword">תכונות של אופרטור הצמוד</span><ol>
 <li>
 <p>קיים ויחיד </p>
 </li>
@@ -132,16 +141,16 @@ $$\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} $$</p>
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור נורמלי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}\hat{X}=\hat{X}\hat{X}^{\dagger}$.</p>
+<div class="definition"><span class="keyword">אופרטור נורמלי</span><p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}\hat{X}=\hat{X}\hat{X}^{\dagger}$.</p>
 </div>
-<div class="proposition"> (המשפט הספקטרלי)<p>אופרטור נורמלי הוא לכסין אורתונורמלי ופורש את כל המרחב. כלומר קיים בסיס למרחב של ווקטורים עצמיים אשר עבורו ווקטורים עצמיים עם ערכים עצמיים שונים יהיו אורתוגונאלים אחד לשני. עבור מטריצות זה אומר כי המטריצה המלכסנת היא אוניטרית.</p>
+<div class="proposition"><span class="keyword">המשפט הספקטרלי</span><p>אופרטור נורמלי הוא לכסין אורתונורמלי ופורש את כל המרחב. כלומר קיים בסיס למרחב של ווקטורים עצמיים אשר עבורו ווקטורים עצמיים עם ערכים עצמיים שונים יהיו אורתוגונאלים אחד לשני. עבור מטריצות זה אומר כי המטריצה המלכסנת היא אוניטרית.</p>
 </div>
-<div class="definition"> (אופרטור הרמיטי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}=\hat{X}$.</p>
+<div class="definition"><span class="keyword">אופרטור הרמיטי</span><p>אופרטור $\hat{X}$ המקיים $\hat{X}^{\dagger}=\hat{X}$.</p>
 </div>
 <div class="remark">
 <p>זהו המקביל המרוכב לאופרטור צמוד לעצמו.</p>
 </div>
-<div class="proposition"> (תכונות של אופרטור הרמיטי)<ol>
+<div class="proposition"><span class="keyword">תכונות של אופרטור הרמיטי</span><ol>
 <li>
 <p>כל הערכים העצמיים ממשיים. </p>
 </li>
@@ -153,9 +162,9 @@ $$\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} $$</p>
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור אנטי-הרמיטי)<p>אופרטור $\hat{X}$ המקיים $\hat{X}=-\hat{X}^{\dagger}$</p>
+<div class="definition"><span class="keyword">אופרטור אנטי-הרמיטי</span><p>אופרטור $\hat{X}$ המקיים $\hat{X}=-\hat{X}^{\dagger}$</p>
 </div>
-<div class="proposition"> (תכונות של אופרטור אנטי-הרמיטי)<ol>
+<div class="proposition"><span class="keyword">תכונות של אופרטור אנטי-הרמיטי</span><ol>
 <li>
 <p>כל הערכים העצמיים מדומים לחלוטין. </p>
 </li>
@@ -185,7 +194,7 @@ $$\hat{X}\bra{v} \ket{w} =\bra{v} \hat{X}^{\dagger}\ket{w} $$</p>
 </li>
 </ol>
 </div>
-<div class="definition"> (אופרטור אוניטרי)<p>יהי $\mathcal{H}$ מרחב הילברט. האופרטור $\hat{X}$ יקרא אניטרי אם לכל $v,w \in \mathcal{H}$ מתקיים:
+<div class="definition"><span class="keyword">אופרטור אוניטרי</span><p>יהי $\mathcal{H}$ מרחב הילברט. האופרטור $\hat{X}$ יקרא אניטרי אם לכל $v,w \in \mathcal{H}$ מתקיים:
 $$\bra{T(v)}\ket{T(w)} =\bra{v} \ket{w}  $$</p>
 </div>
 <div class="proposition">
@@ -208,7 +217,7 @@ $$\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \ket{\psi}   \right\rVe
 </li>
 </ol>
 </div>
-<div class="proposition"> (תכונות של של אופרטור אוניטרי)<ol>
+<div class="proposition"><span class="keyword">תכונות של של אופרטור אוניטרי</span><ol>
 <li>
 <p>ווקטורים מאונכים הולכים לווקטורים מאונכים. </p>
 </li>
@@ -227,14 +236,14 @@ $$\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \ket{\psi}   \right\rVe
 </ol>
 </div>
 <h2>תכונות נוספות של אופרטורים</h2>
-<div class="definition"> (תת מרחב ווקטורי)<p>עבור מרחב הילברט $\mathcal{H}$ כל מרחב ווקטורי שמוכל ב-$\mathcal{H}$ יהיה תת מרחב ווקטורי.</p>
+<div class="definition"><span class="keyword">תת מרחב ווקטורי</span><p>עבור מרחב הילברט $\mathcal{H}$ כל מרחב ווקטורי שמוכל ב-$\mathcal{H}$ יהיה תת מרחב ווקטורי.</p>
 </div>
-<div class="definition"> (סכום ישר)<p>שתי מרחבים נמצאים בסכום ישר אם החיתוך שלהם הוא אפס והסכום שלהם הוא המרחב כולו.</p>
+<div class="definition"><span class="keyword">סכום ישר</span><p>שתי מרחבים נמצאים בסכום ישר אם החיתוך שלהם הוא אפס והסכום שלהם הוא המרחב כולו.</p>
 </div>
 <div class="proposition">
 <p>אם שתי מרחבים ווקטורים נמצאים בסכום ישר, ניתן להציג כל וקטור בצורה יחידה סכום של ווקטור ממרחב הראשון עם הווקטור מהמרחב השני.</p>
 </div>
-<div class="definition"> (אופרטור הטלה)<p>אם שתי מרחבים נמצאים בסכום ישר, ניתן להגדיר אופרטור הטלה על מרחב, שלוקח את הרכיב של הווקטור ששייך למרחב.</p>
+<div class="definition"><span class="keyword">אופרטור הטלה</span><p>אם שתי מרחבים נמצאים בסכום ישר, ניתן להגדיר אופרטור הטלה על מרחב, שלוקח את הרכיב של הווקטור ששייך למרחב.</p>
 </div>
 <p>קיים העתקה יחידה כזו.
 <strong>טענה</strong>
@@ -242,19 +251,19 @@ $$\forall \ket{\psi}  \in \mathcal{H}\qquad \left\lVert  \ket{\psi}   \right\rVe
 <div class="remark">
 <p>האינטואיציה זה שאם אנחנו מטלים אז אנחנו נמצאים כבר במרחב של ההטלה, ולכן הטלה נוספת לא תעשה כלום.</p>
 </div>
-<div class="definition"> (אופרטור הטלה אורתוגונאלי)<p>יהי $V$ מרחב ווקטורי ו- $W\leq V$ תת מרחב וקטורי עם בסיס $\ket{1},\dots \ket{n}{}$. 
+<div class="definition"><span class="keyword">אופרטור הטלה אורתוגונאלי</span><p>יהי $V$ מרחב ווקטורי ו- $W\leq V$ תת מרחב וקטורי עם בסיס $\ket{1},\dots \ket{n}{}$. 
 נגדיר אופרטור $\Pi_{n}= \ket{n}\bra{n}$ אופרטור מעל המרחב $W$.</p>
 </div>
 <p>כאשר כפל של קאט באופרטור יחזיר את הקאט שמוטל על התת מרחב. כמו כן מתקיים:
 $$\Pi_{n}\ket{\psi} =\sum_{n}\bra{n} \left( \ket{n} \bra{\psi}  \right)$$
 שזה למעשה כפל של קאט בסקלר.</p>
-<div class="definition"> (מרחב הניצב)<p>עבור תת מרחב ווקטור $V$ קיים מרחב מאונך $V^\perp$ אשר כל ווקטור ב-$V$ באונך לכל ווקטור ב-$V^\perp$. מרחבים אלו נמצאים בסכום ישר.</p>
+<div class="definition"><span class="keyword">מרחב הניצב</span><p>עבור תת מרחב ווקטור $V$ קיים מרחב מאונך $V^\perp$ אשר כל ווקטור ב-$V$ באונך לכל ווקטור ב-$V^\perp$. מרחבים אלו נמצאים בסכום ישר.</p>
 </div>
-<div class="proposition"> (הטלה אורתוגונאלית)<p>אם $P$ הטלה על המרחב $V$, אז $Id-P$ יהיה ההטלה על המרחב הניצב $V^\perp$</p>
+<div class="proposition"><span class="keyword">הטלה אורתוגונאלית</span><p>אם $P$ הטלה על המרחב $V$, אז $Id-P$ יהיה ההטלה על המרחב הניצב $V^\perp$</p>
 </div>
-<div class="definition"> (אקספוננט של מטריצה)<p>$$e^{X}=\sum_{k=0}^{\infty}{\frac{1}{k!}}X^{k}$$</p>
+<div class="definition"><span class="keyword">אקספוננט של מטריצה</span><p>$$e^{X}=\sum_{k=0}^{\infty}{\frac{1}{k!}}X^{k}$$</p>
 </div>
-<div class="proposition"> (אקספוננט של מטריצה אלכסונית)<p>$$A={\left[\begin{array}{l l l l}{a_{1}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{a_{2}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{a_{n}}\end{array}\right]} \implies e^{A}={\left[\begin{array}{l l l l}{e^{a_{1}}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{e^{a_{2}}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{e^{a_{n}}}\end{array}\right]}$$</p>
+<div class="proposition"><span class="keyword">אקספוננט של מטריצה אלכסונית</span><p>$$A={\left[\begin{array}{l l l l}{a_{1}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{a_{2}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{a_{n}}\end{array}\right]} \implies e^{A}={\left[\begin{array}{l l l l}{e^{a_{1}}}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {0}&amp;{e^{a_{2}}}&amp;{\cdot\cdot\cdot}&amp;{0}\\ {\vdots}&amp;{\vdots}&amp;{\cdot\cdot\cdot}&amp;{\vdots}\\ {0}&amp;{0}&amp;{\cdot\cdot\cdot}&amp;{e^{a_{n}}}\end{array}\right]}$$</p>
 </div>
 <div class="corollary">
 <p>עבור מטריצה לכסינה, מתקיים $A= UDU^{-1}$ ולכן $e^A=Ue^DU^{-1}$</p>
@@ -267,10 +276,10 @@ $$e^{A}={\left[\begin{array}{l l}{-2}&amp;{2}\\ {1}&amp;{1}\end{array}\right]}e^
 <div class="remark">
 <p>ניתן לבצע תהליך זהה עבור צורת ג'ורדן.</p>
 </div>
-<div class="proposition"> (אקספוננט של הטלה)<p>עבור אופרטור הטלה מתקיים $P^2 = P$. ולכן ניתן לקצר את הטור טיילור לשתי איברים ולקבל:
+<div class="proposition"><span class="keyword">אקספוננט של הטלה</span><p>עבור אופרטור הטלה מתקיים $P^2 = P$. ולכן ניתן לקצר את הטור טיילור לשתי איברים ולקבל:
 $$e^{P}=\sum_{k=0}^{\infty}{\frac{P^{k}}{k!}}=I+\left(\sum_{k=1}^{\infty}{\frac{1}{k!}}\right)P=I+(e-1)P$$</p>
 </div>
-<div class="proposition"> (פתרון משוואה דיפרנציאלית)<p>$$y' = Ay\implies y(t)=e^{At}y(0)$$</p>
+<div class="proposition"><span class="keyword">פתרון משוואה דיפרנציאלית</span><p>$$y' = Ay\implies y(t)=e^{At}y(0)$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

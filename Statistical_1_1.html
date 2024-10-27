@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -40,11 +49,11 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Statistical_1_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Statistical`;}});</script>
         <div class="content">
         <h1>1.1  הגדרות</h1>
-    <div class="definition"> (מצבים אפשריים)<p>קבוצת של כל המצבים שהמערכת יכולה לקבל. </p>
+    <div class="definition"><span class="keyword">מצבים אפשריים</span><p>קבוצת של כל המצבים שהמערכת יכולה לקבל. </p>
 </div>
-<div class="definition"> (מערכת דינמית)<p>מערכת שמתקדמת בזמן - בכל יחידת זמן. התקדמות בכל שלב תלויה אך ורק במצב הקודם.</p>
+<div class="definition"><span class="keyword">מערכת דינמית</span><p>מערכת שמתקדמת בזמן - בכל יחידת זמן. התקדמות בכל שלב תלויה אך ורק במצב הקודם.</p>
 </div>
-<div class="definition"> (כלל התקדמות)<p>כלל האומר איך המערכת מתנהגת בכל רגע זמן</p>
+<div class="definition"><span class="keyword">כלל התקדמות</span><p>כלל האומר איך המערכת מתנהגת בכל רגע זמן</p>
 </div>
 <div class="example">
 <div style="display: block;"><svg
@@ -309,7 +318,7 @@ window.MathJax = {
 </svg>
 </div>
 </div>
-<div class="definition"> (חוק שימור)<p>גודל שאם המערכת מתחילה איתו היא תשאר בו. נשאר קבוע ביחס לכלל התקדמות.</p>
+<div class="definition"><span class="keyword">חוק שימור</span><p>גודל שאם המערכת מתחילה איתו היא תשאר בו. נשאר קבוע ביחס לכלל התקדמות.</p>
 </div>
 <div class="example">
 <div style="display: block;"><svg
@@ -574,7 +583,7 @@ window.MathJax = {
 </svg>
 </div>
 </div>
-<div class="definition"> (שימור אינפורציה)<p>אם הכלל התקדמות הוא חח"ע אז יש שימור אינפורציה.</p>
+<div class="definition"><span class="keyword">שימור אינפורציה</span><p>אם הכלל התקדמות הוא חח"ע אז יש שימור אינפורציה.</p>
 </div>
 <div class="example">
 <div style="display: block;"><svg
@@ -843,9 +852,9 @@ window.MathJax = {
 <div class="remark">
 <p>באופן כללי בפיזיקה קיים שימור אינפורציה. </p>
 </div>
-<div class="definition"> (מרחב הקונפיגורציה)<p>המרחב של כל המיקומים. עבור חלקיק יחיד זה באופן כללי יהיה תחת מימדי - מיקום בכל מימד.</p>
+<div class="definition"><span class="keyword">מרחב הקונפיגורציה</span><p>המרחב של כל המיקומים. עבור חלקיק יחיד זה באופן כללי יהיה תחת מימדי - מיקום בכל מימד.</p>
 </div>
-<div class="definition"> (מרחב הפאזה)<p>המרחב של כל המקומים והתנעים. עבור חלקיק יחיד זה באופן כללי יהיה 6-מימדי - 3 קורדינטות מיקום ו-3 קורדינטות תנע.</p>
+<div class="definition"><span class="keyword">מרחב הפאזה</span><p>המרחב של כל המקומים והתנעים. עבור חלקיק יחיד זה באופן כללי יהיה 6-מימדי - 3 קורדינטות מיקום ו-3 קורדינטות תנע.</p>
 </div>
 <div class="proposition">
 <p>מרחב הפאזה הוא אוסף של המצבים האפשריים של פיזיקה קלאסית - ברגע שיודעים את המרחב פאזה של מערכת - יודעים את המרחב פאזה בכל זמן.</p>
@@ -859,7 +868,7 @@ window.MathJax = {
 <div class="proof">
 <p>נניח בשלילה שתי מסלולים שחותכים אחד את השני, ולכן קיים נקודה שמתקבלת מקידום של שתי נקודות שונות - סתירה לשימור אינפורמציה.</p>
 </div>
-<div class="theorem"> (ליוביל)<p>אם לוקחים את כל הנקודות בנפח מסויים במרחב הפאזה, ומקדמים אותם בזמן, אוסף הנקודות האלה יצור נפח חדש אשר יהיה שווה לנפח המקורי.</p>
+<div class="theorem"><span class="keyword">ליוביל</span><p>אם לוקחים את כל הנקודות בנפח מסויים במרחב הפאזה, ומקדמים אותם בזמן, אוסף הנקודות האלה יצור נפח חדש אשר יהיה שווה לנפח המקורי.</p>
 </div>
     </div>
     <ul class='top-navigation'>

@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -94,7 +103,7 @@ $$y_{1}(x)=\tilde{C}_{1}e^{-\sqrt{\omega}x}+\tilde{C}_{2}e^{\sqrt{\omega}x}$$
 <div class="proposition">
 <p>כאשר $\omega &gt; 0$ נקבל כי הפתרון יהיה סכום של אקספוננטים ממשים, כאשר $\omega&lt;0$ נקבל כי סכום של אקספוננטים מדומים, אשר ניתן להמיר אותם בפונקציות טריגונומטריות.</p>
 </div>
-<div class="definition"> (אוסצילטור הרמוני פשוט)<p>משוואה מהצורה:
+<div class="definition"><span class="keyword">אוסצילטור הרמוני פשוט</span><p>משוואה מהצורה:
 $$\ddot{x}=-\omega^{2}x$$</p>
 </div>
 <div class="corollary">
@@ -104,7 +113,7 @@ $$x=Ae^{ i\omega t }+Be^{ -i\omega t }=C\cos\left( \omega t \right)+D\sin\left( 
 <div class="remark">
 <p>אוסצילטור הרמוני מתאר מערכות רבות בפיזיקה, למשל קפיצים, מעגלים חשמלים עם זרם משתנה, תנועה מעגלית ועוד.</p>
 </div>
-<div class="definition"> (אוסצילטור הרמוני מרוסן)<p>משוואה מהצורה:
+<div class="definition"><span class="keyword">אוסצילטור הרמוני מרוסן</span><p>משוואה מהצורה:
 $$\frac{d^{2}}{d t^{2}}\,x(t)+\Gamma\,\frac{d}{d t}\,x(t)+\omega_{0}^{2}\,x(t)=0\,$$</p>
 </div>
 <div class="proposition">
@@ -126,16 +135,16 @@ $$x(t)=A\exp\left( -\frac{\Gamma}{2} \right)+Bt\exp\left( -\frac{\Gamma}{2} \rig
 <div class="symbolize">
 <p>נסמן $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}$.</p>
 </div>
-<div class="definition"> (ריסון יתר)<p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}&gt;0$ נקבל כי הערכים עצמיים ממשיים לחלוטין. ולכן לא יבצע אוסיציות והפתרון יהיה מהצורה:
+<div class="definition"><span class="keyword">ריסון יתר</span><p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}&gt;0$ נקבל כי הערכים עצמיים ממשיים לחלוטין. ולכן לא יבצע אוסיציות והפתרון יהיה מהצורה:
 $$x(t)=A\exp\left( \sqrt\lambda t\right)+B\exp\left( -\sqrt{ \lambda }t \right)$$</p>
 </div>
-<div class="definition"> (ריסון קריטי)<p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}=0$. במקרה זה המערכת מיגע ל-0 תוך זמן סופי ונעצר, והפתרון יהיה מהצורה:
+<div class="definition"><span class="keyword">ריסון קריטי</span><p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}=0$. במקרה זה המערכת מיגע ל-0 תוך זמן סופי ונעצר, והפתרון יהיה מהצורה:
 $$x(t)=x(t)=A\exp\left( -\frac{\Gamma}{2} \right)+Bt\exp\left( -\frac{\Gamma}{2} \right)$$</p>
 </div>
-<div class="definition"> (תת ריסון)<p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}&lt;0$ ולכן האקספוננט מרוכב והמערכת מבצעת אוסצילציות. הפתרון יהיה מהצורה:
+<div class="definition"><span class="keyword">תת ריסון</span><p>כאשר $\lambda=\frac{\Gamma^{2}}{4}-\omega_{0}^{2}&lt;0$ ולכן האקספוננט מרוכב והמערכת מבצעת אוסצילציות. הפתרון יהיה מהצורה:
 $$x(t)=A\exp\left( -\frac{\Gamma}{2}\right)\exp\left(i\sqrt{\lambda}t\, \right)+B\exp\left( -\frac{\Gamma}{2}\right)\exp\left(-i\sqrt{\lambda}t\, \right)=Ce^{ -\Gamma/2 }\cos\left( \sqrt{ \lambda }t+\varphi \right)$$</p>
 </div>
-<div class="definition"> (אוסצילטור מאולץ ומרוסן)<p>משוואה מהצורה:
+<div class="definition"><span class="keyword">אוסצילטור מאולץ ומרוסן</span><p>משוואה מהצורה:
 $$\frac{d^{2}}{d t^{2}}\,x(t)+\Gamma\,\frac{d}{d t}\,x(t)+\omega_{0}^{2}\,x(t)=F(t)/m\,,$$
 כאשר הכוח המאלץ יהיה כוח מחזורי מהצורה:
 $$F(t)=F_{0}\cos\omega_{d}t\,$$</p>

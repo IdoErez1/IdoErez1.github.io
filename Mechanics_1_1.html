@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -56,25 +65,25 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Mechanics_1_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Mechanics`;}});</script>
         <div class="content">
         <h1>1.1  קורדינטות מוכללות</h1>
-    <div class="definition"> (קורדינטה מוכללת)<p>אוסף של סקלרים שבעזרתם באפשר להציג מיקום של גוף במרחב.
+    <div class="definition"><span class="keyword">קורדינטה מוכללת</span><p>אוסף של סקלרים שבעזרתם באפשר להציג מיקום של גוף במרחב.
 בדרך כלל מסמנים סקלרים אלו ב-$q_{1},q_{2},\dots$.</p>
 </div>
 <p>הסיבה העיקרית לשימוש בקורדינטות מוכללות כיוון שיש הרבה בעיות שיותר נוח לפתור בקורדינטה אחת מבקורדינטה אחרת. אנחנו מכירים כבר מספר מערכות קורדינטות:</p>
 <p>בקורדינטות קרטזיות תלת מימדיות ניתן להציג את המיקום של גוף באמצעות $(x,y,z)$. כאשר במערכת פולרית למשל מסמנים $\left( r,\theta \right)$, בקורדינטות כדוריות מסמנים $\left( r,\theta,\varphi \right)$ ובגלילי $\left( r,\theta,z \right)$.</p>
-<div class="definition"> (מהירות מוכללת)<p>הקצב שינוי של קורדינטה מוכללת. מסומן $\dot{q}$ כאשר:
+<div class="definition"><span class="keyword">מהירות מוכללת</span><p>הקצב שינוי של קורדינטה מוכללת. מסומן $\dot{q}$ כאשר:
 $$\dot{q}=\frac{\partial q}{\partial t}$$</p>
 </div>
 <p>לעיתים נוח לכתוב את הבעיה במערכת קורדינטות אחת ואז לעבור למערכת קורדינטות אחרת:</p>
-<div class="theorem"> (מעבר קורדינטות)<p>אם אנחנו רוצים לעבור ממערכת קרטזית $\left( x_{1},y_{1},z_{1},\dots,x_{N},y_{N},z_{N} \right)$ למערכת $\left( q_{1},\dots,q_{3N} \right)$ ניתן לכתוב:
+<div class="theorem"><span class="keyword">מעבר קורדינטות</span><p>אם אנחנו רוצים לעבור ממערכת קרטזית $\left( x_{1},y_{1},z_{1},\dots,x_{N},y_{N},z_{N} \right)$ למערכת $\left( q_{1},\dots,q_{3N} \right)$ ניתן לכתוב:
 $$\begin{array}{c}{{q_{1}=q_{1}\left( x_{1},\,y_{1},\,z_{1},\,x_{2},\,y_{2},\dots,\,z_{N},\,t \right)}}\\ {{q_{2}=q_{2}\left( x_{1},\,y_{1},\,z_{1},\,x_{2},\,y_{2},\dots,\,z_{N},\,t \right)}}\\ {{\vdots}}\\ {{q_{3N}=q_{3N}\left( x_{1},\,y_{1},\,z_{1},\,x_{2},\,y_{2},\dots,z_{N},\,t \right)}}\end{array}$$</p>
 </div>
 <p>כאשר ניתן לעבור חזרה אם"ם היעקוביאן לא מתאפס. כלומר:
 $$\frac{\partial(q_{1},q_{2},\ldots,q_{n})}{\partial\left(x_{1},x_{2},\ldots,x_{n}\right)}=\left|\begin{array}{c c c c}{{\partial q_{1}/\partial x_{1}}}&amp;{{\partial q_{1}/\partial x_{2}}}&amp;{{\ldots}}&amp;{{\partial q_{1}/\partial x_{n}}}\\ {{}}&amp;{{}}&amp;{{\vdots}}&amp;{{}}\\ {{\partial q_{n}/\partial x_{1}}}&amp;{{\partial q_{n}/\partial x_{2}}}&amp;{{\ldots}}&amp;{{\partial q_{n}/\partial x_{n}}}\end{array}\right|\neq0.$$
 לרוב אנחנו מניחים שהקורדינטות המוכללות הם בת"ל, כיוון שאחרת לא קיים מעבר הפוך.</p>
-<div class="definition"> (דרגות חופש)<p>זהו כמות הקורדינטות המוכללות הבלתי תלויות שנדרשות לתיאור בעיה, כלומר מיקום כל החלקיקים.</p>
+<div class="definition"><span class="keyword">דרגות חופש</span><p>זהו כמות הקורדינטות המוכללות הבלתי תלויות שנדרשות לתיאור בעיה, כלומר מיקום כל החלקיקים.</p>
 </div>
 <p>במערכת קרטזית למשל, כדי לתאר מיקום של כל חלקיק, נדרש 3 קורדינטות - $x,y,z$. ולכן מספר דרגות החופש עבור $N$ חלקיקים יהיה $3N$.</p>
-<div class="definition"> (אילוץ הולונומי)<p>זהו אילוץ בצורה של משוואה על הקורדינטות המוכללות. כלומר מהצורה:
+<div class="definition"><span class="keyword">אילוץ הולונומי</span><p>זהו אילוץ בצורה של משוואה על הקורדינטות המוכללות. כלומר מהצורה:
 $$f\left( q_{1},\dots,q_{n},t \right)=0$$</p>
 </div>
 <div class="theorem">

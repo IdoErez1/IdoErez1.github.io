@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -65,29 +74,29 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Electrodynamics_4_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Electrodynamics_3_3`;}});</script>
         <div class="content">
         <h1>4.1  פוטנציאל מגנטי</h1>
-    <div class="definition"> (סימטרייה להזזה בזמן)<p>זה אומר שהמערכת לא משתנה תחת הטרנספורמצייה $t\mapsto t+a$. זוהי העתקה רציפה.</p>
+    <div class="definition"><span class="keyword">סימטרייה להזזה בזמן</span><p>זה אומר שהמערכת לא משתנה תחת הטרנספורמצייה $t\mapsto t+a$. זוהי העתקה רציפה.</p>
 </div>
-<div class="definition"> (סימטרייה לשיקוף בזמן)<p>מערכת שלא משתנה תחת הטרנספורמצייה $t\mapsto -t$. זוהי לא העתקה רציפה.</p>
+<div class="definition"><span class="keyword">סימטרייה לשיקוף בזמן</span><p>מערכת שלא משתנה תחת הטרנספורמצייה $t\mapsto -t$. זוהי לא העתקה רציפה.</p>
 </div>
-<div class="definition"> (אלקטרוסטטיקה)<p>מקרה מיוחד של משוואות מקסוואל שבו יש סימטרייה לשיקוף בזמן. זה יותר חזק מסימטריה להזזה בזמן.</p>
+<div class="definition"><span class="keyword">אלקטרוסטטיקה</span><p>מקרה מיוחד של משוואות מקסוואל שבו יש סימטרייה לשיקוף בזמן. זה יותר חזק מסימטריה להזזה בזמן.</p>
 </div>
 <div class="corollary">
 <p>מתקיים באלקטרוסטטיקה $\vec{B} = 0$ כיוון שראינו שתחת ההעתקה $t\mapsto -t$ נקבל $\vec{B}\mapsto-\vec{B}$.</p>
 </div>
-<div class="definition"> (מגנטוסטטיקה)<p>מערכת נטרלית עם זרימה סטציונאריית($\frac{\partial \vec{J}}{\partial t}=0,\rho=0$). פתרונות אלו מכבדים הזזות בזמן אך אינם מכבדים שיקופים בזמן.</p>
+<div class="definition"><span class="keyword">מגנטוסטטיקה</span><p>מערכת נטרלית עם זרימה סטציונאריית($\frac{\partial \vec{J}}{\partial t}=0,\rho=0$). פתרונות אלו מכבדים הזזות בזמן אך אינם מכבדים שיקופים בזמן.</p>
 </div>
-<div class="definition"> (צפיפות זרם נפחית)<p>$$\vec{J} = \frac{d\vec{I}}{dA}=\rho\cdot \vec{v}$$</p>
+<div class="definition"><span class="keyword">צפיפות זרם נפחית</span><p>$$\vec{J} = \frac{d\vec{I}}{dA}=\rho\cdot \vec{v}$$</p>
 </div>
-<div class="definition"> (צפיפות זרם משטחית)<p>$$\vec{K}=\frac{\mathrm{d} \vec{I}}{\mathrm{d} l} $$</p>
+<div class="definition"><span class="keyword">צפיפות זרם משטחית</span><p>$$\vec{K}=\frac{\mathrm{d} \vec{I}}{\mathrm{d} l} $$</p>
 </div>
-<div class="definition"> (זרם)<p>$$I=\int_{A}\vec{J}\cdot \mathrm{d}A=\int_{C}\vec{K}\cdot \mathrm{d}\vec{l}$$</p>
+<div class="definition"><span class="keyword">זרם</span><p>$$I=\int_{A}\vec{J}\cdot \mathrm{d}A=\int_{C}\vec{K}\cdot \mathrm{d}\vec{l}$$</p>
 </div>
 <div class="proposition">
 <p>משוואות מקסוול במגנטוסטטיקה יהיו:
 $$\begin{gather}\bar{\nabla} \cdot \vec{B}=0 \qquad \bar{\nabla} \times  \vec{B} = \frac{4\pi}{c}\left( \vec{J}+\cancel{ \frac{1}{4\pi}\frac{\partial \vec{E}}{\partial t} }  \right)=\frac{4\pi \vec{J}}{c}\\\bar{\nabla} \cdot \vec{E} = 4\pi \rho = 0 \qquad  \bar{\nabla} \times \vec{E} =  \cancel{ -\frac{1}{c}\frac{\partial \vec{B}}{\partial t} } =0 \end{gather}$$</p>
 </div>
 <h3>פוטנציאל מגנטי ווקטורי</h3>
-<div class="definition"> (פוטנציאל מגנטי ווקטורי)<p>נגדיר $\vec{A}$ כך ש-$\bar{\nabla} \times \vec{A}=\vec{B}$.</p>
+<div class="definition"><span class="keyword">פוטנציאל מגנטי ווקטורי</span><p>נגדיר $\vec{A}$ כך ש-$\bar{\nabla} \times \vec{A}=\vec{B}$.</p>
 </div>
 <div class="proposition">
 <p>כל מה שנדרש לפתור עבור מערכת מגנטוסטטית תהיה:
@@ -102,7 +111,7 @@ $$\bar{\nabla} \left( \bar{\nabla} \cdot \vec{A} \right)-\bar{\nabla}^2 \vec{A}=
 $$0\overset{!}{=} \bar{\nabla} \cdot A'=\bar{\nabla} \cdot \vec{A}+\bar{\nabla}^2 f\implies \bar{\nabla}^2 f=-\bar{\nabla} \cdot A$$
 זוהי משוואת פואסון עם מקור נתון, ולכן קיים פתרון.</p>
 </div>
-<div class="proposition"> (צורה אינטגרלית של המשוואת פואסון)<p>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</p>
+<div class="proposition"><span class="keyword">צורה אינטגרלית של המשוואת פואסון</span><p>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</p>
 </div>
 <div class="proof">
 <p>נרצה לכתוב את המשוואת פואסון $-\bar{\nabla}^2 \vec{A}=\frac{4\pi}{c}\vec{J}$ בצורה אינטגרלית. ניתן לפרק לריכיבים של $\vec{A}$.
@@ -121,7 +130,7 @@ $$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int d^{2}x^{\prime}\frac{\vec{K}\lef
 כאשר אם יש לנו נפח $V$ עם צפיפות נפחית $\vec{J}$ ועל השפה צפיפות משטחית $\vec{K}$ נקבל:
 $$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }+\frac{1}{c}\int d^{2}x^{\prime}\frac{\vec{K}\left( \vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|}$$</p>
 </div>
-<div class="proposition"> (חוסר יחידות של הפוטנציאל המגנטי הווקטורי)<p>עבור פונקציה סקלרית $\chi\left( \vec{r} \right)$ נקבל כי כיוון שמתקיים $\bar{\nabla} \times \bar{\nabla}\chi=0$ אז מתקיים:
+<div class="proposition"><span class="keyword">חוסר יחידות של הפוטנציאל המגנטי הווקטורי</span><p>עבור פונקציה סקלרית $\chi\left( \vec{r} \right)$ נקבל כי כיוון שמתקיים $\bar{\nabla} \times \bar{\nabla}\chi=0$ אז מתקיים:
 $$\mathbf{A}^{\prime}\left( \mathbf{r} \right)=\mathbf{A}\left( \mathbf{r} \right)+\nabla\chi\,\left( \mathbf{r} \right)\implies \bar{\nabla} \times  \vec{A}'=\bar{\nabla} \times \vec{A}$$</p>
 </div>
 <div class="example">
@@ -137,7 +146,7 @@ $$A_{z}\left( \rho \right)=-\frac{2I}{c}\ln\rho \implies {\bf B}\left( \rho \rig
 לדוגמא אם יש תיל שבו זורם זרם לאורך ציר ה-$z$ אז הפוטנציאל הווקטורי יכיל רק את הגורמים לאורך ציר ה-$z$. לעומת זאת עבור טבעת זרם לא ניתן להגיד את אותו הטיעון, וכמו שנראה עוד מאט, הפוטנציאל יכיל גם גורם בכיוון $\hat{\varphi}$ וגם גורם בכיוון $\hat{z}$.</p>
 </div>
 <h3>פוטנציאל מגנטי סקלארי</h3>
-<div class="definition"> (פוטנציאל מגנטי סקלרי)<p>במקומות בהם אין זרם ניתן להגדיר $\varphi$ כך ש-$\bar{\nabla}\varphi=\vec{B}$</p>
+<div class="definition"><span class="keyword">פוטנציאל מגנטי סקלרי</span><p>במקומות בהם אין זרם ניתן להגדיר $\varphi$ כך ש-$\bar{\nabla}\varphi=\vec{B}$</p>
 </div>
 <div class="proposition">
 <p>הפוטנציאל המגנטי הסקלארי מקיים את משוואת לפלס. כלומר מתקיים:
@@ -146,7 +155,7 @@ $$\bar{\nabla}^2 \varphi = 0$$</p>
 <div class="proof">
 <p>$${\vec{\nabla}}\times{\vec{B}}=0\implies {\vec{B}}=-{\frac{4\pi}{c}}\nabla\psi\implies \nabla^{2}\psi=\nabla\cdot(\nabla\psi)=-{\frac{c}{4\pi}}\nabla\cdot{\vec{B}}=0$$</p>
 </div>
-<div class="proposition"> (תנאי שפה של השדה המגנטי)<p>$$\left( \vec{B}_{2}-\vec{B}_{1} \right)\cdot\hat{n}=0 \qquad (\vec{B}_{2}-\vec{B}_{1})\times\hat{n}=-\frac{4\pi}{c}\vec{K}$$</p>
+<div class="proposition"><span class="keyword">תנאי שפה של השדה המגנטי</span><p>$$\left( \vec{B}_{2}-\vec{B}_{1} \right)\cdot\hat{n}=0 \qquad (\vec{B}_{2}-\vec{B}_{1})\times\hat{n}=-\frac{4\pi}{c}\vec{K}$$</p>
 </div>
 <div class="remark">
 <p>אפשר לכתוב את התנאי שפה השני גם בתור:

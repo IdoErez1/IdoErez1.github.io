@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -67,7 +76,7 @@ window.MathJax = {
         <h1>5.1  גלים אלקטרומגנטיים</h1>
     <p>נתחיל מחוקי מקסוואל:
 $$\begin{gather} \bar{\nabla} \cdot \vec{B} = 0 \qquad \bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} \\\bar{\nabla} \cdot \vec{E}=4\pi \rho \qquad -\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J}  \end{gather}$$</p>
-<div class="definition"> (כיול לורנץ)<p>ניתן להגדיר את הפוטנציאלים כך שמתקיים:
+<div class="definition"><span class="keyword">כיול לורנץ</span><p>ניתן להגדיר את הפוטנציאלים כך שמתקיים:
 $${\frac{1}{c}}\,\frac{\partial\Phi}{\partial t}\,+\,{\vec\nabla\cdot A}\,=\,0$$</p>
 </div>
 <div class="proposition">
@@ -152,16 +161,16 @@ $$\vec{E}(z,t)=E_{0}\cos(k z-\omega t+\delta)\,{\hat{\vec{x}}},\quad\vec{B}(z,t)
 </div>
 <h2>אנרגיה של גל אלקטרומגנטי</h2>
 <p>אנו יודעים כי האנרגיה של שדה חשמלי יהיה האינטגרל של השדה בריבוע על המרחב, וכן האנרגיה של השדה המגנטי יהיה האניטגרל על המרחב של השדה המגנטי בריבוע. לכן האנרגיה הכוללת של גל אלקטרומגנטי יהיה שתי התרומות האלה.</p>
-<div class="proposition"> (אנרגיה של השדה החשמלי והמגנטי)<p>ברגע זמן נתון, צפיפות האנרגיה $u$ והאנרגיה הכוללת $U_{tot}$ יהיו:
+<div class="proposition"><span class="keyword">אנרגיה של השדה החשמלי והמגנטי</span><p>ברגע זמן נתון, צפיפות האנרגיה $u$ והאנרגיה הכוללת $U_{tot}$ יהיו:
 $$u=\frac{1}{8\pi}\left( E^{2}+B^{2} \right)\implies U_{tot}=\iiint u \;\mathrm{dV}$$</p>
 </div>
-<div class="proposition"> (האנרגיה המכנית שנוצר מהשדה החשמלי והמגנטי לזמן)<p>כיוון שהשדה המגנטי לא מבצע עבודה, בעזרת כוח לורנץ על צפיפות בנפח $V$ נקבל:
+<div class="proposition"><span class="keyword">האנרגיה המכנית שנוצר מהשדה החשמלי והמגנטי לזמן</span><p>כיוון שהשדה המגנטי לא מבצע עבודה, בעזרת כוח לורנץ על צפיפות בנפח $V$ נקבל:
 $$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,(\rho\,\vec{E}+\vec{j}\times\vec{B})\cdot{\vec{v}}=\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}$$
 כאשר השתמשנו בזה ש-$\vec{j}(\vec{r},\,t)=\rho(\vec{r},\,t){\vec{\upsilon}}(\vec{r},\,t)$. </p>
 </div>
-<div class="definition"> (ווקטור פוינטינג)<p>$${\vec S}=\frac{c}{4\pi}{\vec E}\times{\vec B}$$</p>
+<div class="definition"><span class="keyword">ווקטור פוינטינג</span><p>$${\vec S}=\frac{c}{4\pi}{\vec E}\times{\vec B}$$</p>
 </div>
-<div class="proposition"> (משפט פוינטנג)<p>השטף של ווקטור פוינטינג על מעטפת של נפח שווה לסך האנרגיה(במכנה והאנרגיה של השדה) שנובעים מהשדות החשמליים והמגנטיים:
+<div class="proposition"><span class="keyword">משפט פוינטנג</span><p>השטף של ווקטור פוינטינג על מעטפת של נפח שווה לסך האנרגיה(במכנה והאנרגיה של השדה) שנובעים מהשדות החשמליים והמגנטיים:
 $$\int_{\partial V}\vec{S}\cdot\vec{n}\;\mathrm{d}A=U_{\mathrm{EM}}+U_{\mathrm{mech}}$$
 או לחלופין ניתן לכתוב בעזרת צפיפות אנרגיה משוואת רציפות:
 $$\frac{\partial u_{\mathrm{EM}}}{\partial t}+\nabla\cdot{\vec S}=-{\vec j}\cdot{\vec E}$$</p>

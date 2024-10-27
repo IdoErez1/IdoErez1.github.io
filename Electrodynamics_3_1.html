@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -65,20 +74,20 @@ window.MathJax = {
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Electrodynamics_3_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Electrodynamics_2_4`;}});</script>
         <div class="content">
         <h1>3.1  הגדרות בסיסיות</h1>
-    <div class="definition"> (4 פוטנציאל)<p>4 ווקטור המייצג את הפוטנציאל של החלקיק. מוגדר ביחידות $cgs$ ע"י: 
+    <div class="definition"><span class="keyword">4 פוטנציאל</span><p>4 ווקטור המייצג את הפוטנציאל של החלקיק. מוגדר ביחידות $cgs$ ע"י: 
 $$A^{\alpha}=(\phi,\vec{A})$$
 כאשר $\vec{A}$ זה הפוטנציאל המגנטי ו-$\phi$ זה הפוטנציאל החשמלי.</p>
 </div>
-<div class="definition"> (אינווריאטיות תחת טרנספורמציית כיול)<p>גודל הוא אינווריאנטי תחת טרנספורמציית כיול אם עבור $A_{\mu}\mapsto A_{\mu}+\partial_{\mu }f$ נקבל כי לא משתנה.</p>
+<div class="definition"><span class="keyword">אינווריאטיות תחת טרנספורמציית כיול</span><p>גודל הוא אינווריאנטי תחת טרנספורמציית כיול אם עבור $A_{\mu}\mapsto A_{\mu}+\partial_{\mu }f$ נקבל כי לא משתנה.</p>
 </div>
 <div class="remark">
 <p>נצפה באופן כללי כי כל חוקי הפיזיקה יהיו אינווריאנטים תחת טרנספורמציית כיול.</p>
 </div>
-<div class="definition"> (השדה החשמלי)<p>$${\vec{E}}=-{\bar{\nabla}}\varphi-{\frac{1}{c}}{\frac{\partial{\vec{A}}}{\partial t}}=-\bar{\nabla} A^0 - \frac{1}{c}\frac{\partial \vec{A}}{\partial t} $$</p>
+<div class="definition"><span class="keyword">השדה החשמלי</span><p>$${\vec{E}}=-{\bar{\nabla}}\varphi-{\frac{1}{c}}{\frac{\partial{\vec{A}}}{\partial t}}=-\bar{\nabla} A^0 - \frac{1}{c}\frac{\partial \vec{A}}{\partial t} $$</p>
 </div>
-<div class="definition"> (השדה המגנטי)<p>$$ {\vec{B}}={\bar{\nabla}}\times{\vec{A}}$$</p>
+<div class="definition"><span class="keyword">השדה המגנטי</span><p>$$ {\vec{B}}={\bar{\nabla}}\times{\vec{A}}$$</p>
 </div>
-<div class="definition"> (טנזור השדה האלקטרומגנטי)<p>$$F_{\mu \nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}=\frac{\partial A_{\nu}}{\partial x^\mu}-\frac{\partial A_{\mu}}{\partial x^\nu} $$</p>
+<div class="definition"><span class="keyword">טנזור השדה האלקטרומגנטי</span><p>$$F_{\mu \nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}=\frac{\partial A_{\nu}}{\partial x^\mu}-\frac{\partial A_{\mu}}{\partial x^\nu} $$</p>
 </div>
 <p>כאשר נשים לב כי זה דומה לרוטור של וקטור:
 $$\begin{gather}\left( \bar{\nabla} \times \vec{A} \right)_{i}=\varepsilon_{ikj}\partial_{j}A_{k}  \\\left( \bar{\nabla} \times \vec{A} \right)_{1}=\varepsilon_{123} \partial_{2}A_{3}+\varepsilon_{123}\partial_{3}A_{2}=\partial_{2}A_{3}-\partial_{3}A_{2} \end{gather}$$</p>
@@ -110,7 +119,7 @@ $$f\varepsilon^{\mu_{1}\mu_{2}\mu_{3}\mu_{4}}=\Lambda^{\mu_{1}}_{\;\nu_{1}}\Lamb
 $$f=\Lambda^0_{\;\nu_{1}}\Lambda^1_{\;\nu_{2}} \Lambda^2_{\;\nu_{3}}\Lambda^3_{\;\nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}=\det\left( \Lambda\right)=1$$
 כאשר הסכימה זה למעשה נוסחאת ליבניץ לדטרמיננטה. וכיוון שקיבלנו 1 זה אכן עובר בצורה הרצויה תחת טרנספורמציית לורנץ ולכן טנזור.</p>
 </div>
-<div class="definition"> (4-זרם)<p>$$J^\mu\left( x^\alpha \right)=J^\mu\left( t,\vec{x} \right)=\begin{pmatrix}c\rho \\\vec{J} \end{pmatrix}$$</p>
+<div class="definition"><span class="keyword">4-זרם</span><p>$$J^\mu\left( x^\alpha \right)=J^\mu\left( t,\vec{x} \right)=\begin{pmatrix}c\rho \\\vec{J} \end{pmatrix}$$</p>
 </div>
 <div class="proposition">
 <p>הצפיפות זרם $J^\mu$ הוא 4 ווקטור קונטרא-ווריאנטי.</p>
@@ -132,7 +141,7 @@ $$\bar{\nabla} \cdot \vec{J}=-\frac{\partial }{\partial t} \sum_{n} e_{n} \delta
 $$\frac{\partial }{\partial t} \rho + \bar{\nabla} \cdot \vec{J}=0 \iff \partial_{0}J^0+\partial_{i}J^i =0 \iff \partial_{\mu J^\mu} = 0$$
 לפי הכתיבה הזאת, משוואת הרציפות נראת אותו דבר בכל המערכות ייחוס. מזה נקבל את חוק שימור המטען, כלומר:
 $$\iiint d^3 x\frac{\partial }{\partial t} \rho + \underbrace{ \iiint d^3 x \bar{\nabla} \cdot \vec{J} }_{ \iint_{\Sigma\to \infty} \vec{J} d\vec{S}=0 }=0 \implies \frac{\partial }{\partial t} \underbrace{ \int d^3 \vec{x} \rho }_{ Q } = 0$$</p>
-<div class="theorem"> (משוואות התנועה של חלקיק יחסותי תחת שדה מגנטי)<p>$${\frac{d{\vec{p}}}{d t}}=e{\vec{E}}+{\frac{e}{c}}v\times{\vec{B}}$$</p>
+<div class="theorem"><span class="keyword">משוואות התנועה של חלקיק יחסותי תחת שדה מגנטי</span><p>$${\frac{d{\vec{p}}}{d t}}=e{\vec{E}}+{\frac{e}{c}}v\times{\vec{B}}$$</p>
 </div>
     </div>
     <ul class='top-navigation'>

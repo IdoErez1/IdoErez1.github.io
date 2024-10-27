@@ -13,15 +13,24 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -67,7 +76,7 @@ window.MathJax = {
     <p>נניח כעת שיש לנו שתי דרגות חופש בלתי תלויות $A,B$. מדידת גודל פיזיקלית של אחת לא אמורה להשפיע על השנייה, ולכן נצפה כי $[O_{A},O_{B}]=0$.
 <strong>הגדרה</strong> מכפלה טנזורית של מרחבי הילברט
 מרחבי הילברט $\mathcal{H}_{A},\mathcal{H}_{B}$ בלתי תלויות, ניתן להגדר מרחב חדש $\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$ כאשר מימד המרחב החדש יהיה כפל מרחבי הילברט.</p>
-<div class="definition"> (מצב מכפלה)<p>אם $\ket{\psi}_{A}\in \mathcal{H}_{A}$ ו-$\ket{\psi}_{B}\in \mathcal{H}_{B}$ נגדיר את המצב מכפלה שלהם בתור האיבר
+<div class="definition"><span class="keyword">מצב מכפלה</span><p>אם $\ket{\psi}_{A}\in \mathcal{H}_{A}$ ו-$\ket{\psi}_{B}\in \mathcal{H}_{B}$ נגדיר את המצב מכפלה שלהם בתור האיבר
 $$\ket{\psi} _{A}\otimes \ket{\psi} _{B} \in \mathcal{H}_{A}\times \mathcal{H}_{B}$$
 כאשר הפעולה שמחברת ביניהם נקראת המכפלה הטנזורית בין המצבים</p>
 </div>
@@ -79,10 +88,10 @@ $$\ket{\psi} _{A}\otimes \ket{\psi} _{B}=\ket{\psi_{A}} \ket{\psi} _{B}=\ket{\ps
 <p>מכפלה טנזורית של מצבים מקיימת בילינאריות. כלומר לכל $c \in \mathbb{C}$ מתקיים:
 $$\begin{gather}c\left(\left|\psi\right\rangle_{A}\otimes\left|\phi\right\rangle_{B}\right)=\left(c\left|\psi\right\rangle_{A}\right)\otimes\left|\phi\right\rangle_{B}=\left|\psi\right\rangle_{A}\otimes\left(c\left|\phi\right\rangle_{B}\right) \\\left(\left|\psi\right\rangle_{A}+\left|\psi^{\prime}\right\rangle_{A}\right)\otimes\left|\phi\right\rangle_{B}=\left|\psi\right\rangle_{A}\otimes\left|\phi\right\rangle_{B}+\left|\psi^{\prime}\right\rangle_{A}\otimes\left|\phi\right\rangle_{B} \\|\psi\rangle_{A}\otimes(|\phi\rangle_{B}+|\phi^{\prime}\rangle_{B})=|\psi\rangle_{A}\otimes|\phi\rangle_{B}+|\psi\rangle_{A}\otimes|\phi^{\prime}\rangle_{B} \end{gather}$$</p>
 </div>
-<div class="definition"> (מכפלה פנימית של מצבי מכפלה)<p>נגדיר:
+<div class="definition"><span class="keyword">מכפלה פנימית של מצבי מכפלה</span><p>נגדיר:
 $$\left(\left\langle\psi^{\prime}\right|_{A}\otimes\left\langle\phi^{\prime}\right|_{B}\right)\left(\left|\psi\right\rangle_{A}\otimes\left|\phi\right\rangle_{B}\right)=\left\langle\psi^{\prime}|\psi\right\rangle\left\langle\phi^{\prime}|\phi\right\rangle$$</p>
 </div>
-<div class="proposition"> (בסיס אורתונורמלי של מצבי מכפלה)<p>יהי $\mathcal{H}_{A}$ מרחב הילברט ממימד $d_{A}$ עם בסיס אורתונורמלי $\{\left|e_{i}\right\rangle\}_{i=1}^{d_{A}}$ ו-$\mathcal{H}_{B}$ מרחב הילברט עם בסיס אורתונורמלי $\bigl\{\bigl|f_{j}\bigr\rangle\bigr\}_{j=1}^{d_{B}},$. אזי הקבוצה
+<div class="proposition"><span class="keyword">בסיס אורתונורמלי של מצבי מכפלה</span><p>יהי $\mathcal{H}_{A}$ מרחב הילברט ממימד $d_{A}$ עם בסיס אורתונורמלי $\{\left|e_{i}\right\rangle\}_{i=1}^{d_{A}}$ ו-$\mathcal{H}_{B}$ מרחב הילברט עם בסיס אורתונורמלי $\bigl\{\bigl|f_{j}\bigr\rangle\bigr\}_{j=1}^{d_{B}},$. אזי הקבוצה
 $$\left\{\left|e_{i}\right\rangle_{A}\otimes\left|f_{j}\right\rangle_{B}\right\}$$
 היא בסיס אורתונורמלי של המצב מכפלה $\mathcal{H}_{A}\times \mathcal{H}_{B}$ ממימד $d=d_{A}d_{B}$.</p>
 </div>
@@ -94,9 +103,9 @@ $$\left|\Psi\right\rangle=\sum_{i=1}^{d_{A}}\sum_{j=1}^{d_{B}}\Psi_{i j}\left|e_
 כאשר אם מנורמל מתקיים:
 $$\sum\sum_{i=1\,j=1}^{d_{A}\,\,\,\,d_{B}}|\Psi_{i j}|^{2}=1$$</p>
 </div>
-<div class="theorem"> (היסוד החמישי)<p>מרחב הילברט של מערכת קוונטית המוכבת שתי מערכות $A,B$ בעלות מרחב הילברט $\mathcal{H}_{A},\mathcal{H}_{B}$ בהתאמה נתון ע"י מרחב המכפלה הטנזורי $\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$.</p>
+<div class="theorem"><span class="keyword">היסוד החמישי</span><p>מרחב הילברט של מערכת קוונטית המוכבת שתי מערכות $A,B$ בעלות מרחב הילברט $\mathcal{H}_{A},\mathcal{H}_{B}$ בהתאמה נתון ע"י מרחב המכפלה הטנזורי $\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$.</p>
 </div>
-<div class="definition"> (מכפלה טנזורית של אופרטור)<p>יהי $O_{A}$ אופרטור שפועל על $\mathcal{H}_{A}$ ויהי $O_{B}$ אופרטור שפועל על $\mathcal{H}_{B}$. נגדיר $O=O_{A}\otimes O_{B}$ בתור האופרטור שפועל על מרחב המכפלה $\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$ בצורה הבאה:
+<div class="definition"><span class="keyword">מכפלה טנזורית של אופרטור</span><p>יהי $O_{A}$ אופרטור שפועל על $\mathcal{H}_{A}$ ויהי $O_{B}$ אופרטור שפועל על $\mathcal{H}_{B}$. נגדיר $O=O_{A}\otimes O_{B}$ בתור האופרטור שפועל על מרחב המכפלה $\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$ בצורה הבאה:
 $$\left({ O}_{A}\otimes{ O}_{B}\right)\left(\left|\psi\right\rangle_{A}\otimes\left|\phi\right\rangle_{B}\right)=\left({\cal O}_{A}\left|\psi\right\rangle_{A}\right)\otimes\left({\cal O}_{B}\left|\phi\right\rangle_{B}\right)$$
 כלומר מצב כללי המוגדר ע"י $\left|\Psi\right\rangle=\sum_{i=1}^{d_{A}}\sum_{j=1}^{d_{B}}\Psi_{i j}\left|e_{i}\right\rangle_{A}\otimes\left|f_{j}\right\rangle_{B}$ מקיים:
 $${ O}\left|\Psi\right\rangle=\sum_{i=1}^{d_{A}}\sum_{j=1}^{d_{B}}\Psi_{i j}\left({ O}_{A}\left|e_{i}\right\rangle_{A}\right)\otimes\left({ O}_{B}\left|f_{j}\right\rangle_{B}\right)$$</p>
