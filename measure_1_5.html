@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מידות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אינטגרציית לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_2_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_1_4`;}});</script>
+        <div class="content">
+        <h1>1.5  מידות</h1>
+    <div class="definition"><span class="keyword">מידה</span><p>מידה על מרחב מדיד $(X,A)$ הינה פונקציה $\mu:A\to \left[ 0,\infty \right]$ אשר $\sigma$-אדיטיבית. כלומר לכל סדרת קבוצות זרות ומדידות $A_{1},A_{2},\dots \in A$ כך ש
+$$\mu\left( \bigsqcup_{n} A_{n} \right)=\sum_{n=1}^{\infty}\mu(A_{n})$$
+בנוסף נניח ש-$\mu$ איננה קבועה $\infty$ (כלומר קיימת איזשהי $A \in \mathcal{ A}$ כך ש-$\mu(A)&lt; \infty$).</p>
+</div>
+<div class="remark">
+<p>האדיטביות נותן טור של איברים חיוביים, אשר מתכנס כיוון שסדרת הסכומים החלקיים מונוטוניים ויכול לקבל גם את אינסוף.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>מידת מנייה על $(X,2^{X})$ ניתן להגדיר $\mu(A)=\# A$(כלומר מחזיר את מספר האיברים ב-$A$) </p>
+</li>
+<li>
+<p>מרחב דיראק בהנתן $x_{0} \in X$. 
+$$\mu (A)= \begin{cases} 1  &amp; x_{0} \in A \\0  &amp; x_{0} \not \in A \end{cases}$$</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">מונוטוניות</span><p>אם $A\subseteq B$ אז $\mu(A)\leq \mu(B)$. </p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב $B=A\sqcup B\setminus  A$ ואז:
+$$\mu(B)=\mu(A)+\underbrace{ \mu\left( B\setminus A \right) }_{ \geq 0 }$$</p>
+</div>
+<div class="definition"><span class="keyword">מידה שלמה</span><p>מדה $\mu$ היא שלמה אם לכל $\mu(N)=0$ נקבל:
+$$\mathcal{P}\left( \mathbb{N} \right) \subseteq \mathrm{dom}\left( \mu \right) $$</p>
+</div>
+<p>נניח כי יש לנו מרחב מידה $\left( X,\mu, M \right)$ ונגדיר את $N$ להיות
+$$N=\left\{  A\subseteq \mathcal{P}(x) \mid A\subseteq N \in M \text{ $s$.t. } \mu(N) =0 \right\}$$
+ונגדיר:
+$$\overline{M} =\left\{  \varepsilon E \cup A \mid E \in M \quad  A \in N  \right\}$$
+נגדיר $\overline{\mu}:\overline{M}\to \left[ 0,\infty \right]$ כך ש:
+$$\mu\left( E \cup A \right)=\mu(E)$$</p>
+<p>עבור $\overline{ M}$ נקבל:</p>
+<ol>
+<li>
+<p>היא $\sigma$-אלגברה. </p>
+</li>
+<li>
+<p>מוגדרת היטב ומידה שלמה. </p>
+</li>
+<li>
+<p>היא ההרחבה היחידה של $\mu$ ל-$\overline{M}$. </p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='prev-page'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        
