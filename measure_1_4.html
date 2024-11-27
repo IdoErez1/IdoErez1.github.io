@@ -31,6 +31,48 @@ window.onload = () => {
     for(let i = 0; i< keywords.length; i++){
     if(item==keywords[i].innerText){
     keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -131,6 +173,50 @@ $$H^{-1}\left( I_{1}\times I_{2} \right)=f^{-1}(I_{1})\cap g^{-1}(I_{2})$$
 $$f+g=\Phi \circ  H$$
 כש-$H$ כבטענה הקודמת. $\Phi$ פונקציה רציפה ולכן מדידה מאחר שהרכבה של מדידות מדיד נסיק את הדרוש. כנ"ל לכפל.</p>
 </div>
+<div class="definition"><span class="keyword">גבול עליון ותחתון של סדרת קבוצות</span><p>יהי $(A_{n})\subseteq \Sigma$ סדרה של קבוצות במרחב מידה $\left( X,\Sigma,\mu \right)$. נגדיר:
+$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k},\,\operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>$\operatorname*{lim}\operatorname*{inf}A_{n},\operatorname*{lim}\operatorname*{sup}A_{n}\in\Sigma$ </p>
+</li>
+<li>
+<p>$\mu(\operatorname*{lim}\operatorname*{inf}A_{n})\leq\operatorname*{lim}\operatorname*{inf}\mu(A_{n})$ </p>
+</li>
+<li>
+<p>אם מרחב מידה הוא סופי, כלומר $\mu(X)&lt;\infty$ אז: 
+$$\mu(\operatorname*{lim}\operatorname*{sup}A_{n})\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})$$</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">הלמה של בורל קנטלי</span><p>יהי $\left( X,\mathcal{B},\mu \right)$ מרחב מידה. אזי אם $\{ A_{n} \}_{n=1}^{\infty}\subseteq \mathcal{B}$ מקיים:
+$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$
+אזי:
+$$\mu\left(\limsup_{n\to\infty}A_{n}\right)=\mu\left( \bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k} \right)=0$$</p>
+</div>
+<p>יהי $\left( X,\mathcal{B} , \mu \right)$ מרחב מידה. נניח $\{ A_{n} \}\subseteq B$ כך שמתקיים:
+$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$
+מספיק להראות כי הקבוצה המתוארת על ידי התכונה "$X$ שייך למספר אינסופי של $A_{n}$" היא קבוצה ממידה אפס כלומר שהקבוצה $B\subseteq X$ המוגדרת על ידי:
+$$E=\left\{x\in X:x\in A_{n}{\mathrm{~for~infinitely~many}}\,n\right\}$$
+תקיים $\mu(E)=0$. כאשר בהתאם להדרכה, מתקיים:
+$$E=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</p>
+<p>כאשר זה כמו שאנחנו רוצים, מבטא את החיתוך של כל האיברים שנמצאים בכמות אינסופית של $\{ A_{n} \}$(כדי שאיבר יהיה ב-$E$ נדרש שיהיה שלכל $n \in \mathbb{N}$ קיים $N&gt;n$ כך ש-$x \in A_{N}$). כעת לכל $n \in \mathbb{N}$ נגדיר:
+$$E_{n}=\bigcup_{k=n}^{\infty}A_{k}$$
+כאשר לפי ההגדרה: 
+$$E=\bigcap_{n=1}^{\infty}E_{n}$$
+נשים לב כי הסדרה $\{ E_{n} \}$ היא סדרה יורדת תחת היחס $\subseteq$:
+$$E_{1}\supseteq E_{2}\supseteq E_{3}\supseteq\cdots$$
+כאשר מרציפות המידה של סדרות יורדות נקבל:
+$$\mu(E)=\mu\left(\bigcap_{n=1}^{\infty}E_{n}\right)=\operatorname*{lim}_{n\to\infty}\mu(E_{n}).$$
+וכן מאדטיביות המידה מתקיים:
+$$\mu(E_{n})=\mu\left(\bigcup_{k=n}^{\infty}A_{k}\right)\leq\sum_{k=n}^{\infty}\mu(A_{k})$$
+יהי $\varepsilon&gt; 0$. מההנחה מתקיים:
+$$\lim_{ n \to \infty } \sum_{k=n}^{\infty} \mu(A_{k})=0$$
+ולכן מהגדרה הגבול קיים $N \in \mathbb{N}$ כך שעבורו לכל $n &gt; N$ מתקיים:
+$$\sum_{k=n}^{\infty}\mu(A_{k})&lt;\epsilon$$
+ולכן:
+$$\mu(E)\leq \varepsilon\implies \mu(E)=0$$</p>
     </div>
     <ul class='top-navigation'>
 <li class='next-page'><a href='./measure_1_5'>1.5 מידות</a></li>

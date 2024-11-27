@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סימטריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_4'>5.4 סיבובים</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_5_1'>5.1 וריאציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_5_2'>5.2 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_5_3'>5.3 סימטריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_5_4'>5.4 סיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_5_5'>5.5 בעיית אטום המימן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_5_2'>5.2 מבוא לתורת ההצגות של חבורות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_5_4`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_5_2`;}});</script>
+        <div class="content">
+        <h1>5.3  סימטריות</h1>
+    <div class="definition"><span class="keyword">סימטריה</span><p>אוטומורפיזם(טרנספורמציה המשמרת מבנה של המרחב ווקטורי) על המרחב אשר אינו משנה את חוקי הפיזיקה.</p>
+</div>
+<div class="proposition"><span class="keyword">סימטרייה במערכת קוונטית</span><p>אופורטור מעבר קורדינטות $U$ אשר משמר הסתברות. כלומר אם $\ket{\psi'}=U\ket{\psi}$ אזי אם:
+$$\left\lvert  \braket{ \phi | \psi }   \right\rvert ^{2}= \left\lvert  \braket{ \phi' | \psi' }   \right\rvert ^{2}$$
+אז הטרנפורמציה $U$ נקראת טרנספורמציה סימטרית.</p>
+</div>
+<div class="theorem"><span class="keyword">ווגנר</span><p>אם טרנספורמציה $U$ היא טרנספורמציה סימטרית אז מתקיים אחד התנאים הבאים:</p>
+<ol>
+<li>
+<p>האופרטור $U$ יהיה אופרטור לינארי ואוניטרי: 
+$$\ket{\psi} \mapsto \ket{\psi'} =U\ket{\psi} \qquad U^{\dagger} U = Id $$</p>
+</li>
+<li>
+<p>האופרטור $U$ יהיה אופרטור אנטי אוניטרי ואנטי לינארי: 
+$$\ket{\psi} \mapsto \ket{\psi'} =U\ket{\psi} \qquad \braket{ U\phi | U\psi } =\braket{ \psi | \phi } $$</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אנחנו נתייחס רק למקרה האוניטרי. המקרה האנטי אוניטרי מתרחש רק כאשר הסימטרייה מייצגת היפוך בזמן $t \mapsto -t$.</p>
+</div>
+<div class="definition"><span class="keyword">סימטרייה רציפה</span><p>סימטריה הניתנת להצגה על ידי אופרטור אוניטרי וקשורה ליחידה על ידי משתנה רציף. כלומר פונקציה רציפה $U_{\varepsilon}$ אשר מקיימת $U_{\varepsilon=0}=\mathrm{Id}$.</p>
+</div>
+<div class="example">
+<p>אופרטור הזזה יהיה סימטריה רציפה. אי ביצוע הזזה שקול ללא לעשות כלום ולכן $U_{\varepsilon=0}=\mathrm{Id}$ כאשר ביצוע הזזה עצמה זה פעולה רציפה - אפשר להזיז בכל מספר ממשי.</p>
+</div>
+<div class="proposition">
+<p>ניתן לקרב סימטריה רציפה בעזרת טור טיילור. כך שמתקיים:
+$$U_{\varepsilon}= \mathbb{ 1} +i\varepsilon T+O\left( \varepsilon^{2} \right)$$</p>
+</div>
+<div class="corollary">
+<p>מתקיים תחת הקירוב מסדר ראשון:
+$$T=T^{\dagger}$$
+כלומר $T$ יהיה אופרטור הרמיטי.</p>
+</div>
+<div class="proof">
+<p>נכתוב:
+$$U_{\varepsilon}\approx \mathbb{1} +i\varepsilon T$$
+כאשר מדרישת האוניטריות נקבל:
+$$U_{\varepsilon}^{\dagger}U_{\varepsilon}=\mathbb{1} \implies \left( \mathbb{1} -i\varepsilon T^{\dagger} \right)\left( \mathbb{1} +i\varepsilon T \right)=\mathbb{1} -i\varepsilon T^{\dagger}+i\varepsilon T=\mathbb{1} -i\varepsilon\left( T^{\dagger}-T \right)\overset{!}{=}  \mathbb{1} $$
+ולכן נקבל $T^{\dagger}=T$.</p>
+</div>
+<div class="proposition">
+<p>אופרטור של סימטריה רציפה יוצר חבורה תחת פעולת ההרכב/הכפלת מטריצות. כלומר קיים חבורה $G$ כך שאם $U_{\varepsilon_{1}},U_{\varepsilon_{2}}\in G$ אזי
+$$U_{\varepsilon_{1}}\circ U_{\varepsilon_{2}}\in G$$</p>
+</div>
+<div class="corollary">
+<p>ניתן לבצע כמות גבוהה של טרנספורמציות רציפות קטנות כך שהקרוב לסדר ראשון יהיה יעיל. כלומר עבור $\varepsilon&gt; 0$ לאו דווקא קטן, ניתן לקחת $N&gt;0$ מספיק גדול כך ש-$\frac{\varepsilon}{N}$ יהיה קטן מספיק, כך שניתן לכתוב:
+$$U_{\varepsilon} = \left( 1+i \frac{\varepsilon}{N}T \right)^{N}\xrightarrow[N\to \infty]{} U_{\varepsilon}=e^{ i\varepsilon T }$$</p>
+</div>
+<div class="definition"><span class="keyword">יוצר של טרנספורמציה רציפה</span><p>אופרטור $T$ כך ש:
+$$U_{\varepsilon}=e^{ i\varepsilon T }$$
+כלומר זהו אופרטור אשר יוצר את החבורה של הסימטרייה.</p>
+</div>
+<div class="proposition"><span class="keyword">מציאת יוצר של סימטרייה</span><p>נניח כי $U_{\varepsilon}=e^{ \theta T }$ אזי:
+$$\frac{d}{d\varepsilon}U_{\varepsilon}=Te^{ \varepsilon T }=TU_{\varepsilon}$$</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחאת בייקר קאמפבל האזדורף</span><p>$$e^{X}\circ e^ {Y}=e^{X+Y+{\frac{1}{2}}[X,Y]+{\frac{1}{12}}[X,[X,Y]]-{\frac{1}{12}}[Y,[X,Y]]+\ldots}$$</p>
+</div>
+<div class="proposition"><span class="keyword">הרחבה למספר משתנים</span><p>ניתן לתאר אופרטור אוניטרי רציף במקרה הרב מימדי על ידי מספר משתנים רציפים - $U_{\varepsilon_{1},\varepsilon_{2},\dots, \varepsilon_{n}}$. במקרה זה נקבל כי הקרוב בעזרת טור חזקות תהיה מהצורה:
+$$U_{\varepsilon_{1},\varepsilon_{2},\dots, \varepsilon_{n}}= \mathbb{1} + i\sum_{a=1}^{n} \varepsilon_{a}T_{a}+O\left( \varepsilon_{a} \right)$$
+וכעת יהיה מספר יוצרים, וניתן יהיה לכתוב:
+$$U_{\varepsilon_{1},\varepsilon_{2},\dots, \varepsilon_{n}} = e^{  i\sum_{a=1}^{n} \varepsilon_{a}T_{a}}=\prod _{a=1}^{n}e^{ i\varepsilon_{a}T_{a} }$$
+כאשר נשים לב כי גם כעת היוצר יהיה אופרטור הרמיטי.</p>
+</div>
+<div class="proposition">
+<p>יוצרים של סימטרייה יוצרים מרחב ווקטורי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_4'>5.4 סיבובים</a></li>
+<li class='prev-page'><a href='./Quantum_5_2'>5.2 מבוא לתורת ההצגות של חבורות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

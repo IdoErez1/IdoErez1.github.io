@@ -31,32 +31,77 @@ window.onload = () => {
     for(let i = 0; i< keywords.length; i++){
     if(item==keywords[i].innerText){
     keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
-            <title>הגדרות</title>
+            <title>מצבים של מערכת</title>
         </head>
         <body>
         <ul class='top-navigation'>
-<li class='next-page'><a href='./Statistical_1_2'>1.2 אנטרופיה</a></li>
+<li class='next-page'><a href='./Statistical_1_2'>1.2 אנטרופיית שאנון ואינפרמציה</a></li>
 <li class='parent-page'><a href='./Statistical'> מכניקה סטטיסטית</a><ul class='parent-dropdown'>
 <li class='parent-page-dropdown'><div class='dropdown-div'>1. אנטרופיה ופונקציית החלוקה</div><ul class='parent-dropdown-dropdown'>
-<li class='parent_page-dropdown'><a href='./Statistical_1_1'>1.1 הגדרות</a></li>
-<li class='parent_page-dropdown'><a href='./Statistical_1_2'>1.2 אנטרופיה</a></li>
-<li class='parent_page-dropdown'><a href='./Statistical_1_3'>1.3 אנטרופיה סטטיסטית</a></li>
+<li class='parent_page-dropdown'><a href='./Statistical_1_1'>1.1 מצבים של מערכת</a></li>
+<li class='parent_page-dropdown'><a href='./Statistical_1_2'>1.2 אנטרופיית שאנון ואינפרמציה</a></li>
+<li class='parent_page-dropdown'><a href='./Statistical_1_3'>1.3 אנטרופיית בולצמן</a></li>
 <li class='parent_page-dropdown'><a href='./Statistical_1_4'>1.4 סקירה של תרמודינמיקה</a></li>
 <li class='parent_page-dropdown'><a href='./Statistical_1_5'>1.5 פונקציית המצבים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Statistical_2_1'>2.1 הצבר המיקרוקנוני</a></li>
 </ul></li>
 </ul></li>
 <li class='prev-page'><a href='./Statistical'> מכניקה סטטיסטית</a></li>
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Statistical_1_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Statistical`;}});</script>
         <div class="content">
-        <h1>1.1  הגדרות</h1>
+        <h1>1.1  מצבים של מערכת</h1>
     <div class="definition"><span class="keyword">מצבים אפשריים</span><p>קבוצת של כל המצבים שהמערכת יכולה לקבל. </p>
 </div>
-<div class="definition"><span class="keyword">מערכת דינמית</span><p>מערכת שמתקדמת בזמן - בכל יחידת זמן. התקדמות בכל שלב תלויה אך ורק במצב הקודם.</p>
+<div class="definition"><span class="keyword">מערכת דינמית</span><p>מערכת שמתקדמת בזמן - בכל יחידת זמן. התקדמות בכל שלב תלויה אך ורק במצב הקודם(תכונה זו נקראת מרקוביות).</p>
 </div>
-<div class="definition"><span class="keyword">כלל התקדמות</span><p>כלל האומר איך המערכת מתנהגת בכל רגע זמן</p>
+<div class="definition"><span class="keyword">כלל התקדמות</span><p>כלל האומר איך המערכת מתנהגת בכל רגע זמן.</p>
 </div>
 <div class="example">
 <div style="display: block;"><svg
@@ -860,7 +905,7 @@ window.onload = () => {
 <div class="definition"><span class="keyword">מרחב הפאזה</span><p>המרחב של כל המקומים והתנעים. עבור חלקיק יחיד זה באופן כללי יהיה 6-מימדי - 3 קורדינטות מיקום ו-3 קורדינטות תנע.</p>
 </div>
 <div class="proposition">
-<p>מרחב הפאזה הוא אוסף של המצבים האפשריים של פיזיקה קלאסית - ברגע שיודעים את המרחב פאזה של מערכת - יודעים את המרחב פאזה בכל זמן.</p>
+<p>מרחב הפאזה הוא אוסף של המצבים האפשריים של פיזיקה קלאסית - ברגע שיודעים את המרחב פאזה של מערכת - יודעים את מרחב הפאזה בכל זמן.</p>
 </div>
 <div class="proposition">
 <p>במרחב הפזה יש שימור אינפורציה.</p>
@@ -875,7 +920,7 @@ window.onload = () => {
 </div>
     </div>
     <ul class='top-navigation'>
-<li class='next-page'><a href='./Statistical_1_2'>1.2 אנטרופיה</a></li>
+<li class='next-page'><a href='./Statistical_1_2'>1.2 אנטרופיית שאנון ואינפרמציה</a></li>
 <li class='prev-page'><a href='./Statistical'> מכניקה סטטיסטית</a></li>
 </ul></li>
         </body>

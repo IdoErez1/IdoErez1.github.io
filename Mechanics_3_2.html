@@ -31,6 +31,48 @@ window.onload = () => {
     for(let i = 0; i< keywords.length; i++){
     if(item==keywords[i].innerText){
     keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
@@ -96,7 +138,7 @@ $$\begin{array}{c}{{q_{i}=-{\displaystyle\frac{\partial F_{3}}{\partial p_{i}}}}
 ועבור $F_{4}$:
 $$\begin{array}{c}{{q_{i}=-{\displaystyle\frac{\partial F_{4}}{\partial p_{i}}}}}\qquad  {{Q_{i}={\displaystyle\frac{\partial F_{4}}{\partial P_{i}}}}}\qquad  {{\mathcal{H}'=\mathcal{H}+{\displaystyle\frac{\partial F_{4}}{\partial t}}}}\end{array}$$</p>
 </div>
-<div class="theorem"><span class="keyword"></span><p>התנאים הבאים שקולים לזה שהעתקה $(p,q)\mapsto(P,Q)$ היא טרנספורמציה קנונית:</p>
+<div class="proposition"><span class="keyword">תנאים שקולים לטרנספורמציה קנונית</span><p>התנאים הבאים שקולים לזה שהעתקה $(p,q)\mapsto(P,Q)$ היא טרנספורמציה קנונית:</p>
 <ol>
 <li>
 <p>קיימת פונקציה יוצרת $F$ להעתקה </p>
