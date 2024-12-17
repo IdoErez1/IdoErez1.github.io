@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>עקרונות הפיזיקה הקוונטית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation'> חישוב קוונטי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_1_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation`;}});</script>
+        <div class="content">
+        <h1>1.1  עקרונות הפיזיקה הקוונטית</h1>
+    <div class="definition"><span class="keyword">מערכת סגורה</span><p>מערכת אשר מבודדת מהסביבה - מידע או אנרגיה לא יכול לצאת ממנה.</p>
+</div>
+<div class="definition"><span class="keyword">האקסיומה הראשונה</span><p>מצב קוונטי הוא קרן(ray) במרחב הילברט, וניתן לייצג אותו על ידי $\ket{\psi} \in \mathcal{H}$.</p>
+</div>
+<div class="definition"><span class="keyword">קרן</span><p>לכל $0\neq \lambda \in \mathbb{C}$ אוסף כל המצבים $\lambda \ket{ \psi}$ נקרא קרן.</p>
+</div>
+<div class="reminder"><span class="keyword">מרחב הילברט</span><p>מרחב ווקטורי שלם עם מכפלה פנימית.
+$$\braket{ \psi_{1} | \psi_{2} } =\overline{\braket{ \psi_{2} | \psi_{1} } } $$</p>
+</div>
+<div class="definition"><span class="keyword">נורמה של מצב קוונטי</span><p>$$\left\lVert  \psi  \right\rVert =\sqrt{ \braket{ \psi | \psi }  }\geq 0 $$</p>
+</div>
+<div class="remark">
+<p>נבחר לנרמל את המצב:
+$$\braket{ \psi | \psi } =1$$
+אך גם נירמול אינו קובע את המצב ביחידות!
+$$e^{ i\alpha }\ket{\psi} $$
+הם שקולים פיזיקלית עבור כל $\alpha \in \left[ 0,2\pi \right)$.</p>
+</div>
+<div class="definition"><span class="keyword">האקסיומה השנייה</span><p>גודל פיזקלי/גודל מדיד הם אופרטורים הרמיטים(צמודים לעצם) על $\mathcal{H}$.</p>
+</div>
+<div class="corollary">
+<p>ניתן ללכסן אוניטרי כל גודל מדיד.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור הטלה</span><p>אופרטור $\Pi$ נקרא אופרטור הטלה אם:
+$$\Pi ^{\dagger} = \Pi \qquad \Pi^{2}=\Pi$$
+כאשר הספקטרום יהיה $0,1$.</p>
+</div>
+<div class="definition"><span class="keyword">האקסיומה השלישית</span><p>תוצאות המדידה נקבעות בצורה הסתברותית על ידי כלל בורן(תלוי אינטרפרטציה - אנחנו משתמשים באינטרפטציית קופנהגן)</p>
+</div>
+<div class="proposition"><span class="keyword">כלל בורן</span><p>$$P(n)= \bra{\psi} \Pi_{n}\ket{\psi} =\left\lvert  \braket{ n | \psi }   \right\rvert ^{2}$$</p>
+</div>
+<p>לפי אינטרפטציית קופנהאגן אחרי המדידה המצב הקוונטי קורס:
+$$\ket{\psi} \to \frac{\Pi_{n}\ket{\psi}}{\left\lVert  \Pi_{n}\ket{\psi}   \right\rVert } $$</p>
+<div class="corollary">
+<p>אם נרחב את מצב $\ket{\psi}$ בסיס אורתונורמלי נקבל $\ket{\psi}=\sum_{n} a_{n}\ket{n}$ נקבל:
+$$p_{n}= \lvert a_{n} \rvert ^{2}\implies \sum_{n}p_{n}=1$$</p>
+</div>
+<p>באופן כללי ניתן לכתוב:
+$$a_{n}=\sqrt{ p_{n} }e^{ i\phi_{n} }$$
+אחרי מדידה של $\ket{n}$ נקבל כי המצב הקוונטי יהיה:
+$$\ket{n} \to e^{ i\phi_{n} }\ket{n} $$
+כאשר הפאזה נהיית גלובאלית.</p>
+<p>כאשר בנוסף:
+$$\forall n\quad a_{n}\to e^{ i\theta }a_{n}$$
+ונקבל:
+$$p_{n}\to p_{n}$$
+כלומר ההסתברות לא משתנה ו- $\ket{\psi}\to e^{ i\theta }\ket{\psi}$ הם שקולים פיזיקלית</p>
+<div class="definition"><span class="keyword">ערך תצפית</span><p>$$\left\langle  Q  \right\rangle=\sum_{n} p_{n}q_{n} = \bra{\psi} \sum_{n}q_{n} \Pi_{n} \ket{\psi} = \bra{\psi} Q \ket{\psi}  $$</p>
+</div>
+<div class="corollary">
+<p>פאזה גלובאלית לא משנה את $\langle Q \rangle$, וכן גם לא משנה את הפיזיקה של המערכת</p>
+</div>
+<div class="definition"><span class="keyword">האקסיומה הרביעית</span><p>התקדמות בזמן נקבעת על ידי משוואת שרדינגר:
+$$i\frac{\partial }{\partial t} \ket{\psi(t)} =H(t)\ket{\psi(t)} $$
+כאשר ההתקדמות בזמן נקבעת על ידי אופרטור ההמילטוניאן</p>
+</div>
+<p>עבור התקדמות אינפיניטסימלית:
+$$\ket{\psi(t+dt)} =(1-iH(t)dt)\ket{\psi(t)} = e^{ -iH(t)dt }\ket{\psi(t)}=U(t+dt,t)\ket{\psi(t)}  $$
+וההתקדות בזמן היא אינטרית</p>
+<p>עבור זמן סופי $T=Ndt$ כאשר $N\to 0$ ו-$dt \to 0$ נקבל:
+$$U\left(t+T,t\right)=e^{-i H\left(t+\left(N-1\right)d t\right)d t}\cdot\cdot\cdot e^{-i H\left(t+d t\right)d t}e^{-i H\left(t\right)d t}$$
+כאשר עבור המילטוניאן שתלוי בזמן נקבל:
+$$U(t+T,t)=e^{ -iHT }$$</p>
+<div class="definition"><span class="keyword">האקסיומה החמישית</span><p>המרחב הילברט של מערכת מעורבת מכילה שתי מצבים קוונטים $A,B$ עם $\mathcal{H}_{A}$ ו-$\mathcal{H}_{B}$ מהתאמה הוא המרחב מכפלה:
+$$\mathcal{H}_{AB}=\mathcal{H}_{A}\times \mathcal{H}_{B}$$</p>
+</div>
+<p>כאשר מתקיים:
+$$\dim \mathcal{H}_{AB}=\dim \mathcal{H}_{A} \cdot \dim \mathcal{H}_{B}$$
+והבסיס האורתונורמלי:
+$$\left\{  \ket{ab} =\ket{a} _{A}\otimes \ket{b} _{B}  \right\}$$
+כאשר $\left\{  \ket{a}  \right\}_{A}$ ו-$\ket{b}_{B}$ הם הבסיסים האורתונורמלים המתאימים.</p>
+<div class="summary">
+<p>במרחב סגור האסיומת של הפיזיקה הקוונטית יהיו:</p>
+<ol>
+<li>
+<p>כל מצב קוונטי הוא קרן במרחב הילברט $\mathcal{H}$. </p>
+</li>
+<li>
+<p>כל גודל מדיד הוא אופרטור צמוד לעצמו הפועל ב-$\mathcal{H}$. </p>
+</li>
+<li>
+<p>מדידה היא הטלה אורתוגונאלית. </p>
+</li>
+<li>
+<p>קידום בזמן היא אופרטור אוניטרי. </p>
+</li>
+<li>
+<p>מערכת אשר מורכבת משתי מערכות תהיה מיוצגת בעזרת מכפלה טנזורית של המערכות. 
+כאשר במערכת פתוחה אקסיומות $1-4$ כבר לא יהיו נכונות.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='prev-page'><a href='./Quantum_computation'> חישוב קוונטי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

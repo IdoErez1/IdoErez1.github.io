@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מדידה מוכללת</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_2_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_1_4`;}});</script>
+        <div class="content">
+        <h1>2.1  מדידה מוכללת</h1>
+    <p>נניח ויש לנו מצב טהור $\ket{\psi}_{A}$ שאנחנו רוצים למדוד. נאתחל אותו במצב $\ket{\psi}_{A}\otimes \ket{0}_{B}$. כעת אנחנו רוצים לשזור אות המדידות. כדי לעשות זאת נפעיל אופרטור איניטרי $U$ אשר שוזר את המערכות כך שמתקיים:
+$$\left|\Psi\right\rangle_{A B}=U_{A B}\left|\psi\right\rangle_{A}\otimes\left|0\right\rangle_{B}$$</p>
+<div class="definition"><span class="keyword">אופרטור קלאוס</span><p>יהי $\left\{  \ket{\mu}  \right\}$ בסיס אורתונורמלי, קבוצת אופרטורים $\left\{  M_{\mu}  \right\}$ המוגדרים באופן הבא:
+$$M_{\mu}=\left\langle\mu\right|_{B}U_{A B}\left|0\right\rangle_{B}$$
+נקראים אופרטורי קלאוס</p>
+</div>
+<div class="corollary">
+<p>$$\left|\Psi\right\rangle_{A B}=U_{A B}\left|\psi\right\rangle_{A}\otimes\left|0\right\rangle_{B}=\sum_{\mu}\left(M_{\mu}\left|\psi\right\rangle_{A}\right)\otimes\left|\mu\right\rangle_{B}$$</p>
+</div>
+<div class="proposition"><span class="keyword">יחס שלמות של אופרטורי קלאוס</span><p>$$\sum_{\mu}M_{\mu}^{\dagger}M_{\mu}=\mathbb{I}_{A}$$</p>
+</div>
+<div class="proof">
+<p>כיוון ש-$U_{AB}$ אוניטרי נקבל כי משמר נורמות, ולכן:
+$$1=\sum_{\mu,\nu}\left(\left\langle\psi\right|_{A}M_{\nu}^{\dagger}\otimes\left\langle\nu\right|_{B}\right)\left(M_{\mu}\left|\psi\right\rangle_{A}\otimes\left|\mu\right\rangle_{B}\right)=\left\langle\psi\right|_{A}\sum_{\mu}M_{\mu}^{\dagger}M_{\mu}\left|\psi\right\rangle_{A}$$
+כאשר כיוון ש-$\ket{\psi}_{A}$ הוא שרירותי נקבל את הטענה.</p>
+</div>
+<div class="proposition"><span class="keyword">מדידה אורתוגונאלית במדידה מוכללת</span><p>ההסתברות לחשב את המערכת במצב $\mu$ תהיה:
+ $$p_{\mu}=\left\langle\Psi\right|_{A B}\left(\mathbb{I}_{A}\otimes\left|\mu\right\rangle\left\langle\mu\right|_{B}\right)\left|\Psi\right\rangle_{A B}=\left\langle\psi\right|_{A}M_{\mu}^{\dagger}M_{\mu}\left|\psi\right\rangle_{A}$$
+ והמערכת תקרוס למצב:
+ $$\frac{M_{\mu}\left|\psi\right\rangle_{A}}{\left\|M_{\mu}\left|\psi\right\rangle_{A}\right\|}\otimes\left|\mu\right\rangle_{B}$$</p>
+</div>
+<p>אם נכין את המערכת למדידה נוספת, נקבל:
+ $$U_{AB}=\left[ \frac{M_{\mu}\ket{\psi_{A}}}{\left\lVert  M_{\mu}\ket{\psi}   \right\rVert }\otimes \ket{0} _{B}  \right]=\sum_{\nu} \frac{M_{\nu }M_{\mu}\ket{\psi} _{A}}{\left\lVert  M_{\mu}\ket{\psi}   \right\rVert _{A}}\otimes \ket{v} _{B}$$
+ ולכן בקריסה הנוספת נקבל:
+ $$\frac{M_{\nu}M_{\mu}\left|\psi\right\rangle_{A}}{\left\|M_{\nu}M_{\mu}\left|\psi\right\rangle_{A}\right\|}$$
+ כאשר נשים לב כי המדידה תהיה שווה למדידה הקודמת רק אם:
+ $$M_{\nu}M_{\mu}=e^{i\theta}\delta_{\mu\nu}M_{\mu}$$</p>
+<div class="remark">
+<p>מדידה כזו נקראת:
+POVM - Positive Operator Valued Measurement</p>
+</div>
+<div class="proposition">
+<p>ניתן למצוא את אופרטורי קראוס $\left\{  M_{\mu}  \right\}$ בעזרת הפירוק הפולארי. כלומר קיים $\sqrt{ E_{\mu} }$ כך שלכל מטריצה אונטירית $V_{\mu}$ כך שמתקיים:
+$$M_{\mu}=V_{\mu}\sqrt{ E_{\mu} }$$</p>
+</div>
+<div class="example">
+<p>נניח כי יש לנו צבר עם מטריצת צפיפות:
+$$\rho=\frac{1}{2}\left(|\uparrow\rangle\left\langle\uparrow\right|+|\uparrow_{x}\rangle\left\langle\uparrow_{x}\right|\right)$$
+כיוון ש-$\braket{ \uparrow | \uparrow_{x} }\neq 0$  לא ניתן להכריע אם אנחנו ב-$\ket{\uparrow}$ או $\ket{\uparrow_{x}}$ בעזרת מדידה אורונורמלית. אם נמדוד את $\sigma_{x}$ אם נקבל 1, אנחנו לא יכולים להגיד בוודאות באיזה מצב אנחנו. יש הסתברות של $\frac{3}{4}$ שאנחנו במצב $\ket{\uparrow_{x}}$ והסתברות של $\frac{1}{4}$ שאנחנו במצב $\ket{\uparrow}$. ניתן לקבל אחוזים טובים יותר בעזרת POVM:
+נגדיר:
+$$E_{1}=\lambda \ket{\downarrow } \bra{\downarrow } \qquad  E_{2}=\lambda \ket{\downarrow _{x}} \bra{\downarrow _{x}} \qquad E_{3}= \mathbb{1} -E_{1}-E_{2}$$
+כאשר הגדרנו את $E_{3}$ כדי שייקם את יחס השלמות $\sum_{\mu}E_{\mu}=\mathbb{1}$, ונדרוש חיוביות של $E_{3}$. ולכן:
+$$E_{3}=\frac{1}{2}\left(\begin{array}{c c}{{2-\lambda}}&amp;{{\lambda}}\\ {{\lambda}}&amp;{{2-3\lambda}}\end{array}\right)$$
+כאשר הערכים העצמיים יהיו:
+$$1-\lambda\left(1\pm\frac{1}{\sqrt{2}}\right)\geq 0\implies \lambda \leq 2 - \sqrt{ 2 }$$
+כעת ההסתברות שהיה במצב $\mu=1$, כלומר במצב שבו היה ב-$\ket{\uparrow_{x}}$ יהיה:
+$$p_{\mu=1}=\mathrm{Tr}\left[\rho E_{1}\right]=\frac{\lambda}{2}\mathrm{Tr}[\left|\uparrow\right\rangle\left\langle\uparrow|\downarrow_{x}\rangle\left\langle\downarrow_{x}\right|\right]=\frac{\lambda}{4}$$
+כאשר ההסתברות שהיה במצה $\mu=2$ כלומר במצב שבו היה $\ket{\uparrow}$ נקבל:
+$$p_{\mu=2}=\mathrm{Tr}\left[\rho E_{2}\right]=\frac{\lambda}{2}\mathrm{Tr}\left[\left|\uparrow_{x}\rangle\left\langle\uparrow_{x}\right.\right|\downarrow\right\rangle\left\langle\downarrow\right|]=\frac{\lambda}{4}$$
+כאשר $\mu=3$ לא עוזר לנו. ולכן ההסתברות שנצליח לגלות באיזה מצב היה יהיה:
+$$P=p_{\mu=1}+p_{\mu=2}=\frac{\lambda}{2}$$
+כאשר הערך המקסימלי מתקבל כאשר נבחר $\lambda = 2-\sqrt{ 2 }$ ובמקרה זה:
+$$P=1-\frac{1}{\sqrt{ 2 }}\approx 0.29$$
+שזה הסתברות קצת יותר טובה מ-$\frac{1}{4}$.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>קריטריון</th>
+<th>מדידה אורתוגונאלית</th>
+<th>מדידה מוכללת</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>קריסה</td>
+<td>אופרטור הטלה - $\prod_{n}=\ket{n}\bra{n}$</td>
+<td>אופרטור קראוס - $\braket{ \mu \| _{B} U_{AB}\|0 }_{B}$</td>
+</tr>
+<tr>
+<td>אופרטור חיובי</td>
+<td>$\Pi_{n}=\Pi_{n}^{\dagger}\Pi_{n}$</td>
+<td>$E_{\mu}=M_{\mu}^{\dagger}M_{\mu}$</td>
+</tr>
+<tr>
+<td>יחס שלמות</td>
+<td>$\sum_{n}\Pi_{n}=\mathbb{1}$</td>
+<td>$\sum_{\mu} M_{\mu}^{\dagger}M_{\mu}=\mathbb{1}=\sum_{\mu}E_{\mu}$</td>
+</tr>
+<tr>
+<td>התפלגות הסתברות</td>
+<td>$p_{n}=\mathrm{Tr}\left( \rho \Pi_{n} \right)$</td>
+<td>$p_{\mu}=\mathrm{Tr}\left( \rho E_{m} \right)$</td>
+</tr>
+<tr>
+<td>תוצאות המדידה</td>
+<td>$$\rho\to \rho' = \frac{\Pi_{n}\rho \Pi_{n}}{\mathrm{Tr}\left( \Pi_{n}\rho \Pi_{n} \right)}$$</td>
+<td>$\rho\to \rho' = \frac{M_{\mu}\rho M_{\mu}^{\dagger}}{\mathrm{Tr}\left( M_{\mu}\rho M_{\mu}^{\dagger} \right)}$</td>
+</tr>
+</tbody>
+</table>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='prev-page'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

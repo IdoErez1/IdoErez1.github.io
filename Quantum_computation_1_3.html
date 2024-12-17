@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מטריצת צפיפות וצברים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_1_4`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_1_2`;}});</script>
+        <div class="content">
+        <h1>1.3  מטריצת צפיפות וצברים</h1>
+    <div class="definition"><span class="keyword">ערך תצפית של אופרטור</span><p>נניח $\mathcal{H}$ מרחב הילברט ממימד $d$. נסמן בסיס אורתונורמלי $\left\{  \ket{i}  \right\}_{i=1}^{d}$. יהי $M$ ערך מדיד על $\mathcal{H}$. נרצה למצוא את $\langle M \rangle$ ביחס ל-$\ket{\psi}$.
+ראינו כי:
+$$\langle M \rangle =\bra{\psi} M \ket{\psi} \impliedby \braket{ \psi | \psi } =1$$
+כאשר מיחס השלמות:
+$$1=\sum_{i=1}^{d} \ket{i} \bra{i} $$</p>
+</div>
+<div class="definition"><span class="keyword">עקבה של אופרטור</span><p>$$\mathrm{Tr}(A)=\sum_{j}\left\langle\phi_{j}|A|\phi_{j}\right\rangle$$</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של עקבה</span><ol>
+<li>
+<p>אם $A=A^{\dagger}$ אז $\mathrm{Tr}(A)$ הוא ממשי </p>
+</li>
+<li>
+<p>הומוגניות - $\mathrm{Tr}(aA)=a\mathrm{Tr}(A)$. </p>
+</li>
+<li>
+<p>אדטיביות - $\mathrm{Tr}(A+B)=\mathrm{Tr}(A)+\mathrm{Tr}(B)$. </p>
+</li>
+<li>
+<p>ציקליות - $\mathrm{Tr}(AB)=\mathrm{Tr}(BA)$ כאשר במקרה של שלושה מכפלות $\mathrm{Tr}(ABC)=\mathrm{Tr}(CAB)=\mathrm{Tr}(BAC)$. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">ערך תצפית בעזרת עקבה</span><p>$$\begin{gather}\langle M \rangle =\bra{\psi} M\ket{\psi} =\sum_{i}\braket{ \psi | i } \bra{i} M\ket{\psi} =\sum_{i}\bra{i} M\ket{\psi} \braket{ \psi | i } = \\=\sum_{i}\bra{i} \left[ M\ket{\psi} \bra{\psi}  \right]\ket{i}  \equiv \mathrm{Tr}\left[ M\ket{\psi} \bra{\psi}  \right]  \end{gather} $$</p>
+</div>
+<div class="proposition"><span class="keyword">קשר בין דטרמיננטה לעקבה</span><p>$$\operatorname*{det}[\exp(A)]=\exp[\operatorname{Tr}(A)]$$</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור הצפיפות</span><p>לכל $\ket{\psi}\in \mathcal{H}$ נגדיר:
+$$\rho=\ket{\psi}\bra{\psi}   $$</p>
+</div>
+<div class="definition"><span class="keyword">מצב טהור</span><p>מצב במרחב הילברט אשר ניתן לבטא אותו בעזרת קאט.</p>
+</div>
+<div class="definition"><span class="keyword">מצב מעורב</span><p>מצב שאינו מצב טהור. כלומר מצב שלא ניתן לבטא אותו בעזרת קאט.</p>
+</div>
+<p>נניח כי אנחנו יכולים לקבל כל אחד מהמצבים $\left\{  \ket{\psi_{\mu}}  \right\}_{\mu=1}^{N}$ כאשר ניתן לקבל כל אחד עם הסתברות $p_{\mu}$ כך ש-$\sum_{\mu}p_{\mu} =1$ כאשר הסתברות זו היא הסתברות קלאסית - נובעת ממחסור במידע על המערכת. זהו צבר קלאסי.</p>
+<div class="proposition">
+<p>$$\langle M \rangle =\sum_{\mu=1}^{N}p_{\mu}\left\langle  \psi_{\mu}|M|\psi_{\mu}  \right\rangle =\sum_{\mu=1}^{N} p_{\mu}\mathrm{Tr}\left[ M\rho_{\mu} \right]=\mathrm{Tr}\left[ M\sum_{\mu}p_{\mu}\rho_{\mu} \right]$$</p>
+</div>
+<div class="definition"><span class="keyword">מטריצת צפיפות של צבר</span><p>$$\rho = \sum_{\mu=1}p_{\mu}\rho_{\mu}=\sum_{\mu=1}^{N}p_{\mu}\ket{\psi_{\mu}}\bra{\psi_{\mu}}  $$
+כאשר נשים לב כי כל עוד אין $\mu$ כך ש-$p_{\mu}=1$ נקבל כי זהו מצב מעורב.</p>
+</div>
+<div class="remark">
+<p>המטריצת הצפיפות של צבר זה הצירוף הקמור של מטריצות צפיפות של מצבים טהורים. זאת אומרת כי זהו צירוף לינארי של מצבים טהורים כך שסכום המקדמים יהיה 1.</p>
+</div>
+<div class="corollary">
+<p>$$\langle M \rangle = \mathrm{Tr}\left[ M\rho \right]$$</p>
+</div>
+<div class="definition"><span class="keyword">קוהרנטיות</span><p>המידע שיש למערכת כתוצאה מהתאבכות. עבור קיוביט הגורמים שנוצרים מהתאבכות עבור מטריצת צפיפות מהצורה:
+$$\rho=\begin{bmatrix}|c_{1}|^{2}&amp;c_{1}c_{2}^{*}\\ c_{1}^{*}c_{2}&amp;|c_{2}|^{2}\end{bmatrix}$$
+יהיו $c_{1}^{*}c_{2}$ ו-$c_{1}c_{2}^{*}$.</p>
+</div>
+<div class="definition"><span class="keyword">דקוהרנטיות</span><p>המידע ש</p>
+</div>
+<h2>מטריצת צפיפות של קיוביט</h2>
+<div class="proposition">
+<p>המטריצת צפיפות קיוביט צריכה לקיים:
+- הרמיויות.
+- עקבה 1.
+- ערכים עצמיים ממשיים אי שליליים.</p>
+</div>
+<div class="proposition">
+<p>מטריצת צפיפות של קיו-ביט צריכה להיות מהצורה:
+$$\rho\left(\mathbf{P}\right)={\frac{1}{2}}\left(\mathbb{I}+\mathbf{P}\cdot\sigma\right)$$
+כאשר $|\vec{P}|\leq 1$.</p>
+</div>
+<div class="proof">
+<p>מטריצה הרמיטית כללית תהיה מהצורה:
+$$M=m_{0}\mathbb{1} +\vec{m}\cdot \vec{\sigma}$$
+אם נציב את הדרישה של העקבה נקבל:
+$$\mathrm{Tr}\left( \rho\left( m_{0},\vec{m} \right) \right)=m_{0}\mathrm{Tr}\left[ \mathbb{1}  \right]=2m_{0}=1\implies m_{0}=\frac{1}{2}$$
+כאשר השתמשנו בכך ש-$\mathrm{Tr}\left[ \sigma_{i} \right]=0$. כעת נדרש רק לבדוק את דרישת הערכים העצמיים. נסתכל על הדטרמיננטה נזכור כי הדטרמיננטה זה מכפלת הערכים העצמיים, כאשר כיוון שהעקבה היא 1, מספיק לדרוש כי הדטרמיננטה חיובית. כלומר $\det\left( \rho\left( \vec{P} \right) \right)\geq 0$. הדטרמיננטה תהיה:
+$$\operatorname*{det}\rho\left(\mathbf{P}\right)={\frac{1}{4}}\operatorname*{det}\left(\begin{array}{c c}{{1+P_{3}}}&amp;{{P_{1}-i P_{2}}}\\ {{P_{1}+i P_{2}}}&amp;{{1-P_{3}}}\end{array}\right)={\frac{1}{4}}\left(1-\left|\mathbf{P}\right|^{2}\right)$$
+ולכן המטריצת צפיפות האפשרית הקטנה ביותר תהיה מהצורה:
+$$\rho(\vec{P})=\frac{1}{2}\Big(I+\vec{P}\cdot\vec{\sigma}\Big)=\frac{1}{2}\Bigg(\begin{array}{c c}{{1+P_{3}}}&amp;{{P_{1}-i P_{2}}}\\ {{P_{1}+i P_{2}}}&amp;{{1-P_{3}}}\end{array}\Bigg)$$
+כאשר $\left\lvert  \vec{P}  \right\rvert\leq 1$.</p>
+</div>
+<div class="corollary">
+<p>קבוצת כל המטריצות צפיפות של קיוביט יהיה כדור היחידה(כלל הפנים) ב-$\mathbb{R}^{3}$. </p>
+</div>
+<div class="proposition">
+<p>מצבים טהורים נמצאים על ספרת בלוך, כלומר $\left\lvert  \vec{P}  \right\rvert=1$ ויהיו עם מטריצת צפיפות מהצורה:
+$$\rho\left(\mathbf{P}=\mathbf{\hat{n}}\left(\theta,\varphi\right)\right)={\frac{1}{2}}\left(\mathbb{I}+\mathbf{\hat{n}}\cdot\sigma\right)$$
+כאשר מצבים מעורבים יהיו בתוך ספרת בלוך ולא על השפה, כלומר $\left\lvert  \vec{P}  \right\rvert&lt; 1$.</p>
+</div>
+<div class="proposition">
+<p>הערך המצופה של $\hat{n}\cdot \sigma$ יהיה:
+$$\left\langle{\hat{\mathbf{n}}}\cdot\sigma\right\rangle={\hat{\mathbf{n}}}\cdot\mathbf{P}$$</p>
+</div>
+<div class="proof">
+<p>הערך המצופה הכללי יהיה:
+$$\langle\hat{\mathbf{n}}\cdot\sigma\rangle={\frac{1}{2}}\sum_{i}\mathrm{Tr}\left[n_{i}\sigma_{i}\left(\mathbb{I}+\sum_{j}P_{j}\sigma_{j}\right)\right]={\frac{1}{2}}\left(\sum_{i}n_{i}\mathrm{Tr}\left[\sigma_{i}\right]+\sum_{i j}n_{i}P_{j}\mathrm{Tr}\left[\sigma_{i}\sigma_{j}\right]\right).$$
+בעזרת הזהות $\mathrm{Tr}\left[ \sigma_{i} \right]=0$ ו-$\mathrm{Tr}\left[ \sigma_{i}\sigma_{j} \right]=2\delta_{ij}$ נקבל את המבוקש.</p>
+</div>
+<div class="remark">
+<p>הערך תצפית המקסימלי מתקבל כאשר $\hat{n}=\hat{P}$ ובמקרה זה:
+$$\left\langle{\hat{\mathbf{P}}}\cdot\sigma\right\rangle={\hat{\mathbf{P}}}\cdot\mathbf{P}=|\mathbf{P}|$$</p>
+</div>
+<p>נרצה להכליל. </p>
+<div class="proposition"><span class="keyword">אקסטריומליות המצבים הטהורים</span><p>נניח $\dim\mathcal{H}=d$ ו-$\rho_{1},\rho_{2}$ הם שתי מטריצות צפיפות על $\mathcal{H}$. נבחר $0\leq c\leq 1$ ממשי כך ש:
+$$\rho(c)=c\rho_{1}+(1-c)\rho_{2}$$
+כאשר זוהי מטריצת צפיפות תקינה. נשים לב כי המטריצת צפיפות היא קמורה. ננוכיח כי המצבים הטהורים הם אקסטרימלים - כלומר הם בסוף בו בהתחלה של מצב $\rho(c)$ כלשהו($c=0$ או $c=1$).</p>
+</div>
+<div class="proof">
+<p>יהי $\rho=\ket{\psi}\bra{\psi}$ מטריצת צפיפות של מצב טהור $\ket{\psi}$. נניח בשלילה שקיימים $0&gt;c&gt;1$ ומטריצות צפיפות $\rho_{1},\rho_{2}$ כך ש-$\rho=c\rho_{1}+(1-c)\rho_{2}$. יהי $\ket{\phi}$ מצב שרירותי אורתוגונלי ל-$\ket{\psi}$. מתקיים:
+$$\bra{\phi} \rho \ket{\phi} =\braket{ \phi | \psi } \braket{ \psi | \phi } =0  $$
+כאשר מתקיים:
+$$0=\left\langle\phi\right|\rho\left|\phi\right\rangle=c\left\langle\phi\right|\rho_{1}\left|\phi\right\rangle+\left(1-c\right)\left\langle\phi\right|\rho_{2}\left|\phi\right\rangle$$
+כאשר מתקיים:
+$$\bra{\phi} \rho \ket{\phi} =0\qquad \bra{\phi} \rho_{2}\ket{\phi} =0$$
+כיוון ש-$\ket{\phi}$ הוא שרירותי נקבל כי לכל $\ket{\phi}\perp \ket{\psi}$ ולכן:
+$$\rho_{1}=\rho_{2}=\ket{\psi} \bra{\psi} =\rho$$
+וקיבלנו סתירה.</p>
+</div>
+<div class="corollary">
+<ul>
+<li>ניתן לייצר מצב מעורב מספר דרכים.</li>
+<li>ניתן לייצר מצב טהור רק בדרך אחת.</li>
+</ul>
+</div>
+<h2>טיהור של מצב</h2>
+<div class="reminder">
+<p>כל מצב מעורב ניתן לכתיבה כצירוף קמור של מצבים טהורים.</p>
+</div>
+<div class="proposition">
+<p>כל מטריצת צפיפות ניתנת לכתיבה בעזרת צירוף קמור של מצבים טהורים.</p>
+</div>
+<div class="proposition">
+<p>עבור מטריצה מעורבת קיימים לפתוחות שתי דרכים כך שניתן לכתוב את המטריצה בעזרת במצבים טהורים. כלומר קיימות קבוצות של מצבים קוונטים $\left\{\left|\phi_{i}^{(1)}\right\rangle\right\},\left\{\left|\phi_{i}^{(2)}\right\rangle\right\}$ כך ש:
+$$\rho_{A}=\sum_{i}p_{i}^{(1)}\left|\phi_{i}^{(1)}\right\rangle\left\langle\phi_{i}^{(1)}\right|=\sum_{j}p_{j}^{(2)}\left|\phi_{j}^{(2)}\right\rangle\left\langle\phi_{j}^{(2)}\right|,$$
+כאשר נשים לב כי אין שום סיבה שקבוצות אלו יהיו אורתונורמליות.</p>
+</div>
+<div class="definition"><span class="keyword">פיריפיקציה/טיהור</span><p>עבור מצב מעורב המיוצג על ידי מטריצת צפיפות $\rho_{A}$ במערכת $\mathcal{H}_{A}$ מצב טהור המיוצג על ידי מטריצה $\rho \in \mathcal{H}_{A}\times \mathcal{H}_{B}$ המתקבל על ידי הרחבת המערכת כאשר שארית המערכת היא עוברת טרייס אוט(כלומר $\rho_{A}=\mathrm{Tr}_{B}\left( \rho \right)$) תהיה הפיוריפיקציה של $\rho_{A}$.</p>
+</div>
+<div class="theorem"><span class="keyword">HJW/טיהור</span><p>לכל מטריצת צפיפות קיים פיוריפיקציה.</p>
+</div>
+<div class="example">
+<p>נסתכל על מטריצת צפיפות מהצורה:
+$$\rho_{A}=\frac{1}{2}|0\rangle\langle0|+\frac{1}{2}|1\rangle\langle 1|$$
+כאשר זהו מטריצת צפיפות מעורבת כיוון ש:
+$$\mathrm{Tr}\left( \rho_{A}^{2} \right) = \frac{1}{4}+\frac{1}{4}&lt; 1$$
+כעת נגדיר מערכת $B$ כך ש:
+$$|\Psi\rangle=\frac{1}{\sqrt{2}}(|0\rangle_{A}\otimes|0\rangle_{B}+|1\rangle_{A}\otimes|1\rangle_{B})$$
+כאשר המצב $\rho=\ket{\Psi}\bra{\Psi}$ יהיה מצב טהור. מתקיים:
+$$\rho_{A}=\mathrm{Tr}_{B}(|\Psi\rangle\langle\Psi|)=\frac{1}{2}|0\rangle\langle0|+\frac{1}{2}|1\rangle\langle1|$$</p>
+</div>
+<div class="proposition"><span class="keyword">מציאת פיוריפיקציה</span><p>נכתוב את המטריצת צפיפות של המערכת על ידי הצירוף הקמור של מצבים טהורים:
+$$\rho_{A}=\sum_{i}\lambda_{i}|\psi_{i}\rangle\langle\psi_{i}|,$$
+כעת נכניס מרחב ביניים $\mathcal{H}_{B}$ עם מימד של לכל היותר $\dim \rho$ ובסיס אורתונורמלי $\left\{  \ket{e_{i}}  \right\}$.
+$$|\Psi\rangle=\sum_{i}\sqrt{\lambda_{i}}|\psi_{i}\rangle_{A}\otimes|e_{i}\rangle_{B}.$$
+כאשר זהו מצב טהור במערכת החדשה כיוון שזה מבוטה על ידי קאט יחיד. כעת נשים לב כי אכן:
+$$\mathrm{Tr}_{B}(|\Psi\rangle\langle\Psi|)=\sum_{i}\lambda_{i}|\psi_{i}\rangle\langle\psi_{i}|=\rho_{A}$$</p>
+</div>
+<div class="summary">
+<ul>
+<li></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+<li class='prev-page'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

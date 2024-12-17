@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ערוצים קוונטים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_3_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_2_2`;}});</script>
+        <div class="content">
+        <h1>2.3  ערוצים קוונטים</h1>
+    <h2>ערוצי קיוביט</h2>
+<p>אם יש לנו קיוביט יחיד שקשור לסביבה כלשהי. יש לנו שלושה סוגי שגיאות:</p>
+<ol>
+<li>
+<p>היפוך ביט: 
+$$\ket{0} \leftrightarrow  \ket{1}  \text{ or } \ket{\uparrow } \leftrightarrow  \ket{ \downarrow }  $$
+שזה נעשה על ידי $\sigma_{x}$.</p>
+</li>
+<li>
+<p>טעות סימן/פאזה: 
+$$\ket{+} \leftrightarrow  \ket{-} \text{ or } \ket{\uparrow _{x}} \leftrightarrow  \ket{\downarrow _{x}} $$
+והאופרטור שמבצע טעות זו יהיה $\sigma_{z}$.</p>
+</li>
+<li>
+<p>שתי השגיאות מתקיימות ביחד: 
+$$-iZX=\sigma _{y}$$</p>
+</li>
+</ol>
+<h3>הסתברויות</h3>
+<p>נניח כי יש הסתברות של $1-p$ שלא תהיה שום שגיאה, כאשר יש הסתברות של $\frac{p}{3}$ שיקרה כל אחד מבין השגיאות $X,Y,Z$. ולכן נדרש 4 אופרטורי קראוס(3 עובר השגיאות ו-1 עבור המקרה שאין שגיאות).
+$$\begin{gather}M_{0}=\sqrt{ 1-p }\mathbb{1}  \\M_{i}=\sqrt{ \frac{p}{3} } \sigma_{i} \end{gather}$$
+נבדוק כי אכן אופרטורי קראוס:
+$$M_{0}^{\dagger}M_{0}+\sum_{i}M_{i}^{\dagger} M_{i} = \mathbb{1} \left( 1-p+\frac{3}{p}\cdot 3 \right)=\mathbb{1} $$
+כעת:
+$$\epsilon\left(\rho\right)=\left(1-p\right)\rho+\frac{p}{3}\left(\sigma_{x}\rho\sigma_{x}+\sigma_{y}\rho\sigma_{y}+\sigma_{z}\rho\sigma_{z}\right)$$
+כאשר נשים לב כי לא נדרש לבדוק כי אכן אופרטור צפיפות כי ראינו כי אופקטור קלאוס אשר פועל על מטריצת צפיפות תתן מטריצת צפיפות.
+כעת נניח כי יש לנו קיוביט שרירותי מהצורה:
+$$\rho\left(\mathbf{P}\right)={\frac{1}{2}}\left(\mathbb{I}+\mathbf{P}\cdot\sigma\right)$$
+נקבל מהערוץ כי:
+$$\epsilon\left(\rho\left(\mathbf{P}\right)\right)=\left(1-p\right)\rho\left(\mathbf{P}\right)+{\frac{p}{3}}\left(\sigma_{x}\rho\left(\mathbf{P}\right)\sigma_{x}+\sigma_{y}\rho\left(\mathbf{P}\right)\sigma_{y}+\sigma_{z}\rho\left(\mathbf{P}\right)\sigma_{z}\right)$$
+כאשר ניתן מזה לקבל:
+$$\epsilon\left(\rho\left(\mathbf{P}\right)\right)={\frac{1}{2}}\left(\mathbb{I}+\mathbf{P^{\prime}}\cdot\sigma\right)=\rho\left(\mathbf{P^{\prime}}\right)$$
+כאשר:
+$$\mathbf{P}^{\prime}=\left(1-{\frac{4}{3}}p\right)\mathbf{P}$$
+ולכן למעשה נקבל כי הקיטוב קטן, וזה למה זה נקרא depolarization</p>
+<h2>ערוץ דיפאזה</h2>
+<p>נניח כי יש חלקיק קוונטי $A$ במערכת שתי רמות $\left\{  \ket{0}_{A},\ket{1}_{A}  \right\}$. כאשר $B$ יהיה חלקיק נוסף, ראשית ב-$\ket{0}_{B}$ אשר יכול לבצע אינטגרציה על חלקיק $A$. 
+נניח כי בהסתברות $1-p$ לא קורה כלום, כאשר מהסתברות $p$ נקבל כי $B$ יתפזר מעל $A$ כך ש $B$ ישתנה בצורה הבאה:</p>
+<ol>
+<li>
+<p>אם $A=\ket{0}_{A}$  נקבל כי $B$ יעבור ל-$\ket{1}_{B}$. </p>
+</li>
+<li>
+<p>אם $A=\ket{1}_{_{A}}$ נקבל כי $B$ יעבור ל-$\ket{2}_{B}$ 
+נגדיר אורטור אוניטרי $U$ של התהליך הפיזור הזה. יש לנו 2 מצבים אפשריים של המצב ההתחלתי, שאיתם ניתן להגדיר את האופרטור קראוס.
+$$\ket{0} _{A}\otimes \ket{0} _{B}\qquad $$
+$$\begin{array}{l l l}{{\left|0\right\rangle_{A}\otimes\left|0\right\rangle_{B}\xrightarrow{U}}}{{\sqrt{1-p}\left|0\right\rangle_{A}\otimes\left|0\right\rangle_{B}+\sqrt{p}\left|0\right\rangle_{A}\otimes\left|1\right\rangle_{B}}}\\ {{\left|1\right\rangle_{A}\otimes\left|0\right\rangle_{B}\xrightarrow{U}}}{{\sqrt{1-p}\left|1\right\rangle_{A}\otimes\left|0\right\rangle_{B}+\sqrt{p}\left|1\right\rangle_{A}\otimes\left|2\right\rangle_{B}}}\end{array}$$</p>
+</li>
+</ol>
+<p>וכעת יש לנו שלושה מצבים ונדרש להגדיר שלושה אופרטורי קראוס:</p>
+<ol>
+<li>
+<p>במצב שבו אין פיזור נגדיר: 
+$$M_{0}=\left\langle0\right|_{B}U\left|0\right\rangle_{B}=\sqrt{1-p}\left(\left|0\right\rangle_{A}\left\langle0\right|_{A}+\left|1\right\rangle_{A}\left\langle1\right|_{A}\right)=\sqrt{1-p}\mathbb{I}_{A}$$</p>
+</li>
+<li>
+<p>במצב הפיזור הראשון נקבל: 
+$$M_{1}=\left\langle1\right|_{B}U\left|0\right\rangle_{B}=\sqrt{p}\left|0\right\rangle_{A}\left\langle0\right|_{A}=\frac{\sqrt{p}}{2}\left(\mathbb{I}+\sigma_{z}\right)_{A}$$</p>
+</li>
+<li>
+<p>במצב הפיזור השני נקבל: 
+$$M_{2}=\left\langle2\right|_{B}U\left|0\right\rangle_{B}=\sqrt{p}\left|1\right\rangle_{A}\left\langle1\right|_{A}=\frac{\sqrt{p}}{2}\left(\mathbb{I}-\sigma_{z}\right)_{A}$$</p>
+</li>
+</ol>
+<p>כדי להראות שאלו אופרטורי קראוס מספיק להראות כי מקיימים את יחס השלמות:
+$$M_{0}^{\dagger}M_{0} + M_{1}^{\dagger}M_{1}+M_{2}^{\dagger}M_{2}=\mathbb{1} $$
+כאשר כעת נקבל כי הערוץ דיפאזה תהיה מהצורה:
+$$\epsilon\left(\rho\right)=\left(1-p\right)\rho+\frac{p}{4}\left(\left(\mathbb{I}+\sigma_{z}\right)\rho\left(\mathbb{I}+\sigma_{z}\right)+\left(\mathbb{I}-\sigma_{z}\right)\rho\left(\mathbb{I}-\sigma_{z}\right)\right)=\left(1-\frac{p}{2}\right)\rho+\frac{p}{2}\sigma_{z}\rho\sigma_{z}$$
+כעת אם יש לנו מטריצת צפיפות מהצורה:
+$$\rho=\left(\begin{array}{c c}{{\rho_{00}}}&amp;{{\rho_{01}}}\\ {{\rho_{10}}}&amp;{{\rho_{11}}}\end{array}\right)$$
+וכעת מערוץ הדיפאזה נקבל:
+$$\epsilon\left(\begin{array}{c c}{{\rho_{00}}}&amp;{{\rho_{01}}}\\ {{\rho_{10}}}&amp;{{\rho_{11}}}\end{array}\right)=\left(\begin{array}{c c}{{\rho_{00}}}&amp;{{\left(1-p\right)\rho_{01}}}\\ {{\left(1-p\right)\rho_{10}}}&amp;{{\rho_{11}}}\end{array}\right)$$
+כאשר נשים לב כי אלמנטי המטריצה על האלכסון נשמרים, כאשר אלמנטי המטריצה אשר מחוץ לאלכסון באיטיות דועכים, זה הרכיבים שמאכסנים את המידע על הפאזה.</p>
+<p>כדי לראות מה קורה לקיטוב של חלקיק נסתכל על חלקיק עם מטרצית צפיפות $\rho\left( \vec{P} \right)$. אם נפעיל על זה את הערוץ נקבל כי:
+$$P_{3}\longrightarrow P_{3},\quad P_{1,2}\longrightarrow\left(1-\frac{p}{2}\right)P_{1,2}$$
+כאשר למעשה נקבל כיווץ של הוקטור קיטוב עבור הרכיב $x$ ו-$y$ כאשר רכיב ה-$z$ לא משתנה. </p>
+<p>נניח כעת כי יש שטף של חלקיקים עם קצב פיזור $\Gamma$. אזי ההסתברות שיתזר בזמן אינפיניטסימלי $\mathrm{d}t$ יהיה $p=\Gamma \mathrm{d}t$. עבור זמן סופי $t=N\mathrm{d}t$ נקבל:
+$$\epsilon^{N}\left(\begin{array}{c c}{{\rho_{00}}}&amp;{{\rho_{01}}}\\ {{\rho_{10}}}&amp;{{\rho_{11}}}\end{array}\right)=\left(\begin{array}{c c}{{\rho_{00}}}&amp;{{\left(1-p\right)^{N}\rho_{01}}}\\ {{\left(1-p\right)^{N}\rho_{10}}}&amp;{{\rho_{11}}}\end{array}\right)$$
+ואם ניקח את הגבול כאשר $t\to \infty$ (כלומר $t\gg \Gamma^{-1}$).
+$$\left(1-p\right)^{N}=\left(1-\Gamma\frac{t}{N}\right)^{N}\underset{N\rightarrow\infty}{\longrightarrow}e^{-\Gamma t}$$</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='prev-page'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

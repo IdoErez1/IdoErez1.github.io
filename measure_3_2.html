@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>רגולאריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_3_3`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_3_1`;}});</script>
+        <div class="content">
+        <h1>3.2  רגולאריות</h1>
+    <div class="definition"><span class="keyword">רגולריות פנימית וחיצונית</span><p>במרחב מידה $\left( X,\mathcal{M},\mu \right)$ המכילה את בורל(כדי שיהיה אפשר לדבר על קבוצות פתוחות קומפקטיות).</p>
+<ol>
+<li>
+<p>קבוצה $E$ נקראת רגולארית חיצונית אם: 
+$$\mu(E)=\inf \left\{  \mu(V)\mid E \subseteq V \text{ is open}  \right\}$$</p>
+</li>
+<li>
+<p>קבוצה $E$ נקראת רגולרית פינימית אם: 
+$$\mu(E)=\sup  \left\{  \mu(K)\mid K \subseteq E \text{ is compact}  \right\}$$</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מידת רדון</span><p>במרחב מידה $\left( X,\mathcal{M},\mu \right)$ המכיל את בורל מידה $\mu$ נקראת מידת רדון אם:</p>
+<ol>
+<li>
+<p>לכל $K$ קומפקטי מתקיים $\mu(K)&lt;\infty$. </p>
+</li>
+<li>
+<p>לכל $E \in \mathcal{M}$ רגולריות חיצונית(ביחס ל-$\mu$). </p>
+</li>
+<li>
+<p>כל הקבוצות הפתוחות או אלו ממידה סופית הן רגולריות פנימית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מרחב סיגמא קומפקטי</span><p>מרחב טופולוגי $X$ נקרא $\sigma$-קומפקטי אם $X=\bigcup_{n}K_{n}$ כש-$K_{n}$ קופקטיות.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב סיגמא סופי</span><p>מרחב מידה $\left( X,\mathcal{M},\mu \right)$ נקרא $\sigma$-סופי אם $X=\bigcup_{n}A_{n}$ כש-$\mu(A_{n})&lt;\infty$ לכל $n \in \mathbb{N}$.</p>
+</div>
+<div class="lemma">
+<p>יהי $\left( X,\mathcal{M,\mu} \right)$ מרחב מידה המכילה את בורל. ונניח ש-$X$ היא $\sigma$-קומפקטית וש-$\mu$ מידת רדון. אזי:</p>
+<ol>
+<li>
+<p>לכל $E \in \mathcal{M}$ קיימות $F\subseteq E \subseteq V$ כאשר $V$ פתוחה ו-$F$ סגורה המקיימת: 
+$$\mu\left( V \setminus  F \right)&lt;\varepsilon$$</p>
+</li>
+<li>
+<p>כל קבוצה ב-$\mathcal{M}$ רגולארית פנימית(וחיצונית מהגדרת מידת רדון). </p>
+</li>
+<li>
+<p>לכל $E \in \mathcal{M}$ מתקיים $A\subseteq E\subseteq B$ כש-$A$ היא $F_{\sigma}$(איחוד בן מנייה של סגורות) ו-$B$ היא $G_{\delta}$(חיתוך בן מנייה של סגורות) ו-$\mu\left( B\setminus A \right)=0$. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>מאחר ש-$X=\bigcup_{n}K_{n}$ כש-$K_{n}$ קופמקטי לכל $E \in \mathcal{M}$ מתקיים: 
+$$E=\bigcup_{n}E \cap K_{n}$$
+מאחר ש-$\mu$ מידת רדון. הרי שלכל $0&lt;\varepsilon$ קיימות $E \cap K_{n}\subseteq V_{n}$ כאשר $V_{n}$ מדידה עם:
+$$\mu(V_{n})&lt; \mu\left( E\cap K_{n} \right)+\frac{\varepsilon}{2^{n}}$$
+נסמן $V=\bigcup_{n}V_{n}$ ולכן:
+$$\mu\left( V\setminus  E \right)\leq \sum_{n}\mu\left( V_{n}\setminus  E\cap K_{n} \right)$$
+אם מריצים את אותו טיעון עבור $E^{c}$ מקבלים קבוצה סגורה $F\subseteq E$ עם $\mu\left( E \setminus F \right)&lt; \frac{\varepsilon}{2}$(שקול ל-$\mu\left( F^{c}\setminus E^{c} \right)&lt;\frac{\varepsilon}{2}$ - אותה קבוצה אשר מקרבים מבחוץ). מכאן נקבל את 1.</p>
+</li>
+<li>
+<p>לכל $E \in \mathcal{M}$ קיימת סגורה $F \subseteq E$ עם $\mu\left( E \setminus F \right)&lt;\varepsilon$ מאחר ש $F=\bigcup_{n}F \cap K_{n}$ תהיה $\sigma$-קומפקטית הרי ש: 
+$$\mu\bigg(\overbrace{ \bigcup_{n=1}^{N}F_{n}K_{n}  }^{ \text{compact} }\bigg)\xrightarrow{N\to \infty} \mu(F)$$</p>
+</li>
+<li>
+<p>לכל $n$ נקח $F_{n}\subseteq E_{n}\subseteq V_{n}$ עם $\mu\left( V_{n}\setminus F_{n} \right)&lt;\frac{1}{n}$ ואז ניקח: 
+$$B=\bigcap_{n}V_{n} \qquad  A= \bigcup_{n}F_{n}$$
+יספקו את הטענה.</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword"></span><p>יהי $X$ מרחב האוסדורף קומפקטי מקומית המקיים שכל קבוצה פתוחה בו היא $\sigma$-קומפקטית. אזי אם $\mu$ מידה על $\sigma$-אלגברת בורל על $X$ המקיימת ש $\mu(K)&lt;\infty$ לכל קומפקטית $X \subseteq K$ אזי $\mu$ מידת רדון(וכל קבוצה מדידה היא רגולרית פנימית וחיצונית)</p>
+</div>
+<div class="example">
+<p>הקבוצה $\mathbb{R}^{n}$ מקיים את התנאים. </p>
+</div>
+<div class="proof">
+<p>מאחר ש-$\mu$ סופית על קומפקטית נקבל ש:
+$$\Lambda f:= \int f \;\mathrm{d} \mu $$
+הינו פונקצול לינארי חיובי על $C_{c}(X)$. ממשפט ההצגה של ריס קיימת מידת רדון $\lambda$ על $X$ המקיימת:
+$$\int f \;\mathrm{d} \lambda = \int f \;\mathrm{d} \mu  $$
+לכל $f \in C_{c}(X)$. נרצה להראות ש-$\lambda(E)=\mu(E)$ לכל קבוצה מדידת בורל. מאחר ש-$V= \bigcup_{n}K_{n}$ קופמקטיות הרי שלכל $n$ קיימת פונקציה $g_{n}\in C_{c}(X)$ הרי שלכל $n$ קיימת פונקציה $g_{n}\in C_{c}(X)$ עם $K_{n}\prec g_{n}\prec V$. נגדיר:
+$$f_{N}=\max \left\{  g_{1},g_{2},\dots, g_{N}  \right\} \in C_{c}(X)$$
+ומתקיים $f_{1}\leq f_{2}\leq f_{3}\leq\dots$ עם $f_{N}\xrightarrow{N\to \infty} \mathbb{1}_{V}$ נקודותית. מכן ממשפט ההתכנסות המונוטוית נקבל:
+$$\mu(V)=\lim_{ N \to \infty } \int f_{N} \;\mathrm{d} \mu =\lim_{ N \to \infty } \int f_{N} \;\mathrm{d} \lambda = \lambda(V) $$
+כלומר $\mu(V)=\lambda(V)$ לכל קבוצה פתוחה. מהטענה הקודמת קיימות לכל $E\in \mathcal{M}$ פתוחה וסגורה $F\subseteq E \subseteq V$ עם $\lambda\left( V\setminus F \right)$ מאחר ש-$V\setminus F$ פתוחה הרי ש-$\mu\left( V\setminus F \right)&lt;\varepsilon$ ולכן:
+$$\mu(V)&lt;\mu(E)+\varepsilon \qquad \lambda(V)&lt;\lambda(E)+\varepsilon$$
+ונקבל:
+$$\lambda(E)-\varepsilon&lt;\lambda(V)-\varepsilon = \mu(V)-\varepsilon \leq \mu(E)\leq \mu(V)=\lambda(V)\leq \lambda(E)+\varepsilon$$
+כך שבסופו של דבר נקבל:
+$$\left\lvert  \mu(E)-\lambda(E)  \right\rvert &lt;\varepsilon$$</p>
+</div>
+<div class="definition"><span class="keyword">מידת הסתברות</span><p>מידה על קבוצה $X$ אשר מקיימת $\mu(X)=1$.</p>
+</div>
+<div class="corollary">
+<p>כל מידות ההסתברות על $\mathbb{R}^{n}$ הן רגולריות. מידת ההסתברות היא סופית על כל המרחב ולכן בפרט על כל תת קבוצה קומפקטית.</p>
+</div>
+<div class="corollary">
+<p>תחת התנאים בטענה (למשל ב$\mathbb{R}^{n}$) יש את ההתאמה החח"ע ועל:
+$$\left\{  \text{linear functionals on } C^{*} \right\} \leftrightarrow \left\{  \text{finite borel measures on compact}  \right\}$$</p>
+</div>
+<div class="remark">
+<p>אם $\mu$ סופית על קומפקטיות אזי לכל $f \in C_{c}(X)$ מתקיים:
+$$\left\lvert  \int f \;\mathrm{d} \mu   \right\rvert \leq \lVert f \rVert _{\infty}\cdot \mu\left( \text{supp}(f) \right)\qquad \left( f\leq \lVert f \rVert _{\infty} \cdot \mathbb{1} _{\text{supp}(f)} \right)$$</p>
+</div>
+<div class="corollary">
+<p>מידת לבג היא מידת בורל <u>היחידה</u> על $\mathbb{R}$ שמקיימת $\mu((a,b))=b-a$.</p>
+</div>
+<div class="definition"><span class="keyword">התכנסות חלשה-$*$</span><p>יהי $X$ מרחב האוסדורף קומפקטי מקומית. ויהיו $\mu,\mu_{n}$ מידות רדון. נאמר ש-$\mu_{n}$ מתכנסת חלש-$*$ ל-$\mu$ ונסמן:
+$$\mu_{n}\overset{*}{\rightharpoonup} \mu$$
+אם מתקיים:
+$$\forall f \in C_{c}\qquad  \int f \;\mathrm{d} \mu_{n}\xrightarrow{n\to \infty} \int f \;\mathrm{d} \mu  $$</p>
+</div>
+<p>מעטה נניח כי $X$ קומפקטי. נסמן:
+$$\mathcal{P}(X) =\left\{  \mu \mid \mu\text{ is an probability measure on } X \right\}$$</p>
+<div class="reminder">
+<p>עבור מרחבים קומפקטים $(C_{c}(X)=)C(X)$ ספרבילי (למשל מ-Stone Weierstrass). כלומר קיימת סדרה ב"מ $0 \not \in\{ f_{n} \}$ שצפופה ב-$C(X)$ נגדיר לכל $\mu ,\nu \in \mathcal{P}(X)$.
+$$d\left( \mu,\nu \right):= \sum_{i=1}^{\infty} 2^{-n}\left\lvert  \int f_{n} \;\mathrm{d} \mu -\int f_{n} \;\mathrm{d} \nu   \right\rvert \cdot \lVert f_{n} \rVert _{\infty}^{-1}$$</p>
+</div>
+<div class="lemma">
+<p>הפונקציה $d$ הינה מטריקה על $\mathcal{P}(X)$.</p>
+</div>
+<div class="proof">
+<p>אי שלילית, סימטרית ומקיימת את אי שיוויון המשולש. נותר להוכיח $d\left( \mu,\nu \right)=0$ גורר $\mu=0$. אם $d\left( \mu,\nu \right)=0$ נקבל:
+$$\forall n \quad \int f_{n} \;\mathrm{d} \mu = \int f_{n} \;\mathrm{d} \nu  $$
+לכל $g \in C(X)$ קיימת תת סדרה $f_{n_{k}}\to g$ ב-$||\cdot||_{\infty}$. מכך נובע גם שקיים $M&gt;0$ עבורו $\lVert f_{n_{k}} \rVert,\lVert g \rVert \leq M$
+ממשפט ההתכנסות הנשלטת נסיק כי:
+$$\int g \;\mathrm{d} \mu =\lim_{ k \to \infty } \int f_{n_{k}} \;\mathrm{d} \mu =\lim_{ k \to \infty } \int f_{n_{k}} \;\mathrm{d} \nu = \int  g \;\mathrm{d} \nu  $$
+ולכן מיחידות ההצגיה כפונקציונל נקבל $\mu=\nu$.</p>
+</div>
+<div class="remark">
+<p>$$d\left( \mu_{n},\mu \right)\xrightarrow{n\to \infty} 0 \iff \mu_{n} \overset{*}{\rightharpoonup} \mu$$</p>
+</div>
+<div class="proposition">
+<p>המרחב $\mathcal{P}(X)$ הוא מרחב קומפקטי.</p>
+</div>
+<div class="proof">
+<p>נראה קומפקטיות סדרתית. נקבע קבוצה בת מנייה צפופה ($\overline{\{ f_{n} \}}_{n \in \mathbb{N}}$) תהי $\mu_{n}\in \mathcal{P}(X)$. מאחר שהסדרה:
+$$\left( \int f_{1} \;\mathrm{d} \mu_{n}  \right)_{n \in \mathbb{N}}$$
+חסומה ב-$\mathbb{C}$. ב-$\mathbb{C}$ נסיק שקיימת תת סידה $\mu_{n,1}$ כך שעלייה מתקיים:
+$$\int f_{1} \;\mathrm{d} \mu_{n,1}\xrightarrow{n\to \infty}\alpha_{1} $$
+סדרת הערכים $\left( \int f_{2} \;\mathrm{d} \mu_{n,1} \right)_{n\in \mathbb{N}}$ חסומה ב-$\mathbb{C}$ ולכן קיימת תת סדרה $\mu_{n,2}$ של $\mu_{n,1}$ עליה $\int f_{2} \;\mathrm{d} \mu_{n,2}$. נמשיך כך לכל $f_{k}$ מטיעון האלכסון נסיק כי תת-הסדרה $\mu_{n,n}$ מקיימת:
+$$\forall k \in \mathbb{N} \quad  \int f_{k} \;\mathrm{d} \mu_{n,n}\xrightarrow{n\to \infty} \alpha_{k}\in \mathbb{C} $$
+בהנתן $g \in C(X)$ כלשהו ו-$0&lt;\varepsilon$ קיים $i \in \mathbb{N}$ כך ש:
+$$\lVert f_{i}-g \rVert &lt; \frac{\varepsilon}{3}$$
+בנוסף קיים $N \in \mathbb{N}$ כך שלכל $n,m&gt; N$ מתקיים:
+$$\left\lvert  \int f_{i} \;\mathrm{d} \mu_{n,n}-\int f_{i} \;\mathrm{d} \mu_{m,m}    \right\rvert &lt; \frac{\varepsilon}{3}$$
+ולכן:
+$$\left\lvert  \int g \;\mathrm{d} \mu_{n,n}-\int g \;\mathrm{d} \mu_{m,m}    \right\rvert \leq \underbrace{ \left\lvert  \int g \;\mathrm{d} \mu_{n,n}-\int f_{i} \;\mathrm{d} \mu_{n,n}    \right\rvert }_{ \leq \left\lVert  g\cdot f_{i}  \right\rVert _{\infty}\cdot \mu_{n,n}(X)&lt;\frac{\varepsilon}{3} } +\left\lvert  \int f_{i} \;\mathrm{d} \mu_{n,n}   -\int f_{i} \;\mathrm{d} \mu_{m,m} \right\rvert +\underbrace{ \left\lvert  \int f_{i} \;\mathrm{d} \mu_{m,m} - \int g \;\mathrm{d} \mu_{m,m}    \right\rvert }_{ &lt;\frac{\varepsilon}{3} } &lt;\varepsilon$$
+לכן הסדרה $\left( \int g \;\mathrm{d} \mu_{m,n} \right)_{n \in \mathbb{N}}$ הינה סדרה קושי ב-$\mathbb{C}$ ולכן מתכנסת. לכן נגדיר:
+$$\Lambda g= \lim_{  n \to \infty }  \int g \;\mathrm{d} \mu_{n,n} $$
+תרגילון - לוודא ש-$\Lambda$ פונקציונאל לינארי חיובי. ולכן קיימת מידה $\mu$ המתאימה ל-$\Lambda$. חסר רק להראות ש-$\mu \in \mathcal{P}(X)$. זה נובע ישירות מכך ש-$\mathbb{1}_{X}\in C(X)$ המקיימת:
+$$\mu(X)=\lim_{ n \to \infty } \int \mathbb{1} _{X} \;\mathrm{d} \mu_{n,m} = 1 $$</p>
+</div>
+<div class="remark">
+<ol>
+<li>
+<p>התכנסות חלשה-$*$ היא חלשה יותר מהתנאי שלכל $E \in B$. 
+$$\mu_{n}(E)\to \mu(E)$$
+לדוגמא ב-$\mathbb{R}$ נסתכל על 
+$$\mu_{n}=\delta_{\frac{1}{n}} = \begin{cases} 1  &amp;  \frac{1}{n}\in E \\0 &amp; \text{else} \end{cases}$$
+אז $\mu_{n}\overset{*}{\rightharpoonup} \delta_{0}$:
+$$\forall f \in C_{c}\left( \mathbb{R} \right)\quad \int f \;\mathrm{d} \mu_{n}= f\left(  \frac{1}{n} \right)\xrightarrow{n\to \infty}f(0)=\int f \;\mathrm{d} \delta_{0}  $$
+מצד שני:
+$$\begin{gather}0\equiv \mu_{n}\left( \{ 0 \} \right) \not \to 1 = \delta_{0}\left( \{ 0 \} \right)  \\1\equiv \mu_{n}((0,1)) \not \to 0 =\delta_{0}((0,1)) \end{gather}$$</p>
+</li>
+<li>
+<p>תנאי הקופקטיות ההכרחי למשל ב-$\mathbb{R}$ לסדרה $\delta_{n} \in \mathcal{P}\left( \mathbb{R} \right)$ אין תת סדרה מתכנסת ב-$\mathcal{P}\left( \mathbb{R} \right)$. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='prev-page'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+</ul></li>
+        </body>
+        </html>
+        

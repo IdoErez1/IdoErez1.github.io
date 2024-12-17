@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מחלקות סיבוכיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_3_3`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_3_1`;}});</script>
+        <div class="content">
+        <h1>3.2  מחלקות סיבוכיות</h1>
+    <p>ניתן לכמת כמה בעיה היא קשה לפתור על ידי כמה משאבים היא דורשת כדי לפתור בעיה עם גודל קלט $n$.</p>
+<div class="proposition">
+<p>דרך אחת למדוד את היעילות של משפחת מעגלים היא על ידי איך שהכמות שערים גדלה כאשר מגדלים את גודל הקלט. </p>
+</div>
+<div class="definition"><span class="keyword">מחלקת סיבוכיות</span><p>כל המשפחות מעגלים אשר קצב גידול השערים שלהם גדל לפי תנאי מסויים נמצאים באותה מחלקת סיבוכיות.</p>
+</div>
+<div class="remark">
+<p>לחובבי תורת הקבוצות, זה אכן לא קבוצה, ולכן מתאים לקרא לזה "מחלקה".</p>
+</div>
+<div class="definition"><span class="keyword">משפחת מעגלים פולינומיאליים</span><p>משפחת מעגלים אשר גדל לכל היותר באיזושהי חזקה של גודל הקלט $n$.</p>
+</div>
+<div class="definition"><span class="keyword">בעיה קלה וקשה</span><p>בעיה אשר נפתרת על ידי משפחת מעגלים פולונימיאלים נקראת בעיה קלה. כל יתר הבעיות נקראות קשות.</p>
+</div>
+<div class="definition"><span class="keyword">מחלקת הסיבוכיות NP</span><p>מחלקת הסיבוכיות של כל המעגלים אשר ניתן לוודא את הפיתרון שלהם בזמן פולינומיאלי.</p>
+</div>
+<h2>חישוב אקראי</h2>
+<div class="definition"><span class="keyword">חישוב שימושי</span><p>אנחנו אומרים שחישוב אקראי נחשב שימושי אם קיים $\delta&gt;0$ בלתי תלוי בגודל הקלט אשר עבורו ההסתברות להיות במצב הנכון מקיים:
+$$\mathrm{Prob}\left( \text{right} \right)\geq \frac{1}{2}+\delta$$</p>
+</div>
+<div class="corollary">
+<p>עבור חישוב שימושי ביצועים חוזרים של המדידה ולקיחת הערך שהופיע הכי הרבה פעמים תגדיל את הסיכיים.</p>
+</div>
+<div class="proposition"><span class="keyword">חסם צ'רנוף Chernoff</span><p>עבור סדרה של $N$ מדידות ההסתברות לטעות תהיה לכל היותר:
+$$\mathrm{Prob}\,(\mathrm{wrong})\leq e^{-2N\delta^{2}}$$</p>
+</div>
+<div class="proof">
+<p>כאשר יש שתי מדידות עבור $N$ אופציות נקבל $2^{N}$ סדרות שונות של אפשרויות שהיינו יכולים לקבל. ההסתברות לקבל סדרה עם $N_{\omega}&gt; \frac{N}{2}$ נקבל:
+$${\left({\frac{1}{2}}-\delta\right)^{N_{W}}\left({\frac{1}{2}}+\delta\right)^{N-N_{W}}}{\!\!\!\!\leq\left({\frac{1}{2}}-\delta\right)^{N/2}\!\left({\frac{1}{2}}+\delta\right)^{N/2}}\!\!\!\!=\frac{(1-4\delta^{2})^{N/2}}{2^{N}}\!\leq\!\frac{(e^{-4\delta^{2}})^{N/2}}{2^{N}}$$
+אנו יודעים כי הבחירה של הרוב תביא את הפתרון. לכן נכפיל ב-$2^{N}$, נפתח את המכנה ונקבל את החסם הנקרא Chernoff bound:
+כאשר אם מניחים הסתברות שגיאה מקסימלית $\varepsilon$:
+$$N\geq{\frac{1}{2\delta^{2}}}\ln\left({\frac{1}{\epsilon}}\right)$$</p>
+</div>
+<div class="remark">
+<p>אוהבים לבחור $\delta=\frac{1}{6}$. </p>
+</div>
+<div class="definition"><span class="keyword">מחלקת הסיבוכיות BPP</span><p>המחלקת סיבוכיות של כל המשפחות מעגלים עם קצב גידול היסתברותי חסום על ידי פולינום.</p>
+</div>
+<div class="corollary">
+<p>המחלקת סיבוכיות $P$ מוכלת במחלקת סיבוכיות $BPP$ כיוון שדטרמניזם זה מקרה פרטי של סיבוכיות.</p>
+</div>
+<div class="remark">
+<p>אין לזה הוכחה אבל מאמינים כי יש שיוויון, ומתקיים $BPP=P$. כלומר אקראיות לא משמר את היכולת החישובית.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+<li class='prev-page'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

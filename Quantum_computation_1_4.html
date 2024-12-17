@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שזירה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2'>2.2 מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3'>2.3 ערוצים קוונטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1'>3.1 מעגלים קלאסיים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2'>3.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_3'>3.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1'>4.1 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2'>4.2 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_2_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_1_3`;}});</script>
+        <div class="content">
+        <h1>1.4  שזירה</h1>
+    <div class="definition"><span class="keyword">מערכת שתי מערכות - Bipartite Hilbert Space</span><p>מרחב מכפלה של שתי מצבים:
+$$\mathcal{H}=\mathcal{H}_{A}\times \mathcal{H}_{B}$$
+עם בסיס אורתונורמלי $\{ \ket{ij} \}$. המצב הטהור הכללי ב-$\mathcal{H}$ יהיה:
+$$\ket{\psi} = \sum_{ij} \psi_{ij} \ket{i} _{A}\ket{j} _{B}$$
+כאשר נסמן ב-$\psi_{ij}$ את המטריצת אמפליטודות $d_{A}\times d_{B}$.</p>
+</div>
+<div class="definition"><span class="keyword">פירוק ערכים סינגולאריים $SVD$</span><p>עבור מטריצה $\psi_{ij}$ מגודל $d_{A}\times d_{B}$ קיימת מטריצה אינוטרית $U_{A}$ מגודל $d_{A}\times d_{A}$ כאשר $U_{B}$ היא מגודל $d_{B}\times d_{B}$ ומטריצה מלבנית $\Lambda\left( d_{A}\times d_{B} \right)$ כך ש:
+$$\psi=U_{A}^{T}\Lambda U_{B}$$
+כאשר נניח בלי הגבלת הכלליות כי $d_{A}\geq d_{B}\equiv d$. כאשר מטריצת הערכים הסינגולרית $\Lambda$ תהיה מהצורה:
+$$\Lambda=\left(\begin{array}{c c c c}{{\lambda_{1}}}&amp;{{0}}&amp;{{\cdots}}&amp;{{0}}\\ {{0}}&amp;{{\ddots}}&amp;&amp;{{\vdots}}\\ {{\vdots}}&amp;{{}}&amp;{{\ddots}}&amp;{{0}}\\ {{0}}&amp;{{\cdots}}&amp;{{0}}&amp;{{\lambda_{d}}}\\ {{0}}&amp;{{\cdots}}&amp;{{\cdots}}&amp;{{0}}\\ {{\vdots}}&amp;{{}}&amp;{{}}&amp;{{\vdots}}\\ {{0}}&amp;{{\cdots}}&amp;{{\cdots}}&amp;{{0}}\end{array}\right)$$</p>
+</div>
+<div class="proposition">
+<p>לכל מטריצה קיים פירוק ערכים סינוגלארים.</p>
+</div>
+<div class="proposition">
+<p>בעזרת פירוק ערכים סינגולאריים ניתן לכתוב
+$$\left|\psi\right\rangle=\sum_{i j}\sum_{\mu}\left(U_{A}^{T}\right)_{i\mu}\lambda_{\mu}\left(U_{B}\right)_{\mu j}\left|i\right\rangle_{A}\otimes\left|j\right\rangle_{B}\equiv\sum_{\mu}\lambda_{\mu}\left|\mu\right\rangle_{A}\otimes\left|\mu\right\rangle_{B}$$
+כאשר הגדרנו בסיס אורתונורמלי חדש(מטריצת מעבר בסיס אוניטרית מעבירה בסיס אוניטרי לבסיס אוניטרי) בצורה הבאה:
+$$|\mu\rangle_{A}=\sum_{i}\left(U_{A}\right)_{\mu i}|i\rangle_{A}\quad,|\mu\rangle_{B}=\sum_{j}\left(U_{B}\right)_{\mu j}|j\rangle_{B}$$</p>
+</div>
+<div class="definition"><span class="keyword">צורת שמידט</span><p>$$|\psi\rangle=\sum_{\mu=1}^{d}\lambda_{\mu}\,|\mu\rangle_{A}\otimes|\mu\rangle_{B}$$
+כאשר $\lambda_{\mu}$ נקרא מקדמי שמידט.</p>
+</div>
+<div class="proposition">
+<p>כיוון שכל המקדמי שמידט הם חיוביים וממשיים ניתן לסדר אותם:
+$$\lambda_{1}\geq \lambda_{2} \geq \dots \geq \lambda_{d}$$
+כאשר דרישת הנירמול נותנת
+$$\sum_{\mu=1}^{d} \lambda_{\mu}^{2}=1$$</p>
+</div>
+<div class="definition"><span class="keyword">דרגת שמידט</span><p>מסר המקדמי שמידט שאינו אפס.</p>
+</div>
+<div class="remark">
+<p>הדרגת שמידט המינימלית תהיה 1. זאת נובע מדרישת הנירמול.</p>
+</div>
+<div class="proposition"><span class="keyword">דרגת שמידט 1</span><p>עבור דרגת שמידט 1 נקבל
+$$\ket{\psi} = \ket{\mu=1}_{A} \otimes \ket{\mu=1}_{B}$$
+ונקבל כי אין קשר בין התתי מערכות.</p>
+</div>
+<div class="proposition"><span class="keyword">דרגת שמידט גדולה מ-1</span><p>עבור דרגת שמידט גדולה מ-1 נקבל כי $\ket{\psi}$ היא שזורה.
+$$\ket{\psi} =\sum_{\mu=1} \lambda_{\mu} \ket{\mu}_{A}\otimes \ket{\mu}_{B}   $$
+כאשר מדידה של $\ket{\mu}_{A}$ ב-$A$ גורמת ל-$\ket{\mu}_{B}$ מיידית.</p>
+</div>
+<h2>אנטרופיה שזירה</h2>
+<div class="proposition">
+<p>$$\rho_{A}=\mathrm{Tr_{B}}\left[\rho\right]=\sum_{\mu=1}^{d}\lambda_{\mu}^{2}\left|\mu\right\rangle_{A}\left\langle\mu\right|_{A}=\sum_{\mu=1}^{d}p_{\mu}\left|\mu\right\rangle_{A}\left\langle\mu\right|_{A}$$
+- אם יש שזירה, אנחנו עושים טרייס אוט לאחד המרחבים אז המצב שנשאר יהיה מצב מעורב.
+- ניתן להתייחס לזה כעת כמו צבר קלאסי, עם צפיפות הסתברות קלאסי, ולכן ניתן להגדיר את האטרופיה כדי לכמת את האי וודאות של המצב $A$.</p>
+</div>
+<div class="definition"><span class="keyword">אנטרופיה פון נוימן</span><p>מוגדר על ידי
+$$S=-\sum_{\mu}p_{\mu}\ln p_{\mu}$$</p>
+</div>
+<div class="remark">
+<p>כיוון ש$S$ הוא צירוף קמור נקבל $S\geq 0$.</p>
+</div>
+<div class="proposition">
+<p>כאשר אין שזירה נקבל כי האנטרופיה אפס כאשר באופן כללי נקבל.
+$$S_{A}=-\mathrm{Tr}\left[\rho_{A}\ln\rho_{A}\right]$$</p>
+</div>
+<div class="proposition"><span class="keyword">אנטרפיה מקסימלית</span><p>האנטרופיה מקסימלית כאשר $\rho_{A}$ הוא אקראי לחלוטין. כלומר
+$$p_{\mu}=\frac{1}{d}\quad\forall\mu$$
+וכעת:
+$$S_{\mathrm{max}}=-\sum_{\mu=1}^{d}{\frac{1}{d}}\ln{\frac{1}{d}}=\ln d$$
+כאשר המטריצת הצפיפות במקרה זה תהיה:
+$$\rho=\frac{1}{d}\sum_{\mu}\left|\mu\right\rangle\left\langle\mu\right|=\frac{1}{d}\mathbb{1}$$</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_1'>2.1 מדידה מוכללת</a></li>
+<li class='prev-page'><a href='./Quantum_computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נורמות ומרחבי Lᵖ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_4_1'>4.1 קמירות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_4_1`;}});</script>
+        <div class="content">
+        <h1>4.2  נורמות ומרחבי Lᵖ</h1>
+    <div class="definition"><span class="keyword">נורמת $p$ של $f$</span><p>לכל $f:X\to \mathbb{C}$ מדידה ולכל $1\leq p \leq \infty$ נגדיר:
+$$\lVert f \rVert _{p} := \left[ \int  \lvert f \rvert ^{p} \;\mathrm{d} \mu  \right]^{1/p}$$
+ונקרא לזה נורמת ה-$p$ של $f$. עבור $p=\infty$:
+$$\lVert f \rVert _{\infty}=\text{ess-sup}\left( \lvert f \rvert  \right):= \inf \left\{  \alpha \geq 0 \mid \mu\left( \left\{  x\mid \lvert f(x) \rvert &gt;\alpha  \right\} \right)=0  \right\}$$</p>
+</div>
+<p>מוסכמה - $\inf \varnothing = \infty$. נסמן:
+$$\mathcal{L} ^{p}\left( \mu \right):=\left\{  f:X\to \mathbb{C} \text{ measurable}\mid \lVert f \rVert _{p}&lt;\infty   \right\}$$</p>
+<div class="proposition">
+<p>אם $1\leq p,q\leq \infty$ חזקות צמודות ו-$f \in \mathcal{L}^{p}$, $g \in \mathcal{L}^{q}$ אזי $f\cdot g \in \mathcal{L}^{1}$.</p>
+</div>
+<div class="proof">
+<p>עבור $1&lt;p,q&lt;\infty$ נובע מאי שיוויון הלדר. עם $p=1,q=\infty$ מתקיים $\lvert g(x) \rvert \leq \lVert g \rVert _{\infty}$ מתקיים $\mu$-כמעט תמיד. לכן:
+$$\int \left\lvert  f\cdot g  \right\rvert  \;\mathrm{d} \mu \leq \lVert g \rVert _{\infty}\int \lvert f \rvert  \;\mathrm{d} \mu  $$</p>
+</div>
+<div class="proposition">
+<p>לכל $f,g \in \mathcal{L}^{p}$ עם $1\leq p\leq \infty$ מתקיים:
+$$\lVert f+g \rVert_{p} \leq \lVert f \rVert _{p} + \lVert g \rVert _{p}$$</p>
+</div>
+<div class="proof">
+<p>עבור $1&lt;p&lt; \infty$ נקבל את אי שיוויון מנקובסקי.
+עבור $p=1,\infty$ נובע ישירות מאי שיוויון המשולש.</p>
+</div>
+<div class="corollary">
+<p>המרחב $\mathcal{L}^{p}$ הוא מרחב ווקטורי לכל $1\leq p\leq \infty$.</p>
+</div>
+<div class="proof">
+<p>עבור $f \in \mathcal{L}^{p}$ ו-$\alpha \in \mathbb{C}$ קבוע נקבל $\alpha f \in \mathcal{L}^{p}$.</p>
+</div>
+<div class="remark">
+<p>הפונקציה $||\cdot||$ איננה נורמה על $\mathcal{L}^{p}$ כי $||f||_{p}=0$ גם במקרה ש-$f\neq 0$. עם זרת נשים לב שלכל $1\leq p\leq \infty$ אם $\lVert f \rVert_{p}=0$ אז $f \overset{\mu}{=} 0$. 
+נזכר בתרגיל בו הגדרנו יחס שקילות $f \sim g$ אם $f\overset{\mu}{=} g$. נגדיר:
+$$L^{p}\left( \mu \right)=\left\{  [f]\mid f \in \mathcal{L} ^{p}  \right\}$$
+וכעת $\left( L^{p}\left( \mu \right),||\cdot||_{p} \right)$ מרחב נורמי.</p>
+</div>
+<div class="theorem">
+<p>לכל $1\leq p\leq \infty$ מתקיים כי $L^{p}$ מרחב נורמי שלם(שלם כמרחב מטרי ביחס ל-$d(x,y)=\lVert x-y \rVert_{p}$).</p>
+</div>
+<div class="definition"><span class="keyword">מרחב בנך</span><p>מרחב נורמי שלם נקרא מרחב באנך.</p>
+</div>
+<div class="proof">
+<p>נתחיל מהמקרה של $1\leq p&lt; \infty$. תהי $(f_{n})\subseteq L^{p}$ סדרת קושי כלשהי. נבחר תת סדרה $f_{n_{k}}$ המקיימת:
+$$\forall k \in \mathbb{N}\quad \lVert f_{n_{k+1}}-f_{n_{k}} \rVert _{p}&lt;2^{-k}$$
+נגדיר:
+$$g_{k}= \sum_{i=1}^{k} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert $$
+אזי $g_{k}\in L^{p}$. נסמן $g=\sum_{i=1}^{\infty} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert$. נבחין כי $0\leq g_{1}\leq g_{2}\leq \dots$. ו-$g=\lim_{ k \to \infty }g_{k}$ לכן ממשפט ההתכנסות המונוטונית:
+$$\lVert g \rVert _{p}^{p}=\int g^{p} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k}^{p} \;\mathrm{d} \mu &lt; 1  $$
+כי מאי שיוויון מינקובסקי:
+$$\lVert g_{k} \rVert_{p}\leq \sum_{i=1}^{k}\lVert f_{n_{i+1}}-f_{n_{i}} \rVert_{p} &lt; 1$$
+מכך ש-$\lVert g \rVert_{p}$ נובע ש-$g(x)&lt;\infty$ מתקיים $\mu$ כמעט תמיד כלומר הטור $\sum_{i=1}^{\infty} (f_{n_{i+1}}-f_{n_{i}})$ מתכנס בהחלט $\mu$-כמעט תמיד. נגדיר 
+$$f=f_{n_{1}} + \sum_{i=1}^{\infty}  (f_{n_{i+1}}-f_{n_{i}})$$
+ונסיק כי $f \in L^{p}$. מוגדר $\mu$-כמעט תמיד. נקבע $f=0$ היכן שאיננו מוגדר נבחין כי:
+$$f(x)=\lim_{ i \to \infty } f_{n_{i}}(x)$$
+מתקיים $\mu$ כמעט תמיד. מהלמה של פאטו(Fatou) עבור כל $m \in \mathbb{N}$:
+$$\int \lvert f_{m}-f\rvert^{p}  \;\mathrm{d} \mu \leq \liminf_{ i \to \infty } \int \lvert f_{m}-f_{n_{i}} \rvert ^{p} \;\mathrm{d} \mu = \liminf  \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}$$</p>
+</div>
+<p>מאחר ש-$(f_{n})$ סדרת קושי, הרי שלכל $0&lt;\varepsilon$ קיים $N$ כך שלכל $m,n &gt; N$ מתקיים:
+$$\lVert f_{m}-f_{n} \rVert _{p}&lt;\varepsilon$$
+בפרט עבור $m&gt; N$:
+$$\lVert f_{m}-f \rVert _{p}^{p}\leq \liminf_{i\to \infty} \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}&lt;\varepsilon^{p} $$
+ולכן
+$$\lVert f \rVert _{p}\leq \lVert f_{m} \rVert _{p}+\lVert f_{m}-f \rVert_{p}&lt; \infty$$
+כלומר $f \in L^{p}$. יתר על כן הראנו ש-$\lVert f_{m}-f \rVert\xrightarrow{m\to \infty} 0$.
+עבור $p=\infty$ ניקח סדרת קושי $(f_{n})\subseteq L^{\infty}\left( \mu \right)$. נסמן:
+$$A_{n}=\left\{  x\mid \lvert f_{n}(x) \rvert &gt;\lVert f_{n} \rVert _{\infty}  \right\}\qquad B_{n,k}=\left\{  x \mid \lvert f_{n}(x)-f_{k}(x) \rvert &gt; \lVert f_{n}-f_{k} \rVert _{\infty}  \right\}$$
+כאשר:
+$$\mu\left( \underbrace{ \bigcup_{n}A_{n}\cup \bigcup_{n,k}B_{n,k}  }_{ E }\right)=0$$
+מכיוון שעל  $X \setminus E$ מתקיים ש-$f_{n}$ מתכנס במ"ש.
+בפרט $f(x)=\lim_{ n \to \infty }f_{n(x)}$ מוגדר $\mu$ כמעט תמיד וחסום על ידי $\lim_{ n \to \infty }\lVert f_{n} \rVert_{\infty}$ כלומר $f \in L^{\infty}$ ומתקיים:
+$$\lVert f-f_{n} \rVert _{\infty}\xrightarrow{n\to \infty} 0$$</p>
+<div class="proposition">
+<p>נסמן ב-$S$ את אוסף הפונקציות מורבות הפשוטות עם
+$$\mu\left( \left\{  S \neq 0  \right\} \right)&lt; \infty$$
+אזי לכל $1\leq p &lt; \infty$ נקבל כי $S$ צפופה ב-$L^{p}\left( \mu \right)$.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='prev-page'><a href='./measure_4_1'>4.1 קמירות</a></li>
+</ul></li>
+        </body>
+        </html>
+        
