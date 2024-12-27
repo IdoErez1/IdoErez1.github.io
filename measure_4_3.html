@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>רציפות בהחלט וסינגולאריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3'>4.3 רציפות בהחלט וסינגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_4_4`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_4_2`;}});</script>
+        <div class="content">
+        <h1>4.3  רציפות בהחלט וסינגולאריות</h1>
+    <div class="reminder">
+<p>בהנתן מידה $\mu$ על $X$ ופונקציה מדידה $h:X\to\left[ 0,\infty \right]$ הגדרנו מידה $\nu$ עד ידי $\mathrm{d}\nu=h\mathrm{d}\mu$ (כלומר $\nu(A)=\int _{A}h \;\mathrm{d} \mu$) כאשר הראנו שמתקיים במקרה זה:
+$$\mu(E)=0\implies \nu(E)=0$$
+לכל $E \in \mathcal{A}$ מדידה.</p>
+</div>
+<div class="definition"><span class="keyword">רציפות בהחלט</span><p>נאמר ש-$\mu\ll \nu$  ונאמר ש-$\mu$ <u>רציפה בהחלט</u> ביחס ל-$\nu$ אם:
+$$\nu(A)=0\implies \mu(A)=0$$</p>
+</div>
+<div class="example">
+<p>נניח כי $\mu$ מידה וכי $f:X\to \left[ 0,\infty \right]$ פונקציה מידה אי שלילית. נזכור כי הפונקציה $\mu_{f}(A)=\int _{A}f \;\mathrm{d} \mu$ מגדיר מידה,
+וכן מתקיים:
+$$\mu=0\implies\int _{A}f \;\mathrm{d} \mu=0  $$
+ולכן $\mu_{f}\ll \mu$. אם בנוסף $\mu_{f}\ll \mu$ נקבל כי $\mu \sim \mu_{f}$. בחזרה לדוגמא, אם נדרוש:
+$$\mu_{f}\left( f^{-1}\left( \left( 0,\infty \right] \right) \right)=0\implies \mu_{f}\sim \mu$$</p>
+</div>
+<div class="proposition">
+<p>אם $\mu$ סופית אז $\mu\ll \nu$ שקול לכך שלכל $\varepsilon&gt;0$ קיים $\delta&gt; 0$ כך ש-$\nu(A)&lt;\varepsilon$ גורר $\mu(A)&lt;\delta$.</p>
+</div>
+<div class="proof">
+<p>נניח שלכל $\varepsilon&gt;0$ קיים $\delta&gt; 0$ כך ש-$\nu(A)&lt;\varepsilon$ גורר $\mu(A)&lt;\delta$. ונניח כי $\nu(A)=0$ נקבל:
+$$\forall \delta&gt;0\quad \nu(A)&lt;\delta\implies \forall\varepsilon&gt;0\quad  \mu(A)&lt;\varepsilon\implies \mu(A)=0$$
+נניח $\mu\ll \nu$. נניח בשלילה שקיים $\varepsilon&gt;0$ כך שלכל $n \in \mathbb{N}$ יש $A_{n}$ עם $\nu(A_{n})&lt;2^{-n}$ כך ש-$\mu(A_{n})\geq \varepsilon$. ולפי בורל קנטלי:
+$$\nu(A)=\nu\left( \bigcap_{k=1}^{\infty}\bigcup_{n=k}^{\infty} A_{n} \right)$$
+כמו כן מתקיים:
+$$\mu\left( \bigcap_{m=1}^{\infty}\bigcup_{n=m}^{\infty}A_{n} \right)=\mu\left( \operatorname*{lim}\operatorname*{sup}A_{n} \right)\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})\geq\epsilon $$</p>
+</div>
+<div class="definition"><span class="keyword">מידה סינגולארית</span><p>נאמר ש-$\mu \perp \nu$ אם קיימות $A,B$ כך ש-$A\sqcup B$ ו-$\mu(A)=0$ וגם $\nu(B)=0$.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>המידה $\delta_{X}$ מידת לבג. </p>
+</li>
+<li>
+<p>אם $fg=0$ כמעט תמיד אז $\mu_{f}\perp \mu_{g}$. </p>
+</li>
+<li>
+<p>המידה $\nu_{\frac{1}{3}}$ שנבנת על קבוצת קנטור $\frac{1}{3}$ סינגולאית ביחס ל-Leb וגם ביחס ל-$\delta_{x}$ לכל $x \in \mathbb{R}$. </p>
+</li>
+<li>
+<p>המידה $\mu=\mathrm{Leb}+\delta_{0}$ איננה סינגולרית ביחס ל-Leb ואיננה רציפה בהחלט ביחס ל-Leb. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם $\mu\ll \nu$ וגם $\mu \perp \nu$ אזי $\mu = 0$. כלומר אי אפשר להיות שתי הדברים האלה חוץ מעבור המידה הטריוויאלית.</p>
+</div>
+<div class="proof">
+<p>מתקיים $\mu(B)=0$ כי $\nu(0)=0$ אבל גם $\mu(A)=0$ ולכן $\mu(X)=0$.</p>
+</div>
+<div class="corollary">
+<p>המידה $\delta_{X}$ לא נתונה על ידי $\lambda_{F}$ עבור איזושהי $f$ מדידה.</p>
+</div>
+<div class="proposition">
+<p>יהי $\left( X,\mathcal{M} \right)$ מרחב מידה, ו-$\mu,\nu$ מדידות. אזי:
+$$\mu \perp \nu \iff \forall\varepsilon&gt; 0 \quad \exists A \quad  \mu(A)&lt;\varepsilon \quad \nu(A^{c})&lt;\varepsilon$$</p>
+</div>
+<div class="proof">
+<p>אם $\mu \perp \nu$ אז קיימת קבוצה $A$ כך ש-$\mu(A)=0$ ו-$\nu(A^{c})=0$.
+נוכיח כעת את הכיוון השני. עבור $\varepsilon=2^{-n}$ נבחר $A_{n}$. נגדיר:
+$$A=\limsup_{ n \to \infty } (A_{n})$$
+וכן נקבל $\nu(A)=0$. מצד שני:
+$$\nu\left( A^{c}  \right)=\nu\left( \liminf_{ n \to \infty } A_{n} \right)\leq \liminf_{ n \to \infty } \nu(A_{n})=0$$</p>
+</div>
+<div class="reminder">
+<p>המידה $\lambda$ נקראת $\sigma$ סופית על $\left( X,\mathcal{A} \right)$ אם $X=\bigcup_{n}A_{n}$ עם $\lambda(A_{n})&lt;\infty$.</p>
+</div>
+<div class="theorem"><span class="keyword">Lebesgue-Radon-Nikodym</span><p>אם $\mu$ ו-$\nu$ מידות $\sigma$ סופיות על $\left( X,\mathcal{A} \right)$ אזי קיים צמד מידות יחיד $\nu_{a},\nu_{s}$ המקיים:</p>
+<ol>
+<li>
+<p>המידה $\nu=\nu_{a}+\nu_{b}$ כך ש-$\nu_{a}\ll \mu$ ו-$\nu_{s}\perp \mu$. </p>
+</li>
+<li>
+<p>קיימת פונקציה מדידה $h:x\to \left[ 0,\infty \right)$ עבורה $d\nu_{a}=hd\mu$. יתר על כן אם $X=\bigcup_{n}A_{n}$ עם $\nu(A_{n})\ll \infty$ לכל $n$ אזי $h\cdot \mathbb{1}_{A_{n}}\in L^{1}\left( \mu \right)$ לכל $n$. בפרט אם $\nu$ מידה סופית אז $h \in L^{1}\left( \mu \right)$. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
+<li class='prev-page'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

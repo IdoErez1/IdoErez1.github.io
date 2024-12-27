@@ -92,8 +92,9 @@ window.onload = () => {
 <li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
-<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
@@ -104,15 +105,20 @@ window.onload = () => {
 <li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
 <li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3'>4.3 רציפות בהחלט וסינגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
 </ul></li>
 </ul></li>
 <li class='prev-page'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
 </ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_2_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_1_4`;}});</script>
         <div class="content">
         <h1>1.5  מידות</h1>
-    <div class="definition"><span class="keyword">מידה</span><p>מידה על מרחב מדיד $(X,A)$ הינה פונקציה $\mu:A\to \left[ 0,\infty \right]$ אשר $\sigma$-אדיטיבית. כלומר לכל סדרת קבוצות זרות ומדידות $A_{1},A_{2},\dots \in A$ כך ש
+    <div class="definition"><span class="keyword">מידה</span><p>מידה על מרחב מדיד $\left( X,\mathcal{A} \right)$ הינה פונקציה $\mu:A\to \left[ 0,\infty \right]$ אשר $\sigma$-אדיטיבית. כלומר לכל סדרת קבוצות זרות ומדידות $A_{1},A_{2},\dots \in \mathcal{A}$ כך ש
 $$\mu\left( \bigsqcup_{n} A_{n} \right)=\sum_{n=1}^{\infty}\mu(A_{n})$$
 בנוסף נניח ש-$\mu$ איננה קבועה $\infty$ (כלומר קיימת איזשהי $A \in \mathcal{ A}$ כך ש-$\mu(A)&lt; \infty$).</p>
+</div>
+<div class="symbolize">
+<p>נסמן צירוף של קבוצה $X$ עם סיגמא אלגברה $\mathcal{A}$ ומידה $\mu$ על ידי $\left( X,\mathcal{A},\mu \right)$.</p>
 </div>
 <div class="remark">
 <p>האדיטביות נותן טור של איברים חיוביים, אשר מתכנס כיוון שסדרת הסכומים החלקיים מונוטוניים ויכול לקבל גם את אינסוף.</p>
@@ -123,7 +129,7 @@ $$\mu\left( \bigsqcup_{n} A_{n} \right)=\sum_{n=1}^{\infty}\mu(A_{n})$$
 <p>מידת מנייה על $(X,2^{X})$ ניתן להגדיר $\mu(A)=\# A$(כלומר מחזיר את מספר האיברים ב-$A$) </p>
 </li>
 <li>
-<p>מרחב דיראק בהנתן $x_{0} \in X$. 
+<p>מידת דיראק - בהנתן $x_{0} \in X$. 
 $$\mu (A)= \begin{cases} 1  &amp; x_{0} \in A \\0  &amp; x_{0} \not \in A \end{cases}$$</p>
 </li>
 </ol>
@@ -134,15 +140,25 @@ $$\mu (A)= \begin{cases} 1  &amp; x_{0} \in A \\0  &amp; x_{0} \not \in A \end{c
 <p>ניתן לכתוב $B=A\sqcup B\setminus  A$ ואז:
 $$\mu(B)=\mu(A)+\underbrace{ \mu\left( B\setminus A \right) }_{ \geq 0 }$$</p>
 </div>
-<div class="definition"><span class="keyword">מידה שלמה</span><p>מדה $\mu$ היא שלמה אם לכל $\mu(N)=0$ נקבל:
+<div class="proposition"><span class="keyword">תת-אדטיביות</span><p>יהי $\left( X,\mathcal{A} \right)$ מרחב מדיד. קבוצות $A_{1},A_{2},\dots \in \mathcal{A}$  מקיימות:
+$$\mu\left( \bigcup_{n=1}^{\infty}A_{n} \right)\leq \lim_{ n \to \infty } \mu(A_{n})$$</p>
+</div>
+<div class="proposition"><span class="keyword">רציפות מלמטה</span><p>יהי $\left( X,\mathcal{A} \right)$ מרחב מדיד ו-$A_{1},A_{2},\dots \in \mathcal{A}$. אם $A_{1}\subseteq A_{2}\subseteq \dots$ נקבל:
+$$\mu\left( \bigcup_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})$$</p>
+</div>
+<div class="proposition"><span class="keyword">רציפות מלמעלה</span><p>יהי $\left( X,\mathcal{A} \right)$ מרחב מדיד ו-$A_{1},A_{2},\dots \in \mathcal{A}$. אם $A_{1}\supseteq A_{2}\supseteq \dots$ כאשר $\mu(A_{1})&lt;\infty$ נקבל:
+$$\mu\left( \bigcap_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})$$</p>
+</div>
+<div class="definition"><span class="keyword">מידה שלמה</span><p>מידה $\mu$ היא שלמה אם לכל $\mu(N)=0$ נקבל:
 $$\mathcal{P}\left( \mathbb{N} \right) \subseteq \mathrm{dom}\left( \mu \right) $$</p>
 </div>
-<p>נניח כי יש לנו מרחב מידה $\left( X,\mu, M \right)$ ונגדיר את $N$ להיות
+<div class="proposition"><span class="keyword">השלמה של מידה</span><p>נניח כי יש לנו מרחב מידה $\left( X,\mu, M \right)$ ונגדיר את $N$ להיות
 $$N=\left\{  A\subseteq \mathcal{P}(x) \mid A\subseteq N \in M \text{ $s$.t. } \mu(N) =0 \right\}$$
 ונגדיר:
 $$\overline{M} =\left\{  \varepsilon E \cup A \mid E \in M \quad  A \in N  \right\}$$
 נגדיר $\overline{\mu}:\overline{M}\to \left[ 0,\infty \right]$ כך ש:
 $$\mu\left( E \cup A \right)=\mu(E)$$</p>
+</div>
 <p>עבור $\overline{ M}$ נקבל:</p>
 <ol>
 <li>
