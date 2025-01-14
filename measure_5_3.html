@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט הגזירה של בסיקוביץ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3'>4.3 רציפות בהחלט וסינגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_5_2`;}});</script>
+        <div class="content">
+        <h1>5.3  משפט הגזירה של בסיקוביץ</h1>
+    <div class="theorem"><span class="keyword">הגזירה של לבג-בסיקוביץ'</span><p>יהיו $\lambda$ ו-$\mu$ מידות רדון על $\mathbb{R}^d$.</p>
+<ol>
+<li>
+<p>הנגזרת $D(\mu, \lambda, x)$ קיימת וסופית עבור $\lambda$ כמעט תמיד. </p>
+</li>
+<li>
+<p>לכל קבוצה מדידת בורל $B \subseteq \mathbb{R}^d$ מתקיים: 
+$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$
+עם שוויון כאשר $\mu \ll \lambda$ (כלומר, כאשר $\mu \ll \lambda$ אז $D(\mu, \lambda, \cdot) = \frac{d\mu}{d\lambda}$).</p>
+</li>
+<li>
+<p>מתקיים $\mu \ll \lambda$ אם ורק אם $\underline{D}(\mu, \lambda, x) &lt; \infty$ עבור $\mu$ כמעט תמיד $x$. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li><strong>קיום הנגזרת:</strong> 
+יהיו $r &gt; 0$ ו-$0 &lt; s &lt; t &lt; \infty$ כלשהם. נסמן:
+$$ A_{s,t,r} := \{x \in B_r(0) \mid \underline{D}(\mu, \lambda, x) \leq s &lt; t \leq \overline{D}(\mu, \lambda, x)\} $$
+וכן נסמן:
+$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$
+מהטענה הקודמת נסיק:
+$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$</li>
+</ol>
+</div>
+<p>מאחר ש-$\lambda(A_{s,t,r}) &lt; \infty$ (קבוצה חסומה) ו-$s &lt; t$, נסיק כי $\lambda(A_{s,t,r}) = 0$. עבור $A_{n,r}$ מתקיים:
+$$ \lambda(A_{n,r}) \leq \frac{1}{n} \mu(A_{n,r}) \leq \frac{1}{n} \mu(B_r(0)) &lt; \infty $$
+ולכן:
+$$ \lambda(\{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) = \infty\}) = \lambda\left( \bigcap_{n=1}^\infty A_{n,r} \right) = \lim_{n \to \infty} \lambda(A_{n,r}) \leq \lim_{n \to \infty} \frac{1}{n} \mu(B_r(0)) = 0 $$
+נבחין כי המשלים של $\{x \in \mathbb{R}^d \mid \exists D(\mu, \lambda, x) &lt; \infty\}$ שווה ל:
+$$ \bigcup_{k \in \mathbb{N}} \left( \bigcap_{n \in \mathbb{N}} A_{n,k} \cup \bigcup_{\substack{s &lt; t \\ s,t \in \mathbb{Q}}} A_{s,t,k} \right) $$
+שהוא איחוד בן מנייה של קבוצות מ-$\lambda$ מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.</p>
+<ol start="2">
+<li>
+<p><strong>אינטגרל הנגזרת:</strong> 
+תהי $B$ מדידה וניקח $1 &lt; t &lt; \infty$. לכל $p \in \mathbb{Z}$ נגדיר:
+$$ B_p = \{x \in B \mid t^p \leq D(\mu, \lambda, x) &lt; t^{p+1}\} $$
+אזי מ-1 נסיק כי:
+$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda $$
+כי $B \setminus \bigcup_p B_p$ מכיל רק את הנקודות בהן $D = \infty$ (קבוצה ממידה אפס) או בהן $D=0$ ואז האינטגרנד שווה ל-0. מכאן:
+$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda \leq \sum_{p \in \mathbb{Z}} t^{p+1} \lambda(B_p) \leq \sum_{p \in \mathbb{Z}} t \mu(B_p) = t \cdot \mu\left( \bigcup_p B_p \right) \leq t \cdot \mu(B) $$
+מאחר ש-$t$ שרירותי, נסיק כי:
+$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$
+אם $\mu \ll \lambda$, אז $D$ קיים וסופי $\mu$ כמעט תמיד. נבחין כי $0 &lt; D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}$. נוכל להריץ שרשרת אי-שוויונים דומה כדי להסיק:
+$$ \int_B D(\mu, \lambda, x) \, d\lambda \geq \mu(B) $$
+ולכן במקרה זה מתקיים שוויון.</p>
+</li>
+<li>
+<p><strong>אפיון רציפות מוחלטת:</strong> 
+    מ-1 נובע שאם $\mu \ll \lambda$ אז $\underline{D}(\mu, \lambda, x) &lt; \infty$ $\mu$ כמעט תמיד. תהי $C \subseteq \mathbb{R}^d$ עם $\lambda(C) = 0$. נרצה להראות ש-$\mu(C) = 0$. נבחין כי $C = \bigcup_{n \in \mathbb{N}} C_n$ כאשר:
+$$ C_n = \{x \in C \mid \underline{D}(\mu, \lambda, x) \leq n\} $$
+מכאן:
+$$ \mu(C_n) \leq n \cdot \lambda(C_n) \leq n \cdot \lambda(C) = 0 $$
+ולכן:
+$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0 $$
+ולכן $\mu(C) = 0$. בכיוון ההפוך, אם $\underline{D}(\mu, \lambda, x) &lt; \infty$ $\mu$ כמעט תמיד אז נשתמש בחלק 2 של המשפט כדי להראות $\mu \ll \lambda$.</p>
+</li>
+</ol>
+<div class="remark">
+<p>המשפט הזה הוא אחד התוצאות החשובות בתורת המידה, והוא הבסיס לגזירה של מידות.</p>
+</div>
+<div class="corollary">
+<p>תהי $\lambda$ מידת רדון כלשהי על $\mathbb{R}^d$.</p>
+<ol>
+<li>
+<p>לכל $f: \mathbb{R}^d \to \mathbb{C}$ שהיא $L^1_{loc}$ (כלומר, לכל $x \in \mathbb{R}^d$ קיים כדור $B_{r(x)}$ כך ש-$f \cdot \mathbb{1}_{B_{r(x)}} \in L^1$), מתקיים $\lambda$ כמעט תמיד: 
+$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} f \, d\lambda = f(x) \quad (*) $$</p>
+</li>
+<li>
+<p>עבור כל $A \subseteq \mathbb{R}^d$ מדידה, מתקיים: 
+$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 \quad (**) $$
+עבור $\lambda$ כמעט תמיד $x \in A$.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p><strong>הוכחת החלק הראשון:</strong> 
+מספיק להוכיח עבור $0 \leq f \in \mathbb{R}$. במקרה הכללי, ניתן לכתוב $f = f_1 - f_2 + i(f_3 - f_4)$ כאשר $f_i \geq 0$ ומכיוון שהגבול לינארי, מספיק להוכיח עבור כל פונקציה חיובית בנפרד.
+במקרה זה, נגדיר את המידה $\mu$ על ידי $d\mu = f \, d\lambda$. אזי $\mu \ll \lambda$ (כלומר, $\mu$ רציפה בהחלט ביחס ל-$\lambda$), ולכן לכל קבוצה מדידה $B$:
+$$ \int_B f \, d\lambda = \mu(B) = \int_B D(\mu, \lambda, x) \, d\lambda $$
+כמו כן, $\mu$ מידת רדון כי $f$ היא $L^1_{loc}$.
+מאחר שהשוויון מתקיים לכל $B$ מדידה, נובע ממשפט רדון-ניקודים ש-$f = D(\mu, \lambda, x)$ מתקיים $\lambda$ כמעט תמיד. כלומר:
+$$ f(x) = \lim_{r \to 0} \frac{\mu(B_r(x))}{\lambda(B_r(x))} = \lim_{r \to 0} \frac{\int_{B_r(x)} f \, d\lambda}{\lambda(B_r(x))} $$
+זהו בדיוק מה שרצינו להוכיח.</p>
+</li>
+<li>
+<p><strong>הוכחת החלק השני:</strong> 
+זהו יישום ישיר של חלק 1 עבור $f = \mathbb{1}_A$, פונקציית האינדיקטור של $A$. אם $x \in A$ היא נקודת לבג של $\mathbb{1}_A$, אז:
+$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} \mathbb{1}_A \, d\lambda = \mathbb{1}_A(x) $$
+האינטגרל של $\mathbb{1}_A$ על $B_r(x)$ הוא בדיוק $\lambda(A \cap B_r(x))$. מאחר ש-$x \in A$, אז $\mathbb{1}_A(x) = 1$, ולכן:
+$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 $$
+עבור $\lambda$ כמעט תמיד $x \in A$.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>נקודות $x$ שמקיימות את תנאי $(*)$ או $(**)$ נקראות נקודות לבג של הפונקציה $f$ או של הקבוצה $A$ בהתאמה. משפט הגזירה של לבג קובע שלכמעט כל נקודה במרחב יש את התכונה הזאת.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='prev-page'><a href='./measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

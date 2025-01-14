@@ -107,6 +107,7 @@ window.onload = () => {
 <li class='parent_page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
 <li class='parent_page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
 <li class='parent_page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent_page-dropdown'><a href='./Thermal_5_6'>5.6 צפיפות מצבים</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
@@ -128,6 +129,9 @@ $$E_{F}=\mu(T=0)$$</p>
 <p>הגדרה זו הגיונית כיוון ש:
 $$\mu(T=0)=\frac{\partial E}{\partial N} \implies \mu(T=0)=E(N)-E(N-1)=E_{F}$$</p>
 </div>
+<div class="remark">
+<p>זהו לא האנרגיה שיש למערכת באפס המוחלט! זו הרמת האנרגיה הגבוהה ביותר שחלקיק יכול להגיע עליה. האנרגיה הממוצעת באפס המחולט תהיה קטנה יותר כיוון שיש חלקיקים ברמות הנמוכות יותר. </p>
+</div>
 <div class="proposition">
 <p>באפס המוחלט מספר המצבים הרמה $k$ נתון על ידי פונקציית הביסייד:
 $$n_{k}=\Theta(E_{F}-E_{k})$$</p>
@@ -141,6 +145,30 @@ $$n_{\mathbf{k}}={\frac{1}{\mathrm{e}^{\beta(E_{\mathbf{k}}-\mu)}+1}}=\Theta(\mu
 $$N=\int_{0}^{k_{\mathrm{F}}}g({\boldsymbol{k}})\,\mathrm{d}^{3}k,$$
 כאשר $k$ זה ווקטור הגל של פרמי(Fermi wave vector) ומוגדר על ידי:
 $$E_{\mathrm{F}}={\frac{\hbar^{2}k_{\mathrm{F}}^{2}}{2m}}$$</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב סומרפלד</span><p>$$\int_{-\infty}^{\infty} H\left( \varepsilon \right)f_{FD}\left( \varepsilon \right) \, d\varepsilon = \int_{-\infty}^{\infty}{\frac{H\left( \varepsilon \right)}{e^{\beta\left( \varepsilon-\mu \right)}+1}}\,\mathrm{d}\varepsilon=\int_{-\infty}^{\mu}H\left( \varepsilon \right)\,\mathrm{d}\varepsilon+{\frac{\pi^{2}}{6}}\left({\frac{1}{\beta}}\right)^{2}H^{\prime}\left( \mu \right)+O\left({\frac{1}{\beta\mu}}\right)^{4}$$</p>
+</div>
+<div class="proof">
+<p>נתחיל מלבצע החלפת משתנים $\tau x=\varepsilon-\mu$:
+$$I=\int_{-\infty}^{\infty}{\frac{H(\varepsilon)}{e^{\beta(\varepsilon-\mu)}+1}}\,\mathrm{d}\varepsilon=\tau\int_{-\infty}^{\infty}{\frac{H(\mu+\tau x)}{e^{x}+1}}\,\mathrm{d}x$$
+נחלק את תחום האינטגרציה $I=I_{1}+I_{2}$ באופן הבא:
+$$I=\underbrace{\tau\int_{-\infty}^{0}{\frac{H(\mu+\tau x)}{e^{x}+1}}\,\mathrm{d}x}_{I_{1}}+\underbrace{\tau\int_{0}^{\infty}{\frac{H(\mu+\tau x)}{e^{x}+1}}\,\mathrm{d}x}_{I_{2}}$$
+נכתוב את $I_{1}$ בעזרת החלפת משתנה $x\mapsto-x$:
+$$I_{1}=\tau\int_{-\infty}^{0}{\frac{H(\mu+\tau x)}{e^{x}+1}}\,\mathrm{d}x=\tau\int_{0}^{\infty}{\frac{H(\mu-\tau x)}{e^{-x}+1}}\,\mathrm{d}x$$
+כאשר כיוון ש:
+$${\frac{1}{e^{-x}+1}}=1-{\frac{1}{e^{x}+1}}$$
+נקבל:
+$$I_{1}=\tau\int_{0}^{\infty}H(\mu-\tau x)\,\mathrm{d}x-\tau\int_{0}^{\infty}{\frac{H(\mu-\tau x)}{e^{x}+1}}\,\mathrm{d}x$$
+נחזור למשתנים המקוריים על $-\tau \mathrm{d}x=\mathrm{d}\varepsilon$ בגורם הראשון של $I_{1}$ ונשלב את $I=I_{1}+I_{2}$ כך שנקבל:
+$$I=\int_{-\infty}^{\mu}H(\varepsilon)\,\mathrm{d}\varepsilon+\tau\int_{0}^{\infty}{\frac{H(\mu+\tau x)-H(\mu-\tau x)}{e^{x}+1}}\,\mathrm{d}x$$
+כעת ניתן לקרב את המונה בעזרת הנגזרת בהנחה ש-$\tau$ מספיק קטן:
+$$\Delta H=H(\mu+\tau x)-H(\mu-\tau x)\approx2\tau x H^{\prime}(\mu)$$
+ונקבל:
+$$I=\int_{-\infty}^{\mu}H(\varepsilon)\,\mathrm{d}\varepsilon+2\tau^{2}H^{\prime}(\mu)\int_{0}^{\infty}\frac{x\mathrm{d}x}{e^{x}+1}$$
+כאשר האניטגרל האחרון הוא ידוע ושווה ל:
+$$\int_{0}^{\infty}{\frac{x\mathrm{d}x}{e^{x}+1}}={\frac{\pi^{2}}{12}}$$
+ולכן נקבל סה"כ:
+$$I=\int_{-\infty}^{\infty}\frac{H(\varepsilon)}{e^{\beta(\varepsilon-\mu)}+1}\,\mathrm{d}\varepsilon\approx\int_{-\infty}^{\mu}H(\varepsilon)\,\mathrm{d}\varepsilon+\frac{\pi^{2}}{6\beta^{2}}H^{\prime}(\mu)$$</p>
 </div>
     </div>
     <ul class='top-navigation'>
