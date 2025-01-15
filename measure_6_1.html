@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>      
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מידת מכפלה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='parent-page'><a href='./measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3'>4.3 רציפות בהחלט וסינגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4'>4.4 מרחבי הילברט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1'>6.1 מידת מכפלה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_5_3`;}});</script>
+        <div class="content">
+        <h1>6.1  מידת מכפלה</h1>
+    <div class="definition"><span class="keyword">מלבן</span><p>אם $A \subseteq X$ ו-$B \subseteq Y$, מתקיים ש-$A \times B \subseteq X \times Y$. אנו קוראים לכל קבוצה מהצורה $A \times B$ מלבן ב-$X \times Y$.</p>
+</div>
+<div class="definition"><span class="keyword">מלבן מדיד</span><p>קבוצה מהצורה:
+$$\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}$$
+נקראת מלבן מדיד.</p>
+</div>
+<div class="definition"><span class="keyword">$\sigma$ אלגברה מכפלה</span><p>יהי $(X, \mathcal{A})$ ו-$(Y, \mathcal{C})$ מרחבים מדידים. נגדיר סיגמת אלגברה מכפלה $\mathcal{A}\times \mathcal{ C}$ על ידי ה-$\sigma$ אלגברה הקטנה ביותר על $X\times Y$ אשר מכילה את $\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}$. כלומר:
+$$\mathcal{A} \times \mathcal{C} =\sigma(\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\})$$
+כאשר כל איבר בקבוצה 
+$$\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}$$
+נקרא מלבן מדיד.</p>
+</div>
+<div class="definition"><span class="keyword">חתך</span><p>בהנתן האוסף $E \in \mathcal{A}\times \mathcal{ C}$ ו-$x \in X$, $y \in Y$ נסמן את החתכי $x$ וחתכי $y$ על ידי:
+$$E_{x}=\left\{ y:(x,y)\in E \right\}\qquad E^{y}=\left\{ x:(x,y)\in E \right\}$$</p>
+</div>
+<div class="example"><span class="keyword">חתכים של מלבנים</span><p>אם $X,Y$ הם קבוצות ו-$A\subseteq X, B\subseteq Y$ עבור $a \in X, b \in Y$ נקבל:
+$$[A\times B]_{a}=\begin{cases}B&amp;{\mathrm{if}\;a\in A,}\\ {\emptyset}&amp;{\mathrm{if}\;a\not\in A}\end{cases}\quad{\mathrm{and}}\quad[A\times B]^{b}=\begin{cases}A&amp;{\mathrm{if}\;b\in B,}\\ {\emptyset}&amp;{\mathrm{if}\;b\not\in B,}\end{cases}$$</p>
+</div>
+<div class="proposition">
+<p>חתכים הם פונקציות מדידות. כלומר אם $\left( X,\mathcal{A} \right),\left( Y,\mathcal{B} \right)$ מרחבים מדידים וכן $E \in \mathcal{A} \times \mathcal{B}$, אז $E_x \in \mathcal{B}$ ו-$E^y \in \mathcal{A}$, לכל $x \in X$ ו-$y \in Y$.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>תהי $\mathcal{E}$ אוסף התתי קבוצות $E$ של $X \times Y$ עבורו מתקיים הטענה. יהי $A\times B \in \mathcal{E}$ לכן $A \in \mathcal{A}$ ו-$B \in \mathcal{B}$. </p>
+</li>
+<li>
+<p>נשים לב כי $\mathcal{E}$ הוא $\sigma$ אלגברה. האוסף $\mathcal{E}$ סגור על ידי משלימים ואיחודים בני מנייה כיוון שמתקיים עבור כל תתי קבוצות $E,E_{1},E_{2},\dots \in \mathcal{P}\left( X\times Y \right)$ ולכל $a \in X$: 
+$$\left[ \left( X\times Y \right)\setminus E \right]_{a}=Y\setminus[E]_{a}\qquad \left[ E_{1}\cup E_{2}\cup\cdot\cdot\cdot \right]_{a}=[E_{1}]_{a}\cup[E_{2}]_{a}\cup\cdot\cdot\cdot$$</p>
+</li>
+<li>
+<p>כיוון ש-$\mathcal{E}$ הוא $\sigma$ אלגברה על $X \times Y$ בפרט מכיל את כל המלבנים המדידים ב-$\mathcal{A}\times \mathcal{B}$ ולכן מכיל את $\mathcal{A}\times \mathcal{B}$. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>ההוכחה הזו השתמשה בשיטת הוכחה דו שלבית אשר שימושית בהרבה מקרים:</p>
+<ol>
+<li>
+<p>להראות כי הקבוצה אשר מייצרת את ה-$\sigma$ אלגברה מקיים את התכונה. </p>
+</li>
+<li>
+<p>להראות כי הקבוצה הזאת היא $\sigma$ אגלברה. 
+ומזה נובע כי כל קבוצה ב$\sigma$ אלגברה מקיימת את התכונה.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">חתך של פונקציות</span><p>בהנתן פונקציה $f$ על $X \times Y$ נסמן לכל $x \in X, y \in Y$:
+$$f^{y}(x)=f(x,y)\qquad f_{x}(y)=f(x,y)$$</p>
+</div>
+<div class="example">
+<p>נניח $f:\mathbb{R}\times \mathbb{R}\to \mathbb{R}$ מוגדר על ידי $f(x,y)=5x^{2}+y^{3}$ אזי:
+$$f_{2}(y)=20+y^{3}\qquad f^{3}(x)=5x^{2}+27$$</p>
+</div>
+<div class="proposition">
+<p>חתך של פונקציה משמר מדידות, כלומר אם $f$ היא $\mathcal{A}\times \mathcal{C}$ מדידה אז $f_{x}$ יהיה $\mathcal{C}$ מדידה ו-$f^{y}$ היא $\mathcal{A}$ מדידה.</p>
+</div>
+<div class="remark">
+<p>הכיוון השני לא בהכרח נכון.</p>
+</div>
+<div class="reminder"><span class="keyword">אלגברה</span><p>יהי $X$ קבוצה. אלגברה מעל $X$ הינו אוסף $\mathcal{A}\subseteq \mathcal{P}(X)$ של תתי קבוצות של $X$ המקיימת:</p>
+<ol>
+<li>
+<p>הקבוצה כולה נמצאת - $X \in \mathcal{A}$. </p>
+</li>
+<li>
+<p>אם $E \in \mathcal{A}$ אזי $E^{c} \in \mathcal{A}$. </p>
+</li>
+<li>
+<p>בהנתן אוסף <u>סופי</u> $E_{1}, E_{2},\dots, \in \mathcal{A}$ אזי $\bigcup_{n}E_{n}\in \mathcal{A}$. </p>
+</li>
+</ol>
+</div>
+<p>כלומר זהו למעשה $\sigma$ אלגברה כאשר נדרש רק שיהיה סגור לאיחודים סופיים ולא בני מנייה. בפרט כל $\sigma$ אלגברה היא אלגברה.</p>
+<div class="proposition">
+<p>הקבוצה של כל האיחודים הסופיים של מלבנים מדידים היא אלגברה.</p>
+</div>
+<div class="definition"><span class="keyword">מחלקה מונוטונית</span><p>נניח כי $W$ קבוצה
+אם $A_i \in \mathcal{M}$, $B_i \in \mathcal{M}$, $A_i \subseteq A_{i+1}$, $B_i \supseteq B_{i+1}$ עבור $i = 1, 2, 3, ...$, ואם
+$$A = \bigcup_{i=1}^\infty A_i, \quad B = \bigcap_{i=1}^\infty B_i$$
+אז $A \in \mathcal{M}$ ו-$B \in \mathcal{M}$.</p>
+</div>
+<div class="definition"><span class="keyword">מחלקה מונוטונית</span><p>יהי $W$ קבוצה ו-$\mathcal{M}$ קבוצה של תת-קבוצות של $W$. אז $\mathcal{M}$ נקראת <em>מחלקה מונוטונית</em> על $W$ אם מתקיימים שני התנאים הבאים:
+*   אם $E_1 \subseteq E_2 \subseteq \dots$ היא סדרה עולה של קבוצות ב-$\mathcal{M}$, אז:
+$$\bigcup_{k=1}^{\infty} E_k \in \mathcal{M}$$
+*   אם $E_1 \supseteq E_2 \supseteq \dots$ היא סדרה יורדת של קבוצות ב-$\mathcal{M}$, אז:
+$$\bigcap_{k=1}^{\infty} E_k \in \mathcal{M}$$</p>
+</div>
+<div class="remark">
+<p>ברור כי כי מחלקה מונטונית היא $\sigma$  אלגברה. אך לא כל מחלקה מונטונית היא אלגברה(ובפרט גם לא תהיה $\sigma$ אלגברה). לדוגמא אם נסתכל על אוסף $\mathcal{A}$ של כל הקטעים ב-$\mathbb{R}$. נשים לב כי $\mathcal{A}$ סגור תחת איחודים בני מנייה עולים וחיתוכים בני מניה יורדים. לכן $\mathcal{A}$ היא מחלקה מונטונית על $\mathbb{R}$. אבל $\mathcal{A}$ היא לא סגורה תחת איחודים סופיים. ו-$\mathcal{A}$ לא סגורה תחת מסלים, ולכן $\mathcal{A}$ לא אלגברה.</p>
+</div>
+<div class="theorem"><span class="keyword">המחלקה המונוטנית</span><p>נניח כי $\mathcal{A}$ היא אלגברה על קבוצה $W$. ה-$\sigma$ אלגברה הקטנה ביותר המכילה את $\mathcal{A}$ היא המחלקה המונוטונית הקטנה ביותר המכילה את </p>
+</div>
+<div class="proposition">
+<p>בהנתן אלגברה $\Sigma_{0}\subseteq\mathcal{P}(X)$ ה$\sigma$ אלגברה $\sigma\left( \Sigma_{0} \right)$ הינה ההמחלקה המונוטונית הקטנה ביותר המכילה את $\Sigma_{0}$.</p>
+</div>
+<div class="proposition">
+<p>יהיו $(X, \mathcal{A}, \mu)$ ו-$(Y, \mathcal{C}, \lambda)$ מרחבי מידה $\sigma$-סופיים. נניח כי $Q \in \mathcal{A} \times \mathcal{C}$. אם
+$$\phi(x) = \lambda(Q_x), \quad \psi(y) = \mu(Q^y) $$
+לכל $x \in X$ ו-$y \in Y$, אז $\phi$ מדידה ביחס ל-$\mathcal{S}$, $\psi$ מדידה ביחס ל-$\mathcal{T}$, ו-
+$$\int_X \phi \, d\mu = \int_Y \psi \, d\lambda$$</p>
+</div>
+<div class="remark">
+<p>הסימונים בשאלה מוגדרים היטב כיוון שהראנו כי החתכים הם פונקציות מדידות.</p>
+</div>
+<div class="proof">
+<p>נסמן ב-$\Omega$ את מחלקת כל ה-$\mathbb{Q} \in \mathcal{A}\times \mathcal{C}$ עבורם הטענה מתקיימת. נראה כי ל-$\Omega$ יש את 4 התכונות הבאות. </p>
+<ol>
+<li>
+<p>כל מלבן מדיד נמצא ב-$\Omega$. </p>
+</li>
+<li>
+<p>אם $Q_{1} \subset Q_{2} \subset \dots$ אם לכל $Q_{i}\in \Omega$ ואם $Q=\bigcup Q_{i}$ אז $Q \in \Omega$. </p>
+</li>
+<li>
+<p>אם $\{ Q_{i} \}$ היא קבוצה בת מנייה זרה של איברים ב-$\Omega$ ואם $Q=\bigcup Q_{i}$ אז $Q \in \Omega$. </p>
+</li>
+<li>
+<p>הגדרה</p>
+</li>
+</ol>
+</div>
+<p>יהיו $(X, \mathcal{A}, \mu)$ ו-$(Y, \mathcal{C}, \nu)$ מרחבי מידה $\sigma$ סופיים. נגדיר את מידת המכפלה $\mu \times \nu$ על $\sigma$-אלגברת המכפלה $\left( X\times Y,\mathcal{A} \times \mathcal{C} \right)$ על ידי:
+$$(\mu \times \nu)(Q) := \int_X \nu(Q_x) \, d\mu(x) = \int_Y \mu(Q^y) \, d\nu(y)$$
+כאשר $Q \in \mathcal{A} \times \mathcal{C}$.
+להשלים הוכחה.</p>
+<div class="theorem"><span class="keyword">פוביני</span><p>יהיו $(X, \mathcal{S}, \mu)$ ו-$(Y, \mathcal{T}, \lambda)$ מרחבי מידה $\sigma$-סופיים, ותהי $f$ פונקציה מדידה ביחס ל- $(\mathcal{S} \times \mathcal{T})$ על $X \times Y$.</p>
+<ol>
+<li>אם $0 \le f \le \infty$, ואם 
+$$\phi(x) = \int_Y f_x \, d\lambda, \quad \psi(y) = \int_X f^y \, d\mu \quad (x \in X, y \in Y), \quad (1)$$
+אז $\phi$ מדידה ביחס ל-$\mathcal{S}$, $\psi$ מדידה ביחס ל-$\mathcal{T}$, ו-
+$$\int_X \phi \, d\mu = \int_{X \times Y} f \, d(\mu \times \lambda) = \int_Y \psi \, d\lambda. \quad (2)$$</li>
+</ol>
+</div>
+<ol start="2">
+<li>
+<p>אם $f$ מרוכבת ואם 
+$$\phi^*(x) = \int_Y |f|_x \, d\lambda \quad \text{ו-} \quad \int_X \phi^* \, d\mu &lt; \infty, \quad (3)$$
+אז $f \in L^1(\mu \times \lambda)$.</p>
+</li>
+<li>
+<p>אם $f \in L^1(\mu \times \lambda)$, אז $f_x \in L^1(\lambda)$ עבור כמעט כל $x \in X$, $f^y \in L^1(\mu)$ עבור כמעט כל $y \in Y$; הפונקציות $\phi$ ו-$\psi$, המוגדרות על ידי (1) כמעט בכל מקום, נמצאות ב-$L^1(\mu)$ וב-$L^1(\lambda)$, בהתאמה, ו-(2) מתקיים. </p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure'> תורת המידה</a></li>
+<li class='prev-page'><a href='./measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+        </body>
+        </html>
+        
