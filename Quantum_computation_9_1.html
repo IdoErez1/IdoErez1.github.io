@@ -76,11 +76,11 @@ window.onload = () => {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
-            <title>מעגלים קלאסיים</title>
+            <title>טרוטריזציה</title>
         </head>
         <body>
         <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='next-page'><a href='./Quantum_computation'> חישוב קוונטי</a></li>
 <li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
 <li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
@@ -124,81 +124,31 @@ window.onload = () => {
 <li class='parent_page-dropdown'><a href='./Quantum_computation_9_1'>9.1 טרוטריזציה</a></li>
 </ul></li>
 </ul></li>
-<li class='prev-page'><a href='./Quantum_computation_3_2'>3.2 שימושים של שזירה</a></li>
-</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_4_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_3_2`;}});</script>
+<li class='prev-page'><a href='./Quantum_computation_8_2'>8.2 תרגיל 7</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_8_2`;}});</script>
         <div class="content">
-        <h1>4.1  מעגלים קלאסיים</h1>
-    <div class="definition"><span class="keyword">מחרוזת</span><p>איברים בקבוצה $\{ 0,1 \}^{n}$. ניתן לכתוב את ה-$n$ של מחרוזת $x$ בצורה הבאה:
-$$x=x_{n-1}x_{n-2}\cdot\cdot\cdot x_{2}x_{1}x_{0}$$
-כאשר כל איבר $x_{i}$ נקרא ביט.</p>
+        <h1>9.1  טרוטריזציה</h1>
+    <p>כאשר $H$ מטריצה גדולה יכול להיות מאוד מורכב לעשות עליה אקספוננט. </p>
+<div class="definition"><span class="keyword">המילטוניאן $k$ לוקאלי</span><p>כאשר ההמילטוניאן $H$ עצמו פועל על $m$ קיוביטים אך ניתן לפרק אותו ל-$L$ אופרטורים:
+$$H=\sum_{l=1}^{L}H_{l}$$
+כך שכל $H_{l}$ פועל לכל היותר על $k$ קיוביטים.</p>
 </div>
-<div class="definition"><span class="keyword">חישוב</span><p>פונקציה מהצורה
-$$f:\overbrace{ \{ 0,1 \}^{n} }^{ \text{input} }\to \overbrace{ \{ 0,1 \}^{m} }^{ \text{output} }$$
-שזה שקול לקבוצה של $m$ פונקציות בוליאניות מהצורה:
-$$f:\{ 0,1 \}^{n}\to \{ 0,1 \}$$</p>
+<div class="proposition"><span class="keyword">נוסחאת סוזוקי-טרוטר</span><p>$$e^{\hat{A}+\hat{B}}=\operatorname*{lim}_{n\rightarrow\infty}\left(e^{\frac{\hat{A}}{n}}e^{\frac{\hat{B}}{n}}\right)^{n}$$</p>
 </div>
-<div class="remark">
-<p>פונקציות מהצורה הזו נקראות פונקציות בוליאניות. קבוצות כל הפונקציות הבוליאניות מהצורה $f:\mathbb{F} _{2}^{n}\to \mathbb{F} _{2}^{m}$ תהיה מגודל$2^{2^{n}}$.</p>
+<div class="corollary">
+<p>$$e^{-i\sum_{l=1}^{L}\hat{H}_{l}t}=\operatorname*{lim}_{n\rightarrow\infty}\left(\prod_{l=1}^{L}e^{-i\frac{\hat{H}_{l}t}{n}}\right)^{n}$$</p>
 </div>
-<div class="example">
-<p>עבור $n=4$ נקבל $2^{2^{4}}=2^{16}=65536$ פונקציות בוליאניות אפשריות.
-עבור $n=5$ נקבל כבר $2^{32}=4294967296$. </p>
-</div>
-<div class="definition"><span class="keyword">קבוצת הביטים המתקבלים - Accepted bits</span><p>$$\Sigma_{f}=\left\{x\in\left\{0,1\right\}^{n}|f\left(x\right)=1\right\}$$
-זהו הקבוצה של כל הקלטים אשר הפונקציה תחזיר עבורם 1.</p>
-</div>
-<div class="symbolize">
-<p>נסמן את ה-$n$ מחרוזות שמתקבלים על ידי $f$ על ידי:
-$$\Sigma=\left\{x^{(1)},x^{(2)},x^{(3)},\ldots\right\}$$</p>
-</div>
-<div class="definition"><span class="keyword">קבוצת הביטים הנדחים - Rejected bits</span><p>$$\overline{{{\Sigma}}}_{f}=\left\{x\in\left\{0,1\right\}^{n}|f\left(x\right)=0\right\}$$
-קבוצת כל הקלטים אשר הפונקציה תחזיר עבורם $0$.</p>
-</div>
-<div class="symbolize">
-<p>כמו שאמרנו ניתן לפרק פונקציה $f:{\{ 0,1 \}^{n}\to\{ 0,1 \}^{m}}$ ל-$m$ פונקציות $f^{(a)}:\{ 0,1 \}^{n}\to \{ 0,1 \}^{m}$ כאשר $1\leq a \leq m$.</p>
-</div>
-<div class="proposition"><span class="keyword">הפעולות הבוליאניות גם, או ולא</span><p>ניתן להגדיר בעזרת פונקציות בוליאניות את הפעולות הבאות:</p>
-<ol>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "וגם"(AND) על ידי: 
-$$a\land b = a\cdot b$$</p>
-</li>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "לא"(NOT) על ידי: 
-$$\lnot a = 1- a$$</p>
-</li>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "או"(OR) על ידי: 
-$$a\lor b = a+b - a\cdot b$$</p>
-</li>
-</ol>
-</div>
-<div class="definition"><span class="keyword">קבוצת שערים</span><p>קבוצה של פעולות בוליאניות. כל איבר בקבוצה נקרא שער.</p>
-</div>
-<div class="definition"><span class="keyword">מעגל/חישוב</span><p>סדרה סופית של פעולות בינאריות המופעלות על מחרוזת של ביטים. למעשה שקול לרכיב $f^{(a)}(x)$ של פונקציה בינארית.</p>
-</div>
-<div class="definition"><span class="keyword">קבוצת שערים אוניברסליים</span><p>קבוצה של שערים שניתן בעזרתה להקבל כל פונקציה בוליאנית.</p>
-</div>
-<div class="example">
-<p>הקבוצת שערים:
-$$\left\{  \text{And, Not, Or, Input}  \right\}$$
-כאשר Input זה הפעולה של להכין ביט קבוע מהוות קבוצת שערים אוניברסליים.</p>
-</div>
-<div class="proposition">
-<p>ניתן לתאר מעגל על ידי גרף מכוון אי-ציקלי(כלומר ללא לולאות) כאשר כל קודקוד של הגרף הוא שער.</p>
-</div>
-<div class="definition"><span class="keyword">משפחות של פונקציות בוליאניות</span><p>קבוצה של פונקציות בוליאניות אשר פועלת על קלט עם גודל משתנה.  מוסמן:
-$$f:\{0,1\}^{*}\to\{0,1\}$$</p>
-</div>
-<div class="definition"><span class="keyword">שפה</span><p>הקבוצה של המחרוזות אשר מתקבלות על ידי המשפחת פונקציות:
-$$L=\{x\in\{0,1\}^{*}:f(x)=1\}$$</p>
-</div>
-<div class="definition"><span class="keyword">בעיות הכרעה</span><p>בעיה אשר יש לה תשובה של כן או לא.</p>
+<div class="corollary">
+<p>בעזרת הגדרת הגבול ניתן לקרב את אופרטור הקידום בזמן כרצונינו:
+$$e^{ -i\sum_{l=1}^{L}H_{l}t }\approx \left( \prod_{l=1}^{L} e^{ -iH_{l}t/n } \right)^{n}$$
+ספציפות, לכל $n$ מתקיים:
+$$\hat{U}(t)=e^{-i\sum_{l=1}^{L}\hat{H}_{l}t}=\left(\prod_{l=1}^{L}e^{-i\frac{\hat{H}_{l}t}{n}}\right)^{n}+\overbrace{\left[O\left(\frac{t^{2}}{n}\right)\right]}^{\text{Trotter Error}}$$
+כאשר $n$ נבחר כך שהשגיאה תקיים $\left\lVert  \hat{U}-e^{ -iHt }  \right\rVert\leq\varepsilon$.</p>
 </div>
     </div>
     <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
-<li class='prev-page'><a href='./Quantum_computation_3_2'>3.2 שימושים של שזירה</a></li>
+<li class='next-page'><a href='./Quantum_computation'> חישוב קוונטי</a></li>
+<li class='prev-page'><a href='./Quantum_computation_8_2'>8.2 תרגיל 7</a></li>
 </ul></li>
         </body>
         </html>

@@ -76,11 +76,11 @@ window.onload = () => {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
-            <title>מעגלים קלאסיים</title>
+            <title>חיפוש</title>
         </head>
         <body>
         <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='next-page'><a href='./Quantum_computation_8_1'>8.1 תרגיל 2</a></li>
 <li class='parent-page'><a href='./Quantum_computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
 <li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./Quantum_computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
@@ -124,81 +124,54 @@ window.onload = () => {
 <li class='parent_page-dropdown'><a href='./Quantum_computation_9_1'>9.1 טרוטריזציה</a></li>
 </ul></li>
 </ul></li>
-<li class='prev-page'><a href='./Quantum_computation_3_2'>3.2 שימושים של שזירה</a></li>
-</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_4_2`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_3_2`;}});</script>
+<li class='prev-page'><a href='./Quantum_computation_7_2'>7.2 מחזוריות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_8_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_7_2`;}});</script>
         <div class="content">
-        <h1>4.1  מעגלים קלאסיים</h1>
-    <div class="definition"><span class="keyword">מחרוזת</span><p>איברים בקבוצה $\{ 0,1 \}^{n}$. ניתן לכתוב את ה-$n$ של מחרוזת $x$ בצורה הבאה:
-$$x=x_{n-1}x_{n-2}\cdot\cdot\cdot x_{2}x_{1}x_{0}$$
-כאשר כל איבר $x_{i}$ נקרא ביט.</p>
-</div>
-<div class="definition"><span class="keyword">חישוב</span><p>פונקציה מהצורה
-$$f:\overbrace{ \{ 0,1 \}^{n} }^{ \text{input} }\to \overbrace{ \{ 0,1 \}^{m} }^{ \text{output} }$$
-שזה שקול לקבוצה של $m$ פונקציות בוליאניות מהצורה:
-$$f:\{ 0,1 \}^{n}\to \{ 0,1 \}$$</p>
-</div>
-<div class="remark">
-<p>פונקציות מהצורה הזו נקראות פונקציות בוליאניות. קבוצות כל הפונקציות הבוליאניות מהצורה $f:\mathbb{F} _{2}^{n}\to \mathbb{F} _{2}^{m}$ תהיה מגודל$2^{2^{n}}$.</p>
-</div>
-<div class="example">
-<p>עבור $n=4$ נקבל $2^{2^{4}}=2^{16}=65536$ פונקציות בוליאניות אפשריות.
-עבור $n=5$ נקבל כבר $2^{32}=4294967296$. </p>
-</div>
-<div class="definition"><span class="keyword">קבוצת הביטים המתקבלים - Accepted bits</span><p>$$\Sigma_{f}=\left\{x\in\left\{0,1\right\}^{n}|f\left(x\right)=1\right\}$$
-זהו הקבוצה של כל הקלטים אשר הפונקציה תחזיר עבורם 1.</p>
+        <h1>7.3  חיפוש</h1>
+    <div class="definition"><span class="keyword">בעיית החיפוש</span><p>מציאת ערך מתוך רשימה ללא כל אינפורמציה.</p>
 </div>
 <div class="symbolize">
-<p>נסמן את ה-$n$ מחרוזות שמתקבלים על ידי $f$ על ידי:
-$$\Sigma=\left\{x^{(1)},x^{(2)},x^{(3)},\ldots\right\}$$</p>
-</div>
-<div class="definition"><span class="keyword">קבוצת הביטים הנדחים - Rejected bits</span><p>$$\overline{{{\Sigma}}}_{f}=\left\{x\in\left\{0,1\right\}^{n}|f\left(x\right)=0\right\}$$
-קבוצת כל הקלטים אשר הפונקציה תחזיר עבורם $0$.</p>
-</div>
-<div class="symbolize">
-<p>כמו שאמרנו ניתן לפרק פונקציה $f:{\{ 0,1 \}^{n}\to\{ 0,1 \}^{m}}$ ל-$m$ פונקציות $f^{(a)}:\{ 0,1 \}^{n}\to \{ 0,1 \}^{m}$ כאשר $1\leq a \leq m$.</p>
-</div>
-<div class="proposition"><span class="keyword">הפעולות הבוליאניות גם, או ולא</span><p>ניתן להגדיר בעזרת פונקציות בוליאניות את הפעולות הבאות:</p>
-<ol>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "וגם"(AND) על ידי: 
-$$a\land b = a\cdot b$$</p>
-</li>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "לא"(NOT) על ידי: 
-$$\lnot a = 1- a$$</p>
-</li>
-<li>
-<p>ניתן להביע את הפעולה הלוגית "או"(OR) על ידי: 
-$$a\lor b = a+b - a\cdot b$$</p>
-</li>
-</ol>
-</div>
-<div class="definition"><span class="keyword">קבוצת שערים</span><p>קבוצה של פעולות בוליאניות. כל איבר בקבוצה נקרא שער.</p>
-</div>
-<div class="definition"><span class="keyword">מעגל/חישוב</span><p>סדרה סופית של פעולות בינאריות המופעלות על מחרוזת של ביטים. למעשה שקול לרכיב $f^{(a)}(x)$ של פונקציה בינארית.</p>
-</div>
-<div class="definition"><span class="keyword">קבוצת שערים אוניברסליים</span><p>קבוצה של שערים שניתן בעזרתה להקבל כל פונקציה בוליאנית.</p>
-</div>
-<div class="example">
-<p>הקבוצת שערים:
-$$\left\{  \text{And, Not, Or, Input}  \right\}$$
-כאשר Input זה הפעולה של להכין ביט קבוע מהוות קבוצת שערים אוניברסליים.</p>
+<p>נסמן את הפונקציה $f_{w}:\{ 0,1 \}^{n}\to\{ 0,1 \}$ אשר מחזירה 1 עבור הערך הנכון ו-0 עבור הערך הלא נכון:
+$$f_{w}\left(x\right)=\begin{cases}1&amp;x=w\\ 0&amp;x\neq w\end{cases}$$
+כאשר האופרטור האוניטרי אשר מבצע את $U$ מוגדר על ידי:
+$$U_{w}\left|x\right\rangle\otimes\left|y\right\rangle=\left|x\right\rangle\otimes\left|y\oplus f_{w}\left(x\right)\right\rangle$$</p>
 </div>
 <div class="proposition">
-<p>ניתן לתאר מעגל על ידי גרף מכוון אי-ציקלי(כלומר ללא לולאות) כאשר כל קודקוד של הגרף הוא שער.</p>
+<p>$$(-1)^{f_{w}(x)}=\begin{cases}-1&amp;x=w\\ 1&amp;x\neq w\end{cases}$$</p>
 </div>
-<div class="definition"><span class="keyword">משפחות של פונקציות בוליאניות</span><p>קבוצה של פונקציות בוליאניות אשר פועלת על קלט עם גודל משתנה.  מוסמן:
-$$f:\{0,1\}^{*}\to\{0,1\}$$</p>
+<div class="proposition">
+<p>אם נסתכל רק על המצבים העצמיים של $U_{w}$ ניתן לכתוב:
+$$U_{w}=\mathbb{I}-2\left|w\right\rangle\left\langle w\right|$$</p>
 </div>
-<div class="definition"><span class="keyword">שפה</span><p>הקבוצה של המחרוזות אשר מתקבלות על ידי המשפחת פונקציות:
-$$L=\{x\in\{0,1\}^{*}:f(x)=1\}$$</p>
+<div class="proposition">
+<p>ניתן לכתוב כל קיוביט $\ket{\psi}$ על ידי:
+$$\left|\psi\right\rangle=a\left|w\right\rangle+b\left|w^{\perp}\right\rangle$$
+כאשר:
+$$U_{w}\left|\psi\right\rangle=-a\left|w\right\rangle+b\left|w^{\perp}\right\rangle$$</p>
 </div>
-<div class="definition"><span class="keyword">בעיות הכרעה</span><p>בעיה אשר יש לה תשובה של כן או לא.</p>
-</div>
+<ol>
+<li>
+<p>מאתחלים את הקיוביט במצב: 
+$$|s\rangle={\frac{1}{\sqrt{N}}}\sum_{x=0}^{N-1}|x\rangle$$
+שזה נעשה על ידי הפעלה של $n$ שערי הדמר בצורה מקבילה על הקלט.</p>
+</li>
+<li>
+<p>ללא תלות ב-$\ket{w}$ נקבל כי $\ket{w}$ מוכל ב-$\ket{s}$ עם אמפלטודה 
+$$\langle w|s\rangle={\frac{1}{\sqrt{N}}}\equiv\sin\theta$$
+כאשר נגדיר:
+$$U_{s}=2\left|s\right\rangle\left\langle s\right|-\mathbb{I}$$</p>
+</li>
+<li>
+<p>אם נפרוש את המצב בבסיס $\left\{  \ket{s}  \right\}$ נקבל: 
+$$|\psi\rangle=c\,|s\rangle+d\,|s^{\perp}\rangle$$
+כאשר ניתן לכתוב:
+$$U_{s}\left|\psi\right\rangle=c\left|s\right\rangle-d\left|s^{\perp}\right\rangle$$</p>
+</li>
+</ol>
     </div>
     <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
-<li class='prev-page'><a href='./Quantum_computation_3_2'>3.2 שימושים של שזירה</a></li>
+<li class='next-page'><a href='./Quantum_computation_8_1'>8.1 תרגיל 2</a></li>
+<li class='prev-page'><a href='./Quantum_computation_7_2'>7.2 מחזוריות</a></li>
 </ul></li>
         </body>
         </html>
