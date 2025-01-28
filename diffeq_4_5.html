@@ -13,23 +13,74 @@ window.MathJax = {
     inlineMath: [["$", "$"], ["\\(", "\\)"]],
     displayMath: [["$$", "$$"], ["\[", "\]"]],
     processEscapes: true,
-    packages: ['base', 'ams', 'cancel', 'braket']
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
     processHtmlClass: 'tex2jax_process'
   },
   loader: {
-    load: ['[tex]/cancel', '[tex]/braket']
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
   }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
-            <title>תכונות של משוואת החום</title>
+            <title>פתרון משוואות לא הומוגניות</title>
         </head>
         <body>
         <ul class='top-navigation'>
-<li class='next-page'><a href='./diffeq_4_6'>4.6 תכונות של משוואת הגלים</a></li>
+<li class='next-page'><a href='./diffeq_5_1'>5.1 תכונות של משוואת הגלים</a></li>
 <li class='parent-page'><a href='./diffeq'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
 <li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./diffeq_1_1'>1.1 מושגים כללים</a></li>
@@ -39,10 +90,10 @@ window.MathJax = {
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./diffeq_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_2_2'>2.2 משוואת לג'נדר המוכללת</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_2_3'>2.3 משוואת לג'נדר ופולינומי לג'נדר</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_2_4'>2.4 פתרון באמצעות טור</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_2_5'>2.5 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
 <li class='parent_page-dropdown'><a href='./diffeq_2_6'>2.6 שטרום ליוביל</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
@@ -53,44 +104,46 @@ window.MathJax = {
 <li class='parent_page-dropdown'><a href='./diffeq_3_5'>3.5 פונקציית גרין</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
-<li class='parent_page-dropdown'><a href='./diffeq_4_1'>4.1 משוואות מסדר ראשון</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_4_2'>4.2 משוואות מסדר שני</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_4_3'>4.3 תנאי שפה ותנאי התחלה</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_4_4'>4.4 תכונות של משוואת לפלס</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_4_5'>4.5 תכונות של משוואת החום</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_4_6'>4.6 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
 </ul></li>
-<li class='parent-page-dropdown'><div class='dropdown-div'>5. מד"חים בתחום חסום</div><ul class='parent-dropdown-dropdown'>
-<li class='parent_page-dropdown'><a href='./diffeq_5_1'>5.1 משוואת הגלים</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_5_2'>5.2 משוואת החום</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_5_3'>5.3 פתרון משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
-<li class='parent_page-dropdown'><a href='./diffeq_6_1'>6.1 פתרון בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4'>6.4 פתרון בתחום לא חסום</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
-<li class='parent_page-dropdown'><a href='./diffeq_7_1'>7.1 משוואת לפלס בתחום לא חסום</a></li>
-<li class='parent_page-dropdown'><a href='./diffeq_7_2'>7.2 פתרון בתחום חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2'>8.2 נוסחאות גרין</a></li>
 </ul></li>
 </ul></li>
-<li class='prev-page'><a href='./diffeq_4_4'>4.4 תכונות של משוואת לפלס</a></li>
-</ul></li>
+<li class='prev-page'><a href='./diffeq_4_4'>4.4 משוואות מסדר שני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_5_1`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_4_4`;}});</script>
         <div class="content">
-        <h1>4.5  תכונות של משוואת החום</h1>
-    <div class="definition"> (משוואת החום החד מימדית)<p>$$u_{t}=k u_{x x}.$$
-כאשר $k$ נקרא קבוע הדיפוזיה.</p>
-</div>
-<div class="proposition"> (עקרון המקסימום)<p>אם $u(x,t)$ מקיים את משוואת החום בתחום $0\leq x\leq \ell$ הערך המינימלי או המקסימלי $u(x,t)$ מושג או בהתחלה או בקצה $x=0,\ell$</p>
-</div>
-<div class="proposition">
-<p>קיים פתרון יחיד עבור בעיית דיריכלה.</p>
-</div>
-<div class="definition"> (משוואת החום/דיפוזיה)<p>משווה מהצורה $\bar{\nabla}^2u+\frac{\mathrm{d} u}{\mathrm{d} t}=0$. נשים לב כי זוהי משוואה פרבולית.</p>
+        <h1>4.5  פתרון משוואות לא הומוגניות</h1>
+    <div class="proposition"><span class="keyword">פתרון משוואה לא הומוגנית</span><p>דרך 1 - נפרוש את הפתרון הלא הומוגני ע"י פונקציות עצמיות והשוואה מקדמים. נקבל אוסף של משוואות דיפרנציאליות לינאריות.
+דרך 2 - נרצה ראשית למצוא פתרון פרטי $u^P$ של משוואת פואסון. לאחר מכן נקבל:
+$$u^H=u-u^P$$
+כאשר $u^H$ משוואה הומוגנית. נדרש למצוא תנאי שפה עבור $u^H$, לפתור את הבעיה ההומגונית, ולאחר מכן להציב חזרה $u=u^H+u^P$.</p>
 </div>
     </div>
     <ul class='top-navigation'>
-<li class='next-page'><a href='./diffeq_4_6'>4.6 תכונות של משוואת הגלים</a></li>
-<li class='prev-page'><a href='./diffeq_4_4'>4.4 תכונות של משוואת לפלס</a></li>
+<li class='next-page'><a href='./diffeq_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='prev-page'><a href='./diffeq_4_4'>4.4 משוואות מסדר שני</a></li>
 </ul></li>
         </body>
         </html>
