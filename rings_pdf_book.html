@@ -1,0 +1,401 @@
+
+            <!DOCTYPE html>
+            <html>
+                    <head>
+    <meta charset="UTF-8">
+                    <link rel='stylesheet' href='./styles/pdf_style.css'/>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+            <body>
+            <div id='cover' style='background-color: #37842A;'>
+            <h1>תורת חוגים</h1>
+            <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+        <div id='toc'><ul>
+<li><a href='./rings_1_1'>1. הגדרת החוג</a></li>
+<ul>
+<li><a href='./rings_1_1'>1.1 חוגים</a></li>
+<ul>
+</ul><li><a href='./rings_1_2'>1.2 תת חוג</a></li>
+<ul>
+</ul><li><a href='./rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<ul>
+</ul><li><a href='./rings_1_4'>1.4 אידיאלים</a></li>
+<ul>
+</ul><li><a href='./rings_1_5'>1.5 תחום שלמות</a></li>
+<ul>
+</ul></ul><li><a href='./rings_2_1'>2. חוג הפולינומים</a></li>
+<ul>
+<li><a href='./rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<ul>
+</ul><li><a href='./rings_2_2'>2.2 תחום שלמות</a></li>
+<ul>
+</ul></ul></ul></div>
+<h1 id='rings_1'>הגדרת החוג</h1>
+<h2 id='rings_1_1'>חוגים</h2>
+ <div class="definition"><span class="keyword">חוג</span><p>אוסף $\left( R,+,\cdot, \right)$  כאשר:</p>
+<ol>
+<li>
+<p>הקבוצה $R$ ביחד עם חיבור יוצר חבורה חיבורית, עם איבר ניטרלי אפס. </p>
+</li>
+<li>
+<p>הקבוצה $R$ ביחד עם כפל היא אסוצייטיבית  </p>
+</li>
+<li>
+<p>מכיל יחידה כפלית 1(לא תנאי הכרחי בחלק מההגדרות) </p>
+</li>
+<li>
+<p>מקיים שתי חוקי פילוג: 
+$$r(a+b)=r\cdot a+r\cdot b\quad (a+b)\cdot r=a\cdot r+b\cdot r$$</p>
+</li>
+</ol>
+</div>
+<p>נשים לב כי אין בהכרח הופכי כפלי. חוג עם הופכי לכפל נקרא חוג חילוק. יש דבר כזה חוגים ללא יחידה כפלית. אך אנחנו לא מתעניין בהם כעת.</p>
+<div class="example">
+<ol>
+<li>
+<p>המספרים השלמים $\mathbb{Z}$ עם החיבור והכפל הרגילים. </p>
+</li>
+<li>
+<p>החיבור והכפל המודולרי $\mathbb{Z} _n$. </p>
+</li>
+<li>
+<p>שדה כללי $\mathbb{F}$ </p>
+</li>
+<li>
+<p>פולינומים $\mathbb{F}[x]$, $\mathbb{F}[x,y]$ </p>
+</li>
+<li>
+<p>פולינום עם חוג אחר $R[x]$ כש-$R$ חוג. </p>
+</li>
+<li>
+<p>מטריצות $M_{n\times n}\left( \mathbb{F} \right)$, $M_{n\times n}(R)$(כש-$R$ חוג) </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>עבור $M_{n\times n}(R)$ לא בהכרח אי-הפיכות גורר דטרמיננטה 0.</p>
+</div>
+<div class="definition"><span class="keyword">החוג הטריוויאלי</span><p>$$R=\{ 0 \}$$</p>
+</div>
+<div class="definition">
+<p>אם $R$ חוג ו-$X$ קבוצה אז $R^X$ (פונקציות $X\to R$) יהיה חוג עם הפעולות
+$$\begin{gathered}(f+f')(x)=f(x)+f'(x) \\\left( f\cdot f' \right)(x)=f(x)\cdot f'(x) \end{gathered}$$</p>
+</div>
+<p>אם $(A,+)$ חבורה אבלית. $End(A)$ הוא חוג ביחס ל- $$\begin{gathered}(f+f')(a)=f(a)+f(a') \\\left( f\cdot f' \right)(a)= f(f'(a)) \\0=\left( a\mapsto 0_{A} \right)\qquad 1=id_{A} \end{gathered}$$
+הפילוג פה יותר מעניין. הפילוג מצריך את האבליות! מושאר כתרגיל להראות פילוג.</p>
+<div class="example">
+<p>עבור $A=\mathbb{Z} _p^n$ כאשר $End(A)=M_{n\times n}\left( \mathbb{F}_{p} \right)$.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט קיילי</span><p>כל חוג איזומורפי לתת חוג של $\mathrm{End}(A)$ לחבורה אבלית $A$ כלשהי.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של חוגים</span><p>יהיו $a,b,c \in R$. אזי מתקיים:</p>
+<ol>
+<li>
+<p>$a 0=0a=0$ </p>
+</li>
+<li>
+<p>$a(-b)=(-a)b=-(ab)$ </p>
+</li>
+<li>
+<p>$(-a)(-b)=ab$ </p>
+</li>
+<li>
+<p>$a(b-c)=ab-ac$ וגם $(b-c)a=ba-ca$ </p>
+</li>
+<li>
+<p>$(-1)a=-a$ </p>
+</li>
+<li>
+<p>$(-1)(-1)=1$ </p>
+</li>
+</ol>
+</div>
+<div class="definition">
+<p>איבר $r\in R$ נקרא הפיך אם קיים $s \in R$ כך ש-$rs=sr=1$. </p>
+</div>
+<div class="proposition">
+<p>אם קיים ל-$r$ הופכי הוא יחיד, ומסומן $r^{-1}$.</p>
+</div>
+<div class="example">
+<p>נסתכל על $End\left( \mathbb{Z} ^{\mathbb{N} } \right)$. סדרות של שלמים זה חבורה אבלית. נסתכל על האנדומורפיזם שלה. עבור $T\in End\left( \mathbb{Z} ^{\mathbb{N} } \right)$ המוגדר:
+$$\begin{gathered}T\left( \left( a_{1},a_{2},\dots \right) \right)=\left( a_{2},a_{3},\dots \right) \\S\left( \left( a_{1},a_{2},\dots \right) \right)=\left( 0,a_{1},a_{2},\dots \right) \end{gathered}$$
+כאשר נשים לב כי $S\circ T = id$ אך $T\circ S \neq id$. זה הדוגמא הסטנדרטית ללמה הופכי מימין לא דווקא ההופכי משמאל.</p>
+</div>
+<div class="proposition">
+<p>אוסף ההפיכים ב-$R$ היא חבורה, מסומנת $R^\times$.</p>
+</div>
+<div class="example">
+<p>$$M_{n\times n}\left( \mathbb{F} \right)^x=GL_{n}\left( \mathbb{F} \right)\qquad \mathbb{Z} ^x=\left\{  \pm 1  \right\}\qquad \mathbb{F}[x]^x=\mathbb{F}^x$$</p>
+</div>
+<div class="definition">
+<p>פונקציה $f:R\to S$ שעבורה משמר חיבור, כפל ויחידה: $$\begin{gathered}f(x+y)=f(x)+f(y) \\f\left( x\cdot y \right)=f(x)\cdot f(y) \\f(1)=1 \end{gathered}$$
+<strong>דוגמא</strong>
+קיים הומומורפיזם יחיד $f:\mathbb{Z} \to R$ עבור כל חוג! זה יהיה
+$$f(m)=\begin{cases}\underbrace{ 1+\dots+1 }_{ m }  &amp; m\geq 0\\-\underbrace{ \left( 1+\dots+1 \right) }_{ m  } &amp; m&lt;0 \end{cases}$$</p>
+</div>
+<div class="example">
+<p>עבור $f:\mathbb{R} \to M_{2\times 2}\left( \mathbb{R}  \right)$ המוגדר
+$$f\left( \alpha \right)=\begin{pmatrix}\alpha &amp; 0 \\0 &amp; 0 \end{pmatrix}$$
+הפונקציה $f$ משמרת חיבור וכפל אבל לא יחידה!</p>
+</div>
+<div class="example">
+<p>הפונקציה $0:R\to \{ 0 \}$ היא הומומורפיזם ונקראת הומומורפיזם האפס. אם $S\neq \{ 0 \}$ אזי $0:R\to S$ היא לא הומומורפיזם(כי לא משמרת יחידה)</p>
+</div>
+<div class="remark">
+<p>ברגע שיש הומומורפיזמים, יש גם איזומורפיזים, מונומורפיזם, אפימורפיזם וכו.</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>לחוג יש איבר יחידה כפלי יחיד.</p>
+</div>
+<div class="definition"><span class="keyword">חוג קומוטטיבי</span><p>חוג אשר גם הפעולה של הכפל היא קומוטטיבית. כלומר $\forall a,b \in R\quad a\cdot b=b\cdot a$</p>
+</div>
+<div class="definition"><span class="keyword">חוק חילוק</span><p>חוג אשר גם לכל איבר פרט לאיבר הניטרלי החיבורי יש הוכפי כפלי. כלומר $\forall a \in R\quad a^{-1}\in R$.</p>
+</div>
+<div class="definition"><span class="keyword">שדה</span><p>חוג חילוק קומוטטיבי.</p>
+</div><h2 id='rings_1_2'>תת חוג</h2>
+ <div class="definition"><span class="keyword">תת חוג</span><p>קבוצה לא ריקה $S$ של $R$ נקראת תת חוג אם $S$ מהוואה תת חבורה חיבורית תחת חיבור(כלומר סגורה לחיבור ולהופכי חיבורי) וכן סגורה תחת כפל, כלומר אם $a,b\in R$ אז $a\cdot b \in R$. מסומן $S\leq R$.</p>
+</div>
+<div class="example">
+<p>$$\{ 0 \}\not\leq \mathbb{Z} \qquad \mathbb{F},\mathbb{F}[x^2]\leq \mathbb{F}[x]$$</p>
+</div>
+<div class="reminder">
+<p>כשהיינו בחבורות, דיברנו על קבוצה $X$ ו-$S_{X}$ חבורה. פעולה של $G$ על $X$ שקול ל-$\rho:G\to S_{X}$ הומומורפיזם(המבנה).</p>
+</div>
+<div class="definition"><span class="keyword">פעולה על חוג</span><p>עבור $A$ חבורה אבלית, $\mathrm{End}(A)$ חוג. פעולה של חוג $R$ על $A$($R \circlearrowright A$): $$\rho:R\to End(A)$$ כאשר $\rho$ זה הומומורפיזם של חוגים. נתרגם לפעולה $\cdot:R\times A\to A$
+$$\begin{gathered}(r+r')a=ra+r'a\qquad (rr')a=r(r'a) \\r(a+a')=ra+ra'\qquad 1a=a \end{gathered}$$</p>
+</div>
+<p>עבור שדה $\mathbb{F}$, מרחב וקטורי מעל $\mathbb{F}$ שקול לחבורה אבלית עם פעולה של $\mathbb{F}$. אמנם במרחבים וקטורים היו יותר מ-4 אקסיומות. זאת כיוון שחלק מהאקסימות נדרשו בשביל האבליות.</p>
+<div class="remark">
+<p>לא קוראים ל-$A$ עם פעולה של חוג $R$ מרחב וקטורי מעל $R$. קוראים להם מודול.</p>
+</div>
+<p>כעת ניתן להוכיח את משפט קיילי לחוגים</p>
+<div class="reminder"><span class="keyword">משפט קיילי לחוגים</span><p>כל חוג איזומורפי לתת חוג של $\mathrm{End}(A)$ לחבורה אבלית $A$ כלשהי.</p>
+</div>
+<div class="proof">
+<p>ניקח $A=R^+$. אזי $R\circlearrowright A$ ע\"י $r.a=ra$. נקבל:
+$$\rho:R\to End(R^+)$$
+נקבל כי $\rho$ חח\"ע אם\"ם:
+$$\left\{  r \mid \rho(r)=0  \right\}=\ker\left( \rho \right)=\{ 0 \}$$
+כעת:
+$$r\in \ker\left( \rho \right):\rho(r)=0\quad r=r\cdot 1=\rho(r)(1)=0(1)=0$$</p>
+</div>
+<p>תת חוג $S\leq R$ יקיים $1\in S$, $S\pm S, S\cdot S\subseteq S$ אידיאל $I\trianglelefteq R$ יקיים $RIR\subseteq I$, $I+I$.($I=R\iff 1\in I$)</p>
+<div class="example">
+<p>עבור $m\mathbb{Z} \trianglelefteq \mathbb{Z}$. $M_{n}\left( \mathbb{F} \right)\trianglelefteq M_{n}\left( \mathbb{F} \right)$, $\{ 0 \}$ ורק הם.</p>
+</div><h2 id='rings_1_3'>הומומורפיזם של חוגים</h2>
+ <div class="definition"><span class="keyword">הומומורפיזם של חוגים</span><p>יהיו $S,R$ חוגים. הומומורפיזם של חוגים זו העתקה $\varphi:S\to R$ כך שמתקיים:</p>
+<ol>
+<li>
+<p>זהו הומומורפיזם של החבורה החיבוריות </p>
+</li>
+<li>
+<p>משמר כפל, כלומר $\varphi\left( s_{1}\cdot s_{2} \right)=\varphi(s_{1})\cdot \varphi(s_{2})$. </p>
+</li>
+<li>
+<p>מעביר יחידה ליחידה - $\varphi(1)=1$. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">גרעין של הומומורפיזם</span><p>אוסף האברים בחוג $R$ שההומומורפיזם $\varphi$ שולח ל-0. כלומר:
+$${\mathrm{ker}}\,\left( \varphi \right)=\left\{r\in R\,|\,\varphi\,(r)=0\right\}$$</p>
+</div>
+<div class="definition"><span class="keyword">תמונה של הומומורפיזם</span><p>אוסף כל האיברים שההומומורפיזם מגיע עליהם:
+$${\mathrm{Im}}\left( \varphi \right)=\left\{\varphi\left(r\right)\left|\,r\in R\right\}\right.$$</p>
+</div>
+<div class="proposition">
+<p>התמונה של הומומורפיזם היא תת חוג, והגרעין של הומומורפיזם היא אידיאל.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם הראשון של חוגים </span><p>נניח $\phi:R\to S$ הומומורפיזם של חוגים $R,S$. אז ההעתקה:
+$$R / \ker \phi \to \mathrm{Im}\left( \phi \right)$$
+היא איזומורפיזם בין חוגים</p>
+</div><h2 id='rings_1_4'>אידיאלים</h2>
+ <div class="definition"><span class="keyword">אידיאל</span><p>תת חוג $I$ של $R$ נקרא אידיאל(דו צדדי) אם לכל $r\in R$ ולכן $i \in I$ מתקיים $ri,ir\in I$</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן האידיאל</span><p>קבוצה לא ריקה $I$ הוא אידיאל של החוג $R$ אם:</p>
+<ol>
+<li>
+<p>אם $a,b \in I$ גורר $a-b\in I$ </p>
+</li>
+<li>
+<p>כאשר $i \in I$ ו-$r \in R$ גורר $ir,ri \in I$ </p>
+</li>
+</ol>
+</div>
+<p>נשים לב כי תנאי אחד מראה כי תת חבורה חיבורית, ותנאי 2 מראה שזה אידיאל</p>
+<div class="remark">
+<ol>
+<li>
+<p>החוג כולו $R$ והאידיאל הטריוויאלי $\{ 0 \}$ הם תמיד אידיאלים </p>
+</li>
+<li>
+<p>מסומן $I\trianglelefteq R$. </p>
+</li>
+<li>
+<p>האידיאל יכיל את היחידה רק אם הוא החוג כולו. </p>
+</li>
+</ol>
+</div>
+<p>כעת ננסה להגדיר חוגי מנה כמו בחבורות. </p>
+<div class="proposition"><span class="keyword">חוג מנה</span><p>יהי $R$ חוג, ו-$A$ תת חוג של $R$. הקבוצה:
+$$\left\{  r+A\mid r\in R  \right\}$$
+יוצרת תת חוג ביחד עם הפעולה $(s+A)+(t+A)=s+t+A$ ו-$(s+A)\cdot(t+A)=st+A$ אם"ם החוג $A$ הוא אידיאל.</p>
+</div>
+<div class="definition"><span class="keyword">חוג פשוט</span><p>חוג נקרא פשוט אם האידיאלים היחידים בו הם $(0)=0$ ו-$(1)=R$.</p>
+</div>
+<div class="proposition">
+<p>כל חוג חילוק פרט לחוג הטריוויאלי הוא פשוט</p>
+</div>
+<div class="proposition">
+<p>עבור חוג קומוטטיבי $R$, $R$ הוא פשוט אם"ם הוא שדה.</p>
+</div>
+<div class="proposition">
+<p>לכל שדה $F$ ו-$n$ טבעי, חוג המטריצות $M_{n}(F)$ פשוט.</p>
+</div><h2 id='rings_1_5'>תחום שלמות</h2>
+ <div class="definition"><span class="keyword">מחלק אפס</span><p>איבר $a\neq 0$ נקרא מחלק אפס של חוג $R$ אם קיים $0\neq b \in R$ ומקיים $a\cdot b =0$</p>
+</div>
+<div class="definition"><span class="keyword">תחום שלמות</span><p>חוג קומוטטיבי עם יחידה וללא מחלק אפס נקרא חוק שלמות.</p>
+</div>
+<div class="definition"><span class="keyword">פריקות</span><p>יהא $D$ תחום שלמות. אז $r \in D$ יקרא פריק אם קיים $a,b \in \mathbb{R} \setminus \mathbb{R}^\times$ כך ש-$r=a\cdot b$.</p>
+</div>
+<div class="example">
+<p>החוגים הבאים הם חוגי שלמות:</p>
+<ol>
+<li>
+<p>חוג המספרים שלמים </p>
+</li>
+<li>
+<p>חוג המספרים הגאוסים $Z[i]=\{a+b i\mid a,b\in Z\}$. </p>
+</li>
+<li>
+<p>חוג הפולינומים עם מקדמים שלמים $Z[x]$. </p>
+</li>
+<li>
+<p>החוג $Z[{\sqrt{2}}]=\{a+b{\sqrt{2}}\mid a,b\in Z\}$. </p>
+</li>
+<li>
+<p>החוג המודולארי $\mathbb{Z}_{p}$ כאשר $p$ ראשוני. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">חוק הביטול</span><p>יהיו $a,b,c$ בחוג שלמות. אם $a\neq 0$ ו-$ab=ac$ אז $b=c$.</p>
+</div>
+<div class="proposition">
+<p>תחום שלמות סופי הוא שדה.</p>
+</div><h1 id='rings_2'>חוג הפולינומים</h1>
+<h2 id='rings_2_1'>פולינומים ופריקות</h2>
+ <div class="definition"><span class="keyword">חוג פולינומים</span><p>חוג המסומן ב-$R[x]$ כאשר 
+$$R[x]=\{a_{n}x^{n}+a_{n-1}x^{n-1}+\cdot\cdot\cdot+a_{1}x+a_{0}\mid a_{i}\in R, x \in \mathbb{F} \} $$</p>
+</div>
+<div class="definition"><span class="keyword">פריקות של פולינום</span><p>יהי $D$ תחום שלמות. פולינום $f(x)\in D$ שהוא לא פולינום האפס ולכן פולינום היחידה נקרא פריק אם קיימים $g(x),h(x)\in D$ כך ש-$deg(g(x)),deg(h(x))&gt;1$ ומקיימים $f(x)=g(x)h(x)$.</p>
+</div>
+<div class="proposition">
+<p>אם יש לפולינום $f(x)\in \mathbb{F}[x]$ שורש, אז הוא פריק. </p>
+</div>
+<p>כאשר נשים לב כי הכיוון השני בדרך כלל לא נכון.</p>
+<div class="proposition">
+<p>לפולינום $f(x)\in \mathbb{F}[x]$ מסדר 2 או 3 יש שורש אם"ם הוא פריק.</p>
+</div>
+<h2>מבחני פריקות</h2>
+<div class="proposition"><span class="keyword">הלמה של גאוס</span><p>יהא $p(x)\in \mathbb{Z}[x]$ פולינום ממעלה חיובית. אז $p(x)$ אי פריק מעל $\mathbb{Z}[x]$ אם"ם הוא אי פריק מעל $\mathbb{Q}$</p>
+</div>
+<div class="proposition"><span class="keyword">קריטריון אייזנשטיין</span><p>יהא $\mathbb{Z}[x]\ni q(x)=a_{n}x^n+\dots+a_{0}$, $n&gt;0$.
+אם קיים $p$ ראשוני כך ש:</p>
+<ol>
+<li>
+<p>מתקיים $p\nmid a_n$ </p>
+</li>
+<li>
+<p>מתקיים $p\mid a_{i}$ לכל $0\leq i&lt;n$. </p>
+</li>
+<li>
+<p>מתקיים $p^2 \nmid a_{0}$ 
+אז $q(x)$ אי פריק</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">קרטריון השורש הרציונאלי</span><p>נתון פולינום מהצורה $$p(x)=a_{n}x^{n}+\ldots+a_{0}\in\mathbb{Z}[x]$$ אם $p\left( \frac{a}{b} \right)=0$ ו-$\frac{a}{b}\in \mathbb{ Q}$ מצומצם אזי $a\mid a_{0}$ ו-$b\mid a_{n}$.</p>
+</div>
+<div class="proposition"><span class="keyword">טרנספורמציה לינארית</span><p>לכל $a,b \in \mathbb{F}$ כך ש-$a\neq 0$ אז $p(x) \in \mathbb{F} [x]$ פריק אם"ם $f(ax+b)$ פריק.</p>
+</div>
+<h2>תחום ראשי</h2>
+<div class="definition"><span class="keyword">תחום ראשי</span><p>תחום שבו כל אידיאל נוצר ע"י איבר יחיד.</p>
+</div>
+<div class="definition"><span class="keyword">איבר ראשוני</span><p>יהא $R$ תחום שלמות. איבר $r\in R$ לא הפיך יקרא ראשוני אם $r \mid a\cdot b$ גורר $r \mid a$ או $r \mid b$.</p>
+</div>
+<div class="proposition">
+<p>בתחום ראשי $R$. איבר הוא ראשוני אם"ם הוא אי פריק. </p>
+</div><h2 id='rings_2_2'>תחום שלמות</h2>
+ <div class="definition"><span class="keyword">מחלק אפס</span><p>איבר $a\neq 0$ נקרא מחלק אפס של חוג $R$ אם קיים $0\neq b \in R$ ומקיים $a\cdot b =0$</p>
+</div>
+<div class="definition"><span class="keyword">תחום שלמות</span><p>חוג קומוטטיבי עם יחידה וללא מחלק אפס נקרא חוק שלמות.</p>
+</div>
+<div class="example">
+<p>החוגים הבאים הם תחום שלמות:</p>
+<ol>
+<li>
+<p>חוג המספרים שלמים $\mathbb{Z}$ </p>
+</li>
+<li>
+<p>חוג המספרים הגאוסים $\mathbb{Z}[i]=\left\{ a+b i\mid a,b\in \mathbb{Z} \right\}$ </p>
+</li>
+<li>
+<p>חוג הפולינומים עם מקדמים שלמים $\mathbb{Z}[x]$ </p>
+</li>
+<li>
+<p>החוג $\mathbb{Z}\left[ {\sqrt{2}} \right]=\left\{ a+b{\sqrt{2}}\mid a,b\in \mathbb{Z} \right\}$ </p>
+</li>
+<li>
+<p>החוג המודולארי $\mathbb{Z}_{p}$ כאשר $p$ ראשוני </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>החוגים הבאים הם לא חוגי שלמות:</p>
+<ol>
+<li>
+<p>החוג המודולארי $\mathbb{Z}_{n}$ כאשר $n$ אינו ראשוני </p>
+</li>
+<li>
+<p>חוג המטריצות $M_{2}\left( \mathbb{Z} \right)$ </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">חוג הביטול</span><p>יהיו $a,b,c$ בחוג שלמות. אם $a\neq 0$ ו-$ab=ac$ אז $b=c$</p>
+</div>
+<div class="proof">
+<p>מ-$ab=ac$ נקבל $a(b-c)=0$. כיוון ש-$a\neq 0$ בהכרח מתקיים $b-c=0$ ולכן $b=c$.</p>
+</div>
+<div class="proposition">
+<p>אם $R$ תת חוג של שדה $F$. אזי ב-$R$ אין מחלקי אפס.</p>
+</div>
+<div class="proof">
+<p>נניח $xy=0$ ו-$x\neq 0$. נראה כי $y=0$:
+$$y=\left(x^{-1}x\right)y=x^{-1}\left(x y\right)=x^{-1}\cdot0=0$$</p>
+</div>
+<div class="corollary">
+<p>כל תת חוג של שדה תחום שלמות.</p>
+</div>
+<div class="proposition">
+<p>תחום שלמות סופי הוא שדה.</p>
+</div>
+            </body>
+            </html>
+            
