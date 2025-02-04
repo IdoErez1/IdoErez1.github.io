@@ -137,6 +137,7 @@ h1 {
   border: 2pt solid var(--reminder-text);
   padding: 10pt;
   font-family: "Open Sans", serif;
+  page-break-inside: avoid;
 }
 
 .reminder::before {
@@ -156,6 +157,7 @@ h1 {
   border: 2pt solid var(--gray2);
   padding: 10pt;
   font-family: "Open Sans", serif;
+  page-break-inside: avoid;
 }
 
 .corollary::before {
@@ -198,6 +200,7 @@ tr:nth-child(even) {
   color: var(--gray1);
   margin-bottom: 0;
   padding-bottom: 0;
+  page-break-inside: avoid;
 }
 
 .summary:before {
@@ -321,8 +324,14 @@ h1 {
   color: black;
 }
 
-#toc a::after { 
-  content: leader(".") target-counter(attr(href), page); 
+.page-marker {
+  position: absolute;
+  break-after: page;
+  z-index: -1;
+}
+
+#toc a::after {
+  content: leader(".") target-counter(attr(href), page);
 }
 
 ol,ul {
@@ -350,4 +359,28 @@ div .keyword::before{
 
 div .keyword::after{
   content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
 }

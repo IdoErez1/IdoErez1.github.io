@@ -142,6 +142,7 @@ h1 {
   border: 2pt solid var(--reminder-text);
   padding: 10pt;
   font-family: "Open Sans", serif;
+  page-break-inside: avoid;
 }
 
 .reminder::before {
@@ -161,6 +162,7 @@ h1 {
   border: 2pt solid var(--gray2);
   padding: 10pt;
   font-family: "Open Sans", serif;
+  page-break-inside: avoid;
 }
 
 .corollary::before {
@@ -203,6 +205,7 @@ tr:nth-child(even) {
   color: var(--gray1);
   margin-bottom: 0;
   padding-bottom: 0;
+  page-break-inside: avoid;
 }
 
 .summary:before {
@@ -326,8 +329,14 @@ h1 {
   color: black;
 }
 
-#toc a::after { 
-  content: leader(".") target-counter(attr(href), page); 
+.page-marker {
+  position: absolute;
+  break-after: page;
+  z-index: -1;
+}
+
+#toc a::after {
+  content: leader(".") target-counter(attr(href), page);
 }
 
 ol,ul {
@@ -356,7 +365,30 @@ div .keyword::before{
 div .keyword::after{
   content: ')';
 }
-</style>
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
         <script>
 window.MathJax = {
   tex: {
@@ -375,6 +407,48 @@ window.MathJax = {
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document Height:', document.documentElement.scrollHeight);
+    console.log('Viewport Height:', window.innerHeight);
+    let pagenums = [2,2,5,8,15,20,20,23,27,28,33,38,38,39,41,41,43,44,48,48,50,54,57,60,60, 63,69,69,74,78,83,86,86,91];
+    let i=0;
+    const tocLinks = document.querySelectorAll('#toc a');
+    tocLinks.forEach(link => {
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            const rect = targetElement.getBoundingClientRect();
+            const pageYOffset = window.pageYOffset;
+            const elementTop = rect.top + pageYOffset;
+            const pageHeight = window.innerHeight;
+            
+            const pageNum = pagenums[i];//Math.max(1, Math.ceil(elementTop / pageHeight));
+            i += 1;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'toc-entry';
+            
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = link.textContent;
+            titleSpan.className = 'toc-title';
+            
+            const dotsSpan = document.createElement('span');
+            dotsSpan.className = 'toc-dots';
+            
+            const pageSpan = document.createElement('span');
+            pageSpan.textContent = pageNum;
+            pageSpan.className = 'toc-page';
+            
+            wrapper.appendChild(titleSpan);
+            wrapper.appendChild(dotsSpan);
+            wrapper.appendChild(pageSpan);
+            
+            link.parentNode.replaceChild(wrapper, link);
+        }
+    });
+});
+</script>
         </head>
             <body>
             <div id='cover' style='background-color: #46F7B7;'>
@@ -383,47 +457,47 @@ window.MathJax = {
             </div>
             <h1 id='toc_title'>גלים ואפטיקה</h1><h2 id='toc_title'>תוכן עיניינים</h2>
         <div id='toc'><ul>
-<li><a href='./waves_1_1'>1. רקע מתמטי</a></li>
+<li><a href="#waves_1_1">1. רקע מתמטי</a></li>
 <ul>
-<li><a href='./waves_1_1'>1.1 פתרון משוואת הגלים החד מימדית</a></li>
+<li><a href="#waves_1_1">1.1 פתרון משוואת הגלים החד מימדית</a></li>
 <ul>
-</ul><li><a href='./waves_1_2'>1.2 פונקציות טריגונומטריות</a></li>
+</ul><li><a href="#waves_1_2">1.2 פונקציות טריגונומטריות</a></li>
 <ul>
-</ul></ul><li><a href='./waves_2_1'>2. אסצילטור הרמוני</a></li>
+</ul></ul><li><a href="#waves_2_1">2. אסצילטור הרמוני</a></li>
 <ul>
-<li><a href='./waves_2_1'>2.1 תנודות פשוטות ומרוסן</a></li>
+<li><a href="#waves_2_1">2.1 תנודות פשוטות ומרוסן</a></li>
 <ul>
-</ul><li><a href='./waves_2_2'>2.2 אוסצילטור מאולץ ורסוננס</a></li>
+</ul><li><a href="#waves_2_2">2.2 אוסצילטור מאולץ ורסוננס</a></li>
 <ul>
-</ul><li><a href='./waves_2_3'>2.3 אוסצילטורים מצומדים</a></li>
+</ul><li><a href="#waves_2_3">2.3 אוסצילטורים מצומדים</a></li>
 <ul>
-</ul><li><a href='./waves_2_4'>2.4 אוסצילטורים מצומדים אינסופיים</a></li>
+</ul><li><a href="#waves_2_4">2.4 אוסצילטורים מצומדים אינסופיים</a></li>
 <ul>
-</ul></ul><li><a href='./waves_3_1'>3. משוואת המיתר</a></li>
+</ul></ul><li><a href="#waves_3_1">3. משוואת המיתר</a></li>
 <ul>
-<li><a href='./waves_3_1'>3.1 מעבר לגבול הרצף</a></li>
+<li><a href="#waves_3_1">3.1 מעבר לגבול הרצף</a></li>
 <ul>
-</ul><li><a href='./waves_3_2'>3.2 אנרגיה של גל מכאני</a></li>
+</ul><li><a href="#waves_3_2">3.2 אנרגיה של גל מכאני</a></li>
 <ul>
-</ul><li><a href='./waves_3_3'>3.3 דיספרציה וחבילות גל</a></li>
+</ul><li><a href="#waves_3_3">3.3 דיספרציה וחבילות גל</a></li>
 <ul>
-</ul><li><a href='./waves_3_4'>3.4 יחס נפיצה</a></li>
+</ul><li><a href="#waves_3_4">3.4 יחס נפיצה</a></li>
 <ul>
-</ul><li><a href='./waves_3_5'>3.5 העברה והחזרה</a></li>
+</ul><li><a href="#waves_3_5">3.5 העברה והחזרה</a></li>
 <ul>
-</ul><li><a href='./waves_3_6'>3.6 פתרון משוואת הגל החד מימדית</a></li>
+</ul><li><a href="#waves_3_6">3.6 פתרון משוואת הגל החד מימדית</a></li>
 <ul>
-</ul></ul><li><a href='./waves_4_1'>4. גלים במרחב</a></li>
+</ul></ul><li><a href="#waves_4_1">4. גלים במרחב</a></li>
 <ul>
-<li><a href='./waves_4_1'>4.1 משוואת הגלים התלת מימדי</a></li>
+<li><a href="#waves_4_1">4.1 משוואת הגלים התלת מימדי</a></li>
 <ul>
-</ul><li><a href='./waves_4_2'>4.2 עוצמה של גל</a></li>
+</ul><li><a href="#waves_4_2">4.2 עוצמה של גל</a></li>
 <ul>
-</ul></ul><li><a href='./waves_5_1'>5. אופטיקה - עקיפה ונפיצה</a></li>
+</ul></ul><li><a href="#waves_5_1">5. אופטיקה - עקיפה ונפיצה</a></li>
 <ul>
-<li><a href='./waves_5_1'>5.1 עקיפת פראונהופר</a></li>
+<li><a href="#waves_5_1">5.1 עקיפת פראונהופר</a></li>
 <ul>
-</ul><li><a href='./waves_5_2'>5.2 עקיפת פרנל</a></li>
+</ul><li><a href="#waves_5_2">5.2 עקיפת פרנל</a></li>
 <ul>
 </ul></ul></ul></div>
 <h1 id='waves_1'>רקע מתמטי</h1>
