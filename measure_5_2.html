@@ -92,8 +92,8 @@ window.onload = () => {
 <li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
-<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 קבוצות ממידה אפס</a></li>
-<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
@@ -115,6 +115,7 @@ window.onload = () => {
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2'>6.2 קונבולוציה</a></li>
 </ul></li>
 </ul></li>
 <li class='prev-page'><a href='./measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
@@ -341,24 +342,34 @@ $$ \mu\left( A \cap \bigcup_{n=0}^{\infty} V_n \right) = \mu(A) $$
 <div class="proof">
 <ol>
 <li>
-<p><strong>הוכחת החלק הראשון:</strong> 
-  נניח כי $\underline{D}(\mu, \lambda, x) \leq t$ לכל $x \in A$. לכן לכל $x \in A$ ולכל $\varepsilon &gt; 0$, קיימת סדרת רדיוסים $r_n \to 0$ כך ש:
-$$ \frac{\mu(B_{r_n}(x))}{\lambda(B_{r_n}(x))} &lt; t + \varepsilon $$
-   מכאן נובע שקיים כיסוי בסיקוביץ' $\mathcal{F}$ של $A$ המקיים:
-$$ \forall x \in A \quad \inf\{r &gt; 0 \mid B_r(x) \in \mathcal{F}\} = 0 $$
-  וגם:
-$$ (*) \quad \forall B \in \mathcal{F} \quad \mu(B) \leq (t + \varepsilon) \lambda(B) $$
-  ניקח קבוצה פתוחה $\mathcal{U}$ המכילה את $A$ ומקיימת:
-$$ \mu(\mathcal{U}) \leq \mu(A) + \varepsilon $$
- ונצמצם את $\mathcal{F}$ כך שכל איבריה מוכלים ב-$\mathcal{U}$. מהמסקנה הקודמת, קיים תת-אוסף בן מנייה $\widetilde{\mathcal{E}} \subseteq \mathcal{F}$ של כדורים זרים בזוגות המקיים $\mu(A \setminus \bigcup \widetilde{\mathcal{E}}) = 0$. מכאן:
-$$ \mu(A) \leq \mu\left( \bigcup \widetilde{\mathcal{E}} \right) = \sum_{B \in \widetilde{\mathcal{E}}} \mu(B) \overset{(*)}{\leq} (t + \varepsilon) \sum_{B \in \widetilde{\mathcal{E}}} \lambda(B) $$
-  מכיוון שהכדורים זרים, נקבל:
-$$ = (t + \varepsilon) \lambda\left( \bigcup \widetilde{\mathcal{E}} \right) \leq (t + \varepsilon) \lambda(\mathcal{U}) \leq (t + \varepsilon)(\lambda(A) + \varepsilon) = t\lambda(A) + \varepsilon(\lambda(A) + t + \varepsilon) $$
- מאחר ש-$\varepsilon$ שרירותי, נובע מכך ש-$\mu(A) \leq t \cdot \lambda(A)$.</p>
+<p>נניח $\underline{D}(\mu, \lambda, x) \leq t$. לפי ההגדרה של הגבול התחתון לכל $x \in A$ ולכל $\varepsilon&gt;0$ קיימים סדרה של רדיוסים קטנים כרצונינו כך ש: 
+$$\frac{\mu(B_{r_{n}}(x))}{\lambda(B_{r_{n}}(x))}&lt;t+\varepsilon$$
+כלומר עבור כל $x \in A$ ניתן למצוא כדורים $B$ כך ש-$\mu(B)\leq \left( t+\varepsilon \right)\lambda(B)$.</p>
 </li>
 <li>
-<p><strong>הוכחת החלק השני:</strong> 
-ההוכחה דומה מאוד לחלק הראשון, אך משתמשים בגבול העליון $\overline{D}$ ובאי-שוויון ההפוך. במקום לבחור קבוצה פתוחה $\mathcal{U}$ המכילה את $A$, בוחרים קבוצה סגורה $F \subseteq A$ כך ש $\mu(F) \ge \mu(A) - \varepsilon$. ואז משתמשים בטענה הקודמת על הקבוצה F ועל המשלים של הכדורים.</p>
+<p>תהי $\mathcal{F}$ כיסוי של כדורים כאלה אשר מכסים את $A$ וגם מקיימים: 
+$$\forall x\in A:\quad\operatorname*{inf}\{r&gt;0\mid B_{r}(x)\in{\mathcal{F}}\}=0$$</p>
+</li>
+<li>
+<p>מהמסקנה לעיל, נקבל כי קיים תת אוסף $\widetilde{\mathcal{E}}\subseteq \mathcal{F}$ של כשל כדורים זרים בזוגות כך שמתקיים: 
+$$\mu{\Big(}A\setminus\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Big)}=0$$
+כלומר עד כדי קבוצה מ-$\mu$ מידה אפס $A$ מכוסה על ידי כדורים ב-$\widetilde{\mathcal{E}}$.</p>
+</li>
+<li>
+<p>לכל כדור מהבנייה שלנו קיבלנו כי $\mu(B)\leq \left( t-\varepsilon \right)\lambda(B)$ ולכן כיוון שהכדורים ב-$\widetilde{\mathcal{E}}$ זרים בזוגות נקבל: 
+$$\mu{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}=\sum_{B\in{\tilde{\mathcal{E}}}}\mu(B)\leq(t+\varepsilon)\sum_{B\in{\tilde{\mathcal{E}}}}\lambda(B)=(t+\varepsilon)\,\lambda{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}$$
+כאשר כיוון ש-$\widetilde{\mathcal{E}}$ מכסה את $A$ עד כדי קבוצה ממידה אפס נקבל:
+$$\mu(A)=\mu\Big(\bigcup_{B\in\tilde{\mathcal{E}}}B\Big)\implies\mu(A)\leq\left(t+\varepsilon\right)\lambda(A)$$</p>
+</li>
+<li>
+<p>כעת עבור החלק השני של הטענה נניח כי $\overline{D}(\mu, \lambda, x) \geq t$.  כלומר: 
+$$\overline{{{D}}}\left( \mu,\lambda,x \right)=\operatorname*{lim}_{r\to0}\operatorname*{sup}{\frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}}\geq t\implies \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}\geq t\implies\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$
+כאשר ניתן בפרט לקחת את ההגבול התחתון של אגף שמאל ולקבל את הנגזרת התחתונה:
+$$\underline{{{D}}}(\lambda,\mu,x)=\operatorname*{liminf}_{r\to0}\,\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$</p>
+</li>
+<li>
+<p>כעת נשתמש בחלק הראשון של הטענה ונקבל: 
+$$\lambda(A)\leq\frac{1}{t}\,\mu(A)\implies\mu(A)\geq t\,\lambda(A)$$</p>
 </li>
 </ol>
 </div>

@@ -92,8 +92,8 @@ window.onload = () => {
 <li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_2_1'>2.1 אינטגרציית לבג</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
-<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 קבוצות ממידה אפס</a></li>
-<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
 <li class='parent_page-dropdown'><a href='./measure_2_5'>2.5 התכנסות במידה</a></li>
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
@@ -115,6 +115,7 @@ window.onload = () => {
 </ul></li>
 <li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2'>6.2 קונבולוציה</a></li>
 </ul></li>
 </ul></li>
 <li class='prev-page'><a href='./measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
@@ -137,46 +138,66 @@ $$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$
 </ol>
 </div>
 <div class="proof">
+<p><strong>חלק 1 - קיום הנגזרת</strong></p>
 <ol>
-<li><strong>קיום הנגזרת:</strong> 
-יהיו $r &gt; 0$ ו-$0 &lt; s &lt; t &lt; \infty$ כלשהם. נסמן:
+<li>
+<p>יהיו $r &gt; 0$ ו-$0 &lt; s &lt; t &lt; \infty$ כלשהם. נסמן: 
 $$ A_{s,t,r} := \{x \in B_r(0) \mid \underline{D}(\mu, \lambda, x) \leq s &lt; t \leq \overline{D}(\mu, \lambda, x)\} $$
-וכן נסמן:
-$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$
-מהטענה הקודמת נסיק:
-$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$</li>
+זה למעשה קבוצת הנקודות שבהם לא גזיר.</p>
+</li>
+<li>
+<p>מהטענה הקודמת נקבל: 
+$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$
+ולכן כיוון ש-$s&lt; t$ נדרש כי $\lambda(A_{s,t,r})=0$, ולכן הנגזרת מוגדרת $\lambda$ כמעט תמיד כאשר הנגזרת העליונה סופית.</p>
+</li>
+<li>
+<p>עבור נקודות עם נגזרת עליונה אינסופית נגדיר: 
+$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$</p>
+</li>
 </ol>
 </div>
-<p>מאחר ש-$\lambda(A_{s,t,r}) &lt; \infty$ (קבוצה חסומה) ו-$s &lt; t$, נסיק כי $\lambda(A_{s,t,r}) = 0$. עבור $A_{n,r}$ מתקיים:
-$$ \lambda(A_{n,r}) \leq \frac{1}{n} \mu(A_{n,r}) \leq \frac{1}{n} \mu(B_r(0)) &lt; \infty $$
-ולכן:
+<p>כאשר כיוון שהגדור $B_{r}(0)$ חסום ניתן להראות כי:
+$$\lambda(A_{n,r})\leq\frac{1}{n}\mu(A_{n,r})\leq\frac{1}{n}\mu(B_{r}(0)).$$
+כאשר $n\to \infty$ נקבל:
+$$\lambda\big(\{x\in B_{r}(0)\mid\overline{{{D}}}(\mu,\lambda,x)=\infty\}\big)=0.$$
+ולכן נקבל כי:
 $$ \lambda(\{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) = \infty\}) = \lambda\left( \bigcap_{n=1}^\infty A_{n,r} \right) = \lim_{n \to \infty} \lambda(A_{n,r}) \leq \lim_{n \to \infty} \frac{1}{n} \mu(B_r(0)) = 0 $$
 נבחין כי המשלים של $\{x \in \mathbb{R}^d \mid \exists D(\mu, \lambda, x) &lt; \infty\}$ שווה ל:
 $$ \bigcup_{k \in \mathbb{N}} \left( \bigcap_{n \in \mathbb{N}} A_{n,k} \cup \bigcup_{\substack{s &lt; t \\ s,t \in \mathbb{Q}}} A_{s,t,k} \right) $$
-שהוא איחוד בן מנייה של קבוצות מ-$\lambda$ מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.</p>
-<ol start="2">
+שהוא איחוד בן מנייה של קבוצות מ-$\lambda$ מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.
+<strong>חלק 2 - אי שוויון אינטגרלי</strong></p>
+<ol>
 <li>
-<p><strong>אינטגרל הנגזרת:</strong> 
-תהי $B$ מדידה וניקח $1 &lt; t &lt; \infty$. לכל $p \in \mathbb{Z}$ נגדיר:
+<p>לכל שלם $p \in \mathbb{Z}$ נגדיר: 
 $$ B_p = \{x \in B \mid t^p \leq D(\mu, \lambda, x) &lt; t^{p+1}\} $$
-אזי מ-1 נסיק כי:
-$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda $$
-כי $B \setminus \bigcup_p B_p$ מכיל רק את הנקודות בהן $D = \infty$ (קבוצה ממידה אפס) או בהן $D=0$ ואז האינטגרנד שווה ל-0. מכאן:
-$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda \leq \sum_{p \in \mathbb{Z}} t^{p+1} \lambda(B_p) \leq \sum_{p \in \mathbb{Z}} t \mu(B_p) = t \cdot \mu\left( \bigcup_p B_p \right) \leq t \cdot \mu(B) $$
-מאחר ש-$t$ שרירותי, נסיק כי:
-$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$
-אם $\mu \ll \lambda$, אז $D$ קיים וסופי $\mu$ כמעט תמיד. נבחין כי $0 &lt; D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}$. נוכל להריץ שרשרת אי-שוויונים דומה כדי להסיק:
-$$ \int_B D(\mu, \lambda, x) \, d\lambda \geq \mu(B) $$
-ולכן במקרה זה מתקיים שוויון.</p>
+כאשר הקבוצה $B \setminus \bigcup_{p}B_{p}$ מכיל את האיברים שבהם מתקיים או $D\left( \mu,\lambda,x \right)=\infty$ (אשר מ-$\lambda$ מידה אפס מהחלק הראשון) או $D\left( \mu,\lambda,x \right)=0$ ואז לא תהיה תרומה של האינטגרל.</p>
 </li>
 <li>
-<p><strong>אפיון רציפות מוחלטת:</strong> 
-מ-1 נובע שאם $\mu \ll \lambda$ אז $\underline{D}(\mu, \lambda, x) &lt; \infty$ $\mu$ כמעט תמיד. תהי $C \subseteq \mathbb{R}^d$ עם $\lambda(C) = 0$. נרצה להראות ש-$\mu(C) = 0$. נבחין כי $C = \bigcup_{n \in \mathbb{N}} C_n$ כאשר:
+<p>עבור כל $B_{p}$ נקבל $D\left( \mu,\lambda,x \right)&lt;t^{p+1}$ ומתקיים: 
+$$\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq t^{p+1}\,\lambda(B_{p})$$</p>
+</li>
+<li>
+<p>כאשר בנוסף מהטענה הקודמת כיוון ש-$t^{p}\leq D\left( \mu,\lambda,x \right)$ נקבל כי: 
+$$t^{p}\,\lambda(B_{p})\leq\mu(B_{p})\implies t^{p+1}\,\lambda(B_{p})\leq t\,\mu(B_{p})\implies \int_{B_{p}}D\left( \mu,\lambda,x \right)\,d\lambda(x)\leq t\mu(B_{p})$$</p>
+</li>
+<li>
+<p>נסכום כעת על $\{ p \}$: 
+$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)=\sum_{p\in\mathbb{Z}}\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq\sum_{p\in\mathbb{Z}}t\,\mu(B_{p})=t\,\mu\Big(\bigcup_{p\in\mathbb{Z}}B_{p}\Big)\leq t\,\mu(B).$$
+כיוון ש-$t&gt; 1$ שרירותי ניקח את הגבול $t\to 1$ ונקבל:
+$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)\leq\mu(B)$$</p>
+</li>
+<li>
+<p>כדי להוכיח את השוויון נניח $\mu\ll \lambda$. כיוון ש-$\lambda\left( B_{\infty} \right)=0$ נקבל $\mu\left( B_{\infty} \right)=0$. בנוסף כיוון ש-$D\left( \mu,\lambda,x \right)&lt;\infty$ מתקיים $\lambda$ כמעט תמיד ו-$\mu\ll \lambda$ אז גם $D\left( \mu,\lambda,x \right)&lt;\infty$ מתקיים $\mu$ כמעט תמיד. בנוסף מתקיים $\mu$ כמעט תמיד כי $0 &lt; D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}$ להראות באופן דומה כי האי שיווין ההפוך עובד, ולכן נקבל שיווין $\lambda$ כמעט תמיד: 
+$$D(\mu,\lambda,x)=\frac{d\mu}{d\lambda}(x)$$
+<strong>חלק 3 - אפיון רציפות מוחלטת:</strong></p>
+</li>
+<li>
+<p>מ-1 נובע שאם $\mu \ll \lambda$ אז $\underline{D}(\mu, \lambda, x) &lt; \infty$ $\mu$ כמעט תמיד. תהי $C \subseteq \mathbb{R}^d$ עם $\lambda(C) = 0$. נרצה להראות ש-$\mu(C) = 0$. נבחין כי $C = \bigcup_{n \in \mathbb{N}} C_n$ כאשר: 
 $$ C_n = \{x \in C \mid \underline{D}(\mu, \lambda, x) \leq n\} $$
 מכאן:
 $$ \mu(C_n) \leq n \cdot \lambda(C_n) \leq n \cdot \lambda(C) = 0 $$
 ולכן:
-$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0 $$
+$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0$$
 ולכן $\mu(C) = 0$. בכיוון ההפוך, אם $\underline{D}(\mu, \lambda, x) &lt; \infty$ $\mu$ כמעט תמיד אז נשתמש בחלק 2 של המשפט כדי להראות $\mu \ll \lambda$.</p>
 </li>
 </ol>
@@ -185,7 +206,7 @@ $$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0 $$
 </div>
 <div class="corollary">
 <p>תהי $\lambda$ מידת רדון כלשהי על $\mathbb{R}^d$.</p>
-<ol>
+<ol start="3">
 <li>
 <p>לכל $f: \mathbb{R}^d \to \mathbb{C}$ שהיא $L^1_{loc}$ (כלומר, לכל $x \in \mathbb{R}^d$ קיים כדור $B_{r(x)}$ כך ש-$f \cdot \mathbb{1}_{B_{r(x)}} \in L^1$), מתקיים $\lambda$ כמעט תמיד: 
 $$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} f \, d\lambda = f(x) \quad (*) $$</p>
@@ -198,7 +219,7 @@ $$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 \quad (**) 
 </ol>
 </div>
 <div class="proof">
-<ol>
+<ol start="5">
 <li>
 <p><strong>הוכחת החלק הראשון:</strong> 
 מספיק להוכיח עבור $0 \leq f \in \mathbb{R}$. במקרה הכללי, ניתן לכתוב $f = f_1 - f_2 + i(f_3 - f_4)$ כאשר $f_i \geq 0$ ומכיוון שהגבול לינארי, מספיק להוכיח עבור כל פונקציה חיובית בנפרד.
