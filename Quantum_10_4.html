@@ -5,13 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
         <link rel="stylesheet" href='./styles/main_style.css'>
-        <script type="text/javascript" src="./scripts/dark_mode.js" ></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href='./styles/TOC_style.css'>                    
-                    <title>תורת ההפרעות והמבנה הדק</title>
-                </head>
-                <body>
-                <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_10'>10. חלקיקים זהים ותורת הפיזור</a></li>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+    
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                const paragraphs = div.getElementsByTagName('p');
+                console.log(paragraphs);
+                // Toggle each paragraph's visibility
+                
+                Array.from(paragraphs).forEach(paragraph => {
+                    if (paragraph.classList.contains('paragraph-hidden')) {
+                        // Show paragraph
+                        paragraph.classList.remove('paragraph-hidden');
+                        // Update max-height to match content
+                        paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                        console.log('Showing paragraph');
+                    } else {
+                        // Hide paragraph
+                        paragraph.classList.add('paragraph-hidden');
+                        console.log('Hiding paragraph');
+                    }
+                });
+                
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+        
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פיזור במרחב אינסופי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum'> תורת הקוונטים</a></li>
 <li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
 <li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
 <li class='parent_page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
@@ -82,41 +151,36 @@
 <li class='parent_page-dropdown'><a href='./Quantum_10_4'>10.4 פיזור במרחב אינסופי</a></li>
 </ul></li>
 </ul></li>
-<li class='prev-page'><a href='./Quantum_8'>8. ספין</a></li>
-</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_10`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_8`;}});</script>
-                <div class="content">
-                     <div class="download-container">
-        <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        <div class="download-dropdown">
-            <a href="./Quantum_9_pdf_book.html" download>Download HTML</a>
-            <a href="./Quantum_9_pdf_book_bw.html" download>Download Monochrome HTML</a>
-        </div>
+<li class='prev-page'><a href='./Quantum_10_3'>10.3 תורת פיזור קוונטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_10_3`;}});</script>
+        <div class="content">
+        <h1>10.4  פיזור במרחב אינסופי</h1>
+    <div class="definition"><span class="keyword">הפונקציית גרין של משוואת שרודינגר</span><p>מוגדר על ידי:
+$$G_{0}^{+}({\bf x},{\bf x^{\prime}})=\langle{\bf x}|\frac{1}{E-H_{0}+i\epsilon}|{\bf x^{\prime}}\rangle,$$
+כאשר $H_{0}=-\frac{\hbar^{2}}{2m}\bar{\nabla}^2$ ו-$E=\frac{\hbar^{2}k^{2}}{2m}$ זה האנרגיה של חלקיק נכנס. ה-$+i\epsilon$ זה גורם לכך שזה יהיה מפגר ומאפשר מוודא קוסאליות.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציית גרין של משוואת שרדינגר</span><p>הפונקציית הגרין מוגדרת על ידי:
+$$\left(E-H\right)G(\mathbf{r},\mathbf{r}^{\prime})=\delta(\mathbf{r}-\mathbf{r}^{\prime}),$$</p>
+</div>
+<div class="proposition">
+<p>כאשר עבור חלקיק חופשי מתקיים:
+$$H=-\frac{\hbar^{2}}{2m}\nabla^{2}\implies\left(E+\frac{\hbar^{2}}{2m}\nabla^{2}\right)G\left( {\bf r},{\bf r^{\prime}} \right)=\delta\left( {\bf r}-{\bf r^{\prime}} \right).$$</p>
+</div>
+<div class="proposition">
+<p>הגרין מקיימת עבור $E&gt;0$:
+$$G({\bf r},{\bf r^{\prime}})=-\frac{m}{2\pi\hbar^{2}}\,\frac{e^{i k_{0}R}}{R}$$</p>
+</div>
+<div class="proof">
+<p>נכתוב את הפונקציית גרין במרחב התנע
+$$G({\bf r},{\bf r^{\prime}})=\frac{1}{(2\pi)^{3}}\int d^{3}{\bf k}\;\tilde{G}({\bf k})\,e^{i{\bf k\cdot(r-r^{\prime})}}$$
+כאשר כיוון ש-$\bar{\nabla}^2e^{ i\mathbf{k\cdot \mathbf{r}} }$ ניתן להציב במשוואה הדיפרציאלית ולקבל:
+$$\left(E-\frac{\hbar^{2}k^{2}}{2m}\right)\tilde{G}\left( {\bf k} \right)=1\implies\tilde{G}\left( {\bf k} \right)=\frac{1}{E-\frac{\hbar^{2}k^{2}}{2m}+i\epsilon},$$</p>
+</div>
     </div>
-                <h1>תורת ההפרעות והמבנה הדק</h1>
-            <ul>
-<li><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
-<ul>
-</ul><li><a href='./Quantum_9_2'>9.2 מנוון ולא תלוי בזמן</a></li>
-<ul>
-</ul><li><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
-<ul>
-</ul><li><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
-<ul>
-</ul><li><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
-<ul>
-</ul><li><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
-<ul>
-</ul></ul>
-            </div>
-            <ul class='top-navigation'>
-<li class='next-page'><a href='./Quantum_10'>10. חלקיקים זהים ותורת הפיזור</a></li>
-<li class='prev-page'><a href='./Quantum_8'>8. ספין</a></li>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum'> תורת הקוונטים</a></li>
+<li class='prev-page'><a href='./Quantum_10_3'>10.3 תורת פיזור קוונטית</a></li>
 </ul></li>
-            <script>
-                </body>
-                </html>
-                
+        </body>
+        </html>
+        
