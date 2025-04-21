@@ -1,0 +1,357 @@
+\documentclass{tstextbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Example Document}
+\author{HTML2LaTeX Converter}
+\maketitle
+
+\Chapter{מושגים בסיסיים}
+
+\section{קטגוריה}
+
+\begin{definition}[קטגוריה]
+קטגוריה \(C\) הוא אוסף של אובייקטים \(\mathrm{Ob}(C)\) כך שלכל שתי אובייקטים \(X,Y\in \mathrm{Ob}(C)\) יש מורפיזמים \(\mathrm{Hom}_{C}(X,Y)\) ומקיים:
+
+  \begin{enumerate}
+    \item לכל שלושה אובייקטים \(X,Y,Z\in \mathrm{Ob}(C)\) יש כלל הרכבה: 
+$$\circ:{\mathrm{Hom}}_{C}(X,Y)\times{\mathrm{Hom}}_{C}(Y,Z)\to{\mathrm{Hom}}_{C}(X,Z)$$
+אשר אסוציאטיבי. כלומר לכל \(f\in \mathrm{Hom}_{C}(X,Y)\), \(g \in \mathrm{Hom}_{C}(X,Y)\) ו-\(h \in \mathrm{Hom}_{C}(Z,W)\) מתקיים:
+$$h\circ(g\circ f)=(h\circ g)\circ f$$
+
+
+    \item קיום מורפיזם זהות - לכל אובייקט \(X \in \mathrm{Ob}(C)\) יש מורפיזם זהות \(\mathrm{Id}_{X}\in \mathrm{Hom}(X,X)\) אשר זהות ימנית ושמאלית, כלומר לכל \(f \in \mathrm{Hom}_{C}(X,Y)\) ו-\(g \in \mathrm{Hom}_{C}(Y,X)\) מתקיים: 
+$$f\circ\operatorname{Id}_{X}=f\qquad \operatorname{Id}_{X}\circ g=g$$
+
+
+  \end{enumerate}
+\end{definition}
+\begin{symbolize}
+כאשר כותבים \(X \in C\) מתכוונים לזה ש-\(X\) הוא אובייקט ב-\(C\)(כלומר \(X \in \mathrm{Ob}(C)\)).
+
+\end{symbolize}
+\begin{symbolize}
+עבור \(f \in \mathrm{Hom}_{C}(X,Y)\) כאשר \(C\) ברורה מההקשר נכתוב:
+$$f:X\to Y$$
+או \(X\xrightarrow{f}Y\).
+
+\end{symbolize}
+\begin{definition}[איזומורפיזם]
+פונקציה \(f:X\to Y\) אשר קיים עבורה \(g:Y\to X\) אשר מקיימת \(g\circ f = \mathrm{Id}_{X}\) וגם \(f\circ g = \mathrm{Id}_{Y}\).
+
+\end{definition}
+\begin{definition}[איזומורפיים]
+אובייקטים \(X,Y \in C\) אם קיים \(f:X\to Y\) שהוא איזומורפיזם.
+
+\end{definition}
+\begin{example}
+הזהות \(\mathrm{Id}\) הוא איזומורפיזם. אנו יודעים כי:
+$$\mathrm{Id_{X}\circ Id_{X}=Id_{X}}$$
+לכן כל \(X\) איזומורפי לעצמו.
+
+\end{example}
+\begin{proposition}
+עבור \(f:X\to Y\) אם קיימים \(g,h:Y\to X\) כך שמקיימים:
+$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}$$
+אז \(g=h\) וגם \(f\) איזומורפיזם. כלומר עבור איזומורפיזם קיים הופכי.
+
+\end{proposition}
+\begin{proof}
+נתחיל מ-\(g\). נשים לב כי \(g=g\circ\mathrm{Id}_{Y}\). כיוון ש-\(\mathrm{Id}_{Y}=f\circ h\) ניתן להציב ולקבל:
+$$g=g\circ(f\circ h)$$
+מאסוצייטביות ההרכבה נקבל \(g\circ(f\circ h)=(g\circ f)\circ h.\) אבל \(g \circ f = \mathrm{Id}_{X}\) מההנחה ולכן:
+$$(g\circ f)\circ h=\operatorname{Id}_{X}\circ h=h$$
+כלומר קיבלנו \(g=h\). העובדה שאיזומורפיזם נובע ישירות כיוון ששווים, כיוון שכעת יש פונקציה \(g\) אשר מקיימת \(g\circ f = \mathrm{Id}_{X}\) וגם \(f\circ g = \mathrm{Id}_{Y}\).
+
+\end{proof}
+\begin{proposition}
+אם \(f:X\to Y\) הוא איזומורפיזם אז ההופכי \(g\)(אשר מקיים \(g\circ f = \mathrm{Id}_{X}\) וגם \(f\circ g=\mathrm{Id}_{Y}\)) הוא יחיד, וניתן לסמן אותו ב-\(f^{-1}:Y\to X\).
+
+\end{proposition}
+\begin{proof}
+נניח כי \(g\) ו-\(h\) שתיהם הופכיים של \(f\), כלומר:
+\begin{gather*}g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y} \\h\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}
+\end{gather*}
+כעת נקבל כמו בטענה הקודמת:
+$$g=g\circ{\mathrm{Id}}_{Y}=g\circ(f\circ h)=(g\circ f)\circ h={\mathrm{Id}}_{X}\circ h=h$$
+ולכן ההופכי יחיד.
+
+\end{proof}
+\section{יקום}
+
+\begin{definition}[יקום]
+קבוצה \(U\) אשר מקיימת את התכונות הבאות:
+
+  \begin{enumerate}
+    \item טרנזטיביות - אם \(X \in U\) וגם \(Y \in X\) אזי \(U \in U\). זה מבטיח כי האיברים של איברים הם גם ביקום. 
+
+
+    \item סגירות לזוגות - אם \(X,Y\in U\) אזי גם \(\{ X,Y \}\in U\). 
+
+
+    \item סגירות לאיחודים - אם \(X \in U\) אזי גם \(\bigcup_{Y \in X}Y \in U\).  
+
+
+    \item קבוצת חזקה - אם \(X \in U\) אז הקבוצת חזקה \(\mathcal{P}(X)\in U\). 
+
+
+    \item מכיל את הטבעיים. כלומר \(\mathbb{N} \in U\). 
+
+
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+התכונות האלה הופכות את היקום להיות מודל טוב של תורת הקבוצות, אשר סגור להרכבות סטנדרטיות של קבוצות. זה מאפשר לנו להמנע מפרדוקסים כמו פרדוקס ראסל. זה למעשה המטרה של היקום - מאפשר לנו להסתכל על אוספים גדולים במספיק אך לא גדולים מידי אשר אינם קבוצה(וגורמים לפרדוקסים).
+
+\end{remark}
+\begin{definition}[אקסיומת היקום של גרותנדיק]
+לכל קבוצה \(X\) יש יקום \(U\) עם \(X \in U\). כלומר לא משנה איזה קבוצה יש לנו, יש יקום שמכיל אותה.
+
+\end{definition}
+\begin{corollary}
+בפרט אם \(U\) יקום אינו יכול להכיל את עצמו, אך לכל יקום קיים יקום גדול יותר \(V\) אשר מכיל אותו(\(U \in V\)).
+
+\end{corollary}
+\begin{definition}[קבוצה קטנה]
+נקבע יקום \(U\) ונקרא לקבוצה קטנה אם הוא איבר ב-\(U\)(כלומר \(X \in U\)).
+
+\end{definition}
+\begin{definition}[קבוצה גדולה]
+נקבע יקום גדול יותר \(V\) אשר מכיל את \(U\). נקרא לקבוצה \(X\) גדולה אם \(X \in V\).
+
+\end{definition}
+\begin{remark}
+נשים לב כי בפרט כל קבוצה קטנה היא גדולה. אנחנו נתייחס לכל הקבוצות כאילו הם גדולות. 
+
+\end{remark}
+\begin{definition}[קטגוריה קטנה מקומית]
+נקרה לקטגוריה \(C\) קטנה מקומית אם לכל זוג \(X,Y \in C\) קבוצת ההומומוריזמים \(\mathrm{Hom}_{C}(X,Y)\) היא קטנה.
+
+\end{definition}
+\begin{definition}[קטגוריה קטנה]
+קטגוריה נקראת קטנה אם קטנה מקומית ובנוסף אוסף האובייקטים \(\mathrm{Ob}(C)\) היא קבוצה קטנה.
+
+\end{definition}
+\section{דוגמאות של קטגוריות}
+
+\begin{definition}[קטגוריה Sets - קבוצות]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} קבוצות קטנות
+    \item \textbf{המורפיזמים:} לכל שתי קבוצות \(X,Y\) המורפיזמים המוגדרים על ידי:
+$$\operatorname{Hom}_{\operatorname{Sets}}(X,Y)=Y^{X}=\{f:X\to Y\}$$
+כלומר אוסף כל הפונקציות מ-\(X\) ל-\(Y\).
+  \end{itemize}
+\end{definition}
+\begin{remark}
+נשים לב כי \(Y^{X}\) זו גם קבוצה קטנה.
+
+\end{remark}
+\begin{definition}[קטגוריה Grp - חבורות]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} חבורות אשר מוגדרות על קבוצה שהיא קטנה.
+    \item \textbf{המורפיזמים:} הומומורפיזמים של חבורות.
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Ring - חוגים]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} חוגים קטנים(כלומר מוגדרות על קבוצות קטנות) עם יחידה.
+    \item \textbf{המורפיזמים:} והומומורפיזם של חוגים.
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Ab - חבורות אבליות]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} חבורות אבליות אשר מוגדרות על קבוצה שהיא קטנה.
+    \item \textbf{המורפיזמים:} הומומורפיזמים של חבורות(אשר בפרט מכבדות קומוטטיביות).
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Com Ring - חוגים קומוטטיבים]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} חוגים קומוטטיבים קטנים עם יחידה.
+    \item \textbf{המורפיזמים:} והומומורפיזם של חוגים.
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Mon - מונואידים]
+  \begin{itemize}
+    \item \textbf{האובייקטים:} מונואידים(קבוצה עם פעולה אסוצייטיבית ויחידה) מוגדרים על קבוצה קטנה
+    \item \textbf{המורפיזמים:} הומומורפיזמים של מונואידים - פונקציות אשר משמרות את הפעולה של המונואיד ואת היחידה
+    \item \textbf{דוגמאות:}\((\mathbb{N},+),(\mathbb{F},\cdot)\) או \((\mathbb{Z},\cdot)\).
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה POS - קבוצה סדורה חלקית]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} קבוצות קטנות סדורות חלקית.
+    \item \textbf{המורפיזמים:} פונקציות מונוטוניות(משמרות סדר). כלומר אם \(a\leq b\) בקבוצה סדורה חלקית אחת, אז \(f(a)\leq f(b)\).
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Grph - גרפים]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} גרפים קטנים. כלומר קבוצה קטנה המכילה קודקודים וקצוות.
+    \item \textbf{המורפיזמים:} הומומורפיזמים של גרפים - פונקציה אשר ממפה כל קודקוד של גרף אחד לקודקוד של גרף אחר כך שאם יש קצה מקודקוד \(\alpha\) לקודקוד \(\beta\) במקור אז התמונה תקיים \(f(\alpha)\leq f(\beta)\). 
+  \end{itemize}
+\end{definition}
+\begin{definition}[קטגוריה Met - מרחבים מטרים]
+  \begin{itemize}
+    \item אובייקטים: מרחבים מטרים קטנים אשר מצויידים במטריגה \(d_{X}\).
+    \item מורפיזמים: פונקציות אשר אינם מרחבות, זאת אומרת פונקציה \(f:X\to Y\) אשר מקיימת:
+$$d_{Y}(f(\alpha),f(\beta))\leq d_{X}(\alpha,\beta)$$
+כלומר לכל \(\alpha,\beta \in X\) פונקציה כך שהמרחק בין שתי נקודות אשר לא גדל תחת \(f\).
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה \(\mathrm{Set^{fin}}\) - קבוצות סופיות]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} קבוצות אשר סופיות(בפרט יהיו קטנות).
+    \item \textbf{מורפיזמים:} כל פונקציה בין הקבוצות האלה.
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה \(\mathrm{Set^{inj}}\) - קבוצות עם מורפיזמים חח"ע]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} קבוצות קטנות
+    \item \textbf{מורפיזמים:} פונקציות חד חד ערכיות בין הקבוצות האלה.
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה \(\mathrm{Grp^{fg}}\) - קבוצות נוצרות סופית]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} חבורות קטנות שנוצרות סופית.
+    \item \textbf{מורפיזמים:} הומומורפיזמים בין החבורות האלה.
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה Top - מרחבים טופולוגיים]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} מרחבים טופולוגים קטנים.
+    \item \textbf{מורפיזמים:} פונקציות רציפות בין המרחבים הטופולוגיים.
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה Rel - יחסים]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} קבוצות קטנות.
+    \item \textbf{מורפיזמים:} לכל שתי קבוצות קטנות \(X,Y\) מורפיזם יהיה יחס \(R\subseteq X\times Y\). נשים לב כי הקבוצה של כל הפונקציות \(Y^{X}\) היא תת קבוצה של היחסים האלו.
+    \item \textbf{הרכבה:} בהנתן \(R\subseteq X \times Y\) וגם \(S\subseteq Y \times Z\) אז ההרכבה:
+$$S\circ R=\{(x,z)\in X\times Z\mid\exists y\in Y,\;(x,y)\in R\;{\mathrm{and}}\;(y,z)\in S\}$$
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה \(\mathrm{Sub_{X}}\)]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} עבור קבוצה \(X \in U\) האובייקטים הם האיברים של קבוצת החזקה \(\mathcal{P}(X)\). כלומר כל התתי קבוצות של \(X\).
+    \item \textbf{מורפיזמים:} לכל שתי תתי קבוצות \(Y,Z \subseteq X\) נגדיר:
+$$\operatorname{Hom}_{\operatorname{Sub}_{x}}(Y,Z)={\left\{\begin{array}{l l}{\{I_{Y,Z}\}}&{{\mathrm{if~}}Y\subseteq Z,}\\ {\varnothing }&{{\mathrm{otherwise}}}\end{array}\right.}$$
+  \end{itemize}
+\end{definition}
+\begin{definition}[הקטגוריה BG]
+  \begin{itemize}
+    \item \textbf{אובייקטים:} לחבורה קטנה \(G\) לקטגוריה BG יש בדיוק איבר יחיד המסומן ב-*.
+    \item \textbf{מורפיזמים:}\({\mathrm{Hom}}_{B G}(*,*)=G\)
+  \end{itemize}
+\end{definition}
+בקטגוריה זו כל מורפיזם הוא איזומורפיזם. 
+
+\section{הקטגוריה ההפוכה}
+
+\begin{definition}[הקטגוריה ההפוכה]
+תהי \(\mathcal{C}\) קטגוריה. אזי הקטגוריה ההפוכה תהיה הקטגוריה \(\mathcal{C}^{\text{op}}\) אשר מקיימת:
+- אובייקטיים זהים -\(\text{Ob}(\mathcal{C})=\text{Ob}(\mathcal{C}^{\text{op}})\).
+- לכל \(X,Y\in \mathcal{C}\) נגדיר:
+$$\hom_{{\mathcal{C}}^{o p}}\left(X,Y\right)=\hom_{{\mathcal{C}}}\left(Y,X\right)$$
+- לכל מורפיזם \(f:X\to Y\) ב-\(\mathcal{C}\) נסמן \(f^{\text{op}}:Y\to X\) את המורפיזם המתאים ב-\(\mathcal{C}^{\text{op}}\) כך שמקיים את כלל ההרכבה:
+$$.f^{o p}\circ g^{o p}=(g\circ f)^{o p}$$
+- נגדיר את הזהות של \(X \in \mathrm{Ob}(\mathcal{C}^{\text{op}})=\mathrm{Ob}(\mathcal{C})\) להיות \((\mathrm{Id}_{X})^{\text{op}}\).
+
+\end{definition}
+\section{פונקטור}
+
+\begin{definition}[פונקטור]
+העתקה בין קטגוריות אשר משמרת מבנה. כלומר בהנתן קטגוריות \(C,D\) העתקה \(F:C\to D\) נקראת פונקטור אם מקיימת:
+
+  \begin{enumerate}
+    \item לכל אובייקט \(X\) בקטגוריה \(C\)(כלומר \(X \in \mathrm{Ob}(C)\)) קיים אובייקט מתאים בקטגוריה \(D\) אשר מסומן \(F(X)\in \mathrm{Ob}(D)\). לעיתים מסומן \(FX\). 
+
+
+    \item לכל שתי אובייקטים \(X,Y \in C\) קיים פונקציה: 
+$$F:{\mathrm{Hom}}_{C}(X,Y)\to{\mathrm{Hom}}_{D}(F X,F Y)$$
+אשר ממפה כל מורפיזם \(f:X\to Y\) למורפיזם \(F(f):FX\to FY\).
+
+
+    \item משמר הרכבה - לכל שתי הרכבות של מורפיזמים: 
+$$X\xrightarrow{f}Y\xrightarrow{g}Z$$
+הפונקטור מקיים:
+$$F(g\circ  f)=F(g)\circ F(f)$$
+
+
+    \item משמר יחידה - לכל אובייקט \(X \in \mathrm{Ob}(C)\) הפונקטור שולח את מורפיזם היחידה למורפיזם הזהות: 
+$$F(\operatorname{Id}_{X})=\operatorname{Id}_{F(X)}$$
+
+
+  \end{enumerate}
+\end{definition}
+\begin{proposition}
+פונקטורים משמרים איזומורפיזם.
+
+\end{proposition}
+\begin{proof}
+נזכור כי מורפיזם \(f:X\to Y\) נקרא איזומורפיזם אם קיים מורפיזם \(g:Y\to X\) כך שמתקיים:
+$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y}.$$
+כיוון שפונקטורים משמרים הרכבה ויחידה נקבל כי תכונה זו נשמרת ולכן \(Ff\) יהיה איזומורפיזם ב-\(D\).
+
+\end{proof}
+\begin{definition}[הרכבה של פונקטורים]
+בהנתן שתי פונקטורים:
+$$F:C\to D\quad{\mathrm{and}}\quad G:D\to E,$$
+נגדיר את ההרכבה שלהם \(G\circ F:C\to E\) על ידי:
+
+  \begin{enumerate}
+    \item עבור אובייקט \(X \in \mathrm{Ob}(C)\) נגדיר: 
+$$(G\circ F)(X)=G(F(X))$$
+
+
+    \item עבור מורפיזם \(f:X\to Y\) ב-\(C\) נגדיר: 
+$$(G\circ F)(f)=G(F(f))$$
+
+
+  \end{enumerate}
+\end{definition}
+\begin{definition}[פונקטור הזהות]
+לכל קטרוגיה \(C\) קיים פונקטור \(\mathrm{Id}_{C}:C\to C\) אשר פועל בצורה הבאה:
+
+  \begin{enumerate}
+    \item על אובייקטים מקיים \(\mathrm{Id}_{C}(X)=X\) לכל \(X \in \mathrm{Ob}(C)\). 
+
+
+    \item על מורפיזמים מוגדר על ידי \(\mathrm{Id}_{C}(f)=f\) לכל \(f \in \mathrm{Hom}_{C}(X,Y)\). 
+
+
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+פונקטור הזהות משמש כאיבר ניטרלי בהרכבה של פונקטורים. כלומר עבור כל פונקטורים \(F:C\to D\) ו-\(H:B\to C\) מתקיים:
+$$F\circ{\mathrm{Id}}_{C}=F\qquad{\mathrm{Id}}_{C}\circ H=H$$
+
+\end{remark}
+\begin{definition}[פונקטורים שוכחות מבנה]
+פונקטורים אשר ממפות מבנה "עשיר" יותר למבנה פחות עשיר, כך שמאבד את הבנה שלו.
+
+\end{definition}
+\begin{example}[פונקטור שוכח מבנה]
+נסתכל על הפונקטור \(F:\text{Top}\to\text{Sets}\).
+- על האובייקטים נגדיר \(F(X,\tau)=X\) כאשר \(X\) זה המרחב הטופולוגיים ב-\(\tau\) זה הטופולוגיה. הפונקטור "שוכח" את המבנה של הטופולוגיה.
+- עבור מורפיזמים נגדיר אם \(f:(X,\tau)\to (Y,\sigma)\) רציפה אזי \(F(f)=f\) זו הפונקציה בין קבוצות.
+
+\end{example}
+\begin{example}[הרכבה של פונקטורים שוכחים מבנה]
+נגדיר פונקטור \(F:\text{Grp}\to\text{Sets}_{*}\) על ידי \(F(G,e,\cdot)=(G,e)\) אשר שוכחת את המבנה של החבורה. 
+כעת נגדיר פונקטור נוסף \(H:\text{Sets}_{*}\to\text{Sets}\) על ידי \(H(X,x)=X\). נקבל כי ההכבה \(H\circ F:\text{Grp}\to\text{Sets}\) שוכחת את כל המבנה פרט למבנה של החבורה.
+
+\end{example}
+\begin{definition}[פונקטורים מכלילים מבנה]
+פונקטורים אשר מכלליות את המבנה, כלומר מוסיף חופש נוסף למבנה
+
+\end{definition}
+\begin{example}[פונקטורים מכללים מבנה]
+פונקטורים מהצורה \(F:\mathrm{Ab}\to \mathrm{Grp}\) או מהצורה \(F:\mathrm{Sets ^{fin}}\to \mathrm{Sets}\) יהיו מכלילות מבנה.
+
+\end{example}
+\end{document}

@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קטגוריה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory_1_2'>1.2 יקום</a></li>
+<li class='parent-page'><a href='./Category Theory'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מושגים בסיסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_1'>1.1 קטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_2'>1.2 יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_3'>1.3 דוגמאות של קטגוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_4'>1.4 הקטגוריה ההפוכה</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_5'>1.5 פונקטור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category Theory'> תורת הקטגוריות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category Theory_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category Theory`; }});</script>
+        <div class="content">
+        <h1>1.1  קטגוריה</h1>
+    <div class="definition"><span class="keyword">קטגוריה</span><p>קטגוריה <span>\(C\)</span> הוא אוסף של אובייקטים <span>\(\mathrm{Ob}(C)\)</span> כך שלכל שתי אובייקטים <span>\(X,Y\in \mathrm{Ob}(C)\)</span> יש מורפיזמים <span>\(\mathrm{Hom}_{C}(X,Y)\)</span> ומקיים:</p>
+<ol>
+<li>
+<p>לכל שלושה אובייקטים <span>\(X,Y,Z\in \mathrm{Ob}(C)\)</span> יש כלל הרכבה: 
+<span>$$\circ:{\mathrm{Hom}}_{C}(X,Y)\times{\mathrm{Hom}}_{C}(Y,Z)\to{\mathrm{Hom}}_{C}(X,Z)$$</span>
+אשר אסוציאטיבי. כלומר לכל <span>\(f\in \mathrm{Hom}_{C}(X,Y)\)</span>, <span>\(g \in \mathrm{Hom}_{C}(X,Y)\)</span> ו-<span>\(h \in \mathrm{Hom}_{C}(Z,W)\)</span> מתקיים:
+<span>$$h\circ(g\circ f)=(h\circ g)\circ f$$</span></p>
+</li>
+<li>
+<p>קיום מורפיזם זהות - לכל אובייקט <span>\(X \in \mathrm{Ob}(C)\)</span> יש מורפיזם זהות <span>\(\mathrm{Id}_{X}\in \mathrm{Hom}(X,X)\)</span> אשר זהות ימנית ושמאלית, כלומר לכל <span>\(f \in \mathrm{Hom}_{C}(X,Y)\)</span> ו-<span>\(g \in \mathrm{Hom}_{C}(Y,X)\)</span> מתקיים: 
+<span>$$f\circ\operatorname{Id}_{X}=f\qquad \operatorname{Id}_{X}\circ g=g$$</span></p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<p>כאשר כותבים <span>\(X \in C\)</span> מתכוונים לזה ש-<span>\(X\)</span> הוא אובייקט ב-<span>\(C\)</span>(כלומר <span>\(X \in \mathrm{Ob}(C)\)</span>).</p>
+</div>
+<div class="symbolize">
+<p>עבור <span>\(f \in \mathrm{Hom}_{C}(X,Y)\)</span> כאשר <span>\(C\)</span> ברורה מההקשר נכתוב:
+<span>$$f:X\to Y$$</span>
+או <span>\(X\xrightarrow{f}Y\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">איזומורפיזם</span><p>פונקציה <span>\(f:X\to Y\)</span> אשר קיים עבורה <span>\(g:Y\to X\)</span> אשר מקיימת <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g = \mathrm{Id}_{Y}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">איזומורפיים</span><p>אובייקטים <span>\(X,Y \in C\)</span> אם קיים <span>\(f:X\to Y\)</span> שהוא איזומורפיזם.</p>
+</div>
+<div class="example">
+<p>הזהות <span>\(\mathrm{Id}\)</span> הוא איזומורפיזם. אנו יודעים כי:
+<span>$$\mathrm{Id_{X}\circ Id_{X}=Id_{X}}$$</span>
+לכן כל <span>\(X\)</span> איזומורפי לעצמו.</p>
+</div>
+<div class="proposition">
+<p>עבור <span>\(f:X\to Y\)</span> אם קיימים <span>\(g,h:Y\to X\)</span> כך שמקיימים:
+<span>$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}$$</span>
+אז <span>\(g=h\)</span> וגם <span>\(f\)</span> איזומורפיזם. כלומר עבור איזומורפיזם קיים הופכי.</p>
+</div>
+<div class="proof">
+<p>נתחיל מ-<span>\(g\)</span>. נשים לב כי <span>\(g=g\circ\mathrm{Id}_{Y}\)</span>. כיוון ש-<span>\(\mathrm{Id}_{Y}=f\circ h\)</span> ניתן להציב ולקבל:
+<span>$$g=g\circ(f\circ h)$$</span>
+מאסוצייטביות ההרכבה נקבל <span>\(g\circ(f\circ h)=(g\circ f)\circ h.\)</span> אבל <span>\(g \circ f = \mathrm{Id}_{X}\)</span> מההנחה ולכן:
+<span>$$(g\circ f)\circ h=\operatorname{Id}_{X}\circ h=h$$</span>
+כלומר קיבלנו <span>\(g=h\)</span>. העובדה שאיזומורפיזם נובע ישירות כיוון ששווים, כיוון שכעת יש פונקציה <span>\(g\)</span> אשר מקיימת <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g = \mathrm{Id}_{Y}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f:X\to Y\)</span> הוא איזומורפיזם אז ההופכי <span>\(g\)</span>(אשר מקיים <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g=\mathrm{Id}_{Y}\)</span>) הוא יחיד, וניתן לסמן אותו ב-<span>\(f^{-1}:Y\to X\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(g\)</span> ו-<span>\(h\)</span> שתיהם הופכיים של <span>\(f\)</span>, כלומר:
+<span>$$\begin{gather}g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y} \\h\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}
+\end{gather}$$</span>
+כעת נקבל כמו בטענה הקודמת:
+<span>$$g=g\circ{\mathrm{Id}}_{Y}=g\circ(f\circ h)=(g\circ f)\circ h={\mathrm{Id}}_{X}\circ h=h$$</span>
+ולכן ההופכי יחיד.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory_1_2'>1.2 יקום</a></li>
+<li class='prev-page'><a href='./Category Theory'> תורת הקטגוריות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

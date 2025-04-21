@@ -1,0 +1,685 @@
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --gray1: #000; /* Black */
+  --gray2: #1a1a1a; /* Dark gray */
+  --gray3: #979797; /* Medium dark gray */
+  --gray4: #cecece; /* Medium gray */
+  --gray5: #dbdbdb; /* Light gray */
+  --gray6: #f2f2f2; /* Lighter gray */
+}
+
+body {
+  background-color: #FFF;
+  direction: rtl;
+  margin: 0;
+  font-size: 12px;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.definition {
+  display: block;
+  background: rgba(153, 153, 153, 0.1); /* Light gray background */
+  text-align: right;
+  border-right: 1.5mm solid var(--gray2); /* Medium dark gray */
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  color: var(--gray1); /* Black text */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+/* 
+h1 {
+  color: var(--gray1); 
+} */
+
+.definition::before {
+  font-weight: bold;
+  color: var(--gray2); /* Medium dark gray */
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--gray2);
+}
+
+.proposition {
+  background-color: rgba(102, 102, 102, 0.05); /* Light gray background */
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2); /* Dark gray border */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--gray2); /* Dark gray */
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--gray2);
+}
+
+.proof {
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--gray1); /* Black for strong emphasis */
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: rgba(153, 153, 153, 0.2); /* Medium gray background */
+  border: 2pt solid rgba(153, 153, 153, 0.1); /* Lighter gray border */
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--gray1); /* Black */
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--gray2); /* Dark gray */
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: rgba(204, 204, 204, 0.11); /* Light gray background */
+  border: 0;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+
+}
+
+.theorem {
+  background-color: rgba(153, 153, 153, 0.05); /* Light gray background */
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2); /* Medium dark gray border */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--gray2); /* Medium dark gray */
+  content: "משפט";
+}
+
+.theorem::first-line {
+  color: var(--gray2);
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+  page-break-inside: avoid;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--gray4);
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2);
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+  page-break-inside: avoid;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--gray2);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--gray2);
+}
+
+div {
+  margin: 6pt 0;
+  font-family: "Open Sans", serif;
+}
+
+svg {
+  display: block;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+tr:nth-child(even) {
+  background-color: var(--gray6); /* Light gray */
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--gray1);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--gray4);
+  margin-top: 15px;
+  color: var(--gray1);
+  margin-bottom: 0;
+  padding-bottom: 0;
+  page-break-inside: avoid;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--gray5);
+  color: var(--gray1);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+
+.reminder {
+  background-color: var(--gray5);
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--gray1);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--gray1);
+}
+
+table {
+  width: 100%;
+  background: var(--gray5);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--gray5);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--gray1);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--gray3);
+}
+
+td {
+  color: var(--gray1);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--gray4);
+}
+
+@page {
+  @bottom-center {
+    content: counter(page); 
+    display: block;
+  }
+}
+
+@page :blank {
+  @bottom-center { content: none; }
+}
+
+@page no-chapter {
+  @bottom-center { content: none; }
+}
+
+@page :first {
+  margin: 0;
+  @bottom-center {
+    content: none;
+  }
+}
+
+@page chapter {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+#cover {
+  display: none;
+}
+
+h1 {
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+.page-marker {
+  position: absolute;
+  break-after: page;
+  z-index: -1;
+}
+
+#toc a::after {
+  content: leader(".") target-counter(attr(href), page);
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+            <script>
+                // MathJax configuration
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                        displayMath: [["$$", "$$"], ["\[", "\]"]],
+                        processEscapes: true,
+                        packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+                    },
+                    options: {
+                        ignoreHtmlClass: 'tex2jax_ignore',
+                        processHtmlClass: 'tex2jax_process'
+                    },
+                    loader: {
+                        load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+                    }
+                };
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+        <body>
+            <div id='cover' style='background-color: #026873;'>
+                <h1>תורת הקטגוריות</h1>
+                <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תורת הקטגוריות</h1><h2 id='toc_title'>תוכן עיניינים</h2>
+            <h1 id='Category Theory_1'>מושגים בסיסיים</h1>
+<h2 id='Category Theory_1_1'>קטגוריה</h2>
+ <div class="definition"><span class="keyword">קטגוריה</span><p>קטגוריה <span>\(C\)</span> הוא אוסף של אובייקטים <span>\(\mathrm{Ob}(C)\)</span> כך שלכל שתי אובייקטים <span>\(X,Y\in \mathrm{Ob}(C)\)</span> יש מורפיזמים <span>\(\mathrm{Hom}_{C}(X,Y)\)</span> ומקיים:</p>
+<ol>
+<li>
+<p>לכל שלושה אובייקטים <span>\(X,Y,Z\in \mathrm{Ob}(C)\)</span> יש כלל הרכבה: 
+<span>$$\circ:{\mathrm{Hom}}_{C}(X,Y)\times{\mathrm{Hom}}_{C}(Y,Z)\to{\mathrm{Hom}}_{C}(X,Z)$$</span>
+אשר אסוציאטיבי. כלומר לכל <span>\(f\in \mathrm{Hom}_{C}(X,Y)\)</span>, <span>\(g \in \mathrm{Hom}_{C}(X,Y)\)</span> ו-<span>\(h \in \mathrm{Hom}_{C}(Z,W)\)</span> מתקיים:
+<span>$$h\circ(g\circ f)=(h\circ g)\circ f$$</span></p>
+</li>
+<li>
+<p>קיום מורפיזם זהות - לכל אובייקט <span>\(X \in \mathrm{Ob}(C)\)</span> יש מורפיזם זהות <span>\(\mathrm{Id}_{X}\in \mathrm{Hom}(X,X)\)</span> אשר זהות ימנית ושמאלית, כלומר לכל <span>\(f \in \mathrm{Hom}_{C}(X,Y)\)</span> ו-<span>\(g \in \mathrm{Hom}_{C}(Y,X)\)</span> מתקיים: 
+<span>$$f\circ\operatorname{Id}_{X}=f\qquad \operatorname{Id}_{X}\circ g=g$$</span></p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<p>כאשר כותבים <span>\(X \in C\)</span> מתכוונים לזה ש-<span>\(X\)</span> הוא אובייקט ב-<span>\(C\)</span>(כלומר <span>\(X \in \mathrm{Ob}(C)\)</span>).</p>
+</div>
+<div class="symbolize">
+<p>עבור <span>\(f \in \mathrm{Hom}_{C}(X,Y)\)</span> כאשר <span>\(C\)</span> ברורה מההקשר נכתוב:
+<span>$$f:X\to Y$$</span>
+או <span>\(X\xrightarrow{f}Y\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">איזומורפיזם</span><p>פונקציה <span>\(f:X\to Y\)</span> אשר קיים עבורה <span>\(g:Y\to X\)</span> אשר מקיימת <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g = \mathrm{Id}_{Y}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">איזומורפיים</span><p>אובייקטים <span>\(X,Y \in C\)</span> אם קיים <span>\(f:X\to Y\)</span> שהוא איזומורפיזם.</p>
+</div>
+<div class="example">
+<p>הזהות <span>\(\mathrm{Id}\)</span> הוא איזומורפיזם. אנו יודעים כי:
+<span>$$\mathrm{Id_{X}\circ Id_{X}=Id_{X}}$$</span>
+לכן כל <span>\(X\)</span> איזומורפי לעצמו.</p>
+</div>
+<div class="proposition">
+<p>עבור <span>\(f:X\to Y\)</span> אם קיימים <span>\(g,h:Y\to X\)</span> כך שמקיימים:
+<span>$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}$$</span>
+אז <span>\(g=h\)</span> וגם <span>\(f\)</span> איזומורפיזם. כלומר עבור איזומורפיזם קיים הופכי.</p>
+</div>
+<div class="proof">
+<p>נתחיל מ-<span>\(g\)</span>. נשים לב כי <span>\(g=g\circ\mathrm{Id}_{Y}\)</span>. כיוון ש-<span>\(\mathrm{Id}_{Y}=f\circ h\)</span> ניתן להציב ולקבל:
+<span>$$g=g\circ(f\circ h)$$</span>
+מאסוצייטביות ההרכבה נקבל <span>\(g\circ(f\circ h)=(g\circ f)\circ h.\)</span> אבל <span>\(g \circ f = \mathrm{Id}_{X}\)</span> מההנחה ולכן:
+<span>$$(g\circ f)\circ h=\operatorname{Id}_{X}\circ h=h$$</span>
+כלומר קיבלנו <span>\(g=h\)</span>. העובדה שאיזומורפיזם נובע ישירות כיוון ששווים, כיוון שכעת יש פונקציה <span>\(g\)</span> אשר מקיימת <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g = \mathrm{Id}_{Y}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f:X\to Y\)</span> הוא איזומורפיזם אז ההופכי <span>\(g\)</span>(אשר מקיים <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g=\mathrm{Id}_{Y}\)</span>) הוא יחיד, וניתן לסמן אותו ב-<span>\(f^{-1}:Y\to X\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(g\)</span> ו-<span>\(h\)</span> שתיהם הופכיים של <span>\(f\)</span>, כלומר:
+<span>$$\begin{gather}g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y} \\h\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}
+\end{gather}$$</span>
+כעת נקבל כמו בטענה הקודמת:
+<span>$$g=g\circ{\mathrm{Id}}_{Y}=g\circ(f\circ h)=(g\circ f)\circ h={\mathrm{Id}}_{X}\circ h=h$$</span>
+ולכן ההופכי יחיד.</p>
+</div><h2 id='Category Theory_1_2'>יקום</h2>
+ <div class="definition"><span class="keyword">יקום</span><p>קבוצה <span>\(U\)</span> אשר מקיימת את התכונות הבאות:</p>
+<ol>
+<li>
+<p>טרנזטיביות - אם <span>\(X \in U\)</span> וגם <span>\(Y \in X\)</span> אזי <span>\(U \in U\)</span>. זה מבטיח כי האיברים של איברים הם גם ביקום. </p>
+</li>
+<li>
+<p>סגירות לזוגות - אם <span>\(X,Y\in U\)</span> אזי גם <span>\(\{ X,Y \}\in U\)</span>. </p>
+</li>
+<li>
+<p>סגירות לאיחודים - אם <span>\(X \in U\)</span> אזי גם <span>\(\bigcup_{Y \in X}Y \in U\)</span>.  </p>
+</li>
+<li>
+<p>קבוצת חזקה - אם <span>\(X \in U\)</span> אז הקבוצת חזקה <span>\(\mathcal{P}(X)\in U\)</span>. </p>
+</li>
+<li>
+<p>מכיל את הטבעיים. כלומר <span>\(\mathbb{N} \in U\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>התכונות האלה הופכות את היקום להיות מודל טוב של תורת הקבוצות, אשר סגור להרכבות סטנדרטיות של קבוצות. זה מאפשר לנו להמנע מפרדוקסים כמו פרדוקס ראסל. זה למעשה המטרה של היקום - מאפשר לנו להסתכל על אוספים גדולים במספיק אך לא גדולים מידי אשר אינם קבוצה(וגורמים לפרדוקסים).</p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת היקום של גרותנדיק</span><p>לכל קבוצה <span>\(X\)</span> יש יקום <span>\(U\)</span> עם <span>\(X \in U\)</span>. כלומר לא משנה איזה קבוצה יש לנו, יש יקום שמכיל אותה.</p>
+</div>
+<div class="corollary">
+<p>בפרט אם <span>\(U\)</span> יקום אינו יכול להכיל את עצמו, אך לכל יקום קיים יקום גדול יותר <span>\(V\)</span> אשר מכיל אותו(<span>\(U \in V\)</span>).</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה קטנה</span><p>נקבע יקום <span>\(U\)</span> ונקרא לקבוצה קטנה אם הוא איבר ב-<span>\(U\)</span>(כלומר <span>\(X \in U\)</span>).</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה גדולה</span><p>נקבע יקום גדול יותר <span>\(V\)</span> אשר מכיל את <span>\(U\)</span>. נקרא לקבוצה <span>\(X\)</span> גדולה אם <span>\(X \in V\)</span>.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי בפרט כל קבוצה קטנה היא גדולה. אנחנו נתייחס לכל הקבוצות כאילו הם גדולות. </p>
+</div>
+<div class="definition"><span class="keyword">קטגוריה קטנה מקומית</span><p>נקרה לקטגוריה <span>\(C\)</span> קטנה מקומית אם לכל זוג <span>\(X,Y \in C\)</span> קבוצת ההומומוריזמים <span>\(\mathrm{Hom}_{C}(X,Y)\)</span> היא קטנה.</p>
+</div>
+<div class="definition"><span class="keyword">קטגוריה קטנה</span><p>קטגוריה נקראת קטנה אם קטנה מקומית ובנוסף אוסף האובייקטים <span>\(\mathrm{Ob}(C)\)</span> היא קבוצה קטנה.</p>
+</div><h2 id='Category Theory_1_3'>דוגמאות של קטגוריות</h2>
+ <div class="definition"><span class="keyword">קטגוריה Sets - קבוצות</span><ul>
+<li><strong>האובייקטים:</strong> קבוצות קטנות</li>
+<li><strong>המורפיזמים:</strong> לכל שתי קבוצות <span>\(X,Y\)</span> המורפיזמים המוגדרים על ידי:
+<span>$$\operatorname{Hom}_{\operatorname{Sets}}(X,Y)=Y^{X}=\{f:X\to Y\}$$</span>
+כלומר אוסף כל הפונקציות מ-<span>\(X\)</span> ל-<span>\(Y\)</span>.</li>
+</ul>
+</div>
+<div class="remark">
+<p>נשים לב כי <span>\(Y^{X}\)</span> זו גם קבוצה קטנה.</p>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Grp - חבורות</span><ul>
+<li><strong>האובייקטים:</strong> חבורות אשר מוגדרות על קבוצה שהיא קטנה.</li>
+<li><strong>המורפיזמים:</strong> הומומורפיזמים של חבורות.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Ring - חוגים</span><ul>
+<li><strong>האובייקטים:</strong> חוגים קטנים(כלומר מוגדרות על קבוצות קטנות) עם יחידה.</li>
+<li><strong>המורפיזמים:</strong> והומומורפיזם של חוגים.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Ab - חבורות אבליות</span><ul>
+<li><strong>האובייקטים:</strong> חבורות אבליות אשר מוגדרות על קבוצה שהיא קטנה.</li>
+<li><strong>המורפיזמים:</strong> הומומורפיזמים של חבורות(אשר בפרט מכבדות קומוטטיביות).</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Com Ring - חוגים קומוטטיבים</span><ul>
+<li><strong>האובייקטים:</strong> חוגים קומוטטיבים קטנים עם יחידה.</li>
+<li><strong>המורפיזמים:</strong> והומומורפיזם של חוגים.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Mon - מונואידים</span><ul>
+<li><strong>האובייקטים:</strong> מונואידים(קבוצה עם פעולה אסוצייטיבית ויחידה) מוגדרים על קבוצה קטנה</li>
+<li><strong>המורפיזמים:</strong> הומומורפיזמים של מונואידים - פונקציות אשר משמרות את הפעולה של המונואיד ואת היחידה</li>
+<li><strong>דוגמאות:</strong> <span>\((\mathbb{N},+),(\mathbb{F},\cdot)\)</span> או <span>\((\mathbb{Z},\cdot)\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה POS - קבוצה סדורה חלקית</span><ul>
+<li><strong>אובייקטים:</strong> קבוצות קטנות סדורות חלקית.</li>
+<li><strong>המורפיזמים:</strong> פונקציות מונוטוניות(משמרות סדר). כלומר אם <span>\(a\leq b\)</span> בקבוצה סדורה חלקית אחת, אז <span>\(f(a)\leq f(b)\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Grph - גרפים</span><ul>
+<li><strong>אובייקטים:</strong> גרפים קטנים. כלומר קבוצה קטנה המכילה קודקודים וקצוות.</li>
+<li><strong>המורפיזמים:</strong> הומומורפיזמים של גרפים - פונקציה אשר ממפה כל קודקוד של גרף אחד לקודקוד של גרף אחר כך שאם יש קצה מקודקוד <span>\(\alpha\)</span> לקודקוד <span>\(\beta\)</span> במקור אז התמונה תקיים <span>\(f(\alpha)\leq f(\beta)\)</span>. </li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">קטגוריה Met - מרחבים מטרים</span><ul>
+<li>אובייקטים: מרחבים מטרים קטנים אשר מצויידים במטריגה <span>\(d_{X}\)</span>.</li>
+<li>מורפיזמים: פונקציות אשר אינם מרחבות, זאת אומרת פונקציה <span>\(f:X\to Y\)</span> אשר מקיימת:
+<span>$$d_{Y}(f(\alpha),f(\beta))\leq d_{X}(\alpha,\beta)$$</span>
+כלומר לכל <span>\(\alpha,\beta \in X\)</span> פונקציה כך שהמרחק בין שתי נקודות אשר לא גדל תחת <span>\(f\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה <span>\(\mathrm{Set^{fin}}\)</span> - קבוצות סופיות</span><ul>
+<li><strong>אובייקטים:</strong> קבוצות אשר סופיות(בפרט יהיו קטנות).</li>
+<li><strong>מורפיזמים:</strong> כל פונקציה בין הקבוצות האלה.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה <span>\(\mathrm{Set^{inj}}\)</span> - קבוצות עם מורפיזמים חח"ע</span><ul>
+<li><strong>אובייקטים:</strong> קבוצות קטנות</li>
+<li><strong>מורפיזמים:</strong> פונקציות חד חד ערכיות בין הקבוצות האלה.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה <span>\(\mathrm{Grp^{fg}}\)</span> - קבוצות נוצרות סופית</span><ul>
+<li><strong>אובייקטים:</strong> חבורות קטנות שנוצרות סופית.</li>
+<li><strong>מורפיזמים:</strong> הומומורפיזמים בין החבורות האלה.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה Top - מרחבים טופולוגיים</span><ul>
+<li><strong>אובייקטים:</strong> מרחבים טופולוגים קטנים.</li>
+<li><strong>מורפיזמים:</strong> פונקציות רציפות בין המרחבים הטופולוגיים.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה Rel - יחסים</span><ul>
+<li><strong>אובייקטים:</strong> קבוצות קטנות.</li>
+<li><strong>מורפיזמים:</strong> לכל שתי קבוצות קטנות <span>\(X,Y\)</span> מורפיזם יהיה יחס <span>\(R\subseteq X\times Y\)</span>. נשים לב כי הקבוצה של כל הפונקציות <span>\(Y^{X}\)</span> היא תת קבוצה של היחסים האלו.</li>
+<li><strong>הרכבה:</strong> בהנתן <span>\(R\subseteq X \times Y\)</span> וגם <span>\(S\subseteq Y \times Z\)</span> אז ההרכבה:
+<span>$$S\circ R=\{(x,z)\in X\times Z\mid\exists y\in Y,\;(x,y)\in R\;{\mathrm{and}}\;(y,z)\in S\}$$</span></li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה <span>\(\mathrm{Sub_{X}}\)</span></span><ul>
+<li><strong>אובייקטים:</strong> עבור קבוצה <span>\(X \in U\)</span> האובייקטים הם האיברים של קבוצת החזקה <span>\(\mathcal{P}(X)\)</span>. כלומר כל התתי קבוצות של <span>\(X\)</span>.</li>
+<li><strong>מורפיזמים:</strong> לכל שתי תתי קבוצות <span>\(Y,Z \subseteq X\)</span> נגדיר:
+<span>$$\operatorname{Hom}_{\operatorname{Sub}_{x}}(Y,Z)={\left\{\begin{array}{l l}{\{I_{Y,Z}\}}&amp;{{\mathrm{if~}}Y\subseteq Z,}\\ {\varnothing }&amp;{{\mathrm{otherwise}}}\end{array}\right.}$$</span></li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">הקטגוריה BG</span><ul>
+<li><strong>אובייקטים:</strong> לחבורה קטנה <span>\(G\)</span> לקטגוריה BG יש בדיוק איבר יחיד המסומן ב-*.</li>
+<li><strong>מורפיזמים:</strong> <span>\({\mathrm{Hom}}_{B G}(*,*)=G\)</span></li>
+</ul>
+</div>
+<p>בקטגוריה זו כל מורפיזם הוא איזומורפיזם. </p><h2 id='Category Theory_1_4'>הקטגוריה ההפוכה</h2>
+ <div class="definition"><span class="keyword">הקטגוריה ההפוכה</span><p>תהי <span>\(\mathcal{C}\)</span> קטגוריה. אזי הקטגוריה ההפוכה תהיה הקטגוריה <span>\(\mathcal{C}^{\text{op}}\)</span> אשר מקיימת:
+- אובייקטיים זהים -<span>\(\text{Ob}(\mathcal{C})=\text{Ob}(\mathcal{C}^{\text{op}})\)</span>.
+- לכל <span>\(X,Y\in \mathcal{C}\)</span> נגדיר:
+<span>$$\hom_{{\mathcal{C}}^{o p}}\left(X,Y\right)=\hom_{{\mathcal{C}}}\left(Y,X\right)$$</span>
+- לכל מורפיזם <span>\(f:X\to Y\)</span> ב-<span>\(\mathcal{C}\)</span> נסמן <span>\(f^{\text{op}}:Y\to X\)</span> את המורפיזם המתאים ב-<span>\(\mathcal{C}^{\text{op}}\)</span> כך שמקיים את כלל ההרכבה:
+<span>$$.f^{o p}\circ g^{o p}=(g\circ f)^{o p}$$</span>
+- נגדיר את הזהות של <span>\(X \in \mathrm{Ob}(\mathcal{C}^{\text{op}})=\mathrm{Ob}(\mathcal{C})\)</span> להיות <span>\((\mathrm{Id}_{X})^{\text{op}}\)</span>.</p>
+</div><h2 id='Category Theory_1_5'>פונקטור</h2>
+ <div class="definition"><span class="keyword">פונקטור</span><p>העתקה בין קטגוריות אשר משמרת מבנה. כלומר בהנתן קטגוריות <span>\(C,D\)</span> העתקה <span>\(F:C\to D\)</span> נקראת פונקטור אם מקיימת:</p>
+<ol>
+<li>
+<p>לכל אובייקט <span>\(X\)</span> בקטגוריה <span>\(C\)</span>(כלומר <span>\(X \in \mathrm{Ob}(C)\)</span>) קיים אובייקט מתאים בקטגוריה <span>\(D\)</span> אשר מסומן <span>\(F(X)\in \mathrm{Ob}(D)\)</span>. לעיתים מסומן <span>\(FX\)</span>. </p>
+</li>
+<li>
+<p>לכל שתי אובייקטים <span>\(X,Y \in C\)</span> קיים פונקציה: 
+<span>$$F:{\mathrm{Hom}}_{C}(X,Y)\to{\mathrm{Hom}}_{D}(F X,F Y)$$</span>
+אשר ממפה כל מורפיזם <span>\(f:X\to Y\)</span> למורפיזם <span>\(F(f):FX\to FY\)</span>.</p>
+</li>
+<li>
+<p>משמר הרכבה - לכל שתי הרכבות של מורפיזמים: 
+<span>$$X\xrightarrow{f}Y\xrightarrow{g}Z$$</span>
+הפונקטור מקיים:
+<span>$$F(g\circ  f)=F(g)\circ F(f)$$</span></p>
+</li>
+<li>
+<p>משמר יחידה - לכל אובייקט <span>\(X \in \mathrm{Ob}(C)\)</span> הפונקטור שולח את מורפיזם היחידה למורפיזם הזהות: 
+<span>$$F(\operatorname{Id}_{X})=\operatorname{Id}_{F(X)}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>פונקטורים משמרים איזומורפיזם.</p>
+</div>
+<div class="proof">
+<p>נזכור כי מורפיזם <span>\(f:X\to Y\)</span> נקרא איזומורפיזם אם קיים מורפיזם <span>\(g:Y\to X\)</span> כך שמתקיים:
+<span>$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y}.$$</span>
+כיוון שפונקטורים משמרים הרכבה ויחידה נקבל כי תכונה זו נשמרת ולכן <span>\(Ff\)</span> יהיה איזומורפיזם ב-<span>\(D\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הרכבה של פונקטורים</span><p>בהנתן שתי פונקטורים:
+<span>$$F:C\to D\quad{\mathrm{and}}\quad G:D\to E,$$</span>
+נגדיר את ההרכבה שלהם <span>\(G\circ F:C\to E\)</span> על ידי:</p>
+<ol>
+<li>
+<p>עבור אובייקט <span>\(X \in \mathrm{Ob}(C)\)</span> נגדיר: 
+<span>$$(G\circ F)(X)=G(F(X))$$</span></p>
+</li>
+<li>
+<p>עבור מורפיזם <span>\(f:X\to Y\)</span> ב-<span>\(C\)</span> נגדיר: 
+<span>$$(G\circ F)(f)=G(F(f))$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקטור הזהות</span><p>לכל קטרוגיה <span>\(C\)</span> קיים פונקטור <span>\(\mathrm{Id}_{C}:C\to C\)</span> אשר פועל בצורה הבאה:</p>
+<ol>
+<li>
+<p>על אובייקטים מקיים <span>\(\mathrm{Id}_{C}(X)=X\)</span> לכל <span>\(X \in \mathrm{Ob}(C)\)</span>. </p>
+</li>
+<li>
+<p>על מורפיזמים מוגדר על ידי <span>\(\mathrm{Id}_{C}(f)=f\)</span> לכל <span>\(f \in \mathrm{Hom}_{C}(X,Y)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>פונקטור הזהות משמש כאיבר ניטרלי בהרכבה של פונקטורים. כלומר עבור כל פונקטורים <span>\(F:C\to D\)</span> ו-<span>\(H:B\to C\)</span> מתקיים:
+<span>$$F\circ{\mathrm{Id}}_{C}=F\qquad{\mathrm{Id}}_{C}\circ H=H$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקטורים שוכחות מבנה</span><p>פונקטורים אשר ממפות מבנה "עשיר" יותר למבנה פחות עשיר, כך שמאבד את הבנה שלו.</p>
+</div>
+<div class="example"><span class="keyword">פונקטור שוכח מבנה</span><p>נסתכל על הפונקטור <span>\(F:\text{Top}\to\text{Sets}\)</span>.
+- על האובייקטים נגדיר <span>\(F(X,\tau)=X\)</span> כאשר <span>\(X\)</span> זה המרחב הטופולוגיים ב-<span>\(\tau\)</span> זה הטופולוגיה. הפונקטור "שוכח" את המבנה של הטופולוגיה.
+- עבור מורפיזמים נגדיר אם <span>\(f:(X,\tau)\to (Y,\sigma)\)</span> רציפה אזי <span>\(F(f)=f\)</span> זו הפונקציה בין קבוצות.</p>
+</div>
+<div class="example"><span class="keyword">הרכבה של פונקטורים שוכחים מבנה</span><p>נגדיר פונקטור <span>\(F:\text{Grp}\to\text{Sets}_{*}\)</span> על ידי <span>\(F(G,e,\cdot)=(G,e)\)</span> אשר שוכחת את המבנה של החבורה. 
+כעת נגדיר פונקטור נוסף <span>\(H:\text{Sets}_{*}\to\text{Sets}\)</span> על ידי <span>\(H(X,x)=X\)</span>. נקבל כי ההכבה <span>\(H\circ F:\text{Grp}\to\text{Sets}\)</span> שוכחת את כל המבנה פרט למבנה של החבורה.</p>
+</div>
+<div class="definition"><span class="keyword">פונקטורים מכלילים מבנה</span><p>פונקטורים אשר מכלליות את המבנה, כלומר מוסיף חופש נוסף למבנה</p>
+</div>
+<div class="example"><span class="keyword">פונקטורים מכללים מבנה</span><p>פונקטורים מהצורה <span>\(F:\mathrm{Ab}\to \mathrm{Grp}\)</span> או מהצורה <span>\(F:\mathrm{Sets ^{fin}}\to \mathrm{Sets}\)</span> יהיו מכלילות מבנה.</p>
+</div>
+        </body>
+    </html>
+    
