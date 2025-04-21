@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>העתקות לינאריות ומכפלת מטריצות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_2_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_2_1.html`;}});</script>
+        <div class="content">
+        <h1>2.2  העתקות לינאריות ומכפלת מטריצות</h1>
+    <p>המוטיבציה של מכפלת מטריצות מגיעה מהעולם של העתקות לינאריות. כפי שנראה, מכפלת מטריצה בווקטור זה כמו הפעלה של העתקה לינארית על ווקטור ומכפלה של שתי מטריצות זה כמו הרכבה של שתי העתקות לינאריות. למעשה נגדיר אותם כך שזה מתקיים.</p>
+<div class="definition"><span class="keyword">מכפלת מטריצה בווקטור</span><p>נניח ו-<span>\(A\in M_{m,n}\left( \mathbb{F} \right)\)</span> היא מטריצה עם עמודות <span>\(a_{1},\dots,a_{n}\in \mathbb{F} ^{m}\)</span>. כלומר:
+<span>$$A=\begin{bmatrix}\mathbf{a}_{1}&amp;\mathbf{a}_{2}&amp;\cdots&amp;\mathbf{a}_{n}\end{bmatrix}$$</span>
+עבור <span>\(x \in \mathbb{F} ^{n}\)</span> נגדיר את מכפלת המטריצה בווקטור:
+<span>$$A\mathbf{x}:=x_{1}\mathbf{a}_{1}+x_{2}\mathbf{a}_{2}+\cdots+x_{n}\mathbf{a}_{n}\in\mathbb{R}^{m}$$</span></p>
+</div>
+<div class="example">
+<p>עבור:
+<span>$$A={\left[\begin{array}{c c c}{2}&amp;{-1}&amp;{0}\\ {3}&amp;{1/2}&amp;{\pi}\\ {-2}&amp;{1}&amp;{1}\\ {0}&amp;{0}&amp;{0}\end{array}\right]}\quad\quad{\mathbf{x}}={\left[\begin{array}{c}{-1}\\ {1}\\ {2}\end{array}\right]}$$</span>
+נקבל:
+<span>$$A\mathbf{x}=-1\begin{bmatrix}2\\ 3\\ -2\\ 0\end{bmatrix}+1\begin{bmatrix}-1\\ 1/2\\ 1\\ 0\end{bmatrix}+2\begin{bmatrix}0\\ \pi\\ 1\\ 0\end{bmatrix}=\begin{bmatrix}-3\\ -5/2+2\pi\\ 5\\ 0\end{bmatrix}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצה מייצגת של העתקה לינארית</span><p>בהנתן בסיס <span>\(\mathcal{A}=\left( a_{1},\dots,a_{n} \right)\)</span> של <span>\(V\)</span> ובסיס <span>\(\mathcal{ B}=\left( b_{1},\dots,b_{m} \right)\)</span> של <span>\(W\)</span> ניתן להציג את ההעתקה הלינארית בצורה הבאה:
+<span>$$\begin{gather}[T(v)]_{\mathcal{B} }=\left[ T\left( v_{1}a_{1}+v_{2}a_{2}+\dots+v_{n}a_{n} \right) \right]_{\mathcal{_{B}} }= \\=v_{1}[T(a_{1})]_{\mathcal{B} }+v_{2}[T(a_{2})]_{\mathcal{B} }+\dots+v_{n}[T(a_{n})]_{\mathcal{B} }= \\=\begin{pmatrix}[T(a_{1})]_{\mathcal{B} }\bigg| [T(a_{2})]_{\mathcal{B} }\bigg| \dots \bigg| [T(a_{n})]_{\mathcal{B} }\end{pmatrix}\begin{pmatrix}v_{1}\\v_{2}\\\vdots\\v_{n}\end{pmatrix}_{\mathcal{A} } 
+\end{gather}$$</span>
+כאשר נסמן את המטריצה 
+<span>$$[T]_{\mathcal{B}}^{\mathcal{A}}=\begin{pmatrix}[T(a_{1})]_{\mathcal{B}}\bigg| T(a_{2})_\left[ \mathcal{B} \right]\bigg| \dots \bigg| [T(a_{n})]_{\mathcal{B}}\end{pmatrix}$$</span>
+ונקרא לה המטריצה המייצגת של ההעתקה <span>\(T\)</span> תחת הבסיס <span>\(\mathcal{ A}\)</span>. זוהי מטריצה שמקבלת ווקטור ממרחב <span>\(V\)</span> בהצגה בבסיס <span>\(\mathcal{A}\)</span>, מפעילה את ההעתקה ומחזירה את בתוצאה תחת בסיס <span>\(\mathcal{B}\)</span>.</p>
+</div>
+<div class="remark">
+<p>למעשה אנחנו מגדירים את המכפלת מטריצה בווקטור כך כדי שיתקיים:
+<span>$$[T(v)]_{\mathcal{B} }=[T]_{\mathcal{B} }^{\mathcal{A} }[v]_{\mathcal{A} }$$</span></p>
+</div>
+<p>כעת נרצה להגדיר את המכפלת מטריצות כמקביל להרכבה של העתקות לינאריות.</p>
+<div class="definition"><span class="keyword">מכפלת מטריצות</span><p>עבור <span>\(A \in M_{m,n}\left( \mathbb{F}  \right)\)</span> ו-<span>\(B \in M_{n,k}\left( \mathbb{F}  \right)\)</span> נסמן ב-<span>\(b_{i}\in \mathbb{F} ^{n}\)</span> את העמודה ה-<span>\(i\)</span> של מטריצה <span>\(B\)</span>. אזי נגדיר את מכפלת המטריצות להיות:
+<span>$$A B:=\left[A{\bf b}_{1}\quad A{\bf b}_{2}\quad\cdot\cdot\cdot\quad A{\bf b}_{k}\right]$$</span>
+כאשר נקבל מטריצה <span>\(AB \in M_{m,k}\left( \mathbb{F}  \right)\)</span></p>
+</div>
+<div class="corollary">
+<p>הרכיב ה-<span>\(lk\)</span> של המטריצה <span>\(AB\)</span> יהיה:
+<span>$$AB_{lk}=\sum_{i=1}^{n}\sum_{j=1}^{m} a_{il}b_{kj}$$</span></p>
+</div>
+<p>למעשה הגדרנו את המכפלת מטריצת כך שהמטריצה המייצגת של הרכבה של העתקות לינאריות זה יהיה המכפלת מטריצות של המטריצות המייצגות, כלומר כך שיתקיים הטענה הבאה:</p>
+<div class="proposition">
+<p>תהי <span>\(T_{1}:V\to U\)</span> ו-<span>\(T_{2}:U\to W\)</span> העתקות לינאריות כך של-<span>\(U\)</span> יש בסיס <span>\(\mathcal{C}\)</span>, ל-<span>\(W\)</span> יש בסיס <span>\(\mathcal{A}\)</span> ול-<span>\(V\)</span> יש בסיס <span>\(\mathcal{B}\)</span>. אזי המטריצה המייצגת של הרכבה של העתקות לינאריות תהיה המכפלה של המטריצות המייצגות של כל העתקה בנפרד. כלומר:
+<span>$$\left[ T_{1}\circ  T_{2} \right]_{\mathcal{A} }^{\mathcal{B} }=[T_{1}]_{\mathcal{A} }^{\mathcal{C} }[T_{2}]_{\mathcal{C} }^{\mathcal{B} }$$</span>
+כאשר נשים לב כי התוצאה לא תלויה בבסיס <span>\(\mathcal{C}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(\mathcal{B=\left( b_{1},\dots,b_{n} \right)}\)</span>.
+אנו יודעים כי העמודות של <span>\(\left[ T_{1}\circ T_{2} \right]_{\mathcal{A}}^{\mathcal{B}}\)</span> יהיה:
+<span>$$\left[ T_{1}\circ T_{2} \right]_{\mathcal{A} }^{\mathcal{B} }=\begin{bmatrix}\left[ T_{1}\circ  T_{2}(b_{1}) \right]_{\mathcal{A} }\bigg| \left[ T_{1}\circ  T_{2}\left( b_{2} \right) \right]_{\mathcal{A} }\bigg|\dots \bigg| \left[ T_{1}\circ T_{2} (b_{n}) \right]\mathcal{_{A}}  
+\end{bmatrix} $$</span>
+נסתכל על העמודה ה-<span>\(i\)</span>. נקבל כי היא תהיה שווה:
+<span>$$\left[ T_{1}\circ T_{2}(b_{i}) \right]_{\mathcal{A} }=[(T_{1}(T_{2}(b_{i}))]_{A}$$</span>
+כאשר ניתן לכתוב את <span>\(T_{2}(b_{i})\)</span> בעזרת הבסיס <span>\(\mathcal{C}=\left( c_{1},\dots,c_{m} \right)\)</span>:
+<span>$$T_{2}(b_{i})=\sum_{k=1}^{m}\left([T_{2}(b_{i})]c\right)_{k}c_{k}$$</span>
+וכעת:
+<span>$$T_{1}(T_{2}(b_{i}))=T_{1}\left(\sum_{k=1}^{m}\left([T_{2}(b_{i})]c\right)_{k}c_{k}\right)=\sum_{k=1}^{m}\left([T_{2}(b_{i})]c\right)_{k}T_{1}(c_{k})$$</span>
+כאשר ניתן לכתוב את <span>\(T_{1}(c_{k})\)</span> בעזרת הבסיס <span>\(\mathcal{A}=\left( a_{1},\dots,a_{p} \right)\)</span>:
+<span>$$T_{1}(c_{k})=\sum_{j=1}^{p}\left([T_{1}(c_{k})]_{\mathcal{A}}\right)_{j}a_{j}$$</span>
+וכעת:
+<span>$$T_{1}(T_{2}(b_{i}))=\sum_{k=1}^{m}\sum_{j=1}^{p}\left([T_{2}(b_{i})]c\right)_{k}\left([T_{1}(c_{k})]_{\mathcal{A}}\right)_{j}a_{j}$$</span>
+וקיבלנו כי זה בדיוק המכפלת מטריצה תחת הבסיס <span>\(\mathcal{ A}\)</span>.</p>
+</div>
+<div class="theorem">
+<p>פונקציה היא העתקה לינארית אם"ם היא מייצגת מכפלת מטריצות תחת בסיס כלשהו. </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='prev-page'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

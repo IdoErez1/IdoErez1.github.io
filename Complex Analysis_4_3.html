@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט מוררה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_4_4'>4.4 משפט ההצגה של קושי</a></li>
+<li class='parent-page'><a href='./Complex Analysis'> פונקציות מרוכבות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לפונקציות מרוכבות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_1'>1.1 תזכורת - מרוכבים</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_2'>1.2 גבולות של פונקציות מרוכבות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_3'>1.3 ספרת רימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_1'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_2'>2.2 פונקציות אנליטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פונקציות והעתקות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_1'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_2'>3.2 העתקה לינארית והופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_3'>3.3 העתקת מוביוס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_1'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_2'>4.2 משפט קושי גורסה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_3'>4.3 משפט מוררה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_4'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. טורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_1'>5.1 טורים של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_2'>5.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_3'>5.3 טורי טיילור</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_4'>5.4 טור לורן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Complex Analysis_4_2'>4.2 משפט קושי גורסה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Complex Analysis_4_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Complex Analysis_4_2`; }});</script>
+        <div class="content">
+        <h1>4.3  משפט מוררה</h1>
+    <div class="definition"><span class="keyword">תחום פשוט קשר</span><p>תחום שבו כל מסילה ניתנת לצימצום לנקודה. פשוט קשר ב-<span>\(\mathbb{R}^2\)</span> או <span>\(\mathbb{C}\)</span> זה פשוט ללא חורים.</p>
+</div>
+<div class="definition"><span class="keyword">תחום קשיר מסילתית</span><p>תחום הוא קשיר מסילתית אם לכל <span>\(z_{1},z_{2}\)</span> קיימת מסימה <span>\(\gamma\)</span> אשר מחברת ביניהם</p>
+</div>
+<div class="theorem"><span class="keyword"> מוררה</span><p>יהי <span>\(D\)</span> תחום פתוח וקשיר(אין דרישה לפשוט קשר). נניח לכל <span>\(\gamma \in D\)</span> פשוטה סגורה מתקיים:
+<span>$$\oint_{\gamma} f(z)\;\mathrm{d}z=0$$</span>
+ונניח <span>\(f(z)\)</span> רציפה ב-<span>\(D\)</span>. אזי ל-<span>\(f\)</span> קיימת פונקציה קדומה <span>\(F(z)\)</span> כך ש-<span>\(f(z)=F'(z)\)</span>.</p>
+</div>
+<div class="proof">
+<p>נשים לב כי <span>\(\int_{\beta}f(z)\;\mathrm{d}z\)</span> לא תלוי המסילה <span>\(\beta\)</span> אלה בנקודות התחלה וסוף בלבד. יהיו <span>\(\beta_{1},\beta_{2}\)</span> מסילות המחברות בין <span>\(z_{1},z_{2}\)</span>. נניח <span>\(\beta_{1}\cup \beta_{2}\)</span> סגורה. מתקיים:
+<span>$$0=\oint_{\beta_{1} \cup \left( -\beta_{2} \right)} f\;\mathrm{d}z=\int_{\beta_{1}}f\;\mathrm{d}z-\int_{\beta_{2}}f\;\mathrm{d}z\implies \int_{\beta_{1}}f\;\mathrm{d}z=\int_{\beta_{2}}f\;\mathrm{d}z$$</span>
+ניקח <span>\(z_{0} \in D\)</span> כלשהו. נגדיר <span>\(F:D\to \mathbb{C}\)</span>:
+<span>$$F(z)=\int_{z_{0}}^z f(z)\;\mathrm{d}z$$</span>
+כאשר <span>\(F\)</span> מוגדרת היטב כיוון שאין תלות במסילה. נראה <span>\(F'(z)=f(z)\)</span>. צריך להוכיח:
+<span>$$f(z)=\frac{d}{dz}\int_{z_{0}}^{z} f(s) \, ds $$</span>
+אכן:
+<span>$$\frac{\mathrm{d} }{\mathrm{d} z} \left( \int_{z_{0}}^z f(s)\;\mathrm{d}s \right)=\lim_{ \Delta z \to 0 }  \frac{F\left( z+\Delta z \right)-F(z)}{\Delta z}$$</span>
+וכעת:
+<span>$$\begin{gather}F'(z)=\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}\left( \int\limits_{z_{0}}^{z+\Delta z} f(s)\;\mathrm{d}s -\int_{z_{0}}^{z} f(s)\;\mathrm{d}s    \right)= \\=\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}\left( \int_{z}^{\Delta z}  \!\!\!f\; \mathrm{d}s+ \int_{z_{0}}^{z} f(s)\;\mathrm{d}s -\int_{z_{0}}^{z} f(s)\;\mathrm{d}s    \right) = \\= \lim_{ \Delta z \to 0 } \frac{1}{\Delta z} \int_{z}^{z+\Delta z} f(s)\;\mathrm{ds}= \lim_{ \Delta z \to 0 } \frac{1}{\Delta z} \int_{z}^{z+\Delta z} [(f(s)+f(z))-f(z)]\;\mathrm{ds}= \\= \lim_{ \Delta z \to 0 } \left[ \frac{1}{\Delta z} \int\limits_{z}^{z+\Delta z} f(z)\;\mathrm{ds}+\frac{1}{\Delta z}\int\limits_{z}^{z+\Delta z} (f(s)-f(z))  \, ds \right] = \\= \lim_{ \Delta z \to 0 } \left[ \frac{1}{\Delta z} f(z)\int\limits_{z}^{z+\Delta z} \mathrm{ds}+\frac{1}{\Delta z}\underbrace{ \int\limits_{z}^{z+\Delta z} (f(s)-f(z))  }_{ J } \, ds \right] =    \\=f(z)+\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}J
+\end{gather}$$</span>
+ונדרש רק להראות כי הגבול <span>\(\lim_{ \Delta z \to 0 } \frac{J}{\Delta z}=0\)</span>. נסמן ב-<span>\(\alpha\)</span> את הקטע הישר בין <span>\(z\)</span> ל-<span>\(z+\Delta z\)</span>. מתקיים:
+<span>$$\lvert J \rvert =\left\lvert  \int_{z}^{z+\Delta z}(f(s)-f(z))  \;\mathrm{d}s\right\rvert =\left\lvert  \int_{\alpha} (f(s)-f(z))ds \right\rvert \leq \max _{s \in \alpha}\lvert f(s)-f(z) \rvert \cdot L\left( \alpha \right)$$</span>
+ולכן:
+<span>$$\lvert J \rvert &lt;\varepsilon \left\lvert  \Delta z  \right\rvert \implies \left\lvert  \frac{J}{\Delta z}  \right\rvert &lt; \frac{\varepsilon \left\lvert  \Delta z  \right\rvert}{\Delta z}=\varepsilon\implies \frac{J}{\Delta z}\to 0$$</span>
+אם <span>\(\oint_{\gamma}f(s)=0\)</span> לכל מסילה סגורה <span>\(\gamma\)</span>, ו-<span>\(f\)</span> רציפה אז יש פונקציה קדומה.</p>
+</div>
+<div class="remark">
+<p>בהמשך נראה - אם <span>\(g(z)\)</span> אנליטית אזי גם הנגזרת <span>\(g'(z)\)</span> אנליטית ו-<span>\(g(z)\)</span> גזירה מכל סדר. כאן <span>\(F(z)\)</span> אנליטית ולכן הנגזרת של <span>\(F'(z)=f(z)\)</span> אנליטית.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_4_4'>4.4 משפט ההצגה של קושי</a></li>
+<li class='prev-page'><a href='./Complex Analysis_4_2'>4.2 משפט קושי גורסה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

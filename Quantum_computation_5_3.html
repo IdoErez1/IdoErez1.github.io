@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אוניברסליות של מעגלים קוונטים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+<li class='parent-page'><a href='./Quantum_computation.html'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2.html'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1.html'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3.html'>2.3 ערוצים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_5.html'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2.html'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1.html'>4.1 חישוב</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2.html'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_3.html'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_1.html'>5.1 שערים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_3.html'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_1.html'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_1.html'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_2.html'>7.2 מחזוריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_3.html'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_4.html'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_1.html'>8.1 טרוטריזציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_2.html'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_5_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_5_2.html`;}});</script>
+        <div class="content">
+        <h1>5.3  אוניברסליות של מעגלים קוונטים</h1>
+    <div class="definition"><span class="keyword">אוניברסליות מדוייקת</span><p>כל שתי שערי קיוביט הם אוניברסלים. כלומר כל <span>\(\mathcal{U}\in U(N)\)</span> (כאשר <span>\(N=2^{n}\)</span>) יכול להיות מושג על ידי מכפלה של שתי קיוביט אוניטרים.</p>
+</div>
+<p>נרצה להראות שקיים אוניברסליות מדוייקת. נעשה בשתי שלבים:</p>
+<ol>
+<li>
+<p>כל <span>\(\mathcal{U}\in U(N)\)</span> היא מכפלה של <span>\(2\times 2\)</span> אוניטריות. </p>
+</li>
+<li>
+<p>כל אוניטרלי <span>\(2\times 2\)</span> הוא מכפלה של שתי קיוביט אוניטריות. </p>
+</li>
+</ol>
+<div class="proposition">
+<p>כל <span>\(\mathcal{U}\in U(N)\)</span> היא מכפלה (טנזורית) של <span>\(2\times 2\)</span> אוניטריות.</p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(V\)</span> אוניטרי יש שורש אוניטרי <span>\(U\)</span> כך ש-<span>\(V=U^{2}\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(V\)</span> אוניטרי אז לכסיון וקיים <span>\(\Lambda\)</span> לכסינה כך ש-<span>\(V=W\Lambda W^{\dagger}\)</span>. כעת:
+<span>$$D=\begin{pmatrix}e^{ i\phi_{1}} &amp;  &amp;  \\ &amp; \ddots &amp;  \\ &amp;  &amp; e^{ i\phi_{N} }\end{pmatrix}\implies\sqrt{ D }=\begin{pmatrix}e^{ i\phi_{1}/2} &amp;  &amp;  \\ &amp; \ddots &amp;  \\ &amp;  &amp; e^{ i\phi_{N}/2 }
+\end{pmatrix}$$</span>
+וכעת אם נגדיר <span>\(U=W\sqrt{ \Lambda }W^{\dagger}\)</span> נקבל:
+<span>$$U^{2}=W\sqrt{ D }\underbrace{ W^{\dagger}W }_{ \mathbb{1}  } \sqrt{ D }W^{\dagger}=W\Lambda W^{\dagger}=V$$</span></p>
+</div>
+<div class="reminder">
+<p>האופרטור <span>\(\Lambda(U)\)</span> מבצעת CNOT כך שאם הקיוביט השולט(control) יהיה 1 זה יבצע את <span>\(U\)</span> ואחרת לא יעשה כלום. באופן דומה <span>\(\Lambda^{2}(U)\)</span> פועל על שלושה הקיוביטים ומבצע את <span>\(U\)</span> רק אם שתי הביטים הראשונים יהיו <span>\(\ket{1}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור כל קיוביט יחיד ניתן ליישם את <span>\(\Lambda^{2}(V)\)</span> על ידי שתי שערי קיוביט בלבד.</p>
+</div>
+<div class="proof">
+<p>באינדוקציה. לכל קיוביט אוניטרי <span>\(U\)</span> ניתן ליישם את <span>\(\Lambda^{m}(U^{2})\)</span> על ידי <span>\(\Lambda^{m-1}(U),\Lambda^{m-1}(X),\Lambda(U),\Lambda\left( U^{\dagger} \right)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אונברסליות גנארית - Generic</span><p>קבוצה סופית של שערים היא אוניברסלית אם המעגלים שניתן ליישם בעזרתם היא תת מרחב צפוף במרחב האוניטריים <span>\(U(N)\)</span> כאשר <span>\(N=2^{n}\)</span>.</p>
+</div>
+<div class="example">
+<ul>
+<li>הקבוצה <span>\(U(1)\)</span> היא צפופה. האיברים שלו מייוצגים על ידי <span>\(e^{ i\theta }\)</span> עבור <span>\(\theta \in \left[ 0,2\pi \right)\)</span> שזו קבוצה צפופה.</li>
+<li>הקבוצה של המספרים האי רציונאלים בתחום <span>\([0,1)\)</span> הם צפופים.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>הקבוצה של במספרים <span>\(n\alpha \mod 1\)</span> עבור <span>\(\alpha \in [0,1) \setminus \mathbb{Q}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ראשית נוכיח כי הנקודות האלה הם זרים. לכל <span>\(n,m,\alpha\)</span> קיים מספר <span>\(k \in \mathbb{Z}\)</span> כך ש:
+<span>$$n\alpha = m\alpha+k$$</span>
+נניח בשלילה שקיימים <span>\(m,n,k\)</span> עבור <span>\(\alpha\)</span> כלשהו. אזי עבור <span>\(\alpha = \frac{k}{n-m}\in \mathbb{Q}\)</span> בסתירה.
+ניתן לבחור <span>\(N\)</span> מספרים אי רציונילים שונים <span>\(\left\{  n\alpha  \right\}_{n=1}^{N}\)</span>, ונזהה אותם עם נקודות ייחודיות על <span>\([0,1)\)</span> וסביבה פתוחה מסביבים עם אורך <span>\(\varepsilon&gt; \frac{1}{N}\)</span>. 
+לפחות שתי תחומים כאלה חייבים לחתוך(כיוון שהאורך הכולל הוא <span>\(\varepsilon N &gt; 1\)</span>). ולכן קיימים שתי מספרים <span>\(m&lt;n&lt; \frac{1}{\varepsilon}\)</span> קיימים:
+<span>$$r\alpha=(n-m)\alpha&lt;\varepsilon$$</span>
+ולכן <span>\(\left\{  kr\alpha \mid k \in \mathbb{Z}  \right\}\)</span> היא קבוצה צפיפה. כיוון ש-<span>\(\varepsilon&gt; 0\)</span> קטן כרצונינו נקבל כי <span>\(\left\{  n\alpha \mod 1  \right\}\)</span> היא קבוצה צפיפה לכל <span>\(n \in \mathbb{N}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור מספר אי רציונלי <span>\(\alpha \in \left[ 0,4\pi \right]\)</span> החזקות השלמות של <span>\(e^{ i\alpha/2 }\)</span> יהיו צפיפות ב-<span>\(U(1)\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור החבורה <span>\(U(N)\)</span> כל איבר ניתן לכתיבה בצורה 
+<span>$$U=\mathrm{diag}\left(e^{i{\frac{\theta_{1}}{2}}},...,e^{i{\frac{\theta_{N}}{2}}}\right)$$</span>
+כאשר כיוון שמתורת המספרים אנו יודעים כי <span>\(\frac{\theta_{i}}{\pi},\frac{\theta_{i}}{\theta_{j}}\)</span> יהיו אי רציונאלים כמעט תמיד נקבל כי הערכים העצמיים:
+<span>$$\left\{e^{i\frac{\theta_{i}}{2}k}:i\in\left\{1,...,N\right\},k\in\left\{1,2,3,...\right\}\right\}$$</span>
+יהיו צופיפים בקבוצה <span>\(U(1)^{N}\)</span>.</p>
+</div>
+<p>נניח כי יש לנו שתי שערים גנארים <span>\(U_{1}=e^{ iJ_{1} }, U_{2}=e^{ iJ_{2} }\)</span> כאשר <span>\(J_{1},J_{2}\)</span> הם מטריצות הרמיטיות <span>\(N\times N\)</span> אשר לא מתחלפים. נקרא להם גנרים אם חזקות חיוביות של <span>\(U_{i}\)</span>. זה נותן לנו לקרב את <span>\(\exp\left( i\alpha_{i}J_{i} \right)\)</span> טוב ככל שנרצה לכל <span>\(\alpha \in \mathbb{R}^{+}\)</span>.</p>
+<div class="definition"><span class="keyword">בר-השגה reachable</span><p>אוניטרי <span>\(U\)</span> אשר לכל <span>\(\varepsilon&gt; 0\)</span> קיים מעגלים אשר מיישים את <span>\(\tilde{U}\)</span> אשר קרוב ל-<span>\(U\)</span> כרצונינו. כלומר:
+<span>$$\left\lVert  U-\widetilde{U}  \right\rVert _{\sup }\leq \varepsilon$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן להגיע ל-<span>\(e^{ i\alpha_{i}J_{i} }\)</span> בעזרת <span>\(U_{i}\)</span>(כלומר <span>\(U_{1}\)</span> וגם <span>\(U_{2}\)</span>).</p>
+</div>
+<div class="corollary">
+<p>ניתן להשיג את <span>\(e^{ i\left( \alpha_{1}J_{1}+\alpha_{2}J_{2} \right) }\)</span> אם <span>\(e^{ i\alpha J_{1}/n }\)</span> ו-<span>\(e^{ i\alpha_{2}J_{2}/n }\)</span> ניתנים להשגה</p>
+</div>
+<div class="proof">
+<p><span>$${\operatorname*{lim}_{n\longrightarrow\infty}\left(e^{i\alpha_{1}J_{1}/n}e^{i\alpha_{2}J_{2}/n}\right)^{n}}{{}=\operatorname*{lim}_{n\longrightarrow\infty}\left(\mathbb{1} +{\frac{i}{n}}\left(\alpha_{1}J_{1}+\alpha_{2}J_{2}\right)+O\left(n^{-2}\right)\right)^{n}}=e^{ i\left( \alpha_{1} J_{1}+\alpha_{2} J_{2} \right) }$$</span></p>
+</div>
+<div class="corollary">
+<p>אקספוננט של קומוטטור הוא ניתן להשגה.</p>
+</div>
+<div class="proof">
+<p><span>$$\operatorname*{lim}_{n\longrightarrow\infty}\left(e^{i J_{1}/\sqrt{n}}e^{i J_{2}/\sqrt{n}}e^{-i J_{1}/\sqrt{n}}e^{-i J_{2}/\sqrt{n}}\right)^{n}=\operatorname*{lim}_{n\longrightarrow\infty}\left(1-{\frac{1}{n}}\left[J_{1},J_{2}\right]+O\left(n^{-3/2}\right)\right)=e^{-\left[J_{1},J_{2}\right]}$$</span></p>
+</div>
+<div class="example">
+<p>בעזרת השערים <span>\(U_{n}^{Z}\left( \phi \right)=e^{ -i\phi Z_{n} }\)</span> ו-<span>\(e^{ -i\phi X }\)</span> עבור פאזה <span>\(\phi \in \left[ 0,2\pi \right)\)</span> ניתן ליצור כל אופרטור אוניטרי ב-<span>\(SU(2)\)</span> כיוון שיש לנו שתי יוצרים(<span>\(X,Z\)</span>) ולכן יש לנו אוניברסליות גנארית.</p>
+</div>
+<div class="reminder">
+<p>מתקיים:
+<span>$$U(N)=SU(N)\times U(1)$$</span>
+כאשר <span>\(U(1)\)</span> היא פאזה גלובאלית ולכן מספיק להתייחס ל-<span>\(SU(N)\)</span></p>
+</div>
+<div class="reminder">
+<p>החבורה <span>\(U(N)\)</span> היא חבורת לי. ולכן ניתן להשיג כל איבר על ידי:</p>
+<p><span>$$U=\exp\left(i{\sum_{i}}\alpha_{i}J_{i}\right)$$</span>
+כאשר:
+<span>$$[J_{i},J_{j}]=i\sum_{k}f_{i j k}J_{k}$$</span></p>
+</div>
+<div class="corollary">
+<p>מספיק שיהיה שער גנרי לחלק מהיוצרים והאלגברת לי נותת לנו את השאר.</p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(SU(2)\)</span> יש לנו שלושה יוצרים, ולכן מספיק שתי שערים גנרים כדי להשיג את כל הסיבובים האוניטרים.</p>
+</div>
+<div class="corollary">
+<p>ל-<span>\(SU(4)\)</span> יש 15 יוצרים. אם מסתכל על האלגברה ניתן לראות כי שתי שערים מספיק כדי להשיג כל שער אחר. וכיוון שהראנו כי כל שתי קיוביטים הם אוניברסלים, שתי שערים גנארים הם מספיקים בשביל קבוצה גנארית אוניברסלית.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+<li class='prev-page'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

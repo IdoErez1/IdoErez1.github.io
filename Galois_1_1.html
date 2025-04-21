@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שדות ומרחבים ווקטורים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='parent-page'><a href='./Galois'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_2'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_4'>2.4 הרחבה נורמלית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_5'>2.5 הרחבת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_6'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_3_1'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_2'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_3'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_4'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_5'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_6'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Galois'> תורת גלואה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Galois_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Galois`; }});</script>
+        <div class="content">
+        <h1>1.1  שדות ומרחבים ווקטורים</h1>
+    <div class="definition"><span class="keyword">שדה</span><p>חוג חילוק קומטטיבי(עם יחידה). כלומר חוג קומוטטיבי שבו לכל איבר שונה מ-0 יש הופכי.</p>
+</div>
+<div class="definition"><span class="keyword">המציין של שדה</span><p>הסדר של האיבר 1 בחבורה החיבורית של השדה. עבור שדה אינסופי נגדיר את המיין בתור 0. לעיתים מסומן <span>\(\mathrm{char}(F)\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">חיתוך של שדות</span><p>החיתוך של שדות יהיה שדה.</p>
+</div>
+<div class="proposition"><span class="keyword">איחוד של שדות</span><p>איחוד של שתי שדות יהיה שדה אם"ם שדה אחד מכיל את השדה השני.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב ווקטורי</span><p>קבוצה <span>\(V\)</span> נקראת מרחב ווקטורי מעל שדה <span>\(F\)</span> אם <span>\(V\)</span> היא חבורה אבלית עם פעולת החיבור(המסומנת ב <span>\(+\)</span>) וגם לכל <span>\(a\in F\)</span> ו-<span>\(v \in V\)</span> קיים איבר <span>\(av \in V\)</span> כך שמתקיים לכל <span>\(a,b \in F\)</span> ו-<span>\(u,v \in V\)</span>:</p>
+<ol>
+<li>
+<p><span>\(a(v+u)=av+a u\)</span> </p>
+</li>
+<li>
+<p><span>\((a+b)v=av+bv\)</span> </p>
+</li>
+<li>
+<p><span>\(a(bv)=(a b)v\)</span> </p>
+</li>
+<li>
+<p><span>\(1v=v\)</span> </p>
+</li>
+</ol>
+</div>
+<p>כאשר איבר במרחב ווקטורי נקרא ווקטור, ואיברים בשדה נקראים סקלארים.
+<strong>הגדרה</strong> תת מרחב ווקטורי
+קבוצה <span>\(W\subseteq V\)</span> נקראת תת מרחב ווקטורי אם <span>\(W\)</span> מרחב ווקטורי בפני עצמו</p>
+<div class="definition"><span class="keyword">תלות לינארית</span><p>קבוצה <span>\(S\)</span> של ווקטורים נקראת תלויה לינארית מעל שדה <span>\(F\)</span> אם קיימים וקטורים <span>\(v_{1},v_{2},\dots,v_{n}\in S\)</span> ואיברים <span>\(a_{1},a_{2},\dots,a_{n}\in F\)</span> לא כולם אפס כך ש-<span>\(a_{1}v_{1}+\dots+a_{n}v_{n}=0\)</span>. </p>
+</div>
+<p>כאשר אם קבוצה היא לא תלוייה לינארית היא נקראת בלתי תלוייה לינארית.</p>
+<div class="definition"><span class="keyword">בסיס</span><p>יהי <span>\(V\)</span> מרחב ווקטורי מעל <span>\(F\)</span>. תת קבוצה <span>\(B\)</span> של <span>\(V\)</span> נקרא בסיס של <span>\(V\)</span> אם <span>\(B\)</span> בלתי תלוי לינארי מעל <span>\(F\)</span> וכל איבר ב-<span>\(V\)</span> הוא צירוף לינארי של האיברים ב-<span>\(B\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כל הבסיסים של המרחב הם באותו הגודל.</p>
+</div>
+<div class="definition"><span class="keyword">המימד של מרחב ווקטורי.</span><p>גודל הבסיס המרחב הם באותו הגודל.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='prev-page'><a href='./Galois'> תורת גלואה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

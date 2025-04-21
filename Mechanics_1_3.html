@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>עבודה ואנרגיה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_1_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  עבודה ואנרגיה</h1>
+    <div class="definition"><span class="keyword">עבודה של כוח קבוע</span><p>מוגדר על ידי:
+<span>$$W=\vec{F}\cdot \vec{s}=\left\lVert  \vec{F}  \right\rVert \cdot \left\lVert  \vec{s}  \right\rVert \cdot \cos\left( \theta \right)$$</span>
+כאשר <span>\(\vec{s}\)</span> זה ווקטור ההעתק ו-<span>\(\theta\)</span> זה הזווית בין הכוח להזזה.</p>
+</div>
+<div class="corollary">
+<p>אם הכוח יהיה חיובי כאשר מקסימלי כאשר פועל באותו כיוון כמו השינוי במקום, אפס כאשר פועל במאונך לשינוי במקום, ומינימלי(שלילי) כאשר פועל נגד הכיוון של השני במקום.</p>
+</div>
+<div class="definition"><span class="keyword">אנרגיה קינטית</span><p>בהנתן מסה <span>\(m\)</span> ומהירות <span>\(v\)</span> נגדיר את האנרגיה הקינטית להיות:
+<span>$$K=\frac{1}{2}mv^{2}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט עבודה אנרגיה</span><p><span>$$W_{\text{tot}}=\Delta K$$</span></p>
+</div>
+<div class="proof">
+<p>כאשר חלקיק עובר מנקודה <span>\(x_{1}\)</span> ל-<span>\(x_{2}\)</span> עובר שינוי במקום <span>\(s=x_{2}-x_{1}\)</span>. נסמן את המהירות בנקודה <span>\(x_{2}\)</span> על ידי <span>\(v_{2}\)</span> ובנקודה <span>\(x_{1}\)</span> על ידי <span>\(v_{1}\)</span>. ממשוואות תנועה של תאוצה קבועה נקבל:
+<span>$$v_{2}^{2\!}=v_{1}^{2}+\,2a_{x}s\implies a_{x}={\frac{v_{2}^{2}-{v_{1}^{2}}}{2s}}$$</span>
+נכפיל את הביטוי ב-<span>\(m\)</span> ונקבל את הכוח:
+<span>$$F=m a_{x}=m{\frac{v_{2}^{2}-v_{1}^{2}}{2s}}\implies F s\,=\,{{\frac{1}{2}}}m v_{2}^{2}-{\frac{1}{2}}m v_{1}^{2}$$</span></p>
+</div>
+<div class="remark">
+<p>משפט זה נותן משמעות לאנרגיה קינטית בעזרת עבודה. זהו כמות העבודה שנדרש לבצע כדי להאיץ גוף למהירות <span>\(v\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">עבודה של כוח משתנה</span><p>העבודה שנעשת על ידי כוח הפועל על עקומה <span>\(\gamma\)</span> נתונה על ידי האינטגרל המסלולי:
+<span>$$W=\int_{\gamma} \vec{F} \cdot \mathrm{d}\vec{\ell}=\int _{\gamma}\lVert F \rVert \cos \theta \;\mathrm{d} \ell=\int _{\gamma}F_{||} \;\mathrm{d} \ell   $$</span></p>
+</div>
+<div class="definition"><span class="keyword">הספק</span><p>עבודה ליחידת זמן:
+<span>$$P=\frac{\mathrm{d} W}{\mathrm{d} t} $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הספק בעזרת כוח</span><p>הספק נתון על ידי:
+<span>$$P=\vec{F}\cdot \vec{v}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אנרגיה פוטנציאלית</span><p>אנרגיה שמתקשרת למקום.</p>
+</div>
+<div class="proposition"><span class="keyword">עבודה של כוח כבידה</span><p>תחת כבידה אחידה <span>\(g\)</span> העבודה של הכבידה נתונה על ידי:
+<span>$$W_{\mathrm{g}}\,=\,F s\,=\,w\bigl(y_{1}\,-\,y_{2}\bigr)\,=\,m g y_{1}\,-\,m g y_{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אנרגיה פוטנציאלית כבידתית</span><p>נתונה על ידי:
+<span>$$U_{g}=mgy$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$W_{\text{g}}=-\Delta U_{g}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שימור אנרגיה מכנית</span><p>ניתן לכתוב בעזרת האנרגיה פוטנציאלית הכבידתית:
+<span>$$K_{1}+U_{1,g}=K_{2}+U_{2,g}+W_{\text{other}}$$</span>
+כאשר <span>\(W_{\text{other}}\)</span> זה העבודה של כוחות שאינם כבידתיים.</p>
+</div>
+<div class="proposition"><span class="keyword">עבודה של קפיץ</span><p>העבודה שנעשת על מנת למתוח קפיץ מ-<span>\(x_{1}\)</span> ל-<span>\(x_{2}\)</span> נתונה על ידי:
+<span>$$W_{\text{el}}=F_{\text{el}}\cdot \Delta \vec{x}=\frac{1}{2}kx_{2}^{2}-\frac{1}{2}kx_{1}^{2}$$</span>
+כאשר העבודה הנעשת על ידי הקפיץ כאשר עובר מ-<span>\(x_{1}\)</span> ל-<span>\(x_{2}\)</span> נתונה על ידי:
+<span>$$W_{\text{el}}=\frac{1}{2}kx_{1}^{2}-\frac{1}{2}kx_{2}^{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אנרגיה פוטנציאלית אלסטית</span><p>מוגדר על ידי:
+<span>$$U_{\text{el}}=\frac{1}{2}kx^{2}$$</span>
+כאשר <span>\(x&gt;0\)</span> אם החוט נמתח ו-<span>\(x&lt;0\)</span> אם הקפיץ מקווץ.</p>
+</div>
+<div class="corollary">
+<p><span>$$W_{\text{el}}=-\Delta U_{\text{el}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">כוח משמר</span><p>כוח שניתן להגדיר עבורו אנרגיה פוטנציאלית. </p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של העבודה של כוח משמר</span><ol>
+<li>
+<p>ניתן לבטא אותו כהפרש של ערך התחלתי וערך סופי של הסכום של פונקציית אנרגיה קינטית ופוטנציאלית. </p>
+</li>
+<li>
+<p>הפיך </p>
+</li>
+<li>
+<p>לא תלוי במסלול ורק תלוי בערכי ההתחלה והסיום. </p>
+</li>
+<li>
+<p>כאשר הסוף וההתחלה זהה, העבודה היא אפס. </p>
+</li>
+</ol>
+</div>
+<div class="corollary"><span class="keyword">שימור אנרגיה</span><p>כאשר הכוחות היחידים שפועלים הם כוחות משמרים, כך האנרגיה המכנית:
+<span>$$E=K+U$$</span>
+היא קבועה.</p>
+</div>
+<div class="proposition"><span class="keyword">כוח משמר בעזרת הפוטנציאל</span><p>נתון על ידי:
+<span>$$F_{x}=-\frac{\partial U}{\partial x} $$</span>
+או בצורה ווקטורית:
+<span>$$F=-\bar{\nabla} U$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+<li class='prev-page'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+</ul></li>
+        </body>
+        </html>
+        

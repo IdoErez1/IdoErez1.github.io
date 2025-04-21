@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפטי האיזומורפיזם</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_3_2'>3.2 מנות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_4_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  משפטי האיזומורפיזם</h1>
+    <div class="reminder">
+<p>הראנו שתמיד <span>\(\ker(f) \trianglelefteq G\)</span>, <span>\(im(f)\leq H\)</span></p>
+</div>
+<div class="theorem"><span class="keyword">האיזומורפיזם הראשון</span><p>יהי <span>\(f:G\to H\)</span> הומומורפיזם. אזי: 
+<span>$$G/\ker(f) \cong im(f)$$</span></p>
+</div>
+<div class="proof">
+<p>ראינו כבר ש-<span>\(f\)</span> משרה התאמה בין קוסטים של <span>\(\ker(f)\)</span> ב-<span>\(G\)</span> לאיברי <span>\(im(f)\)</span>:
+כי אם <span>\(f(g)=h\)</span> אזי לכל <span>\(k\in \ker(f)\)</span> גם <span>\(f(gh)=f(g)f(k)=h\)</span> כלומר כל <span>\(g\cdot \ker(f)\)</span> הולך ל-<span>\(h\)</span>. ומצד שני אם <span>\(f(g')=h\)</span> אזי <span>\(g'\in g\ker(f)\)</span> כי 
+<span>$$f(g^{-1} g')=f(g)^{-1} \cdot f(g')=h^{-1} \cdot h=e\implies g^{-1} g\in \ker(f)\to g'\in g\cdot \ker(f)$$</span>
+כעת נסמן ב-<span>\(\bar{f}\)</span> את הפונקציה ש-<span>\(f\)</span> משרה על הקוסטים של <span>\(\ker(f)\)</span>. כלומר:
+<span>$$\bar{f}:G/\ker(f)\to \mathrm{Im}(f) \qquad \bar{f}\left( g\cdot \ker(f)  \right)=f(g)$$</span>
+למעשה מה שעשינו עד עכשיו זה להראות ש-<span>\(f\)</span>:</p>
+<ol>
+<li>
+<p>מוגדרת היטב </p>
+</li>
+<li>
+<p>חחע - 
+<span>$$\bar{f}(g'K)=\bar{f}(gK)\implies f(g)=f(g')\implies g'\in gK\implies gK=g'K$$</span></p>
+</li>
+<li>
+<p>ועל - <span>\(im(f)=im\left( \bar{f} \right)\)</span> כי <span>\(\bar{f}\left( g\ker(f)  \right)=f(g)\)</span> ונותר להראות <span>\(f\)</span> הומומורפיזם, ולכן יהיה איזומורפיזם כיוון שחח"ע ועל: 
+<span>$$\bar{f}((gK)(g'K))= f(gg'K)=f(gg')=f(g)f(g')=  \bar{f}(gK)\cdot \bar{f}(g'K)$$</span>
+וקיבלנו כי <span>\(f\)</span> איזומורפיזם.</p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$f:\mathbb{Z} \to \mathbb{Z} _{n} \qquad f(k)=k\mod n$$</span>
+ומתקיים:
+<span>$$im(f)=\mathbb{Z} _{n}\quad \ker(f)=n\mathbb{Z}$$</span>
+ולכן:
+<span>$$\mathbb{Z} / n\mathbb{Z}  \cong \mathbb{Z} _{n}$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}f:\mathbb{R} \to \mathbb{C} ^\times \quad f\left( \alpha \right)=e^{i\alpha}
+\end{gathered}$$</span>
+וכן: 
+<span>$$\mathrm{ im }(f)=S^1\qquad \ker(f)=\mathbb{Z}$$</span>
+ולכן:
+<span>$$\mathbb{R} / \mathbb{Z}  \cong S^1$$</span></p>
+</div>
+<div class="example">
+<p><span>$$f:G\to Aut(G)\qquad f(g)=\varphi_{g}\;\;\left( \varphi_{g}(x)=gxg^{-1}  \right)$$</span>
+הראנו ש-<span>\(f\)</span> הוא הומומורפיזם.
+<span>$$\mathrm{Im}(f)=Inn(G)\qquad \ker(f)=Z(G)$$</span>
+ולכן:
+<span>$$\mathrm{Inn}(G) \cong G/ Z(G)$$</span></p>
+</div>
+<div class="example">
+<p>אם <span>\(V,W\)</span> מרחבים וקטורים, ו-<span>\(T:V\to W\)</span> העתקה לינארית, אז אם נשכח את נושא הכפל בסקלר <span>\(T:V\to W\)</span> הומומורפיזם של חבורות. אז:
+<span>$$V/ \ker(T) \cong im(T)$$</span>
+וזהו משפט המימדים.</p>
+</div>
+<div class="theorem"><span class="keyword">האיזומורפיזם השני</span><p>אם <span>\(H\leq G\)</span>, <span>\(N\trianglelefteq G\)</span> אזי:
+<span>$$HN\leq G \quad H\cap N\trianglelefteq H$$</span>
+ומתקיים:
+<span>$$HN/ N \cong H / H\cap N$$</span></p>
+</div>
+<div class="proof">
+<p>את הטענה <span>\(HN\leq G \quad H\cap N\trianglelefteq H\)</span> מוכיחים בתרגיל בית נסתכל על <span>\(f:H\to HN/N\)</span> המוגדר: <span>$$f(h)=hN$$</span> מספיק להראות ש-<span>\(f\)</span> אפימורפיזם עם גרעין <span>\(N\cap H\)</span>:</p>
+<ol>
+<li>
+<p>מוגרת היטב </p>
+</li>
+<li>
+<p>על - לכל <span>\(hnN\)</span>(איבר ב-<span>\(HN / N\)</span>) מתקבל <span>\(f(h)=hN=hnN\)</span> 
+נראה כעת כי <span>\(f\)</span> הומומורפיזם:
+<span>$$f(hh')=hh'N=hh'\mathbb{N} =hNh'N=f(h)\cdot f(h')$$</span>
+כאשר השתמשו בזה של <span>\(N\trianglelefteq G\)</span>. נשאר הראות את הגרעין:
+<span>$$h \in \ker(f) \leftrightarrow f(h)=e\leftrightarrow hN=N\leftrightarrow h \in N$$</span>
+ולכן <span>\(\ker(f)\)</span> הוא כל איברי <span>\(H\)</span> ששייכים ל-<span>\(N\)</span>, כלומר <span>\(H\cap N\)</span>. סה"כ קיבלנו: 
+<span>$$H / H\cap N = H / \ker(f) \cong im(f) = HN/ N$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}G=\mathbb{C}^\times \qquad  N=S^1\qquad H=\mathbb{R}^\times \\ HN=\mathbb{C} ^\times \qquad H\cap N=\{ \pm 1 \}
+\end{gathered}$$</span>
+ולכן:
+<span>$$C^\times / \mathbb{R} ^\times  \cong S^1/\{ \pm 1 \}$$</span></p>
+</div>
+<p>אם <span>\(N\trianglelefteq G\)</span>, ו-<span>\(\pi:G\to G/N\)</span> ההטלה הקנונית(<span>\(\pi(g)=gN\)</span>). מה קורה לתת חבורה של <span>\(G\)</span> תחת <span>\(\pi\)</span>? <span>\(\pi(H)\leq G/N\)</span> (<span>\(im\)</span> של הומומורפיזם).
+<span>$$\begin{gather}H\leq G\quad \pi(H)=\left\{  \pi(h)|h\in H  \right\}=\left\{  hN | h\in H  \right\}=HN / N  \\= \left\{  gN |g\in HN  \right\}= \left\{  hnN | h \in H\quad n\in N  \right\}=\left\{  hN|h\in H  \right\}
+\end{gather}$$</span>
+מה קורה ל-<span>\(K\leq G/N\)</span> תחת <span>\(\pi ^{-1}\)</span>? נניח <span>\(\pi ^{-1}(K)\leq G\)</span> (בתרגיל - לכל הומומורפיזם), <span>\(K=\left\{  g_{1}N,g_{2}N, \dots,g_{r}N, \dots  \right\}\)</span>
+<span>$$\pi ^{-1} (K)=\bigcup_{gN\in K} \overbracket{ \pi ^{-1} \underbrace{ (gN) }_{ \in G/N } }^{ gN\subseteq G }=\bigcup_{gN\in K}gN$$</span>
+מה קורה כאשר מפעילים את שניהם? אם <span>\(K\leq G / N\)</span>
+<span>$$\pi\left( \pi ^{-1} (H) \right)=K$$</span>
+אם <span>\(f:X\to Y\)</span> ו-<span>\(f\)</span> על, אזי:
+<span>$$\forall S\subseteq Y\quad f(f^{-1} (S))=S$$</span>
+מה לגבי <span>\(\pi ^{-1} \circ \pi\)</span>? נניח <span>\(H\leq G\)</span>:
+<span>$$\pi ^{-1} \left( \pi(H) \right)=\pi ^{-1} (HN / N)=\bigcup_{gN\in HN / N} gN $$</span>
+וכיוון שמתקיים <span>\(HN / N=\left\{  hN | h\in H  \right\}\)</span> נקבל:
+<span>$$\bigcup_{h \in H} hN=HN$$</span></p>
+<div class="remark">
+<p>אפשר גם בדרך ישירות לחשוב על זה בתור איחוד של כל איברים של חבורת מנה - ולכן נקבל את כל החבורה.</p>
+</div>
+<p>למעשה, <span>\(\pi\)</span> לוקחת תת חבורה של <span>\(G\)</span> ומחזירה תת חבורה של <span>\(G / H\)</span>, כאשר <span>\(\pi ^{-1}\)</span> מקבלת תת חבורה של <span>\(G / H\)</span> ומחזיר תת חבורה של <span>\(G\)</span>.</p>
+<div class="theorem"><span class="keyword">ההתאמה(איזומורפיזם רביעי)</span><p>אם <span>\(N\trianglelefteq G\)</span>, <span>\(\pi\)</span> ו-<span>\(\pi ^{-1}\)</span> משראות התאמה חח"ע ועל בין תת חבורה של <span>\(G / N\)</span> לתת חבורה שמכילות את <span>\(N\)</span>. וההתאמה הזו משמרת הכלה, נורמליות אינדקסים.</p>
+</div>
+<div class="symbolize">
+<p>איברי <span>\(G / N\)</span> הם <span>\(\left( g\in G \right)\quad gN\)</span>. יששמסמנים את <span>\(gN\)</span> ב-<span>\(\bar{g}\)</span> ואז:
+<span>$$\bar{g}\cdot \bar{h}=\overline{gh}\qquad g^{-1} h\in N\iff \bar{g}=\bar{h}$$</span>
+או לחלופין זוכרים/מציינים שאנחנו במנה על ידי המילים "מודולו <span>\(N\)</span>".</p>
+</div>
+<p>ראינו שיש התאמה בין תתי חבורות של <span>\(G/N\)</span> לתתי חבורות של <span>\(G\)</span> שמכילות את <span>\(N\)</span>.
+<span>$$\left\{  H\leq G \mid N\leq H  \right\}\xleftrightarrow[H\to H/N  ]{\bigcup_{gN\in K} gN\leftarrow K} \left\{  K\leq G / N \right\}$$</span>
+התאמה זו ממשמרת הכלה, אינדקס(סדר) ונורמליות. לגבי הנורמליות, אם <span>\(N\leq K\trianglelefteq H\leq G\)</span> וזה מתקיים אם"ם <span>\(1=N / N\leq K / N \trianglelefteq H / N \leq G / N\)</span> וזה מוביל למשפט האיזומורפיזם השלישי</p>
+<div class="theorem"><span class="keyword">האיזומורפיזם השלישי</span><p>אם <span>\(N\trianglelefteq K\trianglelefteq H\)</span>, <span>\(N\trianglelefteq H\)</span> אזי:
+<span>$$^{H / N }/ _{ K  / N } \cong H/K$$</span>
+או באופן מילולי: "חבורת מנה של חבורת מנה היא איזומורפית לחבורת מנה".</p>
+</div>
+<p>ניתן להוכיח באמצעות משפט האיזומורפיזם הראשון.</p>
+<div class="example">
+<p><span>$$^{\mathbb{Z} / 12 \mathbb{Z} }
+/ _{ 6\mathbb{Z}  / 12 \mathbb{Z} } \cong 3 \mathbb{Z}  / 6\mathbb{Z}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='prev-page'><a href='./Groups_3_2'>3.2 מנות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

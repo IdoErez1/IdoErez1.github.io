@@ -1,0 +1,676 @@
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+:root {
+  --gray1: #000; /* Black */
+  --gray2: #1a1a1a; /* Dark gray */
+  --gray3: #979797; /* Medium dark gray */
+  --gray4: #cecece; /* Medium gray */
+  --gray5: #dbdbdb; /* Light gray */
+  --gray6: #f2f2f2; /* Lighter gray */
+}
+
+body {
+  background-color: #FFF;
+  direction: rtl;
+  margin: 0;
+  font-size: 12px;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.definition {
+  display: block;
+  background: rgba(153, 153, 153, 0.1); /* Light gray background */
+  text-align: right;
+  border-right: 1.5mm solid var(--gray2); /* Medium dark gray */
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  color: var(--gray1); /* Black text */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+/* 
+h1 {
+  color: var(--gray1); 
+} */
+
+.definition::before {
+  font-weight: bold;
+  color: var(--gray2); /* Medium dark gray */
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--gray2);
+}
+
+.proposition {
+  background-color: rgba(102, 102, 102, 0.05); /* Light gray background */
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2); /* Dark gray border */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+  font-weight: 400;
+}
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--gray2); /* Dark gray */
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--gray2);
+}
+
+.proof {
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--gray1); /* Black for strong emphasis */
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: rgba(153, 153, 153, 0.2); /* Medium gray background */
+  border: 2pt solid rgba(153, 153, 153, 0.1); /* Lighter gray border */
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--gray1); /* Black */
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--gray2); /* Dark gray */
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: rgba(204, 204, 204, 0.11); /* Light gray background */
+  border: 0;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+
+}
+
+.theorem {
+  background-color: rgba(153, 153, 153, 0.05); /* Light gray background */
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2); /* Medium dark gray border */
+  padding: 10pt;
+  page-break-inside: avoid;
+  font-family: "Open Sans", serif;
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--gray2); /* Medium dark gray */
+  content: "משפט";
+}
+
+.theorem::first-line {
+  color: var(--gray2);
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+  page-break-inside: avoid;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--gray4);
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2);
+  padding: 10pt;
+  font-family: "Open Sans", serif;
+  page-break-inside: avoid;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--gray2);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--gray2);
+}
+
+div {
+  margin: 6pt 0;
+  font-family: "Open Sans", serif;
+}
+
+svg {
+  display: block;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+tr:nth-child(even) {
+  background-color: var(--gray6); /* Light gray */
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--gray1);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--gray4);
+  margin-top: 15px;
+  color: var(--gray1);
+  margin-bottom: 0;
+  padding-bottom: 0;
+  page-break-inside: avoid;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--gray5);
+  color: var(--gray1);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+
+.reminder {
+  background-color: var(--gray5);
+  border-radius: 5pt;
+  border: 2pt solid var(--gray2);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--gray1);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--gray1);
+}
+
+table {
+  width: 100%;
+  background: var(--gray5);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--gray5);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--gray1);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--gray3);
+}
+
+td {
+  color: var(--gray1);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--gray4);
+}
+
+@page {
+  @bottom-center {
+    content: counter(page); 
+    display: block;
+  }
+}
+
+@page :blank {
+  @bottom-center { content: none; }
+}
+
+@page no-chapter {
+  @bottom-center { content: none; }
+}
+
+@page :first {
+  margin: 0;
+  @bottom-center {
+    content: none;
+  }
+}
+
+@page chapter {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+#cover {
+  display: none;
+}
+
+h1 {
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+.page-marker {
+  position: absolute;
+  break-after: page;
+  z-index: -1;
+}
+
+#toc a::after {
+  content: leader(".") target-counter(attr(href), page);
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+            <script>
+                // MathJax configuration
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                        displayMath: [["$$", "$$"], ["\[", "\]"]],
+                        processEscapes: true,
+                        packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+                    },
+                    options: {
+                        ignoreHtmlClass: 'tex2jax_ignore',
+                        processHtmlClass: 'tex2jax_process'
+                    },
+                    loader: {
+                        load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+                    }
+                };
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+        <body>
+            <div id='cover' style='background-color: #026873;'>
+                <h1>פיזיקה חישובית</h1>
+                <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>פיזיקה חישובית</h1><h2 id='toc_title'>תוכן עיניינים</h2>
+            <h1 id='Numerical Physics_1'>אלגברה ואנליזה נומרית</h1>
+<h2 id='Numerical Physics_1_1'>אינטגרציה נומרית</h2>
+ <div class="definition"><span class="keyword">קוודריטור - Quadriture</span><p>חישוב מקורב של אינטגרל מסויים מהצורה:
+<span>$$I=\int_{a}^{b}f(x)\,d x$$</span>
+באופן כללי הקירוב נעשב בעזרת סכום על ערך הפונקציה בנקודות כפול איזשהו משקל:
+<span>$$I\approx\sum_{i=0}^{n}w_{i}f(x_{i})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שגיאות קטיעה לוקאליות</span><p>שגיאות של כל תת תחום הנוצר על ידי קירוב האינטרל.</p>
+</div>
+<div class="definition"><span class="keyword">שגיאות קטיעה גלובאליות</span><p>סך השגיאות הלוקאליות.</p>
+</div>
+<div class="definition"><span class="keyword">כלל אמצע המלבן</span><p>נניח כי עבור תת תחום <span>\([a,b]\)</span> עם עובי <span>\(h=b-a\)</span> נקרב את הפונקצייה בממוצע לפונקציה קבועה אשר שווה לערך באמצע שלה כך שנקבל:
+<span>$$I\approx f\left({\frac{a+b}{2}}\right)h$$</span></p>
+</div>
+<div class="corollary">
+<p>מקירוב טיילור סביב המרכז ניתן להראות כי השגיאה תהיה:
+<span>$$E_{\mathrm{mid}}=-{\frac{(b-a)^{3}}{24}}f^{\prime\prime}(\xi)$$</span>
+עבור איזשהו <span>\(\xi \in [a,b]\)</span>. השיטה הזאת היא עם שגיאה <span>\(O(h^{3})\)</span> לוקלית כאשר נסכם על הרבה תחומים השגיאה הגלובלית תהיה <span>\(O(h^{2})\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">כלל הטרפז</span><p>נקרב כל תת תחום על ידי:
+<span>$$I\approx\frac{h}{2}\left[f(a)+f(b)\right]$$</span></p>
+</div>
+<div class="corollary">
+<p>השגיאה הכוללת תהיה מסדר גודל של <span>\(O(h^{2})\)</span></p>
+</div>
+<div class="proof">
+<p>נפתח <span>\(f(b)\)</span> סביב a ונקבל:
+<span>$$f(b)=f(a)+h f^{\prime}(a)+{\frac{h^{2}}{2}}f^{\prime\prime}(\xi)$$</span>
+כאשר נקבל כי הקירוב הלוקאלי של השגיאה(ממשפט טיילור) יהיה מסדר גודל של:
+<span>$$E_{\mathrm{trap}}=-{\frac{h^{3}}{12}}f^{\prime\prime}(\xi).$$</span>
+ולכן השגיאה הכוללת תהיה מסדר גודל של <span>\(O(h^{2})\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחת סיפסון</span><p>משתמש בפולינום ריבועי כדי לקרב את <span>\(f(x)\)</span> על התחום <span>\([a,b]\)</span>(כאשר <span>\(b-a=2h\)</span>) כך שהנוסחא תהיה:
+<span>$$I\approx\frac{h}{3}\left[f(a)+4f(a+h)+f(b)\right]$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לקבל את השגיאה מנוסחאת טיילור ולהראות כי תהיה מהצורה:
+<span>$$E_{\mathrm{Simpson}}=-\frac{(b-a)^{5}}{2880}f^{(4)}(\xi)$$</span>
+כלומר השגיאה הכוללת תהיה מסדר גודל של <span>\(O(h^{4})\)</span>.</p>
+</div><h2 id='Numerical Physics_1_2'>אינטרפולציה</h2>
+ <div class="definition"><span class="keyword">אינטרפולציה</span><p>כאשר יש לנו ערכים בדידים אינטפוציה זה התהליך של לנסות לחזות את הערך של הפונקציה בערכים שאינם מדוייקים(כלומר בין הערכים הבדידים).</p>
+</div>
+<div class="definition"><span class="keyword">אינטרפולציה לינארית</span><p>בהנתן שתי נקודות סמוכות <span>\((x_{i},f_{i})\)</span> ו-<span>\((x_{i+1},f_{i+1})\)</span> האינטרפולציה הלינארית תהיה:
+<span>$$f(x)\approx f_{i}+{\frac{f_{i+1}-f_{i}}{x_{i+1}-x_{i}}}\,(x-x_{i}),\quad x_{i}\leq x\leq x_{i+1}.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטרפולציה פולינומית</span><p>מחפש פולינום יחיד אשר עובר דרך קבוצה של <span>\(n+1\)</span> נקודות.</p>
+</div>
+<p>יש מספר שיטות אשר מבצעות אינטרפולציה פולינומית</p>
+<div class="definition"><span class="keyword">אינטרפולציית לגרנג'</span><p>שיטת אינטרפלציה פולינומית. בהנתן נקודות <span>\((x_{0},f_{0}),(x_{1},f_{1}),\dots,(x_{n},f_{n})\)</span> הפולינום הייחודי <span>\(P(x)\)</span> של דרגה לכל היותר <span>\(n\)</span> ומקיים <span>\(P(x_{i})=f_{i}\)</span> נתון על ידי נוסחאת לגרנג':
+<span>$$P(x)=\sum_{i=0}^{n}f_{i}\,\ell_{i}(x)$$</span>
+כאשר הבסיס של לגרנג' <span>\(\ell_{i}\)</span> נתון על ידי:
+<span>$$\ell_{i}(x)=\prod_{\stackrel{j=0}{j\neq i}}^{n}{\frac{x-x_{j}}{x_{i}-x_{j}}}.$$</span>
+כאשר בפרט <span>\(\ell_{i}(x)=1\)</span> עבור <span>\(x=x_{i}\)</span> ו-<span>\(\ell_{i}=0\)</span> בכל נקודה <span>\(x=x_{j}\)</span> עבור <span>\(j\neq i\)</span>.</p>
+</div>
+<div class="proposition">
+<p>השגיאה של לגרנג' נתונה על ידי:
+<span>$$f(x)-P(x)={\frac{f^{(n+1)}(\xi)}{(n+1)!}}\prod_{i=0}^{n}(x-x_{i}),$$</span>
+כאשר <span>\(\xi\)</span> זה איזשהו נקודה בתחום.</p>
+</div>
+<div class="definition"><span class="keyword">אינטרפולציה ניוטונית</span><p>שיטת אינטרפלציה פולינומית. בהנתן נקודות <span>\((x_{0},f_{0}),(x_{1},f_{1}),\dots,(x_{n},f_{n})\)</span> הפולינום:
+<span>$$P(x)=a_{0}+a_{1}(x-x_{0})+a_{2}(x-x_{0})(x-x_{1})+\cdots+a_{n}(x-x_{0})(x-x_{1})\cdots(x-x_{n-1}),$$</span>
+כאשר המקדמים נתונים על ידי:
+<span>$$a_{0}=f(x_{0}),\quad a_{1}=\frac{f(x_{1})-f(x_{0})}{x_{1}-x_{0}},\quad a_{2}=\frac{f[x_{1},x_{2}]-f[x_{0},x_{1}]}{x_{2}-x_{0}}$$</span>
+כאשר נשים לב ליתרון משמעותי של שיטה זו - אם מסופים נקודה נוספת, נדרש להוסיף איבר לפלינום ללא חישוב מחדש</p>
+</div>
+<div class="proposition">
+<p>השגיאה של אינטרפולציה ניוטונית נתונה על ידי:
+<span>$$f(x)-P(x)={\frac{f^{(n+1)}(\xi)}{(n+1)!}}\prod_{i=0}^{n}(x-x_{i}),$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטרפולציית הרמיט</span><p>שיטת אינטרפלציה פולינומית אשר משתמשת לא רק בערכים בנקודות, אלה גם בנגזרות בנקודות. אינטרפלציית הרמית בונה פולינומים <span>\(H(x)\)</span> אשר מקיימים:
+<span>$$H(x_{i})=f(x_{i})\quad{\mathrm{and}}\quad H^{\prime}(x_{i})=f^{\prime}(x_{i})$$</span>
+עבור שתי נקודות <span>\(x_{0},x_{1}\)</span> למשל ניתן לכתוב:
+<span>$$H(x)=f(x_{0})h_{00}(x)+f(x_{1})h_{11}(x)+f^{\prime}(x_{0})h_{10}(x)+f^{\prime}(x_{1})h_{01}(x),$$</span>
+כאשר את איברי הבסיס <span>\(h_{00}(x),h_{11}(x),h_{10}(x),h_{01}(x)\)</span> מתקבלות על ידי האילוץ של הערכים והנגזרת.</p>
+</div>
+<div class="definition"><span class="keyword">אינטרפולציית ספליין קוביות</span><p>בגישה זו עבור כל קטע <span>\([x_{i},x_{i+1}]\)</span> ניתן להגדיר:
+<span>$$S_{i}(x)=a_{i}+b_{i}(x-x_{i})+c_{i}(x-x_{i})^{2}+d_{i}(x-x_{i})^{3}$$</span>
+כאשר הספליין מורכב כך ש:
+<span>$$S_{i}(x_{i})=f(x_{i}),S_{i}(x_{i+1})=f(x_{i+1}),S_{i}^{\prime}(x_{i+1})=S_{i+1}^{\prime}(x_{i+1}),S_{i}^{\prime\prime}(x_{i+1})=S_{i+1}^{\prime\prime}(x_{i+1})$$</span></p>
+</div><h2 id='Numerical Physics_1_3'>גזירה נומרית</h2>
+ <div class="reminder">
+<p>עבור פונקציה <span>\(f\)</span> שהיא חלקה, הטור טיילור מסביב ל-<span>\(x_{0}\)</span> נתון על ידי:
+<span>$$f(x_{0}+h)=f(x_{0})+h f^{\prime}(x_{0})+{\frac{h^{2}}{2}}f^{\prime\prime}(x_{0})+{\frac{h^{3}}{6}}f^{\prime\prime\prime}(x_{0})+{\cal O}(h^{4}).$$</span>
+כאשר באופן דומה עבור צעד בכיוון השלילי נקבל:
+<span>$$f(x_{0}-h)=f(x_{0})-h f^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime\prime}(x_{0})-\frac{h^{3}}{6}f^{\prime\prime\prime}(x_{0})+O(h^{4}).$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שגיאת קיטוע - Trucation Error</span><p>נובע מכך שאנחנו חותכים את הטור טיילור באיזשהו איבר. זה נובע מהנזנחה של איברים מסדר קבוע</p>
+</div>
+<div class="definition"><span class="keyword">שגיאת עיגול - Roundoff Error</span><p>נובע מאי דיוקים של החישוב עצמו</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב לנגזרת מימין</span><p><span>$$f^{\prime}(x_{0})\approx{\frac{f(x_{0}+h)-f(x_{0})}{h}}$$</span>
+עד כדי שגיאת קיטוע מסדר גודל של <span>\(O(h)\)</span>.</p>
+</div>
+<div class="proof">
+<p>זה למעשה הגבול של הגדרת הנגזרת. נמצא את הסדר גודל של השגיאה של <span>\(h\)</span> בעזרת טור טיילור:
+<span>$$f(x_{0}+h)=f(x_{0})+h f^{\prime}(x_{0})+{\frac{h^{2}}{2}}f^{\prime\prime}(x_{0})+O(h^{3}).$$</span>
+נחלק ב-<span>\(h\)</span> ונסדר מחדש כך שנקבל:
+<span>$$\frac{f(x_{0}+h)-f(x_{0})}{h}=f^{\prime}(x_{0})+\frac{h}{2}f^{\prime\prime}(x_{0})+O(h^{2}).$$</span>
+כך שניתן לראות כי זה שווה לנגזרת עד כדי <span>\(O(h)\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב הפרש מרכזי</span><p><span>$$f^{\prime}(x_{0})\approx\frac{f(x_{0}+h)-f(x_{0}-h)}{2h}.$$</span>
+עד כדי שגיאת קיטוע מסדר גודל של <span>\(O(h^{2})\)</span></p>
+</div>
+<div class="proof">
+<p>נחסר את הטור טיילור של <span>\(f(x_{0}-h)\)</span> מהטור טיילור של <span>\(f(x_{0}+h)\)</span> כך שנקבל:
+<span>$$f(x_{0}+h)-f(x_{0}-h)=\left[f(x_{0})+h f^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime}(x_{0})+\frac{h^{3}}{6}f^{\prime\prime}(x_{0})+O(h^{4})\right]-\left[f(x_{0})-h f^{\prime}(x_{0})+\frac{h^{2}}{2}f^{\prime}(x_{0})-\frac{h^{3}}{6}f^{\prime\prime}(x_{0})+O(h^{4})\right].$$</span>
+הרבה גורמים משותפים מצטמצמים(בפרט הגורם הריבועי) כך שנקבל:
+<span>$$f(x_{0}+h)-f(x_{0}-h)=2h f^{\prime}(x_{0})+{\frac{2h^{3}}{6}}f^{\prime\prime\prime}(x_{0})+O(h^{5}).$$</span>
+נחלק כעת ב-<span>\(2h\)</span> ונקבל:
+<span>$$\frac{f(x_{0}+h)-f(x_{0}-h)}{2h}=f^{\prime}(x_{0})+\frac{h^{2}}{3!}f^{\prime\prime\prime}(x_{0})+O(h^{4})$$</span>
+כלומר קיבלנו ששווה לנגזרת ב-<span>\(x_{0}\)</span> עד כדי <span>\(O(h^{2})\)</span>.</p>
+</div>
+<div class="remark">
+<p>ניתן לקבל נוסחאות עבור דיוקים אפילו טובים יותר על ידי שימוש בנגזרת בנקודות של <span>\(x_{0}-2h,x_{0}-h,x_{0}+h,x_{0}+2h\)</span> ולקבל שגיאה מסדר גודל של <span>\(O(h^{4})\)</span> או אפילו יותר טוב. ניתן לכתוב באופן כללי:
+<span>$$f^{\prime}(x_{0})\approx{\frac{A f(x_{0}-2h)+B f(x_{0}-h)+C f(x_{0})+D f(x_{0}+h)+E f(x_{0}+2h)}{h}},$$</span>
+ולהשוואות את המקדמים לערכים של הטור טיילור.</p>
+</div>
+<div class="corollary"><span class="keyword">קירוב לשגיאת קיטוע</span><p>ממשפט השארית של קושי נקבל:
+<span>$$f^{\prime}(x)=\frac{f(x+h)-f(x-h)}{2h}-\frac{h^{2}}{6}f^{\prime\prime\prime}(\xi)$$</span>
+עבור <span>\(\xi \in (x-h,x+h)\)</span> ולכן השגיאת קיטוע תהיה שווה ל:
+<span>$$E_{\mathrm{trunc}}\approx{\frac{h^{2}}{6}}f^{\prime\prime\prime}(\xi)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">קירוב לשגיאת עיגול</span><p>כיוון ש-<span>\(f(x+h)\)</span> ו-<span>\(f(x)\)</span> יחסית קרובים נקבל כי בערך שווים וקירוב טוב עבורם יהיה:
+<span>$$E_{\mathrm{round}}\approx{\frac{\epsilon\left|f(x)\right|}{h}}$$</span>
+כאשר <span>\(\epsilon\)</span> זה השגיאה של המכשיר.</p>
+</div>
+<div class="remark">
+<p>קיבלנו שהשגיאת קיטוע קטנה ככל ש-<span>\(h\)</span> קטן יותר כאשר השגיאת עיגול גדלה ככל ש-<span>\(h\)</span> קטן יותר, ולכן נצפה כי יהיה ערך אידיאלי ל-<span>\(h\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הביטוי עבור ה-<span>\(h\)</span> האידיאלי עבור הפרש מרכזי נתון על ידי:
+<span>$$h_{\mathrm{opt}}=\left({\frac{C_{2}\epsilon}{2C_{1}}}\right)^{\frac{1}{3}}.$$</span>
+כאשר <span>\(C_{1}\)</span> הוא קבוע התלוי בנגזרות מסדר גבוה(עבור הפרש מרכזי <span>\(C_{1}\approx \max_{x-\delta \leq \xi \leq x+\delta}\lvert f'''(\xi) \rvert\)</span>), <span>\(C_{2}\)</span> הוא קבוע שתלוי בגודל של <span>\(f(x)\)</span>, ו-<span>\(\epsilon\)</span> זה השגיאה של המכשיר.</p>
+</div>
+<div class="proposition">
+<p>ניתן לקרב את השגיאה הכוללת כתלות ב-<span>\(h\)</span> על ידי:
+<span>$$E(h)\approx C_{1}h^{p}+\frac{C_{2}\epsilon}{h}$$</span>
+כאשר <span>\(p\)</span> זה קבוע אשר שווה ל-2 במקרה של הפרש מרכזי. נקבל:
+<span>$${\frac{d E}{d h}}=p C_{1}h^{p-1}-{\frac{C_{2}\epsilon}{h^{2}}}=0.$$</span>
+ולכן אם נפתור עבור <span>\(h\)</span>:
+<span>$$h_{\mathrm{opt}}=\left({\frac{C_{2}\epsilon}{p C_{1}}}\right)^{\frac{1}{p+1}}.$$</span>
+נציב <span>\(p=2\)</span> עבור המקרה שלנו:
+<span>$$h_{\mathrm{opt}}=\left({\frac{C_{2}\epsilon}{2C_{1}}}\right)^{\frac{1}{3}}$$</span></p>
+</div>
+<div class="example">
+<p>נניח כי נתון פונקציה כך שמתקיים <span>\(\max\lvert f'''(x) \rvert\approx M_{3}\)</span> ולכן הקבוע <span>\(C_{1}\)</span> עבור ההפרש המרכזי יהיה <span>\(\frac{M_{3}}{6}\)</span>. אם <span>\(C_{2}\)</span> זה בקירוב <span>\(\lvert f(x) \rvert\)</span> נקבל:
+<span>$$h_{\mathrm{opt}}=\left({\frac{6|f(x)|\epsilon}{2M_{3}}}\right)^{\frac{1}{3}}=\left({\frac{3|f(x)|\epsilon}{M_{3}}}\right)^{\frac{1}{3}}$$</span></p>
+</div><h2 id='Numerical Physics_1_4'>הצגות של מספרים ממשיים</h2>
+ <div class="definition"><span class="keyword">שגיאה מחולטת</span><p>כמה שאנחנו שוגאים באופן מוחלט - כלומר ערך <span>\(\epsilon\)</span> כך ש- <span>\(x\pm \varepsilon\)</span> זה הטווח ערכים שלנו כתוצאה מהשגיאה.</p>
+</div>
+<div class="definition"><span class="keyword">שגיאה יחסית</span><p>שגיאה ביחס לתוצאה. כלומר אם יש לנו שגיאה מחולטת של <span>\(\epsilon\)</span> אז השגיאה היחסית שלנו היא <span>\(\frac{x+\epsilon}{x}\)</span>. זה כמובן תלוי בערך של <span>\(x\)</span>, וככל ש-<span>\(x\)</span> קטן יותר ביחס לשגיאה אז השגיאה היחסית יותר גדולה.</p>
+</div>
+<div class="proposition">
+<p>מחשב הדרך כלל מייצג מספרים על ידי בצורה הבאה:
+<span>$$x=\pm m\times2^{e},$$</span>
+כאשר <span>\(m\)</span> נקרא המאנטיסה(mantissa) ומאכסן בקירוב 24 ביטים של אינפורמציה(באיזור 7 ספרות עשרוניות) והאקספוננט מאכן בערך 8 ביטים.</p>
+</div>
+<div class="corollary">
+<p>לא ניתן ייצג כל מספר ממשי בצורה מדוייקת, ולכן המספר יהיה בקירוב:
+<span>$$\tilde{x}=x(1+\epsilon_{x})$$</span>
+כאשר <span>\(\varepsilon_{x}\)</span> זה השגיאה היחסית(יהיה בסדר גודל של הדיוק של המכשיר <span>\(\epsilon_{\text{mach}}\)</span>, שזה יהיה שווה למספר הקטן ביותר כך שבהצגה שלו <span>\(1+\epsilon_{\text{mach}}\neq 1\)</span>).</p>
+</div>
+<div class="proposition"><span class="keyword">שגיאת עיגול בכפל</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של המכפלה <span>\(\tilde{x}\tilde{y}\)</span> תקיים:
+<span>$$\frac{\tilde{x}\tilde{y}-xy}{xy}\approx \delta_{x}+\delta_{y}$$</span>
+כלומר כאשר אנחנו כופלים מספרים עם שגיאות אז השגיאות היחסית נסכמות.</p>
+</div>
+<div class="proof">
+<p>נסמן:
+<span>$$\tilde{z}=\tilde{x}\cdot\tilde{y}=x\,y\,(1+\delta_{x})(1+\delta_{y})$$</span>
+כאשר אם נפתח את המכפלה נקבל:
+<span>$$\tilde{z}=x y\left(1+\delta_{x}+\delta_{y}+\delta_{x}\delta_{y}\right)$$</span>
+כאשר נניח ש-<span>\(\delta_{x}\delta_{y}\)</span> זניח כיוון שמכפלה של שתי גדלים קטנים ונבודד את השגיאה היחסית כך שנקבל:
+<span>$${\frac{\tilde{z}-x y}{x y}}\approx\delta_{x}+\delta_{y}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שגיאה של חילוק</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של המנה <span>\(\frac{\tilde{x}}{\tilde{y}}\)</span> תקיים:
+<span>$$\frac{\frac{\tilde{x}}{\tilde{y}}-\frac{x}{y}}{\frac{x}{y}}\approx \delta_{x}-\delta_{y}$$</span>
+כאשר אנחנו מחלקים מספרים עם שגיאות אז השגיאות היחסית יהיו ההפרש.</p>
+</div>
+<div class="proof">
+<p>נסמן:
+<span>$$\tilde{q}=\frac{\tilde{x}}{\tilde{y}}=\frac{x(1+\delta_{x})}{y(1+\delta_{y})}$$</span>
+כאשר ניתן לכתוב את זה על ידי:
+<span>$$\tilde{q}=\frac{x}{y}(1+\delta_{x})\cdot\frac{1}{1+\delta_{y}}$$</span>
+כאשר על ידי קירוב טיילור מסדר ראשון עבור <span>\(\frac{1}{1+\delta_{y}}\)</span> כיוון ש-<span>\(\delta_{y}\)</span> קטן נקבל:
+<span>$$\tilde{q}\approx\frac{x}{y}(1+\delta_{x})(1-\delta_{y})=\frac{x}{y}(1+\delta_{x}-\delta_{y}-\delta_{x}\delta_{y})$$</span>
+אם נזניח את הגורם <span>\(\delta_{x}\delta_{y}\)</span> נקבל:
+<span>$$\tilde{q}\approx\frac{x}{y}(1+\delta_{x}-\delta_{y})$$</span>
+וכעת השגיאה היחסית תהיה:
+<span>$${\frac{\tilde{q}-{\frac{x}{y}}}{{\frac{x}{y}}}}\approx\delta_{x}-\delta_{y}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חיבור של שגיאות</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של <span>\(\tilde{x}+\tilde{y}\)</span> תהיה:
+<span>$$\frac{x\delta_{x}+y\delta_{y}}{x+y}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$${\tilde{x}}+{\tilde{y}}=x{\big(}1+\delta_{x}{\big)}+y{\big(}1+\delta_{y}{\big)}={\big(}x+y{\big)}+{\big(}x\delta_{x}+y\delta_{y}{\big)}$$</span>
+ולכן השגיאה המוחלטת תהיה <span>\(x\delta_{x}+y\delta_{y}\)</span>, ולכן השגיאה היחסית תיהיה:
+<span>$$\frac{x\delta_{x}+y\delta_{y}}{x+y}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור הפרש נקבל:
+<span>$${\frac{x\delta_{x}+y\delta_{y}}{|x-y|}}$$</span>
+וזה יכול ליצור בעיות משמעותיות כאשר <span>\(x \approx y\)</span> כיוון שהשגיאה היחסית תגדל משמעותית.</p>
+</div>
+<div class="corollary">
+<p>נוסחאות עם הפרש של גדלים מאותו סדר גודל יהיו פחות טובות, לדוגמא עבור נוסחאת השורשים:
+<span>$$x={\frac{-b\pm{\sqrt{b^{2}-4a c}}}{2a}}$$</span>
+יש בעיה עבור הביטוי עם ה-<span>\(-\)</span>. ניתן לחשב עבור שורש אחד את ה-<span>\(+\)</span>:
+<span>$$x_{1}={\frac{-b+{\sqrt{b^{2}-4a c}}}{2a}}$$</span>
+ועבור השורש השני(של ה-<span>\(-\)</span>) בעזרת נוסחא שקולה אשר עוקפת את הבעיה של החיסור:
+<span>$$x_{2}={\frac{-2c}{b+{\sqrt{b^{2}-4a c}}}}$$</span></p>
+</div><h2 id='Numerical Physics_1_5'>מציאת שורשים</h2>
+ <div class="definition"><span class="keyword">שורש של פונקציה</span><p>נקודה <span>\(p\)</span> נקראת שורש של פונקציה <span>\(f\)</span> אם:
+<span>$$f(p)=0$$</span></p>
+</div>
+<div class="remark">
+<p>כל עוד לא מציינים</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(f\)</span> רציפה ב-<span>\([a,b]\)</span> ו-<span>\(f(a)f(b)&lt; 0\)</span> קיים לפחות <span>\(p \in (a,b)\)</span> אחד עם <span>\(f(p)=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(f(a)\cdot f(b)&lt; 0\)</span> יש ל-<span>\(f(a)\)</span> ו-<span>\(f(b)\)</span> סימן שונה ולכן נובע ממשפט ערך הביניים. </p>
+</div>
+<div class="proposition"><span class="keyword">שיטת החצייה - Bisection</span><p>אם <span>\(f\)</span> רציפה ב-<span>\([a,b]\)</span> ו-<span>\(f(a)f(b)&lt; 0\)</span> אזי ניתן למצוא את השורש על ידי בניית הסדרה הבאה:
+נגדיר סדרות <span>\((a_{n}),(b_{n})\)</span> ו-<span>\((p_{n})\)</span> באופן רקורסיבי באופן הבא:</p>
+<ol>
+<li>
+<p>נגדיר <span>\(a_{1}=a\)</span> ו-<span>\(b_{1}=b\)</span>. נגדיר בנוסף <span>\(p_{n}=\frac{a_{n}+b_{n}}{2}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(f(p_{n})\cdot f(b)&lt; 0\)</span> אז נגדיר <span>\(a_{n+1}=p_{n},b_{n+1}=b_{n}\)</span>. אחרת בהכרח <span>\(f(p_{n})\cdot f(a_{n})&lt; 0\)</span> ונגדיר <span>\(b_{n+1}=p_{n},a_{n+1}=a_{n}\)</span>. </p>
+</li>
+<li>
+<p>אם באיזשהו שלב <span>\(f(p_{n})=0\)</span> אז מצאנו שורש, אחרת <span>\(p_{n}\)</span> מתכנס לשורש <span>\(p\)</span> בצורה אקספוננציאלית: 
+<span>$$|p_{n}-p|\leq{\frac{b-a}{2^{n}}}$$</span>
+כיוון שבכל שלב אנחנו חוצים את התחום.</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">שיטת ניוטון רפסון</span><p>נניח כי <span>\(f\)</span> פונקציה גזירה פעמיים עם שורש. אם נתחיל מניחוש התחלתי <span>\(p_{0}\)</span>. ניתן להתכנס לשורש <span>\(p\)</span> על ידי:
+<span>$$p_{n+1}=p_{n}-{\frac{f(p_{n})}{f^{\prime}(p_{n})}}$$</span></p>
+</div>
+<p>נסמן <span>\(e_{n}=p_{n}=p\)</span>. משפט טיילור אומר לנו כי עבור איזשהו <span>\(\xi_{n}\)</span> בין <span>\(p_{n}\)</span> ל-<span>\(p\)</span> נקבל:
+<span>$$f(p)=f(p_{n})+(p-p_{n})f^{\prime}(p_{n})+{\frac{(p-p_{n})^{2}}{2}}f^{\prime\prime}(\xi_{n}).$$</span>
+כיוון ש-<span>\(f(p)=0\)</span> נקבל:
+<span>$$0=f(p_{n})-e_{n}f^{\prime}(p_{n})+\frac{e_{n}^{2}}{2}f^{\prime\prime}(\xi_{n}).$$</span>
+על ידי סידור מחדש עבור <span>\(e_{n}\)</span> נקבל:
+<span>$$e_{n}=\frac{f(p_{n})}{f^{\prime}(p_{n})}-\frac{e_{n}^{2}}{2}\frac{f^{\prime\prime}(\xi_{n})}{f^{\prime}(p_{n})}.$$</span>
+כאשר ניתן להניח כי <span>\(e_{n}\)</span> קטן ולכן <span>\(e_{n}^{2}\)</span> זניח ונקבל:</p>
+<div class="proposition"><span class="keyword">שירת הקטע - Secant</span><p>וריאציה של שיטת ניוטון רפסון אשר מקרבת את הנגזרת כך שנקבל:
+<span>$$p_{n+1}=p_{n}-f(p_{n})\cdot{\frac{p_{n}-p_{n-1}}{f(p_{n})-f(p_{n-1})}}$$</span></p>
+</div>
+<div class="proposition">
+<p>שיטת הסקאנט מתכנס מסדר <span>\(\alpha\)</span>, כאשר:
+<span>$$\alpha={\frac{1+{\sqrt{5}}}{2}}\approx1.618$$</span></p>
+</div>
+        </body>
+    </html>
+    

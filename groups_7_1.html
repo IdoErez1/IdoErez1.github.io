@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מילים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_7_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_6_2.html`;}});</script>
+        <div class="content">
+        <h1>7.1  מילים</h1>
+    <p>אנו יודעים כי <span>\(D_{n}=\left\langle  \sigma,\tau \right\rangle\)</span>. לכן כל איבר ב-<span>\(D_{n}\)</span> ניתן לכתוב בעזרת צירוף שלהם. אפשר לחשוב על זה כמו מילה שניתן לכתוב בעזרת <span>\(\sigma\)</span> ו-<span>\(\tau\)</span>.</p>
+<div class="definition">
+<p>מילה ב-<span>\(S\)</span> היא מחרוזת מהצורה <span>\(s_{1}^{\varepsilon_{1}} s_{2}^{\varepsilon_{2}} \dots s_{r}^{\varepsilon_{r}}\)</span> כש-<span>\(r\in \mathbb{N} \cup \{ 0 \}\)</span>, <span>\(s_{i}\in S\)</span> ו-<span>\(\varepsilon_{i}\in \left\{  \pm 1  \right\}\)</span>. למשל עבור <span>\(S=\{ a,b,c \}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$abacccba^{-1} b^{-1} \qquad a^5b^{-1} abc^7$$</span></p>
+</div>
+<div class="symbolize">
+<p>המילה הריקה מסומנת <span>\(\varnothing,e,1\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מילה מצומצמת</span><p>מילה <span>\(s_{1}^{\varepsilon_{1}} s_{2}^{\varepsilon_{2}} \dots s_{r}^{\varepsilon_{r}}\)</span> נקראת מצומצמת אם אין בה מופעים של <span>\(ss ^{-1}\)</span> או <span>\(s ^{-1} s\)</span>. פורמלית:
+<span>$$\forall i\quad s_{i+1}^{\varepsilon_{i+1}}\neq s_{i}^{-\varepsilon_{i}}$$</span>
+<strong>דוגמא</strong>
+<span>$$abaa ^{-1} cb$$</span>
+לא מצוצמת. הצמצום שלה הוא מחיקת האיבר <span>\(aa^{-1}\)</span>. כלומר <span>\(abcb\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצת המילים המצומצמות</span><p>קבוצת המילים המצומצמת ב-<span>\(S\)</span> מסומנת <span>\(F(S)\)</span>. </p>
+</div>
+<div class="proposition">
+<p>עבור קבוצה <span>\(S\)</span> קבוצת המילים המצומצמות <span>\(F(S)\)</span> יוצרת חבורה("החבורה החופשית על <span>\(S\)</span>") כשהכפל הוא שרשור וצמצום(צמוצום=מחיקת <span>\(ss^{-1}\)</span> או <span>\(s ^{-1} s\)</span> מהמילה). חבורה זו נקראת החבורה החופשית של <span>\(S\)</span> כאשר הקבוצה הריקה <span>\(\varnothing\)</span> ניטרלית. וההופכי מוגדר על ידי:
+<span>$$\left( \prod_{i=1}^r s_{i}^{\varepsilon_{i}} \right)^{-1} = s_{r}^{-\varepsilon_{r}}\dots s_{r}^{-\varepsilon _{1}}=\prod_{i=r}^1 s_{i}^{-\varepsilon_{i}}$$</span></p>
+</div>
+<div class="proof">
+<p>איבר ניטרלי: המילה הריקה <span>\(\varnothing\)</span>
+הופכי: כל שיקוף של איבר עם שינוי סימן. לדוגמא:
+<span>$$\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \right)^{-1} =s_{r}^{-\varepsilon_{r}}s_{r-1}^{-\varepsilon_{r-1}}\dots s^{-\varepsilon_{1}}$$</span>
+רעיון עבור אסוצייטיביות: שיכון של <span>\(F(s)\)</span> עם הכפל שהגדרנו בתוך <span>\(Sym_{F(s)}\)</span> ע"י <span>\(s^{\varepsilon}\mapsto \sigma_{s^{\varepsilon}}\)</span> שמוגדרת:
+<span>$$\sigma_{s^{\varepsilon}}\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \right)=\begin{cases}s^{\varepsilon}s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} &amp; s^{\varepsilon}\neq s_{1}^{-\varepsilon_{1}} \\s_{2}^{\varepsilon_{2}}\dots s_{r}^{\varepsilon_{r}} &amp; s^{\varepsilon}=s_{1}^{-\varepsilon_{1}}
+\end{cases}$$</span></p>
+</div>
+<div class="remark">
+<p>ב-<span>\(F(S)\)</span>, ל-<span>\(s \in S\)</span> מתקיים <span>\((s)^{-1} =s ^{-1}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$(abbc^{-1} a)(a^{-1} cbba)=abb\cancel{ c^{-1} aa^{-1} c }bba=abbbba$$</span></p>
+</div>
+<div class="corollary">
+<ul>
+<li>אם <span>\(|S|=|T|\)</span> אז <span>\(F(S)\cong F(T)\)</span>. לכן מסמנים <span>\(F_{n}\)</span> עבור <span>\(F_{S}\)</span> עם  <span>\(|S|=n\)</span>.</li>
+<li>לכן <span>\(F_{1}\cong\mathbb{Z}\cong F_{\{ a \}}=\left\{  a^n\mid n\in \mathbb{Z}\right\}\)</span>.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>אם <span>\(S\)</span> קבוצה, ל-<span>\(F(S)\)</span> יש את התכונה הבאה: לכל חבורה <span>\(T\)</span> ולכל פונקציה <span>\(f:S\to T\)</span> ישנו הומומורפיזם יחיד <span>\(\tilde{f}:F(s)\to T\)</span> שמרחיב את <span>\(f\)</span> (<span>\(\tilde{f}|_{S}=f\)</span>).</p>
+</div>
+<div class="proof">
+<p>ניקח <span>\(\tilde{f}\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon r} \right)=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r})^{\varepsilon_{r}}\)</span> כדי לקבל הומומורפיזם שמרחיב את <span>\(f\)</span> מכאן יחידות. מצד שני, <span>\(\tilde{f}\)</span> הזו
+אכן מוגדרת היטב כי מילים מצוצמות שונות הם איברים שונים ב-<span>\(F(s)\)</span>. נשאר להראות ש-<span>\(\tilde{f}\)</span> היא הומומורפיזם: נסמן:
+<span>$$w=s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \qquad u={s'}_{1}^{\varepsilon_{1}'}\dots {s'}_{1}^{\varepsilon_{1}'}$$</span>
+נניח ש-<span>\(wu=s_{1}^{\varepsilon_{1}}\dots s_{r-j}^{\varepsilon_j}{s'}_{{j+1}}^{\varepsilon'_{j+1}}\dots {s'}_{l}^{\varepsilon'_{l}}\)</span> וכעת: 
+<span>$$\begin{gathered}\tilde{f}(wu)=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r-j})^{\varepsilon_{j}} f({s'}_{j+1})^{\varepsilon'_{j+1}}\dots f({s'}_{l})^{\varepsilon'_{l}}= \\=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r})^{\varepsilon_{r} }f({s'}_{1})^{\varepsilon'_{1}}\dots f({s'}_{l})^{\varepsilon'_{l}}=f(w)f(u)
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>כל חבורה היא מנה של חבורה חופשית.</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(G\)</span> חבורה. נבחר קבוצה נוצרת <span>\(S\)</span>, וניקח <span>\(f:S\to G\)</span>. לפי התכונה האוניברסלית <span>\(f\)</span> מתרחבת <span>\(f(s)\to s\)</span> להומומורפיזם <span>\(\iota:F(s)\to G\)</span>. כאשר <span>\(\iota\)</span> על כיוון ש-<span>\(S\subseteq Im(f)\)</span>. לכן <span>\(G\cong F(s) / \ker\left( \iota \right)\)</span>. באופן יותר כללי, עבור <span>\(S\subseteq G\)</span> ניקח <span>\(\iota:S\to G\)</span> ההכלה אז <span>\(\tilde{\iota}:F(S)\to G\)</span> על אם"ם <span>\(\langle S\rangle=G\)</span>. זאת כי:
+<span>$$\tilde{\iota}\left( \prod s_{i}^{\varepsilon_{i}} \right)=\prod s_{i}^{\varepsilon_{i}}$$</span>
+כאשר <span>\(\iota\)</span> חח"ע אם"ם <span>\(\ker\left( \tilde{\iota} \right)=1\)</span>. כלומר המילה המצומצמת היחידה ב-<span>\(S\)</span>, שמתרגמת ב-<span>\(G\)</span> ל-<span>\(e\)</span> היא המילה הריקה. <span>\(\tilde{\iota}\)</span> חח"ע אם לכל איבר ב-<span>\(G\)</span> יש יצוג יחיד(לכל היותר) כמילה מצומצמת ב-<span>\(S\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור חבורה <span>\(G\)</span> ו-<span>\(S\subseteq G\)</span> הבאים שקולים.</p>
+<ol>
+<li>
+<p>לכל <span>\(g\in G\)</span> יש יצוג יחיד כמילה מצומצמת ב-<span>\(S\)</span>. </p>
+</li>
+<li>
+<p>הפונקציה <span>\(\iota:F(S)\to G\)</span> היא חח"ע ועל(ובפרט <span>\(F(s)\cong G\)</span>). </p>
+</li>
+<li>
+<p>לכל חבורה <span>\(T\)</span> ופונקציה <span>\(f:S\to T\)</span> יש הרחבה יחידה להומומורפיזם  <span>\(\tilde{f}:G\to T\)</span>. 
+כשהטענה מתקיימת, אומרים ש-<span>\(G\)</span> היא חבורה חופשית עם בסיס <span>\(S\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>הטענות האלו מאוד מזכירים לנו טענות מקבילות לאלגברה לינארית. <span>\(1\)</span> מזכיר שלכל וקטור יש יצוג יחיד ע"י איברי הבסיס. <span>\(2\)</span> מזכיר שאיברי הבסיס הוא בת"ל ועל. <span>\(3\)</span> מזכיר שניתן להשלים אוסף וקטורים לבסיס.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>החבורה <span>\(D_{4}=\left\langle  \sigma,\tau  \right\rangle\)</span> לא חופשית עם בסיס <span>\(\left\{  \sigma,\tau  \right\}\)</span> (כאשר אין יצוג יחיד <span>\(\sigma^5=\sigma\)</span>). </p>
+</li>
+<li>
+<p>עבור <span>\(S=\{ a,b \}\subseteq F(a,b,c)\)</span> כאשר <span>\(\langle S\rangle\)</span> הם כל במילים שאין בהן <span>\(c\)</span>. <span>\(\langle S\rangle\)</span> היא חופשית עם בסיס <span>\(\{ a,b \}\)</span>. </p>
+</li>
+<li>
+<p>עבור <span>\(S=\{ a,bab^{-1} ,b^2ab^{-2} \}\)</span>. ניקח <span>\(G=\langle S\rangle \leq\langle F(a,b)\rangle\)</span>. <span>\(G\)</span> חופשית עם בסיס <span>\(S\)</span>. בפרט <span>\(G\cong F_{3}\)</span>. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+<li class='prev-page'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+        </body>
+        </html>
+        

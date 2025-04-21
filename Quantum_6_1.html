@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חבורת הסיבובים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_5_5`; }});</script>
+        <div class="content">
+        <h1>6.1  חבורת הסיבובים</h1>
+    <div class="proposition">
+<p>אופרטור הסיבוב יוצר חבורה, אשר ב-3 מימדים נקראת <span>\(SO(3)\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">היוצרים של SO(3)</span><p>יהיו מהצורה:
+<span>$$J_{1}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{i}}\\ {{0}}&amp;{{-i}}&amp;{{0}}\end{array}\right),\quad J_{2}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{-i}}\\ {{0}}&amp;{{0}}&amp;{{0}}\\ {{i}}&amp;{{0}}&amp;{{0}}\end{array}\right),\quad J_{3}=\left(\begin{array}{l l l}{{0}}&amp;{{i}}&amp;{{0}}\\ {{-i}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{0}}\end{array}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב כל איבר <span>\(O \in SO(3)\)</span> על ידי יוצר <span>\(J\)</span> כך שמתקיים <span>\(O=e^{ \theta J }\)</span>.
+נזכור כי <span>\(O\)</span> צריך להקיים <span>\(\det O=1\)</span> ומאורתוגונאליות:
+<span>$${ O}^{T}{ O}=\mathrm{e}^{\theta J^{T}}\mathrm{e}^{\theta J}\stackrel{!}{=}1 \implies e^{ \theta(J^{T}+J) }=1\implies J^{T}+J=0\implies J^{T}=-J$$</span>
+ולכן יהיה אנטי סימטרי. מטריצה כללית כזו תהיה מהצורה:
+<span>$$\omega=\left(\begin{array}{c c c}{{0}}&amp;{{-\omega_{12}}}&amp;{{-\omega_{13}}}\\ {{+\omega_{12}}}&amp;{{0}}&amp;{{-\omega_{23}}}\\ {{+\omega_{13}}}&amp;{{+\omega_{23}}}&amp;{{0}}\end{array}\right)=\sum_{i&lt;j}i\omega_{i j}X_{i j}$$</span>
+נשים לב כי זהו מרחב ווקטורי ממימד 3, לכן מספיק למצוא 3 מטריצות אשר יהיו בסיס למרחב הזה. אם נדרוש בנוסף כי יהיה הרמיטי ניתן למצוא את הבסיס הבא:
+<span>$$X_{12}=\left(\begin{array}{l l l}{{0}}&amp;{{i}}&amp;{{0}}\\ {{-i}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{0}}\end{array}\right),\quad X_{23}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{i}}\\ {{0}}&amp;{{-i}}&amp;{{0}}\end{array}\right),\quad X_{13}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{i}}\\ {{0}}&amp;{{0}}&amp;{{0}}\\ {{-i}}&amp;{{0}}&amp;{{0}}\end{array}\right).$$</span>
+כאשר מקיים את היחס חילוף:
+<span>$$[X_{i j},X_{l k}]=-i\left(\delta_{j l}X_{i k}-\delta_{i l}X_{j k}-\delta_{i k}X_{l j}+\delta_{j k}X_{l i}\right)$$</span>
+נשים לב כי זהו בסיס למרחב היוצרים, ולא יוצר בעצמו. ולכן ניתן להגדיר:
+<span>$$J_{1}=X_{23},\quad J_{2}=-X_{13},\quad J_{3}=X_{12}$$</span></p>
+</div>
+<div class="corollary">
+<p>היוצרים של <span>\(SO(3)\)</span> מקיימים את היחס חילוף:
+<span>$$[J_{1},J_{2}]=i J_{3},\quad[J_{2},J_{3}]=i J_{1},\quad[J_{3},J_{1}]=i J_{2},$$</span>
+כלומר בעזרת סימון לוי ציווטה נקבל:
+<span>$$\left[J_a,J_{b}\right]=i\epsilon_{a b c}J_{c}$$</span></p>
+</div>
+<div class="proposition">
+<p>האופרטור:
+<span>$$J^{2}=\sum_{a}J_{a}J_{a}=J_{1}^{2}+J_{2}^{2}+J_{3}^{2}$$</span>
+מתחלף עם כל היוצרים של החבורה <span>\(J_{1},J_{2},J_{3}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נכפיל את <span>\(\left[J_a,J_{b}\right]=i\epsilon_{a b c}J_{c}\)</span> ב-<span>\(J_{a}\)</span> משמאל ונסכום על <span>\(a\)</span>. נחזור על התהליך מימין. נקבל:
+<span>$$\begin{gather}{{J^{2}J_{c}-J_{a}J_{c}J_{a}}}{{=}}{{i\epsilon_{a c b}J_{a}J_{b}}}\\ {{J_{a}J_{c}J_{a}-J_{c}J^{2}}}{{=}}{{i\epsilon_{a c b}J_{b}J_{a}}} 
+\end{gather}$$</span>
+אם נסכום את שתי המשוואות האלו ומאנטיסימטריה של טנזור לוי ציוויטה <span>\(\varepsilon_{ijk}\)</span> נקבל:
+<span>$$[J^{2},J_{c}]=0$$</span>
+ניתן לחזור על התהליך ולקבל שהיחס חילוף מתאפס עבור כל אחד מהיוצרים.</p>
+</div>
+<div class="definition"><span class="keyword">הבסיס הקרטזי</span><p>נגדיר משתנים חדשים <span>\(J_{x},J_{y},J_{z}\)</span> באופן הבא:
+<span>$$J_{x}=J_{1} \qquad J_{y}=J_{2} \qquad  J_{z}=J_{3}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הבסיס הפולארי</span><p>נגדיר משתנים חדשים <span>\(J_{0},J_{+},J_{-}\)</span> באופן הבא:
+<span>$$J_{\pm}=J_{x}\pm i J_{y}\qquad J_{0}=J_{z}$$</span>
+כאשר האופרטורים <span>\(J_{\pm}\)</span> נקראים אופרטורי סולם, ואינם הרמיטים אבל כן מתקיים <span>\(J_{\pm}^{\dagger}=J_{\mp}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>בבסיס הפולארי נקבל את היחסי חילוף:
+<span>$$\begin{gather}{{\left[J_{+},J_{-}\right]}}{{=}}{{2J_{0}}}\\ {{\left[J_{0},J_{\pm}\right]}}{{=}}{{\pm J_{\pm}}}  
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חסם עם הערכים העצמיים</span><p>כיוון ש-<span>\(J^{2}\)</span> ו-<span>\(J_{0}\)</span> מתחלים קיים בסיס של ווקטורים עצמיים משותפים. נסמן בסיס זה ב-<span>\(\left\{  \ket{ab}  \right\}\)</span> כך שמתקיים:
+<span>$$J^{2}|a b\rangle=a|a b\rangle\qquad J_{0}|a b\rangle=b|a b\rangle$$</span>
+אזי <span>\(a\geq b^{2}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נשים לב כי ניתן לכתוב:
+<span>$$J^{2}=J_{0}^{2}+\frac{1}{2}\left(J_{-}J_{+}+J_{+}J_{-}\right)$$</span>
+וכעת:
+<span>$$J^{2}-J_{0}^{2}=\frac{1}{2}\left(J_{+}^{\dagger}J_{+}+J_{+}J_{+}^{\dagger}\right)$$</span>
+ולכן נקבל:
+<span>$$\langle a b|J^{2}-J_{0}^{2}|a b\rangle=\langle a b|\frac{1}{2}\left(J_{+}^{\dagger}J_{+}+J_{+}J_{+}^{\dagger}\right)|a b\rangle\geq0.$$</span>
+כאשר כיוון ש-<span>\(J^{2}\ket{ab}=a\ket{ab}\)</span> ו-<span>\(J_{0}\ket{ab}=b\ket{ab}\)</span> נקבל:
+<span>$$\langle a b|J^{2}-J_{0}^{2}|a b\rangle=\bra{ab}  a-b^{2}\ket{ab} =a-b^{2}\geq0\;\Rightarrow\;a\ge b^{2}$$</span></p>
+</div>
+<div class="proposition">
+<p>האופרטור העלה <span>\(J_{+}\)</span> מופעל על המצב <span>\(\ket{a,b}\)</span> יהיה מצב עצמי של <span>\(J_{0}\)</span>. כלומר:
+<span>$$J_{0}J_{+}\ket{a,b} =(b+1)J_{+}\ket{a,b} $$</span></p>
+</div>
+<div class="proof">
+<p><span>$$J_{0}J_{+}|a b\rangle=\left(J_{+}J_{0}+[J_{0},J_{+}]\right)|a b\rangle\\ =J_{+}(J_{0}+1)|a b\rangle=\left(b+1\right)J_{+}|a b\rangle$$</span></p>
+</div>
+<div class="corollary">
+<p>באופן זהה מתקיים:
+<span>$$J_{0}J_{-}\ket{a,b} =(b-1)\ket{a,b} $$</span>
+ולכן ניתן לכתוב:
+<span>$$J_{\pm}|a b\rangle=C_{\pm}|a b\pm1\rangle$$</span></p>
+</div>
+<div class="corollary">
+<p>כיוון שיש ערך מינימלי ומקסימלי של <span>\(b\)</span> נקבל כי:
+<span>$$J_{+}|a b_{\mathrm{max}}\rangle=0,\quad\mathrm{and}\quad J_{-}|a b_{\mathrm{min}}\rangle=0$$</span></p>
+</div>
+<div class="corollary">
+<p>הערכים עצמיים <span>\(a\)</span> צריכים להיות מהצורה:
+<span>$$a=b_{\operatorname*{max}}(b_{\operatorname*{max}}+1)$$</span>
+או:
+<span>$$a=b_{\operatorname*{min}}(b_{\operatorname*{min}}-1)$$</span></p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$J_{-}J_{+}=J_{x}^{2}+J_{y}^{2}-i\left(J_{y}J_{x}-J_{x}J_{y}\right)=J^{2}-J_{0}^{2}-J_{0},$$</span>
+כעת אם נפעיל אופרטור זה על מצב <span>\(\ket{a, b_{\text{max}}}\)</span> נקבל:
+<span>$$J_{-}J_{+}|a b_{\mathrm{max}}\rangle=(J^{2}-J_{0}^{2}-J_{0})|a b_{\mathrm{max}}\rangle=(a-b^{2}-b)|a b_{\mathrm{max}}\rangle$$</span>
+כיוון שהמצב <span>\(\ket{a,b_{\max}}\)</span> אינו אפס, ואנחנו אנחנו מבצעים אופרטור העלה מעל הערך המקסימלי נדרש כי הערך יתאפס:
+<span>$$a=b_{\operatorname*{max}}(b_{\operatorname*{max}}+1)$$</span>
+כאשר אופן דומה מהתנאי <span>\(J_{-}\ket{a,b_{\text{min}}}=0\)</span> ומהיחס:
+<span>$$J_{+}J_{-}=J^{2}-J_{0}^{2}+J_{0}$$</span>
+נקבל:
+<span>$$a=b_{\operatorname*{min}}(b_{\operatorname*{min}}-1)$$</span></p>
+</div>
+<div class="corollary">
+<p>כיוון שקיים <span>\(k \in \mathbb{Z}\)</span> כך ש-<span>\(b_{\max}=b_{\text{min}}+k\)</span> נקבל:
+<span>$$\begin{gather}b_{\min}\left( b_{\min}-1 \right)=\left( b_{\min}+k \right)\left( b_{\min}+k+1 \right)\implies \\ b_{\min}^{2}-b_{\min}=b_{\min}^{2}+b_{\min}+k(k+1)+2kb_{\min}\\ \implies -2b_{\min}(k+1)=k(k+1) 
+\end{gather}$$</span>
+כלומר נקבל:
+<span>$$b_{\min}=-\frac{k}{2}\qquad b_{\max}=\frac{k}{2}$$</span>
+ולכן <span>\(b_{\text{min}}=-b_{\text{max}}\)</span> והערך של <span>\(b_{\text{max}}\)</span> יהיה חצי ממספר שלם.</p>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(m=b\)</span> וכן <span>\(j=b_{\text{max}}\)</span> ולכן <span>\(a=j(j+1)\)</span>. </p>
+</div>
+<div class="corollary">
+<p>לכל <span>\(j\)</span> הערכים המותרים של <span>\(m\)</span> יהיו:
+<span>$$m=\underbrace{-j,-j+1,\ldots,j-1,j}_{2j+1\;{\mathrm{states}}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אורטורי העלה והורדה</span><p>האופרטורים <span>\(J_{-}\)</span> ו-<span>\(J_{+}\)</span> הם למעשה אופרטורי העלה והורדה של התנע הזוויתי, כך שמתקיים:
+<span>$$\begin{gather}J_{+}|j,m\rangle=\sqrt{(j-m)(j+m+1)}\hbar|j,m+1\rangle\\J_{-}|j,m\rangle=\sqrt{(j+m)(j-m+1)}\hbar|j,m-1\rangle 
+\end{gather}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור <span>\(J_{\pm}\)</span> נשים לב כי:
+<span>$$\begin{array}{c}{{\langle j,m|J_{+}^{\dagger}J_{+}|j,m\rangle=\langle j,m|(J^{2}-J_{z}^{2}-\hbar J_{z})|j,m\rangle}}\\ {{=\hbar^{2}[j(j+1)-m^{2}-m].}}\end{array}$$</span>
+כאשר אנו יודעים כי <span>\(J_{+}\ket{ j,m}\)</span> צריך להיות שווה ל-<span>\(\ket{j,m+1}\)</span> עד כדי קבוע נרמול. כלומר:
+<span>$$J_{+}|j,m\rangle=c_{j m}^{+}|j,m+1\rangle$$</span>
+כאשר ע"י השוואה עם הביטוי של הערך מטריצה של <span>\(J_{+}^{\dagger}J_{+}\)</span> נקבל:
+<span>$$\begin{array}{c}{{|c_{j m}^{+}|^{2}=\hbar^{2}[j(j+1)-m(m+1)]}}\\ {{=\hbar^{2}(j-m)(j+m+1).}}\end{array}$$</span>
+כלומר קיבלנו את <span>\(c_{jm}^{+}\)</span> עד כדי פאזה. נהוג לבחור <span>\(c_{jm}^{+}\)</span> להיות ממשי וחיובי ולכן:
+<span>$$J_{+}|j,m\rangle=\sqrt{(j-m)(j+m+1)}\hbar|j,m+1\rangle$$</span>
+על ידי ביצוע תהליך דומה ניתן לקבל:
+<span>$$J_{-}|j,m\rangle=\sqrt{(j+m)(j-m+1)}\hbar|j,m-1\rangle$$</span></p>
+</div>
+<p>נראה את המצבים האפשריים עבור ערכים שונים של <span>\(j\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(j\)</span></th>
+<th><span>\(j(j+1)\)</span></th>
+<th><span>\(m\)</span></th>
+<th><span>\(\ket{j,m}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\(0\)</span></td>
+<td><span>\(0\)</span></td>
+<td><span>\(0\)</span></td>
+<td><span>\(0\)</span></td>
+</tr>
+<tr>
+<td><span>\(\frac{1}{2}\)</span></td>
+<td><span>\(\frac{1}{2}\cdot \frac{3}{2}=\frac{3}{4}\)</span></td>
+<td><span>\(-\frac{1}{2},\frac{1}{2}\)</span></td>
+<td><span>\(\ket{\frac{1}{2},-\frac{1}{2}},\ket{\frac{1}{2},\frac{1}{2}}\)</span></td>
+</tr>
+<tr>
+<td><span>\(1\)</span></td>
+<td><span>\(1\cdot 2 = 2\)</span></td>
+<td><span>\(-1,0,1\)</span></td>
+<td><span>\(\ket{1,-1},\ket{1,0},\ket{1,1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="summary">
+<ul>
+<li>היוצרים של סיבובים ב-3 מימדים הם:
+<span>$$J_{x}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{i}}\\ {{0}}&amp;{{-i}}&amp;{{0}}\end{array}\right),\quad J_{y}=\left(\begin{array}{l l l}{{0}}&amp;{{0}}&amp;{{-i}}\\ {{0}}&amp;{{0}}&amp;{{0}}\\ {{i}}&amp;{{0}}&amp;{{0}}\end{array}\right),\quad J_{z}=\left(\begin{array}{l l l}{{0}}&amp;{{i}}&amp;{{0}}\\ {{-i}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{0}}\end{array}\right)$$</span></li>
+<li>האופרטור <span>\(J^{2}=J_{x}^{2}+J_{y}^{2}+J_{z}^{2}\)</span> מתחלף עם כל היוצרים.</li>
+<li>הבסיס הפולארי מוגדר על ידי:
+<span>$$J_{+}=J_{x}+ i J_{y}\qquad J_{-}=J_{x}- i J_{y}\qquad J_{0}=J_{z}$$</span></li>
+<li>האופרטור <span>\(J^{2}\)</span> מתחלף עם <span>\(J_{0}\)</span> ולכן קיים עבורם בסיס משותף <span>\(\{ \ket{ab} \}\)</span>.</li>
+<li>הערכים העצמיים חסומים כך שמתקיים <span>\(b_{\text{max}}=-b_{\min}=\frac{k}{2}\)</span> עבור <span>\(k \in \mathbb{N}\)</span>. ולכן ניתן לסמן <span>\(j=b_{\text{max}}\)</span> ו-<span>\(m=b\)</span> ולקבל כי הבסיס המתחלף של <span>\(J^{2}\)</span> ו-<span>\(J_{0}\)</span> יהיה מהצורה <span>\(\left\{  \ket{j(j+1),m}  \right\}\)</span> אך בדרך כלל מוסמן פשוט <span>\(\ket{j,m}\)</span>.</li>
+<li>עבור <span>\(j\)</span> נתון יש <span>\(2j+1\)</span> ערכים מותרים של <span>\(m\)</span>.</li>
+<li>האופרטורי סולם <span>\(J_{+}\)</span> ו-<span>\(J_{-}\)</span> יקיימו:
+<span>$$J_{\pm} = \sqrt{ \left( j\mp m \right)\left( j \pm m + 1 \right) } \hbar \ket{j,m+1} $$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='prev-page'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+        </body>
+        </html>
+        

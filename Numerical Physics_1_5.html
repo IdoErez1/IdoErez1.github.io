@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מציאת שורשים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Numerical Physics'> פיזיקה חישובית</a></li>
+<li class='parent-page'><a href='./Numerical Physics'> פיזיקה חישובית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. אלגברה ואנליזה נומרית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_1'>1.1 אינטגרציה נומרית</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_2'>1.2 אינטרפולציה</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_3'>1.3 גזירה נומרית</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_4'>1.4 הצגות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_5'>1.5 מציאת שורשים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Numerical Physics_1_4'>1.4 הצגות של מספרים ממשיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Numerical Physics`; }if (event.key === 'ArrowLeft') { window.location.href = `./Numerical Physics_1_4`; }});</script>
+        <div class="content">
+        <h1>1.5  מציאת שורשים</h1>
+    <div class="definition"><span class="keyword">שורש של פונקציה</span><p>נקודה <span>\(p\)</span> נקראת שורש של פונקציה <span>\(f\)</span> אם:
+<span>$$f(p)=0$$</span></p>
+</div>
+<div class="remark">
+<p>כל עוד לא מציינים</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(f\)</span> רציפה ב-<span>\([a,b]\)</span> ו-<span>\(f(a)f(b)&lt; 0\)</span> קיים לפחות <span>\(p \in (a,b)\)</span> אחד עם <span>\(f(p)=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(f(a)\cdot f(b)&lt; 0\)</span> יש ל-<span>\(f(a)\)</span> ו-<span>\(f(b)\)</span> סימן שונה ולכן נובע ממשפט ערך הביניים. </p>
+</div>
+<div class="proposition"><span class="keyword">שיטת החצייה - Bisection</span><p>אם <span>\(f\)</span> רציפה ב-<span>\([a,b]\)</span> ו-<span>\(f(a)f(b)&lt; 0\)</span> אזי ניתן למצוא את השורש על ידי בניית הסדרה הבאה:
+נגדיר סדרות <span>\((a_{n}),(b_{n})\)</span> ו-<span>\((p_{n})\)</span> באופן רקורסיבי באופן הבא:</p>
+<ol>
+<li>
+<p>נגדיר <span>\(a_{1}=a\)</span> ו-<span>\(b_{1}=b\)</span>. נגדיר בנוסף <span>\(p_{n}=\frac{a_{n}+b_{n}}{2}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(f(p_{n})\cdot f(b)&lt; 0\)</span> אז נגדיר <span>\(a_{n+1}=p_{n},b_{n+1}=b_{n}\)</span>. אחרת בהכרח <span>\(f(p_{n})\cdot f(a_{n})&lt; 0\)</span> ונגדיר <span>\(b_{n+1}=p_{n},a_{n+1}=a_{n}\)</span>. </p>
+</li>
+<li>
+<p>אם באיזשהו שלב <span>\(f(p_{n})=0\)</span> אז מצאנו שורש, אחרת <span>\(p_{n}\)</span> מתכנס לשורש <span>\(p\)</span> בצורה אקספוננציאלית: 
+<span>$$|p_{n}-p|\leq{\frac{b-a}{2^{n}}}$$</span>
+כיוון שבכל שלב אנחנו חוצים את התחום.</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">שיטת ניוטון רפסון</span><p>נניח כי <span>\(f\)</span> פונקציה גזירה פעמיים עם שורש. אם נתחיל מניחוש התחלתי <span>\(p_{0}\)</span>. ניתן להתכנס לשורש <span>\(p\)</span> על ידי:
+<span>$$p_{n+1}=p_{n}-{\frac{f(p_{n})}{f^{\prime}(p_{n})}}$$</span></p>
+</div>
+<p>נסמן <span>\(e_{n}=p_{n}=p\)</span>. משפט טיילור אומר לנו כי עבור איזשהו <span>\(\xi_{n}\)</span> בין <span>\(p_{n}\)</span> ל-<span>\(p\)</span> נקבל:
+<span>$$f(p)=f(p_{n})+(p-p_{n})f^{\prime}(p_{n})+{\frac{(p-p_{n})^{2}}{2}}f^{\prime\prime}(\xi_{n}).$$</span>
+כיוון ש-<span>\(f(p)=0\)</span> נקבל:
+<span>$$0=f(p_{n})-e_{n}f^{\prime}(p_{n})+\frac{e_{n}^{2}}{2}f^{\prime\prime}(\xi_{n}).$$</span>
+על ידי סידור מחדש עבור <span>\(e_{n}\)</span> נקבל:
+<span>$$e_{n}=\frac{f(p_{n})}{f^{\prime}(p_{n})}-\frac{e_{n}^{2}}{2}\frac{f^{\prime\prime}(\xi_{n})}{f^{\prime}(p_{n})}.$$</span>
+כאשר ניתן להניח כי <span>\(e_{n}\)</span> קטן ולכן <span>\(e_{n}^{2}\)</span> זניח ונקבל:</p>
+<div class="proposition"><span class="keyword">שירת הקטע - Secant</span><p>וריאציה של שיטת ניוטון רפסון אשר מקרבת את הנגזרת כך שנקבל:
+<span>$$p_{n+1}=p_{n}-f(p_{n})\cdot{\frac{p_{n}-p_{n-1}}{f(p_{n})-f(p_{n-1})}}$$</span></p>
+</div>
+<div class="proposition">
+<p>שיטת הסקאנט מתכנס מסדר <span>\(\alpha\)</span>, כאשר:
+<span>$$\alpha={\frac{1+{\sqrt{5}}}{2}}\approx1.618$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Numerical Physics'> פיזיקה חישובית</a></li>
+<li class='prev-page'><a href='./Numerical Physics_1_4'>1.4 הצגות של מספרים ממשיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

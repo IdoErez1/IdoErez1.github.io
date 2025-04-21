@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מלכודת פאול - קלאסי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+<li class='parent-page'><a href='./Quantum_computation.html'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2.html'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1.html'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3.html'>2.3 ערוצים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_5.html'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2.html'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1.html'>4.1 חישוב</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2.html'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_3.html'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_1.html'>5.1 שערים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_3.html'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_1.html'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_1.html'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_2.html'>7.2 מחזוריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_3.html'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_4.html'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_1.html'>8.1 טרוטריזציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_2.html'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_6_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_5_4.html`;}});</script>
+        <div class="content">
+        <h1>6.1  מלכודת פאול - קלאסי</h1>
+    <div class="reminder"><span class="keyword">תנאים למחשב קוונטי</span><ol>
+<li>
+<p>יכולת לייצג אינפורמצייה קוונטית. </p>
+</li>
+<li>
+<p>לבצע קבוצה אינברסילת של טרנספורמציה אוניברסלית. </p>
+</li>
+<li>
+<p>לאתחל את המערכת במצב התחלתי נתון. </p>
+</li>
+<li>
+<p>למדוד את התוצאות. </p>
+</li>
+</ol>
+</div>
+<div class="reminder"><span class="keyword">משפט Earnshaw</span><p>אין מצב אקטרוסטטי יציב של חלקיק טעון בשדה חשמלי.</p>
+</div>
+<div class="proposition">
+<p>יש שתי דרכים נפוצות להתגבר על בעיה זו כדי ללכוד יון:</p>
+<ol>
+<li>
+<p>מלכודת פאול - יוצרים שדה חשמלי המשתנה בזמן. </p>
+</li>
+<li>
+<p>מלכודת פנינג - משלבים שדה חשמלי ושדה מגנטי. </p>
+</li>
+</ol>
+</div>
+<p>אנחנו נתמקד במלכדת פאול. כלומר נקבל שדה חשמלי ופוטנציאל שתלוי בזמן</p>
+<div class="proposition">
+<p>עבור יון יחיד עם מסה <span>\(M\)</span> נקבל אפקטיבית פוטנציאל הרמוני עם תדירות <span>\(\omega\)</span>. ולכן עבור פוטנצאיל של חלקיק יחדי נקבל:
+<span>$$V_{0}=\frac{1}{2}M\omega^{2}z^{2}$$</span>
+כאשר <span>\(z\)</span> הוא קורדינטה לאורך הישר עליו הוא כלוא.</p>
+</div>
+<div class="proposition">
+<p>אם יש לנו <span>\(N\)</span> יונים זהים אשר כולם עם מסה <span>\(m\)</span> ומטען <span>\(q\)</span> הכלואים לאורך ישר הפוטנציאל בהתחשב האינטרקציה החשמלית יהיה:
+<span>$$V=\frac{1}{2}M\omega^{2}{\sum_{n}}z_{n}^{2}+\frac{q^{2}\alpha}{2}{\sum_{n}}{\sum_{m\neq n}}\frac{1}{|z_{n}-z_{m}|}$$</span></p>
+</div>
+<div class="proposition">
+<p>הנקודות שיווי משקל של החלקיקים נתונים על ידי המשוואה:
+<span>$$Z_{n}-\sum_{m&lt;n}\frac{1}{(Z_{n}-Z_{m})^{2}}+\sum_{m&gt;n}\frac{1}{(Z_{n}-Z_{m})^{2}}=0$$</span>
+כאשר:
+<span>$$Z_{n}=\left(\frac{4M\omega^{2}}{q^{2}\alpha}\right)^{1/3}z_{n}^{(0)}$$</span></p>
+</div>
+<div class="proof">
+<p>נדרוש:
+<span>$$\left.\frac{\partial V}{\partial z_{n}}\right|_{z_{n}=z_{n}^{(0)}}=0$$</span>
+כלומר:
+<span>$$M\omega^{2}z_{n}^{(0)}-\frac{q^{2}\alpha}{4}\sum_{m&lt;n}\frac{1}{\left(z_{n}^{(0)}-z_{m}^{(0)}\right)^{2}}+\frac{q^{2}\alpha}{4}\sum_{m&gt;n}\frac{1}{\left(z_{n}^{(0)}-z_{m}^{(0)}\right)^{2}}=0$$</span>
+כאשר נגדיר:
+<span>$$Z_{n}=\left(\frac{4M\omega^{2}}{q^{2}\alpha}\right)^{1/3}z_{n}^{(0)}$$</span>
+ומזה ניתן לקבל את המשוואה של הטענה.</p>
+</div>
+<div class="remark">
+<p>עבור <span>\(N=2,3\)</span> זה לא בעיה לפתור את המשוואה אנליטית. עבור ערכים גדולים יותר כבר פותרים את זה נומרית.</p>
+</div>
+<p>כיוון שזה לא בעיה סטטית נצפה לתנודות קטנות סביב הנקודות שיווי משקל. נרצה לבצע לינאריזציה לבעיה.</p>
+<div class="proposition">
+<p>ניתן לכתוב את המיקום של כל חלקיק בתור המיקום של שיווי המשקל ועוד תנועות שתלויות בזמן מסביב לשיווי המשקל. כלומר:
+<span>$$z_{n}=z_{n}^{(0)}+\zeta_{n}$$</span>
+כאשר:
+<span>$$\dot{z}_{n}=\dot{\zeta}_{n}$$</span></p>
+</div>
+<div class="proposition">
+<p>האנרגיה הקינטית תהיה מהצורה:
+<span>$$T=\frac{1}{2}M\sum_{n}\dot{\zeta}_{n}^{2}$$</span>
+כאשר ניתן לקרב את האנרגיה הפוטנציאלית על ידי:
+<span>$$V\approx\frac{1}{2}M\omega^{2}\sum_{m,n}\hat{V}_{m n}\zeta_{m}\zeta_{n}$$</span>
+כאשר:
+<span>$${\hat{V}}_{m n}={\frac{1}{M\omega^{2}}}\left.{\frac{\partial^{2}V}{\partial z_{m}\partial z_{n}}}\right|_{{\bf z}={\bf z}^{(0)}}=\left\{\begin{array}{l l}{{1+\sum_{l\neq m}{\frac{2}{|Z_{m}-Z_{l}|^{3}}}}}&amp;{{m=n}}\\ {{-{\frac{2}{|Z_{m}-Z_{n}|^{3}}}}}&amp;{{m\neq n}}\end{array}\right.$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור התנודות הקטנות נקבל כי משוואת התנועה תהיה:
+<span>$$\ddot{\zeta}_{m}+\omega^{2}\sum_{n}\hat{V}_{m n}\zeta_{n}=0$$</span></p>
+</div>
+<div class="proof">
+<p>כעת נכתוב את הלגרנג'יאן <span>\(L=T-V\)</span> ואת המשוואות אויילר לגרנג':
+<span>$$\frac{d}{d t}\left(\frac{\partial L}{\partial\dot{\zeta}_{n}}\right)-\frac{\partial L}{\partial\zeta_{n}}=0$$</span>
+ונקבל עבור התנודות הקטנות:
+<span>$$\ddot{\zeta}_{m}+\omega^{2}\sum_{n}\hat{V}_{m n}\zeta_{n}=0$$</span></p>
+</div>
+<p>כדי לפתור את משוואת התנועה נרצה ללכסן את המשוואות.</p>
+<div class="proposition">
+<p>ניתן ללכסן את הבעיה כך שמשוואות התנועה יהיו מהצורה:
+<span>$$z_{n}=z_{n}^{(0)}+\sum_{k}C_{k}D_{m k}\cos\left(\omega_{k}t\right)$$</span>
+והלגרנג'יאן יהיה:
+<span>$$ L = \frac{M}{2} \sum_k (\dot{Q}_k^2 - \omega_k^2 Q_k^2) $$</span></p>
+</div>
+<div class="proof">
+<p>נציב טור פורייה מרוכב מהצורה <span>\(\zeta_{m}=\sum_{k}K_{m k}e^{-i\omega_{k}t}\)</span> כך ש-<span>\(\ddot{\zeta}_{m}=-\sum_{k}\omega_{k}^{2}K_{m k}e^{-i\omega_{k}t}\)</span> ונקבל:
+<span>$$-\sum_{k}\omega_{k}^{2}K_{m k}e^{-i\omega_{k}t}+\omega^{2}\!\sum_{n,k}\!\hat{V}_{m n}K_{n k}e^{-i\omega_{k}t}=0$$</span>
+כלומר:
+<span>$$\sum_{k}\left(-\omega_{k}^{2}K_{m k}+\omega^{2}\sum_{n}\hat{V}_{m n}K_{n k}\right)e^{-i\omega_{k}t}=0$$</span>
+כאשר מיחידות טור פורייה נדרש כי כל המקדמים מתאפסים, ולכן לכל <span>\(k\)</span> נדרש:
+<span>$$\sum_{n}\left(-\omega_{k}^{2}\delta_{m n}+\omega^{2}\hat{V}_{m n}\right)K_{n k}=0\implies  \sum_n \hat{V}_{mn} K_{nk} = \frac{\omega_k^2}{\omega^2} K_{mk} $$</span>
+ולכן העמודות של <span>\(K\)</span> הם ווקטורים עצמיים של <span>\(V_{mn}\)</span> עם ערכים עצמיים <span>\(\mu_{k}=\frac{\omega_{k}^{2}}{\omega^{2}}\)</span>. בנוסף נדרש:
+<span>$$\operatorname*{det}\left(-\omega_{k}^{2}\mathbb{1}+\omega^{2}\hat{V}\right)=0\implies \omega_{k}=\omega \sqrt{ \mu_{k} }$$</span>
+ניתן לנרמל את <span>\(K_{nk}\)</span> ולקבל מטריצה אורתונורמלית <span>\(K_{nk}=C_{k}D_{nk}\)</span>. כעת נגדיר אופני תנודה <span>\(Q_{k}(t)=C_{k}e^{ -i\omega_{k}t }\)</span> כך שניתן לכתוב:
+<span>$$\zeta_{m}\left(t\right)=\sum_{k}D_{m k}Q_{k}\left(t\right)$$</span>
+כאשר התנועה של היונים תהיה נתונה על ידי:
+<span>$$z_{n}=z_{n}^{(0)}+\sum_{k}C_{k}D_{m k}\cos\left(\omega_{k}t\right)$$</span></p>
+</div>
+<div class="example">
+<p>עבור <span>\(\mu=1\)</span> נקבל אופן תנודה שבה כל היונים נעים ביחד עם אותה אמפליטודה ופאזה(center of mass mode):
+<span>$$ D_{m1} = \frac{1}{\sqrt{N}}(1, 1, ..., 1)^T $$</span>
+עבור <span>\(\mu=3\)</span> נקבל אופן תנודה כך שהמרחק ביניהם משתנה בצורה מחזורית(Breathing mode):
+<span>$$ D_{m2} = \frac{1}{\sqrt{\sum_n Z_n^2}} (Z_1, Z_2, ..., Z_N)^T $$</span></p>
+</div>
+<div class="proposition">
+<p>המצב מרכז מסה:
+<span>$$ D_{m1} = \frac{1}{\sqrt{N}}(1, 1, ..., 1)^T $$</span>
+תמיד אופן תנודה עם תדירות <span>\(\omega\)</span> ללא תלות ב-<span>\(n\)</span>.</p>
+</div>
+<div class="proof">
+<p>משוואת הערכים העצמיים היא מהצורה:
+<span>$$ \sum_{n}(-\omega^{2}\delta_{mn}+\omega^{2}\hat{V}_{mn})D_{n1}=0 $$</span>
+כיוון ש-<span>\(D_{n 1}\)</span> הוא 1 עד כדי כפל בקבוע, וכן ניתן לחלק ב-<span>\(\omega\)</span> ולקבל את הדרישה:
+<span>$$ \sum_{n}(-\delta_{mn}+\hat{V}_{mn})=0 $$</span>
+ואכן אם אנחנו סוכמים על <span>\(m\)</span> קבוע נקבל:
+<span>$$\sum_{n} V_{mn}=1 + {\frac{2}{|Z_{m}-Z_{n}|^{3}}}- \frac{2}{|Z_{m}-Z_{n}|^{3}} = 1$$</span>
+ולכן <span>\(\sum_{n}(-\delta_{mn}+\hat{V}_{mn}) = 0\)</span> ואכן אופן תנודה עם תדירות <span>\(\omega\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+<li class='prev-page'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

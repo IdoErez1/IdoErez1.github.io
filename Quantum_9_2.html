@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מנוונת שאינו תלוי בזמן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_9_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_9_1`; }});</script>
+        <div class="content">
+        <h1>9.2  מנוונת שאינו תלוי בזמן</h1>
+    <div class="symbolize">
+<p>אם להמילטוניאן יש <span>\(d\)</span> מצבים עם אנרגיות <span>\(E_{n}^{(0)}\)</span> נסמן את הקירוב מסדר 0 על ידי:
+<span>$$\psi_{n,i}^{(0)}=|(n,i)^{(0)}\rangle,\;\;\;i=1,\ldots,d$$</span></p>
+</div>
+<p>הרעיון זה שההפרעה <span>\(\lambda\)</span> יכולה לבטל את הניוון, ואז ניתן לפתור בצורה הרגילה.</p>
+<div class="proposition">
+<p>כיוון שיש ניוון כל צירוף לינארי של מצבים <span>\(\ket{(n,i)^{(0)}}\)</span> גם כן יהיה מצב עצמי של המערכת.</p>
+</div>
+<div class="definition"><span class="keyword">בחירה "טובה" של מצבים</span><p>וקטורים עצמיים אשר תחת ההפרעה מלכסנת את התת מרחב המנוון כאשר לוקחים את הגבול <span>\(\lambda\to 0\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על מסה <span>\(m\)</span> בפוטנציאל אוסצילטורי דו מימדי מהצורה:
+<span>$$H^{0}=\frac{p^{2}}{2\,m}+\frac{1}{2}\,m\,\omega^{2}\left(x^{2}+y^{2}\right)$$</span>
+כאשר נתונה ההפרעה:
+<span>$$V=\epsilon\,m\,\omega^{2}\,x\;y.$$</span>
+המצב המעורער הראשון (<span>\(E^{(0)}=2\hbar \omega\)</span>) מכיל ניוון מסדר שתיים, כאשר בסיס אחד לניוון הזה הוא:
+<span>$$\psi_{a}^{0}=\psi_{0}(x)\,\,\psi_{1}(y)=\sqrt{\frac{2}{\pi}}\,\frac{m\,\omega}{\hbar}\,\,y\,e^{-\frac{m\,\omega}{2\,\hbar}\left(x^{2}+y^{2}\right)}\,.$$</span>
+וגם:
+<span>$$\psi_{b}^{0}=\psi_{1}(x)\ \psi_{0}(y)=\sqrt{\frac{2}{\pi}}\,\frac{m\,\omega}{\hbar}\,x\,e^{-\frac{m\,\omega}{2\,\hbar}\left(x^{2}+y^{2}\right)}$$</span>
+כאשר <span>\(\psi_{1},\psi_{0}\)</span> הם אוסצילטורים הרמונים חד מימדיים. ניתן לפתור את הבעיה הזו בצורה מדוייקת על ידי מעבר למערכת מסובבת:
+<span>$$x^{\prime}=\frac{x+y}{\sqrt{2}}\qquad y^{\prime}=\frac{x-y}{\sqrt{2}}\,.$$</span>
+כאשר במונחי הקורדינטות החדשות נקבל:
+<span>$$H=\frac{1}{2\,m}\bigg(\frac{\partial^{2}}{\partial x^{\prime2}}+\frac{\partial^{2}}{\partial y^{\prime2}}\bigg)+\frac{1}{2}\,m\,(1+\epsilon)\,\,\omega^{2}\,x^{\prime2}+\frac{1}{2}\,m\,(1-\epsilon)\,\,\omega^{2}\,y^{\prime2}.$$</span>
+זה מתאים לשתי אוסצילטורים הרמונים חד מימדיים <span>\(\psi_{m}^{+}\)</span> ו-<span>\(\psi_{m}^{-}\)</span> עם תדירות <span>\(\omega_{\pm}=\sqrt{ 1\pm \varepsilon }\omega\)</span>. הרמות הראשונות יהיו:
+<span>$$E_{m n}=\left(m+\frac{1}{2}\right)\,\hbar\,\omega_{+}+\left(n+\frac{1}{2}\right)\,\hbar\,\omega_{-}$$</span>
+ניקח כעת את הגבול כאשר <span>\(\varepsilon\to 0\)</span> של הרמת אנרגיה הראשונה ונקבל:
+<span>$$\operatorname*{lim}_{\epsilon\rightarrow0}\psi_{01}(x)=\operatorname*{lim}_{\epsilon\rightarrow0}\psi_{0}^{+}(x^{\prime})\ \psi_{1}^{-}(y^{\prime})=\psi_{0}\bigg(\frac{x+y}{\sqrt{2}}\bigg)\ \psi_{1}\bigg(\frac{x-y}{\sqrt{2}}\bigg)\ .$$</span>
+<span>$$=\sqrt{\frac{2}{\pi}}\,\frac{m\,\omega}{\hbar}\,\frac{x-y}{\sqrt{2}}\,e^{-\frac{m\,\omega}{2\hbar}\left(x^{2}+y^{2}\right)}=\frac{-\psi_{a}^{0}+\psi_{b}^{0}}{\sqrt{2}}.$$</span>
+ובאופן דומה:
+<span>$$\operatorname*{lim}_{\epsilon\rightarrow0}\psi_{10}(x)=\frac{\psi_{a}^{0}+\psi_{b}^{0}}{\sqrt{2}}.$$</span>
+ולכן המצבים ה-"טובים" יהיו:
+<span>$$\psi_{\pm}^{0}\equiv\frac{1}{\sqrt{2}}\left(\psi_{b}^{0}\pm\psi_{a}^{0}\right)$$</span></p>
+</div>
+<div class="remark">
+<p>לא תמיד קיימים מצבים כאלה. כאשר לא ייתכן וניתן לפתור על ידי תורת ההפרעות המנוונת מסדר שני.</p>
+</div>
+<div class="symbolize">
+<p><span>$$W_{i j}\equiv\left&lt;\psi_{i}^{0}\left|\,V\,\right|\,\psi_{j}^{0}\right&gt;$$</span></p>
+</div>
+<div class="remark">
+<p>המטריצת <span>\(W\)</span> למעשה מייצגת איך ההפרעה משפיעה על איברי הבסיס של <span>\(H_{0}\)</span>. לדוגמא אם <span>\(W_{10}=0\)</span> זה מראה כי האיבר <span>\(\ket{0}\)</span> לא משתנה ל-<span>\(\ket{1}\)</span> בעקיבות ההפרעה. לעומת זאת אם <span>\(W_{10}=1\)</span> זה אומר כי ההפרעה תשנה את <span>\(\ket{0}\)</span> ל-<span>\(\ket{1}\)</span>. רק תחת בסיס שבו <span>\(W\)</span> אלכסוני נקבל כי המערכת מתנהגת כאילו לא מנוונת - ההפרעה תשאיר כל מצב עצמי באותו מצב עצמי.</p>
+</div>
+<div class="proposition">
+<p>כאשר קיימים מצבים טובים, הם יהיו הווקטורים העצמיים של <span>\(W\)</span>. כלומר נקבל:
+<span>$$W \vec{v}=E^{(1)}\vec{v}$$</span></p>
+</div>
+<div class="proposition">
+<p>כאשר יש נוון מסדר 2 נקבל כי התיקון מסדר ראשון לאנרגיה תהיה:
+<span>$$E_{\pm}^{1}=\frac{1}{2}\left[\,W_{a a}+\,W_{b b}\pm\sqrt{\,(\,W_{a a}-\,W_{b b})^{2}+4\,|\,W_{a b}|^{2}\,}\right]$$</span></p>
+</div>
+<div class="proof">
+<p>נניח ונתונה משוואת שרודינגר <span>\(H\psi=E\psi\)</span> עם <span>\(H=H^{(0)}+\lambda V\)</span> וכן כרגיל נסמן:
+<span>$$E=E^{0}+\lambda E^{1}+\lambda^{2}E^{2}+\cdots,\quad\psi=\psi^{0}+\lambda\psi^{1}+\lambda^{2}\psi^{2}+\cdots.$$</span>
+הצב את הפיתוח לטור במשוואת שרדינגר ונאחד לפי חזקות של <span>\(\lambda\)</span> כך שנקבל:
+<span>$$H^{0}\psi^{0}+\lambda\left(V\psi^{0}+H^{0}\psi^{1}\right)+\cdots=E^{0}\psi^{0}+\lambda\left(E^{1}\psi^{0}+E^{0}\psi^{1}\right)+\cdots.$$</span>
+כאשר <span>\(H^{0}\psi^{0}=E^{0}\psi^{0}\)</span> ולכן נקבל עבור הגודם של <span>\(\lambda^{1}\)</span>:
+<span>$$H^{0}\psi^{1}+V\psi^{0}=E^{0}\psi^{1}+E^{1}\psi^{0}.$$</span>
+ניקח את המכפלה הפנימית עם <span>\(\psi^{0}_{a}\)</span> ונקבל:
+<span>$$\left\langle\psi_{a}^{0}\left|H^{0}\psi^{1}\right\rangle+\left\langle\psi_{a}^{0}\right|V\psi^{0}\right\rangle=E^{0}\left\langle\psi_{a}^{0}\left|\psi^{1}\right\rangle+E^{1}\left\langle\psi_{a}^{0}\right|\psi^{0}\right\rangle$$</span>
+כיוון ש-<span>\(H^{0}\)</span> הרמיטי הגורם נראשון משמאל מבטל את הגורם הראשון מימין. על ידי שימוש באורותונרליות נקבל:
+<span>$$\alpha\left\langle\psi_{a}^{0}\left|\right.V\left|\right.\psi_{a}^{0}\right\rangle+\beta\left\langle\psi_{a}^{0}\left|\right.V\left|\right.\psi_{b}^{0}\right\rangle=\alpha E^{1},$$</span>
+כלומר:
+<span>$$\alpha\,W_{a a}+\beta\,W_{a b}=\alpha\,E^{1},$$</span>
+באופן דומה בעזרת מכפלה פנימית של <span>\(\psi_{b}^{0}\)</span> נקבל:
+<span>$$\alpha\,W_{b a}+\beta\,W_{b b}=\beta E^{1}$$</span>
+מללכסן את <span>\(W\)</span> עבור מערכת של שתי רמות נקבל את הטענה.</p>
+</div>
+<div class="example">
+<p>נמצא את הרמות האנרגיה ה-"טובות" של הדוגמא הקודמת ללא לפתור בצורה מפורשת. נחשב את <span>\(W\)</span>.
+<span>$$W_{a a}=\int\int\psi_{a}^{0}(x,y)\ V\,\psi_{a}^{0}(x,y)\ d x\,d y$$</span>
+<span>$$=\epsilon\,m\,\omega^{2}\,\int|\psi_{0}(x)|^{2}\,\,x\,d x\,\int|\psi_{0}(y)|^{2}\,\,y\,d y=0$$</span>
+כיוון שהאינטגרנד של שתי האינטגרלים הם פונקציות אי זוגיות. באופן דומה <span>\(W_{bb}=0\)</span>. כעת נחשב את <span>\(W_{ab}\)</span>:
+<span>$$\begin{gather}W_{a b}=\iint\psi_{a}^{0}(x,y)\ V\,\psi_{b}^{0}(x,y)\ \mathrm{d} x\,\mathrm{d} y\\=\epsilon\,m\,\omega^{2}\,\int\psi_{0}(x)\ x\ \psi_{1}(x)\ \mathrm{d} x\,\int\psi_{1}(y)\ y\ \psi_{0}(y)\ \mathrm{d} y 
+\end{gather}$$</span>
+כאשר ניתן לכתוב <span>\(x=\sqrt{ \frac{\hbar}{2m\omega} }(a_{+}+a_{-})\)</span> ונקבל:
+<span>$$W_{a b}=\epsilon\,m\,\omega^{2}\left[\int\,\psi_{0}(x)\,\sqrt{\frac{\hbar}{2\,m\,\omega}}\,(a_{+}+a_{-})\,\,\psi_{1}(x)\,\,d x\right]^{2}$$</span>
+<span>$$=\epsilon\,\frac{\hbar\,\omega}{2}\,\left[\int\psi_{0}(x)\,\,\psi_{0}(x)\,\,d x\right]^{2}=\epsilon\,\frac{\hbar\,\omega}{2}.$$</span>
+ולכן המטרצה <span>\(W\)</span> תהיה:
+<span>$$W=\epsilon\,\frac{\hbar\,\omega}{2}\left(\begin{array}{l l}{{0}}&amp;{{1}}\\ {{1}}&amp;{{0}}\end{array}\right)$$</span>
+כאשר הווקטורים העצמיים יהיו:
+<span>$${\frac{1}{\sqrt{2}}}{\left(\begin{array}{l}{1}\\ {1}\end{array}\right)}\;\;\mathrm{and}\;\;{\frac{1}{\sqrt{2}}}{\left(\begin{array}{l}{-1}\\ {1}\end{array}\right)}$$</span>
+ולכן המצבים הטובים יהיו:
+<span>$$\psi_{\pm}^{0}=\frac{1}{\sqrt{2}}\left(\psi_{b}^{0}\pm\psi_{a}^{0}\right),$$</span>
+כאשר הערך העצמי(שזה התיקון הראשון לאנרגיה) יהיה:
+<span>$$E^{1}=\pm\,\epsilon\,\frac{\hbar\,\omega}{2}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A\)</span> אופרטור הרמיטי אשר מתחלף עם <span>\(H^{0}\)</span> ועם <span>\(V\)</span>. אם <span>\(\psi_{a}^{(0)}\)</span> ו-<span>\(\psi_{b}^{(0)}\)</span> הם פונקציות עצמיות של <span>\(A\)</span> עם ערכים עצמיים יחודיים:
+<span>$$A\psi_{a}^{0}=\mu\psi_{a}^{0},\quad A\psi_{b}^{0}=\nu\psi_{b}^{0},\quad\mathrm{and}\;\mu\neq\nu,$$</span>
+אזי <span>\(\psi_{a}^{0}\)</span> ו-<span>\(\psi_{b}^{0}\)</span> המצבים "טובים".</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(H\left( \lambda \right)=H^{0}+\lambda V\)</span> ו-<span>\(A\)</span> מתחלף קיים בסיס משותף של מצבים עצמיים <span>\(\psi_{\gamma}\left( \lambda \right)\)</span> כך שמתקיים:
+<span>$$H(\lambda)\ \psi_{\gamma}(\lambda)=E(\lambda)\ \psi_{\gamma}(\lambda)\ \ \mathrm{and}\ A\ \psi_{\gamma}(\lambda)=\gamma\ \psi_{\gamma}(\lambda)\ .$$</span>
+כאשר כיוון ש-<span>\(A\)</span> הרמיטי נקבל:
+<span>$$\left\langle\psi_{a}^{0}\left|\right.A\psi_{\gamma}(\lambda)\right\rangle=\left\langle A\psi_{a}^{0}\left|\right.\psi_{\gamma}(\lambda)\right\rangle$$</span>
+<span>$$\gamma\,\left\langle\psi_{a}^{0}\,\right|\,\psi_{\gamma}(\lambda)\rangle=\mu^{*}\,\left\langle\psi_{a}^{0}\,\right|\,\psi_{\gamma}(\lambda)\rangle$$</span>
+<span>$$\left(\gamma-\mu\right)\left\langle\psi_{a}^{0}\right|\psi_{\gamma}(\lambda)\rangle=0,$$</span>
+זה נכון לכל ערך של <span>\(\lambda\)</span>, ובפרט אם ניקח את הגבול <span>\(\lambda\to 0\)</span> נקבל:
+<span>$$\left\langle\psi_{a}^{0}\left|\;\psi_{\gamma}(0)\right\rangle=0\;\mathrm{unless}\;\;\gamma=\mu,\right.$$</span>
+ובאופן דומה:
+<span>$$\left\langle\psi_{b}^{0}\left|\right.\psi_{\gamma}(0)\right\rangle=0\mathrm{~unless~}\gamma=\nu.$$</span>
+כאשר המצבים הטובים הם צירופים לינארים של</p>
+</div>
+<div class="example">
+<p>עבור המערכת בשתי דוגמאות הקודמות נשים לב כי האופרטור <span>\(D\)</span> של סיבוב ב-<span>\(45^\circ\)</span> אשר מחליף בין <span>\(x\)</span> ל-<span>\(y\)</span> מקיים:
+<span>$$\begin{array}{l}{{D\,\psi_{a}^{0}(x,\,y)=\psi_{a}^{0}(y,x)=\psi_{b}^{0}(x,\,y)\,,}}\\ {{D\,\psi_{b}^{0}(x,\,y)=\psi_{b}^{0}(y,x)=\psi_{a}^{0}(x,\,y)\,.}}\end{array}$$</span>
+נשים לב שהמצבים העצמיים שלנו הם לא מצבים עצמיים של <span>\(D\)</span>, אך ניתן לבנות כאלה שהם כן בעזרת הצירוף הלינארי שלהם:
+<span>$$\psi_{\pm}^{0}\equiv\pm\psi_{a}^{0}+\psi_{b}^{0}.$$</span>
+וכעת:
+<span>$$D\left(\pm\psi_{a}^{0}+\psi_{b}^{0}\right)=\pm\,D\,\psi_{a}^{0}+D\,\psi_{b}^{0}=\pm\psi_{b}^{0}+\psi_{a}^{0}=\pm\left(\pm\psi_{a}^{0}+\psi_{b}^{0}\right)$$</span>
+כאשר מהטענה אלו מצבים טובים.</p>
+</div>
+<div class="remark">
+<p>תחת הבסיס הזה אשר מתחלף עם <span>\(H^{0}\)</span> ו-<span>\(V\)</span> נקבל כי <span>\(W\)</span> תהיה אלכסונית.</p>
+</div>
+<div class="remark">
+<p>השיטה הזו היא כללית. עבור למשל מערכת עם ניוון 3 נחשב:
+<span>$$W_{i j}=\left(\psi_{i}^{0}\left|\;V\;\right|\;\psi_{j}^{0}\right)$$</span>
+כאשר מוצאים את המצבים והערכים העצמיים של <span>\(W\)</span> על ידי פתרון:
+<span>$$\left(\begin{array}{c c c}{{W_{a a}}}&amp;{{W_{a b}}}&amp;{{W_{a c}}}\\ {{W_{b a}}}&amp;{{W_{b b}}}&amp;{{W_{b c}}}\\ {{W_{c a}}}&amp;{{W_{c b}}}&amp;{{W_{c c}}}\end{array}\right)\left(\begin{array}{c}{{\alpha}}\\ {{\beta}}\\ {{\gamma}}\end{array}\right)=E^{1}\left(\begin{array}{c}{{\alpha}}\\ {{\beta}}\\ {{\gamma}}\end{array}\right)$$</span>
+כאשר מצבים "טובים" יהיו מצבים מהצורה:
+<span>$$\psi^{0}=\alpha\,\psi_{a}^{0}+\beta\,\psi_{b}^{0}+\gamma\,\psi_{c}^{0}.$$</span></p>
+</div>
+<div class="example">
+<p>נתון ההמילטוניאן:
+<span>$$H=V_{0}\left(\begin{array}{c c c}{{(1-\epsilon)}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{1}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{2}}\end{array}\right)$$</span>
+כאשר <span>\(V_{0}\)</span> קבוע ו-<span>\(\varepsilon\ll 1\)</span>. ראשית נמצא את הפתרונות המדוייקים עבור <span>\(\varepsilon=0\)</span>. נקבל מיידית את הערכים העצמיים:
+<span>$$\lambda_{1}=1\quad\lambda_{2}=1\quad\lambda_{3}=2$$</span>
+כאשר נשים לב כי יש ריבוי 2 עבור הערך עצמי 1. הווקטורים העצמיים המתאימים יהיו:
+<span>$$\psi_{1}^{(0)}=e_{1}=\begin{pmatrix}1\\ 0\\ 0\end{pmatrix}\quad\psi_{2}^{(0)}=e_{2}=\begin{pmatrix}0\\ 1\\ 0\end{pmatrix}\quad\psi_{3}^{(0)}=e_{3}=\begin{pmatrix}0\\ 0\\ 1\end{pmatrix}$$</span>
+ניתן לכתוב את ההפרעה על ידי:
+<span>$$V=H-H^{(0)}=V_{0}\left(\begin{array}{c c c}{{(1-\epsilon)}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{1}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{2}}\end{array}\right)-V_{0}\left(\begin{array}{c c c}{{1}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{1}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{2}}\end{array}\right)=V_{0}\left(\begin{array}{c c c}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)$$</span>
+נדרש לחשב את אלמנטי המטריצה של <span>\(V\)</span> בתת מרחב המנוון הנפרש על ידי <span>\(\left\{  \psi_{1}^{(0)},\psi^{(0)}_{2}  \right\}\)</span>. נסמן <span>\(W_{ij}=\braket{ \psi_{i}^{(0)} | V|\psi_{j}^{(0)} }\)</span> ונחשב את אלמנטי <span>\(W\)</span> במפורש:
+<span>$$\begin{gather}W_{11}=\langle \psi_{1}^{(0)}|V|\psi_{1}^{(0)} \rangle=(e_{1})^{\dagger}V(e_{1})=\left(1\quad0\quad0\right)V_{0}\left(\begin{array}{l l l}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)\left(\begin{array}{l}{{1}}\\ {{0}}\\ {{0}}\end{array}\right)=-\epsilon V_{0}\\ W_{22}=\langle \psi_{2}^{(0)}|V|\psi_{2}^{(0)} \rangle=(e_{2})^{\dagger}V(e_{2})=\left(\begin{array}{l l l}{{0}}&amp;{{1}}&amp;{{0}}\end{array}\right)V_{0}\left(\begin{array}{l l l}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)\left(\begin{array}{l}{{0}}\\ {{1}}\\ {{0}}\end{array}\right)=0\\ W_{12}=\langle \psi_{1}^{(0)}|V|\psi_{2}^{(0)} \rangle=(e_{1})^{\dagger}V(e_{2})=\left(1\quad0\quad0\right)V_{0}\left(\begin{array}{l l l}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)\left(\begin{array}{l}{{0}}\\ {{1}}\\ {{0}}\end{array}\right)=0\\ W_{21}=\langle \psi_{2}^{(0)}|V|\psi_{1}^{(0)} \rangle=(e_{2})^{\dagger}V(e_{1})=\left(\begin{array}{l l l}{{0}}&amp;{{1}}&amp;{{0}}\end{array}\right)V_{0}\left(\begin{array}{l l l}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)\left(\begin{array}{l}{{1}}\\ {{0}}\\ {{0}}\end{array}\right)=0
+\end{gather}$$</span>
+ולכן:
+<span>$$W=\left(\begin{array}{c c}{{-\epsilon V_{0}}}&amp;{{0}}\\ {{0}}&amp;{{0}}\end{array}\right)$$</span>
+כיוון ש-<span>\(W\)</span> כבר אלכסונית נקבל כי הערכים עצמיים יהיו <span>\(E_{1}^{(1)}=-\varepsilon V_{0}\)</span> ו-<span>\(E_{2}^{(1)}=0\)</span>. האנרגיות העצמיות של הרמות המנוונות יהיו:
+<span>$$\begin{gather}E_{1}\approx\lambda_{1}^{(0)}V_{0}+E_{1}^{(1)}=V_{0}-\epsilon V_{0}=V_{0}\left( 1-\epsilon \right)\\ E_{2}\approx\lambda_{2}^{(0)}V_{0}+E_{2}^{(1)}=V_{0}+0=V_{0}\\
+\end{gather}$$</span>
+כאשר הרמת אנרגיה הלא מנוונת תהיה:
+<span>$$\begin{gather}E_{3}^{(1)}=\langle \psi_{3}^{(0)}|V|\psi_{3}^{(0)} \rangle=(e_{3})^{\dagger}V(e_{3})=\left(0\quad0\quad1\right)V_{0}\left(\begin{array}{c c c}{{-\epsilon}}&amp;{{0}}&amp;{{0}}\\ {{0}}&amp;{{0}}&amp;{{\epsilon}}\\ {{0}}&amp;{{\epsilon}}&amp;{{0}}\end{array}\right)\left(\begin{array}{c}{{0}}\\ {{0}}\\ {{1}}\end{array}\right)=0\\ \implies E_{3}\approx\lambda_{3}^{(0)}V_{0}+E_{3}^{(1)}=2V_{0}+0=2V_{0}
+\end{gather}$$</span></p>
+</div>
+<div class="example"><span class="keyword">אפקט שטרק</span><p>נמצא בעזרת תורת הפרעות מנוונת מסדר ראשון את הרמות אנרגיה על אטום מימן עם <span>\(n=2\)</span> אשר תחת שדה חשמלי אחיד חלש <span>\(\mathcal{E}\)</span> הפועל לאורך ציר <span>\(z\)</span>. הבסיס עבור המצב המנוון <span>\(n=2\)</span> יהיה עם ניוון <span>\(2^{2}=4\)</span> ויסומן בצורה הבאה:
+<span>$$|1\rangle=|200\rangle,\;|2\rangle=|211\rangle,\;|3\rangle=|210\rangle,\;\ |4\rangle=|21-1\rangle$$</span>
+וכן ההפרעה תהיה מהצורה:
+<span>$$V=-\vec{d}\cdot\vec{\mathcal{E}}=e\vec{r}\cdot\vec{\mathcal{E}}=e\mathcal{E}Z$$</span>
+נרצה לחשב את אלמנטי מטריצת <span>\(W=\bra{2l'm'}V\ket{2ml}=e\mathcal{E}\bra{2l'm'}Z\ket{2lm}\)</span>. כפי שראינו אלמנטי המטריצה <span>\(\bra{2\ell'm'}Z\ket{2\ell m}\)</span> יתאפסו כאשר <span>\(m'\neq m\)</span> וכאשר <span>\(\ell'-\ell = \pm 1\)</span>. ולכן נקבל כי <span>\(\bra{200}Z\ket{210} = \bra{210}Z\ket{200} = -3 a_0\)</span> הם אלמנטי המטריצה היחידים של <span>\(Z\)</span> שאינם מתאפסים. ולכן עבור <span>\(W\)</span> נקבל כי האלמנטים היחידים שלא מתאפסים יהיו:
+<span>$$W_{13}=W_{31}=\bra{200}e\mathcal{E}Z\ket{210}=e\mathcal{E} (-3a_{0})=-3e\mathcal{E} a_{0}$$</span>
+ולכן:
+<span>$$W=\begin{pmatrix}W_{11}&amp;W_{12}&amp;W_{13}&amp;W_{14}\\ W_{21}&amp;W_{22}&amp;W_{23}&amp;W_{24}\\ W_{31}&amp;W_{32}&amp;W_{33}&amp;W_{34}\\ W_{41}&amp;W_{42}&amp;W_{43}&amp;W_{44}\end{pmatrix}=\begin{pmatrix}0&amp;0&amp;-3e\mathcal{E}a_{0}&amp;0\\ 0&amp;0&amp;0&amp;0\\ -3e\mathcal{E}a_{0}&amp;0&amp;0&amp;0\\ 0&amp;0&amp;0&amp;0\end{pmatrix}$$</span>
+נדרש ללכסן את <span>\(W\)</span>. הערכים העצמיים המתקבלים יהיו הפתרונות של <span>\(\det \left( W-E^{(1)}\mathbb{1} \right)=0\)</span> כאשר נקבל:
+<span>$$E^{(1)}=-3e\mathcal{E}a_{0},0,0,3e\mathcal{E}a_{0}.$$</span>
+ולכן התיקון מסדר ראשון לאנרגיה ה-0 יהיה:
+<span>$$\begin{gather}E_{1}=E_{2}^{(0)}+E_{1}^{(1)}=-\frac{R_{y}}{4}-3e{\mathcal{E}}a_{0}\\ E_{2}=E_{2}^{(0)}+E_{2}^{(1)}=-\frac{R_{y}}{4}+3e{\mathcal E}a_{0}\\ E_{3}=E_{2}^{(0)}+E_{3}^{(1)}=-\frac{R_{y}}{4}+0=-\frac{R_{y}}{4}\\ E_{4}=E_{2}^{(0)}+E_{4}^{(1)}=-\frac{R_{y}}{4}+0=-\frac{R_{y}}{4}
+\end{gather}$$</span>
+כאשר השתמשנו בנוסחה של רמות אנרגיה של אטום המימן עבור <span>\(E_{2}^{(0)}=-\frac{R_{y}}{n^{2}}=-\frac{\mu e^{4}}{2\hbar^{2}}\)</span>. המצבים הטובים יהיו הווקטורים העצמיים של <span>\(W\)</span>:
+<span>$$\begin{gather}E_{1}^{(1)}=-3e{\mathcal{E}}a_{0}\implies\psi_{1}^{(0)}={\frac{1}{\sqrt{2}}}\left( |200\rangle+|210\rangle \right)\\ E_{2}^{(1)}=3e{\mathcal E}a_{0}\implies\psi_{2}^{(0)}={\frac{1}{\sqrt2}}\left( -|200\rangle+|210\rangle \right)\\ E_{3}^{(1)}=0\implies\psi_{3}^{(0)}=|211\rangle\\ E_{4}^{(1)}=0\implies\psi_{4}^{(0)}=|21-1\rangle
+\end{gather}$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>כאשר יש להמילטוניאן לא מופרע <span>\(H^{(0)}\)</span> ניוון, הפרעה <span>\(V\)</span> יכולה להעלים את הניוון, ולגרום לרמות אנרגיה להתפצל.</li>
+<li>כאשר יש ניוון, כל צירוף לינארי של מצבים מנוונים הם מצבים עצמיים של <span>\(H^{(0)}\)</span>. צירוף "טוב" הם הצירוף הלינארי במרחב המנוון אשר מלכסן את ההפרעה במרחב המנוון מסדר ראשון.</li>
+<li>לכן כדי למצוא את המצבים ה-"טובים" נדרש ללכסן את <span>\(W_{ij}=\bra{\psi_{i}^{(0)}}V\ket{\psi_{j}^{(0)}}\)</span> כאשר <span>\(\psi_{i}^{(0)}\)</span> ו-<span>\(\psi_{j}^{(0)}\)</span> הם המצבים מנוונים מסדר אפס. התיקונים לאנרגיה מסדר ראשון <span>\(E^{(1)}\)</span> יהיו הערכים העצמיים, כאשר המצבים ה-"טובים" יהיו הווקטורים העצמיים.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='prev-page'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+</ul></li>
+        </body>
+        </html>
+        

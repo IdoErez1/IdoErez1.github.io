@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>וויגנר-אקארט</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_9_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_8_5`; }});</script>
+        <div class="content">
+        <h1>8.6  וויגנר-אקארט</h1>
+    <div class="theorem"><span class="keyword">ווגנר-אקרט</span><p>יהי <span>\(T_{q}^{(k)}\)</span> טנזור ספרי. אלמנטי המטריצה של הטנזור ביחס לבסיס התנע יקיים:
+<span>$$\langle\alpha^{\prime},j^{\prime}m^{\prime}|T_{q}^{(k)}|\alpha,j m\rangle=\langle j k;m q|j k;j^{\prime}m^{\prime}\rangle\frac{\langle\alpha^{\prime},j^{\prime}||T^{(k)}||\alpha,j\rangle}{\sqrt{2j+1}}$$</span>
+כאשר הרכיב <span>\(\langle\alpha^{\prime},j^{\prime}||T^{(k)}||\alpha,j\rangle\)</span> נקרא אלמנטי המטריצה המצומצמת וזה סימון שמדגיש את זה שלא תלוי ביתר הגורמים(<span>\(m,m',q\)</span>).</p>
+</div>
+<div class="remark">
+<p>ניתן להשתמש במשפט זה כדי לחשב את <span>\(\langle\alpha^{\prime},j^{\prime}m^{\prime}|T_{q}^{(k)}|\alpha,j m\rangle\)</span> עבור שילובים שונים של <span>\(m,m',q'\)</span> כאשר יודעים את התוצאה רק עבור אחד מהם.</p>
+</div>
+<div class="corollary">
+<p>מכללי הברירה של מקדמי קלבש גורדון כדי שהמקדמים לא יהיו אפס נדרש:
+<span>$$\begin{gather}m^{\prime}=q+m\quad\iff\quad\Delta m\equiv m^{\prime}-m=q\\ |j-k|\leq j^{\prime}\leq j+k\quad\iff\quad|\Delta j|\equiv|j^{\prime}-j|\leq k 
+\end{gather}$$</span></p>
+</div>
+<div class="example"><span class="keyword">אטום מימן עם שדה חשמלי</span><p>נתון אטום מימן במצב <span>\(\ket{n=3,\ell=2,m}\)</span> אשר מופעל עליו שדה חשמלי <span>\(E\hat{z}\)</span>. בעזרת חישוב ישיר ניתן למצוא:
+<span>$$\braket{ 310 | Ez|320 } =E\int_{0}^{2\pi}  \, d\varphi \int_{0}^{\pi} \sin \theta \, d\theta Y_{20}  \overbracket{ \cos\left( \theta \right) }^{ z }Y_{10}^{*}\braket{ 3 | 3 } =\dots=\frac{3E}{\sqrt{ 15 }}$$</span>
+כיוון שמתקיים:
+<span>$$z=\cos\theta=\sqrt{\frac{4\pi}{3}}\,Y_{10}(\theta,\varphi)=\sqrt{\frac{4\pi}{3}}\,T_{0}^{(1)}$$</span>
+ניתן לכתוב:
+<span>$$E\,z=E\sqrt{\frac{4\pi}{3}}\,T_{0}^{(1)}$$</span>
+כעת בעזרת וויגנר אקארט מתקיים:
+<span>$$\langle3,1,m^{\prime}|T_{0}^{(1)}|3,2,m\rangle=\langle2,1;m,0|1,m^{\prime}\rangle\,\frac{\langle3,1||T^{(1)}||3,2\rangle}{\sqrt{5}}$$</span>
+ולכן:
+<span>$$\langle3,1,m^{\prime}|E\,z|3,2,m\rangle=E\sqrt{\frac{4\pi}{3}}\,\langle2,1;m,0|1,m^{\prime}\rangle\,\frac{\langle3,1||T^{(1)}||3,2\rangle}{\sqrt{5}}$$</span>
+עבור המקרה של <span>\(m=0,m'=0\)</span> נקבל:
+<span>$$\langle3,1,0|E\,z|3,2,0\rangle=E\sqrt{\frac{4\pi}{3}}\,\langle2,1;0,0|1,0\rangle\,\frac{\langle3,1||T^{(1)}||3,2\rangle}{\sqrt{5}}$$</span>
+כאשר ניתן למצוא בעזרת טבלה כי <span>\(\langle2,1;0,0|1,0\rangle=-\sqrt{\frac{1}{10}}\)</span>.  נדרוש שיוויון בין הערך שהתקבל מחישוב ישיר לערך שמתקבל מוויגנר אקארט כדי למצוא את אלמנט המטריצה המצומצם:
+<span>$$E{\sqrt{\frac{4\pi}{3}}}\left(-{\sqrt{\frac{1}{10}}}\right){\frac{\langle3,1||T^{(1)}||3,2\rangle}{\sqrt{5}}}={\frac{3E}{\sqrt{15}}}\implies\left\langle {3},{1}||T^{(1)}||{3},{2} \right\rangle=-\frac{{3}\sqrt{10}}{2\sqrt{\pi}}$$</span>
+ולכן הביטוי עבור אלמנט כללי נתון על ידי:
+<span>$$\langle3,1,m^{\prime}|E\,z|3,2,m\rangle=-E\sqrt{\frac{4\pi}{3}}\,\langle2,1;m,0|1,m^{\prime}\rangle\,\frac{3\sqrt{10}}{2\sqrt{\pi}\sqrt{5}}$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">טנזור סקלארי</span><p>עבור טנזור מסדר אפס, כלומר מהצורה <span>\(T_{0}^{(0)}=S\)</span> נקבל:
+<span>$$\langle\alpha^{\prime},j^{\prime}m^{\prime}|S|\alpha,j m\rangle=\delta_{j j^{\prime}}\delta_{m m^{\prime}}\frac{\langle\alpha^{\prime}j^{\prime}||S||\alpha j\rangle}{\sqrt{2j^{\prime}+1}}$$</span>
+כיוון ש-<span>\(S\)</span> פועל על <span>\(\langle  \alpha,jm|\)</span> כמו הוספה של תנע זוויתי אפס, ולכן אופרטור סקלארי לא יכול לשנות את הערכים של <span>\(j,m\)</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים ממשפט וויגנר אקארט כי:
+<span>$$\langle\alpha^{\prime},j^{\prime},m^{\prime}|T_{q}^{(k)}|\alpha,j,m\rangle=\langle j\,k;m\,q|j^{\prime},m^{\prime}\rangle\,\frac{\langle\alpha^{\prime},j^{\prime}||T^{(k)}||\alpha,j\rangle}{\sqrt{2j+1}}$$</span>
+כאשר עבור אופרטור סקלארי <span>\(k=0\)</span>. ולכן גם ה-<span>\(q\)</span> המותר היחיד יהיה <span>\(q=0\)</span>. כאשר המקדם קלבש ג'ורדון <span>\(\langle j 0;m 0|j',m' \rangle\)</span> הוא לא אפס אם"ם <span>\(j'=j\)</span> וגם <span>\(m'=m\)</span>. למעשה ניתן לכתוב:
+<span>$$\langle j\,0;m\,0|j,m\rangle=\frac{1}{\sqrt{2j+1}}$$</span>
+כאשר אם נציב משפט נקבל:
+<span>$$\langle\alpha^{\prime},j,m|S|\alpha,j,m\rangle=\frac{1}{\sqrt{2j+1}}\,\frac{\langle\alpha^{\prime},j||S||\alpha,j\rangle}{\sqrt{2j+1}}=\frac{\langle\alpha^{\prime},j||S||\alpha,j\rangle}{2j+1}.$$</span>
+כאשר בעזרת הכתיבה הסטנרטית ניתן לספוח <span>\(\frac{1}{\sqrt{ 2j+1 }}\)</span> לתוך הגורם המוצומצם ולקבל:
+<span>$$\langle\alpha^{\prime},j^{\prime},m^{\prime}|S|\alpha,j,m\rangle=\delta_{j j^{\prime}}\,\delta_{m m^{\prime}}\,\frac{\langle\alpha^{\prime},j^{\prime}||S||\alpha,j\rangle}{\sqrt{2j^{\prime}+1}}$$</span></p>
+</div>
+<div class="example">
+<p>נמצא את <span>\(\langle r^{2} \rangle\)</span> עבור כל הארבע מצבים המנוונים עם <span>\(n=2\)</span> של אטום המימן. מהטענה נקבל עבור המצבים עם <span>\(\ell=1\)</span> כי:
+<span>$$\left\langle2\,1\,1\,{|}\,r^{2}\,{|}\,2\,1\,1\right\rangle=\left\langle2\,1\,0\,{|}\,r^{2}\,{|}\,2\,1\,0\right\rangle=\left\langle2\,1\,-1\,{|}\,r^{2}\,{|}\,2\,1\,-1\right\rangle\equiv\left\langle2\,1\,{\big|\big|}\,r^{2}\,{\big|\big|}\,2\,1\right\rangle$$</span>
+כאשר כדי לחשב את אלמנט המטריצה המצומצם מספיק לבחור כל אחד מהערכים האלה:
+<span>$$\left\langle2\,1\,{\big|\big|}\,r^{2}\,{\big|\big|}\,2\,1\right\rangle=\left\langle2\,1\,0\left|\,r^{2}\,\right|\,2\,1\,0\right\rangle=\int r^{2}\;|\psi_{210}(r)|^{2}\;d^{3}\mathbf{r}=\int_{0}^{\infty}r^{4}~|R_{21}(r)|^{2}~d r\,\int\Big|Y_{1}^{0}(\theta,\phi)\Big|^{2}~d\Omega.$$</span>
+כיוון שההרמוניות הספריות מנורמלות האינטגרל הזוויתי יהיה 1. כאשר עבור הרכיב הרדיאלי נקבל:
+<span>$$\langle2\,1\,\|\,r^{2}\,\left\|\,2\,1\right\rangle=\int_{0}^{\infty}r^{4}\,\frac{1}{24\,a^{3}}\,\frac{r^{2}}{a^{2}}\,e^{-r/a}\,d r=30\,a^{2}$$</span>
+זה קבוע את שלושת ערכי התצפית, כאשר ערך התצפית האחרון יהיה:
+<span>$$\begin{gather}\langle 2\,0\|r^{2}\,\|\,2\,0 \rangle=\langle 2\,0\,0\,|r^{2}\,|\,2\,0\,0 \rangle=\int r^{2}\;|\psi_{210}(r)|^{2}\;d^{3}\mathbf{r}=\\=\int_{0}^{\infty}r^{4}~|R_{21}(r)|^{2}~d r\,\int\left|Y_{1}^{0}(\theta,\phi)\right|^{2}\,d\Omega= \int_{0}^{\infty}r^{4}\,{\frac{1}{2\,a^{3}}}\left(1-{\frac{1}{2}}\,{\frac{r}{a}}\right)^{2}\,e^{-r/a}\,d r= 42a^{2}
+\end{gather}$$</span>
+כעת עבור למשל המצב <span>\(|\psi\rangle={\frac{1}{\sqrt{2}}}\;(|200\rangle-i\;|211\rangle)\)</span> ניתן לכתוב:
+<span>$$\begin{gather}\langle\psi\left|\left.r^{2}\right|\psi\right\rangle=\frac{1}{2}\left(\left\langle200\right|+i\left\langle211\right|\right)\,r^{2}\left(\left|200\right\rangle-i\,\left|211\right\rangle\right)= \\={\frac{1}{2}}\,(\left\langle200\left|\,r^{2}\,\right|200\right\rangle+i\,\left\langle211\left|\,r^{2}\,\right|200\right\rangle-i\,\left\langle200\left|\,r^{2}\,\right|211\right\rangle\left.+\left\langle211\left|\left.r^{2}\right|211\right\rangle\right\rangle\right.
+\end{gather}$$</span>
+כאשר מהטענה שתיים מאלמנטי המטריצה מתאפסים ולכן:
+<span>$$\left\langle\psi\left|\,r^{2}\,\right|\,\psi\right\rangle=\frac{1}{2}\left(\left\langle20\left\|\,r^{2}\,\right\|\,20\right\rangle+\left\langle21\left\|\,r^{2}\,\right\|\,21\right\rangle\right)=36\,a^{2}.$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">משפט ההטלה</span><p>עבור אופרטור ווקטורי <span>\(V_{q}\)</span> מתקיים:
+<span>$$\langle\alpha^{\prime},j m^{\prime}|V_{q}|\alpha,j m\rangle=\frac{\langle\alpha^{\prime},j m|\mathbf{J}\cdot\mathbf{V}|\alpha,j m\rangle}{\hbar^{2}j(j+1)}\langle j m^{\prime}|J_{q}|j m\rangle$$</span>
+כאשר <span>\(J_{q}\)</span> הם הרכיבים של ההצגה הספרית של התנע הזוויתי:
+<span>$$J_{\pm1}=\mp\frac{1}{\sqrt{2}}(J_{x}\pm i J_{y})=\mp\frac{1}{\sqrt{2}}J_{\pm},\quad J_{0}=J_{z}.$$</span></p>
+</div>
+<div class="proof">
+<p>ממשפט וויגנר עבור הטנזורים הספרים <span>\(V_{q}\)</span> ו-<span>\(J_{q}\)</span> מתקיים:
+<span>$$\langle\alpha^{\prime},j,m^{\prime}|V_{q}|\alpha,j,m\rangle=\langle j,1;m,q|j,m^{\prime}\rangle\,\frac{\langle\alpha^{\prime},j||V||\alpha,j\rangle}{\sqrt{2j+1}}$$</span>
+<span>$$\langle j,m^{\prime}|J_{q}|j,m\rangle=\langle j,1;m,q|j,m^{\prime}\rangle\,\frac{\langle j||J||j\rangle}{\sqrt{2j+1}}$$</span>
+כאשר ניתן להראות כי:
+<span>$$\langle j||J||j\rangle=\hbar\sqrt{j(j+1)(2j+1)}.$$</span>
+כעת נסתכל על המכפלה הסקלרית <span>\(\mathbf{J}\cdot \mathbf{V}\)</span>. מתקיים:
+<span>$$\langle\alpha^{\prime},j,m|\mathbf{J}\cdot\mathbf{V}|\alpha,j,m\rangle={\frac{\langle\alpha^{\prime},j||V||\alpha,j\rangle\,\langle j||J||j\rangle}{\sqrt{2j+1}}}\,{\frac{1}{\sqrt{2j+1}}},$$</span>
+כלומר:
+<span>$$\langle\alpha^{\prime},j||V||\alpha,j\rangle=\frac{\langle\alpha^{\prime},j,m|\mathbf{J}\cdot\mathbf{V}|\alpha,j,m\rangle}{\hbar\,\sqrt{j(j+1)(2j+1)}}$$</span>
+ולכן ניתן להשוואת בין הערכים ולקבל:
+<span>$$\langle\alpha^{\prime},j,m^{\prime}|V_{q}|\alpha,j,m\rangle=\frac{\langle\alpha^{\prime},j,m|\mathbf{J}\cdot\mathbf{V}|\alpha,j,m\rangle}{\hbar^{2}\,j(j+1)}\,\langle j,m^{\prime}|J_{q}|j,m\rangle$$</span></p>
+</div>
+<div class="example"><span class="keyword">כללי ברירה אופרטור ווקטורי</span><p>יהי <span>\(\mathbf{V}\)</span> אופרטור ווקטורי. נסתכל על <span>\(\hat{V}_{\pm}\equiv\hat{V}_{x}\pm i\,\hat{V}_{y}\)</span>. נקבל את היחסי חילוף:
+<span>$$\begin{gather}{{\left[\hat{L}_{z},\,\hat{V}_{z}\right]=0}}\qquad {{\left[\hat{L}_{z},\,\hat{V}_{\pm}\right]=\pm\,\hbar\,\hat{V}_{\pm}}} \qquad {{\left[\hat{L}_{\pm},\,\hat{V}_{\pm}\right]=0}}\\ {{\left[\hat{L}_{\pm},\,\hat{V}_{z}\right]=\mp\,\hbar\,\hat{V}_{\pm}}}\qquad {{\left[\hat{L}_{\pm},\,\hat{V}_{\mp}\right]=\pm\,2\,\hbar\,\hat{V}_{z}}} 
+\end{gather}$$</span>
+עבור למשל <span>\(\left[\hat{L}_{z},\,\hat{V}_{\pm}\right]=\pm\,\hbar\,\hat{V}_{\pm}\)</span> נקבל עבור אלמנטי המטריצה:
+<span>$$\left\langle n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{L}_{z}\,\hat{V}_{\pm}\,\left|\,n\,\ell\,m\right\rangle-\left\langle n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{\pm}\,\hat{L}_{z}\,\left|\,n\,\ell\,m\right\rangle=\pm\hbar\left\langle n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{\pm}\,\left|\,n\,\ell\,m\right\rangle$$</span>
+וכיוון שהמצבים העצמיים שלנו הם המצבים עצמיים של <span>\(L_{z}\)</span> נקבל:
+<span>$$\left[m^{\prime}-(m\pm1)\right]\,\left\langle n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{\pm}\,\left|\,n\,\ell\,m\right\rangle=0$$</span>
+כלומר אם נקבל כי אלמנטי המטריצה מתאפסים כל עוד לא מתקיים <span>\(m'=\pm 1\)</span>. ניתן להראות באופן דומה עבור <span>\(V_{z}\)</span> ולקבל:
+<span>$$\begin{array}{l l}{{\left&lt;n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{+}\,\left|\,n\,\ell\,m\right&gt;=0}}&amp;{{\ \ \mathrm{unless~}m^{\prime}=m+1}}\\ {{\left&lt;n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{z}\,\left|\,n\,\ell\,m\right&gt;=0}}&amp;{{\ \ \mathrm{unless~}m^{\prime}=m}}\\ {{\left&lt;n^{\prime}\,\ell^{\prime}\,m^{\prime}\,\right|\,\hat{V}_{-}\,\left|\,n\,\ell\,m\right&gt;=0}}&amp;{{\ \ \mathrm{unless~}m^{\prime}=m-1.}}\end{array}$$</span></p>
+</div>
+<div class="remark">
+<p>למעשה כאשר אנחנו במרחב עם <span>\(j\)</span> זהה, אז אופרטור ווקטורי <span>\(\mathbf{V}\)</span> נקבע לחלוטין על ידי ההטלה שלו על <span>\(\mathbf{J}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">שימוש של ווגנר-אקרט למציאת כללי ברירה</span><p>נסתכל על האופרטור:
+<span>$$V=a\,\hat{X}\hat{Y}\;,$$</span>
+כאשר <span>\(\hat{X},\hat{Y}\)</span> הם רכיבי המיקום של אופרטור <span>\(\mathbf{\hat{R}}\)</span>. אנו יודעים כי באופן כללי מתקיים:
+<span>$$U_{x}V_{y}=\frac{i}{2}(T_{-2}^{(2)}-T_{2}^{(2)}+\sqrt{2}\ T_{0}^{(1)})$$</span>
+כאשר <span>\(T^{(2)}_{\pm 2}\)</span> הם רכיבים של טנזור ספרי בלתי פריק מסדר 2 ו-<span>\(T_{0}^{(1)}\)</span> הרכיב של טנזור ספרי בלתי פריק מסדר 1(אופרטור ווקטורי).
+עבור המקרה שלנו <span>\(U=V=\mathbf{\hat{R}}\)</span> ולכן <span>\(U_{x}=\hat{X}\)</span> ו-<span>\(V_{y}=\hat{Y}\)</span> הרכיב <span>\(T_{0}^{(1)}\)</span> הוא רכיב אנטי סימטרי ולכן מתבטל(נזכור כי <span>\(T_{q}^{(1)}=\frac{\left( \vec{U}\times\vec{V} \right)_{q}}{i\sqrt{2}}\)</span> ובפרט כיוון ש-<span>\(\mathbf{U}=\mathbf{V}\)</span> מתאפס). לכן נקבל:
+<span>$$XY=\frac{i}{2}(T_{-2}^{(2)}-T_{2}^{(2)})$$</span>
+מהדרישה של הכללי ברירה של קלבש גורדון נקבל מהגורם הראשון מווגנאר אקרט:
+<span>$$\langle\alpha^{\prime},j^{\prime},m^{\prime}|T_{-2}^{(2)}|\alpha,j,m\rangle=\langle j\,2;m\,(-2)|j^{\prime},m^{\prime}\rangle\,\frac{\langle\alpha^{\prime},j^{\prime}||T^{(2)}||\alpha,j\rangle}{\sqrt{2j+1}},$$</span>
+ולכן מכללי הברירה של מקדמי קלבש גורדון נקבל:
+<span>$$\Delta m = -2\quad \left\lvert  \Delta l  \right\rvert \leq 2$$</span>
+כאשר עבור הגורם השני נקבל מווגנר אקארט כי:
+<span>$$\langle\alpha^{\prime},j^{\prime},m^{\prime}|T_{2}^{(2)}|\alpha,j,m\rangle=\langle j\,2;m\,2|j^{\prime},m^{\prime}\rangle\,\frac{\langle\alpha^{\prime},j^{\prime}||T^{(2)}||\alpha,j\rangle}{\sqrt{2j+1}},$$</span>
+ולכן מכללי הברירה של מקדמי קלבש גורדון נקבל:
+<span>$$\Delta m=2,\,|\Delta l|\leq2$$</span>
+כאשר מטעמי זוגיות כיוון שלאופרטור <span>\(xy\)</span> יש זוגיות חיובית, נדרש <span>\(\left\lvert  \Delta l  \right\rvert=0,2,4,\dots\)</span>
+ולכן סה"כ נקבל כי מתקיים:
+<span>$$|\Delta m|=2\qquad|\Delta l|=0,2$$</span></p>
+</div>
+<div class="example">
+<p>נמצא את הערך המינימלי של <span>\(j\)</span> במצב עצמי של תנע זוויתי כולל <span>\(\ket{jm}\)</span> ואת הערכים העצמיים כך שבאופן כללי ערך תצפית של אופרטור <span>\(O_{m_{0}}^{j_{0}}\)</span> בעל ספין <span>\(j_{0}\)</span> לא יתאפס. מוויגנר אקארט כיוון שהאלמנט מטריצה מצומצם לא אפס מתקיים:
+<span>$$m=m+m_{0}\ ,\quad|j_{0}-j|\leq j\leq j+j_{0}\ .$$</span>
+ולכן <span>\(m_{0}=0\)</span> ו-<span>\(j\geq \frac{j_{0}}{2}\)</span> כך ש-<span>\(j_{\min}=\frac{j_{0}}{2}\)</span>.</p>
+</div>
+<div class="summary">
+<ul>
+<li>משפט ווגינר אקארט אומר כי ניתן לכתוב את אלמנטי המטריצה של טנזור ספרי בלתי פריק על ידי מכפלה של מקדמי קלבש גורדון בגורם שלא תלוי ב-<span>\(m,m',q\)</span> בצורה הבאה:
+<span>$$\langle\alpha^{\prime},j^{\prime},m^{\prime}|T_{q}^{(k)}|\alpha,j,m\rangle=\langle j\,k;m\,q|j^{\prime}\,m^{\prime}\rangle\,\frac{\langle\alpha^{\prime},j^{\prime}||T^{(k)}||\alpha,j\rangle}{\sqrt{2j+1}}$$</span></li>
+<li>אלמנטי המטריצה של קלבש גורדון גוררים כי:
+<span>$$m^{\prime}=m+q\quad\mathrm{and}\quad|j-k|\leq j^{\prime}\leq j+k.$$</span></li>
+<li>אופרטור סקלארי אינו יכול לשנות את המספרים הקוונטים ולכן אלמנטי המטריצה שלו הם לא אפס רק כאשר <span>\(j'=j\)</span> ו-<span>\(m'=m\)</span> ונתון על ידי:
+ <span>$$\langle\alpha^{\prime},j^{\prime}m^{\prime}|S|\alpha,j m\rangle=\delta_{j j^{\prime}}\delta_{m m^{\prime}}\frac{\langle\alpha^{\prime}j^{\prime}||S||\alpha j\rangle}{\sqrt{2j^{\prime}+1}}$$</span></li>
+<li>אופרטור ווקטורי <span>\(\mathbf{V}\)</span> נקבע ביחידות על ידי ההטלה שלו על אופרטור התנע הזוויתי בבסיס הפלארי בצורה הבאה:
+ <span>$$\langle\alpha^{\prime},j m^{\prime}|V_{q}|\alpha,j m\rangle=\frac{\langle\alpha^{\prime},j m|\mathbf{J}\cdot\mathbf{V}|\alpha,j m\rangle}{\hbar^{2}j(j+1)}\langle j m^{\prime}|J_{q}|j m\rangle$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='prev-page'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

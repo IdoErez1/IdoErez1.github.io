@@ -1,0 +1,3053 @@
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --c1: #EEB902;
+  --c2: #F45D01;
+  --symbolize-text: #8377D1;
+  --c4: #7FBC69;
+  --c5: #005C7A;
+  --remark-text: #7EBCED;
+  --definition-text: #2E8A3D;
+  --proposition-text: #E1403D;
+  --theorem-text: #F39237;
+  --iyellow: #F9C762;
+  --idark: #1A535C;
+  --definition-bg: rgba(249, 199, 98, 0.1);
+  --proposition-bg: rgba(225, 64, 61, 0.05);
+  --example-bg: rgba(26, 83, 92, 0.2);
+  --remark-bg: rgba(126, 188, 230, 0.11);
+  --theorem-bg: rgba(228, 147, 82, 0.05);
+  --symbolize-bg: rgba(131, 119, 209, 0.05);
+  --corollary-bg: rgba(255, 195, 0, 0.05); /* Light yellow for corollary */
+  --corollary-text: #FFC300;
+  --reminder-bg: rgba(255, 165, 0, 0.05); /* Light orange for reminder */
+  --reminder-text: #FFA500;
+
+  --lemma-bg: rgba(75, 192, 192, 0.05); /* Soft teal for lemma */
+  --lemma-text: #4BC0C0;
+  --table-even-bg: #f2f2f2;
+  /* --svg-path-color: #111; */
+
+  --table-background: #f5f5f5; /* Light grey for table background */
+  --table-border-color: #cccccc; /* Light border color */
+  --table-header-bg: #e1e1e1; /* Light background for table header */
+  --table-header-text: #2c3e50; /* Darker text for headers */
+  --table-row-bg-odd: #ffffff; /* White for odd rows */
+  --table-row-text: #2c3e50; /* Dark text for rows */
+  --table-disabled-text: #b0b0b0; /* Disabled row text color */
+
+  /* Define light mode colors as CSS variables */
+  --summary-bg-color: #f9f9f9;
+  --summary-label-bg: #4a90e2;
+  --summary-background-color: #4a90e255;
+  --summary-border-color: #e0e0e0;
+  --summary-label-color: white;
+  --summary-text-color: #333;
+
+  direction: rtl;
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--corollary-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--corollary-text);
+  padding: 10pt;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--corollary-text);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--corollary-text);
+}
+
+/* Lemma Block */
+.lemma {
+  background-color: var(--lemma-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--lemma-text);
+  padding: 10pt;
+}
+
+.lemma::before {
+  font-weight: bold;
+  color: var(--lemma-text);
+  content: "למה";
+}
+
+.lemma::first-line {
+  color: var(--lemma-text);
+}
+
+/* Your existing styles */
+.definition {
+  display: block;
+  background: var(--definition-bg);
+  text-align: right;
+  border-right: 1.5mm;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-style: solid;
+  border-color: var(--definition-text);
+  padding: 10pt;
+}
+
+h1 {
+  color: var(--remark-text);
+}
+
+.definition::before {
+  font-weight: bold;
+  color: var(--definition-text);
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--definition-text);
+}
+
+.proposition {
+  background-color: var(--proposition-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--proposition-text);
+  padding: 10pt;
+}
+
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--proposition-text);
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--proposition-text);
+}
+
+.proof {
+  padding: 10pt;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: var(--example-bg);
+  border: 2pt solid var(--example-bg);
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--remark-text);
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: var(--remark-bg);
+  border: 0;
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--summary-label-bg);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--summary-background-color);
+  margin-top: 15px;
+  color: var(--summary-text-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--summary-label-bg);
+  color: var(--summary-label-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+.theorem {
+  background-color: var(--theorem-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--theorem-text);
+  padding: 10pt;
+}
+
+.theorem::first-line {
+  color: var(--theorem-text);
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--theorem-text);
+  content: "משפט";
+}
+
+.symbolize {
+  background-color: var(--symbolize-bg);
+  border-radius: 8pt;
+  border: 2pt solid var(--symbolize-text);
+  padding: 10pt;
+}
+
+
+.symbolize::before {
+  font-weight: bold;
+  color: var(--symbolize-text);
+  content: "סימון";
+}
+
+div {
+  margin: 6pt 0;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  background: var(--table-background);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--table-header-text);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--table-header-bg);
+}
+
+td {
+  color: var(--table-row-text);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--table-row-bg-odd);
+}
+
+@page {
+  @bottom-center {
+    /*background: #f1c55675;*/
+    content: counter(page); 
+    display: block;
+  }
+}
+@page :blank {
+  @bottom-center { content: none }
+}
+@page no-chapter {
+  @bottom-center { content: none }
+}
+@page :first {
+  /*background: url(cover.jpg) no-repeat center;*/
+  background-size: cover;
+  margin: 0;
+  @bottom-center{
+    content: none;
+  }
+}
+@page chapter {
+  background: #fbc847;
+  margin: 0;
+  @bottom-center { content: none }
+}
+
+#cover {
+  margin: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  background-repeat: repeat;
+  padding: 10cm 0;
+width: 100vw;
+  align-content: space-between;
+  height: 29.7cm;
+  text-align: center;
+  color: white;
+  align-items: center;  
+  text-shadow: 15px 15px 20px #0000008c;
+  text-align: center;
+}#cover h1{
+  margin: 0;
+  font-size: 60px;
+  page-break-before: auto;
+}
+#cover h2{
+  font-size: 40px;
+}
+
+h1{
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+#toc a::after { 
+  content: leader(".") target-counter(attr(href), page); 
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+/* ol{
+  counter-reset: list-counter 0;
+}
+ol li{
+  counter-increment: list-counter 1;
+} */
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+            <script>
+                // MathJax configuration
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                        displayMath: [["$$", "$$"], ["\[", "\]"]],
+                        processEscapes: true,
+                        packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+                    },
+                    options: {
+                        ignoreHtmlClass: 'tex2jax_ignore',
+                        processHtmlClass: 'tex2jax_process'
+                    },
+                    loader: {
+                        load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+                    }
+                };
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+        <body>
+            <div id='cover' style='background-color: #026873;'>
+                <h1>אנליזה ממשית</h1>
+                <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+            <h1 id='Infi_1'>פונקציות של משתנה ממשי</h1>
+<h2 id='Infi_1_1'>תכונות של מספרים ממשיים</h2>
+ <div class="symbolize">
+<p>עבור <span>\(A, B\subseteq \mathbb{R}\)</span> נסמן <span>\(A\leq B\)</span> בשביל להגיד:
+<span>$$\forall a \in A\quad \forall b \in B\qquad a\leq b$$</span>
+כאשר אם <span>\(c \in \mathbb{R}\)</span> נסמן <span>\(A\leq c\)</span> בשביל להגיד:
+<span>$$\forall a \in A\quad a\leq c$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת השלמות</span><p>תהיו <span>\(A,B \subseteq \mathbb{R}\)</span> לא ריקות כך ש-<span>\(A\leq B\)</span>. אזי קיים <span>\(c \in \mathbb{R}\)</span> כך שמתקיים <span>\(A\leq c \leq B\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה חסומה מלעיל</span><p>קבוצה <span>\(A\subseteq \mathbb{R}\)</span> נקראת חסומה מלעיל אם קיים <span>\(c \in \mathbb{R}\)</span> כך שמתקיים <span>\(A\leq c\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">חסם מלעיל</span><p>תהי <span>\(A\subseteq \mathbb{R}\)</span> קבוצה. אזי <span>\(c \in \mathbb{R}\)</span> נקרא חסם מלעיל של <span>\(A\)</span> אם מתקיים:
+<span>$$\forall a \in A\quad  a \leq c$$</span></p>
+</div>
+<div class="proposition">
+<p>לכל קבוצה חסומה מלעיל קיים חסם מלעיל <span>\(c \in \mathbb{R}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">חסם עליון</span><p>החסם מלעיל הקטן ביותר. כלומר אם:
+<span>$$A=\left\{  c \in \mathbb{R}\mid c \text{ is upper bound}  \right\}$$</span>
+אז <span>\(m \in \mathbb{R}\)</span> יהיה החסם העליון אם <span>\(m=\min A\)</span>. מסומן <span>\(m=\sup(A)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יחידות החסם העליון</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה שקיימים 2 חסמים עליונים <span>\(x,y\)</span> כך ש-<span>\(x\neq y\)</span>. כיוון ש-<span>\(y\)</span> חסם עליון הוא בפרט חסם מלעיל ולכן מקיים <span>\(x\leq y\)</span>. כיוון ש-<span>\(x\)</span> חסם עליון הוא בפרט חסם מלעיל ומקיים <span>\(y\leq x\)</span>. וקיבלנו כי <span>\(x=y\)</span> בסתירה. ולכן קיים חסם עליון יחיד.</p>
+</div>
+<div class="theorem"><span class="keyword">עקרון החסם העליון</span><p>לכל קבוצה <span>\(A\subseteq \mathbb{R}\)</span> חסומה מלעיל קיים חסם עליון.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(L\subseteq \mathbb{R}\)</span> קבוצה חסומה מלעיל. נסמן ב-<span>\(U\)</span> את קבוצת החסמים מלעיל של <span>\(L\)</span>. </p>
+</li>
+<li>
+<p>קבוצה זו אינה ריקה כיוון ש-<span>\(L\)</span> חסומה מלעיל והיא גם אינה חסומה מלעיל בעצמה כיוון שמתקיים <span>\(M+1 \in U\)</span>. </p>
+</li>
+<li>
+<p>לפי אקסיומת השלמות כיוון שמתקיים <span>\(L\leq U\)</span> קיים <span>\(c \in \mathbb{R}\)</span> כך ש-<span>\(L\leq c\leq U\)</span>. </p>
+</li>
+<li>
+<p>נקבל כי <span>\(L\leq c\)</span> ולכן חסם מלעיל של <span>\(L\)</span>. וגם כיוון ש-<span>\(c\leq U\)</span> הוא החסם מלעיל המינימלי אשר לפי ההגדרה <span>\(c=\sup L\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">טענות שקולות לחסם העליון</span><p>הטענות הבאות שקולות:</p>
+<ol>
+<li>
+<p><span>\(\beta=\sup A\)</span>. </p>
+</li>
+<li>
+<p><span>\(\beta\)</span> חסם מלעיל וכן כל <span>\(\beta &gt; x \in\mathbb{R}\)</span> קיים <span>\(x&lt;a \leq \beta\)</span> </p>
+</li>
+<li>
+<p><span>\(\beta\)</span> חסם מלעיל ולכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\alpha \in A\)</span> כך ש-<span>\(\beta-\varepsilon &lt; a\leq \beta\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ul>
+<li>נראה <span>\(1\implies 2\)</span>:
+נניח בשלילה כי 2 לא מתקיים. אז <span>\(\beta\)</span> הוא חסם מלעיל וקיים <span>\(x \in \mathbb{R}\)</span> כך ש-<span>\(x&lt;\beta\)</span> וגם לא קיים <span>\(a\)</span> כך ש-<span>\(x&lt;a\)</span>. כלומר לכל <span>\(a\)</span> מתקיים <span>\(a&lt;x\)</span>. ולכן <span>\(x\)</span> חסם מלעיל, כיוון שקטן מהחסם העליון, בסתירה.</li>
+<li>נראה <span>\(2\implies 3\)</span>:
+נסמן <span>\(x=\beta-\varepsilon\)</span>. מתקיים <span>\(\beta-\varepsilon&lt;\beta\)</span> ולכן לפי 2 מתקיים:
+<span>$$\beta-\varepsilon&lt;a\leq \beta$$</span></li>
+<li>נראה <span>\(3\implies 1\)</span>:
+נניח בשלילה כי <span>\(\beta\)</span> לא החסם העליון. ולכן כיוון ש-<span>\(A\)</span> לא ריקה קיים עבורה חסם עליון לפי משפט החסם העליון. נסמן <span>\(x = \sup A\)</span>. נסמן <span>\(\varepsilon=\beta-x\)</span>(חיובי כי <span>\(\beta&gt;0\)</span>) ונקבל:
+<span>$$\exists a \in A\quad x&lt;a\leq \beta$$</span>
+בסתירה לכך ש-<span>\(x\)</span> החסם העליון, ולכן נקבל כי <span>\(\beta\)</span> החסם העליון.</li>
+</ul>
+</div><h2 id='Infi_1_2'>פונקציות</h2>
+ <div class="definition"><span class="keyword">פונקציה של משתנה ממשי</span><p>פונקציה <span>\(F:D\to E\)</span> עם <span>\(D\subseteq \mathbb{R}\)</span> ו- <span>\(E\subseteq \mathbb{R}\)</span>. זאת אומרת <span>\(f\)</span> מתאימה לכל <span>\(x \in D\)</span> מספר יחיד.</p>
+</div>
+<div class="definition"><span class="keyword">גרף של פונקציה</span><p><span>$$\Gamma_{f}=\left\{  (x,y)\mid x \in D\land y=f(x)  \right\}=\left\{  (x,f(x))\mid x \in D  \right\}$$</span></p>
+</div>
+<div class="remark">
+<p>לפעמים מציינים את <span>\(f\)</span> ע"י נוסחה בלבד בלי לציין תחומים. במקרים אלו נפעל ע"י המוסכמות הבאות:</p>
+<ol>
+<li>
+<p>מוסכמת התחום המקסימלית - ניקח את <span>\(D\subseteq \mathbb{R}\)</span> להיות הקבוצה הגדולה ביותר שעבורה <span>\(f(x)\)</span> מוגדרת היטב </p>
+</li>
+<li>
+<p>מוסכמת הטווח המקסימלית - ניקח את <span>\(E=\mathbb{R}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">קטע פתוח וסגור</span><ol>
+<li>
+<p>קטע פתוח - קבוצה מהצורה הבאה: 
+<span>$$(a,b)\equiv\left\{  x \in \mathbb{R}\mid a&lt;x&lt;b  \right\}$$</span></p>
+</li>
+<li>
+<p>קטע סגור - קבוצה מהצורה הבאה: 
+<span>$$[a,b]\equiv \left\{  x \in \mathbb{R}  \mid a\leq x \leq b\right\}$$</span></p>
+</li>
+<li>
+<p>קטע חצי פתוח - קבוצה מהצורה <span>\((a,b]\)</span> או <span>\([a,b)\)</span> כאשר: 
+<span>$$\left( a,b]=\left\{  x \in \mathbb{R}\mid a&lt;x\leq b  \right\}\qquad [a,b \right)=\left\{  x \in \mathbb{R}\mid a\leq x&lt; b  \right\}$$</span></p>
+</li>
+<li>
+<p>קרן פתוחה - קטע פתוח שאחד הגבולות שלו הוא אינסוף: 
+<span>$$\left( -\infty,a \right)\equiv \left\{  x \in \mathbb{R} \mid x&lt; a \right\}\qquad \left( a,\infty \right)\equiv\left\{  x \in \mathbb{R}\mid x&gt; a  \right\}$$</span></p>
+</li>
+<li>
+<p>קרן סגורה - קטע חצי סגור שאחד הגבולות שלו הוא אינסוף. החלק עם האינסוף פתוח כי אנחנו לא כוללים את "אינסוף": 
+<span>$$\left[ a,\infty)=\left\{ x \in \mathbb{R}\mid a\leq x   \right\}\qquad (-\infty,b \right]=\left\{  x \in \mathbb{R}\mid x\leq b  \right\}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סביבה של נקודה</span><p>יהי <span>\(x_{0} \in \mathbb{R}\)</span>. סביבה של <span>\(x_{0}\)</span> היא תת קבוצה של <span>\(\mathbb{R}\)</span> מהצורה <span>\((x_{0}-h,x_{0}+h)\)</span> לאיזשהו <span>\(0&lt;h \in \mathbb{R}\)</span></p>
+</div>
+<div class="definition"><span class="keyword">סביבה מנוקבת של נקודה</span><p>יהי <span>\(x_{0} \in \mathbb{R}\)</span>. סביבה מנוקבת של <span>\(x_{0}\)</span> היא תת קבוצה של <span>\(\mathbb{R}\)</span> מהצורה:
+<span>$$(x_{0}-h,x_{0}+h)\setminus \{ x_{0} \}=(x_{0}-h, x_{0})\cup (x_{0},x_{0}+h)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סביבה חד צדדית של נקודה</span><ol>
+<li>
+<p>סביבה ימינית של <span>\(x_{0}\)</span> היא קבוצה מהצורה <span>\([x_{0},x_{0}+h)\)</span>. </p>
+</li>
+<li>
+<p>סביבה ימנית מנוקבת של <span>\(x_{0}\)</span> היא קבוצה מהצורה <span>\((x_{0},x_{0}+h)\)</span> </p>
+</li>
+<li>
+<p>סביבה שמאלית של <span>\(x_{0}\)</span> היא קבוצה מהצורה <span>\((x_{0}-h,x_{0}]\)</span>. </p>
+</li>
+<li>
+<p>סביבה שמאלית מנוקבת של <span>\(x_{0}\)</span> היא קבוצה מהצורה <span>\((x_{0}-h,x_{0})\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציה חסומה מלעיל</span><p>פונקציה <span>\(f:D\to E\)</span> נקראת חסומה מלעיל אם קיים <span>\(M \in \mathbb{R}\)</span> כך שלכל <span>\(x \in D\)</span> מתקיים:
+<span>$$f(x)\leq M$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציה חסומה מלרע</span><p>פונקציה <span>\(f:D\to E\)</span> נקראת חסומה מלעיל אם קיים <span>\(M \in \mathbb{R}\)</span> כך שלכל <span>\(x \in D\)</span> מתקיים:
+<span>$$f(x)\geq M$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציה חסומה</span><p>פונקציה <span>\(f:D\to E\)</span> נקראת חסומה גם למעיל וגם מלרע. כלומר קיימים <span>\(M_{1},M_{2}\in \mathbb{R}\)</span> כך שלכל <span>\(x \in D\)</span> מתקיים:
+<span>$$M_{1}\leq x \leq M_{2}$$</span></p>
+</div>
+<div class="corollary">
+<p>פונקציה חסומה אם"ם קיים <span>\(M \in \mathbb{R}\)</span> כך שלכל <span>\(x \in D\)</span> מתקיים <span>\(|x|&lt;M\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציות מוטוניות מונוטונית</span><p>יהי <span>\(f:D\to\mathbb{R}\)</span>. יהיו <span>\(x_{1},x_{2} \in D\)</span>.</p>
+<ol>
+<li>
+<p>פונקציה נקראת מונטונית עולה אם מתקיים: 
+<span>$$x_{1}&lt; x_{2}\implies f(x_{1})\leq f(x_{2})$$</span></p>
+</li>
+<li>
+<p>פונקציה נקראת מונטונית עולה ממש אם מתקיים: 
+<span>$$x_{1}&lt;x_{2}\implies f(x_{1})&lt;f(x_{2})$$</span></p>
+</li>
+<li>
+<p>פונקציה נקראת מונטונית יורדת אם מתקיים: 
+<span>$$x_{1}&lt;x_{2}\implies f(x_{2})\leq f(x_{1})$$</span></p>
+</li>
+<li>
+<p>פונקציה נקראת מונטונית יורדת ממש אם מתקיים: 
+<span>$$x_{1}&lt;x_{2}\implies f(x_{2})&lt;f(x_{1})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<ol>
+<li>
+<p>אם פונקציה היא מונוטונית עולה ממש אז היא בפרט מונוטנית עולה. </p>
+</li>
+<li>
+<p>אם פונקציה היא מונטונית יורדת ממש אז היא בפרט מונטונית יורדת. </p>
+</li>
+<li>
+<p>אם פונקציה היא קבועה אז היא גם מונוטונית יורדת וגם מונוטרית עולה, אך בכל מקרה אחר לא ייתכן שיקיים את שניהם. </p>
+</li>
+</ol>
+</div><h2 id='Infi_1_3'>גבולות של פונקציות</h2>
+ <div class="definition"><span class="keyword">גבול של פונקציה ממשית בנקודה</span><p>יהי <span>\(x_{0} \in \mathbb{R}\)</span>, ותהי <span>\(f:D\to E\)</span> פונקציה ממשית המוגדרת בסביבה מנוקבת של <span>\(x_{0}\)</span>. נאמר ש-<span>\(L\)</span> הוא הגבול של <span>\(f\)</span> ב-<span>\(x_{0}\)</span> אם מתקיים:
+<span>$$\forall \varepsilon&gt;0\quad \exists \delta &gt; 0\quad  \forall x \in D\quad \left( 0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert f(x)-L \rvert &lt;\varepsilon \right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">יחידות הגבול</span><p>אם מתקיים:
+<span>$$(1)\lim_{ x \to x_{0} } f(x)=L_{1}\qquad (2)\lim_{ x \to x_{0} } f(x)=L_{2}$$</span>
+אז <span>\(L_{1}=L_{2}\)</span></p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי <span>\(L_{2}\neq L_{1}\)</span>. נניח בלי הגבלת הכלליות כי <span>\(L_{2} &gt; L_{1}\)</span>. מגבול <span>\((1)\)</span> נקבל כי עבור <span>\(\varepsilon=\frac{L_{2}-L_{1}}{2}&gt;0\)</span> קיים <span>\(\delta_{1}\)</span> כך ש:
+<span>$$0&lt;\lvert x-x_{0} \rvert &lt;\delta_{1}\implies \lvert f(x)-L_{1} \rvert &lt; \frac{L_{2}-L_{1}}{2}$$</span>
+מגבול <span>\((2)\)</span> נקבל כי עבור <span>\(\varepsilon=\frac{L_{2}-L_{1}}{2}\)</span> כי:
+<span>$$0&lt;\lvert x - x_{0} \rvert &lt;\delta_{1}\implies \lvert f(x)-L_{2} \rvert &lt; \frac{L_{2}-L_{1}}{2}$$</span>
+ולכן אם ניקח <span>\(\lvert x-x_{0} \rvert&lt;\min\left( \delta_{1},\delta_{2} \right)\)</span> נקבל כי:
+<span>$$\frac{L_{1}+L_{2}}{2}&lt;f(x)&lt;\frac{3L_{2}-L_{1}}{2}\;\;\land \;\;\frac{3L_{1}-L_{2}}{2}&lt;f(x)&lt;\frac{L_{2}+L_{1}}{2}$$</span>
+ומטרנזטיביות נקבל כי <span>\(f(x)&lt;f(x)\)</span> בסתירה, ולכן <span>\(L_{1}=L_{2}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">אפיון היינה לגבולות</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ממשית. יהי <span>\(x_{0} \in \mathbb{R}\)</span>. אם כל סדרה <span>\((x_{n})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n}\in D\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(n \in N\)</span> מתקיים <span>\(x_{n} \neq x_{0}\)</span>. </p>
+</li>
+<li>
+<p>הגבול של הסדרה שואפת ל-<span>\(x_{0}\)</span>. 
+מקיימת <span>\(f(x_{n})\xrightarrow{n\to \infty}f(x_{0})\)</span> אם"ם מתקיים <span>\(\lim_{ x \to x_{0} }f(x)=L\)</span></p>
+</li>
+</ol>
+</div>
+<ul>
+<li>נראה ראשית את הכיוון <span>\(\impliedby\)</span>. כלומר נניח כי כל סדרה <span>\((x_{n})\)</span> המקיימת את תנאים <span>\(1,2,3\)</span> תקיים <span>\(f(x_{n})\to f(x_{0})\)</span>.
+נניח בשלילה שלא מקיים <span>\(\lim_{ x \to x_{0} }f(x)=L\)</span>. כלומר:
+<span>$$(i)\quad \exists\varepsilon&gt;0 \quad \forall \delta&gt; 0 \quad \exists x \in D\quad  0 &lt;\lvert x-x_{0} \rvert &lt;\delta \land \lvert f(x)-L \rvert \geq \varepsilon$$</span>
+נסמן את ה-<span>\(\varepsilon\)</span> הזה(אשר קיומו מובטח מהפסוק <span>\((i)\)</span>) ב-<span>\(\varepsilon'\)</span>. נבנה סדרה <span>\((a_n)_{n=1}^\infty\)</span> באופן הבא:
+האיבר <span>\(a_{n}\)</span> יהיה ה-<span>\(x\)</span> שמקבלית מ-<span>\((i)\)</span> עבור <span>\(\varepsilon=\varepsilon'\)</span>. ו-<span>\(\delta=\frac{1}{n}\)</span>. מתקיים:
+<span>$$0&lt;\lvert a_{n}-x_{0} \rvert &lt;\frac{1}{n}\implies x_{0}\neq a_{n}\land -\frac{1}{n}+x_{0}&lt;a_{n}&lt;\frac{1}{n}+x_{0}$$</span>
+כאשר נשים לב כי ממשפט הכריך <span>\((a_{n})\)</span> שואף ל-<span>\(x_{0}\)</span> כאשר <span>\(n\to \infty\)</span>. וכן כיוון ש-<span>\((i)\)</span> מגדיר <span>\(x \in D\)</span> אז גם:
+<span>$$\forall n \in \mathbb{N}\quad a_{n}\in D$$</span>
+ולכן הסדרה <span>\((a_n)_{n=1}^\infty\)</span> מקיימת את תנאים <span>\(1,2,3\)</span> ולכן מקיימת <span>\(\lim_{ n \to \infty }f(a_{n})=L\)</span> אבל לפי <span>\((i)\)</span> מתקיים <span>\(\lvert f(x)-L \rvert\geq \varepsilon\)</span> בסתירה.</li>
+<li>כעת נראה את הכיוון <span>\(\implies\)</span>. נניח כי <span>\(\lim_{ x \to x_{0} }f(x)=L\)</span>. יהי <span>\((x_{n})\)</span> סדרה המקיימת <span>\(1,2,3\)</span>. לפי הגדרת הגבול מתקיים:
+<span>$$(*)\quad \forall \varepsilon&gt;0\quad \exists \delta&gt;0\quad \forall x \in D\quad 0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert f(x)-L \rvert &lt;\varepsilon$$</span>
+וכן מתנאי 3 מתקיים:
+<span>$$(* *)\quad \forall\varepsilon&gt;0\quad \exists N \in \mathbb{N}\quad  \forall n \in \mathbb{N}\quad n&gt;N\implies \lvert x_{n}-x_{0} \rvert &lt;\varepsilon$$</span>
+יהי <span>\(\varepsilon&gt; 0\)</span>. מ-<span>\((*)\)</span> נקבל <span>\(\delta\)</span> כך שלכל <span>\(x \in D\)</span> מתקיים:
+<span>$$\lvert x_{n}-x_{0} \rvert &lt;\delta\implies \lvert f(x_{n}) -f(x_{0})\rvert &lt;\varepsilon$$</span>
+מ-<span>\((* *)\)</span> עבור <span>\(\varepsilon = \delta\)</span> נקבל <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt; N\)</span> מתקיים <span>\(\lvert x_{n}-x_{0} \rvert&lt;\delta\)</span>. כיוון שלפי תנאי 2 מתקיים כי לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n}\neq x_{0}\)</span> גם מתקיים <span>\(0&lt;\lvert x_{n}-x_{0} \rvert&lt;\delta\)</span> אבל מ-<span>\((*)\)</span> זה גורר <span>\(\lvert f(x_{n})-L \rvert&lt;\varepsilon\)</span> ולכן <span>\(\lim_{ n \to \infty }x_{n}=L\)</span>.</li>
+</ul>
+<div class="definition"><span class="keyword">גבול חד צדדי של פונקציה בנקודה</span><p>יהי <span>\(x_{0} \in \mathbb{R}\)</span>, ו-<span>\(f:D\to E\)</span> פונקציה ממשית.</p>
+<ol>
+<li>
+<p>קיים גבול ימיני אם קיימת סביבה ימנית מנוקבת של <span>\(x_{0}\)</span> כך שמתקיים: 
+<span>$$\forall \varepsilon &gt; 0\quad \exists \delta&gt;0\quad \forall x \in D \quad 0&lt;x-x_{0}&lt;\delta\implies \lvert f(x)-L \rvert &lt;\varepsilon$$</span></p>
+</li>
+<li>
+<p>קיים גבול שמאלי אם קיימת שביבה שמאלית מנוקבת של <span>\(x_{0}\)</span> כך שמתקיים: 
+<span>$$\forall \varepsilon &gt; 0\quad \exists \delta&gt;0\quad \forall x \in D \quad 0&lt;x_{0}-x&lt;\delta\implies \lvert f(x)-L \rvert &lt;\varepsilon$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">יחידות הגבול החד צצדי</span><ol>
+<li>
+<p>אם קיים גבול ימני ב-<span>\(x_{0}\)</span> אז הוא יחיד </p>
+</li>
+<li>
+<p>אם קיים גבול ימני ב-<span>\(x_{0}\)</span> אז הוא יחיד </p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<ol>
+<li>
+<p>אם <span>\(L\)</span> הוא הגבול של <span>\(f\)</span> ב-<span>\(x_{0}\)</span> נסמן <span>\(\underset{ x \to x_{0} }{\lim }f(x)=L\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(L\)</span> הוא הגבול הימיני של <span>\(f\)</span> ב-<span>\(x_{0}\)</span> נסמן <span>\(\underset{ x \to x_{0}^{+} }{\lim }f(x)=L\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(L\)</span> הוא הגבול השמאלי של <span>\(f\)</span> ב-<span>\(x_{0}\)</span> נסמן <span>\(\underset{ x \to x_{0}^{-} }{\lim }f(x)=L\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה המוגדרת בסביבה מנוקבת של <span>\(x_{0}\)</span>. אזי <span>\(f\)</span> בעלת גבול ב-<span>\(x_{0}\)</span> אם"ם 3 התנאים הבאים מתקיים:</p>
+<ol>
+<li>
+<p>הגבול הימיני מוגדר ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>הגבול השמאלי מוגדר ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(\underset{ x \to x_{0}^{+} }{\lim }f(x)=\underset{ x \to x_{0}^{-} }{\lim }f(x)\)</span> 
+ובמקרה זה מתקיים:
+<span>$$\lim_{ x \to x_{0} } f(x)=\lim_{ x \to x_{0}^{+} }f(x)=\lim_{ x \to x_{0}^{-} }  f(x)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">אפיון היינה לגבולות חד צדדיים</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ממשית. יהי <span>\(x_{0} \in \mathbb{R}\)</span>. אם כל סדרה <span>\((x_{n})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n}\in D\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(n \in N\)</span> מתקיים <span>\(x_{n} &gt; x_{0}\)</span>. </p>
+</li>
+<li>
+<p>הגבול של הסדרה שואפת ל-<span>\(x_{0}\)</span>. 
+מקיימת <span>\(f(x_{n})\xrightarrow{n\to \infty}f(x_{0})\)</span> אם"ם מתקיים <span>\(\lim_{ x \to x_{0}^{+} }f(x)=L\)</span>.
+כאשר עבור גבול שמאלי תנאי 2 יהיה <span>\(x_{n}&lt;x_{0}\)</span>.</p>
+</li>
+</ol>
+</div>
+<h2>גבולות במובן הרחב</h2>
+<div class="definition"><span class="keyword">שאיפה לאינסוף בנקודה</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה המוגדרת בסביבה מנוקבת של <span>\(x_{0} \in \mathbb{R}\)</span>. </p>
+<ol>
+<li>נאמר כי <span>\(f\)</span> שואפת לאינסוף בנקודה <span>\(x_{0}\)</span> אם מתקיים: 
+<span>$$\forall M \in \mathbb{R}\quad \exists \delta &gt; 0\quad  \forall x \in D\quad 0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies f(x) &gt; M$$</span>
+. נאמר כי <span>\(f\)</span> שואפת למינוס אינסוף בנקודה <span>\(x_{0}\)</span> אם מתקיים:
+<span>$$\forall M \in \mathbb{R}\quad \exists \delta &gt; 0\quad  \forall x \in D\quad 0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies f(x) &lt; M$$</span></li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">שאיפה לערך באינסוף</span><ol>
+<li>
+<p>נאמר ש-<span>\(f:\left( a,\infty \right)\to \mathbb{R}\)</span> שואף ל-<span>\(L\)</span> באינסוף אם מתקיים: 
+<span>$$\forall\varepsilon&gt;0\quad \exists N \in \mathbb{R}\quad \forall x \in \mathrm{Dom}(f)\quad  x &gt; N\implies \lvert f(x)-L \rvert &lt;\varepsilon$$</span>
+ומסומן <span>\(\underset{ x \to \infty }{\lim }f(x)=L\)</span>.</p>
+</li>
+<li>
+<p>נאמר ש-<span>\(f:\left( -\infty,a \right)\to \mathbb{R}\)</span> שואף ל-<span>\(L\)</span> במינוס אינסוף אם מתקיים: 
+<span>$$\forall\varepsilon&gt;0\quad \exists N \in \mathbb{R}\quad \forall x \in \mathrm{Dom}(f)\quad  x &lt; N\implies \lvert f(x)-L \rvert &lt;\varepsilon$$</span>
+ומסומן <span>\(\underset{ x \to -\infty }{\lim }f(x)=L\)</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">שאיפה לאינסוף באינסוף</span><ol>
+<li>
+<p>נאמר ש-<span>\(f:\left( a,\infty \right)\to \mathbb{R}\)</span> שואף לאינסוף באינוסף אם מתקיים: 
+<span>$$\forall M  \in \mathbb{R}\quad \exists N \in \mathbb{R}\quad  \forall x \in \mathrm{Dom}(f)\quad  x &gt; N\implies f(x)&gt;M$$</span>
+כאשר נסמן זאת ב-<span>\(\underset{ x \to \infty }{\lim }f(x)=\infty\)</span></p>
+</li>
+<li>
+<p>נאמר ש-<span>\(f:\left(-\infty,a \right)\to \mathbb{R}\)</span> שואף לאינסוף במינוס אינסוף אם מתקיים: 
+<span>$$\forall M  \in \mathbb{R}\quad \exists N \in \mathbb{R}\quad  \forall x \in \mathrm{Dom}(f)\quad  x &lt; N\implies f(x)&gt;M$$</span>
+כאשר נסמן זאת ב-<span>\(\underset{ x \to -\infty }{\lim }f(x)=\infty\)</span></p>
+</li>
+<li>
+<p>נאמר ש-<span>\(f:\left( a,\infty \right)\to \mathbb{R}\)</span> שואף למינוס אינסוף באינוסף אם מתקיים: 
+<span>$$\forall M  \in \mathbb{R}\quad \exists N \in \mathbb{R}\quad  \forall x \in \mathrm{Dom}(f)\quad  x &gt; N\implies f(x)&lt;M$$</span>
+כאשר נסמן זאת ב-<span>\(\underset{ x \to \infty }{\lim }f(x)=-\infty\)</span></p>
+</li>
+<li>
+<p>נאמר ש-<span>\(f:\left(-\infty,a \right)\to \mathbb{R}\)</span> שואף למינוס אינסוף במינוס אינסוף אם מתקיים: 
+<span>$$\forall M  \in \mathbb{R}\quad \exists N \in \mathbb{R}\quad  \forall x \in \mathrm{Dom}(f)\quad  x &lt; N\implies f(x)&lt;M$$</span>
+כאשר נסמן זאת ב-<span>\(\underset{ x \to -\infty }{\lim }f(x)=-\infty\)</span></p>
+</li>
+</ol>
+</div><h1 id='Infi_2'>פונקציות רציפות</h1>
+<h2 id='Infi_2_1'>הגדרה של פונקציה רציפה</h2>
+ <div class="definition"><span class="keyword">רציפות בנקודה</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ו-<span>\(x_{0} \in \mathbb{R}\)</span>. נאמר כי <span>\(f\)</span> רציפה ב-<span>\(x_{0}\)</span> אם מתקיים:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(f\)</span> מוגדרת בסביבה מלאה של <span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>קיים ל-<span>\(f\)</span> גבול ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>הגבול שווה לערך בהקודה. כלומר: 
+<span>$$\lim_{ x \to x_{0} } f(x)=f(x_{0})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אנחנו הרבה פעמים משתמשים בכיוון השני, אם פונקציה היא רציפה, אז זה מאפשר למצוא את הגבול ממש בקלות! פשוט מציבים את הנקודה, וזה יהיה הגבול.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה רציפה בתחום</span><p>פונקציה <span>\(f\)</span> נקראת רציפה בתחום <span>\(D\)</span> אם לכל <span>\(x \in D\)</span> הפונקציה רציפה ב-<span>\(x\)</span>. אם רציפה בכל תחום הגדרתה נאמר שהיא פונקציה רציפה.</p>
+</div>
+<div class="proposition"><span class="keyword">אפיון היינה לרציפות</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ממשית. יהי <span>\(x_{0} \in \mathbb{R}\)</span>. אם כל סדרה <span>\((x_{n})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n}\in D\)</span>. </p>
+</li>
+<li>
+<p>הגבול של הסדרה שואפת ל-<span>\(x_{0}\)</span>. 
+מקיימת <span>\(f(x_{n})\xrightarrow{n\to \infty}f(x_{0})\)</span> אם"ם מתקיים <span>\(\lim_{ x \to x_{0} }f(x)=L\)</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">אריתמטיקה של פונקציות רציפות</span><p>יהיו <span>\(g,f\)</span> פונקציות רציפות ב-<span>\(x_{0} \in \mathbb{R}\)</span>. </p>
+<ol>
+<li>
+<p>הסכום <span>\(f+g\)</span> יהיה רציף ב-<span>\(x_{0}\)</span> </p>
+</li>
+<li>
+<p>המכפלה <span>\(f\cdot g\)</span> תהיה רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>אם בנוסף <span>\(0\neq g(x_{0})\)</span> אז <span>\(\frac{1}{g}\)</span> רציפה ב-<span>\(x_{0}\)</span>, וכן במקרה זה גם <span>\(\frac{f}{g}\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\lambda \in \mathbb{R}\)</span> אז <span>\(\lambda f\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>ההפרש <span>\(f-g\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>נובע ישירות מאריתמטיקה של גבולות של פונקציות.</p>
+</div>
+<div class="definition"><span class="keyword">רציפות חד צצדית</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> ו-<span>\(x_{0} \in \mathbb{R}\)</span>.</p>
+<ol>
+<li>
+<p>אם מתקיים <span>\(\underset{ x \to x_{0}^{+} }{\lim }f(x)=f(x_{0})\)</span> אז נאמר כי רציף מימין. </p>
+</li>
+<li>
+<p>אם מתקיים <span>\(\underset{ x \to x_{0}^{-} }{\lim }f(x)=f(x_{0})\)</span> אז נאמר כי רציף משמאל. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>פונקציה רציפה בנקודה אם"ם רציפה גם משמאל וגם מימין.</p>
+</div>
+<div class="theorem"><span class="keyword">הרכבה של פונקציות רציפות</span><ol>
+<li>
+<p>תהי <span>\(f\)</span> פונקציה המוגדרת בסיבה מנוקבת של <span>\(x_{0}\)</span> כך ש-<span>\(\underset{ x \to x_{0} }{\lim }f(x)=y_{0}\)</span>. תהי <span>\(g\)</span> רציפה ב-<span>\(y_{0}\)</span>. אזי <span>\(g\circ f\)</span> בעלת גבול ב-<span>\(x_{0}\)</span> ומתקיים: 
+<span>$$\lim_{ x \to x_{0} } g(f(x))=\lim_{ x \to x_{0} } \left( g \circ  f \right)(x)=g(y_{0})$$</span></p>
+</li>
+<li>
+<p>אם בנוסף <span>\(f\)</span>  רציפה ב-<span>\(x_{0}\)</span> אז מתקיים <span>\(g \circ f\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. תהי <span>\(g\)</span> רציפה ב-<span>\(y_{0}\)</span>. לכן קיים <span>\(\delta_{1}&gt;0\)</span> כך שלכל <span>\(y \in \mathrm{Dom}(g)\)</span> מתקיים: 
+<span>$$0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert g(y)-g(y_{0}) \rvert &lt;\varepsilon$$</span>
+עכשיו <span>\(\underset{ x \to x_{0} }{\lim }f(x)=y\)</span> נותן <span>\(\delta&gt;0\)</span> כך שלכל <span>\(x \in \mathrm{Dom}\left( g \circ f \right)\)</span> מתקיים:
+<span>$$\begin{gather}0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert f(x)-y_{0} \rvert &lt;\delta_{1}\implies \lvert g(f(x))-y_{0} \rvert &lt;\delta_{1} \implies \\\implies \lvert g(f(x))-g(y_{0}) \rvert &lt;\varepsilon \implies \lim_{ x \to x_{0} } \left( g\circ f \right)(x_{0})=g(y_{0})
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>כעת נתון כי <span>\(f\)</span> רציפה ב-<span>\(x_{0}\)</span>. לכן <span>\(\underset{ x \to x_{0} }{\lim }f(x)=f(x_{0})=y\)</span>. נקבל כי: 
+<span>$$\lim_{ x \to x_{0} } g \circ f(x)=g(f(x_{0}))=\left( g\circ f \right)(x_{0})$$</span>
+זאת אומרת <span>\(g\circ f\)</span> רציפה ב-<span>\(x_{0}\)</span>.</p>
+</li>
+</ol>
+</div><h2 id='Infi_2_2'>משפטים על פונקציות רציפות</h2>
+ <div class="theorem"><span class="keyword">ערך הביניים</span><p>יהי <span>\(f:[a,b]\to \mathbb{R}\)</span> פונקציה רציפה. לכל <span>\(\lambda \in \left[ \min(f(a),f(b)),\max(f(a),f(b)) \right]\)</span> קיים <span>\(c \in [a,b]\)</span> כך ש-<span>\(f(c)=\lambda\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח בלי הגבלת הכלליות כי <span>\(f(a)\leq f(b)\)</span>. נגדיר: 
+<span>$$g(x)=f(x)-\lambda \qquad S=\left\{  x\mid g(x)\leq 0  \right\}$$</span></p>
+</li>
+<li>
+<p>אם <span>\(f(a)=\lambda\)</span> או <span>\(f(b)=\lambda\)</span> סיימנו. אחרת <span>\(f(a)&lt;\lambda\)</span> וגם <span>\(f(b)&gt;\lambda\)</span>, ולכן <span>\(g(a)&lt;0\)</span> וגם <span>\(g(b)&gt;0\)</span>. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(S\)</span> חסומה כיוון ש-<span>\(a\leq x \leq b\)</span> ולכן כיוון שלא ריקה(<span>\(a \in S\)</span>) לפי משפט החסם העליון <span>\(\sup S\)</span> מוגדר. נסמן <span>\(c=\sup S\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(0&lt;g(c)\)</span> כיוון שהפונקציה רציפה קיימת סביבה מלאה <span>\(A=(c-h,c+h)\)</span> כך ש-<span>\(A\geq 0\)</span>. עבור למשל <span>\(x' = c- \frac{h}{2}\in A\)</span> נקבל <span>\(x'&lt; c\)</span> וגם <span>\(0\leq g(x')\)</span> בסתירה לכך ש-<span>\(c\)</span> החסם התחתון. לכן <span>\(g(c)\leq 0\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(0&gt; g(c)\)</span> כיוון שרציף קיימת סביבה מלאה <span>\(A=(c-h,c+h)\)</span> כך ש-<span>\(\forall x \in A\quad g(x)&lt;0\)</span>. עבור למשל <span>\(g\left( c+\frac{h}{2} \right)&lt;0\)</span> נקבל <span>\(c+\frac{h}{2}\in S\)</span> בסתירה לכך ש-<span>\(c\)</span> החסם העליון ולכן <span>\(g(c)\geq 0\)</span>. </p>
+</li>
+<li>
+<p>משלבים 4+5 נקבל כי <span>\(g(c)=0\)</span> ולכן <span>\(f(c)=\lambda\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">ווירשטראס הראשון</span><p>כל פונקציה <span>\(f:[a,b]\to \mathbb{R}\)</span> רציפה בקטע סדור היא חסומה</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח בשלילה כי <span>\(f(x)\)</span> לא חסומה. לכן: 
+<span>$$(i)\quad \forall M \in \mathbb{R}\quad \exists x \in [a,b]\quad f(x)&gt;M$$</span></p>
+</li>
+<li>
+<p>לכן קיימת סדרה ששואפת לאינסוף - יהי <span>\(n \in \mathbb{N}\)</span>. נגדיר <span>\(a_{n}\)</span> בתור ה-<span>\(x\)</span> המתקבל מ-<span>\((i)\)</span> עבור <span>\(M=n\)</span>. ממשפט הפרוסה כיוון ש <span>\(n\to \infty\)</span> נקבל <span>\(f(a_{n})\to \infty\)</span>. </p>
+</li>
+<li>
+<p>כיוון שלכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(a_{n}\in [a,b]\)</span> מתקיים ש-<span>\((a_{n})\)</span> חסומה. לכן מבולצנו ווירשטאס נקבל תת סדרה <span>\((a_{n_{k}})\)</span> אשר מתכנסת. נגדיר <span>\(\lim_{ n \to \infty }a_{n_{k}}=x_{0}\)</span> </p>
+</li>
+<li>
+<p>מרציפות נקבל <span>\(\lim_{ n \to \infty }f(a_{n_{k}})=f(x_{0})\)</span> כאשר מירושה נקבל <span>\(\lim_{ k \to \infty }f(a_{n_{k}})=\infty\)</span> בסתירה, ולכן חסומה </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">ווירשטראס השני</span><p>אם <span>\(f\)</span> מוגדר ורציף בקטע סגור <span>\([a,b]\)</span> אז מקבל ערך מינימלי ומקסימלי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כיוון ש-<span>\(f\)</span> רציפה ב-<span>\([a,b]\)</span> לפי ווירשטראס הראשון נקבל כי <span>\(f(x)\)</span> חסומה בתחום, ולכן <span>\(M=\sup(f(x))\)</span> מוגדר. </p>
+</li>
+<li>
+<p>קיימת סדרה <span>\((x_{n})\)</span> המתכנסת ל-<span>\(M\)</span>. זאת כיוון שמאפיון הסופרמום: 
+<span>$$\forall \varepsilon &gt; 0\quad \exists x \in [a,b]\quad M-\varepsilon &lt; f(x)$$</span>
+כעת יהי <span>\(n \in \mathbb{N}\)</span>. נגדיר את <span>\(x_{n}\)</span> בתור ה-<span>\(x\)</span> שמתקבל עבור <span>\(\varepsilon=\frac{1}{n}\)</span>. מסנדוויץ כיוון שמתקיים:
+<span>$$\sup M-\frac{1}{n}&lt; f(x_{n})&lt;\sup M+\frac{1}{n}$$</span>
+נקבל <span>\(f(x_{n})\to M\)</span>.</p>
+</li>
+<li>
+<p>מבולצנו ווירשטראס קיימת תת סדרה <span>\(x_{n_{k}}\)</span> אשר מתכנסת - <span>\(x_{n}\)</span> חסומה ע"י <span>\([a,b]\)</span> ומתקיים <span>\(\lim_{ k \to \infty }x_{n_{k}}=d\)</span>. </p>
+</li>
+<li>
+<p>מרציפות נקבל <span>\(f(x_{n_{k}})=f(d)\)</span>. וכן כיוון שמתקיים: 
+<span>$$\forall k \in \mathbb{N}\quad  M- \frac{1}{k}\leq M-\frac{1}{n_{k}}&lt;f(x_{n_{k}})\leq M$$</span>
+ונקבל ממשפט הערך כי <span>\(f(x_{n})\to M\)</span> ולכן <span>\(f(d)=M\)</span> וקיים מקסימום.</p>
+</li>
+</ol>
+</div><h2 id='Infi_2_3'>תכונות של פונקציות רציפות ומונטוניות</h2>
+ <div class="definition"><span class="keyword">מיון נקודות אי רציפות</span><p>תהי <span>\(f\)</span> פונקציה המוגדרת בסביבה מלאה של <span>\(x_{0}\)</span>. אזי:</p>
+<ol>
+<li>
+<p>אם <span>\(\underset{ x \to x_{0} }{\lim }f(x)\)</span> קיים אבל הוא שונה מ-<span>\(x_{0}\)</span> נאמר ש-<span>\(f\)</span> בעלת אי רציפות סליקה </p>
+</li>
+<li>
+<p>אם <span>\(\underset{ x \to x_{0}^{+} }{\lim }f(x)\)</span> ו-<span>\(\underset{ x \to x_{0}^{-} }{\lim }f(x)\)</span> קיימים אך שונים נאמר שקיים אי רציפות מהסוג הראשון. </p>
+</li>
+<li>
+<p>אם לפתוח אחד מהגבולות החד צדדיות לא קיימות נאמר שקיים אי רציפות מהסוג השני, או אי רציפות עיקרית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">המשכה רציפה</span><p>אם לפונקציה <span>\(f:D\to \mathbb{R}\)</span> יש אי רציפות סליקה ב-<span>\(x_{0}\)</span>, ניתן להגדיר פונקציה חדשה כך ש-<span>\(h:D\to \mathbb{R}\)</span> כך:
+<span>$$\forall x \neq x_{0}\quad h(x)=f(x)\qquad h(x_{0})=\lim_{ x \to x_{0} } f(x)$$</span>
+כאשר פונקציה זו תהיה רציפה.</p>
+</div>
+<div class="definition"><span class="keyword">מקטע</span><p>קטע פתוח, סגור או קרן.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>אם <span>\(f\)</span> רציפה אז התמונה של <span>\(f\)</span> תהיה מקטע. </p>
+</li>
+<li>
+<p>אם <span>\(f\)</span> מונטונית ממש אז <span>\(f\)</span> תהיה חד חד ערכית. </p>
+</li>
+<li>
+<p>אם <span>\(f\)</span> מונטונית והתמונה של <span>\(f\)</span> מקטע אז <span>\(f\)</span> רציפה. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>תהי <span>\(I\subseteq \mathbb{R}\)</span> מקטע, ו-<span>\(f:I\to \mathbb{R}\)</span> מונטונית עולה ממש, ורציפה ב-<span>\(I\)</span>. יהיו <span>\(a,b \in \mathbb{R}\)</span> עם <span>\(a&lt; b\)</span>.</p>
+<ol>
+<li>
+<p>אם <span>\(I=[a,b]\)</span> אז <span>\(\mathrm{Im}f=[f(a),f(b)]\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(I=(a,b]\)</span> אז <span>\(\mathrm{Im}f=[ f(a),\underset{ x \to b^{-} }{\lim }f(x) )\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(I=\left( a,\infty \right)\)</span> אז <span>\(\mathrm{Im}f=\left( \underset{ x \to a^{+} }{\lim }f(x),\underset{ x \to \infty }{\lim }f(x) \right)\)</span> 
+כאשר כל המקרים מתקיימים גם עבור הצד שני של התחום.</p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל פונקציה מונוטונית ממש היא חד חד ערכית.</p>
+</div>
+<div class="proposition">
+<p>לכל פונקציה מונוטונית עולה וחסומה יש גבול חד צדדי</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(f\)</span> פונקציה מונוטונית עולה וחסומה.</p>
+<ol>
+<li>
+<p>נגדיר: 
+<span>$$A=\left\{  f(x)\mid x \in (a,b)  \right\}$$</span>
+כאשר נשים לב כי <span>\(A\)</span> לא ריקה כיוון ש-<span>\(f\left( \frac{a+b}{2} \right)\in A\)</span>, וכן <span>\(A\)</span> חסומה כיוון ש-<span>\(f(x)\)</span> חסום.</p>
+</li>
+<li>
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. מאפיון החסם העליון נקבל <span>\(x_{1} \in [a,b]\)</span> אשר יקיים: 
+<span>$$\sup A-\varepsilon &lt; f(x_{1})\leq \sup  A$$</span></p>
+</li>
+<li>
+<p>נבחר <span>\(\delta=b-x_{1}\)</span>. כעת לכל <span>\(x \in (a,b)\)</span> מתקיים: 
+<span>$$0&lt;b-x&lt;\delta\implies -x&lt;-x_{1}\implies x&lt; x_{1}$$</span>
+וכיוון שמונוטונית עולה <span>\(f(x_{1})&lt;f(x)\)</span> וכיוון שחסומה <span>\(f(x)&lt;\sup A\)</span> ולכן:
+<span>$$\sup  A-\varepsilon &lt; f(x_{1}) &lt; f(x)&lt; \sup  A&lt; \sup  A+\varepsilon\implies-\varepsilon&lt;f(x)-\sup  A&lt;\varepsilon$$</span>
+וכעת <span>\(\left\lvert  f(x)-\sup A  \right\rvert&lt;\varepsilon\)</span> וקיבלנו כי <span>\(\underset{ x \to b^{-} }{\lim }f(x)=\sup A\)</span>.</p>
+</li>
+</ol>
+</div><h2 id='Infi_2_4'>רציפות במידה שווה</h2>
+ <div class="definition"><span class="keyword">רציפות במידה שווה</span><p><span>$$\forall \varepsilon&gt;0 \;\;\exists\delta&gt;0 \;\;\forall x_1, x_2 \;\;|x_2-x_1|&lt;\delta \Rightarrow |f(x_2)-f(x_1)|&lt;\varepsilon$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאי לאי רציפות במידה שווה</span><p>יהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה אם קיימות שתי סדרות <span>\((\hat{x_n})_{n=1}^\infty, (x_n)_{n=1}^\infty\)</span> המקיימות:</p>
+<ol>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n},\hat{x}_{n}\in D\)</span> </p>
+</li>
+<li>
+<p>הפרש שואף ל-0: 
+<span>$$\lim_{n\to\infty} (x_n-\hat{x_n})=0$$</span></p>
+</li>
+<li>
+<p>מתקיים: 
+ <span>$$\forall n\in\mathbb N \qquad |f(x_n)-f(\hat{x_n})|\geq \varepsilon_0$$</span>
+ אזי הפונקציה לא רציפה במידה שווה. כלומר קיימות שתי סדרות שמתקרבות אחת לשנייה אבל המרחק בין ערכי ה-<span>\(y\)</span> שלהם לא יהיו קטנים כרצונינו.</p>
+</li>
+</ol>
+</div>
+<p><strong>טענה</strong> משפט קנטור
+ אם פונקציה רציפה בקטע סגור אז <span>\(f\)</span> רציפה במידה שווה.</p>
+<div class="proof">
+<p>נניח בשלילה ש-<span>\(f\)</span> רציפה בקטע סגור אך אינה רציפה במידה שווה. לכן קיים <span>\(\epsilon_0 &gt; 0\)</span> ושתי סדרות <span>\((b_n), (a_n)\)</span> כך ש-<span>\(\lim_{n\to\infty}(b_n-a_n) = 0\)</span> וגם:
+<span>$$\forall n\in\mathbb N\quad |f(b_n)-f(a_n)|\geq \epsilon_0$$</span>
+לפי בולצנו ווירשטרס קיימת ל-<span>\((a_n)\)</span> תת סדרה <span>\((a_{n_k})\)</span> מתכנסת. נסמן <span>\(\lim_{k\to\infty} a_{n_k}=L\)</span>.
+מאריתמטיקה של גבולות מתקיים:
+<span>$$b_{n_k} = a_{n_k}+(b_{n_k}- a_{n_k}) \Rightarrow \lim  b_{n_k} = L+0=L$$</span>
+וכן מרציפות מתקיים:
+<span>$$\lim_{k\rightarrow \infty} f(b_{n_k})=f(L)\qquad \lim_{k\rightarrow \infty} f(a_{n_k})=f(L)$$</span>
+ולכן:
+<span>$$\lim_{k\rightarrow \infty} (b_{n_k}-a_{n_k})=L-L=0$$</span>
+וגם <span>$$\lim f(a_{n_k}) - f(b_{n_k})=0$$</span>
+בסתירה לזה ש-<span>$$\forall n\in\mathbb N\quad |f(b_n)-f(a_n)|\geq \epsilon_0$$</span>
+<strong>הערה</strong>
+טענה זו נכונה גם עבור קטע פתוח אם קיימים הגבולות החד צדיים.</p>
+</div><h1 id='Infi_3'>נגזרת של פונקציה במשתנה אחד</h1>
+<h2 id='Infi_3_1'>הגדרת הנגזרת</h2>
+ <div class="definition"><span class="keyword">נגזרת בנקודה</span><p>תהי <span>\(f(x):A\to \mathbb{R}\)</span> פונקציה כאשר <span>\(A\subseteq \mathbb{R}\)</span>. אזי <span>\(f\)</span> גזירה בנקודה <span>\(x_{0}\)</span> אם מוגדרת בסביבה מלאה ומתקיים:
+<span>$$f'(x_{0})= \lim_{ x \to x_{0} } \frac{f(x)-f(x_{0})}{x-x_{0}}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן להגדיר <span>\(h=x_{0}-x\)</span> ולקבל:
+<span>$$f'(x_{0})=\lim_{ h \to 0 } \frac{f(x_{0}+h)-f(x_{0})}{h}$$</span>
+מהרכבה של גבולות.</p>
+</div>
+<div class="symbolize">
+<p>לעיתים מסמנים הנגזרת של <span>\(f\)</span> לפי <span>\(x\)</span> בתור <span>\(\frac{\mathrm{d} f}{\mathrm{d} x}\)</span></p>
+</div>
+<div class="example">
+<p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> פונקציה המוגדרת <span>\(f(x)=c\)</span> כאשר <span>\(c \in \mathbb{R}\)</span>. נניח כי הנגזרת תהיה <span>\(f'(x_{0})=0\)</span> לכל <span>\(x_{0} \in \mathbb{R}\)</span>. יהי <span>\(x_{0} \in \mathbb{R}\)</span>. מתקיים:
+<span>$$f'(x_{0})= \lim_{ x \to x_{0} } \frac{f(x)-f(x_{0})}{x-x_{0}} = \lim_{ x \to x_{0} } \frac{c-c}{x-x_{0}}=0$$</span>
+ולכן הנגזרת היא אפס.</p>
+</div>
+<div class="definition"><span class="keyword">קירוב לינארי בנקודה</span><p>אם קיים קבוע <span>\(M\)</span> וסביבה של <span>\(x_{0}\)</span> כך שלכל <span>\(x\)</span> בסביבה מתקיים:
+<span>$$M$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">קירוב לינארי</span><p>אם <span>\(f'(x)\)</span> גזירה בנקודה <span>\(x_{0}\)</span> כאשר <span>\(y_{0}=f(x_{0})\)</span> אז הקירוב הלינארי יהיה:
+<span>$$y-y_{0}=f'(x)(x-x_{0})$$</span></p>
+</div>
+<div class="proposition">
+<p>פונקציה גזירה אם"ם קיים קירוב לינארי.</p>
+</div>
+<div class="proof">
+<p>הכיוון של אם הפונקציה גזירה קיים קירוב לינארי הוא מיידי. נניח כעת כי קיים קירוב לינארי. כלומר קיים קבוע <span>\(M\)</span> כך</p>
+</div>
+<div class="proposition">
+<p>אם פונקציה <span>\(f\)</span> גזירה בנקודה אזי רציפה בנקודה.</p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$f(x)=(f(x)-f(x_{0}))+f(x_{0})=\frac{f(x)-f(x_{0})}{x-x_{0}}(x-x_{0})+f(x_{0})\xrightarrow{x\to x_{0}} f(x_{0})$$</span>
+ולכן רציף בנקודה.</p>
+</div>
+<div class="definition"><span class="keyword">גזירות חד כיוונית</span><ol>
+<li>
+<p>גזירות מימין: 
+<span>$$f'_{+}(x_{0})=\lim_{ x \to x_{0}^{+} } \frac{f(x)-f(x_{0})}{x-x_{0}}$$</span></p>
+</li>
+<li>
+<p>גזירות משמאל: 
+<span>$$f'_{-}(x_{0})_{-}=\lim_{ x \to x_{0} } \frac{f(x)-f(x_{0})}{x-x_{0}}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>שיוויון בין הנגזרת החד צדדיות גורר גזירות בנקודה </p>
+</li>
+<li>
+<p>גזירות חד צדדית גורר רציפות חד צדדית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציה גזירה בתחום</span><ol>
+<li>
+<p>אם פונקציה היא גזירה בנקודה לנקודה נקודה בתחום ניתן להגיד שהיא גזירה בתחום. </p>
+</li>
+<li>
+<p>אם פונקציה היא גזירה בכל תחום הגדרתה אנחנו אומרים שהפונקציה היא גזירה. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציה ליפשיצית</span><p>פונקציה <span>\(f:D\to \mathbb{R}\)</span> עבורה קיים קבוע <span>\(M\)</span> כך שלכל <span>\(x_{1},x_{2} \in D\)</span> מתקיים:
+<span>$$\lvert f(x_{1})-f(x_{2}) \rvert \leq M|x_{1}-x_{2}|$$</span>
+כאשר <span>\(M\)</span> נקרא הקבוע ליפשיץ.</p>
+</div>
+<div class="proposition">
+<p>אם הנגזרת של פונקציה היא חסומה אז הפונקציה היא ליפשיצית</p>
+</div>
+<div class="proof">
+<p>נניח כי מתקיים <span>\(\lvert f'(x) \rvert\leq M\)</span> לכל <span>\(x \in D\)</span>. יהיו <span>\(x,y \in I\)</span>. ממשפט לגרנג' מתקיים:
+<span>$$f(y)-f(x)=f'(c)(y-x)\leq M(y - x)$$</span>
+ולכן לישיצית עם קבוע ליפשיץ <span>\(M\)</span>.</p>
+</div><h2 id='Infi_3_2'>חוקי גזירה</h2>
+ <div class="proposition"><span class="keyword">אריתמטיקה של נגזרות</span><p>נניח <span>\(f,g\)</span> מוגדרות בסביבה מלאה של <span>\(x_{0}\)</span> וגזירות. אזי:</p>
+<ol>
+<li>
+<p>הסכום <span>\(f+g\)</span> גזיר ומתקיים: 
+<span>$$(f+g)'(x_{0})= f'(x_{0})+g'(x_{0})$$</span></p>
+</li>
+<li>
+<p>המכפלה <span>\(f\cdot g\)</span> גזירה ב-<span>\(x_{0}\)</span> ומתקיים: 
+<span>$$\left( f\cdot g \right)'(x_{0})=f'(x_{0})g(x_{0})+f(x_{0})g'(x_{0})$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(\lambda \in \mathbb{R}\)</span> מתקיים <span>\(\lambda f\)</span> גזירה וכן: 
+<span>$$\left( \lambda f \right)'(x_{0})=\lambda f'(x_{0})$$</span></p>
+</li>
+<li>
+<p>ההפרש <span>\(f-g\)</span> גזיר ומתקיים: 
+<span>$$(f-g)'(x_{0})= f'(x_{0})-g'(x_{0})$$</span></p>
+</li>
+<li>
+<p>אם <span>\(g(x_{0})\neq 0\)</span> אזי <span>\(\frac{1}{g}\)</span> גזירה ומתקיים: 
+<span>$$\left( \frac{1}{g} \right)'(x_{0})=-\frac{g'(x_{0})}{g(x_{0})^{2}}$$</span></p>
+</li>
+<li>
+<p>אם <span>\(g(x_{0})\neq 0\)</span> אז <span>\(\frac{f(x)}{g(x)}\)</span> גזיר ב-<span>\(x_{0}\)</span> ומתקיים: 
+<span>$$\left( \frac{f}{g} \right)'(x_{0})= \frac{f'(x_{0})g(x_{0})-g'(x_{0})f(x_{0})}{g(x_{0})^{2}}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>מתקיים: 
+<span>$$\begin{gather}\frac{(f+g)(x)-(f+g)(x_{0})}{x-x_{0}}= \frac{f(x)+g(x)-f(x_{0})+g(x_{0})}{x-x_{0}}=  \\=\frac{f(x)-f(x_{0})}{x-x_{0}}+ \frac{g(x)-g(x_{0})}{x-x_{0}}\xrightarrow{x\to x_{0}}f'(x_{0})+g'(x_{0})
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>מתקיים: 
+<span>$$\begin{gather}\frac{(fg)(x)-(fg)(x_{0})}{x-x_{0}}=\frac{f(x)g(x)-f(x_{0})g(x_{0})}{x-x_{0}}=  \\=\frac{f(x)g(x)-f(x_{0})g(x)+f(x_{0})g(x)-f(x_{0})g(x_{0})}{x-x_{0}}= \\=g(x)\left( \frac{f(x)-f(x_{0})}{x-x_{0}} \right)+f(x_{0})\left( \frac{g(x)-g(x_{0})}{x-x_{0}} \right)\xrightarrow{x\to x_{0}} g(x_{0})f'(x_{0})+ f'(x_{0})g(x_{0})
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>אם <span>\(g(x_{0})\)</span> מוגדרת בסביבה מנוקבת של <span>\(x_{0}\)</span> אזי <span>\(\frac{1}{g}(x_{0})\)</span> מוגדרת בסביבה מנוקבת של <span>\(x_{0}\)</span>, ומתקיים: 
+<span>$$\begin{gather}\frac{\left( \frac{1}{g} \right)(x)-\left( \frac{1}{g} \right)(x_{0})}{x-x_{0}}= \frac{\frac{1}{g(x)}-\frac{1}{g(x_{0})}}{x-x_{0}}=\frac{\frac{g(x_{0})-g(x)}{g(x)g(x_{0})}}{x-x_{0}}=  \\=\frac{-(g(x)-g(x_{0}))}{(x-x_{0})g(x)g(x_{0})}=-\frac{1}{g(x)g(x_{0})}\left( \frac{g(x)-g(x_{0})}{x-x_{0}} \right)\xrightarrow{x\to x_{0}} -\frac{g'(x_{0})}{g(x_{0})^{2}}
+\end{gather}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">כלל השרשרת</span><p>אם <span>\(f\)</span> גזירה ב-<span>\(x_{0}\)</span> ו-<span>\(g\)</span> גזירה ב-<span>\(y_{0}=f(x_{0})\)</span> אז <span>\(g\circ f\)</span> גזירה ב-<span>\(x_{0}\)</span> ומתקיים:
+<span>$$\left( g\circ f \right)'(x_{0})=g'(f(x_{0}))f'(x_{0})$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">נגזרת של פונקציה הופכית</span><p>אם פונקציה היא חח"ע ועל אז קיימת הופכית <span>\(f^{-1}\)</span>
+אם מתקיים <span>\(f\)</span> גזירה בנקודה <span>\(x_0\)</span>, <span>\(f'(x_0) \neq 0\)</span> וגם <span>\(f^{-1}\)</span> רציפה בנקודה <span>\(y_0=f(x_0)\)</span> אז מתקיים ש-<span>\(f^{-1}\)</span> גזירה בנקודה <span>\(y_0\)</span> ומתקיים:
+<span>$$(f^{-1})'(y_0) = \frac{1}{f'(x_0)}=\frac{1}{f'(f^{-1} (y_0))}$$</span></p>
+</div>
+<p>ממשפט זה נובע שאם קיימת נקודה שבה השיפוע 0, אז הנגזרת של ההופעית לא מוגדרת בנקודה.
+<strong>הוכחה</strong>
+אם <span>\(y\neq y_{0}\)</span> מתקיים:
+<span>$$f^{-1}(y)\neq f^{-1}(y_{0})$$</span>
+כי <span>\(f^{-1}\)</span> חח"ע. כעת:
+<span>$$f^{-1}(y_{0})=\frac{x-x_{0}}{y-x_{0}}$$</span></p><h2 id='Infi_3_3'>משפטי גזירה</h2>
+ <div class="theorem"><span class="keyword">פרמה</span><p>אם קיימת נקודת קיצון מקומית <span>\(x_0\)</span> והפונקציה גזירה בה אז <span>\(f'(x_0)=0\)</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח <span>\(x_{0}\)</span> מקסימום מקומי. לכן נקודה פנימית. </p>
+</li>
+<li>
+<p>קיים <span>\(\delta&gt;0\)</span> כך ש-<span>\(f(x)\leq f(x_{0})\)</span> עבור כל <span>\(x\)</span> ב-<span>\(\left( x_{0}-\delta,x_{0}+\delta \right)\)</span>. <span>\(f\)</span> גזירה ב-<span>\(x_{0}\)</span> ומתקיים: 
+<span>$$f'_{-}(x_{0})=f'(x_{0})=f'_{+}(x_{0})$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(x \in \left( x_{0},x_{0}+\delta \right)\)</span> מתקיים: 
+<span>$$\frac{f(x)-f(x_{0})}{x-x_{0}}\leq 0$$</span>
+כיוון ש:
+<span>$$f(x)-f(x_{0})\leq 0\quad x-x_{0}\leq 0$$</span></p>
+</li>
+<li>
+<p>אי שיוויון חלש בין פונקציות גורר אי שיוויון חלש בין גבולות, ונקבל <span>\(f'(x_{0})\leq 0\)</span> </p>
+</li>
+<li>
+<p>בעופן דומה עבור <span>\(x \in \left( x_{0}-\delta,x_{0} \right)\)</span> נקבל <span>\(f'(x_{0})\geq 0\)</span>. </p>
+</li>
+<li>
+<p>סה"כ קיבלנו כי <span>\(f'(x_{0})=0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>מהוכחה ראינו כי:</p>
+<ol>
+<li>
+<p>אם פונקציה עולה אז <span>\(0\leq f'(x_{0})\)</span>. </p>
+</li>
+<li>
+<p>אם פונקציה יורדת אז <span>\(0\geq f'(x_{0})\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">רול</span><p>אם פונקציה <span>\(f:[a,b] \rightarrow \mathbb R\)</span>:
+ רציפה בקטע הסגור <span>\([a,b]\)</span>, גזירה בקטע הפתוח <span>\((a,b)\)</span>, מקיימת <span>\(f(a)=f(b)\)</span>
+אז קיימת נקודה <span>\(c\in [a,b]\)</span> המקיימת <span>\(f'(c)=0\)</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>הפונקציה <span>\(f\)</span> רציפה בקטע הסגור <span>\([a,b]\)</span> ולכן מווירשטראס <span>\(f\)</span> חסומה בקטע וקיימים <span>\(c_{1},c_{2} \in [a,b]\)</span> נקודות מקסימום ומינימום כך שמתקיים: 
+<span>$$\forall x \in [a,b]\quad f(c_{1})\leq f(x)\leq f(c_{2})$$</span></p>
+</li>
+<li>
+<p>אם <span>\(c_{1}=c_{2}\)</span> אז מתקיים: 
+<span>$$\forall x \in[a,b]\quad f(c_{1})\leq f(x)\leq f(c_{1})\implies f(x)=f(c_{1})$$</span>
+והפונקציה תהיה קבועה</p>
+</li>
+<li>
+<p>אם <span>\(c_{1}\neq c_{2}\)</span> אז <span>\((a,b)\neq(c_{1},c_{2})\)</span> כי אחרת <span>\(f(b)\neq f(a)\)</span> בסתירה לתנאי 3. לכן <span>\(a&lt;c_{1}&lt;b\)</span> או <span>\(a&lt;c_{2}&lt;b\)</span> ולכן לפתחות אחת מבין <span>\(c_{1},c_{2}\)</span> נקודות פנימית, לכן נקודת קיצון מקומית. </p>
+</li>
+<li>
+<p>מתנאי 2 הפונקציה תהיה גזירה בנקודת הקיצון הזו ולכן תקיים ממשפט פרמה <span>\(f'(c_{1})=0\)</span> או <span>\(f'(c_{2})=0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">לגרנג'</span><p>אם פונקציה <span>\(f:[a,b] \rightarrow \mathbb R\)</span>:
+ רציפה בקטע הסגור <span>\([a,b]\)</span>, גזירה בקטע הפתוח <span>\((a,b)\)</span>
+אז קיימת נקודה <span>\(c\in (a,b)\)</span> המקיימת 
+<span>$$f'(c)=\frac{f(b)-f(a)}{b-a}$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נגדיר <span>\(\ell:\mathbb{R}\to \mathbb{R}\)</span> הישר המשיק שמחבר בין <span>\((a,f(a))\)</span> ו-<span>\((b,f(b))\)</span>. מתקיים: 
+<span>$$\ell(x)=\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$$</span></p>
+</li>
+<li>
+<p>נגדיר <span>\(h(x)=f(x)-\ell(x)\)</span> כאשר <span>\(h\)</span> רציפה ב-<span>\([a,b]\)</span> וגזירה ב-<span>\((a,b)\)</span> מאריתמטיקה של גזירות ורציפות. </p>
+</li>
+<li>
+<p>נגזור את <span>\(h(x)\)</span> ונקבל: 
+<span>$$h'(x)=f'(x)-\ell'(x)=f'(x)- \frac{f(b)-f(a)}{b-a}$$</span></p>
+</li>
+<li>
+<p>בנוסף מתקיים <span>\(h(a)=h(b)=0\)</span> ולכן מקיים את התנאים של משפט רול ולכן קיים נקודה <span>\(c \in (a,b)\)</span> כך שמתקיים: 
+<span>$$h'(c)=0\implies f'(c)=\frac{f(b)-f(a)}{b-a}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">קושי</span><p>אם פונקציות <span>\(f,g\)</span> רציפות בקטע הסגור <span>\([a,b]\)</span> וגזירות בקטע הפתוח <span>\((a,b)\)</span> אז קיים <span>\(c\in (a,b)\)</span> המקיים <span>$$f'(c)\left(g(b)-g(a)\right) = g'(c)\left(f(b) - f(a)\right)$$</span>
+ובפרט אם <span>\(g'(x) \neq 0\)</span> לכל <span>\(x\in (a,b)\)</span> אז מתקיים <span>$$\frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">דרבו</span><p>אם פונקציה היא גזירה ב-<span>\(a,b\)</span> ובעלת נגזרת ימנית ב-<span>\(a\)</span> ונגזרת שמאלית ב-<span>\(b\)</span> אז לכל <span>\(f'_{+}(a) &lt; \lambda &lt; f'_{-}(b)\)</span> קיים <span>\(c\)</span> כך ש-<span>\(f'(c)=\lambda\)</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נגדיר <span>\(g(x)=f(x)-\lambda x\)</span>. נשים לב כי <span>\(g(x)\)</span> רציפה כסכום של פונקציות רציפות. </p>
+</li>
+<li>
+<p>מהמשפט השני של ווירשטראס קיים <span>\(c \in [a,b]\)</span> כך ש: 
+<span>$$\forall x \in [a,b]\quad  g(c)\leq g(x)$$</span></p>
+</li>
+<li>
+<p>מהנתון נובע כי: 
+<span>$$g'_{+}(a)=f'_{+}(a)-\lambda&lt;0\implies \lim_{ x \to a } \frac{g(x)-g(a)}{x-a}&lt;0$$</span></p>
+</li>
+<li>
+<p>לכן קיימת סביבה מנוקבת ימנית של <span>\(a\)</span> כך ש-<span>\(\frac{g(x)-g(a)}{x-a}&lt; 0\)</span>. </p>
+</li>
+<li>
+<p>באופן דומה, כיוון ש-<span>\(b\neq c \neq a\)</span> מתקיים: 
+<span>$$g'_{-}(b)=f'_{-}(b)-\lambda&gt;0$$</span>
+כלומר קיימת סביבה שבה <span>\(g(x)&lt;g(b)\)</span> </p>
+</li>
+<li>
+<p>כלומר <span>\(c\)</span> נקודה פנימית. ולכן מקסימום או מינימום מקומי ומקיימת: 
+<span>$$g'(c)=0\implies f'(c)-\lambda=0\implies f'(c)=\lambda$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>לפונקציה גזירה יש רק אי רציפויות מהסוג השני.</p>
+</div>
+<div class="proof">
+<p>נזכר כי אם <span>\(\underset{ x \to a^{+} }{\lim }f'(x)=L\)</span> כאשר <span>\(f\)</span> רציפה ב-<span>\(a\)</span> אז <span>\(f'_{+}(a)=L\)</span>. נניח בשלילה שקיימת נקודת אי רציפות שאינה מהסוג השני, ולכן שתי הגבולות החד צדדיות של הנגזרת קיימות. נסמן
+<span>$$\lim_{ x \to a^{+} } f'(x)=L\qquad \lim_{ x \to a^{-} } f'(x)=K$$</span>
+כיוון ש-<span>\(f\)</span> גזירה ב-<span>\(a\)</span> אז מתקיים:
+<span>$$\lim_{ x \to a^{-} } f'(x)=\lim_{ x \to a^{+} } f'(x)=f'(a)$$</span>
+ולכן <span>\(K=L\)</span> והפונקציה רציפה, בסתירה.</p>
+</div><h2 id='Infi_3_4'>משפט טיילור וקירובים</h2>
+ <div class="definition"><span class="keyword">פולינום טיילור    </span><p>תהי <span>\(f\)</span> פונקציה. הפולינום טיילור מסדר <span>\(n\)</span> סביב <span>\(a\)</span> יהיה:
+<span>$$P(n,f,a)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k$$</span>
+
+<span>$$R(n,f,a) = f(x) - P(n, f, a)$$</span></p>
+</div>
+<div class="proposition">
+<p>פולינום טיילור מסדר <span>\(n\)</span> של הפונקציה <span>\(f\)</span> סביב הנקודה <span>\(x_{0}\)</span> הוא הפולינום היחיד שמקיים:
+<span>$$\lim_{x\rightarrow c} \frac{R(n,f,a)}{(x-a)^n} = 0$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">השארית של פולינום טיילור</span><p>קיים <span>\(c\in [a,x]\)</span>, כלומר בין הסביבה שבסביבה מפתחים את הפולינום למטרה שאנחנו רוצים למצוא את השארית ממנו המקיים:</p>
+</div>
+<ol>
+<li>
+<p>שארית לגרנג': 
+ <span>$$R_n = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^n$$</span></p>
+</li>
+<li>
+<p>שארית קושי: 
+ <span>$$R_n = \frac{f^{(n+1)(c)}}{n!}(x-c)^k(n-a)$$</span></p>
+</li>
+</ol><h2 id='Infi_3_5'>משפט להופיטל</h2>
+ <div class="theorem"><span class="keyword">לופיטל</span><p>אם קיימים <span>\(f,g\)</span> כך ש-<span>\(f,g\)</span> גזירות בסביבה ומתקיים:
+    <span>$$(1) \lim_{x\to c} f(x) =\lim_{x\to c} g(x) = 0$$</span>
+וקיימת סביבה מנוקבת שבה <span>\(g(x)\neq 0\)</span> אז:
+    <span>$$\lim_{x\rightarrow c} \frac{f(x)}{g(x)} = \lim_{x\rightarrow c} \frac{f'(x)}{g'(x)}$$</span></p>
+</div>
+<div class="remark">
+<p>קיים גם גרסה על שאיפה לאינסוף ושל ביטויים מהצורה <span>\(\frac{\infty}{\infty}\)</span></p>
+</div><h1 id='Infi_4'>אינטגרל של פונקציה במשתנה אחד</h1>
+<h2 id='Infi_4_1'>אינטגרל לפי דרבו ורימן</h2>
+ <div class="definition"><span class="keyword">חלוקה של קטע</span><p>קבוצה סופית <span>\(P\)</span> של נקודות בקטע <span>\([a,b]\)</span> הכוללות גם את <span>\(a\)</span> וגם את <span>\(b\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קוטר חלוקה</span><p>הגודל של ההפרש הגדול ביותר בין 2 נקודות בחלוקה.</p>
+</div>
+<div class="definition"><span class="keyword">סכום דרבו</span><p>חסומה <span>\(f(x)\)</span> וחלוקה <span>\(P=\{x_0, ... , x_n\}\)</span>. עבור <span>\(1\leq i\leq n\)</span> נגדיר:
+<span>$$M_i = \underset{x_{i-1}\leq x\leq x_i}{\sup}f(x)\qquad U(f,P)=\sum_{i=1}^{n} M_i (x_i - x_{i-1})$$</span>
+<span>$$m_i = \underset{x_{i-1}\leq x\leq x_i}{\inf}f(x)\qquad L(f,P)=\sum_{i=1}^{n} m_i (x_i - x_{i-1}) $$</span></p>
+</div>
+<div class="definition"><span class="keyword">תנודה של חלוקה</span><p><span>$$\omega_i = M_i - m_i$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצת חלוקה</span><p><span>$$\mathcal{U} = \left\{U(f,P) \mid P \text{ is partition } \right\}\qquad \mathcal{L} = \left\{L(f,P) \mid P \text{ is partition } \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל עליון ותחתון</span><p>מוגדרים בצורה הבאה:
+<span>$$\overline{\int_a^b} f(x) dx = \sup(\mathcal{U})\qquad \underline{\int_a^b} f(x)dx=\inf(\mathcal{L})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרביליות לפי דרבו</span><p>פונקציה חסומה <span>\(f:D\to \mathbb{R}\)</span> נקראת אינטגרבילית לפי דרבו אם האינטגרל התחתון שווה לאינטגרל העליון.</p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון בין האינטגרלים</span><p><span>$$m(b-a)\leq \mathcal{L}\leq \underline{\int_a^b} f(x)dx \leq \overline{\int_a^b} f(x) dx \leq \mathcal{U}\leq M(b-a)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">למת החתכים עבור קבוצות</span><p>אם <span>\(U,L\)</span> הם קבוצות המקיימות <span>\(U\geq L\)</span> אז הביטויים הבאים שקולים: </p>
+<ol>
+<li>
+<p>קיים <span>\(L\leq c\leq U\)</span> יחיד. </p>
+</li>
+<li>
+<p>מתקיים <span>\(\sup L = \inf U\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(u\in U\quad l\in L\)</span> כך ש-<span>\(u-l&lt;\varepsilon\)</span> </p>
+</li>
+<li>
+<p>קיימות סדרות <span>\((u_n)_{n=1}^{\infty}\)</span> של איברים ב-<span>\(U\)</span> ו-<span>\((l_n)_{n=1}^\infty\)</span> של איברים ב-<span>\(L\)</span> המקיימות <span>\(\underset{n\rightarrow\infty}{\lim }u_n - l_n = 0\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">למת החתכים עבור סכומי דרבו</span><ol>
+<li>
+<p>קיים מספר <span>\(c\)</span> יחיד המקיים שלכל שתי חלוקות <span>\(P_1,P_2\)</span> מתקיים <span>\(L(f,P_1)\leq c \leq U(f,P_2)\)</span>. </p>
+</li>
+<li>
+<p>הפונקציה <span>\(f\)</span> אינטגרבילית. </p>
+</li>
+<li>
+<p>לכל <span>\(\varepsilon&gt;0\)</span> קיימים 2 חלוקות <span>\(P_1, P_2\)</span> שמקיימות <span>\(U(f,P_1)-L(f,P_2)&lt;\varepsilon\)</span> </p>
+</li>
+<li>
+<p>קיימת סדרה של חלוקות <span>\((P_n)_{n=1}^{\infty}\)</span> אשר מקיימת  <span>\(\underset{n\rightarrow \infty}{\lim} \left( U(f,P_n) - L(f,P_n)\right) = 0\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תנאי דרבו לאינטגרביליות</span><p>פונקציה <span>\(f\)</span> אינטגרבילית אם"ם לכל <span>\(\varepsilon&gt;0\)</span> קיימת חלוקה <span>\(P\)</span> כך ש- <span>\(U(f,P)-L(f,P)&lt;\varepsilon\)</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f\)</span> אינטגרבילית ב-<span>\(\left[ \alpha,\beta \right]\subseteq(a,b)\)</span> לכל <span>\(\alpha,\beta\)</span> ו-<span>\(f\)</span> חסומה אז <span>\(f\)</span> אינטגרבילית ב-<span>\([a,b]\)</span>.</p>
+</div>
+<div class="proof">
+<p>הפונקציה <span>\(f\)</span> חסומה ולכן קיים <span>\(M \in \mathbb{R}\)</span> כך ש:
+<span>$$\forall x \in [a,b]\quad \lvert f(x) \rvert &lt;M$$</span>
+יהי <span>\(\varepsilon&gt;0\)</span>. נבחר <span>\(\alpha,\beta \in \mathbb{R}\)</span> המקיימים <span>\(b-\beta&lt;\frac{\varepsilon}{8M}\)</span>, ו-<span>\(\alpha-a&lt;\frac{\varepsilon}{8M}\)</span>. לפי הנתון <span>\(f\)</span> אינטגרבילית ב-<span>\(\left[ \alpha,\beta \right]\)</span> ולכן קיימת חלוקה <span>\(Q\)</span> כך שמתקיים:
+<span>$$U(f,Q)-L(f,Q)&lt;\frac{\varepsilon}{2}$$</span>
+נגדיר חלוקה <span>\(P=Q\cup \{ a,b \}\)</span>. מתקיים:
+<span>$$\begin{gather}U(f,P)-L(f,P)=\left( \sup_{\left[ a,\alpha \right]}(f)-\inf _{\left[ a,\alpha \right]}(f) \right)\left( \alpha-a \right)+U(f,Q)-L(f,Q)\left( \sup_{\left[ \beta,b \right]}(f)-\inf _{\left[ \beta,b \right]}(f) \right)\left( b-\beta \right) \leq \\\leq 2M\cdot \frac{\varepsilon}{8M}+\frac{\varepsilon}{2} +2M\cdot \frac{\varepsilon}{8M}=\frac{\varepsilon}{4}+\frac{\varepsilon}{2}+\frac{\varepsilon}{4}=\varepsilon
+\end{gather}$$</span>
+ומקיים את תנאי דרבו לאינטגרביליות.</p>
+</div>
+<div class="definition"><span class="keyword">סכום רימן</span><p>נגדיר חלוקה <span>\(P=\{x_0,...,x_n\}\)</span> של <span>\([a, b]\)</span> וקבוצה של נקודות <span>\(P^*=\{c_1,...,c_n \}\)</span> המקיימות <span>\(x_{i-1}\leq c_i\leq x_i\)</span>. סכום רימן יהיה מוגדר:
+<span>$$S(f, P, P^*)=\sum_{i=1}^n f(c_i)(x_i-x_{i-1})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרביליות לפי רימן</span><p>קיים <span>\(I\in R\)</span> כך שלכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt;0\)</span> כך שעבור חלוקה המקיימת <span>\(\Delta P &lt; \delta\)</span> ולכל בחירה של נקודות <span>\(P^*\)</span> מתקיים <span>\(|S(f,P,P^*)-I|&lt;\varepsilon\)</span></p>
+</div>
+<div class="proposition">
+<p>פונקציה אינטגרבילית לפי רימן היא חסומה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח בשלילה שלא חסום. נגדיר חלוקה עם <span>\(\Delta P&lt;\delta\)</span>. עבור <span>\(\varepsilon=1\)</span> הסכום רימן יקיים: 
+<span>$$I-1&lt;S(f,P,P^{*})&lt;I+1$$</span></p>
+</li>
+<li>
+<p>חייב להיות מההנחה בשלילה קטע בחלוקה עבורו לא חסום. בקטע זה קיים נקודה שגודלה מכל שאר האיברים בסכום, בסתירה לתנאי רימן. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>נשים לב כי עבור דרבו זו הייתה דרישה בהגדרה, כאשר כאן זה נובע מההגדרה.</p>
+</div>
+<div class="theorem"><span class="keyword">שקילות בין אינטגרל דרבו ורימן</span><p>אינטגרביליות לפי רימן שקולה לאינטגרביליות לפי דרבו.</p>
+</div>
+<p>נראה אינטגרביליות לפי רימן גוררת אינטגרביליות לפי דרבו.</p>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. מתנאי רימן קיים <span>\(0&lt; \delta\)</span> כך שעבור חלוקה <span>\(P=\left\{  x_{0},\dots,x_{n}  \right\}\)</span> כך ש-<span>\(\Delta P&lt;\delta\)</span> לכל חלוקת נקודות <span>\(P^{*}\)</span> מתקיים:
+<span>$$\lvert S(f,P,P^{*}) - I\rvert &lt;\frac{\varepsilon}{4}$$</span>
+נסתכל על הקטע חלוקה <span>\([x_{i-1},x_{i}]\)</span>. נגדיר:
+<span>$$M_{i}=\sup _{x \in [x_{i-1},x_{i}]} f(x)\qquad m_{i}=\inf _{x \in[x_{i-1},x_{i}]}f(x)$$</span>
+אנו יודעים כי מזהות של סופרמום כי מתקיים:
+<span>$$\sup \left\{  x-y \mid x,y \in A\right\}=\sup A-\inf A$$</span>
+לכן:
+<span>$$\omega_{i}(f,P)=M_{i}-m_{i}=\sup _{x \in[x_{i-1},x_{i}]} (f(x)-f(y))$$</span>
+בפרט <span>\(\frac{1}{2}(M_{i}-m_{i})\)</span> לא חסם עליון וקיימים <span>\(c_{i},\hat{c}_{i}\)</span> כך ש:
+<span>$$\frac{1}{2}(M_{i}-m_{i})\leq \lvert f(c_{i})-f\left( \hat{c}_{i} \right) \rvert $$</span>
+נסמן <span>\(P^{*}=\left\{  c_{1},\dots, c_{n}  \right\}\)</span> ו-<span>\(\widehat{P^{*}}=\left\{  \hat{c}_{1},\dots,\hat{c}_{n}  \right\}\)</span> הנקודות עבור כל חלוקה. כעת מתקיים:
+<span>$$\begin{gather}U(f,P)-L(f,P)=\sum (M_{i}-m_{i})(x_{i-1}-x_{i})\leq \\\leq \sum_{i=1}^{n} 2\left\lvert  f(c_{i})-f\left( \hat{c}_{i} \right)  \right\rvert (x_{i-1}-x_{i})= \\=\left\lvert  2S(f,P,P^{*})-2S\left( f,P,\widehat{P^{*}}  \right)  \right\rvert = \frac{2\varepsilon}{4}+\frac{2\varepsilon}{4}=\varepsilon
+\end{gather}$$</span></p>
+</div><h2 id='Infi_4_2'>תכונות האינטגרל המסויים</h2>
+ <div class="proposition">
+<p>אם <span>\(f,g\)</span> פונקציות אינטגרביליות, מתקיים:</p>
+</div>
+<ol>
+<li>
+<p>לינאריות:<br />
+<span>$$\int f\pm g=\int f \pm \int g\qquad \int c f =c\int f$$</span></p>
+</li>
+<li>
+<p>המכפלה <span>\(f\cdot g\)</span> גם תהיה פונקציה אינטגרבילית. </p>
+</li>
+<li>
+<p>אם קיים <span>\(C&gt;0\)</span> כך ש-<span>\(|g|\geq C\)</span> אז <span>\(\frac{f}{g}\)</span> אינטגרבילית. </p>
+</li>
+<li>
+<p>אם <span>\(f(x)&gt;0\)</span> ב-<span>\(x\in[a,b]\)</span> אז <span>\(\int f &gt;0\)</span> </p>
+</li>
+<li>
+<p>מונוטוניות: <span>\(f\geq g\Rightarrow \int f \geq \int g\)</span> </p>
+</li>
+<li>
+<p>ערך מוחלט: <span>\(\left| \int f(x) \right|\leq \int\left| f(x)\right|\)</span> </p>
+</li>
+<li>
+<p>ירושה: אם פונקציה אינטגרבילת בתחום אז תהיה אינטגרבילת בכל תת תחום </p>
+</li>
+<li>
+<p>אינווריטנטיות להזזה אופקית:<br />
+<span>$$\int_{a-c}^{b-c} f(x+c) = \int_a^b f$$</span></p>
+</li>
+<li>
+<p>הומותטיה:<br />
+<span>$$\int_{a/m}^{b/m} f(mx)=\frac{1}{m}\int_a^b f(x) dx$$</span></p>
+</li>
+<li>
+<p>אדיטיביות של תחום: 
+<span>$$\int_a^b f = \int_a^c f + \int_c^b f$$</span></p>
+</li>
+</ol>
+<div class="proposition"><span class="keyword">דברים הגוררים אינטגרביליות</span><p>אם <span>\(f:[a,b]\to \mathbb{R}\)</span> אז הביטיים הבאים גוררים אינטגרביליות:</p>
+</div>
+<ol>
+<li>
+<p>מונוטוניות. </p>
+</li>
+<li>
+<p>רציפות. </p>
+</li>
+<li>
+<p>ליפשיציות </p>
+</li>
+<li>
+<p>מכפלה של פונקציות אינטגרביליות </p>
+</li>
+</ol>
+<div class="proposition">
+<p>אם <span>\(f:[a,b]\rightarrow \mathbb R\)</span> מונוטונית אז היא אינטגרבילית</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח <span>\(f\)</span> מונוטונית עולה ב-<span>\([a,b]\)</span>. </p>
+</li>
+<li>
+<p>הפונקציה <span>\(f\)</span> חסומה כי <span>\(\forall x \quad f(a)\leq f(x)\leq f(b)\)</span>. </p>
+</li>
+<li>
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. נבחר חלוקה <span>\(P=\{x_0,...,x_n\}\)</span> כך ש-<span>\(\Delta P &lt; \frac{\varepsilon}{f(b)-f(a)}\)</span> </p>
+</li>
+<li>
+<p>כעת מתקיים <span>\(M_i=f(x_i)\quad m_i=f(x_{i-1})\)</span> ממונוטוניות </p>
+</li>
+<li>
+<p>נקבל:<br />
+<span>$$\begin{gather}U(f,P)-L(f,P)=\sum_{i=1}^n (M_i-m_i)(x_i-x_{i-1})  \\\leq\Delta P\sum_{i=1}^n (f(x_i)-f(x_{i-1}))=\Delta P(f(b)-f(a))\leq \varepsilon
+\end{gather}$$</span>
+ולכן אינטגרבילי מתנאי דרבו לאינטגרביליות.</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">רציפות גורר אינטגרבילות</span><p>אם פונקציה רציפה בקטע סגור אז היא אינטגרביליות הקטע.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>ממשפט קנטור כיוון שרציפה בקטע סוגר נקבל כי רציפה במ"ש בקטע. לכן: 
+<span>$$\forall \varepsilon&gt;0 \quad \exists \delta&gt; 0\quad \forall x,y \in[a,b]\quad \lvert x-y \rvert &lt;\delta\implies \lvert f(x)-f(y) \rvert &lt;\varepsilon$$</span></p>
+</li>
+<li>
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. נציב בביטוי של רציפות במידה שווה <span>\(\varepsilon_{1}=\frac{\varepsilon}{b-a}\)</span>. נקבל <span>\(\delta&gt; 0\)</span> כך ש: 
+<span>$$\forall x,y \in [a,b]\quad \lvert x-y \rvert &lt;\delta\implies f(x)-f(y)&lt;\frac{\varepsilon}{b-a}$$</span></p>
+</li>
+<li>
+<p>נגדיר חלוקה <span>\(P=\left\{  \alpha=x_{0},\dots,x_{n}=\beta  \right\}\)</span> כך ש-<span>\(\Delta P&lt;\delta\)</span>. </p>
+</li>
+<li>
+<p>כיוון שרציף ב-<span>\([a,b]\)</span> גם רציף ב-<span>\([x_{i-1},x_{i}]\)</span> לכן מווירשטראס השני נקבל כי קיים <span>\(c_{i}\)</span> עבורו <span>\(f(c_{i})\)</span> מקסימלי ב-<span>\([x_{i-1},x_{i}]\)</span>. </p>
+</li>
+<li>
+<p>מתקיים: 
+<span>$$\lvert d_{i}-c_{i} \rvert \leq x_{i}-x_{i-1}&lt;\delta\implies \lvert f(d_{i})-f(c_{i}) \rvert &lt;\frac{\varepsilon}{b-a}\implies f(d_{i})-f(c_{i})&lt;\frac{\varepsilon}{b-a}$$</span></p>
+</li>
+<li>
+<p>נסתכל על הסכומי דרבו: 
+<span>$$\begin{gather}L(f,P)=\sum_{i=1}^{n} m_{i}(x_{i}-x_{i-1})=\sum_{i=1}^{n} f(d_{i})(x_{i}-x_{i-1})  \\U(f,P)=\sum_{i=1}^{n} M_{i}(x_{i}-x_{i-1})=\sum_{i=1}^{n} f(c_{i})(x_{i}-x_{i-1}) \\U(f,P)-L(f,P)=\sum_{i=1}^{n} (f(c_{i})-f(d_{i}))(x_{i}-x_{i-1})\leq \frac{\varepsilon}{b-a}(b-a)=\varepsilon
+\end{gather}$$</span>
+ולכן אינטגבילי מתנאי דרבו לאינטגרביליות.</p>
+</li>
+</ol>
+</div><h2 id='Infi_4_3'>המשפט היסודי של האינפי</h2>
+ <div class="theorem"><span class="keyword">היסודי של האינפי</span><p>עבור פונקציה <span>\(f:A\to \mathbb{R}\)</span> נקבל כי:</p>
+<ol>
+<li>
+<p>אם פונקציה <span>\(f\)</span> היא <u>אינטגרבילית</u> אז <span>\(\tilde F(x)=\int_a^x f\)</span> רציפה. </p>
+</li>
+<li>
+<p>אם פונקציה <span>\(f\)</span> היא <u>רציפה</u> אז <span>\(\tilde F(x)=\int_a^x f(t) dt\)</span> גזירה ומתקיים <span>\(f = \tilde F'\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>נראה כי <span>\(\lim_{x\to x_0} F(x) = F(x_0)\)</span>. מתקיים: 
+<span>$$            |F(x)-F(x_0)|=\left|\int_a^x f-\int_a^{x_0} f \right|=\left|\int_{x_0}^x f\right|\leq  \int_{x_0}^x |f| \leq \int_{x_0}^x M = M(x-x_0)
+$$</span>
+יהי <span>\(\varepsilon &gt;0\)</span>. נגדיר <span>\(\delta = \frac{\varepsilon}{M}\)</span>. כעת לכל <span>\(|x-x_0|&lt;\delta\)</span> מתקיים:
+<span>$$|F(x)-F(x_0)|\leq M(x-x_0)&lt;\varepsilon$$</span></li>
+</ol>
+</div>
+<p>לפני שנוכיח את החלק השני נוכיח משפט אחר:</p>
+<div class="theorem"><span class="keyword">ערך הממוצע האינטגרלי</span><p>אם <span>\(f\)</span> פונקציה רציפה ב- <span>\([a,b]\)</span>, אז קיימת נקודה <span>\(c\in (a,b)\)</span> המקיימת: 
+<span>$$f(c)=\frac{1}{b-a}\int_a^b f$$</span></p>
+</div>
+<div class="proof">
+<p>מהמשפט היסודי הפונקציה <span>\(\tilde F=\int_a^x f(t) dt\)</span> גזירה.
+לכן ניתן להפעיל את לגרנג' ונקבל:
+<span>$$\frac{1}{b-a}\int_a^b f(t) dt = \frac{\tilde{F}(b)-\tilde{F}(a)}{b-a}=\tilde{F'}(c)=f(c)$$</span></p>
+</div>
+<p>כעת ניתן לחזור להוכיח את החלק השני של המשפט היסודי:</p>
+<div class="proof">
+<ol>
+<li>נראה שגזיר בכל <span>\(x_0\)</span> לפי הגדרה:<br />
+<span>$$\frac{F(x)-F(x_0)}{x-x_0}=\frac{\int_a^x f -\int_a^{x_0} f}{x-x_0}=\frac{\int_{x_0}^x f}{x-x_0}$$</span>
+כעת נשתמש בערך הממוצע האינטגרלי כיוון ש-<span>\(f\)</span> רציפה וניקח את הגבול כאשר <span>\(x\rightarrow x_0\)</span>:
+<span>$$\lim_{x\rightarrow x_0} \frac{\int_{x_0}^x f}{x-x_0} = \lim_{x\rightarrow x_0} \frac{f(C(x))(x-x_0))}{x-x_0}=\lim_{x\rightarrow x_0} f(C(x))$$</span>
+וכיוון ש-<span>\(f\)</span> רציפה ו-<span>\(x_0 \leq C(x)\leq x\)</span> אזי:
+<span>$$\underset{x\rightarrow x_0}{\lim} f(C(x))=f(x_0)$$</span></li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">הנוסחה היסודית</span><p>אם <span>\(f\)</span> אינטגרבילית ובעלת פונקציה קדומה <span>\(F\)</span> אז מתקיים: 
+<span>$$\int_a^b F' = F(b)-F(a)$$</span></p>
+</div>
+<div class="proof">
+<p>תהי <span>\(P=\left\{  x_{0},\dots,x_{n}  \right\}\)</span> חלוקה כלשהי של <span>\([a,b]\)</span>. כיוון ש-<span>\(F\)</span> פונקציה קדומה, <span>\(F\)</span> גזירה, ומקיימת את תנאי משפט לגרנג' בגל קטע <span>\([x_{i-1},x_{i}]\)</span>. כלומר עבור <span>\(i=1,\dots,n\)</span> קיים <span>\(\hat{c}_{i}\)</span> המקיימת:
+<span>$$F(x_{i})-F(x_{i-1})=F'\left( \hat{c}_{i} \right)(x_{i}-x_{i-1})=f\left( \hat{c}_{i} \right)(x_{i}-x_{i-1})$$</span>
+נסמן <span>\(P^{*}=\left\{  \hat{c}_{1},\dots,\hat{c}_{n}  \right\}\)</span> וכעת מתקיים:
+<span>$$S(f,P,P^{*})=\sum_{i=1}^{n} f\left( \hat{c}_{i} \right)(x_{i}-x_{i-1})=\sum_{i=1}^{n} (F(x_{i})-F(x_{i-1}))=F(b)-F(a)$$</span>
+וכיוון שמתקיים:
+<span>$$L(f,P)\leq \int_{a}^{b} f(t) \, dt\leq U(f,P) $$</span>
+המספר(נזכור כי האינטגרל המסויים זה מספר) היחיד שמקיים זאת מלמת החתכים זה יהיה ערך האינטגרל. ולכן:
+<span>$$\int_{a}^{b}f(t)\;\mathrm{d}t=F(b)-F(a)$$</span></p>
+</div><h2 id='Infi_4_4'>שיטות אינטגרציה</h2>
+ <div class="proposition"><span class="keyword">אינטגרלים אלמנטריים</span><p>מהמשפט היסודי של האינפי ניתן להגיע לאינטגרלים הבאים:
+<span>$$\begin{gather}\int x^{n}\,d x={\frac{x^{n+1}}{n+1}}+C,\quad{\mathrm{if~}}n\neq-1 \\\int{x}^{{-{{1}}}}{\left.{d}{x}\right.}={\ln{{\left|{x}\right|}}}+{C}\\\int{e}^{{{x}}}{\left.{d}{x}\right.}={e}^{{{x}}}+{C}\\\int\sin{{x}}{\left.{d}{x}\right.}=-\cos{{x}}+{C}\\\int\cos{{x}}{\left.{d}{x}\right.}={\sin{{x}}}+{C}\\\int{{\sec}^{{{2}}}{x}}{\left.{d}{x}\right.}={\tan{{x}}}+{C}\\\int{\sec{{x}}}{\tan{{x}}}{\left.{d}{x}\right.}={\sec{{x}}}+{C}\\\int{\frac{{{1}}}{{{1}+{x}^{{{2}}}}}}{\left.{d}{x}\right.}={\arctan{{x}}}+{C}\\\int{\frac{{{1}}}{{\sqrt{{{1}-{x}^{{{2}}}}}}}}=\arcsin x+C
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אינטגרציה ע"י הצבה</span><p>עבור אינטגרל מסויים מתקיים:
+<span>$$\int_{a}^{b}f(g(x))\cdot g^{\prime}(x)\,d x=\int_{g(a)}^{g(b)}f(u)\,d u$$</span>
+כאשר עבור אינטגרל לא מסויים נקבל את אותו הדבר ללא הגבולות.</p>
+</div>
+<div class="proof">
+<p>מכלל השרשרת וההגדרה של הפונקציה הקדומה מתקיים:
+<span>$$(F\circ g)^{\prime}(x)=F^{\prime}(g(x))\cdot g^{\prime}(x)=f(g(x))\cdot g^{\prime}(x)$$</span>
+כאשר שימוש במשפט היסודי של האינפי נותן לנו:
+<span>$$\begin{gather}{{\int_{a}^{b}f(g(x))\cdot g^{\prime}(x)\,d x=\int_{a}^{b}(F\circ g)^{\prime}(x)\,d x}} {{=(F\circ g)(b)-(F\circ g)(a)}}\\ {{=F(g(b))-F(g(a))}} {{=\int_{g(a)}^{g(b)}f(u)\,d u}}\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אינטגרציה בחלקים</span><p>מתקיים:
+<span>$$\begin{gather}\int_{a}^{b}u(x)v^{\prime}(x)\,dx=\left[u(x)v(x)\right]_{a}^{b}-\int_{a}^{b}u^{\prime}(x)v(x)\,dx=\\=u(b)v(b)-u(a)v(a)-\int_{a}^{b}u^{\prime}(x)v(x)\,dx 
+\end{gather}$$</span>
+כאשר אם נסמן <span>\(u(x)=u\)</span> ו-<span>\(du=u'(x)dx\)</span> ניתן לכתוב בצורה הבאה:
+<span>$$\int u\,d v\;=\;u v-\int v\,d u$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי הנגזרת מכפלה של שתי פונקציות גזירות תהיה:
+<span>$$\left(u(x)v(x)\right)^{\prime}=u^{\prime}(x)v(x)+u(x)v^{\prime}(x)$$</span>
+כאשר אם נבצע אינטגרציה על שתי האגפים נקבל:
+<span>$$\int\left(u(x)v(x)\right)^{\prime}d x=\int u^{\prime}(x)v(x)\,d x+\int u(x)v^{\prime}(x)\,d x$$</span>
+כאשר נשים לב כי האינטגרל של הנגזרת יתן את הפונקציה:
+<span>$$u(x)v(x)=\int u^{\prime}(x)v(x)\,d x+\int u(x)v^{\prime}(x)\,d x$$</span>
+נעביר אגפים ונקבל:
+<span>$$\int u(x)v^{\prime}(x)\,d x=u(x)v(x)-\int u^{\prime}(x)v(x)\,d x$$</span></p>
+</div><h2 id='Infi_4_5'>אינטגרלים לא אמיתיים</h2>
+ <div class="definition"><span class="keyword">אינטגרל לא אמיתי</span><p>אינטגרל אשר שהתחום שלו אינו חסום ולכן כביכול לא אינטגרבילי בתחום שלו, אך במקרים מסויימים נגדיר ערך לאינטגרל. ניתן לחלק ל-2 סוגים:</p>
+</div>
+<ol>
+<li>
+<p>אינטגרל שהתחום שלו הוא אין סופי - כלומר הגבולות של האינטגרל כוללים <span>\(\pm \infty\)</span>. </p>
+</li>
+<li>
+<p>אינטגרל עם תחום סופי שהפונקציה אינה חסומה בתחום שלו. 
+בשתי המקרים ניתן להציב <span>\(t\)</span> לפתור אינטגרל ממשי ולקחת את הגבול.</p>
+</li>
+</ol>
+<div class="example">
+<p>עבור אינטגרל של הפונקציה החסומה <span>\(f:\left[ a,\infty \right)\to \mathbb{R}\)</span> האינטגרל הלא אמיתי בתחום יהיה מוגדר:
+<span>$$\int_a^\infty f = \lim_{t\rightarrow \infty} \int_a^t f$$</span></p>
+</div>
+<div class="remark">
+<p>לא תמיד האינטגרל הלא אמיתי קיים. הוא קיים רק אם הגבול מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן ההשוואה</span><ol>
+<li>
+<p>אם <span>\(g&lt;f&lt;h\)</span> פונקציות אינטגרביליות כאשר <span>\(\int g, \int h\)</span> מתכנסים אז גם <span>\(\int f\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם <span>\(0&lt;f&lt;h\)</span> כאשר <span>\(\int f\)</span> מתבדר אז <span>\(\int h\)</span> מתבדר. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">מבחן ההשוואה הגבולי</span><p>אם <span>\(\frac{f}{g} = L &gt; 0\)</span> אז <span>\(\int f, \int g\)</span> מתכנסים ומתבדרים יחדיו</p>
+</div>
+<div class="definition"><span class="keyword">התכנסות בהחלט</span><p>אם <span>\(\int |a_n|\)</span> מתכנס אז <span>\(\int a_n\)</span> מתכנס</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן דירכלה</span><p>אם <span>\(f,g\)</span> פונקציות כך ש-<span>\(f\)</span> יורדת ומתקיים <span>\(\lim_{x\rightarrow \infty} f = 0\)</span> ו-<span>\(f', g\)</span> אינטגרביליות אז <span>\(\int (f\cdot g)\)</span> מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">אינטגרליים מתכנסים ידועים</span></div><h1 id='Infi_5'>מרחבים מטרים</h1>
+<h2 id='Infi_5_1'>הגדרה של מרחב מטרי</h2>
+ <p>ננסה להכליל את הנושא של גבול למרחב כללי(כלומר לא רק ב-<span>\(\mathbb{R}\)</span>). הגדרת הגבול הידועה אומרת כי אם:
+<span>$$\forall\varepsilon&gt;0\quad\exists\delta&gt;0\quad\mathrm{such\,that}\quad\forall x\,:\,0&lt;\left|x-x_{0}\right|&lt;\delta\qquad\left|f(x)-y_{0}\right|&lt;\varepsilon.$$</span>
+אז ניתן להגיד שהגבול כש-<span>\(x\to x_{0}\)</span>  של <span>\(f(x)\)</span> הוא <span>\(y_{0}\)</span>. ניתן להגדיר פונקציית מרחק <span>\(d(x,y)=|x-y|\)</span> וניתן כעת לכתוב את הגדרת הגבול באופן דומה:
+<span>$$\forall\varepsilon&gt;0\quad\exists\delta&gt;0\quad\mathrm{such\,that}\quad\forall x\,:\,0&lt;d(x,x_{0})&lt;\delta\qquad d(f(x),y_{0})&lt;\varepsilon$$</span>
+כדי שההגדרה תהיה הגיונית, נגדרש כי הטווח של <span>\(d\)</span> תהיה <span>\(\mathbb{R}\)</span>, איך אין דרישה שהתחום יהיה <span>\(\mathbb{R}\)</span>.</p>
+<div class="definition"><span class="keyword">מטריקה</span><p>עבור קבוצה לא ריקה <span>\(X\)</span> פונקציה <span>\(d:X\times X\to \mathbb{R}\)</span> נקראת מטריקה אם מקיימת:</p>
+<ol>
+<li>
+<p>סימטרייה - <span>\(d(x,y)=d(y,x)\)</span> </p>
+</li>
+<li>
+<p>חיוביות - <span>\(d(x,y)\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=y\)</span>. </p>
+</li>
+<li>
+<p>אי שיוויון המשולש. לכל <span>\(x,y,z\in X\)</span> מתקיים: 
+<span>$$d(x,z)\leq d(x,y)+d(y,z)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>ניתן בעקרון לדרוש בתכונה <span>\(2\)</span> רק שיש שיוויון אם"ם <span>\(x=y\)</span> כי במקרה זה מאי שיוויון המשולש עבור <span>\((x,y,x)\)</span> נקבל:
+<span>$$d(x,x)\leq d(x,y)+d(x,y)\implies 0\leq 2d(x,y)\implies 0\leq d(x,y)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הכללה של אי שיוויון המשולש למספר ערכים</span><p><span>$$d(x_{1},x_{n})\leq\sum_{j=1}^{n-1}d(x_{j},x_{j+1})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון המשולש ההפוך</span><p><span>$$d(x,y)\geq|d(x,z)-d(y,z)|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מרחב מטרי</span><p>השילוב של הקבוצה <span>\(X\)</span> ביחד עם מטריקה <span>\(d:X\times X\to \mathbb{R}\)</span> יוצר מרחב מטרי <span>\((X,d)\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">תת קבוצה יוצר מרחב מטרי</span><p>יהי <span>\((X,d)\)</span> מרחב מטרי, ו-<span>\(Y\subseteq X\)</span> ביחד עם הצמצום של <span>\(d\)</span> ל-<span>\(Y\times Y\)</span> יוצר מרחב מטרי. </p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(y_{1},y_{2}\in Y\)</span> נקודות ב-<span>\(X\)</span> אז מקיימים את כל הדרישות של מטריקה ביחיד עם <span>\(d_{Y\times Y}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">תת מרחב מטרי</span><p>עבור <span>\((X,d)\)</span> מרחב מטרי, ו-<span>\(Y\subseteq X\)</span> תת קבוצה, אז <span>\(\left( Y,d_{Y\times Y}\right)\)</span> הוא תת מרחב מטרי של <span>\((X,d)\)</span>. <span>\(d_{Y\times Y}\)</span> נקרא המטריקה המושרת על <span>\(Y\)</span> מ-<span>\(X\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטריקה על מכפלה ישירה</span><p>יהיו <span>\((X,d_{X}),\left( Y,d_{Y} \right)\)</span> מרחבים מטרים. ניתן להגדיר מרחב מכפלה <span>\(\left( X\times Y,\rho \right)\)</span> במספר דרכים: 
+<span>$$\rho((x_{1},y_{1}),(x_{2},y_{2}))=\begin{cases}d_{X}(x_{1},x_{2})+d_{Y}(y_{1},y_{2}) \\\sqrt{d_{X}(x_{1},x_{2})^{2}+d_{Y}(y_{1},y_{2})^{2}} \\\max\{(d_{X}(x_{1},x_{2}),d_{Y}(y_{1},y_{2})\}
+\end{cases}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצה חסומה</span><p>קבוצה <span>\(A\subseteq X\)</span> תקרא חסומה ב-<span>\(X\)</span> אם קיים כדור פתוח ב-<span>\(X\)</span> שמכיל את <span>\(A\)</span>. כלומר אם קיים <span>\(x \in X\)</span> כך שעבורו קיים <span>\(r&gt;0\)</span> שמקיים <span>\(A\subseteq \mathcal{B}_{r}(x)\)</span>.</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(A\subseteq X\)</span> חסומה אז לכל <span>\(a\in X\)</span> קיים <span>\(r&gt;0\)</span> עבורו <span>\(A\subseteq B_{r}(a)\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">פסודו מטריקה</span><p>כמו מטריקה אך לא בהכרח מתקיים הדרישה
+<span>$$x\neq y\implies d(x,y)\neq 0$$</span>
+כלומר יתכן פה מצב שנקבל כי המרחק בין שתי נקודות שונות היא 0. 
+הקטע בפסודו מטריקה זה שניתן להגדיר בעזרתה מטריקה. כל מה שנדרש הוא להסתכל על מחלקות השקילות של האיברים שהמרחק ביניהם 0 - כלומר <span>\(x\sim y\)</span> אם"ם <span>\(d(x,y)=0\)</span>.
+כעת נסתכל על מטריקה חדשה <span>\(\bar{d}\)</span> של המרחק בין נציגים.</p>
+</div>
+<h2>מרחבים נורמים</h2>
+<div class="definition"><span class="keyword">נורמה</span><p>מרחב וקטורי <span>\(X\)</span> אשר מעל <span>\(\mathbb{R}\)</span> או <span>\(\mathbb{C}\)</span> נקרא מרחב נורמי אם קיים נורמה <span>\(||\cdot||:X\to \mathbb{R}\)</span> המקיימת:</p>
+</div>
+<ol>
+<li>
+<p>חיוביות - <span>\(||x||\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=0\)</span> </p>
+</li>
+<li>
+<p>הומוגניות - לכל <span>\(x \in X\)</span> ו-<span>\(a\in \mathbb{R}\)</span> מתקיים <span>\(||ax||=a||x||\)</span> </p>
+</li>
+<li>
+<p>אי שיוויון המשולש - <span>\(||x+y||\leq||x||+||y||\)</span> </p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">מטריקה מושרת מנורמה</span><p>בהנתן מרחב נורמי ניתן להגדיר מטריקה על המרחב ע"י:
+<span>$$d(x,y)=\left\|x-y\right\|$$</span></p>
+</div>
+<p>ולכן למעשה כל נורמה יוצרת מטריקה, כאשר תהיה בעלת תכונות נוספות שלא בהכרח יש למטריקה כללית. למשל:
+<span>$$\begin{array}{c}{{d(x+z,y+z)=d(x,y)}}\qquad  {{d\left( \lambda x,\lambda y \right)=|\lambda|\,d(x,y)}}\end{array}$$</span>
+כאשר למעשה אם מתקיים שתי התכונות האלו, נקבל כי המטריקה שלנו היא מטריקה שמושרת מאיזושהי נורמה.</p><h2 id='Infi_5_2'>גבולות</h2>
+ <div class="definition"><span class="keyword">סדרה מתכנסת</span><p>סדרה <span>\(\{ x_n\}_{n=0}^{\infty}\)</span> נקראת מתכנסת במרחב מטרי <span>\((X,d)\)</span> אם קיים <span>\(x\)</span> כך ש:
+<span>$$\forall\varepsilon&gt;0\quad\exists N\in\mathbb{N}\quad s u c h\;t h a t\quad\forall n&gt;N\qquad d(x_{n},x)&lt;\varepsilon.$$</span></p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>אם סדרה מכנסת אז הגבול שלה הוא יחיד.</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי <span>\(x_{n}\to x\)</span> וגם <span>\(x_{n}\to y\)</span> כאשר <span>\(x\neq y\)</span>. כעת עבור <span>\(\varepsilon&gt;0\)</span> קיים <span>\(n\)</span> מספיק גדול כך ש:
+<span>$$d(x_{n},x)&lt;\varepsilon \qquad d(x_{n},y)&lt;\varepsilon$$</span>
+ולכן מאי שיוויון המשולש נקבל:
+<span>$$d(x,y)\leq d(x,x_{n})+d(x_{n},y)&lt;2\varepsilon$$</span>
+וכיוון שניתן לבחור <span>\(\varepsilon&gt;0\)</span> קטן כרצונינו מתקיים <span>\(d(x,y)=0\)</span> ולכן <span>\(x=y\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם סדרה מתכנסת כל התתי סדרות שלה גם כן מתכנסות ולאותו הגבול</p>
+</div>
+<div class="proposition">
+<p>סדרה <span>\(\{ x_n\}_{n=0}^{\infty}\)</span> במרחב מטרי <span>\((X,d)\)</span> מתכנסת ל-<span>\(x\)</span> אם"ם לכל <span>\(r&gt;0\)</span> הסדרה תהיה בסופו של דבר חסומה ב-<span>\(B_{r}(x)\)</span>. כלומר קיים <span>\(N\)</span> כך שלכל <span>\(n&gt;N\)</span> מתקיים <span>\(x_{n}\in B_{r}(x)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(x_{n}\to x\)</span>, ו-<span>\(y_{n}\to y\)</span>, אז <span>\(d(x_{n},y_{n})\to d(x,y)\)</span></p>
+</div>
+<div class="corollary">
+<p>במרחב מטרי, <span>\(x_{n}\to x\)</span> גורר <span>\(||x_{n}||\to ||x||\)</span></p>
+</div>
+<div class="remark">
+<p>הכיוון ההפוך אינו נכון.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(x_{n}\to x\)</span> סדרה מתכנסת, אז כל תת סדרה גם כן תהיה סדרה מתכנסת, ותתכנס ל-<span>\(x\)</span>.</p>
+</div>
+<div class="proposition">
+<p>התכנסות של המטריקה האוקלידית, שקול להתכנסות איבר איבר:
+<span>$$\operatorname*{lim}_{n\to\infty}x_{n}=x \iff\operatorname*{lim}_{n\to\infty}x_{n}^{j}=x^{j}\quad f o r\,j=1,\ldots,k.$$</span></p>
+</div>
+<div class="proposition">
+<p>נניח <span>\(\{ x_n\}_{n=0}^{\infty}\)</span> סדרה במרחב מטרי <span>\((X,d)\)</span> כך שקיים <span>\(\varepsilon&gt;0\)</span> כך ש:
+<span>$$\forall i\in \mathbb{N}\quad d\left( x_{i},x_{i+1} \right)\geq\varepsilon$$</span>
+אז הסדרה לא מתכנסת.</p>
+</div>
+<div class="remark">
+<p>הכיוון השני לא נכון.</p>
+</div><h2 id='Infi_5_3'>כדורים</h2>
+ <div class="definition"><span class="keyword">ספרה</span><p>אוסף כל האיברים ב-<span>\(X\)</span> שנמצאים במרחק <span>\(r&gt;0\)</span> מ-<span>\(a\in X\)</span>:
+<span>$${\mathcal{S}}_{r}(a)=\left\{x\in\mathbb{X}\,:\,d(x,a)=r\right\}.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">כדור פתוח</span><p>אוסף כל האיברים ב-<span>\(X\)</span> שנמצאים במרחק קטן מ-<span>\(r&gt;0\)</span> מ-<span>\(a\in X\)</span>:
+<span>$${\mathcal{B}}_{r}(a)=\left\{x\in\mathbb{X}\,:\,d(x,a)&lt;r\right\}.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">כדור סגור</span><p>אוסף כל האיברים ב-<span>\(X\)</span> שנמצאים במרחק קטן או שווה ל-<span>\(r&gt;0\)</span> מ-<span>\(a\in X\)</span>:
+<span>$${\hat{\mathcal{B}}}_{r}(a)=\left\{x\in\mathbb{X}\,:\,d(x,a)\leq r\right\}.$$</span></p>
+</div>
+<p>כאשר אנחנו במטריקת <span>\(\mathbb{R}^n\)</span> זה מזכיר איך שאינטויטיבית נראים כדורים. במטריקה הדיסקרטית למשל, נקבל:
+<span>$$\mathcal{B}_{r}(a)=\left\{\begin{array}{l l}{{\{a\}}}&amp;{{r\leq1}}\\ {\:{X}}&amp;{{r&gt;1.}}\end{array}\right.$$</span></p>
+<h3>תכונות של כדורים</h3>
+<div class="lemma">
+<p>לכל <span>\(x,y\in X\)</span>, ולכל <span>\(r&gt;0\)</span>, נקבל:
+<span>$$x\in{\mathcal{B}}_{r}(y)\iff y\in{\mathcal{B}}_{r}(x).$$</span></p>
+</div>
+<div class="lemma">
+<p>יהי <span>\(x \in X\)</span>, ו-<span>\(y\in \mathcal{B}_{r}(x)\)</span> לכל <span>\(r&gt;0\)</span>, אז <span>\(x=y\)</span></p>
+</div>
+<div class="lemma">
+<p>יהי <span>\(x \in X\)</span> ו-<span>\(y\in \mathcal{B}_{r}(x)\)</span> כאשר נתון <span>\(s&gt;0\)</span>, מתקיים:
+<span>$$d(x,y)+s\leq r\implies \mathcal{B}_{s}(y)\subseteq  \mathcal{B}_{r}(x)$$</span></p>
+</div>
+<div class="proposition">
+<p>בהנתן <span>\((X,d)\)</span> מרחב מטרי ו-<span>\(Y\subseteq X\)</span> תת מרחב מטרי, כאשר <span>\(B^X_{r},B_{r}^Y\)</span> הם הכדורים במרחבים המטרים המתאימים, עם מטריקות <span>\(d_{X},d_{Y}\)</span>, אז מתקיים:
+<span>$$\mathcal{B}_{r}^{Y}(y)=Y\cap\mathcal{B}_{r}^{\mathbb{X}}(y).$$</span></p>
+</div>
+<div class="proof">
+<p>נראה מההגדרה ששתי הקבוצות שוות:
+<span>$$\begin{array}{l l}{{{\mathcal{B}}_{r}^{Y}(y)=\{z\in Y\,:\,d_{Y}(z,y)&lt;r\}}}\\ {{\begin{array}{l}{{=\{z\in Y\,:\,d_{X}(z,y)&lt;r\}}}\\ {{=\{z\in X\,:\,z\in Y,\,\ d_{X}(z,y)&lt;r\}}}\\ {{\,=\{z\in X\,:\,z\in Y\}\cap\{z\in X\,:\,d_{X}(z,y)&lt;r\}}}\\ {{\,=Y\cap{\mathcal{B}}_{r}^{\mathbb{X}}(y).}}\end{array}}}\end{array}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצה חסומה</span><p>תהנתן מרחב מטרי <span>\((X,d)\)</span>, קבוצה <span>\(A\subseteq X\)</span> נקראת חסומה אם ניתן לחסום אותה בכדור פתוח. כלומר:
+<span>$$\exists a\in\mathbb{X}\qquad A\subseteq{\mathcal{B}}_{r}(a)$$</span></p>
+</div>
+<div class="lemma">
+<p>אם <span>\(A\subseteq X\)</span> חסום, אז:
+<span>$$\forall b\in\mathbb{X}\quad\exists\rho&gt;0\quad s u c h\;t h a t\quad A\subset{\mathcal{B}}_{\rho}(b).$$</span></p>
+</div>
+<div class="lemma">
+<p>כל כדור פתוח סיביב <span>\(a\)</span> מכיל כדור סגור סביב <span>\(a\)</span> </p>
+</div>
+<p>זה נובע מכך שמוכל בכדור סגור ברדיוס למשל <span>\(\frac{r}{2}\)</span>.</p><h2 id='Infi_5_4'>יחסים בין מרחבים מטרים</h2>
+ <div class="definition"><span class="keyword">הומאומורפיזם</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> אשר חח"ע ועל ו-<span>\(f\)</span>,<span>\(f^{-1}\)</span> רציפות אז <span>\((X,d)\)</span> ו-<span>\((Y,\rho)\)</span> הם הומאומורפים</p>
+</div>
+<div class="definition"><span class="keyword">שקילות</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> חחע ועל וקיים <span>\(0&lt;C_{1},C_{2}\)</span> כך ש:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(f(x_{1}),f(x_{2}))\leq C_{2}d(x_{1}x_{2})
+$$</span></p>
+</div>
+<div class="remark">
+<p>לא משנה מה מראים ששקול כיוון שניתן לחלק החלק הימיני ב-<span>\(C_{2}\)</span> ואת השמאלי ב-<span>\(C_{1}\)</span> ולקבל:
+<span>$$\frac{1}{C_{2}}\rho(f(x_{1}),f(x_{2}))\leq d(x_{1},x_{2})\leq \frac{1}{C_{1}}\rho(f(x_{1}),f(x_{2}))$$</span></p>
+</div>
+<div class="example">
+<p>נראה כי הקטעים <span>\(\left( 0,\infty \right)\)</span>, <span>\((0,1)\)</span> עם המטריקה המושרת מהמטריקה הסטנדרטית על <span>\(\mathbb{R}\)</span> אינם מרחבים מטרים שקולים. נניח בשלילה כי יש שקילות. לכן קיים פונקציה <span>\(f:(0,1)\to\left( 0,\infty \right)\)</span> המקיימת עבור <span>\(C_{1},C_{2}&gt;0\)</span>:
+<span>$$C_{1}|x-y|\leq|f(x)-f(y)|\leq C_{2}|x-y|$$</span>
+כאשר נשים לב כי <span>\(|x-y|&lt;1\)</span> ולכן <span>\(|f(x)-f(y)|&lt;C_{2}\)</span>. לכל <span>\(x,y\in(0,1)\)</span>. אך <span>\(f\)</span> צריכה להיות על, ובפרט צריכים להיות <span>\(s,t\in(0,1)\)</span> כך ש-<span>\(f(t)=2C_{2}+1,f(s)=1\)</span> ולכן עבור ערכים אלו מהשקילות מתקיים:
+<span>$$|f(s)-f(t)|=|2C_{2}+1-1|=2C_{2}&gt;C_{2}$$</span>
+בסתירה לזה ש-<span>\(|f(x)-f(y)|&lt;C_{2}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטריקות שקולות</span><p>כאשר שני מטריקות הם שקולות ביחיד עם פונקציית הזהות, המטריקות נקראות מטריקות שקולות. כלומר אם קיימים <span>\(C_{1},C_{2}&gt;0\)</span> כך ש:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(x_{1},x_{2})\leq C_{2}d(x_{1},x_{2})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">איזומטריה</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> אשר חח"ע ועל וגם מתקיים:
+<span>$$\rho(f(x),f(y))=d(x,y)$$</span></p>
+</div>
+<p>כאשר כמו עם שקילות, ניתן להגדיר מטריקות איזומטריות אם הם איזומטריות ביחס לפונקציית הזהות, שזה בפועל אומר שהם אותו הדבר עד כדי שם.</p>
+<div class="proposition">
+<p>איזומטריה <span>\(\impliedby\)</span> שקילות <span>\(\impliedby\)</span> רציפות</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה ליפשיץ\רציפה ליפשיץ</span><p>פונקציה <span>\(f:X_{d}\to Y_{\rho}\)</span> כך שקיים <span>\(L\geq0\)</span> כך ש-<span>\(\rho(f(x),f(y))\leq Ld(x,y)\)</span>. <span>\(L\)</span> נקרא קבוע לפישיץ של <span>\(f\)</span>. מהתנאי אוטומטית נובע רציפות. פונקציה שקילות היא ליפשיצית.</p>
+</div>
+<div class="proposition">
+<p>כל שתי נורמות <span>\(|| \cdot ||\)</span>, <span>\(|| \cdot ||'\)</span> על <span>\(\mathbb{R}^n\)</span> הם שקולות, ובפרט משרות מטריקות שקולות.
+כלומר קיים <span>\(0&lt;C_{1}\leq C_{2}\)</span> כך ש:
+<span>$$C_{1}\|x\|\leq\|x\|^{\prime}\leq C_{2}\|x\|$$</span></p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי כל נורמה שקולה לנורמה <span>\(||\cdot||_{1}\)</span>. יהי <span>\(||\cdot||\)</span> נורמה כלשהי על <span>\(\mathbb{R} ^n\)</span>. מתקיים:
+<span>$$||x||=  \left\lVert  \sum_{i} e_{i}x_{i}  \right\rVert = \sum_{i}\lvert x_{i} \rvert \lVert e_{i} \rVert \leq \sum_{i}\lvert x_{i} \rvert \max \lVert e_{i} \rVert =\max\lVert e_{i} \rVert \sum_{i}\lvert x_{i} \rvert =C_{2}\lVert x \rVert_{1} $$</span>
+כעת נסתכל על הפונקציה <span>\(f:S^{n-1}\to\mathbb{R}\)</span> (כאשר <span>\(S^{n-1}\)</span> זה ספרת היחידה לפי נורמה <span>\(\lVert \cdot \rVert_{1}\)</span>) המוגדרת ע"י <span>\(f(x)=\lVert x \rVert\)</span>. זוהי פונקציה רציפה כצמצום של פונקציה רציפה, וכן <span>\(S^{n-1}\)</span> קומפקטי, לכן פונקציה זו משיגה מינימום ומקסימום. נסמן את במינימום ב-<span>\(m\)</span>. נשים לב כי המינימום אינו נמצא ב-0 כיוון שאם היה נמצא ב-0 הינו מקבלים כי <span>\(\lVert x_{0} \rVert=0\)</span> כלומר <span>\(x_{0}=0\)</span> בסתירה לכך שנמצא על ספרת היחידה. לכן <span>\(m&gt;0\)</span>. כמו כן מתקיים:
+<span>$$\left\|x\right\|=\|x\|_{1}\left\|{\frac{x}{\|x\|_{1}}}\right\|=\|x\|_{1}f{\big(}x/\|x\|_{1}{\big)}\geq\|x\|_{1}f{\big(}x_{0}{\big)}=m\|x\|_{1},$$</span>
+וזה משלים את האי שיוויון השני עבור <span>\(C_{1}=m\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>כל מרחב נורמי נוצר סופית ממימד <span>\(m\)</span> איזומטרית ל-<span>\(\mathbb{R}^m\)</span>  עם נורמה כלשהי.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(a_{i}\)</span> בסיס ל-<span>\(V\)</span>. נסתכל על ההעתקה הלינארית <span>\(T:V\to \mathbb{R}^m\)</span> הנתון ע"י:
+<span>$$T\left(\sum_{i=1}^{m}x_{i}a_{i}\right)=\big(x_{1},\ldots,x_{m}\big)$$</span>
+העתקה זו היא הפיכה ובפרט הומאומורפיזם. עבור <span>\(x \in \mathbb{R}^m\)</span> נגדיר:
+<span>$$\lVert x \rVert ^{\prime}=\|T^{-1}(x)\|.$$</span>
+זוהי נורמה כיוון שבברור <span>\(\lVert x \rVert'\geq 0\)</span>  כאשר יש שיוויון אם"ם <span>\(T^{-1}(x)=x=0\)</span>. מתקיים הומוגניות כיוון ש:
+<span>$$\|\alpha x\|^{\prime}=\|T^{-1}(\alpha x)\|=\|\alpha\,T^{-1}(x)\|=|\alpha|\|T^{-1}(x)\|=|\alpha|\|x\|_{m}.$$</span>
+ולכן קיבלנו ש-<span>\(\lVert \cdot \rVert'\)</span> היא נורמה על <span>\(\mathbb{R}^m\)</span>. כעת <span>\(T\)</span> איזומטרייה כיוון שלכל <span>\(u,v\in V\)</span> מתקיים:
+<span>$$\left\|u- v \right\|=\left\|T^{-1}T(u-v)\right\|=\left\|T(u-v)\right\|^{\prime}=\|T u-Tv\|^{\prime}.$$</span></p>
+</div><h2 id='Infi_5_5'>פונקציות רציפות</h2>
+ <div class="definition"><span class="keyword">רציפות</span><p>פונקציה <span>\(f:X\to Y\)</span> נקראת רציפה ב-<span>\(x \in X\)</span> אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt;0\)</span> כך שלכל <span>\(z\in B_{\delta}(x)\)</span> מתקיים <span>\(f(z)\in B_{\varepsilon}(f(x))\)</span>.</p>
+</div>
+<p>נשים לב כי זה מתלכד עם ההגדרת <span>\(\varepsilon-\delta\)</span> של רציפות של פונקציות ממשיות. כמו כן, כמו שהיה איפיון של רציפות בעזרת סדרות בפונקציות <span>\(\mathbb{R}\to\mathbb{R}\)</span>, גם פה יש הגדרה שקולה לרציפות:</p>
+<div class="proposition"><span class="keyword">איפיון היינה</span><p>פונקציה <span>\(f:(X,d)\to\left( Y,\rho \right)\)</span> רציפה אם לכל סדרה <span>\(x_{n}\in X\)</span> מתקיים:
+<span>$$\operatorname*{lim}_{n\to\infty}x_{n}=a\implies\operatorname*{lim}_{n\to\infty}f(x_{n})=f(a)$$</span></p>
+</div>
+<div class="proof">
+<p>נראה ראשית כי ההגדרה הראשונה שקולה לשנייה. כלומר נניח כי מתקיים:
+<span>$$\forall\varepsilon&gt;0\quad\exists\delta&gt;0\qquad x\in{\mathcal{B}}_{\delta}(a)\implies f(x)\in{\mathcal{B}}_{\varepsilon}(f(a)).$$</span>
+תהי <span>\(x_{n}\)</span> סדרה המתכנסת ל-<span>\(a\)</span>. לכן מהגדרת הגבול נקבל:
+<span>$$\forall\varepsilon&gt;0\quad\exists N\in\mathbb{N}\quad\mathrm{such\;that}\quad\forall n&gt;N\quad x_{n}\in\mathcal{B}_{\varepsilon}(a).$$</span>
+אם נציב בהגדרה של הרציפות נקבל:
+<span>$$\forall\varepsilon&gt;0\quad\exists N\in\mathbb{N}\quad{\mathrm{such~that}}\quad\forall n&gt;N\quad f(x_{n})\in{\mathcal{B}}_{\varepsilon}(f(a)),$$</span>
+וקיבלנו <span>\(f(x_{n})\to f(a)\)</span>. כעת נניח את ההגדרה השנייה ונראה את ההגדרה הראשונה. כלומר נניח <span>\(x_{n}\to a\)</span> גורר <span>\(f(x_{n})\to a\)</span>. נניח בשלילה <span>\(f\)</span> לא רציף ב-<span>\(a\)</span>. לכן:
+<span>$$\exists\varepsilon&gt;0\quad\forall n\in\mathbb{N}\quad\exists x_{n}:d(x_{n},a)&lt;{\frac{1}{n}}\quad\mathrm{and}\quad\rho(f(x_{n}),f(a))\geq\varepsilon.$$</span>
+כאשר נשים לב כי הסדרה <span>\(x_{n}\)</span> מתכנסת ל-<span>\(a\)</span>, אך הסדרה <span>\(f(x_{n})\)</span> לא מתכנסת ל-<span>\(f(a)\)</span>, בסתירה להנחה.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>כל פונקציה קבועה היא רציפה </p>
+</li>
+<li>
+<p>אם <span>\(d\)</span> פונקציה מרחק של מרחב מטרי <span>\(X\)</span> ו-<span>\(a\)</span> נקודה שרירותית, אז <span>\(f:x\mapsto d(x,a)\)</span> פונקציה רציפה. זה כיוון שעבור <span>\(\varepsilon=\delta\)</span> נקבל <span>\(d(x,z)&lt;\delta\)</span> ולכן<br />
+<span>$$\left|f(x)-f(z)\right|=\left|d(x,a)-d(z,a)\right|\leq d(x,z)&lt;\varepsilon.$$</span></p>
+</li>
+<li>
+<p>כל פונקציה המוגדרת על המרחב הדיסקרטי שהטווח שלה הוא מרחב מטרי היא רציפה. ניתן לקח </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>יהיו <span>\((X,d),\left( Y,\rho \right)\)</span> מרחבים מטרים. תהי פונקציה <span>\(f:(X,d)\to\left( Y,\rho \right)\)</span>. מתקיים
+- פונקציה <span>\(f\)</span> רציפה אם"ם לכל <span>\(U\subseteq Y\)</span> פתוחה, <span>\(f^{-1}(U)\subseteq X\)</span> פתוחה.
+- פונקציה <span>\(f\)</span> רציפה אם"ם לכל <span>\(U\subseteq Y\)</span> סגורה, <span>\(f^{-1}(U)\subseteq X\)</span> סגורה.</p>
+</div>
+<div class="proposition">
+<p>הרכבה של פונקציות רציפות היא רציפה</p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(f,g:X\to\mathbb{R}\)</span> רציפות. אזי <span>\(f\cdot g,f\pm g\)</span> רציפות וכן <span>\(\frac{f}{g}\)</span> רציף כל עוד <span>\(g\)</span> לא מתאפסת.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(V\)</span> מרחב וקטורי סוף מימדי, ויהי <span>\(W\)</span> מרחב נורמי(לאו דווקא סוף מימדי). אזי כל העתקה לינארית <span>\(T:V\to W\)</span> היא רציפה(לפי כל הנורמות על <span>\(V\)</span>, שהם שקולות)</p>
+</div>
+<div class="proposition">
+<p>כל אופרטור לינארי חסום הוא רציף.</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>כל נורמה היא פונקציה רציפה.</p>
+</div><h2 id='Infi_5_6'>קומפקטיות</h2>
+ <div class="definition"><span class="keyword">קומפקטיות סדרתית</span><p>מרחב מטרי <span>\((X,d)\)</span> יקרא קומפקטי אם לכל סדרה יש תת סדרה מתכנסת לאיבר בקבוצה.</p>
+</div>
+<p><strong>דוגמאות:</strong>
+- קטעים סגורים ב-<span>\(\mathbb{R}\)</span>
+- קבוצות סופיות, עם כל מטריקה
+- איחוד סופי של קבוצות קומפקטיות</p>
+<h3>תכונות של מרחבים קומפקטים</h3>
+<div class="proposition"><span class="keyword">ערכים אקסטרימלים</span><p>כל פונקציה רציפה ממרחב מטרי קומפקטי משיגה מינימום ומקסימום</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>פונקציות רציפות הפועלות על תתי מרחבים מטרים קומפקטים הולכות לתתי מרחבים קומפקטים כלומר אם <span>\(K\subseteq X\)</span> קומפקטי ו-<span>\(f:X\to Y\)</span> אז <span>\(f(K)\)</span> קומפקטי.</p>
+</div>
+<div class="proposition">
+<p>מרחב מטרי קומפקטי הוא סגור וחסום</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(K\)</span> תת מרחב מטרי קומפקטי.
+סגירות: נניח בשלילה שקיים סדרה של איברים מ-<span>\(K\)</span> שמתכנס לאיבר שלא ב-<span>\(K\)</span>. לפי הקומפקטיות, לסדרה זו תהיה תת סדרה שתכנסת לאיבר מ-<span>\(K\)</span>. אבל כל התתי סדרות מתכנסים לאותו איבר, בסתירה.
+חסימות: נניח בשלילה ש-<span>\(K\)</span> לא חסום. ויהי <span>\(x_{0}\in K\)</span>. כיוון ש-<span>\(K\)</span> לא חסום קיים סדרה <span>\(\{ x_n\}_{n=0}^{\infty}\)</span>  כך ש-<span>\(d(x_{n},x_{0})&gt;n\)</span>. כיוון ש-<span>\(K\)</span> קומפקטית סדרית, קיים לסדרה זו תת סדרה <span>\(\{ x_{n_{k}}\}_{k=0}^{\infty}\)</span>  המתכנסת ל-<span>\(x \in K\)</span> לכל איבר בתת סדרה זו מתקיים:
+<span>$$n_{k}&lt;d(x_{0},x_{n_{k}})\leq d(x_{0},x)+d(x,x_{n_{k}}).$$</span>
+כיוון ש-<span>\(x_{n_{k}}\to x\)</span> נקבל סתירה כי האגף הימיני חסום והשמאלי מתבדר(<span>\(n_{k}\)</span> מונוטונית עולה ממש)</p>
+</div>
+<div class="proposition">
+<p>אם <span>\((X,d)\)</span> מרחבים מטרים קומפקטים אז כל תת קבוצה סגורה של <span>\(K\subseteq X\)</span> היא קומפקטית.</p>
+</div>
+<div class="proof">
+<p>אם תת קבוצה היא סגורה היא מכילה את כל נקודות הגבול שלה, לכן אם יש סדרה של איברים ב-<span>\(K\)</span> מהקומפקטיות של <span>\(X\)</span> יש לה תת סדרה מתכנסת ב-<span>\(X\)</span>. מהסגירות של <span>\(K\)</span> נקבל כי הגבול נמצא ב-<span>\(K\)</span>. ולכן קומפקטית </p>
+</div>
+<div class="corollary">
+<p>אם <span>\((X,d)\)</span> מרחב מטרי קומפקטי, ו-<span>\(\left( Y,\rho \right)\)</span> מרחב מטרי כללי, אז אם <span>\(f:X\to Y\)</span> רציף, אז לכל קבוצה סגורה <span>\(C\subseteq X\)</span> נקבל <span>\(f(C)\)</span> סגור.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(X\)</span> קומפקטית, גם <span>\(C\)</span> קומקטית כיוון שסגורה מהטענה הקודמת. <span>\(f(C)\)</span> היא לכן קומפקטית כיוון ש-<span>\(f\)</span> רציפה, ולכן סגורה וחסומה. </p>
+</div>
+<div class="proposition">
+<p>איחוד סופי של קבוצות קומפקטיות הוא קומפקטי</p>
+</div>
+<div class="proof">
+<p>בהנתן סדרה <span>\(x_{n}\in \bigcup_{i}K_{i}=K\)</span> אנו יודעים כי כיוון שזהו איחוד סופי חייב להיות <span>\(K_{i}\)</span> שבתוכו הסדרה מופיעה אינסוף פעמים. לכן קיים תת סדרה ב-<span>\(K_{i}\)</span> ומקומפקטיות לתת סדרה זו קיימת תת סדרה מתכנסת ב-<span>\(K_{i}\)</span>. לכן לסדרה <span>\(x_{n}\)</span> יש תת סדרה המתכנסת ב-<span>\(K_{i}\subseteq K\)</span> ולכן קומפקטי</p>
+</div>
+<div class="definition"><span class="keyword">רציפות במידה שווה</span><p>יהיו <span>\((X,d), \left( Y,\rho \right)\)</span> מרחבים מטרים. פונקציה <span>\(f:(X,d)\to \left( Y,\rho \right)\)</span> נקרא רציף במידה שווה אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt;0\)</span> כך שלכל <span>\(x,y\in X\)</span> מתקיים:
+<span>$$d(x,y)&lt;\delta\implies \rho(f(x),f(y))&lt;\varepsilon$$</span></p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\((X,d),\left( Y,\rho \right)\)</span> מרחבים מטרים כאשר <span>\((X,d)\)</span>  קומפקטי, אז אם <span>\(f: X\to Y\)</span> רציף אז רציף במידה שווה</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(f\)</span> רציף אך לא רציף במידה שווה, לכן קיים <span>\(\varepsilon&gt;0\)</span> כך שלכל <span>\(\delta&gt;\)</span> קיימים <span>\(x,y\in X\)</span> כך ש-<span>\(d(x,y)&lt;\delta\)</span>, אבל <span>\(\rho(f(x),f(y))\geq\varepsilon\)</span>. 
+יהי <span>\(\varepsilon&gt;0\)</span>. נבחר <span>\(\delta_{n}=\frac{1}{n}\)</span>. וכאשר  <span>\(x_{n},y_{n}\in X\)</span>  הם כך ש-<span>\(d(x_{n},y_{n})&lt;\delta_{n}=\frac{1}{n}\)</span>. לכן מתקיים:
+<span>$$d(x_{n},y_{n})&lt;{\frac{1}{n}},\qquad\rho(f(x_{n}),f(y_{n}))\geq\varepsilon.$$</span>
+כיוון ש-<span>\(X\)</span> קומפקטי קיים לסדרה <span>\(x_{n}\)</span> תת סדרה מתכנסת <span>\(x_{n_{k}}\)</span> המתכנסת ל-<span>\(x\)</span>. כאשר אנו יודעים כי <span>\(y_{n_{k}}\)</span> היא תת סדרה מתכנסת של <span>\(y_{n}\)</span>. קיים אבל גם ל-<span>\(y_{n_{k}}\)</span> תת סדרה מתכנסת <span>\(y_{n_{k_{j}}}\)</span> מקומפקטיות ל-<span>\(y\)</span>. נזכור כי <span>\(x_{n_{k_{j}}}\to x\)</span> מקומפקטיות.  כעת מהגדרה של גבול בעזרת סדרות נקבל:
+<span>$$d(x,y)=\operatorname*{lim}_{j\to\infty}d(x_{n_{k_{j}}},y_{n_{k_{j}}})\leq\operatorname*{lim}_{j\to\infty}{\frac{1}{n_{k_{j}}}}=0,$$</span>
+לכן <span>\(x=y\)</span>. מצד שני כיוון ש-<span>\(f\)</span> רציפה נקבל:
+<span>$$\lim_{j\to\infty}\rho\bigl(f\bigl(x_{n_{k_{j}}}\bigr),f\bigl(x\bigr)\bigr)=0 \qquad \lim_{j\to\infty}\rho\bigl(f(y_{n_{k_{j}}}),f(x)\bigr)=0$$</span>
+ולכן נקבל כעת כי:
+<span>$$\operatorname*{lim sup}_{j\to\infty}\rho(f(x_{n_{i_{j}}}),f(y_{n_{i_{j}}}))\leq\operatorname*{lim sup}_{j\to\infty}\left(\rho(f(x_{n_{i_{j}}}),f(x))+\rho(f(x),f(y_{n_{i_{j}}}))\right)=0,$$</span>
+בסתירה לכך ש-<span>\(\rho(f(x_{n_{k_{j}}}),f(y_{n_{k_{j}}}))\geq\varepsilon\)</span> לכל <span>\(j\)</span>.</p>
+</div>
+<div class="remark">
+<p>זה מתאים למשפט קנטור ב-<span>\(\mathbb{R}\)</span> שאומר שפונקציה רציפה בקטע סגור רציפה במ"ש.</p>
+</div>
+<div class="theorem"><span class="keyword">בולצנו וירשטראס</span><p>תת קבוצה <span>\(K\subseteq\left( \mathbb{R} ^n,||\cdot||_{2} \right)\)</span> היא קומפקטית אם"ם <span>\(K\)</span> חסומה וסגורה</p>
+</div>
+<div class="proof">
+<p>אם הכיוון שכל <span>\(K\)</span> קומפקית חייבת להיות סגורה וחסומה אנחנו מכירים. כעת נניח כי <span>\(K\)</span> סגורה וחסומה. כיוון שחסומה, קיים <span>$$Q=[a_{1},b_{1}]\times\ldots\times[a_{n},b_{n}]$$</span>
+כך ש-<span>\(K\)</span> מוכלת בתוכה. כיוון ש-<span>\(K\)</span> סגורה מספיק להראות כי <span>\(Q\)</span> קומפקטית. נשים לב כי כל רכיב של הווקטור <span>\(Q\)</span> איזומורפי ל-<span>\(\mathbb{R}\)</span>. נסכל על סדרה כללית של איברים ב-<span>\(Q\)</span>. נסתכל ראשית רק על הרכיב הראשון. מבולצנו ווירשטרס ב-<span>\(\mathbb{R}\)</span> אנו יודעים כי יש תת סדרה מתכנסת <span>\(x_{1}^{k_{m}}\)</span>. כעת נעבור לרכיב השני. נשים לב כי <span>\(x_{2}^{k_{m}}\)</span> היא סדרה ברכיב השני לכן יש לו תת סדרה מתכנסת <span>\(x_{2}^{k_{m_{j}}}\)</span>. נמשיך ככה הלאה ל-<span>\(n\)</span> רכיבים עד שנקבל תת סדרה <span>\(x^{q}\)</span> המתכנסת לפי כל הרכיבים, ולכן קומפקטית.</p>
+</div>
+<p>קיימת אף גרסה חזרה יותר של טענה זו:</p>
+<div class="proposition"><span class="keyword"></span><p>יהי <span>\(\left( V,||\cdot|| \right)\)</span> מרחב נורמי נוצר סופית. כל קבוצה סגורה וחסומה היא קומפקטית</p>
+</div>
+<div class="proof">
+<p>זה נובע ישירות מכך שכל מרחב נורמי נוצר סופית איזומטרי ל-<span>\(\mathbb{R}^n\)</span> עם נורמה כלשהי, ולכן כיוון שהטענה הקודמת מתקיימת עבור <span>\(\mathbb{R}^n\)</span>, תתקיים עבור מרחב נורמי כללי.</p>
+</div><h2 id='Infi_5_7'>שלמות</h2>
+ <div class="definition"><span class="keyword">סדרת קושי</span><p>יהי <span>\((X,d)\)</span> מרחב מטרי, <span>\(\{ x_n\}_{n=0}^{\infty}\)</span>  נקראת סדרת קושי אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N\)</span> כך שלכל <span>\(n,m&gt;N\)</span> מתקיים <span>\(d(x_{n},x_{m})&lt;\varepsilon\)</span> .</p>
+</div>
+<div class="definition"><span class="keyword">מרחב מטרי שלם</span><p>מקיים שכל סדרת קושי מתכנס לאיבר במרחב מטרי.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((X,d), \left( Y,\rho \right)\)</span> מרחבים מטרים שקולים. <span>\(X\)</span> שלם אם"ם <span>\(Y\)</span> שלם.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(f:X\to Y\)</span> העתקה חח"ע ועל כך שעבור <span>\(c_{2}&gt;c_{1}&gt;0\)</span> מתקיים לכל <span>\(x,y\in X\)</span>:
+<span>$$c_{1}d(x,y)\leq\rho(f(x),f(y))\leq c_{2}d(x,y).$$</span>
+נניח <span>\(Y\)</span> שלם, ו-<span>\(x_{n}\)</span> סדרת קושי ב-<span>\(X\)</span>. מהאי שיוויון הימיני הקבל כי <span>\(f(x_{n})\)</span> היא סדרת קושי ב-<span>\(Y\)</span>, ולכן מתכנסת ל-<span>\(y\in Y\)</span>. כיוון ש-<span>\(f\)</span> על, קיים <span>\(x \in X\)</span> כך ש-<span>\(f(x)=y\)</span>. ולכן נקבל מהאי שיוויון השמאלי כעת כי <span>\(f(x_{n})\to y\)</span>, גורר <span>\(x_{n}\to x\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">השלמה למרחב מטרי</span><p>יהי מרחב מטרי <span>\((X,d)\)</span>, קיים <span>\((\hat{X},\hat{d})\)</span>  מרחב מטרי שלם והעתקה <span>\(i:X\to \hat{X}\)</span> כך ש:</p>
+<ol>
+<li>
+<p>מתקיים <span>\(i:X\to i(X)\)</span> איזומטריה.  </p>
+</li>
+<li>
+<p>התמונה <span>\(i(x)\)</span> צפופה ב-<span>\(\hat{X}\)</span>.(<span>\(\overline{i(x)}=\hat{X}\)</span>). 
+כאשר <span>\((\hat{X},\hat{d})\)</span> יחידים עד כדי איזומטריה.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">העתקה מכווצת</span><p>יהא <span>\((X,d)\)</span> מרחב מטרי. פונקציה <span>\(f:X\to X\)</span> נקראת מכווצת אם קיים <span>\(0\leq \lambda&lt;1\)</span> כך שלכל <span>\(x\)</span>,<span>\(y\)</span>:
+<span>$$d(f(x),f(y))\leq \lambda d(x,y)$$</span></p>
+</div>
+<div class="theorem"><span class="keyword"> ההעתקה המכווצת</span><p>יהא <span>\((X,d)\)</span> מרחב מטרי שלם. ותהא <span>\(f:X\to X\)</span> מכווצת, אזי יש ל-<span>\(f\)</span> נקודת שבת יחידה. כלומר יש <span>\(x \in X\)</span> יחיד כך ש-<span>\(f(x)=x\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(x_{0}\in X\)</span>. נגדיר באופן רקורסיבי את <span>\(x_{n}\)</span> ע"י <span>\(x_{0}=x_{0}\quad  x_{n}=f(x_{n})\)</span>
+ראשית נראה כי זוהי סדרת קושי. נשים לב כי ממהנחה מתקיים:
+<span>$$d(x_{n+1},x_{n})=d(f(x_{n}),f(x_{n-1}))\leq\lambda\,d(x_{n},x_{n-1}),$$</span>
+וכן מאינדוקציה נקבל כי <span>\(d(x_{n+1},x_{n})\leq \lambda^nd(x_{1},x_{0})\)</span>. כעת עבור <span>\(n&gt;m\geq N\)</span> נקבל:
+<span>$${{d(x_{n},x_{m})\leq\displaystyle\sum_{k=m}^{n-1}d(x_{k+1},x_{k})\leq\displaystyle\sum_{k=m}^{n-1}\lambda^{k}d(x_{1},x_{0})}}{{\leq\displaystyle\sum_{k=N}^{\infty}\lambda^{k}d(x_{1},x_{0})=\displaystyle\frac{\lambda^{N}}{1-\lambda}d(x_{1},x_{0}).}}$$</span>
+כעת, בהנתן <span>\(\varepsilon&gt;0\)</span>, נבחר <span>\(N\)</span> כך ש-<span>\(\frac{\lambda^N}{1-\lambda}d(x_{1},x_{0})&lt;\varepsilon\)</span> ולכל <span>\(n,m&gt;N\)</span> נקבל <span>\(d(x_{n},x_{m})&lt;\varepsilon\)</span>. כיוון ש-<span>\(X\)</span> שלם, נקבל כי <span>\(x_{n}\)</span> מתכנס. נסמן את הגבול ב-<span>\(x\)</span>. הנקודה <span>\(x\)</span> היא אכן נקודת שבת. כיוון ש-<span>\(f\)</span> רציף(והמטריקה רציפה) אנחנו מקבלים:
+<span>$$d(x,f(x))=\operatorname*{lim}_{n\to\infty}d(x_{n},f(x_{n}))=\operatorname*{lim}_{n\to\infty}d(x_{n},x_{n+1})=0$$</span>
+ולכן <span>\(x=f(x)\)</span> וזוהי אכן נקודת שבת. כעת נדרש להראות רק יחידות.
+נניח בשלילה שיש שני נקודות שבת <span>\(x\neq y\)</span> המקיימות <span>\(f(x)=x,f(y)=y\)</span>. מתקיים מהנתון:
+<span>$$d(x,y)=d(f(x),f(y))\leq\lambda\,d(x,y)\implies d(x,y)\left( 1-\lambda \right)\leq 0$$</span>
+וקיבלנו כי <span>\(d(x,y)\leq 0\)</span> ומאי שליליות המטריקה נקבל כי <span>\(d(x,y)=0\)</span> ולכן <span>\(x=y\)</span> בסתירה.</p>
+</div>
+<div class="theorem"><span class="keyword">העתקה כמעט מכווצת</span><p>יהי <span>\((X,d)\)</span> מרחב מטרי שלם וקומפקטי, <span>\(f:X\to X\)</span> המקיימת:
+<span>$$d(f(x),f(y))&lt; d(x,y)$$</span>
+אז יש ל-<span>\(f\)</span> נקודת שבת יחידה</p>
+</div>
+<div class="remark">
+<p>ההבדל בין משפט ההעתקה המכווצת למשפט ההעתקה הכמעט מכווצת(שם לא רשמי) הוא שבהעתקה הכמעט מכווצת לא נדרש <span>\(\lambda\)</span> ויש אי שיוויון ממש אבל בתמורה לכך צריך לדרוש גם קומפקטיות.</p>
+</div>
+<div class="proof">
+<p>נראה שמהקומפקטיות נובע שההעתקה מכווצת ממש. 
+נניח בשלילה שקיים סדרה כך שלכל <span>\(n\in\mathbb{N}\)</span> יש <span>\((x_{n},y_{n})\)</span> כך ש-
+<span>$$.d(f(x_{n}),f(y_{n}))\geq\left( 1-{\textstyle{\frac{1}{n}}} \right)d(x_{n},y_{n})$$</span>
+מאחר ו-<span>\(X\)</span> קומפקטית, יש תת סדרה מתכנסת. נעבור לאחת כזו ונניח שמתכנסת ל-<span>\((x,y)\)</span>.
+לכן מרציפות ומהנחת השלילה נקבל:
+<span>$$d(f(x),f(y))=\operatorname*{lim}_{n\to\infty}d(f(x_{n}),f(y_{n}))\leq\operatorname*{lim}_{n\to\infty}(1-{\frac{1}{n}})d(x_{n},y_{n})=d(x,y)$$</span>
+לכן <span>\(d(f(x),f(y))=d(x,y)\)</span> בסתירה להיות <span>\(f\)</span> כמעט מכווצת. לכן כל סדרה מקיימת:
+<span>$$d(f(x),f(y))&lt;(1-{\textstyle{\frac{1}{n}}})d(x,y)$$</span>
+ולכן <span>\(f\)</span> באמת מכווצת, וקיים נקודת שבת יחידה.</p>
+</div><h2 id='Infi_5_8'>אוסף מטריקות</h2>
+ <p><strong>המטריקה הדיסקרטית</strong>
+קיים עבור כל קבוצה <span>\(X\)</span>. ניתן להגדיר פונקציית מרחק באופן הבא:
+<span>$$\forall x,y\in X:\,d(x,y)={\left\{\begin{array}{l l}{1}&amp;{x\neq y}\\ {0}&amp;{x=y}\end{array}\right.}$$</span>
+- סדרה מתכנסת במטריקה הדיסקרטית אם"ם היא קבועה החל ממקום מסויים.
+- כל קבוצה במטריקה הדיסקרטית היא גם סגורה וגם פתוחה.</p>
+<p><strong>מטריקה <span>\(p\)</span> אדית</strong>
+ניתן להגדיר פונקציה <span>\(|\cdot|_{p}:\mathbb{Q}\to \mathbb{R}_{\geq 0}\)</span>, שתקבל איבר מהצורה רציונאלי מהצורה <span>\(p^n \frac{a}{b}\)</span> כאשר <span>\(a,b\)</span> זרים ל-<span>\(p\)</span>, ותחזיר את <span>\(p^{-n}\)</span>. מקיימת <span>\(|a\cdot b|_{p}=|a|_{p}\cdot |b|_{p}\)</span>. וכן מקיימת את אי שיוויון המשולש החזק:
+<span>$$|x+y|_{p}\leq \max \{ |x|_{p},|y|_{p} \}$$</span>
+זו תהיה מטריקה, אך לא תהיה מושרת מנורמה.</p>
+<h3>מרחבים נורמים</h3>
+<p><strong>נורמת sup</strong>
+מוגדר במרחב הפונקציות. הנורמה מוגדרת:
+<span>$$\left\Vert{f}\right\Vert_{\infty}=\operatorname*{sup}_{[0,1]}\left\vert{f}\right\vert=\operatorname*{sup}_{x\in[0,1]}\left\vert{f}\left(x\right)\right\vert$$</span>
+כאשר בקטע סגור קומפקטי ולכן מקבל את ערכו המקסימלי. ולכן <span>\(||f||_{\infty}=\max|f(x)|\)</span></p>
+<p><strong>נורמת <span>\(p\)</span></strong>
+<span>$$\|(x_{1},...x_{d})\|_{p}=\left(\sum_{i=1}^{d}|x_{i}|^{p}\right)^{\frac{1}{p}}$$</span>
+כאשר במקרה הגבולי:
+<span>$$\left\Vert(x_{1},...x_{d})\right\Vert_{\infty}=\operatorname*{max}_{i}\left\vert x_{i}\right\vert$$</span></p>
+<p>המרחב <span>\(l^p\)</span>:
+לכל <span>\(1\leq p&lt;\infty\)</span> ו-<span>\(d\in\mathbb{N}\cup \left\{  \infty  \right\}\)</span> ניתן להסתכל על אוסף הסדרות(סופיות או אינסופיות) הבא:
+<span>$$\ell^{p}\left(\mathbb{R}^{d}\right)=\left\{\left(x_{n}\right)_{n=1}^{d}\ :\ \sum|x_{i}|^{p}&lt;\infty\right\}\subseteq\mathbb{R}^{d}$$</span>
+כאשר הסדרה סופית, למעשה כל סדרה ניתנת ליצוג ע"י וקטור, ונקבל בדיוק את <span>\(\mathbb{R}^d\)</span>. על האוסף הזה ניתן להגדיר את נורמה:
+<span>$$||x||_{p}=\left(\sum_{i=1}^{d}|x_{i}|^{p}\right)^{\frac{1}{p}}$$</span></p><h1 id='Infi_6'>נגזרות של פונקציה מרובת משתנים</h1>
+<h2 id='Infi_6_1'>נגזרות</h2>
+ <p>אנחנו כרגע מתייחסים לפונקציות מהצורה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span>. ניתן לכתוב פונקציה כזו כאוסף של פונקציות <span>\(f_{i}:\mathbb{R}\to\mathbb{R}^m\)</span>. כלומר ניתן לכתוב:
+<span>$$f(x)=\begin{pmatrix}{{f_{1}\left(x_{1},\ldots,x_{k}\right)}}\\ {{\ldots}}\\ {{f_{m}\!\left(x_{1},\ldots,x_{k}\right)}}
+\end{pmatrix} \qquad  f_{\alpha}=\left\langle f,e_{\alpha}\right\rangle$$</span></p>
+<div class="definition"><span class="keyword">דיפרנציאבליות</span><p>פונקציה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span> נקראת גזירה/דיפרציאבלית ב-<span>\(a\)</span> אם קיימת העתקה הלינארית <span>\(T:\mathbb{R}^k\to\mathbb{R}^m\)</span> המקיימת:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(a+v)-f(a)-T(v)}{||v||}}=0_{\mathbb{R}^m}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הנגזרת בנקודה</span><p>אם פונקציה היא דיפרנציאבילית, אז ההעתקה היחידה <span>\(Df_{a}(v)\)</span> המקיימת:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(a+v)-f(a)-Df_{a}(v)}{||v||}}=0_{\mathbb{R}^m}$$</span>
+נקראת הנגזרת בנקודה <span>\(a\)</span>. </p>
+</div>
+<p>נשים לב כי כיוון שאנחנו במטריקת <span>\(l_{p}\)</span>, התכנסות איבר איבר לאפס שקול להתכנסות של הנורמה, לכן הגדרה שקולה לגזירות היא:
+<span>$$\lim_{ v \to 0 } \frac{||f(a+v)-f(a)-T(v)||_{\mathbb{R}^m}}{||v||_{\mathbb{R}^k}}=0$$</span>
+<strong>הגדרה</strong> פונקציית הנגזרת
+תהי <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, ותהי <span>\(f:A\to\mathbb{R}^m\)</span> גזירה בכל נקודה <span>\(x \in A\)</span>. אזי <span>\(Df:A\to \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> הומגדרת ע"י <span>\(x\to (Df)_{x}\)</span> נקראת פונקציית הנגזרת.</p>
+<div class="proposition">
+<p>אם הפונקציה היא גזירה, הנגזרת היא יחידה.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(T,S\)</span> העתקות לינארית, אשר מקיימות:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(x+v)-f(x)-Tv}{\|v\|_{\mathbb{R}^{k}}}}=0\qquad\operatorname*{lim}_{v\to0}{\frac{f(x+v)-f(x)-Sv}{\|v\|_{\mathbb{R}^{k}}}}=0.$$</span>
+עבור שינוי קטן <span>\(v\in \mathbb{R}^n\)</span> מתקיים:
+<span>$$(S-T) v =(f(x+ v )-f(x)-T v )-(f(x+ v )-f(x)-S v )\,.$$</span>
+לפי אי שיוויון המשולש:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{\|(S-T) v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}\leq\operatorname*{lim}_{ v \to0}{\frac{\|f(x+ v )-f(x)-T v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}+\operatorname*{lim}_{ v \to0}{\frac{\|f(x+ v )-f(x)-S v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+מהומוגניות הנורמה:
+<span>$$\operatorname*{lim}_{ v \to0}\left\|\left(S-T\right)\left({\frac{ v }{\| v \|_{\mathbb{R}^{k}}}}\right)\right\|_{\mathbb{R}^{m}}=0.$$</span>
+הגבול הזה נכון לכל סדרה <span>\(v\to 0\)</span>. ניקח <span>\(v=te_{j}\)</span> ונשאיף <span>\(t\to 0\)</span> ונקבל לכל <span>\(j\)</span>:
+<span>$$(S-T)(e_{j})=0,$$</span>
+ולכן <span>\(S=T\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נגזרת חלקית</span><p><span>$$\partial_{j}f(x)=\operatorname*{lim}_{t\rightarrow0}{\frac{f(x+t e_{j})-f(x)}{t}}.$$</span>
+כאשר ניתן גם לפרק את <span>\(f\)</span> ולכתוב נגזרת חלקית של רכיב של <span>\(f\)</span>:
+<span>$$\partial_{j}f_{i}(x)=\operatorname*{lim}_{t\rightarrow0}{\frac{f_{i}(x+t e_{j})-f_{i}(x)}{t}}\qquad i=1,\ldots,m\quad j=1,\ldots,k.$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">נגזרת כיוונת</span><p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> ו-<span>\(f:A\to\mathbb{R}^m\)</span> גזירה בנקודה פנימית. לכן לכל <span>\(v\in \mathbb{R}^k\)</span> מתקיים:
+<span>$$(D f)_{x}( v )=\operatorname*{lim}_{t\rightarrow0}{\frac{f(x+t v )-f(x)}{t}}.$$</span></p>
+</div>
+<p>כאשר למעשה ניתן לפרש את <span>\((Df)_{x}(v)\)</span> בתור הקצב שינוי של <span>\(f\)</span> כשזזים מ-<span>\(x\)</span> בכיוון של <span>\(v\)</span>.</p>
+<div class="proposition">
+<p>אם פונקציה היא גזירה ב-<span>\(a\)</span> אז כל הנגזרות הכיווניות קיימות, ומתקיים:
+<span>$$\left(D f\right)_{a}\left(v\right)=\operatorname*{lim}_{t\rightarrow0}{\frac{f\left(a+t v\right)-f\left(a\right)}{t}}$$</span></p>
+</div>
+<div class="corollary">
+<p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> ו-<span>\(f:A\to\mathbb{R}^m\)</span> גזיר בנקודה פנימית <span>\(x \in A\)</span> אז כל הנגזרות החלקיות קיימות ומתקיים:<span>\(\partial_{j}f(x)=(D f)_{x}(e_{j}).\)</span></p>
+</div>
+<div class="proof">
+<p>לפי הגדרה, <span>\(f\)</span> רציפה ב-<span>\(x\)</span>, וכעת לכל <span>\(v\neq 0\)</span> מתקיים:
+<span>$$\operatorname*{lim}_{t\to0}{\frac{f(x+t v )-f(x)-(D f)_{x}(t v )}{\|t v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+וכעת מלינאריות של הנגזרת וההומוגניות של הנורמה נקבל:
+<span>$$\operatorname*{lim}_{t\to0}{\frac{f(x+t v)-f(x)-t\left(D f\right)_{x}(v)}{t}}=\operatorname*{lim}_{t\to0}{\frac{f(x+t v)-f(x)-\left(D f\right)_{x}(t v)}{\|t v\|_{\mathbb{R}^{k}}}}{\frac{|t|\|v\|_{\mathbb{R}^{k}}}{t}}=0,$$</span>
+כיוון ש-<span>\(\frac{f(x+t v )\!-\!f(x)\!-\!(D f)_{x}(t v )}{\|t v \|_{\mathbb{R}^{k}}}\)</span> שואף ל-0 ו-<span>\(\frac{|t|\|v\|_{\mathbb{R}^{k}}}{t}\)</span> חסום אז נקבל כי הגבול שואף ל-0.</p>
+</div>
+<div class="proposition"><span class="keyword">ההצגה בעזרת מטריצה</span><p>כיוון שהנגזרת היא העתקה לינארית אז ניתן להציג אותה בעזרת מטריצה בצורה הבא:
+<span>$$(D f)_x=\left(\begin{array}{lllll}\partial_1 f(x) &amp; \mid &amp; \ldots &amp; \mid &amp; \partial_k f(x)\end{array}\right)=\left(\begin{array}{cccc}\partial_1 f_1(x) &amp; \ldots &amp; \partial_k f_1(x) \\\vdots &amp; \ddots &amp; \vdots \\\partial_1 f_m(x) &amp; \ldots &amp; \partial_k f_m(x)
+\end{array}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם פונקציה היא גזירה בנקודה, אז היא גם רציפה בה</p>
+</div>
+<div class="proof">
+<p>נסמן את הנגזרת בנקודה ב-<span>\(T\)</span>. נקבל מהגדרת הנגזרת:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+ולכן המונה שואף ל-0. מתקיים <span>\(\lim_{ v \to 0 }T(v)=0\)</span> ולכן מאריתמטיקה של גבולות נקבל:
+<span>$$\lim_{ v \to 0 } f(x+v)-f(x)=0$$</span>
+ולכן רציף.</p>
+</div>
+<div class="proposition">
+<p>הנגזרת הוא אופרטור לינארי. כלומר אם <span>\(f,g:A\to\mathbb{R}m\)</span> פונקציות גזירות אז <span>\(h=\alpha f+\beta g\)</span> גזירה וכן מתקיים <span>\((Dh)_{x}=\alpha (Df)_{x}+\beta (Dg)_{x}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, ויהי <span>\(f:A\to\mathbb{R}^m\)</span>. נסמן את הרכיבים <span>\(f_{1},\dots,f_{m}\)</span> פונקציות מ-<span>\(f_{i}:A\to\mathbb{R}\)</span>. אזי <span>\(f\)</span> דיפרנציאבילי אם"ם לכל <span>\(1\leq i\leq m\)</span> נקבל <span>\(f_{i}\)</span> דיפרנציאבילית.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(f\)</span> דיפרנציאבילי אז קיים העתקה לינארית <span>\(T\)</span> כך ש-
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+זהו גבול וקטורי, זה אומר שנדרש שכל אחד מהרכיבים של <span>\(Tv\)</span> אשר אשר נסמן ב-<span>\(T_{i}v\)</span> מתכנס ל-0. כלומר מתקיים:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f_{i}(x+ v )-f_{i}(x)-(T( v ))_{i}}{\| v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+וזה למעשה אומר כי <span>\(T(v)_{i}\)</span> זה הנגזרת של <span>\(f_{i}\)</span>. הכיוון השני מושג באופן דומה, אם כל אחד מהגבולות האלה מתכנסות ל-0, אז גם הגבול של <span>\(Tv\)</span> מתכנס ל-0 ולכן <span>\(T\)</span> הנגזרת.</p>
+</div>
+<div class="theorem"><span class="keyword">תנאי מספיק לדיפרנציאביליות</span><p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה ו-<span>\(f:A\to\mathbb{R}^m\)</span>, אז אם כל ה-<span>\(k\)</span> נגזרות הכיווניות של <span>\(f\)</span> קיימות בסביבה של <span>\(x \in\mathbb{R}^k\)</span> וגם רציפות ב-<span>\(x\)</span>, אז <span>\(f\)</span> גזיר ב-<span>\(x\)</span>.</p>
+</div>
+<div class="proof">
+<p>מהטענה הקודמת מספיק להראות כי עבור <span>\(1\leq i\leq m\)</span> מתקיים. לכן מספיק להראות שקיים העתקה לינארית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R} \right)\)</span> כך ש:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+אנחנו ודעים כי אם <span>\(T\)</span> קיים אז מתקיים:
+<span>$$T=\left(\partial_{1}f(x),\ldots,\partial_{k}f(x)\right).$$</span>
+ולכן צריך להראות כי:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{1}{\| v \|_{\mathbb{R}^{k}}}}\left(f(x+ v )-f(x)-\sum_{j=1}^{k}\partial_{j}f(x) v _{j}\right)=0.$$</span>
+כיוון ש-<span>\(f\)</span> יש נגזרות כיוויניות רציפות, נרצה להשתמש במשפט ערך הביניים על כל רכיב. נכתוב את השינוי ב-<span>\(f\)</span> בתור סכום טלסקופי:
+<span>$$\begin{gather}{f{\big(}x+ v {\big)}-f{\big(}x{\big)}=f{\big(}x+ v _{1}e_{1}{\big)}-f{\big(}x{\big)}}\\ {+f{\big(}x+ v _{1}e_{1}+ v _{2}e_{2}{\big)}-f{\big(}x+ v _{1}e_{1}{\big)}}\\ {+\ldots}\\ {+f{\big(}x+ v {\big)}-f{\big(}x+ v _{1}e_{1}+ v _{2}e_{2}+\cdots+ v _{k-1}e_{k-1}{\big)}.}\end{gather}$$</span>
+ונקבל:
+<span>$$f(x+ v )-f(x)=\sum_{j=1}^{k}\left(f\left(x+\sum_{i=1}^{j} v _{i}e_{i}\right)-f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}\right)\right).$$</span>
+נסתכל על האיבר ה-<span>\(j\)</span> בסכום ונגדיר:
+<span>$$g_{j}(t)=f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}\right),$$</span>
+כך שהאיבר ה-<span>\(j\)</span> בסכום שווה ל-<span>\(g_{j}(v_{j})-g_{j}(0)\)</span> ומתקיים:
+<span>$$g_{j}^{\prime}(t)=\operatorname*{lim}_{h\to0}{\frac{g_{j}(t+h)-g_{j}(t)}{h}}=\operatorname*{lim}_{h\to0}{\frac{f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}+h e_{j}\right)-f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}\right)}{h}}$$</span>
+כעת לפי משפט ערך הביניים(החד מימדי) קיים <span>\(\theta_{j}\in(0,1)\)</span> כך ש:
+<span>$$g_{j}( v _{j})-g_{j}(0)=g_{j}^{\prime}(\theta_{j} v _{j}) v _{j}.$$</span>
+ונקבל סה"כ:
+<span>$$f(x+ v )-f(x)=\sum_{j=1}^{k}g_{j}( v _{j})-g_{j}(0)=\sum_{j=1}^{k}\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right) v _{j}.$$</span>
+ולכן:
+<span>$${\frac{1}{\|v\|_{\mathbb{R}^{k}}}}\left(f(x+ v )-f(x)-\sum_{j=1}^{k}\partial_{j}f(x) v _{j}\right)=\sum_{j=1}^{k}\left(\left[\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right)-\partial_{j}f(x)\right]{\frac{ v _{j}}{\|v\|_{\mathbb{R}^{k}}}}\right).$$</span>
+נשים לב כי <span>\(\frac{v_{j}}{||v||_{\mathbb{R}_{k}}}\)</span> חסום. כאשר מהרציפות של הנגזרת נקבל:
+<span>$$\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right)-\partial_{j}f(x)\xrightarrow{v\to 0} 0$$</span>
+ולכן נקבל כי הביטוי כולו שואף לאפס, ולכן דיפרנציאבילי.</p>
+</div>
+<div class="definition"><span class="keyword">גזיר ברציפות</span><p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה ו-<span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה ב-<span>\(A\)</span>. פונקציה <span>\(f\)</span> היא גזירה ברציפות ב-<span>\(x\)</span> אם ההעתקה <span>\(Df:A\to \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> רציף ב-<span>\(x\)</span>. פונקציה היא גזירה ברציפות אם בכל נקודה היא גזירה ברציפות.</p>
+</div>
+<p>נזכור כי העתקה לינארית היא רציפה אם"ם היא חסומה, לכן כדי להראות שפונקציה גזירה נדרש להראות שחסום בכל נקודה, כלומר נדרש שכל הנגזרות הכיווניות יהיו רציפות(אם נגזרת כיוונית כלשהי לא רציפה בנקודה אז לא חסומה)</p>
+<div class="corollary">
+<p>פונקציה היא גזירה ברציפות אם"ם כל הנגזרות הכיווניות שלה רציפות.</p>
+</div><h2 id='Infi_6_2'>פונקציות רב מימדיות</h2>
+ <h3>מסילות</h3>
+<div class="definition"><span class="keyword">מסילה</span><p>פונקציה מהצורה <span>\(\gamma:[a,b]\to X\)</span> כאשר <span>\(X\)</span> היא פונקציה רציפה נקראת מסילה.</p>
+</div>
+<div class="definition"><span class="keyword">קשירה מסילתית</span><p>עבור מסילה <span>\(\gamma:[a,b]\to X\)</span> תת קבוצה <span>\(A\subseteq X\)</span> היא קשירה מסילתית אם לכל <span>\(x,y\in A\)</span> קיים מסלול <span>\(\gamma:[a,b]\to A\)</span> כך ש-<span>\(\gamma(a)=x,\gamma(b)=y\)</span></p>
+</div>
+<div class="theorem"><span class="keyword">הערך הביניים</span><p>אם <span>\(A\subseteq X\)</span> קשירה מסילתית ו-<span>\(f:A\to\mathbb{R}\)</span> רציפה, אז לכל <span>\(x,y\in X\)</span> ו-<span>\(L\in[f(x),f(y)]\)</span> קיים <span>\(z\in A\)</span> כך ש-<span>\(f(z)=L\)</span></p>
+</div>
+<div class="proof">
+<p><span>$$[a,b]\xrightarrow{\gamma}A\xrightarrow{f}\mathbb{R}$$</span>
+ונשים לב כי <span>\(g=\gamma \circ f:[a,b]\to\mathbb{R}\)</span> פונקציה רציפה כהרכבה של פונקציות רציפות. וכן מתקיים <span>\(g(a)=f(x),g(b)=f(y)\)</span> ופונקציה זו מקיימת את משפט ערך הביניים החד מימדי.</p>
+</div>
+<p><strong>סימון - נגזרת של מסילה:</strong>
+<span>$$\left( D\gamma \right)_{t}:=\gamma^{\prime}(t)=\begin{pmatrix}\gamma_{1}'(t) \\\vdots \\\gamma_{m}'(t)
+\end{pmatrix}$$</span></p>
+<div class="remark">
+<p>במקרה הספציפי של מסילה הנורמה האופרטורית מקיימת:
+<span>$$\|(D\gamma)_{t}\|_{\mathrm{op}_{1,m}}=\operatorname*{max}\{\|(D\gamma)_{t}(1)\|_{\mathbb{R}^{m}},\|(D\gamma)_{t}(-1)\|_{\mathbb{R}^{m}}\}=\|\gamma^{\prime}(t)\|_{\mathbb{R}^{m}}.$$</span></p>
+</div>
+<div class="lemma">
+<p>יהי <span>\(\gamma:[0,1]\to\mathbb{R}^m\)</span> מסילה גזירה כך שמתקיים:
+<span>$$\operatorname*{sup}_{0\leq t\leq1}\|(D\gamma)_{t}\|_{\mathrm{op}_{1,m}}=M$$</span>
+ולכן נקבל:
+<span>$$\|\gamma(1)-\gamma(0)\|_{\mathbb{R}^{m}}\leq M$$</span></p>
+</div>
+<p>הלמה הזאת היא המקרה הפרטי של המשפט הכללי הבא:
+<strong>משפט</strong>
+יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה. תהי <span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה, ו-<span>\(a,b\)</span> כך ש:
+<span>$$[a,b]=\{t b+(1-t)a\colon0\leq t\leq1\}\subset A$$</span>
+כמו כן נניח כי
+<span>$$\operatorname*{sup}_{c\in[a,b]}\|(D f)_{c}\|_{\mathrm{op}_{k,m}}=M.$$</span>
+אזי נקבל:
+<span>$$\|f(b)-f(a)\|_{\mathbb{R}^{m}}\leq M\,\|b-a\|_{\mathbb{R}^{k}}.$$</span></p>
+<h3>פונקציות סקלריות</h3>
+<p>כעת נתעסק עם פונקציות <span>\(f:A\to \mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span>. פונקציות אלו חשובות במיוחד כיוון שניתן לפרק כל פונקציה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span> לאוסף פונקציות סקלריות <span>\(f_{i}:\mathbb{R}^k\to\mathbb{R}\)</span>.</p>
+<div class="definition"><span class="keyword">גרדיאנט</span><p>עבור פונקציה מהצורה <span>\(f:\mathbb{R}^n\to\mathbb{R}\)</span> נגדיר <span>\(\bar{\nabla}f\in\mathbb{R}^m\)</span> בתור הווקטור היחיד שמקיים לכל <span>\(v\in \mathbb{R}^n\)</span>:
+<span>$$D f_{x}(v)=\langle\nabla f(x),v\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן להציג את הגרדיאנט בצורה וקטורית:
+<span>$$\nabla f\left(x\right)=\left(\begin{array}{c}{{\partial_{1}f\left(x\right)}}\\ {{\vdots}}\\ {{\partial_{k}f\left(x\right)}}\end{array}\right)=\left(D f\right)_{x}^{T}$$</span></p>
+</div>
+<p>נשים לב כי אם <span>\(f:A\to \mathbb{R}^k\)</span> דיפרנציאבלית אז <span>\(x\to \bar{\nabla}f(x)\)</span> היא פונקציה:
+<span>$$\bar{\nabla} f:A\to\mathbb{R}^k$$</span>
+<strong>פירוש גאומטרי:</strong>
+ננסה לחפש את הוקטור יחידה שעבורו הקצב שינוי המקסימלי. כלומר נחפש <span>\(\left\lVert  \hat{v}  \right\rVert=1\)</span> כך ש-<span>\((Df)_{x}\left( \hat{v} \right)\)</span> מקסימלי. כאשר ראינו שזה מתי ש-<span>\(\left\langle  \bar{\nabla}f, \hat{v}  \right\rangle\)</span> מקסימלי. מאי שיוויון קושי שוורץ נקבל כי:
+<span>$$\left\langle  \bar{\nabla} f, \hat{v}  \right\rangle \leq \left\lVert  \bar{\nabla} f  \right\rVert \left\lVert  \hat{v}  \right\rVert =\left\lVert  \bar{\nabla} f  \right\rVert $$</span>
+כאשר הערך המקסימלי, כלומר השיוויון מתקבל כאשר תלויים לינארים, כלומר <span>\(\hat{v}=\frac{\bar{\nabla}f}{\left\lVert  \bar{\nabla}f  \right\rVert}\)</span>. ולכן הכיוון של הגרדינט הוא הכיוון של הגידול המקסימלי, וכן מתקיים <span>\(\left\lVert  \bar{\nabla}f(a)  \right\rVert=\lVert Df_{a} \rVert_{op}\)</span>.</p>
+<div class="proposition">
+<p>יהי <span>\(f:A\to\mathbb{R}\)</span> פונקציה גזירה. נניח שב-<span>\(a\)</span> מתקבל ל-<span>\(f\)</span> מקסימום באיזושהי סביבה <span>\(U\)</span> של <span>\(a\)</span>. הראו כי <span>\(\bar{\nabla}f(a)=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון שמקבלת מקסימום, קיים סביבה <span>\(A\)</span> של <span>\(a\)</span> שעבורה לכל <span>\(x \in A\)</span> מתקיים <span>\(f(x)\leq f(a)\)</span>. נסתכל על הנגזרת הכיוונית ה-<span>\(i\)</span>. כיוון ש-<span>\(f\)</span> גזירה מתקיים מצד אחד:
+<span>$$\partial_{i} f|_{a}=\lim_{ h^+ \to 0 } \frac{f(a+he_{i})-f(a)}{h}\leq 0$$</span>
+כאשר מצד שני:
+<span>$$\partial_{i} f|_{a}=\lim_{ h^- \to 0 } \frac{f(a+he_{i})-f(a)}{h}\geq 0$$</span>
+ולכן נקבל <span>\(\partial_{i}f|_{a}=0\)</span> ולכן <span>\(\bar{\nabla}f(a)=0\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ערך הממוצע</span><p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, <span>\(a,b\in A\)</span> כך שהקטע המחבר ביניהם הוא:
+<span>$$[a,b]:=\{a+t(b-a)\::\:t\in[0,1]\}\subset A.$$</span>
+אם <span>\(f:A\to\mathbb{R}\)</span> גזירה, קיים <span>\(\theta \in(0,1)\)</span> כך ש:
+<span>$$f(b)-f(a)=(D f)_{a+\theta(b-a)}(b-a).$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה להשתמש במשפט ערך הממוצע החד מימדי. נסתכל על המסילה <span>\(\gamma:[0,1]\to A\)</span> הנתונה ע"י <span>$$\gamma(t)=a+t(b-a),$$</span> ופנוקציה <span>\(g:I\to\mathbb{R}\)</span> הנתונה ע"י <span>\(g(t)=f\left( \gamma(t) \right)\)</span>. הפונקציה <span>\(g\)</span> היא גזירה כך ש:
+<span>$$g^{\prime}(t)=(D f)_{\gamma(t)}\circ(D\gamma)_{t}=(D f)_{\gamma(t)}(b-a).$$</span>
+וממשפט ערך ההמוצע החד מימדי נקבל <span>\(\theta \in(0,1)\)</span> כך ש:
+<span>$$g(1)-g(0)=g^{\prime}(\theta)=(D f)_{a+\theta(b-a)}(b-a)$$</span></p>
+</div>
+<p>זה למעשה אומר כי בין 2 נקודות על הגרף הקיים נקודה שהשיפוע שלו שווה לשיפוע הישר שמחבר בין הנקודות</p><h2 id='Infi_6_3'>נגזרות מסדר גבוה</h2>
+ <p>נרצה להכליל את המושג של נגזרת לסדרים גבוההים יותר. ראשית נרצה למצוא מה מקבלים כשלקחים את הנגזרת של הנגזרת.
+<strong>הגדרה</strong> נגזרת שנייה בנקודה
+יהי <span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה. הפונקציה תקרא גזירה פעמיים בנקודה <span>\(x\)</span> אם קיים הטנסור <span>\(D^2f(v):\mathrm{Hom}\left( \mathbb{R}^k,\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^m \right) \right)\)</span> (יקרא הנגזרת השנייה) אשר מקיים:
+<span>$$ \lim\limits_{ v \to0}\frac{(Df)_{x+ v }-(Df)_x-(D^2f)_x\left(  v  \right)}{\| v \|_{\mathbb{R}^k}}=0_{\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)}$$</span></p>
+<p>זהו בדיוק ההגדרה של הנגזרת עבור הפונקציית הנגזרת. נשים לב כי זהו גבול מטריציוני, כלומר נדרש שכל איבר במטריצה יתכנס לגבול. נשים לב כי הנגזרת השנייה מקבלת וקטור ומחזירה מטריצה, כאשר המטריצה הזאת תקבל וקטור ותחזיר וקטור אחר.</p>
+<div class="remark">
+<p>הנגזרת השנייה לעיתים מכונת הסיאן</p>
+</div>
+<div class="definition"><span class="keyword">נגזרת חלקית מסדר שני</span><p><span>$$\partial_{i}\partial_{j}\left(f\left(x\right)\right)=\lim_{ t \to 0 } \frac{\partial_{j}f\left(x+t e_{i}\right)-\partial_{j}f\left(x\right)}{t}$$</span></p>
+</div>
+<p>זה למעשה מציאה של הנגזרת הכיווני של הפונקציה <span>\(\partial_{j}f(x)\)</span>.</p>
+<p>לכן בפועל נקבל כי:
+<span>$$\left(D^{2}f\right)\left(v\right)\left(w\right)=\sum_{i=1}^{k}\sum_{j=1}^{k}\partial_{i}\partial_{j}f\left(x\right)v_{i}w_{j}$$</span></p>
+<div class="proposition"><span class="keyword">תנאי מספיק לדיפרנציביליות של הנגזרת השנייה</span><p>תהי <span>\(f:A\to\mathbb{R}^m\)</span> כך ש-<span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה. אם לכל <span>\(j=1,\dots,k\)</span> הפונקציה <span>\(\partial_{j}f:A\to\mathbb{R}^m\)</span> קיימת, ולכל <span>\(i=1,\dots,k\)</span> הנגזרת החלקית <span>\(\partial_{i}\partial _j(f)\)</span>, אז <span>\(f\)</span> דיפרנציאבילית פעמיים ב-<span>\(x\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הנגזרת השנייה היא תבנית בילינארית. כלומר מתקיים:
+<span>$$\begin{array}{c}{{\left(D^{2}f\right)_{x}\left(\alpha v_{1}+\beta v_{2}\right)\left(w\right)=\alpha\left(D^{2}f\right)_{x}\left(v_{1}\right)\left(w\right)+\beta\left(D^{2}f\right)_{x}\left(v_{2}\right)\left(w\right)}}\\ {{\left(D^{2}f\right)_{x}\left(v\right)\left(\alpha w_{1}+\beta w_{2}\right)=\alpha\left(D^{2}f\right)_{x}\left(v\right)\left(w_{1}\right)+\beta\left(D^{2}f\right)_{x}\left(v\right)\left(w_{2}\right)}}\end{array}$$</span></p>
+</div>
+<div class="proof">
+<p>זוהי מסקנה מיידית מכך ש- <span>\(v\mapsto (D^2f)_{x}(v)\)</span> לינארי ו-<span>\(w\mapsto (D^2f)_{x}(v)\)</span> לינארי</p>
+</div>
+<p>כיוון שזהו תבנית לינארית נסמן <span>\((D^2f)_{x}(w,v)=(D^2f)_{x}(w)(v)\)</span>.</p>
+<p><strong>משפט קלרו</strong>
+אם <span>\(f_{xy}\)</span> ו-<span>\(f_{yx}\)</span> רציפות אז <span>\(f_{xy}=f_{yx}\)</span>.</p>
+<p>נראה עם הוכחה יפה בעזרת פוביני
+<strong>הוכחה</strong>
+נניח כי קיים מלבן <span>\(R=[a,b]\times[c,d]\)</span> עבורה מוגדרת ורציפה <span>\(f_{xy},f_{yx}\)</span>. כעת, כיוון שהפונקציות רציפות הם אינטגרביליות, ומתקיים:
+<span>$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{yx}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{y}(x,y))_{x}dxdy=\int_{c}^d f_{y}(b,y)-f_{y}(a,y)\;dy \\=f(b,d)-f(b,c)-f(a,d)+f(a,c)  
+\end{gather}$$</span>
+כאשר עבור <span>\(f_{xy}\)</span> נשתמש בפוביני(ניתן כיוון שרציפות) כדי להחליף את <span>\(dxdy\)</span> ל-<span>\(dydx\)</span> ונקבל:
+<span>$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{xy}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{x}(x,y))_{y}dxdy= \int_{a}^b \int_{c}^d (f_{x}(x,y))_{y} dy\;dx\\\int_{c}^d f_{x}(x,d)-f_{y}(x,c)\;dy=f(b,d)-f(b,c)-f(a,d)+f(a,c)
+\end{gather}$$</span>
+וכעת קיבלנו:
+<span>$$\int_c^d \!\!\!\int_{a}^b \!\!f_{yx}\;dxdy=\int_c^d \!\!\!\int_{a}^b \!\!f_{xy}\;dxdy\implies \int_c^d \!\!\!\int_{a}^b \!f_{yx}-f_{xy}\;dxdy=0$$</span>
+לכן מספיק להראות כי <span>\(f_{yx}-f_{xy}\)</span> זהותית אפס. נניח בשלילה שלא זהותית אפס, לכן קיים נקודה שאינה אפס, ומרציפות יש לנקודה זו סביבה שאינה אפס. כיוון שזה נכון עבור כל מלבן, זה נכון עבור מלבן שנמצא בסביבה הזו, ולכן עבור מלבן זה יהיה נפח שאינו אפס, בסתירה.</p>
+<div class="example">
+<p>נסתכל על הפונקציה:
+<span>$$f(x,y)=\begin{cases}\frac{xy(x^2-y^2)}{x^2+y^2} &amp; (x,y)\neq(0,0) \\0 &amp; (x,y)=(0,0)
+\end{cases}$$</span>
+נראה <span>\(f_{xy}\neq f_{yx}\)</span>. מתקיים ב-<span>\((0,0)\)</span>:
+<span>$$f_{x}(0,0)=\lim_{ h \to 0 } \frac{f(h,0)-f(0,0)}{h}=\lim_{ h \to 0 } \frac{0-0}{h}=0$$</span>
+<span>$$f_{y}(0,0)=\lim_{ h \to 0 } \frac{f(0,h)-f(0,0)}{h}=0$$</span>
+כעת נחשב את הנגזרות השניות:
+<span>$$f_{xy}(0,0)=(f_{x})_{y}(0,0)=\lim_{ h \to 0 } \frac{f_{x}(0,h)-\cancelto{ 0 }{ f_{x}(0,0) }}{h}$$</span>
+נחשב לשם כך את <span>\(f_{x}(0,h)\)</span> בעזרת חוקי גזירה ונקבל:
+<span>$$f_{x}(x,y)= \frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}\implies f_{x}(0,h)=-\frac{h^5}{h^4}=-h$$</span>
+ולכן נקבל <span>\(f_{xy}(0,0)=-1\)</span>. כעת נחשב את <span>\(f_{yx}(0,0)\)</span>, ראשית נחשב את <span>\(f_{y}(x,y)\)</span> בנקודה שונה מ-<span>\((0,0)\)</span> ונקבל:
+<span>$$f_{y}(x,y)= \frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}\implies f(h,0)=h$$</span>
+ומזה ניתן לקבל:
+<span>$$f_{yx}(0,0)=(f_{y})_{x}(0,0)=\lim_{ h \to 0 } \frac{f_{y}(h,0)-\cancelto{ 0 }{ f_{y}(0,0) }}{h}=1\neq f_{xy}=-1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">נגזרת מסדר n</span><p>פונקציה <span>\(f\)</span> גזירה מסדר <span>\(n\)</span> אם היא גזירה מסדר <span>\(n-1\)</span> והנגזרת <span>\(D^{n-1}f\)</span> היא גזירה. <span>$$(D^{n}f)_{x}\in\operatorname{Hom}(\mathbb{R}^{k},\operatorname{Hom}(\mathbb{R}^{k},\dots,\operatorname{Hom}(\mathbb{R}^{k},\mathbb{R}^{m}))),$$</span>
+זוהי תבנית מולטילינארית.</p>
+</div>
+<h2>טיילור רב מימדי</h2>
+<div class="theorem"><span class="keyword">טיילור</span><p>תהי <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(f:A\to\mathbb{R}^m\)</span> דיפרנציאבילית <span>\(p\)</span> פעמים ברציפות ב-<span>\(x \in A\)</span>. אזי, לכל <span>\(v\)</span> קטן מספיק כך ש-<span>\(x+v\in A\)</span> נוכל לכתוב:
+<span>$$\!\!\!\!f\left(x+v\right)\!=\!f\left(x\right)\!+\!\left(D f\right)_{x}\left(v\right)\!+\!\frac12\left(D^{2}f\right)_{x}\left(v,v\right),\ldots,\frac1{p!}\left(D^{(p)}f\right)_{x}\left(v,\ldots,v\right)\!+\!R_{p}\left(v\right)_{x}\left(v,\ldots,v\right)$$</span>
+כאשר <span>\(R_{p}(v)\)</span> היא פונקציית השארית המקיימת:
+<span>$$\operatorname*{lim}_{\nu\to0}{\frac{R_{p}(\nu)}{\|\nu\|_{\mathbb{R}^{k}}^{p}}}=0.$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">שארית לגרנג'</span><p>אם הפונקציה <span>\(f\)</span> גזירה <span>\(p+1\)</span> פעמים, פונקציית השארית מקיימת 
+<span>$$R_{p}(\nu)=\frac{1}{(p+1)!}({D}^{p+1}f)_{x+\theta\nu}(\nu,\nu,\ldots,\nu)$$</span>
+עבור <span>\(\theta \in(0,1)\)</span> כלשהו</p>
+</div>
+<h2>סיווג נקודות קיצון</h2>
+<div class="definition"><span class="keyword">חיובית בהחלט</span><p>תבנית בילינארית סימטרית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)\)</span> נקראת חיובית בהחלט אם:
+<span>$$\forall v \in \mathbb{R}^k\qquad T(v,v)&gt;0$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חיובית למחצה</span><p>תבנית בילינארית סימטרית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)\)</span> נקראת חיובית למצה אם:
+<span>$$\forall v \in \mathbb{R}^k\qquad T(v,v)\geq0$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים לחיוביות בהחלט</span><p>מטריצה <span>\(S\)</span> של תבנית בילינארית סימטרית תהיה חיובית בהחלט אם כל אחד מהתנאים הבאים מתקיים:</p>
+<ol>
+<li>
+<p>כל הערכים העצמיים חיוביים ממש - <span>\(\lambda&gt;0\)</span> </p>
+</li>
+<li>
+<p>כל הערכים על האלכסון בצורה המדורגת חיוביים ממש </p>
+</li>
+<li>
+<p>אם מסתכלים על כל ה-<span>\(n\)</span> מרובעים שמכילים את המספר הקודקוד הימיני העליון אז הדטרמיננטה של כולם חיוביים ממש </p>
+</li>
+<li>
+<p>קיים <span>\(A\)</span> כך ש-<span>\(S=A^TA\)</span> כאשר ל-<span>\(A\)</span> יש עמודות בלתי תלויות(אם לא משתמשים בתנאי על העמודות נקבל שיכול להיות חיובי למחצה) </p>
+</li>
+<li>
+<p>מתקיים <span>\(x^T S x&gt;0\)</span> לכל <span>\(x\)</span> פרט ל-<span>\(x=0\)</span> (שוב התנאי האחרון בשביל המקרה שחיובי למחצה) </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>תנאים 1,2,3 שקולים לתבנית חיובית למחצה אם מסתכלים גם על המקרה של אי שיוויון חלש. כלומר המקרה שהם חיוביים אך לא ממש.</p>
+</div>
+<p>קיימים הגדרות ותנאי שקולים עבור המקרה של תבנית בילינארית סימטרית שלילית בהחלטת ושלילית למחצה.</p>
+<div class="definition"><span class="keyword">נקודת מינימום</span><p>עבור פונקציה <span>\(f:A\to\mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, נקודה <span>\(x \in A\)</span> תהיה נקודת מינימום אם קיים קבוצה <span>\(B\subseteq A\)</span> כך שלכל <span>\(b\in B\)</span> מתקיים <span>\(f(b)\geq f(x)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודת מקסימום</span><p>עבור פונקציה <span>\(f:A\to\mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, נקודה <span>\(x \in A\)</span> תהיה נקודת מקסימום אם קיים קבוצה <span>\(B\subseteq A\)</span> כך שלכל <span>\(b\in B\)</span> מתקיים <span>\(f(b)\leq f(x)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודה קריטית</span><p>נקודה שמאפסת את הנגזרת. כלומר נקודה <span>\(x\)</span> המקיימת <span>\((Df)_{x}=0\)</span>.</p>
+</div>
+<div class="theorem">
+<p>יהי <span>\(f:A\to \mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, וגזירה פעמיים ברציפות. תהי <span>\(A\)</span> נקודה קריטית, אזי אם <span>\(D^2f\)</span> רציפה ב-<span>\(x\)</span>, מתקיים:</p>
+<ol>
+<li>
+<p>אם <span>\((D^2f)_{x}\)</span> חיובית בהחלט אז <span>\(x\)</span> נקודת מינימום. </p>
+</li>
+<li>
+<p>אם <span>\(x\)</span> נקודת מינימום אז <span>\((D^2f)_{x}\)</span> חיובית למחצה. </p>
+</li>
+</ol>
+</div>
+<p>עבור מקסימום מקומי נקבל משפט זהה עבור תבנית בילינארית שלילית בהחלט ולמחצה.</p>
+<p>עבור מטריצה <span>\(2\times 2\)</span> ניתן להשתמש בזה ש-<span>\(\det A=\lambda_{1}\lambda_{2}\)</span> ו-<span>\(\mathrm{Tr}(A)=\lambda_{1}+\lambda_{2}\)</span> כדי להסיק את הסימן של הערכים העצמיים ללא חישוב.</p>
+<p><strong>תבנית כללית למציאת נקודות קיצון:</strong>
+עבור פונקציה <span>\(f:\mathbb{R}^n\to\mathbb{R}\)</span> נבצע את השלבים הבאים</p>
+<ol>
+<li>
+<p>נחשב את הנגזרות החלקיות מסדר שני. אם לא כולם קיימות, הפונקציה לא גזירה ברציפות פעמיים ולא ניתן להמשיך בתהליך. </p>
+</li>
+<li>
+<p>נוכיח שהנגזרות החלקיות מסדר שני רציפות, ונסיק כי <span>\(f\)</span> גזירה פעמיים ברציפות </p>
+</li>
+<li>
+<p>לחפש נקודות קריטיות - נקודות שמאפסות את הנגזרת. </p>
+</li>
+<li>
+<p>בכל אחד מהנקודות האלה, יש למצוא את הערכים העצמיים של ההסיאן </p>
+</li>
+<li>
+<p>אם ישנו ערך עצמי 0, לא ניתן לסווג את הנקודה בתהליך זה. </p>
+</li>
+<li>
+<p>אם כל הערכים העצמיים חיוביים, אז הנקודה היא מינימום, אם כולם שליליים אז מקסימום, אם ישנם ערכים עם סימן מעורב, אז הנקודה היא אוכף. </p>
+</li>
+</ol><h2 id='Infi_6_4'>כלל השרשרת</h2>
+ <div class="proposition"><span class="keyword">כלל השרשרת</span><p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> ו-<span>\(B\subseteq \mathbb{R}^m\)</span> תחומים פתוחים ו-<span>\(f:A\to B,g:B\to\mathbb{R}^n\)</span>, כאשר <span>\(f\)</span> גזירה ב-<span>\(x \in A\)</span> ו-<span>\(g\)</span> גזיר ב-<span>\(f(x)\in B\)</span> אז <span>\(g\circ f\)</span> גזיר ב-<span>\(x\)</span> והנגזרת נתונה ע"י:
+<span>$$\underbrace{(D(g\circ f))_{x}}_{\mathbb{R}^{k}\to\mathbb{R}^{n}}=\underbrace{(D g)_{f(x)}}_{\mathbb{R}^{m}\to\mathbb{R}^{n}}\circ\underbrace{(D f)_{x}}_{\mathbb{R}^{k}\to\mathbb{R}^{m}}$$</span></p>
+</div>
+<div class="proof">
+<p>נסתכל על הסתות קטנות <span>\(u\in\mathbb{R}^n,v\in\mathbb{R}^m\)</span>. נגדיר את הפונקציות שגיאה של הקירוב הלינארי:
+<span>$$\begin{array}{l c r}{{r(u)=f(x+u)-f(x)-(D f)_{x}(u)}}\\ {{s( v )=g(f(x)+ v )-g(f(x))-(D g)_{f(x)}( v )}}\end{array}$$</span>
+כאשר אנו יודעים כי לפי הגדרת הנגזרת הפונקציות השגיאה שואפות ל-0, כאשר כיוון שזוהי מטריקה אוקלידית הם שואפות ל-0 איבר איבר ולכן גם הנורמה שואפת ל-0 ומתקיים:
+<span>$$\operatorname*{lim}_{u\to0}{\frac{\|r(u)\|_{\mathbb{R}^{m}}}{\|u\|_{\mathbb{R}^{k}}}}=0\qquad{\mathrm{~and~}}\qquad\operatorname*{lim}_{ v \to0}{\frac{\|s( v )\|_{\mathbb{R}^{n}}}{\left\| v \right\|_{\mathbb{R}^{m}}}}=0$$</span>
+כעת נציב <span>\(v=(Df)_{x}(u)+r(u)\)</span> בהגדרה של <span>\(s\)</span> ונקבל:
+<span>$$\begin{array}{r l}{s((D f)_{x}(u)+r(u))=g{\big(}f(x)+(D f)_{x}(u)+r(u){\big)}} {-g(f(x))} {-(D g)_{f(x)}{\big(}(D f)_{x}(u)+r(u){\big)}}\end{array}$$</span>
+כאשר נעביר אגפים ונקבל:
+<span>$$\begin{array}{r l}{g(f(x+u))-g(f(x))=(D g)_{f(x)}((D f)_{x}(u))} {+(D g)_{f(x)}(r(u))} {+s((D f)_{x}(u)+r(u))}\end{array}$$</span>
+נעביר לאגף אחד את כל הביטויים שתלויים ב-<span>\(r(u)\)</span> ונחלק את המשוואה ב-<span>\(||u||_{\mathbb{R}^k}\)</span> ונקבל:
+<span>$${{\frac{g\circ f(x+u)-g\circ f(x)-(D g)_{f(x)}\circ(D f)_{x}(u)}{\|u\|_{\mathbb{R}^{k}}}=(D g)_{f(x)}{\frac{r(u)}{\|u\|_{\mathbb{R}^{k}}}}}} {{+\,{\frac{s((D f)_{x}(u)+r(u))}{\|u\|_{\mathbb{R}^{k}}}}.}}$$</span>
+נשים לב כי באגף שמאל למעשה יש לנו את הגדרת הנגזרת. נדרש להראות שמתכנס ל-0 ונקבל את המבוקש. ניקח נורמות של שתי האגפים ונשתמש באי שיוויון המשולש:
+<span>$${\frac{\|g\circ f(x+u)-g\circ f(x)-(D g)_{f(x)}\circ(D f)_{x}(u)\|_{\mathbb{R}^{n}}}{\|u\|_{\mathbb{R}^{k}}}}\leq\|(D g)_{f(x)}\|_{m,n}{\frac{\|r(u)\|_{\mathbb{R}^{m}}}{\|u\|_{\mathbb{R}^{k}}}}+\,{\frac{\|s((D f)_{x}(u)+r(u))\|_{\mathbb{R}^{n}}}{\|u\|_{\mathbb{R}^{k}}}}.$$</span>
+מספיק להראות כי אגף ימין שואף ל-0 כאשר <span>\(u\to_{0}\)</span>. כלומר מספיק להראות:
+<span>$$\operatorname*{lim}_{u\to0}\underbrace{\frac{\|s((D f)_{x}(u)+r(u))\|_{\mathbb{R}^{n}}}{\|u\|_{\mathbb{R}^{k}}}}_{\stackrel{\mathrm{def}}{=}\psi(u)}=0$$</span>
+כעת נכפיל ונחלק את <span>\(\psi\)</span> ונקבל:
+<span>$$\psi(u)= \begin{cases}\frac{\left\|s\left((D f)_x(u)+r(u)\right)\right\|_{\mathbb{R}^n}}{\left\|(D f)_x(u)+r(u)\right\|_{\mathbb{R}^m}} \frac{\left\|(D f)_x(u)+r(u)\right\|_{\mathbb{R}^m}}{\|u\|_{\mathbb{R}^k}} &amp; (D f)_x(u)+r(u) \neq 0 \\ 0 &amp; \text { otherwise. }\end{cases}$$</span>
+לפי אי שיוויון המשולש נקבל:
+<span>$$\psi(u) \leq \begin{cases}\frac{\left\|s\left((D f)_x(u)+r(u)\right)\right\|_{\mathbb{R}^n}}{\left\|(D f)_x(u)+r(u)\right\|_{\mathbb{R}^m}}\left(\left\|(D f)_x\right\|_{\mathrm{op}_{k, m}}+\frac{\|r(u)\|_{\mathbb{R}^m}}{\|u\|_{\mathbb{R}^k}}\right) &amp; (D f)_x(u)+r(u) \neq 0 \\ 0 &amp; \text { otherwise. }\end{cases}$$</span>
+כעת כאשר <span>\(u\to 0\)</span> נקבל <span>\((Df)_{x}(u)+r(u)\to 0\)</span> ולכן לפי ההגדרה של <span>\(s\)</span> הגורם הראשון מתאפס כאשר הגורם שני חסום, ולכן <span>\(\lim_{ u \to 0 }\psi(u)=0\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על הפונקציות
+<span>$$f(x,y)=(x^{2}+y,\sin y,\cos y)\qquad\qquad g(r,s,t)=(e^{s+t},r)$$</span>
+ההרכבה תתן לנו העתקה <span>\(g\circ f:\mathbb{R}^2\to\mathbb{R}^2\)</span> הנתונה ע"י:
+<span>$$(g\circ f)(x,y)=g(x^{2}+y,\sin y,\cos y)=(e^{\sin y+\cos y},x^{2}+y)$$</span>
+ונקבל כי הדיפרנציאלים יתנו לנו:
+<span>$$D(g\circ f)_{(x,y)}=\left(\begin{array}{c c}{{0}}&amp;{{(\cos y-\sin y)e^{\sin y+\cos y}}}\\ {{2x}}&amp;{{1}}\end{array}\right)$$</span>
+כאשר עבור כל אחד מהפונקציות נקבל:
+<span>$$D g_{(s,r,t)}=\left(\begin{array}{c c c}{{0}}&amp;{{e^{s+t}}}&amp;{{e^{s+t}}}\\ {{1}}&amp;{{0}}&amp;{{0}}\end{array}\right)\qquad D f_{(x,y)}=\left(\begin{array}{c c}{{2x}}&amp;{{1}}\\ {{0}}&amp;{{\cos y}}\\ {{0}}&amp;{{-\sin y}}\end{array}\right)$$</span>
+ואכן מתקיים:
+<span>$$\left(\begin{array}{c c c}{{0}}&amp;{{e^{\sin y+\cos y}}}&amp;{{e^{\sin y+\cos y}}}\\ {{1}}&amp;{{0}}&amp;{{0}}\end{array}\right)\left(\begin{array}{c c c}{{2x}}&amp;{{1}}\\ {{0}}&amp;{{\cos y}}\\ {{0}}&amp;{{-\sin y}}\end{array}\right)=\left(\begin{array}{c c c}{{0}}&amp;{{(\cos y-\sin y)e^{\sin y+\cos y}}}\\ {{2x}}&amp;{{1}}\end{array}\right)$$</span></p>
+</div>
+<p>אם נסתכל על המטריצות המייצגות נקבל <span>$$\left(D(g\circ f)_{a}\right)_{i j}=\sum_{l=1}^{m}\left(D g_{f(a)}\right)_{i l}\left(D f_{a}\right)_{l j}$$</span>
+כאשר האיברים של המטריצה המייצגת יהיו:
+<span>$$(\partial_{j}(g\circ f)_{i}(a))_{i j}=\left(\sum_{l=1}^{m}\partial_{l}g_{i}(f(a))\cdot\partial_{j}f_{l}(a)\right)$$</span>
+כאשר נשים לב כי אכן במקרה <span>\(1\times 1\)</span> נקבל:
+<span>$$(g\circ f)^{\prime}(a)=g^{\prime}(f(a))\cdot f^{\prime}(a)$$</span></p>
+<div class="example">
+<p>יהי <span>\(\gamma:\mathbb{R}\to\mathbb{R}^k\)</span> ו-<span>\(g:\mathbb{R}^k\to\mathbb{R}\)</span> נקבל <span>\(h=\gamma \circ g:\mathbb{R}\to\mathbb{R}\)</span> כלומר:
+<span>$$\mathbb{R}\ {\stackrel{\gamma}{\to}}\ \mathbb{R}^{m}\ {\stackrel{g}{\to}}\ \mathbb{R}$$</span>
+אם נכתוב <span>\(\gamma=\left( \gamma_{1},\dots,\gamma_{m} \right)\)</span> נקבל:
+<span>$$h=(g\circ\gamma)(t)=g(\gamma_{1}(t),...,\gamma_{m}(t))$$</span>
+כאשר אם נגזור לפי כלל השרשרת נקבל:
+<span>$$h^{\prime}(t)=\left( D g_{\gamma(t)} \right)\circ\left( D\gamma_{t} \right)(e_{1})=\sum_{l=1}^{m}\frac{\partial g}{\partial x_{l}}\left( \gamma(t) \right)\cdot\gamma_{l}^{\prime}(t)=\left\langle  \bar{\nabla} g(f(t)), \gamma'(t)  \right\rangle $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">נגזרת של מכפלה פנימית</span><p>בהנתן פונקציות גזירות <span>\(f:\mathbb{R}^m\to \mathbb{R}^n\)</span> ו-<span>\(g:\mathbb{R}^k\to\mathbb{R}^n\)</span>, נקבל:
+<span>$$D(f,g)_{(\underline{{a}},\underline{{b}})}(\underline{{v}}_{1},\underline{{v}}_{2})=\langle g(\underline{{b}}),D f_{\underline{{a}}}(\underline{{v}}_{1})\rangle+\langle f({\underline{{a}}}),D g_{\underline{{b}}}(\underline{{v}}_{2})\rangle.$$</span></p>
+</div>
+<div class="proof">
+<p>נגדיר פונקציה של המכפלה הפנימית הסטנדרטית <span>\(\left\langle  \cdot, \cdot  \right\rangle:\mathbb{R}^{2n}\to\mathbb{R}\)</span> המוגדרת:
+<span>$$(x_{1},...,x_{n},y_{1},...,y_{n})\mapsto\sum x_{i}y_{i}$$</span>
+נשים לב כי:
+<span>$${\frac{\partial\left( \sum x_{i}y_{i} \right)}{\partial x_{i}}}=y_{i} \qquad  {\frac{\partial(\sum x_{i}y_{i})}{\partial y_{i}}}=x_{i}$$</span>
+ולכן נקבל:
+<span>$$.D(\langle\cdot,\cdot\rangle)_{({\underline{{x}}},{\underline{{y}}})}=\left(y_{1},...,y_{n}\quad{\Big|}~x_{1}\cdot...,x_{n}~\right)=\left(~{\underline{{y}}}~{\Big|}~{\underline{{x}}}~\right)$$</span>
+כעת נניח  <span>\(f:\mathbb{R}^m\to \mathbb{R}^n\)</span> ו-<span>\(g:\mathbb{R}^k\to\mathbb{R}^n\)</span> פונקציות גזירות. ניתן להגדיר <span>\(h:\mathbb{R}^m\times \mathbb{R}^k\to \mathbb{R}\)</span> ע"י <span>\(h\left( \underline{a},\underline{b} \right)=\left\langle  f\left( \underline{a} \right), g\left( \underline{b} \right)  \right\rangle\)</span>. ניתן לראות את <span>\(h\)</span> כהרכבה של <span>\(\left\langle  \cdot, \cdot  \right\rangle\)</span> על הפונקציה <span>\(\left( f\times g \right):\mathbb{R}^m\times \mathbb{R}^k\to\mathbb{R}^{2n}\)</span> המוגדרת <span>\(\left( f\times g \right)\left( \underline{a},\underline{b} \right)=\left( f\left( \underline{a} \right),g\left( \underline{b} \right) \right)\)</span>.
+כעת ניתן לחשב את הנגזרת של <span>\(h\)</span> בעזרת כלל השרשרת. נקבל:
+<span>$$D h_{(\underline{{{a}}},\underline{{{b}}})}(v)=D(\langle\cdot,\cdot\rangle)_{(f(\underline{{{a}}}),g(\underline{{{b}}}))}\circ D(f\times g)_{(\underline{{{a}}},\underline{{{b}}})}(v)$$</span>
+כאשר ניתן לחשב את הנגזרת של <span>\(f\times g\)</span> בעזרת מטריצת בלוקים:
+<span>$$ D(f\times g)_{(\underline{a},\underline{b})}(v)=\left(\begin{array}{c|c}Df_{\underline{a}}&amp;0\\\hline0&amp;Dg_{\underline{b}}\\\end{array}\right)\left(\frac{v_{1}}{\underline{v_{2}}}\right)=\left(\frac{Df_{\underline{a}}(\underline{v_{1}})}{Dg_{\underline{b}}(\underline{v_{2}})}\right)$$</span>
+ונקבל בסך הכל:
+<span>$$ D\langle f,g\rangle_{(\underline{a},\underline{b})}(\underline{v_1},\underline{v_2})=\left(\begin{array}{c|c}g(\underline{b})&amp;f(\underline{a})\end{array}\right)\left(\frac{Df_{\underline{a}}(v_1)}{Dg_{\underline{b}}(\underline{v_2})}\right)=\langle g(\underline{b}),Df_{\underline{a}}(\underline{v_1})\rangle+\langle f(\underline{a}),Dg_{\underline{b}}(\underline{v_2})\rangle $$</span></p>
+</div>
+<div class="example">
+<p>כאשר <span>\(m=k=n=1\)</span> נקבל:
+<span>$$D(f g)_{(a,b)}(v_{1},v_{2})=g(b)\cdot D f_{a}(v_{1})+f(a)\cdot D g_{b}(v_{2})$$</span>
+כאשר אם נרכיב על המסילה <span>\(\gamma:\mathbb{R}\to\mathbb{R}^2\)</span> הנתונה ע"י <span>\(t\mapsto(t,t)\)</span> נקבל את הפונקציה:
+<span>$$p:\mathbb{R}\to\mathbb{R}\qquad p(t)=f(t)g(t)$$</span>
+אשר מקיימת:
+<span>$$p^{\prime}(t)=D p_{t}(1)=D(f g)_{(t,t)}\circ D\gamma_{t}(1)=D(f g)_{(t,t)}\left(\begin{array}{l}{{1}}\\ {{1}}\end{array}\right)=g(t)f^{\prime}(t)+f(t)g^{\prime}(t)$$</span>
+וקיבלנו את כלל המכפלה</p>
+</div>
+<div class="proposition"><span class="keyword">נגזרת של פונקציה הופכית</span><p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה הפיכה. יהי <span>\(a\in \mathbb{R}^k\)</span> כך ש-<span>\(f\)</span> גזירה ב-<span>\(a\)</span>, ו-<span>\(f^{-1}\)</span> גזירה ב-<span>\(b=f(a)\)</span>. מתקיים:
+<span>$$\left(D f\right)_{a}^{-1}=\left(D\left(f^{-1}\right)\right)_{b}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי <span>\(f\circ f^{-1}=Id\)</span> ולכן מכלל השרשרת נקבל:
+<span>$$(Df^{-1})_{f(a)}\circ Df_{a}=D(Id)_{a}=Id$$</span>
+כאשר השתמשנו בזה ש-<span>\(D(Id)_{a}=Id\)</span>(נובע ישירות מההגדרה) וכעת כיוון שזהו כפל מטריצות ניתן להכפיל במטריצה ההופכית ולקבל:
+<span>$$D(f^{-1})_{f(a)}=(D f_{a})^{-1}$$</span></p>
+</div><h2 id='Infi_6_5'>משפט ההעתקה הפתוחה</h2>
+ <p>תזכורת: עבור <span>\(A\in \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> מרחב השורות זה המרחב הנוצר מהבסיס כשלוקחים את השורות כבסיס, ומרחב העמודות זה המרחב הנוצר כשלוקחים את העמודות כבסיס. המימד של מרחב השורות ושל מרחב העמודות שווה, לכן:
+<span>$$\mathrm{rank}(A)\leq\operatorname*{min}(m,k).$$</span>
+מטריצה נקראת דרגה מלאה אם היא בגודל המקסימלי שיכולה להיות בהתאם לגודל שלה(כלומר באי שיוויון יש שיוויון). במקרה זה, היא תהיה על אם <span>\(m\leq k\)</span> וחח"ע אם <span>\(m\geq k\)</span>.</p>
+<div class="lemma">
+<p>אם <span>\(m\leq k\)</span> ו-<span>\(A\in\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> הוא מדרגה מלאה(כלומר במקרה שלנו, על) קיים מטריצה <span>\(T\in\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^k \right)\)</span> כך ש-<span>\(AT\in\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^m \right)\)</span> הפיכה.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(A\)</span> מדרגה <span>\(m\)</span> אז הגרעין שלו ממימד <span>\(k-m\)</span>. כלומר ל-<span>\(\mathbb{R}^k\)</span> יש תת מרחב <span>\(m\)</span> מימדי שאורתוגונאלי ל-<span>\(\ker A\)</span>.
+לסיים</p>
+</div>
+<div class="definition"><span class="keyword">העתקה פתוחה</span><p>יהיו <span>\((X,d_{x}),(Y,d_{Y})\)</span> מרחבים מטרים. העתקה <span>\(f:X\to Y\)</span> נקראת העתקה פתוחה
+אם <span>\(A\subseteq X\)</span> פתוח ב-<span>\(X\)</span> גורר <span>\(f(A)\)</span> פתוח ב-<span>\(Y\)</span>.</p>
+</div>
+<div class="remark">
+<p>נשים לה הגדרה זו דומה מאוד להגדרה של רציפות של פונקציה, רק שהגרירה הולכת לכיוון ההפוך לכן אם <span>\(f:X\to Y\)</span> הפיכה, ו-<span>\(f^{-1}:Y\to X\)</span> רציפה, אז <span>\(f:X\to Y\)</span> היא העתקה פתוחה.</p>
+</div>
+<div class="example">
+<p><span>$$f:\mathbb{R}\to \mathbb{R}^3\quad x\mapsto x^3\qquad  \text{ החותפ הקתעה}$$</span>
+<span>$$f:\mathbb{R}\to\mathbb{R}\quad x\mapsto x^2 \qquad \text{החותפ הקתעה אל}$$</span>
+כיוון ש-<span>\(A=(-2,2)\)</span> הולך ל-<span>\(f(A)=[0,4)\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">משפט ההעתקה הפתוחה</span><p>יהי <span>\(m\leq k\)</span>, <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, ו-<span>\(f\in C^1\left( A;\mathbb{R}^m \right)\)</span> כך ש-<span>\((Df)_{x}\)</span> מדרגה מלאה לכל <span>\(x \in A\)</span>. אזי <span>\(f\)</span> העתקה פתוחה.</p>
+</div>
+<h2>משפט הפונקציה ההפוכה</h2>
+<div class="theorem"><span class="keyword">הפונקציה ההפוכה</span><p>תהי <span>\(U\subseteq \mathbb{R}^n\)</span> ו-<span>\(f:U\to\mathbb{R}^n\)</span> פונקציה גזירה ותהי <span>\(a\in U\)</span> כך ש-<span>\(\det(Df(a))\neq 0\)</span> אז:</p>
+<ol>
+<li>
+<p>קיימת סביבה <span>\(V\subseteq U\)</span> של <span>\(a\)</span> וסביבה <span>\(W\)</span> של <span>\(f(a)\)</span> </p>
+</li>
+<li>
+<p>קיימת פונקציה <span>\(f:W\to V\)</span> כך ש: 
+<span>$$\forall x \in V\quad g(f(x))=x\qquad \forall y\in W\quad f(g(y))=y$$</span></p>
+</li>
+<li>
+<p>הפונקציה <span>\(g\)</span> גזירה ומקיימת: 
+<span>$$Dg(f(a))=[Df(a)]^{-1}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>נתון הפונקציה <span>\(f:\mathbb{R}^2\to\mathbb{R}^2\)</span> המוגדרת 
+<span>$$f\begin{pmatrix}x_{1}\\x_{2}\end{pmatrix}=\begin{pmatrix}x_{1}+e^{x_{2}} \\x_{2}+e^{x_{1}}
+\end{pmatrix}$$</span>
+נמצא האם קיים היפוך מקומי עבור כל נקודה ב-<span>\(\mathbb{R}^2\)</span>
+ראשית נמצא את הנגזרת:
+<span>$$Df\begin{pmatrix}x_{1}\\ x_{2}\end{pmatrix}=\begin{pmatrix}1 &amp; e^{x_{2}} \\e^{x_{1}} &amp; 1
+\end{pmatrix}\implies \det Df=1-e^{x_{1}+x_{2}}$$</span>
+כאשר הדטרמיננטה לא מתאפסת כל עוד <span>\(x_{1}+x_{2}\neq 0\)</span>, ולכן במקרה בוודאות תהיה פונקציה הפוכה. ייתכן אבל שיש נקודות שעבורן <span>\(x_{1}=-x_{2}\)</span> וקיים היפוך מקומי.</p>
+</div>
+<h2>כופלי לגרנג'</h2>
+<div class="theorem"><span class="keyword">כופלי לגרנג'</span><p>תהי <span>\(B\subseteq \mathbb{R}^k\)</span> פתוחה. <span>\(n+1\leq k\)</span>. 
+<span>$$\begin{array}{c}{{f,g_{1},\ldots,g_{n}\in C^{1}{\bigl(}B;\mathbb{R}{\bigr)},}}\\ {{{}}}\\ {{A=\left\{x\in B:\ g_{1}{\bigl(}x{\bigr)}=\cdots=g_{n}{\bigl(}x{\bigr)}=0\right\}.}}\end{array}$$</span>
+נגדיר <span>\(F:B\to\mathbb{R}^{n+1}\)</span> ע"י:
+<span>$$F(x)=\left(\begin{array}{c}{{g_{1}\left(x\right)}}\\ {{\vdots}}\\ {{g_{n}\left(x\right)}}\\ {{f(x)}}\end{array}\right).$$</span>
+כעת, אם <span>\(x_{0}\in A\)</span> קיצון מקומי של <span>\(f|_{A}\)</span> אזי <span>\((DF)_{x_{0}}\)</span> הוא לא מדרגה מלאה(כלומר מדרגה קטנה מ-<span>\(n+1\)</span>). כלומר <span>\((Dg_{1})_{x_{0}},\dots,(Dg_{n})_{x_{0}},(Df)_{x_{0}}\)</span> הם תלויים לינארית, וקיימים <span>\(\lambda_{1},\dots,\lambda_{n}\)</span> כך ש:
+<span>$$\left(D f\right)_{x_{0}}=\sum_{i=1}^{n}\lambda_{i}\left(D g_{i}\right)_{x_{0}}$$</span></p>
+</div>
+<div class="proof">
+<p>נניח בלי הגבלת הכלליות <span>\(x_{0}\)</span> היא נקודת מקסימום מקומית. כלומר קיימת סביבה <span>\(U\subseteq B\)</span> של <span>\(x_{0}\)</span> כך ש:
+<span>$$f(x_{0})=\max _{x \in A \cap U} f(x)$$</span>
+אנחנו רוצים להוכיח שהדרגה של <span>\((DF(x))_{x_{0}}\)</span> קטנה מ-<span>\(n+1\)</span>. נניח בשלילה שמדרגה <span>\(n+1\)</span>. לכן ממשפט ההעתקה הפתוחה קיים סביבה פתוחה <span>\(U\subseteq B\)</span> של <span>\(x_{0}\)</span> כך ש:
+<span>$$F(x_{0})=(0,\ldots,0,f(x_{0}))^{T}$$</span>
+תהיה נקודה פנימית של <span>\(F(U)\)</span> ב-<span>\(\mathbb{R}^{n+1}\)</span>. במקרה זה קיים <span>\(\varepsilon&gt;0\)</span> כך ש-<span>\(\left( 0,\dots,0,f(x_{0})+\varepsilon \right)^T \in F(U)\)</span>. כלומר קיים <span>\(x_{+}\in U\)</span> כך ש-<span>\(F(x_{+})=\left( 0,\dots,0,f(x_{0})+\varepsilon \right)^T\)</span>. מזה נקבל ש <span>\(x_{+}\in U \cap A\)</span> וגם <span>\(f(x_{+})=f(x_{0})+\varepsilon\)</span>, בסתירה לכך ש-<span>\(x_{0}\)</span> מקסימום מקומי. </p>
+</div>
+<div class="proposition"><span class="keyword">כופלי לגרנג' בפונקציה סקלרית</span><p>תהי <span>\(B\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, ויהיו <span>\(f,g:B\to\mathbb{R}\)</span> פונקציות גזירות ברציפות.
+תהי <span>\(A=\left\{  x \in B\mid g(x)=0  \right\}\)</span> ונניח כי <span>\(\bar{\nabla}g(x) \neq 0\)</span> לכל <span>\(x \in A\)</span>. אזי אם <span>\(x\)</span> מינימום או מקסימום מקומי של <span>\(f|_{A}\)</span> קיימת <span>\(\lambda \in \mathbb{R}\)</span> כך ש-<span>\(\bar{\nabla}f(x)=\lambda \bar{\nabla}g(x)\)</span>.</p>
+</div><h2 id='Infi_6_6'>פונקציות קמורות</h2>
+ <div class="definition"><span class="keyword">הצירוף הקמור</span><p>צירוף לינארי כך שסכום כל המקדמים יהיה 1.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה קמורה</span><p>פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> המקיימת לכל <span>\(x,y \in \mathbb{R}^{n}\)</span>:
+<span>$$f((1-t)x+ty)\leq (1-t)f(x)+tf(y)$$</span>
+עבור <span>\(0\leq t \leq 1\)</span> כאשר <span>\((1-t)f(x)+tf(y)\)</span> יהיה הצירוף הקמור.</p>
+</div>
+<div class="proposition">
+<p>עבור פונקציה <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(f\)</span> קמורה. </p>
+</li>
+<li>
+<p>הנגזרת ראשונה מקיימת: 
+<span>$$f(y)\geq f(x)+f'(x)(y-x)$$</span>
+כלומר הפונקציה תהיה תמיד מעל המשיק המחבר בין שתי נקודות.</p>
+</li>
+<li>
+<p>הנגזרת השנייה מקיימת: 
+<span>$$f''(x)\geq 0$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציה קמורה ממש</span><p>פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> אשר לכל <span>\(x\neq y \in \mathbb{R}^{n}\)</span> ו-<span>\(0&lt;\lambda&lt;1\)</span> מקיימת:
+<span>$$f{\big(}\lambda x+(1-\lambda)y{\big)}&lt;\lambda f(x)+(1-\lambda)f(y)$$</span></p>
+</div>
+<div class="remark">
+<p>עבור פונקציה קמורה הערך של הפונקציה תמיד תהיה קטנה או שווה לערך של כל משיק, כאשר עבור פונקציה קמורה ממש הערך של הפונקציה תהיה קטנה ממש מהערך של המשיק בכל נקודה.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה קמורה</span><p>קבוצה <span>\(C\subseteq \mathbb{R}^{n}\)</span> נקראת קמורה אם לכל נקודות <span>\(x,y \in {C}\)</span> ו-<span>\(0\leq \lambda \leq 1\)</span> מתקיים:
+<span>$$\lambda x+(1-\lambda)y\in C$$</span>
+כלומר אם שתי נקודות הם בקבוצה נדרש כי גם הקו המחבר ביניהם יהיה בקבוצה.</p>
+</div>
+<div class="definition"><span class="keyword">אפיגרף</span><p>עבור פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> האפיגרף יהיה תת קבוצה של <span>\(\mathbb{R}^{n}\times \mathbb{R}\)</span> המכיל את כל הנקודות <span>\((x,t)\)</span> כך ש-<span>\(t\geq f(x)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>פונקציה היא קומרה אם"ם האפיגרף היא קבוצה קמורה.</p>
+</div>
+<div class="reminder">
+<p>העתקה אפינית זוהי פונקציה מהצורה:
+<span>$$f(x)=a^{T}x+b$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של פונקציות קמורות</span><ol>
+<li>
+<p>אם הפונקיות <span>\(f,g:\mathbb{R}^{n}\to \mathbb{R}\)</span> הם קמורות אזי גם <span>\(f+g\)</span> תהיה קמורה. </p>
+</li>
+<li>
+<p>אם <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> קמורה ו-<span>\(\lambda \geq 0\)</span> אזי גם <span>\(\lambda f\)</span> תהיה קמורה. </p>
+</li>
+<li>
+<p>כל פונקציה לינארית או אפינית תנינ קמורה. </p>
+</li>
+<li>
+<p>אם גם <span>\(f\)</span> וגם <span>\(-f\)</span> פונקציות קמורות אזי <span>\(f\)</span> היא העתקה אפינית. </p>
+</li>
+<li>
+<p>אם <span>\(f,g\)</span> היא פונקציה קמורה אזי <span>\(h\)</span> המוגדרת על ידי <span>\(\max\{ f(x),g(x) \}\)</span> היא גם תהיה קמורה. </p>
+</li>
+</ol>
+</div>
+<h2>גזירות</h2>
+<div class="proposition">
+<p>יהי <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> פונקציה גזירה. אזי <span>\(f\)</span> היא קמורה אם"ם לכל <span>\(x,y \in \mathbb{R}\)</span> מתקיים:
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)$$</span></p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(f\)</span> היא קמורה. יהי <span>\(x\neq y \in \mathbb{R}^{n}\)</span>. הקמירות של <span>\(f\)</span> נותנת לנו כי:
+<span>$$f{\big(}(x+y)/2{\big)}\leq{\frac{1}{2}}f(x)+{\frac{1}{2}}f(y).$$</span>
+כעת נסמן <span>\(h\equiv y-x\)</span>. ניתן לכתוב את האי שיוויון בצורה הבאה:
+<span>$$f(x+h/2)\leq{\frac{1}{2}}f(x)+{\frac{1}{2}}f(x+h)$$</span>
+כאשר ניתן לפשט ולקבל:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+h/2)-f(x)}{1/2}}$$</span>
+כעת ניתן להשתמש בדרישת הקמירות במקום על <span>\(x\)</span> ו-<span>\(y=x+h\)</span> על <span>\(x\)</span> ו-<span>\(x+\frac{h}{2}\)</span> ולקבל:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+h/2)-f(x)}{1/2}}\geq{\frac{f(x+h/4)-f(x)}{1/4}},$$</span>
+או באופן כללי ניתן להמשיך באופן זה על חזקות של 2 ולקבל לכל <span>\(k \in \mathbb{N}\)</span>:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+2^{-k}h)-f(x)}{2^{-k}}}$$</span>
+נזכור כעת את ההגדרה של הנגזרת הכיוונית בכיוון <span>\(h\)</span>
+<span>$$\partial_{h} f\equiv \lim_{ t \to 0 } \frac{1}{t}(f(x+th)-f(x)) = \bar{\nabla} f(x)^{T}h$$</span>
+כעת אם ניקח את הגבול <span>\(k\to \infty\)</span> באי שייוון נקבל:
+<span>$$f(x+h)-f(x)\geq\operatorname*{lim}_{k\to\infty}{\frac{f(x+2^{-k}h)-f(x)}{2^{-k}}}=\partial_{h}f=\nabla f(x)^{T}h$$</span>
+כאשר אם נציב חזרה את <span>\(h=y-x\)</span> נקבל את האי שיוויון המבוקש. 
+עבור הכיוון השני נניח כי מתקיים האי שיוויון לכל <span>\(x, y \in \mathbb{R}^{n}\)</span>. בנוסף נניח <span>\(w,z \in \mathbb{R}^{n}\)</span> ו-<span>\(0\leq \lambda \leq 1\)</span> ונסמן:
+<span>$$x:= \lambda w+\left( 1-\lambda \right) z$$</span>
+כאשר כעת האי שיוויון נותן לנו:
+<span>$$\begin{array}{c}{(i)\quad {f(w)\geq f(x)+\nabla f(x)^{T}(w-x),}}\\ (ii)\quad \;{{f(z)\geq f(x)+\nabla f(x)^{T}(z-x).}}\end{array}$$</span>
+כמו כן נשים לב כי:
+<span>$$w-x=(1-\lambda)(w-z)\qquad{\mathrm{~and~}}\qquad z-x=\lambda(z-w).$$</span>
+ולכן אם נכפיל את <span>\((i)\)</span> ב-<span>\(\lambda\)</span> ואת <span>\((ii)\)</span> ב-<span>\(\left( 1-\lambda \right)\)</span> ונחבר נקבל:
+<span>$$f(y)&gt;f(x)+\nabla f(x)^{T}(y-x)$$</span>
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)=f(x)$$</span>
+<span>$$g(y):=f(y)-\nabla f(x)^{T}(y-x)$$</span>
+<span>$$\nabla g(y)=\nabla f(y)-\nabla f(x) \qquad \bar{\nabla}^2 g(y)=\bar{\nabla}^2 f(y)$$</span>
+<span>$$f(y)=f(x)+\nabla f(x)^{T}(y-x)+{\frac{1}{2}}(y-x)^{T}\nabla^{2}f(x+t(y-x))(y-x)$$</span>
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)$$</span>
+<span>$$\left\{x\,\in\,\mathbb{R}\,:\,f^{\prime\prime}(x)\,&gt;\,0\right\}$$</span></p>
+</div><h1 id='Infi_7'>אינטגרל של פונקציה מרובת משתנים</h1>
+<h2 id='Infi_7_1'>אינטגרציה על תיבות</h2>
+ <div class="definition"><span class="keyword">תיבה</span><p>תיבה היא קבוצה מהצורה:
+<span>$$A=[a_{1},b_{1}]\times[a_{2},b_{2}]\times\dots\times[a_{k},b_{k}],$$</span>
+כאשר הנפח שלו מוגדר:
+<span>$$V(A)=\prod_{i=1}^{k}(b_{i}-a_{i}).$$</span>
+כאשר הרוחב של <span>\(A\)</span>:
+<span>$$\max_{1\leq i\leq k}(b_{i}-a_{i})$$</span></p>
+</div>
+<p>כיוון שאנו מתעסקים עם תיבות, נוח לעיתים להשתמש בנורמת האינסוף
+<span>$$||x||_{\infty}=\operatorname*{max}\left\{\left|x_{1}\right|,\ldots,\left|x_{k}\right|\right\}.$$</span>
+כיוון שכדור סגור בנורמה זו היא התיבה <span>\([-1,1]\)</span>.</p>
+<div class="definition"><span class="keyword">חלוקה</span><p>תהא <span>\(A=[a_{1},b_{1}]\times\dots \times[a_{k},b_{k}]\)</span> תיבה. חלוקה <span>\(P\)</span> של <span>\(A\)</span> היא <span>\(P=P_{1}\times P_{2}\times\dots \times P_{k}\)</span>
+כאשר <span>\(P_{j}\)</span> היא חלוקה של הקטע <span>\([a_{j},b_{j}]\)</span>. כלומר:
+<span>$$P_{j}=\left\{  t_{j}^0,\dots,t_{j}^{m_{j}}  \right\}$$</span>
+כאשר <span>$$a_{j}=t_{j}^{0}&lt;t_{j}^{1}&lt;\cdots&lt;t_{j}^{m_{j}}=b_{j}.$$</span> חלוקה כזו משרה חלוקה של התיבה <span>\(A\)</span> לתיבות:
+<span>$$C_{i_{1},\dots,i_{k}}=[t_{1}^{i_{1}-1},t_{1}^{i_{1}}]\times\cdots\times[t_{k}^{i_{k}-1},t_{k}^{i_{k}}].$$</span>
+כאשר הנפח המקורי <span>\(A\)</span> מקיים:
+<span>$$V(A)=\sum_{i_{1},...,i_{k}}V(C_{i_{1},...,i_{k}}).$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סכום תחתון</span><p>בהנתן פונקציה <span>\(f\)</span> וחלוקה <span>\(P=A_{1}\times\dots \times A_{r}\)</span>. נגדיר <span>\(m_{i}=\inf_{x \in A_{i}}f(x)\)</span>. הסכום התחתון של <span>\(f\)</span> ביחס ל-<span>\(P\)</span> יהיה:
+<span>$$s(f,P)=\sum_{i=1}^{r}m_{i}\,V(A_{i})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סכום עליון</span><p>בהנתן פונקציה <span>\(f\)</span> וחלוקה <span>\(P=A_{1}\times\dots \times A_{r}\)</span>. נגדיר <span>\(M_{i}=\sup_{x \in A_{i}}f(x)\)</span>. הסכום התחתון של <span>\(f\)</span> ביחס ל-<span>\(P\)</span> יהיה:
+<span>$$S(f,P)=\sum_{i=1}^{r}M_{i}\,V(A_{i})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">עידון של חלוקה</span><p>חלוקה <span>\(P'\)</span> המקיימת <span>\(P\subseteq P'\)</span> נקראת עידון</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(P'\)</span> עידון של חלוקה מתקיים:
+<span>$$s(f,P)\leq s(f,P^{\prime})\leq S\left(f,P^{\prime}\right)\leq S\left(f,P\right).$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל תחתון</span><p><span>$$\underline{\int}_{A}f(x) \;\mathrm{d}x=\operatorname*{sup}\left\{s(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל עליון</span><p><span>$${\overline{{\int}_{A}}}f(x)\,\mathrm{d} x=\operatorname*{inf}\left\{S(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרבליות לפי רימן</span><p>פונקציה שהאינטגרל העליון שווה לאינטגרל התחתון נקראת אינטגרבילית רימן, כלומר אם:
+<span>$$\underline{\int_{A}} f(x)\;\mathrm{d}x=\overline{\int}_{A}f(x)\mathrm{d}x$$</span>
+ובמקרה זה נקרא לביטוי זה האינטגרל ונסמן:
+<span>$$\int_{A}f(x)\,d x\quad \text{או}\quad\int_{A}f\left( x_{1},\ldots,x_{k} \right)\,d x_{1}d x_{2}\ldots d x_{k}$$</span></p>
+</div>
+<div class="remark">
+<p>פונקציה אינטגרבילית צריכה להיות חסומה, אחרת אין בכלל משמעות לסכום עליון ותחתון.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות בסיסיות של אינטגרלים</span><ol>
+<li>
+<p>סכום של אינטגרלים - אם <span>\(f,g\)</span> אינטגרביליים אז <span>\(f+g\)</span>  אינטגרבילים, ומתקיים: 
+<span>$$\int_{A}(f+g)(x)\,d x=\int_{A}f(x)\,d x+\int_{A}g(x)\,d x.$$</span></p>
+</li>
+<li>
+<p>כפל בסקלר - אם <span>\(f\)</span> אינטגרבילי אז <span>\(cf\)</span> אינטגרבילי ומתקיים: 
+<span>$$\int_{A}(c f)(x)\,d x=c\int_{A}f(x)\,d x.$$</span></p>
+</li>
+<li>
+<p>אינטגרל על יחידה - פונקציית היחידה היא אינטגרבילית, ומקיימת: 
+<span>$$\int_{A}1\,d x=V(A).$$</span></p>
+</li>
+<li>
+<p>חיוביות - אם <span>\(f(x)\geq 0\)</span> לכל <span>\(x \in A\)</span> אז מתקיים: 
+<span>$$\int_{A}f(x)\,d x\geq0.$$</span></p>
+</li>
+<li>
+<p>מונוטוניות - אם <span>\(f(x)\leq g(x)\)</span> לכל <span>\(x\)</span> אז מתקיים: 
+<span>$$\int_{A}f(x)\,d x\leq\int_{A}g(x)\,d x.$$</span></p>
+</li>
+<li>
+<p>אם <span>\(|f(x)|\leq M\)</span> לכל <span>\(x\)</span> אז: 
+<span>$$\left|\int_{A}f(x)\,d x\right|\leq M\,V(A).$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(A,B\subseteq \mathbb{R}^k\)</span> תיבות כך ש-<span>\(A^{\circ},B^{\circ}\)</span> זרים ו-<span>\(A\cup B\)</span> תיבה. פונקציה <span>\(f: A\cup B\to\mathbb{R}\)</span> אינטגרבילית על <span>\(A\)</span> ועל <span>\(B\)</span> אם"ם אינטגרבילית על <span>\(A\cup B\)</span>, ובמקרה זה מתקיים:
+<span>$$\int_{A\cup B}f\,d x=\int_{A}f\,d x+\int_{B}f\,d x.$$</span></p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(f\)</span> אינטגרבילית ב-<span>\(A\)</span> וב-<span>\(B\)</span>. יהיו <span>\(P_{A},P_{B}\)</span> חלוקות של <span>\(A\)</span> ושל <span>\(B\)</span>. נניח... לסיים עמוד 139.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> תיבה, ו-<span>\(f:A\to\mathbb{R}\)</span> פונקציה רציפה, אזי <span>\(f\)</span> אינטגרבילית ב-<span>\(A\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(A\)</span> קומפקטית, פונקציה <span>\(f\)</span> היא חסומה ורציפה במידה שווה ב-<span>\(A\)</span>.
+יהי <span>\(\varepsilon&gt;0\)</span>. מרציפות במידה שווה נקבל <span>\(\delta&gt;0\)</span> כך ש:
+<span>$$\|x-y\|\leq\delta\implies|f(x)-f(y)|\leq{\frac{\varepsilon}{V(A)}}.$$</span>
+יהי <span>\(P\)</span> חלוקה של <span>\(A\)</span> כך שקוטר החלוקה של כל תת תיבא קטן מ-<span>\(\delta\)</span>. לכן:
+<span>$$S\left(f,P\right)-s(f,P)=\sum_{i}(M_{i}-m_{i})\,V(A_{i})\leq \sum_{i}\delta V(A)=\varepsilon$$</span>
+וכעת נקבל:
+<span>$${\overline{{\int_{A}}}}f\,d x-\underline{\int}_{A}f\,d x\leq\varepsilon$$</span>
+ולכן אינטגרבילי.</p>
+</div><h2 id='Infi_7_2'>מידה אפס</h2>
+ <div class="definition"><span class="keyword">מידה אפס</span><p>קבוצה <span>\(A\subseteq \mathbb{R}^k\)</span> נקראת ממידה אפס אם לכל <span>\(\varepsilon&gt;0\)</span> קיימים אוסף בן מנייה של תיבות <span>\((B_{i})_{i\in\mathbb{N}}\)</span>  כך ש-<span>\(A\subseteq \bigcup_{i}B_{i}\)</span> ו-<span>\(\sum_{i}V(B_{i})&lt;\varepsilon\)</span>.</p>
+</div>
+<p>כלומר בצורה פשוטה, ניתן לכסות את הקבוצה ע"י תיבות, וניתן להקטין את התיבות כך שהנפח יקטן ככל שנרצה.</p>
+<div class="lemma">
+<p>איחוד סופי של קבוצות ממידה אפס הוא ממידה אפס</p>
+</div>
+<div class="proof">
+<p>להשלים</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>יחידון(קבוצה עם איבר יחיד, נקודה) הא ממידה אפס, ולכן גם כל קבוצה בת מנייה. </p>
+</li>
+<li>
+<p>קבוצה אם פנים שלא ריק הוא לא ממידה אפס, כיוון שאם <span>\(a\in A^{\circ}\)</span> אז קיים תיבה <span>\(B\)</span> כך ש- <span>\(B\subseteq A\)</span>, ולכן מכסה את <span>\(A\)</span> ע"י קופסאות <span>\((B_{i})_{i}\)</span> שמקיימים <span>\(\sum_{i}V(B_{i})\geq V(B)\)</span>.  </p>
+</li>
+<li>
+<p>הישר <span>\(\mathbb{R}\times \{ 0 \}\subseteq \mathbb{R}^2\)</span> הוא ממידה אפס, כיוון שמתקיים <span>\(\mathbb{R}\times \{ 0 \}=\bigcup_{i\in\mathbb{Z}}[i,i+1]\times \{ 0 \}\)</span> וכל אחד מהאיברים באיחוד הוא ממידה אפס כיוון שניתן לכסות אותו ע"י התיבה <span>\([i,i+1]\times\left[ 0,\varepsilon \right]\)</span> לכל <span>\(\varepsilon&gt;0\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(B\subseteq \mathbb{R}^k\)</span>, אז <span>\(\partial B\)</span> הוא ממידה אפס </p>
+</li>
+</ol>
+</div>
+<div class="theorem">
+<p>יהי <span>\((X,d)\)</span> מרחב מטרי, אז <span>\(A\subseteq X\)</span> קומפקטי אם"ם לכל אוסף של קבוצות פתוחות <span>\(\left\{  U_{\alpha}  \right\}_{\alpha \in I}\)</span> כך ש-<span>\(A\subseteq \bigcup_{\alpha \in I}U_{\alpha}\)</span> קיים אוסף סופי של <span>\(U_{\alpha_{1}},\dots,U_{\alpha_{m}}\)</span> כך ש-<span>\(A\subseteq \bigcup_{i=1}^mU_{\alpha_{i}}\)</span>.</p>
+</div>
+<p>אוסף כזה נקרא כיסוי פתוח.</p>
+<div class="theorem">
+<p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> הוא קומפקטי ממידה אפס, אז לכל <span>\(\varepsilon&gt;0\)</span> קיים כיסוי סופי של תיבות שיכסו את <span>\(A\)</span>, וניתן לקחת אותם להיות תיבות פתוחות.</p>
+</div>
+<div class="proof">
+<p>לכל <span>\(\varepsilon&gt;0\)</span> קיימים תיבות <span>\((B_{i})_{i\in\mathbb{N}}\)</span> כך ש- <span>\(A\subseteq \bigcup_{i}B_{i}\)</span> ו-<span>\(\sum_{i}V(B_{i})&lt;\varepsilon /2\)</span>. לכל <span>\(i\)</span> ניקח תיבה <span>\(B'\)</span> כך ש- <span>\(B_{i}\subseteq(B_{i}')^{\circ}\)</span>, ו- <span>\(V(B'_{i})&lt;2V(B_{i})\)</span>. כעת בשתמש במשפט על האוסף <span>\(\left( (B_{i}')^{\circ} \right)_{i\in\mathbb{N}}\)</span>. </p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>יהי <span>\(B_{1},\dots,B_{n}\)</span> אוסף של תיבות. קיימים תיבות <span>\(C_{1},\dots,C_{m}\)</span> כך שהפנים שלהם זר, כך ש-<span>\(\bigcup_{i=1}^nB_{i}=\bigcup_{j=1}^mC_{m}\)</span>. זה נכון לכל אוסף בר מנייה של תיבות. </p>
+</li>
+<li>
+<p>כל תיבה <span>\(B\subseteq \mathbb{R}^k\)</span> ניתן לחלוקה לתיבות עם יחס בין הצלע הארוכה לקצרה של לכל היותר 2. </p>
+</li>
+<li>
+<p>אם <span>\(B \subseteq \mathbb{R}^k\)</span> תיבה ככה שהיחס בין הצלע הארוכה לקצרה היא לכל היותר 2, אז קיים קובייה <span>\(B\subseteq C\)</span> כך ש-<span>\(V(C)\leq 2^kV(B)\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> ממידה אפס, אז לכל <span>\(\varepsilon&gt;0\)</span> ניתן לכסות את <span>\(A\)</span> ע"י קוביות(מהצורה <span>\([a,b]^k\)</span>) <span>\((C_{i})_{i\in\mathbb{N}}\)</span>, כך ש-<span>\(\sum_{i}V(C_{i})&lt;\varepsilon\)</span>. </p>
+</div>
+<div class="theorem"><span class="keyword">לבג ויטאלי</span><p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> תיבה כך ש-<span>\(f:A\to\mathbb{R}\)</span> פונקציה חסומה. <span>\(f\)</span> תהיה אינטגרבילית אם"ם נקודות האי רציפות הם ממידה אפס.</p>
+</div>
+<div class="remark">
+<p>זה אומר כי אם קבוצה היא לא ממידה אפס, אז מכילה נקודות רציפות.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f_{1},\dots f_{m}:A\to\mathbb{R}\)</span> פונקציות אינטגרביליות, ו-<span>\(\phi:\mathbb{R}^m\to\mathbb{R}\)</span> פונקציות רציפות, אז:
+<span>$$\int_{A}\phi\bigl(f_{1}(x),\ldots,f_{m}(x)\bigr)\,d x$$</span>
+כאשר בפרט מכפלה סופית של פונקציות אינטגרביליות היא אינטגרבילית</p>
+</div>
+<div class="proof">
+<p>נקודות האי רציפות של <span>\(\phi\)</span> זה האיחוד של הנקודות האי רציפות של <span>\(f_{i}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם קבוצה היא קומפקטיות וממידה אפס אז הנפח שלה הוא אפס</p>
+</div>
+<div class="definition">
+<p>יהי <span>\((X,d),\left( Y,\rho \right)\)</span> מרחבים מטרים. עבור <span>\(f:X\to Y\)</span> נגדיר 
+<span>$$\omega_{f}(x)=\lim_{ \delta \to 0 } \mathrm{diam}\left( f\left( B_{\delta}(x) \right) \right)\qquad F_{\varepsilon}=\left\{ x \in X \mid 
+\omega_{f}(x)\geq \varepsilon  \right\}$$</span>
+כאשר נזכור כי:
+<span>$$\mathrm{diam(A)}=\sup_{y_{1},y_{2}\in A} \rho\left(y_{1},y_{2} \right)\quad A\subseteq Y$$</span></p>
+</div>
+<p>נשים לב כי אם <span>\(x\)</span> נקודת רציפות:
+<span>$$\begin{gather} \forall \varepsilon &gt;0 \quad \exists \delta&gt;0\quad \forall x'\in B_{\delta}(x)\quad f(x')\in B_{\varepsilon}(f(x))\implies  \\\forall\varepsilon&gt;0 \quad \exists \delta&gt;0\quad \forall x',x''\in B_{\delta}(x)\quad \rho(f(x'),f(x''))\implies \\
+\omega_{f}(x)\leq \mathrm{diam}\left( f\left( B_{\delta}(x) \right) \right)&lt;2\varepsilon\end{gather}$$</span>
+כלומר <span>\(x\)</span> נקודת רציפות גורר <span>\(\omega_{f}(x)=0\)</span>. באופן דומה, הגרירה ההפוכה גם נכונה, ולכן קבוצת נקודות האי רציפות יהיו שוות לקבוצה:
+<span>$$\left\{  x \in X \mid \omega_{f}(x)&gt;0  \right\}=\bigcup_{n\in\mathbb{N}}\left\{  x \in X \mid \omega_{f}(x)\geq \frac{1}{n}  \right\}=\bigcup_{n \in \mathbb{N}}F_{\frac{1}{n}}$$</span></p>
+<div class="proposition"><span class="keyword">ניסוח שקול למשפט לבג</span><p>עבור <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, פונקציה <span>\(f:A\to\mathbb{R}\)</span> חסומה היא אינטגרבילית אם"ם <span>\(F_{\frac{1}{n}}\)</span> ממידה אפס לכל <span>\(n\)</span>.</p>
+</div><h2 id='Infi_7_3'>נפח של קבוצות</h2>
+ <div class="definition"><span class="keyword">פונקציה מציינת</span><p>מחזירה 1 עם הנקודה נמצאת בקבוצה <span>\(S\)</span> ו-0 אם לא. כלומר:
+<span>$$\chi_{S}\left(x\right)=\left\{{\begin{array}{l l}{1}&amp;{\;x\in S}\\ {0}&amp;{\;x\notin S.}\end{array}}\right.$$</span></p>
+</div>
+<p>לפעמים מסמנים את הפונקציה ב- <span>\(1_{S}\)</span>. </p>
+<div class="definition"><span class="keyword">נפח של קבוצה</span><p>הנפח של קבוצה <span>\(S\)</span> תהיה:
+<span>$$V(S)=\int_{A}\!\chi_{S}(x)\,d x$$</span>
+אם האינטגרל הזה מוגדר הקבוצה נקראת בעלת נפח</p>
+</div>
+<div class="proposition">
+<p>קבוצה <span>\(A\)</span> בעלת נפח אם"ם <span>\(\partial A\)</span> ממידה אפס.</p>
+</div>
+<div class="proof">
+<p>נזכור כי <span>\(1_{A}\)</span> אינטגרבילית אם"ם קבוצת נקודות האי רציפות הם ממידה אפס. נקודות האי רציפות של <span>\(1_{A}\)</span> הן בדיוק הערכים שבהן מחליפה בין 0 ל-1, כלומר השפה של <span>\(A\)</span>. לכן <span>\(A\)</span> בעלת נפח אם"ם <span>\(\partial A\)</span> ממידה אפס.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(B\subseteq \mathbb{R}^k\)</span> תיבה. אזי <span>$$V(B)=\int_{B}1_{B}d x$$</span></p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. קיימת חלוקה <span>\(P\)</span> כך ש:
+<span>$$\underline{{{s}}}(1_{B},P)-\epsilon&lt;\int\limits_{B}1_{B}d x&lt;\overline{{{S}}}(1_{B},P)+\epsilon$$</span>
+מהגדרת הסכום העליון והתחתון מתקיים:
+<span>$$\begin{array}{l}{{\underline{{s}}(1_{B},P)=\displaystyle\sum_{j=1}^{r}\operatorname*{inf}_{x\in A_{j}}1_{B}(x)\cdot V(B_{j})=\displaystyle\sum_{j=1}^{r}V(B_{j})=V(B)}}\\ {{\overline{{S}}(1_{B},P)=\displaystyle\sum_{j=1}^{r}\operatorname*{sup}_{x\in A_{j}}1_{B}(x)\cdot V(B_{j})=\displaystyle\sum_{j=1}^{r}V(B_{j})=V(B)}}\end{array}$$</span>
+ולכן:
+<span>$$V(B)-\epsilon&lt;\int_{B}1_{B}d x&lt;V(B)+\epsilon$$</span>
+זה נכון לכל <span>\(\varepsilon&gt;\)</span> ולכן <span>\(V(B)=\int_{B}1_{B}\)</span></p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(A,B,C\subseteq \mathbb{R}^k\)</span> קבוצות בעלות נפח. אזי <span>\(C\cap D, C \cup D\)</span> בעלות נפח ומתקיים:
+<span>$$V\left(C\cup D\right)=V\left(C\right)+V\left(D\right)-V\left(C\cap D\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(S\subseteq \mathbb{R}^k\)</span> קבוצה קומפקטית, ו-<span>\(f\in C\left( S;\mathbb{R} \right)\)</span>(גזיר ברציפות ב-<span>\(S\)</span> ורציף ב-<span>\(\mathbb{R}\)</span>), אזי הגרף של <span>\(f\)</span>:
+<span>$$\left\{\left(x,f\left(x\right)\right):x\in S\right\}\subset\mathbb{R}^{k+1}$$</span>
+הוא ממידה 0 ב-<span>\(\mathbb{R}^{k+1}\)</span>.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה לינארית. אם <span>\(N\subseteq \mathbb{R}^k\)</span> ממידה 0 אזי <span>\(f(N)\)</span> ממידה אפס. </p>
+</li>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה ליפשיצית. אם <span>\(N\subseteq \mathbb{R}^k\)</span> ממידה אפס, אזי <span>\(f(N)\)</span> ממידה אפס. </p>
+</li>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה גזירה ברציפות. אם <span>\(K\subseteq \mathbb{R}^n\)</span> קבוצה קומפקטית ממידה אפס, <span>\(f(K)\)</span> תהיה ממידה אפס. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>קבוצה <span>\(A\subseteq \mathbb{R}^n\)</span> בעלת נפח אם"ם <span>\(A^\circ,\bar{A}\)</span> בעלות נפח.</p>
+</div>
+<div class="proposition">
+<p>קבוצה <span>\(A\subseteq \mathbb{R}^n\)</span> בעלת נפח ו-<span>\(f:\bar{A}\to \mathbb{R}\)</span> חסומה. אזי <span>\(f\)</span> אינטגרבילית על <span>\(\bar{A}\)</span> אם"ם <span>\(f\)</span> אינטגרבילית על <span>\(A\)</span> אם"ם <span>\(f\)</span> אינטגרבילית על <span>\(A^\circ\)</span> ומתקיים:
+<span>$$\int_{A^\circ }f(x)=\int_{A}f(x)=\int_{\bar{A}}f(x)$$</span></p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(B\subseteq \mathbb{R}^k\)</span> תיבה סגורה ו-<span>\(\left\{  B_{\alpha}  \right\}_{\alpha=1}^\infty\)</span>  אוסף בן מנייה של תיבות פתוחות כך ש-<span>\(B\subseteq \bigcup_{\alpha=1}^\infty B_{\alpha}\)</span> אז מתקיים:
+<span>$$V(B)\le\sum_{\alpha=1}^{\infty}V(B_{\alpha})$$</span></p>
+</div>
+<div class="proposition">
+<p>קבוצה פתוחה חסומה לא בהכרח בעלת נפח. כלומר השפה שלה לא בהכרח ממידה אפס.</p>
+</div>
+<div class="example">
+<p>קבוצת קנטור. תהי <span>\(q_{n}\)</span> סדרה של כל המספרים הרציונאלים. נגדיר:
+<span>$$U=\bigcup_{n=1}^\infty B\left( q_{n}, \frac{1}{2^n} \right)= \bigcup_{n=1}^\infty \left( q_{n}- \frac{1}{2^n},q_{n}+\frac{1}{2^n} \right)$$</span>
+נשים לב כי <span>\(U\)</span> פתוחה, וכמו כן <span>\(U\)</span> צפופה ב-<span>\(\mathbb{R}\)</span>. וכן <span>\(\mathbb{Q}\subseteq U\)</span>. מתקיים:
+<span>$$U=\bar{U}\setminus  U^\circ  = \mathbb{R} \setminus U= U^\circ =A $$</span>
+נניח בשלילה ש-<span>\(A\)</span> ממידה אפס. נשים לב כי:
+<span>$$[1,4]\subseteq(0,5)\cap\left( U\cup A \right) \subseteq\left( (0,5)\cap U \right)\cup \left( A\cap (0,5)\right)$$</span>
+נגדיר <span>\(U'=(0,5)\cap U\)</span> קבוצה פתוחה כחיתוך סופי של קבוצות פתוחות. כעת:
+<span>$$\partial U' \subseteq \left( A \cap(0,5) \right)\cup \{ 0,5 \}$$</span>
+כאשר הוספנו את הנקודות קצה כדי שיכיל את נקודות הגבול. וקיבלנו איחוד של קבוצות ממידה אפס, ולכן השפה ממידה אפס. ולכן <span>\(U'\)</span> בעלת נפח. כעת:
+<span>$$\begin{gather} V\left( U'\cap A \right)\leq V\left( (0,5)\cap \bigcup_{n=1}^\infty\left( q_{n}-\frac{1}{2^n},q_{n}+\frac{1}{2^n}\cup A \right) \right)\leq  \\
+\leq \sum_{n=1}^\infty V\left( \left( q_{n}-\frac{1}{2^n},q_{n}+\frac{1}{2^n} \right) \right) +V(A_{n}[0,5])=\sum_{n=1}^\infty \frac{2}{2^n}+0=2\end{gather}$$</span>
+אבל <span>\(V([1,4])=3\)</span> והגענו לסתירה.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול לאינטגרביליות פונקציות סקלאריות</span><p>עבור <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה ופונקציה חיובית <span>\(f:\left[ 0,\infty \right]\to A\)</span> אם הביטוי:
+<span>$$\operatorname*{sup}\left\lbrace\int_{K}f:K\in U\quad {\text{בעלת נפח וקומפקטית}}\right\rbrace$$</span>
+סופי, אז הפוקציה <span>\(f\)</span> אינטגרבילית, והאינטגרל שווה לסופרמום. </p>
+</div>
+<div class="proposition"><span class="keyword">סדרת מיצוי</span><p>תהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, אזי יש סדרת קבוצות קומפקטיות בעלות נפח <span>\(C_{N}\)</span> כך ש-<span>\(C_{N}\subset C^\circ_{N+1}\)</span> ו-<span>\(\sum_{N=1}^\infty C_{N}=A\)</span>. סדרה זו נקראת סדרת מיצוי.</p>
+</div><h2 id='Infi_7_4'>אינטגרלים לא אמיתיים</h2>
+ <div class="definition"><span class="keyword">אינטגרל לא אמיתי של פונקציה חיובית</span><p>תהא <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה עם שפה ממידה אפס ותהא <span>\(f:A\to\left[ 0,\infty \right]\)</span> פונקציה שקבוצת נקודות האי רציפות שלה ממידה אפס. נאמר ש-<span>\(f\)</span> אינטגרבילית על <span>\(A\)</span> אם:
+<span>$$c=\operatorname*{sup}\left\lbrace\int_{K}f:K\in U\quad {\text{בעלת נפח וקומפקטית}}\right\rbrace $$</span>
+סופי. ובמקרה זה האינטגרל שווה ל-<span>\(c\)</span>.</p>
+</div>
+<div class="proposition">
+<p>במקרה ש-<span>\(A\)</span> בעלת נפח ו-<span>\(f\)</span> חסומה, אז ההגדרה הזו שקולה ללהגדרה הרגילה.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(f\)</span> אי שלילית, <span>\(\int_{A}f(x)dx\geq c\)</span>. מצד שני, ראינו כי
+<span>$$\int_{A}f(x)dx=\lim_{ i \to \infty }\int_{S_{i}}f(x)\;\mathrm{d}x\leq c$$</span>
+כאשר <span>\(S_{i}\subseteq A^\circ\)</span> איחוד סופי של תיבות.</p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל לא אמיתי של פונקציה כללית</span><p>עבור פונקציה <span>\(f:\mathbb{R}\to A\)</span> כללית, נגדיר <span>\(f_{+}=\max\{ f,0 \}\)</span> ו-<span>\(f_{-}=\max\{ -f,0 \}\)</span> כאשר הפונקציה אינטגרבילית אם"ם <span>\(f_{-},f_{+}\)</span> אינטגרביליות, והאינטגרל יהיה שווה ל:
+<span>$$\int_{A}f=\int_{A}f_{+}-\int_{A}f_{-}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סדרת מיצוי</span><p>נאמר כי <span>\(A_{n}\subseteq A\)</span> סדרה ממצה אם <span>\(A_{1}\subseteq A_{2} \subseteq \dots \subseteq A\)</span> ולכל קבוצה <span>\(B\subseteq A\)</span> קומפקטית, נקבל <span>\(B \subseteq A_{n}\)</span> החל ממקום מסוים. </p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((A_{n})\)</span> סדרה ממצה. אם <span>\(f:A\to \mathbb{R}\)</span> אינטגרבילי במובן אינטגרל לא אמיתי, אז:
+<span>$$\lim_{ n \to \infty } \int_{A_{n}}f(x)\;\mathrm{d}x=\int_{A} \;f(x)\;\mathrm{d}x$$</span></p>
+</div>
+<div class="remark">
+<p>אם <span>\(A_{n}\)</span> בעלת נפח ו-<span>\(f|_{A_{n}}\)</span> חסומה, אז צד שמאל של המשוואה הוא אינטגרל אמיתי.</p>
+</div>
+<div class="proposition">
+<p>פונקציה <span>\(f\)</span> אינטגרבילית על תחום <span>\(A\)</span> אם"ם קיים מיצוי קומפקטי <span>\(D_{n}\)</span> של <span>\(A\)</span> כך ש-
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{D_{n}}|f|=L\in\mathbb{R}$$</span></p>
+</div><h2 id='Infi_7_5'>משפט פוביני</h2>
+ <p><strong>אינטואיציה</strong> אם מחלקים את התיבות לקוביות וסוכמים אותם, ניתן לסכום אותם לפי השורות או לפי העמודות, וכיוון שכמות התיבות היא סופית נצפה לקבל אותו דבר.</p>
+<div class="theorem"><span class="keyword">פוביני</span><p>יהיו <span>\(A\subseteq \mathbb{R}^k,B\subseteq \mathbb{R}^m\)</span> תיבות סגורות ו-<span>\(f:A\times B\to\mathbb{R}\)</span> פונקציה אינטגרבילית. לכל <span>\(x  \in A\)</span> ו-<span>\(y\in B\)</span> נגדיר:
+<span>$$f_{x}(y):=f(x,y),\;f_{y}(x):=f(x,y)$$</span>
+אם לכל <span>\(x \in A,y \in B\)</span> האינטגרלים<span>$$\int_{B}f_{x}(y)d y,\;\int_{A}f_{y}(x)d x$$</span>
+קיימים אז:
+<span>$$\int_{A\times B}f(x,y)d x d y=\int_{A}\left( \int_{B}f_{x}(y)d y \right)d x=\int_{A}\left( \int_{B}f_{y}(x)d x \right)d y$$</span></p>
+</div>
+<p>זה מאפשר לנו לבצע אינטגרציה לכל משתנה בנפרד, ולהחליף סדר אינטגרציה.</p>
+<div class="proof">
+<p>כיוון ש-<span>\(f\)</span> אינטגרבילית ב-<span>\(A\times B\)</span> לכל <span>\(\varepsilon&gt;0\)</span> קיימת חלוקה <span>\(P\)</span> כך ש-
+<span>$$S\left(f,P\right)-s(f,P)\leq\varepsilon.$$</span>
+כאשר כל חלוקה <span>\(P\)</span> של <span>\(A\times B\)</span> היא מכפלה של חלוקות <span>\(P_{A},P_{B}\)</span> של תיבות <span>\(A\)</span> ושל תיבות <span>\(B\)</span>. נסמן:
+<span>$$G(y)=\overline{{{\int_{A}}}}f(x,y)\,d x\qquad{\mathrm{and}}\qquad H(y)=\underline{{{\int_{A}}}}f(x,y)\,d x.$$</span>
+כעת:
+<span>$$\begin{aligned} {{s ( f, P )}} &amp; {{} {{} {} {} {{}=} \sum_{i} \sum_{j} V ( A_{i} ) V ( B_{j} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}} \\ {{}} &amp; {{} {{} {{}=\sum_{j} V ( B_{j} ) \sum_{i} V ( A_{i} ) \operatorname* {i n f}_{( x, y ) \in A_{i} \times B_{j}} f ( x, y )}}} \\ {{}} &amp; {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} \sum_{j} V ( A_{i} ) \operatorname* {i n f}_{x \in A_{i}} f ( x, y )}}} \\ {{}} &amp; {{} {{} {{} \leq\sum_{j} V ( B_{j} ) \operatorname* {i n f}_{y \in B_{j}} H ( y )=s ( H, P_{B} ).}}} \\ \end{aligned}
+$$</span>
+ובאופן דומה נקבל:
+<span>$$S\left(f,P\right)\geq S\left(G,P_{B}\right).$$</span>
+כעת נוכל להסיק כי:
+<span>$$\begin{aligned}\int_{A\times B}f(x,y) dxdy-\varepsilon &amp; \leq s(f,P)\leq s(H,P_{B}) \\&amp;\leq\underline{\int}_{B}H(y) dy\leq\overline{\int}_{B}H(y) dy \\&amp;\leq S\left(H,P_{B}\right)\leq S\left(G,P_{B}\right)\leq S\left(f,P\right) \\&amp;\leq\int_{A\times B}f(x,y) dxdy+\varepsilon.
+\end{aligned}$$</span>
+כיוון שנכון לכל <span>\(\varepsilon\)</span> נקבל כי:
+<span>$$\int_{A\times B}f(x,y)\,d x d y=\int_{B}H(y)\,d y=\int_{B}{\underline{{\int_{A}}}}f(x,y)\,d x\,d y.$$</span>
+ובאופן דומה, נקבל:
+<span>$$\int_{A\times B}f(x,y)\,d x d y=\int_{B}G(y)\,d y=\int_{B}{\overline{{\int_{A}}}}f(x,y)\,d x\,d y.$$</span></p>
+</div>
+<p>משפט זה מאוד חשוב כיוון שהופך אינטגרל על קבוצה לאוסף אינטגרלים חד מימדיים.</p>
+<div class="example">
+<p>ננסה למצוא נפח של גוף סיבוב. יהי <span>\(f:[a,b]\to\left[ 0,\infty \right]\)</span> פונקציה רציפה. וכן נגדיר:
+<span>$$C=\left\{(x,y,z)\in\mathbb{R}^{3}:\;x\in[a,b],\;y^{2}+z^{2}\leq f^{2}(x)\right\}.$$</span>
+נשים לב כי <span>\(C\)</span> קבוצה בעלת נפח. כעת מפוביני מתקיים:
+<span>$$V(C)=\int_{a}^{b}\left(\int\chi_{C}(x,y,z)\,d y d z\right)\,d x=\int_{a}^{b}\pi f^{2}(x)\,d x,$$</span>
+כיוון שהאינטגרל הפנימי הוא נשטח של דיסטה ברדיוס <span>\(f(x)\)</span>. </p>
+</div>
+<div class="corollary">
+<p>יהיו <span>\(g_{0},g_{1}:[a,b]\to \mathbb{R}\)</span> פונקציות רציפות כך ש-<span>\(g_{0}\leq g_{1}\)</span> ותהי:
+<span>$$D=\left\{\left(x,y\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right]\right\}$$</span>
+אזי <span>\(D\)</span> היא קבוצת בעלת נפח ולכל פונקציה רציפה <span>\(f:D\to\mathbb{R}\)</span> נקבל:
+<span>$$\int_{D}f\left(x,y\right)d x d y=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}f\left(x,y\right)d y\right)d x$$</span></p>
+</div>
+<div class="corollary">
+<p>יהיו <span>\(h_{0},h_{1}:D\to\mathbb{R}\)</span> פונקציות רציפות כך ש-<span>\(h_{0}\leq h_{1}\)</span> ותהי:
+<span>$$E=\left\{\left(x,y,z\right)\in\mathbb{R}^{2}:x\in\left[a,b\right],y\in\left[g_{0}\left(x\right),g_{1}\left(x\right)\right],z\in\left[h_{0}\left(x,y\right),h_{1}\left(x,y\right)\right]\right\}$$</span>
+אזי <span>\(E\)</span> קבוצת בעלת נפח ולכל פונקציה רציפה <span>\(f:E\to\mathbb{R}\)</span> נקבל:
+<span>$$\int_{E}f\left(x,y,z\right)d x d y d z=\int_{a}^{b}\left(\int_{g_{0}\left(x\right)}^{g_{1}\left(x\right)}\left(\int_{h_{0}\left(x,y\right)}^{h_{1}\left(x,y\right)}f\left(x,y,z\right)d z\right)d y\right)d x$$</span></p>
+</div><h2 id='Infi_7_6'>משפט חילוף משתנה</h2>
+ <div class="theorem"><span class="keyword">חלוף משתנה חד מימדי</span><p><span>$$\int_{g(a)}^{g(b)} f=\int_{a}^{b}\left( f\circ g \right)g'$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">חילוף משתנה רב מימדי</span><p>תהא <span>\(U\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(g\in C^1\left( U,\mathbb{R} \right)\)</span> חח"ע, <span>\(0\neq J(g(x))=\det(Dg)_{x}\)</span> לכל <span>\(x \in U\)</span>.
+תהא <span>\(\mathcal{U}\)</span> פונקציית בעלת נפח וקומפקטית. אזי <span>\(f:A\to\mathbb{R}\)</span> אינטגרבילית כך ש-<span>\(f\circ g\)</span> אינטגרבילית. מתקיים:
+<span>$$\int_{A} f(x)dx=\int_{g^{-1}(A)}\left( f\circ g \right)(y)|Jg(y)|dy$$</span></p>
+</div>
+<p><strong>הערות</strong></p>
+<ol>
+<li>
+<p>אם <span>\(f\)</span> רציפה, אז <span>\(f\)</span> אינטגרבילית, <span>\(f\circ g\)</span> אינטגרבלית </p>
+</li>
+<li>
+<p>בפרט נובע אם <span>\(A\)</span> מבעלת נפח אז <span>\(g^{-1}(A)\)</span> בעלת נפח </p>
+</li>
+<li>
+<p>ממשפט ההעתקה הפתוחה, <span>\(g(U)=V\)</span> היא פתוח. כלומר בעצם <span>\(g:U\to V\)</span> חח"ע ועל ו- </p>
+</li>
+</ol>
+<div class="corollary"><span class="keyword">חילוף משתנה בקבוצה פתוחה</span><p>תהא <span>\(U\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(g\in C^1\left( U,\mathbb{R}^k \right)\)</span> חד-חד ערכית כך ש-<span>\(Jg(x)\neq_{0}\)</span> ב-<span>\(U\)</span>. אזי לכל <span>\(f:U\to \mathbb{R}\)</span> אינטגרבילית כך ש-<span>\(f\circ g\)</span> אינטגרבילית, מתקיים:
+<span>$$\int_{U}f(x)d x=\int_{g^{-1}(U)}f\circ g|J g(y)|d y$$</span></p>
+</div>
+<div class="example">
+<p>עבור הקבוצה <span>\(E\)</span> ונפונקציה <span>\(f\)</span> המוגדרות:
+<span>$$E=\left\{ (x,y)\quad|\quad0&lt;x^{2}+x y+y^{2}&lt;1 \right\}\qquad f(x,y)=\frac{1}{\sqrt{x^{2}+x y+y^{2}}}$$</span>
+נחשב את האינטגרל של <span>\(f\)</span> על התחום <span>\(E\)</span>. ראשית נראה שאינטגרבילית.
+נזכור כי <span>\(f\)</span> אינטגרבילית על <span>\(A\)</span> אם"ם קיים מיצוי קומפקטי <span>\(D_{n}\)</span> של <span>\(A\)</span> כך ש:
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{D_{n}}|f|=L\in\mathbb{R}$$</span>
+הפונקציה <span>\(f\)</span> חיובית לכן אפשר להתעלם מהערך המוחלט. ניקח את המיצוי:
+<span>$$D_{n}=\left\{(x,y):\ {\textstyle{\frac{1}{n}}}\leq x^{2}+x y+y^{2}\leq1-{\textstyle{\frac{1}{n}}}\right\}$$</span>
+זהו למעשה מתאר את התחום בין אליספה קטנה לאליפסה גדולה. נרצה להמיר אותם בעיגולים ע"י חילופי משתנה לינארים. נשים לב כי ניתן לכתוב:
+<span>$$x^{2}+x y+y^{2}=\frac{3}{4}(x+y)^{2}+\frac{1}{4}(x-y)^{2}$$</span>
+ולכן ניתן לסמן <span>\(u=x+y,v=x-y\)</span> ונקבל <span>\(x=\frac{1}{2}(u+v),y=\frac{1}{2}(u-v)\)</span>. למעשה נפטרנו כאן מהסיבוב. כעת ניתן להגדיר:
+<span>$$g(u,v)=\left( \frac{1}{2}(u+v),\frac{1}{2}(u-v) \right)\implies Dg=\begin{pmatrix}\frac{1}{2} &amp; \frac{1}{2}\\ \frac{1}{2}  &amp; -\frac{1}{2}
+\end{pmatrix}$$</span>
+היעקוביאן שווה ל-<span>\(\left\lvert  -\frac{1}{2}  \right\rvert=\frac{1}{2}\)</span>, ולכן האינטגרל יהיה:
+<span>$$\int_{D_{n}}f=\int_{\frac{1}{n}\leq\frac{3}{4}u^{2}+\frac{1}{4}v^{2}\leq1-\frac{1}{n}}\frac{1}{\sqrt{\frac{3}{4}u^{2}+\frac{1}{4}v^{2}}}\cdot\frac{1}{2}$$</span>
+נגדיר חילופי משתנה נוסף על מנת להפוך לטבעות עגולות:
+<span>$${{\displaystyle\frac{\sqrt{3}}{2}u=t,\;\frac{1}{2}v=s}}\quad  {{\displaystyle g(t,s)=\left( \frac{2}{\sqrt{3}}t,2s \right)}}\quad {{\displaystyle J g=\frac{2}{\sqrt{3}}\cdot2=\frac{4}{\sqrt{3}}}}$$</span></p>
+</div>
+<p>וכעת נקבל:
+<span>$$\int_{D_{n}}f={\frac{1}{2}}{\frac{4}{\sqrt{3}}}\int_{{\frac{1}{n}}\leq t^{2}+s^{2}\leq1-{\frac{1}{n}}}{\frac{1}{\sqrt{t^{2}+s^{2}}}}={\frac{2}{\sqrt{3}}}\int_{{\frac{1}{n}}\leq t^{2}+s^{2}\leq1-{\frac{1}{n}}}{\frac{1}{\sqrt{t^{2}+s^{2}}}}$$</span>
+נעשה חילוף משתנה אחרון לקורדינטות פולאריות. הקורדינטות הפולאריות מפספסות קבוצה ממידה אפס. ולכן האינטגרלים שווים. הפוקציה <span>\(f\)</span> רציפה בתחום ולכן ניתן להשתמש במשפט פוביני ולקבל:
+<span>$$=\frac{2}{\sqrt{3}}\int\limits_{\frac{1}{n}}^{1-\frac{1}{n}}\int\limits_{0}^{2\pi}\frac{1}{\sqrt{r^{2}}}r d\theta d r=\frac{4\pi}{\sqrt{3}}\left( 1-\frac{2}{n} \right)\implies\int_{E}f=\operatorname*{lim}_{n\to\infty}{\frac{4\pi}{\sqrt{3}}}\left( 1-{\frac{2}{n}} \right)={\frac{4\pi}{\sqrt{3}}}$$</span></p><h1 id='Infi_8'>אינטגרציה על מסילות</h1>
+<h2 id='Infi_8_1'>עקומות</h2>
+ <div class="definition"><span class="keyword">עקומה חלקה</span><p>העתקה <span>\(\gamma:[a,b]\to \mathbb{R}^{n}\)</span> אשר גזירה מכל סדר.</p>
+</div>
+<div class="definition"><span class="keyword">שקולים עד כדי פרמטריזציה</span><p>שתי עקומות <span>\(\mu:[c,d]\to \mathbb{R}^{n}\)</span> ו-<span>\(\gamma:[a,b]\to \mathbb{R}^{n}\)</span> שקולים עד כדי פרמטריזציה אם קיים פונקצייה חלקה <span>\(\phi:[c,d]\to[a,b]\)</span> כך ש-<span>\(\phi(c)=a\)</span> ו-<span>\(\phi(d)=b\)</span> כאשר <span>\(\phi'&gt;0\)</span> ומתקיים:
+<span>$$\mu=\gamma \circ  \phi$$</span></p>
+</div>
+<div class="remark">
+<p>התנאים על <span>\(\phi\)</span> הם שקולים לכך ש-<span>\(\phi\)</span> היא עולה, חח"ע ועל על מפה חלקה מ-<span>\([c,d]\)</span> ל-<span>\([a,b]\)</span> כך שההופכי הוא גם כן חלק.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mu=\gamma \circ\phi\)</span> כמו מקודם אז לכל <span>\(t_{0} \in [c,d]\)</span> מתקיים:
+<span>$$\mu^{\prime}(t_{0})=\gamma^{\prime}(\phi(t_{0}))\phi^{\prime}(t_{0})$$</span></p>
+</div>
+<div class="proof">
+<p>זה מקרה מיוחד של כלל השרשרת.</p>
+</div>
+        </body>
+    </html>
+    

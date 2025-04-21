@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרצאה 3</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_4_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_4_2`; }});</script>
+        <div class="content">
+        <h1>4.3  הרצאה 3</h1>
+    <div class="definition"><span class="keyword">מודול פשוט</span><p>אין תתי מודולים מלבד <span>\(\{ 0 \},M\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מודול ציקלי</span><p>מודול <span>\(M\)</span> הוא ציקלי אם יש אישזהו איבר <span>\(M=\langle m \rangle=Rm\)</span> ל-<span>\(m \in M\)</span> שיוצר אותו.</p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(C_{8}=\langle 1 \rangle\)</span> כ-<span>\(\mathbb{Z}\)</span>-מודול.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(M=\langle m \rangle\)</span> ציקלי אזי נסתכל על:
+<span>$$f:R\to M \qquad f(r)=r m$$</span>
+אזי <span>\(f\)</span> הומומורפיזם של R-מודולים ועל ולכן:
+<span>$$M \cong  R / \ker  f$$</span>
+(הגרעין <span>\(\ker f\)</span> הוא אידיאלי שמאלי = תת מודול של <span>\(R\)</span>)
+לכן כל מודול ציקלי איזומורפי לחוג מודול משהו.
+וכן גל להיפך - <span>\(R / I\)</span> הוא <span>\(R\)</span> מודול ציקלי לכל <span>\(I\leq R\)</span> וזה סימון לאידיאלי שמאלי.</p>
+</div>
+<div class="remark">
+<p>כאשר יש הומומורפיזם של שתי חוגים אז <span>\(f:R\to\)</span> אז <span>\(\ker f \trianglelefteq R\)</span>. זה הומומורפיזם של חוגים.
+כאשר יש הומומורפיזם של מודולים <span>\(f:M\to M'\)</span> גורר <span>\(\ker f\leq M\)</span> תת מודול.
+עבור <span>\(R\)</span> כ-<span>\(R\)</span> מודול נקבל תת מודול אם"ם אידיאל שמאלי.</p>
+</div>
+<div class="definition"><span class="keyword">מודול נאמן - faithful</span><p>הומומורפיזם המבנה <span>\(\rho:R\to \mathrm{End}_{Ab}(M)\)</span> הוא חח"ע. כלומר:
+לכל <span>\(r\neq 0\)</span> יש איזשהו <span>\(m \in M\)</span> עם <span>\(r m \neq 0\)</span>.
+מקביל לחלוטין לפעולה נאמנה עבור חבורות.</p>
+</div>
+<p>מתי לחוג אין אידיאלים שמאליים?
+אם"ם חוג חילוק.</p>
+<div class="proof">
+<p>לכל <span>\(0\neq r \in R\)</span> יש הופכי משמאל. כי <span>\(\langle r \rangle=Rr=R\)</span> וזה אומר שיש הופכי משמאל. נסמן ב-<span>\(\bar{r}\)</span> להופכי משמאל. נדרש רק להראות כי יש הופכי מימין כדי להראות שחוג חילוק. נראה ש-<span>\(r\bar{r}=1\)</span>. נסתכל עליו בריבוע:
+<span>$$(r\bar{r})^{2}=r\cancel{ \bar{r}r }\bar{r}=r\bar{r}$$</span>
+בנוסף <span>\(r\bar{r}\neq 0\)</span> כי <span>\(\bar{r}r\bar{r}r=1\)</span> ולכן ייתכן כי <span>\(r\bar{r}\)</span> מתאפס.
+לכן:
+<span>$$\overline{r\bar{r}} (r\bar{r})^{2}=\overline{r\bar{r}} r\bar{r}\implies r\bar{r}=1$$</span></p>
+</div>
+<div class="lemma">
+<p>קבוצה בת"ל שאינה פורשת אפשר להרחיב לקבוצה בת"ל</p>
+</div>
+<div class="proof">
+<ul>
+<li>אם <span>\(m\neq \langle m_{1},\dots,m_{n} \rangle\)</span> אזי <span>\(m_{1},\dots,m_{n},m\)</span> בת"ל כי אם:
+<span>$$a_{1}m_{1}+\dots+a_{n}m_{n}+am=0$$</span></li>
+<li>כעת אם <span>\(a=0\)</span> נקבל כי לא אפשרי כי <span>\(a_{1},\dots,a_{n}\)</span> בת"ל.</li>
+<li>אם <span>\(a\neq 0\)</span> נקבל:
+<span>$$m=-\frac{a_{1}}{a}m_{1}+\dots-\frac{a_{n}}{a}m_{n}$$</span>
+סתירה.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>החוג <span>\(R\)</span> הוא חוג חילוק. </p>
+</li>
+<li>
+<p>אין ל-<span>\(R\)</span> אידיאלים שמאליים. </p>
+</li>
+<li>
+<p>אין ל-<span>\(R\)</span> אידיאלים ימניים. </p>
+</li>
+<li>
+<p>החוג <span>\(R\)</span> פשוט כ-<span>\(R\)</span> מודול. </p>
+</li>
+<li>
+<p>כל <span>\(R\)</span> מודול הוא חופשי(כלומר לכל <span>\(R\)</span> מודול יש בסיס) </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>את 1-4 הראנו. נותר להראות רק ש-5 שקול לקודמים.
+נראה חוג חילוק גורר כי בסיס כמו מעל שדה(קבוצה בת"ל שאינה פורשת אפשר להרחיב לקבוצה בת"ל.
+אחרי שחוזרים על זה מספיק פעמיים(אינסוף כלשהו - ייתכן וידרש אינדוקציה טרנספיניטית), מגיעים לבסיס).
+אם כל <span>\(R\)</span> מודול הוא חופשי, ו-<span>\(0 \neq r\in R\)</span>. 
+נניח בשלילה שיש <span>\(0\lneq I\lneq R\)</span>(אידיאל שמאלי) ניקח <span>\(M= R / I\)</span>. אזי <span>\(1+I\)</span> יוצר אם <span>\(M\)</span> ולכן בסיס. נשלים אולי בהפסקה.</p>
+</div>
+<p>נראה כעת כי אם <span>\(R\)</span> מודול חופשי אז <span>\(R\)</span> חוג חילוק. ניקח <span>\(M\neq 0\)</span> מודול פשוט. (למשל <span>\(M = R / I\)</span> כש-<span>\(I\leq R\)</span> אידיאל שמאלי מקסימלי - קיים מהלמה של צורן).
+ניקח בסיס <span>\(B\)</span> ל-<span>\(M\)</span>. ניקח <span>\(b\in B\)</span> ונסתכל על:
+<span>$$f:R\to M; r\mapsto rb$$</span>
+הומומורפיזם של מודולים. <span>\(f\)</span> על כי <span>\(M\)</span> פשוט ו-<span>\(0\neq b \in \mathrm{Im} f\)</span> ולכן <span>\(B=\{ b \}\)</span>. בנוסף כיוון ש-<span>\(B\)</span> בסיס אז חופשי ולכן <span>\(f\)</span> חח"ע. לכן <span>\(R\cong M\)</span> כמודול. לכן אין ל-<span>\(R\)</span> תת מודולים - כלומר אין אידיאלים שמאליים ולכן חוג חילוק.</p>
+<h2>סופיות</h2>
+<div class="definition"><span class="keyword">מודול נוצר סופית</span><p>מודל שנוצר על ידי איזשהי קבוצה סופית כלשהי:
+<span>$$M=\langle m_{1},\dots,m_{n} \rangle $$</span>
+עבור <span>\(m_{1},\dots ,m_{n}\)</span> כלשהם.</p>
+</div>
+<div class="definition"><span class="keyword">מודול נתרי - Noetherian</span><p>מודול <span>\(M\)</span> נקרא נתרי אם כל תת מודול של <span>\(M\)</span> נוצר סופית.</p>
+</div>
+<div class="example">
+<p><span>$$R=M=\mathbb{F} [x_{1},x_{2},\dots]$$</span>
+מודול <span>\(M\)</span> נוצר סופית(כי <span>\(M=\langle 1 \rangle\)</span>).
+ניקח את האידיאל שנוצר על ידי כל המונומים:
+<span>$$I=(x_{1},x_{2},x_{3},\dots)\trianglelefteq  R$$</span>
+וזה יהיה פשוט כל הפולינומים שכאשר מציבים אפס בכל המשתנים מקבלים אפס:
+<span>$$I=\{ p\mid p(0,0,0,\dots)=0 \}$$</span>
+אם <span>\(I\)</span> היה נוצר סופית, כלומר:
+<span>$$I=(p_{1},\dots, p_{n})=\left\{  \sum q_{i}p_{i}\mid p_{i}\in R  \right\}$$</span>
+כל מונומים מתחלק באחד מהמשתנים שמופיעים באחד ה-<span>\(p_{i}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הפסוקים הבאים שקולים:</p>
+<ol>
+<li>
+<p>המודול <span>\(M\)</span> נתרי </p>
+</li>
+<li>
+<p>כל סדרה עולה של תתי מודולים של <span>\(M\)</span> מתייצבת, כלומר לא ייתכן: 
+<span>$$M_{1} \lneq M_{2}\lneq \dots \lneq \dots \lneq M$$</span></p>
+</li>
+<li>
+<p>לכל אוסף של תתי מודולים יש איבר מקסימלי. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>מ-2 ל-3 ניתן לעבור מהלמה של צורן.
+אם יש סדרה עולה ממש:
+<span>$$M_{1} \subsetneq M_{2} \subsetneq \dots$$</span>
+ניקח <span>\(N=\bigcup_{i=1}^{\infty}M_{i}\)</span> ונראה שלא נוצר סופית - אם הוא היה ב-<span>\(M_{j}\)</span> כלשהו כל היוצרים כבר מופיעים ולכן הסדרה כבר לא עולה. ואם <span>\(N\leq M\)</span> לא נוצר סופית ניקח <span>\(n_{1},n_{2},n_{3},\dots\)</span> כש-<span>\(n_{j}\not\in \langle n_{1},\dots,n_{j-1} \rangle\)</span> ואז:
+<span>$$N_{j}=\langle n_{1},\dots n_{j} \rangle $$</span>
+עולה ממש.</p>
+</div>
+<div class="example">
+<p>המודול <span>\(\mathbb{Q}\)</span> הוא לא <span>\(\mathbb{Z}\)</span>-מודול נתרי:
+<span>$$\mathbb{Z}\subsetneq \frac{1}{2}\mathbb{Z} \subsetneq \frac{1}{4}\mathbb{Z} \subsetneq \dots$$</span>
+כאשר <span>\(\mathbb{Z}\)</span> כן <span>\(\mathbb{Z}\)</span> מודול נתרי:
+<span>$$m_{1}\mathbb{Z} \subsetneq m_{2}\mathbb{Z} \subseteq \dots $$</span>
+כאשר נדרש <span>\(m_{2}\)</span> כך שמחלק את <span>\(m_{1}\)</span>. בסופו של דבר נתייצב כי כל <span>\(m_{i}\)</span> צריך לחלק את כל ה-m-ים הקודמים.</p>
+</div>
+<div class="definition"><span class="keyword">מודול ארטיני</span><p>מודול נקרא ארטיני אם אין סדרה אינסופית ירדת ממש של תתי מודולים.</p>
+</div>
+<div class="remark">
+<p>ארטיני זה תנאי חזק. יותר חזק מנתרי, מאוד מגביל.</p>
+</div>
+<div class="example">
+<p>למשל <span>\(\mathbb{Z}^{\mathbb{Z}}\)</span> לא ארטיני:
+<span>$$\mathbb{Z}\supset 2\mathbb{Z} \supset 4\mathbb{Z}\supset \dots$$</span></p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(\mathbb{Z}\left[ \frac{1}{2} \right] / \mathbb{Z}\)</span> כ-<span>\(\mathbb{Z}\)</span> מודול. זה ארטיני ולא נתרי:
+<span>$$\left\langle  \frac{1}{2}  \right\rangle \subset \left\langle  \frac{1}{4}  \right\rangle \subset \left\langle  \frac{1}{8}  \right\rangle \subset \dots$$</span>
+כל תת מודול הוא <span>\(\left\langle  \frac{1}{2^{n}}  \right\rangle\)</span> ל-<span>\(n\)</span> כלשהו. ואז:
+<span>$$\left\langle  \frac{1}{2^{n_{1}}}  \right\rangle \supset \left\langle  \frac{1}{2^{n_{2}}}  \right\rangle\supset $$</span>
+כאשר <span>\(n_{2}&lt; n_{1}\)</span> וזה חייב להעצר.</p>
+</div>
+<p>וניתן גם לקבל נתרי ולא ארטיני.</p>
+<div class="definition"><span class="keyword">מאורך סופי</span><p>אם <span>\(M\)</span> גם נתרי וגם ארטיני הוא נקרא מאורך סופי.</p>
+</div>
+<p>אם <span>\(M\)</span> מאורך סופי אזי יש סדרה:
+<span>$$0=M_{n}\leq  \dots \lneq M_{2} \lneq  M_{1}=M$$</span>
+כך ש-<span>\(M_{i} / M_{i+1}\)</span> פשוט לכל <span>\(i\)</span>.  זה למעשה סדרת הרכב.</p>
+<div class="theorem"><span class="keyword">ג'ורדן הולדר</span><p>אם יש ל-<span>\(M\)</span> סדרת הרכב אזי לכל 2 סדרות הרכב יש את אותן מנות(עד כדי סדר ואיזומורפיזם).</p>
+</div>
+<div class="example">
+<p><span>$$(0)\overset{C_{2}}{&lt;}(6)\overset{C_{3}}{&lt;}  (2)\overset{C_{2}}{&lt;}   C_{12}$$</span>
+או לחלופין ניתן לבנות:
+<span>$$(0)\overset{C_{2}}{&lt;} (6) \overset{C_{2}}{&lt;} (3)\overset{C_{3}}{&lt;} C_{12}$$</span></p>
+</div>
+<p>אם <span>\(M\)</span> נוצרים סופית אזי <span>\(M\)</span> מנה של <span>\(R^{n}\)</span> ל-<span>\(n\)</span> כלשהו:
+<span>$$M=\langle m_{1},..,m_{n} \rangle $$</span>
+ו-<span>\(f:R^{n}\to M\)</span> מוגדר על ידי:
+<span>$$(r_{1},\dots,r_{n})\mapsto r_{1}m_{1}+\dots+r_{n}m_{n}$$</span>
+וזה הומומורפיזם על(של מודולים) ולכן:
+<span>$$M\cong  R^{n} / \ker f$$</span></p>
+<div class="proposition">
+<p>אם <span>\(M,R,R^{n}\)</span> נתרי אזי <span>\(M\)</span> נוצר סופית:
+<span>$$M=\langle m_{1},\dots,m_{n} \rangle $$</span>
+וגם <span>\(M\geq \ker f\)</span>. וזה גורר <span>\(\ker f\)</span> גם נוצר סופית:
+<span>$$\ker f=\langle  (r_{11},\dots,r_{1n}),(r_{21},\dots,r_{2n}), \dots, (r_{t1},\dots,r_{tn})\rangle $$</span>
+ואז 
+<span>$$M=R^{\oplus \{ m_{1},\dots,m_{n} \}} /\langle \{ \sum\limits_{i=1}^{n}r_{ij}m_{i}\mid 1\leq j\leq t \} \rangle $$</span>
+כאשר נזכור כי החבורה החופשית מוגדרת על ידי:
+<span>$$G=\langle s_{1}\dots s_{r}\mid r_{1}\dots r_{m} \rangle = F_{\{ s_{1},\dots,s_{n} \}} / \langle \langle r_{1},\dots,r_{n} \rangle  \rangle $$</span></p>
+</div>
+<div class="definition"><span class="keyword">חוג נתרי/ארטני</span><p>חוג נקרא נתרי / ארטיני אם הוא כזה כמודול מעל עצמו.</p>
+</div>
+<div class="theorem"><span class="keyword">הופקינס לויצקי</span><p>חוג ארטיני הוא נתרי.</p>
+</div>
+<div class="proposition">
+<p><span>$$M_{n}(\mathbb{F} )=\mathrm{End}_{\mathbb{F} }(\mathbb{F} ^{n})$$</span>
+וכל <span>\(\mathbb{F}\)</span> מודולים נוצרים סופיים איזומורפיים ל-<span>\(\mathbb{F}^{n}\)</span> כלשהו.</p>
+</div>
+<div class="remark">
+<p>זה עדין נכון אם מחלפים את <span>\(\mathbb{F}\)</span> עם <span>\(M_{n}(\mathbb{F})\)</span>:
+<span>$$\mathbb{F} = \mathrm{End}_{M_{n}}(\mathbb{F}^{n} )$$</span></p>
+</div>
+<p>כעת נסתכל על <span>\(\mathrm{End}_{R}(R)\)</span>. אם <span>\(f \in \mathrm{End}_{R}(R)\)</span> אז <span>\(f\)</span> נקבע על ידי <span>\(f(1)\)</span>. כי:
+<span>$$\forall x \in R\quad f(x)=f(x\cdot 1)=xf(1)$$</span>
+בנוסף, לכל <span>\(r \in R\)</span> אפשר להגדיר <span>\(f_{r}(x)=xr\)</span>. נשים לב כי <span>\(f_{r}\in \mathrm{End}_{R}(R)\)</span>. זה כיוון שמתקיים:
+<span>$$f_{r}(r'x)=(r'x)r=r'(xr)=r'f_{r}(x)$$</span>
+סה"כ:
+<span>$$\Phi:R\to \mathrm{End}_{R}(R)\qquad \Phi(r)=f_{r}$$</span>
+וכן <span>\(\Phi\)</span> חח"ע ועל.</p>
+<p>השאלה עכשיו היא האם <span>\(\Phi\)</span> איזומורפיזם של חוגים?
+נבדוק.
+<span>$$\Phi(r+r')(x)=f_{r+r'}(x)=xr+xr'=(\Phi(r)+\Phi(r'))(x)$$</span>
+עבור הכפל:
+<span>$$\Phi(rr')(x)=f_{rr'}(x)=xrr'=(\Phi(r')\circ  \Phi(r))(x)$$</span>
+כלומר קיבלנו:
+<span>$$\Phi(rr')=\Phi(r')\Phi(r)$$</span>
+הכפל התהפך!</p>
+<p>קיבלנו כי <span>\(\Phi\)</span> הוא אנטי הומומורפיזם של חוגי(משמר חיבור, הופך כפל).</p>
+<div class="definition">
+<p>לחוג <span>\(R\)</span> החוג ההפוך <span>\(R^{\text{O}}\)</span> הוא <span>\(R\)</span> כקבוצה וכחבורה חבורה אבל עם הכפל:
+<span>$$x\cdot_{R^{O}}y := y\cdot_{R} x$$</span>
+קיבלנו:
+<span>$$\Phi:R^{\text{O}}\xrightarrow{\cong }\mathrm{End}_{R}(R)$$</span></p>
+</div>
+<p>אתגר - לנסות לחפש חוג שלא איזומורפי לחוג ההפוך שלו.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='prev-page'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+</ul></li>
+        </body>
+        </html>
+        

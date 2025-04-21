@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קמירות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_4_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_3_4`; }});</script>
+        <div class="content">
+        <h1>4.1  קמירות</h1>
+    <div class="definition"><span class="keyword">פונקציה קמורה</span><p>פונקציה <span>\(\varphi:(a,b)\to \mathbb{R}\)</span> אשר מקיימת לכל <span>\(a\leq s,t \leq b\)</span> ולכל <span>\(\lambda \in (0,1)\)</span> מתקיים:
+<span>$$\varphi\left( \lambda s+\left( 1-\lambda \right)t \right)\leq \lambda \varphi(s)+\left( 1-\lambda \right)\varphi(t)$$</span></p>
+</div>
+<div class="remark">
+<p>הקטע <span>\((a,b)\)</span> לא חייב להיות חסום.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול לקמירות</span><p>פונקציה היא קמורה אם לכל <span>\(x&lt;y&lt;z\)</span> מתקיים:
+<span>$$\frac{\varphi(x)-\varphi(y)}{x-y}\leq \frac{\varphi(y)-\varphi(z)}{y-z}$$</span>
+כלומר השיפועים של הישרים המחברים בין הנקודות גדלים.</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(\varphi\)</span> קמורה אז היא רציפה ב-<span>\((a,b)\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">אי-שיוויון ג'נסון</span><p>יהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב הסתברות. תהי <span>\(\varphi:(a,b)\to \mathbb{R}\)</span> קמורה ו-<span>\(f:X\to (a,b)\)</span> מדידה. אזי:
+<span>$$\varphi\left( \int _{X} \;\mathrm{d} \mu  \right)\leq \int _{X} \varphi \circ  f \;\mathrm{d} \mu $$</span></p>
+</div>
+<ol>
+<li>
+<p>נסמן <span>\(T=\int _{X}f \;\mathrm{d}\mu\)</span> כאשר כיוון ש-<span>\(f \in (a,b)\)</span> ו-<span>\(\mu\)</span> מידת הסתברות נקבל כי <span>\(T \in (a,b)\)</span>. </p>
+</li>
+<li>
+<p>נגדיר: 
+<span>$$\beta=\operatorname*{sup}_{s&lt;T}{\frac{\varphi(T)-\varphi(s)}{T-s}}.$$</span>
+ונקבל מהדרישה של הסופרמום עבור <span>\(s\leq T\)</span>:
+<span>$$\varphi(T)-\varphi(s)\leq\beta(T-s)\implies\varphi(s)\geq\varphi(T)+\beta\,(s-T)$$</span>
+כאשר כיוון ש-<span>\(\varphi\)</span> קמורה נקבל עבור <span>\(s&gt; T\)</span> מתקיים:
+<span>$$\forall x \in (a,b) \quad \frac{\varphi(x)-\varphi(T)}{x-T}\leq\frac{\varphi\left( s \right)-\varphi(T)}{s-T}\implies \sup _{x &lt;T}\frac{\varphi(T)-\varphi(x)}{T-x}\leq \frac{\varphi(s)-\varphi(T)}{s-T}$$</span>
+כאשר נזהה את <span>\(\beta\)</span> ונקבל:
+<span>$$\beta \leq \frac{\varphi(s)-\varphi(T)}{s-T}\implies \varphi(s)\geq \varphi(T)+\beta(s-T)$$</span></p>
+</li>
+<li>
+<p>כיוון שהאי שיוויון<br />
+<span>$$\varphi(s)\geq\varphi(T)+\beta\left(s-T\right)$$</span>
+נכון לכל <span>\(s \in (a,b)\)</span> נקבל כי עבור <span>\(s=f(x)\)</span>:
+<span>$$\varphi{\big(}f(x){\big)}\geq\varphi(T)+\beta\,(f(x)-T).$$</span></p>
+</li>
+<li>
+<p>אם נבצע אינטרקציה על שתי האגפים נקבל: 
+<span>$$\int_{X}\varphi\big(f(x)\big)\,d\mu(x)\geq\int_{X}\Big[\varphi(T)+\beta\left(f(x)-T\right)\Big]d\mu(x).$$</span>
+מלינאריות האינטגרל כיוון ש-<span>\(\varphi(T)\)</span> ו-<span>\(\beta\)</span> קבועים ניתן לכתוב את אגף ימין בצורה הבאה:
+<span>$$\varphi(T)\int_{X}d\mu(x)+\beta\Bigl(\int_{X}f(x)\,d\mu(x)-T\int_{X}d\mu(x)\Bigr)=\varphi(T)+\beta\,(T-T)=\varphi(T).$$</span>
+כאשר השתמשנו בכך ש-<span>\(\mu\)</span> מידת הסתברות ולכן <span>\(\int _{X} \;\mathrm{d} \mu=1\)</span> ו-<span>\(\int _{X}f(x) \;\mathrm{d} \mu=T\)</span>.</p>
+</li>
+<li>
+<p>סה"כ קיבלנו: 
+<span>$$\int_{X}\varphi{\big(}f(x){\big)}\,d\mu(x)\geq\varphi(T),$$</span>
+שזה בדיוק אי שיוויון ג'נסון.</p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">חזקות צמודות</span><p>זוג מספרים <span>\(1\leq p,q\leq \infty\)</span> נקראים חזקות צמודות אם:
+<span>$$\frac{1}{p}+\frac{1}{q}=1$$</span>
+כאשר <span>\(\frac{1}{\infty}=0\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$(2,2),\left( 1,\infty \right)$$</span>
+הם זוגות צמודות.</p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(\left( X.\mathcal{A},\mu \right)\)</span> מרחב מידה כלשהו ויהיו <span>\(1\leq p,q\leq \infty\)</span> חזקות צמודות. אזי לכל <span>\(f,g:X\to \left[ 0,\infty \right]\)</span> אי שליליות מדידות מתקיים:</p>
+<ol>
+<li>
+<p>אי שיוויון הולדר: 
+<span>$$\int f\cdot g \;\mathrm{d} \mu \leq \left[ \int f^{p} \;\mathrm{d} \mu  \right]^{1/p} \cdot\left[ \int g^{q} \;\mathrm{d} \mu  \right]^{1/q} $$</span></p>
+</li>
+<li>
+<p>אי שיוויון מינקוסבסקי: 
+<span>$$\left[ \int (f+g)^{p} \;\mathrm{d} \mu \right]^{1/p} \leq \left[ \int f^{p} \;\mathrm{d} \mu  \right]^{1/p}+\left[ \int g^{p} \;\mathrm{d} \mu  \right]^{1/p}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>ראשית נוכיח את אי שיוויון הולדר. נגדיר: 
+<span>$$A=\left(\int_{X}f^{p}\,d\mu\right)^{1/p}=||f||_{p}\qquad B=\left(\int_{X}g^{q}\,d\mu\right)^{1/q}=\|g\|_{q}$$</span>
+אם <span>\(A=0\)</span> נקבל <span>\(\int_X f^p \; \mathrm{d}\mu = 0\)</span> ולכן <span>\(f^{p}\overset{\mu}{=}0\)</span> ובפרט נקבל בשתי האגפים אפס והאי שיוויון מתקיים.
+אם <span>\(A&gt; 0\)</span> ו-<span>\(B=\infty\)</span> אז נקבל באגף ימין אינסוף ובאגף שמאל מספר סופי ולכן האי שיוויון מתקיים.</p>
+</li>
+<li>
+<p>כעת נתייחס למקרה הלא טריוויאלי שבו <span>\(0&lt;A&lt;\infty\)</span> ו-<span>\(0&lt;B&lt; \infty\)</span>. נגדיר: 
+<span>$$ F=\frac{f}{A} \qquad G=\frac{g}{B} \implies \int_{X}F^{p}d\mu=1=\int_{X}G^{q}d\mu$$</span></p>
+</li>
+<li>
+<p>אם <span>\(x \in X\)</span> כך ש-<span>\(0&lt;F(x),G(x)&lt;\infty\)</span> אזי קיימים מספרים ממשיים <span>\(s,t\)</span> כך ש-<span>\(F(x)=e^{ s/p },G(x)=e^{ t/q }\)</span>. כיוון ש-<span>\(\frac{1}{p}+\frac{1}{q}=1\)</span> מהקמירות של האקספוננט נקבל: 
+<span>$$e^{s/p+t/q}\leq p^{-\,1}e^{s}+q^{-\,1}e^{t}\implies F(x)G(x)\leq p^{-\,1}F(x)^{p}+q^{-\,1}G(x)^{q}$$</span>
+כעת אם נציב את האי שיוויון מתנאי נרמול ונקבל את אי שיוויון הולדר.</p>
+</li>
+<li>
+<p>כעת כדי להוכיח את אי שיוויון מנקובסקי נכתוב: 
+<span>$$(f+g)^{p}=f\cdot(f+g)^{p-1}+g\cdot(f+g)^{p-1}.$$</span>
+כאשר מאי שיוויון הולדר נקבל:
+<span>$$\int f\cdot(f+g)^{p-1}\leq\left\{\left[f^{p}\right\}^{1/p}\left\{\left[(f+g)^{(p-1)q}\right\}^{1/q}\right]\right\}^{1/q}$$</span>
+כיוון ש-<span>\((p-1)q=p\)</span> נקבל:
+<span>$$\int(f+g)^{p}\leq\left\{\int(f+g)^{p}\right\}^{1/q}\left[\left\{\int f^{p}\right\}^{1/p}+\left\{\int g^{p}\right\}^{1/p}\right]$$</span>
+אם נחלק כעת ב-<span>\(\left\{\int(f+g)^{p}\right\}^{1/q}\)</span> ונשתמש בזה ש-<span>\(1-\frac{1}{q}=\frac{1}{p}\)</span> נקבל את האי שיוויון.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>עבור אי שיוויון הולדר יש שיוויון כאשר קיימים קבועים <span>\(\alpha,\beta\)</span> לא שניהם אפס כך ש-<span>\(\alpha f^{p}=\beta g^{q}\)</span>. </p>
+</div>
+<div class="remark">
+<p>מאי שיוויון הולדר עבור <span>\(p=q=2\)</span> נקבל את אי שיוויון קושי שוורץ.</p>
+</div>
+<div class="corollary">
+<p>הפונקציה <span>\(e^{ x }\)</span> קמורה ולכן אם ניקח <span>\(\mu=\sum_{i=1}^{n}\alpha_{i}\delta_{x_{i}}\)</span> מידת הסתברות נקבל את אי שיוויון הממצועים
+<span>$$\prod y_{i}^{\alpha _{i}}\leq \sum \alpha_{i}y_{i}\qquad y_{i}=e^{ x_{i} }$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='prev-page'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פרמיונים ובוזונים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_6_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_6_1`; }});</script>
+        <div class="content">
+        <h1>6.2  פרמיונים ובוזונים</h1>
+    <div class="reminder"><span class="keyword">פונקציית הגראנד חלוקה</span><p>עבור מצב עם אנרגיה נתונה <span>\(E\)</span>, הפונקציית הגראנד חלוקה יהיה הסכום על כל קונפיגורציות:
+<span>$${\mathcal Z}=\sum_{n}\mathrm{e}^{n\beta(\mu-E)}$$</span>
+כאשר כל קונפיגורציה נבדלת למעשה רק על ידי מספר החלקיקים, ולכן נדרש לסכום רק על מספר החלקיקים.</p>
+</div>
+<div class="proposition">
+<p>מספר הממוצע של חלקיקים במצב יהיה:
+<span>$$\langle n\rangle=\frac{\sum_{n}n\mathrm{e}^{n\beta(\mu-E)}}{\sum_{n}\mathrm{e}^{n\beta(\mu-E)}}=-\frac{1}{\beta\mathcal{Z}}\frac{\partial\mathcal{Z}}{\partial E}=-\frac{1}{\beta}\frac{\partial\ln\mathcal{Z}}{\partial E}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור פרמיונים יש רק שתי אפשרויות - <span>\(n=1\)</span> או <span>\(n=0\)</span> ולכן נדרש לסכום רק עליהם ולקבל:
+<span>$${\mathcal Z}=\sum_{n=0}^{1}\mathrm{e}^{n\beta(\mu-E)}=1+\mathrm{e}^{\beta(\mu-E)},$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$\ln{\mathcal{Z}}=\ln(1+\mathrm{e}^{\beta(\mu-E)})$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור בוזונים נקבל:
+<span>$${\mathcal{Z}}=\sum_{n=0}^{\infty}\mathrm{e}^{n\beta(\mu-E)}={\frac{1}{1-\mathrm{e}^{\beta(\mu-E)}}}$$</span>
+ולכן:
+<span>$$\ln{\mathcal{Z}}=-\ln(1-\mathrm{e}^{\beta(\mu-E)})$$</span></p>
+</div>
+<div class="proposition">
+<p>מספר החלקיקים הממוצע יהיה עבור פרמיונים:
+<span>$$\langle n\rangle=\frac{1}{\mathrm{e}^{\beta(E-\mu)}+1},$$</span>
+כאשר עבור בוזונים:
+<span>$$\langle n\rangle=\frac{1}{\mathrm{e}^{\beta(E-\mu)}-1},$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור מערכת כללית שבה מכניסים <span>\(n_{i}\)</span> חלקיקים לרמה <span>\(i\)</span> עם האנרגיה <span>\(E_{i}\)</span> מתקיים:
+<span>$${\mathcal Z}=\prod_{i}\sum_{\{n_{i}\}}\mathrm{e}^{n_{i}\beta(\mu-E_{i})}$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב קונפיגורציה כללית על ידי:
+<span>$$\left[\mathrm{e}^{\beta(\mu-E_{1})}\right]^{n_{1}}\times\left[\mathrm{e}^{\beta(\mu-E_{2})}\right]^{n_{2}}\times\cdots=\prod_{i}\mathrm{e}^{n_{i}\beta(\mu-E_{i})}$$</span>
+ולכן פונקציית הגראנד חלוקה תהיה:
+<span>$${\mathcal{Z}}=\sum_{\left\{n_{i}\right\}}\prod_{i}\mathrm{e}^{n_{i}\beta(\mu-E_{i})}$$</span>
+כאשר ניתן לקחת גורם משותף ולהפוך את סדר הסכימה וכפל:
+<span>$$\begin{gather}\sum_{\left\{ n_{\epsilon} \right\}}\prod_{\epsilon}\exp\left[ -\beta\left( \epsilon-\mu \right)n_{\epsilon} \right],=\sum_{n_{\epsilon_{1}}}\sum_{n_{\epsilon_{2}}}\cdots e^{-\beta\left( \epsilon_{1}-\mu \right)n_{\epsilon_{1}}}e^{-\beta\left( \epsilon_{2}-\mu \right)n_{\epsilon_{2}}}\ldots=\\=\sum_{n_{\epsilon_{1}}}e^{-\beta\left( \epsilon_{1}-\mu \right)n_{\epsilon_{1}}}\sum_{n_{\epsilon_{2}}}e^{-\beta\left( \epsilon_{2}-\mu \right)n_{\epsilon_{2}}}\ldots =\\=\prod_{\epsilon}\sum_{n_{\epsilon}}\exp\left[ -\beta\left( \epsilon-\mu \right)n_{\epsilon} \right] 
+\end{gather}$$</span></p>
+</div>
+<div class="remark">
+<p>הפיתוח הכללי הזה נותן את הפונקציית החלוקה של פרמיונים כאשר מתאפשר לכל היותר רמה אחת של אנרגיה ושל בוזונים כמות אינסופית של רמות.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציית התפלגות פרמי דיראק</span><p>פונקציה:
+<span>$$f(E)=\frac{1}{\mathrm{e}^{\beta(E-\mu)}+1}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית התפלגות בוז-אינשטיין</span><p><span>$$f(E)=\frac{1}{\mathrm{e}^{\beta(E-\mu)}-1}$$</span></p>
+</div>
+<div class="remark">
+<p>פונקציות החלוקות מוגדרות כך שמקיימות <span>\(f(E)=\langle n \rangle\)</span>. כמו כן נשים לב כי בגבול <span>\(\beta\left( E-\mu \right)\gg 1\)</span> נקבל את התפלגות בולצמן, דבר המתאים לעקרון ההתאמה האומר כי בגבול הקלאסי נצפה כי יתנהג בצורה קלאסית.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי עבור <span>\(\mu=E\)</span> נקבל כי ההתפלגות בוזונית מתבדרת, זאת כיוון שבמצב זה הרמה הנמוכה ביותר תהיה מאוכלסת עם כמות אינסופית של חלקיקים - פתרון לא פיזיקלי, ולכן נדרש <span>\(\mu&lt; E\)</span>.</p>
+</div>
+<div class="summary">
+<ul>
+<li>פונקציית הגראנד חלוקה של פרמיונים ובוזונים תקיים:
+<span>$$\ln{\mathcal{Z}}=\pm\ln(1\pm\mathrm{e}^{\beta(\mu-E)}),$$</span>
+כאשר ה-<span>\(+\)</span> זה עבור פרמיונים ו-<span>\(-\)</span> עבור בוזונים.</li>
+<li>מספר החלקיקים הממוצע יהיה:
+<span>$$\langle n_{E}\rangle=\frac{1}{\mathrm{e}^{\beta(E-\mu)}\pm1},$$</span>
+כאשר ה-<span>\(+\)</span> זה עבור פרמיונים ו-<span>\(-\)</span> עבור בוזונים.</li>
+<li>בוזונים מקיימים סטטיסטיקת בוז-אינשטיין, הנתונה על ידי:
+<span>$$f_{BE}(E)=\frac{1}{\mathrm{e}^{\beta(E-\mu)}-1}$$</span></li>
+<li>פרמיונים מקיימים סטטיסטיקת פרמי-דיראק, הנתונה על ידי:
+<span>$$f_{FD}(E)=\frac{1}{\mathrm{e}^{\beta(E-\mu)}+1}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='prev-page'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התכנסות במ"ש של טורי פונקציות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='parent-page'><a href='./series.html'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_1_1.html'>1.1 הגדרת הגבול</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_3.html'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_4.html'>1.4 מונוטוניות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_5.html'>1.5 שורשים וממוצעים</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_6.html'>1.6 תתי סדרות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_7.html'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_8.html'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_2_1.html'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_2.html'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_3.html'>2.3 טורים כלליים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./series_3_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./series_2_4.html`;}});</script>
+        <div class="content">
+        <h1>3.1  התכנסות במ"ש של טורי פונקציות</h1>
+    <div class="proposition"><span class="keyword">מבחן ה-<span>\(M\)</span> של ווירשטראס</span><p>אם קיים טור מתכנס של מספרים חיוביים <span>\(\sum M_n\)</span> כך שלכל <span>\(n\in \mathbb N\)</span> מתקיים ולכל <span>\(x\)</span> בתחום מתקיים <span>\(|f_n(x)|\leq M_n\)</span> אז <span>\(\sum f_n(x)\)</span> מתכנס בהחלט במ"ש</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. מתנאי קושי של התכנסות של טור מספרי קיים <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n &gt; N\)</span> ולכן <span>\(p \in \mathbb{N}\)</span> מתקיים:
+<span>$$\sum_{i=n}^{n+p} M_{i}&lt;\varepsilon$$</span>
+יהי <span>\(n&gt;N\)</span>, <span>\(p \in \mathbb{N}\)</span>. מתקיים:
+<span>$$\sum_{k=n+1}^{n+p}f_{k}(x)\leq \sum_{k=n+1}^{n+p} M_{k}&lt;\varepsilon$$</span>
+ולכן מתכנס במ"ש מתנאי קושי להתכנסות במש של טורי פונקציות.</p>
+</div>
+<div class="proposition"><span class="keyword">שימור רציפות</span><p>אם <span>\((f_{n})\)</span> סדרת פונקציות המתכנסת במ"ש ל-<span>\(f\)</span>, ו-<span>\(f_{n}\)</span> רציפה לכל <span>\(n\in \mathbb{N}\)</span> אזי <span>\(f\)</span> רציפה</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. כיוון ש-<span>\((f_{n})\)</span> מתכנס במ"ש ל-<span>\(f\)</span> קיים <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(x_{0} \in [a,b]\)</span> מתקיים:
+<span>$$\forall n &gt; N\quad \lvert f_{n}(x_{0})-f(x_{0}) \rvert &lt;\frac{\varepsilon}{3}$$</span>
+יהי <span>\(n_{0}&gt;N\)</span>. מתקיים מהגדרת הרציפות:
+<span>$$\forall x \in [a,b]\quad \exists \delta&gt; 0\quad \lvert x-x_{0} \rvert &lt;\delta\implies \lvert f_{n_{0}}(x)-f_{n_{0}}(x_{0}) \rvert $$</span>
+כעת מתקיים:
+<span>$$\begin{gather}\lvert f(x)-f(x_{0}) \rvert =\lvert f(x)-f_{n}(x_{0})+f_{n}(x_{0})-f_{n_{0}}(x)+f_{n_{0}}(x)-f(x_{0}) \rvert \leq \\\leq \lvert f(x)-f_{n_{0}}(x) \rvert +\lvert f_{n_{0}}(x)-f_{n_{0}}(x_{0}) \rvert +\lvert f_{n_{0}}(x_{0})-f(x_{0}) \rvert &lt;\frac{3\varepsilon}{3}=\varepsilon 
+\end{gather}$$</span>
+ולכן עובר ה-<span>\(\delta\)</span> הזו מתקיים:
+<span>$$\lvert x-x_{0} \rvert &lt;\delta\implies \lvert f(x)-f(x_{0}) \rvert &lt;\varepsilon$$</span>
+ולכן <span>\(f\)</span> רציף.</p>
+</div>
+<div class="proposition"><span class="keyword">שימור אינטגרביליות</span><p>אם <span>\((f_{n})\)</span> סדרת פונקציות המתכנסת במ"ש ל-<span>\(f\)</span> בקטע <span>\([a,b]\)</span> אם <span>\(f_{n}\)</span> אינטגרבילית לכל <span>\(n \in \mathbb{N}\)</span> אז גם <span>\(f\)</span> אינטגרבילית.</p>
+</div>
+<div class="proof">
+<p>מהתכנסות במ"ש נובע כי:
+<span>$$\forall\varepsilon&gt;0\quad \exists N \in \mathbb{N} \quad \forall x \in \left[ a,b\right]\quad \forall n&gt; N\quad \lvert f_{n}(x)-f(x) \rvert &lt;\varepsilon$$</span>
+יהי <span>\(\varepsilon&gt;0\)</span>. עבור <span>\(\frac{\varepsilon}{4(b-a)}\)</span> נקבל <span>\(N \in \mathbb{N}\)</span> כך שמתקיים:
+<span>$$\forall x \in [a,b]\quad  \forall n \in N\quad \lvert f_{n}(x)-f(x) \rvert &lt;\frac{\varepsilon}{4(b-a)}$$</span>
+כיוון ש-<span>\(f_{n}\)</span> אינטגרבילית מתנאי דרבו לינאגרביליות קיימת חלוקה <span>\(P=\left\{  a=x_{0},\dots,x_{n}=b  \right\}\)</span> כך ש:
+<span>$$U(f,P)-L(f,P)&lt;\frac{\varepsilon}{2}\implies\sum_{i=1}^{n} \omega_{i,f}(x_{i}-x_{i-1})&lt;\frac{\varepsilon}{2}$$</span>
+נשים לב כי עבור <span>\(u,v \in [x_{i-1,x_{i}}]\)</span> מתקיים:
+<span>$$\begin{gather}\lvert f(u)-f(v) \rvert =\lvert f(u)-f_{n}(u)+f_{n}(u)-f_{n}(v)+f_{n}(v)-f(v) \rvert \leq \\\leq \lvert f(u)-f_{n}(u) \rvert +\lvert f_{n}(v)-f_{n}(u) \rvert +\lvert f_{n}(v)-f(v) \rvert  \\&lt;\frac{\varepsilon}{4(b-a)}+\omega_{i,f_{n}}+\frac{\varepsilon}{4(b-a)}=\frac{\varepsilon}{2(b-a) }+\omega_{i,f_{n}}
+\end{gather}$$</span>
+ובפרט מתקיים עבור ה-<span>\(u,v\)</span> המינימלים והמקסימלים בכל תחום, ולכן:
+<span>$$\omega_{i,f}\leq \lvert f(u)-f(v) \rvert \leq \frac{\varepsilon}{2(b-a)}+\omega_{i,f_{n}}$$</span>
+וכעת:
+<span>$$\begin{gather}U(f,P)-L(f,P)=\sum_{i=1}^{n}\omega_{i,f}(x_{i}-x_{i-1})\leq\sum_{i=1}^{n} \left( \frac{\varepsilon}{2(b-a)}+\omega_{i, f_{n}} \right)(x_{i}-x_{i-1})=  \\=\frac{\varepsilon}{2(b-a)}\sum_{i=1}^{n}(x_{i}-x_{i-1})+\sum_{i=1}^{n} \omega_{i,f_{n}}(x_{i}-x_{i-1})=\frac{\varepsilon}{2(b-a) }(b-a)+\frac{\varepsilon}{2}=\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon 
+\end{gather}$$</span>
+ולכן <span>\(f\)</span> אינטגרבילית.</p>
+</div>
+<div class="proposition"><span class="keyword">אינטגרציה איבר איבר</span><p>אם <span>\(\sum f_n\)</span> מתכנסת במ"ש ל-<span>\(f\)</span>. ואז מתקיים:
+ <span>$$\int_a^b \left(\sum_{n=1}^\infty f_n\right) dx=\sum_{n=1}^\infty \left(\int_a^b f_n dx\right)=\int_a^b f dx$$</span></p>
+</div>
+<div class="proposition">
+<p>טור המתכנס במ"ש משמר חסימות.</p>
+</div>
+<div class="proposition">
+<p>אם סדרה מתכנסת במ"ש ניתן להחליף גבולות:
+<span>$$\operatorname*{lim}_{x\to x_{0}}\left(\operatorname*{lim}_{n\to\infty}f_{n}(x)\right)=\operatorname*{lim}_{n\to\infty}\left(\operatorname*{lim}_{x\to x_{0}}f_{n}(x)\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">גזירה איבר איבר</span><p>יהי <span>\(\sum f\)</span> טור פונקציות כך שמתקיים:</p>
+<ol>
+<li>
+<p>טור הנגזרות  <span>\(\sum f_n'(x)\)</span> מתכנס במ"ש על <span>\([a,b]\)</span> </p>
+</li>
+<li>
+<p>הטור <span>\(\sum f_n(x_0)\)</span> מתכנס נקודתית 
+אזי מתקיים <span>\(\left( \sum f_{n} \right)'=\sum(f'_{n})\)</span>.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='prev-page'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

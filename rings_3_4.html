@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מודולים חופשיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings_3_5.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_3_3.html`;}});</script>
+        <div class="content">
+        <h1>3.4  מודולים חופשיים</h1>
+    <div class="definition"><span class="keyword">בסיס</span><p>תת קבוצה <span>\(S\subseteq M\)</span> תקרא בסיס אם מקיימת:</p>
+<ol>
+<li>
+<p>פורשת - לכל <span>\(m \in M\)</span> ניתן לכתוב בצורה: 
+<span>$$m=\sum r_{i}s_{i}$$</span>
+כאשר <span>\(s_{i}\in S,r_{i}\in R\)</span>.</p>
+</li>
+<li>
+<p>בת"ל - הצגה זו היא יחודית </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מודול חופשי</span><p>מודול שיש לו בסיס.</p>
+</div>
+<div class="definition"><span class="keyword">סכום ישר</span><p>עבור קבוצה <span>\(S\)</span> וחוג <span>\(R\)</span> נגדיר:
+<span>$$R^{\oplus S}=\{f\in R^{S}\mid f(s)=0\;{\mathrm{for~almost~all}}\;s\in S\}.$$</span>
+במילים אחרות כל איבר של <span>\(R^{\oplus S}\)</span> היא פונקציה מ-<span>\(S\)</span> ל-<span>\(R\)</span> שהיא לא אפס רק במספר סופי של ערכים.</p>
+</div>
+<div class="remark">
+<p>ההבדל בין הגדרה זו של סכום ישר ל-<span>\(R^{S}\)</span>(אוסף הפונקציות מ-<span>\(f:S\to R\)</span>) היא ש-<span>\(R^{\oplus S}\)</span> זה אוסף כל הפונקציות עם תומך סופי - כלומר מכיל מספר סופי של ערכים שינם אפס.</p>
+</div>
+<div class="example"><span class="keyword">המודול <span>\(\mathbb{R}^{\oplus \mathbb{N}}\)</span></span><p>הסכום <span>\(\mathbb{R}^{\oplus \mathbb{N}}\)</span> מכיל את כל הסדרות מהצורה:
+<span>$$(a_{0},a_{1},\dots,a_{m}, 0,0,\dots)$$</span>
+כאשר הבסיס יהיה <span>\(\{ e_{1} \}\)</span> כאשר <span>\(e_{i}(j)=\delta_{ij}\)</span>. כיוון שיש בסיס זה בפרט מודול חופשי.</p>
+</div>
+<div class="example"><span class="keyword">המודול <span>\(\mathbb{Z}^{\mathbb{N}}\)</span></span><p>עבור סופי אנו יודעים כי <span>\(C_{3}=\mathbb{Z} / 3\mathbb{Z}\)</span> - לא <span>\(\mathbb{Z}\)</span> מודול חופשי.
+עבור המקרה הכללי הבעיה קצת יותר מסובכת. לפי Baer התשובה היא לא באופן כללי, אך לפי Specker כל תחבורה בת מנייה היא חופשית. בפרט ממשפט Specker מתקיים שאם <span>\(\mathbb{Z}^{\oplus S}\cong \mathbb{Z}^{\mathbb{N}}\)</span> אזי <span>\(\lvert S \rvert&gt; \aleph_{0}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אנדומורפיזמים של מודולים</span><p>עבור <span>\(R\)</span> מודול <span>\(M\)</span> נגדיר:
+<span>$$\operatorname{End}_{R}(M)=\{\operatorname{All}\,R{\mathrm{-linear\;maps}}\;f:M\to M\}.$$</span>
+כאשר זה תת חוג של <span>\(\mathrm{End}(M)\)</span>, האדומורפיזמים של <span>\(M\)</span> כחבורה אבלית</p>
+</div>
+<div class="example"><span class="keyword"><span>\(\mathrm{End}_{\mathbb{Z}}(\mathbb{Z})\)</span></span><p>עבור <span>\(\mathrm{End}_{\mathbb{Z}}(\mathbb{Z})\cong \mathbb{Z}\)</span> לכל <span>\(m\)</span> ב-<span>\(\mathbb{Z}\)</span> נגדיר:
+<span>$$f_{m}(n)=mn$$</span>
+זה אנדומורפיזם:
+<span>$$\begin{gather}f_{m}(n+n')=m(n+n')=f_{m}(n)+f_{m}(n')\\ f_{m}(m'n)=m(m'n)=(mm')n=m'mn=m'f_{m}(n)
+\end{gather}$$</span>
+מצד שני אם <span>\(f \in \mathrm{End}_{\mathbb{Z}}(\mathbb{Z})\)</span> אזי <span>\(\varphi=f_{\varphi(1)}\)</span> כי:
+<span>$$\varphi(n)=\varphi(n\cdot 1)=n\cdot \varphi( 1)=f_{\varphi(1)}(n)$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור חוג כללי <span>\(R\)</span> נקבל:
+<span>$$\mathrm{End}_{R}(R)\cong  R$$</span>
+לכל חוג קומוטטיבי <span>\(R\)</span>.</p>
+</div>
+<div class="proof">
+<p>זהה למה שעשינו בדוגמא עבור <span>\(R=\mathbb{Z}\)</span>. יהי <span>\(f \in \mathrm{End}_{R}(R)\)</span>. נגדיר <span>\(f(1)=a\)</span> ואז לכל <span>\(r \in R\)</span> נקבל:
+<span>$$f(r)=f(r\cdot1)=r\cdot f(1)=r\cdot a.$$</span>
+ולכן <span>\(f\)</span> מתאים לכפל ב-<span>\(a\)</span> ונקבל <span>\(\mathrm{End}_{R}(R)\cong R\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span>$$M_{n}(\mathbb{F} )=\mathrm{End}_{\mathbb{F} }(\mathbb{F} ^{n})$$</span>
+וכל <span>\(\mathbb{F}\)</span> מודולים נוצרים סופיים איזומורפיים ל-<span>\(\mathbb{F}^{n}\)</span> כלשהו.</p>
+</div>
+<div class="remark">
+<p>זה עדין נכון אם מחלפים את <span>\(\mathbb{F}\)</span> עם <span>\(M_{n}(\mathbb{F})\)</span>:
+<span>$$\mathbb{F} = \mathrm{End}_{M_{n}}(\mathbb{F}^{n} )$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אנטי הומומרפיזם של חוגים</span><p>הומומורפיזם שבמקום שמשמר כפל הופך את הכפל, כלומר:
+<span>$$\Phi(rr')=\Phi(r')\Phi(r)$$</span></p>
+</div>
+<div class="reminder">
+<p>אם <span>\(f \in \mathrm{End}_{R}(R)\)</span> אז <span>\(f\)</span> נקבע על ידי <span>\(f(1)\)</span>. כי:
+<span>$$\forall x \in R\quad f(x)=f(x\cdot 1)=xf(1)$$</span>
+בנוסף, לכל <span>\(r \in R\)</span> אפשר להגדיר <span>\(f_{r}(x)=xr\)</span>. נשים לב כי <span>\(f_{r}\in \mathrm{End}_{R}(R)\)</span>. זה כיוון שמתקיים:
+<span>$$f_{r}(r'x)=(r'x)r=r'(xr)=r'f_{r}(x)$$</span>
+סה"כ:
+<span>$$\Phi:R\to \mathrm{End}_{R}(R)\qquad \Phi(r)=f_{r}$$</span>
+וכן <span>\(\Phi\)</span> חח"ע ועל.</p>
+</div>
+<div class="proposition">
+<p>ההעתקה <span>\(\Phi:R\to \mathrm{End}_{R}(R)\)</span> המוגדרת לעיל היא אנטי הומומואפיזם של חוגים.</p>
+</div>
+<div class="proof">
+<p><span>$$\Phi(r+r')(x)=f_{r+r'}(x)=xr+xr'=(\Phi(r)+\Phi(r'))(x)$$</span>
+עבור הכפל:
+<span>$$\Phi(rr')(x)=f_{rr'}(x)=xrr'=(\Phi(r')\circ  \Phi(r))(x)$$</span>
+כלומר קיבלנו:
+<span>$$\Phi(rr')=\Phi(r')\Phi(r)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חוג הפוך</span><p>לחוג <span>\(R\)</span> החוג ההפוך <span>\(R^{\text{op}}\)</span> הוא <span>\(R\)</span> כקבוצה וכחבורה חבורה אבל עם הכפל:
+<span>$$x\cdot_{R^{op}}y := y\cdot_{R} x$$</span></p>
+</div>
+<div class="corollary">
+<p>קיבלנו:
+<span>$$\Phi:R^{\text{op}}\xrightarrow{\cong }\mathrm{End}_{R}(R)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מודול נאמן</span><p>מודול <span>\(R^{M}\)</span> נקרא האמן אם הומומורפיזם המבנה <span>\(\rho:R\to \mathrm{End_{Ab}}(B)\)</span> הוא חח"ע. באופן שקול אם לכל <span>\(0\neq r \in R\)</span> קיים <span>\(m \in M\)</span> כך שמתקיים <span>\(r m \neq 0\)</span>.</p>
+</div>
+<div class="lemma">
+<p>לחוג חילוק אין אידיאלים שמאליים אם"ם חוג חילוק.</p>
+</div>
+<div class="proof">
+<p>לכל <span>\(0\neq r \in R\)</span> יש הופכי משמאל. כי <span>\(\langle r \rangle=Rr=R\)</span> וזה אומר שיש הופכי משמאל. נסמן ב-<span>\(\bar{r}\)</span> להופכי משמאל. נדרש רק להראות כי יש הופכי מימין כדי להראות שחוג חילוק. נראה ש-<span>\(r\bar{r}=1\)</span>. נסתכל עליו בריבוע:
+<span>$$(r\bar{r})^{2}=r\cancel{ \bar{r}r }\bar{r}=r\bar{r}$$</span>
+בנוסף <span>\(r\bar{r}\neq 0\)</span> כי <span>\(\bar{r}r\bar{r}r=1\)</span> ולכן ייתכן כי <span>\(r\bar{r}\)</span> מתאפס.
+לכן:
+<span>$$\overline{r\bar{r}} (r\bar{r})^{2}=\overline{r\bar{r}} r\bar{r}\implies r\bar{r}=1$$</span></p>
+</div>
+<div class="lemma">
+<p>אפשר להרחיב קבוצה בת"ל שאינה פורשת לבסיס.</p>
+</div>
+<div class="proof">
+<ul>
+<li>אם <span>\(m\neq \langle m_{1},\dots,m_{n} \rangle\)</span> אזי <span>\(m_{1},\dots,m_{n},m\)</span> בת"ל כי אם:
+<span>$$a_{1}m_{1}+\dots+a_{n}m_{n}+am=0$$</span></li>
+<li>כעת אם <span>\(a=0\)</span> נקבל כי לא אפשרי כי <span>\(a_{1},\dots,a_{n}\)</span> בת"ל.</li>
+<li>אם <span>\(a\neq 0\)</span> נקבל:
+<span>$$m=-\frac{a_{1}}{a}m_{1}+\dots-\frac{a_{n}}{a}m_{n}$$</span>
+סתירה.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>החוג <span>\(R\)</span> הוא חוג חילוק. </p>
+</li>
+<li>
+<p>אין ל-<span>\(R\)</span> אידיאלים שמאליים. </p>
+</li>
+<li>
+<p>אין ל-<span>\(R\)</span> אידיאלים ימניים. </p>
+</li>
+<li>
+<p>החוג <span>\(R\)</span> פשוט כ-<span>\(R\)</span> מודול. </p>
+</li>
+<li>
+<p>כל <span>\(R\)</span> מודול הוא חופשי(כלומר לכל <span>\(R\)</span> מודול יש בסיס) </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>את 1-4 הראנו. נותר להראות רק ש-5 שקול לקודמים.
+נראה חוג חילוק גורר כי בסיס כמו מעל שדה(קבוצה בת"ל שאינה פורשת אפשר להרחיב לקבוצה בת"ל.
+אחרי שחוזרים על זה מספיק פעמיים(אינסוף כלשהו - ייתכן וידרש אינדוקציה טרנספיניטית), מגיעים לבסיס).
+אם כל <span>\(R\)</span> מודול הוא חופשי, ו-<span>\(0 \neq r\in R\)</span>. 
+נניח בשלילה שיש <span>\(0\lneq I\lneq R\)</span>(אידיאל שמאלי) ניקח <span>\(M= R / I\)</span>. אזי <span>\(1+I\)</span> יוצר אם <span>\(M\)</span> ולכן בסיס. נשלים אולי בהפסקה.
+נראה כעת כי אם <span>\(R\)</span> מודול חופשי אז <span>\(R\)</span> חוג חילוק. ניקח <span>\(M\neq 0\)</span> מודול פשוט. (למשל <span>\(M = R / I\)</span> כש-<span>\(I\leq R\)</span> אידיאל שמאלי מקסימלי - קיים מהלמה של צורן).
+ניקח בסיס <span>\(B\)</span> ל-<span>\(M\)</span>. ניקח <span>\(b\in B\)</span> ונסתכל על:
+<span>$$f:R\to M; r\mapsto rb$$</span>
+הומומורפיזם של מודולים. <span>\(f\)</span> על כי <span>\(M\)</span> פשוט ו-<span>\(0\neq b \in \mathrm{Im} f\)</span> ולכן <span>\(B=\{ b \}\)</span>. בנוסף כיוון ש-<span>\(B\)</span> בסיס אז חופשי ולכן <span>\(f\)</span> חח"ע. לכן <span>\(R\cong M\)</span> כמודול. לכן אין ל-<span>\(R\)</span> תת מודולים - כלומר אין אידיאלים שמאליים ולכן חוג חילוק.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='prev-page'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

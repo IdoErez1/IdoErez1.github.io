@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המשפט הספקטרלי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_9_5.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_9_3.html`;}});</script>
+        <div class="content">
+        <h1>9.4  המשפט הספקטרלי</h1>
+    <div class="theorem"><span class="keyword">שור</span><p>כל מטריצה מרוכבת ניתנת להצגה כמטריצה משולשית אוניטרית.</p>
+</div>
+<div class="proof">
+<p>ראינו כי כל מטריצה מרוכבת ניתנת להצגה כמטריצה משולשית. ולכן בעזרת גראם שמידט ניתן למצוא בסיס אשר משמר את הפרוש ויהיה אורתוגונאלי. כיוון שמשמר את הפרוש של כל רכיב נמשיך לקבל כי הרכיב הראשון שייך לפרוש של עצמו, הרכיב השני שייך לפרוש של הרכיב הראשון ושל עצמו, וכן ראינו כי תכונה זו מאפיינת את זה שבסיס הוא בסיס משלשי.</p>
+</div>
+<div class="corollary">
+<p>לכל <span>\(A \in M_{n \times n}\left( \mathbb{C} \right)\)</span>  קיימת <span>\(U\)</span> אוניטרית כך ש-<span>\(U^{*}AU\)</span> משולשית.</p>
+</div>
+<div class="theorem"><span class="keyword">המשפט הסקטראלי הממשי</span><ol>
+<li>
+<p>אופרטור <span>\(T\)</span> על ממ"פ ממשית הוא לכסין אותונורמלי אם"ם הוא צמוד עצמית. </p>
+</li>
+<li>
+<p>עבור מטריצה <span>\(A\in M_{n\times n}\left( \mathbb R \right)\)</span> היא לכסינה אותונורמלית אם"ם <span>\(A^t = A\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ממשפט שור קיים בסיס עבורו משולשית עם מטריצת מעבר אוטוגונאלית. כיוון שהאופרטור צמוד לעצמו, נקבל כי תחת הממשיים סימטרי תחת כל בסיס, ובפרט תחת הבסיס המשולשי. מטריצה סימטרית משולשית תהיה אלכסונית.</p>
+</div>
+<div class="definition"><span class="keyword">מטריצה נורמלית</span><p>מטריצה שמקיימת <span>\(A^* A = A A^*\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור נורמלי</span><p>העתקה המקיימת <span>\(T^*T = TT^*\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אופרטור הוא נורמלי אם"ם לכל <span>\(v \in V\)</span> מתקיים:
+<span>$$\lVert Tv \rVert =\lVert T^{*}v \rVert $$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$\left\vert\left\vert T x\right\vert\right\vert^{2}=\left\langle T^{*}T x,x\right\rangle=\left\langle T T^{*}x,x\right\rangle=\left\vert\left\vert T^{*}x\right\vert\right\vert^{2}$$</span>
+כעת בעזרת פולריזציה נקבל:
+<span>$$\begin{gather}\left( N^{*}N\mathbf{x},\mathbf{y} \right)=\left( N\mathbf{x},N\mathbf{y} \right)=\frac{1}{4}\sum_{\alpha=\pm1,\pm i}\alpha\|N\mathbf{x}+\alpha N\mathbf{y}\|^{2}=\\=\frac{1}{4}\sum_{\alpha=\pm1,\pm i}\alpha\|N\left( \mathbf{x}+\alpha\mathbf{y} \right)\|^{2}=\frac{1}{4}\sum_{\alpha=\pm1,\pm i}\alpha\|N^{*}\left( \mathbf{x}+\alpha\mathbf{y} \right)\|^{2}\\=\frac{1}{4}\sum_{\alpha=\pm1,\pm i}\alpha\|N^{*}\mathbf{x}+\alpha N^{*}\mathbf{y}\|^{2}=\left( N^{*}\mathbf{x},N^{*}\mathbf{y} \right)=\left( NN^{*}\mathbf{x},\mathbf{y} \right) 
+\end{gather}$$</span>
+וכיוון שמתקיים לכל <span>\(x,y \in V\)</span> נקבל כי <span>\(N^{*}N=N N^{*}\)</span>.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>צמודה עצמית גוררת נורמליות. </p>
+</li>
+<li>
+<p>אורתוגונאליות/אוניטריות גוררת נורמליות. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">הספקטרלי המרוכב</span><ol>
+<li>
+<p>אופרטור <span>\(T\)</span> על ממ"פ מרוכב היא לכסינה אותונורמלית אם"ם הוא נורמלי. </p>
+</li>
+<li>
+<p>עבור מטריצה <span>\(A\in M(\mathbb C)\)</span> היא לכסינה אותונורמלית מעל <span>\(\mathbb R\)</span> אם"ם היא נורמלית, כלומר <span>\(A^* A = A A^*\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ממשפט שור קיימת מטריצה משולשית עם מטריצת מעבר אורתונורמלית. כמו במקרה הממשי, מספיק להראות כי מטריצה מושלישית כזו תהיה סימטרית אם"ם היא נורמלית. נוכיח בעזרת אינדוקציה על מימד המטריצה. המקרה הבסיס טריוויאלי(מטריצה <span>\(1\times1\)</span> היא לכסינה). כעת ניתן לכתוב:
+<span>$$N=\left(\begin{array}{c|ccc} a_{1,1} &amp; a_{1,2}  &amp; \dots &amp; a_{1,n} \\\hline 0 &amp;  &amp;  &amp;  \\\vdots &amp;  &amp; N_{1} &amp;  \\0 &amp;  &amp;  &amp; 
+\end{array}\right)$$</span>
+ניתן כעת לחשב את המכפלות <span>\(N^{*}N\)</span> ו-<span>\(N N^{*}\)</span> ישירות בעזרת מכפלת בלוקים:
+<span>$$(N^{*}N)_{1,1}=\overline{{{a}}}_{1,1}a_{1,1}=|a_{1,1}|^{2}$$</span>
+<span>$$(N N^{*})_{1,1}=|a_{1,1}|^{2}+|a_{1,2}|^{2}+\ldots+|a_{1,n}|^{2}$$</span>
+ולכן מתקיים <span>\((N^{*}N)_{1,1}=(N N^{*})_{1,1}\)</span> אם"ם מתקיים:
+<span>$$a_{1,2}=\ldots=a_{1,n}=0$$</span>
+כלומר ניתן להציג את המטריצה בצורה:
+<span>$$N=\left(\begin{array}{c|ccc} a_{1,1} &amp; 0   &amp; \dots &amp; 0 \\\hline 0 &amp;  &amp;  &amp;  \\\vdots &amp;  &amp; N_{1} &amp;  \\0 &amp;  &amp;  &amp; 
+\end{array}\right)$$</span>
+וכיוון שזוהי מטריצת בלוקים אלכסונית ניתן לחשב בקלות את המכפלות הבאות:
+<span>$$NN^{*}=\left(\begin{array}{c|ccc} |a_{1,1}|^{2} &amp; 0  &amp; \dots &amp; 0 \\\hline 0 &amp;  &amp;  &amp;  \\\vdots &amp;  &amp; N_{1}^{*}N_{1} &amp;  \\0 &amp;  &amp;  &amp; \end{array}\right)\qquad N^{*}N=\left(\begin{array}{c|ccc} |a_{1,1}|^{2} &amp; 0  &amp; \dots &amp; 0 \\\hline 0 &amp;  &amp;  &amp;  \\\vdots &amp;  &amp; N_{1}N_{1}^{*} &amp;  \\0 &amp;  &amp;  &amp; 
+\end{array}\right)$$</span>
+כאשר ניתן לראות כי כיוון שאנו דורשים <span>\(N^{*}N=N N^{*}\)</span> אז מתקיים <span>\(N_{1}^{*}N_{1}=N_{1} N_{1}^{*}\)</span> ולכן <span>\(N_{1}\)</span> נורמלי, ומהנחת האינדוקציה נקבל כי לכסינה ולכן <span>\(N\)</span> לכסינה ובפרט הצורה המשולשית תהיה אלכסונית ולכסינה אורתונורמלית.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='prev-page'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

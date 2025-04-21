@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טרוטריזציה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+<li class='parent-page'><a href='./Quantum Computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_1'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_2'>2.2 מדידה מוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_3'>2.3 ערוצים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_4'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_5'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_1'>3.1 מצבי בל</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_2'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_1'>4.1 חישוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_3'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_1'>5.1 שערים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_2'>5.2 מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_4'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_2'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_2'>7.2 מחזוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_3'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum Computation_8_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum Computation_7_4`; }});</script>
+        <div class="content">
+        <h1>8.1  טרוטריזציה</h1>
+    <p>כאשר <span>\(H\)</span> מטריצה גדולה יכול להיות מאוד מורכב לעשות עליה אקספוננט. </p>
+<div class="definition"><span class="keyword">המילטוניאן <span>\(k\)</span> לוקאלי</span><p>כאשר ההמילטוניאן <span>\(H\)</span> עצמו פועל על <span>\(m\)</span> קיוביטים אך ניתן לפרק אותו ל-<span>\(L\)</span> אופרטורים:
+<span>$$H=\sum_{l=1}^{L}H_{l}$$</span>
+כך שכל <span>\(H_{l}\)</span> פועל לכל היותר על <span>\(k\)</span> קיוביטים.</p>
+</div>
+<div class="example">
+<p>נתונה שרשרת פרמיונית מאורך <span>\(N\)</span> - ישר עם <span>\(N\)</span> אתרים(מסומנים 1 עד <span>\(N\)</span>) אשר יכולים להכיל פרמיון יחיד. פרמיון נוצר על ידי <span>\(c_{n}^{\dagger}\)</span> ומושמד על ידי <span>\(c_{n}\)</span> כאשר מתקיים:
+<span>$$\left\{  c_{m},c_{n}^{\dagger}  \right\}=\delta_{mn}\qquad \left\{c_{m},c_{n}\right\}=\left\{c_{m}^{\dagger},c_{n}^{\dagger}\right\}=0$$</span>
+כן כדי למפות את הפרמיונים לקיוביטים לצורכי חישוב נשתמש במפוי ג'ורדן ויגנר:
+<span>$$c_{n}=\left(\prod_{m=1}^{n-1}\sigma_{m}^{z}\right)\sigma_{m}^{-}\qquad c_{n}^{\dagger}=\left(\prod_{m=1}^{n-1}\sigma_{m}^{z}\right)\sigma_{m}^{+}$$</span>
+כאשר העתקה זו משמרת יחסי אנטי קומוטטור. אם נרצה למשל לבצע סימולציה של ההמילטוניאן:
+<span>$$H=\left(c_{1}^{\dagger}c_{2}+c_{2}^{\dagger}c_{3}+\ldots+c_{N-1}^{\dagger}c_{N}\right)+h.c.$$</span>
+אשר בפרוש 2 לוקאלי במונחי הפרמיונים, אבל הוא גם 2 לוקאלי במונחי הספין כי מתקיים:
+<span>$$\begin{gather}c_{n}^{\dagger}c_{n+1}=\sigma^{(+)}_{n}\left( \prod_{m&lt;n}\sigma_{z} \right)\left( \prod_{m&lt;n+1}\!\!\sigma_{z} \right)\sigma_{n+1}^{(-)}=\sigma_{n}^{(+)}\sigma_{z}^{(n)}\sigma_{n+1}^{(-)} = \\=\left( \ket{\uparrow } \bra{\downarrow } \sigma_{z} \right)_{n}\otimes \sigma_{n+1}^{(-)}=-\sigma_{n}^{(+)}\sigma_{n+1}^{(0)}\implies \\\implies H=-\left( \sigma_{1}^{(+)}\sigma_{2}^{(-)}+\sigma_{2}^{(+)}\sigma_{3}^{(-)} +\dots \right)+ \mathrm{h.\!c.}
+\end{gather}$$</span>
+לעומת זאת ההמילטוניאן:
+<span>$$H=\left(c_{1}^{\dagger}c_{7}+c_{2}^{\dagger}c_{8}+\ldots+c_{N-6}^{\dagger}c_{N}\right)+h.c.$$</span>
+הוא 2 לוקאלי במונחי הפרמיונים אך 7 לוקאלי במונחי הספין! הסיבוכיות עדיין נשארת אבל פולינומיאלית(למורת שייתכן יהיה קשה יותר לממש את זה עם חומרה קוונטית).</p>
+</div>
+<p>כעת נניח כי ההמילטוניאן שלו <span>\(k\)</span> לוקאלי, וכן בנוסף נניח כי קיים <span>\(h\)</span> כך שכל ההמילטוניאנים שלנו מקיימים <span>\(\lVert H_{i} \rVert\leq h\)</span>.</p>
+<div class="proposition"><span class="keyword">נוסחאת סוזוקי-טרוטר</span><p><span>$$e^{\hat{A}+\hat{B}}=\operatorname*{lim}_{n\rightarrow\infty}\left(e^{\frac{\hat{A}}{n}}e^{\frac{\hat{B}}{n}}\right)^{n}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$e^{-i\sum_{l=1}^{L}\hat{H}_{l}t}=\operatorname*{lim}_{n\rightarrow\infty}\left(\prod_{l=1}^{L}e^{-i\frac{\hat{H}_{l}t}{n}}\right)^{n}$$</span></p>
+</div>
+<div class="remark">
+<p>למעשה זהו קירוב ראשון של נוסחאת בייקר-קאמפבל-האסדורף. אנחנו מתייחסים לאופרטורים כאילו הם מתחלפים.</p>
+</div>
+<div class="symbolize">
+<p>נסמן את הפלט האמיתי ב-<span>\(\widetilde{U}(t)\)</span> כך שהמצב שמתקבל יהיה:
+<span>$$\left|\widetilde{\psi}\left(t\right)\right\rangle=\widetilde{U}\left(t\right)\left|\psi_{0}\right\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>אם נדרוש כי השגיאה תהיה:
+<span>$$\left\|\left|\psi\left(t\right)\right\rangle-\left|\widetilde{\psi}\left(t\right)\right\rangle\right\|\leq\delta$$</span>
+אז מספיק לדרוש כי:
+<span>$$\left\|U\left(t\right)-\widetilde{U}\left(t\right)\right\|\leq\delta$$</span>
+כאשר אם נבצע <span>\(N=\frac{t}{\epsilon}\)</span> צעדים השגיאה תקיים:
+<span>$$\left\|e^{-i\sum_{i=1}^{M}H_{i}\epsilon}-\prod_{i=1}^{M}e^{-i H_{i}\epsilon}\right\|\leq\epsilon^{2}\!\sum_{i&lt;j}\!h^{2}+O\left(\epsilon^{3}\right)=O\left(M\epsilon^{2}h^{2}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$e^{-i\sum\limits_{i=1}^{M}H_{i}\epsilon}=1-i\epsilon\sum\limits_{i=1}^{M}H_{i}-\frac{1}{2}\epsilon^{2}\sum\limits_{i=1}^{M}\sum\limits_{j=1}^{M}H_{i}H_{j}+O\left(\epsilon^{3}\right)$$</span>
+וכן:
+<span>$$\prod_{i=1}^{M}e^{-iH_{i}\epsilon}=\prod_{i=1}^{M}\left(1-i\epsilon H_{i}+\frac{1}{2}\epsilon^{2}H_{i}^{2}+O\left(\epsilon^{3}\right)\right)=1-i\epsilon\sum_{i=1}^{M}H_{i}-\epsilon^{2}\sum_{i&lt;j}H_{i}H_{j}-\frac{1}{2}\epsilon^{2}\sum_{i=1}^{M}H_{i}^{2}+O\left(\epsilon^{3}\right)$$</span>
+ולכן ההפרש יהיה:
+<span>$$e^{-i\sum\limits_{i=1}^{M}H_{i}\epsilon}-\prod\limits_{i=1}^{M}e^{-iH_{i}\epsilon}=\frac{1}{2}\epsilon^{2}\left(\sum\limits_{i&lt;j}H_{i}H_{j}-\sum\limits_{i&gt;j}H_{i}H_{j}\right)+O\left(\epsilon^{3}\right)=\frac{1}{2}\epsilon^{2}\sum\limits_{i&lt;j}\left[H_{i},H_{j}\right]+O\left(\epsilon^{3}\right)$$</span>
+באופן כללי נדרש עבור <span>\(\sum\limits_{i&lt;j}\left[H_{i},H_{j}\right]\)</span> לסכום על <span>\(\frac{1}{2}M(M-1)=O(M^{2})\)</span> איברים, כאשר כיוון שאנחנו דורשים לקוליות, הקומוטטור לא יהיה אפס פרט למספר קבוע של גורמי המילטוניאן. ולכן <span>\(O(M)=O(n)\)</span>. עבור כל קומוטטור שאינו אפסי נקבל:
+<span>$$\|[H_{i},H_{j}]\|\leq2\,\|H_{i}H_{j}\|\leq2h^{2}$$</span>
+ולכן השגיאה תקיים:
+<span>$$\left\|e^{-i\sum_{i=1}^{M}H_{i}\epsilon}-\prod_{i=1}^{M}e^{-i H_{i}\epsilon}\right\|\leq\epsilon^{2}\sum_{i&lt;j}\!h^{2}+O\left(\epsilon^{3}\right)=O\left(M\epsilon^{2}h^{2}\right)$$</span></p>
+</div>
+<div class="corollary">
+<p>אם נבצע <span>\(N=\frac{t}{\epsilon}\)</span> צעדים כאשר כל אחת עם שגיאה מקסימלית מסדר גודל <span>\(O\left( M\epsilon^{2}h \right)\)</span> נקבל:
+<span>$$\delta\sim\frac{t}{\epsilon}M\epsilon^{2}h^{2}=M h^{2}t\epsilon\implies\epsilon=O\left(\frac{\delta}{M h^{2}t}\right)$$</span></p>
+</div>
+<div class="corollary">
+<p>גודל המעגל(מספר השערים) הנדרשים יהיו:
+<span>$$L=\frac{M t}{\epsilon}=O\left(\frac{\left(M h t\right)^{2}}{\delta}\right)$$</span></p>
+</div>
+<div class="corollary">
+<p>ממשפט Solovay-Kitaev ניתן לבצע סימולציה על כל שער עד כדי דיוק <span>\(O\left( \epsilon^{2}h^{2} \right)\)</span> עם קבוצת שערכים אונברלסים על ידי שימוש ב:
+<span>$$\mathrm{polylog}\left(\frac{1}{\epsilon^{2}h^{2}}\right)=\mathrm{polylog}\left(\left(\frac{M h t}{\delta}\right)^{2}\right)$$</span>
+שערים ולכן ניתן לבצע סימולציה של הקידום בזמן עם מעגל מגודל:
+<span>$$L=O\left(\frac{\left(M h t\right)^{2}}{\delta}\mathrm{polylog}\left(\left(\frac{M h t}{\delta}\right)^{2}\right)\right)$$</span>
+כיוון ש-<span>\(M=O(n)\)</span> והנפח גם כן <span>\(O(n)\)</span> נקבל כי <span>\(Mt\)</span> מסדר גודל של המרחב זמן של הסימולציה <span>\(\Omega=Vt\)</span> ולכן:
+<span>$$L=O\left(\Omega^{2}\mathrm{polylog}{\left( \Omega \right)}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">נוסחאת טרוטר מסדר שני</span><p><span>$$U\left(t\right)\approx\widetilde{U}^{\left(2\right)}\left(t\right)=\left(\prod_{i=1}^{M}e^{-i H_{i}\epsilon/2}\prod_{i=M}^{1}e^{-i H_{i}\epsilon/2}\right)^{N}$$</span></p>
+</div>
+<div class="lemma">
+<p>עבור שתי איברים<span>\((M=2)\)</span> נקבל:
+<span>$$\left\|e^{-i H\epsilon}-e^{-i H_{1}\epsilon/2}e^{-i H_{2}\epsilon}e^{-i H_{1}\epsilon/2}\right\|=O\left(\epsilon^{3}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>ראשית נפתח את שתי הגורמים לסדר שלישי ב-<span>\(\epsilon\)</span>:
+<span>$$\begin{gather}e^{-i\epsilon(H_{1}+H_{2})}=1-i\epsilon\left(H_{1}+H_{2}\right)-\frac{\epsilon^{2}}{2}\left(H_{1}^{2}+H_{2}^{2}+H_{1}H_{2}+H_{2}H_{1}\right)+\\ \frac{ie^{3}}{6}\left(H_{1}^{3}+H_{2}^{3}+H_{1}^{2}H_{2}+H_{1}H_{2}^{2}+H_{2}^{2}H_{1}+H_{2}H_{1}^{2}+H_{1}H_{2}H_{1}+H_{2}H_{1}H_{2}\right)+O\left(\epsilon^{4}\right) 
+\end{gather}$$</span>
+וכן:
+<span>$$\begin{gather}e^{-i\epsilon H_{1}/2}e^{-i\epsilon H_{2}}e^{-i\epsilon H_{1}/2}=\left(1-i\frac{\epsilon}{2}H_{1}-\frac{\epsilon^{2}}{8}H_{1}^{2}+i\frac{\epsilon^{3}}{48}H_{1}^{3}+O\left(\epsilon^{4}\right)\right)\times\\ \times\left(1-i\epsilon H_{2}-\frac{\epsilon^{2}}{2}H_{2}^{2}+i\frac{\epsilon^{3}}{6}H_{2}^{3}+O\left(\epsilon^{4}\right)\right)\times\left(1-i\frac{\epsilon}{2}H_{1}-\frac{\epsilon^{2}}{8}H_{1}^{2}+i\frac{\epsilon^{3}}{48}H_{1}^{3}+O\left(\epsilon^{4}\right)\right)=\\=1-i\epsilon\left(H_{1}+H_{2}\right)-\frac{\epsilon^{2}}{2}\left(H_{1}^{2}+H_{2}^{2}+H_{1}H_{2}+H_{2}H_{1}\right)\\+i\epsilon^{3}\left(\frac{1}{24}H_{1}^{3}+\frac{1}{6}H_{2}^{3}+\frac{1}{8}H_{1}^{2}H_{2}+\frac{1}{4}H_{1}^{*}H_{2}^{2}+\frac{1}{4}H_{2}^{2}H_{1}+\frac{1}{8}H_{2}H_{1}^{2}+\frac{1}{4}H_{1}H_{2}H_{1}\right)+O\left(\epsilon^{4}\right) 
+\end{gather}$$</span>
+כאשר נשים לב כי הגורמים מסדר ראשון ושני הם זהים, ולכן יבטלו אחד את השני כשנחשב שגיאה, ונשאר רק עם גורמים מסדר שלישי.</p>
+</div>
+<div class="proposition">
+<p>עבור מספר כללי <span>\(M\geq 2\)</span> של גורמי המילטוניאן נקבל כי השגיאה תקיים:
+<span>$$\left\lVert  U-\widetilde{U}^{(2)}  \right\rVert =\left\|e^{-iH\epsilon}-e^{-iH_{1}\epsilon/2}\cdots e^{-iH_{M-1}\epsilon/2}e^{-iH_{M}\epsilon}e^{-iH_{M-1}\epsilon/2}\cdots e^{-iH_{1}\epsilon/2}\right\|=\left(M-1\right)O\left(\epsilon^{3}\right)=O\left(M\epsilon^{3}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן להוסיף ולהחסיר מהשגיאה:
+<span>$$e^{-i H_{1}\epsilon/2}e^{-i\epsilon\sum_{i=2}^{M}H_{i}}e^{-i H_{1}\epsilon/2}$$</span>
+ולהשתמש באי שוויון המשולש ולקבל:
+<span>$$\begin{gather}\left\|e^{-iH_{\epsilon}}-e^{-iH_{1\epsilon}/2}\ldots e^{-iH_{M-1\epsilon}/2}e^{-iH_{M\epsilon}\epsilon}e^{-iH_{M-1\epsilon}/2}\ldots e^{-iH_{1\epsilon}/2}\right\|\leq\\\left\|e^{-iH_{\epsilon}}-e^{-iH_{1\epsilon}/2}e^{-i\epsilon\sum\limits_{i=2}^{M}H_{i}}e^{-iH_{1\epsilon}/2}\right\|+\\+\left\|e^{-iH_{1\epsilon}/2}e^{-i\epsilon\sum\limits_{i=2}^{M}H_{i}}e^{-iH_{1\epsilon}/2}-e^{-iH_{1\epsilon}/2}\ldots e^{-iH_{M-1\epsilon}/2}e^{-iH_{M\epsilon}\epsilon}e^{-iH_{M-1\epsilon}/2}\ldots e^{-iH_{1\epsilon}/2}\right\| 
+\end{gather}$$</span>
+כאשר האיבר הראשון יהיה מסדר גודל <span>\(O\left( \epsilon^{3} \right)\)</span> מהלמה וניתן להפעיל את הלמה באופן אידנוקטיבי על האיבר השני, ולכן נקבל סה"כ <span>\(M-1\)</span> איברים ולכן השגיאה תגדל בסדר גודל של <span>\((M-1)O\left( \epsilon^{3} \right)=O\left( M\epsilon^{3} \right)\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">מודל אייזינג</span><p>נתון ההמילטוניאן של מודל אייזינג אשר נרצה:
+<span>$$H=a{\sum_{i}}Z_{i}+c{\sum_{i}}X_{i}X_{i+1}\equiv H_{Z}+H_{X}$$</span>
+נרצה לבנות מעגל קוונטי אשר מקרב את <span>\(e^{ -iHt }\)</span> עבור ההמילטוניאן הזה בעזרת שערים של אחד או שתיים קיוביטים. ראשית נשים לב כי כל הגורמים של <span>\(H_{Z}\)</span> מתחלפים אחד עם השני כי <span>\(Z_{i}\)</span> מתחלף עם עצמו וכל הגורמים של <span>\(H_{X}\)</span> מתחלפים אחד עם השני כי <span>\(X_{i},X_{j}\)</span> מתחלפים זה עם זה. ולכן מתקיים:
+<span>$$e^{ -i\epsilon H_{Z} }=\prod_{i}e^{ -i\epsilon aZ_{i}}\qquad e^{ -i\epsilon H_{X} }=\prod_{i}e^{ -i\epsilon c\sum_{i}X_{i}X_{i+1} }$$</span>
+כעת נרצה למצוא את השגיאה מסדר מוביל עבור קירוב טרוטר מסדר ראשון, כלומר <span>$$\widetilde{U}\left(t\right)=\left(\prod_{i=1}^{M}e^{-i H_{i}\epsilon}\right)^{N}$$</span> כאשר <span>\(\epsilon=\frac{t}{N}\)</span> וכן נדרוש כי <span>\(\left\lVert  U(t)-\tilde{U}(t)  \right\rVert\leq \delta\)</span> עבור <span>\(\delta&gt; 0\)</span> כלשהו. לפי נוסחאת השגיאה נקבל כי הגורם המוביל של השגיאה הוא:
+<span>$$\frac{\epsilon^{2}}{2}\left\|\left[H_{Z},H_{X}\right]\right\|$$</span>
+כדי לחשב את הקומוטטור ניתן לכתוב:
+<span>$$[H_{Z},H_{X}]=a c{\sum_{i j}{\left[Z_{i},X_{j}X_{j+1}\right]}}=a c{\sum_{i j}{\left(\delta_{i j}\left[Z_{i},X_{j}X_{j+1}\right]+\delta_{i,j+1}\left[Z_{i},X_{j}X_{j+1}\right]\right)}}$$</span>
+ולכן:
+<span>$$\left[H_{Z},H_{X}\right]=a c{\sum_{i}\left[Z_{i},X_{i}\right]\left(X_{i+1}+X_{i-1}\right)}=2i a c{\sum_{i}}Y_{i}\left(X_{i+1}+X_{i-1}\right).$$</span>
+כאשר החסם יהיה:
+<span>$$\begin{gather}\frac{\epsilon^{2}}{2}\left\|\left[H_{Z},H_{X}\right]\right\|=2\epsilon^{2}\left|a c\right|\left\|\sum_{i}Y_{i}\left(X_{i+1}+X_{i-1}\right)\right\|\leq\\ 2\epsilon^{2}\left|a c\right|\sum_{i}\left\|Y_{i}\left(X_{i+1}+X_{i-1}\right)\right\|{=}2\epsilon^{2}\left|a c\right|n\left\|Y_{1}\left(X_{2}{+}X_{n}\right)\right\| 
+\end{gather}$$</span>
+נשים לב כי:
+<span>$$\left\|Y_{1}\left(X_{2}+X_{n}\right)\right\|\leq\left\|Y_{1}X_{2}\right\|+\left\|Y_{1}X_{n}\right\|=2$$</span>
+ולכן:
+<span>$$\left\|e^{-i H\epsilon}-\prod_{i=1}^{M}e^{-i H_{i}\epsilon}\right\|\leq4\epsilon^{2}\left|a c\right|n\implies \left\|U\left(t\right)-\widetilde{U}\left(t\right)\right\|\leq\delta\approx4N\epsilon^{2}\left|a c\right|n$$</span>
+ואם נרצה לחשב עד דיוק <span>\(\delta\)</span> נדרש:
+<span>$$\delta\approx4\epsilon^{2}\left|a c\right|n N=4\epsilon\left|a c\right|n t\implies\epsilon\approx\frac{\delta}{4\left|a c\right|n t}$$</span></p>
+</div>
+<div class="example"><span class="keyword">מערכת מעגלית</span><p>נתון מערכת מחזורית של ספינים עם <span>\(n\)</span> אתרים וההמילטוניאן:
+<span>$$H=\sum_{i=1}^{n}X_{i}X_{i+1}+\sum_{i=1}^{n}Y_{i}Y_{i+1}+\lambda\sum_{i=1}^{n}Z_{i}\equiv H_{X}+H_{Y}+H_{Z}$$</span>
+נרצה לבצע קידום בזמן <span>\(U=e^{ -iHt }\)</span> בעזרת השערים ה-single qubit מהצורה <span>\(V=e^{ -i\phi Z_{i} }\)</span> ובעזרת שערי שתי קיוביטים של ספינים שכנים מהצורה <span>\(W_{i}\left( \phi \right)=e^{ -i\phi X_{i}X_{i+1} }\)</span>. ניתן להפעיל שערים במקביל כל עוד אינם פועלים על אותו קיוביט. ראשית נשים לב שנדרש לעשות פה טרוטטריזציה למערכת כיוון שההמילטוניאן דורש לפעול על יותר מקיוביט אחד באותו זמן והשערים שלנו לא מאפשרים לעשות זאת. נקרב:
+<span>$$U(t)=e^{ -iHt }\approx \left( e^{ iH_{X}\varepsilon }\cdot e^{ -iH_{Y} \varepsilon}\cdot e^{ iH_{Z}\varepsilon } \right)^{M}\qquad M=\frac{t}{\varepsilon}$$</span>
+כאשר אם נניח (בה"כ) כי <span>\(X&lt;Y&lt;Z\)</span> השגיאה נתונה על ידי:
+<span>$$\frac{\varepsilon^{2}}{2}\left\lVert  \sum_{i&lt;j}[H_{i},H_{j}]  \right\rVert +O\left( \varepsilon^{3} \right)=\frac{\varepsilon^{2}}{2}\lVert [H_{X},H_{Y}]+[H_{Y},H_{Z}]+[H_{X},H_{Z}] \rVert +O\left( \varepsilon^{3} \right)$$</span>
+כאשר לאחר פתרון אלגברי מפורש של הקומוטטורים נקבל כי השגיאה תהיה <span>\(4n\varepsilon^{2}+O\left( \varepsilon^{3} \right)\)</span>.
+כדי לממש את <span>\(H_{Z}\)</span> נשים לב כי כל הגורמים הלוקאלים של <span>\(H_{Z}\)</span> מתחלפים ולכן:
+<span>$$e^{ -i\varepsilon H_{Z} }=e^{ -i\varepsilon \lambda \sum Z_{i} }=\prod_{i}e^{ -i\varepsilon \lambda Z_{i} }=\prod_{i}V_{i}$$</span>
+כאשר ניתן להפעיל אותם במקביל ולקבל כי גדל ב-<span>\(O(1)\)</span>. באופן דומה כדי לממש את <span>\(H_{X}\)</span> נשים לב כי כל הגורמים הלוקאלים מתחלפים ולכן:
+<span>$$e^{ -i\varepsilon H_{X} }=e^{ -i\varepsilon \sum_{i}X_{i}X_{i+1}}=\prod_{i}e^{ -i\varepsilon X_{i}X_{i+1} }=\prod_{i} W_{i}\left( \varepsilon \right)$$</span>
+אומנם נראה שיש בעיה כיוון שאנחנו פועלים בזוגות ולכן נראה כאילו לא ניתן להריץ את כולם ביחד, ניתן לפרק את המכפלה לזוגיים ואי זוגיים וכעת ניתן להריץ על הזוגיים בהרצה אחת, ולהריץ על האי זוגיים בשתי הרצות, ולכן גם זה ממומש ב-<span>\(O(1)\)</span>. עבור <span>\(H_{Y}\)</span> נשתמש בזה שמתקיים:
+<span>$$e^{ -i\frac{\pi}{4} Z_{i} }X_{i}e^{ i\frac{\pi}{4} Z_{i} }=Y_{i}\implies V_{i}\left( \frac{\pi}{4} \right)X_{i}V_{i}^{\dagger}\left( \frac{\pi}{4} \right)$$</span>
+ולכן:
+<span>$$H_{Y}=\left[ \prod_{i}V_{i}\left( \frac{\pi}{4} \right) \right]H_{X}\left[ \prod_{i}V_{i}^{\dagger}\left( \frac{\pi}{4} \right) \right]\implies e^{ iH_{Y}\varepsilon }=Ve^{ -i\varepsilon H_{X} }V^{\dagger}$$</span>
+וגם ממומש ב-<span>\(O(1)\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+<li class='prev-page'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li>
+        </body>
+        </html>
+        

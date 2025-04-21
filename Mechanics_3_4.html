@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הבעיה הדו גופית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_3_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_3_3`; }});</script>
+        <div class="content">
+        <h1>3.4  הבעיה הדו גופית</h1>
+    <p>הבעיה הדו גופית היא בעיה של 2 גופים שמקיימים את הדרישות הבאות:</p>
+<ol>
+<li>
+<p>פועל כוח "מרכזי" על הציר המחבר ביניהם </p>
+</li>
+<li>
+<p>הכוח תלוי אך ורק במרחק בינהם. </p>
+</li>
+</ol>
+<div class="proposition"><span class="keyword">הלגרנג'יאן של הבעיה הדו גופית</span><p><span>$$ \mathcal{L}=\frac12\left(m_1\left|\dot{\vec{r_1}}\right|^2+m_2\left|\dot{\vec{r_2}}\right|^2\right)-V\left(|\vec{r_1}-\vec{r_2}|\right)$$</span></p>
+</div>
+<h2>מציאת המסלול בבעיה הדו גופית</h2>
+<div class="definition"><span class="keyword">מסה מצומצמת</span><p>גודל בעל יחידות של מסה המוגדר בתור:
+<span>$$\mu=\frac{1}{\frac{1}{m_{1}}+\frac{1}{m_{2}}}=\frac{m_1m_2}{m_1+m_2}$$</span>
+זהו למעשה המסה האפקטיבית של מערכת של שתי גופים.</p>
+</div>
+<div class="symbolize">
+<p>ניתן לסמן:
+<span>$$\vec{r_1}=\vec{R}_{cm}+\frac{\mu}{m_1}\vec{r},\quad\vec{r_2}=\vec{R}_{cm}-\frac{\mu}{m_2}\vec{r}$$</span>
+כלומר ניתן לפרק את <span>\(\vec{r}_{1},\vec{r}_{2}\)</span> לתנועה של מרכז המסה וסביב מרכז המסה.</p>
+</div>
+<div class="proposition">
+<p>ניתן לכתוב את הלגרנג'יאן האפקטיבי של הבעיה הדו גופית בצורה הבאה:
+<span>$$\mathcal{L}_{eff}= \frac\mu2\dot{r}^2-\frac{p_\theta^2}{2\mu r^2}-V(r)$$</span>
+כאשר <span>\(V(r)\)</span> זה הפוטנציאל, <span>\(p_{\theta}\)</span> זה התנע הזוויתי השמור, <span>\(\mu\)</span> זה המסה המצומצת ו-<span>\(\dot{r}\)</span> זה המהירות סביב מרכז המסה.</p>
+</div>
+<div class="proof">
+<p>בהנתן הלגרנג'יאן של בעיה דו גופית:
+<span>$$ \mathcal{L}=\frac12\left(m_1\left|\dot{\vec{r_1}}\right|^2+m_2\left|\dot{\vec{r_2}}\right|^2\right)-V\left(|\vec{r_1}-\vec{r_2}|\right)$$</span>
+כעת ניתן להציב:
+<span>$$ \vec{r_1}=\vec{R}_{cm}+\frac{\mu}{m_1}\vec{r},\quad\vec{r_2}=\vec{R}_{cm}-\frac{\mu}{m_2}\vec{r},\quad\mu=\frac{m_1m_2}{m_1+m_2}$$</span>
+כאשר נקבע את ציר ה-<span>\(z\)</span> להיות בכיוון של התנע השמור:
+<span>$$ \vec{L}=\vec{r}\times m\dot{\vec{r}}\parallel\hat{z}$$</span>
+כאשר נזכור כי <span>\(\dot{\vec{R}}_{cm}=0\)</span>, ונקבל בעיה מצומצמת למישור
+<span>$$ \mathcal{L}=\frac\mu2\left( \dot{r}^2+r^2\dot{\theta}^2 \right)-V(r)$$</span>
+נשים לב כי <span>\(\theta\)</span> היא קואורדינטה ציקלית. ונקבל גודל שמור:
+<span>$$ \frac d{dt}\left(\frac12r^2\dot{\theta}\right)=0,\quad\frac{dS}{dt}=\frac12r\left(r\dot{\theta}\right)\implies\frac{dS}{dt}=\frac{p_\theta}{2\mu}=\mathrm{const}$$</span>
+גודל שמור זה יהיה שווה לשטח של חלק מהמסלול - הוכחה של חוק שני של קפלר.
+לעשה התמרת לג'נדר לפי <span>\(\theta\)</span>:
+<span>$$ \mathcal{L}_{eff}=\mathcal{L}-p_\theta\dot{\theta}=\boxed{ \frac\mu2\dot{r}^2-\frac{p_\theta^2}{2\mu r^2}-V(r) }$$</span></p>
+</div>
+<div class="corollary">
+<p>האנרגיה ומשוואות התנועה יתנו:
+<span>$$E=\frac{\mu}{2}\dot{r}^2+V_{eff}(r) \qquad \mu\ddot{r}=-\frac{dV}{dr}+\frac{p_\theta^2}{\mu r^3}$$</span>
+כאשר הגדרנו את הפוטנציאל האפקטיבי להיות <span>\(V_{eff}\equiv\frac{p_\theta^2}{2\mu r^2}+V(r)\)</span>.</p>
+</div>
+<div class="proof">
+<p>וכיוון שלא תלוי בזמן משימור מפוקציית יעקובי נקבל את האנרגיה:
+<span>$$ E=\frac{\partial L_{eff}}{\partial\dot{r}}\dot{r}-L_{eff}=\frac{\mu}{2}\dot{r}^2+\frac{p_\theta^2}{2\mu r^2}+V(r)=\boxed{ \frac{\mu}{2}\dot{r}^2+V_{eff}(r) }$$</span>
+בכל אופן, ממשוואת אוילר לגרנג' נקבל:
+<span>$$ \frac d{dt}\frac{\partial L_{eff}}{\partial\dot{r}}-\frac{\partial L_{eff}}{\partial r}=0\implies \boxed{ \mu\ddot{r}=-\frac{dV}{dr}+\frac{p_\theta^2}{\mu r^3} }$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משוואת בינה</span><p>זוהי המשוואה המתארת את הגאומטריה של תנועה מרכזית כללית:
+<span>$$ \frac{p_\theta^2}\mu u^2\frac d{d\theta}(-u^{\prime})=F(1/u)+\frac{p_\theta^2}\mu u^3$$</span>
+כאשר <span>\(u'=-\frac{r'}{r^{2}}\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון שאנו רוצים לתאר את הגאומטריה של המסלול. נעביר את <span>\(r(t)\to r\left( \theta \right)\)</span>.
+כיוון שאנו יודעים כי <span>\(\frac{d\theta}{dt}=\frac{p_{\theta}}{\mu r^2}\)</span>. נסמן <span>\(\frac{dr}{d\theta}=r'\)</span> ונקבל:
+<span>$$ \dot{r}=\frac{dr}{dt}=\frac{dr}{d\theta}\frac{d\theta}{dt}=\frac{p_\theta}{\mu r^2}r^{\prime}$$</span>
+נציב במשוואת תנועה ונקבל:
+<span>$$ \mu\frac{p_\theta^2}{\mu^2r^2}\frac d{d\theta}\left(\frac{r^{\prime}}{r^2}\right)=-\frac{dV}{dr}+\frac{p_\theta^2}{\mu r^3}$$</span>
+נשים לב כי אם נציב במסלול <span>\(u=\frac{1}{r}\implies u'=-\frac{r'}{r^2}\)</span> נקבל את האיבר שבסוגריים. לכן ניתן לעשות החלפת משתנים. נסמן את הכוח <span>\(F(r)= -\frac{dV}{dr}\)</span> ונקבל:
+<span>$$ \frac{p_\theta^2}\mu u^2\frac d{d\theta}(-u^{\prime})=F(1/u)+\frac{p_\theta^2}\mu u^3$$</span>
+מזה ניתן לפשט ולקבל את משוואת בינה(Binet):
+<span>$$\boxed{ u^{\prime\prime}+u=-\frac\mu{p_\theta^2u^2}F(1/u)}
+$$</span></p>
+</div>
+<h2>בעיית קפלר</h2>
+<div class="definition"><span class="keyword">פוטנציאל כבידתי</span><p>פוטנציאל מהצורה:
+<span>$$V(r)=\frac{\alpha}{r}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מקדם האקסצנטריות</span><p>מספר <span>\(\varepsilon\)</span> המאפיין צורה קונית ומסווג את הצורה שלו:</p>
+<ol>
+<li>
+<p>עבור <span>\(\varepsilon=0\)</span> הצורה היא עיגול. </p>
+</li>
+<li>
+<p>עבור <span>\(0&lt;\varepsilon&lt;1\)</span> הצורה היא אליפסה. </p>
+</li>
+<li>
+<p>עבור <span>\(\varepsilon=1\)</span> הצורה היא פרבולה. </p>
+</li>
+<li>
+<p>עבור <span>\(\varepsilon&gt;1\)</span> הצורה היא היפרבולה. </p>
+</li>
+<li>
+<p>עבור <span>\(\varepsilon=\infty\)</span> הצורה היא זוג ישרים. 
+זה למעשה הזווית קבוע שקשור לזווית שמישור חותך את בצורה הקונית.</p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם נציב את הפוטנציאל הכבידתי <span>\(V=\frac{\alpha}{r}\)</span> במשוואת בינה נקבל:
+<span>$$ u=\frac1r=\frac1{r_0}(1+\epsilon\cos(\theta-\theta_0)),\quad\quad\frac1{r_0}\equiv\frac{\mu\alpha}{p_\theta^2}$$</span>
+כאשר <span>\(\varepsilon\)</span> הוא מקדם האקסצנטריות, <span>\(\mu\)</span> זה מסה מצומצמת, <span>\(r_{0}\)</span> זה קבוע(כאשר נראה בהמשך כי זה המרחק המינימלי).</p>
+</div>
+<div class="proof">
+<p>אם נניח פוטנציאל מרכזי(בעיית קפלר)כלומר <span>\(V(r)=\frac{\alpha}{r}\)</span> נקבל כי:
+<span>$$ F(r)=-\frac{dV}{dr}=-\frac\alpha{r^2}=-\alpha u^2$$</span>
+נציב במשוואת בינט ונקבל:
+<span>$$ u^{\prime\prime}+u=\frac{\mu\alpha}{p_\theta^2}$$</span>
+הפתרון של המדר יהיה:
+<span>$$ u(\theta)=\frac{\mu\alpha}{p_\theta^2}+A\cos(\theta-\theta_0)$$</span>
+ונעבור לסימונים:
+<span>$$ u=\frac1r=\frac1{r_0}(1+\epsilon\cos(\theta-\theta_0)),\quad\quad\frac1{r_0}\equiv\frac{\mu\alpha}{p_\theta^2}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(E\)</span> זה האנרגיה של המערכת, מתקיים:
+<span>$$\varepsilon=\sqrt{ 1+ \frac{2Ep_{\theta}^{2}}{\mu \alpha^{2}} }$$</span></p>
+</div>
+<div class="proof">
+<p>נבטא את <span>\(\epsilon\)</span> בעזרת האנרגיה:
+<span>$$ E=\frac\mu2\dot{r}^2+V_{eff}(r)=\frac\mu2\dot{r}^2-\frac\alpha r+\frac{p_\theta^2}{2\mu r^2} =\frac{p_\theta^2}{2\mu}\left(\frac{r^{\prime2}}{r^4}+\frac1{r^2}\right)-\frac\alpha r$$</span>
+כאשר נשים לב כי:
+<span>$$ \frac{r^{\prime2}}{r^4}=\left[\left(\frac1r\right)^{\prime}\right]^2=\left(  -\frac\epsilon{r_0}\sin\left( \theta-\theta_0 \right) \right)^2=\frac{\epsilon^2}{r_{0}^2}\sin^2\left( \theta-\theta_{0} \right)$$</span>
+נציב באנרגיה ונקבל:
+<span>$$ \begin{aligned}E&amp;=\frac{p_\theta^2}{2\mu}\left(\frac{\epsilon^2}{r_0^2}\sin^2(\theta-\theta_0)+\frac{1}{r_0^2}\left(1+\epsilon\cos(\theta-\theta_0)\right)^2\right)-\frac{\alpha}{r_0}\left(1+\epsilon\cos(\theta-\theta_0)\right)\end{aligned}$$</span>
+כאשר לאחר פישוט נקבל:
+<span>$$ \frac{2\mu E}{p_\theta^2}=\frac{\epsilon^2-1}{r_0^2}\implies  \epsilon=\sqrt{1+\frac{2\mu E}{p_\theta^2}r_0^2}\overset{(*)}{\operatorname*{=}}\sqrt{1+\frac{2\mu E}{p_\theta^2}\left(\frac{p_\theta^2}{\mu\alpha}\right)^2}=\sqrt{1+\frac{2Ep_\theta^2}{\mu\alpha^2}}$$</span>
+כאשר ב-<span>\((*)\)</span> השתמשנו בזה ש-<span>\(r_{0}^2=\frac{p_{\theta}^2}{\mu \alpha}\)</span>.</p>
+</div>
+<div class="remark">
+<p>נראה כי ייתכן שיש בעיה, כיוון שהאנרגיה <span>\(E\)</span> היא לא תמיד חיובית, נראה כאילו ייתכן כי הביטוי בשורש יכול להיות שלילי. ניתן לפרק את האנרגיה לסכום של אנרגיה קינטית ואנרגיה פוטנציאלית - <span>\(E=E_{k}+V\)</span>. מספיק להראות כי האנרגיה הקינטית תמיד חיובית. כלומר <span>\(E-V\geq 0\)</span> או <span>\(E\geq V\)</span>. כאשר מהטענה הבאה ניתן לראות כי אכן מתקיים.</p>
+</div>
+<div class="proposition">
+<p>הפוטנציאל המינימלי <span>\(V_{min}\)</span> מתקבל ב-<span>\(r_{min}=r_{0}\)</span>, ומקיים <span>\(V_{min}=-\frac{\alpha}{2r_{0}}\)</span></p>
+</div>
+<div class="proof">
+<p><span>$$ \begin{aligned}\frac{dV_{eff}}{dr}&amp;=-\frac{\alpha r_0}{r^3}+\frac\alpha{r^2}=0\implies r_{min}=r_0\\V_{min}&amp;=V_{eff}\left(r_0\right)=-\frac\alpha{2r_0}\leq E\end{aligned}$$</span></p>
+</div>
+<div class="proposition">
+<p>מתקיים עבור תנועה בפוטנציאל כבידתי:
+<span>$$\epsilon=\sqrt{1-\frac E{V_{min}}} \qquad r\left(\theta\right)=\frac{r_0}{1+\epsilon\cos\left(\theta-\theta_0\right)}$$</span></p>
+</div>
+<div class="proof">
+<p>נציב את הביטוי <span>\(V_{min}=-\frac{\alpha}{2r_{0}}\)</span> בביטוי שמצאנו עבור <span>\(\varepsilon\)</span> ונקבל:
+<span>$$ \epsilon\:=\:\sqrt{1-\frac E{V_{min}}}
+$$</span>
+כלומר:
+<span>$$\boxed{ \epsilon\:=\:\sqrt{ 1+\frac{2Ep_{\theta}^2 }{\mu \alpha^2}}\:=\:\sqrt{1-\frac E{V_{min}}}}
+$$</span>
+וכן ניתן לבטא את הרדיוס כך:
+<span>$$\boxed{ r\left(\theta\right)=\frac{r_0}{1+\epsilon\cos\left(\theta-\theta_0\right)}}
+$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+<li class='prev-page'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+</ul></li>
+        </body>
+        </html>
+        

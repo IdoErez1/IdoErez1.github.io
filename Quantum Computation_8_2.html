@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תיקון שגיאות - קוד שור</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation'> חישוב קוונטי</a></li>
+<li class='parent-page'><a href='./Quantum Computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_1'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_2'>2.2 מדידה מוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_3'>2.3 ערוצים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_4'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_5'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_1'>3.1 מצבי בל</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_2'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_1'>4.1 חישוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_3'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_1'>5.1 שערים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_2'>5.2 מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_4'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_2'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_2'>7.2 מחזוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_3'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum Computation`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum Computation_8_1`; }});</script>
+        <div class="content">
+        <h1>8.2  תיקון שגיאות - קוד שור</h1>
+    <div class="proposition"><span class="keyword">סוגי שגיאות</span><ol>
+<li>
+<p>היפוך ביט - <span>\(X\)</span>  </p>
+</li>
+<li>
+<p>היפוך פאזה - <span>\(Z\)</span>. </p>
+</li>
+<li>
+<p>שניהם - <span>\(Y\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>ניתן לקודד את <span>\(\ket{0}\)</span> ו-<span>\(\ket{1}\)</span> על ידי:
+<span>$$\begin{array}{r}{|0\rangle\longrightarrow|\overline{{{0}}}\rangle\equiv|000\rangle}\\ {|1\rangle\longrightarrow|\overline{{{1}}}\rangle\equiv|111\rangle}\end{array}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$\alpha\left|0\right\rangle+\beta\left|1\right\rangle\longrightarrow\alpha\left|0\right\rangle+\beta\left|1\right\rangle=\alpha\left|000\right\rangle+\beta\left|111\right\rangle$$</span></p>
+</div>
+<div class="remark">
+<p>זה לא מפר את משפט חוסר השכפול כי אנחנו מאתחלים למצב ידוע שלוש פעמים, <strong>ולא</strong> מבצעים:
+<span>$$a\,|0\rangle\,+\,b\,|1\rangle\,\stackrel{.}{\mapsto}\,\left(a\,|0\rangle+b\,|1\rangle\right)^{\otimes3}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תיקון היפוך ביט</span><p>ניתן לבצע את האלגוריתם הבא לתיקון של היפוך קיוביט יחיד.</p>
+<ol>
+<li>
+<p>מתחלים עם שלושה קיוביטים. </p>
+</li>
+<li>
+<p>מבצעים מדידות של האופרטורים <span>\(Z_{2}Z_{3}\)</span> ו-<span>\(Z_{1}Z_{2}\)</span> כאשר ניתן כי פועלים על בסיס <span>\(z\)</span> ולא משנים את המצב. </p>
+</li>
+<li>
+<p>לפי התוצאות ניתן לדעת האם התבצע היפוך ביט ואיזה אופרטור נדרש להפעיל כדי לקבל את התוצאה המקורית, לפי הטבלה הבאה: </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>מקרה</th>
+<th><span>\(Z_1 Z_2\)</span></th>
+<th><span>\(Z_2 Z_3\)</span></th>
+<th>תיקון נדרש</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>אין היפוך ביט</td>
+<td><span>\(1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(\mathbb{1}\)</span></td>
+</tr>
+<tr>
+<td>היפוך של 1</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(X\)</span></td>
+</tr>
+<tr>
+<td>היפוך של 2</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(-1\)</span></td>
+<td><span>\(X_2\)</span></td>
+</tr>
+<tr>
+<td>היפוך של 3</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(X_3\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="definition"><span class="keyword">מדידת syndrome</span><p>מדידה אשר לא רק אמרת לנו איפה הטעות, אבל גם מאפשרת לתקן אותה.</p>
+</div>
+<div class="proposition"><span class="keyword">היפוך ביט וגם היפוך פאזה</span><ol>
+<li>
+<p>נדרש כעת לשמור 9 קיוביטים, אשר מחלוקים 3 שלישיות של קיוביטים. </p>
+</li>
+<li>
+<p>עבור כל שלושה, נבצע תיקון היפוך ביט כמו שראינו בטענה הקודמת. </p>
+</li>
+<li>
+<p>כל שלושה תהיה אינווריאנטית להפעלה של <span>\(X\)</span> על כל שלושת הקיוביטים בשלושה. כלומר ניתן להפעיל <span>\(X_{1}X_{2}X_{3},\;X_{4}X_{5}X_{6},\;X_{7}X_{8}X_{9}\)</span>. </p>
+</li>
+<li>
+<p>נבדוק עבור כל שלושה אם יש הפרש פאזה ביחס יחסי על ידי הפעלת אופרטור ה-<span>\(X\)</span> על שניהם. כלומר נפעיל את <span>\(X_{1}X_{2}X_{3}X_{4}X_{5}X_{6}\)</span> ו-<span>\(X_{4}X_{5}X_{6}X_{7}X_{8}X_{9}\)</span>.  </p>
+</li>
+<li>
+<p>אם יש פאזה יחסית בין השלשה הראשונה לשנייה נדרש להפעיל <span>\(Z_{1},Z_{2}\)</span> או <span>\(Z_{3}\)</span>.  ניתן לבצע באופן דומה עבור המקרים האחרים. נסכם אותם בטבלה: </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>מקרה</th>
+<th><span>\(X_{4}X_{5}X_{6}X_{7}X_{8}X_{9}\)</span></th>
+<th><span>\(X_{1}X_{2}X_{3}X_{4}X_{5}X_{6}\)</span></th>
+<th>תיקון נדרש</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>אין היפוך פאזה</td>
+<td><span>\(1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(\mathbb{1}\)</span></td>
+</tr>
+<tr>
+<td>היפוך פאזה 1</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(Z_{1},Z_{2}\text{ or }Z_{3}\)</span></td>
+</tr>
+<tr>
+<td>היפוך פאזה 2</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(-1\)</span></td>
+<td><span>\(Z_{4},Z_{5}\text{ or }Z_{6}\)</span></td>
+</tr>
+<tr>
+<td>היפוך פאזה 3</td>
+<td><span>\(-1\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(Z_{7},Z_{8}\text{ or }Z_{9}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="proposition">
+<p>ניתן להציג שגיאה על ידי אופרטור אוניטרי מהצורה:
+<span>$$U\,=\,e^{i{\bf m}\cdot\sigma}\qquad {\bf m}=\left(\epsilon_{x},\epsilon_{y},\epsilon_{z}\right)$$</span>
+כאשר <span>\(\left\lvert  \epsilon_{i}  \right\rvert\ll 1\)</span>. ובפרט כל שגיאת קיוביט יחיד ניתן לייצג בצורה הזו.</p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב:
+<span>$$U=e^{i(\epsilon_{x},\epsilon_{y},\epsilon_{z})\cdot\sigma}\approx\mathbb{1}+i\epsilon_{x}X+i\epsilon_{y}Y+i\epsilon_{z}Z$$</span>
+כאשר היחידה <span>\(\mathbb{1}\)</span> מסמן שאין שגיאה, <span>\(X\)</span> מייצג היפוך ביט, <span>\(Z\)</span> מיצג היפוך פאזה ו-<span>\(Y\)</span> מייצג שילוב של היפוך פאזה וביט.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי האופציה הכי סבירה זה שלא קורה כלום. אחר כך יש שגיאה מסדר גודל של <span>\(O\left( |\epsilon_{i}|^{2}  \right)\)</span> כאשר אם מתרחש ניתן לפעול לפי קוד שור. ואחר כך יש שגיאות מסדר גודל של <span>\(O\left( |\epsilon_{i}|^{4} \right)\)</span> שיש שתי שגיאות במקביל. עבור מקרה זה אנחנו כבר לא יודעים להתמודד, אך הסיכוי שיקרה מאוד נמוך גם ככה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation'> חישוב קוונטי</a></li>
+<li class='prev-page'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פיזור במרחב אינסופי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_11_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_11_2`; }});</script>
+        <div class="content">
+        <h1>11.3  פיזור במרחב אינסופי</h1>
+    <div class="proposition">
+<p>ניתן לכתוב את משוואת שרדונגר בצורה של משוואת הלמהודס:
+<span>$$\left(\nabla^{2}+k^{2}\right)\psi(\mathbf{r})=Q(\mathbf{r}),$$</span>
+כאשר:
+<span>$$k\equiv\frac{\sqrt{2m E}}{\hbar}\quad\mathrm{and}\quad Q({\bf r})\equiv\frac{2m}{\hbar^{2}}\,V({\bf r})\,\psi({\bf r}).$$</span></p>
+</div>
+<div class="proof">
+<p>נובע מסידור מחדש של משוואת שרודנגר הבלתי תלויה בזמן:
+<span>$$-\frac{\hbar^{2}}{2m}\nabla^{2}\psi\left( \mathbf{r} \right)+V\left( \mathbf{r} \right)\psi\left( \mathbf{r} \right)=E\,\psi\left( \mathbf{r} \right)\implies-\nabla^{2}\psi\left( {\bf r} \right)+\frac{2m}{\hbar^{2}}\,V\left( {\bf r} \right)\psi\left( {\bf r} \right)=\frac{2m E}{\hbar^{2}}\,\psi\left( {\bf r} \right)$$</span>
+כאשר אם נגדיר:
+<span>$$k^{2}\equiv\frac{2m E}{\hbar^{2}},\quad\mathrm{and}\quad Q({\bf r})\equiv\frac{2m}{\hbar^{2}}\,V({\bf r})\psi({\bf r}),$$</span>
+נקבל את הטענה.</p>
+</div>
+<div class="reminder"><span class="keyword">פונקציית גרין של משוואת הלמהודס</span><p>פונקציה <span>\(G\left( \mathbf{r} \right)\)</span> אשר מקיימת:
+<span>$$\left(\nabla^{2}+k^{2}\right)G(\mathbf{r})=\delta^{3}(\mathbf{r})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פונקציית גרין של משוואת הלמהולדס</span><p>הביטוי:
+<span>$$\psi(\mathbf{r})=\int G(\mathbf{r}-\mathbf{r}_{0})\,Q(\mathbf{r}_{0})\,d^{3}\mathbf{r}_{0}.$$</span>
+יהיה פתרון של משוואת שרדינגר.</p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\left(\nabla^{2}+k^{2}\right)\psi\left(\mathbf{r}\right)=\int\left[\left(\nabla^{2}+k^{2}\right)G\left( \mathbf{r}-\mathbf{r}_{0} \right)\right]Q\left( \mathbf{r}_{0} \right)\,d^{3}\mathbf{r}_{0}=\\=\int\delta^{3}\left( {\bf r}-{\bf r}_{0} \right)\,Q\left( {\bf r}_{0} \right)\,d^{3}{\bf r}_{0}=Q\left( {\bf r} \right). 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ביטוי מפורש עבור הפונקציית גרין</span><p>נתין לכתוב במפורש את הפונקציית גרין של משוואת הלמהולדס עם תנאי שפה דועכים באינסוף על ידי:
+<span>$$G\left( \mathbf{r} \right)=-\frac{e^{i k |\mathbf{r}-\mathbf{r}'|}}{4\pi |\mathbf{r}-\mathbf{r}'|}$$</span></p>
+</div>
+<div class="proof">
+<p>נכתוב את <span>\(G\left( \mathbf{r} \right)\)</span> בעזרת התמרת פורייה:
+<span>$$(*)\quad G\left( {\bf r} \right)=\frac{1}{\left(2\pi\right)^{3/2}}\int e^{i{\bf s\cdot r}}g\left( {\bf s} \right)\,d^{3}{\bf s}.$$</span>
+כעת:
+<span>$$\left(\nabla^{2}+k^{2}\right)G(\mathbf{r})={\frac{1}{(2\pi)^{3/2}}}\int\left[\left(\nabla^{2}+k^{2}\right)e^{i\mathbf{s}\cdot\mathbf{r}}\right]g(\mathbf{s})\,d^{3}\mathbf{s}.$$</span>
+כאשר נשתמש בזה שמתקיים <span>\(\bar{\nabla}^2e^{ i\mathbf{s}\cdot \mathbf{r} }=-s ^{2}e^{ i\mathbf{s}\cdot \mathbf{r} }\)</span> וגם <span>\(\delta^{3}({\bf r})=\frac{1}{(2\pi)^{3}}\int e^{i{\bf s\cdot r}}\,d^{3}{\bf s}\)</span> ונציב במשוואה:
+<span>$${\frac{1}{(2\pi)^{3/2}}}\int\left(-s^{2}+k^{2}\right)e^{i{\bf s\cdot r}}g\;({\bf s})\;d^{3}{\bf s}={\frac{1}{(2\pi)^{3}}}\int e^{i{\bf s\cdot r}}\,d^{3}{\bf s}.$$</span>
+כלומר קיבלנו כי:
+<span>$$g({\bf s})=\frac{1}{(2\pi)^{3/2}\left(k^{2}-s^{2}\right)}.$$</span>
+נציב בחזרה ב-<span>\((*)\)</span> ונקבל:
+<span>$$G({\bf r})=\frac{1}{(2\pi)^{3}}\int e^{i{\bf s\cdot r}}\frac{1}{\left(k^{2}-s^{2}\right)}\,d^{3}{\bf s}.$$</span>
+כעת נשים לב כי <span>\(\mathbf{r}\)</span> מקובע(האינטגרל לא תלוי בו), לכן נגדיר מערכת קורדינטות כדוריות כאשר <span>\(\mathbf{r}\)</span> הוא ציר ה-<span>\(\hat{z}\)</span>(הציר הפולארי). כעת נקבל כי:
+<span>$$\mathbf{r}\cdot \mathbf{s}=s r\cos \theta$$</span>
+כאשר האינטגרל על <span>\(\varphi\)</span> נהיה טריוויאלי ולכן מוסיף פשוט פקטור של <span>\(2\pi\)</span>. האינטגרל ב-<span>\(\theta\)</span> נותן:
+<span>$$\int_{0}^{\pi}e^{i s r\cos\theta}\sin\theta\,d\theta=-\frac{e^{i s r\cos\theta}}{i s r}\bigg|_{0}^{\pi}=\frac{2\sin(s r)}{s r}.$$</span>
+ולכן נקבל:
+<span>$$G(\mathbf{r})={\frac{1}{(2\pi)^{2}}}{\frac{2}{r}}\int_{0}^{\infty}{\frac{s\sin(s r)}{k^{2}-s^{2}}}d s={\frac{1}{4\pi^{2}r}}\int_{-\infty}^{\infty}{\frac{s\sin(s r)}{k^{2}-s^{2}}}d s.$$</span>
+זה לא אינטגרל פשוט. נרצה לפתור אותו על ידי פיצול לשתי אינטגרלים ושימוש באינטגרציה מרוכבת ומשפט השארית של קושי. ראשית נכתוב:
+<span>$$G(\mathbf{r})={\frac{i}{8\pi^{2}r}}\bigg\{\underbrace{ \int_{-\infty}^{\infty}{\frac{s e^{i s r}}{\left(s-k\right)\left(s+k\right)}}d s }_{ I_{2} }-\underbrace{ \int_{-\infty}^{\infty}{\frac{s e^{-i s r}}{\left(s-k\right)\left(s+k\right)}}d s }_{ I_{2} }\bigg\}=\frac{i}{8\pi^{2}r}\left(I_{1}\,-\,I_{2}\right)$$</span>
+כאשר נזכור כי משפט השארית של קושי אומר כי:
+<span>$$\oint\frac{f(z)}{(z-z_{0})}d z=2\pi i f(z_{0}),$$</span>
+וניתן למצוא מסלולים מתאימים כך שמתקיים:
+<span>$$I_{1}=\oint\left[\frac{s e^{i s r}}{s+k}\right]\frac{1}{s-k}\,d s=2\pi i\left[\frac{s e^{i s r}}{s+k}\right]\biggr\vert_{s=k}=i\pi e^{i k r}$$</span>
+וכן:
+<span>$$I_{2}=-\oint\left[\frac{s e^{-i s r}}{s-k}\right]\frac{1}{s+k}\,d s=-2\pi i\left[\frac{s e^{-i s r}}{s-k}\right]\biggr|_{s=-k}=-i\pi\,e^{i k r}$$</span>
+ולכן נקבל סה"כ:
+<span>$$G({\bf r})=\frac{i}{8\pi^{2}r}\left[\left(i\pi e^{i k r}\right)-\left(-i\pi e^{i k r}\right)\right]=-\frac{e^{i k r}}{4\pi r}$$</span>
+כאשר זה למעשה נכון מרחבית עבור <span>\(r \mapsto |\mathbf{r}-\mathbf{r'}|\)</span>.</p>
+</div>
+<div class="corollary"><span class="keyword">פתרון כללי</span><p>הפתרון הכללי של משוואת שרדינגר תהיה מהצורה:
+<span>$$\psi\left(\mathbf{r}\right)=\psi_{0}(\mathbf{r})-{\frac{m}{2\pi\hbar^{2}}}\int{\frac{e^{i k\left|\mathbf{r}-\mathbf{r}_{0}\right|}}{\left|\mathbf{r}-\mathbf{r}_{0}\right|}}V\left(\mathbf{r}_{0}\right)\psi\left(\mathbf{r}_{0}\right)d^{3}\mathbf{r}_{0}$$</span></p>
+</div>
+<div class="remark">
+<p>כאשר <span>\(r\to \infty\)</span> נקבל כמו שמצופה מפיזור סכום של הגל הנכנס עם גל כדורי מתפשט.</p>
+</div>
+<div class="definition"><span class="keyword">מצבים נכנסים - In States</span><p>מצבים אשר בזמן <span>\(t\to -\infty\)</span> יהיו חופשיים, כלומר ללא השפעה של הפוטנציאל פיזור.</p>
+</div>
+<div class="remark">
+<p>מתאר הפועל את חלקיקים לפני שהם נכנסים לפוטנציאל של הפיזור. חלקיקים אלו אינם מושפעים מהפוטנציאל פיזור ולכן רק יכולו את הרכיב הקינטי.</p>
+</div>
+<div class="symbolize">
+<p>מסמנים את המצבים האלה ב-<span>\(\psi^{\text{in}}\)</span> או <span>\(\psi^{\text{in}}_{k}\)</span> אם רוצים להדגיש שמדובר בגל מונוכרומטי עם אורך גל <span>\(k\)</span>. לעיתים מסומן גם ב-<span>\(\psi^{(+)}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>מצבים נכנסים מקיימים:
+<span>$$H\Psi_{\bf k}^{\mathrm{in}}=\frac{{\hbar^{2}\bf k}^{2}}{2m}\Psi_{\bf k}^{\mathrm{in}}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור מספר גל <span>\(\mathbf{k}\)</span> מתקיים:
+<span>$$\psi(\mathbf{r})=(2\pi\hbar)^{-3/2}e^{i\mathbf{k}\cdot\mathbf{r}}+\int G(\mathbf{r},\mathbf{r}^{\prime})V(\mathbf{r}^{\prime})\psi(\mathbf{r}^{\prime})d^{3}\mathbf{r}^{\prime}$$</span></p>
+</div>
+<div class="proposition">
+<p>הפונקציית גרין מקיימת:
+<span>$$G(\mathbf{r},\mathbf{r^{\prime}})=\lim_{ \varepsilon \to 0 } \langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}|\mathbf{r^{\prime}}\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי <span>\(E=\frac{\hbar^{2}k^{2}}{2m}\)</span> ולכן ניתן לכתוב:
+<span>$$E-\frac{\hbar^{2}q^{2}}{2m}+i\epsilon=\frac{\hbar^{2}}{2m}\Big(k^{2}-q^{2}+\frac{2m}{\hbar^{2}}i\epsilon\Big)$$</span>
+כאשר נגדיר <span>\(\epsilon'=\frac{2m}{\hbar^{2}}\epsilon\)</span>. כעת מתקיים:
+<span>$$\langle{\bf r}|\frac{1}{E-H_{0}+i\epsilon}|{\bf r^{\prime}}\rangle=\frac{2m}{\hbar^{2}}\int\frac{d^{3}q}{(2\pi)^{3}}\,\frac{e^{i{\bf q\cdot(r-r^{\prime})}}}{k^{2}-q^{2}+i\epsilon^{\prime}}.$$</span>
+ונדרש רק לחשב את האינטגרל. נסמן <span>\(\mathbf{R}=\mathbf{r}-\mathbf{r'}\)</span>. נעבור לקורדינטות כדוריות כך שציר ה-<span>\(\mathbf{z}\)</span> יהיה ציר ה-<span>\(\mathbf{R}\)</span>. לכן מתקיים <span>\(\mathbf{q}\cdot \mathbf{R}=qR\cos \theta\)</span> ולכן:
+<span>$$I(\mathbf{R})={\frac{1}{(2\pi)^{2}}}\int_{0}^{\infty}d q\,{\frac{q^{2}}{k^{2}-q^{2}+i\epsilon^{\prime}}}\int_{0}^{\pi}d\theta\,\sin\theta\,e^{i q R\cos\theta}.$$</span>
+כאשר החלק הזוויתי נותן:
+<span>$$\int_{0}^{\pi}\sin\theta\,e^{i q R\cos\theta}d\theta=\frac{2\sin(q R)}{q R}.$$</span>
+ולכן:
+<span>$$I(\mathbf{R})={\frac{1}{(2\pi)^{2}R}}\int_{0}^{\infty}d q\,{\frac{q\,\sin(q R)}{k^{2}-q^{2}+i\epsilon^{\prime}}}.$$</span>
+בעזרת אינטגרציה מרוכבת כיוון שאין סינגולריות על ציר הממשי נבצע אינטגרל על הציר הממשי וחצי המישור העליון. נקבל <span>\(I\left( \mathbf{R} \right)=-\frac{e^{ ikR }}{4\pi R}\)</span> ולכן:
+<span>$$\langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}|\mathbf{r}^{\prime}\rangle={\frac{2m}{\hbar^{2}}}\left(-{\frac{e^{i k|\mathbf{r}-\mathbf{r}^{\prime}|}}{4\pi|\mathbf{r}-\mathbf{r}^{\prime}|}}\right)$$</span>
+כאשר קיבלנו את הפונקציית גרין(הפאקטורי נרמול פחות מעניינים אותנו, ותלויים בהגדרה של פונקציית גרין).</p>
+</div>
+<div class="corollary"><span class="keyword">משוואת ליפמאן שכווינגר - Lippmann Schwinger</span><p><span>$$|\psi_{\bf k}^{i n}\rangle=|{\bf k}\rangle+\frac{1}{E-H_{0}+i\epsilon}V|\psi_{\bf k}^{i n}\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב את הפתרון הכללי על ידי:
+<span>$$\psi\left( \mathbf{r} \right)=\braket{ \mathbf{r} | \mathbf{k} } +\int G\left( \mathbf{r},\mathbf{r}^{\prime} \right)V\left( \mathbf{r}^{\prime} \right)\psi\left( \mathbf{r}^{\prime} \right)d^{3}\mathbf{r}^{\prime}$$</span>
+יהי <span>\(\varepsilon\)</span> שרירותי אינפיניטסימלי. נשתמש בביטוי <span>\(G(\mathbf{r},\mathbf{r^{\prime}})=\langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}|\mathbf{r^{\prime}}\rangle\)</span> ונקבל:
+<span>$$\langle\mathbf{r}|\psi_{\mathbf{k}}^{i n}\rangle=\langle\mathbf{r}|\mathbf{k}\rangle+\int\langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}|\mathbf{r}^{\prime}\rangle\langle\mathbf{r}^{\prime}|V|\psi_{\mathbf{k}}^{i n}\rangle d^{3}\mathbf{r}^{\prime}$$</span>
+נשים לב כי יש <span>\(\ket{\mathbf{r'}}\bra{\mathbf{r'}}\)</span> פונקציית דלתא בתוך האינטגרל. לכן ניתן "לבטל" את האינטגרל ולקבל:
+<span>$$\langle\mathbf{r}|\psi_{\mathbf{k}}^{i n}\rangle=\langle\mathbf{r}|\mathbf{k}\rangle+\langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}V|\psi_{\mathbf{k}}^{i n}\rangle$$</span>
+כאשר אם נסיר את הבסיס המיקום נקבל:
+<span>$$|\psi_{\bf k}^{i n}\rangle=|{\bf k}\rangle+\frac{1}{E-H_{0}+i\epsilon}V|\psi_{\bf k}^{i n}\rangle$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>ניתן לכתוב את משוואת שרודינגר בצורה אינטגרלית בתור קונבולוציה עם הפונקציית גרין <span>\(G\left( \mathbf{r} \right)=-\frac{e^{i k |\mathbf{r}-\mathbf{r}'|}}{4\pi |\mathbf{r}-\mathbf{r}'|}\)</span>:
+<span>$$\psi({\bf r})\;=\;\psi_{0}({\bf r})\;-\;\frac{m}{2\pi\hbar^{2}}\,\int\frac{e^{i k|{\bf r}-{\bf r}^{\prime}|}}{|{\bf r}-{\bf r}^{\prime}|}V({\bf r}^{\prime})\,\psi({\bf r}^{\prime})\,d^{3}{\bf r}^{\prime}$$</span></li>
+<li>המצבים נכנסים(In states) הם מצבים אשר ב-<span>\(t\to -\infty\)</span> מתנהגים כאילו לא משפעים מהפוטנציאל, ולכן יהיו גלים מישוריים ומקיימים:
+<span>$$\left(H-E\right)\psi_{\bf k}^{\mathrm{in}}\;=\;0$$</span></li>
+<li>ניתן להציג את הפונקציית גרין בצורה מטריציונית על ידי:
+<span>$$G(\mathbf{r},\mathbf{r^{\prime}})=\lim_{ \varepsilon \to 0 } \langle\mathbf{r}|{\frac{1}{E-H_{0}+i\epsilon}}|\mathbf{r^{\prime}}\rangle$$</span>
+כאשר ה-<span>\(+i\epsilon\)</span> נועד כדי להבטיח הפיכות ותנאי שפה.</li>
+<li>ניתן לתאר את המצבים הנכנסים (In states) בזמן סופי על ידי משוואת Lippmann-Schwinger:
+<span>$$|\psi_{\bf k}^{\mathrm{in}}\rangle\ =\ |{\bf k}\rangle\ +\ \frac{1}{E-H_{0}+i\epsilon}\,V\,|\psi_{\bf k}^{\mathrm{in}}\rangle$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='prev-page'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

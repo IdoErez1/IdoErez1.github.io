@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חוק שני של תרמודינמיקה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  חוק שני של תרמודינמיקה</h1>
+    <div class="theorem"><span class="keyword">הניסוח של קלווין של החוק השני של תרמודימיקה</span><p>לא ייתכן תהליך שהתוצאה היחידה שלו היא המרה מלאה של חום לעבודה.</p>
+</div>
+<div class="definition"><span class="keyword">אנטרופיה</span><p>החום <span>\(\;\bar{}\mkern-7.5mu dQ\)</span> העוברת למערכת ע"י הטמפרטורה. כלומר:
+<span>$$dS = \frac{\;\bar{}\mkern-7.5mu dQ}{T}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ניסוח שקול לחוק השני לתרמודינמיקה</span><p>עבור מערכת מבודדת מתקיים:
+<span>$$dS \geq \frac{\;\bar{}\mkern-7.5mu dQ}{T}$$</span>
+כאשר עבור תהליך הפיך בלבד מתקיים <span>\(dS = \frac{dQ}{T}\)</span></p>
+</div>
+<div class="corollary">
+<p>עבור מערכת מבודדת תרמית(איזותרמית) מתקיים <span>\(\;\bar{}\mkern-7.5mu dQ=0\)</span> ולכן החוק השני יהיה:
+<span>$$dS \geq 0$$</span></p>
+</div>
+<div class="corollary">
+<p>אם מתייחסים ליקום כמערכת מבודדת, ניתן לכתוב את שתי החוקים הראשונים של תרמודינמיקה בצורה הבאה:</p>
+<ol>
+<li>
+<p>האנרגיה הפנימית של היקום היא קבועה - <span>\(U_{\mathrm{Universe}}=\mathrm{constant}.\)</span> </p>
+</li>
+<li>
+<p>האנטרופיה של היקום יכול רק לגדול </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">המשוואה היסודית</span><p><span>$$dU=\;\bar{}\mkern-7.5mu dQ+\;\bar{}\mkern-7.5mu dW=TdS + PdV$$</span></p>
+</div>
+<div class="proof">
+<p>נשתמש בחוק הראשון של תרמודינמיקה ונזכור כי <span>\(dQ = TdS\)</span> וכן <span>\(dW = PdV\)</span> ולכן נקבל את המבוקש.</p>
+</div>
+<div class="remark">
+<p>הכתיבה של האנרגיה הפנימית בעזרת המשתנים <span>\(U=U(S,V)\)</span> נקראים המשתנים הטבעיים. </p>
+</div>
+<div class="proposition">
+<p>עבור מערכת ציקלית נקבל כי סך האנרגיה הפנימית היא 0, ולכן:
+<span>$$\oint T\mathrm{d}S = - \oint P \mathrm{d}V$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='prev-page'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

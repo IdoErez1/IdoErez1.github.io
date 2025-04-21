@@ -1,0 +1,561 @@
+
+            <!DOCTYPE html>
+            <html>
+                    <head>
+    <meta charset="UTF-8">
+                    <style> @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --c1: #EEB902;
+  --c2: #F45D01;
+  --symbolize-text: #8377D1;
+  --c4: #7FBC69;
+  --c5: #005C7A;
+  --remark-text: #7EBCED;
+  --definition-text: #2E8A3D;
+  --proposition-text: #E1403D;
+  --theorem-text: #F39237;
+  --iyellow: #F9C762;
+  --idark: #1A535C;
+  --definition-bg: rgba(249, 199, 98, 0.1);
+  --proposition-bg: rgba(225, 64, 61, 0.05);
+  --example-bg: rgba(26, 83, 92, 0.2);
+  --remark-bg: rgba(126, 188, 230, 0.11);
+  --theorem-bg: rgba(228, 147, 82, 0.05);
+  --symbolize-bg: rgba(131, 119, 209, 0.05);
+  --corollary-bg: rgba(255, 195, 0, 0.05); /* Light yellow for corollary */
+  --corollary-text: #FFC300;
+  --reminder-bg: rgba(255, 165, 0, 0.05); /* Light orange for reminder */
+  --reminder-text: #FFA500;
+
+  --lemma-bg: rgba(75, 192, 192, 0.05); /* Soft teal for lemma */
+  --lemma-text: #4BC0C0;
+  --table-even-bg: #f2f2f2;
+  /* --svg-path-color: #111; */
+
+  --table-background: #f5f5f5; /* Light grey for table background */
+  --table-border-color: #cccccc; /* Light border color */
+  --table-header-bg: #e1e1e1; /* Light background for table header */
+  --table-header-text: #2c3e50; /* Darker text for headers */
+  --table-row-bg-odd: #ffffff; /* White for odd rows */
+  --table-row-text: #2c3e50; /* Dark text for rows */
+  --table-disabled-text: #b0b0b0; /* Disabled row text color */
+
+  /* Define light mode colors as CSS variables */
+  --summary-bg-color: #f9f9f9;
+  --summary-label-bg: #4a90e2;
+  --summary-background-color: #4a90e255;
+  --summary-border-color: #e0e0e0;
+  --summary-label-color: white;
+  --summary-text-color: #333;
+
+  direction: rtl;
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--corollary-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--corollary-text);
+  padding: 10pt;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--corollary-text);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--corollary-text);
+}
+
+/* Lemma Block */
+.lemma {
+  background-color: var(--lemma-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--lemma-text);
+  padding: 10pt;
+}
+
+.lemma::before {
+  font-weight: bold;
+  color: var(--lemma-text);
+  content: "למה";
+}
+
+.lemma::first-line {
+  color: var(--lemma-text);
+}
+
+/* Your existing styles */
+.definition {
+  display: block;
+  background: var(--definition-bg);
+  text-align: right;
+  border-right: 1.5mm;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-style: solid;
+  border-color: var(--definition-text);
+  padding: 10pt;
+}
+
+h1 {
+  color: var(--remark-text);
+}
+
+.definition::before {
+  font-weight: bold;
+  color: var(--definition-text);
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--definition-text);
+}
+
+.proposition {
+  background-color: var(--proposition-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--proposition-text);
+  padding: 10pt;
+}
+
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--proposition-text);
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--proposition-text);
+}
+
+.proof {
+  padding: 10pt;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: var(--example-bg);
+  border: 2pt solid var(--example-bg);
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--remark-text);
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: var(--remark-bg);
+  border: 0;
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--summary-label-bg);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--summary-background-color);
+  margin-top: 15px;
+  color: var(--summary-text-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--summary-label-bg);
+  color: var(--summary-label-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+.theorem {
+  background-color: var(--theorem-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--theorem-text);
+  padding: 10pt;
+}
+
+.theorem::first-line {
+  color: var(--theorem-text);
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--theorem-text);
+  content: "משפט";
+}
+
+.symbolize {
+  background-color: var(--symbolize-bg);
+  border-radius: 8pt;
+  border: 2pt solid var(--symbolize-text);
+  padding: 10pt;
+}
+
+
+.symbolize::before {
+  font-weight: bold;
+  color: var(--symbolize-text);
+  content: "סימון";
+}
+
+div {
+  margin: 6pt 0;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  background: var(--table-background);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--table-header-text);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--table-header-bg);
+}
+
+td {
+  color: var(--table-row-text);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--table-row-bg-odd);
+}
+
+@page {
+  @bottom-center {
+    /*background: #f1c55675;*/
+    content: counter(page); 
+    display: block;
+  }
+}
+@page :blank {
+  @bottom-center { content: none }
+}
+@page no-chapter {
+  @bottom-center { content: none }
+}
+@page :first {
+  /*background: url(cover.jpg) no-repeat center;*/
+  background-size: cover;
+  margin: 0;
+  @bottom-center{
+    content: none;
+  }
+}
+@page chapter {
+  background: #fbc847;
+  margin: 0;
+  @bottom-center { content: none }
+}
+
+#cover {
+  margin: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  background-repeat: repeat;
+  padding: 10cm 0;
+width: 100vw;
+  align-content: space-between;
+  height: 29.7cm;
+  text-align: center;
+  color: white;
+  align-items: center;  
+  text-shadow: 15px 15px 20px #0000008c;
+  text-align: center;
+}#cover h1{
+  margin: 0;
+  font-size: 60px;
+  page-break-before: auto;
+}
+#cover h2{
+  font-size: 40px;
+}
+
+h1{
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+#toc a::after { 
+  content: leader(".") target-counter(attr(href), page); 
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+/* ol{
+  counter-reset: list-counter 0;
+}
+ol li{
+  counter-increment: list-counter 1;
+} */
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document Height:', document.documentElement.scrollHeight);
+    console.log('Viewport Height:', window.innerHeight);
+    let pagenums = [2,2,5,8,15,20,20,23,27,28,33,38,38,39,41,41,43,44,48,48,50,54,57,60,60, 63,69,69,74,78,83,86,86,91];
+    let i=0;
+    const tocLinks = document.querySelectorAll('#toc a');
+    tocLinks.forEach(link => {
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            const rect = targetElement.getBoundingClientRect();
+            const pageYOffset = window.pageYOffset;
+            const elementTop = rect.top + pageYOffset;
+            const pageHeight = window.innerHeight;
+
+            const pageNum = pagenums[i];//Math.max(1, Math.ceil(elementTop / pageHeight));
+            i += 1;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'toc-entry';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = link.textContent;
+            titleSpan.className = 'toc-title';
+
+            const dotsSpan = document.createElement('span');
+            dotsSpan.className = 'toc-dots';
+
+            const pageSpan = document.createElement('span');
+            pageSpan.textContent = pageNum;
+            pageSpan.className = 'toc-page';
+
+            wrapper.appendChild(titleSpan);
+            wrapper.appendChild(dotsSpan);
+            wrapper.appendChild(pageSpan);
+
+            link.parentNode.replaceChild(wrapper, link);
+        }
+    });
+});
+</script>
+        </head>
+            <body>
+            <div id='cover' style='background-color: #026873;'>
+            <h1>טופולוגיה</h1>
+            <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+        <h1 id='topology_1'>מרחבים טופולוגיים</h1>
+<h2 id='topology_1_1'>מרחבים טופולוגיים</h2>
+ <div class="definition"><span class="keyword">טופולוגיה</span><p>טופולוגיה על קבוצה <span>\(X\)</span> היא אוסף <span>\(\tau\)</span> של תתי קבוצות של <span>\(X\)</span>(אשר נקראות קבוצות פתוחות) אשר מקיימות:</p>
+<ol>
+<li>
+<p>מכילות את הקבוצה כולה והקבוצה הריקה, כלומר <span>\(X,\varnothing  \in \tau\)</span>. </p>
+</li>
+<li>
+<p>סגירות תחת חיתוכים סופיים, כלומר: 
+<span>$$\begin{array}{r l}{A,B\in\tau}&amp;{{}\Rightarrow\quad A\cap B\in\tau.}\end{array}$$</span></p>
+</li>
+<li>
+<p>סגירות תחת איחודים כלשהן: 
+<span>$$\{U_{i}\}_{i\in I}\subseteq\tau\implies\bigcup_{i\in I}U_{i}\in\tau$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">הטופולוגיה הטריוויאלית</span><p>לכל קבוצה <span>\(X\)</span> ניתן להגדיר את הטופולוגיה הטריווילאית על ידי <span>\(\tau=\{ \varnothing,X \}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">הטופולוגיה הדיסקרטית</span><p>לכל קבוצה <span>\(X\)</span> ניתן להגדיר את הטופולוגיה הדיסקרטית על ידי <span>\(\tau=\mathcal{P}(X)\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">הטופולוגיה הסטנדרטית על <span>\(\mathbb{R}\)</span></span><p>קבוצה <span>\(U\subseteq \mathbb{R}\)</span> תהיה פתוחה אם לכל <span>\(x \in U\)</span> קיים <span>\(\epsilon&gt;0\)</span> כך שהכדור הפתוח מקיים:
+<span>$$B_{\varepsilon}(x)=(x-\varepsilon,x+\varepsilon)\subseteq U$$</span></p>
+</div>
+<div class="example"><span class="keyword">טופולוגיית המשלים הסופית</span><p>לכל קבוצה <span>\(X\)</span> ניתן להגדיר את הטופולוגיה:
+<span>$$\tau=\{A\subseteq X\mid X\setminus A\,\mathrm{is\,finite}\}\cup\{\varnothing \}$$</span></p>
+</div>
+<div class="example"><span class="keyword">טופולוגית המשלים הבן מנייה</span><p>לכל קבוצה <span>\(X\)</span> ניתן להגדיר את הטופולוגיה:
+<span>$$\tau=\{A\subseteq X\mid X\setminus A\,\mathrm{is\;countable}\}\cup\{\varnothing \}.$$</span></p>
+</div><h2 id='topology_1_2'>בסיס של טופולוגיה</h2>
+ <div class="definition"><span class="keyword">בסיס של טופולוגיה</span><p>בסיס <span>\(\mathcal{B}\)</span> של טופולוגיה על <span>\(X\)</span> זו אוסף של תתי קבוצות על <span>\(X\)</span> אשר מקיימות:</p>
+<ol>
+<li>
+<p>כיסוי של <span>\(X\)</span>. כלומר מתקיים: 
+<span>$$\bigcup_{B\in{\mathcal{B}}}B=X$$</span></p>
+</li>
+<li>
+<p>אם <span>\(x \in B_{1}\cap B_{2}\)</span> עבור <span>\(B_{1},B_{2}\in \mathcal{B}\)</span> אזי קיים <span>\(B_{3} \in \mathcal{B}\)</span> כך שמתקיים: 
+<span>$$x\in B_{3}\subseteq B_{1}\cap B_{2}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">טפולוגיה הנוצרת על ידי בסיס</span><p>הטופולוגיה הנוצרת על ידי בסיס <span>\(\mathcal{B}\)</span> תהיה הטופולוגיה שמתקבלת על ידי איחוד של כל איבר בבסיס:
+<span>$$\tau=\left\{\bigcup S\mid S\subseteq\mathcal{B}\right\}$$</span></p>
+</div>
+<div class="example"><span class="keyword">הטופולוגיה הדיסקרטית</span><p>הטופולוגיה שבה כל יחידון הוא איבר בבסיס היא יוצרת את הטופולגיה הדיסקרטית, כיוון שניתן להרכיב כל קבוצה על ידי איחוד של יחידונים.</p>
+</div>
+<div class="example"><span class="keyword">הבסיס האוקלידי</span><p>עבור <span>\(\mathbb{R}^{n}\)</span> האוסף של כל הכדורים הפתוחים מהווה בסיס לטופולוגיה הסטנדרטית</p>
+</div>
+<div class="example"><span class="keyword">בסיס בן מנייה עבור <span>\(\mathbb{R}^{n}\)</span></span><p>עבור <span>\(\mathbb{R}^{n}\)</span> אוסף הכדורים הפתוחים אשר מרכזם בנקודות רציונאליות ורדיוסים רציונאלי.</p>
+</div>
+<div class="definition"><span class="keyword">תת בסיס</span><p>תת בסיס <span>\(\mathcal{S}\)</span> על טופולוגיה <span>\(X\)</span> הוא אוסף של תתי קבוצות כך שהחיתוך הסופי של האיברים יוצר בסיס:
+<span>$${\mathcal{B}}=\{B_{1}\cap B_{2}\cap\cdots\cap B_{n}\mid n\in\mathbb{N},B_{i}\in{\mathcal{S}}\}.$$</span>
+כך שהטופולוגיה הנוצרת על ידי <span>\(\mathcal{S}\)</span> תהיה:
+<span>$$\tau=\left\{\bigcup S\mid S\subseteq\mathcal{B}\right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טופולוגייה סדר</span><p>יהי <span>\(P\)</span> קבוצה סדורה קווית(כלומר ניתן להשוואות כל שתי איברים). אזי טופולוגיית הסדר על <span>\(P\)</span> תהיה הטופולוגיה שנוצרת על ידי הבסיס:
+- הקטעים הפתוחים:
+<span>$$(a,b)=\{x\in P\mid a&lt;x&lt;b\}.$$</span>
+- אם ל- <span>\(P\)</span> יש מינימום <span>\(m\)</span> או מקסימום <span>\(M\)</span> אזי גם:
+<span>$$[m,b)=\{x\in P\mid m\leq x&lt;b\},\quad(a,M]=\{x\in P\mid a&lt;x\leq M\}$$</span></p>
+</div>
+            </body>
+            </html>
+            

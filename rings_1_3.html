@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הומומורפיזם של חוגים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings_1_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_1_2.html`;}});</script>
+        <div class="content">
+        <h1>1.3  הומומורפיזם של חוגים</h1>
+    <div class="definition"><span class="keyword">הומומורפיזם של חוגים</span><p>יהיו <span>\(S,R\)</span> חוגים. הומומורפיזם של חוגים זו העתקה <span>\(\varphi:S\to R\)</span> כך שמתקיים:</p>
+<ol>
+<li>
+<p>זהו הומומורפיזם של החבורה החיבוריות </p>
+</li>
+<li>
+<p>משמר כפל, כלומר <span>\(\varphi\left( s_{1}\cdot s_{2} \right)=\varphi(s_{1})\cdot \varphi(s_{2})\)</span>. </p>
+</li>
+<li>
+<p>מעביר יחידה ליחידה - <span>\(\varphi(1)=1\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">גרעין של הומומורפיזם</span><p>אוסף האברים בחוג <span>\(R\)</span> שההומומורפיזם <span>\(\varphi\)</span> שולח ל-0. כלומר:
+<span>$${\mathrm{ker}}\,\left( \varphi \right)=\left\{r\in R\,|\,\varphi\,(r)=0\right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תמונה של הומומורפיזם</span><p>אוסף כל האיברים שההומומורפיזם מגיע עליהם:
+<span>$${\mathrm{Im}}\left( \varphi \right)=\left\{\varphi\left(r\right)\left|\,r\in R\right\}\right.$$</span></p>
+</div>
+<div class="proposition">
+<p>התמונה של הומומורפיזם היא תת חוג, והגרעין של הומומורפיזם היא אידיאל.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם הראשון של חוגים </span><p>נניח <span>\(\phi:R\to S\)</span> הומומורפיזם של חוגים <span>\(R,S\)</span>. אז ההעתקה:
+<span>$$R / \ker \phi \to \mathrm{Im}\left( \phi \right)$$</span>
+היא איזומורפיזם בין חוגים</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='prev-page'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+</ul></li>
+        </body>
+        </html>
+        

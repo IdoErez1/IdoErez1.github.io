@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פתירות חבורות מסדר קטן מ-60</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_7_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_6_1.html`;}});</script>
+        <div class="content">
+        <h1>6.2  פתירות חבורות מסדר קטן מ-60</h1>
+    <div class="reminder">
+<p>חבורה סופית היא פתירה אם"ם גורמי ההרכב שלה הם ציקלים.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(G\)</span> חבורה בגודל <span>\(|G|&lt;60\)</span> אזי <span>\(G\)</span> פתירה.</p>
+</div>
+<p>מספיק להוכיח שכל חבורה מוגדל קטן מ-<span>\(60\)</span> היא ציקלית מסדר ראשוני.(כי גורמי ההרכב של חבורה חסומים בגודלה - לא יתכן גורם הרכב מסדר גדול יותר) ולכן מספיק להראות את הטענה הבאה</p>
+<div class="proposition">
+<p>אם <span>\(|G|&lt;60\)</span> ו-<span>\(|G|\)</span> לא ראשוני אז יש לה ת"ח נורמלית לא טריוויאלית.</p>
+</div>
+<div class="proof">
+<p>מקרה <span>\(I\)</span>: <span>\(|G|=p^n\)</span> כאשר <span>\(p\)</span> ראשוני, <span>\(n\geq 2\)</span>. זה אומר שחבורה <span>\(p\)</span> היא פתירה, ולכן יש:
+<span>$$1=G_{0}\triangleleft \dots \triangleleft G_{r-1}\triangleleft G_{r}=G$$</span>
+כאשר המנה איזומורפית ל-<span>\(\mathbb{Z} _p\)</span>, ואיננה "פשוט לא ציקלית".</p>
+</div>
+<p>מקרה <span>\(II\)</span>: <span>\(|G|=p^nq\)</span> כאשר <span>\(p\neq q\)</span> ראשוניים. <span>\(p^n&lt;q\)</span>. למשל <span>\(6,20,51\)</span>. נסתכל על <span>\(k_{q}\)</span>. אנו יודעים כי: 
+<span>$$\begin{cases}k_{q}\mid p^n\implies k_{q}\in \left\{  1,p,p^2,\dots,p^n  \right\} \\k_{q}\equiv 1\mod q \implies k_{q}\in \{1, 1+q, 1+2q  \}
+\end{cases}\implies k_{q}=1$$</span>
+ולכן חבורת <span>\(q\)</span> סילו היא נורמלית.
+מקרה <span>\(III\)</span>: כאשר <span>\(|G|=p^mq^n \nmid(p^n)!\)</span> למשל <span>\(\left( 45\nmid 5!, 12\nmid 3! \right)\)</span>. נסתכל בפעולה של <span>\(G\)</span> בכפל על <span>\(G / Q\)</span> כש-<span>\(Q\in Syl_{q}(G)\)</span>. נסתכל על:
+<span>$$\rho:G\to Sym_{G / Q}\cong S_{p^n}\qquad \ker\left( \rho \right)=Core_{G}(Q)=\bigcap_{g\in G}gQg^{-1}$$</span>
+נשים לב ש-<span>\(Core_{G}(Q)\leq Q\)</span>, ואם <span>\(Core_{G}(Q)=1\)</span> אזי <span>\(\rho\)</span> שיכון, כלומר <span>\(G\)</span> איזומורפית שתת חבורה של <span>\(S_{p^n}\)</span> בסתירה ללגרנג'.
+כעת נשאר להראות: <span>\(30,40,42,56\)</span>. נראה בנפרד.
+<span>$$\begin{gather}|G|=40=8\cdot 5\implies \begin{cases}k_{5}\equiv 1 \mod 5\\k_{5}\mid 8\end{cases}\implies k_{5}=1\\|G|=42=2\cdot 3\cdot 7\implies \begin{cases}k_{7} \equiv 1 \mod 7 \\k_{7} \mid 6\end{cases}\implies k_{7}=1\\|G|=56=8\cdot 7\implies \begin{cases}k_{7}=1 \mod 7 \\k_{7} \mid 6\end{cases}\implies k_{7}=1 
+\end{gather}$$</span>
+עבור <span>\(k_{7}=1\)</span> סיימנו. עבור <span>\(k_{7}=8\)</span> נשים לב ששתי חבורות <span>\(7\)</span> סילו נחתכות ב-<span>\(e\)</span> (לגרנג') לכן ב-<span>\(G\)</span> יש <span>\(8\cdot 6=48\)</span> איברים מסדר <span>\(7\)</span>. ב-<span>\(G\)</span> יש <span>\(56-48=8\)</span> איברים שאינם מסדר <span>\(7\)</span> ולכן <span>\(k_{2}=1\)</span>. נותן לבדוק רק את <span>\(30\)</span>. נניח <span>\(|G|=30=2\cdot 3\cdot 5\)</span>. נניח בשלילה ש-<span>\(G\)</span> פשוטה. ולכן <span>\(1&lt;k_{2},k_{3},k_{5}\)</span>. לכן: 
+<span>$$\begin{cases}k \equiv 1 \mod 5 \\k_{5} \mid 6
+\end{cases}\implies k_{5}=6$$</span>
+ולכן יש <span>\(24\)</span> איברים מסדר <span>\(5\)</span> ב-<span>\(G\)</span>.
+<span>$$\begin{cases}  k_{3} \equiv 1 \mod 5\\k_{3}\mid 10  
+\end{cases}\implies k_{3}=10$$</span>
+ויש <span>\(20\)</span> שאיברים מסדר <span>\(3\)</span> ב-<span>\(G\)</span>. וכיוון ש-<span>\(24+20=44\)</span> קיבלנו סתירה.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='prev-page'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+</ul></li>
+        </body>
+        </html>
+        

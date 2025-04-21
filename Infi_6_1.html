@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נגזרות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_5_8`; }});</script>
+        <div class="content">
+        <h1>6.1  נגזרות</h1>
+    <p>אנחנו כרגע מתייחסים לפונקציות מהצורה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span>. ניתן לכתוב פונקציה כזו כאוסף של פונקציות <span>\(f_{i}:\mathbb{R}\to\mathbb{R}^m\)</span>. כלומר ניתן לכתוב:
+<span>$$f(x)=\begin{pmatrix}{{f_{1}\left(x_{1},\ldots,x_{k}\right)}}\\ {{\ldots}}\\ {{f_{m}\!\left(x_{1},\ldots,x_{k}\right)}}
+\end{pmatrix} \qquad  f_{\alpha}=\left\langle f,e_{\alpha}\right\rangle$$</span></p>
+<div class="definition"><span class="keyword">דיפרנציאבליות</span><p>פונקציה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span> נקראת גזירה/דיפרציאבלית ב-<span>\(a\)</span> אם קיימת העתקה הלינארית <span>\(T:\mathbb{R}^k\to\mathbb{R}^m\)</span> המקיימת:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(a+v)-f(a)-T(v)}{||v||}}=0_{\mathbb{R}^m}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הנגזרת בנקודה</span><p>אם פונקציה היא דיפרנציאבילית, אז ההעתקה היחידה <span>\(Df_{a}(v)\)</span> המקיימת:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(a+v)-f(a)-Df_{a}(v)}{||v||}}=0_{\mathbb{R}^m}$$</span>
+נקראת הנגזרת בנקודה <span>\(a\)</span>. </p>
+</div>
+<p>נשים לב כי כיוון שאנחנו במטריקת <span>\(l_{p}\)</span>, התכנסות איבר איבר לאפס שקול להתכנסות של הנורמה, לכן הגדרה שקולה לגזירות היא:
+<span>$$\lim_{ v \to 0 } \frac{||f(a+v)-f(a)-T(v)||_{\mathbb{R}^m}}{||v||_{\mathbb{R}^k}}=0$$</span>
+<strong>הגדרה</strong> פונקציית הנגזרת
+תהי <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, ותהי <span>\(f:A\to\mathbb{R}^m\)</span> גזירה בכל נקודה <span>\(x \in A\)</span>. אזי <span>\(Df:A\to \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> הומגדרת ע"י <span>\(x\to (Df)_{x}\)</span> נקראת פונקציית הנגזרת.</p>
+<div class="proposition">
+<p>אם הפונקציה היא גזירה, הנגזרת היא יחידה.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(T,S\)</span> העתקות לינארית, אשר מקיימות:
+<span>$$\operatorname*{lim}_{v\to0}{\frac{f(x+v)-f(x)-Tv}{\|v\|_{\mathbb{R}^{k}}}}=0\qquad\operatorname*{lim}_{v\to0}{\frac{f(x+v)-f(x)-Sv}{\|v\|_{\mathbb{R}^{k}}}}=0.$$</span>
+עבור שינוי קטן <span>\(v\in \mathbb{R}^n\)</span> מתקיים:
+<span>$$(S-T) v =(f(x+ v )-f(x)-T v )-(f(x+ v )-f(x)-S v )\,.$$</span>
+לפי אי שיוויון המשולש:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{\|(S-T) v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}\leq\operatorname*{lim}_{ v \to0}{\frac{\|f(x+ v )-f(x)-T v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}+\operatorname*{lim}_{ v \to0}{\frac{\|f(x+ v )-f(x)-S v \|_{\mathbb{R}^{m}}}{\| v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+מהומוגניות הנורמה:
+<span>$$\operatorname*{lim}_{ v \to0}\left\|\left(S-T\right)\left({\frac{ v }{\| v \|_{\mathbb{R}^{k}}}}\right)\right\|_{\mathbb{R}^{m}}=0.$$</span>
+הגבול הזה נכון לכל סדרה <span>\(v\to 0\)</span>. ניקח <span>\(v=te_{j}\)</span> ונשאיף <span>\(t\to 0\)</span> ונקבל לכל <span>\(j\)</span>:
+<span>$$(S-T)(e_{j})=0,$$</span>
+ולכן <span>\(S=T\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נגזרת חלקית</span><p><span>$$\partial_{j}f(x)=\operatorname*{lim}_{t\rightarrow0}{\frac{f(x+t e_{j})-f(x)}{t}}.$$</span>
+כאשר ניתן גם לפרק את <span>\(f\)</span> ולכתוב נגזרת חלקית של רכיב של <span>\(f\)</span>:
+<span>$$\partial_{j}f_{i}(x)=\operatorname*{lim}_{t\rightarrow0}{\frac{f_{i}(x+t e_{j})-f_{i}(x)}{t}}\qquad i=1,\ldots,m\quad j=1,\ldots,k.$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">נגזרת כיוונת</span><p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> ו-<span>\(f:A\to\mathbb{R}^m\)</span> גזירה בנקודה פנימית. לכן לכל <span>\(v\in \mathbb{R}^k\)</span> מתקיים:
+<span>$$(D f)_{x}( v )=\operatorname*{lim}_{t\rightarrow0}{\frac{f(x+t v )-f(x)}{t}}.$$</span></p>
+</div>
+<p>כאשר למעשה ניתן לפרש את <span>\((Df)_{x}(v)\)</span> בתור הקצב שינוי של <span>\(f\)</span> כשזזים מ-<span>\(x\)</span> בכיוון של <span>\(v\)</span>.</p>
+<div class="proposition">
+<p>אם פונקציה היא גזירה ב-<span>\(a\)</span> אז כל הנגזרות הכיווניות קיימות, ומתקיים:
+<span>$$\left(D f\right)_{a}\left(v\right)=\operatorname*{lim}_{t\rightarrow0}{\frac{f\left(a+t v\right)-f\left(a\right)}{t}}$$</span></p>
+</div>
+<div class="corollary">
+<p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> ו-<span>\(f:A\to\mathbb{R}^m\)</span> גזיר בנקודה פנימית <span>\(x \in A\)</span> אז כל הנגזרות החלקיות קיימות ומתקיים:<span>\(\partial_{j}f(x)=(D f)_{x}(e_{j}).\)</span></p>
+</div>
+<div class="proof">
+<p>לפי הגדרה, <span>\(f\)</span> רציפה ב-<span>\(x\)</span>, וכעת לכל <span>\(v\neq 0\)</span> מתקיים:
+<span>$$\operatorname*{lim}_{t\to0}{\frac{f(x+t v )-f(x)-(D f)_{x}(t v )}{\|t v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+וכעת מלינאריות של הנגזרת וההומוגניות של הנורמה נקבל:
+<span>$$\operatorname*{lim}_{t\to0}{\frac{f(x+t v)-f(x)-t\left(D f\right)_{x}(v)}{t}}=\operatorname*{lim}_{t\to0}{\frac{f(x+t v)-f(x)-\left(D f\right)_{x}(t v)}{\|t v\|_{\mathbb{R}^{k}}}}{\frac{|t|\|v\|_{\mathbb{R}^{k}}}{t}}=0,$$</span>
+כיוון ש-<span>\(\frac{f(x+t v )\!-\!f(x)\!-\!(D f)_{x}(t v )}{\|t v \|_{\mathbb{R}^{k}}}\)</span> שואף ל-0 ו-<span>\(\frac{|t|\|v\|_{\mathbb{R}^{k}}}{t}\)</span> חסום אז נקבל כי הגבול שואף ל-0.</p>
+</div>
+<div class="proposition"><span class="keyword">ההצגה בעזרת מטריצה</span><p>כיוון שהנגזרת היא העתקה לינארית אז ניתן להציג אותה בעזרת מטריצה בצורה הבא:
+<span>$$(D f)_x=\left(\begin{array}{lllll}\partial_1 f(x) &amp; \mid &amp; \ldots &amp; \mid &amp; \partial_k f(x)\end{array}\right)=\left(\begin{array}{cccc}\partial_1 f_1(x) &amp; \ldots &amp; \partial_k f_1(x) \\\vdots &amp; \ddots &amp; \vdots \\\partial_1 f_m(x) &amp; \ldots &amp; \partial_k f_m(x)
+\end{array}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם פונקציה היא גזירה בנקודה, אז היא גם רציפה בה</p>
+</div>
+<div class="proof">
+<p>נסמן את הנגזרת בנקודה ב-<span>\(T\)</span>. נקבל מהגדרת הנגזרת:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+ולכן המונה שואף ל-0. מתקיים <span>\(\lim_{ v \to 0 }T(v)=0\)</span> ולכן מאריתמטיקה של גבולות נקבל:
+<span>$$\lim_{ v \to 0 } f(x+v)-f(x)=0$$</span>
+ולכן רציף.</p>
+</div>
+<div class="proposition">
+<p>הנגזרת הוא אופרטור לינארי. כלומר אם <span>\(f,g:A\to\mathbb{R}m\)</span> פונקציות גזירות אז <span>\(h=\alpha f+\beta g\)</span> גזירה וכן מתקיים <span>\((Dh)_{x}=\alpha (Df)_{x}+\beta (Dg)_{x}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, ויהי <span>\(f:A\to\mathbb{R}^m\)</span>. נסמן את הרכיבים <span>\(f_{1},\dots,f_{m}\)</span> פונקציות מ-<span>\(f_{i}:A\to\mathbb{R}\)</span>. אזי <span>\(f\)</span> דיפרנציאבילי אם"ם לכל <span>\(1\leq i\leq m\)</span> נקבל <span>\(f_{i}\)</span> דיפרנציאבילית.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(f\)</span> דיפרנציאבילי אז קיים העתקה לינארית <span>\(T\)</span> כך ש-
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+זהו גבול וקטורי, זה אומר שנדרש שכל אחד מהרכיבים של <span>\(Tv\)</span> אשר אשר נסמן ב-<span>\(T_{i}v\)</span> מתכנס ל-0. כלומר מתקיים:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f_{i}(x+ v )-f_{i}(x)-(T( v ))_{i}}{\| v \|_{\mathbb{R}^{k}}}}=0.$$</span>
+וזה למעשה אומר כי <span>\(T(v)_{i}\)</span> זה הנגזרת של <span>\(f_{i}\)</span>. הכיוון השני מושג באופן דומה, אם כל אחד מהגבולות האלה מתכנסות ל-0, אז גם הגבול של <span>\(Tv\)</span> מתכנס ל-0 ולכן <span>\(T\)</span> הנגזרת.</p>
+</div>
+<div class="theorem"><span class="keyword">תנאי מספיק לדיפרנציאביליות</span><p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה ו-<span>\(f:A\to\mathbb{R}^m\)</span>, אז אם כל ה-<span>\(k\)</span> נגזרות הכיווניות של <span>\(f\)</span> קיימות בסביבה של <span>\(x \in\mathbb{R}^k\)</span> וגם רציפות ב-<span>\(x\)</span>, אז <span>\(f\)</span> גזיר ב-<span>\(x\)</span>.</p>
+</div>
+<div class="proof">
+<p>מהטענה הקודמת מספיק להראות כי עבור <span>\(1\leq i\leq m\)</span> מתקיים. לכן מספיק להראות שקיים העתקה לינארית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R} \right)\)</span> כך ש:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{f\left( x+ v  \right)-f(x)-T\left(  v  \right)}{\| v \|_{\mathbb{R}^{k}}}}=0_{\mathbb{R}^k}$$</span>
+אנחנו ודעים כי אם <span>\(T\)</span> קיים אז מתקיים:
+<span>$$T=\left(\partial_{1}f(x),\ldots,\partial_{k}f(x)\right).$$</span>
+ולכן צריך להראות כי:
+<span>$$\operatorname*{lim}_{ v \to0}{\frac{1}{\| v \|_{\mathbb{R}^{k}}}}\left(f(x+ v )-f(x)-\sum_{j=1}^{k}\partial_{j}f(x) v _{j}\right)=0.$$</span>
+כיוון ש-<span>\(f\)</span> יש נגזרות כיוויניות רציפות, נרצה להשתמש במשפט ערך הביניים על כל רכיב. נכתוב את השינוי ב-<span>\(f\)</span> בתור סכום טלסקופי:
+<span>$$\begin{gather}{f{\big(}x+ v {\big)}-f{\big(}x{\big)}=f{\big(}x+ v _{1}e_{1}{\big)}-f{\big(}x{\big)}}\\ {+f{\big(}x+ v _{1}e_{1}+ v _{2}e_{2}{\big)}-f{\big(}x+ v _{1}e_{1}{\big)}}\\ {+\ldots}\\ {+f{\big(}x+ v {\big)}-f{\big(}x+ v _{1}e_{1}+ v _{2}e_{2}+\cdots+ v _{k-1}e_{k-1}{\big)}.}\end{gather}$$</span>
+ונקבל:
+<span>$$f(x+ v )-f(x)=\sum_{j=1}^{k}\left(f\left(x+\sum_{i=1}^{j} v _{i}e_{i}\right)-f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}\right)\right).$$</span>
+נסתכל על האיבר ה-<span>\(j\)</span> בסכום ונגדיר:
+<span>$$g_{j}(t)=f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}\right),$$</span>
+כך שהאיבר ה-<span>\(j\)</span> בסכום שווה ל-<span>\(g_{j}(v_{j})-g_{j}(0)\)</span> ומתקיים:
+<span>$$g_{j}^{\prime}(t)=\operatorname*{lim}_{h\to0}{\frac{g_{j}(t+h)-g_{j}(t)}{h}}=\operatorname*{lim}_{h\to0}{\frac{f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}+h e_{j}\right)-f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+t e_{j}\right)}{h}}$$</span>
+כעת לפי משפט ערך הביניים(החד מימדי) קיים <span>\(\theta_{j}\in(0,1)\)</span> כך ש:
+<span>$$g_{j}( v _{j})-g_{j}(0)=g_{j}^{\prime}(\theta_{j} v _{j}) v _{j}.$$</span>
+ונקבל סה"כ:
+<span>$$f(x+ v )-f(x)=\sum_{j=1}^{k}g_{j}( v _{j})-g_{j}(0)=\sum_{j=1}^{k}\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right) v _{j}.$$</span>
+ולכן:
+<span>$${\frac{1}{\|v\|_{\mathbb{R}^{k}}}}\left(f(x+ v )-f(x)-\sum_{j=1}^{k}\partial_{j}f(x) v _{j}\right)=\sum_{j=1}^{k}\left(\left[\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right)-\partial_{j}f(x)\right]{\frac{ v _{j}}{\|v\|_{\mathbb{R}^{k}}}}\right).$$</span>
+נשים לב כי <span>\(\frac{v_{j}}{||v||_{\mathbb{R}_{k}}}\)</span> חסום. כאשר מהרציפות של הנגזרת נקבל:
+<span>$$\partial_{j}f\left(x+\sum_{i=1}^{j-1} v _{i}e_{i}+\theta_{j} v _{j}e_{j}\right)-\partial_{j}f(x)\xrightarrow{v\to 0} 0$$</span>
+ולכן נקבל כי הביטוי כולו שואף לאפס, ולכן דיפרנציאבילי.</p>
+</div>
+<div class="definition"><span class="keyword">גזיר ברציפות</span><p>אם <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה ו-<span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה ב-<span>\(A\)</span>. פונקציה <span>\(f\)</span> היא גזירה ברציפות ב-<span>\(x\)</span> אם ההעתקה <span>\(Df:A\to \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\)</span> רציף ב-<span>\(x\)</span>. פונקציה היא גזירה ברציפות אם בכל נקודה היא גזירה ברציפות.</p>
+</div>
+<p>נזכור כי העתקה לינארית היא רציפה אם"ם היא חסומה, לכן כדי להראות שפונקציה גזירה נדרש להראות שחסום בכל נקודה, כלומר נדרש שכל הנגזרות הכיווניות יהיו רציפות(אם נגזרת כיוונית כלשהי לא רציפה בנקודה אז לא חסומה)</p>
+<div class="corollary">
+<p>פונקציה היא גזירה ברציפות אם"ם כל הנגזרות הכיווניות שלה רציפות.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='prev-page'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סימטריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_3_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_3_1`; }});</script>
+        <div class="content">
+        <h1>3.2  סימטריות</h1>
+    <div class="definition"><span class="keyword">הומוגניות ואיזוטרופיות</span><p>מרחב נקרא <u>הומוגני</u> אם הוא נראה אותו דבר מכל מקום, כלומר יש סימטרייה להזזה. ניתן גם להגדיר מרחב <u>הומוגני זמני</u> - כלומר סימטרי להזזות בזמן.
+מרחב נקרא <u>איזוטרופי</u> אם נראה אותו דבר תחת סיבוב, כלומר יש סימטרייה לסיבובים.</p>
+</div>
+<div class="definition"><span class="keyword">תנע מוכלל</span><p>לכל קורדינטה מוכללת ניתן להגדיר תנע מוכלל <span>$$p_{i}={\frac{\partial \mathcal{L}}{\partial{\dot{q}}_{i}}}$$</span>
+
+קורדינטה מוכללת של המערכת שאינה מופיעה בלגרנג'יאן נקראת ציקלית</p>
+</div>
+<div class="remark">
+<p>קורדינטה שאינה מופיעה בלגרנג'יאן אינה משפיעה של משוואות התנועה.</p>
+</div>
+<div class="theorem">
+<p>תנע צמוד של קורדינטה ציקלית הוא שמור(כלומר גודל שנשמר בבעיה)</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(q_{i}\)</span> קורדינטה ציקלית. מאוילר לגרנג':
+<span>$$\frac{d}{dt}\left( \frac{\partial \mathcal{L}  }{\partial \dot{q}_{i}} \right)=\frac{\partial \mathcal{L}  }{\partial q}=0\implies \frac{\partial \mathcal{L}  }{\partial \dot{q}_{i}}=C\implies p_{i}=C$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית יעקובי</span><p><span>$$h=h(q,\dot{q},t)=\sum_{i}\dot{q}_{i}\frac{\partial{\cal L}}{\partial\dot{q}_{i}}-{\cal L}$$</span></p>
+</div>
+<div class="theorem">
+<p>הנגזרת של הפונקציית יעקובי בזמן היא הנגדית של הנגזרת של הנגרנג'יאן
+<span>$$\frac{\partial \mathcal{L} }{\partial t}=-\frac{\partial h}{\partial t}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי:
+<span>$${\frac{d \mathcal{L}}{d t}}=\sum_{i}{\frac{\partial \cal L}{\partial q_{i}}}{\frac{d q_{i}}{d t}}+\sum_{i}{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}{\frac{d{\dot{q}}_{i}}{d t}}+{\frac{\partial \cal L}{\partial t}}$$</span>
+נשים לב כי מאוילר לגרנג' מתקיים:
+<span>$${\frac{d \cal L}{d t}}=\sum_{i}\left[{\dot{q}}_{i}{\frac{d}{d t}}\left({\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}\right)+{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}{\frac{d{\dot{q}}_{i}}{d t}}\right]+{\frac{\partial \cal L}{\partial t}}$$</span>
+כאשר נשים לב כי:
+<span>$${\frac{d}{d t}}\sum_{i}{\dot{q}}_{i}{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}=\sum_{i}{\frac{d}{d t}}\left({\dot{q}}_{i}{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}\right)=\sum_{i}\left[{\dot{q}}_{i}{\frac{d}{d t}}\left({\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}\right)+{\frac{d{\dot{q}}_{i}}{d t}}{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}\right]$$</span>
+אך הסכימה ניתן להחלפה ע"י <span>\(\frac{d}{d t}\,\sum_{i}\dot{q}_{i}\frac{\partial \cal L}{\partial\dot{q}_{i}}\)</span> ולכן:
+<span>$${\frac{d \cal L}{d t}}={\frac{d}{d t}}\sum_{i}{\dot{q}}_{i}{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}+{\frac{\partial \cal L}{\partial t}}$$</span>
+או:
+<span>$${\frac{\partial \cal L}{\partial t}}={\frac{d}{d t}}\left(\cal L-\sum_{i}{\dot{q}}_{i}\,{\frac{\partial \cal L}{\partial{\dot{q}}_{i}}}\right)=\frac{dh}{dt}$$</span></p>
+</div>
+<p>ולכן אם הלגרנג'יאן לא תלוי בזמן, אז פונקציית יעקובי היא קבועה.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='prev-page'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+</ul></li>
+        </body>
+        </html>
+        

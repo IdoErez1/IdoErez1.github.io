@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סדרות הרכב</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_5_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_4_4.html`;}});</script>
+        <div class="content">
+        <h1>5.1  סדרות הרכב</h1>
+    <div class="definition"><span class="keyword">סדרה נורמלית</span><p>סדרה נורמלית של חבורה <span>\(G\)</span> היא סדרה מהצורה:
+<span>$$1=H_{0}\trianglelefteq \dots \trianglelefteq H_{r-2}\trianglelefteq H_{r-1}\trianglelefteq H_{r}=G$$</span>
+כלומר סדרה של תתי חבורות נורמליות כך שבסוף מקבלים את התת חבורה הטריווילאית.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי תמיד קיים סדרה נורמלית עבור חבורה <span>\(G\)</span> כי בפרט החבורה הטריוויאלית 1 היא תמיד תת חבורה נורמלית, אך לא כל סדרה של תתי סדרות נורמלית תהיה סדרה נורמלית כיוון שלא תמיד תגיע ל-1. לדוגמא:
+<span>$$\dots \trianglelefteq 16\mathbb{Z}\trianglelefteq 8\mathbb{Z} \trianglelefteq 4\mathbb{Z}  \trianglelefteq \mathbb{Z}$$</span>
+כאשר לא נגיע ל-1 כי כל תת חבורה של <span>\(\mathbb{Z}\)</span> איזומורפית ל-<span>\(\mathbb{Z}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$1=\langle 0\rangle \trianglelefteq \overbracket{ \langle 4\rangle }^{ \cong \mathbb{Z} _{3} } \trianglelefteq \overbracket{ \langle 2\rangle  }^{ \cong \mathbb{Z} _{6} } \trianglelefteq \mathbb{Z} _{12}$$</span>
+וכן גם:
+<span>$$\langle 0\rangle \trianglelefteq \langle 4\rangle \trianglelefteq  \langle 4\rangle \trianglelefteq  \mathbb{Z} _{4}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סדרת הרכב</span><p>סדרה נורמלית של <span>\(G\)</span> נקראת סדרת הרכב של <span>\(G\)</span> אם <span>\(H_{i}\triangleleft H_{i+1}\)</span> לכל <span>\(i\)</span>. ואי אפשר להוסיף תת חבורה לסדרה.
+להוסיף: עבור <span>\(H_{i}\triangleleft H_{i+1}\)</span> כלשהו למצוא<span>\(H_{i}\triangleleft K\triangleleft H_{i+1}\)</span>. כאשר נשים לב כי <span>\(\triangleleft\)</span> מסמל נורמלית ממש, כלומר תת חבורה נורמלית שאינה שווה לחבורה.</p>
+</div>
+<div class="corollary">
+<p>ל-<span>\(\mathbb{Z}\)</span> אין סדרות הרכב:
+<span>$$\{ 0 \}=H_{0}\triangleleft H_{1}\triangleleft \dots \triangleleft H_{r-1}\triangleleft \mathbb{Z}$$</span>
+לכל סדרה נורמלית בלי חזרות <span>\(H_{1}\cong\mathbb{Z}\)</span> (תת חבורה לא טריוויאלית של <span>\(\mathbb{Z}\)</span>), ולכן אפשר להוסיף תת חבורה בינה לבין <span>\(\{ 0 \}=H_{0}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(S_{n}\)</span> כאשר <span>\(n\geq 5\)</span> נקבל כי:
+<span>$$1\triangleleft A_{n}\triangleleft S_{n}$$</span>
+כיוון ש-<span>\(A_{n}\)</span> פשוטה.</p>
+</div>
+<div class="proposition">
+<p>לחבורה סופית יש סדרת הרכב</p>
+</div>
+<div class="proof">
+<p>אם <span>\(G\)</span> פשוטה, <span>\(1\triangleleft G\)</span> סדרת הרכב. אם <span>\(G\)</span> לא פשוטה, יש לה תת חבורה נורמלית. ניקח תת חבורה נורמלית מקסימלית ב-<span>\(G\)</span>(ביחס להכלה), נקרא לה <span>\(H_{r}\)</span>, ונמשיך ממנה. התהליך יעצר כי <span>\(G\)</span> הינה סופית.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(1=H_{0}\trianglelefteq \dots \trianglelefteq H_{r}=G\)</span> סדרה נורמלית של <span>\(G\)</span> אזי היא סדרת הרכב אם"ם <span>\(H_{i+1}/ H_{i}\)</span> פשוטה לכל <span>\(i\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$H_{i}=H_{i+1}\iff 1=H_{i+1} / H_{i}$$</span>
+קיים <span>\(H_{i}\triangleleft \;?\triangleleft H_{i+1}\)</span> אם"ם (ממשפט האיזומורפיזם הרביעי) יש תת חבורה:
+<span>$$1=H_{i }/ H_{i} \triangleleft \;?\triangleleft H_{i+1} / H_{i}$$</span>
+כלומר<span>\(H_{i+1} / H_{i}\)</span> לא פשוטה.</p>
+</div>
+<div class="definition"><span class="keyword">גורמי הרכב</span><p>המנות <span>\(H_{i+1} / H_{i}\)</span> נקראים גורמי ההרכב(composition factors) שלה.</p>
+</div>
+<div class="example">
+<p><span>$$1 \overset{ \mathbb{Z} _{2} }{ \triangleleft }\left\langle  \left( 1\; 2\right)(3\;4) \right\rangle \overset{ \mathbb{Z} _{2} }{ \triangleleft }V\overset{ \mathbb{Z} _{3} }{ \triangleleft } A_{9}\overset{ \mathbb{Z} _{2} }{ \triangleleft } S_{4}$$</span>
+כאשר מעל הסימון של תת חבורה נורמלית ממש אנו כותבים את החבורה שעליה הגורמי הרכב <span>\(G_{i+1} / G_{i}\)</span> איזומורפיות עלייה.</p>
+</div>
+<div class="theorem"><span class="keyword">ג'ורדן הולדר</span><p>לכל סדרות ההרכב יש את אותם גורמי הרכב(לאו דווקא באותו סדר!)</p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}0\stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 6\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 3\rangle \stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \mathbb{Z} _{12}\\0\stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \langle 4\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 2\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \mathbb{Z} _{12}\\0\stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 6\rangle \stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \langle 2\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \mathbb{Z} _{12}
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> אבלית סופית, אז גורמי ההרכב שלה הם:
+<span>$$\mathbb{Z} _{p},\mathbb{Z} _{p_{2}},\dots,\mathbb{Z} _{p_{r}}$$</span>
+עבור ראשוניים <span>\(p_{i}\)</span> שמקיימים: 
+<span>$$\prod_{i=1}^r p_{i}= |G|$$</span></p>
+</div>
+<div class="proof">
+<p>כל גורם הרכב של <span>\(G\)</span> הוא מנה של תת חבורות של <span>\(G\)</span> ולכן אבלי, ובנוסף פשוט. חבורה אבלית פשוטה אם"ם <span>\(\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני אם"ם חבורה בלי תתי חבורות אם"ם כל איבר הוא יוצר. לגבי הגודל:
+<span>$$1=G_{0}\triangleleft \dots \triangleleft G_{r}=G$$</span>
+גורמי ההרכב הם <span>\(Z_{p_{i}}\cong G_{i+1} / G_{i}\)</span> לכל <span>\(i\)</span>, ואז: 
+<span>$$\begin{gathered}|G|=|G_{r}|=|G_{r}:G_{r-1}|=|G_{r-2}|[G_{r-1}:G_{r-2}]= \\=\dots=\prod_{i=0}^r [G_{i+1}:G_{i}]=\prod_{i=0}^r |G_{i-1} / G_{i}|=\prod_{i=0}^r p_{i}
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> סופית ו-<span>\(N\trianglelefteq G\)</span> אזי גורמי ההרכב של <span>\(G\)</span> הם איחוד(עם חזרות) של גורמי ההרכב של <span>\(N\)</span> ושל <span>\(G / N\)</span>.</p>
+</div>
+<div class="proof">
+<p>נבנה סדרת הרכב שמכילה את <span>\(N\)</span>: נתחיל מ-<span>\(1\trianglelefteq N\trianglelefteq G\)</span>. אם זו סדרת הרכב, סיימנו. אם לא, אפשר להוסיף לה חבורת ביניים עד שמקבלים סדרת הרכב:
+<span>$$\star \quad 1=G_{0}\triangleleft G_{1} \triangleleft \dots \triangleleft G_{k}=N\triangleleft G_{k+1}\triangleleft \dots \triangleleft G_{r} = G$$</span>
+כאשר גורמי ההרכב של <span>\(N\)</span> הם <span>\(G_{i+1} / G_{i}\)</span> ל- <span>\(i=0,\dots,k-1\)</span>. נשים לב שממשפט האיזומורפיזם השלישי עבור <span>\(k\leq i\)</span>:
+<span>$$(G_{i+1} / N) / (G_{i} / N) \cong G_{i+1} / G_{i}$$</span>
+ולכן <span>\(\star\)</span> סדרת הרכב, וגורמי ההרכב שלה איזומורפים ל-<span>\(G_{i+1} / G_{i}\)</span>.(<span>\(k\leq i\leq r-1\)</span>).</p>
+</div>
+<div class="example">
+<p>עבור <span>\(V\trianglelefteq S_{4}\)</span>. גורמי ההרכב של <span>\(V\)</span>. <span>\(\mathbb{Z} _2,\mathbb{Z} _2\)</span>, ושל <span>\(S_{4} / V \cong S_{3}\)</span>: <span>\(\mathbb{Z} _3,\mathbb{Z} _2\)</span>.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי: <span>$$\begin{cases}N\trianglelefteq G \\N\leq H\leq G
+\end{cases}\implies N\trianglelefteq  H$$</span> כי <span>\(\forall h'\quad h'N=Nh\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(|G|=p^r\)</span> כאשר <span>\(p\)</span> ראשונית, אז גורמי ההרכב שלה הם <span>\(\overbrace{ \mathbb{Z}_{p},\dots,\mathbb{Z} _p }^{ r }\)</span>.</p>
+</div>
+<div class="proof">
+<p>באינדוקציה שלמה על <span>\(|G|\)</span>, ניקח <span>\(N=Z(G)\)</span>, יודעים ש-<span>\(1=N\)</span>(מרכז
+של חבורת <span>\(p\)</span>) אם <span>\(N=G\)</span> אז <span>\(G\)</span> אבלית והוכחנו בעבר. אחרת, <span>\(p^k=|N|,p^l=|G / N|\)</span> חבורות מסדר חזקה <span>\(p\)</span> קטנה מ-<span>\(|G|\)</span>. לכן עבור <span>\(k,l &lt;r\)</span>, ומהאינדוקציה נקבל גורמי ההרכב שלה הם <span>\(\overbrace{ \mathbb{Z} _p, \dots, \mathbb{Z} _p }^{ r }\)</span>, והטענה אכן מתקיימת. ולכן:
+<span>$$\underbrace{ \overbrace{ \mathbb{Z} _{p},\dots , \mathbb{Z} _{p} }^{ l }\quad \overbrace{ \mathbb{Z} _{p},\dots,\mathbb{Z} _{p} }^{ k } }_{ \text{G לש בכרה ימרוג} }$$</span> 
+<strong>דוגמא</strong>
+יש חמישה חבורות מגודל 8 עד עדי איזומורפיזם -
+<span>$$\mathbb{Z} _{2}\times \mathbb{Z} _{4},\mathbb{Z} _{2}^3, \mathbb{Z} _{8},Q, D_{4}$$</span>
+וגורמי ההרכב של כל אחת מהם יהיו <span>\(\mathbb{Z} _2,\mathbb{Z} _2,\mathbb{Z} _2\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='prev-page'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

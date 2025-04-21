@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>עוצמות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page'><a href='./Set Theory'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_1'>1.1 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_3'>1.3 יחסי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_3'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_5'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Set Theory_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Set Theory_1_4`; }});</script>
+        <div class="content">
+        <h1>1.5  עוצמות</h1>
+    <p>כאשר נתונות לנו שתי קבוצות נרצה להשוואות את ה-"גדלים" שלהם.</p>
+<div class="definition"><span class="keyword">קבוצות שוות עוצמה</span><p>זוג קבוצות <span>\(A,B\)</span> נקראות שוות עוצמה אם קיימת פונקציה חח"ע ועל(כלומר הפיכה) <span>\(f:A\to B\)</span>. במקרה זה נסמן <span>\(|A|=|B|\)</span>.</p>
+</div>
+<div class="proposition">
+<p>שיוויון עוצמות הוא יחס שקילות.</p>
+</div>
+<div class="proof">
+<p>בין קבוצה לעצמה קיימת פונקציה חח"ע ועל - פונקציית הזהות - ולכן רפלקסיבי. אם <span>\(|A|=|B|\)</span> אז קיימת פונקציה הפיכה <span>\(f:A\to B\)</span> ולכן <span>\(f^{-1}:B\to A\)</span> גם כן פונקציה הפיכה ומתקיים <span>\(|B|=|A|\)</span>. בנוסף הרכבה של פונקציות הפיכות היא הפיכה ולכן טרנזיטיבי.</p>
+</div>
+<div class="definition"><span class="keyword">יחס סדר של שיוויון עוצמות</span><p>נאמר כי עוצמת קבוצה <span>\(B\)</span> גדולה או שווה לעוצמה של קבוצה <span>\(A\)</span> אם קיימת פונקציה חח"ע <span>\(f:A\to B\)</span>. במקרה זה נסמן <span>\(|A|\leq |B|\)</span>. אם בנוסף מתקיים <span>\(|A| \neq |B|\)</span>(כלומר לא שוות עוצמה), נאמר כי העוצמה של <span>\(B\)</span> גדולה ממש מהעוצמה של <span>\(A\)</span> ונסמן <span>\(|A|&lt;|B|\)</span>.</p>
+</div>
+<div class="remark">
+<p>הגדרה חלופית עבור <span>\(|A|&lt;|B|\)</span> זה אם קיים פונקציה חח"ע <span>\(f:A\to B\)</span> אך לא קיימת פונקצייה על.</p>
+</div>
+<div class="symbolize">
+<p>עבור <span>\(n\)</span> טבעי נסמן את קבוצת כל האיברים הטבעיים עד המספר ע"י:
+<span>$$[n]=\left\{  0,\dots, n-1  \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצה סופית</span><p>קבוצה אשר שוות עוצמה לקבוצה <span>\([n]\)</span> עבור <span>\(n\)</span> טבעי כלשהו. כלומר קבוצה <span>\(A\)</span> המקיימת <span>\(|A|=|[n]|\)</span>.  במקרה זה נאמר כי העוצמה של הקבוצה תהיה <span>\(n\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קבוצה בת מנייה</span><p>קבוצה <span>\(A\)</span> תקרא בת מנייה אם שוות עוצמה לטבעיים, כלומר <span>\(|A|=|\mathbb{N}|\)</span>, וקיים פונקצייה חח"ע בין הטבעיים לקבוצה.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(|A|\leq |\mathbb{N}|\)</span> אז <span>\(A\)</span> סופית או בת מנייה. כלומר למעשה קבוצות בנות מנייה הם הקבוצות האינסופיות "הקטנות ביותר".</p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי <span>\(A\subseteq \mathbb{N}\)</span> אז <span>\(A\)</span> סופית או בת מנייה. נגדיר פונקציה <span>\(g:A\to \mathbb{N}\)</span> ע"י <span>\(g(x)=|A\cap [x]|\)</span>. 
+ראשית נשים לב כי <span>\(g\)</span> מונוטונית עולה ממש ולכן חח"ע. אם <span>\(\mathrm{rng}(g)=\mathbb{N}\)</span> סיימנו, והקבוצה בת מנייה. אחרת נניח <span>\(\mathrm{rng}(g)\neq \mathbb{N}\)</span>. נסמן <span>\(N \in \mathbb{N}\)</span> בתור האיבר הטבעי המינימלי כך ש-<span>\(N \notin \mathrm{rng}(g)\)</span>. יהיו <span>\(a_{0},\dots,a_{N-1}\)</span> איברים כך ש-<span>\(g(a_{i})=i\)</span>. אם <span>\(A=\left\{  a_{0},\dots,a_{N-1}  \right\}\)</span> נקבל <span>\(|A|=N\)</span> ולכן סופית. אחרת נניח <span>\(A \setminus \left\{   a_{0},\dots, a_{N - 1}  \right\}\)</span> אינה ריקה, ונראה כי מצב זה לא אפשרי. יהי <span>\(b \in A \setminus \left\{   a_{0},\dots,a_{N-1}  \right\}\)</span> האיבר המינימלי בה(קיים בתור תת קבוצה של הטבעיים). 
+נראה כעת <span>\(\left\{a_{0},\ldots,a_{N-1}\right\}\subseteq A\cap[b]\)</span> בעזרת הכלה דו כיוונית. מתקיים <span>\(A\cap[b]\subseteq\ \{a_{0},\ldots,a_{N-1}\}\)</span> כי אם קיים איבר <span>\(c\in\left(A\cap[b]\right)\smallsetminus\ \left\{a_{0},\cdot\cdot\cdot,a_{N-1}\right\}\)</span> נקבל <span>\(c&lt; b\)</span> בסתירה למינימליות של <span>\(b\)</span>. נראה כעת <span>\(\left\{a_{0},\ldots,a_{N-1}\right\}\subseteq A\cap[b]\)</span>, כלומר שלכל <span>\(i&lt;N\)</span> מתקיים <span>\(a_{i}&lt; b\)</span>. אחרת יש <span>\(i&lt; N\)</span> כך ש-<span>\(b&lt; a_{i}\)</span>. כיוון ש-<span>\(g\)</span> מונוטונית עולה נקבל <span>\(g(b)&lt; g(a_{i})=i\)</span> אבל אז <span>\(g(b)=j=g(a_{j})\)</span> עבור <span>\(j&lt; i\)</span> כלשהו בסתירה לכך ש-<span>\(g\)</span> היא חח"ע. כלומר קיבלנו סה"כ כי:
+<span>$$A\cap[b]=\ \left\{ a_{0},\ldots,a_{N-1} \right\} \implies |A\cap[b]|=|\ \left\{ a_{0},\dots,a_{N-1} \right\}|=N$$</span>
+ולכן <span>\(g(b)=N\)</span> בסתירה לבחירה של <span>\(N\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה בעוצמת הרצף</span><p>קבוצה <span>\(A\)</span> תרא בעוצמת הרצף אם שוות עוצמה לממשיים. </p>
+</div>
+<div class="example">
+<p>נקבל כי <span>\(|\left( -\frac{\pi}{2},\frac{\pi}{2} \right)|=|\mathbb{R}|\)</span> כיוון שהפונקציה <span>\(F(x):\left( -\frac{\pi}{2},\frac{\pi}{2} \right)\to \mathbb{R}\)</span> המוגדרת ע"י <span>\(F(x)=\tan(x)\)</span> היא הפיכה. וכעת ע"י הזזה וכפל בקבוע נקבל כי כל קטע פתוח <span>\((a,b)\)</span> יהיה בעוצמת הרצף. בנוסף כל קטע החצי סגור או סגור גם כן יהיה בעוצמת הרצף.</p>
+</div>
+<div class="proposition">
+<ul>
+<li>לכל <span>\(n \in \mathbb{N}\setminus \{ 0 \}\)</span> מתקיים <span>\(\left\lvert  \mathbb{R}^n  \right\rvert=\left\lvert  \mathbb{R}  \right\rvert=\left\lvert  \mathbb{R}^\mathbb{N}  \right\rvert\)</span>. </li>
+<li>מתקיים <span>\(\left\lvert  \mathbb{R}^\mathbb{R}  \right\rvert=\left\lvert  \mathcal{P}\left( \mathbb{R} \right)  \right\rvert&gt;\left\lvert  \mathbb{R}  \right\rvert\)</span></li>
+</ul>
+</div>
+<div class="theorem"><span class="keyword">קנטור שרדר ברנשטיין</span><p>יהיו <span>\(A, B\)</span> קבוצות.  אם <span>\(|A|\leq |B|\)</span> וגם <span>\(|B|\leq |A|\)</span> אז <span>\(|A|=|B|\)</span>.</p>
+</div>
+<p>נניח בה"כ כי <span>\(A\subseteq B\)</span>. כמו כן נניח כי <span>\(f:A\to B\)</span> חח"ע. נגדיר:
+<span>$$ A^*=\{x\in A\mid\exists n\in\mathbb{N}\quad\exists a\in A\backslash B\quad x=f^n\left(a\right)\}$$</span>
+כאשר הפונקציה ההפיכה המבוקשת תהיה מוגדרת ע"י:
+<span>$$h(x)=\begin{cases}f(x) &amp; x \in A^{*} \\x &amp; x \in A \setminus  A^{*}
+\end{cases}$$</span>
+ראשית נשים לב כי <span>\(A / B \subseteq A^{*}\)</span>, כיוון ש-<span>\(f^{0}(a)=a\)</span> לכל <span>\(a\)</span>. לכן <span>\(h\)</span> מוגדרת היטב.
+כעת נראה ש-<span>\(h\)</span> חח"ע:
+יהיו <span>\(x_{1}\neq x_{2} \in A\)</span>. מספיק להראות כי <span>\(h(x_{1})\neq h(x_{2})\)</span>. נסתכל בנפרד מתי <span>\(x_{1},x_{2} \in A^{*}\)</span>, <span>\(x_{1},x_{2} \in A \setminus A^{*}\)</span>, וכאשר <span>\(x_{1},\in A^{*},x_{2} \in A\setminus A^{*}\)</span>.
+אם <span>\(x_{1},x_{2} \in A^{*}\)</span> מתקיים <span>\(x_{1},x_{2}\in A^{*}\)</span> אז מתקיים:
+<span>$$h(x_{1})=f(x_{1})\neq f(x_{2})=h(x_{2})$$</span>
+כיוון ש-<span>\(f\)</span> חח"ע. אם <span>\(x_{1},x_{2} \in A \setminus A^{*}\)</span> נקבל:
+<span>$$h(x_{1})=x_{1}\neq x_{2}=h(x_{2})$$</span>
+אם <span>\(x_{1} \in A^{*}\)</span> ו-<span>\(x_{2} \in A\setminus A^{*}\)</span> נשים לב ראשית כי <span>\(f(x_{1})\in A^{*}\)</span> לפי ההגדרה של <span>\(A^{*}\)</span>, ולכן:
+<span>$$h(x_{1})=f(x_{1})\neq x_{2}=h(x_{2})$$</span>
+ולכן מקיים חח"ע. נדרש רק להראות כי על. נבצע כעת חלוקה למקרים <span>\(b \in A^{*}\)</span> ו-<span>\(b \in A\setminus A^{*}\)</span>:
+אם <span>\(b \in A \setminus A^{*}\)</span> נקבל כי <span>\(b=h(b)\)</span>. אם <span>\(b \in A^{*}\)</span> אז מהגדרת <span>\(A^{*}\)</span> נקבל כי קיים <span>\(n\geq 0\)</span> כך ש-<span>\(b=f^{n}(a)\)</span>. נשים לב כי בהכרח <span>\(n&gt; 0\)</span>, כי אם כי אם <span>\(n=0\)</span> נקבל:
+<span>$$b=f^{0}(a)=a \in A\setminus  B$$</span>
+אבל לא ייתכן ש-<span>\(b \in A\setminus B\)</span>. לכן אפשר להסתכל על <span>\(n-1\geq 0\)</span>. נסמן <span>\(a'=f^{n-1}(a)\)</span> ולכן גם <span>\(a' \in A^{*}\subseteq A\)</span> ולכן:
+<span>$$h(a')=f(a')=f(f^{n-1}(a))=f^{n}(a)=b$$</span>
+והראנו כי על, ולכן קיבלנו פונקציה הפיכה בין שתי הקבוצות.</p>
+<div class="proposition">
+<p>נסמן ב-<span>\(C\left( \mathbb{R} \right)\)</span> את קבוצת הפונקציות הרציפות אז מתקיים:
+<span>$$\left\lvert  C\left( \mathbb{R} \right)  \right\rvert =\left\lvert  \mathbb{R}  \right\rvert $$</span></p>
+</div>
+<div class="proof">
+<p>נשתמש בקש"ב(קנטור שרדר ברנשטיין). לכל ממשי הפונקציה הקבועה עם ערך <span>\(a\)</span> היא רציפה ולכן יש לכל הפחות פונקציות רציפות כלומר הממשיים - <span>\(\left\lvert  \mathbb{R}  \right\rvert\leq \left\lvert  C\left( \mathbb{R} \right)  \right\rvert\)</span>.
+בכיוון השני נגדיר <span>\(F:C\left( \mathbb{R} \right)\to \mathbb{R}^\mathbb{Q}\)</span> על ידי <span>\(F(1)=f\upharpoonright \mathbb{Q}\)</span>.
+עובדה(מאינפי): אם <span>\(f,g:\mathbb{R}\to \mathbb{R}\)</span> רציפות ומסכימות על הרציונאלים, אז <span>\(f=g\)</span>. 
+מעובדה, <span>\(F\)</span> חח"ע. ומתקיים:
+<span>$$\left\lvert  C\left( \mathbb{R} \right)  \right\rvert \leq \left\lvert  \mathbb{R}^\mathbb{Q}   \right\rvert =\left\lvert  \mathbb{R}^\mathbb{N}  \right\rvert =\lvert \mathbb{R} \rvert $$</span></p>
+</div>
+<h2>חשבון עוצמות</h2>
+<div class="definition"><span class="keyword">עוצמה - זמנית</span><p>נסתכל על היחס:
+<span>$$E=\left\{  (A,B)\mid \exists f:A\to B \text{ invertable}  \right\}$$</span>
+ראינו ש-<span>\(E\)</span> יחס שקילות. נגגיר עוצמה כאוסף מחלקות השקולות של <span>\(E\)</span> על <span>\(A\)</span>.</p>
+</div>
+<div class="symbolize">
+<ol>
+<li>
+<p>העוצמה <span>\(|\mathbb{N}|\)</span> מסומן ב-<span>\(\aleph_{0}\)</span>. </p>
+</li>
+<li>
+<p>העוצמה <span>\(|\mathbb{R}|\)</span> מסומן ב-<span>\(\aleph\)</span> או <span>\(\mathfrak{c}\)</span> </p>
+</li>
+<li>
+<p>באופן כללי משתמשים באותויות גוטיות - לדוגמא <span>\(\mathfrak{a,b,c}\)</span> כדי לסמן עוצמות(מחלקות עוצמה) </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">חיבור עוצמות</span><p>בהנתן קבוצות <span>\(A,B\)</span> המקיימות <span>\(|A|=\mathfrak{a},|B|=\mathfrak{b}\)</span> כך ש-<span>\(A\cap B = \varnothing\)</span> נגדיר את חיבור העוצמות ע"י:
+<span>$${\mathfrak{a}}+{\mathfrak{b}}=|A\cup B|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">כפל עוצמות</span><p>בהנתן עוצמות <span>\(\mathfrak{a,b}\)</span> נגדיר <span>\(\mathfrak{a\cdot b}\)</span> באופן הבא:
+יהי <span>\(A,B\)</span> קבוצות. <span>\(|A|=\mathfrak{a}\)</span> ו-<span>\(|B|=\mathfrak{b}\)</span>. נגדיר <span>\(\mathfrak{a\cdot b}=|A\times B|\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(\mathfrak{a,b,c}\)</span> עוצמות. אזי:
+<span>$$\begin{gather}1.\;\mathfrak{a+(b+c)=(a+b)+c} \qquad 2.\;\mathfrak{a+b=b+a} \\3.\;\mathfrak{a\cdot \left( b\cdot c \right)=\;\left( a\cdot b \right)\cdot c} \qquad 4.\;\mathfrak{a\cdot b=b\cdot c} \\5.\;\mathfrak{a+a}=2\cdot\mathfrak{a}    
+\end{gather} $$</span></p>
+</div>
+<div class="proof">
+<p>יוהו <span>\(A,B,C\)</span> נציגים זרים. מתקיים:
+<span>$$A\cup\left( B\cup C \right)=\left( A\cup B \right)\cup C\qquad A\cup B=B\cup A$$</span>
+לכן שתי הטענות הראשונות מתקיימות. נראה את הטענה השלישית. נגדיר:
+<span>$$f:A\times\left( B\times C \right)\to \left( A\times B \right)\times C$$</span>
+ע"י:
+<span>$$f\left( \left\langle  a,\langle b,c \rangle   \right\rangle  \right)=\left\langle  \langle a,b \rangle ,c  \right\rangle $$</span>
+ו-<span>\(f\)</span> הפיכה. לכן:
+<span>$$\left\lvert  A\times\left( B\times C \right)  \right\rvert =\left\lvert  \left( A\times B \right)\times C  \right\rvert $$</span>
+מראים את הטענה הרביעית באופן דומה. נראה את הטענה החמישית:
+יהי <span>\(A'\)</span> נציג נוסף של <span>\(\mathfrak{a}\)</span> זר ל-<span>\(A\)</span>. תהי <span>\(g:A'\to A\)</span> הפיכה. נגדיר:
+<span>$$h:A\cup A' \to A \times[2]\quad h(x)=\begin{cases}\langle x,u \rangle  &amp; x \in A \\\langle g(x),1 \rangle  &amp; x \in A'
+\end{cases}$$</span>
+אפשר לבדוק ש-<span>\(h\)</span> חח"ע ועל(הפיכה) ולכן סיימנו</p>
+</div>
+<div class="definition"><span class="keyword">חזקת קבוצות</span><p>בהנתן קבוצות <span>\(A,B\)</span> נגדיר את החזקה <span>\(A^{ B}\)</span> בתור אוסף כל הפונקציות <span>\(f:B\to A\)</span>. כלומר:
+<span>$$A^{B}=\left\{ f\subseteq B\times A\mid f:B\to A\;\;\mathrm{is\;a\;function} \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חזקת עוצמות</span><p>בהנתן עוצמות <span>\(\mathfrak{a,b}\)</span> נגדיר <span>\(\mathfrak{a^b}\)</span> באופן הבא:
+יהיו <span>\(A,B\)</span> קבוצות כך ש- <span>\(|A|=\mathfrak{a},|B|=\mathfrak{b}\)</span>. נגדיר:
+<span>$$\mathfrak{a} ^{\mathfrak{b} }=|A^{B}|$$</span></p>
+</div>
+<div class="proposition">
+<p>העוצמה של חזקות מקיימת את הגדרת החזקה הרגילה, כלומר:
+<span>$$|A^{B}|=|A|^{|B|}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A\)</span> קבוצה. העוצמה של <span>\(\mathcal{P}(A)\)</span> תהיה <span>\(|2^{A}|=2^{|A|}\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span>$$2^{\aleph_{0}}=\aleph_{0}^{\aleph_{0}}$$</span></p>
+</div>
+<div class="proof">
+<p>ניקח את <span>\(\mathbb{N}\)</span> להיות הנציג של <span>\(\aleph_{0}\)</span> ואת <span>\(\{ 0,1 \}=[2]\)</span> להיות הנציג של 2.
+נשתמש במשפט קנטור שרדר ברנשטיין. ראשית <span>\([2]^\mathbb{N}\subseteq \mathbb{N}^\mathbb{N}\)</span> ולכן <span>\(2^{\aleph_{0}}\leq \aleph_{0}^{\aleph_{0}}\)</span>. צריך להראות  <span>\(2^{\aleph_{0}}\geq \aleph_{0}^{\aleph_{0}}\)</span>. בהינתן פונקציה 
+<span>$$f:\mathbb{N}\to \mathbb{N}\quad G(f):\mathbb{N}\to \mathbb{N}\quad G(f)(k)=\left( \sum_{i=0}^k f(i) \right)+k$$</span>
+כעת נגדיר:
+<span>$$H:\mathbb{N}^\mathbb{N} \to [2]^\mathbb{N}\qquad (H(f))(n)=\begin{cases}1 &amp;  \exists k\quad n=G(f)(k) \\0 &amp; else
+\end{cases}$$</span>
+אינטואיטבית, זהי סדרה של מספר בסדרה מייצג את כמות האפסים שתהיה בסדרה שנעבור עלייה, למשל:
+<span>$$\left\langle  3,1,5,\dots  \right\rangle \mapsto \left\langle  0,0,0,1,0,1,0,0,0,0,0,1,\dots  \right\rangle$$</span>
+תרגיל: לבדוק ש-<span>\(H\)</span> אכן חח"ע. היא לא על, ואין אף <span>\(f:\mathbb{N}^\mathbb{N}\)</span> כך ש:
+<span>$$H(f)=\left\langle  0,0,0,0,0,\dots  \right\rangle $$</span>
+אבל לא אכפת לנו כי קנטור שרדר ברנשטיין. </p>
+</div>
+<div class="remark">
+<p>דרך נוספת להראות את האי שיוויון בכיוון השני היא לשים לב כי מתקיים <span>\(\mathbb{N}^\mathbb{N}\subseteq \mathcal{P}\left( \mathbb{N}\times \mathbb{N} \right)\)</span> ולכן:
+<span>$$\aleph_{0}^{\aleph_{0}}\leq 2^{\mathbb{N}\times \mathbb{N}}=2^{\aleph_{0}\cdot \aleph_{0}}=2^{\aleph_{0}}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(\mathfrak{a,b,c}\)</span> עוצמות, ו-<span>\(\mathfrak{a\leq b}\)</span> אז <span>\(\mathfrak{a^c\leq b^c}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(A,B,C\)</span> נציגים בהתאמה. תהי <span>\(i:A\to B\)</span> חח"ע. נגדיר:
+<span>$$F:A^C\to B^C\quad F(f)=i\circ f$$</span>
+נראה ש-<span>\(F\)</span> חח"ע. יהיו <span>\(f,g\)</span> כך ש-<span>\(F(f)=F(g)\)</span>. 
+לכן לכל <span>\(x \in C\)</span> מתקיים <span>\(i(f(x))=i(g(x))\)</span> גורר לכל <span>\(x \in C\)</span> מתקיים <span>\(f(x)=g(x)\)</span> כי <span>\(i\)</span> חח"ע. ולכן <span>\(g=f\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mathfrak{a,b,c}\)</span> עוצמות, <span>\(\mathfrak{a}\neq 0\)</span> ו-<span>\(\mathfrak{b\leq c}\)</span> אזי <span>\(\mathfrak{a^b\leq a^c}\)</span></p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(A,B,C\)</span> נציגים. תהי <span>\(i: B\to C\)</span> חח"ע. אז <span>\(\mathfrak{b}=|B|=|rng(i)|\)</span> ואפשר להשתמש ב-<span>\(rng(i)\)</span> במקום ב-<span>\(B\)</span>. לכן בלי הגבלת הכלליות <span>\(B\subseteq C\)</span>. נראה <span>\(\lvert A^B \rvert\leq \lvert A^C \rvert\)</span>. יהי <span>\(a_{0} \in A\)</span> כלשהו. נגדיר 
+<span>$$H:A^B\to A^C\quad f\mapsto H(f)\qquad (H(f))(c)=\begin{cases}f(c) &amp; c\in B \\a_{0} &amp;  c \in C \setminus  B
+\end{cases}$$</span>
+נראה ש-<span>\(H\)</span> חח"ע. (סימון: אם <span>\(\varphi:X\to Y\)</span> פונקציה <span>\(X'\subseteq X\)</span> אז <span>\(\varphi\upharpoonright X'\)</span> זה הצמצום של <span>\(\varphi\)</span> ל-<span>\(X'\)</span> כלומר <span>\(\varphi \upharpoonright X'= \varphi \cap (X' \times Y)\)</span>). נניח <span>\(H(f)=H(g)\)</span> בפרט:
+<span>$$f=H(f)\upharpoonright B=H(g)\upharpoonright B = g$$</span>
+כלומר <span>\(f=g\)</span></p>
+</div>
+<p>יהיו <span>\(\mathfrak{a,b,c}\)</span> עוצמות. מתקיים:</p>
+<ol>
+<li>
+<p><span>\({\mathfrak{a}}\cdot({\mathfrak{b}}+{\mathfrak{c}})=({\mathfrak{a}}\cdot{\mathfrak{b}})+({\mathfrak{a}}\cdot{\mathfrak{c}})\)</span> </p>
+</li>
+<li>
+<p><span>\({\mathfrak{a}}^{\mathfrak{c}}\cdot{\mathfrak{b}}^{\mathfrak{c}}=({\mathfrak{a}}\cdot{\mathfrak{b}})^{\mathfrak{c}}\)</span> </p>
+</li>
+<li>
+<p><span>\({\mathfrak{a}}^{\mathfrak{b}}\cdot{\mathfrak{a}}^{\mathfrak{c}}={\mathfrak{a}}^{\mathfrak{b}+{\mathfrak{c}}}\)</span> </p>
+</li>
+<li>
+<p><span>\(\left(a^{\mathfrak{b}}\right)^{\mathfrak{c}}={\mathfrak{a}}^{{\mathfrak{b}}\cdot{\mathfrak{c}}}\)</span> </p>
+</li>
+</ol>
+<div class="proposition">
+<p><span>$$2^{\aleph_{0}}=\mathfrak{c} = |(0,1)|$$</span></p>
+</div>
+<div class="proof">
+<p>נשתמש בקנטור שרדר ברנשיין. נראה ראשית <span>\(2^{\aleph_{0}}\leq \mathfrak{C}\)</span>. ניקח נציגים:
+<span>$$\left\{  f:\mathbb{N}\to \{ 0,1 \}  \right\}=\{ 0,1 \}^\mathbb{N}$$</span>
+עבור <span>\(2^x\)</span> ו-<span>\((0,1)\)</span></p>
+</div>
+<p>תזכורת:
+לכל מספר ממשי <span>\(x \in (0,1)\)</span> יש הצגה סטנדרטית יחידה של פיתוח עשרוני.
+<span>$$x=0.x_{0}x_{1}x_{2}\dots x_{n}\dots$$</span>
+כאשר הסטנדרטי אומרים שלא מתקיים <span>\(x_{n}=9\)</span> החל מ-<span>\(m \in \mathbb{N}\)</span>.
+נגדיר פונקציה:
+<span>$$G:\{ 0,1 \}^\mathbb{N}\to (0,1)$$</span>
+באופן הבא:
+לכל <span>\(f:\mathbb{N}\to \{ 0,1 \}\)</span> נגדיר:
+<span>$$G(f)=0.f(0)f(1)f(2)\dots f(n)\dots$$</span>
+יחידות הפיתוחים של מספירים כנל מבטיח כי <span>\(G\)</span> חח"ע. מסקנה:
+<span>$$2^{\aleph_{0}}=|\{ 0,1 \}^\mathbb{N}|\leq|[0,1)|=\mathfrak{c}  $$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='prev-page'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

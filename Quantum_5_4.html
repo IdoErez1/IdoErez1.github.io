@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>היפוך במקום</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_5_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_5_3`; }});</script>
+        <div class="content">
+        <h1>5.4  היפוך במקום</h1>
+    <div class="definition"><span class="keyword">היפוך במקום חד מימדי</span><p>אופרטור <span>\(\Pi\)</span> אשר מקיים:
+<span>$$\Pi \psi(x)=\psi(-x)$$</span></p>
+</div>
+<div class="proposition">
+<p>אופרטור ההיפוך במקום הוא הרמיטי ואוניטרי, וכן הערכים העצמיים שלו הם <span>\(\pm 1\)</span>.</p>
+</div>
+<div class="proof">
+<p>נובע ישירות מכך שההופכי של עצמו(היפוך פעמיים יחזיר לאותו מצב). מזה גם נובע שהערכים העצמיים שלו הם <span>\(\pm 1\)</span> כיוון שמתקיים <span>\(\Pi^{2}=\mathbb{1}\)</span> ולכן <span>\(\Pi^{2}-\mathbb{1}=0\)</span> נקבל כי הפולינום המינימלי מתחלק ב-<span>\(x^{2}-1\)</span> וזה חייב גם להיות הפולינום המינימלי כי לא ייתכן כי מסדר ראשון. ולכן הערכים העצמיים הם השורשים <span>\(\pm 1\)</span>.</p>
+</div>
+<div class="definition">
+<p>מצבים עצמיים של אופרטור ההיפוך המרחבי עם ערך עצמי <span>\(1\)</span> נקראים מצבים זוגיים או סימטריים ומצבים עצמיים עם ערך עצמי <span>\(-1\)</span> נקראים אי זוגיים או אנטי סימטריים.</p>
+</div>
+<div class="proposition">
+<p>ההיפוך המרחבי של אופרטור <span>\(Q\)</span> יהיה <span>\(\Pi ^{\dagger}Q \Pi\)</span>. </p>
+</div>
+<div class="proposition">
+<p>אופרטור המיקום והתנע הם אי זוגיים תחת היפוך מרחבי. כלומר מקיימים:
+<span>$$\Pi ^{\dagger} X\Pi=-X\qquad \Pi ^{\dagger}P \Pi=-P$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור אופרטור כללי אשר מורכב מאופרטורי המיקום והתנע <span>\(Q(X,P)\)</span> מתקיים:
+<span>$$\Pi ^{\dagger}Q(X,P)\Pi = Q(-X,-P)$$</span></p>
+</div>
+<div class="proof">
+<p>נובע מכך שכל גורם חיבורי שמופיע <span>\(X\)</span> או <span>\(P\)</span> מתהפך מהטענה בקודמת וכל גורם כפלי ניתן להכניס יחידה באמצא(לדוגמא <span>\(\Pi XP \Pi ^{\dagger}=\Pi X\Pi ^{\dagger}\Pi P \Pi ^{\dagger}=(-X)(-P)\)</span>).</p>
+</div>
+<div class="definition"><span class="keyword">מערכת סימטרית להיפוך מרחבי</span><p>מערכת אשר אינווריאנטית תחת היפוך מרחבי, כלומר <span>\(\Pi ^{\dagger}H\Pi=H\)</span>, או לחלופין מקיימת <span>\(\left[ H,\Pi \right]=0\)</span>.</p>
+</div>
+<div class="remark">
+<p>עבור חלקיק חופשי בפוטנציאל חד מימדי היפוך מרחבי אומר כי הפוטנציאל היא פונקציה זוגית <span>\(V(x)=V(-x)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם למערכת יש סימטריה להיפוך מרחבי נקבל כי לכסינה במשותף עם האופרטור ההיפוך המרחבי ולכן:
+<span>$$\hat{\Pi}\,\psi_{n}(x)=\psi_{n}(-x)=\pm\,\psi_{n}(x)\,,$$</span></p>
+</div>
+<div class="proposition">
+<p>אם למערכת יש היפוך מרחבי אז לפי משפט אנרנפסט:
+<span>$$\frac{d}{d t}\left&lt;\Pi\right&gt;=\frac{i}{\hbar}\left&lt;\left[\hat{H},\hat{\Pi}\right]\right&gt;=0$$</span>
+ולכן הזוגיות נשמרת לאורך זמן(אם הפונקציה זוגית תשאר זוגית ואם אי זוגית אז תשאר אי זוגית).</p>
+</div>
+<div class="example"><span class="keyword">אוסצילטור הרמוני</span><p>נסתכל עם אוסצילטור הרמוני חד מימדי עם המילטוניאן מהצורה:
+<span>$$H=\frac{1}{2m}p^{2}+\frac{1}{2}m\omega^{2}x^{2}$$</span>
+נבנה את המרחב הילברט בעזרת אופרטורי העלה <span>\(a^{\dagger}=X-\frac{i}{m\omega}P\)</span> והורדה <span>\(a \sim \left( X+\frac{i}{m\omega}P \right)\)</span>. נזכור כי <span>\(a\ket{0}=0\)</span> ו-<span>\(\ket{n}\sim\left( a^{\dagger} \right)^{n}\ket{0}\)</span>.
+ההמילטוניאן אינווריאנטי לזוגיות(אכן <span>\(\left[ H,\Pi \right]=0\)</span>), ולכן הזוגיות מוגדרת היטב. כיוון שאופרטור היצירה לינארי ב-<span>\(X\)</span> ו-<span>\(P\)</span> נקבל:
+<span>$$\Pi a^{\dagger}\Pi=-a^{\dagger}$$</span>
+כלומר הזוגיות של המצב <span>\(\ket{n+1}\)</span> יהיה:
+<span>$$\Pi \ket{n+1} =\Pi a^{\dagger}\ket{n} =-a^{\dagger}\Pi \ket{n} \implies \eta_{n+1}=-\eta_{n}$$</span>
+כאשר <span>\(\eta_{n}\)</span> מסמן מסמן את הזוגיות של הרמה המעורערת ה-<span>\(n\)</span>. נשים לב כי הזוגיות מתחלפת בכל רמה מעורערת. לכן מספיק לדעת את הזוגיות של רמה נתונה. עבור מצב היסוד נקבל:
+<span>$$\psi_{0}(x)=\langle x|0\rangle\sim\exp\left(-{\frac{m\omega x^{2}}{2\hbar}}\right)$$</span>
+כאשר נשים לב כי לא משתנה תחת שיקוף מרחבי, ולכן <span>\(\eta_{0}=1\)</span> ומזה נקבל כי <span>\(\eta_{n}=(-1)^{n}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">היפוך מרחבי תלת מימדי</span><p>כעת מוגדר עבור פונקציית גל ווקטורית:
+<span>$$\hat{\Pi}\psi({\bf r})=\psi(-{\bf r})$$</span></p>
+</div>
+<div class="corollary">
+<p>בדיוק כמו במקרה החד מימדי מתקיים:
+<span>$$\hat{\Pi}^{\dagger}\,\hat{\mathbf{r}}\,\hat{\Pi}=-\hat{\mathbf{r}}\qquad \hat{\Pi}^{\dagger}\,\hat{\bf p}\,\hat{\Pi}=-\hat{\bf p}$$</span>
+כאשר כל שילוב שלהם מקיים:
+<span>$$\hat{\Pi}^{\dagger}\hat{Q}(\hat{\bf r},\hat{\bf p})\;\hat{\Pi}=\hat{Q}(-\hat{\bf r},-\hat{\bf p})$$</span></p>
+</div>
+<div class="proposition">
+<p>תנע זוויתי נשמר תחת היפוך מרחבי. כלומר:
+<span>$$\Pi ^{\dagger}L\Pi=L$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\hat{\mathbf{L}}^{\prime}=\hat{\Pi}^{\dagger}\,\hat{\mathbf{L}}\,\hat{\Pi}=\hat{\mathbf{r}}^{\prime}\times\hat{\mathbf{p}}^{\prime}=\left(-\hat{\mathbf{r}}\right)\times\left(-\hat{\mathbf{p}}\right)=\hat{\mathbf{r}}\times\hat{\mathbf{p}}=\hat{\mathbf{L}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">היפוך מרחבי בקורדינטות כדוריות</span><p>בקורדינטות כדוריות היפוך במרחב מקיים:
+<span>$$\left( r,\theta,\phi \right)\mapsto\left( r,\,\pi-\theta,\,\phi+\pi \right)$$</span></p>
+</div>
+<div class="example">
+<p>עבור הרמיוניות ספריות בקורדינטות כדוריות מתקיים:
+<span>$$Y_{\ell}^{m}(\pi-\theta,\phi+\pi)=(-1)^{\ell}\,Y_{\ell}^{m}(\theta,\phi)$$</span>
+זאת כיוון שניתן לכתוב:
+<span>$$Y_{\ell}^{m}(\theta,\phi)=N\,P_{\ell}^{m}(\cos\theta)\,e^{i m\phi}$$</span>
+אם מבצעים את אופרטור ההיפוך המרחבי נקבל <span>\(\theta \mapsto \pi-\theta\)</span> ו-<span>\(\phi \mapsto \phi+\pi\)</span>. הפולינומי לג'נדר המוכללים מקיימים:
+<span>$$P_{\ell}^{m}(-\cos\theta)=(-1)^{\ell+m}P_{\ell}^{m}(\cos\theta)$$</span>
+כאשר החלק האזיומטלי מקיים:
+<span>$$e^{i m(\phi+\pi)}=e^{i m\phi}e^{i m\pi}=e^{i m\phi}(-1)^{m}$$</span>
+כלומר סה"כ:
+<span>$$(-1)^{\ell+m}\cdot(-1)^{m}=(-1)^{\ell}$$</span></p>
+</div>
+<div class="remark">
+<p>טנזורים ספריים כללים(כאשר הרמיוניות ספריות הם מקרה פרטי שלהם) מדרגה <span>\(k\)</span> מתווסף פאקטור של <span>\((-1)^{k}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">זוגיות תחת היפוך מרחבי</span><p>אופרטור נקרא זוגי תחת היפוך מרחבי אם לא משתנה. </p>
+</div>
+<div class="remark">
+<p>קוראים לאובייקט אשר עובר סיבוב וגם היפוך במרחב כמו <span>\(\mathbf{x}\)</span> ווקטור, וכן לאובייקט אשר עובר סיבוב כמו <span>\(\mathbf{x}\)</span> אך היפוך במרחב בצורה שונה פסודו ווקטור(כלומר אובייקט כמו תנע זוויתי אשר מקיים <span>\(\Pi V\Pi=+V\)</span>).</p>
+</div>
+<div class="example">
+<p>השדה החשמלי הוא ווקטור כאשר השדה המגנטי הוא פסאודו ווקטור כיוון שתחת היפוך מרחבי מתקיים:
+<span>$$E\mapsto -E\qquad B\mapsto +B$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>אופרטור <span>\(\Pi\)</span> נקרא היפוך במרחב והופך את המיקום של החלקיקים. בפרט <span>\(\Pi \psi(x)=\psi(-x)\)</span>.</li>
+<li>לכל אופרטור <span>\(Q(X,P)\)</span> מתקיים:
+<span>$$Q(X,P)\Pi^{\dagger}Q(X,P)\Pi=Q(-X,-P)$$</span></li>
+<li>תנע זוויתי לא משתנה תחת היפוך מרחבי.</li>
+<li>בקורדינטות ספריות היפוך מרחבי נתון על ידי <span>\(\left( r,\theta,\phi \right)\mapsto\left( r,\,\pi-\theta,\,\phi+\pi \right)\)</span>.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+<li class='prev-page'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

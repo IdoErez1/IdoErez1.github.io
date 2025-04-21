@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הפעולה של התנועה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_3_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_3_1`; }});</script>
+        <div class="content">
+        <h1>3.2  הפעולה של התנועה</h1>
+    <h2>פעולה של חלקיק חופשי</h2>
+<div class="definition"><span class="keyword">פעולה יחסותית</span><p>הפעולה של חלקיק חופשי מוגדרת בצורה הבאה:
+<span>$$S=-mc\int_\gamma d s=-mc\int_\gamma\sqrt{c^2d t^{2}-d x^{2}-d y^{2}-d z^{2}}=-mc \int_{\gamma} \sqrt{ \frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau} \eta_{\mu \nu} } \;\mathrm{d}\tau$$</span></p>
+</div>
+<div class="remark">
+<p>זה למעשה המסולול של הפעולה תחת קו עולם. כאשר מעקרון הפעולה המינימלית נקבל כי הקו העולם שנקבל יהיה הקו עולם עם "אורך" אקסטרימלי.</p>
+</div>
+<p>הקבוע <span>\(-m\)</span> אינו ישפיע על משוואות התנועה, אבל יגרום לכך שבמהירויות נמוכות, הפעולה תסכים עם הלגרנג'יאן הניוטוני שמופיע עם <span>\(m\)</span>. נראה זאת במפורש:
+<span>$$\begin{array}{r c l}{{S}}&amp;{{=}}&amp;{{\displaystyle-mc\int_{i}^{f}d s=-m\int_{i}^{f}\sqrt{c^2d t^{2}-d x^{2}-d y^{2}-d z^{2}}=-mc\int_{i}^{f}\sqrt{1-\left( \frac{d x}{cd t} \right)^{2}-\left( \frac{d y}{cd t} \right)^{2}-\left( \frac{d z}{cd t} \right)^{2}}~d t}}\\ {{}}&amp;{{\approx}}&amp;{{\displaystyle-mc\int_{i}^{f}\left[ 1-\frac{1}{2c}|\vec{v}|^{2} \right]d t=-mc(t_{f}-t_{i})+\int_{i}^{f}\frac{1}{2}m|\vec{v}|^{2}d t}}\end{array}$$</span>
+כאשר הקבוע <span>\(-mc(t_{f}-t_{i})\)</span> אינו ישפיע על משוואות התנועה.</p>
+<div class="remark">
+<p>הגדרה זו מוגדרת היטב כיוון שגם האינטרוואל וגם הזמן העצמי הם סקלרי לורנץ, ולכן הלגרנג'יאן יהיה זהה בכל מערכות הייחוס.</p>
+</div>
+<h2>הפעולה שהשדה מפעיל על המטען</h2>
+<div class="definition"><span class="keyword">השדה</span><p>מופיע במרחב ומשפיע על החלקיק. השדה משפיע על החלקיק אבל באותו אופן החלקיק משפיע על השדה.</p>
+</div>
+<p>ביחסות כללית למשל, המסה משפיע על העיקום של המרחב זמן, אבל העיקום של המרחב זמן משפיע על תנועת המסה.
+כאן באופן דומה, המטען משפיע על השדה האלקטרומגנטי, אבל השדה משפיע על המטען. לכן אם נרצה למצוא את הלגרנג'יאן של מערכת כולה. נרצה למצוא את הלגרנג'יאן של השדה(אשר נסמן <span>\(\mathcal{L}_{f}\)</span>), וכן את הלגרנג'יאן של ההשפעה של השדה והחלקיק(אשר נסמן <span>\(\mathcal{L}_{int}\)</span>).</p>
+<p>הפעולה של האינטרקציה בין השדה לחלקיק תהיה האינטגרל המסלולי על הקו עולם של הביטוי הבא:
+<span>$$S_{int}=-\frac{e}{c} \int_{\gamma} A_{i} dx^i$$</span>
+כאשר <span>\(e\)</span> זה המטען, ונדרש כמו מקודם לנרמל <span>\(\frac{1}{c}\)</span> כדי שיתאים בגבול הקלאסי לתוצאות הידועות(כאשר כמובן לא משפיע על משוואות התנועה)</p>
+<h2>הפעולה של השדה</h2>
+<p>ולכן נותר למצוא רק את <span>\(S_{f}\)</span>. ניתן למעשה לקבוע את <span>\(S_{f}\)</span> לחלוטין מהעקרונות הבאים:</p>
+<ol>
+<li>
+<p>אינווריאנטיות תחת טרנספורמציית לורנץ. </p>
+</li>
+<li>
+<p>אינוואירנטיות תחת טרנספורמציית כיול. </p>
+</li>
+<li>
+<p>עקרון הסופרפוזיציה.  </p>
+</li>
+</ol>
+<div class="remark">
+<p>השדה היחידה בערך שאנחנו מכירים שמקיים סופרפוזיציה הוא השדה האלקטרומגנטי. כבידה למשל(תחת יחסות כללית) אינו מקיים סופרפוזיציה. עיקרון סופרפוזיציה למעשה נובעת מזה שהמשוואות הם לינאריות.</p>
+</div>
+<div class="definition"><span class="keyword">אינווריאנטיות תחת טרנספורמציית כיול</span><p>ניתן לעבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu}f\)</span> כלומר להוסיף 4-גרדיאנט ולקבל <span>\(A_{\mu}\)</span> חדש אשר לכל היותר מוסיף קבוע לפעולה.</p>
+</div>
+<p>אומנם מרגיש שאלו הנחות מאוד טבעיות, אבל למעשה מאוד חזקות אשר לא קיימים באופן כללי בטבע, ולכן בסופו של דבר זה הנחות מבוססות ניסוי.</p>
+<div class="proposition">
+<p>שלושת העקרונות האלו קובעים את <span>\(S_{f}\)</span> ביחידות.</p>
+</div>
+<div class="proof">
+<p>מעקרון הסופרפוזיציה, אנו יודעים כי משוואות התנועה של שדה הם לינארים. מכאן הפעולה חייבת להיות ריבועית בשדה. 
+מטרנספורמציית כיול נקבל כי לא נרצה להשתמש ב-<span>\(A_{\mu}\)</span>(לא אינווריאנטי תחת שינוי כיול).
+כמו כן לא נשים נגזרת שנייה בתוך פעולה כדי לשמור על סדר ראשון בפעולה, הפועלה צריך להיות אובייקט תלוי בנגזרות הראשון. ולכן נשארנו עם <span>\(F_{\mu \nu}\)</span>. 
+המבנה היחיד שמקיים את שלושת העקרונות הוא <span>\(F_{\mu \nu}F^{\mu \nu}\)</span>. וזה אכן מקיים את שלושת הדרישות. </p>
+</div>
+<p>עקרונית יש עוד מבנה לא רלוונטי - <span>\(\varepsilon^{\mu \nu \alpha \beta}F_{\mu \nu}F_{\alpha \beta}=\partial_{\mu}V^\mu\)</span> כי זה נגזרת שלמה(4 דיוורגנץ)
+לכן למעשה קיים יחיד. למעשה:
+<span>$$S_{f}=\alpha\int \;\mathrm{d}t\mathrm{d}^3xF_{\mu \nu}F^{\mu \nu}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu}$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+<li class='prev-page'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

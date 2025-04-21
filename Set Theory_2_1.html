@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מחלקות וקבוצות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page'><a href='./Set Theory'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_1'>1.1 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_3'>1.3 יחסי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_3'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_5'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Set Theory_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Set Theory_1_5`; }});</script>
+        <div class="content">
+        <h1>2.1  מחלקות וקבוצות</h1>
+    <p>נרצה בעזרת תורת הקבוצות להציג כל אובייקט מתמטי. לשם כך נצטרך להגדר במדויק מה זה קבוצה. נעשה זאת בעזרת "השפה הפורמלית":</p>
+<div class="definition"><span class="keyword">השפה הפורמלית</span><p>השפה היסודית של <span>\(\in, =\)</span> וכמובן הסמלים הלוגיים הרגלים - סוגריים, כמתים, קשרים.</p>
+</div>
+<p>נראה מספר דוגמאות של דברים שניתן להציג בעזרת קבוצות:
+<strong>דוגמא</strong>
+המספרים טבעיים
+<span>$$0 = \varnothing \quad 1 = \{ 0 \}\quad n+1=n\cup \{ n \}$$</span>
+ולכן ניתן לכתוב למשל:
+<span>$$2=1 \cup \{ 1 \} = \{ 1,0 \}=\left\{  \left\{  \varnothing   \right\},\varnothing   
+\right\}$$</span></p>
+<div class="example">
+<p>זוג סדור ניתן להציג בעזרת קבוצות:
+<span>$$\langle x,y \rangle =\left\{  \{ x \},\{ x,y \}  \right\}$$</span></p>
+</div>
+<p>ניתן גם לתאר קבוצה בעזרת תכונה:</p>
+<div class="definition"><span class="keyword">תכונה של קבוצה</span><p>תכונה <span>\(p(x)\)</span> של קבוצות היא כזו שניתנת לתיאור ע"י נוסחה בשפה הפורמלית.</p>
+</div>
+<div class="example">
+<p>ניתן לתאר את הקבוצה הריקה <span>\(\varnothing\)</span> בעזרת התכונה
+<span>$$\varphi_{0}(x)= \forall y\quad y \not \in x$$</span>
+(התכונה התואמת עבור <span>\(x\)</span>: לכל קבוצה <span>\(y\)</span> מתקיים <span>\(x\not \in y\)</span>).</p>
+</div>
+<div class="example">
+<p>הכלה בין קבוצות <span>\(x\subseteq y\)</span>. בשפה הפורמלית:
+<span>$$\forall z\left( z \in x \implies z \in y \right)$$</span></p>
+</div>
+<div class="example">
+<p>כיצד נבטא <span>\(x=1\)</span>?
+<span>$$X=\left\{  \varnothing   \right\}$$</span>
+בשפה הפורמלית:
+<span>$$\varphi_{1}(x)= \exists y\quad \left[ \left( \varphi_{0}(y)\land y \in x \right) \land  \forall z \left( z \in x\implies z = y \right)\right]$$</span>
+עבור <span>\(x=2\)</span> נקבל:
+<span>$$2=\left\{  \varnothing ,\left\{  \varnothing   \right\}  \right\}$$</span>
+<span>$$\varphi_{2}\left(x\right):=\forall y\quad\left(y\in x\leftrightarrow\varphi_{0}\left(y\right)\vee\varphi_{1}\left(y\right)\right)$$</span></p>
+</div>
+<p>הניסיון נאיבי להגדיר קבוצה - לכל תכונה <span>\(P(x)\)</span> יש קבוצה <span>\(\left\{  x \mid P(x)  \right\}\)</span>.
+בעיה - עבור התכונה <span>\(P(x)=x \not \in x\)</span> לא ייתכן קבוצה:
+<span>$$\left\{  x\mid x \not  \in x  \right\}$$</span>
+הגישה שלנו: נרשום רשימת אקסיומת:
+<span>$$ZFC = ZF+AC$$</span>
+שתכליתן לתת לנו תיאר של הקבוצות הקיימות.
+<strong>הגדרה</strong> מחלקה
+באופן כללי, לאוסף מהצורה:
+<span>$$\left\{  x\mid P(x)  \right\}$$</span>
+כאשר <span>\(P(x)\)</span> תכונה כלשהי יקרא מחלקה.</p>
+<div class="definition"><span class="keyword">מחלקה נאותה</span><p>מחלקה שאינה קבוצה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='prev-page'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת לג'נדר ופולינומי לג'נדר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations_2_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  משוואת לג'נדר ופולינומי לג'נדר</h1>
+    <div class="definition"><span class="keyword">משוואת לג'נדר</span><p><span>$$(1-x^{2})y^{\prime\prime}-2x y^{\prime}+\ell(\ell+1)y=0,$$</span></p>
+</div>
+<div class="remark">
+<p>שימושי במיוחד במשוואות שכוללות סימטריה ספרית, כאשר משוואה זו מופיעה באופן טבעי.</p>
+</div>
+<div class="proposition">
+<p>יש שלושה נקודות סינגולאיות - <span>\(x=-1,1,\infty\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">פונקציות לג'נדר</span><p>פתרון של משוואת לג'נדר.</p>
+</div>
+<div class="proposition">
+<p>פתרון של משוואת לג'נדר יהיה <span>\(y(x)=c_{1}y_{1}(x)+c_{2}y_{2}(x)\)</span> כאשר:
+<span>$$\begin{gather}y_{1}(x)=1-\ell(\ell+1)\frac{x^{2}}{2!}+(\ell-2)\ell(\ell+1)(\ell+3)\frac{x^{4}}{4!}-\cdots \\y_{2}(x)=x-(\ell-1)(\ell+2)\frac{x^{3}}{3!}+(\ell-3)(\ell-1)(\ell+2)(\ell+4)\frac{x^{5}}{5!}-\cdots
+\end{gather}$$</span>
+כך שהחוקיות בין האיברים נקבע לפי הכלל נסיגה:
+<span>$$a_{n+2}=\frac{[n(n+1)-\ell(\ell+1)]}{(n+1)(n+2)}a_{n}$$</span></p>
+</div>
+<div class="proof">
+<p>נפתור בעזרת טור חזקות:
+<span>$$\sum_{n=0}^{\infty}\left[n(n-1)a_{n}x^{n-2}-n(n-1)a_{n}x^{n}-2n a_{n}x^{n}+\ell(\ell+1)a_{n}x^{n}\right]=0,$$</span>
+איחוד משתנים יתן:
+<span>$$\sum_{n=0}^{\infty}\left\{(n+2)(n+1)a_{n+2}-[n(n+1)-\ell(\ell+1)]a_{n}\right\}x^{n}=0.$$</span>
+כאשר מיחידות הטור נדרוש כי כל המקדמים מתאפסים, מכאן נקבל את הנוסחאת נסיגה:
+<span>$$a_{n+2}=\frac{[n(n+1)-\ell(\ell+1)]}{(n+1)(n+2)}a_{n},$$</span>
+מספיק למצוא שתי פתרונות בלתי תלויים. עבור <span>\(a_{0}=1\)</span> ו-<span>\(a_{1}=0\)</span> נקבל:
+<span>$$y_{1}(x)=1-\ell(\ell+1)\frac{x^{2}}{2!}+(\ell-2)\ell(\ell+1)(\ell+3)\frac{x^{4}}{4!}-\cdots,$$</span>
+כאשר עבור <span>\(a_{0}=0\)</span> ו-<span>\(a_{1}=1\)</span> נקבל:
+<span>$$y_{2}(x)=x-(\ell-1)(\ell+2)\frac{x^{3}}{3!}+(\ell-3)(\ell-1)(\ell+2)(\ell+4)\frac{x^{5}}{5!}-\cdots$$</span>
+כאשר נשים לב כי רדיוס ההתכנסות של הטור יהיה 1(למשל ממבחן דלמבר)
+לכן פתרון כללי יהיה מהצורה:
+<span>$$y(x)=c_{1}y_{1}(x)+c_{2}y_{2}(x)$$</span></p>
+</div>
+<div class="proposition">
+<p>כאשר <span>\(\ell\)</span> שלם הנוסחאת נסיגה מתאפסת בשלב מסויים, ולכן נקבל פולינום. בפרט אם <span>\(\ell\)</span> זוגי אז <span>\(y_{1}\)</span> הופך לפולינום ואם <span>\(\ell\)</span> אי זוגי אז <span>\(y_{2}\)</span> הופך לפלונום. </p>
+</div>
+<div class="definition">
+<p>הטור מתאפס הבשלב מסויים נקרא פולינומי לג'נדר, או פונקציות בסל מהסוג הראשון ומסומן <span>\(P_{\ell}(x)\)</span>. הטור הנותר נקרא פונקציית בסל מהסוג השני, ומסומן <span>\(Q_{\ell}(x)\)</span>, כאשר <span>\(Q_{\ell}(x)\)</span> הוא פתרון המתקבל רק במקרה סונגולרי-רגולרי, ופרט מתבדר ב-<span>\(x=\pm 1\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(\ell\)</span> שלם נקבל כי הפתרון הכללי של משוואת בסל מוגדר על ידי:
+<span>$$y(x)=c_{1}P_{\ell}(x)+c_{2}Q_{\ell}(x),$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">נוסחאת רודריגס</span><p><span>$$P_{\ell}(x)=\frac{1}{2^{\ell}\ell!}\frac{d^{\ell}}{d x^{\ell}}(x^{2}-1)^{\ell}$$</span></p>
+</div>
+<div class="proof">
+<p>נגדיר <span>\(u=(x^{2}-1)^{\ell}\)</span> כך ש-<span>\(u'=2\ell x(x^{2}-1)^{\ell-1}\)</span> וכעת:
+<span>$$(x^{2}-1)u^{\prime}-2\ell x u=0.$$</span>
+אם נגזור <span>\(\ell+1\)</span> פעמים נקבל:
+<span>$$\left[(x^{2}-1)u^{(\ell+2)}+2x(\ell+1)u^{(\ell+1)}+\ell(\ell+1)u^{(\ell)}\right]-2\ell\left[x u^{(\ell+1)}+(\ell+1)u^{(\ell)}\right]=0,$$</span>
+אשר מצטמם לביטוי:
+<span>$$(x^{2}-1)u^{(\ell+2)}+2x u^{(\ell+1)}-\ell(\ell+1)u^{(\ell)}=0.$$</span>
+וקיבלנו את משוואת לג'נדר עבור <span>\(u^{\left( \ell \right)}\)</span>.  כיוון ש-<span>\(\ell\)</span> מספר טבעי ו-<span>\(u^{\left( \ell \right)}\)</span> רגולרי נקבל:
+<span>$$u^{(\ell)}(x)=c_{\ell}P_{\ell}(x)$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$I_{\ell}=\int_{-1}^{1}P_{\ell}(x)P_{\ell}(x)\,d x={\frac{2}{2\ell+1}}$$</span></p>
+</div>
+<div class="proposition">
+<p>משוואת לג'נדר היא משוואת שטרום לוביל, ולכן בפרט ניתן לכתוב כל פונקציה המתנהגת יפה בתחום <span>\(\lvert x \rvert&lt;1\)</span> בצורה הבאה:
+<span>$$f(x)=\sum_{\ell=0}^{\infty}a_{\ell}P_{\ell}(x),$$</span>
+כאשר המקדמים יהיו שווים ל:
+<span>$$a_{\ell}={\frac{2\ell+1}{2}}\int_{-1}^{1}f(x)P_{\ell}(x)\,d x$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">יחס נסיגה של נגזרות</span><p>מתקיים:
+<span>$$(2n+1)P_{n}=P_{n+1}^{\prime}-P_{n-1}^{\prime}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ההרמוניות הספריות</span><p><span>$$Y_{\ell}^{m}(\theta,\phi)=(-1)^{m}\left[\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}\right]^{1/2}P_{\ell}^{m}(\cos\theta)\exp(i m\phi).$$</span></p>
+</div>
+<p>כאשר נשים לב ליחס:</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='prev-page'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+</ul></li>
+        </body>
+        </html>
+        

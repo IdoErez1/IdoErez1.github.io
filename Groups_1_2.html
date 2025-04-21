@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תתי חבורות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  תתי חבורות</h1>
+    <h2>תתי חבורות</h2>
+<div class="definition"><span class="keyword">תת חבורה</span><p>אם <span>\(G\)</span> חבורה, ו-<span>\(H\subseteq G\)</span>, אזי <span>\(H\)</span> נקראת תת חבורה של <span>\(G\)</span> </p>
+</div>
+<div class="definition"><span class="keyword">תת חבורה נוצרת על ידי איבר</span><p>אם <span>\(G\)</span> חבורה ו-<span>\(S\subseteq G\)</span>, התת חבורה שנוצרת ע"י <span>\(S\)</span> היא התת חבורה המינימלית שמכילה את <span>\(S\)</span>, מסומנת <span>\(\langle S\rangle\)</span>.</p>
+</div>
+<div class="remark">
+<p>יש כזו! נקח את <span>\(\bigcap_{{H\leq G,S\subseteq H}}H\)</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\langle s\rangle=\left\{  \prod_{i=1}^{l}s_{i}\bigg| l\in\mathbb{N}\setminus \{ 0 \},s_{i}\in S,e_{i} \in \{ 1,-1 \}  \right\}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור <span>\(G=\mathbb{Z}\)</span> מתקבל <span>\(\mathbb{Z}=\langle 1\rangle\)</span> </p>
+</li>
+<li>
+<p>עבור <span>\(G=2\mathbb{Z}\)</span> מתקבל <span>\(2\mathbb{Z}=\langle 2\rangle\)</span> </p>
+</li>
+<li>
+<p>עבור החבורה <span>\(G=\mathbb{Z}_{9}^x\)</span> מתקבל <span>\(G=\langle 2\rangle\)</span> 
+תזכורת: <span>\(Z_{n}^x=\{ 1\leq t\leq n \;\big|\;gcd(t,n)=1 \}\)</span></p>
+</li>
+<li>
+<p>עבור <span>\(G=D_{n}\)</span> אם <span>\(\sigma\)</span> סיבוב -<span>\(\frac{2\pi}{n}\)</span> ימינה ו-<span>\(\tau\)</span> שיקוף כלשהו אז: 
+<span>$$D_{n}=\langle \sigma,\tau\rangle $$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">חבורה ציקלית</span><p>חבורה נקראת ציקלית אם יש איבר שיוצר אותה, כלומר <span>\(G=\langle g\rangle\)</span>. </p>
+</div>
+<p>לדוגמא <span>\(\mathbb{Z},\mathbb{Z}_{9}^x\)</span>.
+לא דוגמא: <span>\(\mathbb{Z}_{8}\)</span>.</p>
+<div class="definition"><span class="keyword">חבורה אבלית</span><p>חבורה נקראת אבלית אם הכפל בה קומוטטיבי</p>
+</div>
+<div class="proposition">
+<p>חבורה ציקלית היא אבלית</p>
+</div>
+<div class="proof">
+<p>קיים <span>\(g\in G\)</span> כך ש-<span>\(G=\langle g\rangle\)</span>. הובע שכל איבר <span>\(x \in G\)</span> היא מהצירה <span>\(g^m\)</span> עבור <span>\(m\in \mathbb{Z}\)</span> כלשהו. ואז אם <span>\(x,y \in G\)</span> קיימים <span>\(m,n \in \mathbb{Z}\)</span> כך ש-<span>\(x=g^m\)</span>, <span>\(y=g^n\)</span>. ולכן:
+<span>$$x\cdot y=g^m \cdot g^n=g^{m+n}=g^n g^m=y\cdot x$$</span></p>
+</div>
+<div class="corollary">
+<p>החבורה <span>\(D_{3}\)</span> אינה ציקלית. </p>
+</div>
+<div class="definition"><span class="keyword">מרכז של חבורה</span><p>המרכז(center) של חבורה הוא:
+<span>$$Z(G) =\{ x \in G \big| \forall h\in G\quad gh=hg \}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>אם <span>\(G\)</span> אבלית אז <span>\(\mathbb{Z}(G)=G\)</span>(ורק אם!) </p>
+</li>
+<li>
+<p><span>\(\mathbb{Z}(D_{3})=\{ e \}\)</span> </p>
+</li>
+<li>
+<p><span>\(Z(D_{4})=\{ e, R_{180} \}\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>המרכז של חבורה היא תת חבורה שלה(<span>\(\mathbb{Z}(G)\leq G\)</span>)</p>
+</div>
+<div class="proof">
+<p>מכיל את איבר היחידה - <span>\(eg=ge\)</span>. וכן:
+<span>$$\forall k \in G, gh \in \mathbb{Z}(G) \quad (gh)k=g(hk)=g(kh)=(gk)h=(kg)h=k(gh)$$</span>
+ואז:
+<span>$$g^{-1}k=\dots=kg^{-1}$$</span>
+וסגור להופכי</p>
+</div>
+<div class="definition"><span class="keyword">גרף קיילי</span><p>של חבורה ביחס לאיברים <span>\(S\subseteq G\)</span> הוא גרף עם קודקודים <span>\(G\)</span>. וקשתות מכוונות מקודקוד <span>\(g\)</span>, לקודקוד <span>\(sg\)</span> ו-<span>\(s \in S\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מתקיים <span>\(\langle s\rangle=G\)</span> אם"ם יש מסילה מכל קודקוד לכל קודקוד(גרף קשיר), כשמתעלמים מכיווני החצים.</p>
+</div>
+<div class="definition"><span class="keyword">קוסט</span><p>אם <span>\(G\)</span> חבורה ו-<span>\(H\leq G\)</span>, אז לכל <span>\(g \in G\)</span> הקוסט השמאלי של <span>\(H\)</span> המתקבל מ-<span>\(g\)</span> הוא:
+<span>$$gH=\{ gh\;|\; h\in H\}$$</span>
+כאשר הקוסט הימיני יהיה:
+<span>$$Hg=\{ hg \;|\; h\in H \}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>ישריות במרחב וקטורי </p>
+</li>
+<li>
+<p>עבור <span>\(G=\mathbb{Z}\)</span>, <span>\(H=5\mathbb{Z}\)</span> נקבל: 
+<span>$$17+5\mathbb{Z}=\{ \dots,7,12,17,22,27,32,\dots \}$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(G=D_{3}\)</span> ו-<span>\(H=\{ e,F_{0} \}\)</span> נקבל: 
+<span>$$\begin{gather}R_{120}\cdot H=\{ R_{120}, F_{120} \} \\H\cdot R_{120}=\{ R_{120}, F_{240} \}
+\end{gather}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>אם <span>\(C\subseteq G\)</span> קוסט שמאלי של <span>\(H\)</span>, ו-<span>\(g \in C\)</span> אזי <span>\(C=gH\)</span>.</p>
+</div>
+<div class="proof">
+<p>יודעים שיש <span>\(x \in G\)</span> כך ש-<span>\(C=xH\)</span>. בפרט <span>\(g=xh\)</span> ל-<span>\(h \in H\)</span> כלשהו. ואז:
+<span>$$gH=(xh)H=x(hH)=xH$$</span></p>
+</div>
+<div class="corollary">
+<p>שני קוסטים שמאליים(ימניים) הם זהים או זרים. לכן <span>\(G\)</span> הוא איחוד זר של הקוסטים השמאליים של <span>\(H\)</span>, וגם של הקוסטים הימניים של <span>\(H\)</span>. כלומר: <span>\(G=\bigsqcup gH\)</span></p>
+</div>
+<div class="example">
+<p><span>$$G=3\mathbb{Z} \bigsqcup 1+3\mathbb{Z}\bigsqcup 5+3\mathbb{Z}$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב אם <span>\(G\)</span> חבורה ו-<span>\(H\subseteq G\)</span>, אז "להיות באותו קוסט שמאלי של <span>\(H\)</span>" הוא יחס שקילות על <span>\(G\)</span>.</p>
+</div>
+<div class="proposition">
+<p>איברים <span>\(x,y \in G\)</span> באותו קוסט שמאלי אם"ם:
+<span>$$xH=yH \iff y^{-1}x \in H ,y^{-1}xH=H \iff y\in xH$$</span></p>
+</div>
+<div class="example">
+<p>כאשר <span>\(G=\mathbb{Z}\)</span>, <span>\(H=mz\)</span>. מתי <span>\(a\)</span>,<span>\(b\)</span> האותו קוסט שמאלי של <span>\(H\)</span>? זה יהיה כאשר <span>\(a-b \in m\mathbb Z\)</span>, כלומר <span>\(a\equiv b\mod(m)\)</span></p>
+</div>
+<div class="definition"><span class="keyword">אינדקס</span><p>האנדקס של <span>\(H\)</span> ב-<span>\(G\)</span> (כש-<span>\(H\leq G\)</span>), הוא מספר הקוסטים השמאליים של <span>\(H\)</span> ב-<span>\(G\)</span>. מסומן <span>\([G:H]\)</span></p>
+</div>
+<div class="remark">
+<p>זה גם מספר הקוסטים הימניים - ההופכי של קוסט שמאלי הוא קוסט ימני:
+<span>$$(gH)^{-1}=\{ (gh)^{-1} \big| h\in H \}=\{ h^{-1}g^{-1} \big|h\in H \}=Hg^{-1}$$</span>
+מקבלים העתקה חח"ע ועל בין הקוסטים הימניים לשמאליים.</p>
+</div>
+<div class="proposition">
+<p>לכל הקוסטים של <span>\(H\)</span> אותו הגודל. </p>
+</div>
+<div class="proof">
+<p>ההעתקה <span>\(T:G\to G\quad T(x)=gx\)</span> היא חח"ע ועל. בפרט:
+<span>$$|gH|=|T(H)|=|H|$$</span></p>
+</div>
+<div class="corollary">
+<p>הגודל של <span>\(G\)</span> הוא הגדול(הזהה) של כל קוסט כפול מספר הקוסטים הזרים. כלומר:
+<span>$$\boxed{|G|=[G:H]|H|}
+$$</span></p>
+</div>
+<div class="remark">
+<p>זה כולל את המקרה האינסופי</p>
+</div>
+<div class="theorem"><span class="keyword">לגרנג'</span><p>הגודל של תת חבורה מחלק את הגודל של החבורה. כלומר:
+<span>$$|H| \;\big|\;|G|$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(G\)</span> סופית ו-<span>\(g^{|G|}=e\)</span> </p>
+</div>
+<div class="proof">
+<p>תהי <span>\(H=\langle g\rangle\)</span>, אזי <span>\(|H| \;\big|\;|G|\)</span>, נניח <span>\(|G|=|H|\cdot m\)</span>. ואז:
+<span>$$g^{|G|}=(g^{|H|})^m=e^m=e$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(|G|\)</span> ראשוני, אז אין ל-<span>\(G\)</span> תת חבורה לא טריוויאלית, ובפרט היא ציקלית(לכל <span>\(e\neq g\)</span> בהכרח <span>\(\langle g\rangle=G\)</span>).</p>
+</div>
+<div class="theorem"><span class="keyword">אוילר</span><p>אם <span>\(gcd(a,n)=1\)</span>, אזי <span>\(a^{\varphi(n)}=1\mod n\)</span>. כאשר:
+<span>$$\varphi(n)=|Z_{n}^\times|=|\left\{  1\leq t\leq n \;\big|\;\mathrm{gcd}(t,n)=1  \right\}|$$</span></p>
+</div>
+<div class="remark">
+<p>משומש באלגוריתם RSA</p>
+</div>
+<div class="definition"><span class="keyword">תת חבורה נורמלית</span><p>תת חבורה <span>\(H\)</span> של <span>\(G\)</span> נקראת נורמלית אם <span>\(gH=Hg\)</span> לכל <span>\(g \in G\)</span>. כלומר המחלק הימיני שווה למחלק השמאלי. 
+סימון: <span>\(H \trianglelefteq G\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>תת חבורה אבלית היא נורמלית </p>
+</li>
+<li>
+<p>המרכז של חבורה היא נורמלית גם אם לא אבלית(<span>\(\mathbb{Z}(G)\trianglelefteq G\)</span>). </p>
+</li>
+<li>
+<p>סיבוב ב-<span>\(D_{3}\)</span> - <span>\(\{ e,R_{120},R_{240} \}\trianglelefteq D_{3}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>תת חבורה של שיקוף הוא לא תת חבורה נורמלית ב-<span>\(D_{3}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\([G:H]=2\)</span> אזי <span>\(H\trianglelefteq G\)</span>. </p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\forall g \in H\quad  gH=H=Hg\\\forall g\notin H\quad  gH=G\setminus H=Hg \\H \bigsqcup gH=G=H  \bigsqcup G \setminus H
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p><span>\(H   \trianglelefteq G\)</span> </p>
+</li>
+<li>
+<p><span>\(gHg^{-1}=H\)</span> </p>
+</li>
+<li>
+<p>הקוסטים הימניים של <span>\(G\)</span> הם שמאליים ולהיפך. </p>
+</li>
+</ol>
+</div>
+<div class="symbolize"><span class="keyword"></span><p>הקוסטים השמאליים של <span>\(H\)</span> ב-<span>\(G\)</span> מסומנים <span>\(G/H\)</span> והימניים מסומנים <span>\(H/G\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$\mathbb{Z}/3\mathbb{Z}=\{ 3\mathbb{Z},3\mathbb{Z}+1,3\mathbb{Z}+2 \}$$</span>
+לכן ניתן להגיד שתת חבורה <span>\(H\leq G\)</span> היא נורמלית אם"ם <span>\(G/H=H/G\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הצמדה</span><p>עבור איבר <span>\(g\)</span>, הפונקציה מ-<span>\(G\)</span> ל-<span>\(G\)</span> ששולחת <span>\(h\)</span> ל-<span>\(ghg^{-1}\)</span>  נקראת הצמדה ב-<span>\(g\)</span>.
+לפעמים מסומנת <span>\(\phi_{g}\)</span>:
+<span>$$\phi_{g}:G\to G \quad \phi_{g}(h)=ghg^{-1}$$</span>
+עוד סימון: <span>\(^{g}h=ghg^{-1}\)</span> </p>
+</div>
+<div class="corollary">
+<p>תת חבורה <span>\(H\)</span> תהיה תת חבורה נורמלית אם"ם <span>\(\phi_{g}(H)=H\)</span>  לכל <span>\(g\in G\)</span> </p>
+</div>
+<div class="definition"><span class="keyword">אוטומורפיזם</span><p>איזומורפיזם ממנה לעצמה</p>
+</div>
+<div class="example">
+<p><span>$$f:\mathbb{Z}\to \mathbb{Z}\quad f(n)=-n$$</span></p>
+</div>
+<p><strong>שאלה</strong>
+מתי <span>\(f:g\to g^{-1}\)</span> היא אוטומורפיזם של חבורה <span>\(G\)</span>.</p>
+<div class="proposition">
+<p>עבור כל <span>\(g\in G\)</span> , מתקיים ש-<span>\(\varphi_{g}\)</span> הוא אוטומורפיזם של <span>\(G\)</span>(נקראות אוטומורפיזמים פנימיים)</p>
+</div>
+<div class="proof">
+<p>ראשית <span>\(\phi_{g}\)</span> חח"ע ועל. זאת כיוון ש:
+<span>$$\phi_{g}=\overbrace{\underbrace{ gh }_{ הרומת } g^{-1}}^{הרומת}$$</span>
+ או <span>\(\phi_{g^{-1}}\)</span> ההופכית שלה. </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+<li class='prev-page'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

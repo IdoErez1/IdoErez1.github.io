@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>העתקות לינאריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_1_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  העתקות לינאריות</h1>
+    <div class="definition"><span class="keyword">העתקה לינארית</span><p>תהי <span>\(V,W\)</span> מרחבים ווקטוריים מעל השדה <span>\(\mathbb{F}\)</span>. אזי פונקציה <span>\(T:V\to W\)</span> נקראת העתקה לינארית אם מקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(v, u \in V\)</span> מתקיים <span>\(T(v+u)=T(v)+T(u)\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(c \in \mathbb{F}\)</span> ו-<span>\(v \in V\)</span> מתקיים <span>\(T(cv)=cT(v)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם פונקציה <span>\(T:V\to W\)</span> מקיימת לכל <span>\(v,u \in V\)</span> ו-<span>\(c \in \mathbb{F}\)</span> כי:
+<span>$$T(cv+u)=cT(v)+T(u)$$</span>
+אז <span>\(T\)</span> היא העתקה לינארית.</p>
+</div>
+<p>החשיבות של העתקות לינאריות מגיעה מכך שמשמרת את המבנה של המרחב הווקטורי:</p>
+<div class="proposition">
+<p>העתקה לינארית מעבירה מרחב ווקטורי למרחב ווקטורי. כלומר אם <span>\(V\)</span> מרחב ווקטורי, ו-<span>\(U\leq V\)</span> תת מרחב ווקטורי, אז אם <span>\(T:V\to W\)</span> העתקה לינארית <span>\(T(U)\)</span> יהיה תת מרחב ווקטורי של <span>\(W\)</span>.</p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי אם <span>\(T(u),T(v) \in T(U)\)</span> ו-<span>\(c \in \mathbb{F}\)</span> אזי:
+<span>$$T(u)+cT(v) \in T(U)$$</span>
+אנו יודעים כי <span>\(U\)</span> תת מרחב ווקטורי לכן
+<span>$$u+cv \in U$$</span>
+ולכן קיים <span>\(\tilde{u} \in U\)</span> כך ש:
+<span>$$u+cv = \tilde{u}$$</span>
+נפעיל את <span>\(T\)</span> ונקבל:
+<span>$$T(u)+cT(v)=T\left( \tilde{u} \right)\in T(U)$$</span>
+ואכן תת מרחב ווקטורי.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(T:V\to W\)</span> העתקה לינארית. אזי האפס ב-<span>\(V\)</span> לאפס ב-<span>\(W\)</span>. כלומר <span>\(T(0_{V})=0_{W}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$T(0_{V})=T\left( 0\cdot 0_{V} \right)=0\cdot T(0_{V})=0_{W}$$</span></p>
+</div>
+<div class="proposition">
+<p>תהא <span>\(\left( a_{1},\dots,a_{n} \right)\)</span> בסיס של <span>\(V\)</span>. אזי ההעתקה הלינארית <span>\(T:V\to W\)</span> נקבעת ביחידות על ידי לאן שולחת את איברי הבסיס.</p>
+</div>
+<div class="proof">
+<p>כיוון שנתון איברי הבסיס קיימים מקדימים <span>\(v_{1},\dots,v_{n}\in \mathbb{F}\)</span> כך שמתקיים:
+<span>$$v=v_{1}a_{1}+v_{2}a_{2}+\dots+v_{n}a_{n}$$</span>
+נפעיל את ההעתקה <span>\(T:V\to W\)</span> ונקבל:
+<span>$$T(v)=T\left( v_{1}a_{1}+v_{2}a_{2}+\dots+v_{n}a_{n} \right)=v_{1}T(a_{1})+v_{2}T(a_{2})+\dots+v_{n}T(a_{n})$$</span>
+כאשר נשים לב כי קיבלנו העתקה מפורשת - <span>\(T(a_{i})\)</span> זה ווקטור מפורש לכל <span>\(i\)</span> כאשר <span>\(v_{i}\)</span> הם קבועים.</p>
+</div>
+<div class="definition"><span class="keyword">גרעין של העתקה</span><p>יהי <span>\(V,W\)</span> מרחבים וקטורים ו-<span>\(T:V\to W\)</span> העתקה לינארית. הגרעין(kernel) של <span>\(T\)</span> תהיה קבוצת כל האיברים ב-<span>\(V\)</span> אשר הולכים ל-0. כלומר:
+<span>$$\ker (T)=\left\{  v\mid T(v)=0_{W}  \right\}\subseteq V$$</span></p>
+</div>
+<div class="proposition">
+<p>הגרעין הוא תת מרחב ווקטורי.</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(v_{1},v_{2} \in \ker T\)</span> ו-<span>\(c \in \mathbb{F}\)</span>. מספיק להראות כי <span>\(v_{1}+cv_{2}\in \ker T\)</span>. מתקיים:
+<span>$$T(v_{1}+cv_{2})=T(v_{1})+cT(v_{2})=0_{W}+c\cdot 0_{W}=0_{W}\implies v_{1}+cv_{2}\in \ker  T$$</span></p>
+</div>
+<div class="proposition">
+<p>העתקה לינארית <span>\(T:V\to W\)</span> חד חד ערכית אם"ם <span>\(\ker(T)=\{ 0_{V} \}\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(\ker (T)=0\)</span>. נניח בשלילה כי <span>\(T\)</span> לא חח"ע. כלומר קיימים <span>\(v_{1},v_{2} \in V\)</span> כך ש-<span>\(v_{1}\neq v_{2}\)</span> ומתקיים <span>\(T(v_{1})=T(v_{2})\)</span>. </p>
+</li>
+<li>
+<p>כעת <span>\(T(v_{1})-T(v_{2})=0\)</span> ולכן <span>\(T(v_{1}-v_{2})=0\)</span> מלינאריות. </p>
+</li>
+<li>
+<p>קיבלנו כי <span>\(v_{1}-v_{2} \in \ker(T)\)</span> ולכן <span>\(v_{1}-v_{2}=0_{V}\)</span> כלומר <span>\(v_{1}=v_{2}\)</span> בסתירה. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">תמונה של העתקה</span><p>יהי <span>\(V,W\)</span> מרחבים וקטורים ו-<span>\(T:V\to W\)</span> העתקה לינארית. התמונה של <span>\(T\)</span> תהיה קבוצת כל האיברים ב-<span>\(W\)</span> 
+<span>$$\mathrm{Im}(T)=T(V)=\left\{  T(v)\mid v \in V  \right\}\subseteq W$$</span>
+כאשר נשים לב כי זה תהיה תת קבוצה של <span>\(V\)</span>.</p>
+</div>
+<div class="proposition">
+<p>התמונה של העתקה <span>\(T:V\to W\)</span> יהיה תת מרחב ווקטורי של <span>\(W\)</span>.</p>
+</div>
+<div class="symbolize">
+<p>נסמן את המימד של הגרעין ב-<span>\(\text{null } T\)</span>, ואת המימד של התמונה ב-<span>\(rk(T)\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">המימדים</span><p>יהיו <span>\(V,W\)</span> מרחבים ווקטורים מעל <span>\(\mathbb{F}\)</span> כך ש-<span>\(V\)</span> נוצר סופית. תהי <span>\(T:V\to W\)</span> העתקה לינארית. אזי <span>\(\ker (T),\mathrm{Im}(T)\)</span> נוצרים סופית ומתקיים:
+<span>$$\text{null }(T)+\mathrm{rk}(T)=\dim V$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>מאחר ש-<span>\(V\)</span> נוצר סופית, גם <span>\(\ker(T)\)</span> נוצר סופית, ולכן קיים בסיס <span>\(\left( v_{1},\dots,v_{k} \right)\)</span> של <span>\(\mathrm{\ker}(T)\)</span>. </p>
+</li>
+<li>
+<p>מאחר ש-<span>\(\left( v_{1},\dots,v_{k} \right)\)</span> בלתי תלוייה לינארית, קיימים <span>\(\left( v_{k+1},\dots,v_{n} \right)\)</span> כך ש-<span>\(\left( v_{1},\dots,v_{n} \right)\)</span> מהווים בסיס של <span>\(V\)</span>. </p>
+</li>
+<li>
+<p>נוכיח כי <span>\(\left( T(v_{k+1}),\dots ,T(v_{n}) \right)\)</span> בסיס של <span>\(\mathrm{\mathrm{Im}}(T)\)</span>. מאחר ש-<span>\(T(v_{1})=T(v_{2})=\dots =T(v_{k})=0_{W}\)</span> (כי נמצאים בגרעין) נקבל כי: 
+<span>$$\mathrm{Span}\left( \left\{  T(v_{k+1}),\dots T(v_{n})  \right\} \right)=\mathrm{Span}\left( \left\{  T(v_{1}),\dots,T(v_{n})  \right\} \right)=\mathrm{\mathrm{Im}}(T)$$</span></p>
+</li>
+<li>
+<p>נוכיח כי הסדרה <span>\(\left( T(v_{k+1}),\dots,T(v_{n}) \right)\)</span> בלתי תלוייה לינארית. יהיו <span>\(c_{k+1},\dots,c_{n}\in \mathbb{F}\)</span>. כך שמתקיים: 
+<span>$$c_{k+1}T(v_{k+1})+\dots+c_{n}T(v_{n})=0_{W}\implies T\left( c_{k+1}v_{k+1}+\dots+c_{n}v_{n} \right)=0_{W}$$</span></p>
+</li>
+<li>
+<p>קיבלנו כי <span>\(c_{k+1}v_{k+1}+\dots+c_{n}v_{n}\in \ker (T)\)</span>. ולכן ניתן לבטא בעזרת הבסיס של הגרעין. כלומר קיימים <span>\(d_{1},\dots,d_{k}\)</span> כך ש: 
+<span>$$c_{k+1}v_{k+1}+\dots+c_{n}v_{n}=d_{1}v_{1}+\dots+d_{k}v_{k}\implies c_{k+1}v_{k+1}+\dots+c_{n}v_{n}-d_{1}v_{1}-\dots-d_{k}v_{k}=0$$</span>
+וכיוון שהווקטורים <span>\(v_{1},\dots,v_{n}\)</span> בלתי תלויים לינארית נקבל כי:
+<span>$$-d_{1}=-d_{2}=\dots=-d_{k}=c_{k+1}=\dots=c_{n}=0$$</span></p>
+</li>
+<li>
+<p>קיבלנו כי הסדרה <span>\(\left( T(v_{k+1}),\dots,T(v_{n}) \right)\)</span> בלתי תלוייה לינארית ולכן בסיס של <span>\(\mathrm{Im}(T)\)</span>. ולכן מתקיים: 
+<span>$$\text{null }(T)+\mathrm{rk}(T)=k+(n-k)=n=\dim(V)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>יהיו <span>\(V,W\)</span> מרחבים ווקטורים כך ש-<span>\(V\)</span> נוצר סופית. אם העתקה לינארית <span>\(T:V\to W\)</span> היא חח"ע ועל אז <span>\(\dim(V)=\dim(W)\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כיוון שחח"ע מתקיים <span>\(\ker(T)=\{ 0_{V} \}\)</span> ולכן <span>\(\text{null }T=0\)</span>. </p>
+</li>
+<li>
+<p>כיוון שעל נקבל כי <span>\(\mathrm{Im}(T)=W\)</span> ולכן <span>\(\mathrm{rk}(T)=\dim (W)\)</span>. </p>
+</li>
+<li>
+<p>כעת ממשפט במימדים: 
+<span>$$\dim(V)=\text{null }T+\mathrm{rk\;}T=0+\dim W=\dim W$$</span></p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='prev-page'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

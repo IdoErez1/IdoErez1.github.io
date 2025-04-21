@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות אנליטיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_3_1'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent-page'><a href='./Complex Analysis'> פונקציות מרוכבות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לפונקציות מרוכבות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_1'>1.1 תזכורת - מרוכבים</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_2'>1.2 גבולות של פונקציות מרוכבות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_3'>1.3 ספרת רימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_1'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_2'>2.2 פונקציות אנליטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פונקציות והעתקות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_1'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_2'>3.2 העתקה לינארית והופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_3'>3.3 העתקת מוביוס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_1'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_2'>4.2 משפט קושי גורסה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_3'>4.3 משפט מוררה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_4'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. טורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_1'>5.1 טורים של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_2'>5.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_3'>5.3 טורי טיילור</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_4'>5.4 טור לורן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Complex Analysis_2_1'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Complex Analysis_3_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Complex Analysis_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  פונקציות אנליטיות</h1>
+    <div class="definition"><span class="keyword">פונקציה אנליטית בנקודה</span><p>פונקציה <span>\(f:\mathbb{C}\to \mathbb{C}\)</span> נקראת אנליטית בנקודה <span>\(z_{0}\)</span> אם יש לה נגזרת בכל נקודה בסביבה של <span>\(z_{0}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(f:\mathbb{C}\to\mathbb{C}\)</span> אנליטי בנקודה אז גם אניטית בסביבה.</p>
+</div>
+<div class="definition"><span class="keyword">אנליטיות בקבוצה פתוחה</span><p>פונקציה <span>\(f:\mathbb{C}\to \mathbb{C}\)</span> נקראת אנליטית בקבוצה פתוחה אם גזירה בכל נקודה בה.</p>
+</div>
+<div class="definition"><span class="keyword">אנליטיות בקבוצה שאינה פתוחה</span><p>פונקציה <span>\(f:\mathbb{C}\to \mathbb{C}\)</span> נקראת אנליטית בקבוצה שאינה פתוחה <span>\(B\)</span> אם קיים קבוצה פתוחה <span>\(B\subseteq A\)</span> כך ש-<span>\(A\)</span> אנליטית.</p>
+</div>
+<div class="definition"><span class="keyword">נקודה סינגולארית</span><p>נקודה שבה לכל סביבה קיים נקודה בסביבה שעבורה הפונקציה אנליטית.</p>
+</div>
+<div class="proposition">
+<p>הרכבה של פונקציות אנליטיות היא אנליטית</p>
+</div>
+<p>זה נובע ישירות מכלל השרשרת.</p>
+<h2>פונקציות הרמוניות</h2>
+<div class="definition"><span class="keyword">פונקציה הרמונית</span><p>פונקציה ממשית אשר מקיימת את משוואת לפלס נקראת הרמונית.</p>
+</div>
+<div class="theorem">
+<p>אם פונקציה <span>\(f:\mathbb{C}\to \mathbb{C}\)</span> המוגדרת <span>\(f(z)=u(x,y)+iv(x,y)\)</span> אנליטית ב-<span>\(D\)</span>. אז הפונקציות <span>\(u,v\)</span> הם פונקציות הרמוניות.</p>
+</div>
+<div class="proof">
+<p>כיוון שאנליטית, גזירה, ולכן מקושי רימן מתקיים:
+<span>$$u_{x}=v_{y},\quad u_{y}=-v_{x}.$$</span>
+כאשר אם נגזור את שתי אגפי המשוואה לפי <span>\(x\)</span> נקבל:
+<span>$$u_{x x}=v_{y x},\quad u_{y x}=-v_{x x}.$$</span>
+כאשר באופן דומה אם היינו גוזרים לפי <span>\(y\)</span> היינו מקבלים:
+<span>$$u_{x y}=v_{y y},\quad u_{y y}=-v_{x y}$$</span>
+אנו יודעים כי כיוון שהפונקציה אנליטית, הנגזרות החלקיות רציפות, ולכן מתקיים <span>\(v_{xy}=v_{yx}\)</span> ו-<span>\(u_{xy}=u_{yx}\)</span> ולכן:
+<span>$$u_{x x}+u_{y y}=0\quad{\mathrm{and}}\quad v_{x x}+v_{y y}=0.$$</span>
+ומקיימות את משוואת לפלס לכן פונקציות הרמוניות.</p>
+</div>
+<div class="definition"><span class="keyword">צמוד הרמוני</span><p>אם <span>\(u(x,y)\)</span> פונקציה הרמונית, הצמוד ההרמוני יהיה פונקציה <span>\(v(x,y)\)</span> אשר מקיים את משוואות קושי רימן. כלומר:
+<span>$$u_{x}=v_{y}\qquad u_{y}=-v_{x}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_3_1'>3.1 פונקציות אלמנטריות</a></li>
+<li class='prev-page'><a href='./Complex Analysis_2_1'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+</ul></li>
+        </body>
+        </html>
+        

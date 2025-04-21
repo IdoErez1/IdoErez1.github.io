@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טנזור המאמץ האלקטרומגנטי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics'> חשמל אנליטי</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_5_3`; }});</script>
+        <div class="content">
+        <h1>5.4  טנזור המאמץ האלקטרומגנטי</h1>
+    <div class="definition"><span class="keyword">טנזור המאמץ החשמלי</span><p><span>$$T_{i j}({\vec E})=\epsilon_{0}(E_{i}E_{j}\,-\,{\textstyle{\frac{1}{2}}}\delta_{i j}E^{2})$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור נפח נתון <span>\(V\)</span>, צפיפות הכוח(כוח ליחידת נפח) עבור כוח אלקטרומגנטי יהיה:
+<span>$$\begin{array}{c}{{\displaystyle{\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}+(\vec{E}\cdot\nabla)\vec{E}\right]+\frac{1}{\mu_{0}}\left[(\nabla\cdot\vec{B})\vec{B}+(\vec{B}\cdot\nabla)\vec{B}\right]}}}\\ {{\displaystyle{-\frac{1}{2}\nabla\left(\epsilon_{0}E^{2}+\frac{1}{\mu_{0}}B^{2}\right)-\epsilon_{0}\frac{\partial}{\partial t}(\vec{E}\times\vec{B}).}}}\end{array}$$</span></p>
+</div>
+<div class="proof">
+<p>בעזרת כוח לורנץ, אנו יודעים כי:
+<span>$$\vec{F}=\int_{\mathcal{V}}(\vec{E}+\vec{v}\times\vec{B})\rho\,d\tau=\int_{\mathcal{V}}\left(\rho\vec{E}+\vec{J}\times\vec{B}\right)d\tau.$$</span>
+ולכן הכוח ליחידת נפח יהיה:
+<span>$$\vec{f}=\rho\vec{E}+\vec{J}\times\vec{B}.$$</span>
+כאשר ניתן להחליף את <span>\(\vec{J}\)</span> בעזרת נוחאת אמפר-מקסוואל ואת <span>\(\rho\)</span> בעזרת חוק גאוס ולקבל:
+<span>$$\vec{f}=\epsilon_{0}(\nabla\cdot\vec{E})\vec{E}+\left({\frac{1}{\mu_{0}}}\nabla\times\vec{B}-\epsilon_{0}{\frac{\partial\vec{E}}{\partial t}}\right)\times\vec{B}$$</span>
+כאשר נזכור כי עבור מכפלה וקטורית מתקיים נוסחאת ליבניץ:
+<span>$${\frac{\partial}{\partial t}}(\vec{E}\times\vec{B})=\left({\frac{\partial\vec{E}}{\partial t}}\times\vec{B}\right)+\left(\vec{E}\times{\frac{\partial\vec{B}}{\partial t}}\right)$$</span>
+כעת חוק פאראדיי אומר כי <span>\({\frac{\partial{\vec B}}{\partial t}}=-{\vec\nabla\times E}\)</span>, וניתן להציב ולקבל:
+<span>$${\frac{\partial{\vec E}}{\partial t}}\times{\vec B}={\frac{\partial}{\partial t}}({\vec E}\times{\vec B})+{\vec E}\times({\vec\nabla}\times{\vec E})$$</span>
+וכעת:
+<span>$$\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}-\vec{E}\times(\nabla\times\vec{E})\right]-{\frac{1}{\mu_{0}}}\left[\vec{B}\times(\nabla\times\vec{B})\right]-\epsilon_{0}{\frac{\partial}{\partial t}}(\vec{E}\times\vec{B})$$</span>
+כאשר ניתן להוסיף לביטוי <span>\(\left( \bar{\nabla} \cdot \vec{B} \right)\cdot \vec{B}\)</span> כדי שהביטוי יהיה יותר סימטרי(הרי <span>\(\bar{\nabla} \cdot \vec{B}=0\)</span>). הנוסף מכלל מספכלה מתקיים:
+<span>$$\nabla(E^{2})=2(\vec{E}\cdot\nabla)\vec{E}+2\vec{E}\times(\nabla\times\vec{E})$$</span>
+ולכן:
+<span>$$\vec{E}\times(\nabla\times\vec{E})={\frac{1}{2}}\nabla(E^{2})-(\vec{E}\cdot\nabla)\vec{E}$$</span>
+כאשר מתקבל ביטוי זהה עבור <span>\(\bar{\nabla}(B^{2})\)</span>. ולכן נקבל סה"כ:
+<span>$$\begin{array}{c}{{\displaystyle{\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}+(\vec{E}\cdot\nabla)\vec{E}\right]+\frac{1}{\mu_{0}}\left[(\nabla\cdot\vec{B})\vec{B}+(\vec{B}\cdot\nabla)\vec{B}\right]}}}\\ {{\displaystyle{-\frac{1}{2}\nabla\left(\epsilon_{0}E^{2}+\frac{1}{\mu_{0}}B^{2}\right)-\epsilon_{0}\frac{\partial}{\partial t}(\vec{E}\times\vec{B}).}}}\end{array}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טנזור המאמץ</span><p>זהי מטריצה 3 מימדית המוגדרת:
+<span>$$\sigma_{i j}\equiv\epsilon_{0}\left(E_{i}E_{j}-\frac{1}{2}\delta_{i j}E^{2}\right)+\frac{1}{\mu_{0}}\left(B_{i}B_{j}-\frac{1}{2}\delta_{i j}B^{2}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן כעת לכתוב את צפיפות האנרגיה בצורה הבאה:
+<span>$${\vec f}=\nabla\cdot \sigma-\epsilon_{0}\mu_{0}\frac{\partial{\vec S}}{\partial t}$$</span>
+כאשר <span>\(\sigma\)</span> זה טנזור המאמץ, ו-<span>\(S\)</span> זה ווקטור פוינטינג.</p>
+</div>
+<div class="proposition"><span class="keyword">אוילר לגרנג' עבור שדות</span><p><span>$$\frac{\partial{\cal L}}{\partial\psi}-\partial_{\mu}\frac{\partial{\cal L}}{\partial\left(\partial_{\mu}\psi\right)}=0$$</span>
+כאשר תנאי השפה הם <span>\(\psi\left( \vec{x},t_{i} \right)\)</span> ו-<span>\(\psi\left( \vec{x},t_{f} \right)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אוילר לגרנג' עבור שדות שקול ל:
+<span>$$\partial_{\nu}{ \left(\frac{\partial L}{\partial\left(\partial_{\nu}\psi\right)}\partial_{\mu}\psi-\delta_{\mu}^{~\nu}L\right) }=0$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טנזור המאמץ-אנרגיה תנע</span><p>טנזור המוגדר
+<span>$${T^{\nu}}_{\mu}=\left(\frac{\partial L}{\partial\left(\partial_{\nu}\psi\right)}\partial_{\mu}\psi-\delta_{\mu}^{~\nu}L\right)$$</span>
+כלומר מוגדר כך שהפתרון של משוואת אוילר לגרנג' עבור השדה יהיה <span>\(\partial_{\nu}{T^{\nu}}_{\mu}=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור הלגרנג'יאן של השדה שפיתחנו <span>\(\mathcal{L}=-\frac{1}{16\pi}F_{\alpha \beta}F^{\alpha \beta}\)</span> נקבל כי טנזור המאמץ יהיה שווה:
+<span>$$T^{\nu\mu}=-\frac{1}{4\pi}F^{\nu\rho}F_{\;\;\rho}^{\mu}+\frac{1}{16\pi}\eta^{\nu\mu}\left(F_{\alpha\beta}F^{\alpha\beta}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הלגרנג'יאן של השדה האלקטרומגנטי ביחידות גאוסיות יהיו:
+<span>$${\mathcal{L}}={\frac{1}{16\pi c}}F_{\mu\nu}F^{\mu\nu}$$</span>
+כאשר <span>\(F_{\mu\nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}\)</span>. כדי לפתור את אילר לגרנג' נחשב ראשית את <span>\(\frac{\partial{\mathcal{L}}}{\partial(\partial_{\mu}A_{\lambda})}\)</span>. נקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{16\pi c}\frac{\partial}{\partial(\partial_{\mu}A_{\lambda})}(F_{\alpha\beta}F^{\alpha\beta})$$</span>
+כאשר נשתמש בכלל השרשרת ובזה ש<span>\(F_{\alpha \beta}\)</span> תלוי לינארית ב-<span>\(\partial_{\mu}A_{\nu}\)</span> ונקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{8\pi c}F^{\alpha\beta}\frac{\partial F_{\alpha\beta}}{\partial(\partial_{\mu}A_{\lambda})}$$</span>
+כאשר נזכור כי מתקיים:
+<span>$$\frac{\partial F_{\alpha\beta}}{\partial(\partial_{\mu}A_{\lambda})}=\delta_{\alpha}^{\mu}\delta_{\beta}^{\lambda}-\delta_{\beta}^{\mu}\delta_{\alpha}^{\lambda}$$</span>
+נציב ונקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{8\pi c}(F^{\mu\lambda}-F^{\lambda\mu})$$</span>
+כאשר נשתמש באנטי סימטריות <span>\(F^{\mu \lambda}=-F^{\lambda \mu}\)</span> ולכן:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{4\pi c}F^{\mu\lambda}$$</span>
+נציב את הביטוי הזה בהגדרה של הטנזור אנרגיה תנע ונקבל:
+<span>$$T^{\mu\nu}={\frac{1}{4\pi c}}F^{\mu\lambda}\partial^{\nu}A_{\lambda}-\eta^{\mu\nu}{\mathcal{L}}$$</span>
+כאשר אם נשתמש באנטי סימטרייה של <span>\(F^{\mu \nu}\)</span> ובכלל המכפלה נקבל:
+<span>$$T^{\mu\nu}={\frac{1}{4\pi c}}F^{\mu\lambda}F_{\lambda}^{\nu}-\eta^{\mu\nu}\left({\frac{1}{16\pi c}}F_{\alpha\beta}F^{\alpha\beta}\right)$$</span>
+ושכחתי מינוס לאורך כל הפיתוח. ולכן קיבלנו מינוס התוצאה המתבקשת.</p>
+</div>
+<div class="proposition"><span class="keyword">הצורה המטריציונית של טנזור המאמץ-אנרגיה-תנע</span><p>בצורה הקונטרה ווריאנטית נקבל:
+<span>$$T^{\mu\nu}=\left(\begin{array}{c c c c}u&amp;{{{\frac{1}{c}}S_{x}}}&amp;{{{\frac{1}{c}}S_{y}}}&amp;{{{\frac{1}{c}}S_{z}}}\\ {{{\frac{1}{c}}S_{x}}}&amp;{{-\sigma_{x x}}}&amp;{{-\sigma_{x y}}}&amp;{{-\sigma_{x z}}}\\ {{{\frac{1}{c}}S_{y}}}&amp;{{-\sigma_{y x}}}&amp;{{-\sigma_{y y}}}&amp;{{-\sigma_{y z}}}\\ {{{\frac{1}{c}}S_{z}}}&amp;{{-\sigma_{z x}}}&amp;{{-\sigma_{z y}}}&amp;{{-\sigma_{z z}}}\end{array}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות הטנזור מאמץ</span><p>לטנזור המאמץ יש את התכונות הבאות:</p>
+<ul>
+<li>טנזור סימטרי - <span>\(T^{\mu \nu}=T^{\nu \mu}\)</span></li>
+<li>חסר עקבה - <span>\({T^{\alpha}}_{\alpha}=0\)</span>. זאת כיוון שמתקיים:
+<span>$$\begin{gather}T_{\mu}^{\mu}=\frac{1}{4\pi}\left[F^{\mu\alpha}F_{\mu\alpha}-\delta_{\mu}^{\mu}\frac{1}{4}F^{\alpha\beta}F_{\alpha\beta}\right] =\\=\frac{1}{4\pi}\left[F^{\mu\alpha}F_{\mu\alpha}-F^{\alpha\beta}F_{\alpha\beta}\right]=\frac{1}{4\pi}\left[F^{\alpha\beta}F_{\alpha\beta}-F^{\alpha\beta}F_{\alpha\beta}\right]=0
+\end{gather}$$</span></li>
+<li>צפיפות האנרגיה מקיימת <span>\(T^{00}=u\geq 0\)</span>.</li>
+<li>הדיברגץ יהיה <span>\(\partial_{\nu}T^{\mu\nu}+\eta^{\mu\rho}\,f_{\rho}=0\)</span>, שמפה ניתן לקבל את חוקי השימור הבאים:
+<span>$$\begin{gather}{\frac{\partial u_{\mathrm{em}}}{\partial t}}+\nabla\cdot\vec{S}+\vec{J}\cdot\vec{E}=0 \\{\frac{\partial{\vec p}_{\mathrm{em}}}{\partial t}}-\nabla\cdot\sigma+\rho{\vec E}+{\vec J}\times{\vec B}=0\implies u_{\mathrm{em}}={\frac{\epsilon_{0}}{2}}E^{2}+{\frac{1}{2\mu_{0}}}B^{2} \\\vec{p}_{\mathrm{em}}={\frac{\vec{S}}{c^{2}}}
+\end{gather}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics'> חשמל אנליטי</a></li>
+<li class='prev-page'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+</ul></li>
+        </body>
+        </html>
+        

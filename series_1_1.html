@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרת הגבול</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page'><a href='./series.html'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_1_1.html'>1.1 הגדרת הגבול</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_3.html'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_4.html'>1.4 מונוטוניות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_5.html'>1.5 שורשים וממוצעים</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_6.html'>1.6 תתי סדרות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_7.html'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_8.html'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_2_1.html'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_2.html'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_3.html'>2.3 טורים כלליים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./series.html'> סדרות וטורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./series_1_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./series.html`;}});</script>
+        <div class="content">
+        <h1>1.1  הגדרת הגבול</h1>
+    <div class="definition"><span class="keyword">סדרה של מספרים ממשיים</span><p>פונקציה <span>\(f:\mathbb{N}\to \mathbb{R}\)</span> נקראת סדרה ממשית. בדרך כלל נסמן את האיבר ה-<span>\(n\)</span> של הסדרה ב-<span>\(f_{n}\)</span>, ואת הסדרה כולה נסמן ב-<span>\((f_{n})_{n=1}^{\infty}\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור <span>\(\lambda \in \mathbb{R}\)</span> הסדרה <span>\(f_{n}=\lambda\)</span> נקראת הסדרה הקבועה </p>
+</li>
+<li>
+<p>הסדרה <span>\(h_{n}=\frac{1}{n}=\left( 1,\frac{1}{2},\frac{1}{3},\dots \right)\)</span> נקראת הסדרה ההרמונית </p>
+</li>
+<li>
+<p>הסדרה המתחלפת <span>\(q_{n}=(-1)^{n-1}\)</span>.  </p>
+</li>
+<li>
+<p>הסדרה של המספרים הראשוניים <span>\((p)_{n=1}^{\infty}=\left( 2,3,5,7,\dots \right)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">גבול של סדרה ממשית</span><p>תהי <span>\((f_{n})_{n=1}^{\infty}\)</span> סדרה ממשית ו-<span>\(L \in \mathbb{R}\)</span>. אזי <span>\(L\)</span> יקרא הגבול של הסדרה אם:
+<span>$$\forall\varepsilon&gt;0\quad \exists N \in \mathbb{N}\quad \forall n\in \mathbb{N}\quad n&gt;N\implies |f_{n}-L|&lt;\varepsilon$$</span>
+כלומר עבור כל מספר חיובי <span>\(\varepsilon&gt;0\)</span> ניתן למצוא איזשהו <span>\(N \in \mathbb{N}\)</span> כך שהחל ממנו, כל האיברים <span>\(n&gt;N\)</span> יקיימו <span>\(|f_{n}-L|&lt;\varepsilon\)</span>, כלומר <span>\(L-\varepsilon&lt;f_{n}&lt;L+\varepsilon\)</span>.
+אם <span>\(L\)</span> הוא גבול, נאמר כי <span>\((a_n)_{n=1}^\infty\)</span> מתכנס ל-<span>\(L\)</span>, ונסמן <span>\(f_{n}\xrightarrow{n\to \infty}L\)</span>, או לחלופין <span>\(\lim_{ n \to \infty }f_{n}=L\)</span>.</p>
+</div>
+<div class="remark">
+<p>סדר הכמתים חשוב פה. אנחנו לוקחים <span>\(\varepsilon\)</span> כלשהו, אז עבורו מקבלים <span>\(N\in \mathbb{N}\)</span> אשר יכול להיות תלוי ב-<span>\(\varepsilon\)</span> כיוון שנבחר אחריו. כלומר <span>\(N=N\left( \varepsilon \right)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הסדרה <span>\((a_n)_{n=1}^\infty\)</span> מתכנסת ל-<span>\(L\)</span>. </p>
+</li>
+<li>
+<p>הסדרה <span>\((a_n-L)_{n=1}^\infty\)</span> מתכנסת ל-0 - כלומר הסדרה שמחסירים <span>\(L\)</span> מכל איבר של <span>\(a_{n}\)</span>. </p>
+</li>
+<li>
+<p>הסדרה <span>\((|a_{n}-L|)_{n=1}^\infty\)</span> מתכנסת ל-0 - כלומר סדרה הערכים המוחלטים. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סדרה מתכנסת</span><p>סדרה <span>\((a_n)_{n=1}^\infty\)</span> עבורה קיים <span>\(L \in \mathbb{R}\)</span> כלשהו אשר מתקיים <span>\(a_{n}\xrightarrow{n\to \infty}L\)</span> נקראת סדרה מתכנסת. בעזרת כמתים:
+<span>$$\exists L \in \mathbb{R}\quad \forall\varepsilon&gt;0\quad \exists N \in \mathbb{N}\quad \forall n\in \mathbb{N}\quad n&gt;N\implies |f_{n}-L|&lt;\varepsilon$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">יחידות הגבול</span><p>תהי <span>\((a_n)_{n=1}^\infty\)</span> סדרה ממשית. אם <span>\((a_n)_{n=1}^\infty\)</span> מתכנס לגבול <span>\(L\)</span> אז גבול זה הוא יחיד. כלומר אם <span>\(a_{n}\)</span> מתכנס ל-<span>\(L_{1}\)</span> וגם מתכנס ל-<span>\(L_{2}\)</span> אז <span>\(L_{1}=L_{2}\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח בשלילה כי קיימים <span>\(L_{1},L_{2} \in \mathbb{R}\)</span> עם <span>\(L_{2}&gt;L_{1}\)</span> כך ש-<span>\((a_n)_{n=1}^\infty\)</span> מתכנס גם ל-<span>\(L_{1}\)</span> וגם ל-<span>\(L_{2}\)</span>. </p>
+</li>
+<li>
+<p>נגדיר <span>\(\varepsilon= \frac{L_{2}-L_{1}}{3}\)</span>. מהגדרת הגבול עבור <span>\(L_{1}\)</span> נקבל <span>\(N_{1} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{1}\)</span> מתקיים <span>\(\lvert a_{n}-L_{1} \rvert&lt;\varepsilon\)</span>. כאשר מהגדרת הגבול עבור <span>\(L_{2}\)</span> נקבל <span>\(N_{2}\)</span> כך שלכל <span>\(n&gt;N_{2}\)</span> מתקיים <span>\(|a_{n}-L_{2}|&lt;\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>נסתכל על <span>\(n_{0}&gt;N_{1}\)</span> וגם <span>\(n_{0}&gt;N_{2}\)</span> (קיים כזה, למשל <span>\(n_{0}&gt;\max(N_{1},N_{2})\)</span> או <span>\(n_{0}&gt;N_{1}+N_{2}\)</span>) נקבל כי <span>\(|a_{n_{0}}-L_{1}|&lt;\varepsilon\)</span> וגם <span>\(|a_{n_{0}}-L_{2}|&lt;\varepsilon\)</span>. כעת: 
+<span>$$3\varepsilon=\lvert L_{2}-L_{1} \rvert =|L_{2}-a_{n_{0}}+a_{n_{0}}-L_{1}|\leq |-(a_{n_{0}}-L_{2})|+|(a_{n_{0}}-L_{1})|\leq 2\varepsilon$$</span>
+וקיבלנו סתירה.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סדרה מתבדרת</span><p>סדרה שאינה מתכנסת נקראת סדרה מתבדרת. כלומר:
+<span>$$\forall L \in \mathbb{R}\quad \exists\varepsilon&gt;0\quad \forall N \in \mathbb{N}\quad \exists n\in \mathbb{N}\quad n&gt;N \land|f_{n}-L|\geq\varepsilon$$</span></p>
+</div>
+<div class="example">
+<p>נוכיח את התבדרות הסדרה:
+<span>$$(a_n)_{n=1}^\infty =\left( \frac{1+(-1)^{n+1}}{2} \right)_{n=1}^\infty =\left( 1,0,1,0,\dots \right)$$</span></p>
+<ol>
+<li>
+<p>יהי <span>\(L \in \mathbb{R}\)</span>. נגדיר <span>\(\varepsilon=\frac{1}{4}\)</span>, וכן יהי <span>\(N \in \mathbb{N}\)</span>. ניקח <span>\(n_{0} \in \mathbb{N}\)</span> כך ש-<span>\(n_{0}&gt;N\)</span>. כעת <span>\(\{ a_{n_{0}},a_{n_{0}+1} \}=\{ 0,1 \}\)</span> ולכן <span>\(|a_{n_{0}}-a_{n_{0}+1}|=1\)</span>. </p>
+</li>
+<li>
+<p>נניח בשלילה שמתקיים <span>\(|a_{n_{0}}-L|&lt;\varepsilon \land|a_{n_{0}+1}-L|&lt;\varepsilon\)</span>. כעת: 
+<span>$$1=|a_{n_{0}}-a_{n_{0}+1}|=|a_{n_{0}}-L+L-a_{n_{0}}|=|a_{n_{0}}-L|+|a_{n_{0}+1}-L|&lt;\frac{1}{4}+\frac{1}{4}=\frac{1}{2}$$</span>
+בסתירה. לכן או <span>\(|a_{n_{0}}-L|\geq\varepsilon\)</span> ובמקרה זה ניקח <span>\(n=n_{0}\)</span> וסיימנו או <span>\(|a_{n_{0}+1}-L|\geq \varepsilon\)</span> וניקח <span>\(n=n_{0}+1\)</span> וסיימנו.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סדרה חסומה</span><ol>
+<li>
+<p>קבוצה נקראת חסומה מלעיל אם קבוצת האיברים שלה חסומה מלעיל. כלומר קיים <span>\(M\in \mathbb{R}\)</span> כך שלכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(a_{n}&lt;M\)</span>. </p>
+</li>
+<li>
+<p>קבוצה נקראת חסומה מלרע אם קבוצה האיברים שלה חסומה מלרע. כלומר קיים <span>\(m \in \mathbb{R}\)</span> כך שלכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(a_{n}&gt;m\)</span>. </p>
+</li>
+<li>
+<p>קבוצה נקראת חסומה אם חסומה גם מלעיל וגם מלרע. כלומר קיימים <span>\(m,M\in \mathbb{R}\)</span> כך שלכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(m\leq a_{n}\leq M\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אם סדרה חסומה מלעיל עבור <span>\(M\)</span> אז בפרק לכל <span>\(\tilde{M}\geq M\)</span>. וכן אם חסומה מלרע עבור <span>\(m\)</span> אז בפרט חסומה מלרע לכל <span>\(\tilde{m}\leq m\)</span>. וכן מתכונות הערך המחולט:
+<span>$$M\leq|\max (|m|,|M|)|\qquad \text{and}\qquad -|\max(|m|,|M|)|\leq m $$</span>
+ולכן להיות חסום שקול למעשה לזה שקיים <span>\(C\)</span> כך שלכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(|a_{n}|&lt;C\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>הסדרה <span>\((a_n)_{n=1}^\infty=\left( 1,0,1,\dots \right)_{n=1}^\infty\)</span> עבור <span>\(m=0,M=1\)</span>. </p>
+</li>
+<li>
+<p>הסדרה <span>\((n)_{n=1}^\infty=(a_n)_{n=1}^\infty\)</span> אינה חסומה מלעיל אך חסומה מלרע על ידי <span>\(m=1\)</span>. </p>
+</li>
+<li>
+<p>הסדרה <span>\((a_n)_{n=1}^\infty=((-1)^{n}n)_{n=1}^\infty\)</span> אינה חסומה לא מלעיל ולא מלרע. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל סדרה מתכנסת היא חסומה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח ש-<span>\((a_n)_{n=1}^\infty\)</span> מתכנסת. לכן יש לה גבול שנסמן ב-<span>\(L\)</span>. </p>
+</li>
+<li>
+<p>לפי הגדרת הגבול עבור <span>\(\varepsilon=1\)</span> נקבל <span>\(N_{1}\in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{1}\)</span> מתקיים <span>\(|a_{n}-L|&lt;1\)</span>. כלומר <span>\(L-1&lt;a_{n}&lt;L+1\)</span>. </p>
+</li>
+<li>
+<p>כעת נגדיר את הקבועים הבאים: 
+<span>$$\begin{gather}M=\max \left\{  L+1,a_{1}, a_{2},\dots,a_{n}  \right\} \\m=\min \left\{  L-1 ,a_{1},a_{2},\dots,a_{n} \right\}
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>יהי <span>\(n \in \mathbb{N}\)</span>. אם <span>\(n\leq N_{1}\)</span> אזי <span>\(m\leq a_{n}\leq M\)</span> ואם <span>\(n&gt;N_{1}\)</span> מתקיים: 
+<span>$$m\leq L-1&lt;a_{n}&lt;L+1\leq M$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>הטענה נותת קריטרון להתבדרות - אם סדרה היא לא חסומה - היא מתבדרת.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='prev-page'><a href='./series.html'> סדרות וטורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

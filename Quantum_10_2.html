@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אוסף כללי של חלקיקים זהים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_10_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_10_1`; }});</script>
+        <div class="content">
+        <h1>10.2  אוסף כללי של חלקיקים זהים</h1>
+    <p>נכליל את מה שעשינו עבור זוגות עבור כל אוסף של <span>\(N\)</span> חלקיקים בעזרת תורת החבורות.</p>
+<div class="reminder">
+<p>אוסף של <span>\(N\)</span> חלקיקים יהיה איבר במרחב:
+<span>$${\mathcal{H}}_{\mathrm{total}}={\mathcal{H}}_{1}\otimes{\mathcal{H}}_{2}\otimes\cdots\otimes{\mathcal{H}}_{N},$$</span>
+מהצורה:
+<span>$$|\varphi_{i_{1}}\varphi_{i_{2}}\cdots\varphi_{i_{N}}\rangle\equiv|\varphi_{i_{1}}\rangle_{1}\otimes|\varphi_{i_{2}}\rangle_{2}\otimes\cdots\otimes|\varphi_{i_{N}}\rangle_{N}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פעולה של איבר בחבורת הסימטריות</span><p>נגדיר את הפעולה של החבורת התמורות <span>\(S_{N}\)</span> על <span>\(H_{\text{total}}\)</span> על ידי שינוי השמות של החלקיקים. כלומר לכל פרמוטציה <span>\(g \in S_{N}\)</span> קיים אופרטור ואונטרי <span>\(P_{g}\)</span> כך שמקיים:
+<span>$$P_{g}\left|\varphi_{i_{1}}\varphi_{i_{2}}\cdots\varphi_{i_{N}}\right\rangle=\left|\varphi_{i_{g(1)}}\varphi_{i_{g(2)}}\cdots\varphi_{i_{g(N)}}\right\rangle$$</span></p>
+</div>
+<div class="remark">
+<p>האופרטור <span>\(P_{g}\)</span> זה פשוט המטריצה שמתאימה לתמורה <span>\(g\)</span>. הסיבה היחידה שמשתמשים בזה במקום ב-<span>\(g\)</span> זה שהקבוצות לא מתאימות, הרי <span>\(P_{g}\)</span> פועלת על המרחב הילברט. במתמטיקה הרבה פעמים משתמשים בסימון <span>\(g.\ket{\psi}\)</span> כאשר ה-. מסמנת את זה שזה פועל בהתאם לחוקיות הרצויה, ושזה לא כפל רגיל.</p>
+</div>
+<div class="reminder">
+<p>כאשר חבורה <span>\(G\)</span> פועלת על קבוצה <span>\(X\)</span> ניתן לחלק את הקבוצה <span>\(X\)</span> לאוסף של מחלקות שקילות כך ששתי איברים <span>\(x_{1},x_{2} \in X\)</span> נמצאים באותה מחלקת שקילות רק אם קיים <span>\(g \in G\)</span> כך ש-<span>\(x_{1}=g.x_{2}\)</span>. מחלקות שקילות אלו נקראות מסלולים. כמו כן אם <span>\(x\)</span> נציג של מחלקת שקילות נסמן את המחלקת שקילות ב-<span>\(\mathcal{O}(x_{i})\)</span> כך שעבור נציגים של כל המסלולים <span>\(\{ x_{i} \}\)</span> מתקיים:
+<span>$$X=\bigsqcup_{i} \mathcal{O} (x_{i})$$</span></p>
+</div>
+<div class="corollary">
+<p>שתי איברים <span>\(\ket{\psi},\ket{\psi '}\in \mathcal{H}\)</span> נמצאים באותו מסלול אם קיים <span>\(g \in S_{N}\)</span> כך ש-<span>\(\ket{\psi'}=P_{g}\ket{\psi}\)</span>. כלומר:
+<span>$${\mathcal{O}}(|\psi\rangle)=\{P_{g}|\psi\rangle:g\in S_{N}\}$$</span>
+כאשר כל שתי איברים באותו מסלול עבור חלקיקים זהים מייצגים את אותו מצב פיזיקלי.</p>
+</div>
+<div class="reminder">
+<p>ניתן לפרק כל תמורה לאוסף של חילופים. הסימן של התמורה(<span>\(\mathrm{sgn}\)</span>) תהיה שווה <span>\(1\)</span> אם יש כמות זוגית של חילופים ול-<span>\(-1\)</span> אם יש כמות אי זוגית של חילופים.</p>
+</div>
+<div class="proposition">
+<p>כאשר יש לי אוסף של <span>\(N\)</span> בוזונים התת מרחב הפיזיקלי יהיה:
+<span>$${\mathcal{H}}_{\text{bosons}}=\left\{\,v\in{\mathcal{H}}_{\mathrm{total}}:P_{g}\,v=v\,\,\mathrm{for~all}\,\,g\in S_{N}\,\right\}$$</span>
+כיוון זה אוסף של כל המצבים שאינם משתנים תחת כל החילופים.</p>
+</div>
+<div class="proposition">
+<p>כאשר יש לי אוסף של <span>\(N\)</span> פרמיונים התת המרחב בפיזיקלי יהיה:
+<span>$${\mathcal{H}}_{\mathrm{fermions}}=\{\,v\in{\mathcal{H}}_{\mathrm{total}}:P_{g}\,v=\mathrm{sgn}(g)\,v\,\mathrm{for~all}\,g\in S_{N}\,\}.$$</span>
+כלומר זה אוסף כל המצבים שמחליפים סימן תחת כל חילוף.</p>
+</div>
+<p>כעת כמו מקודם נגדיר את המסמטר והאנטי מסמטר על ידי אופרטורי ההטלה על המרחבים הפיזיקליים אשר אינם משנים את המחלקת שקילות המתאימה. כלומר זה יחזיר את המצב אשר מייצג את אותו מצב הפיזיקלי(כלומר נמצא באותו מסלול) וגם נמצא בתת מרחב הפיזיקלי אשר אינווריאנטי לחילוף החלקיקים.</p>
+<div class="definition"><span class="keyword">מסמטר ואנטי מסמטר</span><p>עבור מערכת של <span>\(N\)</span> חלקיקים המסמטר <span>\(S\)</span> והאנטי מסמטר <span>\(A\)</span> מוגדרים על ידי:
+<span>$$S={\frac{1}{N!}}\sum_{g\in S_{N}}P_{g}\qquad A=\frac{1}{N!}\sum_{g\in S_{N}}\mathrm{sgn}(g)\,P_{g}$$</span>
+כלומר זה יהיה האופרטור שנדרש להפעיל על האופורטור במצב מכפלה כדי שיש במסמטר. </p>
+</div>
+<div class="remark">
+<p>עבור <span>\(N&gt;2\)</span> נקבל <span>\(A+S\neq \mathbb{1}\)</span> ולכן לא כל מצב הוא או סימטרי או אנטי סימטרי.</p>
+</div>
+<div class="remark">
+<p>משהו נחמד לשים לב עליו זה שאם איבר הוא על האלכסון של מטריצת תמורה אז הוא נקודת שבת, ולכן עבור מטריצת תמורה העקבה של אופרטור זה כמות נקודות השבת. לכן אם ניקח את העקבה של שתי האגפים של המסמטר ניתן לכתוב:
+<span>$$\mathrm{Tr}(S)=\frac{1}{N!}\sum_{g\in S_{N}}\mathrm{Tr}(P_{g})=\frac{1}{N!}\sum_{g \in S_{N}}|\mathrm{fix(g)|}=\frac{1}{|S_{N}|}\sum_{g \in S_{N}}|\mathrm{fix(g)|}$$</span>
+כאשר קיבלנו בדיוק את הביטוי מהלמה של ברנסייד עבור כמות המסלולים! ולכן העקבה של המסמטר יהיה כמות המסלולים בפעולה. כלומר כמות המצבים הפיזיקלים של המערכת הבוזונית! ניתן להראות באופן דומה עבור האנטי מסמטר:
+<span>$$\mathrm{Tr}(A)=\frac{1}{N!}\sum_{g\in S_{N}}\mathrm{sgn(g)}\cdot\mathrm{Tr}(P_{g})=\frac{1}{N!}\sum_{g \in S_{N}}\mathrm{sgn}(g)|\mathrm{fix(g)|}=\frac{1}{|S_{N}|}\sum_{g \in S_{N}}\mathrm{sgn(g)}|\mathrm{fix(g)|}$$</span></p>
+</div>
+<div class="proposition">
+<p>המסמטר הוא אופרטור הטלה אורתוגונאלי על המרחב הפיזיקלי של הבוזונים והאנטי מסמטר הם האופרטורי ההטלה על התת מרחב הפיזיקלי של הפרמיונים.</p>
+</div>
+<div class="proof">
+<p>נראה עבור המסמטר. ראשית נראה כי אופרטור הטלה. כלומר ש-<span>\(S^{2}=S\)</span>. מתקיים:
+<span>$$S^{2}=\left(\frac{1}{N!}\sum_{g\in S_{N}}P_{g}\right)\left(\frac{1}{N!}\sum_{h\in S_{N}}P_{h}\right)=\frac{1}{(N!)^{2}}\sum_{g,h\in S_{N}}P_{g}P_{h}.$$</span>
+כאשר כיוון ש-<span>\(P_{g}P_{h}=P_{gh}\)</span>(מהדרישות של פעולה על חבורה) כאשר ההעתקה <span>\((g,h)\mapsto gh\)</span> מ-<span>\(S_{N}\times S_{N}\to S_{N}\)</span> היא על כאשר כל גורם מופיע בדיוק <span>\(N!\)</span> פעמים נקבל:
+<span>$$S^{2}={\frac{1}{(N!)^{2}}}\cdot N!\sum_{k\in S_{N}}P_{k}={\frac{1}{N!}}\sum_{k\in S_{N}}P_{k}=S.$$</span>
+כעת כדי להראות כי הטלה אורתוגונאלי נראה כי הרמיטי:
+<span>$$S^{\dagger}=\frac{1}{N!}\sum_{g\in S_{N}}P_{g}^{\dagger}=\frac{1}{N!}\sum_{g\in S_{N}}P_{g^{-1}}.$$</span>
+כיוון שההעתקה <span>\(g\mapsto g^{-1}\)</span> היא העתקה הפיכה מ-<span>\(S_N\to S_{N}\)</span> נקבל:
+<span>$$S^{\dagger}=\frac{1}{N!}\sum_{g\in S_{N}}P_{g}=S$$</span>
+לבסוף כדי להראות שהמרחב שמוטל עליו הוא המרחב הפיזיקלי של הבוזונים(<span>\(\left\{\,v\in{\mathcal{H}}_{\mathrm{total}}:P_{g}\,v=v\,\,\mathrm{for~all}\,\,g\in S_{N}\,\right\}\)</span>) נשתמש בזה שמצב כללי מהמרחב הזה לא משתנה תחת המסמטר.</p>
+</div>
+<div class="example"><span class="keyword">ספירת מצבים אנטי סימטרים</span><p>נמצא כמה מצבים אנטי סימטרים יש במערכת של 3 חלקיקים עם ספין <span>\(S=1\)</span>. נכתוב מצב כללי על ידי:
+<span>$$|1,m_{1}\rangle\otimes|1,m_{2}\rangle\otimes|1,m_{3}\rangle=|m_{1}m_{2}m_{3}\rangle$$</span>
+כאשר כדי למצוא את התת מרחב האנטי סימטרי נרצה להטיל את איברי הבסיס <span>\(\left\{  \ket{m_{1},m_{2},m_{3}}\mid m_{1},m_{2},m_{3} \in\{ -1,0,1 \} \right\}\)</span> על המרחב האנטי סימטרי על ידי האנטי מסמטר <span>\(A=\frac{1}{N!}\sum_{g\in S_{N}}\mathrm{sgn}(g)\,P_{g}\)</span>. נשים לב כי אם יש לנו שתי ערכי <span>\(m\)</span> זהים נקבל כי נבדלים על ידי מחזור אחד ולכן כל מחזור יהיה זהה למינוס אותו המחזור(החילוף הלא משנה כלום הזה יוסיף סימן מינוס) ולכן נקבל 0. כלומר המצב היחיד שנדרש לבדוק זה המצב שבו מצב מכיל את כל ערכי <span>\(m\)</span> האפשריים. כיוון שיש מצב אחד כזה עד כדי תמורה נדרש להפעיל את האנטי מסמטר רק על מצב אחד כזה:
+<span>$$A\ket{-1,0,1} ={\frac{1}{\sqrt{6}}}{\Big[}\mid+1,0,-1\rangle-\mid0,+1,-1\rangle-\mid+1,-1,0\rangle+\mid0,-1,+1\rangle+\mid-1,+1,0\rangle-\mid-1,0,+1\rangle{\Big]}$$</span>
+ניתן לחלופין אם רק מעניין אותנו לספור את המצבים להשתמש בלמה של ברנסייד:
+<span>$$\mathrm{Tr}(A)=\frac{1}{N!}\sum_{g \in S_{N}}\mathrm{sgn}(g)|\mathrm{fix(g)|}=\text{Num of Orbits}$$</span>
+ניתן לסווג לשלושה קטגוריות:</p>
+<ul>
+<li>מחזור של היחידה - יש מצב אחד כזה. לא משנה כלום ולכן כל איבר בבסיס הוא שבת. ומוסיף לסכום <span>\(27 \times 1\)</span>.</li>
+<li>מחזור של חילוף - יש 3 מצבים כאלה - מתוכם יהיה שבת רק אם שתי האיברים המוחלפים שווים ואז יש גם דרגת חופש של האיבר השלישי. לכן סה"כ יש 9 איברי שבת לכל חילוף כזה. אך כיוון שזה תמורה אם סימן שלילי מוסיף לסכום <span>\(-9 \times 3 = -27\)</span> </li>
+<li>מחזור של שלוש - יש 2 מצבים כאלה. מצב כזה יהיה שבת רק אם שלושת האיברים שווים. יש שלושה מצבים שבם כולם שווים ולכן יש שלושה איברי שבת. סה"כ מוסיף לסכום <span>\(2\times 3 = 6\)</span>.</li>
+</ul>
+<p>נקבל כעת כי סה"כ כמות המצבים יהיו:
+<span>$$\frac{1}{6}\lvert 27-27+6 \rvert =1$$</span>
+ואכן קיבלנו כי יש רק מצב אחד כזה.</p>
+</div>
+<div class="proposition"><span class="keyword">דטרמיננטת סלאטור - Slator</span><p>עבור אוסף של <span>\(N\)</span> פרמיונים חישוב האופרטור האנטי מסומטר <span>\(A\)</span> המוגדר על ידי:
+<span>$$A\left(\left|\psi_{1}\right\rangle\otimes\cdots\otimes\left|\psi_{N}\right\rangle\right)=\frac{1}{N!}\sum_{g\in S_{N}}\operatorname{sgn}(g)\,P_{g}\left(\left|\psi_{1}\right\rangle\otimes\cdots\otimes\left|\psi_{N}\right\rangle\right).$$</span>
+שקול לחישוב הדטרימינטטה הבאה:
+<span>$$\Psi(x_{1},\ldots,x_{N})=\frac{1}{\sqrt{N!}}\left|\begin{array}{cccc}{{\psi_{1}(x_{1})}}&amp;{{\psi_{1}(x_{2})}}&amp;{{\cdots}}&amp;{{\psi_{1}(x_{N})}}\\ {{\psi_{2}(x_{1})}}&amp;{{\psi_{2}(x_{2})}}&amp;{{\cdots}}&amp;{{\psi_{2}(x_{N})}}\\ {{\vdots}}&amp;{{\vdots}}&amp;{{\ddots}}&amp;{{\vdots}}\\ {{\psi_{N}(x_{1})}}&amp;{{\psi_{N}(x_{2})}}&amp;{{\cdots}}&amp;{{\psi_{N}(x_{N})}}\end{array}\right|$$</span></p>
+</div>
+<div class="proof">
+<p>כלל ליבניץ לדטרמיננטה אומר כי:
+<span>$$\operatorname*{det}(A)=\sum_{\tau\in S_{n}}\operatorname{sgn}(\tau)\prod_{i=1}^{n}a_{i\tau(i)}=\sum_{\sigma\in S_{n}}\operatorname{sgn}(\sigma)\prod_{i=1}^{n}a_{\sigma(i)i}$$</span>
+ולכן נובע ישירות.</p>
+</div>
+<div class="summary">
+<ul>
+<li>מערכת של <span>\(N\)</span> חלקיקים מתואר על ידי איבר במרחב <span>\({\mathcal{H}}_{\mathrm{total}}={\mathcal{H}}_{1}\otimes{\mathcal{H}}_{2}\otimes\cdots\otimes{\mathcal{H}}_{N}\)</span>.</li>
+<li>אופרטור <span>\(P_{g}\)</span> מחליף את השמות של החלקיקים. כאשר עבור חלקיקים זהים כל החליופים האפשריים של מצב קוונטים מייצגים מצב פיזיקלי.</li>
+<li>בוזונים לכל תמורה <span>\(g\)</span> מקיימים <span>\(P_{g}\ket{\psi}=\ket{\psi}\)</span> כאשר פרמיונים לכל מצב מקיימים <span>\(P_{g}\ket{\psi}=\mathrm{sgn}(g)\ket{\psi}\)</span>.</li>
+<li>המסמטר ואנטי מסמטר מטילים את התת מרחב הפיסיקלי:
+<span>$$S={\frac{1}{N!}}\sum_{g\in S_{N}}P_{g}\qquad A=\frac{1}{N!}\sum_{g\in S_{N}}\mathrm{sgn}(g)\,P_{g}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+<li class='prev-page'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

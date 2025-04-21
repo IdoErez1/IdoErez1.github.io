@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המשוואות הקנוניות ומרחב הפאזה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_4_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_3_5`; }});</script>
+        <div class="content">
+        <h1>4.1  המשוואות הקנוניות ומרחב הפאזה</h1>
+    <div class="definition"><span class="keyword">המילטוניאן</span><p>פונקציה <span>\(\mathcal{\mathcal{H}}\left( q_{i},\frac{\partial \mathcal{\mathcal{L}} } {\partial \dot{q}_{i}},t \right)\)</span> היא ההתמרת לג'נדר של הלגרנג'יאן לפי המהירות המוכללת. כלומר:
+<span>$$\mathcal{\mathcal{H}}(q_{i},\,p_{i},\,t)=\sum_{i=1}^{n}\,p_{i}{\dot{q}}_{i}-\mathcal{L}(q_{i},{\dot{q}}_{i},\,t)$$</span>
+ונקבל פונקציה של הקורדינטה המוכללת והתנע המוכלל.</p>
+</div>
+<div class="theorem"><span class="keyword">המשוואות הקנוניות</span><p><span>$$\begin{array}{c c}{{\dot{q}_{i}=\displaystyle\frac{\partial \mathcal{\mathcal{H}}}{\partial p_{i}}}}&amp; {{\dot{p}_{i}=-\displaystyle\frac{\partial \mathcal{\mathcal{H}}}{\partial q_{i}}}}\end{array}$$</span></p>
+</div>
+<div class="proof">
+<p>מההגדרה של התמרת לג'נדר אנו יודעים כי:
+<span>$$p_{i}=\frac{\partial \mathcal{L}}{\partial\dot{q}_{i}}\quad\quad\dot{q}_{i}=\frac{\partial \mathcal{\mathcal{H}}}{\partial p_{i}}$$</span>
+ולכן כבר קיבלנו את אחת המשוואות. אנו יודעים מהתכונות של התמרת לג'נדר כאשר יש משתנים שאנחנו לא מתמירים איתם נקבל:
+<span>$${\frac{\partial \mathcal{\mathcal{H}}}{\partial q_{i}}}=-{\frac{\partial \mathcal{L}}{\partial q_{i}}}\quad\quad{\frac{\partial \mathcal{\mathcal{H}}}{\partial t}}=-{\frac{\partial \mathcal{L}}{\partial t}}$$</span>
+אנו יודעים מאילר לגרנג' כי:
+<span>$$\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial\dot{q}_{i}}\right)=\frac{\partial \mathcal{L}}{\partial q_{i}}\implies \dot{p}_{i}=\frac{\partial \mathcal{L}}{\partial q_{i}}=-\frac{\partial \mathcal{\mathcal{H}}}{\partial q_{i}}$$</span></p>
+</div>
+<p>שתי המשוואות האלו נקראות המשוואות הקנוניות. אפשר גם להוכיח ישירות מעקרון המילטון. בעזרתם אפשר לקבל עבור <span>\(n\)</span> דרגות חופש את משוואות התנועה בעזרת <span>\(2n\)</span> משוואות דיפרציאליות מסדר ראשון. </p>
+<h3>מרחב הפאזה</h3>
+<p>נזכור כי מרחב הקונפיגורציות הוא המרחב שמתאר את המיקום של החלקיק בקורדינטות מוכללות. אם אנחנו מתקדמים בזמן ניתן לראות במרחב זה איך נראה המערכת לאורך זמן. מערכת זו אינה מושלמת, כיוון שבהנתן מרחב קונפיגורציה לא נוכל לדעת איך המערכת תהיה לאחר זמן מסויים. כדי לדעת זאת, דרוש גם התנע המוכלל הצמוד של כל אחת מהקורדינטות המוכללות.</p>
+<div class="definition"><span class="keyword">מרחב הפאזה</span><p>המרחב שכולל את הערך של הקורדינטה המוכללת וגם התנע התמוד שלה</p>
+</div>
+<p>אם נסרטט על מרחב הפאזה את המערכת לאורך זמן, נראה כי עבור תנאי התחלה נתון - נקודה במרחב הפאזה - קיים מסלול יחיד שיכול לקחת. השיפוע בכל נקודה נקבע ממשוואות המילטון. מהסיבה הזאת לא ייתכן כי שני מסלולים על מרחב הפאזה נחתכים, ולא שווים. אם ננחתכים אז בנקודה אחת יש שני שיפועים שונים.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='prev-page'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

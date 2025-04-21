@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט הגזירה של בסיקוביץ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_6_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_5_2.html`;}});</script>
+        <div class="content">
+        <h1>5.3  משפט הגזירה של בסיקוביץ</h1>
+    <div class="theorem"><span class="keyword">הגזירה של לבג-בסיקוביץ'</span><p>יהיו <span>\(\lambda\)</span> ו-<span>\(\mu\)</span> מידות רדון על <span>\(\mathbb{R}^d\)</span>.</p>
+<ol>
+<li>
+<p>הנגזרת <span>\(D(\mu, \lambda, x)\)</span> קיימת וסופית עבור <span>\(\lambda\)</span> כמעט תמיד. </p>
+</li>
+<li>
+<p>לכל קבוצה מדידת בורל <span>\(B \subseteq \mathbb{R}^d\)</span> מתקיים: 
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$</span>
+עם שוויון כאשר <span>\(\mu \ll \lambda\)</span> (כלומר, כאשר <span>\(\mu \ll \lambda\)</span> אז <span>\(D(\mu, \lambda, \cdot) = \frac{d\mu}{d\lambda}\)</span>).</p>
+</li>
+<li>
+<p>מתקיים <span>\(\mu \ll \lambda\)</span> אם ורק אם <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> עבור <span>\(\mu\)</span> כמעט תמיד <span>\(x\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p><strong>חלק 1 - קיום הנגזרת</strong></p>
+<ol>
+<li>
+<p>יהיו <span>\(r &gt; 0\)</span> ו-<span>\(0 &lt; s &lt; t &lt; \infty\)</span> כלשהם. נסמן: 
+<span>$$ A_{s,t,r} := \{x \in B_r(0) \mid \underline{D}(\mu, \lambda, x) \leq s &lt; t \leq \overline{D}(\mu, \lambda, x)\} $$</span>
+זה למעשה קבוצת הנקודות שבהם לא גזיר.</p>
+</li>
+<li>
+<p>מהטענה הקודמת נקבל: 
+<span>$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$</span>
+ולכן כיוון ש-<span>\(s&lt; t\)</span> נדרש כי <span>\(\lambda(A_{s,t,r})=0\)</span>, ולכן הנגזרת מוגדרת <span>\(\lambda\)</span> כמעט תמיד כאשר הנגזרת העליונה סופית.</p>
+</li>
+<li>
+<p>עבור נקודות עם נגזרת עליונה אינסופית נגדיר: 
+<span>$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$</span></p>
+</li>
+</ol>
+</div>
+<p>כאשר כיוון שהגדור <span>\(B_{r}(0)\)</span> חסום ניתן להראות כי:
+<span>$$\lambda(A_{n,r})\leq\frac{1}{n}\mu(A_{n,r})\leq\frac{1}{n}\mu(B_{r}(0)).$$</span>
+כאשר <span>\(n\to \infty\)</span> נקבל:
+<span>$$\lambda\big(\{x\in B_{r}(0)\mid\overline{{{D}}}(\mu,\lambda,x)=\infty\}\big)=0.$$</span>
+ולכן נקבל כי:
+<span>$$ \lambda(\{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) = \infty\}) = \lambda\left( \bigcap_{n=1}^\infty A_{n,r} \right) = \lim_{n \to \infty} \lambda(A_{n,r}) \leq \lim_{n \to \infty} \frac{1}{n} \mu(B_r(0)) = 0 $$</span>
+נבחין כי המשלים של <span>\(\{x \in \mathbb{R}^d \mid \exists D(\mu, \lambda, x) &lt; \infty\}\)</span> שווה ל:
+<span>$$ \bigcup_{k \in \mathbb{N}} \left( \bigcap_{n \in \mathbb{N}} A_{n,k} \cup \bigcup_{\substack{s &lt; t \\ s,t \in \mathbb{Q}}} A_{s,t,k} \right) $$</span>
+שהוא איחוד בן מנייה של קבוצות מ-<span>\(\lambda\)</span> מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.
+<strong>חלק 2 - אי שוויון אינטגרלי</strong></p>
+<ol>
+<li>
+<p>לכל שלם <span>\(p \in \mathbb{Z}\)</span> נגדיר: 
+<span>$$ B_p = \{x \in B \mid t^p \leq D(\mu, \lambda, x) &lt; t^{p+1}\} $$</span>
+כאשר הקבוצה <span>\(B \setminus \bigcup_{p}B_{p}\)</span> מכיל את האיברים שבהם מתקיים או <span>\(D\left( \mu,\lambda,x \right)=\infty\)</span> (אשר מ-<span>\(\lambda\)</span> מידה אפס מהחלק הראשון) או <span>\(D\left( \mu,\lambda,x \right)=0\)</span> ואז לא תהיה תרומה של האינטגרל.</p>
+</li>
+<li>
+<p>עבור כל <span>\(B_{p}\)</span> נקבל <span>\(D\left( \mu,\lambda,x \right)&lt;t^{p+1}\)</span> ומתקיים: 
+<span>$$\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq t^{p+1}\,\lambda(B_{p})$$</span></p>
+</li>
+<li>
+<p>כאשר בנוסף מהטענה הקודמת כיוון ש-<span>\(t^{p}\leq D\left( \mu,\lambda,x \right)\)</span> נקבל כי: 
+<span>$$t^{p}\,\lambda(B_{p})\leq\mu(B_{p})\implies t^{p+1}\,\lambda(B_{p})\leq t\,\mu(B_{p})\implies \int_{B_{p}}D\left( \mu,\lambda,x \right)\,d\lambda(x)\leq t\mu(B_{p})$$</span></p>
+</li>
+<li>
+<p>נסכום כעת על <span>\(\{ p \}\)</span>: 
+<span>$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)=\sum_{p\in\mathbb{Z}}\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq\sum_{p\in\mathbb{Z}}t\,\mu(B_{p})=t\,\mu\Big(\bigcup_{p\in\mathbb{Z}}B_{p}\Big)\leq t\,\mu(B).$$</span>
+כיוון ש-<span>\(t&gt; 1\)</span> שרירותי ניקח את הגבול <span>\(t\to 1\)</span> ונקבל:
+<span>$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)\leq\mu(B)$$</span></p>
+</li>
+<li>
+<p>כדי להוכיח את השוויון נניח <span>\(\mu\ll \lambda\)</span>. כיוון ש-<span>\(\lambda\left( B_{\infty} \right)=0\)</span> נקבל <span>\(\mu\left( B_{\infty} \right)=0\)</span>. בנוסף כיוון ש-<span>\(D\left( \mu,\lambda,x \right)&lt;\infty\)</span> מתקיים <span>\(\lambda\)</span> כמעט תמיד ו-<span>\(\mu\ll \lambda\)</span> אז גם <span>\(D\left( \mu,\lambda,x \right)&lt;\infty\)</span> מתקיים <span>\(\mu\)</span> כמעט תמיד. בנוסף מתקיים <span>\(\mu\)</span> כמעט תמיד כי <span>\(0 &lt; D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}\)</span> להראות באופן דומה כי האי שיווין ההפוך עובד, ולכן נקבל שיווין <span>\(\lambda\)</span> כמעט תמיד: 
+<span>$$D(\mu,\lambda,x)=\frac{d\mu}{d\lambda}(x)$$</span>
+<strong>חלק 3 - אפיון רציפות מוחלטת:</strong></p>
+</li>
+<li>
+<p>מ-1 נובע שאם <span>\(\mu \ll \lambda\)</span> אז <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> <span>\(\mu\)</span> כמעט תמיד. תהי <span>\(C \subseteq \mathbb{R}^d\)</span> עם <span>\(\lambda(C) = 0\)</span>. נרצה להראות ש-<span>\(\mu(C) = 0\)</span>. נבחין כי <span>\(C = \bigcup_{n \in \mathbb{N}} C_n\)</span> כאשר: 
+<span>$$ C_n = \{x \in C \mid \underline{D}(\mu, \lambda, x) \leq n\} $$</span>
+מכאן:
+<span>$$ \mu(C_n) \leq n \cdot \lambda(C_n) \leq n \cdot \lambda(C) = 0 $$</span>
+ולכן:
+<span>$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0$$</span>
+ולכן <span>\(\mu(C) = 0\)</span>. בכיוון ההפוך, אם <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> <span>\(\mu\)</span> כמעט תמיד אז נשתמש בחלק 2 של המשפט כדי להראות <span>\(\mu \ll \lambda\)</span>.</p>
+</li>
+</ol>
+<div class="remark">
+<p>המשפט הזה הוא אחד התוצאות החשובות בתורת המידה, והוא הבסיס לגזירה של מידות.</p>
+</div>
+<div class="corollary">
+<p>תהי <span>\(\lambda\)</span> מידת רדון כלשהי על <span>\(\mathbb{R}^d\)</span>.</p>
+<ol>
+<li>
+<p>לכל <span>\(f: \mathbb{R}^d \to \mathbb{C}\)</span> שהיא <span>\(L^1_{loc}\)</span> (כלומר, לכל <span>\(x \in \mathbb{R}^d\)</span> קיים כדור <span>\(B_{r(x)}\)</span> כך ש-<span>\(f \cdot \mathbb{1}_{B_{r(x)}} \in L^1\)</span>), מתקיים <span>\(\lambda\)</span> כמעט תמיד: 
+<span>$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} f \, d\lambda = f(x) \quad (*) $$</span></p>
+</li>
+<li>
+<p>עבור כל <span>\(A \subseteq \mathbb{R}^d\)</span> מדידה, מתקיים: 
+<span>$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 \quad (**) $$</span>
+עבור <span>\(\lambda\)</span> כמעט תמיד <span>\(x \in A\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p><strong>הוכחת החלק הראשון:</strong> 
+מספיק להוכיח עבור <span>\(0 \leq f \in \mathbb{R}\)</span>. במקרה הכללי, ניתן לכתוב <span>\(f = f_1 - f_2 + i(f_3 - f_4)\)</span> כאשר <span>\(f_i \geq 0\)</span> ומכיוון שהגבול לינארי, מספיק להוכיח עבור כל פונקציה חיובית בנפרד.
+במקרה זה, נגדיר את המידה <span>\(\mu\)</span> על ידי <span>\(d\mu = f \, d\lambda\)</span>. אזי <span>\(\mu \ll \lambda\)</span> (כלומר, <span>\(\mu\)</span> רציפה בהחלט ביחס ל-<span>\(\lambda\)</span>), ולכן לכל קבוצה מדידה <span>\(B\)</span>:
+<span>$$ \int_B f \, d\lambda = \mu(B) = \int_B D(\mu, \lambda, x) \, d\lambda $$</span>
+כמו כן, <span>\(\mu\)</span> מידת רדון כי <span>\(f\)</span> היא <span>\(L^1_{loc}\)</span>.
+מאחר שהשוויון מתקיים לכל <span>\(B\)</span> מדידה, נובע ממשפט רדון-ניקודים ש-<span>\(f = D(\mu, \lambda, x)\)</span> מתקיים <span>\(\lambda\)</span> כמעט תמיד. כלומר:
+<span>$$ f(x) = \lim_{r \to 0} \frac{\mu(B_r(x))}{\lambda(B_r(x))} = \lim_{r \to 0} \frac{\int_{B_r(x)} f \, d\lambda}{\lambda(B_r(x))} $$</span>
+זהו בדיוק מה שרצינו להוכיח.</p>
+</li>
+<li>
+<p><strong>הוכחת החלק השני:</strong> 
+זהו יישום ישיר של חלק 1 עבור <span>\(f = \mathbb{1}_A\)</span>, פונקציית האינדיקטור של <span>\(A\)</span>. אם <span>\(x \in A\)</span> היא נקודת לבג של <span>\(\mathbb{1}_A\)</span>, אז:
+<span>$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} \mathbb{1}_A \, d\lambda = \mathbb{1}_A(x) $$</span>
+האינטגרל של <span>\(\mathbb{1}_A\)</span> על <span>\(B_r(x)\)</span> הוא בדיוק <span>\(\lambda(A \cap B_r(x))\)</span>. מאחר ש-<span>\(x \in A\)</span>, אז <span>\(\mathbb{1}_A(x) = 1\)</span>, ולכן:
+<span>$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 $$</span>
+עבור <span>\(\lambda\)</span> כמעט תמיד <span>\(x \in A\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>נקודות <span>\(x\)</span> שמקיימות את תנאי <span>\((*)\)</span> או <span>\((**)\)</span> נקראות נקודות לבג של הפונקציה <span>\(f\)</span> או של הקבוצה <span>\(A\)</span> בהתאמה. משפט הגזירה של לבג קובע שלכמעט כל נקודה במרחב יש את התכונה הזאת.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='prev-page'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות מיוחדות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  פונקציות מיוחדות</h1>
+    <p>פרק זה זה בעיקר אוסף תכונות שימושיות של פונקציות מיוחדות.</p>
+<h2>פולינומי לג'נדר</h2>
+<p>נקבעים ע"י הפונקצייה היוצרת:
+<span>$$\frac{1}{\sqrt{1-2x t+t^{2}}}\ \equiv\ \sum_{\ell=0}^{\infty}t^{\ell}P_{\ell}(x)\qquad|x|\leq1,\;0&lt;t&lt;1.$$</span></p>
+<p>פותרים את משוואת לג'נדר:
+<span>$$(1-x^{2})\frac{d^{2}P(x)}{d x^{2}}-2x y\frac{d P(x)}{d x}+\ell(\ell+1)P(x)=0.$$</span></p>
+<p>מקיימים יחס אורתוגונאליות:
+<span>$$\int_{-1}^{1}d x\,P_{\ell}(x)P_{m}(x)=\frac{2}{2\ell+1}\delta_{\ell m}$$</span>
+ומקיימים יחס שלמות:
+<span>$$\sum_{\ell=0}^{\infty}\left(\ell+\textstyle{\frac{1}{2}}\right)P_{\ell}(x)P_{\ell}(x^{\prime})=\delta(x-x^{\prime}).$$</span>
+כלומר ניתן לבטא כל פונקציה בעזרת צירוף לינארי(לאו דווקא סופי) של פולינומי לג'נדר.
+נוסחאת רודריגאז:
+<span>$$P_{\ell}(x)={\frac{1}{2^{\ell}\ell!}}{\frac{d^{\ell}}{d x^{\ell}}}(x^{2}-1)^{\ell},$$</span>
+ערכים ראשונים:
+<span>$$\begin{gather}{{P_{0}(x)=1}}\qquad  {{P_{1}(x)=x}}\qquad  {{P_{2}(x)=\displaystyle\frac{1}{2}(3x^{2}-1)}}\\ {{P_{3}(x)=\frac{1}{2}(5x^{3}-3x)}}\qquad  {{P_{4}(x)=\displaystyle\frac{1}{8}(35x^{4}-30x^{2}+3)}}\end{gather}$$</span>
+ערך ב-<span>\(x=0\)</span>:
+<span>$$P_{\ell}(0)=\left\{\begin{array}{c c}{{0}}&amp;{{\mathrm{odd\,\,}\ell,}}\\ {{}}&amp;{{}}\\ {{\displaystyle\frac{(\ell-1)!!}{(-2)^{\ell/2}(\ell/2)!}}}&amp;{{\mathrm{even\,\,}\ell\ge2.}}\end{array}\right.$$</span>
+וכן באופן כללי מקיים יחס זוגיות <span>\(P_{\ell}(-x)=(-1)^{\ell}P_{\ell}(x)\)</span>. נוסחאות נסיגה:
+<span>$$\begin{array}{c}{{(2\ell+1)P_{\ell}(x)=P_{\ell+1}^{\prime}(x)-P_{\ell-1}^{\prime}(x)}}\\ {{(2\ell+1)x P_{\ell}(x)=(\ell+1)P_{\ell+1}(x)+\ell P_{\ell-1}(x)}}\\ {{P_{\ell}(x)=P_{\ell+1}^{\prime}(x)-2x P_{\ell}^{\prime}(x)+P_{\ell-1}^{\prime}(x).}}\end{array}$$</span></p>
+<h2>פולינומי לג'נדר מוכללים</h2>
+<p>פולינום <span>\(P_{\ell}^{m}(x)\)</span> אשר פותרים את המשוואה:
+<span>$$(1-x^{2})\frac{d^{2}P(x)}{d x^{2}}-2x y\frac{d P(x)}{d x}+\left\{\ell(\ell+1)-\frac{m^{2}}{1-x^{2}}\right\}P(x)=0$$</span>
+עבור ערכים שלמים כך ש-<span>\(\lvert m \rvert\leq \ell\)</span>. שלמים(ניתן לבטא כל פונקציה בעזרתם) ואורתוגונאלים. נוסחא מפורשת:
+<span>$$P_{\ell}^{m}(x)=(-1)^{m}(1-x^{2})^{m/2}{\frac{d^{m}}{d x^{m}}}P_{\ell}(x)$$</span>
+מקיימות:
+<span>$$P_{\ell}^{0}(x)=P_{\ell}(x),\phantom{s p a c e}P_{\ell}^{1}(0)=P_{\ell}^{\prime}(0),\phantom{s p a c e}\mathrm{and}\phantom{s p a c e}P_{\ell}^{m}(1)=0.$$</span>
+תכונות שימושיות:
+<span>$$\begin{gather}\frac{d}{d\theta}P_{\ell}(\cos\theta)=-P_{\ell}^{1}(\cos\theta) \\P_{\ell}^{1}(\cos\theta)=(-1)^{\ell+1}P_{\ell}^{1}(-\cos\theta) \\\int_{0}^{\pi}d\theta\sin\theta P_{\ell}^{m}(\cos\theta)P_{\ell^{\prime}}^{m}(\cos\theta)=\frac{2}{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\delta_{\ell\ell^{\prime}}
+\end{gather}$$</span></p>
+<h2>הרמוניות ספריות</h2>
+<p>נסתכל על המשוואה:
+<span>$$\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)+\frac{1}{\sin^{2}\theta}\frac{\partial^{2}Y}{\partial\theta^{2}}=-\ell(\ell+1)Y.$$</span>
+כאשר ניתן לכתוב את הפונקציות העצמיות שלה ע"י פולינומי לג'נדר המוכללות:
+<span>$$Y_{\ell\,m}(\theta,\phi)=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_{\ell}^{m}(\cos\theta)e^{i m\phi}\qquad m\ge0,$$</span>
+מקיימים יחס אורתוגונאליות:
+<span>$$\int_{0}^{2\pi}d\phi\,\int_{0}^{\pi}d\theta\,\sin\theta\;Y_{\ell m}(\theta,\phi)Y_{\ell^{\prime}m^{\prime}}^{\ast}(\theta,\phi)=\delta_{\ell\ell^{\prime}}\delta_{m m^{\prime}}$$</span>
+ויחס שלמות:
+<span>$$\sum_{\ell=0}^{\infty}\sum_{m=-\ell}^{\ell}Y_{\ell m}(\theta,\phi)Y_{\ell m}^{*}(\theta^{\prime},\phi^{\prime})=\delta(\cos\theta-\cos\theta^{\prime})\delta(\phi-\phi^{\prime}).$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='prev-page'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מערכות ב-3 מימדים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_1_4`; }});</script>
+        <div class="content">
+        <h1>2.1  מערכות ב-3 מימדים</h1>
+    <div class="definition"><span class="keyword">המרחב האוקלידי</span><p>מרחב 3 מימדי. כלומר ניתן לתאר כל נקודה במרחב ע"י 3 מספרים.</p>
+</div>
+<div class="definition"><span class="keyword">מערכת צירים</span><p>נקודה במרחב הנקראת ראשית הצירים ביחד עם 3 כיוונים בלתי לתלויים נקרא מערכת צירים.</p>
+</div>
+<div class="remark">
+<p>מערכת צירים היא למעשה דרך לתאר מיקום במרחב. לרוב נבחר את המערכת צירים להיות אורתוגונאלים, ונסמן אותם ב-<span>\(x,y,z\)</span> כך ששלושה ימינית - כלומר <span>\(\hat{x} \times \hat{y} = \hat{z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">טרנספורמציה של מערכת צירים</span><p>פונקציה המעבירה ממערכת צירים אחת למערכת צירים אחרת.</p>
+</div>
+<div class="proposition">
+<p>לפי ההגדרה מערכת צירים שונות נבדלות אחד מהשני בשתי דרכים עיקריות:</p>
+<ol>
+<li>
+<p>הכיוונים של הצירים. </p>
+</li>
+<li>
+<p>המיקום של הראשית. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל טרנספורמציה של מערכת צירים ניתן לייצג ע"י שינוי של הכיוונים, מתיחה של הצירים, והמיקום של הראשית.</p>
+</div>
+<div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="227.17" height="227.17" viewBox="0 0 227.17 227.17">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 3.328125 -3.015625 C 3.390625 -3.265625 3.625 -4.1875 4.3125 -4.1875 C 4.359375 -4.1875 4.609375 -4.1875 4.8125 -4.0625 C 4.53125 -4 4.34375 -3.765625 4.34375 -3.515625 C 4.34375 -3.359375 4.453125 -3.171875 4.71875 -3.171875 C 4.9375 -3.171875 5.25 -3.34375 5.25 -3.75 C 5.25 -4.265625 4.671875 -4.40625 4.328125 -4.40625 C 3.75 -4.40625 3.40625 -3.875 3.28125 -3.65625 C 3.03125 -4.3125 2.5 -4.40625 2.203125 -4.40625 C 1.171875 -4.40625 0.59375 -3.125 0.59375 -2.875 C 0.59375 -2.765625 0.703125 -2.765625 0.71875 -2.765625 C 0.796875 -2.765625 0.828125 -2.796875 0.84375 -2.875 C 1.1875 -3.9375 1.84375 -4.1875 2.1875 -4.1875 C 2.375 -4.1875 2.71875 -4.09375 2.71875 -3.515625 C 2.71875 -3.203125 2.546875 -2.546875 2.1875 -1.140625 C 2.03125 -0.53125 1.671875 -0.109375 1.234375 -0.109375 C 1.171875 -0.109375 0.953125 -0.109375 0.734375 -0.234375 C 0.984375 -0.296875 1.203125 -0.5 1.203125 -0.78125 C 1.203125 -1.046875 0.984375 -1.125 0.84375 -1.125 C 0.53125 -1.125 0.296875 -0.875 0.296875 -0.546875 C 0.296875 -0.09375 0.78125 0.109375 1.21875 0.109375 C 1.890625 0.109375 2.25 -0.59375 2.265625 -0.640625 C 2.390625 -0.28125 2.75 0.109375 3.34375 0.109375 C 4.375 0.109375 4.9375 -1.171875 4.9375 -1.421875 C 4.9375 -1.53125 4.859375 -1.53125 4.828125 -1.53125 C 4.734375 -1.53125 4.71875 -1.484375 4.6875 -1.421875 C 4.359375 -0.34375 3.6875 -0.109375 3.375 -0.109375 C 2.984375 -0.109375 2.828125 -0.421875 2.828125 -0.765625 C 2.828125 -0.984375 2.875 -1.203125 2.984375 -1.640625 Z M 3.328125 -3.015625 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 4.84375 -3.796875 C 4.890625 -3.9375 4.890625 -3.953125 4.890625 -4.03125 C 4.890625 -4.203125 4.75 -4.296875 4.59375 -4.296875 C 4.5 -4.296875 4.34375 -4.234375 4.25 -4.09375 C 4.234375 -4.03125 4.140625 -3.734375 4.109375 -3.546875 C 4.03125 -3.296875 3.96875 -3.015625 3.90625 -2.75 L 3.453125 -0.953125 C 3.421875 -0.8125 2.984375 -0.109375 2.328125 -0.109375 C 1.828125 -0.109375 1.71875 -0.546875 1.71875 -0.921875 C 1.71875 -1.375 1.890625 -2 2.21875 -2.875 C 2.375 -3.28125 2.421875 -3.390625 2.421875 -3.59375 C 2.421875 -4.03125 2.109375 -4.40625 1.609375 -4.40625 C 0.65625 -4.40625 0.296875 -2.953125 0.296875 -2.875 C 0.296875 -2.765625 0.390625 -2.765625 0.40625 -2.765625 C 0.515625 -2.765625 0.515625 -2.796875 0.5625 -2.953125 C 0.84375 -3.890625 1.234375 -4.1875 1.578125 -4.1875 C 1.65625 -4.1875 1.828125 -4.1875 1.828125 -3.875 C 1.828125 -3.625 1.71875 -3.359375 1.65625 -3.171875 C 1.25 -2.109375 1.078125 -1.546875 1.078125 -1.078125 C 1.078125 -0.1875 1.703125 0.109375 2.296875 0.109375 C 2.6875 0.109375 3.015625 -0.0625 3.296875 -0.34375 C 3.171875 0.171875 3.046875 0.671875 2.65625 1.203125 C 2.390625 1.53125 2.015625 1.828125 1.5625 1.828125 C 1.421875 1.828125 0.96875 1.796875 0.796875 1.40625 C 0.953125 1.40625 1.09375 1.40625 1.21875 1.28125 C 1.328125 1.203125 1.421875 1.0625 1.421875 0.875 C 1.421875 0.5625 1.15625 0.53125 1.0625 0.53125 C 0.828125 0.53125 0.5 0.6875 0.5 1.171875 C 0.5 1.671875 0.9375 2.046875 1.5625 2.046875 C 2.578125 2.046875 3.609375 1.140625 3.890625 0.015625 Z M 4.84375 -3.796875 "/>
+</g>
+<g id="glyph-0-2">
+<path d="M 1.328125 -0.828125 C 1.859375 -1.40625 2.15625 -1.65625 2.515625 -1.96875 C 2.515625 -1.96875 3.125 -2.5 3.484375 -2.859375 C 4.4375 -3.78125 4.65625 -4.265625 4.65625 -4.3125 C 4.65625 -4.40625 4.5625 -4.40625 4.546875 -4.40625 C 4.46875 -4.40625 4.453125 -4.390625 4.390625 -4.296875 C 4.09375 -3.8125 3.890625 -3.65625 3.65625 -3.65625 C 3.40625 -3.65625 3.296875 -3.8125 3.140625 -3.984375 C 2.953125 -4.203125 2.78125 -4.40625 2.453125 -4.40625 C 1.703125 -4.40625 1.25 -3.484375 1.25 -3.265625 C 1.25 -3.21875 1.28125 -3.15625 1.359375 -3.15625 C 1.453125 -3.15625 1.46875 -3.203125 1.5 -3.265625 C 1.6875 -3.734375 2.265625 -3.734375 2.34375 -3.734375 C 2.546875 -3.734375 2.734375 -3.671875 2.96875 -3.59375 C 3.375 -3.4375 3.484375 -3.4375 3.734375 -3.4375 C 3.375 -3.015625 2.546875 -2.296875 2.359375 -2.140625 L 1.453125 -1.296875 C 0.78125 -0.625 0.421875 -0.0625 0.421875 0.015625 C 0.421875 0.109375 0.53125 0.109375 0.546875 0.109375 C 0.625 0.109375 0.640625 0.09375 0.703125 -0.015625 C 0.9375 -0.375 1.234375 -0.640625 1.5625 -0.640625 C 1.78125 -0.640625 1.890625 -0.546875 2.140625 -0.265625 C 2.296875 -0.046875 2.484375 0.109375 2.765625 0.109375 C 3.765625 0.109375 4.34375 -1.15625 4.34375 -1.421875 C 4.34375 -1.46875 4.296875 -1.53125 4.21875 -1.53125 C 4.125 -1.53125 4.109375 -1.46875 4.078125 -1.390625 C 3.84375 -0.75 3.203125 -0.5625 2.875 -0.5625 C 2.6875 -0.5625 2.5 -0.625 2.296875 -0.6875 C 1.953125 -0.8125 1.796875 -0.859375 1.59375 -0.859375 C 1.578125 -0.859375 1.421875 -0.859375 1.328125 -0.828125 Z M 1.328125 -0.828125 "/>
+</g>
+<g id="glyph-0-3">
+<path d="M 4.53125 -4.984375 C 4.53125 -5.640625 4.359375 -7.03125 3.34375 -7.03125 C 1.953125 -7.03125 0.421875 -4.21875 0.421875 -1.9375 C 0.421875 -1 0.703125 0.109375 1.609375 0.109375 C 3.015625 0.109375 4.53125 -2.75 4.53125 -4.984375 Z M 1.46875 -3.625 C 1.640625 -4.25 1.84375 -5.046875 2.25 -5.765625 C 2.515625 -6.25 2.875 -6.8125 3.328125 -6.8125 C 3.8125 -6.8125 3.875 -6.171875 3.875 -5.609375 C 3.875 -5.109375 3.796875 -4.609375 3.5625 -3.625 Z M 3.46875 -3.296875 C 3.359375 -2.84375 3.15625 -2 2.765625 -1.28125 C 2.421875 -0.59375 2.046875 -0.109375 1.609375 -0.109375 C 1.28125 -0.109375 1.078125 -0.40625 1.078125 -1.328125 C 1.078125 -1.75 1.140625 -2.328125 1.390625 -3.296875 Z M 3.46875 -3.296875 "/>
+</g>
+<g id="glyph-0-4">
+<path d="M 7.375 -4.34375 C 7.375 -5.953125 6.3125 -7.03125 4.828125 -7.03125 C 2.6875 -7.03125 0.484375 -4.765625 0.484375 -2.4375 C 0.484375 -0.78125 1.609375 0.21875 3.046875 0.21875 C 5.15625 0.21875 7.375 -1.96875 7.375 -4.34375 Z M 3.09375 -0.046875 C 2.109375 -0.046875 1.421875 -0.84375 1.421875 -2.15625 C 1.421875 -2.609375 1.5625 -4.0625 2.328125 -5.21875 C 3.015625 -6.265625 3.984375 -6.78125 4.78125 -6.78125 C 5.59375 -6.78125 6.484375 -6.21875 6.484375 -4.734375 C 6.484375 -4.015625 6.21875 -2.46875 5.234375 -1.234375 C 4.75 -0.625 3.9375 -0.046875 3.09375 -0.046875 Z M 3.09375 -0.046875 "/>
+</g>
+<g id="glyph-1-0">
+<path d="M 2.015625 -3.296875 C 2.078125 -3.40625 2.078125 -3.46875 2.078125 -3.515625 C 2.078125 -3.734375 1.890625 -3.890625 1.671875 -3.890625 C 1.40625 -3.890625 1.328125 -3.671875 1.296875 -3.5625 L 0.375 -0.546875 C 0.359375 -0.53125 0.328125 -0.453125 0.328125 -0.4375 C 0.328125 -0.359375 0.546875 -0.28125 0.609375 -0.28125 C 0.65625 -0.28125 0.65625 -0.296875 0.703125 -0.40625 Z M 2.015625 -3.296875 "/>
+</g>
+</g>
+</defs>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 111.395469 -0.0009375 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 226.972656 113.585938 L 223.785156 111.992188 L 224.980469 113.585938 L 223.785156 115.179688 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="217.757" y="121.394"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 0.0009375 111.393594 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 113.585938 0.199219 L 111.992188 3.386719 L 113.585938 2.191406 L 115.179688 3.386719 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="117.105" y="8.008"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -42.245156 -42.243125 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 69.929688 157.238281 L 73.3125 156.109375 L 71.339844 155.828125 L 71.058594 153.855469 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="67.396" y="153.718"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 96.469688 55.698281 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 211.78125 56.890625 L 208.222656 57.105469 L 210.054688 57.886719 L 209.816406 59.867188 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="207.536" y="53.372"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="213.23" y="49.757"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -55.698281 96.471719 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 56.890625 15.386719 L 57.105469 18.945312 L 57.886719 17.113281 L 59.867188 17.351562 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="52.874" y="26.399"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="58.116" y="22.784"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -42.245156 -42.243125 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 69.929688 157.238281 L 73.3125 156.109375 L 71.339844 155.828125 L 71.058594 153.855469 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="65.999" y="153.718"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="71.07" y="150.103"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 100%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M 56.692344 -0.0009375 C 56.692344 9.948281 54.07125 19.729531 50.094688 26.620156 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 100%)" fill-opacity="1" d="M 162.683594 85.238281 L 162.898438 88.796875 L 163.679688 86.964844 L 165.65625 87.203125 "/>
+<g fill="rgb(0%, 0%, 100%)" fill-opacity="1">
+<use xlink:href="#glyph-0-3" x="171.866" y="95.392"/>
+</g>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-4" x="102.189" y="123.913"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(50%, 50%, 50%)" stroke-opacity="1" stroke-dasharray="0.3985 1.99255" stroke-miterlimit="10" d="M -113.385781 -113.387656 L 113.387656 -113.387656 M -113.385781 -56.692344 L 113.387656 -56.692344 M -113.385781 -0.0009375 L 113.387656 -0.0009375 M -113.385781 56.694375 L 113.387656 56.694375 M -113.385781 113.36625 L 113.387656 113.36625 M -113.385781 -113.387656 L -113.385781 113.385781 M -56.694375 -113.387656 L -56.694375 113.385781 M 0.0009375 -113.387656 L 0.0009375 113.385781 M 56.692344 -113.387656 L 56.692344 113.385781 M 113.368125 -113.387656 L 113.368125 113.385781 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+</svg>
+</div>
+<div class="corollary">
+<p>חוק פיזיקלי אשר אינו תלוי במערכת צירים מקיים הומוגניות(סימטריה להזזות) ולאיזוטרופיות(סימטריה לסיבובים). </p>
+</div>
+<div class="remark">
+<p>בעתיד כשנתעסק במרחב 4 מימדי מתווסף מימד של זמן, ולכן חופש בחירת מערכת ייחוס גורר גם להומוגניות בזמן.</p>
+</div>
+<div class="proposition">
+<p>כל מעבר מערכת צירים ניתנת לייצוג ע"י טרנספורמציה לינארית(מתיחה + סיבוב) והזזה, לכן ניתן לייצג מעבר קורדינטות כללי ע"י:
+<span>$$\left(\begin{array}{c}{{\Delta x^{\prime}}}\\ {{\Delta y^{\prime}}}\\ {{\Delta z^{\prime}}}\end{array}\right)=T\left(\begin{array}{c}{{\Delta x}}\\ {{\Delta y}}\\ {{\Delta z}}\end{array}\right)$$</span></p>
+</div>
+<p>המצב נהיה קצת יותר מסובך כאשר מכניסים זמן.</p>
+<div class="definition"><span class="keyword">מערכת ייחוס</span><p>מערכת צירים שהיא פונקציה של זמן. ניתן לחשוב על זה שכל אחד מהמאפיינים של מערכת צירים היא פונקציה של הזמן. כלומר גם כל אחד מהצירים וגם המיקום של הראשית זה פונקציה של הזמן.</p>
+</div>
+<p>באופן כללי אנחנו מניחים שהטבע לא מאיץ באופן פתאומי בלי סיבה, לכן נניח שהמערכת ייחוס היא פונקציה גזירה, ולכן ניתן לבצע קירוב לינארי לשינוי במערכת ייחוס:
+<span>$$\begin{pmatrix}dx' \\dy' \\dz' \\dt'\end{pmatrix}=T\begin{pmatrix}dx\\ dy \\ dz \\ dt
+\end{pmatrix}$$</span>
+כאשר כמו במעבר של מערכת קורדינטות, נקבל כי <span>\(dx,dy,dz,dt\)</span> מייצגות את השינוי במיקום של הראשית, וההעתקה <span>\(T\)</span> מייצג כמה שמשתנה כל רכיב.
+כפי שניתן לתאר, יש מספר רב של דרכים שניתן לעבור דרכם מערכות ייחוס. </p>
+<div class="definition"><span class="keyword">טרנספורמציית גלילאו</span><p>דרך לעבור ממערכת ייחוס <span>\(\mathcal{O}\)</span> למערכת ייחוס <span>\(\mathcal{O}'\)</span> הנעה במהירות קבועה <span>\(v\)</span> ביחס ל-<span>\(\mathcal{O}\)</span>. מעבר מהמערכת <span>\(x,y,z\)</span> למערכת <span>\(x',y',z'\)</span> מוגדרת:
+<span>$$\begin{pmatrix}d x' \\d y' \\d  z' \\dt' \end{pmatrix}=\begin{pmatrix}d x-v_{x}t \\d y-v_{y}t \\d z-v_{z}t \\t'\end{pmatrix}\implies \begin{pmatrix}d x' \\d y' \\d z' \\dt'\end{pmatrix}=\begin{pmatrix}1  &amp; 0 &amp; 0 &amp; -v_{x} \\0 &amp; 1 &amp; 0 &amp; -v_{y} \\0 &amp; 0 &amp; 1 &amp; -v_{z} \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\begin{pmatrix}dx \\dy \\dz  \\dt
+\end{pmatrix}$$</span>
+כאשר אם נסמן את המטריצה ב-<span>\(A\)</span> ניתן בעזרת הסכם הסכמיה של אינשטיין לכתוב:
+<span>$$dx'^i=A_{i}dx^i$$</span></p>
+</div>
+<div class="proposition">
+<p>הטרנספורמציה היחידה שמשמרת את חוקי ניוטון תחת מעבר במערכות צירים היא טרספונמציית גלילי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='prev-page'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

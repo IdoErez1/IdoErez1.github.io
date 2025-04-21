@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טורים כלליים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+<li class='parent-page'><a href='./Series'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_1_1'>1.1 הגדרת הגבול</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_3'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_6'>1.6 תתי סדרות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_8'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_2'>3.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_3'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Series_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Series_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  טורים כלליים</h1>
+    <div class="definition"><span class="keyword">התכנסות בהחלט</span><p>טור <span>\(\sum a_{n}\)</span> מתכנס בהחלט אם <span>\(\sum\lvert a_{n} \rvert\)</span> מתכנס</p>
+</div>
+<div class="proposition">
+<p>אם הטור המקורי <span>\(\sum a_{n}\)</span> מתכנס אזי הטור מתכנס בהחלט, כלומר <span>\(\sum\lvert a_{n} \rvert\)</span> מתכנס.</p>
+</div>
+<div class="proposition">
+<p>אם טור מתכנס בהחלט אז ניתן לשנות את איבר הסכימה.</p>
+</div>
+<div class="proposition">
+<p>מכפלה של 2 טורים מתכנסים בהחלט היא הקונבולוציה הבדידה שלהם, כלומר:
+<span>$$\sum_{n=0}^\infty a_n \cdot \sum_{n=0}^\infty b_n = \sum_{m=1}^\infty c_m \qquad c_m = \sum_{n=0}^m a_n b_{m-n}$$</span></p>
+</div>
+<div class="example">
+<p>נמצא את הטור השקול של <span>\(\sum \left(\frac{1}{2}\right)^n \cdot \sum \left(\frac{1}{2}\right)^n\)</span>. מתקיים:
+<span>$$c_n = \sum_{n=0}^m a_n b_{m-n} = \sum_{n=0}^m \left(\frac{1}{2}\right)^n \cdot \left(\frac{1}{2}\right)^{m-n}=$$</span>
+<span>$$= \sum_{n=0}^m \left(\frac{1}{2}\right)^m = \left(\frac{1}{2}\right)^m \sum_{n=0}^m 1 = (m+1)\left(\frac{1}{2}\right)^m$$</span>
+ונקבל:
+<span>$$\sum \left(\frac{1}{2}\right)^n \cdot \sum \left(\frac{1}{2}\right)^n = \sum_{m=0}^\infty (m+1) \left(\frac{1}{2}\right)^m$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טור ליבניץ'</span><p>טור אי שלילית, מונוטונית יורדת ואפסה. לפי משפט לייבניץ טור מהצורה <span>\(\sum(-1)^{n+1} a_n\)</span> מתכנס.</p>
+</div>
+<div class="proposition">
+<p>טור ליבניץ מתכנס.</p>
+</div>
+<div class="proof">
+<p>נסמן ב-<span>\(S_{n}\)</span> את סדרת הסכומים החלקיים. נראה ש-<span>\((S_{2n})\)</span> תת סדרה עולה:
+<span>$$\forall k \in \mathbb{N}\quad S_{2(k+1)}-S_{2k}=\sum_{n=1}^{2k+2}(-1)^{n+1}a_{n}-\sum_{n=1}^{2k}(-1)^{n+1} a_{n}=a_{2k+2}+a_{2k+1}\geq 0$$</span>
+ולכן מונוטונית עולה. כעת נראה ש-<span>\((S_{2n-1})\)</span> תת סדרה יורדת:
+<span>$$\forall k \in \mathbb{N}\quad S_{2(k-1)-1}-S_{2k-1}=\dots =a_{2k+1}-a_{2k}\leq 0$$</span>
+כעת נשים לב כי <span>\(S_{2k+1}\leq S_{2k-1}\)</span> כיוון ש:
+<span>$$\forall k \in \mathbb{N}\quad  S_{2(k+1)}-a_{2k}\leq S_{2k-1}$$</span>
+כיוון שגם:
+<span>$$\lim_{ k \to \infty } S_{2k-1}-S_{2k}=\lim_{ k \to \infty } a_{2k}=0 $$</span>
+אז הסדרות <span>\((S_{2k}),(S_{2k-1})\)</span> מקיימות את תנאי הלמה של קנטור ולכן:
+<span>$$\lim_{ n \to \infty } S_{n}=\lim_{ k \to \infty } S_{2k}=\lim_{ k \to \infty } S_{2k-1}=L$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מבחן דיריכלה</span><p>אם הטור <span>\(\sum b_n\)</span> חסום והסדרה <span>\((a_n)\)</span> מונוטונית ואפסה אז <span>\(\sum (a_n b_n)\)</span> מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן אבל</span><p>אם <span>\(a_n\)</span> מונוטונית וחסומה ו-<span>\(\sum b_n\)</span> מתכנס אז <span>\(\sum (a_n b_n)\)</span> מתכנס.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+<li class='prev-page'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הומומורפיזמים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_3_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_2_2.html`;}});</script>
+        <div class="content">
+        <h1>3.1  הומומורפיזמים</h1>
+    <div class="definition"><span class="keyword">הומומורפיזם</span><p>כאשר <span>\(\left( G,\cdot  \right)\)</span>,<span>\(\left( H,\times  \right)\)</span> חבורות,
+פונקציה <span>\(f:G\to H\)</span> אפשר מכבדת את הכפל, כלומר:
+<span>$$\forall x,y\in G\quad f\left(x\cdot y  \right)=f(x)\times f(y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מונומורפיזם אפימורפיזם איזומורפיזם ואנדומורפיזם</span><p>אם <span>\(f\)</span> הומומופריזם אז אם <span>\(f\)</span>:</p>
+<ol>
+<li>
+<p>חח"ע אז נקרא <u>מונומורפיזם</u>. </p>
+</li>
+<li>
+<p>על אז נקרא <u>אפימורפיזם</u>. </p>
+</li>
+<li>
+<p>חח"ע ועל אז נקרא <u>איזומורפיזם</u>. </p>
+</li>
+<li>
+<p>מקבוצה לעצמה אז נקרא <u>אנדומורפיזם</u>. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>הפונקציות הבאות הם הומומורפיזמים:</p>
+<ol>
+<li>
+<p>כל <span>\(G\)</span>,<span>\(H\)</span> <span>\(f:G\to H\)</span> המוגדרת <span>\(f(g)=e_{H}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G\leq H\)</span>, <span>\(f(g)=g\)</span> לכל <span>\(g \in  G\)</span>. </p>
+</li>
+<li>
+<p>עבור <span>\(f:\mathbb{Z} \to \mathbb{Z} _n\)</span>, נגדיר <span>\(f(j)=j\mod n\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(\mathbb{F}\)</span> שדה, אז: <span>\(\det:GL_{n}\to \mathbb{F}^\times\)</span> המוגדרת <span>\(\det\left( A\cdot B \right)=\det(A)\cdot \det (B)\)</span> זה אפימורפיזם כי: 
+<span>$$\forall \alpha \in \mathbb{F}  ^{\times}\qquad \det \left( \begin{matrix} \alpha  &amp;  &amp;  \\   &amp; 1 &amp; &amp; \\  &amp;  &amp; \ddots &amp;  \\  &amp;  &amp;  &amp; 1
+ \end{matrix} \right)=\alpha$$</span></p>
+</li>
+<li>
+<p>נגדיר <span>\(\mathrm{Tr}:M_{n}(\mathbb{F)}\to \mathbb{F}^+\)</span> כך ש-<span>\(\mathrm{Tr}(A+B)=\mathrm{Tr}(A)+\mathrm{Tr}(B)\)</span> </p>
+</li>
+<li>
+<p>נגדיר <span>\(\mathrm{sgn}:S_{n}\to \left\{  \pm 1  \right\}\)</span> כי <span>\(\mathrm{sgn}\left( \sigma \circ \tau \right)=\mathrm{sgn}\left( \sigma \right)\cdot \mathrm{sgn}\left( \tau \right)\)</span> </p>
+</li>
+<li>
+<p>נגדיר <span>\(f:\mathbb{R} \to \mathbb{C} ^\times\)</span> כך ש-<span>\(f\left( \theta \right)=e^{i\theta}\)</span> </p>
+</li>
+<li>
+<p>נניח <span>\(A\in M_{n}\left( \mathbb{R}  \right)\)</span>. נגדיר <span>\(f:\mathbb{R} \to GL_{n}\left( \mathbb{R}  \right)\)</span> כך ש-<span>\(f(t)=e^{tA}\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תכונות של הומומורפיזמים</span><p>אם <span>\(f:G\to H\)</span> הומומורפיזם:</p>
+<ol>
+<li>
+<p><span>\(f(e)=e\)</span> </p>
+</li>
+<li>
+<p><span>\(f(g^{-1} )=f(g)^{-1}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(f':H\to K\)</span> עוד הומומורפיזם, <span>\(f'\circ f:G\to K\)</span> גם הומומורפיזם </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>התמונה של הומומורפיזם תהיה תת חבורה. כלומר <span>\(im(f)\leq H\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(h,h'\in im(f)\)</span>. קיימים <span>\(g,g'\in G\)</span> עם <span>\(f(g)=h,f(g')=h'\)</span> ואז: <span>$$f(gg')=f(g)f(g')=hh'$$</span> כמו כן, <span>\(f(g)^{-1} =f(g^{-1} )\)</span> וכן <span>\(f(e)\in Im(f)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">גרעין של הומומורפזים</span><p>הגרעין של הומומורפיזם <span>\(f\)</span> מוגדר:
+ <span>$$\ker(f):=\left\{  g\in G\;|\;f(g)=e  \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>הומומורפיזם <span>\(f\)</span> חח"ע אם"ם <span>\(\ker(f)=\{ e \}\)</span></p>
+</div>
+<div class="proposition">
+<p>הגרעין של הומומורפיזם יהיה תת חבורה נורמלית. כלומר מתקיים <span>\(\ker(f) \trianglelefteq G\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>: אם <span>\(g,g'\in \ker(f)\)</span> אזי: 
+<span>$$\ker(f)\leq G \impliedby  \begin{cases}f\left( g\cdot g' \right)=f(g)f(g') = ee=e \\f(g^{-1} )=f(g)^{-1} =e^{-1} =e \\f(e)=e
+\end{cases}$$</span>
+ואכן <span>\(f\left( g\times g^{-1}  \right)=f(g)f(x)f(g^{-1} )=e\)</span></li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(f(g)=h\)</span> אזי <span>\(f^{-1} (h)=g\ker(f)=\ker(f)g\)</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(k\in \ker(f)\)</span>, אז: <span>$$f(gk)=f(g)f(k)=h$$</span> מצד שני, אם <span>\(f(g')=h\)</span>, נרצה להראות <span>\(g'\in \ker(f)\)</span>.
+<span>$$f(g')=h=f(g)\implies f(g')f(g)^{-1} = f(g'g^{-1} )=e\implies g'g\in \ker(f)\implies g'\in \ker(f)g=g\ker(f)$$</span> </p>
+</div>
+<div class="definition"><span class="keyword">הומומורפיזם המבנה</span><p>אם <span>\(G\circlearrowright X\)</span> אזי ראינו שכל <span>\(g\in G\)</span> פועל על <span>\(X\)</span> ע"י פרמוטציה <span>\(\Pi_{g}\in S_{x}\)</span>. נסתכל על <span>\(\rho:G\to S_{X}\)</span>. <span>\(\rho\)</span> נקראת הומומורפיזם המבנה של הפעולה.</p>
+</div>
+<div class="proposition">
+<p>הומורפיזם המבנה <span>\(\rho\)</span> היא הומומורפיזם.</p>
+</div>
+<div class="proof">
+<p><span>$$\forall x\quad  \rho\left( g\cdot g' \right)(x)=\Pi_{g,g'}=(gg')(x)=g(g'x)=\Pi_{g}\left( \Pi_{g'}(x) \right)=\left( \rho(g) \circ  \rho(g') \right)(x)$$</span>
+בכיוון ההפוך: אם <span>\(G\)</span> חבורה, <span>\(X\)</span> קבוצה, ונתון הומומורפיזם<span>\(\rho:G\to S_{X}\)</span>. אפשר להגדיר פעולה של <span>\(G\)</span> על <span>\(X\)</span> ע"י <span>\(g\cdot x=\rho(g)(x)\)</span>. זו אכן פעולה. לכל <span>\(x \in X\)</span> ולכל <span>\(g,g'\in G\)</span> מתקיים: 
+<span>$$\begin{gathered}e x=\rho(e)(x)=id(x)=x \\(g'g)x= \rho(gg')(x)=\left( \rho(g)\circ \rho(g') \right)(x)=\rho(g)\left( \rho(g')(x) \right)=g'\cdot \left( g\cdot x \right)
+\end{gathered}$$</span> בסופו של דבר, למצוא הומורפיזם מ-<span>\(G\)</span> ל-<span>\(S_{X}\)</span> זה שקול ללהגדיר פעולה של <span>\(G\)</span> על <span>\(X\)</span>.</p>
+</div>
+<div class="example">
+<p>למשל אם <span>\(G\)</span> פעולת על עצמה ע"י הצמדה: <span>\(g.x=gxg^{-1}\)</span>. נגדיר <span>\(\rho:G\to Aut(G)\leq S_{G}\)</span> כך ש-<span>\(\rho(g)(x)=gxg^{-1}\)</span>, או <span>\(\rho(g)=\varphi_{g}\)</span>. מה הגרעין של <span>\(\rho\)</span>? <span>\(Z(G)\)</span> (<span>\(g\in Z(G)\iff \varphi_{g}=id\)</span>).
+וכן <span>\(Im\left( \rho \right)=Inn(G)\)</span>(כאשר <span>\(Inn(G)\)</span> זה האיזומורפיזמים הפנימיים) של <span>\(G\)</span>.</p>
+</div>
+<div class="remark">
+<p>מתקיים <span>\(Aut(S_{n})=Inn(S_{n})\)</span> לכל <span>\(n\neq 6\)</span>.</p>
+</div>
+<div class="remark">
+<p>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(\rho\)</span> הומומורפיזם המבנה, <span>\(G\)</span> חח"ע אם"ם הפעולה נאמנה(faithful).</p>
+</div>
+<div class="remark">
+<p>אם <span>\(f:G\to H\)</span>(הומומורפיזם חח"ע). אזי <span>\(G\cong Im(f)\)</span> (כי <span>\(f:G\to Im(f)\)</span> על, חח"ע ומכבדת כפל). לכן אם <span>\(G\circlearrowright X\)</span> בצורה נאמנה מתקבל איזומורפיזם של <span>\(G\)</span> לתת חבורה של <span>\(S_{X}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='prev-page'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

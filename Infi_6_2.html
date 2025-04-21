@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות רב מימדיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_6_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_6_1`; }});</script>
+        <div class="content">
+        <h1>6.2  פונקציות רב מימדיות</h1>
+    <h3>מסילות</h3>
+<div class="definition"><span class="keyword">מסילה</span><p>פונקציה מהצורה <span>\(\gamma:[a,b]\to X\)</span> כאשר <span>\(X\)</span> היא פונקציה רציפה נקראת מסילה.</p>
+</div>
+<div class="definition"><span class="keyword">קשירה מסילתית</span><p>עבור מסילה <span>\(\gamma:[a,b]\to X\)</span> תת קבוצה <span>\(A\subseteq X\)</span> היא קשירה מסילתית אם לכל <span>\(x,y\in A\)</span> קיים מסלול <span>\(\gamma:[a,b]\to A\)</span> כך ש-<span>\(\gamma(a)=x,\gamma(b)=y\)</span></p>
+</div>
+<div class="theorem"><span class="keyword">הערך הביניים</span><p>אם <span>\(A\subseteq X\)</span> קשירה מסילתית ו-<span>\(f:A\to\mathbb{R}\)</span> רציפה, אז לכל <span>\(x,y\in X\)</span> ו-<span>\(L\in[f(x),f(y)]\)</span> קיים <span>\(z\in A\)</span> כך ש-<span>\(f(z)=L\)</span></p>
+</div>
+<div class="proof">
+<p><span>$$[a,b]\xrightarrow{\gamma}A\xrightarrow{f}\mathbb{R}$$</span>
+ונשים לב כי <span>\(g=\gamma \circ f:[a,b]\to\mathbb{R}\)</span> פונקציה רציפה כהרכבה של פונקציות רציפות. וכן מתקיים <span>\(g(a)=f(x),g(b)=f(y)\)</span> ופונקציה זו מקיימת את משפט ערך הביניים החד מימדי.</p>
+</div>
+<p><strong>סימון - נגזרת של מסילה:</strong>
+<span>$$\left( D\gamma \right)_{t}:=\gamma^{\prime}(t)=\begin{pmatrix}\gamma_{1}'(t) \\\vdots \\\gamma_{m}'(t)
+\end{pmatrix}$$</span></p>
+<div class="remark">
+<p>במקרה הספציפי של מסילה הנורמה האופרטורית מקיימת:
+<span>$$\|(D\gamma)_{t}\|_{\mathrm{op}_{1,m}}=\operatorname*{max}\{\|(D\gamma)_{t}(1)\|_{\mathbb{R}^{m}},\|(D\gamma)_{t}(-1)\|_{\mathbb{R}^{m}}\}=\|\gamma^{\prime}(t)\|_{\mathbb{R}^{m}}.$$</span></p>
+</div>
+<div class="lemma">
+<p>יהי <span>\(\gamma:[0,1]\to\mathbb{R}^m\)</span> מסילה גזירה כך שמתקיים:
+<span>$$\operatorname*{sup}_{0\leq t\leq1}\|(D\gamma)_{t}\|_{\mathrm{op}_{1,m}}=M$$</span>
+ולכן נקבל:
+<span>$$\|\gamma(1)-\gamma(0)\|_{\mathbb{R}^{m}}\leq M$$</span></p>
+</div>
+<p>הלמה הזאת היא המקרה הפרטי של המשפט הכללי הבא:
+<strong>משפט</strong>
+יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה. תהי <span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה, ו-<span>\(a,b\)</span> כך ש:
+<span>$$[a,b]=\{t b+(1-t)a\colon0\leq t\leq1\}\subset A$$</span>
+כמו כן נניח כי
+<span>$$\operatorname*{sup}_{c\in[a,b]}\|(D f)_{c}\|_{\mathrm{op}_{k,m}}=M.$$</span>
+אזי נקבל:
+<span>$$\|f(b)-f(a)\|_{\mathbb{R}^{m}}\leq M\,\|b-a\|_{\mathbb{R}^{k}}.$$</span></p>
+<h3>פונקציות סקלריות</h3>
+<p>כעת נתעסק עם פונקציות <span>\(f:A\to \mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span>. פונקציות אלו חשובות במיוחד כיוון שניתן לפרק כל פונקציה <span>\(f:\mathbb{R}^k\to\mathbb{R}^m\)</span> לאוסף פונקציות סקלריות <span>\(f_{i}:\mathbb{R}^k\to\mathbb{R}\)</span>.</p>
+<div class="definition"><span class="keyword">גרדיאנט</span><p>עבור פונקציה מהצורה <span>\(f:\mathbb{R}^n\to\mathbb{R}\)</span> נגדיר <span>\(\bar{\nabla}f\in\mathbb{R}^m\)</span> בתור הווקטור היחיד שמקיים לכל <span>\(v\in \mathbb{R}^n\)</span>:
+<span>$$D f_{x}(v)=\langle\nabla f(x),v\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן להציג את הגרדיאנט בצורה וקטורית:
+<span>$$\nabla f\left(x\right)=\left(\begin{array}{c}{{\partial_{1}f\left(x\right)}}\\ {{\vdots}}\\ {{\partial_{k}f\left(x\right)}}\end{array}\right)=\left(D f\right)_{x}^{T}$$</span></p>
+</div>
+<p>נשים לב כי אם <span>\(f:A\to \mathbb{R}^k\)</span> דיפרנציאבלית אז <span>\(x\to \bar{\nabla}f(x)\)</span> היא פונקציה:
+<span>$$\bar{\nabla} f:A\to\mathbb{R}^k$$</span>
+<strong>פירוש גאומטרי:</strong>
+ננסה לחפש את הוקטור יחידה שעבורו הקצב שינוי המקסימלי. כלומר נחפש <span>\(\left\lVert  \hat{v}  \right\rVert=1\)</span> כך ש-<span>\((Df)_{x}\left( \hat{v} \right)\)</span> מקסימלי. כאשר ראינו שזה מתי ש-<span>\(\left\langle  \bar{\nabla}f, \hat{v}  \right\rangle\)</span> מקסימלי. מאי שיוויון קושי שוורץ נקבל כי:
+<span>$$\left\langle  \bar{\nabla} f, \hat{v}  \right\rangle \leq \left\lVert  \bar{\nabla} f  \right\rVert \left\lVert  \hat{v}  \right\rVert =\left\lVert  \bar{\nabla} f  \right\rVert $$</span>
+כאשר הערך המקסימלי, כלומר השיוויון מתקבל כאשר תלויים לינארים, כלומר <span>\(\hat{v}=\frac{\bar{\nabla}f}{\left\lVert  \bar{\nabla}f  \right\rVert}\)</span>. ולכן הכיוון של הגרדינט הוא הכיוון של הגידול המקסימלי, וכן מתקיים <span>\(\left\lVert  \bar{\nabla}f(a)  \right\rVert=\lVert Df_{a} \rVert_{op}\)</span>.</p>
+<div class="proposition">
+<p>יהי <span>\(f:A\to\mathbb{R}\)</span> פונקציה גזירה. נניח שב-<span>\(a\)</span> מתקבל ל-<span>\(f\)</span> מקסימום באיזושהי סביבה <span>\(U\)</span> של <span>\(a\)</span>. הראו כי <span>\(\bar{\nabla}f(a)=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון שמקבלת מקסימום, קיים סביבה <span>\(A\)</span> של <span>\(a\)</span> שעבורה לכל <span>\(x \in A\)</span> מתקיים <span>\(f(x)\leq f(a)\)</span>. נסתכל על הנגזרת הכיוונית ה-<span>\(i\)</span>. כיוון ש-<span>\(f\)</span> גזירה מתקיים מצד אחד:
+<span>$$\partial_{i} f|_{a}=\lim_{ h^+ \to 0 } \frac{f(a+he_{i})-f(a)}{h}\leq 0$$</span>
+כאשר מצד שני:
+<span>$$\partial_{i} f|_{a}=\lim_{ h^- \to 0 } \frac{f(a+he_{i})-f(a)}{h}\geq 0$$</span>
+ולכן נקבל <span>\(\partial_{i}f|_{a}=0\)</span> ולכן <span>\(\bar{\nabla}f(a)=0\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ערך הממוצע</span><p>יהי <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, <span>\(a,b\in A\)</span> כך שהקטע המחבר ביניהם הוא:
+<span>$$[a,b]:=\{a+t(b-a)\::\:t\in[0,1]\}\subset A.$$</span>
+אם <span>\(f:A\to\mathbb{R}\)</span> גזירה, קיים <span>\(\theta \in(0,1)\)</span> כך ש:
+<span>$$f(b)-f(a)=(D f)_{a+\theta(b-a)}(b-a).$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה להשתמש במשפט ערך הממוצע החד מימדי. נסתכל על המסילה <span>\(\gamma:[0,1]\to A\)</span> הנתונה ע"י <span>$$\gamma(t)=a+t(b-a),$$</span> ופנוקציה <span>\(g:I\to\mathbb{R}\)</span> הנתונה ע"י <span>\(g(t)=f\left( \gamma(t) \right)\)</span>. הפונקציה <span>\(g\)</span> היא גזירה כך ש:
+<span>$$g^{\prime}(t)=(D f)_{\gamma(t)}\circ(D\gamma)_{t}=(D f)_{\gamma(t)}(b-a).$$</span>
+וממשפט ערך ההמוצע החד מימדי נקבל <span>\(\theta \in(0,1)\)</span> כך ש:
+<span>$$g(1)-g(0)=g^{\prime}(\theta)=(D f)_{a+\theta(b-a)}(b-a)$$</span></p>
+</div>
+<p>זה למעשה אומר כי בין 2 נקודות על הגרף הקיים נקודה שהשיפוע שלו שווה לשיפוע הישר שמחבר בין הנקודות</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='prev-page'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרצאה 1</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_4_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_3_7`; }});</script>
+        <div class="content">
+        <h1>4.1  הרצאה 1</h1>
+    <div class="definition"><span class="keyword">חוג</span><p>שלושה <span>\((R,+,\times)\)</span> כאשר <span>\(+,\times\)</span> אסוצייטיבי, <span>\(+\)</span> קומוטטיבי ומתקיים דיסטריביוטיובות:
+<span>$$a\times(b+c)=a\times b+a\times c \qquad (a+b)c=ac+bc$$</span>
+ניטרליים: <span>\(0,1\)</span> ונגדי <span>\(-a\)</span>.</p>
+</div>
+<div class="remark">
+<p>לא תמיד מכילילים בהגדרה של חוג קיום יחידה ואסוצייטיביות.</p>
+</div>
+<div class="example">
+<p><span>$$\mathbb{Z},\mathbb{Q} ,\mathbb{R},\mathbb{C}, \mathbb{F} [x]$$</span>
+ניתן גם להסתכל על פולינומים מעל חוג כלשהו <span>\(R[x]\)</span> או <span>\(R[x,y, \dots]\)</span> ופונקציות <span>\(R\{ x,y \}\)</span>. חוג המטריצות על חוגים <span>\(M_{n}(R)\)</span> כאשר <span>\(R\)</span> חוג, <span>\(\mathbb{H}\)</span> הקווטרניונים של המילטון. פונקציות רציפות <span>\(C^{\infty}(\mathbb{R}),C^{1}(\mathbb{R})\)</span>. פונקציות חלקות על יריעה דיפרנציאלית או רימנית - <span>\(C^{\infty}(M)\)</span>. <span>\(L^{2}(\mathbb{R})\)</span> זה חוג ללא יחידה כי <span>\(y=1\)</span> לא ב-<span>\(L^{2}\)</span>.
+אם ניקח שדה אז אוסף הטורי חזקות יהיה חוג:
+<span>$$\mathbb{F} [[x]]=\left\{  \sum_{i=0}^{\infty} a_{i}x^{i}\mid a_{i} \in \mathbb{F}  \right\}$$</span>
+כאשר ניתן לקחת אפילו תחת חוג <span>\(R[[x]]\)</span>. ניתן באופן דומה לקחת:
+<span>$$\mathbb{F} ((x))=\left\{  \sum_{j=m}^{\infty} a_{i}x^{i} \mid m \in \mathbb{Z}\quad a_{i}\in \mathbb{F}   \right\}$$</span>
+כלומר נאפשר גם חזקות שליליות(טורי לורן).</p>
+</div>
+<p>תרגיל:
+להראות ש-<span>\(\mathbb{F}((x))\)</span> שדה. </p>
+<p>אם נסתכל על 
+<span>$$\mathbb{F}[[x]]^{\times}=\left\{  \sum_{i=0}^{\infty} a_{i}x^{i}\mid a_{0}\neq 0 \right\}$$</span>
+כאשר <span>\(R^{\times}\)</span> זה האיברים שהפיכים ב-<span>\(R\)</span>(חבורה).</p>
+<div class="definition"><span class="keyword">twisted polynomials</span><p>ניקח שדה <span>\(\mathbb{F}\)</span> ואוטומורפיזם <span>\(\sigma \in \mathrm{Aut}(\mathbb{F})\)</span>. נסתכל על:
+<span>$$F^{\sigma}[x]=\left\{  \sum_{i=0}^{n}a_{i}x^{i}\mid a_{i}\in \mathbb{F} \quad n \in \mathbb{N}  \right\}$$</span>
+חיבור כמו ב-<span>\(\mathbb{F}[x]\)</span>. כפל - עבור <span>\(a\in \mathbb{F}\)</span> נגדיר:
+<span>$$xa=\sigma(a)x$$</span>
+כעת:
+<span>$$(a+bx)(c+dx)=ac+(b\sigma(c)+ad)x+b\sigma(d)x^{2}$$</span>
+זה גם חוג לא קומוטטיבי</p>
+</div>
+<div class="definition"><span class="keyword">הומומורפיזמים של חוגים:</span><p>פונקציה <span>\(f:R\to S\)</span> אשר מקיימת:
+<span>$$f(a+b)=f(a)+f(b)\qquad f(ab)=f(a)f(b)\quad f(1)=1$$</span>
+עבור חוגים בלי יחידה שוללים את <span>\(f(1)=1\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$f_{r}:R[x]\to R$$</span>
+עבור <span>\(r \in R\)</span> קבוע:
+<span>$$f_{r}(p(x))=p(r)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תת חוג</span><p>קבוצה <span>\(S \subseteq R\)</span>(תת חוג - <span>\(1_{S}=1_{R}\)</span>).</p>
+</div>
+<div class="remark">
+<p>נקבל כי <span>\(\{ 0 \}\)</span> לא תת חוג של <span>\(\mathbb{Z}\)</span> למרות ש-<span>\(\{ 0 \}\)</span> חוג בפני עצמו.</p>
+</div>
+<div class="definition"><span class="keyword">אידיאל</span><p>תת חוג <span>\(I\trianglelefteq R\)</span> נקרא אידיאל אם:
+<span>$$I+I\subseteq I\qquad RIR\subseteq I\qquad I\neq \varnothing $$</span>
+למשל <span>\(5\mathbb{Z}\trianglelefteq \mathbb{Z}\)</span>. אם <span>\(R\)</span> קומוטטיבי נקבל <span>\(rR\trianglelefteq R\)</span>.</p>
+</div>
+<div class="proposition">
+<p>לכל חוג יש את האידיאלים:
+<span>$$0\trianglelefteq  R \qquad R \trianglelefteq  R$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חוג פשוט</span><p>חוג <span>\(R\)</span> נקרא פשוט אם האידיאלים היחידים שלו הם <span>\(R\)</span> ו-<span>\(0\)</span>.</p>
+</div>
+<h3>חוגים פשוטים</h3>
+<p>שדות, חוגי חילוק(חוג חילוק - חוג שיש בו הופכיים לכל <span>\(0\neq r\)</span>).</p>
+<div class="remark">
+<p>חוג חילוק זה כמו שדה אבל לא דווקא קומוטטיבי.</p>
+</div>
+<div class="example">
+<p>מטריצות מעל שדה <span>\(M_{n}(\mathbb{F})\)</span> או מטריצות מעל חוג חילוק <span>\(M_{n}(D)\)</span> כש-<span>\(D\)</span> חוג חילוף.</p>
+</div>
+<div class="theorem"><span class="keyword">ארטין-וודרברן</span><p>אם <span>\(R\)</span> חוג פשוט (נדרש גם אולי נתרי? או תנאי סופיות אחר) אזי <span>\(R=M_{n}(D)\)</span> לחוג חילוק <span>\(D\)</span> ו-<span>\(n \in \mathbb{N}\)</span>.
+(מרחיבים על זה בתורת ההצגות).</p>
+</div>
+<p>אם <span>\(I\trianglelefteq R\)</span>, ו-<span>\(R / I\)</span> חוג מנה. ניתן להסתכל על <span>\(R / I\)</span> חבורה(עם <span>\(+\)</span>) כאשר נגדיר סכום קבוצתי:
+<span>$$=(r+I)+(s+I)=r+s+I$$</span>
+וכן ניתן להגדיר כפל קבוצתי:
+<span>$$\neq(r+I)\cdot (s+I):= r\cdot s +1$$</span>
+כאשר 
+<span>$$4\mathbb{Z}\neq (0+2\mathbb{Z})\cdot(0+2\mathbb{Z})=0\cdot 0+2\mathbb{Z}$$</span></p>
+<p>נוכיח כי מוגדר היטב
+<span>$$r+I=r'+I\qquad s+I=s'+I$$</span>
+כעת עד כדי שקילות מודולרית עם <span>\(I\)</span> נקבל:
+<span>$$(rs+I)-(r's'+I)=rs-r's'\equiv \underbracket{ r\underbrace{ (s-s') }_{ I } }_{ I }+\underbracket{ \underbrace{ (r-r') }_{ I }s' }_{ I }\equiv 0$$</span></p>
+<div class="theorem"><span class="keyword">איזו I</span><p>אם <span>\(f:R\to S\)</span> הומומורפיזם אזי <span>\(\ker f \trianglelefteq R\)</span> ו-<span>\(\mathrm{im}f\leq S\)</span> תת חוג ו-<span>\(R / \ker f \cong \mathrm{im}f\)</span> על ידי:
+<span>$$r+\ker f \mapsto f(r)$$</span></p>
+</div>
+<p>קיים באופן דומה לחבורות משפטי איזו II, III, IV.</p>
+<p>האידיאלים של <span>\(R / I\)</span> הם בהתאמה עם האידילים של <span>\(R\)</span> שמכילים את <span>\(I\)</span>. לכן <span>\(R / I\)</span> פשוט אם"ם <span>\(I\)</span> אידיאל מקסימלי(אידיאל מקסימלי = מקסימום מבין האידאלים ששונים מ-<span>\(R\)</span>)</p>
+<div class="proposition">
+<p>לכל חוג שונה מ-<span>\(0\)</span> יש אידיאל מקסימלי</p>
+</div>
+<div class="proof">
+<p>זה הוכחה עם הלמה של צורן. נסתכל על קבוצת כל האידיאלים ממש(שונים מ-R) עם יחס ההכלה. לא ריקה כי <span>\(\{ 0 \}\triangleleft R\)</span>
+סגורה לאיחוד שרשראות עולות. אם:
+<span>$$I_{1}\subseteq I_{2} \subseteq \dots$$</span>
+אזי <span>\(\bigcup_{i=1}^{\infty}I_{i}\)</span> נמצא גם. לכן <span>\(\bigcup_{i=1}^{\infty}I_{i}\trianglelefteq R\)</span>. כל שתי אידיאלים כבר מופיעים ב-<span>\(I_{n}\)</span> כלשהו ולכן גם <span>\(+\)</span> וגם כפל ב-<span>\(R\)</span>. לא ריק: 0.
+נרצה להראות כי אידיאל ממש - <span>\(\bigcup_{i=1}^{\infty}I_{i}\triangleleft R\)</span>. זה כי <span>\(I=R\)</span> אם"ם <span>\(1 \in I\)</span> לכן לפי הלמה של צורן יש איבר מקסימלי.</p>
+</div>
+<div class="corollary">
+<p>לכל חוג יש מנות פשוטות.</p>
+</div>
+<div class="definition"><span class="keyword">אידיאל שמאל</span><p>מסומן על ידי <span>\(I\leq R\)</span>. זה אומר ש-<span>\(RI,I+I\subseteq I\)</span> ו-<span>\(I\neq \varnothing\)</span>.</p>
+</div>
+<div class="example">
+<p>מטריצות מהצורה:
+<span>$$\begin{pmatrix}0 &amp; \star  &amp; \star\\0 &amp; \star  &amp; \star\\0 &amp; \star  &amp; \star
+\end{pmatrix}\leq  M_3(\mathbb{F} )$$</span></p>
+</div>
+<div class="remark">
+<p>בחוגים קומוטטיבים אידלים שמאלים וימיניים הם אותו דבר.</p>
+</div>
+<p><strong>שאלה</strong>
+מי הם כל האידיאלים השמאליים על <span>\(M_{n}(\mathbb{F})\)</span>?</p>
+<div class="definition"><span class="keyword">אידיאל ימיני</span><p><span>$$R\supseteq IR$$</span></p>
+</div>
+<p>לאיזה חוגים אין אידאלים חד צדדים?
+- חוגי חילוק -&gt; אין אידיאלים
+- אין אידיאלים שמאליים -&gt; לכל <span>\(0\neq r \in R\)</span> אז <span>\(\{ 0 \}\lneq Rr\leq R\)</span> כי <span>\(1\cdot r = r\)</span> לכן <span>\(Rr=R\)</span> ויש הופכי משמאל.
+- אם גם אין אידיאלים ימניים יש גם הופכי מימן:
+<span>$$sr = 1\quad rt=1$$</span>
+<span>$$\underbrace{ s r t }_{ s\cdot 1 =s } = 1 \cdot t = t\implies t=s$$</span></p>
+<h2>מודולים</h2>
+<div class="definition"><span class="keyword">מודול</span><p>אם <span>\(R\)</span> חוג מודול מעל <span>\(R\)</span> הוא קבוצה <span>\(M\)</span> עם פעולה <span>\(+\)</span> שמקיימת את אקסוימות המרחב הווקטורי:
+<span>$$\begin{gather}m+m'=m'+m \\m+(m'+m'')=\dots \\\exists 0 \quad m+0=m \\\exists-m \quad m+(-m)=0
+\end{gather}$$</span>
+שזה למעשה הדרישות של חבורה אבלית, וכן יש את הדרישות:
+<span>$$\begin{gather}r(m+m')=r m + rm'  \\(r+r')m=r m + r' m \\(rr')m=r(r'm) \\1m = m
+\end{gather}$$</span></p>
+</div>
+<p>עבור קבוצה <span>\(X\)</span> יש לנו את החבורה <span>\(S_{X}\)</span>. משפט קיילי אומר כי כל חבורה היא תת חבורה של <span>\(S_{X}\)</span> ל-<span>\(X\)</span> כלשהו. ולכן במובן מסויים מספיק להבין את חבורת התמורות. בפועל זה לא מלמד אותנו כזה הרבה.</p>
+<div class="proof">
+<p>הפעולה <span>\(G \circlearrowright G\)</span> על ידי כפל משמאל משרה הומומורפיזם מבנה:
+<span>$$\rho:G\to S_{G}$$</span>
+והיא חד חד ערכית.</p>
+<p><span>$$G\circlearrowright X \iff \rho:G\to S_{X}$$</span></p>
+</div>
+<p>אם <span>\(X\)</span> קבוצה ורוצים להגדיר פעולה של <span>\(G\)</span> עליה צריך למצוא הומומורפיזם <span>\(\rho:G\to S_{X}\)</span>. </p>
+<p>אבחנה: אם <span>\(A\)</span> חבורה אבלית אזי <span>\(\text{End}(A)\)</span> הוא חוג.
+<span>$$\begin{gather}(f+f')(a)=f(a)+f'(a)\\ (f\cdot f')(a)=f(f'(a)) \\(f\cdot(g+h))(a)=f((g+h)(a))=f(g(a)+h(a))=f(g(a))+f(h(a))=(fg+fh)(a) \\(f'+f)(a)=f'(a)+f(a)=(f+f')(a)
+\end{gather}$$</span></p>
+<div class="theorem"><span class="keyword">קיילי לחוגים</span><p>כל חוג הוא תת חוג של <span>\(\text{End}(A)\)</span> ל-<span>\(A\)</span> כלשהי.</p>
+</div>
+<div class="proof">
+<p>ניקח את <span>\(A=R^{+}\)</span>. נגדיר <span>\(\rho:R\to \mathrm{End}(A)\)</span> הומומורפיזם המבנה.
+<span>$$\rho(r)(a)=ra$$</span>
+צריך להראות ש-<span>\(\rho\)</span> הומומורפיזם של חוגים.
+צריך גם להראות ש-<span>\(\rho(r)\)</span> הוא אנדומורפיזם.
+נראה <span>\(\rho\)</span> חח"ע: אם <span>\(r \in \ker \rho\)</span>. אם:
+<span>$$\rho(r)=1_{\text{End}(A)}=\mathrm{Id}$$</span>
+וכעת:
+<span>$$r=r\cdot 1=\rho(r)(1)=1$$</span></p>
+</div>
+<p>אם <span>\(A\)</span> חבורה אבלית ו-<span>\(R\)</span> חוג מה יתן הומומורפיזם מבנה <span>\(\rho:R\to \mathrm{End}(A)\)</span>?</p>
+<p>נרצה להגדיר פעולה <span>\(r\cdot a = \rho(r)(a)\)</span>. כלומר נרצה כי:
+<span>$$r(a+a')=ra+ra'$$</span>
+כלומר זה למעשה להגיד כי <span>\(\rho(r)\in \mathrm{End}(A)\)</span>. זה אומר כי אם נפעיל אותו על סכום:
+<span>$$\begin{gather}r(a+a')=ra+ra' \\(r+r')(a)=ra+ra' \\(rr')(a)=r(r'(a)) \\1\cdot a = a
+\end{gather}$$</span></p>
+<p>כעת ניתן לראות כי זה בדיוק ה-4 דרישות השניות של מודול - ולכן נסיק כי החלק הראשון של הדרישות של מודול גורמות לכך שהחיבור היא חבורה אבלית, וה-4 הדרישות הנותרות נועדו כדי לגרום לכך שיפעול כאנדומורפיזם. </p>
+<p>כלומר מודול מעל <span>\(R\)</span> הוא חבורה אבלית <span>\(M\)</span> עם פעולה של R(שנגזרת מהומומורפיזם <span>\(R\to \mathrm{End}(M)\)</span>).</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='prev-page'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+        </body>
+        </html>
+        

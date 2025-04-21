@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בעיית אטום המימן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_7_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_6_3`; }});</script>
+        <div class="content">
+        <h1>6.4  בעיית אטום המימן</h1>
+    <div class="definition"><span class="keyword">אטום המימן</span><p>האטום הפשוט ביותר. מורכב מגרעין טעון חיובית עם מסת מנוחה <span>\(m_{p}\,=\,1.6726231\times10^{-27}\,\mathrm{kg},\)</span> וכן אלקטרון טעון שלילית עם מסה <span>\(m_{e}\;=\;9.1093897\,\times\,10^{-31}\,\mathrm{kg}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת שרדינגר עבור אטום המימן</span><p>משוואת שרדינגר לא תלויה בזמן, כלומר מהצורה:
+<span>$$\Delta\psi\left(\vec{r}\right)+\frac{2m_{0}}{\hbar^{2}}\left(E-V\left(\vec{r}\right)\right)\ \psi\left(\vec{r}\right)=0$$</span>
+הפוטנציאל יהיה מהצורה של פוטנציאל קולון:
+<span>$$V\left(\vec{r}\right)=-\frac{e_{0}^{2}}{4\,\pi\,\varepsilon_{0}\,\left|\vec{r}\right|}$$</span>
+כאשר המסה של המערכת תהיה המסה המצומצמת:
+<span>$$m_{0}=\frac{m_{p}\ \cdot\ m e}{m_{p}+m_{e}}$$</span></p>
+</div>
+<div class="reminder"><span class="keyword">לפלסיאן בקורדינטות כדוריות</span><p><span>$$\Delta\psi=\frac{\partial^{2}\psi}{\partial r^{2}}+\frac{2}{r}\;\frac{\partial\psi}{\partial r}+\frac{1}{r^{2}}\left[\frac{1}{\sin\theta}\;\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial\psi}{\partial\theta}\right)+\frac{1}{\sin^{2}\theta}\;\frac{\partial^{2}\psi}{\partial\;\varphi^{2}}\right]$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פירוק בעיית המימן בעזרת הפרדת משתנים</span><p>אם נפריד למשתנים מהצורה:
+<span>$$\psi\left(r,\theta,\varphi\right)=R\left(r\right)\Theta\left(\theta\right)\Phi\left(\varphi\right)$$</span>
+נקבל שלושה משוואות. עבור הרכיב הרדיאלי נקבל:
+<span>$${\frac{d^{2}R}{d r^{2}}}+{\frac{2}{r}}\;{\frac{d R}{d r}}+\left({\frac{2m_{0}E}{\hbar^{2}}}+{\frac{m_{0}e_{0}^{2}}{2\pi\varepsilon_{0}\hbar^{2}r}}-{\frac{\alpha}{r^{2}}}\right)R=0$$</span>
+עבור הרכיב האזימוטלי נקבל:
+<span>$${\frac{1}{\sin\theta}}\;{\frac{d}{d\theta}}\left(\sin\theta{\frac{d\Theta}{d\theta}}\right)+\left(\alpha-{\frac{m^{2}}{\sin^{2}\theta}}\right)\Theta=0$$</span>
+עבור הרכיב הפולארי נקבל:
+<span>$$\frac{d^{2}\Phi}{d\varphi^{2}}+m^{2}\Phi=0$$</span>
+כאשר <span>\(\alpha,m\)</span> הם קבועים לא ידועים.</p>
+</div>
+<div class="proof">
+<p>הרעיון הוא להציב את הפונקציה, להעביר אגפים כך שאגף אחד תלוי ב-<span>\(R\)</span> והאגף השני תלוי ב-<span>\(\Phi,\theta\)</span>.  כעת נשוואת כל אחת מהמשוואות לקבוע, לאחר מכן להעביר שוב אגפים כך שאגף אחד תלוי ב-<span>\(\theta\)</span> בלבד ואגף שני תלוי ב-<span>\(\Phi\)</span> בלבד. כעת יש לנו שלוש המשוואות ושתי קבועים לא ידועים.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון הרכיב הפולארי</span><p><span>$$\Phi= C e^{ im\varphi }\qquad \varphi \in \mathbb{Z}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פתרון הרכיב האזימוטלי</span><p>הפתרון יהיה:
+<span>$$\Phi=P_{\ell}^{m}(\cos\left( \theta ) \right)\qquad  m \in \{ -\ell,-\ell+1, \dots, -1,0,1,\dots, \ell-1, \ell \}$$</span>
+כאשר:
+<span>$$\alpha=\ell\left(\ell+1\right)\qquad  \ell \in \mathbb{N} \cup \{ 0 \}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור הצבה <span>\(\xi=\cos(\theta)\)</span> נקבל:
+<span>$$\left(1-\xi^{2}\right)\frac{d^{2}\Theta}{d\xi^{2}}-2\xi\frac{d\Theta}{d\xi}+\left(\alpha-\frac{m^{2}}{1-\xi^{2}}\right)\Theta=0$$</span>
+כאשר זוהי משוואה לג'נדר המוכללת. קיים פתרון חסום רק כאשר <span>\(\xi \in [-1,1]\)</span> ו-<span>\(\alpha\)</span> הוא מספר שלם כך ש-<span>\(\alpha = \ell\left( \ell+1 \right)\)</span> כאשר <span>\(\ell\)</span> מספר שלם אי שלילי. ניתן לפתור בעזרת טור חזקות ולקבל את הפולינומי לג'נדר המוכללים.</p>
+</div>
+<div class="remark">
+<p>משתי משוואות האלה למעשה קיבלנו את הערכים עבור <span>\(m\)</span> ו-<span>\(\alpha\)</span>.</p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את המכפלה של החלק הזוויתי והרדיאלי בעזרת ההרמוניות הספריות <span>\(Y_{\ell m}\left( \theta,\varphi \right)\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">פתרון המשוואה הרדיאלית</span><p>המשוואה הרדיאלית תהיה מהצורה:
+<span>$$R_{n}l(r)=N_{n l}\exp(-r/n a_{0})(2r/n a_{0})^{l}L_{n+l}^{2l+1}(2r/n a_{0}),$$</span>
+כאשר <span>\(a_{0}={\frac{4\pi\epsilon_{0}\,\hbar^{2}}{m_{e}\,e^{2}}}\)</span> נקרא רדיוס בוהר ופקטור הנרמול יהיה:
+<span>$$N_{n l}=-\sqrt{\left(\frac{2}{n a_{0}}\right)^{3}\frac{(n-l-1)!}{2n[(n+l)!]^{3}}}$$</span></p>
+</div>
+<div class="proof">
+<p>לאחר הבצבת הביטויים עבור <span>\(\alpha\)</span> ו-<span>\(m\)</span> נקבל כי המשוואה הרדיאלית תהיה מהצורה:
+<span>$${\frac{d^{2}R}{d r^{2}}}+{\frac{2}{r}}\;{\frac{d R}{d r}}+\left({\frac{2m_{0}E}{\hbar^{2}}}+{\frac{m_{0}e_{0}^{2}}{2\pi\varepsilon_{0}\hbar^{2}r}}-{\frac{l\left(l+1\right)}{r^{2}}}\right)\;R=0$$</span>
+כעת בנוסף לפוטנציאל קולון, יש את התוספת של הפוטנציאל הצנטריפוגאלי:
+<span>$$E_{r o t}=\frac{\hbar^{2}}{2m_{0}}\frac{\ell\left(\ell+1\right)}{r^{2}}=\frac{\vec{L}^{2}}{2m_{0}r^{2}}$$</span>
+כלומר למעשה ניתן להתייחס לבעיה כאילו מסתובב חלקיק עם תנע זוויתי המקיים:
+<span>$$\left\lvert  \vec{L}  \right\rvert = \sqrt{ \ell\left( \ell+1 \right)\hbar }$$</span>
+ומומנט אינרציה של <span>\(I=m_{0}r^{2}\)</span>(כמו של חלקיק נקודתי המסתובב במרחק <span>\(r\)</span>). נסמן את סך האנרגיה להיות <span>\(E\)</span>. נסתכל על הפתרון למשוואה בשתי מקרי קצה:</p>
+<ol>
+<li>כאשר המרחק גדול מאוד, במקרה זה נקבל כי המשוואה תהיה מהצורה: 
+<span>$$\frac{d^{2}R}{d r^{2}}+\frac{2m_{0}E}{\hbar^{2}}\ R=0$$</span>
+ולכן הפתרון יהיה מהצורה:
+<span>$$u\sim A\exp(-\left(\sqrt{\frac{2m|E|}{\hbar^{2}}}r\right)+B\exp\left(\sqrt{\frac{2m|E|}{\hbar^{2}}}r\right)$$</span>
+כאשר <span>\(r\to 0\)</span> נקבל משוואה מהצורה:
+<span>$${\frac{d^{2}R}{d r^{2}}}-{\frac{\ell\left( \ell+1 \right)}{r^{2}}}R=0$$</span>
+כאשר הפתרון יהיה:
+<span>$$R = A r^{\ell+1}+Br ^{-\ell}$$</span>
+ולכן כדי שיקיים את שתי המקרי קצה נכתוב פתרון בצורה כללית על ידי:
+<span>$$C r^{l+1}\exp(-\alpha r)G(r)$$</span>
+כאשר <span>\(G(r)\)</span> הוא טור חזקות מהצורה <span>\(G(r)=\sum A_{i}r^{i}\)</span> ואם נציב במשוואה נקבל את נוסחאת הנסיגה:
+<span>$$A_{k}=-2A_{k-1}\frac{\frac{m e^{2}}{\hbar^{2}}-(l+k)\sqrt{-\frac{2m E}{\hbar^{2}}}}{(l+k)(l+k+1)-l(l+1)}$$</span>
+ולמעשה נקבל כי הפתרון מתבדר אלה אם היחס נסיגה הזה מתאפס החל מאיבר מסויים, כלומר אם מתקבל כי <span>\(G(r)\)</span> הוא פולינום. זה יקרה רק אם המונה ביחס נסיגה יהיה יתאפס. כלומר כאשר:
+<span>$$\frac{m e^{2}}{\hbar^{2}}=(l+k)\sqrt{-\frac{2m E}{\hbar^{2}}}.$$</span>
+ואם נגדיר <span>\(n=\left( \ell+k \right)\)</span> נקבל:
+<span>$$E=-{\frac{m e^{4}}{2n^{2}\hbar^{2}}}$$</span>
+הפולינומים האלה הם פולינומי לג'נדר המוכללים <span>\(L_{q}^{p}\)</span> כאשר אם נחבר את הכל נקבל כי התוצאה של המשוואה הרדיאלית תהיה מהצורה:
+<span>$$R_{n}l(r)=N_{n l}\exp\left( -\frac{r}{n a_{0} }\right)\left( \frac{2r}{n a_{0}} \right)^{l}L_{n+l}^{2l+1}\left( \frac{2r}{n a_{0}} \right)$$</span>
+כאשר פקטור הנרמול יהיה:
+<span>$$N_{n l}=-\sqrt{\left(\frac{2}{n a_{0}}\right)^{3}\frac{(n-l-1)!}{2n[(n+l)!]^{3}}}$$</span></li>
+</ol>
+</div>
+<div class="corollary"><span class="keyword">רמות אנרגיה</span><p>מההוכחה הקודמת ראינו כי הרמות האנרגיה האפשריות יהיו תלויות ב-<span>\(n\)</span> ומקיימות:
+<span>$$ E_{n} = -{\frac{m_{0} e_{0}^{4}}{2n^{2}\hbar^{2}}} = -\frac{e_{0}^{2}}{8\pi\varepsilon_{0}a_{0}n^{2}} = -\frac{13.6 , \mathrm{eV}}{n^{2}} $$</span></p>
+</div>
+<div class="definition"><span class="keyword">המספרים הקוונטים</span><ul>
+<li>הקבוע <span>\(n \in \mathbb{N}\)</span> נקרא המספר הקוונטי היסודי וקובע את רמת האנרגיה.</li>
+<li>הקבוע <span>\(\ell \in \left\{  0,1,2,\dots ,n-1  \right\}\)</span> נקרא המספר הקוונטי האזימוטלי וקובע את התנע הזוויתי האורביטלי.</li>
+<li>הקבוע <span>\(m \in \left\{  -\ell+1,-\ell, \dots, 0, \dots\ell,\ell+1  \right\}\)</span> נקרא המספר הקוונטי המגנטי קובע את האורינציה המרחבית של התנע הזוויתי ואת הרכיב ה-<span>\(z\)</span> של התנע הזוויתי <span>\(L_{z}=m\hbar\)</span>.</li>
+</ul>
+</div>
+<div class="remark">
+<p>הקבוע <span>\(\ell\)</span> קבוע את הצורה של האורביטל. לעיתים מסמנים <span>\(\ell=0\)</span> ב-<span>\(s\)</span>, את <span>\(\ell=1\)</span> ב-<span>\(p\)</span>, את <span>\(\ell=2\)</span> ב-<span>\(d\)</span> ואת <span>\(\ell=3\)</span> ב-<span>\(f\)</span> בהתאמה.</p>
+</div>
+<div class="corollary">
+<p>הפתרון הכולל של הפונקציית גל של אטום המימן נתונה על ידי:
+<span>$$ \psi_{n\ell m}\left( r, \theta, \varphi \right) = N_{n\ell} A_{\ell m}  \frac{1}{\sqrt{2\pi}} \overbrace{\left( \frac{2r}{n a_0} \right)^\ell e^{-r/na_0} L_{n-\ell-1}^{2\ell+1} \left( \frac{2r}{n a_0} \right) }^{ R(r) } \overbrace{ P_{\ell}^{|m|} \left( \cos \theta \right) }^{ \Theta\left( \theta \right) } \overbrace{ e^{im\varphi} }^{ \Phi\left( \varphi \right) } $$</span>
+כאשר <span>\(N_{n l}=-\sqrt{\left(\frac{2}{n a_{0}}\right)^{3}\frac{(n-l-1)!}{2n[(n+l)!]^{3}}}\)</span> הפקטור נרמול של החלק הרדיאלי<span>\((R(r))\)</span>, <span>\(A_{\ell m} = \sqrt{ \frac{(2\ell+1)}{2} \frac{(\ell-|m|)!}{(\ell+|m|)!} }\)</span> הפאקטור נרמול של הגורם הפולארי <span>\(\Theta\left( \theta \right)\)</span> ו-<span>\(\frac{1}{\sqrt{2\pi}}\)</span> הפאקטור נרמול של הגורם האזימוטלי(<span>\(\Phi\left( \varphi \right)\)</span>).</p>
+</div>
+<div class="remark">
+<p>ניתן לחלופין להשתמש בהגדרה של ההרמוניות הספריות, לשלב את <span>\(\Theta\left( \theta \right)\Phi\left( \varphi \right)\)</span> ולקבל <span>\(\psi_{n\ell m}(r,\theta,\varphi)=R_{n\ell}(r)\;Y_{\ell}^{m}(\theta,\varphi),\)</span> כאשר פאקטור הנרמול כבר נכנס בהגדרה של ההרמוניות הספריות.</p>
+</div>
+<div class="corollary"><span class="keyword">ניוון אנרגיות</span><p>באטום המימן הרמות אנרגיה תלויות רק מספר הקוונטי היסודי <span>\(n\)</span>. לכל <span>\(n\)</span> יש <span>\(n\)</span> ערכים שונים של <span>\(0\leq \ell \leq n-1\)</span>. עבור כל <span>\(\ell\)</span> יש <span>\(2\ell+1\)</span> ערכים שונים של <span>\(m\)</span>. ולכן הניוון האנרגטי יהיה:
+<span>$$\sum_{\ell=0}^{n-1} (2\ell+1) = n^2$$</span></p>
+</div>
+<div class="remark">
+<p>הניוון האנרגטי יכול להעלם תחת הפעלה של שדה מגנטי(אפקט זימן) או שדה חשמלי(אפקט שטרק).</p>
+</div>
+<div class="proposition"><span class="keyword">מצב היסוד</span><p>המצב היסוד של אטום המימן יהיה:
+<span>$$\psi_{100}(r,\theta,\varphi)=\frac{1}{\sqrt{\pi a_{0}^{3}}}\,e^{-r/a_{0}}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי הפונקציית גל הכוללת תהיה:
+<span>$$\psi_{n\ell m}(r,\theta,\varphi)=N_{n\ell}\,A_{\ell m}\,\frac{1}{\sqrt{2\pi}}\left(\frac{2r}{n a_{0}}\right)^{\ell}e^{-r/(n a_{0})}L_{n-\ell-1}^{\,2\ell+1}\left(\frac{2r}{n a_{0}}\right)P_{\ell}^{|m|}(\cos\theta)e^{i m\varphi},$$</span>
+כאשר המצב יסוד זה הערך המינימלי ומתקבל עבור <span>\(n=1,\ell=0,m=0\)</span>. נציב ונקבל עבור פאקטורי הנרמול:
+<span>$$N_{10}=-\sqrt{\left(\frac{2}{a_{0}}\right)^{3}\frac{(0)!}{2\cdot1\left(1!\right)^{3}}}=-\frac{2}{a_{0}^{3/2}}\qquad A_{00}=\sqrt{\frac{2\cdot0+1}{2}\frac{(0)!}{(0)!}}=\sqrt{\frac{1}{2}}.$$</span>
+כאשר בנוסף מתקיים <span>\(L^{1}_{0}(x)=1\)</span> ו-<span>\(P_{0}^{0}\left( \cos \theta \right)=1\)</span>. נציב בשאר הביטוי ונקבל את הטענה.</p>
+</div>
+<div class="lemma"><span class="keyword">כללי הברירה של אלמנטי המטריצה של האופרטור Z</span><p>אלמנטי המטריצה <span>\(\bra{n'\ell m'}Z\ket{n\ell m}\)</span> מקיימים:</p>
+<ol>
+<li>
+<p>מתאפסים כאשר <span>\(m'\neq m\)</span>. </p>
+</li>
+<li>
+<p>מתאפסים כאשר <span>\(\ell'-\ell\)</span> הוא זוגי. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ראשית נפשט את הבעיה בעזרת שתי כללי ברירה:</p>
+<ol>
+<li>
+<p>אנו יודעים כי האופרטור <span>\(Z\)</span> בקואורדינטות ספריות יהיה <span>\(Z=r\cos \theta\)</span>. וכן אנו יודעים כי: 
+<span>$$Y_{10}\left( \theta,\varphi \right)=\sqrt{\frac{3}{4\pi}}\cos\theta\implies Z=r\sqrt{\frac{4\pi}{3}}Y_{10}\left( \theta,\varphi \right)$$</span>
+אנו יודעים כי באופן כללי:
+<span>$$ \bra{n'l'm'}Z\ket{n\ell m} = \int \psi_{n'l'm'}^*\left( \vec{r} \right)  Z  \psi_{n\ell m}\left( \vec{r} \right) , \mathrm{d}^3r $$</span>
+כאשר אם נציב <span>\(Z=r\cos \theta\)</span> ו-<span>\(\psi_{n\ell m}\left( r,\theta,\varphi \right)=R_{n\ell}(r)Y_{\ell m}\left( \theta,\varphi \right)\)</span> נקבל:
+<span>$$ \bra{n'l'm'}Z\ket{n\ell m} \propto \int R_{n'l'}^*(r) R_{n\ell}(r) r^3 dr \int Y_{l'm'}^*\left( \theta, \varphi \right)  \cos \left( \theta \right)  Y_{\ell m}\left( \theta, \varphi \right)  \overbrace{ \sin \theta\mathrm{d}\theta \mathrm{d}\varphi }^{ \mathrm{d}\Omega } $$</span>
+עבור האינטגרל הזוויתי נקבל:
+<span>$$ I_{\text{angular}} = \int Y_{l'm'}^*\left( \theta, \varphi \right)  \cos \left( \theta \right)  Y_{\ell m}\left( \theta, \varphi \right)  \mathrm{d}\Omega = \int\limits_0^{2\pi} \!\!\!\int\limits_0^{\pi} Y_{l'm'}^*\left( \theta, \varphi \right)  \cos \left( \theta \right)  Y_{\ell m}\left( \theta, \varphi \right)  \sin \left( \theta  \right) \mathrm{d}\theta  \mathrm{d}\varphi $$</span>
+וכיוון שיש סימטריה אזימוטלית, החלק האזימוטלי מקיים מאורתוגונאליות הטור הפורייה המרוכב:
+<span>$$ I_{\varphi} = \int\limits_0^{2\pi} e^{-im'\varphi} e^{im\varphi} \mathrm{d}\varphi = \int\limits_0^{2\pi} e^{i(m-m')\varphi} \mathrm{d}\varphi =2\pi \delta_{m,m'}$$</span>
+כלומר אלמנט המטריצה מתאפס כאשר <span>\(m\neq m'\)</span>. </p>
+</li>
+<li>
+<p>נשתמש כעת בזוגיות מרחבית - כלומר איך המצב משתנה תחת היפוך במרחב. הזוגיות המרחבית של מצב <span>\(\ket{n\ell m}\)</span> של אטום המימן נקבע על ידי <span>\(\ell\)</span> כאשר הזויות תהיה <span>\((-1)^{\ell}\)</span>. האופרטור <span>\(Z=r\cos \theta\)</span> הוא אי זוגי כיוון שתחת היפוך המרחב מתקיים <span>\(r \mapsto -r\)</span> או תחת סימטריה כדורית: 
+<span>$$r \mapsto r\qquad \theta \mapsto \pi-\theta \qquad \varphi \mapsto \varphi+\pi$$</span>
+ונקבל כעת:
+<span>$$Z=r\cos \theta \mapsto r\cos\left( \pi-\theta \right)=-r\cos \theta=-Z$$</span>
+או באופן שקול ל-<span>\(Y_{10}\)</span> יש זוגיות מרחבית <span>\((-1)^{1}=-1\)</span> ולכן גם ל-<span>\(Z\)</span> כיוון שפרופורציונאליים. כעת כדי שאלמנטי המטריצה <span>\(\bra{n'\ell'm'}Z\ket{n\ell m}\)</span> לא יהיו אפס נדרש כי האינטגרנד יהיה זוגי בסך הכל. הזוגיות של האינטגרנד יהיה מכפלת הזוגיות של <span>\(\psi^{*}_{n'\ell'm'},Z,\psi_{n,\ell,m}\)</span> כאשר הזוגיות של פונקציות הגל יקיימו <span>\(\psi_{n\ell m}=(-1)^{\ell}\)</span> ו-<span>\(\psi^{*}_{n'\ell',m'}=(-1)^{\ell}\)</span>. לכן הזוגיות הכוללת של האינטגרנד תהיה אפס רק אם:
+<span>$$ (-1)^{\ell'} \times (-1) \times (-1)^{\ell} = +1 \implies (-1)^{\ell' + \ell + 1} = +1 \implies \ell'+\ell +1\in \mathbb{Z} / 2\mathbb{Z}\implies\ell'+\ell \in \mathbb{Z} / 2\mathbb{Z}+1$$</span>
+כלומר <span>\(\ell'+\ell\)</span> יהיה אי זוגי. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>נרצה למצוא את אלמנטי המטריצה של <span>\(Z\)</span> עבור <span>\(n=2\)</span>. כלומר את <span>\(\bra{2l'm'}Z\ket{2lm}\)</span>. כללי הברירה נותנים <span>\(\Delta m=m'-m=0\)</span> ו-<span>\(\Delta \ell=\pm 1\)</span> הם הערכים היחידים שלא יכולים להיות אפס. לכן יש רק שתי אלמנטי מטריצה שצריך להתייחס עליהם - <span>\(\bra{210}Z\ket{200}\)</span> ו-<span>\(\bra{200}Z\ket{210}\)</span>. מתקיים:
+<span>$$ \bra{210}Z\ket{200} = \int_0^\infty R_{21}(r) R_{20}(r) r^3 dr \int Y_{10}^*(\theta, \varphi) \cos \theta Y_{00}(\theta, \varphi) d\Omega $$</span>
+כאשר האינטגרל הזוויתי נותן:
+<span>$$ \int Y_{10}^*\left( \theta, \varphi \right) \cos \left( \theta \right) Y_{00}\left( \theta, \varphi \right) d\Omega = \frac{1}{\sqrt{3}} $$</span>
+והאינטגרל הרדיאלי נותן:
+<span>$$ \int_0^\infty R_{21}(r) R_{20}(r) r^3 dr = -3\sqrt{3} a_0 $$</span>
+ולכן:
+<span>$$\bra{210}Z\ket{200} = \frac{1}{\sqrt{3}} \times (-3\sqrt{3} a_0) = -3 a_0 $$</span>
+כאשר כיוון ש-<span>\(Z\)</span> הרמיטי וממשי נקבל:
+<span>$$\bra{200}Z\ket{210} = (\bra{210}Z\ket{200})^* = -3 a_0 $$</span>
+כאשר כל שאר אלמנטי המטריצה הם אפס.</p>
+</div>
+<div class="summary">
+<ul>
+<li>אטום המימן הוא האטום הפשוט ביותר, ומתואר על ידי המשוואת שרודינגר עם סימטריה רדיאלית תחת פוטנציאל קולומבי:
+<span>$$ \bar{\nabla}^2 \psi\left(\vec{r}\right)+\frac{2m_{0}}{\hbar^{2}}\left(E+\frac{e_{0}^{2}}{4\pi\varepsilon_{0}\left|\vec{r}\right|}\left(\vec{r}\right)\right) \psi\left(\vec{r}\right)=0 $$</span></li>
+<li>נפתור על ידי הפרדת משתנים לחלק הרדיאלי, פולארי ואזימוטלי <span>\(\psi \left(r,\theta,\varphi\right) =R\left(r\right) \Theta\left(\theta\right) \Phi\left(\varphi\right)\)</span>.</li>
+<li>הפתרון מאופיין על ידי שלושה מספרים שלמים - המספר הקוונטי היסודי <span>\(1\leq n\)</span> אשר קובע את רמת האנרגיה, המספר הקוונטי האזימוטלי <span>\(0\leq \ell \leq n-1\)</span> אשר קבוע את התנע הזוויתי האורביטלי <span>\(|\vec{L}| = \sqrt{\ell(\ell+1)}\hbar\)</span> והמספר הקוונטי המגנטי <span>\(-\ell \leq m\leq \ell\)</span> אשר קובע את הרכיב ה-<span>\(z\)</span> של התנע הזוויתי האורביטלי.</li>
+<li>האנרגיות האפשריות מקוונטטות ונתונות על ידי:
+<span>$$ E_{n} = -{\frac{m_{0} e_{0}^{4}}{2n^{2}\hbar^{2}}} = -\frac{e_{0}^{2}}{8\pi\varepsilon_{0}a_{0}n^{2}} = -\frac{13.6 \; \mathrm{eV}}{n^{2}} $$</span></li>
+<li>פונקציית הגל הכוללת נתונה על ידי:
+<span>$$ \psi_{n\ell m}\left( r, \theta, \varphi \right) = N_{n\ell} A_{\ell m} \frac{1}{\sqrt{2\pi}}  \overbrace{\left( \frac{2r}{n a_0} \right)^\ell e^{-r/na_0} L_{n-\ell-1}^{2\ell+1} \left( \frac{2r}{n a_0} \right) }^{ R(r) } \overbrace{ P_{\ell}^{|m|} \left( \cos \theta \right) }^{ \Theta\left( \theta \right) } \overbrace{ e^{im\varphi} }^{ \Phi\left( \varphi \right) } $$</span>
+כאשר <span>\(N_{n l}=-\sqrt{\left(\frac{2}{n a_{0}}\right)^{3}\frac{(n-l-1)!}{2n[(n+l)!]^{3}}}\)</span> הפקטור נרמול של החלק הרדיאלי<span>\((R(r))\)</span>, <span>\(A_{\ell m} = \sqrt{ \frac{(2\ell+1)}{2} \frac{(\ell-|m|)!}{(\ell+|m|)!} }\)</span> הפאקטור נרמול של הגורם הפולארי <span>\(\Theta\left( \theta \right)\)</span> ו-<span>\(\frac{1}{\sqrt{2\pi}}\)</span> הפאקטור נרמול של הגורם האזימוטלי(<span>\(\Phi\left( \varphi \right)\)</span>).</li>
+<li>ניתן לכתוב על ידי ההרמוניות הספריות כך שפונקציית הגל תהיה מהצורה <span>\(\psi_{n\ell m}\left( r,\theta,\varphi \right)=R_{n\ell}(r)Y_{\ell m}\left( \theta \varphi \right)\)</span>.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='prev-page'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות נפח</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_4_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_4_2.html`;}});</script>
+        <div class="content">
+        <h1>4.3  פונקציות נפח</h1>
+    <p>ננסה לשוב כעת על מטריצה בתור אוסף של <span>\(n\)</span> ווקטורים. נרצה למצוא פונקציה אשר מחזירה את הנפח ה-<span>\(n\)</span> מימדי של המטריצה.</p>
+<div class="definition"><span class="keyword">פונקציונאל לינארי</span><p>העתקה לינארית <span>\(T:V\to\mathbb{F}\)</span>.</p>
+</div>
+<p>נסתכל כרגע על פונקציונלים לינארים מהמרחב <span>\(V=M_{n\times n}\)</span>.</p>
+<div class="symbolize">
+<p>הסימון <span>\(L_{k}^{M}\)</span> יסמן את השורה ה-<span>\(k\)</span> של מטריצה <span>\(M\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">לינאריות לפי שורה</span><p>פונקציה <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> נקראת לינארית לפי השורה ה-<span>\(i\)</span> כאשר:</p>
+<ol>
+<li>אם <span>\(A,B,C \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> כך שלכל <span>\(1\leq j\leq n\)</span> כך ש-<span>\(i\neq j\)</span> המקיימים: 
+<span>$$L_{j}^{A}=L_{j}^{B}=L_{j}^{C}\implies L_{i}^{A}+L_{i}^{B}=L_{i}^{C}$$</span>
+אז תקיים:
+<span>$$D(C)=D(A)+D(B)$$</span></li>
+</ol>
+</div>
+<div class="example">
+<p>עבור <span>\(n=2\)</span> הפונקציונאל המוגדר על ידי:
+<span>$$D\begin{pmatrix}a_{11} &amp; a_{12} \\a_{21} &amp; a_{22}
+\end{pmatrix}=a_{11}$$</span>
+תהיה לינארית לפי השורה הראשונה אך לא לינארית לפי השורה השנייה.</p>
+</div>
+<div class="definition"><span class="keyword">מולטילינאריות</span><p>פונקציה <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\)</span> אשר לינארית לפי השרוה ה-<span>\(i\)</span> לכל <span>\(1\leq i\leq n\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(D,D':M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> פונקציות מוליטלינאריות ו-<span>\(c \in \mathbb{F}\)</span> אזי גם:
+<span>$$c D, D+D'$$</span>
+יהיו פונקציות מולטילינאריות.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה מתחלפת</span><p>פונקציה <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> אשר לכל <span>\(A \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> שיש לה שתי שורות סמוכות שוות מתקיים <span>\(D(A)=0\)</span>.</p>
+</div>
+<div class="example">
+<p>עבור <span>\(n=2\)</span> הפונקציה המוגדרת על ידי:
+<span>$$D\begin{pmatrix}a_{11} &amp; a_{12} \\a_{21} &amp; a_{22}
+\end{pmatrix}=a_{11}\cdot a_{22}-a_{12}\cdot a_{21}$$</span>
+היא מתחלפת כי:
+<span>$$D\begin{pmatrix}a_{11} &amp; a_{12} \\a_{11} &amp; a_{12}
+\end{pmatrix}=a_{11}\cdot a_{12}-a_{11}\cdot a_{12}=0$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית נפח</span><p>פונקציה <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> אשר מוליטלינארית ומחלפת.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(D',D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> פונקציות נפח ו-<span>\(c \in \mathbb{F}\)</span> אזי גם <span>\(D'+D\)</span> ו-<span>\(cD\)</span> פונקציות נפח.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> פונקציית נפח. אם <span>\(A,B \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> כך ש-<span>\(B\)</span> מתקבל מ-<span>\(A\)</span> ע"י פעולת שורת אלמטרית <span>\(R_{k}\leftrightarrow R_{k+1}\)</span> כאשר <span>\(1\leq k\leq n+1\)</span> אזי <span>\(D(B)=-D(A)\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(L_{i}^{A}=\ell_{i}\)</span>. כיוון ש-<span>\(A,B\)</span> מתקבלות על ידי חילוף של שורות סמוכות ניתן לכתוב:
+<span>$$A=\begin{pmatrix}\ell_{1} \\\vdots \\ \ell_{k}\\ \ell_{k+1}\\ \vdots \\ \ell_{n}\end{pmatrix}\quad B=\begin{pmatrix}\ell_{1} \\\vdots \\ \ell_{k+1}\\ \ell_{k}\\ \vdots \\ \ell_{n}
+\end{pmatrix}$$</span>
+אם נחבר את המטריצות נקבל את המטריצה החדשה:
+<span>$$C=A+B=\begin{pmatrix}\ell_{1} \\ \vdots \\ \ell_{k}+\ell_{k+1} \\\ell_{k}+\ell_{k+1}\\ \vdots \\ \ell_{n}
+\end{pmatrix}$$</span>
+כאשר נשים לב כי כיוון שיש שתי שורות סמוכות שוות נקבל <span>\(D(C)=0\)</span> ולכן:
+<span>$$D(C)=D(A+B)=D(A)+D(B)\implies D(A)=-D(B)$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור שתי מטריצות <span>\(A,B\)</span> הנבדלות בחילוף שורה <span>\(R_{i}\leftrightarrow R_{j}\)</span> מתקיים:
+<span>$$D(A)=-D(B)$$</span></p>
+</div>
+<div class="corollary">
+<p>פונקציית נפח <span>\(D\)</span> עם שתי שורות זההות מקיימת <span>\(D(A)=0\)</span>. נובע מכך שניתן להחליף את השורות כך שיהיו סמוכות ואז נקבל כי <span>\(-D(A)=0\)</span> ולכן <span>\(D(A)=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>פונקציית נפח הפועלת של מטריצה <span>\(A\)</span> אשר שורה אחת שלה היא כפל בסקלר של שורה אחרת תקיים <span>\(D(A)=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסמן את השורות של <span>\(A\)</span> ב-<span>\(\ell_{1},\dots,\ell_{n}\)</span>. נניח כי <span>\(\ell_{j}=c\ell_{i}\)</span> כאשר <span>\(c \in \mathbb{F}\)</span>. נגדיר <span>\(B=\varepsilon(A)\)</span> כאשר <span>\(\varepsilon=R_{i}\to cR_{i}\)</span> אז יש ל-<span>\(B\)</span> 2 שורות זההות ולכן מתקיים <span>\(D(B)=0\)</span>. מאחר ש-<span>\(D\)</span> מולטילנארית מתקיים:
+<span>$$0=D(B)=cD(A)$$</span>
+ולכן עבור <span>\(c\neq 0\)</span> מתקיים <span>\(\ell_{j}=0\)</span> ולכן מלינאריות של <span>\(D\)</span> לפי השורה ה-<span>\(j\)</span> נובע כי <span>\(D(A)=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(D:M_{n\times m}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> פונקציית נפח, ו-<span>\(A,B \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> כך ש-<span>\(B\)</span> מתקבל מ-<span>\(A\)</span> על ידי ביצוע פעולת שורה אלמטרית <span>\(R_{i}\to R_{i}+c\cdot R_{j}\)</span> אז <span>\(D(B)=D(A)\)</span>.</p>
+</div>
+<p>הרעיון של ההוכחה הוא לפרק את זה לפעולות של החלפה וכפל בסקלר.</p>
+<div class="definition"><span class="keyword">מאפיין של פעולת שורה אלמנטרית</span><p>פונקציה המקבל פעולת שורה אלמטרית ומחזירה מספר בצורה הבאה:
+<span>$$\begin{gather}\mu\left( R_{i}\to cR_{i} \right)=c  \\\mu\left( R_{i}\leftrightarrow  R_{j}  \right) = -1 \\\mu\left( R_{i}\to R_{i}+cR_{j} \right)=1
+\end{gather}$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(D:M_{n\times n}\left( \mathbb{F}  \right)\to \mathbb{F}\)</span> פונקציית נפח, ו-<span>\(\varepsilon\)</span> פעולת שורה אלמנטרית, מתקיים:
+<span>$$D\left( \varepsilon(A) \right)=\mu\left( \varepsilon \right)D(A)$$</span>
+בפרט אם מטריצות שקולות שורה אז ניתן לחשב את הערך של הפונקציית נפח ע"י הפעלה חוזרת של פעולות שורה אלמטריות.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(D\)</span> פונקציית נפח ו-<span>\(A\)</span> מטריצה הפיכה, אזי <span>\(D(A)=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>פונקציית נפח <span>\(D\)</span> של מכפלה <span>\(A,B\)</span> מקיימת:
+<span>$$D(AB)=D(A) D (B)$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='prev-page'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

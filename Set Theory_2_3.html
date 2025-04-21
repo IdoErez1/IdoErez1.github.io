@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טענות ובניות בסיסיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page'><a href='./Set Theory'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_1'>1.1 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_3'>1.3 יחסי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_3'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_5'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Set Theory_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Set Theory_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  טענות ובניות בסיסיות</h1>
+    <div class="proposition">
+<p>לא ייתכן קבוצה שהיא איבר של עצמה. כלומר קבוצה <span>\(x\)</span> המקיימת <span>\(x \in x\)</span>.</p>
+</div>
+<div class="proof">
+<p>נקבל במקרה כזה כי קיים השרשת הכלות:
+<span>$$\dots\in x \in x \in x \in x \in \dots $$</span>
+בסתירה לאקסיומת היסוד האומרת כי קיים איבר מינימלי ביחס ל-<span>\(\in\)</span>.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(r\)</span> קבוצה של זוגות סדורים. אז <span>\(\left\{  x\mid \exists y\quad\left( \langle x,y \rangle \right)\in r  \right\}\)</span> ו-<span>\(\left\{  y\mid \exists x\quad\langle x,y \rangle\in r  \right\}\)</span> הם קבוצות.</p>
+</div>
+<div class="proposition">
+<p>קיימת קבוצה אינדוקטיבית מינימלית ביחס ל-<span>\(\subseteq\)</span>.</p>
+</div>
+<div class="proof">
+<p>ראשית נשים לב כי חיתוך של קבוצות אינדוקטיביות תהיה קבוצה אינדוקטיבית. זאת כיוון שהקבוצה הריקה תהיה בחיתוך, וגם העוקב שלה בפרט בחיתוך.
+תהי <span>\(I\)</span> קבוצה אינדוקטיבית מאקסיומת האינסוף. בפרט קבוצת החזקה שלה <span>\(\mathcal{P}(I)\)</span> קיימת מאקסיומת האינסוף. נסתכל על הקבוצה:
+<span>$$z=\left\{  J \in \mathcal{P}(I) \mid J\text{ is inductive}   \right\}$$</span>
+כאשר נקבל כי <span>\(\cap z\)</span> היא קבוצה אינדוקטיבית מהטענה לעיל, כאשר החיתוך יהיה מינימלי ביחס להכלה.</p>
+</div>
+<div class="definition"><span class="keyword">המספרים הטבעיים</span><p>הקבוצה האינדוקטיבית המינימלית תוגדר בתור המספרים הטבעיים.</p>
+</div>
+<div class="proposition"><span class="keyword">אינדוקציה על הטבעיים</span><p>תהי <span>\(p(x)\)</span> תכונה. נניח כי <span>\(p(0)\)</span> ולכן <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(p(n)\implies p(n+1)\)</span> אזי <span>\(p(n)\)</span> לכל <span>\(n \in \mathbb{N}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(J'=\left\{   n \in \mathbb{N}\mid p(n)  \right\}\)</span> אשר קיימת מאקסיומת ההפרדה. תני המשפט מבטיחים כי <span>\(J' \subseteq \mathbb{N}\)</span> קבוצה אינדוקטיבית, ולכן כיוון ש-<span>\(\mathbb{N}\)</span> הקבוצה האינדוקטיבית המינימלית נקבל כי <span>\(J'=\mathbb{N}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">רקורסיה על הטבעיים</span><p>תהי <span>\(A\)</span> מחלקה לא ריקה. אם <span>\(F:A\to A\)</span> מחלקת פונקציה(אוסף זוגות סדורים עם תכונה המקיימת את תנאי הפונקציה) אז קיימת ויחידה פונקציה <span>\(f:\mathbb{N}\to A\)</span> כך ש-<span>\(g(0)=a\)</span> ולכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(g(n+1)=F(g(n))\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='prev-page'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+</ul></li>
+        </body>
+        </html>
+        

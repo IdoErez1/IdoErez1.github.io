@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>החלפת משתנה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='parent-page'><a href='./data_analysis.html'> אנליזת נתונים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הסתברות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+</ul></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_2.html'>2. מונטה קארלו</a></li>
+</ul></li>
+<li class='prev-page'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./data_analysis_1_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./data_analysis_1_2.html`;}});</script>
+        <div class="content">
+        <h1>1.3  החלפת משתנה</h1>
+    <div class="proposition"><span class="keyword">החלפת משתנה</span><p>אם <span>\(g(u)\)</span> ו-<span>\(f(x)\)</span> מייצגים את אותה התפלגות הסתברות מתקיים:
+<span>$$g(u)=f(x)\left|{\frac{d x}{d u}}\right|$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$P(x_{1}&lt;x&lt;x_{2})=\int_{x_{1}}^{x_{2}}f(x^{\prime})d x^{\prime}=\int_{u_{1}}^{u_{2}}g(u^{\prime})d u^{\prime}$$</span>
+ולכן:
+<span>$$|g(u)d u|=|f(x)d x|\implies g(u)=f(x)\left|{\frac{d x}{d u}}\right|$$</span></p>
+</div>
+<div class="example">
+<p>נחשב את צפיפות ההתסברות של נפח של ספרה בעזרת צפיפות ההסתברות של הרדיוס. נניח כי צפיפות ההסתברות של הרדיוס נתונה על ידי התפלגות אחידה:
+<span>$$f(r)=\begin{cases}\frac{1}{r_{2}-r_{1}} &amp; r_{1}&lt;r&lt;r_{2} \\0 &amp; \text{else}
+\end{cases}$$</span>
+אזי כעת <span>\(g(V)=f(r)\left|{\frac{d r}{d V}}\right|\)</span> כאשר אנו יודעים כי <span>\({\frac{d V}{d r}}=4\pi r^{2}\)</span> ולכן:
+<span>$$g(V)=\frac{1}{r_{2}-r_{1}}\frac{1}{4\pi r^{2}}=\frac{1}{V_{2}^{1/3}-V_{1}^{1/3}}\frac{1}{3}V^{-2/3}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פונקציית מעבר התפלגות</span><p>בהנתן שתי התפלגותיות <span>\(f(x),g(u)\)</span> עם פונקציות הסתברות מצטברות <span>\(F(x),G(u)\)</span> הטרנספורמציה המקשרת ביניהן תהיה:
+<span>$$u(x)=G^{-1}(F(x))$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\int_{-\infty}^{x}f\left( x^{\prime} \right)d x^{\prime}=\int_{-\infty}^{u}g\left( u^{\prime} \right)d u^{\prime}\implies F(x)=G(u)\implies u(x)=G^{-1}(F(x))$$</span></p>
+</div>
+<div class="example">
+<p>נניח ויש לנו דרך ליצור התפלגות אחידה ואנחנו רוצים ליצוא התפלגות אקספוננציאלית:
+<span>$$g(u)=\begin{cases}\lambda e^{ -\lambda u } &amp; 0&lt;u \\0 &amp; \text{else}
+\end{cases}$$</span>
+אזי ניתן לכתוב:
+<span>$$G(u)=1-e^{-\lambda u}=F(x)=x$$</span>
+כאשר נבודד את <span>\(u\)</span> ונקבל:
+<span>$$u=-\frac{\ln(1-x)}{\lambda}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">התפלגות רב משתנית</span></div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='prev-page'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

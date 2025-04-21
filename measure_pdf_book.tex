@@ -1,0 +1,3283 @@
+\documentclass{tstextbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Example Document}
+\author{HTML2LaTeX Converter}
+\maketitle
+
+\section{מרחבים מדידים}
+
+\subsection{מבוא טופולוגי}
+
+הרעיון הטופולוגיה זה שניתן לדבר על צורות בלי לדבר על אורכים, ואפשר לדבר על מרחבים גם ללא מטריקות.
+
+\begin{definition}[טופולוגיה]
+טופולוגיה על קבוצה \(X\) זה אוסף של תתי קבוצות \(\tau \subseteq 2^{X}\) המקיים:
+
+  \begin{enumerate}
+    \item הקבוצה הריקה והקבוצה כולה בפנים 
+
+
+    \item לכל אוסף \(\left\{  U_{\alpha}  \right\}_{\alpha}\subseteq \tau\) גם \(\cup_{\alpha}U_{\alpha}\in \tau\). 
+
+
+    \item לכל אוסף סופי \(U_{1},U_{2},\dots,U_{n}\in \tau\) גם \(\cap_{i=1}^{N}U_{i}\). 
+הצמד \(\left( X,\tau \right)\) נקרא מרחב טופולוגי וקבוצות \(U \in \tau\) נקראות פתוחות.
+
+
+  \end{enumerate}
+\end{definition}
+\begin{definition}[קבוצה סגורה]
+קבוצה שהמשלים שלה פתוחה.
+
+\end{definition}
+\begin{example}
+  \begin{enumerate}
+    \item מרחב מטרי עם הקבוצות הפתוחות שלו. למשל \(\mathbb{R}^{n}\) או \(\mathbb{C}^{n}\) עם הקבוצות הפתוחות שלהן ביחס למטריקה האוקלידית. 
+
+
+    \item האוסף \((X,2^{X})\) כל קבוצה תהיה פתוחה. זה נקרא הטופולוגיה הדיסקרטית. 
+
+
+    \item עבור הקבוצה \(X=\{ 1,2,3 \}\) ו-\(\tau=\left\{  \varnothing,X,\{ 1 \},\{ 1,3 \}  \right\}\). 
+
+
+  \end{enumerate}
+\end{example}
+\begin{definition}[סגור של קבוצה]
+יהי \(A\subseteq X\) קבוצה. נגדיר את הסגור שלה להיות:
+$$\overline{A} = \left\{   x \in X \mid \forall x \in U \in \tau \quad U \cap A \neq \varnothing  \right\}$$
+באופן שקול \(\overline{A}\) הינה הקבוצה הסגורה הקטנה ביותר המכילה את \(A\).
+
+\end{definition}
+\begin{example}
+ב-\(\left( \mathbb{R}, 2^{\mathbb{R}} \right)\) מתקיים
+$$\overline{(0,1)} = (0,1)$$
+
+\end{example}
+\begin{example}
+הקבוצה \(\left[ -\infty,\infty \right]=\mathbb{R}\cup \left\{  \pm \infty  \right\}\) כך ש-\(U\) פתוחה אם"ם \(U\cap \mathbb{R}\) פתוחה(בטופולוגיה הסטנדטית על \(\mathbb{R}\)) ומתקיים:
+- אם \(\infty \in U\) אז קיים \(\alpha \in \mathbb{R}\) כך ש-\(\left( \alpha,\infty \right]\subseteq U\). 
+- אם קיים \(\beta \in \mathbb{R}\) כך ש-\(\left[ -\infty,\beta \right)\subseteq U\) אז \(-\infty \in U\)
+היא טופלוגיה
+
+\end{example}
+\begin{definition}[רציפות]
+בהינתן שני מרחבים טופולוגיים \(\left( X,\tau_{X} \right)\) ו-\(\left( Y,\tau_{Y} \right)\) פונקציה \(f:X\to Y\) תקרא רציפה אם המקור של כל קבוצה פתוחה ב-\(Y\) הוא פתוח ב-\(X\). או בסימנים:
+$$f^{-1} (U) \in \tau_{X}$$
+לכל \(U \in \tau_{Y}\)
+
+\end{definition}
+\begin{definition}[הומאומורפיזם]
+שני מרחבים יקראו הומאומורפיים אם קיימת פונקציה \(\varphi:X\to Y\) רציפה חח"ע ועל ובעלת הופכי רציף.
+
+\end{definition}
+\begin{example}
+הקטע \([-1,1]\) הומאומורפי ל-\(\left[ -\infty,\infty \right]\), כאשר הומואומורפיזם מתאים(יש הרבה כאלה) יהיה:
+$$\varphi(x)=\begin{cases}\frac{2}{\pi}\arctan(x) & x \in \mathbb{R} \\\pm 1 & x=\pm \infty
+\end{cases}$$
+
+\end{example}
+\begin{definition}[קומפקטיות]
+לכל כיסוי בפתוח קיים כיסוי סופי.
+
+\end{definition}
+\begin{definition}[קבוצה צפופה]
+קבוצה \(D\leq X\) נקראת צפופה(ב-\(X\)) אם \(\overline{D}=X\).
+
+\end{definition}
+\begin{definition}[ספרבילי]
+מרחב נקרא ספרבילי אם קיימת בו תת קבוצה בת מנייה צפופה.
+
+\end{definition}
+\begin{definition}[בסיס לטופולוגיה]
+בסיס לטופולוגיה \(\tau\) הינו אוסף \(\varepsilon \subseteq \tau\) כך שכל קבוצה פתוחה ב-\(\tau\) היא איחוד(כלשהו) של איברי \(\varepsilon\).
+
+\end{definition}
+\begin{example}
+הטופולוגיה הסטנדרטית על \(\mathbb{R}^{n}\) עם אוסף הכדורים הפתוחים. זאת כיוון כל קבוצה פתוחה ב-\(\mathbb{R}^{n}\) ניתן להציג על ידי איחוד של כדורים פתוחים.
+
+\end{example}
+\begin{definition}[אקסיומת המנייה השנייה]
+מרחב טופולוגי מקיים את אקסיומת המנייה השנייה אם יש לו בסיס בן מנייה.
+
+\end{definition}
+\begin{definition}[מרחב האוסדורף]
+מרחב טופולוגי נקרא האוסדורף אם לכל \(x,y \in X\) שונות קיימות \(U,V \in \tau\) כך ש-\(x \in U\), \(y \in U\), \(U\cap V = \varnothing\).
+
+\end{definition}
+\begin{definition}[קומפקטי מקומי]
+מרחב נקרא קומפקטי מקומית אם לכל \(x \in X\) קיים \(x \in V \in \tau\) כך ש-\(\overline{V}\) קופמקטי. 
+
+\end{definition}
+\begin{definition}[סיגמה קומפקטי]
+מרחב נקרא \(\sigma\)-קומפקטי אם \(X\) הוא איחוד בן מנייה של קומפקטיות.
+
+\end{definition}
+\begin{theorem}[המטריזציה של Urysohn]
+אם \(X\) מרחב האוסדורף קומפקטי מקומי ובעל אקסיומת המנייה השנייה אזי הוא מטריזבילי כלומר קיימת מטריקה על \(X\) כך שהטפולוגיה היא בדיוק הקבוצות הפתוחות.
+
+\end{theorem}
+\begin{summary}
+  \begin{itemize}
+    \item טופולוגיה על קבוצה \(X\) היא אוסף של תתי קבוצות של \(X\) אשר מכיל את הקבוצה הריקה והקבוצה כולה, סגור לאיחודים בני מנייה ולחיתוכים סופיים. האיברים שלה נקראים קבוצות פתוחות.
+    \item קבוצה סגורה \(A\subseteq X\) הוא איבר שהמשלים שלה \(X\setminus A = A^{c}\) הוא קבוצה פתוחה.
+    \item סגור של קבוצה \(A\) זה הקבוצה הסגורה \(\overline{A}\) הקטנה ביותר שמכילה את הקבוצה.
+    \item פונקציה בין מרחבים טופולוגיים הנקראת רציפה אם המקור של כל קבוצה פתוחה תהיה קבוצה פתוחה.
+    \item קבוצה נקראת קומפקטית אם לכל כיסוי פתוח קיים כיסוי סופי.
+    \item קבוצה \(D\leq X\) נקראת צפופה(ב-\(X\)) אם \(\overline{D}=X\). מרחב נקרא ספרבילי אם קיימת בו תת קבוצה בת מנייה צפופה.
+  \end{itemize}
+\end{summary}
+\subsection{סיגמא אלגברה}
+
+\begin{definition}[\(\sigma\) אלגברה]
+יהי \(X\) קבוצה. \(\sigma\)-אלגברה מעל \(X\) הינו אוסף \(\mathcal{A}\subseteq \mathcal{P}(X)\) של תתי קבוצות של \(X\) המקיימת:
+
+  \begin{enumerate}
+    \item הקבוצה כולה נמצאת - \(X \in \mathcal{A}\). 
+
+
+    \item אם \(E \in \mathcal{A}\) אזי \(E^{c} \in \mathcal{A}\). 
+
+
+    \item בהנתן אוסף \underline{בן מנייה}\(E_{1}, E_{2},\dots, \in \mathcal{A}\) אזי: 
+$$\bigcup_{n}E_{n}\in \mathcal{A}$$
+
+
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+לפעמים מוסיפים ל-1 את הדרישה \(\varnothing \in \mathcal{A}\) אבל זה למעשה נובע מ-2.
+
+\end{remark}
+\begin{definition}[מרחב מדיד וקבוצות מדידות]
+הצמד \((X,\mathcal{A})\) נקרא \underline{מרחב מדיד} כאשר קבוצות \(E \in \mathcal{A}\) נקראות \underline{קבוצות מדידות}.
+
+\end{definition}
+\begin{definition}[אלגברה]
+אוסף המקיים את \(1,2\) וסגור תחת איחודים סופיים נקרא אלגברה. כלומר הסיגמא מציין איחוד בן מנייה. לכן \(\sigma\) אלגברה היא בפרט אלגברה.
+
+\end{definition}
+\begin{remark}
+עבור אלגברה כיוון שנדרש לראות כי סגור תחת איחודים סופיים מספיק להראות כי סגור על ידי איחוד של שתי קבוצות, ואז איחודים כלליים נובע מאינדוקציה. מכלל דה מורגן מתקיים
+$$\left( A\cup B \right)^{C}=A^{C}\cap B^{C}$$
+ולכן מספיק להראות כי סגור לחיתוך ולמשלים.
+
+\end{remark}
+\begin{example}
+עבור קבוצה \(X\) האוספים הבאים יהיו \(\sigma\)-אלגברה.
+
+  \begin{enumerate}
+    \item ה\(\sigma\)-אלגברה הטריוויאלית - \(\left\{  \varnothing, X  \right\}\)
+
+
+    \item אוסף כל תתי הקבוצות \(\mathcal{P}(X)=2^{X}\). 
+
+
+    \item בהנתן חלוקה של \(X\): 
+$$X= \bigsqcup_{n=1}^{N}P_{n}$$
+כאשר \(\mathcal{A}\) זה קבוצת כל האיחודים האפשריים של איברים מ-\(P_{1},\dots,P_{n}\).
+
+
+    \item אוסף כל האיחודים הסופיים של קטעים ב-\(\mathbb{R}\). זהו אפילו אלגברה. אך אם נסתכל על אוסף כל האיחודים של קטעים בני מנייה לא נקבל לא \(\sigma\) אלגברה ולא אלגברה(נובע מכל שלא יהיה סגור למשלים) 
+
+
+  \end{enumerate}
+\end{example}
+\begin{proposition}[תכונות בסיסיות של \(\sigma\)-אלגברה]
+  \begin{enumerate}
+    \item הקבוצה הריקה \(\varnothing \in \mathcal{A}\). 
+
+
+    \item בהנתן \(\mathcal{A}_{1},\dots.,\mathcal{A}_{n} \in \mathcal{A}\) גם \(\mathcal{A}_{1}\cup\dots \cup \mathcal{A}_{n}\in \mathcal{A}\) יהיה מדיד. 
+
+
+    \item בהנתן \(A,B \in \mathcal{A}\) אזי: 
+$$B\setminus A = B \cap A^{c}=\left( B^{c}\cup A\right)^{c}\in \mathcal{A}$$
+
+
+    \item בהנתן \({A}_{1},{A}_{2},\dots \in \mathcal{A}\) וגם: 
+$$\bigcap_{n=1}^{\infty} {A}_{n}\in \mathcal{A}$$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{definition}[העתקות מדידות]
+בהנתן שני מרחבים מדידים \((X,\mathcal{A})\) ו-\(\left( Y,\mathcal{C} \right)\) פונקציה \(f:X\to Y\) תקרא מדידה אם המקום של כל קבוצה מדידה הוא מדיד. כלומר:
+$$\forall E \in \mathcal{C} \qquad f^{-1}(E)\in \mathcal{A}$$
+
+\end{definition}
+\begin{example}
+  \begin{itemize}
+    \item פונקציית הזהות \(\mathrm{Id}:\left( \mathbb{R},2^{\mathbb{R}} \right)\to \left( \mathbb{R},\left\{  \varnothing,\mathbb{R}  \right\} \right)\) פונקציה מדידה. 
+    \item הפונקצית הזהות: \(\mathrm{Id}:\left( \mathbb{R},\left\{  \varnothing,\mathbb{R}  \right\} \right)\to \left( \mathbb{R}, 2^{\mathbb{R}} \right)\) אינה מדידה.
+    \item בהנתן \((X,\mathcal{A})\) הפונקציה המקיימת \(f^{-1} (E)\in \mathcal{A}\):
+$$\mathbb{1}_{E}: X\to \mathbb{R}$$
+מדידה אם"ם הקבוצה \(E\) מדידה(\(E \in \mathcal{A}\)).
+  \end{itemize}
+\end{example}
+\begin{proposition}[תכונות של המקור]
+יהי \(f:X\to Y\) פונקציה. אזי:
+
+  \begin{enumerate}
+    \item לכל \(A\subseteq Y\) מתקיים: 
+$$f^{-1}\left( Y\setminus  A \right)= X\setminus  f^{-1}(A) \iff f^{-1}(A^{c})=f^{-1}(A)^{c}$$
+
+
+    \item לכל קבוצת תתי קבוצות \(\mathcal{A}\) מתקיים: 
+$$f^{-1}\left( \bigcup_{A \in \mathcal{A} }A \right)=\bigcup_{A \in \mathcal{A} }f^{-1}(A)$$
+
+
+    \item לכל קבצות תתי קבוצות \(\mathcal{A}\) מתקיים: 
+$$f^{-1}\left( \bigcap_{A \in \mathcal{A} }A  \right)=\bigcap_{A \in \mathcal{A} }f^{-1}(A)$$
+
+
+  \end{enumerate}
+\end{proposition}
+נוכיח את 1 ו-2.
+
+\begin{proof}
+  \begin{enumerate}
+    \item נניח \(E \in M_{1}\). אזי קיים \(D \in M_{2}\) כך ש-\(E =f^{-1}(D)\). נשים לב כי: 
+$$f^{-1}(D^{c})\in M_{1}\iff f(M_{1})\in D^{c}\iff f(M_{1})\not  \in D \iff \left( f^{-1}(D)^{c} \right)\in M_{1}\iff E^{c} \in M_{1}$$
+
+
+    \item בכיוון נראשון, יהי \(x \in f^{-1}\left( \bigcup_{A \in \mathcal{A}}A \right)\). לכן \(f(x)\in \bigcup_{A \in \mathcal{A}}A\). ולכן קיים \(A \in \mathcal{A}\) כך ש-\(f(x) \in A\). ולכן \(x \in f^{-1}(A)\) עבור איזשהו \(A\) ולכן \(x \in \bigcup_{A\in\mathcal{A}}f^{-1}(A)\) ולכן \(f^{-1}\left( \bigcup_{A \in \mathcal{A}}A \right)\subseteq \bigcup_{A \in \mathcal{A}}f^{-1}(A)\). עבור הכיוון השני נניח \(x \in \bigcup_{A \in \mathcal{A}}f^{-1}(A)\). לכן קיים \(A \in \mathcal{A}\) כך ש-\(x \in f^{-1}(A)\). כלומר \(f(x)\in A\subseteq \bigcup_{A \in \mathcal{A}}A\) ולכן \(f(x)\in \bigcup_{A \in \mathcal{A}}A\). כלומר \(x \in f^{-1}(\bigcup_{A \in \mathcal{A}}A\). ולכן מתקיים ההכלה השנייה. 
+
+
+  \end{enumerate}
+\end{proof}
+\begin{summary}
+  \begin{itemize}
+    \item סיגמא אלגברה מעל קבוצה \(X\) היא אוסף של תתי קבוצות של \(X\) אשר מכיל את הקבוצה הריקה, סגור למשלים, וסגור לאיחוד בין מנייה.
+    \item מרחב מדיד הוא צמד של קבוצה עם סיגמא אלגברה עליה, כאשר כל איבר בסיגמא אלגברה נקרא קבוצה מדידה.
+    \item סוגמא אלגברה יהיה סגור לחיסור קבוצות ולחיתוך בן מנייה של קבוצות.
+  \end{itemize}
+\end{summary}
+\subsection{סיגמא אלגברה בורל}
+
+\begin{proposition}[קיום \(\sigma\) אלגברה נוצרת]
+בהנתן אוסף כלשהו \(F \subseteq \mathcal{P}(X)\) קיימת \(\sigma\)-אלגברה קטנה ביותר מעל \(X\) המכילה את \(F\). כלומר קיימת \(\sigma\) אגברה מעל \(X\) אשר נסמנה \(\sigma(F)\) אשר מוכלת בתוך כל \(\sigma\) אלגברה המכילה את \(F\) ומוכלת בכל \(\sigma\) אלגברה המכילה את \(F\). \(\sigma(F)\) מכונה ה-\(\sigma\) אלגברה הנוצרת על ידי \(F\).
+
+\end{proposition}
+\begin{proof}
+נגדיר ב-\(\Omega\) את קבוצת כל התתי קבוצות \(e \in\mathcal{P}(X)\) כך ש-\(e\) סיגמא אלגברה מעל \(X\) שמכילה את \(F\).
+ראשית \(\Omega \neq \varnothing\) כי \(2^{X} \in \Omega\). נגדיר:
+$$\sigma(F):= \bigcap_{e \in \Omega}e$$
+כמובן ש-\(\sigma(F)\subseteq e\) לכל \(e \in \Omega\) ולכן נותר להוכיח כי \(\sigma(F)\) היא \(\sigma\)-אלגברה. בהנתן \(E_{1},\dots \in e\).
+לכל \(e \in \Omega\) ולכן לכל \(e \in \Omega\):
+$$\bigcup_{n=1}^{\infty}E_{n}\in e$$
+בפרט:
+$$\bigcup_{n=1}^{\infty}E_{n}\in \sigma(F)$$
+באופן דומה נראה את תכונות \((1)\) ו-\((2)\).
+
+\end{proof}
+\begin{definition}[סיגמא אלגברה בורל]
+יהי \(\left( X,\tau \right)\) מרחב טופולוגי. ה-\(\sigma\) אלגברה בורל על \(\left( X,\tau \right)\) הינה \(\sigma\left( \tau \right)\). כלומר האוסף ה\(\sigma\)-אלגברה הקטן ביותר אשר מכיל את \(X\). איבר ב-\(\sigma\left( \tau \right)\) לעיתים נקרא קבוצת בורל.
+
+\end{definition}
+\begin{remark}
+הקונבנציה זה שבכל פעם שנראה מרחב שיש עליו טופולוגיה סטנדטית(כמו \(\mathbb{R},\mathbb{C},[0,1]\)) אלה אם מצויין אחרת נחשב עליו כמרחב מדיד עם \(\sigma\) אלגברה בורל.
+
+\end{remark}
+\begin{remark}
+ה-\(\sigma\)-אלגברה בורל מכילה את כל הקבוצות \(F_{\sigma},G_{\delta}\) כאשר \(F_{\sigma}\) - איחודים בני מנייה של קבוצות סגורות ו-\(G_{\delta}\) זה חיתוכים בני מנייה של קבוצות פתוחות. למשל ב-\(\mathbb{R}\)(זהו הטופולוגיה הרגילה) הרציונלים -\(\mathbb{Q}\) זה קבוצת מדידת בורל.
+
+\end{remark}
+\begin{remark}
+ה-\(\sigma\) אלגברת בורל על \(\mathbb{R}\) קטנה משמעותית מ-\(2^{\mathbb{R}}\) (כלומר \(B\subsetneq 2^{\mathbb{R}}\)) בהנתן אקסיומת הבחירה.
+
+\end{remark}
+\begin{lemma}
+יהי \((X,\mathcal{A})\) מרחב מדיד ותהי \(f: X\to Y\) פונקציה כלשהי. האוסף:
+$$\Omega=\left\{  E\subseteq Y \mid f^{-1}(E) \in \mathcal{A}  \right\}$$
+הינו \(\sigma\)-אלגברה.
+
+\end{lemma}
+\begin{proof}
+ראשית \(Y \in \Omega\). בהנתן \(\mathcal{A}, E_{1},E_{2},\dots \in \Omega\) נבחין כי:
+$$f^{-1}(\mathcal{A}^{c})=(f^{-1}(\mathcal{A}))^{2}\qquad f^{-1}\left( \bigcup_{k=1}^{\infty} E_{n} \right)=\bigcup_{n=1}^{\infty }f^{-1}(E_{n})$$
+ולכן \(\mathcal{A}^{c},\bigcup_{n}E_{n}\in \Omega\). ולכן \(\Omega\) תהיה \(\sigma\)-אלגברה.
+
+\end{proof}
+\begin{proposition}
+יהי \((X,\mathcal{A})\) מרחב מדיד ויהי \(\left( Y,\tau \right)\) מרחב טופולוגי. נסמן ב-\(B_Y\) את סיגמת אלגברת בורל \(B_{Y}=\sigma\left( \tau \right)\) אזי פונקציה \(f:(X,\mathcal{A})\to (Y,B_{Y})\) פונקציה מדידה אם"ם המקור לכל קבוצה פתוחה הוא מדיד. כלומר אם"ם לכל \(\mathcal{U}\in \tau\) נקבל \(f^{-1}\left( \mathcal{ U} \right)\) מדיד - \(f^{-1}\left( \mathcal{U}  \right)\in \mathcal{A}\).
+
+\end{proposition}
+\begin{proof}
+כיוון אחד קל כי אם \(f\) מדידה אז המקור של כל קבוצה מדידה הוא מדיד ובפרט המקור של כל קבוצה פתוחה \(\mathcal{ U}\in \tau \subseteq B_{Y}\) נוא מדיד. נניח שהמקור של קבוצות פתוחות הוא מדיד. נסמן ב:
+$$\Omega = \left\{   E\subseteq Y \mid f^{-1} (E)\in \mathcal{A} \right\} $$
+מהלמה אנו יודעים ש-\(\Omega\) הינה \(\sigma\)-אלגברה, ומההנחה \(\tau \subseteq \Omega\). מצד שני \(B_{Y}\) היא הסיגמא אלגברה הקטנה ביותר המכילה את \(\tau\) ולכן \(B_{Y}\subseteq \Omega\) ולכן \(f\) מדידה.
+
+\end{proof}
+\begin{corollary}
+בהנתן פונקציה רציפה בין מרחבים טופלוגיים \(f:X\to Y\)(כלומר המקור של קבוצה פתוחה היא קבוצה פתוחה) הינה פונקציה מדידה בורל.
+
+\end{corollary}
+\begin{remark}
+ה-\(\sigma\) אלגברת בורל היא יחידה.
+$$\bigcup_{q\in Q\cup U} I_n \supseteq U$$
+
+\end{remark}
+\begin{summary}
+  \begin{itemize}
+    \item עבור קבוצה \(X\) וקבוצה של תתי קבוצה \(\mathcal{A}\) החיתוך של כל הסיגמות אלגברה על \(X\) שמכילות את \(\mathcal{A}\) יהיה \(\sigma\) אלגברה על \(X\) ונקרא ה\(\sigma\)  אלגברה הנוצרת על ידי \(\mathcal{A}\).
+    \item קבוצה של מקורות של קבוצה תהיה \(\sigma\)-אלגברה.
+    \item פונקציות רציפות יהיו פונקציות מדידות בורל.
+  \end{itemize}
+\end{summary}
+\subsection{פונקציות מדידות}
+
+\begin{definition}[פונקציה מדידה]
+בהנתן שני מרחבים מדידים \((X,\mathcal{A})\) ו-\((Y,e)\) פונקציה \(f:X\to Y\) נקראת מדידה אם לכל \(E \in e\) מקיימת:
+$$f^{-1} (E) \in \mathcal{A}$$
+
+\end{definition}
+\begin{reminder}
+קבוצה \(U\subseteq \left[ -\infty,\infty \right]\) היא פתוחה אם"ם:
+- הקבוצה \(U\cap \mathbb{R}\) פתוחה ב-\(\mathbb{R}\)
+- אם \(\infty \in U\) אז קיים \(\alpha \in \mathbb{R}\) כך ש-\(\left( \alpha,\infty \right]\subseteq U\).
+- אם \(-\infty \in U\) אז:
+$$\exists \beta \in \mathbb{R} \qquad  \left[ -\infty,\beta \right]\subseteq U$$
+
+\end{reminder}
+\begin{corollary}
+כל קבוצה פתוחה ב-\(\left[ -\infty,\infty \right]\) היא איחוד בן מנייה של קבוצות מהצורה:
+$$\begin{cases}\left( \alpha,\infty \right] \\\left[ -\infty,\beta \right) \\\left( \alpha,\beta \right)
+\end{cases}$$
+
+\end{corollary}
+\begin{proposition}
+פונקציה \(f:X\to \left[ -\infty,\infty \right]\) (עם \((X,\mathcal{A})\)) מדידה אם"ם המקור של כל קרן מדיד, כלומר:
+$$f^{-1}\left( \left( a,\infty \right] \right)$$
+מדידה לכל \(\alpha \in \mathbb{R}\).
+
+\end{proposition}
+\begin{proof}
+כיוון אחד מיידי, כי אם \(f\) מדידה בפרט:
+$$\mathcal{A} \ni f^{-1}\left( \left( \alpha,\infty \right] \right)$$
+בכיוון השני - מהמסקנה מספיק להראות שכל הקבוצות מהצורה:
+$$(*)\qquad \left( \alpha,\infty \right]\quad \left[ -\infty,\beta \right]\quad \left( \alpha,\beta \right)$$
+יש להם מקור מדיד. כי אז אם \(U\subseteq \left[ -\infty,\infty \right]\) אזי:
+$$U=\bigcup_{n=1}^{\infty} I_{n}$$
+כשכל \(I_{n}\) היא ביטוי מהצורה \((*)\) ולכן:
+$$f^{-1}(U)=\bigcup_{n=1}^{\infty} f^{-1}(I_{n}) \in \mathcal{A}$$
+ולכן מהטענה שעבור טופולוגיות מספיק להראות שהמקור של כל קבוצה פתוחה היא מדידה נקבל כי \(f\) מדידה. בהנתן \(\beta \in \mathbb{R}\) אז:
+$$f^{-1}\left( \left[ -\infty,\beta \right) \right)=\bigcup _{n=1}^{\infty}f^{-1}\left( \left[ -\infty,\beta-\frac{1}{n} \right] \right)=\bigcup_{n=1}^{\infty}\left( f^{-1}\left( \left( \beta-\frac{1}{n},\infty \right] \right) \right)^{C}\in \mathcal{A}$$
+בהנתן \(-\infty<\alpha<\beta<\infty\):
+$$f^{-1}\left( \left( \alpha,\beta \right) \right)=f^{-1}\left( \left[ -\infty,\beta \right) \right)\cap f^{-1}\left( \left( \alpha,\infty \right] \right)$$
+
+\end{proof}
+\begin{remark}
+מתקיימת טענה מקבילה עבור \(\left[ -\infty,\beta \right)\)
+
+\end{remark}
+\begin{corollary}
+בהנתן סדרת פונקציות מדידות:
+$$f_{n}:X\to \left[ -\infty,\infty \right]$$
+נקבל כי הפונקציות הבאות מדידות:
+$$\inf_{n}f_{n},\quad \sup _{n}f_{n}, \quad \lim_{ n \to \infty } \inf_{n}f_{n},\quad \lim_{ n \to \infty } \sup _{n}f_{n} $$
+כאשר הכוונה הוא גבול נקודתי.
+
+\end{corollary}
+\begin{proof}
+נסמן \(g=\sup_{n}f_{n}\). מספיק להראות:
+$$g^{-1}\left( \left( \alpha,\infty \right] \right)$$
+הוא מדיד לכל \(\alpha \in \mathbb{R}\). אכן:
+$$g^{-1}\left( \left( \alpha,\infty \right] \right)= \bigcup_{n=1}^{\infty}f_{n}^{-1}\left( \left( \alpha,\infty \right] \right)$$
+מהטענה המקבילה לזו עבור \(\left[ -\infty,\beta \right)\) נסיק ש-\(\inf_{n}f_{n}\) מדיד. מכאן ש:
+$$\lim_{ n \to \infty } \sup f_{n}=\inf_{k} \sup _{n\geq k}f_{n}$$
+מדיד.
+
+\end{proof}
+\begin{example}
+$$f_{n}:\mathbb{R}\to \left[ -\infty,\infty \right]\qquad f_{n}(x)=x+n$$
+כאשר לכל \(x \in \mathbb{R}\) נקבל:
+$$\sup _{n}f_{n}\equiv \infty$$
+
+\end{example}
+\begin{lemma}
+אם \(f:X\to Y\) ו-\(g:Y\to Z\) מדידות אז:
+$$g\circ  f : X\to Z$$
+מדידה.
+
+\end{lemma}
+\begin{proof}
+לכל קבוצה מדידה \(C\subseteq Z\) מתקיים:
+$$(g\circ f)^{-1}(C)=f^{-1}(g^{-1}(C)).$$
+כאשר כיוון ש-\(g\) מדיד, \(g^{-1}(C)\) מדיד ב-\(Y\). וכן כיוון ש-\(f\) מדיד אז \(f^{-1}(g^{-1}(C))\) מדיד ב-\(X\). ולכן \(g\circ f\) מדיד.
+
+\end{proof}
+\begin{proposition}
+יהיו \(f,g:X\to \left[ -\infty,\infty \right]\) פונקציות מדידות, אזי:
+$$H:X\to\left[ -\infty,\infty \right]^{2}\qquad H(x)=(f(x),g(x))$$
+מדידה.
+
+\end{proposition}
+\begin{proof}
+מהתזכורת כל קבוצה פתוחה ב-\(\left[ -\infty ,\infty \right]^{2}\) הוא איחוד בן מנייה של מלבנים מהצורה \(I_{1}\times I_{2}\) כש-\(I_{j}\) מהצורה:
+$$\left( \alpha,\infty \right]\quad \left[ -\infty,\beta \right]\quad \left( \alpha,\beta \right)$$
+מספיק לבדוק ש:
+$$H^{-1}\left( I_{1}\times I_{2} \right)$$
+מדיד עבור כל מלבן כנ"ל. אכן:
+$$H^{-1}(I_{1}\times I_{2})=\{x\in X\mid f(x)\in I_{1}{\mathrm{~and~}}g(x)\in I_{2}\}=f^{-1}(I_{1})\cap g^{-1}(I_{2}).$$
+וכיוון שהחיתוך של קבוצות מדידות היא קבוצה מדידה קיבלנו כי אכן מדיד.
+
+\end{proof}
+\begin{corollary}
+בהנתן \(f,g:X\to \mathbb{R}\) מדידות גם \(f+g\) ו-\(f\cdot g\) מדידות.
+
+\end{corollary}
+\begin{proof}
+נגדיר \(\Phi:\mathbb{R}^{2}\to \mathbb{R}\) על ידי \(\Phi(x,y)=x+y\) אזי:
+$$f+g=\Phi \circ  H$$
+כש-\(H\) כבטענה הקודמת. \(\Phi\) פונקציה רציפה ולכן מדידה מאחר שהרכבה של מדידות מדיד נסיק את הדרוש. כנ"ל לכפל.
+
+\end{proof}
+\begin{definition}[גבול עליון ותחתון של סדרת קבוצות]
+יהי \((A_{n})\subseteq \Sigma\) סדרה של קבוצות במרחב מידה \(\left( X,\Sigma,\mu \right)\). 
+
+  \begin{enumerate}
+    \item נגדיר את הגבול העליון של הסדרה להיות: 
+$$\operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$
+כאשר זה למעשה מייצג את כל האיברים שמופיעים באינסוף קבוצות בסדרה.
+
+
+    \item נגדיר את הגבול התחתון של סדרה להיות: 
+$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k}$$
+כאשר זה למעשה מייצג את כל האיברים שבסופו של דבר מופיעים בכל הקבוצות בסדרה.
+
+
+  \end{enumerate}
+\end{definition}
+\begin{remark}
+האינטויציה עבור הגבול התחתון זה עבור \(n\) קבוע כמה איברים משותפים לכל הקבוצות עם \(k\geq n\)(כלומר חותכים אם כל הקבוצות עם \(k\geq n\)). כעת נאחד את כל הקבוצות האלה ונקבל את האיברים שמפועים בכל הקבוצות בסופו של דבר. האינטואיציה עבור גבול עליון זה שעבור \(n\) קבוע מסתכלים על כל האיברים שמופיעים בכל הקבוצות בסדרה החל מ-\(A_{n}\)(זה האיחוד) ואז חותכים את כל האיברים שמופיעים הכול.
+
+\end{remark}
+\begin{proposition}
+  \begin{enumerate}
+    \item \(\operatorname*{lim}\operatorname*{inf}A_{n},\operatorname*{lim}\operatorname*{sup}A_{n}\in\Sigma\)
+
+
+    \item \(\mu(\operatorname*{lim}\operatorname*{inf}A_{n})\leq\operatorname*{lim}\operatorname*{inf}\mu(A_{n})\)
+
+
+    \item אם מרחב מידה הוא סופי, כלומר \(\mu(X)<\infty\) אז: 
+$$\mu(\operatorname*{lim}\operatorname*{sup}A_{n})\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})$$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+\end{proof}
+\begin{theorem}[הלמה של בורל קנטלי]
+יהי \(\left( X,\mathcal{B},\mu \right)\) מרחב מידה. אזי אם \(\{ A_{n} \}_{n=1}^{\infty}\subseteq \mathcal{B}\) מקיים:
+$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)<\infty$$
+אזי:
+$$\mu\left(\limsup_{n\to\infty}A_{n}\right)=\mu\left( \bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k} \right)=0$$
+
+\end{theorem}
+\begin{proof}
+יהי \(\left( X,\mathcal{B} , \mu \right)\) מרחב מידה. נניח \(\{ A_{n} \}\subseteq B\) כך שמתקיים:
+$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)<\infty$$
+מספיק להראות כי הקבוצה המתוארת על ידי התכונה "\(X\) שייך למספר אינסופי של \(A_{n}\)" היא קבוצה ממידה אפס כלומר שהקבוצה \(B\subseteq X\) המוגדרת על ידי:
+$$E=\left\{x\in X:x\in A_{n}{\mathrm{~for~infinitely~many}}\,n\right\}$$
+תקיים \(\mu(E)=0\). כאשר בהתאם להדרכה, מתקיים:
+$$E=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$
+
+\end{proof}
+כאשר זה כמו שאנחנו רוצים, מבטא את החיתוך של כל האיברים שנמצאים בכמות אינסופית של \(\{ A_{n} \}\)(כדי שאיבר יהיה ב-\(E\) נדרש שיהיה שלכל \(n \in \mathbb{N}\) קיים \(N>n\) כך ש-\(x \in A_{N}\)). כעת לכל \(n \in \mathbb{N}\) נגדיר:
+$$E_{n}=\bigcup_{k=n}^{\infty}A_{k}$$
+כאשר לפי ההגדרה: 
+$$E=\bigcap_{n=1}^{\infty}E_{n}$$
+נשים לב כי הסדרה \(\{ E_{n} \}\) היא סדרה יורדת תחת היחס \(\subseteq\):
+$$E_{1}\supseteq E_{2}\supseteq E_{3}\supseteq\cdots$$
+כאשר מרציפות המידה של סדרות יורדות נקבל:
+$$\mu(E)=\mu\left(\bigcap_{n=1}^{\infty}E_{n}\right)=\operatorname*{lim}_{n\to\infty}\mu(E_{n}).$$
+וכן מאדטיביות המידה מתקיים:
+$$\mu(E_{n})=\mu\left(\bigcup_{k=n}^{\infty}A_{k}\right)\leq\sum_{k=n}^{\infty}\mu(A_{k})$$
+יהי \(\varepsilon> 0\). מההנחה מתקיים:
+$$\lim_{ n \to \infty } \sum_{k=n}^{\infty} \mu(A_{k})=0$$
+ולכן מהגדרה הגבול קיים \(N \in \mathbb{N}\) כך שעבורו לכל \(n > N\) מתקיים:
+$$\sum_{k=n}^{\infty}\mu(A_{k})<\epsilon$$
+ולכן:
+$$\mu(E)\leq \varepsilon\implies \mu(E)=0$$
+
+\begin{definition}[פונקציית מדידת בורל]
+יהי \(X\subseteq \mathbb{R}\) פונקציה \(f:X\to \mathbb{R}\) נקראת מדידת בורל אם \(f^{-1}(B)\) היא קבוצת בורל לכל קבוצת בורל \(B\subseteq \mathbb{R}\).
+
+\end{definition}
+\begin{proposition}
+כל פונקציה רציפה היא מדידת בורל.
+
+\end{proposition}
+\begin{proof}
+נניח \(X \subseteq \mathbb{R}\) קבוצת בורל ו-\(f:X\to \mathbb{R}\) רציפה. יהי \(a \in \mathbb{R}\). אם \(x \in X\) ו-\(f(x)> a\) אז לפי הרציפות של \(f\) קיים \(\delta_{x}> 0\) כך ש-\(f(y)> a\) לכל \(y \in \left( x-\delta_{x},x+\delta _{x} \right)\cap X\). ולכן:
+$$f^{-1}\big((a,\infty)\big)=\Big(\bigcup_{x\in f^{-1}\big((a,\infty)\big)}(x-\delta_{x},x+\delta_{x})\Big)\cap X.$$
+כאשר האיחוד בתוך הסוגרים הגדולות היא קבוצה פתוחה ב-\(\mathbb{R}\). לכן החיתוך עם \(X\) היא קבוצת בורל, ולכן \(f^{-1}\left( \left( a,\infty \right) \right)\) היא קבוצת בורל. ולכן \(f\) מדידת בורל.
+
+\end{proof}
+\begin{proposition}
+כל פונקציה מונוטונית היא מדידת בורל.
+
+\end{proposition}
+\begin{summary}
+  \begin{itemize}
+    \item פונקציה מדידה היא פונקציה שהמקור של כל קבוצה מדידה היא קבוצה מדידה.
+    \item עבור פונקציות מהצורה \(f:X\to \left[ -\infty,\infty \right]\) כדי להראות שמדידה ניתן להראות שהמקור של כל קרן \(f^{-1}\left( \left( a,\infty \right] \right)\) מדידה.
+    \item הרכבה, סכום ומכפלה של פונקציות מדידות תהיה מדידה.
+    \item עבור סדרה של קבוצות, הגבול עליון נותן קבוצה של איברים אשר מופיעים אינסוף פעמים, וגבול תחתון נותן את קבוצת האיברים אשר יפיעו בכל קבוצה החל מאיבר מסויים, ומוגדרים על ידי:
+$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k}\qquad \operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$
+    \item הלמה של בורל קנטלי אומר כי אם עבור סדרה של קבוצות מתקיים \(\sum_{n=1}^{\infty}\mu\left(A_{n}\right)<\infty\) אז \(\mu(\limsup A_{n})=0\).
+    \item פונקציה היא מדידת בורל אם המקור שלה קבוצת בורל. בפרט כל פונקציה רציפה ומונוטונית היא מדידת בורל.
+  \end{itemize}
+\end{summary}
+\subsection{מידות}
+
+\begin{definition}[מידה]
+מידה על מרחב מדיד \(\left( X,\mathcal{A} \right)\) הינה פונקציה \(\mu:A\to \left[ 0,\infty \right]\) אשר \(\sigma\)-אדיטיבית. כלומר לכל סדרת קבוצות זרות ומדידות \(A_{1},A_{2},\dots \in \mathcal{A}\) כך ש
+$$\mu\left( \bigsqcup_{n} A_{n} \right)=\sum_{n=1}^{\infty}\mu(A_{n})$$
+בנוסף נניח ש-\(\mu\) איננה קבועה \(\infty\) (כלומר קיימת איזשהי \(A \in \mathcal{ A}\) כך ש-\(\mu(A)< \infty\)).
+
+\end{definition}
+\begin{symbolize}
+נסמן צירוף של קבוצה \(X\) עם סיגמא אלגברה \(\mathcal{A}\) ומידה \(\mu\) על ידי \(\left( X,\mathcal{A},\mu \right)\).
+
+\end{symbolize}
+\begin{remark}
+האדיטביות נותן טור של איברים חיוביים, אשר מתכנס כיוון שסדרת הסכומים החלקיים מונוטוניים ויכול לקבל גם את אינסוף.
+
+\end{remark}
+\begin{example}
+  \begin{enumerate}
+    \item מידת מנייה על \((X,2^{X})\) ניתן להגדיר \(\mu(A)=\# A\)(כלומר מחזיר את מספר האיברים ב-\(A\)) 
+
+
+    \item מידת דיראק - בהנתן \(x_{0} \in X\). 
+$$\mu (A)= \begin{cases} 1  & x_{0} \in A \\0  & x_{0} \not \in A
+\end{cases}$$
+
+
+  \end{enumerate}
+\end{example}
+\begin{proposition}[מונוטוניות]
+אם \(A\subseteq B\) אז \(\mu(A)\leq \mu(B)\). 
+
+\end{proposition}
+\begin{proof}
+ניתן לכתוב \(B=A\sqcup B\setminus  A\) ואז:
+$$\mu(B)=\mu(A)+\underbrace{ \mu\left( B\setminus A \right) }_{ \geq 0 }$$
+
+\end{proof}
+\begin{proposition}[תת-אדטיביות]
+יהי \(\left( X,\mathcal{A} \right)\) מרחב מדיד. קבוצות \(A_{1},A_{2},\dots \in \mathcal{A}\)  מקיימות:
+$$\mu\left( \bigcup_{n=1}^{\infty}A_{n} \right)\leq \lim_{ n \to \infty } \mu(A_{n})$$
+
+\end{proposition}
+\begin{proposition}[רציפות מלמטה]
+יהי \(\left( X,\mathcal{A} \right)\) מרחב מדיד ו-\(A_{1},A_{2},\dots \in \mathcal{A}\). אם \(A_{1}\subseteq A_{2}\subseteq \dots\) נקבל:
+$$\mu\left( \bigcup_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})$$
+
+\end{proposition}
+\begin{proposition}[רציפות מלמעלה]
+יהי \(\left( X,\mathcal{A} \right)\) מרחב מדיד ו-\(A_{1},A_{2},\dots \in \mathcal{A}\). אם \(A_{1}\supseteq A_{2}\supseteq \dots\) כאשר \(\mu(A_{1})<\infty\) נקבל:
+$$\mu\left( \bigcap_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})$$
+
+\end{proposition}
+\begin{definition}[מידה שלמה]
+מידה \(\mu\) היא שלמה אם לכל \(\mu(N)=0\) נקבל:
+$$\mathcal{P}\left( N \right) \subseteq \mathrm{dom}\left( \mu \right) $$
+כלומר עבור כל קבוצה ממידה אפס כל התתי קבוצות שלה גם מדידות(ולכן ממונוטוניות יהיו גם ממידה אפס).
+
+\end{definition}
+\begin{proposition}[השלמה של מידה]
+נניח כי יש לנו מרחב מידה \(\left( X,\mu, M \right)\) ונגדיר את \(N\) להיות
+$$N=\left\{  A\subseteq \mathcal{P}(x) \mid A\subseteq N \in M \text{ \(s\).t. } \mu(N) =0 \right\}$$
+ונגדיר:
+$$\overline{M} =\left\{   E \cup A \mid E \in M \quad  A \in N  \right\}$$
+נגדיר \(\overline{\mu}:\overline{M}\to \left[ 0,\infty \right]\) כך ש:
+$$\mu\left( E \cup A \right)=\mu(E)$$
+כאשר עבור \(\overline{ M}\) נקבל:
+
+  \begin{enumerate}
+    \item היא \(\sigma\)-אלגברה. 
+
+
+    \item מוגדרת היטב ומידה שלמה. 
+
+
+    \item היא ההרחבה היחידה של \(\mu\) ל-\(\overline{M}\). 
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{remark}
+הצגה נוספת של השלמה של מרחב מידה \(\left( X,\mathcal{A},\mu \right)\)  תהיה:
+$$\overline{A} =\left\{  E\subseteq X\quad \exists A,B \in \mathcal{A} \quad A\subseteq E\subseteq B\quad  \mu\left( B\setminus  A \right)=0  \right\}$$
+
+\end{remark}
+\begin{summary}
+  \begin{itemize}
+    \item מידה היא פונקציה המקבלת איבר ב\(\sigma\) אלגברה ומחזירה מספר בין 0 לאינסוף(כולל) כך ש\(\sigma\) אדטיבית, כלומר עבור קבוצות זרות \(A_{1},A_{2}\) מתקיים \(\mu(A_{1}+A_{2})=\mu(A_{1})+\mu(A_{2}\).
+    \item מידה היא מונטונית, כלומר \(A\subseteq B\) גורר \(\mu(A)\leq \mu(B)\).
+    \item מידה היא רציפה מלמעלה ומלמטה, כלומר מתקיים:
+$$\mu\left( \bigcup_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})\qquad \mu\left( \bigcap_{n=1}^{\infty}A_{n} \right)=\lim_{ n \to \infty } \mu(A_{n})$$
+כאשר עבור רציפות למעטה נדרש \(\mu(A_{1})< \infty\).
+    \item מידה היא שלמה אם עבור כל קבוצה ממידה אפס כל התתי קבוצה שלה גם מדידות.
+    \item ניתן להשלים מידה בצורה יחידה.
+  \end{itemize}
+\end{summary}
+\section{מידת לבג}
+
+\subsection{אינטגרציית לבג}
+
+\begin{definition}[פונקציה פשוטה]
+פונקציה \(s:X\to \mathbb{C}\) על מרחב מדיד \(\left( X,\mathcal{A} \right)\) נקראת פשוטה אם היא מדידה ובעלת תמונה סופית. כלומר:
+$$\lvert s(X) \rvert <\infty$$
+באופן שקול ניתן לומר שקיימים קבועים \(\alpha_{1},\dots,\alpha_{k}\in \mathbb{C}\) וקבוצות מדידות \(E_{1},\dots,E_{k}\in \mathcal{A}\) כך ש:
+$$s=\sum_{i=1}^{k}\alpha_{i}\mathbb{1} _{E_{i}}$$
+
+\end{definition}
+\begin{remark}
+תמיד ניתן לבחור את \(E_{1},\dots,E_{k}\) כך ש-\(\{ E_{1},..,E_{k} \}\) הינה חלוקה של \(X\). כלומר הקבוצות זרות בזוגות ואיחודן כל \(X\).
+
+\end{remark}
+\begin{definition}[אינטגרל של פונקציה פשוטה]
+על המרחב מידה \(\left( X,\mathcal{A},\mu \right)\) האינטגרל של פונקציה פשוטה \(s:X\to \left[ 0,\infty \right)\) מוגדר להיות:
+$$s=\sum_{i=1}^{k} \alpha_{i}\mathbb{1} _{E_{i}}$$
+מעל קבוצה מדידה \(A\in \mathcal{A}\) מוגדר להיות:
+$$\int_{A} s\;\mathrm{d}\mu:= \sum_{i=1}^{k} \alpha_{i}\mu\left( A\cap E_{i} \right)$$
+
+\end{definition}
+\begin{remark}
+אריתמטיקה ב-\(\left[ 0,\infty \right]\) לכל \(\alpha \in \left[ 0,\infty \right]\) נקבל \(\alpha+\infty=\infty\) ולכל \(\alpha>0\) נקבל \(\alpha\cdot \infty=\infty\) ו-\(0\cdot \infty = 0\). זהו מוסכמה שאנחנו משתמשים בה כרגע, ולא נכונות באופן כללי(למשל עם סדרות ניתן להראות שסדרה מתכנסת לא בצורה רצויה).
+
+\end{remark}
+\begin{proposition}
+לכל פונקציה מדידה \(f:X\to \left[ 0,\infty \right]\) קיימת סדרת פונקציות פשוטות \(s_{n}:X\to \left[ 0,\infty \right)\) המקיימת:
+
+  \begin{enumerate}
+    \item זוהי סדרה עולה של פונקציות פשוטות: 
+$$0\leq s_{1} \leq s_{2} \leq \dots \leq f$$
+
+
+    \item לכל \(x \in X\) נקבל: 
+$$\lim_{ n \to \infty } s_{n}(x)=f(x)$$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+קיימים הרבה דרכים לבנות סדרת פונקציות כאלה, למשל אם נסתכל על \(\varphi_{n}:\left[ 0,\infty \right)\to\left[ 0,\infty \right)\) המוגדרת על ידי:
+$$\varphi_{n}=\begin{cases}n  & x\geq n \\2^{-n}\cdot \left\lfloor  2^{n}\cdot x  \right\rfloor  & 0\leq x < n
+\end{cases}$$
+כאשר זוהי סדרה של פונקציות פשוטות כך ש:
+$$s_{n}=\varphi_{n}\circ  f$$
+
+\end{proof}
+\begin{definition}[אינטגרל לבג]
+תהי \(f:X\to \left[ 0,\infty \right]\) פונקציה מדידה. נגדיר את האינטגרל לבג שלה ביחס ל-\(\mu\) מעל קבוצה מדידה \(A \in \mathcal{ A}\) להיות:
+$$\int _{A}f \;\mathrm{d} \mu := \sup _{0\leq s \leq f} \int _{A}s \;\mathrm{d} \mu $$
+
+\end{definition}
+\begin{proposition}[תכונות בסיסיות של אינטגרל לבג]
+  \begin{enumerate}
+    \item אם \(0\leq f\leq g\) אז: 
+$$0\leq \int _{A}f \;\mathrm{d} \mu \leq \int _{A}g \;\mathrm{d} \mu $$
+
+
+    \item אם \(0\leq f\) ו-\(A\subseteq B\) נקבל: 
+$$\int _{A}f \;\mathrm{d} \mu \leq \int _{B} f\;\mathrm{d} \mu  $$
+
+
+    \item אם \(0\leq f\) ו-\(0\leq c\) קבוע אז: 
+$$\int _{A} c\cdot f  \;\mathrm{d} \mu= c \int _{A}f \;\mathrm{d} \mu  $$
+
+
+    \item אם \(f|_{E}\equiv 0\) אז: 
+$$\int _{E}f \;\mathrm{d} \mu=0 $$
+גם אם \(\mu(E)=\infty\).
+
+
+    \item אם \(\mu(E)=0\) אז \(\int _{E}f \;\mathrm{d} \mu=0\) (גם אם \(f  \equiv \infty\)). 
+
+
+    \item אם \(0\leq f\) אזי: 
+$$\int _{E}f \;\mathrm{d} \mu=\int _{X}f \cdot \mathbb{1} _{E} \;\mathrm{d} \mu  $$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proposition}[אי שיוויון מרקוב]
+אם \(f:X\to \left[ 0,\infty \right]\) פונקציה מדידה אי שלילית, אזי לכל \(a> 0\) מתקיים:
+$$\mu\left( f^{-1}\left( \left[ a,\infty \right] \right) \right)\leq \frac{1}{a}\int _{X}f\;\mathrm{d} \mu $$
+
+\end{proposition}
+\subsection{התכנסויות אינטגרלית של סדרות פונקציות}
+
+\begin{definition}[התכנסות נקודתית]
+יהי \(\left( X,\mathcal{A},\mu \right)\) מרחב מידה ו-\(f_{n},f:X\to \mathbb{R}\) פונקציות מדידות. נגדיר \(f_{n}\to f\) נקודתית אם לכל \(x \in X\) מתקיים:
+$$f(x)=\lim_{ n \to \infty } f_{n}(x)$$
+
+\end{definition}
+\begin{theorem}[ההתכנסות המונוטונית]
+תהי \(\left\{  f_{n}:X\to \left[ 0,\infty \right]  \right\}\) סדרה עולה:
+$$0\leq f_{1} \leq f_{2} \leq \dots$$
+של פונקציות מדידות. אזי:
+$$f=\lim_{ n \to \infty } f_{n}\quad \left( =\sup _{n}f_{n} \right)$$
+מקיימת לכל \(A \in \mathcal{A}\):
+$$\int_{A}f \;\mathrm{d}\mu = \lim_{ n \to \infty } \int_{A}f_{n}\;\mathrm{d}\mu$$
+
+\end{theorem}
+\begin{remark}
+הפונקציה \(f\) מדידה כגבול של מדידות.
+
+\end{remark}
+\begin{proof}
+נסמן \(\alpha=\int _{A} f_{n} \;\mathrm{d} \mu\). נוכיח כי \(\alpha\) שווה ל-\(\int _{A}f \;\mathrm{d} \mu\) על ידי להראות שתי אי שיוויונות חלשים.
+
+  \begin{enumerate}
+    \item נראה \(\alpha \leq \int_{A} f \;\mathrm{d} \mu\) בצורה הבאה: 
+לכל \(n\in \mathbb{N}\) נשים לב כי:
+$$f_{n}\leq \sup _{n}f_{n}=f$$
+ולכן ממונוטוניות האינטגרל:
+$$\int f_{n} \;\mathrm{d} \mu \leq \int f \;\mathrm{d} \mu $$
+וכעת משימור אי שיוויון חלש בין גבולות נקבל:
+$$\lim_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu=\alpha \leq \int f \;\mathrm{d} \mu  $$
+
+
+    \item עבור הכיוון השני, נרצה להראות כי עבור פונקציה פשוטה \(s(x)\leq f(x)\) ו-\(0<c<1\) מתקיים \(\int c\cdot s(x) \;\mathrm{d} \mu \geq \alpha\) וכיוון שסופרמום משמר אי שוויון חלש נקבל את הטענה. נגדיר את הקבוצה: 
+$$E_{n}=\left\{  x \in X\mid f_{n}(x)\geq c\cdot s(x)  \right\}$$
+כאשר נשים לב כי כל \(E_{n}\) יהיה מדיד.
+
+
+    \item נשים לב כי מתקיים: 
+$$E_{1} \subseteq E_{2} \subseteq E_{3} \subseteq\dots \qquad X=\bigcup_{n}E_{n}$$
+כדי לראות זאת נניח \(x \in X\). מספיק להראות כי קיים \(n \in \mathbb{N}\) כך ש-\(x \in E_{n}\).
+אם \(f(x)=0\) אזי \(x \in E_{1}\). אם \(f(x)> 0\) אחרת נזכור כי מתקיים:
+$$f(x)=\sup_{n} f_{n}(x)\implies \forall \varepsilon>0 \quad \exists n \quad f(x)-f_{n}(x)<\varepsilon$$
+ובפרט עבור \(\varepsilon=f(x)-cs(x)>0\) נקבל \(n \in \mathbb{N}\) כך ש:
+$$f(x)-f_{n}(x)<f(x)-cs(x)\implies cs(x)> f_{n}(x)$$
+ולכן \(x \in E_{n}\) עבור \(n\) מספיק גדול.
+
+
+    \item כיוון שלכל \(E_{n}\) נקבל \(E_{n}\subseteq  X\): 
+$$\int_{E_{n}}  c s(x) \;\mathrm{d} \mu \leq\int_{E_{n}} f_{n} \;\mathrm{d} \mu \leq \int _{X} f_{n}\;\mathrm{d} x  $$
+כאשר השתמשנו בכך שבתחום \(E_{n}\) מתקיים \(cs(x)\leq f_{n}\) ומונוטוניות האינטגרל.
+
+
+    \item אם ניקח את הגבול \(n\to \infty\) נקבל משימור אי שיוויון חלש בין גבולות: 
+$$\lim_{ n \to \infty } \int _{E_{n}}c\cdot s \;\mathrm{d} \mu \leq \lim_{ n \to \infty } \int _{E_{n}}f_{n} \;\mathrm{d} \mu \leq \lim_{ n \to \infty } \int _{X}f_{n} \;\mathrm{d} \mu = \alpha$$
+כאשר נזכור כי \(\int c\cdot s(x) \;\mathrm{d} \mu=c\cdot \int s(x) \;\mathrm{d} \mu\).
+
+
+    \item נראה \(\lim_{ n \to \infty }\int _{E_{n}}s \;\mathrm{d} \mu=\int _{X}s \;\mathrm{d} \mu\) בצורה הבאה: 
+נסמן \(s=\sum_{i=1}^{k}\alpha_{i}\mathbb{1}_{A_{i}}\) כש-\(\left\{  A_{1},\dots,A_{k}  \right\}\) חלוקה של \(X\). כאשר כעת מתקיים:
+$$\int _{E_{n}}s \;\mathrm{d} \mu = \sum_{i=1}^{k}  \alpha_{i}\mu\left( A_{i}\cap E_{n} \right) $$
+מאחר שלכל \(1\leq i \leq k\) נקבל:
+$$A_{i}\cap E_{1}\subseteq A_{i}\cap E_{2}\subseteq A_{i}\cap E_{3}\subseteq \dots$$
+כאשר נקבל:
+$$\bigcup_{n}A_{i}\cap E_{n}=A_{i}$$
+ולכן מרציפות של מידה של סדרות עולות נקבל:
+$$\mu\left( A_{i}\cap E_{n} \right)\xrightarrow{n\to \infty} \mu(A_{i})$$
+ולכן:
+$$\int _{E_{n}} s\;\mathrm{d} \mu \xrightarrow{n\to\infty } \sum_{i=1}^{k}\alpha_{i}\mu(A_{i})=\int _{X}s \;\mathrm{d} \mu  $$
+
+
+    \item משלבים 5 ו-6 נסיק כי: 
+$$\alpha \geq c \cdot \int _{X} s  \;\mathrm{d} \mu $$
+
+
+    \item מאחר ש-\(0\leq s\leq f\) פשוטה שרירותית ו-\(0< c < 1\) שרירותי נסיק ש: 
+$$\alpha \geq \sup_{n}  \int_{X} s \;\mathrm{d} \mu =\int _{X}f \;\mathrm{d} \mu$$
+וכיוון שיש לנו אי שוייונות בשתי כיוונים הוכחנו את הטענה.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{corollary}
+עבור סדרת הפונקציות הפשוטות מהצורה:
+$$0\leq s_{1}\leq s_{2} \leq\dots \leq f$$
+נקבל:
+$$\int f \;\mathrm{d} \mu =\lim_{ n \to \infty } \int s_{n} \;\mathrm{d} \mu $$
+
+\end{corollary}
+\begin{symbolize}
+נסמן \(f_{n}\nearrow f\) כדי לסמן ש-\(f_{n}\) מתכנסת ל-\(f\) בצורה מונוטונית.
+
+\end{symbolize}
+\begin{lemma}
+יהיו \(f,g:X\to\left[ 0,\infty \right]\) מדידות. אזי:
+$$\int (f+g) \;\mathrm{d} \mu = \int f \;\mathrm{d} \mu+\int  g \;\mathrm{d} \mu   $$
+
+\end{lemma}
+\begin{proof}
+האסטרטגיה תהיה להוכיח את הטענה עבור פונקציות פשוטות ומשם להסיק את הטענה לכל פונקציה מדידה בעזרת משפט ההתכנסות המונוטונית.
+יהיו \(s,t :X\to \left[ 0,\infty \right)\) פונקציות פשוטות כלשהן. נגדיר:
+$$t=\sum_{j=1}^{m} \beta_{j}\mathbb{1} _{B_{j}}\qquad s=\sum_{i=1}^{n} \alpha_{i}\mathbb{1} _{A_{i}}$$
+כש-\(\{ A_{i} \}\) ו-\(\{ B_{i} \}\) חלוקות של \(X\). נשים לב שהסכום \(s+t\) היא פונקציה פשוטה, כאשר \(\left\{  A_{i}\cap B_{j}  \right\}_{i,j}\) תהיה חלוקה. לכן נקבל:
+$$\int (s+t) \;\mathrm{d} \mu = \sum_{i,j} \left( \alpha_{i}+\beta_{j} \right)\cdot\left( A_{i}\cap B_{j} \right)=\sum_{i}\alpha_{i}\overbrace{ \sum_{j}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(A_{i}) }  +\sum_{j}\beta_{j}\overbrace{ \sum_{i}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(B_{j}) }=\int s \;\mathrm{d} \mu +\int t \;\mathrm{d} \mu $$
+יהיו \(f,g\) מדידות יהיו \(s_{n}\to f\) ו-\(t_{n}\to g\) סדרות עולות של פונקציות פשוטות, אזי \(s_{n}+t_{n}\to f+g\) וממשפט ההתכנסות המונוטונית:
+$$\int (f+g) \;\mathrm{d} \mu = \lim_{n\to \infty} \int  s_{n}\;\mathrm{d}\mu + \int t \;\mathrm{d} \mu =\int f \;\mathrm{d} \mu+\int g \;\mathrm{d} \mu  $$
+
+\end{proof}
+\begin{corollary}
+ניתן בדרך דומה להראות הומוגניות, כלומר עבור \(c \in \mathbb{R}\) מתקיים:
+$$\int cf \;\mathrm{d} \mu=c\int f \;\mathrm{d} \mu  $$
+
+\end{corollary}
+\begin{proposition}
+יהיו \(f_{n}:X\to \left[ 0,\infty \right]\) פונקציות מדידות. אזי:
+$$\int \sum_{n=1}^{\infty} f_{n} \;\mathrm{d}\mu= \sum_{n=1}^{\infty}\int  f_{n} \;\mathrm{d} \mu  $$
+
+\end{proposition}
+\begin{proof}
+מאינדוקציה על הלמה הקודמת:
+$$\int \sum_{i=1}^{N} f_{n} \;\mathrm{d} \mu = \sum_{i=1}^{N} \int f_{n} \;\mathrm{d} \mu  $$
+כמו כן:
+$$\sum_{i=1}^{N} f_{n}\to \sum_{i=1}^{\infty} f_{n}$$
+מונוטונית עולה. ולכן ממשפט ההתכנסות המונוטונית נובעת הטענה.
+
+\end{proof}
+\begin{corollary}
+לכל סדרת מספרים אי שליליים \(a_{ij}\) מתקיים:
+$$\sum_{i=1}^{\infty} \sum_{j=1}^{\infty} a_{ij}=\sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{ij}
+$$
+
+\end{corollary}
+\begin{proof}
+יישום הטענה הקודמת על מרחב המידה:
+$$\left( \mathbb{N},2^{\mathbb{N}}, \mu \right)$$
+כאשר \(\mu\) זה מידת המנייה.
+
+\end{proof}
+\begin{proposition}
+בהנתן מרחב מידה \(\left( X,\mathcal{ A, \mu} \right)\) נגדיר פונקציית מדידה \(h:X\to \left[ 0,\infty \right)\). הפונקציית מידה \(\nu:\mathcal{A}\to \left[ 0,\infty \right]\) המוגדרת על ידי:
+$$\nu(E)=\int _{X}h \;\mathrm{d} \mu $$
+הינה מידה על \(\left( X,\mathcal{A} \right)\). נסמן במקרה זה \(\mathrm{d}\nu=h\cdot \mathrm{d\mu}\). מעבר לכך לכל \(g:X\to\left[ 0,\infty \right]\) מדידה נגדיר:
+$$\int g \;\mathrm{d} \nu = \int g \cdot h \;\mathrm{d} \mu  $$
+
+\end{proposition}
+\begin{proof}
+ראשית ש-\(\nu\left( \varnothing \right)=0\) לכן אם \(E_{1},E_{2},\dots\) סדרה כלשהי של קבוצות מדידות זרות עם איחוד \(E=\bigcup_{n}E_{n}\). מתקיים ש:
+$$\nu(E)=\int _{E}h \;\mathrm{d} \mu = \int _{X}h\cdot \mathbb{1} _{E} \;\mathrm{d} \mu = \int h \sum_{n=1}^{\infty} \mathbb{1}_{E_{n}} \;\mathrm{d} \mu   = \sum_{n=1}^{\infty} \nu(E_{n})$$
+כאשר השתמשנו בזה ש-\(\mathbb{1}_{E}=\sum_{n=1}^{\infty}\mathbb{1}_{E_{n}}\) ובטענה הקודמת. קיבלנו כי \(\nu\) מידה על \(\left( X,\mathcal{ A} \right)\). קל להשתכנע כי \((*)\) מתקיימת עבור פונקציות פשוטות. לכן עבור \(g\) מדידה נקח \(S_{n}\to g\) סדרה עולה של פונקציות פשוטות ונקבל ממשפט ההתכנסות המונוטונית על מרחב המידה \(\left( X,\mathcal{A},\nu \right)\) כי:
+$$\int g \;\mathrm{d} \nu =\lim_{ n \to \infty } \int s_{n} \;\mathrm{d} \nu = \lim_{ n \to \infty } \int s_{n}h \;\mathrm{d} \mu $$
+כעת כיוון ש-\(s_{n}\cdot h \to g\cdot h\) סדרה עולה נקבל כי:
+$$\lim_{ n \to \infty } \int s_{n}h \;\mathrm{d} \mu=\int g\cdot h \;\mathrm{d} \mu \implies \int g \;\mathrm{d} \nu=\int g\cdot h \;\mathrm{d} \mu  $$
+
+\end{proof}
+\begin{remark}
+התכונה "אם \(\mu(E)=0\) אז \(\nu(E)=0\)" נקראת רציפות בהחלט. נבחין שלכל \(E \in \mathcal{A}\) אם \(\mathrm{d}\nu=h\mathrm{d}\mu\) נקבל כי רציף בהחלט.
+
+\end{remark}
+\begin{theorem}[הלמה של פאטו - Fatou]
+תהי \(f_{n}:X\to \left[ 0,\infty \right]\) סדרה של פונקציות מדידות. אזי:
+$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$
+
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item נגדיר סדרה חדשה \(\{ g_{k} \}_{k=1}^{\infty}\) על ידי \(g_{k}=\inf_{n\geq k}f_{n}\). 
+
+
+    \item נשים לב כי הסדרה \(g_{k}\) היא מונוטונית עולה. זאת כיוון שכל איבר בסדרה יהיה אינפומום של קבוצה קטנה יותר. 
+
+
+    \item נשים לב כי הגבול של הסדרה \(\{ g_{k} \}\) הוא בדיוק ההגדרה של הגבול התחתון של הסדרה המקורית: 
+$$\lim_{ k \to \infty } g_{k}=\liminf_{ n \to \infty } f_{n} $$
+
+
+    \item כעת ממשפט ההתכנסות המונוטונית נקבל: 
+$$\int \liminf_{ n \to \infty } f_{n} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu  $$
+
+
+    \item מצד שני לכל \(k\) נקבל \(g_{k}\leq f_{k}\) ולכן \(\int g_{k} \;\mathrm{d} \mu \leq \int f_{k} \;\mathrm{d} \mu\) וזה גורר כי: 
+$$\lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu \leq \lim_{ k \to \infty }   \int f_{k} \;\mathrm{d} \mu \implies \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu \leq \liminf_{ k \to \infty }   \int f_{k} \;\mathrm{d} \mu $$
+
+
+    \item אם נשלב את התוצאות נקבל: 
+$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+אי אפשר לצפות לשיוויון בטענה(בכלליות הזו). למשל, עבור \(\left( \mathbb{R},\mathcal{B},\text{Leb} \right)\) ניקח:
+$$f_{n}= \begin{cases} \mathbb{1}  _{[0,1]} & n\text{ is even} \\\mathbb{1} _{[-1,0]} & n\text{ is odd} 
+\end{cases}$$
+וכעת:
+$$\liminf_{ n \to \infty } f_{n} = \mathbb{1} _{\{ 0 \}}$$
+ומתקיים:
+$$0\leq \int  \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \text{Leb} \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \text{Leb}=1  $$
+
+\end{remark}
+\begin{remark}
+האינטואיציה זה שאם יש פונקציה שמתנדנדת מסביב לגבול הנקודתית שלה, אז השטח הנמוך ביותר יהיה השטח מתחת לערך הכי נמוך בסדרה, ולא ייתכן
+
+\end{remark}
+\begin{summary}
+  \begin{itemize}
+    \item משפט ההתכנסות המונוטונית אומר כי עבור סדרת פונקציה \(\{ f_{n} \}\) המתכנסת מונוטונית לפונקציה \(f_n \nearrow f\) מתקיים:
+$$\int_A f \, d\mu = \lim_{n \to \infty} \int_A f_n \, d\mu$$
+    \item בפרט לכל פונקציה קיים סדרה מונוטית של פונקציות פשוטות \(s_n \nearrow f\) כך ש:
+$$\int f \, d\mu = \lim_{n \to \infty} \int s_n \, d\mu$$
+    \item האינטגרל הוא לינארי, לכן עבור \(f,g \geq 0\) מתקיים:
+$$\int \left( \alpha f+\beta g \right) \, d\mu = \alpha\int f \, d\mu + \beta\int g \, d\mu$$
+    \item הלמה של פאטו אומר כי עבור סדרת פונקציות כללית \(f_{n}\) המקיימת \(f_n \geq 0\) מתקיים:
+$$\int \liminf_{n \to \infty} f_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu$$
+  \end{itemize}
+\end{summary}
+\subsection{אינטגרציה מרוכבת}
+
+\begin{proposition}[הצגה של פונקציה מרוכבת]
+בהנתן \(f:X\to \mathbb{C}\) ניתן להציג כצירוף \(f=u+iv\) כש-\(u,v:X\to \mathbb{R}\). כמו כן ניתן להגדיר:
+$$u^{+}=\max \{ 0,u \} = u \cdot \mathbb{1} _{\left\{  u\geq 0  \right\}} \qquad u^{-}=\max \{ 0,-u \} = u \cdot \mathbb{1} _{\left\{  u\leq 0  \right\}}$$
+כנל ל-\(v\). כאשר נקבל מזה כי ניתן לכתוב את \(f\) על ידי:
+$$f = (u^{+}-u^{-})+i(v^{+}-v^{-})$$
+
+\end{proposition}
+\begin{proposition}
+פונקציה \(f:X\to \mathbb{C}\) מדידה אם"ם \(u,v:X\to \mathbb{R}\) מדידות אם"ם \(u^{+},u^{-},v^{+},v^{-}:X\to \left[ 0,\infty \right)\) מדידות.
+
+\end{proposition}
+\begin{definition}[אינטגרבילות של פונקציות מרוכבת]
+נאמר שפונקציה מדידה \(f:X\to \mathbb{C}\) אינטגרבילית(או סכימה) אם:
+$$\int \lvert f \rvert  \;\mathrm{d} \mu < \infty $$
+
+\end{definition}
+\begin{definition}[מרחב הפונקציות האינטגרביליות]
+$$L^{1}\left( \mu \right):= \left\{  f:X\to \mathbb{C} \mid \int  \lvert f \rvert  \;\mathrm{d} \mu < \infty   \right\}$$
+
+\end{definition}
+\begin{remark}
+נשים לב שעבור \(f \in L^{1}\left( \mu \right)\) מתקיים:
+$$u^{+}\leq \lvert u \rvert \leq \lvert f \rvert $$
+ולכן \(\int u^{+} \;\mathrm{d} \mu<\infty\) כנ"ל ל-\(u^{-},v^{+},v^{-}\).
+
+\end{remark}
+\begin{definition}[אינטגרל של פונקציה מרוכבת]
+עבור \(f\in L^{1}\left( \mu \right)\) נגדיר:
+$$\int f \;\mathrm{d} \mu := \left( \int u^{+} \;\mathrm{d} \mu -\int u^{-} \;\mathrm{d} \mu  \right)+ i\left( \int v^{+} \;\mathrm{d} \mu -\int v^{-} \;\mathrm{d} \mu  \right)$$
+
+\end{definition}
+\begin{example}[פונקציה שאיננה אינטגרבילית]
+עבור \(\left( \mathbb{R}, \mathcal{B},\text{Leb} \right)\) הפונקציה \(\sin:\mathbb{R}\to \mathbb{C}\) איננה אינטגרבילית.
+
+\end{example}
+\begin{lemma}
+אם \(f,g \in L^{1}\left( \mu \right)\) ו-\(\alpha,\beta \in \mathbb{C}\) קבועים אזי:
+$$\alpha f+\beta g \in L^{1}\left( \mu \right)$$
+
+\end{lemma}
+\begin{corollary}
+הקבוצה \({L}^{1}\left( \mu \right)\) מרחב ווקטורי מעל המרוכבים והעתקה:
+$$f\mapsto \int f \;\mathrm{d} \mu $$
+הינו פונקציונאל לינארי.
+
+\end{corollary}
+\begin{proposition}[אי שיוויון המשולש האינטגרלי]
+תהי \(f \in L^{1}\left( \mu \right)\) אזי:
+$$\left\lvert  \int f \;\mathrm{d} \mu   \right\rvert \leq \int \lvert f \rvert  \;\mathrm{d} \mu $$
+
+\end{proposition}
+\begin{proof}
+אנו יודעים כי \(\int f \;\mathrm{d} \mu \in \mathbb{C}\). ולכן קיים \(\alpha \in \mathbb{C}\) עם \(\left\lvert  \alpha  \right\rvert=1\) שעבורו:
+$$\alpha \int_{X} f \;\mathrm{d} \mu = \left\lvert  \int_{X} f \;\mathrm{d} \mu   \right\rvert  \in \mathbb{R}$$
+ולכן:
+$$\left\lvert  \int_{X} f \;\mathrm{d} \mu   \right\rvert =\alpha \int_{X} f \;\mathrm{d} \mu = \overbrace{ \int_{X} \alpha f\;\mathrm{d} \mu }^{ \text{Real} }  =\int_{X} \mathrm{Re}\left( \alpha \cdot f \right) \;\mathrm{d} \mu + i \int_{X} \mathrm{Im}\left( \alpha \cdot f \right) \;\mathrm{d} \mu  $$
+וכיוון שיש לנו פונקציה ממשית שמוצגת על ידי צירוף לינארי של מספר ממשי ומרוכב, נדרש שהחלק המרוכב מתאפס, כלומר:
+$$\int_{X} \mathrm{Im}\left( \alpha \cdot f \right) \;\mathrm{d} \mu=0 $$
+כאשר:
+$$\int_{X} \mathrm{Re}\left( \alpha \cdot f \right) \;\mathrm{d} \mu \leq \int_{X} \left\lvert  \mathrm{Re}\left( \alpha \cdot f \right)  \right\rvert  \;\mathrm{d} \mu \leq \int_{X}  \left\lvert  \alpha \cdot f  \right\rvert  \;\mathrm{d} \mu = \int_{X} \lvert f \rvert  \;\mathrm{d} \mu   $$
+כאשר השתמשנו בזה ש-\(\left\lvert  \alpha  \right\rvert=1\).
+
+\end{proof}
+\begin{theorem}[ההתכנסות הנשלטת - Dominated Convergence]
+תהי \(f_{n}:X\to \mathbb{C}\) סדרה של פונקציות מדידות נניח שקיימת פונקציה \(g \in L^{1}\left( \mu \right)\) כך שלכל \(n\) מתקיים:
+$$\lvert f_{n} \rvert \leq g$$
+(כאשר זה יהיה הנשלטות - \(g\) שולטת על \(f_{n}\)). וכן נניח כי \(f_{n}\to f\) נקודתית. אזי:
+$$\int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu \xrightarrow{} 0 $$
+ובפרט:
+$$\int f \;\mathrm{d} \mu = \lim_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu  $$
+
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item נבחין כי \(\lvert f \rvert\leq g\) ולכן \(f \in L^{1}\left( \mu \right)\). כמו כן: 
+$$\lvert f-f_{n} \rvert \leq \lvert f \rvert +\lvert f_{n} \rvert \leq g+g = 2g$$
+
+
+    \item נגדיר: 
+$$h_{n}=2g-\lvert f-f_{n} \rvert $$
+כאשר נשים לב כי \(h_{n}\) מתכנסת נקודתית ל-\(2g\).
+
+
+    \item בפרט מתקיים: 
+$$\liminf_{ n \to \infty } h_{n}(x)=2g(x) $$
+
+
+    \item מהלמה של פאטו עבור \(h_{n}(x)\) נקבל: 
+$$\int2g\,\mathrm{d}\mu=\int\operatorname*{lim}_{n\to\infty}\operatorname*{inf}h_{n}(x)\operatorname{d}\!\mu\leq\operatorname*{lim}_{n\to\infty}\operatorname*{inf}\int h_{n}(x)\operatorname{d}\!\mu$$
+
+
+    \item בעזרת הזהות \(\liminf(-a_{n})=-\limsup(a_{n})\) נקבל: 
+$$\int 2g \;\mathrm{d} \mu \leq \liminf_{ n \to \infty }  \int\left( 2g-\lvert f-f_{n} \rvert  \right)\;\mathrm{d}\mu=\int 2g \;\mathrm{d} \mu - \limsup_{ n \to \infty }  \int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu $$
+
+
+    \item בגלל ש-\(g \in L^{1}\left( \mu \right)\) אי שלילית הרי ש-\(\int 2g \;\mathrm{d} \mu< \infty\) ולכן ניתן להחסירו ולקבל: 
+$$\limsup_{ n \to \infty }\int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu =0  $$
+
+
+    \item כיוון ש-\(\int\lvert f-f_{n} \rvert\mathrm{d}\mu\to 0\) בפרט מתקיים: 
+$$\left\lvert  \int f \;\mathrm{d} \mu -\int f_{n} \;\mathrm{d} \mu   \right\rvert =\left\lvert  \int f-f_{n} \;\mathrm{d} \mu   \right\rvert \leq \int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu \xrightarrow{n\to \infty} 0 $$
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+נשים לב ש-\(\int \lvert f-f_{n} \rvert \;\mathrm{d} \mu\to 0\) באמת תמיד חזק יותר מ-\(\int f_{n} \;\mathrm{d} \mu\to \int f \;\mathrm{d} \mu\). למשל עבור \(\left( A,B,\text{Leb} \right)\) נקבל:
+$$f_{n}=n\mathbb{1} _{\left( 1,\frac{1}{n} \right)}-n\mathbb{1} _{\left[ \frac{1}{n},\frac{2}{n} \right]}$$
+כאשר \(f_{n}\to 0\) נקודתית וכן \(\int f_{n} \;\mathrm{d} \text{Leb}=0\).
+
+\end{remark}
+\begin{summary}
+  \begin{itemize}
+    \item ניתן לפרק פונקציה מרוכב מהצורה \(f = u + iv\) ל-4 פונקציות ממשיות אי שליליות:
+$$u^+ = \max(0, u) \qquad u^- = \max(0, -u)\quad v^+ = \max(0, v) \qquad v^- = \max(0, -v)$$
+כאשר \(f\) מדידה אם ורק אם \(u, v\) מדידות.
+    \item פונקציה מרוכבת \(f\) תהיה אינטגרבילית אם \(\int |f| \, \mathrm{d}\mu < \infty\) כאשר האינטגרל יהיה שווה:
+$$\int f \, \mathrm{d}\mu = \left( \int u^+ \, \mathrm{d}\mu - \int u^- \, \mathrm{d}\mu \right) + i \left( \int v^+ \, \mathrm{d}\mu - \int v^- \, \mathrm{d}\mu \right)$$
+    \item ניתן להגדיר את אוסף כל הפונקציות עם האינטגרל סופי:
+$$L^{1}\left( \mu \right):= \left\{  f:X\to \mathbb{C} \mid \int  \lvert f \rvert  \;\mathrm{d} \mu < \infty   \right\}$$
+כאשר \(L^{1}\left( \mu \right)\) יהיה מרחב ווקטורי.
+    \item משפט ההתכנסות הנשלטת אומר כי אם יש סדרה של פונקציות מדידות \(\{ f_{n} \}\) אשר קטנה בהחלט מפונקציה \(g \in L^{1}\left( \mu \right)\) (כלומר לכל \(n\) מתקיים \(|f_{n}|\leq g\)). אזי סדרת האינטגרלים \(\left( \int f_{n}\mathrm{d\mu} \right)\) מתכנסת לאינטגרל של הגבול הנקודתי \(f=\lim f_{n}\).
+  \end{itemize}
+\end{summary}
+\subsection{קבוצות ממידה אפס}
+
+\begin{definition}[\(\mu\) כמעט תמיד]
+במרחב מידה \(\left( X,\mathcal{A},\mu \right)\) נאמר שכונה \(P\) מתקיימת \(\mu\)-כמעט תמיד(\(\mu\)-כת) אם קיימת קבוצה \(N \in \mathcal{A}\) עם \(\mu(N)=0\) כך ש-\(P\) מתקיימת לכל \(x \in X\setminus N\).
+
+\end{definition}
+\begin{definition}[פונקציות שוות כמעט תמיד]
+פונקציות אשר שוות פרט לקבוצה במידה אפס. אם \(f \underset{\mu}{=} g\) אז \(\mu\left( \left\{  f\neq g  \right\} \right)=0\).
+
+\end{definition}
+\begin{definition}[קבוצה ממידה אפס]
+קבוצה אשר המידה שלה שווה ל-0.
+
+\end{definition}
+\begin{definition}[קבוצה מקו-מידה אפס]
+קבוצה אשר המשלים שלה הוא קבוצה ממידה אפס.
+
+\end{definition}
+\begin{remark}
+לעיתים נרצה לעסוק בפונקציות המוגדרות כמעט תמיד. כלומר פונקציות המגודרות רק על קבוצה מקו מידה אפס(המשלים של מידה אפס). במקרה זה ניתן לדבר בצורה מוגדרת היטב על האינטגרל של אותו פונקציה, למשל על ידי קבועת ערכיה להיות אפס היכן שאיננה מוגדרת.
+
+\end{remark}
+\begin{proposition}
+תהי \(f_{n}:X\to \mathbb{C}\) סדרה של פונקציות מדידות המוגדרות כמעט-תמיד כך ש:
+$$\sum_{i=1}^{\infty} \int  \lvert f_{n} \rvert  \;\mathrm{d} \mu < \infty $$
+אזי:
+
+  \begin{enumerate}
+    \item הטור \(f(x)=\sum_{i=1}^{\infty} f_{n}(x)\) מתכנס כמעט תמיד(כלומר \(f\) מוגדר כמעט תמיד). 
+
+
+    \item מתקיים \(f\in L^{1}\left( \mu \right)\) וכן: 
+$$\int f \;\mathrm{d} \mu = \sum_{i=1}^{\infty} \int f_{n} \;\mathrm{d} \mu  $$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item כל \(f_{n}\) מוגדר כמעט תמיד ולכן קיים קבוצה \(S_{n}\subseteq X\) כך ש-\(\mu(S_{n}^{c})=0\) עבורה \(S_{n}\) מוגדרת. נגדיר: 
+$$\varphi(x)=\sum_{i=1}^{\infty}\lvert f_{n} \rvert$$
+אשר תהיה מוגדרת על \(S=\bigcap_{n}S_{n}\) כך ש-\(\mu(S^{c})=\mu\left( \bigcup_{n}S_{n}^{c} \right)=0\). 
+
+
+    \item לפי משפט ההתכנסות המונוטונית על פונקציות אי שליליות ניתן להחליף גבול ואינטגרל ולקבל: 
+$$\int \varphi \;\mathrm{d} \mu =\sum_{i=1}^{\infty} \int \lvert f_{n} \rvert  \;\mathrm{d} \mu < \infty $$
+ולכן \(\varphi<\infty\) מתקיים \(\mu\) כמעט תמיד וכן \(\varphi \in L^{1}\left( \mu \right)\). ולכן \(\mu\)-כמעט תמיד \(\sum_{i=1}^{\infty}f_{n}(x)\) מתכנס בהחלט. כיוון שהתכנסות בהחלט ב-\(\mathbb{C}\) גורר התכנסות נקבל כי מתכנס ב-\(\mathbb{C}\) ו-\(f\) מוגדרת כמעט תמיד.
+
+
+    \item נסמן \(g_{k}=\sum_{i=1}^{k}f_{n}\) ונבחין כי: 
+$$\lvert g_{k}(x) \rvert \leq \sum_{i=1}^{k} \lvert f_{n}(x) \rvert \leq \varphi(x)$$
+ולכן \(\varphi(x)\in L^{1}\left( \mu \right)\) היא פונקציה שולטת. ממשפט ההתכנסות הנשלטת נקבל:
+$$\int f \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu\implies\int\,f\,d\mu=\sum_{n=1}^{\infty}\int\,f_{n}\,d\mu.$$
+ובנוסף נקבל \(f \in L^{1}\left( \mu \right)\).
+
+
+  \end{enumerate}
+\end{proof}
+\begin{lemma}
+  \begin{enumerate}
+    \item המקרה האי שלילי - יהי \(f:X\to\left[ 0,\infty \right]\) פונקציה מדידה. אם \(\int f \;\mathrm{d} \mu=0\) אז \(f=0\)\(\mu\) כמעט תמיד. 
+
+
+    \item המקרה המרוכב - תהי \(f:X\to \mathbb{C}\) פונקציה מדידה. אם לכל קבוצה מדידה \(E \in \mathcal{A}\) מתקיים \(\int _{E}f \;\mathrm{d} \mu=0\) אזי \(f\underset{\mu}{=} 0\). 
+
+
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \begin{enumerate}
+    \item נניח \(\int f \;\mathrm{d} \mu=0\). נגדיר: 
+$$A_{n}=\{x\in X\mid f(x)\geq1/n\}.$$
+כיוון ש-\(f\geq \frac{1}{n}\cdot \mathbb{1}_{A_{n}}\), ניתן לכתוב:
+$$0=\int f\,d\mu\geq\int\frac{1}{n}\cdot \mathbb{1} _{A_{n}}\,d\mu=\frac{1}{n}\cdot\mu(A_{n})\implies \mu(A_{n})=0$$
+כאשר נשים לב כי מתקיים:
+$$\mu\left(\bigcup_{n=1}^{\infty}A_{n}\right)\leq\sum_{n=1}^{\infty}\mu(A_{n})=0$$
+
+
+    \item נסמן \(f=a^{+}-a^{-}+iv^{+}-iv^{-}\) נתבונן ב: 
+$$E=\left\{  x \in X \mid u^{+}(x)> 0  \right\}$$
+ונשים לב כי:
+$$0=\mathrm{Re}\int_{E} f \;\mathrm{d} \mu  = \int _{E}u \;\mathrm{d} \mu = \int _{X}u^{+} \;\mathrm{d} \mu  $$
+כאשר השיוויון הראשון נובע מההנחה ש-\(\int _{E}f \;\mathrm{d} \mu=0\) לכל \(E \in \mathcal{A}\). לכן מסעיף א נקבל:
+$$u^{+}=u^{-}=v^{+}=v^{-}=0$$
+
+
+  \end{enumerate}
+\end{proof}
+\begin{proposition}
+תהי \(\left( X,\mathcal{A},\mu \right)\) מרחב מידה סופי(\(\mu(X)<\infty\)) ותהי \(f \in L^{1}\left( \mu \right)\). נניח \(\Omega \subseteq \mathbb{C}\) קבוצה סגורה כך שלכל קבוצה מדידה \(E \in \mathcal{A}\) עם \(\mu(E)> 0\) הממוצע:
+$$A_{E}(f)=\frac{1}{\mu(E)}\int_{E}f\,d\mu$$
+הוא כך ש-\(A_{E}(f)\in \Omega\). לכן \(f(x) \in \Omega\)\(\mu\) כמעט תמיד.
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item כיוון ש-\(\Omega\) סגורה, המשלים \(\Omega^{c}\) יהיה פתוח. כל קבוצה פתוחה ניתן לכתוב כאיחוד בן מנייה של כדורים סגורים. 
+כדי להראות ש-\(f(x) \in \Omega\) מספיק להראות כי \(\mu\left( f^{-1}\left( \overline{B_{r}\left( \alpha \right)} \right) \right)= 0\) לכל כדור סגור \(\overline{B_{r}\left( \alpha \right)}\subseteq \Omega^{c}\).
+
+
+    \item נניח בשלילה כי קיים כדור סגור \(\overline{B_{r}\left( \alpha \right)}\subseteq \Omega^{c}\) כך ש-\(E=f^{-1}\left( \overline{B_{r}\left( \alpha \right)}  \right)\) יהיה בעל מידה חיובית \(\mu(E)> 0\). 
+נחשב את הממוצע:
+$$\left\lvert  A_{\varepsilon}(f)-\alpha  \right\rvert =\left\lvert  \frac{1}{\mu(E)}\int _{E}f \;\mathrm{d} \mu -\frac{1}{\mu(E)}\int _{E}\alpha \;\mathrm{d} \mu \right\rvert=\frac{1}{\mu(E)}   \left\lvert  \int f-\alpha \;\mathrm{d} \mu   \right\rvert \leq \frac{1}{\mu(E)}\int _{E}\left\lvert  f-\alpha  \right\rvert  \;\mathrm{d} \mu \leq r$$
+
+
+    \item קיבלנו \(A_{E}(f)\in \overline{B}_{r}\left( \alpha \right) \subseteq \Omega^{c}\) בסתירה להנחה \(A_{E}(f)\in \Omega\) לכל \(E\). 
+
+
+  \end{enumerate}
+\end{proof}
+\subsection{התכנסות במידה}
+
+\begin{definition}[התכנסות נקודתית כמעט תמיד]
+יהי \(\left( X,\mathcal{A},\mu \right)\) מרחב מידה ו-\(f_{n},f:X\to \mathbb{R}\) פונקציות מדידות. נגדיר \(f_{n}\to f\) נקודתית כמעט תמיד אם כמעט לכל \(x \in X\) מתקיים:
+$$f(x)=\lim_{ n \to \infty } f_{n}(x)$$
+
+\end{definition}
+\begin{remark}
+ניתן לראות כי התנסות נקודתית גוררת התכנסות כמעט תמיד.
+
+\end{remark}
+\begin{definition}[התכנסות ב-\(L^{1}\)]
+יהי \(\left( X,\mathcal{A},\mu \right)\) מרחב מידה ו-\(f_{n},f :X\to \mathbb{R}\) פונקציות מדידות. אזי אם:
+$$\int \lvert f_{n}-f \rvert  \;\mathrm{d} \mu\to 0 $$
+נגיד שהסדרה \(f_{n}\) מתכנסת ל-\(f\) ב-\(L^{1}\).
+
+\end{definition}
+\begin{definition}[התכנסות במידה]
+יהי \(\left( X,\mathcal{A},\mu \right)\) מרחב מידה ו-\(f_{n},f:X\to \mathbb{R}\) פונקציות מדידות. אם לכל \(\varepsilon> 0\) מתקיים:
+$$\mu\left( \left\{  x\mid \lvert f_{n}(x)-f(x) \rvert \geq \varepsilon  \right\} \right)\to 0$$
+נאמר ש-\(f_{n}\to f\) במידה.
+
+\end{definition}
+\begin{corollary}
+התכנסות של סדרה ב-\(L^{1}\) ל-\(f\) גוררת התכנסות במידה ל-\(f\).
+
+\end{corollary}
+\begin{proof}
+מאי שיוויון מרקוב נקבל:
+$$\mu\left(\left\{x\in X\mid\underbrace{\left|f_{n}\left(x\right)-f\left(x\right)\right|}_{y}>\varepsilon\right\}\right)\leq\frac{\int\left|f_{n}-f\right|}{\varepsilon}\stackrel{*}{\to}0$$
+
+\end{proof}
+\begin{proposition}
+התכנסות במידה גוררת קיום של תת סדרה המתכנסת כמעט תמיד, ואם למרחב יש מידה סופית אז ההתכנסות כמעט תמיד גוררת התכנסות מידה.
+
+\end{proposition}
+\begin{remark}
+ניתן לנסח את משפט ההתכנסות הנשלטת בצורה הבאה:
+אם \(f_{n}\to f\) נקודתית ויש \(g \in L^{1}\left( X,\mu \right)\) כך ש-\(\lvert f_{n} \rvert\leq g\) לכל \(n \in \mathbb{N}\) אזי \(f_{n}\to f\) ב-\(L^{1}\left( X,\mu \right)\).
+
+\end{remark}
+\begin{example}
+נסתכל על סדרת הפונקציות:
+$$f_{n}=n\cdot \mathbb{1} _{\left[ 0,\frac{1}{n} \right]}$$
+נקבל כי הפונקציה הנקודתית תהיה \(\infty\) אם \(x=0\) ו-0 אחרת, ולכן יש לה גבול כמעט תמיד ובמידה \(f=0\). אי לה גבול ב-\(L^{1}\) כי \(\int\lvert f_{n} \rvert \mathrm{d}\mu =1\) לכל \(n\) ולכן \(f_{n}\) לא מתכנסת ב-\(L^{1}\) ל-0(כאשר אם היה מתכנס ב-\(L^{1}\) היה צריך בהכרח להתכנס ל-0 כיוון שזה הגבול של התכנסות במידה). 
+
+\end{example}
+\section{משפט ההצגה של ריס}
+
+\subsection{משפט ההצגה של ריס}
+
+\begin{example}
+בהנתון קטע פתוח וחסום ב-\(\mathbb{R}\) נסמן \(\ell((a,b))=b-a\). ניתן להגדיר את המידה הבאה:
+$$\lambda^{*}=\inf\left\{  \sum_{i=1}^{\infty} \ell((a_{n},b_{n}))\mid E\subseteq \bigcup_{n} (a_{n},b_{n})  \right\}$$
+כאשר ניתן להראות כי מתקיים:
+$$\lambda^{*}((a,b))=\lambda^{*}([a,b])=\ell((a,b))$$
+אכן לכל \(\varepsilon>0\) ניקח מנייה של \(\{ q_{n} \}_{n \in \mathbb{N}}=\mathbb{Q}\) ואוסף קטעים:
+$$I_{n}=\left( q_{n}-\frac{\varepsilon}{2^{n+1}},q_{n}+\frac{\varepsilon}{2^{n+1}} \right)$$
+אזי:
+$$\sum_{n=1}\ell(I_{n})=\varepsilon \qquad  \mathbb{Q} \subseteq \bigcup_{n}I_{n}$$
+ונקבל מזה כי:
+$$\forall\varepsilon>0 \quad \lambda^{*}\left( \mathbb{Q}  \right)\leq \varepsilon$$
+
+\end{example}
+\begin{theorem}
+קיימת \(\sigma\) אלגברה \(m\) המכילה את \(\sigma\)-אלגברה בורל על \(\mathbb{R}\) כך ש-\(\lambda^{*}|_{m}\) הינה מידה(מידת לבג).
+
+\end{theorem}
+\begin{remark}
+היינו יכולים להסתכל על הגדרה דומה עם:
+$$\ell'((a,b))=(b-a)^{\alpha}$$
+עבור \(0\leq \alpha\).
+
+\end{remark}
+\begin{reminder}[מרחב האוסדורף וקומפקטיות מקומית]
+מרחב טופולוגי נקרא האוסדורף אם לכל \(x,y \in X\) שונות קיימות קבוצות פתוחות \(x \in U\) ו-\(y\in V\) כך ש-\(U\cap V = \varnothing\).
+מרחב נקרא קומפקטית מקומית אם לכל נקודה \(x \in X\) קיימת סביבה פתוחה \(x \in V_{x}\) כך ש-\(\overline{V}_{x}\) קומפקטי.
+
+\end{reminder}
+\begin{definition}[תומך טופוליגי]
+בהנתן פונקציה רציפה \(f:X\to \mathbb{C}\) נגדיר את התומך הטופולוגי של \(f\) להיות:
+$$\mathrm{supp}(f):= \left\{  f\neq 0  \right\}$$
+נסמן ב-\(C_{c}(X)\) את מרחב הפונקציות הרציפות בעלות תומך קומפקטי.
+
+\end{definition}
+\begin{remark}
+הסימון \(C_{c}\) מייצג Continuous Compact support.
+
+\end{remark}
+\begin{symbolize}
+בהנתון קבוצה פתוחה \(V\) וקומפקטית \(K\) נסמן \(f \prec V\) ו-\(K\prec f\) אם \(f \in C_{c}(X)\) ומקיימת \(\mathbb{1}_{K} \leq f\)ו-\(f\leq \mathbb{1} _{V}\) בהתאמה.
+
+\end{symbolize}
+\begin{theorem}[הלמה של Urysohn]
+אם \(X\) מרחב טופולוגי האוסדורף קומפקטי מקומית ו-\(K\subseteq V\) קומפקטית בתוך פתוחה אזי קיימת פונקציה \(f\in C_{c}(x)\) המקיימת:
+$$K \prec f \prec V$$
+כלומר פונקציה \(f\) מקיימת את תכונות הבאות:
+$$\begin{gather}\forall x \in K \quad f(x)=1\\ \forall x \not  \in V \quad  f(x) = 0 \\ \forall x \in X \quad 0\leq f(x)\leq 1 
+\end{gather}$$
+
+\end{theorem}
+\begin{remark}
+נשים לב שבהנתן מידת בורל "יפה" \(\mu\)(סופית) על מרחב האוסדורף קומפקטית מקומית. העתקה \(\Lambda_{\mu}:C_{c}(x)\to \mathbb{C}\) המוגדרת על ידי:
+$$\Lambda_{\mu}f := \int f \;\mathrm{d} \mu $$
+הינו פונקציונאל לינארי חיובי.
+
+\end{remark}
+\begin{definition}[פונקציונאל לינארי חיובי]
+פונקציונאל לינארי על \(\mathbb{C}_{c}\) נקראת \underline{חיובי} אם לכל \(0\leq f\) מתקיים \(\Lambda f \geq 0\). משפט ההצגה של ריס יתן גרירה הפוכה, מפונקציונאל לינארי חיובי על \(C_{c}\) למידות.
+
+\end{definition}
+\begin{lemma}[קיום חלוקה יחידה]
+יהי \(X\) האסדורף קומפקטית ויהיו \(V_{1},\dots V_{n}\) קבוצות פתוחות המכסות קבוצות קופקטיות:
+$$k\subseteq \bigcup_{i}^{n} V_{i}$$
+אזי קיימות פונקציות \(h_{i}\prec \sum_{i=1}^{n}h_{i}\) המקיימות:
+$$k\prec \sum_{i=1}^{n} h_{i}$$
+
+\end{lemma}
+\begin{proof}
+לכל \(x \in k\) קיימת קבוצה פתוחה \(W_{x}\) עם סגור קומפקטי \(\overline{W}_{x}\subseteq V_{i}\) לאיזשהו \(i\). \(k\) קופקטית אז קיים כיסוי סופי:
+$$W_{x_{1}},\dots,W_{x_{k}}$$
+נגדיר:
+$$H_{i}=\bigcup_{x_{i}\in V_{i}}\overline{W} _{x_{i}\subseteq V_{i}}$$
+נקח \(H_{i}\prec g_{i}\prec V_{i}\) מהלמה של אוריסון. נגדיר:
+$$h_{1}=g_{1}\qquad h_{2}=(1-g_{1})g_{2}\dots h_{n}=(1-g_{1})(1-g_{2})\dots(1-g_{n})g_{n}$$
+ונבחין ש-\(h_{i}\prec V_{i}\) וכן:
+$$\sum_{i=1}^{n} h_{i}= 1-(1-g_{1})(1-g_{2})\dots.(1-g_{n})$$
+ולכן \(\sum h_{i}=1\) לכל \(x \in k\).
+
+\end{proof}
+\begin{theorem}[ההצגה של ריס Riesz]
+יהי \(X\) מרחב האוסדורף קומפקטי מקומית ופונקציונל לינארי חיובי ו-\(\Lambda:C_{c}(X)\to \mathbb{C}\) קיימת \(\sigma\)-אלגברה \(\mathfrak{M}\) על \(X\) המכילה את \(\sigma\)-אלגברת בורל ומידה יחידה \(\mu\) על \(\mathfrak{M}\) המקיימת:
+
+  \begin{enumerate}
+    \item $$\forall f \in C_{c}(X)\qquad \Lambda f=\int f \;\mathrm{d} \mu $$
+
+
+    \item לכל קבוצה קומפקטית \(K\leq X\)  נקבל \(\mu(K)< \infty\). 
+
+
+    \item רגולריות חיצונית: לכל \(E \in \mathfrak{M}\): 
+$$\mu(E)=\inf \left\{  \mu(V) \mid E\subseteq V \text{ is open} \right\}$$
+
+
+    \item רגולריות פנימית: לכל \(E \subseteq m\) פתוחה או בעלת מידה סופית \(\mu(E)<\infty\) מתקיים: 
+$$\mu(E)= \sup \left\{  \mu(K)\mid K\subseteq E\text{ is compact}  \right\}$$
+
+
+    \item הקבוצה \(\mathfrak{M}\) תהיה \(\sigma\)-אלגברה שלמה ביחס ל-\(\mu\). 
+
+
+  \end{enumerate}
+\end{theorem}
+\begin{proposition}[יחידות ההצגה]
+המידה \(\mu\) המוגדרת על ידי משפט ההצגה של ריס היא יחידה.
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item תהי \(V\subseteq X\) קבוצה פתוחה ויהי \(\varepsilon> 0\). רגולריות חיצונית(תכונה 3) והעובדה ש-\(\mu_{2}\) סופית בתחום קומפקטי(תכונה 2) נקבל \(K\subseteq V\) קומפקטית כך ש: 
+$$\mu_{2}(V)\leq\mu_{2}(K)+\varepsilon.$$
+
+
+    \item מהלמה של אוריסון נקבל פונקציה \(f \in C_{c}(X)\) רציפה אשר מקיימת \(\mathbb{1}_{K}\leq f(x)\leq \mathbb{1}_{V}\).  
+
+
+    \item כיוון ששתי המידות מייצגות את \(\Lambda\) נקבל: 
+$$\mu_{1}(K)=\int \mathbb{1} _{K} \;\mathrm{d} \mu \leq \int f \;\mathrm{d}\mu = \Lambda f=\int f \;\mathrm{d} \mu_{2}\leq \int \mathbb{1} _{V} \;\mathrm{d} \mu_{2} = \mu_{2}(V)<\mu_{2}(k)+\varepsilon    $$
+
+
+    \item כיוון ש-\(\varepsilon\) שרירותי נקבל: 
+$$\mu_{1}(K)\leq\mu_{2}(K)$$
+
+
+    \item מטעמי סימטריה(ניתן לבצע את אותו תהליך עם תפקידים הפוכים של \(\mu_{1},\mu_{2}\)) נקבל: 
+$$\mu_{1}(K)=\mu_{2}(K).$$
+
+
+    \item כעת מרגולריות פנימית (תכונה 3) ורגולריות חיצונית(תכונה 4) נקבל כי יש שיווין עבור כל ה-\(\sigma\) אלגברה. 
+
+
+  \end{enumerate}
+\end{proof}
+כעת כדי להוכיח את המשפט נבנה את הקבוצה הבאה:
+$$\mu(V):= \sup \left\{  \Lambda f\mid f\prec V  \right\}$$
+כאשר \(f\prec V\)  אומר:
+$$f(x) \in [0,1]\quad f \in C_{c}(x)\quad f \subseteq \mathbb{1} _{V}$$
+הגדרנו לכל \(E \leq X\):
+$$\mu(E)=\inf \left\{   \mu(V)\mid V\supseteq E \text{ is open}    \right\}$$
+הגדרנו את האוסף \(\mathfrak{M}_{F}\) להיות האוסף של כל הקבוצות \(E\) בעלות מידה סופית ורגולריות פנימית, כלומר מקיימות:
+$$\mu(E)=\sup \left\{  \mu(k)\mid K \subseteq E \text{ is compact}  \right\}\qquad \mu(E)<\infty$$
+ממנו הגדרנו:
+$$\mathfrak{M} =\left\{  E\subseteq X \mid E\cap K \in \mathfrak{M} _{F}, \text{for all compact K}  \right\}$$
+
+ונוכיח את ה-10 שלבים אשר נתאר כלמות:
+
+\begin{lemma}[שלב 1]
+לכל \(E_{1},E_{2},\dots \subseteq X\) מתקיים:
+$$\mu\left( \bigcup_{n}E_{n} \right)\leq \sum_{n}\mu(E_{n})$$
+
+\end{lemma}
+\begin{proof}
+ראשית נוכיח את הטענה על קבוצות פתוחות \(V_{1},V_{2}\). תהי \(g\prec V_{1} \cup V_{2}\). לפי חלוקת היחידה קיימים \(h_{1},h_{2} \in C_{c}(X)\) כך שמתקיים:
+$$h_{1}\prec V_{1},h_{2}\prec V_{2}\qquad h_{1}+h_{2}\geq 1$$
+כך שניתן לפרק את \(g\) בצורה הבאה:
+$$g=gh_{1}+gh_{2}$$
+כיוון ש-\(gh_{i}\prec V_{i}\) מלינאריות, חיוביות של \(\Lambda\) נקבל:
+$$\Lambda g=\Lambda(g h_{1})+\Lambda(g h_{2})\leq\mu(V_{1})+\mu(V_{2})$$
+כאשר השתמשנו בזה ש-\(\mu\) לוקח את הסופרמום. אם ניקח את הסופרמום מעל כל \(g\prec V_{1}\cup V_{2}\) נקבל:
+$$\mu(V_{1}\cup V_{2})\leq\mu(V_{1})+\mu(V_{2})$$
+כלומר נובע מההגדרה של \(\mu\). כאשר מאינדוקציה ניתן לכליל לכל סכום סופי:
+$$\mu\left(\bigcup_{i=1}^{N}V_{i}\right)\leq\sum_{i=1}^{N}\mu(V_{i})$$
+כעת נכליל עבור קבוצות כללית(לאו דווקא פתוחה). יהי \(E=\bigcup_{n=1}^{\infty}E_{n}\). לכל \(\varepsilon> 0\) נבחר קבוצה פתוחה \(V_{n}\supseteq E_{n}\) כך ש:
+$$\mu(V_{n})\leq\mu(E_{n})+\frac{\varepsilon}{2^{n}}.$$
+יהי \(V=\bigcup_{n=1}^{\infty}V_{n}\). לכל \(g\prec V\) הקבוצה \(\text{supp}(g)\) היא קומפקטית ומכוסה על ידי כמות סופית של \(V_{n}\). לכן מתת אדטיביות סופית נקבל:
+$$\Lambda g\leq\mu\left(\bigcup_{i=1}^{N}V_{i}\right)\leq\sum_{i=1}^{N}\mu(V_{i})\leq\sum_{i=1}^{N}\mu(E_{i})+\varepsilon\leq\sum_{i=1}^{\infty}\mu(E_{i})+\varepsilon.$$
+מאחר ש-\(g\prec V\) שרירותית הרי ש:
+$$\mu\left( \bigcup_{n}E_{n} \right)\leq \mu(V)\leq \sum_{n=1}^{\infty} \mu(E_{n})+\varepsilon $$
+מאחר ש-\(\varepsilon\) שרירותית נסיק את הדרישה.
+
+\end{proof}
+\begin{lemma}[שלב 2]
+אם \(K\subseteq X\) קומפקטית אז \(K \in \mathfrak{M}_{F}\) ומתקיים:
+$$\mu(K)=\inf \left\{  \Lambda f\mid k=F\prec f  \right\}$$
+
+\end{lemma}
+\begin{proof}
+תהי \(K\prec f\) כלשהי ויהי \(0<\alpha < 1\). נתבונן ב:
+$$V_{\alpha}=\left\{  f > \alpha  \right\}$$
+פתוחה. תהי \(K\prec g\prec V_{\alpha}\) כלשהי(קיים מהלמה של אוריסון). נבחין כי \(\alpha g \leq f\) ולכן:
+$$\Lambda g \leq \Lambda \alpha ^{-1} f = \alpha ^{-1} \Lambda f$$
+ונקבל:
+$$\mu(K)\leq \mu\left( V_{\alpha} \right)=\sup \left\{  \Lambda g \mid g \prec V_{\alpha}  \right\}\leq \alpha ^{-1} \Lambda f$$
+ניקח \(\alpha \to 1\) ונקבל \(\mu(K)\leq \Lambda f < \infty\). כמובן שברור ש:
+$$\mu(K)=\sup \left\{  \mu(K')\mid K' \subseteq K \text{ is compact}  \right\}$$
+ולכן \(k \in m_{F}\). מהגדרה \(\mu(K)\) לכל \(0<\varepsilon\) קיים \(K\subseteq V\) פתוחה עם \(\mu(V)<\mu(K)+\varepsilon\). ניקח \(K \prec f \prec V\) ונקבל ש:
+$$\Lambda f \leq \mu(V) < \mu(K)+\varepsilon$$
+אבל הראנו ש:
+$$\mu(K)\leq \Lambda f$$
+ולכן:
+$$\mu(K)=\inf \left\{  \Lambda f \mid k \prec f  \right\}$$
+
+\end{proof}
+\begin{lemma}[שלב 3]
+לכל פתוחה \(V\):
+$$\mu(V)=\sup \left\{  \mu(K) \mid K \subseteq V \text{ is compact}  \right\}$$
+ולכן כל פתוחה עם \(\mu(V)< \infty\) תהיה ב-\(\mathfrak{M}_{F}\)
+
+\end{lemma}
+\begin{proof}
+אם \(\mu(V)\) אז \(V \in \mathfrak{M}_{F}\). אחרת ניקח \(0<\alpha< \mu(V)\). מהגדרת \(\mu(V)\) קיימת \(f\prec V\) עם \(\alpha < \Lambda f\). נבחין שלכל פוחה \(\text{supp}(f)\subseteq W\) מתקיים:
+$$f\prec W$$
+ולכן \(\Lambda f\leq \mu(W)\) ומכאן:
+$$\alpha< \Lambda f \leq \infty \left\{  \mu(W)\mid \text{supp}(f) \subseteq W \text{ is open}  \right\}=\mu\left( \text{supp}(f) \right)\leq \mu(V)$$
+ולכן מצאנו קבוצה קומפקטית \(\text{supp}(f)\) עם מידה בין \(\alpha\) ל-\(\mu(V)\) ומכאן הטענה
+
+\end{proof}
+\begin{lemma}[שלב 4]
+לכל \(E_{1}, E_{2}, \dots \in \mathfrak{M}_{F}\) זרות בזוגות מתקיים:
+$$\mu\left( \bigsqcup_{n} E_{n} \right)=\sum_{n=1}^{\infty} \mu(E_{n})$$
+כמו כן אם \(\infty> \mu\left( \bigcup_{n}E_{n} \right)\) אז \(\bigcup_{n}E_{n}\in \mathfrak{M}_{F}\).
+
+\end{lemma}
+\begin{proof}
+נתחיל מלהוכיח את הטעה עבור \(K_{1},K_{2} \in \mathfrak{ M}_{F}\) קומפקטיות זרות. מהלמה של אוריסון קיימת \(K_{1}\prec f\prec K_{2}^{c}\). יהי \(\varepsilon> 0\). תהי \(K_{1}\cup K_{2}\prec g\) עם \(\Lambda g <\mu\left( K_{1}\cup K_{2} \right)+\varepsilon\). נבחין ש:
+$$K_{1}\prec fg \qquad  K_{2}\prec (1-f)g$$
+לכן:
+$$\mu(K_{1})+\mu(K_{2})\leq \Lambda fg + \Lambda(1-f)g = \Lambda g <\mu\left( K_{1} \cup K_{2} \right)+\varepsilon$$
+מאחר ש-\(\varepsilon\) שרירותי ומשלב \(I\) נסיק כי:
+$$\mu\left( K_{1} \cup K_{2} \right)= \mu(K_{1}+K_{2})$$
+באינדוקציה נסיק את הטענה עבור כל אוסף סופי של קומפקטיות זרות בזוגות. תהי \(E_{1},E_{2},\dots \in \mathfrak{M}_{f}\) סדרה כלשהי של קבוצות זרות בזוגות. נסמן \(E=\bigsqcup_{n} E_{n}\). יהי \(\varepsilon>0\). מאחר ש- \(E_{n} \in \mathfrak{M}_{F}\) הרי שקיימות \(K_{n}\subseteq E_{n}\) קומפקטיות עם:
+$$\mu(E_{n})<\mu(K_{n})+\frac{\varepsilon}{2^{n}}$$
+לכן:
+$$\mu(E)\geq \mu\left( E_{1} \cup \dots \cup E_{N} \right)\geq \mu\left( K_{1} \sqcup \dots \sqcup K_{N} \right) = \sum_{i=1}^{N} \mu(K_{n})\geq \sum_{i=1}^{N} \mu(E_{n})-\varepsilon$$
+מאחר ש-\(\varepsilon\) ו-\(N\) שרירותיים:
+$$\mu(E)\geq \sum_{n=1}^{\infty} \mu(E_{n})$$
+בשילוב עם שלב 1 מקבלים שיוויון. אם \(\mu(E)<\infty\). אז מהגדרת הטור לכל \(0<\varepsilon\) קיים \(N\) כך ש:
+$$\mu(E)<\sum_{i=1}^{N} \mu(E_{n})+\varepsilon$$
+ולכן:
+$$\mu(E)< \sum_{i=1}^{N} \mu(E_{n})+\varepsilon$$
+ולכן:
+$$\mu(E)<\sum_{n=1}^{N} \mu(K_{n})+2\varepsilon$$
+מאחר ש-\(K_{1}\sqcup \dots \sqcup K_{N}\) קומפקטי נסיק את תנאי 2 מהגדרה \(\mu_{F}\implies E \in \mathfrak{M}_{F}\).
+
+\end{proof}
+\begin{lemma}[שלב 5]
+לכל \(E \in \mathfrak{M}_{F}\) ו-\(0<\varepsilon\) קיימות \(K\subseteq E \subseteq V\) כאשר \(K\) קומפקטית ו-\(V\) פתוחה עם \(\mu\left( V\setminus K \right)< \varepsilon\).
+
+\end{lemma}
+\begin{proof}
+קיימות \(K\subseteq E \subseteq V\) המקיימות:
+$$\mu(V)-\frac{\varepsilon}{2}< \mu(E) < \mu(K)+\frac{\varepsilon}{2}$$
+מאחר ש-\(V \setminus K\) פתוחה וממידה סופית. הרי ש-\(V \setminus K \in \mathfrak{M}_{F}\) משלב 3. כלומר \(K,V, V\setminus K \in \mathfrak{M}_{F}\) ולכן מ-4 נסיק כי:
+$$\mu\left( V \setminus  K \right)= \mu(V)-\mu(K)$$
+כנדרש.
+
+\end{proof}
+\begin{lemma}[שלב 6]
+לכל \(A,B \in \mathfrak{M}_{F}\). מתקיים:
+$$A\cup B, A\cap B , A \setminus  B \in \mathfrak{M} _{F}$$
+
+\end{lemma}
+\begin{proof}
+משלב 5 לכל \(\varepsilon>0\) קיימות \(K\subseteq B \subseteq V_{2}\) ו-\(K_{1} \subseteq B \subseteq V_{2}\) עם \(\mu\left( V_{i}\setminus K_{i} \right)<\frac{\varepsilon}{2}\). נבחין כי:
+$$A-B\subset V_{1}-K_{2}\subset(V_{1}-K_{1})\cup(K_{1}-V_{2})\cup(V_{2}-K_{2}),$$
+ולכן:
+$$\mu\left( A\setminus  B \right)< \mu\left( V_{1} \setminus  K_{1} \right)+\mu\left( K_{1} \setminus  V_{2} \right)+\mu\left( V_{2}\setminus  K_{2} \right)< \mu\left( K_{1} \setminus  V_{2} \right)+\varepsilon$$
+מאחר ש-\(K_{1} \setminus V_{2}\) קומפקטית(חיסור של קבוצה פתוחה מקבוצה קומפקטית תהיה תת קבוצה סגורה של קבוצה קומפקטית ולכן קומפקטית) ו-\(\varepsilon\) שרירותי הרי ש- \(A \setminus B \in \mathfrak{M}_{F}\):
+$$A\cup B = A \sqcup B \setminus  A \in \mathfrak{ M} _{F} \qquad  A \cap B = A \setminus  \left( A \setminus  B \right)\in \mathfrak{ M} _{F}$$
+
+\end{proof}
+\begin{lemma}[שלב 7]
+הקבוצה \(\mathfrak{M}\) היא סיגמה אלגברה המכילה את \(\sigma\)-אלגברת בורל.
+
+\end{lemma}
+\begin{proof}
+תהי \(A\in \mathfrak{ M}\) ו-\(K \subseteq X\) קומפקטית. אזי:
+$$A^{c}\cap K = K \setminus  \left( A \cap K \right)$$
+שזה הפרש של שתי קבוצות ב-\(\mathfrak{M}_{F}\) ולכן מ-6 נקבל:
+$$A^{c}\cap K \in \mathfrak{M} _{F}\implies A^{c}\in \mathfrak{M} $$
+יהיו \(A_{1},A_{2},\dots \in \mathfrak{M}\) ו-\(K\) קומפקטית. נגדיר:
+$$B_{i}=A_{1} \cap K\qquad  B_{N}=\left( A_{N}\cap K \right)\setminus \left( B_{1} \cup \dots B_{N-1} \right)$$
+אזי \(B_{1},B_{2},\dots \in \mathfrak{M}_{F}\) זרים בזוגות. ולכן מ-4 האיחוד שלהם ב-\(\mathfrak{M}_{F}\) קרי:
+$$\bigsqcup_{n}B_{n}= \bigcup_{n} A_{n}\cap K \in \mathfrak{M} _{F}  \implies \bigcup_{n} A_{n}  \in \mathfrak{ M} \implies \mathfrak{ M} \text{ is sigma algebra}$$
+תהי \(C\) קבוצה סגורה כלשהי ו-\(K\) קומפקטית. אזי:
+$$C\cap K \in \mathfrak{M} _{F}$$
+כי היא קונפקטית(2) ולכן \(C_{1} \in \mathfrak{M}\) ולכן \(\mathfrak{M}\geq \text{borel}\).
+
+\end{proof}
+\begin{lemma}[שלב 8]
+מתקיים:
+$$\mathfrak{M} _{F}=\left\{  E \in \mathfrak{M} \mid \mu(E)< \infty  \right\}$$
+ולכן למעשה ה-\(F\) מייצג Finite. כלומר כל הקבוצות ממידה סופית.
+
+\end{lemma}
+\begin{proof}
+אם \(E \in \mathfrak{M}_{F}\) ו-\(K\) קומפקטית אזי מ-2 ו-4 נסיק כי \(E\cap K \in \mathfrak{M}_{F}\). לכן \(E \in \mathfrak{M}\). תהי \(E \in \mathfrak{M}\) עם \(\mu(E)<\infty\). קיימת \(E \subseteq V\) פתוחה עם \(\mu(V)<\mu(E)+\frac{\varepsilon}{2}\). מאחר ש-\(V \in \mathfrak{M}_{F}\)(משלב 3) הרי שקיימת קומפקטית \(K \subseteq V\) עם
+$$\mu(V)<\mu(K)+\frac{\varepsilon}{2}$$
+מאחר ש-\(E\cap K \in \mathfrak{M}_{F}\) קיימת קומפקטית \(H \subseteq E \cap K\) עם \(\mu\left( E\cap K \right)<\mu(H)+\varepsilon\). לכן:
+$$E\subseteq \left( E\cap K \right)\bigsqcup \left( V \setminus  K \right)$$
+מזה נסיק כי:
+$$\mu(E)\leq\mu\left( E\,\cap\,K \right)+\mu\left( V\setminus K \right)<\mu(H)+2\epsilon,$$
+מאחר ש-\(H\) קומפקטית ו-\(\varepsilon\) שרירותי נסיק \(E \in \mathfrak{M}_{F}\).
+
+\end{proof}
+\begin{lemma}[שלב 9]
+המידה \(\mu\) היא מידה על \(\mathfrak{M}\)
+
+\end{lemma}
+\begin{proof}
+הראנו ב-\(4\) את ה-\(\sigma\)-אדטיביות של \(\mu\) על \(\mathfrak{M}_{F}\). מ-8 כל הקבוצות ב-\(\mathfrak{M}\setminus \mathfrak{M}_{F}\) הן ממידה אינסופית וממילא ה-\(\sigma\)-אדטיבית נובעת.
+
+\end{proof}
+\begin{remark}
+נשים לב כי הוכחנו את כל החלקים של משפט ההצגה של ריס פרט לראשון. וזה יהיה השלב האחרון שלנו.
+
+\end{remark}
+\begin{lemma}[שלב 10]
+$$\forall f \in C_{c}(X)\qquad \Lambda f=\int f \;\mathrm{d} \mu $$
+
+\end{lemma}
+\begin{proof}
+ראשית מספיק להוכיח את הטענה עבור פונקציות ממשיות. והאמת שמספיק להוכיח את האי שוויון
+$$\Lambda f\leq\int_{X}f\,d\mu$$
+כיוון שאם נראה זאת עבור כל פונקציה ממשית:
+$$-\Lambda f=\Lambda(-f)\leq\int_{X}(-f)\;d\mu=-\int_{X}f\,d\mu,$$
+ונקבל \(\Lambda f \geq \int f \;\mathrm{d} \mu\).
+הערה מקדימה:
+$$C_{c}(X)\subseteq L^{1}\left( \mu \right)$$
+כי מאחר ש-\(\text{supp}(f)\) קומפקטית ו-\(f\) קציפה האי ש-\(f(x)=f\left( \text{supp}(f) \right)\subseteq \mathbb{C}\) קומפקטי ולכן:
+$$M=\sup \lvert f \rvert < \infty$$
+ומכאן \(f\leq M\cdot \mathbb{1}_{\text{supp}(f)}\) וממונוטוניות האינטגרל:
+$$\int \lvert f \rvert  \;\mathrm{d} \mu \leq M \cdot \mu\left( \text{supp}(f) \right)<\infty $$
+כאשר האי שוויון האחרון נובע משלב 2 בהוכחה(שזה גם תכונה 2 של משפט ההצגה של ריס). נסמן \(K=\text{supp}(f)\) ו-\(f(x)\subseteq [a,b]\subseteq \mathbb{R}\). יהי \(0<\varepsilon\). ניקח חלוקה:
+$$y_{0}<a<y_{1}<\cdots<y_{n}=b$$
+המקיימים \(y_{i}-y_{i-1}<\varepsilon\). נסמן:
+$$E_{i}=\{x\colon y_{i-1}<f(x)\leq y_{i}\}\cap K$$
+
+\end{proof}
+\begin{summary}
+  \begin{itemize}
+    \item משפט ההצגה של ריס אומר כי לכל פונקציונאל חיובי \(\Lambda:C_{c}(X)\to \mathbb{C}\) עם תומך קומפקטי קיים מידת רדון ייחודים \(\mu\)(רגולאריות פנימית וחיצונית ומידה סופית על תחום קומפקטי) כך שמתקיים:
+$$\Lambda(f)=\int_{X}f\,d\mu\quad\mathrm{for~all~}f\in C_{c}(X).$$
+    \item כדי להוכיח זאת הגדרנו עבור קבוצות פתוחות:
+$$\mu(V):= \sup \left\{  \Lambda f\mid f\prec V  \right\}$$
+כך שבעזרת זה הגדרנו לכל \(E \leq X\):
+$$\mu(E)=\inf \left\{   \mu(V)\mid V\supseteq E \text{ is open}    \right\}$$
+הגדרנו את האוסף \(\mathfrak{M}_{F}\) להיות האוסף של כל הקבוצות \(E\) בעלות מידה סופית ורגולריות פנימית, כלומר מקיימות:
+$$\mu(E)=\sup \left\{  \mu(k)\mid K \subseteq E \text{ is compact}  \right\}\qquad \mu(E)<\infty$$
+ממנו הגדרנו:
+$$\mathfrak{M} =\left\{  E\subseteq X \mid E\cap K \in \mathfrak{M} _{F}, \text{for all compact K}  \right\}$$
+כעת הוכחנו בעזרת השלבים הבאים:
+
+
+    \item הפונקציה \(\mu\) היא תת אדטיבית 
+
+
+    \item הראנו כי עבור קבוצות קופקטיות \(\mu(K)=\operatorname*{inf}\{\Lambda(f)\mid K\prec f\}\). 
+
+
+    \item הראנו כי עבור קבוצות פתוחות \(V\) מתקיים \(\mu(V)=\operatorname*{sup}\{\mu(K):K\subseteq V\ \mathrm{compact}\}\). 
+
+
+    \item אדיטוביות עבור \(\mathfrak{M}_{F}\). כלומר לכל \(E_{n}\in \mathfrak{M}_{F}\) זרים, מתקיים \(\mu\left( \sqcup E_{n}\right)=\sum\mu(E_{n})\). 
+
+
+    \item קירוב של \(E \in \mathfrak{M}_{F}\) על ידי קבוצות קומפקטיות ופתוחות. כלומר לכל \(E \in \mathfrak{M}_{F}\) ו-\(\varepsilon> 0\) קיים \(K \subseteq E \subseteq V\) כך ש-\(\mu\left( V\setminus K \right)< \varepsilon\). 
+
+
+    \item סגירות תחת איחודים וחיתוכים סופיים של \(\mathfrak{M}_{F}\). 
+
+
+    \item הקבוצה \(\mathfrak{M}\) היא \(\sigma\) אלגברה. 
+
+
+    \item הקבוצה \(\mathfrak{M}_{F}\) מכילה את כל הקבוצות ב-\(\mathfrak{M}\) עם מידה סופית. 
+
+
+    \item הפונקציה \(\mu\) היא מידה. 
+
+
+    \item ההצגה - מתקיים \(\Lambda f=\int f \;\mathrm{d} \mu\). 
+
+
+  \end{itemize}
+\end{summary}
+\subsection{רגולאריות}
+
+\begin{definition}[רגולריות פנימית וחיצונית]
+במרחב מידה \(\left( X,\mathcal{M},\mu \right)\) המכילה את בורל(כדי שיהיה אפשר לדבר על קבוצות פתוחות קומפקטיות).
+
+  \begin{enumerate}
+    \item קבוצה \(E\) נקראת רגולארית חיצונית אם: 
+$$\mu(E)=\inf \left\{  \mu(V)\mid E \subseteq V \text{ is open}  \right\}$$
+
+
+    \item קבוצה \(E\) נקראת רגולרית פינימית אם: 
+$$\mu(E)=\sup  \left\{  \mu(K)\mid K \subseteq E \text{ is compact}  \right\}$$
+
+
+  \end{enumerate}
+\end{definition}
+\begin{definition}[מידת רדון]
+במרחב מידה \(\left( X,\mathcal{M},\mu \right)\) המכיל את בורל מידה \(\mu\) נקראת מידת רדון אם:
+
+  \begin{enumerate}
+    \item לכל \(K\) קומפקטי מתקיים \(\mu(K)<\infty\). 
+
+
+    \item לכל \(E \in \mathcal{M}\) רגולריות חיצונית(ביחס ל-\(\mu\)). 
+
+
+    \item כל הקבוצות הפתוחות או אלו ממידה סופית הן רגולריות פנימית. 
+
+
+  \end{enumerate}
+\end{definition}
+\begin{definition}[מרחב סיגמא קומפקטי]
+מרחב טופולוגי \(X\) נקרא \(\sigma\)-קומפקטי אם \(X=\bigcup_{n}K_{n}\) כש-\(K_{n}\) קומפקטיות.
+
+\end{definition}
+\begin{definition}[מרחב סיגמא סופי]
+מרחב מידה \(\left( X,\mathcal{M},\mu \right)\) נקרא \(\sigma\)-סופי אם \(X=\bigcup_{n}A_{n}\) כש-\(\mu(A_{n})<\infty\) לכל \(n \in \mathbb{N}\).
+
+\end{definition}
+\begin{lemma}
+יהי \(\left( X,\mathcal{M,\mu} \right)\) מרחב מידה המכילה את בורל. ונניח ש-\(X\) היא \(\sigma\)-קומפקטית וש-\(\mu\) מידת רדון. אזי:
+
+  \begin{enumerate}
+    \item לכל \(E \in \mathcal{M}\) קיימות \(F\subseteq E \subseteq V\) כאשר \(V\) פתוחה ו-\(F\) סגורה המקיימת: 
+$$\mu\left( V \setminus  F \right)<\varepsilon$$
+
+
+    \item כל קבוצה ב-\(\mathcal{M}\) רגולרית פנימית(וחיצונית מהגדרת מידת רדון). 
+
+
+    \item לכל \(E \in \mathcal{M}\) מתקיים \(A\subseteq E\subseteq B\) כש-\(A\) היא \(F_{\sigma}\)(איחוד בן מנייה של סגורות) ו-\(B\) היא \(G_{\delta}\)(חיתוך בן מנייה של סגורות) ו-\(\mu\left( B\setminus A \right)=0\). 
+
+
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \begin{enumerate}
+    \item מאחר ש-\(X=\bigcup_{n}K_{n}\) כש-\(K_{n}\) קופמקטי לכל \(E \in \mathcal{M}\) מתקיים: 
+$$E=\bigcup_{n}E \cap K_{n}$$
+מאחר ש-\(\mu\) מידת רדון. הרי שלכל \(0<\varepsilon\) קיימות \(E \cap K_{n}\subseteq V_{n}\) כאשר \(V_{n}\) מדידה עם:
+$$\mu(V_{n})< \mu\left( E\cap K_{n} \right)+\frac{\varepsilon}{2^{n}}$$
+נסמן \(V=\bigcup_{n}V_{n}\) ולכן:
+$$\mu\left( V\setminus  E \right)\leq \sum_{n}\mu\left( V_{n}\setminus  E\cap K_{n} \right)$$
+אם מריצים את אותו טיעון עבור \(E^{c}\) מקבלים קבוצה סגורה \(F\subseteq E\) עם \(\mu\left( E \setminus F \right)< \frac{\varepsilon}{2}\)(שקול ל-\(\mu\left( F^{c}\setminus E^{c} \right)<\frac{\varepsilon}{2}\) - אותה קבוצה אשר מקרבים מבחוץ). מכאן נקבל את 1.
+
+
+    \item לכל \(E \in \mathcal{M}\) קיימת סגורה \(F \subseteq E\) עם \(\mu\left( E \setminus F \right)<\varepsilon\) מאחר ש \(F=\bigcup_{n}F \cap K_{n}\) תהיה \(\sigma\)-קומפקטית הרי ש: 
+$$\mu\bigg(\overbrace{ \bigcup_{n=1}^{N}F_{n}K_{n}  }^{ \text{compact} }\bigg)\xrightarrow{N\to \infty} \mu(F)$$
+
+
+    \item לכל \(n\) ניקח \(F_{n}\subseteq E_{n}\subseteq V_{n}\) עם \(\mu\left( V_{n}\setminus F_{n} \right)<\frac{1}{n}\) ואז ניקח: 
+$$B=\bigcap_{n}V_{n} \qquad  A= \bigcup_{n}F_{n}$$
+יספקו את הטענה.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{proposition}
+יהי \(X\) מרחב האוסדורף קומפקטי מקומית המקיים שכל קבוצה פתוחה בו היא \(\sigma\)-קומפקטית. אזי אם \(\mu\) מידה על \(\sigma\)-אלגברת בורל על \(X\) המקיימת ש \(\mu(K)<\infty\) לכל קומפקטית \(X \subseteq K\) אזי \(\mu\) מידת רדון(וכל קבוצה מדידה היא רגולרית פנימית וחיצונית).
+
+\end{proposition}
+\begin{example}
+הקבוצה \(\mathbb{R}^{n}\) מקיים את התנאים. 
+
+\end{example}
+\begin{proof}
+  \begin{enumerate}
+    \item מאחר ש-\(\mu\) סופית על קומפקטית נקבל שלכל \(f\in C_{c}(X)\) הפונקציונאל: 
+$$\Lambda f:= \int f \;\mathrm{d} \mu $$
+הינו פונקציונלי לינארי חיובי על \(C_{c}(X)\). ולכן ממשפט ההצגה של ריס קיימת מידת רדון \(\lambda\) על \(X\) המקיימת:
+$$\int f \;\mathrm{d} \lambda = \int f \;\mathrm{d} \mu  $$
+לכל \(f \in C_{c}(X)\). 
+
+
+    \item נרצה להראות ש-\(\lambda(E)=\mu(E)\) לכל קבוצה מדידת בורל. נראה ראשית על הפונקציות הפתוחות. עבור \(V\subseteq X\) פתוחה מאחר ש-\(V= \bigcup_{n}K_{n}\) קופמקטיות נקבל עבור כל \(n\) מהלמה של אוהריסון פונקציה \(g_{n}\in C_{c}(X)\)  עם \(K_{n}\prec g_{n}\prec V\). נגדיר: 
+$$f_{N}=\max \left\{  g_{1},g_{2},\dots, g_{N}  \right\} \in C_{c}(X)$$
+ומתקיים \(f_{1}\leq f_{2}\leq f_{3}\leq\dots\) עם \(f_{N}\xrightarrow{N\to \infty} \mathbb{1}_{V}\) נקודותית. מכן ממשפט ההתכנסות המונוטונית נקבל:
+$$\mu(V)=\lim_{ N \to \infty } \int f_{N} \;\mathrm{d} \mu =\lim_{ N \to \infty } \int f_{N} \;\mathrm{d} \lambda = \lambda(V) $$
+כלומר \(\mu(V)=\lambda(V)\) לכל קבוצה פתוחה. 
+
+
+    \item מהטענה הקודמת קיימות לכל \(E\in \mathcal{M}\) פתוחה וסגורה \(F\subseteq E \subseteq V\) עם \(\lambda\left( V\setminus F \right)<\varepsilon\) מאחר ש-\(V\setminus F\) פתוחה הרי ש-\(\mu\left( V\setminus F \right)<\varepsilon\) ולכן: 
+$$\mu(V)<\mu(E)+\varepsilon \qquad \lambda(V)<\lambda(E)+\varepsilon$$
+ונקבל:
+$$\lambda(E)-\varepsilon<\lambda(V)-\varepsilon = \mu(V)-\varepsilon \leq \mu(E)\leq \mu(V)=\lambda(V)\leq \lambda(E)+\varepsilon$$
+כך שבסופו של דבר נקבל:
+$$\left\lvert  \mu(E)-\lambda(E)  \right\rvert <\varepsilon\implies \mu(E)=\lambda(E)$$
+
+
+  \end{enumerate}
+\end{proof}
+\begin{definition}[מידת הסתברות]
+מידה על קבוצה \(X\) אשר מקיימת \(\mu(X)=1\).
+
+\end{definition}
+\begin{corollary}
+כל מידות ההסתברות על \(\mathbb{R}^{n}\) הן רגולריות. מידת ההסתברות היא סופית על כל המרחב ולכן בפרט על כל תת קבוצה קומפקטית.
+
+\end{corollary}
+\begin{corollary}
+תחת התנאים בטענה (למשל ב\(\mathbb{R}^{n}\)) יש את ההתאמה החח"ע ועל:
+$$\left\{  \text{linear functionals on } C^{*} \right\} \leftrightarrow \left\{  \text{finite borel measures on compact}  \right\}$$
+
+\end{corollary}
+\begin{remark}
+אם \(\mu\) סופית על קומפקטיות אזי לכל \(f \in C_{c}(X)\) מתקיים:
+$$\left\lvert  \int f \;\mathrm{d} \mu   \right\rvert \leq \lVert f \rVert _{\infty}\cdot \mu\left( \text{supp}(f) \right)\qquad \left( f\leq \lVert f \rVert _{\infty} \cdot \mathbb{1} _{\text{supp}(f)} \right)$$
+
+\end{remark}
+\begin{corollary}
+מידת לבג היא מידת בורל \underline{היחידה} על \(\mathbb{R}\) שמקיימת \(\mu((a,b))=b-a\).
+
+\end{corollary}
+\begin{definition}[התכנסות חלשה-\(*\)]
+יהי \(X\) מרחב האוסדורף קומפקטי מקומית. ויהיו \(\mu,\mu_{n}\) מידות רדון. נאמר ש-\(\mu_{n}\) מתכנסת חלש-\(*\) ל-\(\mu\) ונסמן:
+$$\mu_{n}\overset{*}{\rightharpoonup} \mu$$
+אם מתקיים:
+$$\forall f \in C_{c}\qquad  \int f \;\mathrm{d} \mu_{n}\xrightarrow{n\to \infty} \int f \;\mathrm{d} \mu  $$
+
+\end{definition}
+\begin{symbolize}
+מעטה נניח כי \(X\) קומפקטי. נסמן:
+$$\mathcal{P}(X) =\left\{  \mu \mid \mu\text{ is an probability measure on } X \right\}$$
+
+\end{symbolize}
+\begin{reminder}
+עבור מרחבים קומפקטים \((C_{c}(X)=)C(X)\) ספרבילי (למשל מ-Stone Weierstrass). כלומר קיימת סדרה ב"מ \(0 \not \in\{ f_{n} \}\) שצפופה ב-\(C(X)\) נגדיר לכל \(\mu ,\nu \in \mathcal{P}(X)\).
+$$d\left( \mu,\nu \right):= \sum_{i=1}^{\infty} 2^{-n}\left\lvert  \int f_{n} \;\mathrm{d} \mu -\int f_{n} \;\mathrm{d} \nu   \right\rvert \cdot \lVert f_{n} \rVert _{\infty}^{-1}$$
+
+\end{reminder}
+\begin{lemma}
+הפונקציה \(d\) הינה מטריקה על \(\mathcal{P}(X)\).
+
+\end{lemma}
+\begin{proof}
+אי שלילית, סימטרית ומקיימת את אי שיוויון המשולש. נותר להוכיח \(d\left( \mu,\nu \right)=0\) גורר \(\mu=0\). אם \(d\left( \mu,\nu \right)=0\) נקבל:
+$$\forall n \quad \int f_{n} \;\mathrm{d} \mu = \int f_{n} \;\mathrm{d} \nu  $$
+לכל \(g \in C(X)\) קיימת תת סדרה \(f_{n_{k}}\to g\) ב-\(||\cdot||_{\infty}\). מכך נובע גם שקיים \(M>0\) עבורו \(\lVert f_{n_{k}} \rVert,\lVert g \rVert \leq M\)
+ממשפט ההתכנסות הנשלטת נסיק כי:
+$$\int g \;\mathrm{d} \mu =\lim_{ k \to \infty } \int f_{n_{k}} \;\mathrm{d} \mu =\lim_{ k \to \infty } \int f_{n_{k}} \;\mathrm{d} \nu = \int  g \;\mathrm{d} \nu  $$
+ולכן מיחידות ההצגיה כפונקציונל נקבל \(\mu=\nu\).
+
+\end{proof}
+\begin{remark}
+$$d\left( \mu_{n},\mu \right)\xrightarrow{n\to \infty} 0 \iff \mu_{n} \overset{*}{\rightharpoonup} \mu$$
+
+\end{remark}
+\begin{proposition}
+המרחב \(\mathcal{P}(X)\) הוא מרחב קומפקטי.
+
+\end{proposition}
+\begin{proof}
+נראה קומפקטיות סדרתית. נקבע קבוצה בת מנייה צפופה (\(\overline{\{ f_{n} \}}_{n \in \mathbb{N}}\)) תהי \(\mu_{n}\in \mathcal{P}(X)\). מאחר שהסדרה:
+$$\left( \int f_{1} \;\mathrm{d} \mu_{n}  \right)_{n \in \mathbb{N}}$$
+חסומה ב-\(\mathbb{C}\). ב-\(\mathbb{C}\) נסיק שקיימת תת סידה \(\mu_{n,1}\) כך שעלייה מתקיים:
+$$\int f_{1} \;\mathrm{d} \mu_{n,1}\xrightarrow{n\to \infty}\alpha_{1} $$
+סדרת הערכים \(\left( \int f_{2} \;\mathrm{d} \mu_{n,1} \right)_{n\in \mathbb{N}}\) חסומה ב-\(\mathbb{C}\) ולכן קיימת תת סדרה \(\mu_{n,2}\) של \(\mu_{n,1}\) עליה \(\int f_{2} \;\mathrm{d} \mu_{n,2}\). נמשיך כך לכל \(f_{k}\) מטיעון האלכסון נסיק כי תת-הסדרה \(\mu_{n,n}\) מקיימת:
+$$\forall k \in \mathbb{N} \quad  \int f_{k} \;\mathrm{d} \mu_{n,n}\xrightarrow{n\to \infty} \alpha_{k}\in \mathbb{C} $$
+בהנתן \(g \in C(X)\) כלשהו ו-\(0<\varepsilon\) קיים \(i \in \mathbb{N}\) כך ש:
+$$\lVert f_{i}-g \rVert < \frac{\varepsilon}{3}$$
+בנוסף קיים \(N \in \mathbb{N}\) כך שלכל \(n,m> N\) מתקיים:
+$$\left\lvert  \int f_{i} \;\mathrm{d} \mu_{n,n}-\int f_{i} \;\mathrm{d} \mu_{m,m}    \right\rvert < \frac{\varepsilon}{3}$$
+ולכן:
+$$\left\lvert  \int g \;\mathrm{d} \mu_{n,n}-\int g \;\mathrm{d} \mu_{m,m}    \right\rvert \leq \underbrace{ \left\lvert  \int g \;\mathrm{d} \mu_{n,n}-\int f_{i} \;\mathrm{d} \mu_{n,n}    \right\rvert }_{ \leq \left\lVert  g\cdot f_{i}  \right\rVert _{\infty}\cdot \mu_{n,n}(X)<\frac{\varepsilon}{3} } +\left\lvert  \int f_{i} \;\mathrm{d} \mu_{n,n}   -\int f_{i} \;\mathrm{d} \mu_{m,m} \right\rvert +\underbrace{ \left\lvert  \int f_{i} \;\mathrm{d} \mu_{m,m} - \int g \;\mathrm{d} \mu_{m,m}    \right\rvert }_{ <\frac{\varepsilon}{3} } <\varepsilon$$
+לכן הסדרה \(\left( \int g \;\mathrm{d} \mu_{m,n} \right)_{n \in \mathbb{N}}\) הינה סדרה קושי ב-\(\mathbb{C}\) ולכן מתכנסת. לכן נגדיר:
+$$\Lambda g= \lim_{  n \to \infty }  \int g \;\mathrm{d} \mu_{n,n} $$
+תרגילון - לוודא ש-\(\Lambda\) פונקציונאל לינארי חיובי. ולכן קיימת מידה \(\mu\) המתאימה ל-\(\Lambda\). חסר רק להראות ש-\(\mu \in \mathcal{P}(X)\). זה נובע ישירות מכך ש-\(\mathbb{1}_{X}\in C(X)\) המקיימת:
+$$\mu(X)=\lim_{ n \to \infty } \int \mathbb{1} _{X} \;\mathrm{d} \mu_{n,m} = 1 $$
+
+\end{proof}
+\begin{remark}
+  \begin{enumerate}
+    \item התכנסות חלשה-\(*\) היא חלשה יותר מהתנאי שלכל \(E \in B\). 
+$$\mu_{n}(E)\to \mu(E)$$
+לדוגמא ב-\(\mathbb{R}\) נסתכל על 
+$$\mu_{n}=\delta_{\frac{1}{n}} = \begin{cases} 1  &  \frac{1}{n}\in E \\0 & \text{else}
+\end{cases}$$
+אז \(\mu_{n}\overset{*}{\rightharpoonup} \delta_{0}\):
+$$\forall f \in C_{c}\left( \mathbb{R} \right)\quad \int f \;\mathrm{d} \mu_{n}= f\left(  \frac{1}{n} \right)\xrightarrow{n\to \infty}f(0)=\int f \;\mathrm{d} \delta_{0}  $$
+מצד שני:
+$$\begin{gather}0\equiv \mu_{n}\left( \{ 0 \} \right) \not \to 1 = \delta_{0}\left( \{ 0 \} \right)  \\1\equiv \mu_{n}((0,1)) \not \to 0 =\delta_{0}((0,1))
+\end{gather}$$
+
+
+    \item תנאי הקומפקטיות ההכרחי למשל ב-\(\mathbb{R}\) לסדרה \(\delta_{n} \in \mathcal{P}\left( \mathbb{R} \right)\) אין תת סדרה מתכנסת ב-\(\mathcal{P}\left( \mathbb{R} \right)\). 
+
+
+  \end{enumerate}
+\end{remark}
+\subsection{מידות אינווריאנטיות}
+
+יהי \(X\) מרחב מטרי קומפקטי ותהי \(T:X \to X\) העתקה רציפה. הצמד \((X,T)\) נקרא מערכת דינמית טופולוגית. הסדרה \((T^{k}x)_{k \in \mathbb{N}}\) נקראות המסלול של \(X\).
+
+\begin{example}
+נגדיר:
+$$X=\mathbb{R} / \mathbb{Z} \qquad  Tx = x+\alpha \text{ mod }1 \quad  \alpha \in \mathbb{R}$$
+
+\end{example}
+\begin{definition}[מידה \(T\) אינווריאטנית]
+מידת בורל \(\mu\) על \(X\) נקראת \(T\)-אינווריאנטית אם \(T_{*}\mu = \mu\). כאשר:
+$$\left( T_{*}\mu \right)=\mu(T^{-1}A)$$
+
+\end{definition}
+עכשיו נראה כי לכל מערכת טופולוגית קומפקטית קיימת מידה \(T\) איווריאנטית.
+
+\begin{remark}
+נשים לב ש:
+$$\mathbb{1} _{T^{-1}A}=\mathbb{1} _{A}\circ  T$$
+כלומר \(\mu\) היא T-איווריאנטית אם"ם:
+$$\forall A \in \mathcal{B}  \qquad  \int \mathbb{1} _{A} \;\mathrm{d} \mu = \int \mathbb{1}_{A}\circ  T  \;\mathrm{d} \mu  $$
+אם"ם:
+$$\int f \;\mathrm{d} \mu = \int f \circ  T \;\mathrm{d} \mu = \int  f \;\mathrm{d} T_{*}\mu   $$
+
+\end{remark}
+\begin{theorem}
+כש-\(X\) קומפקטי ו-\(T:X\to X\) רציף תמיד קיימת מידת הסתברות(נדרוש כדי שיהיה רגולרית) \(T\)-אינווריאנטית.
+
+\end{theorem}
+\begin{proof}
+נקבע \(x_{0} \in X\) כלשהו. נתבונן בסדרת מידות ההסתברות:
+$$\mu_{n}:= \frac{1}{n}\sum_{i=0}^{n-1}\delta_{T^{k}x_{0}}  \in \mathcal{P}(X) $$
+כאשר זה יהיה מידת הסתברות כיוון שצירוף קמור של מידות הסתברות תהיה מידת הסתברות.
+מאחר ש-\(\mathcal{P}(X)\) קומפקטית סדרתית קיימת תת-סדרה \(\mu_{n_{k}}\overset{*}{\rightharpoonup} \mu\) כש-\(\mu \in \mathcal{P}(X)\). נראה ש-\(\mu\) היא \(T\) אינווריאנית. תהי \(f \in C(X)\). מתקיים:
+$$\begin{gather}\left\lvert  \int f \;\mathrm{d} \mu - \int f \circ  T \;\mathrm{d} \mu    \right\rvert = \left\lvert   \lim_{ k \to \infty } \int \left( f-f\circ  T \right) \;\mathrm{d} \mu_{n_{k}}   \right\rvert = \lim_{ k \to \infty } \left\lvert  \frac{1}{n_{k}}\sum_{i=0}^{n_{k}-1}  \left( f-f\circ T \right)(T^{i}x_{0})  \right\rvert = \\=\lim_{ k \to \infty } \left\lvert  \frac{1}{n_{k}}\sum_{i=0}^{n_{k}-1} f(T^{i}x_{0})-f(T^{i+1}x_{0})  \right\rvert \overset{*}{=} \lim_{ n \to \infty } \frac{1}{n_{k}}\lvert f({x_{0}})-f(T^{n_{k}}(x_{0})) \rvert \leq \\
+\leq \lim_{ k \to \infty } \frac{1}{n_{k}}2\lVert f \rVert _{\infty}=0 \end{gather} $$
+כאשר ב-\((*)\) השתמשנו בזה שהטור טלסקופי. כעת נקבל:
+$$\forall f \in C(X)\quad  \int f \;\mathrm{d} T_{*}\mu = \int f \;\mathrm{d} \mu \implies T_{*}\mu = \mu  $$
+
+\end{proof}
+\begin{remark}
+נשים לב כי אין פה שום סיבה שתהיה יחידות, ולמעשה ברוב המערכות אין יחידות.
+
+\end{remark}
+\subsection{רציפות של פונקציות מדידות}
+
+\begin{theorem}[לוסין - Lusin]
+יהי \(X\) מרחב האוסדורף קומפקטי מקומית ותהי \(\mu\) מידת רדון על \(X\). תהי \(f:X\to \mathbb{C}\) מדידה כך ש:
+$$A\supseteq\left\{  x\mid f(x)\neq 0  \right\}$$
+ממידה סופית, כלומר \(\mu(A)<\infty\) אזי לכל \(\varepsilon> 0\) קיימת פונקציה רציפה עם תומך קומפקטי \(g \in C_{c}(X)\) עם:
+$$\mu\left( \left\{  x\mid f(x)\neq g(x)  \right\} \right)< \varepsilon$$
+בנוסף ניתן לבחור \(g\) כך ש:
+$$\sup _{x \in X}\lvert g(x) \rvert \leq \sup _{x \in X} \lvert f(x) \rvert $$
+
+\end{theorem}
+כלומר עד כדי שגיאה קטנה כרצוני, פונקציות מדידות הם בעצם רציפות.
+
+\begin{proof}
+  \begin{enumerate}
+    \item נראה ראשית את המקרה הפשוט - עבור \(A\) קומפקטית ו-\(0\leq f< 1\). נקרב את \(f\) על ידי פונקציות פשוטות המוגדרות על ידי: 
+$$s_{n}(x)=2^{-n}\lfloor2^{n}f(x)\rfloor$$
+כאשר \(n\to \infty\) נקבל \(s_{n}(x)\to f(x)\).
+
+
+    \item נגדיר \(t_{n}=s_{n}-s_{n-1}\) כאשר ניתן לכתב כל \(t_{n}\) על ידי \(t_{n}(x)=2^{-n}\mathbb{1}_{T_{n}}(x)\) כאשר \(\mathbb{1}_{T_{n}}\) היא הפונקציה המציינת של הקבוצה: 
+$$T_{n}=\left\{  s_{n}\neq s_{n-1}  \right\}=\left\{ x\mid\exists k\quad k\cdot2^{-(n-1)}+2^{-n}\leq f(x)<(k+1)2^{-(n-1)} \right\}$$
+ובפרט כיוון שטור טלסקופי מתקיים:
+$$\lim_{ n \to \infty } \sum _{k=1}^{n}t_{k}=\lim_{ n \to \infty } S_{n}=f(x)$$
+
+
+    \item מרגולריות נמצא קבוצות קופמקטיות \(K_{n}\) וקבוצות פתוחות \(V_{n}\) כך שלכל \(T_{n}\) מתקיים: 
+$$K_{n}\subseteq T_{n}\subseteq V_{n}\qquad \mu\left( V_{n}\setminus  K_{n} \right)< 2^{-n}\varepsilon$$
+
+
+    \item מהלמה של אוריסון נמצא פונקציות רציפות \(h_{n}\) כך שמתקיים: 
+$$\begin{gather}\forall x \quad 0\leq h_{n}(x)\leq 1  \\\forall x \in K_{n}\quad h_{n}(x)=1 \\\forall x \not  \in V_{n} \quad h_{n}(x)=0
+\end{gather}$$
+ונגדיר את הפונקציה הרציפה \(g\) שלנו על ידי:
+$$g(x)=\sum_{n=1}^{\infty}2^{-n}h_{n}(x)$$
+כיוון ש-\(h_{n}(x)\leq 1\) נקבל כי הטור מתכנס במידה שווה(ממבחן ה-\(M\) של וורשטרס למשל) ולכן משמר רציפות ו-\(g(x)\) תהיה רציפה.
+
+
+    \item נשים לב כי כיוון שמתקיים \(K_{n}\subseteq T_{n}\) נקבל כי בתחום זה \(\mathbb{1}_{T_{n}}(x)=1\) ולכן \(h_{n}(x)=1\) ונקבל \(t_{n}=2^{-n}h_{n}(x)\) בתחום \(V_{n}\setminus K_{n}\) ולכן \(f(x)=g(x)\) פרט לאיחוד של הקבוצות האלו \(\bigcup_{n}\left( V_{n}\setminus K_{n} \right)\). המידה של האיחוד הזה חסום על ידי: 
+$$\mu \left( \bigcup_{n}\left( V_{n}\setminus K_{n} \right) \right)\leq\sum_{n=1}^{\infty}\mu\left( V_{n}\setminus K_{n} \right)<\sum_{n=1}^{\infty}2^{-n}\varepsilon=\varepsilon$$
+
+
+    \item כעת אם \(A\) לא קומפקטית נמצא תת קבוצה קומפקטית \(K\) של \(A\) כך ש-\(\mu\left( A\setminus K \right)<\delta\). כעת עבור \(K\) כיוון שקומפקטית מהטענה נקבל \(g:K\to \mathbb{C}\) רציפה כך שלכל \(x \in K\) מתקיים \(\mu\left( \left\{  x\mid f|_{K}(x)\neq g(x)  \right\} \right)<\varepsilon-\delta\). נגדיר \(\tilde{g}:A\to \mathbb{C}\) על ידי: 
+$$\tilde{g}(x)=\begin{cases}g(x) &  x \in K \\0  & \text{else}
+\end{cases}$$
+ונקבל:
+$$\begin{gather}\mu\left( \left\{  x \in A\mid f(x)\neq \tilde{g}(x)  \right\} \right)\leq\mu\left( A\setminus  K \sqcup \left\{  x \in K\mid f|_{K}(x)\neq g(x)  \right\} \right)\leq\\ \leq \mu\left( A\setminus  K \right)+\mu\left( \left\{  x \in K\mid f|_{K}(x)\neq g(x)  \right\} \right)< \delta+\varepsilon-\delta=\varepsilon 
+\end{gather}$$
+
+
+    \item כאשר \(f\) איננה חסומה נסמן \(B_{n}=\left\{  \lvert f \rvert>n  \right\}\). מאחר ש-\(\mu(A)< \infty\) ו-\(\bigcap_{n}B_{n}=\varnothing\) הרי שמרציפות יורדת של \(\mu\) עבור הסדרה: 
+$$A \supseteq B_{1} \supseteq \dots \supseteq B_{n}\supseteq \dots$$
+נסיק ש-\(\mu(B_{n})\to 0\) ולכן ניתן "להתעלם" מקבוצה קטנה של x-ים עליה \(f\) איננה חסומה.
+
+
+    \item עבור התנאי: 
+$$\sup _{x \in X}\lvert g(x) \rvert \leq \sup _{x \in X} \lvert f(x) \rvert $$
+כיוון שאנחנו יכולים להניח ש-\(f\) לא חסום(מהסעיף הקודם עד כדי קבוצה ממידה אפס) נגדיר:
+$$\varphi = \begin{cases} z  &   \lvert z \rvert\leq R \\\frac{z}{\lvert z \rvert }R & \lvert z \rvert > R 
+\end{cases}$$
+כש-\(R=\sup\lvert f \rvert<\infty\). כעת \(\varphi(g(x))\) תהיה פונקציה רציפה המקיימת את התנאי.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{corollary}
+בתנאי משפט לוסין קיימת סדרת פונקציות \(g_{n}\in C_{c}(X)\) עם:
+$$f(x)=\lim_{ n \to \infty } g_{n}(x)$$
+עבור \(\mu\)-כמעט כל \(x \in X\)(כלומר פרט לקבוצה ממידה אפס).
+
+\end{corollary}
+\begin{proof}
+לכל \(n \in \mathbb{N}\) נבחר \(g_{n}\in C_{c}(X)\) עם:
+$$J_{n}=\left\{  x\mid f(x)\neq g_{n}(x)  \right\}$$
+המקיים \(\mu(J_{n})<2^{-n}\). בפרט \(\sum_{n \in \mathbb{N}} \mu(J_{n})< \infty\) ולכן מהלמה של בורל קנטלי מתקיים ש-\(\mu(\limsup J_{n})=0\). כלומר עבור \(\mu\)-כמעט כל \(x \in X\), נקבל כי \(x\) מוכל בכל היותר מספר סופי של \(J_{n}\)-ים. מכאן הסדרה \(g_{n}(x)\) קבועה החל ממקום מסויים ושווה ל-\(f(x)\).
+
+\end{proof}
+\begin{theorem}[אגורוף]
+יהי \(\left( X,\mathcal{M},\mu \right)\) מרחב מידה סופית. ונניח כי \(f_{n}:X\to \mathbb{R}\) מתכנסת כמעט תמיד ל-\(f:X\to \mathbb{R}\). אזי לכל \(\varepsilon> 0\) קיימת \(E \in \mathcal{ M}\) כך ש-\(\mu(E)< \varepsilon\) כך ש-\(f_{n}\to f\) במ"ש ב-\(E^{c}\).
+
+\end{theorem}
+\begin{proof}
+יהי \(\varepsilon> 0\). נסמן:
+$$n_{k}(x)=\operatorname*{min}\left\{n:\forall N>n\qquad|f_{N}(x)-f(x)|<{\frac{1}{k}}\right\}$$
+כאשר נשתמש בקונבנציה שהמינימום של הקבוצה הרחקה היא באינסוף. יהי \(x \in X\). אם \(f_{n}(x)\to f(x)\) כמעט תמיד נקבל:
+$$\forall k\quad n_{k}(x)<\infty$$
+ולכן כיוון ש-\(n^{-1}_{k}\left( \left\{  \infty  \right\} \right)\) ממידה אפס, נקבל:
+$$0=\bigcup_{n=1}^{\infty}\mu\left( n_{k}^{-1}\left( \left\{  \infty  \right\} \right) \right)$$
+כעת:
+$$\bigcap_{m=1}^{\infty}n_{k}^{-1}((m,\infty])=n_{k}^{-1}(\{\infty\})$$
+מרציפות מלמעלה(כיוון שאמרנו כי \(\mu(X)<\infty\)) נקבל כי לכל \(k\) מתקיים:
+$$\mu(n_{k}^{-1}\left( \left( m,\infty] \right) \right)\xrightarrow{m\to \infty}0$$
+כעת נבחר \(m_{k}\) כך שלכל \(N> m_{k}\) מתקיים:
+$$\mu(\bigcup_{k=1}^{\infty}n_{k}^{-1}((m_{k},\infty]))<\sum_{k=1}^{\infty}\epsilon\cdot2^{-k}=\epsilon$$
+ונגדיר:
+$$E=\bigcup_{k=1}^{\infty}n_{k}^{-1}((m_{k},\infty])$$
+ולכן \(\mu(E)<\varepsilon\). נשים לב כי עבור \(x \in E^{c}\) אז לכל \(k\) מתקיים \(m_{k}\geq n_{k}(x)\). ולכן אם \(N>m_{k}\) אז \(N> n_{k}(x)\) ולכן:
+$$\lvert f_{n}(x)-f(x) \rvert < \frac{1}{k}$$
+
+\end{proof}
+\begin{summary}
+  \begin{itemize}
+    \item כל פונקציה מדידה לבג עם תומך קומפקטי היא בקירוב רציפה(משפט לוסין).
+    \item סדרת פונקציות \(f_{n}:[a,b]\to \mathbb{R}\) המתכנסת כמעט תמיד היא בקירוב מתכנסת במ"ש(משפט אגרוף).
+  \end{itemize}
+\end{summary}
+\section{מרחבי Lᵖ}
+
+\subsection{קמירות}
+
+\begin{definition}[פונקציה קמורה]
+פונקציה \(\varphi:(a,b)\to \mathbb{R}\) אשר מקיימת לכל \(a\leq s,t \leq b\) ולכל \(\lambda \in (0,1)\) מתקיים:
+$$\varphi\left( \lambda s+\left( 1-\lambda \right)t \right)\leq \lambda \varphi(s)+\left( 1-\lambda \right)\varphi(t)$$
+
+\end{definition}
+\begin{remark}
+הקטע \((a,b)\) לא חייב להיות חסום.
+
+\end{remark}
+\begin{proposition}[תנאי שקול לקמירות]
+פונקציה היא קמורה אם לכל \(x<y<z\) מתקיים:
+$$\frac{\varphi(x)-\varphi(y)}{x-y}\leq \frac{\varphi(y)-\varphi(z)}{y-z}$$
+כלומר השיפועים של הישרים המחברים בין הנקודות גדלים.
+
+\end{proposition}
+\begin{lemma}
+אם \(\varphi\) קמורה אז היא רציפה ב-\((a,b)\).
+
+\end{lemma}
+\begin{theorem}[אי-שיוויון ג'נסון]
+יהי \(\left( X,\mathcal{A},\mu \right)\) מרחב הסתברות. תהי \(\varphi:(a,b)\to \mathbb{R}\) קמורה ו-\(f:X\to (a,b)\) מדידה. אזי:
+$$\varphi\left( \int _{X} \;\mathrm{d} \mu  \right)\leq \int _{X} \varphi \circ  f \;\mathrm{d} \mu $$
+
+\end{theorem}
+\begin{enumerate}
+  \item נסמן \(T=\int _{X}f \;\mathrm{d}\mu\) כאשר כיוון ש-\(f \in (a,b)\) ו-\(\mu\) מידת הסתברות נקבל כי \(T \in (a,b)\). 
+
+
+  \item נגדיר: 
+$$\beta=\operatorname*{sup}_{s<T}{\frac{\varphi(T)-\varphi(s)}{T-s}}.$$
+ונקבל מהדרישה של הסופרמום עבור \(s\leq T\):
+$$\varphi(T)-\varphi(s)\leq\beta(T-s)\implies\varphi(s)\geq\varphi(T)+\beta\,(s-T)$$
+כאשר כיוון ש-\(\varphi\) קמורה נקבל עבור \(s> T\) מתקיים:
+$$\forall x \in (a,b) \quad \frac{\varphi(x)-\varphi(T)}{x-T}\leq\frac{\varphi\left( s \right)-\varphi(T)}{s-T}\implies \sup _{x <T}\frac{\varphi(T)-\varphi(x)}{T-x}\leq \frac{\varphi(s)-\varphi(T)}{s-T}$$
+כאשר נזהה את \(\beta\) ונקבל:
+$$\beta \leq \frac{\varphi(s)-\varphi(T)}{s-T}\implies \varphi(s)\geq \varphi(T)+\beta(s-T)$$
+
+
+  \item כיוון שהאי שיוויון\\
+$$\varphi(s)\geq\varphi(T)+\beta\left(s-T\right)$$
+נכון לכל \(s \in (a,b)\) נקבל כי עבור \(s=f(x)\):
+$$\varphi{\big(}f(x){\big)}\geq\varphi(T)+\beta\,(f(x)-T).$$
+
+
+  \item אם נבצע אינטרקציה על שתי האגפים נקבל: 
+$$\int_{X}\varphi\big(f(x)\big)\,d\mu(x)\geq\int_{X}\Big[\varphi(T)+\beta\left(f(x)-T\right)\Big]d\mu(x).$$
+מלינאריות האינטגרל כיוון ש-\(\varphi(T)\) ו-\(\beta\) קבועים ניתן לכתוב את אגף ימין בצורה הבאה:
+$$\varphi(T)\int_{X}d\mu(x)+\beta\Bigl(\int_{X}f(x)\,d\mu(x)-T\int_{X}d\mu(x)\Bigr)=\varphi(T)+\beta\,(T-T)=\varphi(T).$$
+כאשר השתמשנו בכך ש-\(\mu\) מידת הסתברות ולכן \(\int _{X} \;\mathrm{d} \mu=1\) ו-\(\int _{X}f(x) \;\mathrm{d} \mu=T\).
+
+
+  \item סה"כ קיבלנו: 
+$$\int_{X}\varphi{\big(}f(x){\big)}\,d\mu(x)\geq\varphi(T),$$
+שזה בדיוק אי שיוויון ג'נסון.
+
+
+\end{enumerate}
+\begin{definition}[חזקות צמודות]
+זוג מספרים \(1\leq p,q\leq \infty\) נקראים חזקות צמודות אם:
+$$\frac{1}{p}+\frac{1}{q}=1$$
+כאשר \(\frac{1}{\infty}=0\).
+
+\end{definition}
+\begin{example}
+$$(2,2),\left( 1,\infty \right)$$
+הם זוגות צמודות.
+
+\end{example}
+\begin{proposition}
+יהיו \(\left( X.\mathcal{A},\mu \right)\) מרחב מידה כלשהו ויהיו \(1\leq p,q\leq \infty\) חזקות צמודות. אזי לכל \(f,g:X\to \left[ 0,\infty \right]\) אי שליליות מדידות מתקיים:
+
+  \begin{enumerate}
+    \item אי שיוויון הולדר: 
+$$\int f\cdot g \;\mathrm{d} \mu \leq \left[ \int f^{p} \;\mathrm{d} \mu  \right]^{1/p} \cdot\left[ \int g^{q} \;\mathrm{d} \mu  \right]^{1/q} $$
+
+
+    \item אי שיוויון מינקוסבסקי: 
+$$\left[ \int (f+g)^{p} \;\mathrm{d} \mu \right]^{1/p} \leq \left[ \int f^{p} \;\mathrm{d} \mu  \right]^{1/p}+\left[ \int g^{p} \;\mathrm{d} \mu  \right]^{1/p}$$
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item ראשית נוכיח את אי שיוויון הולדר. נגדיר: 
+$$A=\left(\int_{X}f^{p}\,d\mu\right)^{1/p}=||f||_{p}\qquad B=\left(\int_{X}g^{q}\,d\mu\right)^{1/q}=\|g\|_{q}$$
+אם \(A=0\) נקבל \(\int_X f^p \; \mathrm{d}\mu = 0\) ולכן \(f^{p}\overset{\mu}{=}0\) ובפרט נקבל בשתי האגפים אפס והאי שיוויון מתקיים.
+אם \(A> 0\) ו-\(B=\infty\) אז נקבל באגף ימין אינסוף ובאגף שמאל מספר סופי ולכן האי שיוויון מתקיים.
+
+
+    \item כעת נתייחס למקרה הלא טריוויאלי שבו \(0<A<\infty\) ו-\(0<B< \infty\). נגדיר: 
+$$ F=\frac{f}{A} \qquad G=\frac{g}{B} \implies \int_{X}F^{p}d\mu=1=\int_{X}G^{q}d\mu$$
+
+
+    \item אם \(x \in X\) כך ש-\(0<F(x),G(x)<\infty\) אזי קיימים מספרים ממשיים \(s,t\) כך ש-\(F(x)=e^{ s/p },G(x)=e^{ t/q }\). כיוון ש-\(\frac{1}{p}+\frac{1}{q}=1\) מהקמירות של האקספוננט נקבל: 
+$$e^{s/p+t/q}\leq p^{-\,1}e^{s}+q^{-\,1}e^{t}\implies F(x)G(x)\leq p^{-\,1}F(x)^{p}+q^{-\,1}G(x)^{q}$$
+כעת אם נציב את האי שיוויון מתנאי נרמול ונקבל את אי שיוויון הולדר.
+
+
+    \item כעת כדי להוכיח את אי שיוויון מנקובסקי נכתוב: 
+$$(f+g)^{p}=f\cdot(f+g)^{p-1}+g\cdot(f+g)^{p-1}.$$
+כאשר מאי שיוויון הולדר נקבל:
+$$\int f\cdot(f+g)^{p-1}\leq\left\{\left[f^{p}\right\}^{1/p}\left\{\left[(f+g)^{(p-1)q}\right\}^{1/q}\right]\right\}^{1/q}$$
+כיוון ש-\((p-1)q=p\) נקבל:
+$$\int(f+g)^{p}\leq\left\{\int(f+g)^{p}\right\}^{1/q}\left[\left\{\int f^{p}\right\}^{1/p}+\left\{\int g^{p}\right\}^{1/p}\right]$$
+אם נחלק כעת ב-\(\left\{\int(f+g)^{p}\right\}^{1/q}\) ונשתמש בזה ש-\(1-\frac{1}{q}=\frac{1}{p}\) נקבל את האי שיוויון.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+עבור אי שיוויון הולדר יש שיוויון כאשר קיימים קבועים \(\alpha,\beta\) לא שניהם אפס כך ש-\(\alpha f^{p}=\beta g^{q}\). 
+
+\end{remark}
+\begin{remark}
+מאי שיוויון הולדר עבור \(p=q=2\) נקבל את אי שיוויון קושי שוורץ.
+
+\end{remark}
+\begin{corollary}
+הפונקציה \(e^{ x }\) קמורה ולכן אם ניקח \(\mu=\sum_{i=1}^{n}\alpha_{i}\delta_{x_{i}}\) מידת הסתברות נקבל את אי שיוויון הממצועים
+$$\prod y_{i}^{\alpha _{i}}\leq \sum \alpha_{i}y_{i}\qquad y_{i}=e^{ x_{i} }$$
+
+\end{corollary}
+\subsection{נורמות ומרחבי Lᵖ}
+
+\begin{definition}[נורמת \(p\) של \(f\)]
+לכל \(f:X\to \mathbb{C}\) מדידה ולכל \(1\leq p \leq \infty\) נגדיר:
+$$\lVert f \rVert _{p} := \left[ \int  \lvert f \rvert ^{p} \;\mathrm{d} \mu  \right]^{1/p}$$
+ונקרא לזה נורמת ה-\(p\) של \(f\). עבור \(p=\infty\):
+$$\lVert f \rVert _{\infty}=\text{ess-sup}\left( \lvert f \rvert  \right):= \inf \left\{  \alpha \geq 0 \mid \mu\left( \left\{  x\mid \lvert f(x) \rvert >\alpha  \right\} \right)=0  \right\}$$
+
+\end{definition}
+מוסכמה - \(\inf \varnothing = \infty\). נסמן:
+$$\mathcal{L} ^{p}\left( \mu \right):=\left\{  f:X\to \mathbb{C} \text{ measurable}\mid \lVert f \rVert _{p}<\infty  
+\right\}$$
+
+\begin{proposition}
+אם \(1\leq p,q\leq \infty\) חזקות צמודות ו-\(f \in \mathcal{L}^{p}\), \(g \in \mathcal{L}^{q}\) אזי \(f\cdot g \in \mathcal{L}^{1}\).
+
+\end{proposition}
+\begin{proof}
+עבור \(1<p,q<\infty\) נובע מאי שיוויון הלדר. עם \(p=1,q=\infty\) מתקיים \(\lvert g(x) \rvert \leq \lVert g \rVert _{\infty}\) מתקיים \(\mu\)-כמעט תמיד. לכן:
+$$\int \left\lvert  f\cdot g  \right\rvert  \;\mathrm{d} \mu \leq \lVert g \rVert _{\infty}\int \lvert f \rvert  \;\mathrm{d} \mu  $$
+
+\end{proof}
+\begin{proposition}
+לכל \(f,g \in \mathcal{L}^{p}\) עם \(1\leq p\leq \infty\) מתקיים:
+$$\lVert f+g \rVert_{p} \leq \lVert f \rVert _{p} + \lVert g \rVert _{p}$$
+
+\end{proposition}
+\begin{proof}
+עבור \(1<p< \infty\) נקבל את אי שיוויון מנקובסקי.
+עבור \(p=1,\infty\) נובע ישירות מאי שיוויון המשולש.
+
+\end{proof}
+\begin{corollary}
+המרחב \(\mathcal{L}^{p}\) הוא מרחב ווקטורי לכל \(1\leq p\leq \infty\).
+
+\end{corollary}
+\begin{proof}
+עבור \(f \in \mathcal{L}^{p}\) ו-\(\alpha \in \mathbb{C}\) קבוע נקבל \(\alpha f \in \mathcal{L}^{p}\).
+
+\end{proof}
+\begin{remark}
+הפונקציה \(||\cdot||\) איננה נורמה על \(\mathcal{L}^{p}\) כי \(||f||_{p}=0\) גם במקרה ש-\(f\neq 0\). עם זרת נשים לב שלכל \(1\leq p\leq \infty\) אם \(\lVert f \rVert_{p}=0\) אז \(f \overset{\mu}{=} 0\). 
+נזכר בתרגיל בו הגדרנו יחס שקילות \(f \sim g\) אם \(f\overset{\mu}{=} g\). נגדיר:
+$$L^{p}\left( \mu \right)=\left\{  [f]\mid f \in \mathcal{L} ^{p}  \right\}$$
+וכעת \(\left( L^{p}\left( \mu \right),||\cdot||_{p} \right)\) מרחב נורמי.
+
+\end{remark}
+\begin{definition}[מרחב בנך]
+מרחב נורמי שלם נקרא מרחב באנך.
+
+\end{definition}
+\begin{proposition}
+לכל \(1\leq p\leq \infty\) מתקיים כי \(L^{p}\) מרחב נורמי שלם(שלם כמרחב מטרי ביחס ל-\(d(x,y)=\lVert x-y \rVert_{p}\)).
+
+\end{proposition}
+\begin{proof}
+נתחיל מהמקרה של \(1\leq p< \infty\). תהי \((f_{n})\subseteq L^{p}\) סדרת קושי כלשהי. נבחר תת סדרה \(f_{n_{k}}\) המקיימת:
+$$\forall k \in \mathbb{N}\quad \lVert f_{n_{k+1}}-f_{n_{k}} \rVert _{p}<2^{-k}$$
+נגדיר:
+$$g_{k}= \sum_{i=1}^{k} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert $$
+אזי \(g_{k}\in L^{p}\). נסמן \(g=\sum_{i=1}^{\infty} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert\). נבחין כי \(0\leq g_{1}\leq g_{2}\leq \dots\). ו-\(g=\lim_{ k \to \infty }g_{k}\) לכן ממשפט ההתכנסות המונוטונית:
+$$\lVert g \rVert _{p}^{p}=\int g^{p} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k}^{p} \;\mathrm{d} \mu < 1  $$
+כי מאי שיוויון מינקובסקי:
+$$\lVert g_{k} \rVert_{p}\leq \sum_{i=1}^{k}\lVert f_{n_{i+1}}-f_{n_{i}} \rVert_{p} < 1$$
+מכך ש-\(\lVert g \rVert_{p}\) נובע ש-\(g(x)<\infty\) מתקיים \(\mu\) כמעט תמיד כלומר הטור \(\sum_{i=1}^{\infty} (f_{n_{i+1}}-f_{n_{i}})\) מתכנס בהחלט \(\mu\)-כמעט תמיד. נגדיר 
+$$f=f_{n_{1}} + \sum_{i=1}^{\infty}  (f_{n_{i+1}}-f_{n_{i}})$$
+ונסיק כי \(f \in L^{p}\). מוגדר \(\mu\)-כמעט תמיד. נקבע \(f=0\) היכן שאיננו מוגדר נבחין כי:
+$$f(x)=\lim_{ i \to \infty } f_{n_{i}}(x)$$
+מתקיים \(\mu\) כמעט תמיד. מהלמה של פאטו(Fatou) עבור כל \(m \in \mathbb{N}\):
+$$\int \lvert f_{m}-f\rvert^{p}  \;\mathrm{d} \mu \leq \liminf_{ i \to \infty } \int \lvert f_{m}-f_{n_{i}} \rvert ^{p} \;\mathrm{d} \mu = \liminf  \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}$$
+מאחר ש-\((f_{n})\) סדרת קושי, הרי שלכל \(0<\varepsilon\) קיים \(N\) כך שלכל \(m,n > N\) מתקיים:
+$$\lVert f_{m}-f_{n} \rVert _{p}<\varepsilon$$
+בפרט עבור \(m> N\):
+$$\lVert f_{m}-f \rVert _{p}^{p}\leq \liminf_{i\to \infty} \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}<\varepsilon^{p} $$
+ולכן
+$$\lVert f \rVert _{p}\leq \lVert f_{m} \rVert _{p}+\lVert f_{m}-f \rVert_{p}< \infty$$
+כלומר \(f \in L^{p}\). יתר על כן הראנו ש-\(\lVert f_{m}-f \rVert\xrightarrow{m\to \infty} 0\).
+עבור \(p=\infty\) ניקח סדרת קושי \((f_{n})\subseteq L^{\infty}\left( \mu \right)\). נסמן:
+$$A_{n}=\left\{  x\mid \lvert f_{n}(x) \rvert >\lVert f_{n} \rVert _{\infty}  \right\}\qquad B_{n,k}=\left\{  x \mid \lvert f_{n}(x)-f_{k}(x) \rvert > \lVert f_{n}-f_{k} \rVert _{\infty}  \right\}$$
+כאשר:
+$$\mu\left( \underbrace{ \bigcup_{n}A_{n}\cup \bigcup_{n,k}B_{n,k}  }_{ E }\right)=0$$
+מכיוון שעל  \(X \setminus E\) מתקיים ש-\(f_{n}\) מתכנס במ"ש.
+בפרט \(f(x)=\lim_{ n \to \infty }f_{n(x)}\) מוגדר \(\mu\) כמעט תמיד וחסום על ידי \(\lim_{ n \to \infty }\lVert f_{n} \rVert_{\infty}\) כלומר \(f \in L^{\infty}\) ומתקיים:
+$$\lVert f-f_{n} \rVert _{\infty}\xrightarrow{n\to \infty} 0$$
+
+\end{proof}
+\begin{proposition}
+לכל \(1\leq p\leq \infty\) המרחב \(L^{p}\left( \mu \right)\) שלם(מרחב בנך).
+
+\end{proposition}
+\begin{proposition}
+יהי \(S\) אוסף כל הפונקציות הפשוטות \(s:X\to \mathbb{C}\) המקיימות:
+$$\mu\left( \left\{  x\mid s(x)\neq 0  \right\} \right)< \infty$$
+אזי לכל \(1\leq p < \infty\) הקבוצה \(S\) צפופה ב-\(L^{p}\left( \mu \right)\).
+
+\end{proposition}
+\begin{remark}
+כאשר \(\mu\) מידה אינסופית(\(\mu(X)=\infty\)) אז \(S\) איננה צפופה ב-\(L^{\infty}\).
+
+\end{remark}
+\begin{proof}
+ראשי מאחר שלכל \(s \in S\) התמונה \(s(X)\) סופית(המשמעות של להיות פונקציה פשוטה) הרי שיחד עם \(\mu\left( \left\{  s\neq 0  \right\} \right)<\infty\) נסיק כי \(S\subseteq L^{p}\left( \mu \right)\) לכל \(1\leq p\leq \infty\). תהי \(f \in L^{p}\left( \mu \right)\) כלשהי. ניקח את הסדרה:
+$$0\leq s_{1} \leq s_{2} \leq s_{3} \leq \dots \leq f$$
+פשוטות שבנינו בעבר. אכן מהתנאי \(0\leq s_{n}\leq f\) נסיק כי \(\mu\left( \left\{  s_{n}\neq 0  \right\} \right)\).
+נניח בשלילה \(s_{n}\in S\). נסמן:
+$$c=\min \left\{  \alpha> 0\mid \mu\left( \left\{  s_{n}=\alpha  \right\} \right)=\infty  \right\}$$
+אזי:
+$$\int f^{p} \;\mathrm{d} \mu \geq \int  s_{n}^{p} \;\mathrm{d} \mu \geq c^{p}\mu\left( \{ s_{n}=c \} \right)=\infty $$
+בסתירה לכך ש-\(f \in L^{p}\left( \mu \right)\). נזכר ש-\(s_{n}\to f\) נקודתית ולכן \(\lvert f-s_{n} \rvert^{p}\xrightarrow{n\to \infty}0\). כמו כן \(\lvert f-s_{n} \rvert^{p}\leq f^{p}\in L^{1}\left( \mu \right)\) ולכן אנחנו מתקיימים את התנאים של משפט ההתכנסות בנשלטת. ולכן:
+$$\lVert f -s_{n}\rVert _{p}^{p}= \int \lvert f-s_{n} \rvert ^{p} \;\mathrm{d} \mu \xrightarrow{n\to \infty}0\implies L^{p}\left( \mu \right)=\overline{S}  $$
+
+\end{proof}
+\begin{proposition}[קירוב על ידי פונקציות רציפות]
+יהי \(X\) מרחב האוסדורף קומפקטית מקומית ותהי \(\mu\) מידת רדין על \(X\).
+לכל \(1\leq p<\infty\) הקבוצה \(C_{c}(X)\) צפופה ב-\(L^{p}\left( \mu \right)\).
+
+\end{proposition}
+\begin{proof}
+ראשית, מאחר ש-\(\mu\) מידת רדון, הרי ש-\(C_{c}(X)\leq L^{p}\left( \mu \right)\). מספיק להראות ש-\(S\subseteq \overline{C_{c}(X})\). תהי \(s \in S\) כלשהי. ממשפט Lusin הרי שלכל \(0< \varepsilon\) קיימת \(g \in C_{c}(X)\) המקיימת:
+$$\mu\left( \left\{  s \neq g  \right\} \right)< \varepsilon$$
+יתר על כן נוכל לדרש
+$$\sup_{x \in X}\lvert g \rvert\leq \sup_{x \in X}\lvert s \rvert=M$$
+כאשר נבחין כי מכך נובע ש-\(\lvert g-s \rvert\leq 2M\). לכן:
+$$\lVert g-s \rVert _{p}^{p}=\int \lvert g-s \rvert ^{p} \;\mathrm{d} \mu=\cancelto{ 0 }{ \int_{\{ g=s \}} \lvert g-s \rvert ^{p} \;\mathrm{d} \mu }  + \int _{\left\{  g\neq s  \right\}}\lvert g-s \rvert ^{p} \;\mathrm{d} \mu \leq 2M\varepsilon$$
+
+\end{proof}
+\begin{remark}
+  \begin{enumerate}
+    \item זו עוד עדות לכך שמידת לבג היא ההכללה ה"נכונה" של אינטגרל רימן - כלומר ש-\(L^{p}\left( \text{Leb},\mathbb{R} \right)\) הינו ההשלמה המטרית של \(C_{c}\left( \mathbb{R} \right)\) ביחס למטריקה המתאימה מאינטגרל רימן. 
+
+
+    \item הכל \(L^{p}\) ההשלמה של \(C_{c}(X)\) היא שונה(כי המטריקה שונה). 
+
+
+    \item ההשלמה המטרית של \(C_{c}\left( \mathbb{R} \right)\) לפי נורמת-\(\infty\) ביחס ל-Leb היא \(C_{0}\left( \mathbb{R} \right)\) - קבוצת הפונקציות הרציפות שדועכות ל-0 באינסוף. 
+
+
+  \end{enumerate}
+\end{remark}
+\subsection{מרחבי הילברט}
+
+\begin{reminder}
+מרחב מכפלה פנימית \(V\) מעל \(\mathbb{C}\) הינו מרחב ווקטורי עם \(\left\langle  \cdot,\cdot  \right\rangle\) המקיימת:
+
+  \begin{enumerate}
+    \item לכל \(w \in V\) ההעתקה \(v\mapsto \langle v,w \rangle\) היא \(\mathbb{C}\)-לינארית. 
+
+
+    \item לכל \(0\neq v \in V\) מתקיים \(\langle v,v \rangle>0\). 
+
+
+    \item לכל \(u,v \in V\) מתקיים \(\langle u,v \rangle=\overline{\langle v,u \rangle}\). 
+
+
+  \end{enumerate}
+\end{reminder}
+\begin{definition}[מרחב הילברט]
+מרחב מכפלה פנימי נקרא מרחב הילברט אם הוא שלם ביחס למטריקה המושרית מהמכפלה הפנימית(כלומר \(d(x,y)=\lVert x-y \rVert=\sqrt{ \langle x-y,x-y \rangle }\))
+
+\end{definition}
+\begin{corollary}
+המרחב ההווקטורי \(L^2\left( \mu \right)\) הינו מרחב הילברט ביחס למכפלה הפנימית:
+$$\langle f,g \rangle =\int f \cdot \overline{g}  \;\mathrm{d} \mu $$
+
+\end{corollary}
+\begin{symbolize}
+מסמנים ב-\(\mathcal{H}\) במרחב בילברט.
+
+\end{symbolize}
+\begin{definition}[קבוצה קמורה במרחב הילברט]
+קבוצה \(D \subseteq \mathcal{H}\) נקראת קבומרה אם לכל \(x,y \in D\) ולכל \(\alpha \in[0,1]\) מתקיים:
+$$\alpha x+\left( 1-\alpha \right)y \in D$$
+
+\end{definition}
+\begin{reminder}
+במרחבי מכפלה פנימית מתקיים:
+
+  \begin{enumerate}
+    \item אי שיוויון קושי שוורץ: 
+$$\forall x,y \in \mathcal{H}\qquad \left\lvert  \langle x,y \rangle   \right\rvert \leq \lVert x \rVert \cdot \lVert y 
+\rVert $$
+
+
+    \item כלל המקבילית: 
+$$\forall x,y \in \mathcal{H} \qquad \lVert x+y \rVert ^{2}+\lVert x-y \rVert ^{2}=2\left( \lVert x \rVert^{2}+\lVert y \rVert ^{2}  \right)$$
+
+
+  \end{enumerate}
+\end{reminder}
+\begin{lemma}
+תהי \(\varnothing \neq D \subseteq \mathcal{H}\) סגורה וקמורה אזי קיים \(z \in D\) עבורו:
+$$\lVert z \rVert =\inf\left\{  \lVert x \rVert \mid x \in D \right\}$$
+
+\end{lemma}
+\begin{proof}
+נסמן:
+$$\delta=\inf\left\{  \lVert x \rVert  \mid x \in D  \right\}$$
+אם \(\delta =0\) כיוון ש-\(D\) סגור נקבל \(0 \in D\) והטענה מתקיימת. 
+אם \(\delta> 0\) ניקח \(\{ x_{n} \}\subseteq D\) עם \(\lVert x_{n} \rVert\xrightarrow{n\to \infty}\delta\). לכל \(0<\varepsilon\) קיים \(N\) כך שלכל \(n>N\) נקבע \(n,m>N\) כלשהם. מאחר ש- \(\frac{x_{n}+x_{m}}{2}\in D\) נקבל
+$$\lVert x_{n}+x_{m} \rVert \geq 2\delta$$
+מצד שני, מבחירת \(n,m\) כך ש-\(\lVert x_{n} \rVert,\lVert x_{m} \rVert<\delta+\varepsilon\) לכן מכלל המקבילית נקבל:
+$$\lVert x_{n}-x_{m} \rVert ^{2}= 2\left( \lVert x_{n} \rVert ^{2}+\lVert x_{m} \rVert ^{2}-\lVert x_{n}+x_{m} \rVert ^{2} \right)\leq 4\left( \varepsilon+\delta \right)-\left( 2\delta \right)^{2}=8\varepsilon \cdot \delta+4\varepsilon^{2}$$
+ולכן \(\{ x_{n} \}\) הינה סדרת קושי המתכנסת ל-\(z \in D\)(כי \(\mathcal{H}\) שלם ו-\(D\) סגור). מרציפות \(||\cdot||\) נסיק ש-\(||z||=\delta\).
+
+\end{proof}
+\begin{definition}[מרחב מאונך]
+בהנתן \(Y\subseteq H\) נגדיר:
+$$Y^{\perp}= \left\{  x \in \mathcal{H} \mid \forall y \in Y\quad \langle x,y \rangle =0 \right\}$$
+
+\end{definition}
+\begin{theorem}[ההטלה האורתוגונלית]
+יהי \(V\subseteq \mathcal{H}\) תת מרחב סגור. אזי לכל \(u\in \mathcal{H}\) קיימת הצגה יחידה בתור \(u=v+w\)  כך ש-\(v \in V\) ו-\(w \in V^{\perp}\).
+
+\end{theorem}
+\begin{proof}
+אם \(u\in V\) אז \(u=u+0\). אחרת נניח \(u\not \in V\) נסמן \(D=V-u\). אזי \(D\) תת קבוצה סגורה וקמורה. מהלמה הקודמת:
+$$\exists z \in D\qquad \lVert z \rVert = \inf \left\{  \lVert x \rVert \mid x \in D  \right\}$$
+נראה ש-\(z \in V^{\perp}\). אם נראה זאת נסיק כי \(u=\underbrace{ (z+u) }_{ \in D+u=V }-\overbrace{ z }^{ \in V^{\perp} }\).
+לכן מספיק להראות כי המכפלה הפנימית של \(z\) עם כל \(v\in V\) יהיה 0. יהי \(v \in V\) ו-\(t \in C\). נתבונן ב:
+$$\lVert \underbrace{ z+tv }_{ \in D } \rVert ^{2}=\langle z+tv,z+tv \rangle =\lVert z \rVert ^{2}+|t|^{2}\lVert v \rVert ^{2}+2\mathrm{Re}\left( t\cdot \langle z,v \rangle  \right)$$
+כש-\(t \in \mathbb{R}\) הביטוי הנ"ל הינו פולינום ריבועי שהוא חיובי תמיד כי 
+$$\lVert z+tv \rVert^{2}\geq \delta^{2}$$
+ומקבל מינימום עבור \(t=0\)(מבחירת \(z \in D\)). לכן אם נגזרות את הביטוי ב-\(z=0\) נקבל נגזרת 0. כלומר:
+$$2\mathrm{Re}\left( \langle z,v \rangle  \right)=0$$
+באופן דומה אם ניקח את \(t=i\cdot s\) כאשר \(s \in \mathbb{R}\) נסיק באופן דומה:
+$$2\mathrm{Im}\left( \langle z,v \rangle  \right)=0$$
+ולכן נקבל \(\langle z,v \rangle=0\) ולכן \(z\in V^{\perp}\).
+
+\end{proof}
+\begin{corollary}
+אם \(V\subseteq \mathcal{H}\) תת מרחב סגור אזי \(V \neq \mathcal{H}\) אם"ם \(V^{\perp}\neq \{ 0 \}\).
+
+\end{corollary}
+\begin{definition}[נורמה אופרטורית]
+בהנתן פונקציונאל לינארי \(\phi:\mathcal{H}\to \mathbb{C}\) נגדיר את הנורמה האופרטורית שלו בתור:
+$$\left\lVert  \phi  \right\rVert _{\mathrm{op}} := \sup _{x \in \mathcal{H}} \frac{\left\lvert  \phi(x)  \right\rvert }{\lVert x \rVert }=\sup _{x \in \mathcal{H}, \lVert x \rVert =1} \left\lvert  \phi(x)  \right\rvert $$
+כלומר התמונה של ספרת היחידה ב-\(\mathcal{H}\) ורואים מה המרחק הכי גדול שמתקבל. נאמר ש-\(\phi\)\underline{חסום} אם הנורמה האופרטורית שלו סופית.
+
+\end{definition}
+\begin{lemma}
+פונקציונאל לינארי \(\phi:\mathcal{H}\to \mathbb{C}\) הינו רציף אם"ם הינו חסום.
+
+\end{lemma}
+\begin{proof}
+אם \(\phi\) חסום הרי הינו שלכל \(x,y \in \mathcal{H}\) מתקיים:
+$$\left\lvert  \phi(x)-\phi(y)  \right\rvert =\left\lvert  \phi(x-y)  \right\rvert \leq \left\lVert  \phi  \right\rVert _{\mathrm{op}}\cdot \lVert x-y \rVert $$
+ולכן \(\phi\) רציף(אפילו ליפשיץ).
+עבור הכיוון השני, אם \(\phi\) רציף הרי שקיים \(0< \delta\) כך שלכל \(\lVert x \rVert< \delta\) מתקיים \(\left\lvert  \phi(x)  \right\rvert<1\) ולכל \(\lVert x \rVert\leq \frac{\delta}{2}\) מתקיים \(\left\lvert  \phi(x)  \right\rvert<1\). 
+ולכן \(\lVert x \rVert\leq 1\) מתקיים \(\left\lvert  \phi(x)  \right\rvert< \frac{2}{\delta}\) ולכן \(\left\lVert  \phi  \right\rVert_{\mathrm{op}}\leq \frac{2}{\delta}\). נסמן:
+$$\mathcal{H}^{*}=\left\{  \phi \mid \mathcal{H}\to \mathbb{C}   \text{ is a bounded linear functional}\right\}$$
+המרחב הדואלי של \(\mathcal{H}\).
+
+\end{proof}
+\begin{theorem}[ההצגה של Frechet-Riesz]
+ההעתקה \(\Phi:\mathcal{H}\to \mathcal{H}^{*}\) שולחת כל \(h \in \mathcal{H}\) לפונקציונאל \(\phi_{h}(z)=\langle z,h \rangle\) אז העתקה זו הינה איזומורפיזם צמוד לינארי ואיזומטריה בין \(\mathcal{H} \cong \mathcal{H}^{*}\). כלומר \(\phi\) תתקיים:
+
+  \begin{enumerate}
+    \item משמר אדטיביות - לכל \(h_{1},h_{2} \in \mathcal{H}\) מתקיים \(\phi(h_{1}+h_{2})=\phi(h_{1})+\phi(h_{2})\). 
+
+
+    \item הומוגניות למחצה - לכל \(h \in \mathcal{H}\) ולכל \(\lambda \in \mathbb{C}\) מתקיים \(\phi\left( \lambda h \right)=\overline{\lambda}\phi(h)\). 
+
+
+    \item משמר נורמה - \(\left\lVert  \phi(h)  \right\rVert_{\mathrm{op}}=\left\lVert  \phi_{h}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\). 
+
+
+    \item הפיכה. 
+
+
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+ראשית מאקסיומת המכפלה הפנימית \(\Phi\) היא צמוד לינארית. יהי \(h \in \mathcal{H}\) כלשהו. מאי שיוויון קושי שוורץ נקבל שלכל \(x \in \mathcal{H}\) מתקיים:
+$$\left\lvert  \phi_{h}(x)  \right\rvert =\left\lvert  \langle x,h \rangle   \right\rvert \leq \lVert h \rVert \cdot \lVert x \rVert $$
+ומזה כבר מקבלים כי הנורמה האופרטורית חסומה - \(\left\lVert  \phi_{h}  \right\rVert\leq \lVert h \rVert\). כאשר למעשה יש שיוויון ממש. מספיק להראות כי קיים ווקטור אשר מקיים את השיוויון הזה. 
+$$\left\lvert  \phi_{n}(h)  \right\rvert =\lVert h \rVert ^{2}$$
+ולכן \(\left\lVert  \phi_{n}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\). בפרט \(\phi_{h}\in \mathcal{H}^{*}\) ו-\(\Phi\) הינה איזומטרייה. נותר להראות כי \(\Phi\) היא על. 
+יהי \(\ell \in \mathcal{H}^{*}\). נסמן \(v=\ker\left( \ell \right)\). אם \(v = \mathcal{H}\) אז \(\ell=0\) ו-\(\ell=\phi_{0}\) אחרת \(V\subsetneq \mathcal{H}\) ומאחר ש-\(\ell\) רציף(כי חסום) נסיק כי \(V= \ell^{-1}\left( \{ 0 \} \right)\) סגור.
+מהמסקנה ממשפט ההטלה נסיק כי \(V^{\perp}\neq \{ 0 \}\). ולכן קיים \(0\neq z \in V^{\perp}\). נסמן:
+$$w=\frac{\overline{\ell(z)}}{\lVert z \rVert ^{2}}\cdot z $$
+כעת נראה שניתן להציג את \(\ell\) על ידי \(\ell=\phi_{W}\). אכן לכל \(x \in \mathcal{H}\) ניתן לנסתכל על \(\ell(x)z-\ell(z)x\). אם נפעיל על זה את \(\ell\) נקבל:
+$$\ell\left( \ell(x)z-\ell(z)x \right)=\ell(x)\ell(z)-\ell(z)\ell(x)=0$$
+במילים אחרות:
+$$\ell(x)z-\ell(z)x \in \ker \left( \ell \right)=V$$
+ולכן מאחר ש-\(z \in V^{\perp}\) נסיק ש:
+$$0=\left\langle  \ell(x)z-\ell(z)x,z  \right\rangle =\ell(x)\cdot \lVert z \rVert ^{2}-\ell(z)\langle x,z \rangle $$
+וכעת:
+$$\ell(x)= \frac{1}{\lVert z \rVert ^{2}}\ell(z)\langle x,z \rangle =\langle x,w \rangle =\phi(x)$$
+
+\end{proof}
+\begin{corollary}
+עבור \(\mathcal{H}=L^{2}\left( \mu \right)\) קיבלנו שלכל פונקציונל לינארי \(\phi:\mathcal{H}\to \mathbb{C}\)  קיימת פונקציה \(h \in L^{2}\left( \mu \right)\) המקיימת:
+$$\forall f \in L^{2}\quad \phi(f)=\int f\cdot h \;\mathrm{d} \mu $$
+
+\end{corollary}
+\subsection{רציפות בהחלט וסינגולאריות}
+
+\begin{reminder}
+בהנתן מידה \(\mu\) על \(X\) ופונקציה מדידה \(h:X\to\left[ 0,\infty \right]\) הגדרנו מידה \(\nu\) עד ידי \(\mathrm{d}\nu=h\mathrm{d}\mu\) (כלומר \(\nu(A)=\int _{A}h \;\mathrm{d} \mu\)) כאשר הראנו שמתקיים במקרה זה:
+$$\mu(E)=0\implies \nu(E)=0$$
+לכל \(E \in \mathcal{A}\) מדידה.
+
+\end{reminder}
+\begin{definition}[רציפות בהחלט]
+נאמר ש-\(\mu\ll \nu\)  ונאמר ש-\(\mu\)\underline{רציפה בהחלט} ביחס ל-\(\nu\) אם:
+$$\nu(A)=0\implies \mu(A)=0$$
+
+\end{definition}
+\begin{example}
+נניח כי \(\mu\) מידה וכי \(f:X\to \left[ 0,\infty \right]\) פונקציה מידה אי שלילית. נזכור כי הפונקציה \(\mu_{f}(A)=\int _{A}f \;\mathrm{d} \mu\) מגדיר מידה,
+וכן מתקיים:
+$$\mu=0\implies\int _{A}f \;\mathrm{d} \mu=0  $$
+ולכן \(\mu_{f}\ll \mu\). אם בנוסף \(\mu_{f}\ll \mu\) נקבל כי \(\mu \sim \mu_{f}\). בחזרה לדוגמא, אם נדרוש:
+$$\mu_{f}\left( f^{-1}\left( \left( 0,\infty \right] \right) \right)=0\implies \mu_{f}\sim \mu$$
+
+\end{example}
+\begin{proposition}
+אם \(\mu\) סופית אז \(\mu\ll \nu\) שקול לכך שלכל \(\varepsilon>0\) קיים \(\delta> 0\) כך ש-\(\nu(A)<\varepsilon\) גורר \(\mu(A)<\delta\).
+
+\end{proposition}
+\begin{proof}
+נניח שלכל \(\varepsilon>0\) קיים \(\delta> 0\) כך ש-\(\nu(A)<\varepsilon\) גורר \(\mu(A)<\delta\). ונניח כי \(\nu(A)=0\) נקבל:
+$$\forall \delta>0\quad \nu(A)<\delta\implies \forall\varepsilon>0\quad  \mu(A)<\varepsilon\implies \mu(A)=0$$
+נניח \(\mu\ll \nu\). נניח בשלילה שקיים \(\varepsilon>0\) כך שלכל \(n \in \mathbb{N}\) יש \(A_{n}\) עם \(\nu(A_{n})<2^{-n}\) כך ש-\(\mu(A_{n})\geq \varepsilon\). ולפי בורל קנטלי:
+$$\nu(A)=\nu\left( \bigcap_{k=1}^{\infty}\bigcup_{n=k}^{\infty} A_{n} \right)$$
+כמו כן מתקיים:
+$$\mu\left( \bigcap_{m=1}^{\infty}\bigcup_{n=m}^{\infty}A_{n} \right)=\mu\left( \operatorname*{lim}\operatorname*{sup}A_{n} \right)\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})\geq\epsilon $$
+
+\end{proof}
+\begin{definition}[מידה סינגולארית]
+נאמר ש-\(\mu \perp \nu\) אם קיימות \(A,B\) כך ש-\(A\sqcup B\) ו-\(\mu(A)=0\) וגם \(\nu(B)=0\).
+
+\end{definition}
+\begin{example}
+  \begin{enumerate}
+    \item המידה \(\delta_{X}\) ומידת לבג. 
+
+
+    \item אם \(fg=0\) כמעט תמיד אז \(\mu_{f}\perp \mu_{g}\). 
+
+
+    \item המידה \(\nu_{\frac{1}{3}}\) שנבנת על קבוצת קנטור \(\frac{1}{3}\) סינגולאית ביחס ל-Leb וגם ביחס ל-\(\delta_{x}\) לכל \(x \in \mathbb{R}\). 
+
+
+    \item המידה \(\mu=\mathrm{Leb}+\delta_{0}\) איננה סינגולרית ביחס ל-Leb ואיננה רציפה בהחלט ביחס ל-Leb. 
+
+
+  \end{enumerate}
+\end{example}
+\begin{proposition}
+אם \(\mu\ll \nu\) וגם \(\mu \perp \nu\) אזי \(\mu = 0\). כלומר אי אפשר להיות שתי הדברים האלה חוץ מעבור המידה הטריוויאלית.
+
+\end{proposition}
+\begin{proof}
+מתקיים \(\mu(B)=0\) כי \(\nu(0)=0\) אבל גם \(\mu(A)=0\) ולכן \(\mu(X)=0\).
+
+\end{proof}
+\begin{corollary}
+המידה \(\delta_{X}\) לא נתונה על ידי \(\lambda_{F}\) עבור איזושהי \(f\) מדידה.
+
+\end{corollary}
+\begin{proposition}
+יהי \(\left( X,\mathcal{M} \right)\) מרחב מידה, ו-\(\mu,\nu\) מדידות. אזי \(\mu \perp \nu\) אם"ם:
+$$ \forall\varepsilon> 0 \quad \exists A \quad  \mu(A)<\varepsilon \quad \nu(A^{c})<\varepsilon$$
+
+\end{proposition}
+\begin{proof}
+אם \(\mu \perp \nu\) אז קיימת קבוצה \(A\) כך ש-\(\mu(A)=0\) ו-\(\nu(A^{c})=0\).
+נוכיח כעת את הכיוון השני. עבור \(\varepsilon=2^{-n}\) נבחר \(A_{n}\). נגדיר:
+$$A=\limsup_{ n \to \infty } (A_{n})$$
+וכן נקבל \(\nu(A)=0\). מצד שני:
+$$\nu\left( A^{c}  \right)=\nu\left( \liminf_{ n \to \infty } A_{n} \right)\leq \liminf_{ n \to \infty } \nu(A_{n})=0$$
+
+\end{proof}
+\begin{reminder}
+המידה \(\lambda\) נקראת \(\sigma\) סופית על \(\left( X,\mathcal{A} \right)\) אם \(X=\bigcup_{n}A_{n}\) עם \(\lambda(A_{n})<\infty\).
+
+\end{reminder}
+\begin{lemma}
+תהי \(\mu\) מידה \(\sigma\) סופית על \(\left( X,\mathcal{A} \right)\) אזי קיימת מידה סופית \(\nu\) כך ש-\(\nu \sim \mu\)(המידות שקולות - כלומר גם מתקיים \(\nu\ll \mu\) וגם \(\mu\ll \nu\)).
+
+\end{lemma}
+\begin{proof}
+יהי \(\mu\) מידה \(\sigma\) סופית, עם \(X=\bigcup_{n=1}^{\infty}A_{n}\) כאשר \(\mu(A_{n})\ll \infty\) לכל \(n\). נגדיר:
+$$w(x)=\sum_{n=1}^{\infty}\frac{2^{-n}}{1+\mu(A_{n})}\mathbb{1} _{A_{n}}(x).$$
+כאשר כל גורם הוא חיובי וחסום על ידי \(2^{-n}\) . לכן הטור מתכנס ממבחן ההשוואה לטורים אי שליליים. לכן \(0<w(x)\leq 1\) לכל \(x \in X\).
+נגדיר פונקציה סופית \(\nu\) על ידי:
+$$d\nu=w\,d\mu\quad(\nu(E)=\int_{E}w\,d\mu\,\mathrm{for~all}\,\,E\in{\mathcal{A}}).$$
+זו תהיה מידה סופית כיוון שמתקיים:
+$$\nu(X)=\int_{X}w\,d\mu=\sum_{n=1}^{\infty}{\frac{2^{-n}}{1+\mu(A_{n})}}\mu(A_{n})\leq\sum_{n=1}^{\infty}2^{-n}=1$$
+נשים לב כעת לשקילות:
+- אם \(\mu(E)=0\) אז \(\nu(E)=\int _{E}w \;\mathrm{d} \mu=0\) ולכן \(\nu\ll \mu\).
+- אם \(\nu(E)=0\) כיוון ש-\(w(x)> 0\) לכל \(x\) האינטגרל \(\int _{E}w \;\mathrm{d} \mu=0\) גורר \(\mu(E)=0\) ולכן \(\mu\ll \nu\).
+
+\end{proof}
+\begin{corollary}
+מההוכחה ראינו כי אם \(\mu\) מידה \(\sigma\) -סופית על \(\left( X,\mathcal{A} \right)\) אזי קיימת פונקציה מדידה \(w:X\to \mathbb{R}\) עם \(0<w\leq 1\) עבורה המידה \(\mu'=w\mathrm{d}\mu\) הינה מידה סופית ו-\(\mu' \sim \mu\).
+
+\end{corollary}
+\begin{theorem}[Lebesgue-Radon-Nikodym]
+אם \(\mu\) ו-\(\nu\) מידות \(\sigma\) סופיות על \(\left( X,\mathcal{A} \right)\) אזי:
+
+  \begin{enumerate}
+    \item קיים צמד מידות יחיד \(\nu_{a},\nu_{s}\) המקיים: 
+    \item \(\nu=\nu_{a}+\nu_{s}\)
+    \item \(\nu_{a}\ll \mu\)
+    \item \(\nu_{s} \perp \mu\)
+
+
+    \item קיים פונקציה מדידה \(h:X\to\left[ 0,\infty \right)\) אשר נקראת הנגזרת רדון ניקודין ומקיימת: 
+
+
+    \item \(\mathrm{d}\nu_{a}=h\mathrm{d}\mu\)
+    \item אם \(X=\bigcup_{n}A_{n}\) כך ש-\(\nu(A_{n})<\infty\) לכל \(n\) נקבל \(h\cdot \mathbb{1}_{A_{n}}\in L^{1}\) כלומר פונקציה ממידה סופית.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item ראשית נעשה רדוקציה למקרה של מידה סופית. נניח \(\nu\) היא \(\sigma\) סופית. לכן ניתן לכתוב \(\nu=\sum_{n}\nu_{n}\) כאשר כל \(\nu_{n}\) היא סופית. כעת: 
+$$\nu_{a}=\sum_{n} \nu_{n,a}\qquad \nu_{s}=\sum_{n}\nu_{n,s}$$
+ולכן אם הטענה נכונה עבור מידות סופית תהיה נכונה עבור מידות \(\sigma\) סופיות ומספיק להוכיח עבור מקרה זה.
+
+
+    \item מהלמה קיים \(w:X\to (0,1]\) כך ש-\(w\mathrm{d}\mu\) היא סופית ושקולה ל-\(\mu\). נגדיר כעת \(\lambda=\nu+w\mathrm{d}\mu\) כך ש-\(\lambda\) תהיה מידה סופית. מתקיים בפרט: 
+$$\nu(E)\leq\lambda(E),\quad\mu(E)\leq\frac{1}{\operatorname*{inf}w}\lambda(E).$$
+
+
+  \end{enumerate}
+3.תהי \(f \in L^{2}\left( \lambda \right)\). אזי: 
+$$\left\lvert  \int f \;\mathrm{d} \nu   \right\rvert \leq \int \lvert f \rvert  \;\mathrm{d} \nu \leq \int \lvert f \rvert  \;\mathrm{d} \lambda =\int |f|\cdot 1 \;\mathrm{d} \lambda \overset{*}{\leq}  \left[ \int \lvert f \rvert ^{2} \;\mathrm{d} \lambda  \right]^{1/2}\cdot\left[ \int 1 \;\mathrm{d} \lambda  \right]^{1/2}=\left( \lambda(x) \right)^{1/2}\cdot \lVert f \rVert _{2} < \infty$$
+כאשר המעבר ב-\((*)\) תהיה שימוש בקושי שוורץ עם המכפלה של \(|f|\cdot 1\). 
+
+  \begin{enumerate}
+    \item נגדיר \(\phi:L^{2}\left( \lambda \right)\to \mathbb{C}\) על ידי \(\phi(f)=\int f \;\mathrm{d} \nu\). מאי שיוויון קושי שוורץ נקבל: 
+$$|\phi(f)|\leq\int|f|\,d\nu\leq\int|f|\,d\lambda\leq\sqrt{\lambda(X)}||f||$$
+ולכן חסום על \(L^{2}\left( \lambda \right)\). נזכור כי במקרה זה \(\phi(f)\) לפי המסקנה ממשפט ההצגה של פרשה-ריס:
+$$\left( \triangle \right) \qquad \int f \;\mathrm{d} \nu = \int f \cdot g \;\mathrm{d} \lambda $$
+
+
+    \item נשים לב שלכל \(E\in \mathcal{A}\) עם \(\lambda(E)>0\) מתקיים: 
+$$0\leq\overbrace{ \frac{1}{\lambda(E)}\cdot \int _{E}g \;\mathrm{d} \lambda }^{(1) } = \frac{\nu(E)}{\lambda(E)} \leq 1$$
+כאשר \((1)\) זה למעשה הממוצע של \(g\) ביחס ל-\(\lambda\) על \(E\). ולכן מלמה שהוכחנו מזמן העובדה הנ"ל גוררת ש-\(0\leq g \leq 1\) מתקיים \(\lambda\) כמעט תמיד.
+
+
+    \item נסמן: 
+$$A=\left\{  x\mid 0\leq g(x)<1  \right\}\qquad B=\left\{  x\mid g(x)=1  \right\}$$
+וכן נגדיר \(\nu_{a}=\nu|_{A}\) ו-\(\nu_{s}=\nu|_{B}\).
+
+
+  \end{enumerate}
+7.כעת נרצה להוכיח \(\nu_{s}\perp \mu\). מספיק להראות כי \(\mu(B)=0\) כי כעת \(B \sqcup B^{c}\) הפירוק המתאים. נשים לב כי ניתן לכתוב את \(\triangle\) בצורה הבאה: 
+$$\int f \;\mathrm{d} \nu =\int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \nu+\int f\cdot g\cdot w \;\mathrm{d} \mu    $$
+ולכן:
+$$(*)\quad \int f\cdot g\cdot w \;\mathrm{d} \mu = \int f(1-g) \;\mathrm{d} \nu  $$
+על ידי הצבה של \(f=\mathbb{1}_{B}\) ב-\((*)\) נקבל ש:
+$$\int_{B} \cancelto{ 1 }{ g } \;\mathrm{d} \mu = \int_{B} \cancelto{ 0 }{ (1-g) } \;\mathrm{d} \nu  =0$$
+ולכן \(\mu(B)=0\) כי \(0<w\) תמיד ולכן \(\nu_{s}\perp \mu\) (עם \(B\cap B^{c}=\varnothing\) הפירוק המתאים).
+
+  \begin{enumerate}
+    \item נרצה כעת להראות כי \(\nu_{a}\ll \mu\). נגדיר את הסדרה: 
+$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$
+נציב ב-\((*)\) ונקבל:
+$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$
+וכן:
+$$\int_{A}\left(1+g+\cdots+g^{n}\right)\cdot g\cdot w\,d\mu=\int_{A}\left(1+g+\cdots+g^{n}\right)\left(1-g\right)d\nu.$$
+כאשר ניתן לפשט את אגף ימין בעזרת סכום טלסקופי ולקבל:
+$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)\left(1-g\right)d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}$$
+כאשר ניתן לפשט את אגף שמאל על ידי זיהוי טור גאומטרי:
+$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)g\cdot w\,d\mu=\int_{A}\left(g+g^{2}+\cdots+g^{n+1}\right)w\,d\mu$$
+אם ניקח את הגבול \(n\to \infty\) נקבל עבור אגף ימין כי \(g^{n+1}\to 0\) ולכן:
+$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}=\int_{A}1\,d\nu_{a}=\nu_{a}(E).$$
+ועבור אגף שמאל נקבל:
+$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1+g+\cdots+g^{n}\right)g\cdot w\,d\mu=\int_{A}{\frac{g}{1-g}}\cdot w\,d\mu.$$
+
+
+    \item אם נשוואה את שתי האגפים נקבל: 
+$$\nu_{a}(E)=\int_{E}\underbrace{\frac{g\cdot w}{1-g}}_{h}\,d\mu\quad\mathrm{for~all~}E\in\mathcal{A}.$$
+
+
+    \item מאחר ש-\(\nu_{a}\) מידה סופית נסיק ש-\(h \in L^{1}\left( \mu \right)\). 
+
+
+  \end{enumerate}
+\end{proof}
+\section{גזירות}
+
+\subsection{גזירה של מידות רדון ב-ℝᵈ}
+
+מעתה נחשוב על מידות רדון על \(\mathbb{R}^{d}\)(בפרט סופיות על כל קבוצה קומפקטית).
+
+\begin{definition}
+בהנתן שתי מידות רדון \(\mu,\lambda\) על \(\mathbb{R}^{d}\) נגדיר את הנגזרת הנקודתית העליונה/התחתונה של \(\mu\) ביחס ל-\(\lambda\) על ידי:
+$$\overline{D} \left( \mu,\lambda,x \right)=\overline{\lim_{ r\searrow 0 } } \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}$$
+כש-\(B_{r}(x)\) כדור אוקלידי סגור ברדיוס \(R\) סביב \(x\). באופן דומה עבור נגזרת התחתונה:
+$$\underline{D}=\underline{\lim_{ r \searrow 0 } }  \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}$$
+הנגזרת, כשקיימת תסומן ב-\(D\left( \mu,\lambda,x \right)\) כש-\(\overline{D}=\underline{D}\)
+
+\end{definition}
+\begin{remark}
+נגדיר \(\frac{0}{0}=0\).
+
+\end{remark}
+\begin{remark}
+הנגזרות \(\overline{D},\underline{D}\) מדידות.
+
+\end{remark}
+\begin{example}
+עבור \(\lambda=\mathrm{Leb}_{\mathbb{R}}\) ו-\(0\leq f \in C\left( \mathbb{R} \right)\). ניקח \(\mathrm{d}\mu=f\mathrm{d}\lambda\) אזי:
+$$D\left( \mu,\lambda,x \right)=f(x)$$
+
+\end{example}
+\subsection{משפט הכיסוי של בסיקוביץ}
+
+\begin{definition}[כיסוי בסיקוביץ']
+כיסוי \(\mathcal{F}\) של קבוצה \(A\subseteq \mathbb{R}^{d}\) נקרא כיסוי בסיקוביץ'(Besicovitch) אם \(\mathcal{F}\) מורכב מכדורים (אוקלידים) סגורים ולכל \(x \in A\) קיים \(0<r\) כך ש-\(B_{r}(x)\in \mathcal{F}\).
+
+\end{definition}
+\begin{theorem}[הכיסוי של בסיקוביץ]
+קיימים קבועים אוניברסליים \(P=P(d)\) ו-\(Q=Q(d)\) עבורם לכל \(A\subseteq \mathbb{R}^{d}\) קבוצה חסומה וכיסוי בסיקוביץ \(\mathcal{F}\) של A. קיים תת כיסוי בן מנייה \(\mathcal{E}\subseteq \mathcal{F}\) מגובה קטן או שווה ל-\(P\). כלומר:
+$$\mathbb{1} _{A}\leq \sum_{B \in \mathcal{E} }\mathbb{1} _{B}\leq P$$
+יתר על כן ניתן לפצל את \(\mathcal{E}\) לאיחוד של \(m\) תתי אוספים:
+$$\mathcal{E} =\bigcup_{i=1}^{m}\mathcal{E_{i}} $$
+כך שכל \(\mathcal{E}_{i}\) מכיל אוסף של כדורים זרים בזוגות וכן \(m\leq Q\).
+
+\end{theorem}
+\begin{remark}
+אינטואיטבית, המשפט אומר כי אם יש לנו אוסף של כדורים סגורים שמכסים את קבוצה \(A\) במרחב \(d\) מימדי, אפשר לבחור תת אוסף "דליל" יותר כך שעדיין מכסה את \(A\) ויש לו את התכונות הבאות:
+
+  \begin{enumerate}
+    \item תת כיסוי בן מנייה - צריך רק מספר בין מנייה של כדורים כדי לכסות את \(A\). 
+
+
+    \item חפיפה חסומה - אומנם יש חפיפה בין המעגלים אבל הוא חסום - כל נקודה במרחב מכוסה על ידי לכל היותר \(P\) מהכדורים, כאשר \(P\) תלוי רק ב-\(d\). 
+
+
+    \item פירוק למשפחות זרות - ניתן לחלק את הכדורים שנבחרו ל-\(Q\) קבוצות כך שהגדורים זרים בזוגות, כאשר \(Q\) תלוי רק ב-\(d\). 
+
+
+  \end{enumerate}
+\end{remark}
+\begin{lemma}
+יהיו \(a,b \in \mathbb{R}^{d}\) וקטורים כלשהם המקיימים
+$$0<\lVert b \rVert <\lVert a-b \rVert \text{ and }0<\lVert a \rVert <\lVert a - b\rVert $$
+אזי הזווית בין \(a\) ל-\(b\) גדולה או שווה מ-\(\frac{\pi}{3}\). במילים אחרות:
+$$\left\lVert  \frac{a}{\lVert a \rVert }-\frac{b}{\lVert b \rVert }  \right\rVert \geq 1$$
+
+\end{lemma}
+\begin{proof}
+כל שני וקטורים ב-\(\mathbb{R}^{d}\) חיים במישור משותף ולכן מספיק להוכיח את הטענה עבור \(\mathbb{R}^{2}\). נסמן ב-\(L\) את האנך שחוצה את הקטע \([0,a]\). 
+מאחר ש:
+$$0<\lVert b \rVert <\lVert a-b \rVert $$
+הרי ש-\(b\) נמצא בחצי המישור ששפתו \(L\) ומכיל את 0. מצד שני, מאחר ש-\(\lVert a \rVert<\lVert a-b \rVert\) הרי ש-\(b \not \in B_{\lVert a \rVert}(a)\) ובפרט \(b \not \in \triangle\)(\(b\) לא במשולש).
+
+\end{proof}
+\begin{proposition}[תכנות בסיקוביץ החלשה]
+קיים מספר טבעי \(N = N(d)\) (התלוי רק בממד המרחב \(d\)) כך שלכל אוסף של כדורים סגורים \(B_{r_1}(x_1), B_{r_2}(x_2), ..., B_{r_k}(x_k)\) המקיימים את שני התנאים הבאים:
+
+  \begin{enumerate}
+    \item \textbf{חיתוך לא ריק:}\(\bigcap_{i=1}^{k} B_{r_i}(x_i) \neq \varnothing\). כלומר, יש נקודה משותפת לכל הכדורים באוסף. 
+
+
+    \item \textbf{אי-הכלה:}\(\forall i \neq j, \quad x_i \notin B_{r_j}(x_j)\). כלומר, מרכזו של אף כדור אינו נמצא בתוך כדור אחר באוסף. 
+אזי, מספר הכדורים באוסף חסום על ידי \(N\), כלומר \(k \leq N\).
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+בהנתן אוסף כדורים כנ"ל נוכל להעתיקו ע"י הזזה כך ש-\(0 \in \bigcap_{i=1}^{k} B_{r_{i}}(x_{i})\).
+מאחר ש-\(x_{i}\not \in B_{r}(x_{j})\) לכל \(i \neq j\) הרי ש:
+$$\lVert x_{i}-x_{j} \rVert > r_{j}\geq \lVert x_{j} \rVert > 0$$
+ולכן \(x_{i},x_{j}\) מקיימים את תנאי הלמה. ולכן:
+$$\forall i\neq j\qquad \left\lVert  \frac{x_{i}}{\lVert x_{j} \rVert }-\frac{x_{j}}{\lVert x_{j} \rVert }  \right\rVert > 0$$
+מקופקטיות \(S^{d-1}\) נסיק שקיים \(N\) שהינו המספר המקסימלי של נקודות ב-\(S^{d-1}\) המרוחקות זו מזו מרחק 1.
+
+\end{proof}
+\begin{remark}
+כבר כאן אפשר לראות שיש משהו מיחוד בכדורים אוקלידיים, כי למשל אם ניקח אליפסות צרות כרצונינו נוכל לייצר זרים גדולים כרצונינו.
+
+\end{remark}
+כעת נוכל להוכיח את המשפט
+
+\begin{proof}
+זהו הוכחה קוסטרוקטיבית. נבנה תת כיסוי אשר יקיים את הנדרש.
+
+  \begin{enumerate}
+    \item לכל נקודה \(x\) בקבוצה המקורית בוחרים כדור אחד מהוסף המקורי שמכיל את \(x\). נסמן את הרדיוס של הכדור הזה ב-\(r(x)\). 
+
+
+    \item נבנה סדרת כדורים באופן הבא: 
+
+
+    \item נמצא את הרדיוס הגדול ביותר, ונקרא לו \(M_{1}\), כלומר:
+$$0<M_{1}=\sup \left\{  r(x)\mid x \in A  \right\}$$
+    \item אם \(M_{1}=\infty\) סיימנו, אחרת נניח \(M_{1}< \infty\). 
+    \item כעת נבחר נקודה \(x_1\) ב-\(A\) שהכדור שנבחר לה יש רדיוס קרוב ל-\(M_1\) (בין \(\frac{M_1}{2}\) ל-\(M_1\)). זה נותן לנו את הכדור הראשון.
+    \item כעת, מסתכלים על החלק של \(A\) שלא מכוסה על ידי הכדורים שבחרנו עד כה. מוצאים את הרדיוס הגדול ביותר בין הנקודות הנותרות (נקרא לו \(M_2\)). כלומר:
+$$0<M_{2}=\sup \left\{  r(x)\mid x \in A \setminus  \bigcup_{i=1}^{k} B_{r(x_{i})}(x_{i})  \right\}$$
+    \item בוחרים נקודה \(x_2\) בחלק הלא מכוסה הזה שהכדור שנבחר לה יש רדיוס קרוב ל-\(M_2\) (בין \(\frac{M_2}{2}\) ל-\(M_2\)).
+    \item ממשיכים בתהליך הזה. מקבלים סדרת כדורים.
+
+
+    \item אם לעולם לא נכסה את \(A\) לחלוטין במספר סופי של כדורים, זה אומר שאנחנו יוצרים סדרה אינסופית של כדורים עם רדיוסים הולכים וקטנים (\(M_\ell\) שואף ל-0). זה מבטיח שבסופו של דבר, כל נקודה ב-\(A\) תכוסה על ידי כדור כלשהו בסדרה. 
+
+
+    \item סדרת הכדורים שבנינו היא תת-האוסף ה"דליל" שאנחנו מחפשים. נקרא לאוסף הזה \(\mathcal{E}\). 
+
+
+    \item להראות שהחפיפה חסומה. נתבונן בכל אוסף של כדורים מ-\(\mathcal{E}\) שיש להם חיתוך לא ריק (כולם חופפים בנקודה כלשהי). אנחנו רוצים להראות שלא יכולים להיות "יותר מדי" כדורים חופפים כאלה. בשביל זה נשתמש בשתי טענות(אשר ההוכחה הריגורוזית שלהם תופיע אחרי ההוכחה): 
+
+
+    \item לכל "שלב" בבנייה (שבו בחרנו כדורים עם רדיוסים קרובים ל-\(M_\ell\)), לא יכולים להיות יותר מדי כדורים באוסף החופף שלנו מאותו שלב. המספר חסום על ידי \(16^d\) (כאשר \(d\) הוא הממד). זה מוכח באמצעות ארגומנט נפח: אם הכדורים חופפים והמרכזים שלהם מופרדים במרחק מסוים, אפשר לארוז רק מספר מוגבל מהם בתוך כדור גדול יותר.
+    \item לא יכולים להיות יותר מדי "שלבים" שתורמים כדורים לאוסף החופף שלנו. מספר זה חסום על ידי \(N(d)\), מספר שתלוי רק בממד. זה משתמש ב"תכונת בסיקוביץ' החלשה" שהוכחנו קודם.
+
+
+    \item הכפלת שני החסמים הללו (\(16^d\) ו-\(N(d)\)) נותנת לנו חסם \(P(d)\) על המספר הכולל של הכדורים החופפים. 
+
+
+    \item נרצה כעת להראות שאפשר לחלק את הכדורים שנבחרו למשפחות זרות, באופן הבא: 
+
+
+    \item מסדרים את הכדורים שנבחרו לפי רדיוס יורד.    
+    \item המשפחה הראשונה מכילה את הכדור הראשון בסידור. לאחר מכן, מוסיפים את הכדור הראשון שלא חותך את הכדור הראשון. ממשיכים בתהליך הזה.
+    \item אז, מתחילים משפחה שנייה עם הכדור הראשון שנותר מהרשימה המסודרת. מוסיפים למשפחה הזו את הכדור הראשון שנותר שלא חותך אף אחד מהכדורים שכבר נמצאים במשפחה השנייה.
+    \item חוזרים על התהליך הזה עד שכל הכדורים משויכים למשפחה.
+
+
+    \item כעת נוכיח שכל נקודה \(x \in A\) שייכת לכל היותר \(Q(d)\) כדורים מתוך \(\mathcal{E}\), כאשר \(Q(d)\) תלוי רק ב-\(d\). נניח בשלילה שקיימת נקודה \(x\) השייכת ל-\(Q(d)+1\) כדורים שונים \(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\). ללא הגבלת הכלליות נניח \(r_{i_1} \ge r_{i_2} \ge \dots \ge r_{i_{Q(d)+1}}\). מכיוון שהכדורים באותו אוסף זרים, מרכזי הכדורים \(x_{i_1},...,x_{i_{Q(d)+1}}\) שייכים לכדור \(B_{2r_{i_1}}(x)\). כמו כן, הכדורים \(B_{r_{i_{Q(d)+1}}/2}(x_{i_j})\) זרים ומוכלים ב \(B_{2r_{i_1}}(x)\). 
+נפח של כדור ב \(\mathbb{R}^d\) פרופורציוני ל \(r^d\). לכן, מספר הכדורים הזרים חסום על ידי
+$$ \frac{(2r_{i_1})^d}{(r_{i_{Q(d)+1}}/2)^d} = 4^d (\frac{r_{i_1}}{r_{i_{Q(d)+1}}})^d $$
+אולם, מכיוון שכל הכדורים \(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\) מכילים את \(x\), ורדיוסיהם לא קטנים מ \(r_{i_{Q(d)+1}}\), נקבל סתירה אם נבחר \(Q(d)\) גדול מספיק. למעשה, ניתן לבחור \(Q(d) = C^d\) עבור קבוע \(C\) כלשהו.
+
+
+  \end{enumerate}
+\end{proof}
+כעת נוכיח את השתי טענות אשר השתמשנו בהם בהוכחה
+
+\begin{lemma}
+אנו רוצים להראות שאם ניקח אוסף של כדורים \(B_{i_1}, \dots, B_{i_m} \in \mathcal{E}\) בעלי חיתוך לא ריק, אז \(m \leq P\) עבור \(P(d)\) התלוי רק ב-\(d\). 
+
+\end{lemma}
+\begin{proof}
+נסמן \(I = \{i_1, \dots, i_m\}\) ו-\(J_\ell = \mathbb{N} \cap [k_{\ell-1}+1, k_\ell]\).
+יהי \(i_0 = \min(I \cap J_\ell)\). לכל \(i_1', i_2' \in I \cap J_\ell\) כך ש-\(i_1' < i_2'\), מהבנייה \(x_{i_2'} \notin B_{r(x_{i_1'})}(x_{i_1'})\). כלומר, \(||x_{i_2'} - x_{i_1'}|| > r(x_{i_1'})\).
+מכיוון ש-\(B_{r(x_{i_1')}}(x_{i_1'}) \cap B_{r(x_{i_2'})}(x_{i_2'}) \neq \varnothing\), קיים \(z\) כך ש-\(||z - x_{i_1'}|| \leq r(x_{i_1'})\) וגם \(||z - x_{i_2'}|| \leq r(x_{i_2'})\). לפי אי שוויון המשולש:
+$$ ||x_{i_2'} - x_{i_1'}|| \le ||x_{i_2'} - z|| + ||z - x_{i_1'}|| \le r(x_{i_2'}) + r(x_{i_1'}) $$
+מכיוון ש-\(r(x_{i_1'}), r(x_{i_2'}) \le M_\ell\) וגם \(\frac{M_\ell}{2}< r_{i_{1}'}\) נקבל  \\
+$$ \frac{M_\ell}{2} < r_{i_1'} < ||x_{i_2'} - x_{i_1'}|| \le 2M_\ell $$
+כמו כן, כל הכדורים \(B_{r(x_i)}(x_i)\) כאשר \(i \in I \cap J_\ell\) מכילים את הכדור \(B_{M_\ell/4}(z)\). ולכן, הכדורים \(B_{r(x_i)/2}(x_i)\) זרים ומכילים את הכדורים \(B_{M_\ell/8}(x_i)\). כל הכדורים \(B_{M_\ell/8}(x_i)\) מוכלים בכדור \(B_{2M_\ell}(x_{i_0})\).
+נפח של כדור ב-\(\mathbb{R}^d\) פרופורציוני ל-\(r^d\). לכן, מספר הכדורים \(B_{M_\ell/8}(x_i)\) המוכלים ב-\(B_{2M_\ell}(x_{i_0})\) חסום על ידי:
+$$ \frac{(2M_\ell)^d}{(M_\ell/8)^d} = 16^d $$
+ולכן \(|I \cap J_\ell| \leq 16^d\).
+
+\end{proof}
+\begin{lemma}
+מתקיים מתכונת בסיקוביץ החלשה:
+$$\#\left\{  \ell \mid I\cap J_{\ell}\neq \varnothing   \right\}\leq N(d)$$
+
+\end{lemma}
+\begin{proof}
+ניקח \(n_1, \dots, n_s \in I\) כך שלכל אינדקס \(\ell\), אם \(n_i, n_j \in I \cap J_\ell\) אז \(i=j\). כלומר, לכל שלב \(\ell\) יש לכל היותר כדור אחד מ-\(I\). נניח \(n_1 < n_2 < \dots < n_s\). מהבנייה \(x_{n_j} \notin B_{r(x_{n_i})}(x_{n_i})\) לכל \(i<j\). לכן \(||x_{n_j} - x_{n_i}|| > r(x_{n_i})\).
+מכיוון ש \(r_{n_{j}}\leq \frac{M_{\ell_{n_{i}}}}{2}<r_{n_{i}}\) נקבל \(||x_{n_j} - x_{n_i}|| > r_{n_i} > \frac{M_{\ell_{n_i}}}{2} \ge r_{n_j}\)
+לכן \(||x_{n_j} - x_{n_i}|| > r_{n_j}\) וגם \(||x_{n_j} - x_{n_i}|| > r_{n_i}\).
+לכן הוקטורים \(x_{n_i}\) מקיימים את תנאי הלמה שהוכחנו קודם, ולכן \(\left\| \frac{x_{n_i}}{||x_{n_i}||} - \frac{x_{n_j}}{||x_{n_j}||} \right\| \geq 1\).
+כעת, כל הוקטורים \(\frac{x_{n_i}}{||x_{n_i}||}\) נמצאים על הספירה \(S^{d-1}\), והמרחק בין כל שניים מהם הוא לפחות 1. מתכונת בסיקוביץ' החלשה, מספר הנקודות על הספירה במרחק לפחות 1 זו מזו חסום על ידי \(N(d)\). לכן \(s \leq N(d)\).
+
+\end{proof}
+\begin{proposition}
+תהי \(\mu\) מידת רדון על \(\mathbb{R}^d\). תהי \(A \subseteq \mathbb{R}^d\) קבוצה מדידה וחסומה. לכל כיסוי בסיקוביץ' \(\mathcal{F}\) של \(A\), קיים תת-אוסף סופי \(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{F}\) המורכב מכדורים זרים בזוגות ומקיים:
+$$ \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) \geq \frac{1}{2Q} \mu(A) $$
+כאשר \(Q = Q(d)\) הוא הקבוע ממשפט הכיסוי של בסיקוביץ' (המספר המקסימלי של משפחות זרות שאליהן ניתן לחלק את תת-הכיסוי).
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item ממשפט הכיסוי של בסיקוביץ', עבור הכיסוי \(\mathcal{F}\) של \(A\), קיים תת-כיסוי בן מנייה \(\mathcal{E} \subseteq \mathcal{F}\) שניתן לחלקו ל-\(Q\) אוספים של כדורים זרים בזוגות: 
+$$ \mathcal{E} = \bigcup_{i=1}^{Q} \mathcal{E}_i $$
+כאשר כל \(\mathcal{E}_i\) מכיל כדורים זרים בזוגות.
+
+
+    \item מכיוון ש-\(\mathcal{E}\) הוא כיסוי של \(A\), מתקיים: 
+$$ A \subseteq \bigcup_{B \in \mathcal{E}} B = \bigcup_{i=1}^{Q} \bigcup_{B \in \mathcal{E}_i} B $$
+
+
+    \item מכיוון ש-\(\mu\) היא מידה, מתקיים: 
+$$ \mu(A) \leq \mu\left( \bigcup_{i=1}^{Q} \bigcup_{B \in \mathcal{E}_i} B \right) \leq \sum_{i=1}^{Q} \mu\left( \bigcup_{B \in \mathcal{E}_i} B \right) $$
+
+
+    \item מכיוון שהכדורים בתוך כל \(\mathcal{E}_i\) זרים בזוגות, מתקיים: 
+$$ \mu\left( \bigcup_{B \in \mathcal{E}_i} B \right) = \sum_{B \in \mathcal{E}_i} \mu(B) $$
+
+
+    \item לכן: 
+$$ \mu(A) \leq \sum_{i=1}^{Q} \sum_{B \in \mathcal{E}_i} \mu(B) $$
+
+
+    \item מכאן נובע שקיים לפחות \(i\) אחד, נניח \(i_0\), כך ש: 
+$$ \sum_{B \in \mathcal{E}_{i_0}} \mu(B) \geq \frac{1}{Q} \mu(A) $$
+זאת מכיוון שאם זה לא היה נכון, אז סכום כל הסכומים היה קטן מ-\(\mu(A)\), בסתירה לאי-השוויון הקודם.
+
+
+    \item כעת, מכיוון ש-\(\mu\) היא מידת רדון ו-\(A\) חסומה, \(\mu(A) < \infty\). לכן, הסכום \(\sum_{B \in \mathcal{E}_{i_0}} \mu(B)\) סופי או אינסופי. אם הוא סופי, אפשר לבחור תת-אוסף סופי \(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{E}_{i_0}\) כך ש: 
+$$ \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) = \sum_{B \in \widetilde{\mathcal{E}}_0} \mu(B) \geq \frac{1}{2} \sum_{B \in \mathcal{E}_{i_0}} \mu(B) \geq \frac{1}{2Q} \mu(A) $$
+אם הסכום אינסופי, מכיוון ש \(\mu(A)\) סופי, קיימת סדרה עולה של תתי קבוצות סופיות של \(\mathcal{E}_{i_0}\), שאיחודן הוא \(\mathcal{E}_{i_0}\). לכן ניתן לבחור תת קבוצה סופית \(\widetilde{\mathcal{E}}_0\) כך שהאי שיוויון מתקיים.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{corollary}
+תהי \(\mu\) מידת רדון על \(\mathbb{R}^d\) ותהי \(A \subseteq \mathbb{R}^d\) מדידה. בהינתן כיסוי בסיקוביץ' \(\mathcal{F}\) של \(A\) המקיים:
+$$ \forall x \in A \quad \inf\{r > 0 \mid B_r(x) \in \mathcal{F}\} = 0 $$
+קיים תת-אוסף בן מנייה \(\widetilde{\mathcal{E}} \subseteq \mathcal{F}\) המורכב מכדורים זרים בזוגות ומקיים:
+$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}} \right) = 0 $$
+כלומר, כמעט כל \(A\) מכוסה על ידי אוסף של כדורים זרים בזוגות מתוך \(\mathcal{F}\).
+
+\end{corollary}
+\begin{proof}
+ההוכחה מתחלקת לשני חלקים: תחילה עבור \(A\) חסומה, ולאחר מכן עבור \(A\) כללית.
+\textbf{1. המקרה ש-\(A\) חסומה:}
+נניח תחילה ש-\(A \subseteq \mathbb{R}^d\) חסומה ו-\(\mu(A) > 0\). ניקח קבוצה פתוחה \(\mathcal{U}\) המכילה את \(A\) ומקיימת:
+$$ \mu(\mathcal{U}) < \left(1 + \frac{1}{4Q}\right) \mu(A) $$
+כאשר \(Q\) הוא הקבוע ממשפט הכיסוי של בסיקוביץ'. נסלק מ-\(\mathcal{F}\) את כל הכדורים שאינם מוכלים ב-\(\mathcal{U}\). \(\mathcal{F}\) עדיין יהיה כיסוי בסיקוביץ' של \(A\).
+מהטענה הקודמת, קיים תת-אוסף סופי של כדורים זרים בזוגות \(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{F}\) המקיים \(\bigcup \widetilde{\mathcal{E}}_0 \subseteq \mathcal{U}\) וגם:
+$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}}_0 \right) \leq \mu\left( \mathcal{U} \setminus \bigcup \widetilde{\mathcal{E}}_0 \right) = \mu(\mathcal{U}) - \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) \leq \mu(\mathcal{U}) - \frac{1}{2Q} \mu(A) < \left(1 - \frac{1}{4Q}\right) \mu(A) $$
+נסמן \(s = 1 - \frac{1}{4Q}\) ו-\(A_1 = A \setminus \bigcup \widetilde{\mathcal{E}}_0\). ניקח קבוצה פתוחה \(\mathcal{U}_1\) המכילה את \(A_1\) ומקיימת:
+$$ \mu(\mathcal{U}_1) < \left(1 + \frac{1}{4Q}\right) \mu(A_1) $$
+נצמצם שוב את \(\mathcal{F}\) להיות כיסוי של \(A_1\) שכל איבריו מוכלים ב-\(\mathcal{U}_1\). קיים תת-אוסף \(\widetilde{\mathcal{E}}_1 \subseteq \mathcal{F}\) של כדורים זרים בזוגות עם:
+$$ \mu\left( A_1 \setminus \bigcup \widetilde{\mathcal{E}}_1 \right) < s \cdot \mu(A_1) $$
+נמשיך באותו אופן ונקבל אוסף בן מנייה:
+$$ \mathcal{E} = \bigcup_{n=0}^{\infty} \widetilde{\mathcal{E}}_n $$
+של כדורים זרים בזוגות. מאחר ש-\(s < 1\), מתקיים:
+$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}} \right) = 0 $$\textbf{2. המקרה ש-\(A\) אינה חסומה:}
+כאשר \(A \subseteq \mathbb{R}^d\) אינה חסומה, מכיוון ש-\(\mu\) מידת רדון, לכל היותר מספר בן מנייה של ספירות \(\partial B_r(0)\) כאשר \(r > 0\) הן בעלות \(\mu\)-מידה חיובית. אחרת, היה קיים \(0 < R\) כך ש-\(B_R(0)\) מכיל אוסף לא בן מנייה של ספירות ממידה \(\varepsilon > 0\) כלשהי, בסתירה לכך ש-\(\mu(B_R(0)) < \infty\)
+לכן קיימת סדרה עולה של רדיוסים \(r_n \nearrow \infty\) שעבורם:
+$$ \mu\left( \bigcup_{n=0}^{\infty} \partial B_{r_n}(0) \right) = 0 $$
+המשלים של אוסף הספירות הזה:
+$$ \mathbb{R}^d \setminus \bigcup_{n=0}^{\infty} \partial B_{r_n}(0) $$
+הוא אוסף בן מנייה של קבוצות פתוחות, חסומות וזרות \(V_1, V_2, V_3, \dots\). מאחר ש:
+$$ \mu\left( A \cap \bigcup_{n=0}^{\infty} V_n \right) = \mu(A) $$
+נוכל כעת להפעיל את החלק הראשון של ההוכחה על כל אחת מהקבוצות \(A \cap V_n\), כאשר נדאג לצמצם את \(\mathcal{F}\) ל-\(V_n\). בצורה זו, נוכל לכסות כמעט את כל \(A\) על ידי אוסף בן מנייה של כדורים זרים בזוגות.
+
+\end{proof}
+\begin{reminder}
+$$\overline{D}:= \limsup_{ r \nearrow 0 } \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}\qquad \underline{D}:= \liminf_{ r \searrow 0 } \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}$$
+
+\end{reminder}
+\begin{proposition}
+יהיו \(\mu\) ו-\(\lambda\) מידות רדון כלשהן. תהי \(A \subseteq \mathbb{R}^d\) קבוצת בורל ויהי \(0 < t < \infty\) כלשהו:
+
+  \begin{enumerate}
+    \item אם \(\underline{D}(\mu, \lambda, x) \leq t\) לכל \(x \in A\) אז \(\mu(A) \leq t \cdot \lambda(A)\). 
+
+
+    \item אם \(\overline{D}(\mu, \lambda, x) \geq t\) לכל \(x \in A\) אז \(\mu(A) \geq t \cdot \lambda(A)\). 
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item נניח \(\underline{D}(\mu, \lambda, x) \leq t\). לפי ההגדרה של הגבול התחתון לכל \(x \in A\) ולכל \(\varepsilon>0\) קיימים סדרה של רדיוסים קטנים כרצונינו כך ש: 
+$$\frac{\mu(B_{r_{n}}(x))}{\lambda(B_{r_{n}}(x))}<t+\varepsilon$$
+כלומר עבור כל \(x \in A\) ניתן למצוא כדורים \(B\) כך ש-\(\mu(B)\leq \left( t+\varepsilon \right)\lambda(B)\).
+
+
+    \item תהי \(\mathcal{F}\) כיסוי של כדורים כאלה אשר מכסים את \(A\) וגם מקיימים: 
+$$\forall x\in A:\quad\operatorname*{inf}\{r>0\mid B_{r}(x)\in{\mathcal{F}}\}=0$$
+
+
+    \item מהמסקנה לעיל, נקבל כי קיים תת אוסף \(\widetilde{\mathcal{E}}\subseteq \mathcal{F}\) של כשל כדורים זרים בזוגות כך שמתקיים: 
+$$\mu{\Big(}A\setminus\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Big)}=0$$
+כלומר עד כדי קבוצה מ-\(\mu\) מידה אפס \(A\) מכוסה על ידי כדורים ב-\(\widetilde{\mathcal{E}}\).
+
+
+    \item לכל כדור מהבנייה שלנו קיבלנו כי \(\mu(B)\leq \left( t-\varepsilon \right)\lambda(B)\) ולכן כיוון שהכדורים ב-\(\widetilde{\mathcal{E}}\) זרים בזוגות נקבל: 
+$$\mu{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}=\sum_{B\in{\tilde{\mathcal{E}}}}\mu(B)\leq(t+\varepsilon)\sum_{B\in{\tilde{\mathcal{E}}}}\lambda(B)=(t+\varepsilon)\,\lambda{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}$$
+כאשר כיוון ש-\(\widetilde{\mathcal{E}}\) מכסה את \(A\) עד כדי קבוצה ממידה אפס נקבל:
+$$\mu(A)=\mu\Big(\bigcup_{B\in\tilde{\mathcal{E}}}B\Big)\implies\mu(A)\leq\left(t+\varepsilon\right)\lambda(A)$$
+
+
+    \item כעת עבור החלק השני של הטענה נניח כי \(\overline{D}(\mu, \lambda, x) \geq t\).  כלומר: 
+$$\overline{{{D}}}\left( \mu,\lambda,x \right)=\operatorname*{lim}_{r\to0}\operatorname*{sup}{\frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}}\geq t\implies \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}\geq t\implies\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$
+כאשר ניתן בפרט לקחת את ההגבול התחתון של אגף שמאל ולקבל את הנגזרת התחתונה:
+$$\underline{{{D}}}(\lambda,\mu,x)=\operatorname*{liminf}_{r\to0}\,\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$
+
+
+    \item כעת נשתמש בחלק הראשון של הטענה ונקבל: 
+$$\lambda(A)\leq\frac{1}{t}\,\mu(A)\implies\mu(A)\geq t\,\lambda(A)$$
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+טענה זו היא למעשה השימוש המרכזי במשפט הכיסוי של בסיקוביץ' לצורך גזירה של מידות. היא מקשרת בין הגבולות העליונים והתחתונים של יחסי המידות לבין יחסי המידות של הקבוצות עצמן.
+
+\end{remark}
+\subsection{משפט הגזירה של בסיקוביץ}
+
+\begin{theorem}[הגזירה של לבג-בסיקוביץ']
+יהיו \(\lambda\) ו-\(\mu\) מידות רדון על \(\mathbb{R}^d\).
+
+  \begin{enumerate}
+    \item הנגזרת \(D(\mu, \lambda, x)\) קיימת וסופית עבור \(\lambda\) כמעט תמיד. 
+
+
+    \item לכל קבוצה מדידת בורל \(B \subseteq \mathbb{R}^d\) מתקיים: 
+$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$
+עם שוויון כאשר \(\mu \ll \lambda\) (כלומר, כאשר \(\mu \ll \lambda\) אז \(D(\mu, \lambda, \cdot) = \frac{d\mu}{d\lambda}\)).
+
+
+    \item מתקיים \(\mu \ll \lambda\) אם ורק אם \(\underline{D}(\mu, \lambda, x) < \infty\) עבור \(\mu\) כמעט תמיד \(x\). 
+
+
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{חלק 1 - קיום הנגזרת}
+
+  \begin{enumerate}
+    \item יהיו \(r > 0\) ו-\(0 < s < t < \infty\) כלשהם. נסמן: 
+$$ A_{s,t,r} := \{x \in B_r(0) \mid \underline{D}(\mu, \lambda, x) \leq s < t \leq \overline{D}(\mu, \lambda, x)\} $$
+זה למעשה קבוצת הנקודות שבהם לא גזיר.
+
+
+    \item מהטענה הקודמת נקבל: 
+$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$
+ולכן כיוון ש-\(s< t\) נדרש כי \(\lambda(A_{s,t,r})=0\), ולכן הנגזרת מוגדרת \(\lambda\) כמעט תמיד כאשר הנגזרת העליונה סופית.
+
+
+    \item עבור נקודות עם נגזרת עליונה אינסופית נגדיר: 
+$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$
+
+
+  \end{enumerate}
+\end{proof}
+כאשר כיוון שהגדור \(B_{r}(0)\) חסום ניתן להראות כי:
+$$\lambda(A_{n,r})\leq\frac{1}{n}\mu(A_{n,r})\leq\frac{1}{n}\mu(B_{r}(0)).$$
+כאשר \(n\to \infty\) נקבל:
+$$\lambda\big(\{x\in B_{r}(0)\mid\overline{{{D}}}(\mu,\lambda,x)=\infty\}\big)=0.$$
+ולכן נקבל כי:
+$$ \lambda(\{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) = \infty\}) = \lambda\left( \bigcap_{n=1}^\infty A_{n,r} \right) = \lim_{n \to \infty} \lambda(A_{n,r}) \leq \lim_{n \to \infty} \frac{1}{n} \mu(B_r(0)) = 0 $$
+נבחין כי המשלים של \(\{x \in \mathbb{R}^d \mid \exists D(\mu, \lambda, x) < \infty\}\) שווה ל:
+$$ \bigcup_{k \in \mathbb{N}} \left( \bigcap_{n \in \mathbb{N}} A_{n,k} \cup \bigcup_{\substack{s < t \\ s,t \in \mathbb{Q}}} A_{s,t,k} \right) $$
+שהוא איחוד בן מנייה של קבוצות מ-\(\lambda\) מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.
+\textbf{חלק 2 - אי שוויון אינטגרלי}
+
+\begin{enumerate}
+  \item לכל שלם \(p \in \mathbb{Z}\) נגדיר: 
+$$ B_p = \{x \in B \mid t^p \leq D(\mu, \lambda, x) < t^{p+1}\} $$
+כאשר הקבוצה \(B \setminus \bigcup_{p}B_{p}\) מכיל את האיברים שבהם מתקיים או \(D\left( \mu,\lambda,x \right)=\infty\) (אשר מ-\(\lambda\) מידה אפס מהחלק הראשון) או \(D\left( \mu,\lambda,x \right)=0\) ואז לא תהיה תרומה של האינטגרל.
+
+
+  \item עבור כל \(B_{p}\) נקבל \(D\left( \mu,\lambda,x \right)<t^{p+1}\) ומתקיים: 
+$$\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq t^{p+1}\,\lambda(B_{p})$$
+
+
+  \item כאשר בנוסף מהטענה הקודמת כיוון ש-\(t^{p}\leq D\left( \mu,\lambda,x \right)\) נקבל כי: 
+$$t^{p}\,\lambda(B_{p})\leq\mu(B_{p})\implies t^{p+1}\,\lambda(B_{p})\leq t\,\mu(B_{p})\implies \int_{B_{p}}D\left( \mu,\lambda,x \right)\,d\lambda(x)\leq t\mu(B_{p})$$
+
+
+  \item נסכום כעת על \(\{ p \}\): 
+$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)=\sum_{p\in\mathbb{Z}}\int_{B_{p}}D(\mu,\lambda,x)\,d\lambda(x)\leq\sum_{p\in\mathbb{Z}}t\,\mu(B_{p})=t\,\mu\Big(\bigcup_{p\in\mathbb{Z}}B_{p}\Big)\leq t\,\mu(B).$$
+כיוון ש-\(t> 1\) שרירותי ניקח את הגבול \(t\to 1\) ונקבל:
+$$\int_{B}D(\mu,\lambda,x)\,d\lambda(x)\leq\mu(B)$$
+
+
+  \item כדי להוכיח את השוויון נניח \(\mu\ll \lambda\). כיוון ש-\(\lambda\left( B_{\infty} \right)=0\) נקבל \(\mu\left( B_{\infty} \right)=0\). בנוסף כיוון ש-\(D\left( \mu,\lambda,x \right)<\infty\) מתקיים \(\lambda\) כמעט תמיד ו-\(\mu\ll \lambda\) אז גם \(D\left( \mu,\lambda,x \right)<\infty\) מתקיים \(\mu\) כמעט תמיד. בנוסף מתקיים \(\mu\) כמעט תמיד כי \(0 < D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}\) להראות באופן דומה כי האי שיווין ההפוך עובד, ולכן נקבל שיווין \(\lambda\) כמעט תמיד: 
+$$D(\mu,\lambda,x)=\frac{d\mu}{d\lambda}(x)$$\textbf{חלק 3 - אפיון רציפות מוחלטת:}
+
+
+  \item מ-1 נובע שאם \(\mu \ll \lambda\) אז \(\underline{D}(\mu, \lambda, x) < \infty\)\(\mu\) כמעט תמיד. תהי \(C \subseteq \mathbb{R}^d\) עם \(\lambda(C) = 0\). נרצה להראות ש-\(\mu(C) = 0\). נבחין כי \(C = \bigcup_{n \in \mathbb{N}} C_n\) כאשר: 
+$$ C_n = \{x \in C \mid \underline{D}(\mu, \lambda, x) \leq n\} $$
+מכאן:
+$$ \mu(C_n) \leq n \cdot \lambda(C_n) \leq n \cdot \lambda(C) = 0 $$
+ולכן:
+$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0$$
+ולכן \(\mu(C) = 0\). בכיוון ההפוך, אם \(\underline{D}(\mu, \lambda, x) < \infty\)\(\mu\) כמעט תמיד אז נשתמש בחלק 2 של המשפט כדי להראות \(\mu \ll \lambda\).
+
+
+\end{enumerate}
+\begin{remark}
+המשפט הזה הוא אחד התוצאות החשובות בתורת המידה, והוא הבסיס לגזירה של מידות.
+
+\end{remark}
+\begin{corollary}
+תהי \(\lambda\) מידת רדון כלשהי על \(\mathbb{R}^d\).
+
+  \begin{enumerate}
+    \item לכל \(f: \mathbb{R}^d \to \mathbb{C}\) שהיא \(L^1_{loc}\) (כלומר, לכל \(x \in \mathbb{R}^d\) קיים כדור \(B_{r(x)}\) כך ש-\(f \cdot \mathbb{1}_{B_{r(x)}} \in L^1\)), מתקיים \(\lambda\) כמעט תמיד: 
+$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} f \, d\lambda = f(x) \quad (*) $$
+
+
+    \item עבור כל \(A \subseteq \mathbb{R}^d\) מדידה, מתקיים: 
+$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 \quad (**) $$
+עבור \(\lambda\) כמעט תמיד \(x \in A\).
+
+
+  \end{enumerate}
+\end{corollary}
+\begin{proof}
+  \begin{enumerate}
+    \item \textbf{הוכחת החלק הראשון:} 
+מספיק להוכיח עבור \(0 \leq f \in \mathbb{R}\). במקרה הכללי, ניתן לכתוב \(f = f_1 - f_2 + i(f_3 - f_4)\) כאשר \(f_i \geq 0\) ומכיוון שהגבול לינארי, מספיק להוכיח עבור כל פונקציה חיובית בנפרד.
+במקרה זה, נגדיר את המידה \(\mu\) על ידי \(d\mu = f \, d\lambda\). אזי \(\mu \ll \lambda\) (כלומר, \(\mu\) רציפה בהחלט ביחס ל-\(\lambda\)), ולכן לכל קבוצה מדידה \(B\):
+$$ \int_B f \, d\lambda = \mu(B) = \int_B D(\mu, \lambda, x) \, d\lambda $$
+כמו כן, \(\mu\) מידת רדון כי \(f\) היא \(L^1_{loc}\).
+מאחר שהשוויון מתקיים לכל \(B\) מדידה, נובע ממשפט רדון-ניקודים ש-\(f = D(\mu, \lambda, x)\) מתקיים \(\lambda\) כמעט תמיד. כלומר:
+$$ f(x) = \lim_{r \to 0} \frac{\mu(B_r(x))}{\lambda(B_r(x))} = \lim_{r \to 0} \frac{\int_{B_r(x)} f \, d\lambda}{\lambda(B_r(x))} $$
+זהו בדיוק מה שרצינו להוכיח.
+
+
+    \item \textbf{הוכחת החלק השני:} 
+זהו יישום ישיר של חלק 1 עבור \(f = \mathbb{1}_A\), פונקציית האינדיקטור של \(A\). אם \(x \in A\) היא נקודת לבג של \(\mathbb{1}_A\), אז:
+$$ \lim_{r \to 0} \frac{1}{\lambda(B_r(x))} \int_{B_r(x)} \mathbb{1}_A \, d\lambda = \mathbb{1}_A(x) $$
+האינטגרל של \(\mathbb{1}_A\) על \(B_r(x)\) הוא בדיוק \(\lambda(A \cap B_r(x))\). מאחר ש-\(x \in A\), אז \(\mathbb{1}_A(x) = 1\), ולכן:
+$$ \lim_{r \to 0} \frac{\lambda(A \cap B_r(x))}{\lambda(B_r(x))} = 1 $$
+עבור \(\lambda\) כמעט תמיד \(x \in A\).
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+נקודות \(x\) שמקיימות את תנאי \((*)\) או \((**)\) נקראות נקודות לבג של הפונקציה \(f\) או של הקבוצה \(A\) בהתאמה. משפט הגזירה של לבג קובע שלכמעט כל נקודה במרחב יש את התכונה הזאת.
+
+\end{remark}
+\section{מרחבי מכפלה}
+
+\subsection{מידת מכפלה סופית}
+
+\begin{definition}[מלבן]
+אם \(A \subseteq X\) ו-\(B \subseteq Y\), מתקיים ש-\(A \times B \subseteq X \times Y\). אנו קוראים לכל קבוצה מהצורה \(A \times B\) מלבן ב-\(X \times Y\).
+
+\end{definition}
+\begin{definition}[מלבן מדיד]
+קבוצה מהצורה:
+$$\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}$$
+נקראת מלבן מדיד.
+
+\end{definition}
+\begin{definition}[\(\sigma\) אלגברה מכפלה]
+יהי \((X, \mathcal{A})\) ו-\((Y, \mathcal{C})\) מרחבים מדידים. נגדיר \(\sigma\) אלגברה מכפלה \(\mathcal{A}\times \mathcal{ C}\) על ידי ה-\(\sigma\) אלגברה הקטנה ביותר על \(X\times Y\) אשר מכילה את \(\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}\). כלומר:
+$$\mathcal{A} \times \mathcal{C} =\sigma(\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\})$$
+כאשר כל איבר בקבוצה 
+$$\left\{  A\times C\mid A \in \mathcal{A} \quad C \in \mathcal{C}   \right\}$$
+נקרא מלבן מדיד.
+
+\end{definition}
+\begin{definition}[חתך]
+בהנתן האוסף \(E \in \mathcal{A}\times \mathcal{ C}\) ו-\(x \in X\), \(y \in Y\) נסמן את החתכי \(x\) וחתכי \(y\) על ידי:
+$$E_{x}=\left\{ y:(x,y)\in E \right\}\qquad E^{y}=\left\{ x:(x,y)\in E \right\}$$
+
+\end{definition}
+\begin{example}[חתכים של מלבנים]
+אם \(X,Y\) הם קבוצות ו-\(A\subseteq X, B\subseteq Y\) עבור \(a \in X, b \in Y\) נקבל:
+$$[A\times B]_{a}=\begin{cases}B&{\mathrm{if}\;a\in A,}\\ {\emptyset}&{\mathrm{if}\;a\not\in A}\end{cases}\quad{\mathrm{and}}\quad[A\times B]^{b}=\begin{cases}A&{\mathrm{if}\;b\in B,}\\ {\emptyset}&{\mathrm{if}\;b\not\in B,}\end{cases}$$
+
+\end{example}
+\begin{proposition}
+חתכים הם פונקציות מדידות. כלומר אם \(\left( X,\mathcal{A} \right),\left( Y,\mathcal{B} \right)\) מרחבים מדידים וכן \(E \in \mathcal{A} \times \mathcal{B}\), אז \(E_x \in \mathcal{B}\) ו-\(E^y \in \mathcal{A}\), לכל \(x \in X\) ו-\(y \in Y\).
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item תהי \(\mathcal{E}\) אוסף התתי קבוצות \(E\) של \(X \times Y\) עבורו מתקיים הטענה. יהי \(A\times B \in \mathcal{E}\) לכן \(A \in \mathcal{A}\) ו-\(B \in \mathcal{B}\). 
+
+
+    \item נשים לב כי \(\mathcal{E}\) הוא \(\sigma\) אלגברה. האוסף \(\mathcal{E}\) סגור על ידי משלימים ואיחודים בני מנייה כיוון שמתקיים עבור כל תתי קבוצות \(E,E_{1},E_{2},\dots \in \mathcal{P}\left( X\times Y \right)\) ולכל \(a \in X\): 
+$$\left[ \left( X\times Y \right)\setminus E \right]_{a}=Y\setminus[E]_{a}\qquad \left[ E_{1}\cup E_{2}\cup\cdot\cdot\cdot \right]_{a}=[E_{1}]_{a}\cup[E_{2}]_{a}\cup\cdot\cdot\cdot$$
+
+
+    \item כיוון ש-\(\mathcal{E}\) הוא \(\sigma\) אלגברה על \(X \times Y\) בפרט מכיל את כל המלבנים המדידים ב-\(\mathcal{A}\times \mathcal{B}\) ולכן מכיל את \(\mathcal{A}\times \mathcal{B}\). 
+
+
+  \end{enumerate}
+\end{proof}
+\begin{remark}
+ההוכחה הזו השתמשה בשיטת הוכחה דו שלבית אשר שימושית בהרבה מקרים:
+
+  \begin{enumerate}
+    \item להראות כי הקבוצה אשר מייצרת את ה-\(\sigma\) אלגברה מקיים את התכונה. 
+
+
+    \item להראות כי הקבוצה הזאת היא \(\sigma\) אגלברה. 
+ומזה נובע כי כל קבוצה ב\(\sigma\) אלגברה מקיימת את התכונה.
+
+
+  \end{enumerate}
+\end{remark}
+\begin{definition}[חתך של פונקציות]
+בהנתן פונקציה \(f\) על \(X \times Y\) נסמן לכל \(x \in X, y \in Y\):
+$$f^{y}(x)=f(x,y)\qquad f_{x}(y)=f(x,y)$$
+
+\end{definition}
+\begin{example}
+נניח \(f:\mathbb{R}\times \mathbb{R}\to \mathbb{R}\) מוגדר על ידי \(f(x,y)=5x^{2}+y^{3}\) אזי:
+$$f_{2}(y)=20+y^{3}\qquad f^{3}(x)=5x^{2}+27$$
+
+\end{example}
+\begin{proposition}
+חתך של פונקציה משמר מדידות, כלומר אם \(f\) היא \(\mathcal{A}\times \mathcal{C}\) מדידה אז \(f_{x}\) יהיה \(\mathcal{C}\) מדידה ו-\(f^{y}\) היא \(\mathcal{A}\) מדידה.
+
+\end{proposition}
+\begin{remark}
+הכיוון השני לא בהכרח נכון.
+
+\end{remark}
+\begin{reminder}[אלגברה]
+יהי \(X\) קבוצה. אלגברה מעל \(X\) הינו אוסף \(\mathcal{A}\subseteq \mathcal{P}(X)\) של תתי קבוצות של \(X\) המקיימת:
+
+  \begin{enumerate}
+    \item הקבוצה כולה נמצאת - \(X \in \mathcal{A}\). 
+
+
+    \item אם \(E \in \mathcal{A}\) אזי \(E^{c} \in \mathcal{A}\). 
+
+
+    \item בהנתן אוסף \underline{סופי}\(E_{1}, E_{2},\dots, \in \mathcal{A}\) אזי \(\bigcup_{n}E_{n}\in \mathcal{A}\). 
+
+
+  \end{enumerate}
+\end{reminder}
+כלומר זהו למעשה \(\sigma\) אלגברה כאשר נדרש רק שיהיה סגור לאיחודים סופיים ולא בני מנייה. בפרט כל \(\sigma\) אלגברה היא אלגברה.
+
+\begin{proposition}
+הקבוצה של כל האיחודים הסופיים של מלבנים מדידים היא אלגברה.
+
+\end{proposition}
+\begin{definition}[מחלקה מונוטונית]
+נניח כי \(W\) קבוצה
+אם \(A_i \in \mathcal{M}\), \(B_i \in \mathcal{M}\), \(A_i \subseteq A_{i+1}\), \(B_i \supseteq B_{i+1}\) עבור \(i = 1, 2, 3, ...\), ואם
+$$A = \bigcup_{i=1}^\infty A_i, \quad B = \bigcap_{i=1}^\infty B_i$$
+אז \(A \in \mathcal{M}\) ו-\(B \in \mathcal{M}\).
+
+\end{definition}
+\begin{definition}[מחלקה מונוטונית]
+יהי \(W\) קבוצה ו-\(\mathcal{M}\) קבוצה של תת-קבוצות של \(W\). אז \(\mathcal{M}\) נקראת מחלקה מונוטונית על \(W\) אם מתקיימים שני התנאים הבאים:
+*   אם \(E_1 \subseteq E_2 \subseteq \dots\) היא סדרה עולה של קבוצות ב-\(\mathcal{M}\), אז:
+$$\bigcup_{k=1}^{\infty} E_k \in \mathcal{M}$$
+*   אם \(E_1 \supseteq E_2 \supseteq \dots\) היא סדרה יורדת של קבוצות ב-\(\mathcal{M}\), אז:
+$$\bigcap_{k=1}^{\infty} E_k \in \mathcal{M}$$
+
+\end{definition}
+\begin{remark}
+ברור כי כי מחלקה מונוטונית היא \(\sigma\)  אלגברה. אך לא כל מחלקה מונטונית היא אלגברה(ובפרט גם לא תהיה \(\sigma\) אלגברה). לדוגמא אם נסתכל על אוסף \(\mathcal{A}\) של כל הקטעים ב-\(\mathbb{R}\). נשים לב כי \(\mathcal{A}\) סגור תחת איחודים בני מנייה עולים וחיתוכים בני מניה יורדים. לכן \(\mathcal{A}\) היא מחלקה מונוטונית על \(\mathbb{R}\). אבל \(\mathcal{A}\) היא לא סגורה תחת איחודים סופיים. ו-\(\mathcal{A}\) לא סגורה תחת מסלים, ולכן \(\mathcal{A}\) לא אלגברה.
+
+\end{remark}
+\begin{theorem}[המחלקה המונוטונית]
+נניח כי \(\mathcal{A}\) היא אלגברה על קבוצה \(W\). ה-\(\sigma\) אלגברה הקטנה ביותר המכילה את \(\mathcal{A}\) היא המחלקה המונוטונית הקטנה ביותר המכילה את \(\mathcal{A}\).
+
+\end{theorem}
+\begin{proposition}
+בהינתן אלגברה \(\Sigma_{0}\subseteq\mathcal{P}(X)\) ה-\(\sigma\) אלגברה \(\sigma\left( \Sigma_{0} \right)\) הינה המחלקה המונוטונית הקטנה ביותר המכילה את \(\Sigma_{0}\).
+
+\end{proposition}
+\begin{proposition}
+יהי \((X, \mathcal{A}, \mu)\) ו-\((Y, \mathcal{C}, \lambda)\) מרחבי מידה \(\sigma\)-סופיים. נניח כי \(Q \in \mathcal{A} \times \mathcal{C}\). אזי:
+$$\phi(x) = \lambda(Q_x), \quad \psi(y) = \mu(Q^y) $$
+לכל \(x \in X\) ו-\(y \in Y\), אז \(\phi\) מדידה ביחס ל-\(\mathcal{S}\), \(\psi\) מדידה ביחס ל-\(\mathcal{T}\), ו-
+$$\int_X \phi \, d\mu = \int_Y \psi \, d\lambda$$
+
+\end{proposition}
+\begin{remark}
+הסימונים בשאלה מוגדרים היטב כיוון שהראנו כי החתכים הם פונקציות מדידות.
+
+\end{remark}
+\begin{proof}
+נסמן ב-\(\Omega\) את משפחת כל הקבוצות \(Q\subseteq \mathcal{A}\times \mathcal{C}\) עבורם המשפט נכון. נשים לב כי מתקיים:
+$$\forall x\in X\qquad\varphi\left(x\right)=\nu\left(Q_{x}\right)=\nu\left(C\right)\cdot\mathbb{1}_{A}\left(x\right)$$$$\forall y\in Y\qquad\psi\left(y\right)=\mu\left(Q^{y}\right)=\mu\left(A\right)\cdot\mathbb{1}_{C}\left(y\right)$$
+ובפרט \(\varphi,\psi\) מדידות ומתקיים:
+$$\int_{X}\varphi d\mu=\mu\left(A\right)\cdot\nu\left(C\right)=\int_{Y}\psi d\nu$$
+ולכן \(\Omega\) מכילה את כל המלבנים המדידים. באופן דומה \(\Omega\) מכילה את כל האיחודים הסופיים של מלבנים מדידים, ולכן 
+
+\end{proof}
+נסמן ב-\(\Omega\) את מחלקת כל ה-\({Q} \in \mathcal{A}\times \mathcal{C}\) עבורם הטענה מתקיימת. נראה כי ל-\(\Omega\) יש את 4 התכונות הבאות. 
+
+\begin{enumerate}
+  \item כל מלבן מדיד נמצא ב-\(\Omega\). 
+
+
+  \item אם \(Q_{1} \subset Q_{2} \subset \dots\) אם לכל \(Q_{i}\in \Omega\) ואם \(Q=\bigcup Q_{i}\) אז \(Q \in \Omega\). 
+
+
+  \item אם \(\{ Q_{i} \}\) היא קבוצה בת מנייה זרה של איברים ב-\(\Omega\) ואם \(Q=\bigcup Q_{i}\) אז \(Q \in \Omega\). 
+
+
+  \item 
+\end{enumerate}
+\begin{definition}[מידת מכפלה]
+יהיו \((X, \mathcal{A}, \mu)\) ו-\((Y, \mathcal{C}, \nu)\) מרחבי מידה \(\sigma\) סופיים. נגדיר את מידת המכפלה \(\mu \times \nu\) על \(\sigma\)-אלגברת המכפלה \(\left( X\times Y,\mathcal{A} \times \mathcal{C} \right)\) על ידי:
+$$(\mu \times \nu)(Q) := \int_X \nu(Q_x) \, d\mu(x) = \int_Y \mu(Q^y) \, d\nu(y)$$
+כאשר \(Q \in \mathcal{A} \times \mathcal{C}\).
+להשלים הוכחה.
+
+\end{definition}
+\begin{theorem}[פוביני]
+יהיו \((X, \mathcal{S}, \mu)\) ו-\((Y, \mathcal{T}, \lambda)\) מרחבי מידה \(\sigma\)-סופיים, ותהי \(f\) פונקציה מדידה ביחס ל- \((\mathcal{S} \times \mathcal{T})\) על \(X \times Y\).
+
+  \begin{enumerate}
+    \item אם \(0 \le f \le \infty\), ואם 
+$$\phi(x) = \int_Y f_x \, d\lambda, \quad \psi(y) = \int_X f^y \, d\mu \quad (x \in X, y \in Y), \quad (1)$$
+אז \(\phi\) מדידה ביחס ל-\(\mathcal{S}\), \(\psi\) מדידה ביחס ל-\(\mathcal{T}\), ו-
+$$\int_X \phi \, d\mu = \int_{X \times Y} f \, d(\mu \times \lambda) = \int_Y \psi \, d\lambda. \quad (2)$$
+
+
+    \item אם \(f\) מרוכבת ואם 
+$$\phi^*(x) = \int_Y |f|_x \, d\lambda \quad \text{and} \quad \int_X \phi^* \, d\mu < \infty, \quad (3)$$
+אז \(f \in L^1(\mu \times \lambda)\).
+
+
+    \item אם \(f \in L^1(\mu \times \lambda)\), אז \(f_x \in L^1(\lambda)\) עבור כמעט כל \(x \in X\), \(f^y \in L^1(\mu)\) עבור כמעט כל \(y \in Y\); הפונקציות \(\phi\) ו-\(\psi\), המוגדרות על ידי (1) כמעט בכל מקום, נמצאות ב-\(L^1(\mu)\) וב-\(L^1(\lambda)\), בהתאמה, ו-(2) מתקיים. 
+
+
+  \end{enumerate}
+\end{theorem}
+\begin{enumerate}
+  \item נוודא עבור פונקציות מציינות של מלבנים מהצורה \(Q=A\times B\) עם \(A \in \mathcal{A},B \in \mathcal{C}\). כאשר נזכור כי המידת מכפלה מוגדרת על ידי: 
+$$(\mu\times\lambda)(Q)=\int_{X}\lambda(Q_{x})d\mu(x)=\int_{Y}\mu(Q^{y})d\lambda(y).$$
+עבור \(f=\mathbb{1}_{Q}\) נקבל:
+$$\int_{X}\phi(x)d\mu(x)=\int_{Y}\psi(y)d\lambda(y),$$
+ולכן הטענה תקפה עבור פונקציות מציינות.
+
+
+  \item נראה עבור פונקציות פשוטות. כיוון שכל פונקציה פשוטה היא מהצורה: 
+$$s(x,y)=\sum_{i=1}^{N}a_{i}\mathbb{1} _{Q_{i}}(x,y)$$
+נקבל מלינאריות האינטגרל ועד ידי שימוש בזה שמתקיים עבור פונקציות מציינות כי הטענה מתקיימת גם עבור פונקציות פשוטות.
+
+
+  \item נראה עבור פונקציות כלליות בעזרת משפט ההתכנסות המונוטונית. יהי \(f\) פונקציה. אנו יודעים כי קיימת סדרה של פונקציות מונוטוניות \(s_{n}\nearrow f\) של פונקציות פשוטות. לפי משפט ההתכנסות המונוטונית ניתן להכניס את הגבול לאינטגרל: 
+$$\int_{X}\operatorname*{lim}_{n\to\infty}\int_{Y}s_{n}(x,y)d\lambda(y)d\mu(x)=\operatorname*{lim}_{n\to\infty}\int_{X}\int_{Y}s_{n}(x,y)d\lambda(y)d\mu(x).$$
+כאשר התוצאה תקפה עבור \(s_{n}\) זה יהיה תקף עבור \(f\).
+
+
+  \item אם \(f\) היא מרוכבת, ניתן להפעיל את הטענה על \(|f|\) ולקבל את תכונה 2 של המשפט. 
+
+
+  \item עבור \(f \in L^{1}\left( \mu \times \lambda \right)\) כללית, ניתן לפרק ל-\(f=f^{+}-f^{-}\) ולקבל את תכונה 3. 
+
+
+  \item הוכחנו כבר את 1 עבור \(1_Q\) כאשר \(Q \in A \times C\). מלינאריות האינטגרל, נסיק שהטענה נכונה גם עבור צירופים לינאריים סופיים 
+של פונקציות מציינות (קרי, Fubini נכון עבור פונקציות פשוטות). לפיכך, בהינתן \([0, \infty) \ni f : X \times Y\) מדידה כלשהי, קיימת סדרה
+עולה \(\{s_n\}_{n=1}^\infty\) של פונקציות פשוטות ואי־שליליות הנשלטת ע"י \(f\)., כלומר
+$$\forall n \in \mathbb{N} \quad 0 \le s_n \le s_{n+1} \le f
+$$
+. בפרט, לכל \(x \in X\) ולכל \(y \in Y\) מתקיים ש- הסדרות עולות כך ש-
+$$(s_n)_x \xrightarrow{n \to \infty} f_x \quad \text{and} \quad (s_n)^y \xrightarrow{n \to \infty} f^y
+$$
+כך ש-\(f\)
+(כאשר זו התכנסות נקודתית). מכך ש-Fubini מתקיים לכל \(s_n\), אזי
+$$
+\forall n \in \mathbb{N} \quad \int_{X \times Y} s_n \, d(\mu \times \nu) = \int_X \phi_n \, d\mu = \int_Y \psi_n \, d\nu $$
+כאשר \(\phi_n(x) = \int_Y (s_n)_x \, d\nu\) ו- \(\psi_n(y) = \int_X (s_n)^y \, d\mu\) הן הפונקציות המתאימות ל-\(s_n\) מהמשפט. לפיכך, ממשפט ההתכנסות המונוטונית נקבל שמתקיים:
+$$\int_{X \times Y} f \, d(\mu \times \nu) = \lim_{n \to \infty} \int_{X \times Y} s_n \, d(\mu \times \nu) =\begin{cases}\lim_{n \to \infty} \int_X \phi_n \, d\mu = \lim_{n \to \infty} \int_X \left( \int_Y (s_n)_x \, d\nu \right) d\mu \stackrel{(*)}{=} \int_X \left( \lim_{n \to \infty} \int_Y (s_n)_x \, d\nu \right) d\mu = \int_X \left( \int_Y f_x \, d\nu \right) d\mu = \int_X \phi \, d\mu \\\lim_{n \to \infty} \int_Y \psi_n \, d\nu = \lim_{n \to \infty} \int_Y \left( \int_X (s_n)^y \, d\mu \right) d\nu \stackrel{(*)}{=} \int_Y \left( \lim_{n \to \infty} \int_X (s_n)^y \, d\mu \right) d\nu = \int_Y \left( \int_X f^y \, d\mu \right) d\nu = \int_Y \psi \, d\nu\end{cases}
+$$
+
+
+\end{enumerate}
+כלומר Fubini אמנם מתקיים.
+
+\begin{enumerate}
+  \item נובע מ-1 עבור \(|f|\). 
+
+
+  \item מספיק להוכיח עבור פונקציות ממשיות, ואז להתמודד בנפרד עם הפירוק של \(f\) לסכום - \(f = f^+ - f^-\). 
+
+
+\end{enumerate}
+\begin{proof}
+  \begin{enumerate}
+    \item נראה ראשית כי מתקיים עבור \(f(x,y)=\mathbb{1}_{Q}(x,y)\) כאשר \(Q=A\times C\) כאשר \(A \in \mathcal{S},C\in\mathcal{T}\). לכן לפי ההגדרה של מידת מכפלה נקבל: 
+  \end{enumerate}
+\end{proof}
+\subsection{קונבולוציה}
+
+\begin{definition}[קונבולוציה]
+המידה \(\mu*\nu\) המוגדרת על ידי הדחיפה קדימה של העתקת הסכום
+$$ s_{\ast}\left(\mu\,\times\,\nu\right)$$
+
+\end{definition}
+\begin{proposition}
+מתקיים:
+$$\left( \mu*\nu \right)E=\int _{\mathbb{R}^{d}}\mu(E-x) \;\mathrm{d} \nu $$
+
+\end{proposition}
+\begin{proof}
+$$(\mu*\nu)(E)=(\mu\times\nu)\bigl(s^{-1}(E)\bigr)\stackrel{\text{fubini}}{=}\int_{\mathbb{R}^{d}}\mu\bigl(s^{-1}(E)_{x}\bigr)d\nu=\int_{\mathbb{R}^{d}}\mu(E-x)d\nu$$
+כאשר השתמשנו בכך ש-\(s ^{-1}(E_{x})=E-x\) כיוון שמתקיים:
+$$s^{-1}(E)_{x}=\left\{ \,y\in\mathbb{R}^{d}\mid x+y\in E\, \right\}\implies E-x=\left\{ \,z\in\mathbb{R}^{d}:z+x\in E\, \right\}$$
+
+\end{proof}
+\begin{remark}
+הקונבולוציה מתלכדת עם הקונבולוציה הרגילה במקרה הרציף.
+
+\end{remark}
+\begin{proposition}
+$$\left( \mu*\delta_{y} \right)(E)=\int_{\mathbb{R}^{d}}\mu(E-x)\mathrm{d}\delta_{y}(x)=\mu(E-y)$$
+
+\end{proposition}
+\end{document}

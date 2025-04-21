@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תתי סדרות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page'><a href='./Series'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_1_1'>1.1 הגדרת הגבול</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_3'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_6'>1.6 תתי סדרות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_8'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_2'>3.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_3'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Series_1_7`; }if (event.key === 'ArrowLeft') { window.location.href = `./Series_1_5`; }});</script>
+        <div class="content">
+        <h1>1.6  תתי סדרות</h1>
+    <div class="definition"><span class="keyword">תת סדרה</span><p>תהי <span>\((a_n)_{n=1}^\infty\)</span> סדרה ממשית נתונה. סדרה <span>\((b_k)_{k=1}^\infty\)</span> נקראת תת סדרה של <span>\((a_n)_{n=1}^\infty\)</span> אם קיימת סדרה מונוטונית עולה <u>ממש</u>
+של אינדקסים <span>\((n_{k})_{k=1}^\infty\)</span> כך ש-<span>\(n_{k}\in \mathbb{N}\)</span> ושכל <span>\(\mathbb{N}\in k\)</span> מתקיים:
+<span>$$b_{k}=a_{n_{k}}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\((n_{k})\)</span> סדרה של מספרים טבעיים מונוטנית עולה ממש אזי לכל <span>\(k \in \mathbb{N}\)</span> מתקיים:
+<span>$$k\leq n_{k}$$</span></p>
+</div>
+<div class="proof">
+<p>באידוקציה על <span>\(k\)</span>. בסיס האינדוקציה: עבור <span>\(k=0\)</span> נקבל כי <span>\(1\leq n_{1}\in \mathbb{N}\)</span>.
+עבור צעד האינדוקציה נניח כי <span>\(k\leq n_{k}\)</span>. כיוון ש-<span>\((n_{k})\)</span> מונוטונית עולה ממש לכן <span>\(k&lt;n_{k}&lt;n_{k+1}\)</span> וכיוון ש-<span>\(n_{k+1}\)</span> מספר טבעי נקבל <span>\(k+1\leq n_{k+1}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ירושה</span><p>תהי <span>\(a_{n_{k}}\)</span> תת סדרה של <span>\((a_{n})\)</span>. אז מתקיים:</p>
+</div>
+<ol>
+<li>
+<p>אם <span>\((a_{n})\)</span> חסומה אז גם <span>\((a_{n_{k}})\)</span> תהיה חסומה. </p>
+</li>
+<li>
+<p>אם <span>\((a_{n})\)</span> מונוטונית אז גם <span>\((a_{n_{k}})\)</span> תהיה מונוטונית. </p>
+</li>
+<li>
+<p>אם <span>\((a_{n})\)</span> מתכנסת אז גם <span>\((a_{n_{k}})\)</span> מתכנסת ולאותו גבול. </p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">גבול חלקי</span><p>נתונה סדרה <span>\((a_n)_{n=1}^\infty\)</span>. מספר ממשי <span>\(\lambda \in \mathbb{R}\)</span> נקרא גבול חלקי של <span>\((a_n)_{n=1}^\infty\)</span> אם קיימת תת סדרה של <span>\((a_n)_{n=1}^\infty\)</span> אשר מתכנסת ל-<span>\(\lambda\)</span>.</p>
+</div>
+<div class="proposition">
+<p>לכל סדרה קיימת תת סדרה מונוטונית</p>
+</div>
+<div class="definition"><span class="keyword">פסגה</span><p>מספר טבעי יקרא פסגה של סדרה <span>\((a_n)_{n=1}^\infty\)</span> אם לכל <span>\(n\geq m\)</span> מתקיים <span>\(a_{m}\geq a_{n}\)</span>. כאשר נשים לב כי אז:
+<span>$$a_{m}=\max \left\{  a_{n}\mid n\geq m  \right\}$$</span></p>
+</div>
+<p>כדי להוכיח את המשפט נפצל ל-2 למות:</p>
+<div class="lemma">
+<p>אם יש אינסוף פסגות, קיימת תת סדרה מונוטנית יורדת.</p>
+</div>
+<div class="proof">
+<ol>
+<li>נגדיר אוסף קבוצות באופן רקורסיבי. ראשית נגדיר: 
+<span>$$A_{1}=\left\{  m \in \mathbb{N} \mid \text{<span>\(m\)</span> is peak}  \right\}$$</span>
+בכאשר פרט <span>\(A_{1}\neq \varnothing\)</span>. לכן מעקרון הסדר הטוב קיים <span>\(m_{1} \in \mathbb{N}\)</span> כך ש-<span>\(m_{1}=\min A_{1}\)</span>. עכשיו נגדיר <span>\(A_{2}=A_{1}\setminus A_{1}\)</span> ועבור קיים מינימום <span>\(m_{2}\)</span>. כאשר נשים לב כי מתקיים <span>\(m_{1}&lt;m_{2}\)</span>. כעת נניח כי הגדרנו <span>\(m_{1},\dots,m_{k}\)</span> כך שמתקיים:
+<span>$$m_{1}&lt;m_{2}&lt;\dots&lt;m_{k}$$</span>
+וקבוצות <span>\(A_{1},\dots,A_{k}\)</span> כך ש:
+<span>$$A_{k}=\left\{  m \in \mathbb{N} \mid \text{<span>\(m\)</span> is peak }\land m_{k}&lt;m \right\}$$</span>
+ו-<span>\(m_{k+1}=\min A_{k+1}\)</span> ולכן(כיוון ש-<span>\(m_{k}\)</span> פסגה) <span>\(a_{m_{k}}\geq a_{m_{k+1}}\)</span> ן-<span>\((m_{k})\)</span> היא סדרה מונוטונית עולה ממש, ולכן נותת תת סדרה <span>\((a_{m_{k}})\)</span> של <span>\((a_{n})\)</span> מזה שלכל <span>\(k \in \mathbb{N}\)</span> מתקיים <span>\(a_{m_{k}}\geq a_{m_{k+1}}\)</span> רואים כי זו תת סדרה מונוטונית יורדת.</li>
+</ol>
+</div>
+<div class="lemma">
+<p>אם יש כמות סופית של פסגות, קיימת תת סדרה מונוטונית עולה.</p>
+</div>
+<div class="proof">
+<p>נניח כי קיימות כמות סופית של איברי פסגה. לכן קיים <span>\(N\in\mathbb{N}\)</span> כך שכל <span>\(n&gt;N\)</span> הוא לא איבר פסגה. נבנה ברקורסיה סדרה מונוטונית עולה</p>
+</div>
+<ol>
+<li>
+<p>נגדיר <span>\(n_{1}=N+1\)</span>. נשים לב כי <span>\(n_{1}&gt;N\)</span> ולכן לא איבר פסגה. כלומר קיים <span>\(n_{2} \in \mathbb{N}\)</span> עם <span>\(n_{2} &gt; n_{2}\)</span> כך ש-<span>\(a_{n_{1}}\leq a_{n_{2}}\)</span>. </p>
+</li>
+<li>
+<p>נניח כי הגדרנו <span>\(n_{1}&lt;n_{2}&lt;\dots&lt;n_{k}\)</span> כך ש: 
+<span>$$a_{n_{1}}\leq a_{n_{2}}\leq \dots \leq a_{n_{k}}$$</span>
+ואז <span>\(n_{k}&gt;n_{1}&gt;N\)</span> ולכן <span>\(n_{k}\)</span> לא איבר פסגה. כלומר קיים <span>\(n_{k+1}\in \mathbb{N}\)</span> כך ש-<span>\(n_{k+1}&gt;n_{k}\)</span> ו-<span>\(a_{n_{k}}\leq a_{n_{k+1}}\)</span> ונקבל כי <span>\((a_{n_{k}})\)</span> מונוטונית עולה.</p>
+</li>
+</ol>
+<p>משתי למות אלה, והעבודה שייתכן או שקיים כמות סופית של פסוגות או כמות אינסופית של פסגות הוכחת המשפט מיידי</p>
+<div class="theorem"><span class="keyword">בולצנו ווירשטראס</span><p>לכל סדרה חסומה יש תת סדרה מתכנסת</p>
+</div>
+<div class="proof">
+<p>מהטענה הקודמת קיימת תת סדרה מונוטונית, כאשר מירושה היא תהיה חסומה, ולכן קיימת תת סדרה מונוטונית וחסומה, כאשר ראינו כי סדרה כזו מתכנסת.</p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\((b_{n}),(a_{n})\)</span> סדרות חסומות. אז קיימת תת סדרה <span>\(n_{k}\)</span> כך ש-<span>\((a_{n_{k}})\)</span> ו-<span>\((b_{n_{k}})\)</span> שתיהם מתכנסות.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\((a_{n})\)</span> חסומה לפי בוצלנו ווירשטראס קיימת תת סדרה כך ש-<span>\((a_{n_{k}})\)</span> מתכנסת. נסתכל על <span>\((b_{n_{k}})\)</span>. כיוון ש<span>\((b_{n})\)</span> חסומה גם <span>\((b_{n_{k}})\)</span> חסומה ולכן קיימת עבורה תת סדרה כך ש-<span>\((b_{n_{k_{l}}})\)</span> מתכנסת. כעת, <span>\((a_{n_{k_{l}}})\)</span> גם כן מתכנסת מירושה. ולכן קיימת תת סדרה שעבורה גם <span>\((a_{n_{k_{l}}})\)</span> וגם <span>\((b_{n_{k_{l}}})\)</span> מתכנסת.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(\lambda \in \mathbb{R}\)</span>. אזי <span>\(\lambda\)</span> גבול חלקי של <span>\((a_n)_{n=1}^\infty\)</span> אם"ם לכל <span>\(\varepsilon&gt;0\)</span> התכונה <span>\(a_{n}-\lambda&lt;\varepsilon\)</span> היא תכונה שכיחה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='prev-page'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

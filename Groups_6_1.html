@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חבורות p סילו</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_5_3`; }});</script>
+        <div class="content">
+        <h1>6.1  חבורות p סילו</h1>
+    <div class="definition"><span class="keyword">חבורת <span>\(p\)</span> סילו</span><p>תהי <span>\(G\)</span> חבורה סופית ו-<span>\(p\)</span> מספר ראשוני. נכתוב <span>\(|G|=p^r\cdot m\)</span> עם <span>\(p\nmid m\)</span>. (כאשר נסמן <span>\(p^r \mid \mid |G|\)</span>). תת חבורה <span>\(H\leq G\)</span> נקראת חבורת <span>\(p\)</span>-סילו של <span>\(G\)</span> אם <span>\(|H|=p^r\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>אם <span>\(|G|=p^r\)</span> אזי <span>\(G\)</span> עצמה(ורק היא) חבורה <span>\(p\)</span> סילו שלה. </p>
+</li>
+<li>
+<p>עבור <span>\(G=S_{4}\)</span> נקבל <span>\(D_{4}\)</span> חבורת 2-סילו. <span>\(\langle (123)\rangle\)</span> חבורת 3-סילו, <span>\(\langle id\rangle\)</span> חבורת 5-סילו(<span>\(24=1\cdot 24=5^0\cdot 24\)</span>). </p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(Syl_{p}(G)\)</span> - קבוצת תתי החבורת ב-<span>\(p\)</span> סילו של <span>\(G\)</span>. כאשר נגדיר <span>\(k_{p}:=|Syl_{p}(G)|\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 1</span><p>יש חבורת <span>\(p\)</span> סילו.</p>
+</div>
+<div class="proof">
+<p>נסתכל על <span>\(X=\left\{  S\subseteq G  \mid |S|=p^r\right\}\)</span>. <span>\(G\circlearrowright X\)</span> ע"י כפל משמאל -<span>\(g.S=\left\{  gs\mid s\in S  \right\}\)</span>. ראשית, נראה כי <span>\(p\nmid |X|\)</span>.
+מתקיים: 
+<span>$$\begin{pmatrix}p^r m\\p^r 
+\end{pmatrix}=\frac{p^r m\cdot  (p^r m - 1) \cdot \dots\cdot (p^r m - p^r - 1)}{p^r (p^r-1)\cdot \dots\cdot (p^r-p^r+1)}$$</span>
+נראה ש-<span>\(p\)</span> מחלק את <span>\(p^r m - j\)</span> ואת <span>\(p^r - j\)</span> אותו מספר פעמים. לכל <span>\(0\leq j&lt;p^r\)</span>. נכתוב <span>\(j=p^{r'}\cdot m'\)</span> עם <span>\(p\nmid m'\)</span>. נשים לב ש-<span>\(r'&lt;r\)</span>. ואז: 
+<span>$$\begin{gathered}p^r m -j = p^r m - p^{r'}m' = p^{r'}(p^{r-r'}m-m') \\p^r - j = p^r - p^{r'}m'=p^{r'}(p^{r-r'}-m')
+\end{gathered}$$</span>
+מ-<span>\(p \nmid|X|\)</span> נובע שיש מסלול <span>\(O(s)\)</span> עם <span>\(p \nmid |O(s)|\)</span>. ניקח <span>\(P=Stab_{G}(S)\)</span>. ממשוואת מסלול מייצב:
+<span>$$|G|=|P|\cdot |O(s)|\implies p^r ||P|$$</span>
+מצד שני, <span>\(S\)</span> הוא איחוד של קוסטים של <span>\(P\)</span>: 
+<span>$$S=PS=\bigsqcup_{i=1}^k P_{S_{i}}$$</span>
+לנציגים <span>\(S_{1},\dots,S_{k}\)</span> כלשהם, ולכן <span>\(k\cdot |P|=p^r\)</span>. ולכן <span>\(|P|\)</span> חזקה של <span>\(p\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 2</span><p>כל חבורות <span>\(p\)</span> סילו צמודות זו לזו. כלומר <span>\(Syl_{p}(G)\)</span> מהווה מסלול בפעולת <span>\(G\)</span> על תתי החבורות שלה ע"י הצמדה.</p>
+</div>
+<div class="proof">
+<p>נראה טענה קצת חזקה יותר: אם <span>\(P \in Syl_{p}(G)\)</span> ו-<span>\(H\leq G\)</span> אזי קיים <span>\(g \in G\)</span> כך ש-<span>\(H\cap gPg^{-1}\in Syl_{p}(H)\)</span>. טענה זו תסיק את המשפט <span>\(II\)</span> של סילו כיוון ש: תהאנה <span>\(P,P'\)</span> חבורות <span>\(p\)</span> - סילו של <span>\(G\)</span>. ניקח <span>\(H=P'\)</span>. קיים <span>\(g \in  G\)</span> כך ש-<span>\(P'\cap gPg'\)</span> תת חבורה <span>\(p\)</span> סילו של <span>\(P'\)</span>. וזה גורר:
+<span>$$P'\cap gP g^{-1} =P' \implies gPg^{-1}  \subseteq P' \implies gPg^{-1} =P'$$</span>
+כי גדליהן שווים. תובנה כללית: <span>\(H,K\leq G\)</span>.<span>\(K\leq G\circlearrowright G / H\)</span>. מעניין לחקור את <span>\(K\circlearrowright G / H\)</span>. תרגיל - להראות ש- <span>\(Stab_{k}(gH)=K\cap gHg^{-1}\)</span> כאשר המסלולים נקראים קוסטים כפולים(<span>\(\text{Double Cosets}\)</span>). נחזור להוכיח את המשפט: נסתכל על <span>\(H \circlearrowright G / P\)</span>. כאשר <span>\(p\nmid m\)</span> ולכן <span>\(p\nmid |G / P|\)</span> יש מסלול <span>\(O(gP)\)</span> כך ש:
+<span>$$p\nmid |O(gP)|\implies p\nmid [H:Stab_{H}(gP)]\implies p\nmid \frac{|H|}{|H\cap gPg^{-1} |}$$</span>
+כלומר אם <span>\(|H|=p^{r'}m'\)</span>(כאשר <span>\(p\nmid m'\)</span> ) אזי <span>\(p^{r'}\mid|H\cap gPg^{-1} |\)</span>. מצד שני, <span>\(|H\cap gPg^{-1} |\mid|gPg^{-1} |\)</span> מלגרנג' כאשר <span>\(|gPg^{-1} |\)</span> חזקה של <span>\(P\)</span>. ולכן <span>\(|H\cap gPg^{-1} |\)</span> חזקה של <span>\(P\)</span>. ומשתי טענות אלו נובע המשפט.</p>
+</div>
+<div class="corollary">
+<p>חבורת <span>\(p\)</span> סילו היא נורמלית אם"ם היא החבורת <span>\(p\)</span> סילו היחידה.</p>
+</div>
+<div class="definition"><span class="keyword">נילפוטנטיות</span><p>חבורת סופית שכל החבורות ה-<span>\(p\)</span> סילו שלה הן נורמליות נקראת נילפוטנטית. אם"ם <span>\(k_{p}=1\)</span> לכל ראשוני <span>\(p\)</span>. כל תת חבורת <span>\(p\)</span> של <span>\(G\)</span> מוכלת בחבורת <span>\(p\)</span> סילו.</p>
+</div>
+<div class="remark">
+<p>משפט סילו זה סוג משפט הפוך של משפט לגרנג'.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 3</span><p><span>$$k_{p}=|Syl_{p}(G)|\implies \begin{cases}k_{p}\mid m \\k_{p} \equiv 1\mod p
+\end{cases}$$</span></p>
+</div>
+<div class="proof">
+<p>תהי <span>\(P \in Syl_{p}(G)\)</span>. מתקיים:
+<span>$$k_{p}=|O(p)|=[G:N_{G}(P)]=\frac{|G|}{|N_{G}|}$$</span>
+כאשר המעבר הראשון נובע מסילו <span>\(II\)</span> ומעבר שני ממשפט מסלול מייצב במסלול של <span>\(G\)</span> ע"י הצמדה. כעת:
+<span>$$Stab(P)=\left\{  g\in G\mid gPg^{-1} =P  \right\}=N_{G}(P)\geq P\xrightarrow{lagrange} p^r \mid N_{G}(P)\implies \frac{|G|}{|N_{G}(P)|}\mid m$$</span>
+כעת נסתכל על הפעולה של <span>\(P\)</span> על <span>\(Syl_{p}(G)\)</span> ע"י הצמדה. המסלול של <span>\(P\)</span> הוא <span>\(\{ P \}\)</span>. נראה שאם <span>\(P\neq P'\in Syl_{p}(G)\)</span> אזי <span>\(1\neq|O(P')|\)</span> ומזה נובע <span>\(P\mid|O(P')|\)</span> כי ממשפט מסלול מייצב. אבל המסלול מחלק את גודל החבורה הפועלת, <span>\(p^r=|P|\)</span> ומכאן נובע
+<span>$$k_{p}=|Syl_{p}(G)|=\sum_{orbits}|O(H)|\implies k_{p}\equiv 1\mod p$$</span>
+כעת נניח בשלילה ש-<span>\(O(P')=\{ P' \}\)</span>. אזי <span>\(gP'=P'g\)</span> לכל <span>\(g \in P\)</span>. לכן <span>\(PP'=P'P\)</span> וזה מתקיים אם"ם <span>\(PP'\leq G\)</span>(תרגיל). וכן:
+<span>$$|PP'|=\frac{|P|\cdot |P'|}{|P\cap P'}=\frac{p^{2r}}{|P\cap P'|}$$</span>
+נכתוב <span>\(|P\cap P'|=p^{2r-k}\)</span>. ולכן <span>\(0\leq k\leq r\)</span>. מכיוון ש:
+<span>$$\begin{cases}|PP'|=p^{2r-k} \\|PP'|\mid p^r m
+\end{cases}\implies r\leq k\implies P=P'$$</span>
+וקיבלנו סתירה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+<li class='prev-page'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

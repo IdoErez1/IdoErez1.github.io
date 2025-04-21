@@ -1,0 +1,2354 @@
+
+            <!DOCTYPE html>
+            <html>
+                    <head>
+    <meta charset="UTF-8">
+                    <style> @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --c1: #EEB902;
+  --c2: #F45D01;
+  --symbolize-text: #8377D1;
+  --c4: #7FBC69;
+  --c5: #005C7A;
+  --remark-text: #7EBCED;
+  --definition-text: #2E8A3D;
+  --proposition-text: #E1403D;
+  --theorem-text: #F39237;
+  --iyellow: #F9C762;
+  --idark: #1A535C;
+  --definition-bg: rgba(249, 199, 98, 0.1);
+  --proposition-bg: rgba(225, 64, 61, 0.05);
+  --example-bg: rgba(26, 83, 92, 0.2);
+  --remark-bg: rgba(126, 188, 230, 0.11);
+  --theorem-bg: rgba(228, 147, 82, 0.05);
+  --symbolize-bg: rgba(131, 119, 209, 0.05);
+  --corollary-bg: rgba(255, 195, 0, 0.05); /* Light yellow for corollary */
+  --corollary-text: #FFC300;
+  --reminder-bg: rgba(255, 165, 0, 0.05); /* Light orange for reminder */
+  --reminder-text: #FFA500;
+
+  --lemma-bg: rgba(75, 192, 192, 0.05); /* Soft teal for lemma */
+  --lemma-text: #4BC0C0;
+  --table-even-bg: #f2f2f2;
+  /* --svg-path-color: #111; */
+
+  --table-background: #f5f5f5; /* Light grey for table background */
+  --table-border-color: #cccccc; /* Light border color */
+  --table-header-bg: #e1e1e1; /* Light background for table header */
+  --table-header-text: #2c3e50; /* Darker text for headers */
+  --table-row-bg-odd: #ffffff; /* White for odd rows */
+  --table-row-text: #2c3e50; /* Dark text for rows */
+  --table-disabled-text: #b0b0b0; /* Disabled row text color */
+
+  /* Define light mode colors as CSS variables */
+  --summary-bg-color: #f9f9f9;
+  --summary-label-bg: #4a90e2;
+  --summary-background-color: #4a90e255;
+  --summary-border-color: #e0e0e0;
+  --summary-label-color: white;
+  --summary-text-color: #333;
+
+  direction: rtl;
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--corollary-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--corollary-text);
+  padding: 10pt;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--corollary-text);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--corollary-text);
+}
+
+/* Lemma Block */
+.lemma {
+  background-color: var(--lemma-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--lemma-text);
+  padding: 10pt;
+}
+
+.lemma::before {
+  font-weight: bold;
+  color: var(--lemma-text);
+  content: "למה";
+}
+
+.lemma::first-line {
+  color: var(--lemma-text);
+}
+
+/* Your existing styles */
+.definition {
+  display: block;
+  background: var(--definition-bg);
+  text-align: right;
+  border-right: 1.5mm;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-style: solid;
+  border-color: var(--definition-text);
+  padding: 10pt;
+}
+
+h1 {
+  color: var(--remark-text);
+}
+
+.definition::before {
+  font-weight: bold;
+  color: var(--definition-text);
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--definition-text);
+}
+
+.proposition {
+  background-color: var(--proposition-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--proposition-text);
+  padding: 10pt;
+}
+
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--proposition-text);
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--proposition-text);
+}
+
+.proof {
+  padding: 10pt;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: var(--example-bg);
+  border: 2pt solid var(--example-bg);
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--remark-text);
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: var(--remark-bg);
+  border: 0;
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--summary-label-bg);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--summary-background-color);
+  margin-top: 15px;
+  color: var(--summary-text-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--summary-label-bg);
+  color: var(--summary-label-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+.theorem {
+  background-color: var(--theorem-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--theorem-text);
+  padding: 10pt;
+}
+
+.theorem::first-line {
+  color: var(--theorem-text);
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--theorem-text);
+  content: "משפט";
+}
+
+.symbolize {
+  background-color: var(--symbolize-bg);
+  border-radius: 8pt;
+  border: 2pt solid var(--symbolize-text);
+  padding: 10pt;
+}
+
+
+.symbolize::before {
+  font-weight: bold;
+  color: var(--symbolize-text);
+  content: "סימון";
+}
+
+div {
+  margin: 6pt 0;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  background: var(--table-background);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--table-header-text);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--table-header-bg);
+}
+
+td {
+  color: var(--table-row-text);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--table-row-bg-odd);
+}
+
+@page {
+  @bottom-center {
+    /*background: #f1c55675;*/
+    content: counter(page); 
+    display: block;
+  }
+}
+@page :blank {
+  @bottom-center { content: none }
+}
+@page no-chapter {
+  @bottom-center { content: none }
+}
+@page :first {
+  /*background: url(cover.jpg) no-repeat center;*/
+  background-size: cover;
+  margin: 0;
+  @bottom-center{
+    content: none;
+  }
+}
+@page chapter {
+  background: #fbc847;
+  margin: 0;
+  @bottom-center { content: none }
+}
+
+#cover {
+  margin: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  background-repeat: repeat;
+  padding: 10cm 0;
+width: 100vw;
+  align-content: space-between;
+  height: 29.7cm;
+  text-align: center;
+  color: white;
+  align-items: center;  
+  text-shadow: 15px 15px 20px #0000008c;
+  text-align: center;
+}#cover h1{
+  margin: 0;
+  font-size: 60px;
+  page-break-before: auto;
+}
+#cover h2{
+  font-size: 40px;
+}
+
+h1{
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+#toc a::after { 
+  content: leader(".") target-counter(attr(href), page); 
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+/* ol{
+  counter-reset: list-counter 0;
+}
+ol li{
+  counter-increment: list-counter 1;
+} */
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document Height:', document.documentElement.scrollHeight);
+    console.log('Viewport Height:', window.innerHeight);
+    let pagenums = [2,2,5,8,15,20,20,23,27,28,33,38,38,39,41,41,43,44,48,48,50,54,57,60,60, 63,69,69,74,78,83,86,86,91];
+    let i=0;
+    const tocLinks = document.querySelectorAll('#toc a');
+    tocLinks.forEach(link => {
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            const rect = targetElement.getBoundingClientRect();
+            const pageYOffset = window.pageYOffset;
+            const elementTop = rect.top + pageYOffset;
+            const pageHeight = window.innerHeight;
+
+            const pageNum = pagenums[i];//Math.max(1, Math.ceil(elementTop / pageHeight));
+            i += 1;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'toc-entry';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = link.textContent;
+            titleSpan.className = 'toc-title';
+
+            const dotsSpan = document.createElement('span');
+            dotsSpan.className = 'toc-dots';
+
+            const pageSpan = document.createElement('span');
+            pageSpan.textContent = pageNum;
+            pageSpan.className = 'toc-page';
+
+            wrapper.appendChild(titleSpan);
+            wrapper.appendChild(dotsSpan);
+            wrapper.appendChild(pageSpan);
+
+            link.parentNode.replaceChild(wrapper, link);
+        }
+    });
+});
+</script>
+        </head>
+            <body>
+            <div id='cover' style='background-color: #026873;'>
+            <h1>תורת החבורות</h1>
+            <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+        <h1 id='groups_1'>מבוא לחבורות</h1>
+<h2 id='groups_1_1'>הגדרה ותכונות</h2>
+ <h2>הגדרת החבורה</h2>
+<div class="definition"><span class="keyword">חבורה</span><p>חבורה היא קבוצה <span>\(G\)</span> עם פעולה בינארית <span>\(\circ:G\times G\to G\)</span>  המקיימת:</p>
+<ol>
+<li>
+<p>אסוציאטיביות: <span>\(\forall x,y,z\in G\quad(x\circ y)\circ z=x\circ(y\circ z)\)</span> </p>
+</li>
+<li>
+<p>קיים איבר ניטרלי/יחידה <span>\(e\in G\)</span> </p>
+</li>
+<li>
+<p>קיום הופכי - לכל <span>\(x \in G\)</span> קיים <span>\(y\in G\)</span> כך ש- <span>\(x\circ y=y\circ x=e\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>איבר ניטרלי הוא יחיד</p>
+</div>
+<div class="proof">
+<p>אם <span>\(e_{1},e_{2}\in G\)</span> שניהם ניטרלים אזי
+<span>$$e_{1}=e_{1}\circ e_{2}=e_{2}$$</span></p>
+</div>
+<div class="remark">
+<p>לא דרשנו קומוטטיביות</p>
+</div>
+<div class="example">
+<p>הצירופים הבאים של קבוצות ופעולה יהיו חבורה:
+- השלמים עם חיבור - <span>\((\mathbb{Z},+)\)</span>
+- רציונלים ללא 0 עם פעולת הכפל
+- רציונאלים חיוביים עם פעולת הכפל
+- חיבור מודולרי
+- קבוצה טבעיים ללא 0 עם כפל מודולו <span>\(n\)</span> כאשר <span>\(n\)</span> ראשוני
+- הטבעיים עם חיסור - <span>\((\mathbb{Z},-)\)</span>. יש ניטרלי מצד אחד(0) והופכי(<span>\(x\)</span> הופכי ל-<span>\(x\)</span>)</p>
+</div>
+<div class="example">
+<p>הצירופים הבאים של קבוצות ופעולה הם לא חבורה:
+- שלמים בלי אפס עם כפל - <span>\((\mathbb{Z}\setminus \{ 0 \},\times)\)</span> - לא חבורה כיוון שאין איבר הופכי לכל איבר
+- קבוצה טבעיים ללא 0 עם כפל מודולו <span>\(n\)</span> כאשר <span>\(n\)</span> לא ראשוני</p>
+</div>
+<div class="remark">
+<p>בכל שדה יש עבור כל פעולה חבורות. ולכן מכל שדה ניתן ליצור 2 חבורות. כנל עם מרחב וקטורי. זאת כיוון שהאקסיומות של המרחב וקטורי והשדה מכילות בתוכם את האקסיומות של החבורה.</p>
+</div>
+<p><strong>דוגמה</strong>
+חבורת הסימטריות - <span>\((Sym_{x},\circ)\)</span> כאשר <span>\(\circ\)</span> היא פעולת ההרכבה ו- <span>\(Sym_{x}\)</span> זה הקבוצת הפונקציות החח"ע ועל. פונקציות הזהות היא איבר היחידה, כיוון שהפונקציות הם חח"ע ועל אז הם הפיכות ולכל איבר קיים הופכי.</p>
+<div class="example">
+<p>סוגרי לי(Lie): <span>\((M_{n}(\mathbb{R}),[\cdot,\cdot])\)</span> - לא אסוצייטבית:</p>
+<p><span>$$[A,B]=A\cdot B-B\cdot A$$</span></p>
+</div>
+<div class="example">
+<p>מטריצות הפיכות <span>\(n\times n\)</span> עם כפל מטריצות. מסומן ב-<span>\(GL_{n}(\mathbb{R})\)</span></p>
+</div>
+<div class="remark">
+<p>בדרכ נקרא לפעולה כפל, ונסמן אותה ב-<span>\(\times\)</span> ונשמיט אותה. </p>
+</div>
+<h2>תכונות של חבורות</h2>
+<p>במשפטים הבאים, <span>\((G,\cdot)\)</span> חבורה, ו-<span>\(e\)</span> איבר ניטרלי.</p>
+<div class="proposition">
+<p>ההופכי הוא יחיד.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(x \in G\)</span> ו-<span>\(y,z\)</span> הופכיים של <span>\(x\)</span> אזי:
+<span>$$xy=yx=xz=zx=e$$</span>
+לכן:
+<span>$$y=ye=y(xz)=(yx)z=ez=z$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של חבורות</span><ol>
+<li>
+<p>מתקיים <span>\((x^{-1})^{-1}=x\)</span> </p>
+</li>
+<li>
+<p>הופכי של כפל מקיים <span>\((xy)^{-1}=y^{-1}x ^{-1}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(xy=e\)</span> אז <span>\(y=x ^{-1}\)</span> </p>
+</li>
+<li>
+<p>צמצום:<br />
+<span>$$xy=xz\implies y=z \impliedby yx=zx$$</span></p>
+</li>
+<li>
+<p>העברת אגף:<br />
+<span>$$xy=z\iff y=x ^{-1}z$$</span></p>
+</li>
+<li>
+<p>פתרון משוואה: לכל <span>\(a,b\in G\)</span>, למשוואה <span>\(ax=b\)</span> יש פתרון יחיד ב-<span>\(G\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(a\in G\)</span>, אזי <span>\(f:G\to G\)</span> המוגדרת <span>\(f(g)=ag\)</span> היא תמורה על <span>\(G\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">פרמה</span><p>אם <span>\(p\)</span> ראשוני ו-<span>\(0&lt;a &lt;p\)</span> אזי <span>\(a^{p-1}\equiv 1\mod p\)</span></p>
+</div>
+<p>נוכיח טענה כללית יותר:</p>
+<div class="theorem"><span class="keyword"></span><p>אם <span>\((G,\cdot)\)</span> חבורה והפעולה קומוטטיבית אזי לכל <span>\(a\in G\)</span> מתקיים <span>\(a^{|G|}=e\)</span> (כאשר פרמה זה במקרה <span>\(G=(\mathbb{F}_{p}\setminus \{ 0 \},\otimes)\)</span>)</p>
+</div>
+<div class="proof">
+<p>נמספר את איברי <span>\(G\)</span>: <span>\(g_{1},g_{2},\dots,g_{|G|}\)</span>. 
+ראינו שכפל ב-<span>\(a\)</span> זה תמורה, כלומר:
+<span>$$\{ ag_{1},ag_{2},\dots,ag_{|G|} \}=\{ g_{1},\dots,g_{|G|} \}$$</span>
+ולכן:
+<span>$$a^{|G|}\prod_{i=1}^{|G|}(g_{i})=\prod_{i=1}^{|G|}(ag_{i})=\prod_{i=1}^{|G|}(g_{i})$$</span>
+וניתן לצמצם ולקבל:
+<span>$$a^{|G|}=e$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אלגוריתם של פרמה לבדיקת ראשוניות</span><p>אלגוריתם הסתבוריתי להכרעה אם מספר הוא ראשוני הפועל בצורה הבאה:</p>
+<ol>
+<li>
+<p>בהנתן <span>\(n\in \mathbb{N}\)</span>, מגרילים <span>\(1&lt;a&lt;n\)</span>. ובודקים האם: 
+<span>$$a^{n-1} \equiv 1\mod n$$</span></p>
+</li>
+<li>
+<p>אם כן - לא ידוע אם ראשוני. נצפה שראשוני, וננסה לחזור עם עוד <span>\(a\)</span>. </p>
+</li>
+<li>
+<p>אם לא - בוודאות לא ראשוני. </p>
+</li>
+<li>
+<p>אם חוזרים על זה הרבה פעמים, הסבירות שהמספר ראשוני יעלה.  </p>
+</li>
+</ol>
+</div>
+<h2>לוח כפל</h2>
+<p>עבור חבורה ניתן לבנות לוח כפל עם האיברים של החבורה. נזכיר כי בגלל חוק הביטול אם <span>\(a\cdot b=a\cdot c\)</span> אז <span>\(b=c\)</span>. לכן בכל שורה ועמודה כל ערך יכול להופיע רק פעם אחת. נבנה לוח כפל עבור החבורה <span>\(D_{3}\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span>\(\circ\)</span></th>
+<th><strong>Id</strong></th>
+<th><span>\(\mathbf{R_{120}}\)</span></th>
+<th><span>\(\mathbf{R_{240}}\)</span></th>
+<th><span>\(\mathbf{F_{0}}\)</span></th>
+<th><span>\(\mathbf{F_{120}}\)</span></th>
+<th><span>\(\mathbf{F_{240}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Id</strong></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{R_{120}}\)</span></td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{R_{240}}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{0}}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{120}}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{240}}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(R_{123}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+</tr>
+</tbody>
+</table>
+<p>כאשר <span>\(R_{\theta}\)</span> מסמנת סיבוב ב-<span>\(\theta\)</span> מעלות, ו-<span>\(F_{\theta}\)</span> מסמן להפוך את הצורה לאורך הציר שנמצא ב-<span>\(\theta\)</span> מעלות.
+ניתן לראות כי חבורה זו אינה קומוטטיבית</p>
+<h2>איזומורפיזם</h2>
+<p>ננסה לבנות חבורה כללית עם שלושה איברים, נסמן <span>\(G=\{ e,a,b \}\)</span>. ננסה לבנות טבלת כפל:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\cdot\)</span></th>
+<th>e</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>e</strong></td>
+<td>e</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td><strong>a</strong></td>
+<td>a</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>b</strong></td>
+<td>b</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>כאן נראה כאילו יש לנו בחירה, אך למעשה לא ייתכן ש-<span>\(a\cdot a=a\)</span> ויהיה את אותו ערך פעמיים בשורה. לכן הטבלת כפל שלנו תראה:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\cdot\)</span></th>
+<th>e</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>e</strong></td>
+<td>e</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td><strong>a</strong></td>
+<td>a</td>
+<td>b</td>
+<td>e</td>
+</tr>
+<tr>
+<td><strong>b</strong></td>
+<td>b</td>
+<td>e</td>
+<td>a</td>
+</tr>
+</tbody>
+</table>
+<p>ועבור מספרים כלליים קיבלנו טבלה יחידה. זה אומר שלכל החבורות עם שלושה איברים תהיה את הטבלה הזו, כלומר אפשר לחשוב על זה כאילו יש סוג של שיוויון בין בחבורות בגודל 3</p>
+<div class="definition">
+<p>אם <span>\((G,\circ)\)</span> ו-<span>\((H,\times)\)</span> שתי חבורות, אזי פונקציה <span>\(f:G\to H\)</span> נקראת איזומורפיזם(של חבורות) אם היא חח"ע ועל ושומרת כפל:
+<span>$$\forall g,g' \in G,\quad f(g\circ g')=f(g)\times f(g')$$</span></p>
+</div>
+<div class="symbolize">
+<p>אם קיים איזומורפיזם מחבורה <span>\(G\)</span> לחבורה <span>\(H\)</span>, הן נקראות איזומורפיות. מסומן <span>\(G\cong H\)</span></p>
+</div>
+<div class="proposition">
+<p>איזומורפיות היא יחס שקילות. אם <span>\(G,H,K\)</span> חבורות, אזי:</p>
+<ol>
+<li>
+<p>חבורה איזומורפית לעצמה - <span>\(G\cong G\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G \cong H\)</span> אזי <span>\(H\cong G\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G\cong H\cong K\)</span> אזי <span>\(G\cong K\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$(\{ \pm 1 \},x)\cong (\mathbb{Z}_{2},\oplus_{2}) \cong (\mathbb{F}_{3}\setminus \{ 0 \}, \otimes_{3} )$$</span>
+<span>$$(\mathbb{R},+)\cong (R_{&gt;0},\times)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מכפלה ישרה</span><p>אם <span>\(G\)</span>,<span>\(H\)</span> חבורות, המכפלה הישרה שלהם (מסומנת <span>\(G\times H\)</span>) היא החבורה שאיבריה הם הזוגות<span>\((g,h)\)</span> כש-<span>\(g\in G\)</span> ו-<span>\(h\in H\)</span>, והפעולה:
+<span>$$(g,h)\cdot (g',h')=(g\cdot g', h\cdot h')$$</span></p>
+</div>
+<div class="remark">
+<p>שאלה מתבקשתי היא מתי חבורה מסויימת איזומורפית למכפלה?
+למשל, החבורה.
+<span>$$\mathbb{C}^{\times}\cong\mathbb{R}_{&gt;0}^{\times}\times \underbrace{ S^1 }_{ \{ z\in \mathbb{C}\mid |z|=1 \} }$$</span>
+זו שאלה שנענה עליה בהמשך.</p>
+</div><h2 id='groups_1_2'>תתי חבורות</h2>
+ <h2>תתי חבורות</h2>
+<div class="definition"><span class="keyword">תת חבורה</span><p>אם <span>\(G\)</span> חבורה, ו-<span>\(H\subseteq G\)</span>, אזי <span>\(H\)</span> נקראת תת חבורה של <span>\(G\)</span> </p>
+</div>
+<div class="definition"><span class="keyword">תת חבורה נוצרת על ידי איבר</span><p>אם <span>\(G\)</span> חבורה ו-<span>\(S\subseteq G\)</span>, התת חבורה שנוצרת ע"י <span>\(S\)</span> היא התת חבורה המינימלית שמכילה את <span>\(S\)</span>, מסומנת <span>\(\langle S\rangle\)</span>.</p>
+</div>
+<div class="remark">
+<p>יש כזו! נקח את <span>\(\bigcap_{{H\leq G,S\subseteq H}}H\)</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\langle s\rangle=\left\{  \prod_{i=1}^{l}s_{i}\bigg| l\in\mathbb{N}\setminus \{ 0 \},s_{i}\in S,e_{i} \in \{ 1,-1 \}  \right\}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור <span>\(G=\mathbb{Z}\)</span> מתקבל <span>\(\mathbb{Z}=\langle 1\rangle\)</span> </p>
+</li>
+<li>
+<p>עבור <span>\(G=2\mathbb{Z}\)</span> מתקבל <span>\(2\mathbb{Z}=\langle 2\rangle\)</span> </p>
+</li>
+<li>
+<p>עבור החבורה <span>\(G=\mathbb{Z}_{9}^x\)</span> מתקבל <span>\(G=\langle 2\rangle\)</span> 
+תזכורת: <span>\(Z_{n}^x=\{ 1\leq t\leq n \;\big|\;gcd(t,n)=1 \}\)</span></p>
+</li>
+<li>
+<p>עבור <span>\(G=D_{n}\)</span> אם <span>\(\sigma\)</span> סיבוב -<span>\(\frac{2\pi}{n}\)</span> ימינה ו-<span>\(\tau\)</span> שיקוף כלשהו אז: 
+<span>$$D_{n}=\langle \sigma,\tau\rangle $$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">חבורה ציקלית</span><p>חבורה נקראת ציקלית אם יש איבר שיוצר אותה, כלומר <span>\(G=\langle g\rangle\)</span>. </p>
+</div>
+<p>לדוגמא <span>\(\mathbb{Z},\mathbb{Z}_{9}^x\)</span>.
+לא דוגמא: <span>\(\mathbb{Z}_{8}\)</span>.</p>
+<div class="definition"><span class="keyword">חבורה אבלית</span><p>חבורה נקראת אבלית אם הכפל בה קומוטטיבי</p>
+</div>
+<div class="proposition">
+<p>חבורה ציקלית היא אבלית</p>
+</div>
+<div class="proof">
+<p>קיים <span>\(g\in G\)</span> כך ש-<span>\(G=\langle g\rangle\)</span>. הובע שכל איבר <span>\(x \in G\)</span> היא מהצירה <span>\(g^m\)</span> עבור <span>\(m\in \mathbb{Z}\)</span> כלשהו. ואז אם <span>\(x,y \in G\)</span> קיימים <span>\(m,n \in \mathbb{Z}\)</span> כך ש-<span>\(x=g^m\)</span>, <span>\(y=g^n\)</span>. ולכן:
+<span>$$x\cdot y=g^m \cdot g^n=g^{m+n}=g^n g^m=y\cdot x$$</span></p>
+</div>
+<div class="corollary">
+<p>החבורה <span>\(D_{3}\)</span> אינה ציקלית. </p>
+</div>
+<div class="definition"><span class="keyword">מרכז של חבורה</span><p>המרכז(center) של חבורה הוא:
+<span>$$Z(G) =\{ x \in G \big| \forall h\in G\quad gh=hg \}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>אם <span>\(G\)</span> אבלית אז <span>\(\mathbb{Z}(G)=G\)</span>(ורק אם!) </p>
+</li>
+<li>
+<p><span>\(\mathbb{Z}(D_{3})=\{ e \}\)</span> </p>
+</li>
+<li>
+<p><span>\(Z(D_{4})=\{ e, R_{180} \}\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>המרכז של חבורה היא תת חבורה שלה(<span>\(\mathbb{Z}(G)\leq G\)</span>)</p>
+</div>
+<div class="proof">
+<p>מכיל את איבר היחידה - <span>\(eg=ge\)</span>. וכן:
+<span>$$\forall k \in G, gh \in \mathbb{Z}(G) \quad (gh)k=g(hk)=g(kh)=(gk)h=(kg)h=k(gh)$$</span>
+ואז:
+<span>$$g^{-1}k=\dots=kg^{-1}$$</span>
+וסגור להופכי</p>
+</div>
+<div class="definition"><span class="keyword">גרף קיילי</span><p>של חבורה ביחס לאיברים <span>\(S\subseteq G\)</span> הוא גרף עם קודקודים <span>\(G\)</span>. וקשתות מכוונות מקודקוד <span>\(g\)</span>, לקודקוד <span>\(sg\)</span> ו-<span>\(s \in S\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מתקיים <span>\(\langle s\rangle=G\)</span> אם"ם יש מסילה מכל קודקוד לכל קודקוד(גרף קשיר), כשמתעלמים מכיווני החצים.</p>
+</div>
+<div class="definition"><span class="keyword">קוסט</span><p>אם <span>\(G\)</span> חבורה ו-<span>\(H\leq G\)</span>, אז לכל <span>\(g \in G\)</span> הקוסט השמאלי של <span>\(H\)</span> המתקבל מ-<span>\(g\)</span> הוא:
+<span>$$gH=\{ gh\;|\; h\in H\}$$</span>
+כאשר הקוסט הימיני יהיה:
+<span>$$Hg=\{ hg \;|\; h\in H \}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>ישריות במרחב וקטורי </p>
+</li>
+<li>
+<p>עבור <span>\(G=\mathbb{Z}\)</span>, <span>\(H=5\mathbb{Z}\)</span> נקבל: 
+<span>$$17+5\mathbb{Z}=\{ \dots,7,12,17,22,27,32,\dots \}$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(G=D_{3}\)</span> ו-<span>\(H=\{ e,F_{0} \}\)</span> נקבל: 
+<span>$$\begin{gather}R_{120}\cdot H=\{ R_{120}, F_{120} \} \\H\cdot R_{120}=\{ R_{120}, F_{240} \}
+\end{gather}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>אם <span>\(C\subseteq G\)</span> קוסט שמאלי של <span>\(H\)</span>, ו-<span>\(g \in C\)</span> אזי <span>\(C=gH\)</span>.</p>
+</div>
+<div class="proof">
+<p>יודעים שיש <span>\(x \in G\)</span> כך ש-<span>\(C=xH\)</span>. בפרט <span>\(g=xh\)</span> ל-<span>\(h \in H\)</span> כלשהו. ואז:
+<span>$$gH=(xh)H=x(hH)=xH$$</span></p>
+</div>
+<div class="corollary">
+<p>שני קוסטים שמאליים(ימניים) הם זהים או זרים. לכן <span>\(G\)</span> הוא איחוד זר של הקוסטים השמאליים של <span>\(H\)</span>, וגם של הקוסטים הימניים של <span>\(H\)</span>. כלומר: <span>\(G=\bigsqcup gH\)</span></p>
+</div>
+<div class="example">
+<p><span>$$G=3\mathbb{Z} \bigsqcup 1+3\mathbb{Z}\bigsqcup 5+3\mathbb{Z}$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב אם <span>\(G\)</span> חבורה ו-<span>\(H\subseteq G\)</span>, אז "להיות באותו קוסט שמאלי של <span>\(H\)</span>" הוא יחס שקילות על <span>\(G\)</span>.</p>
+</div>
+<div class="proposition">
+<p>איברים <span>\(x,y \in G\)</span> באותו קוסט שמאלי אם"ם:
+<span>$$xH=yH \iff y^{-1}x \in H ,y^{-1}xH=H \iff y\in xH$$</span></p>
+</div>
+<div class="example">
+<p>כאשר <span>\(G=\mathbb{Z}\)</span>, <span>\(H=mz\)</span>. מתי <span>\(a\)</span>,<span>\(b\)</span> האותו קוסט שמאלי של <span>\(H\)</span>? זה יהיה כאשר <span>\(a-b \in m\mathbb Z\)</span>, כלומר <span>\(a\equiv b\mod(m)\)</span></p>
+</div>
+<div class="definition"><span class="keyword">אינדקס</span><p>האנדקס של <span>\(H\)</span> ב-<span>\(G\)</span> (כש-<span>\(H\leq G\)</span>), הוא מספר הקוסטים השמאליים של <span>\(H\)</span> ב-<span>\(G\)</span>. מסומן <span>\([G:H]\)</span></p>
+</div>
+<div class="remark">
+<p>זה גם מספר הקוסטים הימניים - ההופכי של קוסט שמאלי הוא קוסט ימני:
+<span>$$(gH)^{-1}=\{ (gh)^{-1} \big| h\in H \}=\{ h^{-1}g^{-1} \big|h\in H \}=Hg^{-1}$$</span>
+מקבלים העתקה חח"ע ועל בין הקוסטים הימניים לשמאליים.</p>
+</div>
+<div class="proposition">
+<p>לכל הקוסטים של <span>\(H\)</span> אותו הגודל. </p>
+</div>
+<div class="proof">
+<p>ההעתקה <span>\(T:G\to G\quad T(x)=gx\)</span> היא חח"ע ועל. בפרט:
+<span>$$|gH|=|T(H)|=|H|$$</span></p>
+</div>
+<div class="corollary">
+<p>הגודל של <span>\(G\)</span> הוא הגדול(הזהה) של כל קוסט כפול מספר הקוסטים הזרים. כלומר:
+<span>$$\boxed{|G|=[G:H]|H|}
+$$</span></p>
+</div>
+<div class="remark">
+<p>זה כולל את המקרה האינסופי</p>
+</div>
+<div class="theorem"><span class="keyword">לגרנג'</span><p>הגודל של תת חבורה מחלק את הגודל של החבורה. כלומר:
+<span>$$|H| \;\big|\;|G|$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(G\)</span> סופית ו-<span>\(g^{|G|}=e\)</span> </p>
+</div>
+<div class="proof">
+<p>תהי <span>\(H=\langle g\rangle\)</span>, אזי <span>\(|H| \;\big|\;|G|\)</span>, נניח <span>\(|G|=|H|\cdot m\)</span>. ואז:
+<span>$$g^{|G|}=(g^{|H|})^m=e^m=e$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(|G|\)</span> ראשוני, אז אין ל-<span>\(G\)</span> תת חבורה לא טריוויאלית, ובפרט היא ציקלית(לכל <span>\(e\neq g\)</span> בהכרח <span>\(\langle g\rangle=G\)</span>).</p>
+</div>
+<div class="theorem"><span class="keyword">אוילר</span><p>אם <span>\(gcd(a,n)=1\)</span>, אזי <span>\(a^{\varphi(n)}=1\mod n\)</span>. כאשר:
+<span>$$\varphi(n)=|Z_{n}^\times|=|\left\{  1\leq t\leq n \;\big|\;\mathrm{gcd}(t,n)=1  \right\}|$$</span></p>
+</div>
+<div class="remark">
+<p>משומש באלגוריתם RSA</p>
+</div>
+<div class="definition"><span class="keyword">תת חבורה נורמלית</span><p>תת חבורה <span>\(H\)</span> של <span>\(G\)</span> נקראת נורמלית אם <span>\(gH=Hg\)</span> לכל <span>\(g \in G\)</span>. כלומר המחלק הימיני שווה למחלק השמאלי. 
+סימון: <span>\(H \trianglelefteq G\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>תת חבורה אבלית היא נורמלית </p>
+</li>
+<li>
+<p>המרכז של חבורה היא נורמלית גם אם לא אבלית(<span>\(\mathbb{Z}(G)\trianglelefteq G\)</span>). </p>
+</li>
+<li>
+<p>סיבוב ב-<span>\(D_{3}\)</span> - <span>\(\{ e,R_{120},R_{240} \}\trianglelefteq D_{3}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>תת חבורה של שיקוף הוא לא תת חבורה נורמלית ב-<span>\(D_{3}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\([G:H]=2\)</span> אזי <span>\(H\trianglelefteq G\)</span>. </p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\forall g \in H\quad  gH=H=Hg\\\forall g\notin H\quad  gH=G\setminus H=Hg \\H \bigsqcup gH=G=H  \bigsqcup G \setminus H
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p><span>\(H   \trianglelefteq G\)</span> </p>
+</li>
+<li>
+<p><span>\(gHg^{-1}=H\)</span> </p>
+</li>
+<li>
+<p>הקוסטים הימניים של <span>\(G\)</span> הם שמאליים ולהיפך. </p>
+</li>
+</ol>
+</div>
+<div class="symbolize"><span class="keyword"></span><p>הקוסטים השמאליים של <span>\(H\)</span> ב-<span>\(G\)</span> מסומנים <span>\(G/H\)</span> והימניים מסומנים <span>\(H/G\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$\mathbb{Z}/3\mathbb{Z}=\{ 3\mathbb{Z},3\mathbb{Z}+1,3\mathbb{Z}+2 \}$$</span>
+לכן ניתן להגיד שתת חבורה <span>\(H\leq G\)</span> היא נורמלית אם"ם <span>\(G/H=H/G\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הצמדה</span><p>עבור איבר <span>\(g\)</span>, הפונקציה מ-<span>\(G\)</span> ל-<span>\(G\)</span> ששולחת <span>\(h\)</span> ל-<span>\(ghg^{-1}\)</span>  נקראת הצמדה ב-<span>\(g\)</span>.
+לפעמים מסומנת <span>\(\phi_{g}\)</span>:
+<span>$$\phi_{g}:G\to G \quad \phi_{g}(h)=ghg^{-1}$$</span>
+עוד סימון: <span>\(^{g}h=ghg^{-1}\)</span> </p>
+</div>
+<div class="corollary">
+<p>תת חבורה <span>\(H\)</span> תהיה תת חבורה נורמלית אם"ם <span>\(\phi_{g}(H)=H\)</span>  לכל <span>\(g\in G\)</span> </p>
+</div>
+<div class="definition"><span class="keyword">אוטומורפיזם</span><p>איזומורפיזם ממנה לעצמה</p>
+</div>
+<div class="example">
+<p><span>$$f:\mathbb{Z}\to \mathbb{Z}\quad f(n)=-n$$</span></p>
+</div>
+<p><strong>שאלה</strong>
+מתי <span>\(f:g\to g^{-1}\)</span> היא אוטומורפיזם של חבורה <span>\(G\)</span>.</p>
+<div class="proposition">
+<p>עבור כל <span>\(g\in G\)</span> , מתקיים ש-<span>\(\varphi_{g}\)</span> הוא אוטומורפיזם של <span>\(G\)</span>(נקראות אוטומורפיזמים פנימיים)</p>
+</div>
+<div class="proof">
+<p>ראשית <span>\(\phi_{g}\)</span> חח"ע ועל. זאת כיוון ש:
+<span>$$\phi_{g}=\overbrace{\underbrace{ gh }_{ הרומת } g^{-1}}^{הרומת}$$</span>
+ או <span>\(\phi_{g^{-1}}\)</span> ההופכית שלה. </p>
+</div><h2 id='groups_1_3'>תמורות</h2>
+ <div class="reminder">
+<p>החבורה <span>\(S_{n}\)</span> היא החבורה של הפונקציות של איברים מהקבוצה <span>\(\{ 1,\dots,n \}\)</span> לעצמה שהם חח"ע ועל:</p>
+</div>
+<div class="definition"><span class="keyword">מחזור</span><p>עבור <span>\(1\leq k_{0},\dots,k_{m}\leq n\)</span> שונים זה מזה
+ מחזור הוא איבר <span>\((k_{0},..,k_{m-1})\)</span> של חבורת התמורות <span>\(S_{n}\)</span> כאשר:
+ <span>$$(k_{0},..,k_{m-1})(x)=\begin{cases}k_{i+1} &amp; x=k_{i} \\k_{0}  &amp; x=k_{m-1} \\x &amp; \text{else}
+\end{cases}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>המחזור הטריוויאלי - <span>\(()=e=(k_{0})\)</span>. מחזור הוא לא טריוויאלי אם"ם <span>\(m\geq 2\)</span>. </p>
+</li>
+<li>
+<p>המחזור המתואר בצורה הבאה: 
+<span>$$S_{3}\ni\begin{pmatrix}1  &amp; 2 &amp; 3 \\2 &amp; 3 &amp; 1\end{pmatrix} = \begin{pmatrix}1 &amp; 2 &amp; 3\end{pmatrix}=\begin{pmatrix}3 &amp; 1 &amp; 2\end{pmatrix}=\begin{pmatrix}2 &amp; 3 &amp; 1
+\end{pmatrix}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>הסדר של <span>\(\begin{pmatrix} k_{0}&amp; \dots &amp; k_{m-1}\end{pmatrix}\in S_{n}\)</span>  הוא <span>\(m\)</span> כש-<span>\(m&gt;2\)</span> </p>
+</div>
+<div class="definition"><span class="keyword">מחזורים זרים</span><p>2 מחזורים <span>\(\begin{pmatrix} k_{0}&amp; \dots &amp; k_{m-1}\end{pmatrix},\begin{pmatrix} l_{0}&amp; \dots &amp; l_{m-1}\end{pmatrix}\in S_{n}\)</span> יקראו זרים אם <span>\(\begin{pmatrix} k_{0}&amp; \dots &amp; k_{m-1}\end{pmatrix}\cap\begin{pmatrix} l_{0}&amp; \dots &amp; l_{m-1}\end{pmatrix}=\emptyset\)</span>  </p>
+</div>
+<div class="proposition">
+<p>כל תמורה שווה להרכבה של מחזורים זרים יחידים עד כדי סדר</p>
+</div>
+<div class="definition"><span class="keyword">תת מחזור</span><p>תהי <span>\(\sigma \in S_{n}\)</span>. המחזור 
+<span>$$\begin{pmatrix} k_{0}&amp; \dots &amp; k_{m-1}\end{pmatrix},\begin{pmatrix} l_{0}&amp; \dots &amp; l_{m-1}\end{pmatrix}\in S_{n}$$</span>
+ יקרא תת מחזור של <span>\(\sigma\)</span> אם:
+<span>$$\sigma\big|_{(k_{0},\dots,k_{m-1})} = (k_{0},\dots,k_{m})\big|_{(k_{0},\dots,k_{m-1})}$$</span></p>
+</div>
+<div class="lemma">
+<p>תהא <span>\(\sigma \in S_{n}\)</span>, כל  <span>\(1\leq x\leq n\)</span> נמצא באיזשהו תת מחזור של <span>\(\sigma\)</span> לא טריוויאלי אם"ם <span>\(x\neq \sigma x\)</span>.</p>
+</div>
+<p>"הוכחה"
+<span>$$(x,\sigma(x),\sigma^2(x),\dots,\sigma^{m-1}(x))$$</span></p>
+<div class="lemma">
+<p>תהא <span>\(\sigma \in S_{n}\)</span>. ונניח כי <span>\(c,c' \in S_{n}\)</span> תתי מחזורים של <span>\(\sigma\)</span>. אזי או ש-<span>\(c,c'\)</span> זרים או ש<span>\(c=c'\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(c,c'\)</span> זרים, סיימנו.
+אחרת קיים <span>\(1\leq k_{0}\leq n\)</span> שנמצא גם ב-<span>\(c\)</span> וגם ב-<span>\(c'\)</span>. ומתקיים עבורו.
+<span>$$\begin{gather}c=(x,\sigma(x),\sigma^2(x),\dots,\sigma^{m-1}(x)) \\c'=(x,\sigma(x),\sigma^2(x),\dots,\sigma^{m-1}(x))
+\end{gather}$$</span>
+נניח כי <span>\(c\)</span> באורך <span>\(m\)</span> המינימלי מבין <span>\(c,c'\)</span>, אז <span>\(\sigma^M(k_{0})=k_{0}\)</span>. אבל <span>\(\sigma^{m-1}(k_{0})\)</span> נמצא ב-<span>\(c'\)</span>, ומתקיים:
+<span>$$c'(\sigma^{m-1}(k))=\sigma^M(k_{0})=k_{0}$$</span>
+לכן יש c' גם נסגר באורך <span>\(m\)</span>.</p>
+</div>
+<p>כעת נוכל להוכיח את המשפט</p>
+<div class="proof">
+<p>תהא <span>\(\sigma \in S_{n}\)</span>. נסתכל על הקבוצה
+<span>$$\{ c \in S_{n} \big|c\text{ לש ילאיווירט אל רוזחמ תת }\sigma \}=\{ c_{1},\dots,c_{s} \}$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\sigma=c_{1}\circ\dots,c_{s}$$</span></p>
+</div>
+<div class="proof">
+<p>יהא <span>\(1\leq x\leq n\)</span>, נניח כי <span>\(x\)</span> נמצא ב-<span>\(c_{i}\)</span> עבור <span>\(1\leq i\leq s\)</span> כלשהו. 
+בפרט, <span>\(x\)</span> לא ב-<span>\(c_{i}\)</span> עבור <span>\(i\neq j\)</span>. אחרת <span>\(c_j\)</span>, <span>\(c_{i}\)</span> לא זרים, ולכן <span>\(c_{i}=c_{j}\)</span>.
+<span>$$c_{1}\circ \dots c_{i}\circ \dots c_{s}(x)=c_{1}\circ \dots c_{i}(x)$$</span>
+וכן, <span>\(c_{i}\)</span> תת מחזור של <span>\(\sigma\)</span>, לכן <span>\(c_{i}(x)=\sigma(x)\)</span>. בפרט, גם <span>\(\sigma(x)\)</span> נמצא</p>
+</div>
+<p>הראנו כי עבור <span>\(x\)</span> שנמצא ב-<span>\(c_i\)</span> </p><h1 id='groups_2'>פעולות על חבורות</h1>
+<h2 id='groups_2_1'>מסלולים ומייצבים</h2>
+ <div class="definition"><span class="keyword">פעולות\Action</span><p>פעולה של חבורה <span>\(G\)</span> על קבוצה <span>\(X\)</span> היא אופרטור בינארי <span>\(G\times X\to X\)</span> שמקיימת:</p>
+</div>
+<ol>
+<li>
+<p><span>\(\forall x \in X\quad ex=x\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall g,h \in G \quad x \in X \qquad (gh)x=g(hx)\)</span> </p>
+</li>
+</ol>
+<p>לרוב נסמן אותו בכפל, כאשר את הפעולה "<span>\(G\)</span> פועלת על X" נסמן ב-<span>\(G\circlearrowright X\)</span>.</p>
+<div class="example"><span class="keyword">פעולות</span><ul>
+<li>נגדיר <span>\(S \circlearrowright \{ 1,\dots,n \}\)</span> ע"י <span>\(\sigma\cdot j=\sigma(j)\)</span>.</li>
+<li>נגדיר <span>\(S_{x}\circlearrowright X\)</span> כנ"ל</li>
+<li>נגדיר <span>\(GL_{n}(\mathbb{F})\circlearrowright \mathbb{F}^n\)</span> ע"י <span>\(A\cdot v=Av\)</span>(כפל מטריצה בווקטור)</li>
+<li>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(H\leq G\)</span> אזי נגדיר <span>\(H\circlearrowright X\)</span> ע"י צמצום הפעולה.</li>
+<li>אם <span>\(V\)</span> מרחב וקטורי מעל <span>\(\mathbb{F}\)</span>, <span>\(\mathbb{F}^\times \circlearrowright V\)</span> ע"י כפל בסקלר.</li>
+<li>החבורה <span>\(D_{n}\)</span>  פועלת על קודקודי המצולה המשוכלל ה-<span>\(n\)</span> </li>
+<li>החבורה <span>\(D_n\)</span> פועלת על צביעת קודקודי ה-<span>\(n\)</span> מצולע ב-<span>\(k\)</span> צבעים(כאשר <span>\(|x|=k^n\)</span>).</li>
+</ul>
+</div>
+<div class="remark">
+<p>אם נתון הפעולה <span>\(G\circlearrowright X\)</span> אז <span>\(\langle s\rangle=G\)</span>, מספיק להבין איך איברי <span>\(S\)</span> פועלים כדי להבין את הפעולה. 
+זה נעשה ע"י אסוציטיביות: <span>\(s_{1}(s_{2}x)=(s_{1}s_{2})x\)</span>  ובנוסף:
+<span>$$s(s ^{-1}x)=(ss ^{-1})x-ex=x$$</span>
+כלומר <span>\(s ^{-1}x\)</span> היה האיבר <span>\(y\in X\)</span> שנשלח ל-<span>\(x\)</span> ע"י <span>\(s\)</span>.</p>
+</div>
+<div class="remark">
+<p>אם <span>\(G\circlearrowright X\)</span> אזי כל <span>\(g\in G\)</span> משרה, ע"י כפל, פרמוטציה של X:
+<span>$$\Pi_{g}(x)=gx$$</span>
+כאשר <span>\(\Pi_{g}\)</span> היא פרמוטציה של <span>\(X\)</span> כי <span>\(\Pi_{g^{-1}}\)</span> היא ההופכית שלה:
+<span>$$\Pi_{g^{-1}}(\Pi_{g}(x))=\Pi_{g^{-1}}(gx)=g^{-1}(gx)=(g^{-1}g)x=ex=x$$</span>
+בפרט זה אומר שאם <span>\(s\)</span> פועלת ע"י תמורה <span>\(\Pi_{s}\)</span>, <span>\(s ^{-1}\)</span> פועלת ע"י התמורה ההופעית <span>\(\Pi_{s}^{-1}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">עוד פעולות</span><ul>
+<li>לכל חבורה <span>\(G\)</span> נגדיר <span>\(G\circlearrowright G\)</span> ע"י כפל:
+ <span>$$g,x \in G\qquad g\cdot x:=g\times x$$</span>
+ כאשר <span>\(\cdot\)</span> היא הפעולה ו-<span>\(\times\)</span> היא כפל ב-<span>\(G\)</span>.</li>
+<li>ניתן להגדיר <span>\(G\circlearrowright G\)</span>  ע"י הצמדה: 
+ <span>$$\forall g,x \in  G \qquad g* x :=g\times g^{-1}$$</span>
+נבדוק פעולה:
+<span>$$\begin{aligned}1.&amp;  &amp;\forall x \in G &amp;  e_{x}=e\times e^{-1}=x \\2.&amp; &amp;\forall g,h,x \in  G &amp;  ^h(^yx)=hgx g^{-1}h^{-1}=(hg)\times (hg)^{-1}=x
+\end{aligned}$$</span></li>
+</ul>
+</div>
+<p><strong>הגדרה</strong> מסלול
+אם <span>\(G\circlearrowright X\)</span> ו-<span>\(x \in G\)</span>, המסלול(orbit) של <span>\(X\)</span>(תחת G) הוא:
+<span>$$O_{G}(x)=O(x)=\{ gx \;\big|\; g\in G \} \subseteq X$$</span></p>
+<div class="proposition">
+<p>אם <span>\(G\circlearrowright X\)</span> אז היחס "להיות באותו מסלול" זה יחס שקילות</p>
+</div>
+<div class="proof">
+<p>נראה שמקיים את שלושת הדרישות:
+<span>$$\begin{gather}1.\quad  ex=x \implies x \in O(g) \\2.\quad  y\in O(x)\implies \exists g\quad y=gx\implies x=g^{-1}y\implies x \in O(y) \\3.\quad z\in O(y),y\in O(x)\implies \dots \;?\;\dots\implies z\in O(x)
+\end{gather}$$</span>
+כלומר פעולה של <span>\(G\)</span> על <span>\(X\)</span> משרה פירוק זר למסלולים.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(x_{1},\dots,x_{r}\)</span> נציגים למסלולים שונים אז הקבוצה היא האיחוד הזר של המסלולים:
+<span>$$X=\bigsqcup_{i=1}^r O(x_{i})$$</span></p>
+</div>
+<div class="example">
+<p>עבור:
+<span>$$\left\{ \begin{pmatrix}\cos \theta &amp; \sin \theta \\-\sin \theta  &amp; \cos \theta
+\end{pmatrix} \right\}=SO(2)\circlearrowright\mathbb{R}^2$$</span>
+המסלולים של הפעולה הם המעגלים ברדיוסים שונים. </p>
+</div>
+<div class="symbolize">
+<p>עבור <span>\(G\circlearrowright X\)</span> מסמנים ב-<span>\(G\setminus X\)</span> את אוסף המסלולים של הפעולה.</p>
+</div>
+<div class="remark">
+<p>הרבה בעיות במתמטיקה הם מהצורה <span>\(G\setminus X=?\)</span>. למשל <span>\(|D_{n}\setminus X |=\)</span> כאשר <span>\(X\)</span> זה צבעות של n-מצולע ב-<span>\(k\)</span> צבעים</p>
+</div>
+<div class="remark">
+<p>הסימון של <span>\(G\setminus H\)</span> מסמן גם את הקוסטים הימניים של <span>\(H\)</span> ב-<span>\(G\)</span>, וכן גם מסמן את המסלולים של <span>\(H\circlearrowright G\)</span> ע"י כפל אשר שווה ל-<span>\(\{ hg|h\in H \}=Hg\)</span> כאשר גדלים אלו שווים!
+ניתן גם להגדיר פעולה ימינית של חבורה באופן מקביל לאיך שהגדרנו פעולה, ויתקבל שהמסלולים של הפעולה יהיה שווה לקוסטים השמאליים.</p>
+</div>
+<div class="definition"><span class="keyword">פעולה טרנזטיבית</span><p>פעולה נקראת טרנזטיבית אם יש מסלול יחיד</p>
+</div>
+<div class="definition"><span class="keyword">פעולה נאמנה</span><p>אם האיבר היחיד שמשרה את פרמוטציית הזהות על <span>\(X\)</span> הוא <span>\(e\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פעולה חופשייה</span><p>אם <span>\(gx=x\)</span> גורר <span>\(g=e\)</span></p>
+</div>
+<div class="definition"><span class="keyword">מייצב</span><p>אם <span>\(G\circlearrowright X\)</span>, המייצב של <span>\(x \in X\)</span> הוא:
+<span>$$\text{Stab}_{G}(x)=G_{x}=\left\{  g\in G \;\big|\;gx=x  \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>המייצב תמיד תת חבורה של G:
+<span>$$\begin{gather}ex=x\implies e\in  G_{x} \\gx=hx=x\implies ghx=x\implies g^{-1} \in  G_{x} \\
+\end{gather}$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">מסלול מייצב</span><p>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(x \in X\)</span> אזי:
+<span>$$|O(x)|=[G:G_x]$$</span>
+ואם <span>\(|G|\)</span> סופית נובע <span>\(|O(x)|\cdot|G_{x}|=|G|\)</span> מלגרנג'.</p>
+</div>
+<div class="proof">
+<p>נשים לב שאם ורק אם <span>\(g_{1},g_{2}\)</span> באותו קוסט(שמאלי) של <span>\(G_{x}\)</span>, אזי <span>\(g_{1}x=g_{2}x\)</span>. זאת כי:
+<span>$$g_{1}^{-1} g_{2}\in G_{x}\rightleftarrows g_{1}^{-1} g_{2}x=x \rightleftarrows g_{2}x=g_{1}x$$</span>
+בנוסף לכל <span>\(y\in O(x)\)</span> יש <span>\(g \in G\)</span> עם <span>\(gx=y\)</span>(מהגדרת המסלול)
+קיבלנו התאמה בין אוסף הקוסטים בשמאליים של <span>\(G_{x}\)</span> לבין המסלולים <span>\(O(x)\)</span>.
+פורמלית, בנינו פונקציה:
+<span>$$f:G/G_{x}\to O(x)\quad f(gG_{x})=gx$$</span>
+הוכחנו <span>\(f\)</span> מוגדרת היטב, על וחח"ע.
+נסכם את ההוכחה. הפונקציה <span>\(f\)</span> מוגדרת היטב כי לא תלוייה באיזה איבר מתחילים
+<span>$$C=g_{1}G_{x}=g_{2}G_{x}$$</span>
+כאשר הגדרנו:
+<span>$$f(C)=g_{1}x\qquad f(C)=g_{2}x$$</span>
+על: מהגדרת המסלול, וחח"ע:
+חח"ע:
+<span>$$f(g_{1}G_{x})=f(g_{2}G_{x})\to g_{1}x=g_{2}x\to g_{1}^{-1} g_{2}x\to g_{1}^{-1} g_{2}\in G_{x}\to g_{1}G_{x}=g_{2}G_{x}$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן להוכיח ע"י בניית  <span>\(f:O(x)\to G/G_{x}\)</span>.</p>
+</div>
+<div class="lemma"><span class="keyword">שאינה של ברנסייד</span><p>תהי <span>\(G\)</span> סופית ו-<span>\(G\circlearrowright X\)</span>. מתקיים:
+<span>$$\overbracket{ |G\setminus X| }^{ orbits }=\frac{1}{|G|}\sum_{g\in  G}|\mathrm{fix}(g)|$$</span>
+כאשר <span>\(\mathrm{fix}(g)=\{ x|gx=x \}\)</span> נקודות השבת של <span>\(g\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\frac{1}{|G|}\sum_{g\in G}|fix(g)|=\frac{1}{|G|} \sum_{g \in  G}\sum_{x \in  X}\delta_{x,gx}=\frac{1}{|G|}\sum_{x \in  X}\sum_{g \in  G}\delta_{x,gx}= \\\frac{1}{|G|}\sum_{x \in X}|G_{x}|=\sum_{x \in X} \frac{1}{|O(x)|}=|G\setminus X|
+\end{gather}$$</span></p>
+</div><h2 id='groups_2_2'>מחלקות צמידות</h2>
+ <div class="definition"><span class="keyword">מחלקות צמידות</span><p>המסלולים של הפעולה של חבורה <span>\(G\)</span> על עצמה על ידי הצמדה נקראים מחלקות צמידות של <span>\(G\)</span>.
+<span>$$O(g)=\{ hgh^{-1} |h\in G \}=\{  ^hG | h \in  G \}=  ^Gg$$</span></p>
+</div>
+<div class="example"><span class="keyword">מחלקות צמידות</span><ol>
+<li>
+<p>אם <span>\(G\)</span> אבלית <span>\(G_{g}=\{ g \}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(g\in Z(G)\)</span>, אז <span>\(G_{g}=\{ g \}\)</span> ורק אם: 
+אם <span>\(g\neq Z(G)\)</span> יש <span>\(h\)</span> עם <span>\(gh=hg\)</span> ואז <span>\(g\neq hgh^{-1}\)</span>.</p>
+</li>
+</ol>
+</div>
+<h2>מחלקות צמידות</h2>
+<p>הסתכלנו על הפעולה של חבורה על עצמה ע"י הצמדה. כלומר:
+<span>$$\forall g,x \in G\qquad g\cdot x=gxg^{-1} = \prescript{g}{}{x}$$</span>
+המסלול:
+<span>$$O(x)=\{ \prescript{g}{}{X}\;\bigg|\;g\in G \}$$</span>
+כאשר מתקיים <span>\(O(x)=\{ x \}\)</span> אם ורק אם <span>\(x \in Z(G)\)</span> </p>
+<p>המייצב בפעולה הזו תקרא המרכז של <span>\(x\)</span>:
+<span>$$C_{G}(x)=\{ g\in G\;\big|\; \prescript{g}{}{x}=x \}$$</span></p>
+<div class="definition"><span class="keyword">מחלקות הצמידות</span><p>המסלול של <span>\(x\)</span> נקרא מחלקת צמידות:
+<span>$$O(x)=\prescript{G}{}{x}=\{ \prescript{g}{}{x} \;\big|g \in G \}=[x]$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אם <span>\(\sigma,\tau \in S_{n}\)</span>, ו-<span>\(\sigma=(a_{1},\dots,a_{r})\)</span>. אזי:
+<span>$$\prescript{\tau}{}{\sigma}=(\tau(a_{1}), \tau(a_{2}), \dots, \tau(a_{r}))$$</span></p>
+</div>
+<div class="remark">
+<p>מכיוון שהצמדה היא אוטומורפיזם, זה מספיק לחשב ל-<span>\(\sigma\)</span> כללית:
+<span>$$\prescript{\tau}{}{\sigma}=\prescript{\tau}{}{(\rho_{1},\rho_{2},\rho_{3})}=\tau \rho_{1}\rho_{2}\rho_{3}\tau ^{-1} =\tau \rho_{1}\tau ^{-1} \tau \rho_{2}\tau ^{-1} \tau \rho_{3}\tau ^{-1} =\prescript{\tau}{}{\rho_{1}}\prescript{\tau}{}{\rho_{2}}\prescript{\tau}{}{\rho_{3}}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$(\prescript{\tau}{}{\sigma})(\tau(a_{j}))=\tau \sigma \tau ^{-1} \tau(a_{j})=\tau(a_{j+1})$$</span></p>
+</div>
+<div class="corollary">
+<p>מחלקת הצמידות של תמורה ב-<span>\(S_{n}\)</span> היא כל התמורות עם אותו מבנים מחזורים, (כלומר כמה מחזורים יש מכל אורך בפירוק למחזורים זרים).</p>
+</div>
+<p>כש-<span>\(G\circlearrowright X\)</span>, האיחוד זר של הנציגים למחלקת הצמידות   <span>\(X=\bigsqcup_{}^{}O(x)\)</span>. במקרה של <span>\(G\circlearrowright G\)</span> בהצמדה, עבור האיחוד של <span>\(g\)</span> נציגים למחלקות הצמידות:
+<span>$$G=\bigsqcup_{\text{g }}^{} \prescript{G}{}{g}$$</span>
+ומתקיים:
+<span>$$\boxed{|G|=\sum|\prescript{G}{}{g}|=\sum \frac{|G|}{|C_{G}(g)|}=|Z(G)|+\sum[G:C_{G}(g)]}
+$$</span>
+זה נקרא משוואת המחלקות.
+דוגמא עבור <span>\(S_{4}\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\sigma\)</span></th>
+<th><span>\(()\)</span></th>
+<th><span>\((1,2)\)</span></th>
+<th><span>\((1,2,3)\)</span></th>
+<th><span>\((1,2,3,4)\)</span></th>
+<th><span>\((1,2)(3,4)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\([\sigma]\)</span></td>
+<td>1</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>וקיבלנו שהסכום 24, ואכן, <span>\(|S_{4}|=24\)</span></p>
+<div class="proposition">
+<p>אם <span>\(G\neq \{ e \}\)</span> חבורה בגודל חזקה ראשוני, אזי <span>\(Z(G)\neq \{ e \}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(g_{1},\dots,g_{r}\)</span> נציגים למחלקות הצמידות שאינה במרכז.
+אזי:
+<span>$$|G|=|Z(G)|+\sum_{i=1}^r \frac{|G|}{|C_{G}(g_{i})|}$$</span>
+מכיוון ש-<span>\(g_{i}\not\in Z(G)\)</span>, <span>\(C_{g}\lneq G\)</span>(כלומר תת חבורה שאינה G).
+לכן מלגרנג' <span>\(|C_{G}(g_{i})|=p^m\)</span> ל-<span>\(m&lt;k\)</span>, ואז:
+<span>$$p|p^{k-m}=\frac{|G|}{|C_{G}(g_{i})|}$$</span>
+לכן <span>\(p\;\big|\;|Z(G)|\)</span>.
+לכן <span>\(p\;\big|\;|Z|\)</span>, ובפרט <span>\(|Z(G)|\geq p\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">קושי</span><p>אם <span>\(p\;\big|\;|G|\)</span> (ראשוני) אז יש ב-<span>\(G\)</span> איבר מסדר <span>\(p\)</span>.</p>
+</div>
+<div class="proof">
+<p>נגדיר:
+<span>$$X:=\{ (g_{0},g_{1},\dots,g_{p-1})\;\Big| \;g_{i}\in G\quad g_{0}\cdot \dots\cdot g_{p-1}=e \}$$</span>
+נשים לב ש-<span>\(\mathbb{Z}_{p}\)</span> פועלת על <span>\(X\)</span> ע"י סיבוב ציקלי:
+<span>$$\begin{align}1\cdot (g_{0},g_{1},\dots,g_{p-1})&amp;=(g_{1},g_{2},\dots,g_{p-1},g_{0}) \\2\cdot (g_{0},g_{1},\dots,g_{p-1})&amp;=(g_{2},g_{3},\dots,g_{0},g_{1}) \\
+\end{align}$$</span>
+כעת אם נסכום על <span>\(\vec{g}\)</span> נציגים למסלולים של <span>\(\mathbb{Z} _{p}\)</span> על <span>\(X\)</span>:
+<span>$$|X|=\sum|O(\vec{g})|$$</span>
+כאשר ממשפט מסולול מייצב:
+<span>$$|O(\vec{g})|=\frac{|\mathbb{Z} _{p}|}{Stab_{\mathbb{Z} _{p}}(\vec{g})}=\begin{cases}1  &amp; Stab_{\mathbb{Z} _{p}}(\vec{g}) \\p &amp; else
+\end{cases}$$</span>
+מתי <span>\(Stab_{\mathbb{Z} _{p}}(\vec{g})\)</span> הוא כל <span>\(\mathbb{Z}_p\)</span>? אם (ורק אם) <span>\(\vec{g}=(g,g..,g)\)</span> ל-<span>\(g\in G\)</span> כלשהו. נשים לב שזה ב-<span>\(X\)</span> אם"ם <span>\(g^p=e\)</span>, שזה מה שרצינו.
+בנוסף <span>\(|X|=G^{p-1}\)</span>,
+<span>$$X=\{ (g_{0},g_{1},g_{2},\dots,g_{p-2}, (g_{0},g_{1},\dots,g_{p-2})^{-1} )\;\big|\;g_{0},\dots,g_{p-2} \}$$</span>
+סה"כ <span>\(p\)</span> מחלק את <span>\(|X|\)</span> וגם את <span>\(|\{ \vec{g}\in X\;\big|\; \vec{g}  \text{ קבוע} \}|\)</span>
+בנוסף, <span>\((e,e, \dots,e)\)</span> מבטיח שמספר ב-<span>\(g\)</span> הקבועים אינו 0.
+זה מבטיח לפחות עוד <span>\(p-1\)</span> פתרונות.</p>
+</div>
+<div class="remark">
+<p>ניתן גם להוכיח ממשוואת המחלקה: 
+<span>$$p\;\big|\;G\to p\;\big|\;Z(g) \;\lor\;\exists g\in  G\quad p\;\big|\;C_{G(g)}$$</span>
+ומזה נובע קושי</p>
+</div>
+<div class="proposition">
+<p>יש 2 חבורות מסדר 6 עד כדי איזומורפיזם</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(|G|=G\)</span>. מקושי, יש בה איבר <span>\(x\)</span>  מסדר 2, ואיבר <span>\(y\)</span> מסדר 3. נגדיר <span>\(H:=\langle y\rangle\)</span> מאינדקס 2. לכן <span>\(H\trianglelefteq G\)</span>. ולכן <span>\(xyx ^{-1}\in xHx ^{-1}=H\)</span>
+בפרט:
+<span>$$\begin{cases}xyx^{-1} =e\to y=e\to \text{סתירה} \\xyx^{-1} =y\to xy=yx \to |xy|=6 \to G \cong \mathbb{Z}_{6} \\xyx^{-1} =y^2 \to xy=y^2x \to  G\cong D_{3}
+\end{cases}$$</span>
+כאשר את המקרה האחרון ניתן לראות ע"י מילואי טבלת הכפל.
+והשורה השנייה מתקיימת כי:
+<span>$$(xy)^l=x^ly^l=e\to x^l=y^{-l}\in \langle x\rangle \cap \langle y\rangle =\{ e \}$$</span>
+כאשר:
+<span>$$\begin{cases}x^l=e\implies 2|l \\y^l=e\implies 3|l
+\end{cases}\implies 6|l$$</span></p>
+</div><h1 id='groups_3'>הומומורפיזמים</h1>
+<h2 id='groups_3_1'>הומומורפיזמים</h2>
+ <div class="definition"><span class="keyword">הומומורפיזם</span><p>כאשר <span>\(\left( G,\cdot  \right)\)</span>,<span>\(\left( H,\times  \right)\)</span> חבורות,
+פונקציה <span>\(f:G\to H\)</span> אפשר מכבדת את הכפל, כלומר:
+<span>$$\forall x,y\in G\quad f\left(x\cdot y  \right)=f(x)\times f(y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מונומורפיזם אפימורפיזם איזומורפיזם ואנדומורפיזם</span><p>אם <span>\(f\)</span> הומומופריזם אז אם <span>\(f\)</span>:</p>
+<ol>
+<li>
+<p>חח"ע אז נקרא <u>מונומורפיזם</u>. </p>
+</li>
+<li>
+<p>על אז נקרא <u>אפימורפיזם</u>. </p>
+</li>
+<li>
+<p>חח"ע ועל אז נקרא <u>איזומורפיזם</u>. </p>
+</li>
+<li>
+<p>מקבוצה לעצמה אז נקרא <u>אנדומורפיזם</u>. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>הפונקציות הבאות הם הומומורפיזמים:</p>
+<ol>
+<li>
+<p>כל <span>\(G\)</span>,<span>\(H\)</span> <span>\(f:G\to H\)</span> המוגדרת <span>\(f(g)=e_{H}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G\leq H\)</span>, <span>\(f(g)=g\)</span> לכל <span>\(g \in  G\)</span>. </p>
+</li>
+<li>
+<p>עבור <span>\(f:\mathbb{Z} \to \mathbb{Z} _n\)</span>, נגדיר <span>\(f(j)=j\mod n\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(\mathbb{F}\)</span> שדה, אז: <span>\(\det:GL_{n}\to \mathbb{F}^\times\)</span> המוגדרת <span>\(\det\left( A\cdot B \right)=\det(A)\cdot \det (B)\)</span> זה אפימורפיזם כי: 
+<span>$$\forall \alpha \in \mathbb{F}  ^{\times}\qquad \det \left( \begin{matrix} \alpha  &amp;  &amp;  \\   &amp; 1 &amp; &amp; \\  &amp;  &amp; \ddots &amp;  \\  &amp;  &amp;  &amp; 1
+ \end{matrix} \right)=\alpha$$</span></p>
+</li>
+<li>
+<p>נגדיר <span>\(\mathrm{Tr}:M_{n}(\mathbb{F)}\to \mathbb{F}^+\)</span> כך ש-<span>\(\mathrm{Tr}(A+B)=\mathrm{Tr}(A)+\mathrm{Tr}(B)\)</span> </p>
+</li>
+<li>
+<p>נגדיר <span>\(\mathrm{sgn}:S_{n}\to \left\{  \pm 1  \right\}\)</span> כי <span>\(\mathrm{sgn}\left( \sigma \circ \tau \right)=\mathrm{sgn}\left( \sigma \right)\cdot \mathrm{sgn}\left( \tau \right)\)</span> </p>
+</li>
+<li>
+<p>נגדיר <span>\(f:\mathbb{R} \to \mathbb{C} ^\times\)</span> כך ש-<span>\(f\left( \theta \right)=e^{i\theta}\)</span> </p>
+</li>
+<li>
+<p>נניח <span>\(A\in M_{n}\left( \mathbb{R}  \right)\)</span>. נגדיר <span>\(f:\mathbb{R} \to GL_{n}\left( \mathbb{R}  \right)\)</span> כך ש-<span>\(f(t)=e^{tA}\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תכונות של הומומורפיזמים</span><p>אם <span>\(f:G\to H\)</span> הומומורפיזם:</p>
+<ol>
+<li>
+<p><span>\(f(e)=e\)</span> </p>
+</li>
+<li>
+<p><span>\(f(g^{-1} )=f(g)^{-1}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(f':H\to K\)</span> עוד הומומורפיזם, <span>\(f'\circ f:G\to K\)</span> גם הומומורפיזם </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>התמונה של הומומורפיזם תהיה תת חבורה. כלומר <span>\(im(f)\leq H\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(h,h'\in im(f)\)</span>. קיימים <span>\(g,g'\in G\)</span> עם <span>\(f(g)=h,f(g')=h'\)</span> ואז: <span>$$f(gg')=f(g)f(g')=hh'$$</span> כמו כן, <span>\(f(g)^{-1} =f(g^{-1} )\)</span> וכן <span>\(f(e)\in Im(f)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">גרעין של הומומורפזים</span><p>הגרעין של הומומורפיזם <span>\(f\)</span> מוגדר:
+ <span>$$\ker(f):=\left\{  g\in G\;|\;f(g)=e  \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>הומומורפיזם <span>\(f\)</span> חח"ע אם"ם <span>\(\ker(f)=\{ e \}\)</span></p>
+</div>
+<div class="proposition">
+<p>הגרעין של הומומורפיזם יהיה תת חבורה נורמלית. כלומר מתקיים <span>\(\ker(f) \trianglelefteq G\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>: אם <span>\(g,g'\in \ker(f)\)</span> אזי: 
+<span>$$\ker(f)\leq G \impliedby  \begin{cases}f\left( g\cdot g' \right)=f(g)f(g') = ee=e \\f(g^{-1} )=f(g)^{-1} =e^{-1} =e \\f(e)=e
+\end{cases}$$</span>
+ואכן <span>\(f\left( g\times g^{-1}  \right)=f(g)f(x)f(g^{-1} )=e\)</span></li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(f(g)=h\)</span> אזי <span>\(f^{-1} (h)=g\ker(f)=\ker(f)g\)</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(k\in \ker(f)\)</span>, אז: <span>$$f(gk)=f(g)f(k)=h$$</span> מצד שני, אם <span>\(f(g')=h\)</span>, נרצה להראות <span>\(g'\in \ker(f)\)</span>.
+<span>$$f(g')=h=f(g)\implies f(g')f(g)^{-1} = f(g'g^{-1} )=e\implies g'g\in \ker(f)\implies g'\in \ker(f)g=g\ker(f)$$</span> </p>
+</div>
+<div class="definition"><span class="keyword">הומומורפיזם המבנה</span><p>אם <span>\(G\circlearrowright X\)</span> אזי ראינו שכל <span>\(g\in G\)</span> פועל על <span>\(X\)</span> ע"י פרמוטציה <span>\(\Pi_{g}\in S_{x}\)</span>. נסתכל על <span>\(\rho:G\to S_{X}\)</span>. <span>\(\rho\)</span> נקראת הומומורפיזם המבנה של הפעולה.</p>
+</div>
+<div class="proposition">
+<p>הומורפיזם המבנה <span>\(\rho\)</span> היא הומומורפיזם.</p>
+</div>
+<div class="proof">
+<p><span>$$\forall x\quad  \rho\left( g\cdot g' \right)(x)=\Pi_{g,g'}=(gg')(x)=g(g'x)=\Pi_{g}\left( \Pi_{g'}(x) \right)=\left( \rho(g) \circ  \rho(g') \right)(x)$$</span>
+בכיוון ההפוך: אם <span>\(G\)</span> חבורה, <span>\(X\)</span> קבוצה, ונתון הומומורפיזם<span>\(\rho:G\to S_{X}\)</span>. אפשר להגדיר פעולה של <span>\(G\)</span> על <span>\(X\)</span> ע"י <span>\(g\cdot x=\rho(g)(x)\)</span>. זו אכן פעולה. לכל <span>\(x \in X\)</span> ולכל <span>\(g,g'\in G\)</span> מתקיים: 
+<span>$$\begin{gathered}e x=\rho(e)(x)=id(x)=x \\(g'g)x= \rho(gg')(x)=\left( \rho(g)\circ \rho(g') \right)(x)=\rho(g)\left( \rho(g')(x) \right)=g'\cdot \left( g\cdot x \right)
+\end{gathered}$$</span> בסופו של דבר, למצוא הומורפיזם מ-<span>\(G\)</span> ל-<span>\(S_{X}\)</span> זה שקול ללהגדיר פעולה של <span>\(G\)</span> על <span>\(X\)</span>.</p>
+</div>
+<div class="example">
+<p>למשל אם <span>\(G\)</span> פעולת על עצמה ע"י הצמדה: <span>\(g.x=gxg^{-1}\)</span>. נגדיר <span>\(\rho:G\to Aut(G)\leq S_{G}\)</span> כך ש-<span>\(\rho(g)(x)=gxg^{-1}\)</span>, או <span>\(\rho(g)=\varphi_{g}\)</span>. מה הגרעין של <span>\(\rho\)</span>? <span>\(Z(G)\)</span> (<span>\(g\in Z(G)\iff \varphi_{g}=id\)</span>).
+וכן <span>\(Im\left( \rho \right)=Inn(G)\)</span>(כאשר <span>\(Inn(G)\)</span> זה האיזומורפיזמים הפנימיים) של <span>\(G\)</span>.</p>
+</div>
+<div class="remark">
+<p>מתקיים <span>\(Aut(S_{n})=Inn(S_{n})\)</span> לכל <span>\(n\neq 6\)</span>.</p>
+</div>
+<div class="remark">
+<p>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(\rho\)</span> הומומורפיזם המבנה, <span>\(G\)</span> חח"ע אם"ם הפעולה נאמנה(faithful).</p>
+</div>
+<div class="remark">
+<p>אם <span>\(f:G\to H\)</span>(הומומורפיזם חח"ע). אזי <span>\(G\cong Im(f)\)</span> (כי <span>\(f:G\to Im(f)\)</span> על, חח"ע ומכבדת כפל). לכן אם <span>\(G\circlearrowright X\)</span> בצורה נאמנה מתקבל איזומורפיזם של <span>\(G\)</span> לתת חבורה של <span>\(S_{X}\)</span>.</p>
+</div><h2 id='groups_3_2'>מנות</h2>
+ <p>תהי <span>\(G\)</span> חבורה ו-<span>\(H\leq G\)</span> תת חבורה. מתי הקוסטים <span>\(G/H\)</span> מקבלים מבנים של חבורה מתוך המבנה של <span>\(G\)</span>?</p>
+<div class="example">
+<p>עבור <span>\(G=\mathbb{Z} ,H=7\mathbb{Z}\)</span> נקבל:
+<span>$$G/H=\left\{  7\mathbb{Z} , 1+7\mathbb{Z} ,2+7\mathbb{Z} ,\dots,6+7\mathbb{Z}\right\}$$</span>
+יש התאמה בין <span>\(\mathbb{Z} /m\mathbb{Z}\)</span> ע"י:
+<span>$$(j+m)\mathbb{Z} \to j\mod m$$</span>
+הגדרה זו מכבדת את הפעולות במובן ש-<span>\((j+k)+m\mathbb{Z}\)</span> עובר ל-<span>\(j\oplus k\)</span>(<span>\(\oplus\)</span> זה חיבור ב-<span>\(\mathbb{Z}_{m}\)</span>). למעשה אפשר להגדיר חיבור על <span>\(\mathbb{Z} /m\mathbb{Z}\)</span> ע"י:
+<span>$$\left( j+m\mathbb{Z}  \right)+\left( k+m\mathbb{Z}  \right)=(j+k)+m\mathbb{Z}$$</span>
+ומתקבל חבורה (איזומורפית ל-<span>\(\mathbb{Z} _m\)</span>). לדוגמא:
+<span>$$m=7: \left( 3+7\mathbb{Z}  \right)+\left( 6+7\mathbb{Z}  \right)=9+7\mathbb{Z} =2+7\mathbb{Z}$$</span>
+נראה כי החיבור מוגדר היטב:
+<span>$$\left( j+xm+m\mathbb{Z}  \right)+\left( k+ym+m\mathbb{Z}  \right)=j+k+xm+ym+m\mathbb{Z} =x+y+m\mathbb{Z}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט קיילי</span><p>כל חבורה איזומורפית לתת חבורה של חבורת תמורות.</p>
+</div>
+<div class="proof">
+<p>ראינו שאם <span>\(G\)</span> פועלת נאמנה על קבוצה <span>\(X\)</span> אזי הומומורפיזם המבנה <span>\(\rho:G\to S_{X}\)</span> הוא חח"ע = מונומורפיזם = שיכון. ואז <span>\(G\cong Im(P)\leq S_{X}\)</span>. הפעולה של <span>\(G\)</span> על עצמה על ידי כפל היא נאמנה ולכן <span>\(G\)</span> איזומורפית לתת חבורה של <span>\(S_{G}\)</span>.</p>
+</div>
+<div class="example">
+<p>למשל <span>\(G=D_{4}\)</span>, מתקבל <span>\(G\cong Im\left( \rho \right)\leq S_{8}\cong S_{(D_{4})}\)</span>. ו-<span>\(|S_{8}|=40320\)</span>. אם <span>\(H\leq G\)</span>, אפשר להגדיר פעולה של <span>\(G\)</span> על <span>\(G/H\)</span>:
+<span>$$g.(g'H)=gg'H$$</span>
+ראינו שאפשר להגדיר מבנה של חבורה על<span>\(\mathbb{Z} /n\mathbb{Z}\)</span> על ידי:
+<span>$$\left( j+n\mathbb{Z} \right) \oplus\left( k+n\mathbb{Z}  \right)=j+k+n\mathbb{Z}$$</span>
+וחבורה הזו איזומורפית ל-<span>\(\mathbb{Z} _n\)</span> על ידי:
+<span>$$j+n\mathbb{Z} \to j \mod n$$</span>
+וניתן למשל בקלות עם הגדרה זו להראות אסוציטיביות: 
+<span>$$\begin{gathered}\left( \left( j+n\mathbb{Z}  \right)\oplus\left( k+n\mathbb{Z}  \right) \right)\oplus\left( l+n\mathbb{Z}  \right)=(j+k)+l+n\mathbb{Z} \\=j+(k+l)+n\mathbb{Z}  = \left( j+n\mathbb{Z}  \right)\oplus\left( \left( k+n\mathbb{Z}  \right)\oplus l+n\mathbb{Z}  \right)
+\end{gathered}$$</span></p>
+</div>
+<p>נרצה להכליל רעיון זה באופן כללי. בהנתון <span>\(H\leq G\)</span>,רוצים להגדיר מבנה של חבורה על הקוסטים <span>\(G/H\)</span>: 
+<span>$$(gH)\cdot  (g'H)=gg'H$$</span>
+בעיה: לא מוגדר היטב! יכול להיות ש-<span>\(g''H-g'H\)</span>, אבל <span>\(gg''H\neq gg'H\)</span></p>
+<div class="example">
+<p><span>$$H=\langle (12)\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(N\trianglelefteq G\)</span> תת חבורה נורמלית, אזי <span>\((gN)(g'N)=gg'N\)</span> מוגדר היטב.</p>
+</div>
+<div class="proof">
+<p>הנציגים של <span>\(gN\)</span> הם בדיוק <span>\(gn\)</span> כש-<span>\(n\in N\)</span>. צריך להראות שלכל <span>\(n,n' \in N\)</span>:
+<span>$$\overbrace{ (gnN) }^{ gN }(g'n'N)O=gng'n'N\stackrel{?}{=} gg'N$$</span>
+נראה: 
+<span>$$gng'n'N=gng'N=gnNg'=gNg'=gg'N$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(N\trianglelefteq G\)</span>, אפשר להגדיר חבורה(נקראת חבורת המנה של <span>\(G\)</span> ב-<span>\(N\)</span>) שאיבריה <span>\(G/N\)</span> והכפל בה הוא:
+<span>$$(gN)\times_{G/N} (g'N)=\left( g\times_{G} g' \right)N$$</span>
+הכפל שהגדרנו זהה לכפל הקבוצתי. כלומר: <span>$$(gN)\times_{G} (g'N)=gg'N$$</span> כי:
+<span>$$(gN)\cdot g'N=g(Ng')N=g(g'N)N=gg'(NN)=gg'N$$</span>
+אם <span>\(N\leq G\)</span>, הכפל שהגדרנו על הקוסטים <span>\(G/N\)</span> מוגדר היטב אזי <span>\(N\trianglelefteq G\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>אנו יודעים כי חבורת התמורות הזוגיות היא תת חבורה נורמלית של חבורת התמורות. מתקיים: 
+<span>$$S_{n} / A_{n} \cong \mathbb{Z} _{2}$$</span></p>
+</li>
+<li>
+<p><span>\(S^1 \cong \mathbb{C} ^{\times } / \mathbb{R} _{&gt;0}\)</span> </p>
+</li>
+<li>
+<p><span>\(\mathbb{C} /\mathbb{R} \cong i\mathbb{R} \leq \mathbb{C}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(N\trianglelefteq G\)</span> מסמנים את חבורת המנה <span>\(G/N\)</span>. יש אפימורפיזם ("ההטלה הקנונית") מ-<span>\(G\)</span> ל- <span>\(G / N\)</span>.<br />
+<span>$$\begin{gathered}\pi:G\to G / N \\\pi(g)=gN
+\end{gathered}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>תת חבורה <span>\(H\leq G\)</span> היא נורמלית אם"ם היא גרעין של הומומורפיזם</p>
+</div>
+<div class="proof">
+<p>ראינו שגרעין הוא נורמלי. מצד שני אם <span>\(H\trianglelefteq G\)</span> אזי
+היא הגרעין של ההטלה הקנונית: <span>$$\begin{gathered}\pi:G\to G / H \\g\in \ker\left( \pi \right) \leftrightarrow gH=\pi(g)=e_{G / H}=H \leftrightarrow g\in H
+\end{gathered}$$</span> מכך נסיק כי: <span>$$H=\ker\left( \pi \right)$$</span> </p>
+</div>
+<p>אם <span>\(N\trianglelefteq G\)</span>, אם <span>\(G\)</span> נוצרת ע"י <span>\(S\)</span> אזי <span>\(G / N\)</span> נוצרת ע"י <span>\(\left\{  sN\;|\; s \in S  \right\}\)</span>. בפרט אם <span>\(G\)</span> ציקלית אזי <span>\(G / N\)</span> ציקלית</p>
+<div class="proposition">
+<p>אם <span>\(G / Z(G)\)</span> ציקלית אז <span>\(G\)</span> אבלית.</p>
+</div>
+<div class="proof">
+<p>נכתוב <span>\(N=Z(G)\)</span>, ונניח ש-<span>\(gN\)</span> יוצרת את <span>\(G / N\)</span>. אם <span>\(x,y \in G\)</span>,
+אזי <span>\(y\in g^kN\)</span>, <span>\(x \in g^jN\)</span> ל-<span>\(j,k\in \mathbb{N}\)</span> כלשהם. ואז:
+<span>$$xy=g^j n g^k n'=g^h n'g^jn=yx$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G/Z(G)\)</span> ציקלית אז <span>\(G\)</span> אבלית(ולכן <span>\(|G/Z(G)|=1\)</span>).</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(N=Z(G)\)</span>. אם <span>\(G/N\)</span> ציקלית, אז יש לה יוצר מ-<span>\(gN\)</span>:
+<span>$$G/N=\left\{  \dots,g^{-1} N,N,gN,g^2N, \dots  \right\}$$</span>
+לכן אם <span>\(x,y \in G\)</span> אז יש <span>\(x \in g^iN\)</span> ו-<span>\(y\in g^kN\)</span>. ואז ישנם <span>\(n,n' \in N\)</span> כך ש-<span>\(x=g^in\)</span> ו-<span>\(y=g^kn'\)</span>. כעת כולם מתחלפים זה עם זה: <span>$$xy=g^ing^kn'=yx$$</span></p>
+</div><h2 id='groups_3_3'>משפטי האיזומורפיזם</h2>
+ <div class="reminder">
+<p>הראנו שתמיד <span>\(\ker(f) \trianglelefteq G\)</span>, <span>\(im(f)\leq H\)</span></p>
+</div>
+<div class="theorem"><span class="keyword">האיזומורפיזם הראשון</span><p>יהי <span>\(f:G\to H\)</span> הומומורפיזם. אזי: 
+<span>$$G/\ker(f) \cong im(f)$$</span></p>
+</div>
+<div class="proof">
+<p>ראינו כבר ש-<span>\(f\)</span> משרה התאמה בין קוסטים של <span>\(\ker(f)\)</span> ב-<span>\(G\)</span> לאיברי <span>\(im(f)\)</span>:
+כי אם <span>\(f(g)=h\)</span> אזי לכל <span>\(k\in \ker(f)\)</span> גם <span>\(f(gh)=f(g)f(k)=h\)</span> כלומר כל <span>\(g\cdot \ker(f)\)</span> הולך ל-<span>\(h\)</span>. ומצד שני אם <span>\(f(g')=h\)</span> אזי <span>\(g'\in g\ker(f)\)</span> כי 
+<span>$$f(g^{-1} g')=f(g)^{-1} \cdot f(g')=h^{-1} \cdot h=e\implies g^{-1} g\in \ker(f)\to g'\in g\cdot \ker(f)$$</span>
+כעת נסמן ב-<span>\(\bar{f}\)</span> את הפונקציה ש-<span>\(f\)</span> משרה על הקוסטים של <span>\(\ker(f)\)</span>. כלומר:
+<span>$$\bar{f}:G/\ker(f)\to \mathrm{Im}(f) \qquad \bar{f}\left( g\cdot \ker(f)  \right)=f(g)$$</span>
+למעשה מה שעשינו עד עכשיו זה להראות ש-<span>\(f\)</span>:</p>
+<ol>
+<li>
+<p>מוגדרת היטב </p>
+</li>
+<li>
+<p>חחע - 
+<span>$$\bar{f}(g'K)=\bar{f}(gK)\implies f(g)=f(g')\implies g'\in gK\implies gK=g'K$$</span></p>
+</li>
+<li>
+<p>ועל - <span>\(im(f)=im\left( \bar{f} \right)\)</span> כי <span>\(\bar{f}\left( g\ker(f)  \right)=f(g)\)</span> ונותר להראות <span>\(f\)</span> הומומורפיזם, ולכן יהיה איזומורפיזם כיוון שחח"ע ועל: 
+<span>$$\bar{f}((gK)(g'K))= f(gg'K)=f(gg')=f(g)f(g')=  \bar{f}(gK)\cdot \bar{f}(g'K)$$</span>
+וקיבלנו כי <span>\(f\)</span> איזומורפיזם.</p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$f:\mathbb{Z} \to \mathbb{Z} _{n} \qquad f(k)=k\mod n$$</span>
+ומתקיים:
+<span>$$im(f)=\mathbb{Z} _{n}\quad \ker(f)=n\mathbb{Z}$$</span>
+ולכן:
+<span>$$\mathbb{Z} / n\mathbb{Z}  \cong \mathbb{Z} _{n}$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}f:\mathbb{R} \to \mathbb{C} ^\times \quad f\left( \alpha \right)=e^{i\alpha}
+\end{gathered}$$</span>
+וכן: 
+<span>$$\mathrm{ im }(f)=S^1\qquad \ker(f)=\mathbb{Z}$$</span>
+ולכן:
+<span>$$\mathbb{R} / \mathbb{Z}  \cong S^1$$</span></p>
+</div>
+<div class="example">
+<p><span>$$f:G\to Aut(G)\qquad f(g)=\varphi_{g}\;\;\left( \varphi_{g}(x)=gxg^{-1}  \right)$$</span>
+הראנו ש-<span>\(f\)</span> הוא הומומורפיזם.
+<span>$$\mathrm{Im}(f)=Inn(G)\qquad \ker(f)=Z(G)$$</span>
+ולכן:
+<span>$$\mathrm{Inn}(G) \cong G/ Z(G)$$</span></p>
+</div>
+<div class="example">
+<p>אם <span>\(V,W\)</span> מרחבים וקטורים, ו-<span>\(T:V\to W\)</span> העתקה לינארית, אז אם נשכח את נושא הכפל בסקלר <span>\(T:V\to W\)</span> הומומורפיזם של חבורות. אז:
+<span>$$V/ \ker(T) \cong im(T)$$</span>
+וזהו משפט המימדים.</p>
+</div>
+<div class="theorem"><span class="keyword">האיזומורפיזם השני</span><p>אם <span>\(H\leq G\)</span>, <span>\(N\trianglelefteq G\)</span> אזי:
+<span>$$HN\leq G \quad H\cap N\trianglelefteq H$$</span>
+ומתקיים:
+<span>$$HN/ N \cong H / H\cap N$$</span></p>
+</div>
+<div class="proof">
+<p>את הטענה <span>\(HN\leq G \quad H\cap N\trianglelefteq H\)</span> מוכיחים בתרגיל בית נסתכל על <span>\(f:H\to HN/N\)</span> המוגדר: <span>$$f(h)=hN$$</span> מספיק להראות ש-<span>\(f\)</span> אפימורפיזם עם גרעין <span>\(N\cap H\)</span>:</p>
+<ol>
+<li>
+<p>מוגרת היטב </p>
+</li>
+<li>
+<p>על - לכל <span>\(hnN\)</span>(איבר ב-<span>\(HN / N\)</span>) מתקבל <span>\(f(h)=hN=hnN\)</span> 
+נראה כעת כי <span>\(f\)</span> הומומורפיזם:
+<span>$$f(hh')=hh'N=hh'\mathbb{N} =hNh'N=f(h)\cdot f(h')$$</span>
+כאשר השתמשו בזה של <span>\(N\trianglelefteq G\)</span>. נשאר הראות את הגרעין:
+<span>$$h \in \ker(f) \leftrightarrow f(h)=e\leftrightarrow hN=N\leftrightarrow h \in N$$</span>
+ולכן <span>\(\ker(f)\)</span> הוא כל איברי <span>\(H\)</span> ששייכים ל-<span>\(N\)</span>, כלומר <span>\(H\cap N\)</span>. סה"כ קיבלנו: 
+<span>$$H / H\cap N = H / \ker(f) \cong im(f) = HN/ N$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}G=\mathbb{C}^\times \qquad  N=S^1\qquad H=\mathbb{R}^\times \\ HN=\mathbb{C} ^\times \qquad H\cap N=\{ \pm 1 \}
+\end{gathered}$$</span>
+ולכן:
+<span>$$C^\times / \mathbb{R} ^\times  \cong S^1/\{ \pm 1 \}$$</span></p>
+</div>
+<p>אם <span>\(N\trianglelefteq G\)</span>, ו-<span>\(\pi:G\to G/N\)</span> ההטלה הקנונית(<span>\(\pi(g)=gN\)</span>). מה קורה לתת חבורה של <span>\(G\)</span> תחת <span>\(\pi\)</span>? <span>\(\pi(H)\leq G/N\)</span> (<span>\(im\)</span> של הומומורפיזם).
+<span>$$\begin{gather}H\leq G\quad \pi(H)=\left\{  \pi(h)|h\in H  \right\}=\left\{  hN | h\in H  \right\}=HN / N  \\= \left\{  gN |g\in HN  \right\}= \left\{  hnN | h \in H\quad n\in N  \right\}=\left\{  hN|h\in H  \right\}
+\end{gather}$$</span>
+מה קורה ל-<span>\(K\leq G/N\)</span> תחת <span>\(\pi ^{-1}\)</span>? נניח <span>\(\pi ^{-1}(K)\leq G\)</span> (בתרגיל - לכל הומומורפיזם), <span>\(K=\left\{  g_{1}N,g_{2}N, \dots,g_{r}N, \dots  \right\}\)</span>
+<span>$$\pi ^{-1} (K)=\bigcup_{gN\in K} \overbracket{ \pi ^{-1} \underbrace{ (gN) }_{ \in G/N } }^{ gN\subseteq G }=\bigcup_{gN\in K}gN$$</span>
+מה קורה כאשר מפעילים את שניהם? אם <span>\(K\leq G / N\)</span>
+<span>$$\pi\left( \pi ^{-1} (H) \right)=K$$</span>
+אם <span>\(f:X\to Y\)</span> ו-<span>\(f\)</span> על, אזי:
+<span>$$\forall S\subseteq Y\quad f(f^{-1} (S))=S$$</span>
+מה לגבי <span>\(\pi ^{-1} \circ \pi\)</span>? נניח <span>\(H\leq G\)</span>:
+<span>$$\pi ^{-1} \left( \pi(H) \right)=\pi ^{-1} (HN / N)=\bigcup_{gN\in HN / N} gN $$</span>
+וכיוון שמתקיים <span>\(HN / N=\left\{  hN | h\in H  \right\}\)</span> נקבל:
+<span>$$\bigcup_{h \in H} hN=HN$$</span></p>
+<div class="remark">
+<p>אפשר גם בדרך ישירות לחשוב על זה בתור איחוד של כל איברים של חבורת מנה - ולכן נקבל את כל החבורה.</p>
+</div>
+<p>למעשה, <span>\(\pi\)</span> לוקחת תת חבורה של <span>\(G\)</span> ומחזירה תת חבורה של <span>\(G / H\)</span>, כאשר <span>\(\pi ^{-1}\)</span> מקבלת תת חבורה של <span>\(G / H\)</span> ומחזיר תת חבורה של <span>\(G\)</span>.</p>
+<div class="theorem"><span class="keyword">ההתאמה(איזומורפיזם רביעי)</span><p>אם <span>\(N\trianglelefteq G\)</span>, <span>\(\pi\)</span> ו-<span>\(\pi ^{-1}\)</span> משראות התאמה חח"ע ועל בין תת חבורה של <span>\(G / N\)</span> לתת חבורה שמכילות את <span>\(N\)</span>. וההתאמה הזו משמרת הכלה, נורמליות אינדקסים.</p>
+</div>
+<div class="symbolize">
+<p>איברי <span>\(G / N\)</span> הם <span>\(\left( g\in G \right)\quad gN\)</span>. יששמסמנים את <span>\(gN\)</span> ב-<span>\(\bar{g}\)</span> ואז:
+<span>$$\bar{g}\cdot \bar{h}=\overline{gh}\qquad g^{-1} h\in N\iff \bar{g}=\bar{h}$$</span>
+או לחלופין זוכרים/מציינים שאנחנו במנה על ידי המילים "מודולו <span>\(N\)</span>".</p>
+</div>
+<p>ראינו שיש התאמה בין תתי חבורות של <span>\(G/N\)</span> לתתי חבורות של <span>\(G\)</span> שמכילות את <span>\(N\)</span>.
+<span>$$\left\{  H\leq G \mid N\leq H  \right\}\xleftrightarrow[H\to H/N  ]{\bigcup_{gN\in K} gN\leftarrow K} \left\{  K\leq G / N \right\}$$</span>
+התאמה זו ממשמרת הכלה, אינדקס(סדר) ונורמליות. לגבי הנורמליות, אם <span>\(N\leq K\trianglelefteq H\leq G\)</span> וזה מתקיים אם"ם <span>\(1=N / N\leq K / N \trianglelefteq H / N \leq G / N\)</span> וזה מוביל למשפט האיזומורפיזם השלישי</p>
+<div class="theorem"><span class="keyword">האיזומורפיזם השלישי</span><p>אם <span>\(N\trianglelefteq K\trianglelefteq H\)</span>, <span>\(N\trianglelefteq H\)</span> אזי:
+<span>$$^{H / N }/ _{ K  / N } \cong H/K$$</span>
+או באופן מילולי: "חבורת מנה של חבורת מנה היא איזומורפית לחבורת מנה".</p>
+</div>
+<p>ניתן להוכיח באמצעות משפט האיזומורפיזם הראשון.</p>
+<div class="example">
+<p><span>$$^{\mathbb{Z} / 12 \mathbb{Z} }
+/ _{ 6\mathbb{Z}  / 12 \mathbb{Z} } \cong 3 \mathbb{Z}  / 6\mathbb{Z}$$</span></p>
+</div><h1 id='groups_4'>פירוק של חבורות</h1>
+<h2 id='groups_4_1'>מכפלה ישרה</h2>
+ <div class="definition"><span class="keyword">מכפלה ישרה חיצונית</span><p>לחבורות <span>\(H,K\leq G\)</span> המכפלה הישרה שלהם תהיה:
+<span>$$ H\times K=\{(h,k)\mid h\in H,k\in K\}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(H_{1}, H_{2}\)</span> חבורות כך ש-<span>\(G=H_{1}\times H_{2}\)</span> אזי קיימת תת חבורה <span>\(N\)</span> כך ש-<span>\(N\cong H_{1}\)</span> כאשר <span>\(N\trianglelefteq G\)</span> ו-<span>\(G / N \cong H_{2}\)</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(H_{1}, H_{2}\)</span> חבורות, אפשר לקחת <span>\(G=H_{1}\times H_{2}, N=H_{1}\times 1=\left\{  (h,e)\mid h\in H_{1}  \right\}\)</span> ואכן <span>\(N\cong H_{1}\)</span>. כמו כן <span>\(N\trianglelefteq G\)</span> כך שמתקיים:
+<span>$$(h_{1}h_{2})(h_{1}e)(h_{1}^{-1} h_{2}^{-1} )=h_{1}h_{2}he\in N$$</span>
+כעת <span>\(G / N \cong H_{2}\)</span>, ממשפט האיזומורפיזם הראשון עבור: 
+<span>$$\begin{cases}f:G\to H \\f(h_{1},h_{2})=h_{2}\end{cases}\implies \begin{array}{c }\operatorname{im}(f)=H_{2} \\\ker(f)=N 
+\end{array}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לקבל את אותה טענה עבור <span>\(H_{2}\)</span>. כלומר אם <span>\(G=H_{1}\times H_{2}\)</span> אזי קיים תת חבורה <span>\(N\cong H_{2}\)</span> כך ש-<span>\(N\trianglelefteq G\)</span> וגם <span>\(G / N \cong H_{1}\)</span>.</p>
+</div>
+<p>נרצה למצוא מתי אפשר לפרק חבורה למכפלה ישרה של שתי חבורות "קטנות" יותר. למשל אם <span>\(H,K\leq G\)</span>, נסתכל על הפונקציה: 
+<span>$$\begin{cases}f:H\times K\to G \\f(h,k)=hk
+\end{cases}$$</span>
+מתי <span>\(f\)</span> היא איזומורפיזם? למשל:
+<span>$$S_{1}\times R^{\times}_{&gt;0}\cong C^{\times}$$</span>
+אבל:
+<span>$$\langle (1,2) \rangle \times A_{3}\not\cong  S_{3}$$</span>
+כיוון שאומנם חח"ע ועל אך לא הומומורפיזם.</p>
+<div class="proposition">
+<p>פונקציה <span>\(f:H\times K \to G\)</span> המוגדרת על ידי <span>\(f(h,k)=hk\)</span> היא איזומורפיזם אם"ם:</p>
+<ol>
+<li>
+<p><span>\(HK=G\)</span> </p>
+</li>
+<li>
+<p><span>\(H\cap K=\{ e \}\)</span> </p>
+</li>
+<li>
+<p><span>\(H,K\trianglelefteq G\)</span> </p>
+</li>
+</ol>
+</div>
+<p><strong>הוכחה</strong></p>
+<ol>
+<li>
+<p>שקול לעל </p>
+</li>
+<li>
+<p>שקול לכך ש-<span>\(f\)</span> חח"ע(הראנו כי <span>\(\frac{|H||K|}{|H\cap K|}=|HK|\)</span>) </p>
+</li>
+<li>
+<p>אם <span>\(f\)</span> איזומורפיזם היא משמרת הכל, ובפרט משמרת נורמליות: 
+אנו יודעים כי <span>\(H\times G\)</span> נורמלית ב-<span>\(H\times K\)</span>. לכן:
+<span>$$H=f\left( H\times 1 \right)\trianglelefteq f\left( H\times K \right)=G$$</span>
+ו-<span>\(K\)</span> באותו אופן. 
+מצד שני, אם <span>\(H,K\trianglelefteq G\)</span>, נדרש להוכיח <span>\(f\)</span> הומומורפיזם(מ-1, 2נובע חח"ע ועל).
+<span>$$f\text{ הומומורפיזם}\iff f((h',k)(h,k'))\stackrel{?}{=} f((h',k))\cdot f(h,k')) \quad \forall h,h'\in H\quad \forall k,k'\in K$$</span>
+כאשר הצד הימיני שקול ל:
+<span>$$f((h'h,kk'))=h'hkk'\stackrel{?}{=} h'k \cdot hk'$$</span>
+כלומר <span>\(f\)</span> הומומורפיזם אם"ם:
+<span>$$\forall h\in H\quad k\in K\quad hk=kh \iff \forall h,k\quad \underbrace{ h\overbracket{ kh^{-1}k^{-1} }^{ \in H } }_{ \in H } =1$$</span>
+וקיבלנו: 
+<span>$$hkh^{-1} k^{-1}  \in H\cap K=1$$</span></p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">מכפלה ישרה פנימית</span><p>אם <span>\(H,K\)</span> תתי חבורות של <span>\(G\)</span>, <span>\(G\)</span> נקראת מכפלה ישרה פנימית של <span>\(H\)</span> ו-<span>\(K\)</span> אם מתקיים:</p>
+<ol>
+<li>
+<p>המכפלה זה הכל - <span>\(HK=G\)</span> </p>
+</li>
+<li>
+<p>החיתוך טריוויאלי - <span>\(H\cap K=\{ e \}\)</span> </p>
+</li>
+<li>
+<p>תתי חבורות נורמליות - <span>\(H,K \trianglelefteq G\)</span> 
+ומסומן <span>\(G=H\times K\)</span>. למשל <span>\(\mathbb{C} ^\times =\mathbb{R} _{&gt;0}\times S^1\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>סימון זה יכול להראות מבלבל. <span>\(G=H\times K\)</span> יכול להתכוון או ל-<span>\(H,K\)</span> תתי חבורות של <span>\(G\)</span> ו-<span>\(G\)</span> המכפלה ישרה פנימית, או בתור <span>\(G\)</span> כמכפלה הישרה החיצונית של <span>\(H\)</span> ו-<span>\(K\)</span>. אבל הראנו כי למעשה 2 אופציות אלו איזומורפיות.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(G\)</span> היא מכפלה ישרה פנימית(מי"פ) של <span>\(G\geq H,K\)</span> אז <span>\(G\cong H\times K\)</span>. וכן מתקיים:
+<span>$$f^{-1} :G\xrightarrow{\cong}H\times K$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}G=\mathbb{C} ^\times \quad H=\mathbb{R} _{&gt;0}\quad K=S^1 \\f^{-1} \left( \alpha \right)=\left( |\alpha|, \frac{\alpha}{|\alpha|} \right)
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(p\)</span> ו-<span>\(q\)</span> הם גורמים ראשוניים זרים, אזי כל חבורה אבלית מסדר <span>\(pq\)</span> איזומורפיית לטבעיים מודולו <span>\(pq\)</span>.</p>
+</div><h2 id='groups_4_2'>מכפלה חצי ישרה</h2>
+ <p>ראינו כי אם יש שתי תתי חבורות נורמליות שהחיתוך שלהם טריוואילי והכפלה שלהם הכל נקבל כי החבורה איזומורפית למכפלה ישרה. לא כל החבורות כמובן מתקבלות בצורה הזו, ולכן נרצה למצוא דרכים לפרק חבורות נוספות. דרך אחד לעשות זאת זה עם מכפלה חצי ישרה.</p>
+<div class="definition"><span class="keyword">מכפלה חצי ישרה פנימית</span><p>אם <span>\(H,K\leq G\)</span> אזי <span>\(G\)</span> נקראת מכפלה חצי ישרה של <span>\(H\)</span> ו-<span>\(K\)</span> אם מתקיים:</p>
+<ol>
+<li>
+<p><span>\(HK=G\)</span> </p>
+</li>
+<li>
+<p><span>\(H\cap K=\{ e \}\)</span> </p>
+</li>
+<li>
+<p><span>\(K\trianglelefteq G\)</span> 
+מסומן: <span>\(G=H\ltimes K\)</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(G=H\ltimes K\)</span> אזי <span>\(G / K \cong H\)</span>.</p>
+</div>
+<div class="proof">
+<p>ממשפט האיזומורפיזם הראשון:
+<span>$$f:G\to H \quad \forall k\in K, h\in H\quad f(hk)=h$$</span>
+(כלומר לכל <span>\(g\in G\)</span> יש יצוג יחיד כ-<span>\(hk\)</span>) בברור, <span>\(im(f)=H\)</span>, <span>\(\ker(f)=K\)</span>. צריך להראות הומומורפיזם: 
+<span>$$\begin{gathered}f(hk)f(h'k')=hh'\\f(hkh'k')=f(hh'k''k')=hh'
+\end{gathered}$$</span> 
+<strong>דוגמא</strong>
+<span>$$\begin{gathered}D_{n}=\left\langle  \sigma \right\rangle\rtimes \left\langle  \tau \right\rangle \\S_{n}=A_{n} \rtimes \langle (1,2)\rangle\\\mathrm{Aff}\left( \mathbb{F}^n  \right)=GL_{n}\left( \mathbb{F} \right)\ltimes \mathbb{F}^n
+\end{gathered}$$</span></p>
+</div>
+<div class="remark">
+<p>מכפלה חצי ישרה של שתי חבורות אבליות לאו דווקא תהיה אבלית.</p>
+</div><h2 id='groups_4_3'>חבורות פשוטות</h2>
+ <p>אם <span>\(G\)</span> חבורה, ו-<span>\(N\trianglelefteq G\)</span> אז רוצים לחשוב על <span>\(G\)</span> כ-"מורכבת" מ-<span>\(N\)</span> ו-<span>\(G/N\)</span>. למשל:
+<span>$$\mathbb{Z} _{3} \cong A_{3}\trianglelefteq S_{3}\qquad S_{3} / A_{3} \cong \mathbb{Z} _{2}$$</span>
+הרעיון:
+אם יש ל-<span>\(G\)</span> תת חבורה נורמלית <span>\(N\neq G,1\)</span>, אפשר לעבור לחקור את <span>\(N\)</span> ו-<span>\(G / N\)</span>. ולהמשיך כך עבורן: אם ל-<span>\(N\)</span> יש תת חבורה <span>\(1\lneq N_{1}\triangleleft N\)</span>, ניתן "לפרק את <span>\(N\)</span>" ל-<span>\(N_{1}\)</span> ו-<span>\(N / N_{1}\)</span>. אם ל-<span>\(G / N\)</span> יש תת חבורה <span>\(1\lneq K \triangleleft G / N\)</span>. ועכשיו ניתן "לפרק את <span>\(G / N\)</span>".</p>
+<div class="definition"><span class="keyword">חבורה פשוטה</span><p>חבורה <span>\(G\)</span> נקראת פשוטה אם <span>\(N\trianglelefteq G\)</span> גורר <span>\(N=G\)</span> או <span>\(N=1\)</span> (ו-<span>\(|G|\neq 1\)</span>)</p>
+</div>
+<div class="definition"><span class="keyword">תוכנית הולדר/Holder</span><p>ב-1892 לודויג אוטו הולדר הגה את המטרות הבאות בתורת החבורות:</p>
+<ol>
+<li>
+<p>למצוא את כל החבורות הסופיות הפשוטות </p>
+</li>
+<li>
+<p>להבין את כל הדרכים להרכיב, בהנתון חבורות סופיות <span>\(H_{1},H_{2}\)</span>. חבורה <span>\(G\)</span> עם תת חבורה <span>\(N\trianglelefteq G\)</span> כך ש-<span>\(N\cong H_{1}\)</span> 
+ ו-<span>\(G / N \cong H_{2}\)</span>.
+ למשל עבור<span>\(H_{1}=\mathbb{Z} _3\)</span>, <span>\(H_{2}=\mathbb{Z} _3\)</span>:
+<span>$$\langle 2\rangle \trianglelefteq \mathbb{Z} _{6}\qquad A_{3}\trianglelefteq S_{3}\implies \langle 2\rangle \cong A_{3}\cong\mathbb{Z} _{3}\quad \mathbb{Z} _{6} / \langle 2\rangle \cong S_{3} / A_{3} \cong \mathbb{Z} _{2}$$</span>
+כיום סימנו את המטרה הראשונה של התוכנית, אשר לקחה כ-100 שנה.</p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">חבורות פשוטות</span><ol>
+<li>
+<p>החבורה <span>\(\mathbb{Z} _{p}\)</span> ל-<span>\(p\)</span> ראשוני (אם <span>\(G\)</span> סופית פשוטה אזי <span>\(G\cong\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני) </p>
+</li>
+<li>
+<p>התמורות הזוגיות <span>\(A_{n}\)</span> ל-<span>\(n\geq 5\)</span>.(כאשר <span>\(A_{4}\)</span> היא חבורה נורמלית הנקראת חבורת קליין) </p>
+</li>
+<li>
+<p>החבורה <span>\(PSL_{n}\left( \mathbb{F}_{p} \right)\)</span> ל-<span>\(n\geq 2\)</span> כאשר <span>\(p\)</span> ראשוני. (למעט <span>\(PSL_{2}(2),PSL_{2}(3)\)</span> ) כאשר <span>\(PSL_{n}\left( \mathbb{F} \right)=SL_{n}\left( \mathbb{F} \right)/Z\)</span> כאשר המרכז 
+ <span>$$Z=\{ \alpha I\in SL_{n}\left( \mathbb{F} \right)\mid \alpha^n=1 \}$$</span>
+ החבורה הכי קטנה תהיה: <span>\(|PSL_{3}\left( \mathbb{F}_{2} \right)|=168\)</span>.</p>
+</li>
+</ol>
+</div><h2 id='groups_4_4'>פשטות התמורות הזוגיים</h2>
+ <p>נרצה להוכיח את הטענה הבאה:</p>
+<div class="proposition">
+<p>חבורת תמורות הזוגיות <span>\(A_{5}\)</span> פשוטה.</p>
+</div>
+<div class="reminder">
+<p>מחלקת הצמידות של תמורה <span>\(\sigma\)</span> ב-<span>\(S_{n}\)</span> עם אותו מבנה מחזורים.
+<span>$$\tau\left( a_{1}, a_{2},\dots,a_{r} \right)\tau ^{-1} =\left( \tau (a_{1}), \tau(a_{2}),\dots,\tau(a_{r})\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>תת חבורה <span>\(H\)</span> של <span>\(G\)</span> היא נורמלית אם"ם איחוד של מחלקות צמידות.</p>
+</div>
+<div class="proposition">
+<p>מחלקות הצמידות של <span>\(\sigma\)</span> ב-<span>\(S_{n}\)</span> היא או:</p>
+<ol>
+<li>
+<p>נשארת מחלקת צמידות ב-<span>\(A_{n}\)</span> </p>
+</li>
+<li>
+<p>מתפרקת לשתי מחלקות צמידות שווה לגודל ב-<span>\(A_{n}\)</span>. 
+בפרט עבור <span>\(\sigma, \tau \in A_{n}\)</span> עבור <span>\(n\geq 2\)</span> אם הם צמודות ב-<span>\(A_{n}\)</span>(זאת אומרת קיים <span>\(\rho \in A_{n}\)</span> כך ש-<span>\(\rho \sigma \rho ^{-1} =\tau\)</span> ) הן צמודות ב-<span>\(S_{n}\)</span>(כלומר <span>\(\exists \rho \in S_{n}\quad \rho \sigma \rho ^{-1} =\tau\)</span>). אבל לא בהכרח להיפך!</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ממשפט מסלול מייצב:
+<span>$$|\prescript{A_{n}}{}{\sigma}|= \frac{|A_{n}|}{|C_{A_{n}}\left( \sigma \right)|}=\frac{|A_{n}|}{|A_{n}\cap C_{S_{n}}\left( \sigma \right)|}$$</span>
+כאשר ממשפט האיזומורפיזם השני:
+<span>$$\frac{|A_{n}|}{|A_{n}\cap C_{S_{n}}\left( \sigma \right)|}=\frac{|A_{n}\cdot C_{S_{n}}\left( \sigma \right)|}{|C_{S_{n}}|}$$</span>
+כאשר השתמשנו בזה ש:
+<span>$$H / H\cap N \cong HN / N \implies \frac{|H|}{|H\cap N|}= \frac{|HN|}{|N|}\implies \frac{|N|}{|H\cap N|}= \frac{|HN|}{|H|}$$</span>
+ניתן לפצל כעת למקרים - אם המרכז מורכב כולו מתמורות זוגיות וכאשר לא,
+כלומר:
+<span>$$\frac{|A_{n}\cdot C_{S_{n}}\left( \sigma \right)|}{|C_{S_{n}}|}=\begin{cases}\frac{|A_{n}|}{|C_{S_{n}}\left( \sigma \right)|} &amp; C_{S_{n}}\subseteq A_{n} \\\frac{|S_{n}|}{|C_{S_{n}}\left( \sigma \right)|} &amp; else\end{cases}=\begin{cases}\frac{1}{2}|\prescript{S_{n}}{}{\sigma} &amp; C_{S_{n}}\subseteq A_{n} \\\frac{|S_{n}|}{| \prescript{S_{n}}{}{\sigma} |} &amp; else
+\end{cases}$$</span></p>
+</div>
+<p>כעת נחזור להוכיח את הטענה ש-<span>\(A_{5}\)</span> פשוטה.</p>
+<div class="proof">
+<p>רעיון: נמצא את מחלקות הצמידות, ונראה שאין איחוד של חלק מהן שמהווה תת חבורה למעט <span>\(e,A_{5}\)</span>. נתחיל במחלקות הצמידות של <span>\(S_{5}\)</span></p>
+<table>
+<thead>
+<tr>
+<th><span>\(\sigma\)</span></th>
+<th><span>\(()\)</span></th>
+<th><span>\((12)\)</span></th>
+<th><span>\((123)\)</span></th>
+<th><span>\((1234)\)</span></th>
+<th><span>\((12345)\)</span></th>
+<th><span>\((12)(34)\)</span></th>
+<th><span>\((12)(345)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\(\sigma\)</span></td>
+<td>1</td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>24</td>
+<td>15</td>
+<td>20</td>
+</tr>
+<tr>
+<td><span>\(C_{S_5}\)</span></td>
+<td>120</td>
+<td>12</td>
+<td>6</td>
+<td>4</td>
+<td>5</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td><span>\(C_{S_5}(\sigma)\)</span></td>
+<td><span>\(S_5\)</span></td>
+<td></td>
+<td><span>\(\langle (123), (45) \rangle \cong \mathbb{Z}_3 \times \mathbb{Z}_2\)</span></td>
+<td></td>
+<td><span>\(\langle (12345) \rangle\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>\(A_5\sigma\)</span></td>
+<td>1</td>
+<td></td>
+<td>20</td>
+<td></td>
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>כאשר ניתן לפסול את העמודות האי זוגיות של התמורות האי זוגיות. סך הכל
+מחלקות הצמידות ב-<span>\(A_{5}\)</span> הם: <span>$$\begin{matrix}()  &amp; (123) &amp; (12345) &amp; (21345) &amp; (12)(34) \\1 &amp; 20 &amp; 12 &amp; 12 &amp; 15
+\end{matrix}$$</span> תהי <span>\(1\nleq N \triangleleft A_{5}\)</span>. אזי הגודל של <span>\(N\)</span> שווה
+לסכום של חלק מבין <span>\(20,12,12,15\)</span> ועוד אחד, ולכן <span>\(|N|\geq 13\)</span>. מצד שני, <span>\(|N|\big|60\)</span> מלגרנג': <span>$$N=\cancel{ 60 },30,20,15,\cancel{ 12,10,6 }$$</span>
+כאשר פסלנו את האיברים שקטנים מ-13 כאשר 30,20,15 נפסלות כיוון שלא ניתן להגיע עליהם בעזרת סכימה של צירוף של האיברים <span>\(15,12,12,20\)</span>. ואין פתרון. כלומר הוכחנו כי <span>\(A_{n}\)</span> פשוטה(אם <span>\(N\trianglelefteq A_{5}\)</span> אז <span>\(N=A_{5}\)</span> או <span>\(N=1\)</span>).</p>
+<div class="proposition">
+<p>התמורות הזוגיים <span>\(A_{n}\)</span> נוצרת ע"י ה-3 מחזורים ב-<span>\(S_{n}\)</span> עבור <span>\(n&gt;3\)</span>.</p>
+</div>
+<div class="proposition">
+<p>ב-<span>\(A_{n}\)</span> כל ה-3 מחזורים צמודים(עבור <span>\(5\leq n\)</span>).</p>
+</div>
+<div class="proof">
+<p>כל ה-3 מחזורים ב-<span>\(S_{n}\)</span> הם צמודים, וראינו ששני מחלקות צמידות
+של <span>\(\sigma\)</span> נשארת מחלקת צמידות ב-<span>\(A_{n}\)</span> אם"ם <span>\(\sigma\)</span> זוגית,
+ו-<span>\(C_{S_{n}}\left( \sigma \right)\not\subseteq A_{n}\)</span>. עבורנו:
+<span>$$|\prescript{S_{n}}{}{\left( 1\;2\;3 \right)}|= \frac{n(n-1)(n-2)}{3}$$</span>
+ולכן:
+<span>$$|C_{S_{n}}\left( \left( 1\;2\;3 \right) \right)|= \frac{n!}{\frac{n(n-1)(n-2)}{3}}=3(n-3)!$$</span>
+לכן:
+<span>$$C_{S_{n}}\left( \left( 1\;2\;3 \right) \right)=\left\langle  \left( 1\;2\;3 \right) \right\rangle \times S_{\left\{  4,5,\dots,n  \right\}}=S_{4\dots n}\bigsqcup \left( 1\;2\;3 \right)\cdot S_{4\dots n}\bigsqcup \left( 1\;2\;3 \right)^2 S_{4\dots n}$$</span>
+כי הם מתחלפות. וזה המספר שחיפשנו. נשאר להחליט האם כל אלו זוגיות. אם <span>\(n\geq 5\)</span>. לא: <span>\(\left( 4\;5 \right)\in S_{4\dots n}\)</span>. לכן סיימנו.</p>
+</div>
+<p>כעת נוכיח את הטענה כללית.</p>
+<div class="proposition">
+<p>חבורת התמורות הזוגיות <span>\(A_{n}\)</span> פשוטה עבור <span>\(n\geq 5\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(1\neq N\trianglelefteq A_{n}\)</span>(<span>\(n\geq 6\)</span>). נחפש <span>\(i,j,k,l,r\)</span> כך ש-<span>\(\tau \in H=A_{\{ i,j,k,l,r \}}\)</span>(התמורות הזוגיות ב-<span>\(S_{\{ i,j,k,l,r \}}\)</span>). ואז נסתכל על <span>\(H\cap N\trianglelefteq H\cong A_{5}\)</span>. <span>\(H\cong A_{5}\)</span> פשוטה, לכן או <span>\(N\cap H=1\)</span> (לא ייתכן כי <span>\(\tau \in H\cap N\)</span>) או ש-<span>\(N\cap H=H\)</span>, ולכן <span>\(A_{i,j,k,l,r}=H\leq N\)</span>. בפרט מכילה 3-מחזור(למשל <span>\((i,j,k)\)</span>). מכיוון ש-<span>\(N\)</span> נורמלית ב-<span>\(A_{n}\)</span>, היא מכילה את כל הצמודים (ב-<span>\(A_{n}\)</span>) של <span>\((i,j,k)\)</span> כלומר את כל ה-3 מחזורים, מהטענה השנייה. ואז מטענה 1 נובע <span>\(N=A_{n}\)</span>. נבחר <span>\(id\neq \sigma \in N\)</span>. יש <span>\(i\neq j\)</span> כך ש-<span>\(\sigma(i)=j\)</span>. נסתכל על:
+<span>$$\tau=\underbracket{ \sigma\left( x\;y\;z \right)\sigma ^{-1} }_{ \left( \sigma(x)\;\sigma(y)\;\sigma(z) \right) } \left( x\;y\;z \right)$$</span>
+ניקח <span>\((x\;y\;z)=(i\;j\;k)\)</span> כש-<span>\(k\notin \left\{  i,j,\sigma(j)  \right\}\)</span> ואז:
+<span>$$\tau=\left( \sigma(i),\sigma(j),\sigma(k) \right)(i,k,j)=\left( j, \sigma(j), \sigma(k) \right)(i,k,j)$$</span>
+ולכן <span>\(\tau\)</span> מזיזה 5 איברים לכל היותר: <span>\(i,j,k,\sigma(j),\sigma(k)\)</span> ו-<span>\(\tau \neq id\)</span> ולכן <span>\(\tau(k)=\sigma(j)\neq k\)</span> </p>
+</div><h1 id='groups_5'>סדרות הרכב ופתירות</h1>
+<h2 id='groups_5_1'>סדרות הרכב</h2>
+ <div class="definition"><span class="keyword">סדרה נורמלית</span><p>סדרה נורמלית של חבורה <span>\(G\)</span> היא סדרה מהצורה:
+<span>$$1=H_{0}\trianglelefteq \dots \trianglelefteq H_{r-2}\trianglelefteq H_{r-1}\trianglelefteq H_{r}=G$$</span>
+כלומר סדרה של תתי חבורות נורמליות כך שבסוף מקבלים את התת חבורה הטריווילאית.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי תמיד קיים סדרה נורמלית עבור חבורה <span>\(G\)</span> כי בפרט החבורה הטריוויאלית 1 היא תמיד תת חבורה נורמלית, אך לא כל סדרה של תתי סדרות נורמלית תהיה סדרה נורמלית כיוון שלא תמיד תגיע ל-1. לדוגמא:
+<span>$$\dots \trianglelefteq 16\mathbb{Z}\trianglelefteq 8\mathbb{Z} \trianglelefteq 4\mathbb{Z}  \trianglelefteq \mathbb{Z}$$</span>
+כאשר לא נגיע ל-1 כי כל תת חבורה של <span>\(\mathbb{Z}\)</span> איזומורפית ל-<span>\(\mathbb{Z}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$1=\langle 0\rangle \trianglelefteq \overbracket{ \langle 4\rangle }^{ \cong \mathbb{Z} _{3} } \trianglelefteq \overbracket{ \langle 2\rangle  }^{ \cong \mathbb{Z} _{6} } \trianglelefteq \mathbb{Z} _{12}$$</span>
+וכן גם:
+<span>$$\langle 0\rangle \trianglelefteq \langle 4\rangle \trianglelefteq  \langle 4\rangle \trianglelefteq  \mathbb{Z} _{4}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סדרת הרכב</span><p>סדרה נורמלית של <span>\(G\)</span> נקראת סדרת הרכב של <span>\(G\)</span> אם <span>\(H_{i}\triangleleft H_{i+1}\)</span> לכל <span>\(i\)</span>. ואי אפשר להוסיף תת חבורה לסדרה.
+להוסיף: עבור <span>\(H_{i}\triangleleft H_{i+1}\)</span> כלשהו למצוא<span>\(H_{i}\triangleleft K\triangleleft H_{i+1}\)</span>. כאשר נשים לב כי <span>\(\triangleleft\)</span> מסמל נורמלית ממש, כלומר תת חבורה נורמלית שאינה שווה לחבורה.</p>
+</div>
+<div class="corollary">
+<p>ל-<span>\(\mathbb{Z}\)</span> אין סדרות הרכב:
+<span>$$\{ 0 \}=H_{0}\triangleleft H_{1}\triangleleft \dots \triangleleft H_{r-1}\triangleleft \mathbb{Z}$$</span>
+לכל סדרה נורמלית בלי חזרות <span>\(H_{1}\cong\mathbb{Z}\)</span> (תת חבורה לא טריוויאלית של <span>\(\mathbb{Z}\)</span>), ולכן אפשר להוסיף תת חבורה בינה לבין <span>\(\{ 0 \}=H_{0}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(S_{n}\)</span> כאשר <span>\(n\geq 5\)</span> נקבל כי:
+<span>$$1\triangleleft A_{n}\triangleleft S_{n}$$</span>
+כיוון ש-<span>\(A_{n}\)</span> פשוטה.</p>
+</div>
+<div class="proposition">
+<p>לחבורה סופית יש סדרת הרכב</p>
+</div>
+<div class="proof">
+<p>אם <span>\(G\)</span> פשוטה, <span>\(1\triangleleft G\)</span> סדרת הרכב. אם <span>\(G\)</span> לא פשוטה, יש לה תת חבורה נורמלית. ניקח תת חבורה נורמלית מקסימלית ב-<span>\(G\)</span>(ביחס להכלה), נקרא לה <span>\(H_{r}\)</span>, ונמשיך ממנה. התהליך יעצר כי <span>\(G\)</span> הינה סופית.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(1=H_{0}\trianglelefteq \dots \trianglelefteq H_{r}=G\)</span> סדרה נורמלית של <span>\(G\)</span> אזי היא סדרת הרכב אם"ם <span>\(H_{i+1}/ H_{i}\)</span> פשוטה לכל <span>\(i\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$H_{i}=H_{i+1}\iff 1=H_{i+1} / H_{i}$$</span>
+קיים <span>\(H_{i}\triangleleft \;?\triangleleft H_{i+1}\)</span> אם"ם (ממשפט האיזומורפיזם הרביעי) יש תת חבורה:
+<span>$$1=H_{i }/ H_{i} \triangleleft \;?\triangleleft H_{i+1} / H_{i}$$</span>
+כלומר<span>\(H_{i+1} / H_{i}\)</span> לא פשוטה.</p>
+</div>
+<div class="definition"><span class="keyword">גורמי הרכב</span><p>המנות <span>\(H_{i+1} / H_{i}\)</span> נקראים גורמי ההרכב(composition factors) שלה.</p>
+</div>
+<div class="example">
+<p><span>$$1 \overset{ \mathbb{Z} _{2} }{ \triangleleft }\left\langle  \left( 1\; 2\right)(3\;4) \right\rangle \overset{ \mathbb{Z} _{2} }{ \triangleleft }V\overset{ \mathbb{Z} _{3} }{ \triangleleft } A_{9}\overset{ \mathbb{Z} _{2} }{ \triangleleft } S_{4}$$</span>
+כאשר מעל הסימון של תת חבורה נורמלית ממש אנו כותבים את החבורה שעליה הגורמי הרכב <span>\(G_{i+1} / G_{i}\)</span> איזומורפיות עלייה.</p>
+</div>
+<div class="theorem"><span class="keyword">ג'ורדן הולדר</span><p>לכל סדרות ההרכב יש את אותם גורמי הרכב(לאו דווקא באותו סדר!)</p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}0\stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 6\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 3\rangle \stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \mathbb{Z} _{12}\\0\stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \langle 4\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 2\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \mathbb{Z} _{12}\\0\stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \langle 6\rangle \stackrel{\mathbb{Z} _{3} }{\trianglelefteq} \langle 2\rangle \stackrel{\mathbb{Z} _{2} }{\trianglelefteq} \mathbb{Z} _{12}
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> אבלית סופית, אז גורמי ההרכב שלה הם:
+<span>$$\mathbb{Z} _{p},\mathbb{Z} _{p_{2}},\dots,\mathbb{Z} _{p_{r}}$$</span>
+עבור ראשוניים <span>\(p_{i}\)</span> שמקיימים: 
+<span>$$\prod_{i=1}^r p_{i}= |G|$$</span></p>
+</div>
+<div class="proof">
+<p>כל גורם הרכב של <span>\(G\)</span> הוא מנה של תת חבורות של <span>\(G\)</span> ולכן אבלי, ובנוסף פשוט. חבורה אבלית פשוטה אם"ם <span>\(\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני אם"ם חבורה בלי תתי חבורות אם"ם כל איבר הוא יוצר. לגבי הגודל:
+<span>$$1=G_{0}\triangleleft \dots \triangleleft G_{r}=G$$</span>
+גורמי ההרכב הם <span>\(Z_{p_{i}}\cong G_{i+1} / G_{i}\)</span> לכל <span>\(i\)</span>, ואז: 
+<span>$$\begin{gathered}|G|=|G_{r}|=|G_{r}:G_{r-1}|=|G_{r-2}|[G_{r-1}:G_{r-2}]= \\=\dots=\prod_{i=0}^r [G_{i+1}:G_{i}]=\prod_{i=0}^r |G_{i-1} / G_{i}|=\prod_{i=0}^r p_{i}
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> סופית ו-<span>\(N\trianglelefteq G\)</span> אזי גורמי ההרכב של <span>\(G\)</span> הם איחוד(עם חזרות) של גורמי ההרכב של <span>\(N\)</span> ושל <span>\(G / N\)</span>.</p>
+</div>
+<div class="proof">
+<p>נבנה סדרת הרכב שמכילה את <span>\(N\)</span>: נתחיל מ-<span>\(1\trianglelefteq N\trianglelefteq G\)</span>. אם זו סדרת הרכב, סיימנו. אם לא, אפשר להוסיף לה חבורת ביניים עד שמקבלים סדרת הרכב:
+<span>$$\star \quad 1=G_{0}\triangleleft G_{1} \triangleleft \dots \triangleleft G_{k}=N\triangleleft G_{k+1}\triangleleft \dots \triangleleft G_{r} = G$$</span>
+כאשר גורמי ההרכב של <span>\(N\)</span> הם <span>\(G_{i+1} / G_{i}\)</span> ל- <span>\(i=0,\dots,k-1\)</span>. נשים לב שממשפט האיזומורפיזם השלישי עבור <span>\(k\leq i\)</span>:
+<span>$$(G_{i+1} / N) / (G_{i} / N) \cong G_{i+1} / G_{i}$$</span>
+ולכן <span>\(\star\)</span> סדרת הרכב, וגורמי ההרכב שלה איזומורפים ל-<span>\(G_{i+1} / G_{i}\)</span>.(<span>\(k\leq i\leq r-1\)</span>).</p>
+</div>
+<div class="example">
+<p>עבור <span>\(V\trianglelefteq S_{4}\)</span>. גורמי ההרכב של <span>\(V\)</span>. <span>\(\mathbb{Z} _2,\mathbb{Z} _2\)</span>, ושל <span>\(S_{4} / V \cong S_{3}\)</span>: <span>\(\mathbb{Z} _3,\mathbb{Z} _2\)</span>.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי: <span>$$\begin{cases}N\trianglelefteq G \\N\leq H\leq G
+\end{cases}\implies N\trianglelefteq  H$$</span> כי <span>\(\forall h'\quad h'N=Nh\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(|G|=p^r\)</span> כאשר <span>\(p\)</span> ראשונית, אז גורמי ההרכב שלה הם <span>\(\overbrace{ \mathbb{Z}_{p},\dots,\mathbb{Z} _p }^{ r }\)</span>.</p>
+</div>
+<div class="proof">
+<p>באינדוקציה שלמה על <span>\(|G|\)</span>, ניקח <span>\(N=Z(G)\)</span>, יודעים ש-<span>\(1=N\)</span>(מרכז
+של חבורת <span>\(p\)</span>) אם <span>\(N=G\)</span> אז <span>\(G\)</span> אבלית והוכחנו בעבר. אחרת, <span>\(p^k=|N|,p^l=|G / N|\)</span> חבורות מסדר חזקה <span>\(p\)</span> קטנה מ-<span>\(|G|\)</span>. לכן עבור <span>\(k,l &lt;r\)</span>, ומהאינדוקציה נקבל גורמי ההרכב שלה הם <span>\(\overbrace{ \mathbb{Z} _p, \dots, \mathbb{Z} _p }^{ r }\)</span>, והטענה אכן מתקיימת. ולכן:
+<span>$$\underbrace{ \overbrace{ \mathbb{Z} _{p},\dots , \mathbb{Z} _{p} }^{ l }\quad \overbrace{ \mathbb{Z} _{p},\dots,\mathbb{Z} _{p} }^{ k } }_{ \text{G לש בכרה ימרוג} }$$</span> 
+<strong>דוגמא</strong>
+יש חמישה חבורות מגודל 8 עד עדי איזומורפיזם -
+<span>$$\mathbb{Z} _{2}\times \mathbb{Z} _{4},\mathbb{Z} _{2}^3, \mathbb{Z} _{8},Q, D_{4}$$</span>
+וגורמי ההרכב של כל אחת מהם יהיו <span>\(\mathbb{Z} _2,\mathbb{Z} _2,\mathbb{Z} _2\)</span>.</p>
+</div><h2 id='groups_5_2'>פתירות</h2>
+ <div class="definition"><span class="keyword">פתירות</span><p>חבורה <span>\(G\)</span> נקראת פתירה אם יש לה סדרה נורמלית עם מנות אבליות.</p>
+</div>
+<div class="proposition">
+<p>חבורה <span>\(G\)</span> סופית היא פתירה אם"ם גורמה ההרכב שלה הם חבורות ציקליות
+ראשוניות(כלומר רק <span>\(\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני)</p>
+</div>
+<div class="proof">
+<p>הכיוון הראשון ברור, אם יש <span>\(G\)</span> כך שחבורות ההרכב שלה הם חבורות
+ציקליות ראשוניות, אז <span>\(G\)</span> פתירה. בכיוון השני, נניח:
+<span>$$1=G_{0}\triangleleft \dots \trianglelefteq G_{r}=G$$</span>
+סדרת נורמלית עם מנות אבליות, אפשר להמשיך להוסיף לה איברים עד שמגיעים לסדרת הרכב. אם <span>\(G_{i}\triangleleft \dots \triangleleft H'\triangleleft \dots \triangleleft G_{i+1}\)</span> אזי:
+<span>$$G_{i}\triangleleft \dots \triangleleft H\triangleleft H'\triangleleft \dots \triangleleft G_{i+1}$$</span>
+נלך למנה ב-<span>\(G_{i}\)</span>:
+<span>$$1=G_{i} / G_{i} \triangleleft \dots \triangleleft H / G_{i}\triangleleft \dots G_{i+1} / G_{i}$$</span>
+ואז <span>\(H' / H \cong (H' / G_{i}) / (H / G_{i})\cong H' / H\)</span>. כאשר מנה של תת חבורה של <span>\(G_{i+1} / G_{i}\)</span> אבלית. לכן גורמי ההרכב אבלים ולכן הם <span>\(\mathbb{Z} _p\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> פתירה ו-<span>\(H\leq G\)</span> אז <span>\(H\)</span> פתירה</p>
+</div>
+<div class="proof">
+<p>נבחר <span>\(1=G_{0}\triangleleft \dots \triangleleft G_{r} = G\)</span>. עם <span>\(G_{i+1} / G_{i}\)</span> אבלית. נחתוך עם <span>\(H\)</span>:
+<span>$$1=H_{0}\triangleleft \dots \triangleleft H_{r}=H$$</span>
+נגדיר <span>\(H_{i}=H\cap G_{i}\)</span>. צריך להראות ש-<span>\(H_{i}\)</span> נורמלית, <span>\(H_{i}\trianglelefteq H_{i+1}\)</span> והמנה אבלית.
+<span>$$H_{i}=H\cap G_{i}=H\cap G_{i+1}\cap G_{i}=H_{i+1}\cap G_{i}\trianglelefteq H_{i+1}$$</span>
+וניתן להשתמש במשפט האיזומורפיזם השני:
+<span>$$H_{i+1} / H_{i} = H_{i+1} / \left( H_{i+1}\cap G_{i} \right)\cong (G_{i} H_{i+1}) / G_{i} \leq G_{i+1} / G_{i}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(N\trianglelefteq G\)</span> אזי <span>\(G\)</span> פתירה אם"ם <span>\(N\)</span> ו-<span>\(G / N\)</span> פתירות.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(G\)</span> פתירה אז <span>\(N\)</span> פתירה(גם ל-<span>\(N\leq G\)</span>, הוכחנו). נניח ש-<span>\(N\)</span> ו-<span>\(G / N\)</span> פתירות ונוכיח ש-<span>\(G\)</span> פתירה. ניקח סדרה נורמלית:
+<span>$$1=N / N = G_{0} / N \trianglelefteq  \dots \trianglelefteq G_{r-1} / N \trianglelefteq  G_{r} / N = G / N$$</span>
+עם מנות אבליות(אנחנו יודעים שתתי חבורות של <span>\(G / N\)</span> הן מהצורה <span>\(H / N\)</span> ל-<span>\(N\leq H\leq G\)</span>). ממשפט ההתאמה, <span>\(G_{i}\triangleleft G_{i+1}\)</span> מאיזו 3:
+<span>$$\overbracket{ (G_{i+1} / N) / (G_{i} / N) }^{ abelian! } \cong G_{i+1} / G_{i}$$</span>
+ניקח סדרה נורמלית <span>\(\{ N_{i} \}_{i=0}^l\)</span> ל-<span>\(N\)</span> עם מנות אבליות, ונקבל סדרה נורמלית עם מנות אבליות. כעת נראה <span>\(G\)</span> פתירה גורר <span>\(G / N\)</span> פתירה. נבחר סדרה
+נורמלית עם מנות אבליות: 
+<span>$$\begin{aligned}1.\quad &amp;1=G_{0}\triangleleft G_{1} \triangleleft \dots G_{r}= G \xRightarrow{\times N}\\2.\quad &amp;1=N&lt;G_{1}N&lt;\dots &lt;G_{r}N=G \xrightarrow{ \div N} \\3.\quad &amp;1=N / N &lt; G_{1} N / N&lt;\dots &lt; G_{r}N / N = G / N
+\end{aligned}$$</span>
+נראה שהמעבר 2 הוא סדרה נורמלית עם מנות אבליות(סנעמ"ב). מתקיים <span>\(G_{i}N\trianglelefteq G_{i+1}N\)</span> כי: 
+<span>$$\begin{gathered}\forall g \in  G_{i+1}\quad  gG_{i}N\stackrel{G_{i} \triangleleft G_{i+1}}{=} G_{i}gN\stackrel{N\triangleleft G}{=} G_{i}Ng \\\forall n \in N\quad nG_{i}N \stackrel{N\triangleleft G}{=} = NG_{i}N = G_{i}Nn
+\end{gathered}$$</span>
+ועכשיו:
+<span>$$G_{i+1}N / G_{i}N= G_{i+1 }G_{i}N / G_{i}N \cong G_{i+1} /\left(  G_{i+1}\cap G_{i}N \right) \cong (G_{i+1} / G_{i}) / \left( G_{i+1} \cap G_{i}N \right) / G_{i}$$</span>
+כעת נראה שמעבר 3 היא סנעמ"א. ממשפטי האיזו הרביעי(זו סדרה נורמלית) והשלישי (עם אותן מנות כמו 2).</p>
+</div><h2 id='groups_5_3'>נילפוטנטיות</h2>
+ <h1 id='groups_6'>משפטי סילו</h1>
+<h2 id='groups_6_1'>חבורות p סילו</h2>
+ <div class="definition"><span class="keyword">חבורת <span>\(p\)</span> סילו</span><p>תהי <span>\(G\)</span> חבורה סופית ו-<span>\(p\)</span> מספר ראשוני. נכתוב <span>\(|G|=p^r\cdot m\)</span> עם <span>\(p\nmid m\)</span>. (כאשר נסמן <span>\(p^r \mid \mid |G|\)</span>). תת חבורה <span>\(H\leq G\)</span> נקראת חבורת <span>\(p\)</span>-סילו של <span>\(G\)</span> אם <span>\(|H|=p^r\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>אם <span>\(|G|=p^r\)</span> אזי <span>\(G\)</span> עצמה(ורק היא) חבורה <span>\(p\)</span> סילו שלה. </p>
+</li>
+<li>
+<p>עבור <span>\(G=S_{4}\)</span> נקבל <span>\(D_{4}\)</span> חבורת 2-סילו. <span>\(\langle (123)\rangle\)</span> חבורת 3-סילו, <span>\(\langle id\rangle\)</span> חבורת 5-סילו(<span>\(24=1\cdot 24=5^0\cdot 24\)</span>). </p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(Syl_{p}(G)\)</span> - קבוצת תתי החבורת ב-<span>\(p\)</span> סילו של <span>\(G\)</span>. כאשר נגדיר <span>\(k_{p}:=|Syl_{p}(G)|\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 1</span><p>יש חבורת <span>\(p\)</span> סילו.</p>
+</div>
+<div class="proof">
+<p>נסתכל על <span>\(X=\left\{  S\subseteq G  \mid |S|=p^r\right\}\)</span>. <span>\(G\circlearrowright X\)</span> ע"י כפל משמאל -<span>\(g.S=\left\{  gs\mid s\in S  \right\}\)</span>. ראשית, נראה כי <span>\(p\nmid |X|\)</span>.
+מתקיים: 
+<span>$$\begin{pmatrix}p^r m\\p^r 
+\end{pmatrix}=\frac{p^r m\cdot  (p^r m - 1) \cdot \dots\cdot (p^r m - p^r - 1)}{p^r (p^r-1)\cdot \dots\cdot (p^r-p^r+1)}$$</span>
+נראה ש-<span>\(p\)</span> מחלק את <span>\(p^r m - j\)</span> ואת <span>\(p^r - j\)</span> אותו מספר פעמים. לכל <span>\(0\leq j&lt;p^r\)</span>. נכתוב <span>\(j=p^{r'}\cdot m'\)</span> עם <span>\(p\nmid m'\)</span>. נשים לב ש-<span>\(r'&lt;r\)</span>. ואז: 
+<span>$$\begin{gathered}p^r m -j = p^r m - p^{r'}m' = p^{r'}(p^{r-r'}m-m') \\p^r - j = p^r - p^{r'}m'=p^{r'}(p^{r-r'}-m')
+\end{gathered}$$</span>
+מ-<span>\(p \nmid|X|\)</span> נובע שיש מסלול <span>\(O(s)\)</span> עם <span>\(p \nmid |O(s)|\)</span>. ניקח <span>\(P=Stab_{G}(S)\)</span>. ממשוואת מסלול מייצב:
+<span>$$|G|=|P|\cdot |O(s)|\implies p^r ||P|$$</span>
+מצד שני, <span>\(S\)</span> הוא איחוד של קוסטים של <span>\(P\)</span>: 
+<span>$$S=PS=\bigsqcup_{i=1}^k P_{S_{i}}$$</span>
+לנציגים <span>\(S_{1},\dots,S_{k}\)</span> כלשהם, ולכן <span>\(k\cdot |P|=p^r\)</span>. ולכן <span>\(|P|\)</span> חזקה של <span>\(p\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 2</span><p>כל חבורות <span>\(p\)</span> סילו צמודות זו לזו. כלומר <span>\(Syl_{p}(G)\)</span> מהווה מסלול בפעולת <span>\(G\)</span> על תתי החבורות שלה ע"י הצמדה.</p>
+</div>
+<div class="proof">
+<p>נראה טענה קצת חזקה יותר: אם <span>\(P \in Syl_{p}(G)\)</span> ו-<span>\(H\leq G\)</span> אזי קיים <span>\(g \in G\)</span> כך ש-<span>\(H\cap gPg^{-1}\in Syl_{p}(H)\)</span>. טענה זו תסיק את המשפט <span>\(II\)</span> של סילו כיוון ש: תהאנה <span>\(P,P'\)</span> חבורות <span>\(p\)</span> - סילו של <span>\(G\)</span>. ניקח <span>\(H=P'\)</span>. קיים <span>\(g \in  G\)</span> כך ש-<span>\(P'\cap gPg'\)</span> תת חבורה <span>\(p\)</span> סילו של <span>\(P'\)</span>. וזה גורר:
+<span>$$P'\cap gP g^{-1} =P' \implies gPg^{-1}  \subseteq P' \implies gPg^{-1} =P'$$</span>
+כי גדליהן שווים. תובנה כללית: <span>\(H,K\leq G\)</span>.<span>\(K\leq G\circlearrowright G / H\)</span>. מעניין לחקור את <span>\(K\circlearrowright G / H\)</span>. תרגיל - להראות ש- <span>\(Stab_{k}(gH)=K\cap gHg^{-1}\)</span> כאשר המסלולים נקראים קוסטים כפולים(<span>\(\text{Double Cosets}\)</span>). נחזור להוכיח את המשפט: נסתכל על <span>\(H \circlearrowright G / P\)</span>. כאשר <span>\(p\nmid m\)</span> ולכן <span>\(p\nmid |G / P|\)</span> יש מסלול <span>\(O(gP)\)</span> כך ש:
+<span>$$p\nmid |O(gP)|\implies p\nmid [H:Stab_{H}(gP)]\implies p\nmid \frac{|H|}{|H\cap gPg^{-1} |}$$</span>
+כלומר אם <span>\(|H|=p^{r'}m'\)</span>(כאשר <span>\(p\nmid m'\)</span> ) אזי <span>\(p^{r'}\mid|H\cap gPg^{-1} |\)</span>. מצד שני, <span>\(|H\cap gPg^{-1} |\mid|gPg^{-1} |\)</span> מלגרנג' כאשר <span>\(|gPg^{-1} |\)</span> חזקה של <span>\(P\)</span>. ולכן <span>\(|H\cap gPg^{-1} |\)</span> חזקה של <span>\(P\)</span>. ומשתי טענות אלו נובע המשפט.</p>
+</div>
+<div class="corollary">
+<p>חבורת <span>\(p\)</span> סילו היא נורמלית אם"ם היא החבורת <span>\(p\)</span> סילו היחידה.</p>
+</div>
+<div class="definition"><span class="keyword">נילפוטנטיות</span><p>חבורת סופית שכל החבורות ה-<span>\(p\)</span> סילו שלה הן נורמליות נקראת נילפוטנטית. אם"ם <span>\(k_{p}=1\)</span> לכל ראשוני <span>\(p\)</span>. כל תת חבורת <span>\(p\)</span> של <span>\(G\)</span> מוכלת בחבורת <span>\(p\)</span> סילו.</p>
+</div>
+<div class="remark">
+<p>משפט סילו זה סוג משפט הפוך של משפט לגרנג'.</p>
+</div>
+<div class="theorem"><span class="keyword">סילו 3</span><p><span>$$k_{p}=|Syl_{p}(G)|\implies \begin{cases}k_{p}\mid m \\k_{p} \equiv 1\mod p
+\end{cases}$$</span></p>
+</div>
+<div class="proof">
+<p>תהי <span>\(P \in Syl_{p}(G)\)</span>. מתקיים:
+<span>$$k_{p}=|O(p)|=[G:N_{G}(P)]=\frac{|G|}{|N_{G}|}$$</span>
+כאשר המעבר הראשון נובע מסילו <span>\(II\)</span> ומעבר שני ממשפט מסלול מייצב במסלול של <span>\(G\)</span> ע"י הצמדה. כעת:
+<span>$$Stab(P)=\left\{  g\in G\mid gPg^{-1} =P  \right\}=N_{G}(P)\geq P\xrightarrow{lagrange} p^r \mid N_{G}(P)\implies \frac{|G|}{|N_{G}(P)|}\mid m$$</span>
+כעת נסתכל על הפעולה של <span>\(P\)</span> על <span>\(Syl_{p}(G)\)</span> ע"י הצמדה. המסלול של <span>\(P\)</span> הוא <span>\(\{ P \}\)</span>. נראה שאם <span>\(P\neq P'\in Syl_{p}(G)\)</span> אזי <span>\(1\neq|O(P')|\)</span> ומזה נובע <span>\(P\mid|O(P')|\)</span> כי ממשפט מסלול מייצב. אבל המסלול מחלק את גודל החבורה הפועלת, <span>\(p^r=|P|\)</span> ומכאן נובע
+<span>$$k_{p}=|Syl_{p}(G)|=\sum_{orbits}|O(H)|\implies k_{p}\equiv 1\mod p$$</span>
+כעת נניח בשלילה ש-<span>\(O(P')=\{ P' \}\)</span>. אזי <span>\(gP'=P'g\)</span> לכל <span>\(g \in P\)</span>. לכן <span>\(PP'=P'P\)</span> וזה מתקיים אם"ם <span>\(PP'\leq G\)</span>(תרגיל). וכן:
+<span>$$|PP'|=\frac{|P|\cdot |P'|}{|P\cap P'}=\frac{p^{2r}}{|P\cap P'|}$$</span>
+נכתוב <span>\(|P\cap P'|=p^{2r-k}\)</span>. ולכן <span>\(0\leq k\leq r\)</span>. מכיוון ש:
+<span>$$\begin{cases}|PP'|=p^{2r-k} \\|PP'|\mid p^r m
+\end{cases}\implies r\leq k\implies P=P'$$</span>
+וקיבלנו סתירה.</p>
+</div><h2 id='groups_6_2'>פתירות חבורות מסדר קטן מ-60</h2>
+ <div class="reminder">
+<p>חבורה סופית היא פתירה אם"ם גורמי ההרכב שלה הם ציקלים.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(G\)</span> חבורה בגודל <span>\(|G|&lt;60\)</span> אזי <span>\(G\)</span> פתירה.</p>
+</div>
+<p>מספיק להוכיח שכל חבורה מוגדל קטן מ-<span>\(60\)</span> היא ציקלית מסדר ראשוני.(כי גורמי ההרכב של חבורה חסומים בגודלה - לא יתכן גורם הרכב מסדר גדול יותר) ולכן מספיק להראות את הטענה הבאה</p>
+<div class="proposition">
+<p>אם <span>\(|G|&lt;60\)</span> ו-<span>\(|G|\)</span> לא ראשוני אז יש לה ת"ח נורמלית לא טריוויאלית.</p>
+</div>
+<div class="proof">
+<p>מקרה <span>\(I\)</span>: <span>\(|G|=p^n\)</span> כאשר <span>\(p\)</span> ראשוני, <span>\(n\geq 2\)</span>. זה אומר שחבורה <span>\(p\)</span> היא פתירה, ולכן יש:
+<span>$$1=G_{0}\triangleleft \dots \triangleleft G_{r-1}\triangleleft G_{r}=G$$</span>
+כאשר המנה איזומורפית ל-<span>\(\mathbb{Z} _p\)</span>, ואיננה "פשוט לא ציקלית".</p>
+</div>
+<p>מקרה <span>\(II\)</span>: <span>\(|G|=p^nq\)</span> כאשר <span>\(p\neq q\)</span> ראשוניים. <span>\(p^n&lt;q\)</span>. למשל <span>\(6,20,51\)</span>. נסתכל על <span>\(k_{q}\)</span>. אנו יודעים כי: 
+<span>$$\begin{cases}k_{q}\mid p^n\implies k_{q}\in \left\{  1,p,p^2,\dots,p^n  \right\} \\k_{q}\equiv 1\mod q \implies k_{q}\in \{1, 1+q, 1+2q  \}
+\end{cases}\implies k_{q}=1$$</span>
+ולכן חבורת <span>\(q\)</span> סילו היא נורמלית.
+מקרה <span>\(III\)</span>: כאשר <span>\(|G|=p^mq^n \nmid(p^n)!\)</span> למשל <span>\(\left( 45\nmid 5!, 12\nmid 3! \right)\)</span>. נסתכל בפעולה של <span>\(G\)</span> בכפל על <span>\(G / Q\)</span> כש-<span>\(Q\in Syl_{q}(G)\)</span>. נסתכל על:
+<span>$$\rho:G\to Sym_{G / Q}\cong S_{p^n}\qquad \ker\left( \rho \right)=Core_{G}(Q)=\bigcap_{g\in G}gQg^{-1}$$</span>
+נשים לב ש-<span>\(Core_{G}(Q)\leq Q\)</span>, ואם <span>\(Core_{G}(Q)=1\)</span> אזי <span>\(\rho\)</span> שיכון, כלומר <span>\(G\)</span> איזומורפית שתת חבורה של <span>\(S_{p^n}\)</span> בסתירה ללגרנג'.
+כעת נשאר להראות: <span>\(30,40,42,56\)</span>. נראה בנפרד.
+<span>$$\begin{gather}|G|=40=8\cdot 5\implies \begin{cases}k_{5}\equiv 1 \mod 5\\k_{5}\mid 8\end{cases}\implies k_{5}=1\\|G|=42=2\cdot 3\cdot 7\implies \begin{cases}k_{7} \equiv 1 \mod 7 \\k_{7} \mid 6\end{cases}\implies k_{7}=1\\|G|=56=8\cdot 7\implies \begin{cases}k_{7}=1 \mod 7 \\k_{7} \mid 6\end{cases}\implies k_{7}=1 
+\end{gather}$$</span>
+עבור <span>\(k_{7}=1\)</span> סיימנו. עבור <span>\(k_{7}=8\)</span> נשים לב ששתי חבורות <span>\(7\)</span> סילו נחתכות ב-<span>\(e\)</span> (לגרנג') לכן ב-<span>\(G\)</span> יש <span>\(8\cdot 6=48\)</span> איברים מסדר <span>\(7\)</span>. ב-<span>\(G\)</span> יש <span>\(56-48=8\)</span> איברים שאינם מסדר <span>\(7\)</span> ולכן <span>\(k_{2}=1\)</span>. נותן לבדוק רק את <span>\(30\)</span>. נניח <span>\(|G|=30=2\cdot 3\cdot 5\)</span>. נניח בשלילה ש-<span>\(G\)</span> פשוטה. ולכן <span>\(1&lt;k_{2},k_{3},k_{5}\)</span>. לכן: 
+<span>$$\begin{cases}k \equiv 1 \mod 5 \\k_{5} \mid 6
+\end{cases}\implies k_{5}=6$$</span>
+ולכן יש <span>\(24\)</span> איברים מסדר <span>\(5\)</span> ב-<span>\(G\)</span>.
+<span>$$\begin{cases}  k_{3} \equiv 1 \mod 5\\k_{3}\mid 10  
+\end{cases}\implies k_{3}=10$$</span>
+ויש <span>\(20\)</span> שאיברים מסדר <span>\(3\)</span> ב-<span>\(G\)</span>. וכיוון ש-<span>\(24+20=44\)</span> קיבלנו סתירה.</p><h1 id='groups_7'>חבורות חופשיות</h1>
+<h2 id='groups_7_1'>מילים</h2>
+ <p>אנו יודעים כי <span>\(D_{n}=\left\langle  \sigma,\tau \right\rangle\)</span>. לכן כל איבר ב-<span>\(D_{n}\)</span> ניתן לכתוב בעזרת צירוף שלהם. אפשר לחשוב על זה כמו מילה שניתן לכתוב בעזרת <span>\(\sigma\)</span> ו-<span>\(\tau\)</span>.</p>
+<div class="definition">
+<p>מילה ב-<span>\(S\)</span> היא מחרוזת מהצורה <span>\(s_{1}^{\varepsilon_{1}} s_{2}^{\varepsilon_{2}} \dots s_{r}^{\varepsilon_{r}}\)</span> כש-<span>\(r\in \mathbb{N} \cup \{ 0 \}\)</span>, <span>\(s_{i}\in S\)</span> ו-<span>\(\varepsilon_{i}\in \left\{  \pm 1  \right\}\)</span>. למשל עבור <span>\(S=\{ a,b,c \}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$abacccba^{-1} b^{-1} \qquad a^5b^{-1} abc^7$$</span></p>
+</div>
+<div class="symbolize">
+<p>המילה הריקה מסומנת <span>\(\varnothing,e,1\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מילה מצומצמת</span><p>מילה <span>\(s_{1}^{\varepsilon_{1}} s_{2}^{\varepsilon_{2}} \dots s_{r}^{\varepsilon_{r}}\)</span> נקראת מצומצמת אם אין בה מופעים של <span>\(ss ^{-1}\)</span> או <span>\(s ^{-1} s\)</span>. פורמלית:
+<span>$$\forall i\quad s_{i+1}^{\varepsilon_{i+1}}\neq s_{i}^{-\varepsilon_{i}}$$</span>
+<strong>דוגמא</strong>
+<span>$$abaa ^{-1} cb$$</span>
+לא מצוצמת. הצמצום שלה הוא מחיקת האיבר <span>\(aa^{-1}\)</span>. כלומר <span>\(abcb\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצת המילים המצומצמות</span><p>קבוצת המילים המצומצמת ב-<span>\(S\)</span> מסומנת <span>\(F(S)\)</span>. </p>
+</div>
+<div class="proposition">
+<p>עבור קבוצה <span>\(S\)</span> קבוצת המילים המצומצמות <span>\(F(S)\)</span> יוצרת חבורה("החבורה החופשית על <span>\(S\)</span>") כשהכפל הוא שרשור וצמצום(צמוצום=מחיקת <span>\(ss^{-1}\)</span> או <span>\(s ^{-1} s\)</span> מהמילה). חבורה זו נקראת החבורה החופשית של <span>\(S\)</span> כאשר הקבוצה הריקה <span>\(\varnothing\)</span> ניטרלית. וההופכי מוגדר על ידי:
+<span>$$\left( \prod_{i=1}^r s_{i}^{\varepsilon_{i}} \right)^{-1} = s_{r}^{-\varepsilon_{r}}\dots s_{r}^{-\varepsilon _{1}}=\prod_{i=r}^1 s_{i}^{-\varepsilon_{i}}$$</span></p>
+</div>
+<div class="proof">
+<p>איבר ניטרלי: המילה הריקה <span>\(\varnothing\)</span>
+הופכי: כל שיקוף של איבר עם שינוי סימן. לדוגמא:
+<span>$$\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \right)^{-1} =s_{r}^{-\varepsilon_{r}}s_{r-1}^{-\varepsilon_{r-1}}\dots s^{-\varepsilon_{1}}$$</span>
+רעיון עבור אסוצייטיביות: שיכון של <span>\(F(s)\)</span> עם הכפל שהגדרנו בתוך <span>\(Sym_{F(s)}\)</span> ע"י <span>\(s^{\varepsilon}\mapsto \sigma_{s^{\varepsilon}}\)</span> שמוגדרת:
+<span>$$\sigma_{s^{\varepsilon}}\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \right)=\begin{cases}s^{\varepsilon}s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} &amp; s^{\varepsilon}\neq s_{1}^{-\varepsilon_{1}} \\s_{2}^{\varepsilon_{2}}\dots s_{r}^{\varepsilon_{r}} &amp; s^{\varepsilon}=s_{1}^{-\varepsilon_{1}}
+\end{cases}$$</span></p>
+</div>
+<div class="remark">
+<p>ב-<span>\(F(S)\)</span>, ל-<span>\(s \in S\)</span> מתקיים <span>\((s)^{-1} =s ^{-1}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$(abbc^{-1} a)(a^{-1} cbba)=abb\cancel{ c^{-1} aa^{-1} c }bba=abbbba$$</span></p>
+</div>
+<div class="corollary">
+<ul>
+<li>אם <span>\(|S|=|T|\)</span> אז <span>\(F(S)\cong F(T)\)</span>. לכן מסמנים <span>\(F_{n}\)</span> עבור <span>\(F_{S}\)</span> עם  <span>\(|S|=n\)</span>.</li>
+<li>לכן <span>\(F_{1}\cong\mathbb{Z}\cong F_{\{ a \}}=\left\{  a^n\mid n\in \mathbb{Z}\right\}\)</span>.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>אם <span>\(S\)</span> קבוצה, ל-<span>\(F(S)\)</span> יש את התכונה הבאה: לכל חבורה <span>\(T\)</span> ולכל פונקציה <span>\(f:S\to T\)</span> ישנו הומומורפיזם יחיד <span>\(\tilde{f}:F(s)\to T\)</span> שמרחיב את <span>\(f\)</span> (<span>\(\tilde{f}|_{S}=f\)</span>).</p>
+</div>
+<div class="proof">
+<p>ניקח <span>\(\tilde{f}\left( s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon r} \right)=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r})^{\varepsilon_{r}}\)</span> כדי לקבל הומומורפיזם שמרחיב את <span>\(f\)</span> מכאן יחידות. מצד שני, <span>\(\tilde{f}\)</span> הזו
+אכן מוגדרת היטב כי מילים מצוצמות שונות הם איברים שונים ב-<span>\(F(s)\)</span>. נשאר להראות ש-<span>\(\tilde{f}\)</span> היא הומומורפיזם: נסמן:
+<span>$$w=s_{1}^{\varepsilon_{1}}\dots s_{r}^{\varepsilon_{r}} \qquad u={s'}_{1}^{\varepsilon_{1}'}\dots {s'}_{1}^{\varepsilon_{1}'}$$</span>
+נניח ש-<span>\(wu=s_{1}^{\varepsilon_{1}}\dots s_{r-j}^{\varepsilon_j}{s'}_{{j+1}}^{\varepsilon'_{j+1}}\dots {s'}_{l}^{\varepsilon'_{l}}\)</span> וכעת: 
+<span>$$\begin{gathered}\tilde{f}(wu)=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r-j})^{\varepsilon_{j}} f({s'}_{j+1})^{\varepsilon'_{j+1}}\dots f({s'}_{l})^{\varepsilon'_{l}}= \\=f(s_{1})^{\varepsilon_{1}}\dots f(s_{r})^{\varepsilon_{r} }f({s'}_{1})^{\varepsilon'_{1}}\dots f({s'}_{l})^{\varepsilon'_{l}}=f(w)f(u)
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>כל חבורה היא מנה של חבורה חופשית.</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(G\)</span> חבורה. נבחר קבוצה נוצרת <span>\(S\)</span>, וניקח <span>\(f:S\to G\)</span>. לפי התכונה האוניברסלית <span>\(f\)</span> מתרחבת <span>\(f(s)\to s\)</span> להומומורפיזם <span>\(\iota:F(s)\to G\)</span>. כאשר <span>\(\iota\)</span> על כיוון ש-<span>\(S\subseteq Im(f)\)</span>. לכן <span>\(G\cong F(s) / \ker\left( \iota \right)\)</span>. באופן יותר כללי, עבור <span>\(S\subseteq G\)</span> ניקח <span>\(\iota:S\to G\)</span> ההכלה אז <span>\(\tilde{\iota}:F(S)\to G\)</span> על אם"ם <span>\(\langle S\rangle=G\)</span>. זאת כי:
+<span>$$\tilde{\iota}\left( \prod s_{i}^{\varepsilon_{i}} \right)=\prod s_{i}^{\varepsilon_{i}}$$</span>
+כאשר <span>\(\iota\)</span> חח"ע אם"ם <span>\(\ker\left( \tilde{\iota} \right)=1\)</span>. כלומר המילה המצומצמת היחידה ב-<span>\(S\)</span>, שמתרגמת ב-<span>\(G\)</span> ל-<span>\(e\)</span> היא המילה הריקה. <span>\(\tilde{\iota}\)</span> חח"ע אם לכל איבר ב-<span>\(G\)</span> יש יצוג יחיד(לכל היותר) כמילה מצומצמת ב-<span>\(S\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור חבורה <span>\(G\)</span> ו-<span>\(S\subseteq G\)</span> הבאים שקולים.</p>
+<ol>
+<li>
+<p>לכל <span>\(g\in G\)</span> יש יצוג יחיד כמילה מצומצמת ב-<span>\(S\)</span>. </p>
+</li>
+<li>
+<p>הפונקציה <span>\(\iota:F(S)\to G\)</span> היא חח"ע ועל(ובפרט <span>\(F(s)\cong G\)</span>). </p>
+</li>
+<li>
+<p>לכל חבורה <span>\(T\)</span> ופונקציה <span>\(f:S\to T\)</span> יש הרחבה יחידה להומומורפיזם  <span>\(\tilde{f}:G\to T\)</span>. 
+כשהטענה מתקיימת, אומרים ש-<span>\(G\)</span> היא חבורה חופשית עם בסיס <span>\(S\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>הטענות האלו מאוד מזכירים לנו טענות מקבילות לאלגברה לינארית. <span>\(1\)</span> מזכיר שלכל וקטור יש יצוג יחיד ע"י איברי הבסיס. <span>\(2\)</span> מזכיר שאיברי הבסיס הוא בת"ל ועל. <span>\(3\)</span> מזכיר שניתן להשלים אוסף וקטורים לבסיס.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>החבורה <span>\(D_{4}=\left\langle  \sigma,\tau  \right\rangle\)</span> לא חופשית עם בסיס <span>\(\left\{  \sigma,\tau  \right\}\)</span> (כאשר אין יצוג יחיד <span>\(\sigma^5=\sigma\)</span>). </p>
+</li>
+<li>
+<p>עבור <span>\(S=\{ a,b \}\subseteq F(a,b,c)\)</span> כאשר <span>\(\langle S\rangle\)</span> הם כל במילים שאין בהן <span>\(c\)</span>. <span>\(\langle S\rangle\)</span> היא חופשית עם בסיס <span>\(\{ a,b \}\)</span>. </p>
+</li>
+<li>
+<p>עבור <span>\(S=\{ a,bab^{-1} ,b^2ab^{-2} \}\)</span>. ניקח <span>\(G=\langle S\rangle \leq\langle F(a,b)\rangle\)</span>. <span>\(G\)</span> חופשית עם בסיס <span>\(S\)</span>. בפרט <span>\(G\cong F_{3}\)</span>. </p>
+</li>
+</ol>
+</div><h2 id='groups_7_2'>הצגות של חבורות</h2>
+ <p>נסתכל על:
+<span>$$D_{n}\cong \prescript{F\left( \sigma,\tau \right)}{}{/\ker\left( \tilde{\iota}:F\left( \sigma,\tau \right)\to D_{n} \right) }$$</span>
+כדי להבין את <span>\(F\)</span> נדרש להבין את הגרעין. הגרעין פה מכיל איברים כמו <span>\(\sigma^n,\tau^2,\left( \sigma \tau \right)^2,\tau^8\)</span>.</p>
+<div class="definition">
+<p>עבור <span>\(S\subseteq G\)</span>, התת חבורה הנורמלית שנוצרת ע"י <span>\(S\)</span> היא:
+<span>$$\langle S\rangle = \bigcap_{S\subseteq N\trianglelefteq G} N=\left\{  \prod_{i=1}^r gs_{i}^{\varepsilon_{i}}g^{-1} \mid s_{i}\in S\;\;\varepsilon_{i}\in \left\{  \pm 1  \right\}\;\;r\in \mathbb{N} \;\;g\in G  \right\}$$</span>
+נחפש <span>\(S\)</span> סופית כך ש:
+<span>$$\ker\left( \tilde{\iota} \right) = \left\langle  \langle S\rangle  \right\rangle$$</span>
+כאשר עבור <span>\(D_{n}\)</span>:
+<span>$$\ker\left( \tilde{\iota} \right)=\left\langle  \left\langle  \tau^n, \sigma^n , \left( \tau \sigma \right)^2\right\rangle  \right\rangle$$</span></p>
+</div>
+<div class="example">
+<p><span>$$G=D_{n}=\left\langle  \sigma,\tau \right\rangle$$</span>
+<span>$$\tilde{\iota}:F\left( \sigma,\tau \right)\to D_{n}$$</span>
+<span>$$\ker\left( \tilde{\iota} \right)=\left\{  \sigma^n,\tau^2, \sigma^{2n}, \left( \sigma \tau \right)^2,\dots  \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">יוצרים ויחסים</span><p>אם <span>\(S\)</span> יוצרת את <span>\(G\)</span>, איברי <span>\(S\)</span> נקראים יוצרים (<span>\(generators\)</span>) ואיברי <span>\(\ker\left( \tilde{\iota}:F(s)\to G \right)\)</span> נקראים יחסים(<span>\(relators / relations\)</span>). למשל "<span>\(\sigma \tau \sigma \tau\)</span> הוא יחס ב-<span>\(D_{n}\)</span>", "<span>\(\tau \sigma \tau=\sigma ^{-1}\)</span>" הוא יחס ב-<span>\(D_{n}\)</span>.</p>
+</div>
+<div class="example">
+<p>המילה "<span>\(\sigma \tau \sigma \tau\)</span> הוא יחס ב-<span>\(D_{n}\)</span>", ו-"<span>\(\tau \sigma \tau=\sigma ^{-1}\)</span>" הוא יחס ב-<span>\(D_{n}\)</span>.</p>
+</div>
+<p>אנחנו הגדרנו עבור <span>\(S\subseteq G\)</span> את:
+<span>$$\left\langle  \langle S\rangle  \right\rangle =\bigcap_{S\subseteq N\trianglelefteq G}N=\left\langle  \left\{  \prescript{g}{}{s}\mid g\in G\quad s \in S  \right\} \right\rangle$$</span>
+כאשר אנחנו מחפשים <span>\(R\subseteq F(s)\)</span> כךש-<span>\(\ker\left( \tilde{\iota} \right)= \left\langle \langle R\rangle\right\rangle\)</span>.</p>
+<div class="symbolize">
+<p><span>\(G=\left\langle  S\mid R  \right\rangle\)</span> הצגה של <span>\(G\)</span> ע"י היוצרים של <span>\(S\)</span> ויחסים <span>\(R\)</span>. </p>
+<p><span>$$\begin{gathered}S\subseteq R\quad S\subseteq G \\\left\langle  \langle R\rangle  \right\rangle =\ker\left( \left( \tilde{\iota}:F(s)\to G \right) \right)\quad R\subseteq F(s)
+\end{gathered}$$</span>
+נובע:
+<span>$$G\cong F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\qquad Z_{n}=\left\langle  a\mid a^n \right\rangle \qquad \ker\left( \tilde{\iota}:\overbracket{ F(a) }^{ \cong\mathbb{Z}  }\to \mathbb{Z} _{n} \right) = \langle a^n\rangle =\left\langle  \langle a^n\rangle  \right\rangle$$</span>
+<span>$$D_{n}=\left\langle  \sigma,\tau \mid \sigma^n,\tau^2,\left( \sigma \tau \right)^2 \right\rangle$$</span>
+כאשר תיכף נוכיח את הדוגמא השנייה.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f:G\to H\)</span> הומומורפיזם ו-<span>\(N\trianglelefteq  G\)</span> אזי ישנו הומומורפיזם <span>\(\bar{f}:G / N\to H\)</span> כך ש-<span>\(f=\bar{f}\circ \pi\)</span></p>
+</div>
+<div class="proof">
+<p>הטרנה מתקיימת אם ורק אם <span>\(N\subseteq \ker(f)\)</span> אם"ם <span>\(f\)</span> קבועה על כל קוסט של <span>\(N\)</span> אם"ם <span>\(\bar{f}(gN)=f(g)\)</span> מוגדרת היטב. נחזור לדוגמא על דיהדרלים: נוכיח ש-<span>\(D_{n}=\left\langle  \underbrace{ \sigma,\tau }_{ S } \mid \underbrace{ \sigma^n,\tau^2,\left( \sigma \tau \right)^2 }_{ R }  \right\rangle\)</span>. נסמן <span>\(K=\left\langle  \langle R\rangle\right\rangle \trianglelefteq F(s)\)</span>(רוצים: <span>\(K=\ker\left( \tilde{\iota} \right)\)</span>). נסתכל על הדיאגרמה הבאה:</p>
+</div>
+<p>כיוון ש-<span>\(R\subseteq \ker\left( \tilde{\iota} \right)\)</span> נקבל <span>\(\left\langle  \langle R\rangle\right\rangle\subseteq \ker\left( \tilde{\iota} \right)\)</span> ולכן <span>\(\bar{\tilde{\iota}}\)</span> קיים. וכן זה יהיה איזומורפיזם כיוון שעל(כי <span>\(\left\{  \sigma,\tau  \right\}=im\left( \iota \right)\subseteq im\left( \tilde{\iota} \right)=im\left( \bar{\tilde{\iota}} \right)\)</span>) נוכיח כי
+<span>$$2n\geq |F\left( \sigma,\tau \right) / \left\langle  \langle R\rangle  \right\rangle |$$</span>
+ולכן <span>\(\tau\)</span> איזומורפיזם. נוכיח שע"י מכפלה באיברי <span>\(\left\langle  \langle R\rangle\right\rangle\)</span> אפשר להגיע ממילה כללית ב-<span>\(F\left( \sigma,\tau \right)\)</span> לאחת מהמילים <span>\(\sigma^i\tau^k\)</span> כאשר <span>\(0\leq j&lt;n, 0\leq k\leq 1\)</span>. נשים לב שב <span>\(F\left( \sigma,\tau \right) / \left\langle \langle R\rangle\right\rangle\)</span> מתקיים <span>\(\sigma^n=e\)</span>(כלומר <span>\(\sigma^n\left\langle \langle R\rangle\right\rangle=\left\langle  \langle R\rangle  \right\rangle\)</span>) כאשר <span>\(\tau^2=e\)</span> וכן:
+<span>$$\sigma \tau=\sigma \tau\left( \sigma \tau \right)^{-2}=\tau ^{-1} \sigma ^{-1} =\tau ^{-1} \left( \tau^2 \right)\sigma ^{-1} =\tau ^{-1}$$</span>
+מ-<span>\(e=\tau^2=\sigma^4\)</span> , <span>\(\sigma \tau=\tau \sigma ^{-1}\)</span> אתם יודעים לעבור ממילה כללית ב-<span>\(\sigma ,\tau,\sigma ^{-1} ,\tau ^{-1}\)</span> לאחת המילים <span>\(\sigma^i\tau^k\)</span> כאשר <span>\(0\leq j&lt;n,0\leq k&lt;2\)</span> (כי אפשר להחליף <span>\(\tau^k \sigma^j\)</span> ב-<span>\(\sigma^m\tau^\ell\)</span> כלשהו).
+נקבל כי <span>\(\bar{f}\)</span> מונומורפיזם(שיכון/חח"ע) אם"ם <span>\(N=\ker(f)\)</span>: אם <span>\(k\in \ker(f)\)</span> אזי <span>$$\bar{f}(kN)=\bar{f}(k)=f(k)=e$$</span>
+<span>$$\bar{f} \text{ ע"חח } \implies kN=N\implies k\in N$$</span></p>
+<div class="proposition">
+<p><span>$$\left\langle  \langle R\rangle  \right\rangle =\ker\left( \left( F(s)\to G \right) \right) \quad \langle s\rangle =G\implies G\cong F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span>
+ו-<span>\(H\)</span> חבורה כלשהי אז אם <span>\(f:S\to H\)</span> פונקציה אז קיים הומומורפיזם <span>\(\tilde{f}:G\to H\)</span> שמרחיב את <span>\(f\)</span> (<span>\(\tilde{f}|_{S}=f\)</span>) אם"ם לכל <span>\(R\ni r=\prod_{i=1}^m s_{i}^{\varepsilon_{i}}\)</span> מתקיים <span>\(\prod_{i=1}^mf(s_{i})^{\varepsilon_{i}}=1\)</span> ב-<span>\(H\)</span>.</p>
+</div>
+<div class="example">
+<p>תהי <span>\(H\)</span> חבורה אזי יש הומומורפיזם <span>\(f:D_{n}\to H\)</span> שמקיים <span>\(f\left( \pi \right)=h', f\left( \sigma \right)=h\)</span> אם"ם <span>\((hh')^2=h^n=h'^2=e\)</span></p>
+</div>
+<div class="proof">
+<p>אם קיימת <span>\(f\)</span> כזו אז בפרט מתקיים:
+<span>$$\forall r=\prod_{i=1}^m s_{i}^{\varepsilon_{i}}\qquad \prod_{i=1}^{m}f(s_{i})^{\varepsilon_{i}}=\prod_{i=1}^{m}\tilde{f}(s_{i})^{\varepsilon_{i}}=\tilde{f}\left( \prod_{i=1}^{m}s_{i}^{\varepsilon_{i}}O \right)=\tilde{f}(e)=e$$</span>
+מצד שני, נסתכל על:
+<span>$$G= f(s) / \ker\left( \tilde{\iota} \right)=F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span>
+לפי הקרטריון של התפרקות הומומורפיזם דרך חבורת מנה, <span>\(\tilde{f}\)</span> מוגדרת אם"ם <span>\(\left\langle  \langle R\rangle  \right\rangle\subseteq \ker\left( \tilde{f}^{F(s)} \right)\)</span>
+וזה שקול ל-<span>\(R\subseteq \ker\left( \tilde{f}^{F(s)} \right)\)</span> </p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}\mathbb{Z} =\left\langle  a\mid \varnothing\right\rangle \qquad \mathbb{Z} _{n}=\left\langle  a\mid a^n \right\rangle \qquad F_{n}=\left\langle  a_{1},\dots,a_{n}\mid \varnothing\right\rangle \\ \mathbb{Z} ^2=\left\langle  a,b\mid aba^{-1} b^{-1}  \right\rangle  \qquad \mathbb{Z}^3=\left\langle  a,b,c\mid[a,b],[b,c],[a,c] \right\rangle   \\S_{n}=\left\langle  a_{1},\dots,a_{n-1}\mid a_{i}^2 \;\;\forall i\leq n-1\quad (a_{i}a_{i+1})^3\;\;\forall i\leq n-2\qquad a_{i}a_{j}a_{i}^{-1} a_{j}^{-1}\;\; \forall j\geq i+2 \right\rangle
+\end{gathered}$$</span></p>
+</div>
+<div class="remark">
+<p>אין אלגוריתם שמכריע בהנתן <span>\(S,R\)</span> סופית האם <span>\(\left\langle  S\mid R  \right\rangle\)</span> טריווירליות סופיות או אין סופיות.</p>
+</div>
+            </body>
+            </html>
+            

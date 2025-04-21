@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אופרטורים לינארים ומעברי בסיס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_4_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_3_4`; }});</script>
+        <div class="content">
+        <h1>4.1  אופרטורים לינארים ומעברי בסיס</h1>
+    <div class="definition"><span class="keyword">אופרטור</span><p>פונקציה שהתחום שלה שווה לטווח. כלומר מחזירה את אותו אובייקט אשר לקחה.</p>
+</div>
+<div class="example">
+<ul>
+<li>אופרטור הנגזרת <span>\(\frac{d}{dx}\)</span> לוקח פונקציה ומחזיר פונקציה.</li>
+<li>אופרטור האינטגרל באותו דרך לוקח פונקציה ומחזיר פונקציה</li>
+<li>פונקציה <span>\(\Omega(f)=f+1\)</span> כלומר מקבלת פונקציה ומחזירה את הפונקציה אשר מבצעת את הפונקציה המקורית ומוספיה 1.</li>
+</ul>
+</div>
+<div class="remark">
+<p>אופרטורים זה נפוץ במיוחד כיוון שהרבה פעמים אנחנו לוקחים אופבייקט במרחב, ועושים עליו פעולות אך לא מעבירים אותו למרחב אחר, ולכן הפונקציה אשר מבצעת את הפעולות תהיה אופרטור.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור לינארי</span><p>אופרטור אשר לינארי. כלומר <span>\(T:V\to V\)</span> אשר מקיים <span>\(T(v+cu)=T(v)+cT(u)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>במקרה הנוצר סופית, אופרטורים לינארים מיוצגים על ידי מטריצה ריבועית, ומטריצות ריבועיות יוצרות אופרטורים לינאריים.</p>
+</div>
+<div class="definition"><span class="keyword">מטריצות דומות</span><p>שתי מטריצות ריבועיות אשר מייצגות את אותה העתקה לינארית בבסיסים שונים נקראות מטריצות דומות.</p>
+</div>
+<div class="symbolize">
+<p>עכשיו כשנתייחס לאופרטורים, נסמן את המטריצה המייצגת של אופרטור אשר מקבל ווקטור בבסיס <span>\(\mathcal{A}\)</span> מחזיר ווקטור בבסיס <span>\(\mathcal{A}\)</span> ע"י <span>\([T]_{\mathcal{A}}\)</span> במקום <span>\([T]_{\mathcal{A}}^{\mathcal{A}}\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על העתקה
+<span>$$T\begin{pmatrix}x\\ y\end{pmatrix}=\begin{pmatrix}x\\ x+y
+\end{pmatrix}$$</span>
+נשים לב כי מצד אחת בבסיס הסטנדרטי <span>\(\mathcal{A}=(e_{1},e_{2})\)</span> ניתן לייצג את המטריצה המייצגת בצורה הבאה:
+<span>$$[T]_{\mathcal{A} }=\begin{bmatrix}[T(e_{1})]_{\mathcal{A}}  \bigg|[T(e_{2})]_{\mathcal{A} } \end{bmatrix}=\begin{bmatrix}1  &amp;  0 \\1 &amp; 1
+\end{bmatrix}$$</span>
+אך מצד שני עבור הבסיס <span>\(\mathcal{B}=(e_{1}+e_{2},e_{1})\)</span> נקבל:
+<span>$$[T]_{\mathcal{B} }=\begin{bmatrix}[T(e_{1}+e_{2})]_{\mathcal{B}}  \bigg|[T(e_{2})]_{\mathcal{B} } \end{bmatrix}=\begin{bmatrix}1  &amp;  1 \\2 &amp; 1
+\end{bmatrix}$$</span>
+ולכן המטריצות <span>\([T]_{\mathcal{A}}=[T]_{\mathcal{B}}\)</span> יהיו דומות</p>
+</div>
+<div class="definition"><span class="keyword">מטריצת מעבר בסיס</span><p>מטריצה שמעבירה ווקטור מבסיס <span>\(\mathcal{A}=\left( a_{1},\dots,a_{n} \right)\)</span> לבסיס <span>\(\mathcal{B}=\left( b_{1},\dots,b_{n} \right)\)</span>. זה למעשה יהיה המטריצה המייצגת של אופרטור היחידה אשר מקבל ווקטור בבסיס <span>\(\mathcal{A}\)</span> ומחזיר ווקטור מבסיס <span>\(\mathcal{B}\)</span>. כלומר המטריצה:
+<span>$$[Id]_{\mathcal{B} }^{\mathcal{A} }=\begin{bmatrix}[Id(a_{1})]_{\mathcal{B} } \bigg| \dots \bigg| [Id(a_{n})]_{\mathcal{B} }\end{bmatrix}=\begin{bmatrix}[a_{1}]_{\mathcal{B} } \bigg| \dots \bigg| [a_{n}]_{\mathcal{B} }
+\end{bmatrix}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ההופכי של מטריצת המעבר בסיס</span><p>המטריצה ההופכית למטריצה שמעבירה ווקטור מבסיס <span>\(\mathcal{A}=\left( a_{1},\dots,a_{n} \right)\)</span> לבסיס <span>\(\mathcal{B}=\left( b_{1},\dots,b_{n} \right)\)</span> תקיים:
+<span>$$\left( [Id]_{\mathcal{B} }^{\mathcal{A} } \right)^{-1}=[Id]_{\mathcal{A} }^{\mathcal{B} }=\begin{bmatrix}[b_{1}]_{\mathcal{A} } \bigg| \dots \bigg| [b_{n}]_{\mathcal{A} }
+\end{bmatrix}$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$[Id]_{\mathcal{B} }^{\mathcal{A} }[Id]_{\mathcal{A} }^{\mathcal{B} }=\left[ Id\circ  Id \right]_{\mathcal{B
+} }^{\mathcal{B} }=[Id]_{\mathcal{B} }$$</span>
+וזה מספיק כיוון שזוהי מטריצה ריבועית(אחרת היה צריך להראות ששווה ליחידה גם בכפל בכיוון השני) ולכן הופכי.</p>
+</div>
+<div class="proposition">
+<p>מטריצות <span>\(A,B\)</span> יהיו דומות אם"ם קיימת מטריצה הפיכה <span>\(P\)</span> כך ש:
+<span>$$A=P ^{-1}BP$$</span>
+כאשר המטריצה <span>\(P\)</span> תהיה המטריצת מעבר בסיס</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח ראשית כי <span>\(A,B\)</span> מטריצות דומות. לכן קיימות העתקה לינארית <span>\(T\)</span> ובסיסים <span>\(\mathcal{A},\mathcal{B}\)</span> כך ש: 
+<span>$$A=[T]_{\mathcal{A} }\qquad B=[T]_{\mathcal{B} }$$</span></p>
+</li>
+<li>
+<p>אנו יודעים כי מתקיים: 
+<span>$$[T]_{\mathcal{A} }=[T]_{\mathcal{A} }^{\mathcal{A} }=[Id]_{\mathcal{A} }^{\mathcal{B} }[T]_{\mathcal{B} }^{\mathcal{B} } [Id]_{\mathcal{B} }^{\mathcal{A} }$$</span></p>
+</li>
+<li>
+<p>נסמן <span>\(P=[Id]_{\mathcal{B}}^{\mathcal{A}}\)</span> ולכן <span>\(P ^{-1}=[Id]_{\mathcal{A}}^{\mathcal{B}}\)</span> ולכן: 
+<span>$$[T]_{\mathcal{A} }=P ^{-1} [T]_{\mathcal{B} }P\implies A=P ^{-1} BP$$</span></p>
+</li>
+<li>
+<p>בכיוון השני נניח כי קיימת <span>\(P\)</span> הפיכה כך ש-<span>\(A=P ^{-1} B P\)</span>. נרצה להראות כי מייצגים את אותה העתקה <span>\(T\)</span> תחת בסיסים שונים. נגדיר העתקה לינארית <span>\(T(v)=Av\)</span>. מתקיים: 
+<span>$$[Tv]_{\mathcal{A} }=[T]_{\mathcal{A} }^{A}[v]_{\mathcal{A} }=P ^{-1}BP [v]_{A}$$</span></p>
+</li>
+<li>
+<p>נזכור כי המטריצת <span>\(P\)</span> היא המטריצת מעבר בסיס. ולכן <span>\(P[v]_{A}=[v]_{B}\)</span>. ולכן נקבל: 
+<span>$$A[v]_{\mathcal{A}}=P^{-1}B[v]_{\mathcal{B}}=P^{-1}[T(v)]_{\mathcal{B}}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>מטריצות דומות משמרות דרגה</p>
+</div>
+<div class="proof">
+<p><span>$$\operatorname{rank}B=\operatorname{rank}(P^{-1}A P)=\operatorname{rank}(A P)=\operatorname{rank}A$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חזקה של מטריצות דומות</span><p>אם <span>\(A\)</span> דומה ל-<span>\(B\)</span> עם מטריצת מעבר <span>\(P\)</span> מתקיים <span>\(A^{n}=P ^{-1} B^{n}P\)</span> </p>
+</div>
+<div class="proof">
+<p><span>$$A^{k}=(P ^{-1} B P)^{k}=\overbrace{ (P ^{-1}B P) (P ^{-1} B P)\dots (P ^{-1} B P) }^{ k\;\mathrm{ times} }= P ^{-1} B (P ^{-1} P) B (P ^{-1} P)\dots P=P ^{-1} B^{ k} P$$</span></p>
+</div>
+<div class="remark">
+<p>אם <span>\(A=PBP ^{-1}\)</span> אז עדיין דומות כי <span>\(A=(P ^{-1})^{-1} B P ^{-1}\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">עקבה</span><p>סכום האיברים על האלכסון של המטריצה. כלומר:
+<span>$$\mathrm{Tr}(A)=\sum_{i=1}^{n} A_{i,i}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של עקבה</span><ol>
+<li>
+<p><span>\(\mathrm{tr}(A+B)=\mathrm{tr}A+\mathrm{tr}B\)</span> </p>
+</li>
+<li>
+<p><span>\(\mathrm{tr}(k A)=k\cdot \mathrm{tr}(A)\)</span> </p>
+</li>
+<li>
+<p><span>\(\mathrm{tr}(A^{T})=\mathrm{tr}(A)\)</span> </p>
+</li>
+<li>
+<p><span>\(\mathrm{tr}(A B)=\mathrm{tr}(B A)\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>מטריצות דומות משמרות עקבה. לכן עקבה של אופרטור מוגדר היטב.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(A\)</span> דומה ל-<span>\(B\)</span> אז קיים <span>\(P\)</span> הפיכה כך שמתקיים <span>\(B=P ^{-1}A P\)</span> וכעת:
+<span>$$\mathrm{tr}B=\mathrm{tr}(P^{-1}A P)=\mathrm{tr}((A P)P^{-1})=\mathrm{tr}A$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='prev-page'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

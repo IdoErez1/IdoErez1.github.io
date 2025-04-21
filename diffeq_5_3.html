@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בעיה רב מימדית לא חסומה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_6_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_5_2.html`;}});</script>
+        <div class="content">
+        <h1>5.3  בעיה רב מימדית לא חסומה</h1>
+    <div class="proposition">
+<p>משוואת הגלים מהצורה:
+<span>$$u_{tt}-c^{2}\bar{\nabla}^2 u=0$$</span>
+היא אינווריאנטית תחת:</p>
+<ol>
+<li>
+<p>הזזות במרחב ובזמן. </p>
+</li>
+<li>
+<p>סיבובים במרחב. </p>
+</li>
+<li>
+<p>טרנספורמציית לורנץ. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>עבור משוואה מהצורה:
+<span>$$\frac{\partial ^2u}{\partial t^{2}}-c^{2}u=f $$</span>
+תחת התנאים <span>\(u|_{t=0}=g\)</span> ו-<span>\(u_{t}|_{t=0}=h\)</span> נקבל</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='prev-page'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

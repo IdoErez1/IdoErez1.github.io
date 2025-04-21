@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות קמורות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_7_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_6_5`; }});</script>
+        <div class="content">
+        <h1>6.6  פונקציות קמורות</h1>
+    <div class="definition"><span class="keyword">הצירוף הקמור</span><p>צירוף לינארי כך שסכום כל המקדמים יהיה 1.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה קמורה</span><p>פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> המקיימת לכל <span>\(x,y \in \mathbb{R}^{n}\)</span>:
+<span>$$f((1-t)x+ty)\leq (1-t)f(x)+tf(y)$$</span>
+עבור <span>\(0\leq t \leq 1\)</span> כאשר <span>\((1-t)f(x)+tf(y)\)</span> יהיה הצירוף הקמור.</p>
+</div>
+<div class="proposition">
+<p>עבור פונקציה <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(f\)</span> קמורה. </p>
+</li>
+<li>
+<p>הנגזרת ראשונה מקיימת: 
+<span>$$f(y)\geq f(x)+f'(x)(y-x)$$</span>
+כלומר הפונקציה תהיה תמיד מעל המשיק המחבר בין שתי נקודות.</p>
+</li>
+<li>
+<p>הנגזרת השנייה מקיימת: 
+<span>$$f''(x)\geq 0$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציה קמורה ממש</span><p>פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> אשר לכל <span>\(x\neq y \in \mathbb{R}^{n}\)</span> ו-<span>\(0&lt;\lambda&lt;1\)</span> מקיימת:
+<span>$$f{\big(}\lambda x+(1-\lambda)y{\big)}&lt;\lambda f(x)+(1-\lambda)f(y)$$</span></p>
+</div>
+<div class="remark">
+<p>עבור פונקציה קמורה הערך של הפונקציה תמיד תהיה קטנה או שווה לערך של כל משיק, כאשר עבור פונקציה קמורה ממש הערך של הפונקציה תהיה קטנה ממש מהערך של המשיק בכל נקודה.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה קמורה</span><p>קבוצה <span>\(C\subseteq \mathbb{R}^{n}\)</span> נקראת קמורה אם לכל נקודות <span>\(x,y \in {C}\)</span> ו-<span>\(0\leq \lambda \leq 1\)</span> מתקיים:
+<span>$$\lambda x+(1-\lambda)y\in C$$</span>
+כלומר אם שתי נקודות הם בקבוצה נדרש כי גם הקו המחבר ביניהם יהיה בקבוצה.</p>
+</div>
+<div class="definition"><span class="keyword">אפיגרף</span><p>עבור פונקציה <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> האפיגרף יהיה תת קבוצה של <span>\(\mathbb{R}^{n}\times \mathbb{R}\)</span> המכיל את כל הנקודות <span>\((x,t)\)</span> כך ש-<span>\(t\geq f(x)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>פונקציה היא קומרה אם"ם האפיגרף היא קבוצה קמורה.</p>
+</div>
+<div class="reminder">
+<p>העתקה אפינית זוהי פונקציה מהצורה:
+<span>$$f(x)=a^{T}x+b$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של פונקציות קמורות</span><ol>
+<li>
+<p>אם הפונקיות <span>\(f,g:\mathbb{R}^{n}\to \mathbb{R}\)</span> הם קמורות אזי גם <span>\(f+g\)</span> תהיה קמורה. </p>
+</li>
+<li>
+<p>אם <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> קמורה ו-<span>\(\lambda \geq 0\)</span> אזי גם <span>\(\lambda f\)</span> תהיה קמורה. </p>
+</li>
+<li>
+<p>כל פונקציה לינארית או אפינית תנינ קמורה. </p>
+</li>
+<li>
+<p>אם גם <span>\(f\)</span> וגם <span>\(-f\)</span> פונקציות קמורות אזי <span>\(f\)</span> היא העתקה אפינית. </p>
+</li>
+<li>
+<p>אם <span>\(f,g\)</span> היא פונקציה קמורה אזי <span>\(h\)</span> המוגדרת על ידי <span>\(\max\{ f(x),g(x) \}\)</span> היא גם תהיה קמורה. </p>
+</li>
+</ol>
+</div>
+<h2>גזירות</h2>
+<div class="proposition">
+<p>יהי <span>\(f:\mathbb{R}^{n}\to \mathbb{R}\)</span> פונקציה גזירה. אזי <span>\(f\)</span> היא קמורה אם"ם לכל <span>\(x,y \in \mathbb{R}\)</span> מתקיים:
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)$$</span></p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(f\)</span> היא קמורה. יהי <span>\(x\neq y \in \mathbb{R}^{n}\)</span>. הקמירות של <span>\(f\)</span> נותנת לנו כי:
+<span>$$f{\big(}(x+y)/2{\big)}\leq{\frac{1}{2}}f(x)+{\frac{1}{2}}f(y).$$</span>
+כעת נסמן <span>\(h\equiv y-x\)</span>. ניתן לכתוב את האי שיוויון בצורה הבאה:
+<span>$$f(x+h/2)\leq{\frac{1}{2}}f(x)+{\frac{1}{2}}f(x+h)$$</span>
+כאשר ניתן לפשט ולקבל:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+h/2)-f(x)}{1/2}}$$</span>
+כעת ניתן להשתמש בדרישת הקמירות במקום על <span>\(x\)</span> ו-<span>\(y=x+h\)</span> על <span>\(x\)</span> ו-<span>\(x+\frac{h}{2}\)</span> ולקבל:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+h/2)-f(x)}{1/2}}\geq{\frac{f(x+h/4)-f(x)}{1/4}},$$</span>
+או באופן כללי ניתן להמשיך באופן זה על חזקות של 2 ולקבל לכל <span>\(k \in \mathbb{N}\)</span>:
+<span>$$f(x+h)-f(x)\geq{\frac{f(x+2^{-k}h)-f(x)}{2^{-k}}}$$</span>
+נזכור כעת את ההגדרה של הנגזרת הכיוונית בכיוון <span>\(h\)</span>
+<span>$$\partial_{h} f\equiv \lim_{ t \to 0 } \frac{1}{t}(f(x+th)-f(x)) = \bar{\nabla} f(x)^{T}h$$</span>
+כעת אם ניקח את הגבול <span>\(k\to \infty\)</span> באי שייוון נקבל:
+<span>$$f(x+h)-f(x)\geq\operatorname*{lim}_{k\to\infty}{\frac{f(x+2^{-k}h)-f(x)}{2^{-k}}}=\partial_{h}f=\nabla f(x)^{T}h$$</span>
+כאשר אם נציב חזרה את <span>\(h=y-x\)</span> נקבל את האי שיוויון המבוקש. 
+עבור הכיוון השני נניח כי מתקיים האי שיוויון לכל <span>\(x, y \in \mathbb{R}^{n}\)</span>. בנוסף נניח <span>\(w,z \in \mathbb{R}^{n}\)</span> ו-<span>\(0\leq \lambda \leq 1\)</span> ונסמן:
+<span>$$x:= \lambda w+\left( 1-\lambda \right) z$$</span>
+כאשר כעת האי שיוויון נותן לנו:
+<span>$$\begin{array}{c}{(i)\quad {f(w)\geq f(x)+\nabla f(x)^{T}(w-x),}}\\ (ii)\quad \;{{f(z)\geq f(x)+\nabla f(x)^{T}(z-x).}}\end{array}$$</span>
+כמו כן נשים לב כי:
+<span>$$w-x=(1-\lambda)(w-z)\qquad{\mathrm{~and~}}\qquad z-x=\lambda(z-w).$$</span>
+ולכן אם נכפיל את <span>\((i)\)</span> ב-<span>\(\lambda\)</span> ואת <span>\((ii)\)</span> ב-<span>\(\left( 1-\lambda \right)\)</span> ונחבר נקבל:
+<span>$$f(y)&gt;f(x)+\nabla f(x)^{T}(y-x)$$</span>
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)=f(x)$$</span>
+<span>$$g(y):=f(y)-\nabla f(x)^{T}(y-x)$$</span>
+<span>$$\nabla g(y)=\nabla f(y)-\nabla f(x) \qquad \bar{\nabla}^2 g(y)=\bar{\nabla}^2 f(y)$$</span>
+<span>$$f(y)=f(x)+\nabla f(x)^{T}(y-x)+{\frac{1}{2}}(y-x)^{T}\nabla^{2}f(x+t(y-x))(y-x)$$</span>
+<span>$$f(y)\geq f(x)+\nabla f(x)^{T}(y-x)$$</span>
+<span>$$\left\{x\,\in\,\mathbb{R}\,:\,f^{\prime\prime}(x)\,&gt;\,0\right\}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='prev-page'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

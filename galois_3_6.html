@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המשפט היסודי של האלגברה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./galois.html'> תורת גלואה</a></li>
+<li class='parent-page'><a href='./galois.html'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_1_1.html'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_2.html'>1.2 הרחבת שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_2_1.html'>2.1 שדה פיצול</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_3.html'>2.3 שיכונים של שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_4.html'>2.4 הרחבה נורמלית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_5.html'>2.5 הרחבת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_6.html'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_6.html'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./galois.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./galois_3_5.html`;}});</script>
+        <div class="content">
+        <h1>3.6  המשפט היסודי של האלגברה</h1>
+    <div class="proposition">
+<p>השדה <span>\(\mathbb{C}\)</span> סגור אלגברית. כלומר כל פולינום עם מקדמים מרוכבים מתפצל.</p>
+</div>
+<div class="proof">
+<p>נראה כי <span>\(p \in \mathbb{C}\)</span> מתפצל מעל <span>\(\mathbb{C}\)</span>. מספיק להראות עבור פולינום ממשי כי עבור פולינום מרוכב נקבל כי <span>\(p \in \mathbb{C}[x]\)</span> מתפצל אם"ם <span>\(p\cdot \overline{p}\)</span> מתפצל כאשר מתקיים <span>\(p\cdot \overline{p}=\overline{p\cdot \overline{p}}\)</span> ולכן ממשי.
+מאינפי 1 לכל פולינום מדרגה אי זוגית יש שורש ממשי, ולכן אין הרחבה אי זוגית מעל <span>\(\mathbb{R}\)</span>. נניח בשלילה שיש הרחבה <span>\(E\)</span> אי זוגית מעל <span>\(\mathbb{R}\)</span>. ממשפט האיבר הפרימיטיבי נקבל כי הרחבת שדות תהיה מהצורה <span>\(E=\mathbb{R}\left( \alpha \right)\)</span>. כאשר מתקיים
+<span>$$\left[ \mathbb{R}\left( \alpha \right) :\mathbb{R}\right]=\deg\left( m_{\alpha} \right) $$</span>
+כעת נראה כי כל הרחבה גלואה מקייימת <span>\(\left[ E:\mathbb{R} \right]=2^{n}\)</span>. נסמן <span>\(\left[ E:\mathbb{R} \right]=2^{n}q\)</span>. כאשר <span>\(2\not\mid q\)</span>. ניקח חבורת 2 סילו של <span>\(G\left( E / \mathbb{R} \right)\)</span>. נקבל:
+<span>$$\left[ E:\mathcal{F} (H) \right]=\lvert H \rvert =2^{n}$$</span>
+כאשר כעת מתקיים
+<span>$$\underbrace{ \left[ E:\mathbb{R} \right] }_{ 2^{n}q }=\underbrace{ \left[ E:\mathcal{F} (H) \right] }_{ 2^{n} }\underbrace{ \left[ \mathcal{F} (H):\mathbb{R} \right] }_{ q }$$</span>
+כאשר אנו יודעים כי <span>\(q\)</span> לא זוגי(כיוון שכל הריכיבים בזוגיים נכנסו לחבורת <span>\(p\)</span> סילו) ולכן <span>\(q=1\)</span>.</p>
+</div>
+<p>אנו יודעים כי לכל פולינום מרוכב מדרגה 2 יש שורש. מנוסחאת שורשים עבור פולינום <span>\(p=x^{2}+bx+c\)</span> נקבל:
+<span>$$x_{1,2}=\frac{-b\pm \sqrt{ b^{2}-4c }}{2}$$</span>
+כאשר חיסור, חיבור, כפל וחילוק של מספרים מרוכבים יחזיר מספר מרוכב. ולכן מספיק להראות כי שורש של מספר מרוכב הוא מספר מרוכב. אכן:
+<span>$$\sqrt{ re^{ i\theta } }=\sqrt{ r }e^{ i\theta/2 }$$</span>
+ואכן מרוכב. לכן אין הרחבה מדרגה 2 מעל <span>\(\mathbb{C}\)</span>(באותו אופן שהראנו ל-<span>\(\mathbb{R}\)</span>). כעת נראה כי אין הרחבת גלואה המקיימת <span>\(\left[ E:\mathbb{C} \right]=2^{n}\)</span>. נניח בשלילה שיש, לכן נילפוטנטי ולכן קיים תת חבורה מגודל <span>\(H=2^{n-1}\)</span>. כעת מתקיים
+<span>$$\underbrace{ \left[ E:\mathbb{C} \right] }_{ 2^{n} }=\underbrace{ \left[ E:\mathcal{F} (H) \right] }_{ 2^{n} −1}\left[ \mathcal{F} (H):\mathbb{C} \right]\implies \left[ \mathcal{F} (H):\mathbb{C} \right] =2$$</span>
+ולכן הפולנינום  המינימלי מדרגה 2 בסתירה שהפולינום המינימלי אי פריק ולכן <span>\(\left[ E:\mathbb{C} \right]\neq 2^{n}\)</span>
+ניקח פולינום <span>\(p\)</span>. נסתכל על שדה הפיצול של <span>\((x^{2}+1)p\)</span> ונסמן אותו ב-<span>\(E\)</span>. מתקיים:
+<span>$$\underbrace{ \left[ E:\mathbb{R} \right] }_{ 2^{n} }=\left[ E:\mathbb{C} \right]\underbrace{ \left[ \mathbb{C}:\mathbb{R} \right] }_{ 2 }\implies E:\mathbb{C}=1\implies E=C$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./galois.html'> תורת גלואה</a></li>
+<li class='prev-page'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

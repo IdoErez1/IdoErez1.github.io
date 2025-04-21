@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אקסיומת הבחירה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory'> תורת הקבוצות</a></li>
+<li class='parent-page'><a href='./Set Theory'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_1'>1.1 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_3'>1.3 יחסי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_3'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_5'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Set Theory`; }if (event.key === 'ArrowLeft') { window.location.href = `./Set Theory_2_4`; }});</script>
+        <div class="content">
+        <h1>2.5  אקסיומת הבחירה</h1>
+    <div class="definition"><span class="keyword">פונקציית בחירה</span><p>בהינתן קבוצה <span>\(X\)</span> של קבוצות לא ריקות, פונקציית בחירה היא פונקציה אשר לוקחת איבר מכל קבוצה ב-<span>\(X\)</span>, וממפה אותה לאיבר ב-<span>\(X\)</span>. כלומר עבור הקבוצה <span>\(\left\{  B_{i}\mid i \in I  \right\}\)</span> קיימת פונקציה בחירה <span>\(F:I\to \cup \left\{  B_{i}\mid i \in I  \right\}\)</span> כך ש-<span>\(\forall i \in I\quad f(i) \in B_{i}\)</span>. בכתיבה פורמלית:
+<span>$$\forall X\left[ \varnothing \not \in X\implies \exists f:X\to \bigcup X \quad \forall A \in X\left( f(A)\in A \right)  \right]$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת הבחירה</span><p>לכל קבוצה לא ריקה <span>\(A\)</span> קיים פונקציית בחירה <span>\(f\)</span> אשר מקשר כל קבוצה <span>\(a \in A\)</span> לאיבר <span>\(x \in A\)</span>. </p>
+</div>
+<div class="proposition">
+<p>אקסיומת הבחירה שקול לכך שלכל פונקציה <span>\(f:A\to B\)</span> על קיים פונקציה <span>\(g:B\to A\)</span> אשר חח"ע.</p>
+</div>
+<p>נוכיח רק את הכיוון <span>\(\impliedby\)</span>.
+<strong>הוכחה</strong>
+נניח את אקסיומת הבחירה:</p>
+<ol>
+<li>
+<p>יהי <span>\(f:A\to B\)</span> פונקציה אשר על. נגדיר את הקבוצה: 
+<span>$$C_{b}=\left\{  a \in A\mid f(a)=b  \right\}$$</span>
+כאשר קבוצה זו אינה ריקה כיוון שהפונקציה <span>\(f\)</span> היא על. 
+הערה: קבוצה זו לפעמים נקראת התמונה ההפוכה(preimage) ומסמן ב-<span>\(f^{-1}(b)\)</span>.</p>
+</li>
+<li>
+<p>כעת נגדיר את הקבוצה: 
+<span>$$X=\left\{  C_{b}\mid b \in B  \right\}$$</span>
+נשים לב כי זו קבוצה של קבוצות לא ריקות, כאשר האיחוד <span>\(\cup X=A\)</span> כיוון שהפונקציה <span>\(f\)</span> היא על.</p>
+</li>
+<li>
+<p>מאקסיומת הבחירה קיימת פונקציה <span>\(g:B\to \cup X=A\)</span> המקיימת <span>\(g(b)\in C_{b}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(g(b_{1})=g(b_{2})\)</span> נקבל כי <span>\(b_{1},b_{2}\in C_{b_{1}}\cap C_{b_{2}}\)</span> וכיוון שהקבוצות זרות, נקבל כי לכל שתי איברים מתקיים <span>\(b_{1}=b_{2}\)</span> </p>
+</li>
+</ol>
+<h3>הלמה של צורן</h3>
+<div class="definition"><span class="keyword">שרשרת</span><p>יהי <span>\(\left( Z,&lt;_{Z} \right)\)</span> יחס סדר חלקי. תת קבוצה <span>\(C\subseteq Z\)</span> תיקרא שרשרת אם ב-<span>\(&lt;_{Z}\)</span> הוא היחס סדר מלא על <span>\(C\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">חסם למעיל ואיבר מקסימלי</span><p>תהי <span>\((Z,&lt;_{Z})\)</span> יחס סדר חלקי ו-<span>\(C\)</span> שרשרת של <span>\(Z\)</span>. איבר <span>\(x \in Z\)</span> יקרא חסם מלעיל של שרשרת <span>\(C\)</span> אם:
+<span>$$\forall \in C\quad y\leq_{z} x$$</span>
+כאשר איבר <span>\(m \in Z\)</span> יקרא איבר מקסימלי אם לא קיים <span>\(y \in Z\)</span> כך ש-<span>\(m&lt;_{Z}y\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הלמה של צורן</span><p>לכל יחס סדר חלקי <span>\((Z,&lt;_{Z})\)</span> אם לכל שרשרת <span>\(C\subseteq Z\)</span> יש חסם מלעיל אז יש איבר מקסימלי בסדר <span>\((Z,&lt;_{Z})\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הלמה של צורן גורר כי לכל מרחב ווקטורי קיים בסיס.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(V\)</span> מרחב ווקטורי. נגדיר את הקבוצה: 
+<span>$$Z=\left\{  B\subseteq V\mid B \text{ is linearly independent}  \right\}$$</span>
+כאשר נשים לב כי <span>\(Z\)</span> לא ריקה כי למשל <span>\(\varnothing \in Z\)</span>.</p>
+</li>
+<li>
+<p>ניקח את היחס <span>\(&lt;_{Z}\)</span> לביות <span>\(\subset_{Z}\)</span>. כלומר <span>\(B_{1}&lt;_{Z}B_{2}\)</span> אם <span>\(B_{1}\subset_{Z}B_{2}\)</span>. ביחד עם היחס הזה, אם תנאי הלמה של צורן מתקיימים זה אומר שקיים <span>\(B\subseteq V\)</span> מקסימלי, כך שהוספה של כל איבר אחר יגרום לכך שלא יהיה מקסימלי. ולכן יהיה בסיס, ונדרש רק להראות את תנאי הלמה. </p>
+</li>
+<li>
+<p>תהי <span>\(C\subseteq Z\)</span> שרשרת. כלומר <span>\(C\)</span> מורכבת מבסיסים כך שכל אחת מוכלת בשנייה. </p>
+</li>
+<li>
+<p>נתבונן בקבוצה: 
+<span>$$B=\bigcup C=\bigcup \left\{  B'\mid B' \in C  \right\}$$</span>
+נדרש להראות כי חסם מלעיל וכי נמצא בקבוצה Z(אחרת היחס סדר בכלל לא מוגדר). כלומר כי בתל. העובדה שחסם מלעיל ברורה כיוון שכל איבר בקבוצה מוכל בה.</p>
+</li>
+<li>
+<p>נראה כי <span>\(B\)</span> בתל. יהיו <span>\(v_{1},\dots,v_{n}\in B\)</span> כך שקיימים <span>\(a_{1},\dots,a_{n}\)</span> לא כולם אפס כך ש: 
+<span>$$\sum_{i=1}^{\infty}a_{i}v_{i}=0$$</span></p>
+</li>
+<li>
+<p>מהגדרת ההכלה נקבל כי <span>\(v_{1},\dots,v_{n}\in B_{i}\)</span> עבור <span>\(B_{i}\in C\)</span>. כאשר נזכור כי מהגדרת השרשרת מתקיים: 
+<span>$$B_{1}\subseteq \dots \subseteq B_{n}$$</span>
+ולכן נקבל כי <span>\(v_{1},..,v_{n}\in B_{n}\)</span> ולכן בתל כיוון ש-<span>\(B_{n}\)</span> בתל.</p>
+</li>
+<li>
+<p>קיבלנו כי <span>\(B\)</span> בתל, לכן לכל שרשרת יש חסם עליון וקיים מקסימום לקבוצה <span>\(Z\)</span>, אשר יהיה בסיס של המרחב הווקטורי. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>הלמה של צורן שקולה לכך שניתן להרחיב כל סדר חלקי לסדר קווי.</p>
+</div>
+<div class="proof">
+<ol>
+<li></li>
+</ol>
+</div>
+<h2>עקרון הסדר הטוב</h2>
+<div class="definition"><span class="keyword">עיקרון הסדר הטוב</span><p>לכל קבוצה <span>\(A\)</span> קיים יחס סדר טוב <span>\(&lt;_{A}\subseteq A\times A\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עקרון הסדר הטוב, ובפרט אקסיומת הבחירה שקולה לטענה כי לכל זוג קבוצות <span>\(A,B\)</span> מתקיים כי <span>\(|A|\leq|B|\)</span> או <span>\(|B|\leq |A|\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עקרון הסדר הטוב גורר כי לכל קבוצה <span>\(X\)</span> קיים מונה <span>\(\theta\)</span> כך ש-<span>\(|X|=|\theta|\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">השקילות</span><p>הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p>אקסיומת הבחירה. </p>
+</li>
+<li>
+<p>הלמה של צורן. </p>
+</li>
+<li>
+<p>עקרון הסדר הטוב. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory'> תורת הקבוצות</a></li>
+<li class='prev-page'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

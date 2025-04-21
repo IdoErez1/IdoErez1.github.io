@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בסיס של טופולוגיה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology'> טופולוגיה</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><a href='./Topology_2'>2. הפרדה ומנייה</a></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  בסיס של טופולוגיה</h1>
+    <div class="definition"><span class="keyword">בסיס של טופולוגיה</span><p>בסיס <span>\(\mathcal{B}\)</span> של טופולוגיה על <span>\(X\)</span> זו אוסף של תתי קבוצות על <span>\(X\)</span> אשר מקיימות:</p>
+<ol>
+<li>
+<p>כיסוי של <span>\(X\)</span>. כלומר מתקיים: 
+<span>$$\bigcup_{B\in{\mathcal{B}}}B=X$$</span></p>
+</li>
+<li>
+<p>אם <span>\(x \in B_{1}\cap B_{2}\)</span> עבור <span>\(B_{1},B_{2}\in \mathcal{B}\)</span> אזי קיים <span>\(B_{3} \in \mathcal{B}\)</span> כך שמתקיים: 
+<span>$$x\in B_{3}\subseteq B_{1}\cap B_{2}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">טפולוגיה הנוצרת על ידי בסיס</span><p>הטופולוגיה הנוצרת על ידי בסיס <span>\(\mathcal{B}\)</span> תהיה הטופולוגיה שמתקבלת על ידי איחוד של כל איבר בבסיס:
+<span>$$\tau=\left\{\bigcup S\mid S\subseteq\mathcal{B}\right\}$$</span></p>
+</div>
+<div class="example"><span class="keyword">הטופולוגיה הדיסקרטית</span><p>הטופולוגיה שבה כל יחידון הוא איבר בבסיס היא יוצרת את הטופולגיה הדיסקרטית, כיוון שניתן להרכיב כל קבוצה על ידי איחוד של יחידונים.</p>
+</div>
+<div class="example"><span class="keyword">הבסיס האוקלידי</span><p>עבור <span>\(\mathbb{R}^{n}\)</span> האוסף של כל הכדורים הפתוחים מהווה בסיס לטופולוגיה הסטנדרטית</p>
+</div>
+<div class="example"><span class="keyword">בסיס בן מנייה עבור <span>\(\mathbb{R}^{n}\)</span></span><p>עבור <span>\(\mathbb{R}^{n}\)</span> אוסף הכדורים הפתוחים אשר מרכזם בנקודות רציונאליות ורדיוסים רציונאלי.</p>
+</div>
+<div class="definition"><span class="keyword">תת בסיס</span><p>תת בסיס <span>\(\mathcal{S}\)</span> על טופולוגיה <span>\(X\)</span> הוא אוסף של תתי קבוצות כך שהחיתוך הסופי של האיברים יוצר בסיס:
+<span>$${\mathcal{B}}=\{B_{1}\cap B_{2}\cap\cdots\cap B_{n}\mid n\in\mathbb{N},B_{i}\in{\mathcal{S}}\}.$$</span>
+כך שהטופולוגיה הנוצרת על ידי <span>\(\mathcal{S}\)</span> תהיה:
+<span>$$\tau=\left\{\bigcup S\mid S\subseteq\mathcal{B}\right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טופולוגייה סדר</span><p>יהי <span>\(P\)</span> קבוצה סדורה קווית(כלומר ניתן להשוואות כל שתי איברים). אזי טופולוגיית הסדר על <span>\(P\)</span> תהיה הטופולוגיה שנוצרת על ידי הבסיס:
+- הקטעים הפתוחים:
+<span>$$(a,b)=\{x\in P\mid a&lt;x&lt;b\}.$$</span>
+- אם ל- <span>\(P\)</span> יש מינימום <span>\(m\)</span> או מקסימום <span>\(M\)</span> אזי גם:
+<span>$$[m,b)=\{x\in P\mid m\leq x&lt;b\},\quad(a,M]=\{x\in P\mid a&lt;x\leq M\}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology'> טופולוגיה</a></li>
+<li class='prev-page'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

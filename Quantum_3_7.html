@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אוסצילטור הרמוני קוונטי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_4_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_3_6`; }});</script>
+        <div class="content">
+        <h1>3.7  אוסצילטור הרמוני קוונטי</h1>
+    <div class="definition"><span class="keyword">פוטנציאל הרמוני</span><p>פוטנציאל מהצורה:
+<span>$$V(x)={\frac{1}{2}}m\omega^{2}X^{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אוסצילטור הרמוני קוונטי</span><p>מערכת שבה יש פוטנציאל הרמוני, כלומר מערכת שההמילטוניאן שלה יהיה:
+<span>$$H={\frac{p^{2}}{2m}}+{\frac{m\omega^{2}x^{2}}{2}}$$</span></p>
+</div>
+<p>ניתן לפתור מערכת זו בשתי דרכים - הדרך הראשונה בעזרת טור חזקות(נקבל את משוואת הרמיט) והדרך השנייה זה בעזרת אופרטורי העלה והרדה</p>
+<div class="symbolize">
+<p>נגדיר אופרטורים חסרי יחידות ונסמן אותם עם כובע:
+<span>$$X=\sqrt{\frac{\hbar}{m\omega}}\hat{X}\,\,\,;\,\,\,P=\sqrt{\hbar m\omega}\hat{P}\,\,\,;\,\,\,\mathcal{H}=\hbar\omega\hat{\mathcal{H}}$$</span></p>
+</div>
+<p>ונקבל כעת כי ההמילטוניאן שלנו יהיה:
+<span>$$\hat{\mathcal{H}}=\frac{1}{2}\left(\hat{P}^{2}+\hat{X}^{2}\right)$$</span>
+זה מזכיר השלמה לריבוע מרוכבת. נראה אם באמת זה מה שמתקיים:
+<span>$$\left( \hat{X}-i\hat{P} \right)\left( \hat{X}+i\hat{P} \right)=\hat{X}^2-i\hat{P}\hat{X}+i\hat{X}\hat{P} + \hat{P}^2=\hat{X}^2 +\hat{P}^2 -i\left[ \hat{X},\hat{P} \right]$$</span>
+כאשר אומנם לא קיבלנו השלמה לריבוע מושלמת בגלל החוסר חילופיות, אבל ניתן למצוא ביטוי בעזרת הקומוטטור כאשר מתקיים <span>\(\left[ \hat{X},\hat{P} \right]=\frac{i}{2}I\)</span> ולכן נקבל:
+<span>$$\hat{\mathcal{H}}=\left( \hat{X}+i\hat{P} \right)\left( \hat{X}-i\hat{P} \right)+\frac{1}{2}I$$</span></p>
+<div class="definition"><span class="keyword">אופרטורי העלה והורדה</span><p><span>$$a=\left( \hat{X}+i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x+\frac{i p}{m\omega}\right)\quad a^{\dagger}=\left( \hat{X}-i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x-\frac{i p}{m\omega}\right)$$</span>
+לעיתים אופרטור הורדה <span>\(a\)</span> נקרא אופרטור השמדה ואופרטור העלה <span>\(a^{\dagger}\)</span> נקרא אופרטור יצירה.</p>
+</div>
+<div class="proposition"><span class="keyword">יחסי חילוף של אופרטורי העלה והורדה</span><p><span>$$\left[a,a^{\dagger}\right]=\left(\frac{1}{2\hbar}\right)\left(-i[x,p]+i[p,x]\right)=1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אופרטור המספר</span><p><span>$$N=a^{\dagger}a=\left(\frac{m\omega}{2\hbar}\right)\left(x^{2}+\frac{p^{2}}{m^{2}\omega^{2}}\right)+\left(\frac{i}{2\hbar}\right)[x,p]=\frac{H}{\hbar \omega}-\frac{1}{2}$$</span></p>
+</div>
+<div class="remark">
+<p>אופרטורי העלה והורדה הם לא הרמיטים בפני עצמם, כאשר אופרטור המספר הוא כמובן יהיה אופרטור הרמיטי כמכפלה של אופרטור עם הצמוד ההרמיטי שלו.</p>
+</div>
+<div class="proposition">
+<p><span>$$H=\hbar\omega(N+\frac{1}{2})$$</span></p>
+</div>
+<div class="corollary">
+<p>קיבלנו כי <span>\(H\)</span> היא פונקציה של <span>\(N\)</span>, לכן הקומוטטור שלהם מתאפס וניתן ללכסן אותם במשותף.</p>
+</div>
+<div class="proposition">
+<p>הערכים העצמיים של האנרגיות יהיו:
+<span>$$E_{n}=\left( n+{{\frac{1}{2}}} \right)\hbar\omega$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה למצוא את הערכים העצמיים של <span>\(N\ket{n}=n\ket{n}\)</span>. כיוון שלכסינים במשותף, ניתן להציב <span>\(N\mapsto H\)</span> וכן <span>\(\hbar \omega \left( N+\frac{1}{2} \right)\mapsto \hbar \omega\left( n+\frac{1}{2} \right)\)</span> ונקבל:
+<span>$$H\ket{n} =\hbar \omega\left( n+\frac{1}{2} \right)\ket{n} $$</span>
+ונקבל את הע"ע של האנרגיה המובקשים.</p>
+</div>
+<div class="proposition">
+<p><span>$$Na^{\dagger}\ket{ n} =(n+1)a^{\dagger}\ket{n} \qquad Na\ket{n} =(n-1)a\ket{n} $$</span></p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$\begin{gather}\left[N,a\right]=\left[a^{\dagger}a,a\right]=a^{\dagger}\left[a,a\right]+\left[a^{\dagger},a\right]a=-a  \\\left[ N,a^{\dagger} \right]=\left[ a^{\dagger}a,a^{\dagger} \right]=a^{\dagger}\left[ a,a^{\dagger} \right]+\left[ a^{\dagger},a^{\dagger} \right]a = a^{\dagger}
+\end{gather}$$</span>
+נזכור כי מהגדרת הקומוטטור <span>\(AB=[A,B]+BA\)</span> ולכן נקבל:
+<span>$$\begin{gather}N a^{\dagger}|n\rangle=\left( \left[ N,a^{\dagger} \right]+a^{\dagger}N \right)|n\rangle=(n+1)a^{\dagger}|n\rangle  \\N a|n\rangle=([N,a]+a N)|n\rangle=(n-1)a|n\rangle
+\end{gather}$$</span></p>
+</div>
+<div class="remark">
+<p>נקבל כי אם <span>\(\ket{n}\)</span> פתרון של משוואת שרדינגר, אז גם <span>\(a\ket{n}\)</span> יהיה פתרון עם רמת אנרגיה נמוכה יותר. באופן דומה גם <span>\(a^{\dagger}\ket{n}\)</span> יהיה פתרון עם רמת אנרגיה גובהה יותר.</p>
+</div>
+<div class="proposition">
+<p><span>$$a|n\rangle=\sqrt{n}|n-1\rangle \qquad  a^{\dagger}|n\rangle=\sqrt{n+1}|n+1\rangle$$</span></p>
+</div>
+<p>נשים לב כי מתקיים <span>\(a|n\rangle=c|n-1\rangle\)</span> כלומר הווקטור העצמי <span>\(\ket{n}\)</span> שמתאים לע"ע <span>\(n\)</span> ולווקטור עצמי <span>\(\ket{n-1}\)</span> שמתאים לערך עצמי <span>\(n-1\)</span> נבדלים בכפל בסקלר. כעת נשים לב כי:
+<span>$$\left\langle  n|a^{\dagger}a|n \right\rangle=|c|^{2}\implies \bra{n} N\ket{n} =\bra{n} n\ket{n} =n=\lvert c \rvert ^2$$</span>
+כאשר ניקח את <span>\(c\)</span> להיות חיובי ונקבל:
+<span>$$a|n\rangle=\sqrt{n}|n-1\rangle \qquad  a^{\dagger}|n\rangle=\sqrt{n+1}|n+1\rangle$$</span></p>
+<div class="proposition">
+<p><span>$$a^k\ket{n} =\sqrt{ \frac{n!}{(n-k)!} }\ket{n-k} $$</span>
+כאשר מוגדר על עוד <span>\(n-k&gt;0\)</span> בגלל דרישת חיוביות הנורמה:
+<span>$$n=\langle n|N|n\rangle=(\langle n|a^{\dagger}\rangle\cdot(a|n\rangle)\geq0$$</span></p>
+</div>
+<div class="corollary">
+<p>המצב יסוד של האוסצילטור ההרמוני יהיה:
+<span>$$E_{0}={\frac{1}{2}}\hbar\omega$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$\left|n\right\rangle=\left[\frac{(a^{\dagger})^{n}}{\sqrt{n!}}\right]\left|0\right\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>לא קיים רמת אנרגיה מקסימלת באסצילטור ההרמוני</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה שקיים. כלומר קיים קיים רמת אנרגיה שביצוע האופרטור העלה יתן לי שהאהרגיה מתאפסת. לכן:
+<span>$$a^{\dagger}\ket{H} =0\implies aa^{\dagger}\ket{H} =0\implies a^{\dagger}a\ket{H} +1\ket{H} =0\implies a^{\dagger}a\ket{H} =-1\ket{H} $$</span>
+כאשר השתמשנו ביחס חילוף נקבל כי <span>\(-1\)</span> הוא ערך עצמי - וזה פתרון לא פיזיקלי - לא ייתכן אנרגיה שלילית.</p>
+</div>
+<div class="proposition">
+<p>מיחסי האורטונורמליות מתקיים:
+<span>$$\langle n^{\prime}|a|n\rangle=\sqrt{n}\delta_{n^{\prime},n-1},\quad\langle n^{\prime}|a^{\dagger}|n\rangle=\sqrt{n+1}\delta_{n^{\prime},n+1}.$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אופרטורי התנע והמיקום בבסיס האנרגיה</span><p><span>$$\begin{gather}\left\langle  n^{\prime}|x|n \right\rangle=\sqrt{\frac{\hbar}{2m\omega}}\left( \sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1} \right)  \\\langle n^{\prime}|p|n\rangle=i\sqrt{\frac{m\hbar\omega}{2}}(-\sqrt{n}\delta_{n^{\prime},n-1}+\sqrt{n+1}\delta_{n^{\prime},n+1})
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מצבים עצמיים של האנרגיה בבסיס המקום</span><p><span>$$\langle x^{\prime}|n\rangle=\left(\frac{1}{\pi^{1/4}\sqrt{2^{n}n!}}\right)\left(\frac{1}{x_{0}^{n+1/2}}\right)\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)^{n}\exp{\left[-\frac{1}{2}\left(\frac{x^{\prime}}{x_{0}}\right)^{2}\right]}$$</span></p>
+</div>
+<div class="proof">
+<p>נסתכל על המצב היסוד המוגדר ע"י <span>\(a\ket{0}=\ket{0}\)</span>. ע"י ההגדרה של אופרטור ההורדה, נקבל:
+<span>$$\langle x^{\prime}|a|0\rangle=\sqrt{\frac{m\omega}{2\hbar}}\langle x^{\prime}|\left(x+\frac{i p}{m\omega}\right)|0\rangle=0.$$</span>
+כאשר ניתן לכתוב את זה בתור משוואה דיפרנציאלית:
+<span>$$\left(x^{\prime}+x_{0}^{2}\frac{d}{d x^{\prime}}\right)\left\langle  x^{\prime}|0 \right\rangle=0\qquad x_{0}\equiv{\sqrt{\frac{\hbar}{m\omega}}}$$</span>
+כאשר באופן כללי הפתרון של המשוואה תהיה:
+<span>$$\langle x^{\prime}|0\rangle=\left(\frac{1}{\pi^{1/4}\sqrt{x_{0}}}\right)\exp{\left[-\frac{1}{2}\left(\frac{x^{\prime}}{x_{0}}\right)^{2}\right]}$$</span>
+בעזרת אופרטור העלה ניתן לקבל:
+<span>$$\begin{gather}\left\langle  x^{\prime}|1 \right\rangle=\left\langle  x^{\prime}|a^{\dagger}|0 \right\rangle=\left(\frac{1}{\sqrt{2}x_{0}}\right)\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)\left\langle  x^{\prime}|0 \right\rangle  \\\langle x^{\prime}|2\rangle=\left(\frac{1}{\sqrt{2}}\right)\langle x^{\prime}|(a^{\dagger})^{2}|0\rangle=\left(\frac{1}{\sqrt{2!}}\right)\left(\frac{1}{\sqrt{2}x_{0}}\right)^{2}\left(x^{\prime}-x_{0}^{2}\frac{d}{d x^{\prime}}\right)^{2}\langle x^{\prime}|0\rangle
+\end{gather}$$</span>
+כאשר אם נמשיך את זה באופן כללי נקבל את המבוקש.</p>
+</div>
+<div class="proposition"><span class="keyword">ערך התצפית של המיקום והתנע בריבוע במצב יסוד</span><p><span>$$\left\langle x^{2}\right\rangle=\frac\hbar{2m\omega}=\frac{x_{0}^{2}}2 \qquad \left\langle p^{2}\right\rangle=\frac{\hbar m\omega}{2}$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$x^{2}=\left(\frac{\hbar}{2m\omega}\right)\left(a^{2}+a^{\dagger2}+a^{\dagger}a+a a^{\dagger}\right)$$</span>
+כאשר אם ניקח את הערך המצופה, כל הערכים פרט לאחרון יתאפס.</p>
+</div>
+<div class="proposition"><span class="keyword">ערך התצפית של האנרגיה הקינטית והפוטנציאלית</span><p><span>$$\left\langle\frac{p^{2}}{2m}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}\qquad \left\langle\frac{m\omega^{2}x^{2}}{2}\right\rangle=\frac{\hbar\omega}{4}=\frac{\langle H\rangle}{2}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי וודאות במצב יסוד</span><p><span>$$\left\langle \left( \triangle x \right)^{2} \right\rangle=\langle x^{2}\rangle={\frac{\hbar}{2m\omega}}\qquad  \langle(\triangle p)^{2}\rangle=\langle p^{2}\rangle=\frac{\hbar m\omega}{2}$$</span>
+כאשר מתקיים:
+<span>$$\langle(\triangle x)^{2}\rangle\langle(\triangle p)^{2}\rangle={\frac{\hbar^{2}}{4}}$$</span>
+כאשר נשים לב כי זו האי וודאות המינימלית האפשרית לפי עקרון האי וודאות.</p>
+</div>
+<div class="proof">
+<p>נזכור כי מתקיים:
+<span>$$\begin{array}{c c l}{{x^{2}}}={{\displaystyle\frac{\hbar}{2m\omega}\left( a+a^{\dagger} \right)^{2}}}\end{array}\qquad p^{2}\;\;=\;\;-\frac{m\omega\hbar}2(a-a^{\dagger})^{2}$$</span>
+ולכן ניתן לחשב את הערך תצפית בצורה ישירה:
+<span>$$\begin{array}{l c l}{{\langle0|(a+a^{\dagger})(a+a^{\dagger})|0\rangle}}&amp;{{=}}&amp;{{\langle0|a a^{\dagger}|0\rangle=1}}\\ {{\langle0|(a-a^{\dagger})(a-a^{\dagger})|0\rangle}}&amp;{{=}}&amp;{{-\langle0|a a^{\dagger}|0\rangle=-1}}\end{array}$$</span>
+ונקבל:
+<span>$$\langle x^{2}\rangle_{0}\langle p^{2}\rangle_{0}=-\frac{\hbar^{2}}{4}1(-1)=\frac{\hbar^{2}}{4}$$</span>
+כאשר כיוון שהערך תצפית של אופרטור המקום והתנע הוא 0, נקבל:
+<span>$$\langle(\triangle x)^{2}\rangle_{0}\langle(\triangle p)^{2}\rangle_{0}=\frac{\hbar^{2}}{4}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי וודאות עבור רמת אנרגיה כללית</span><p><span>$$\left\langle \left( \triangle x \right)^{2} \right\rangle\left\langle \left( \triangle p \right)^{2} \right\rangle=\left(n+\frac{1}{2}\right)^{2}\hbar^{2}=\frac{\hbar^{2}}{4}(2n+1)^{2}$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$\begin{gather}\left\langle  n|\left( a+a^{\dagger} \right)\left( a+a^{\dagger} \right)|n \right\rangle=\left\langle  n|a a^{\dagger}+a^{\dagger}a|n \right\rangle=\left\langle  n|2a^{\dagger}a+\left[ a,a^{\dagger} \right]|n \right\rangle=2n+1  \\\langle n|(a-a^{\dagger})(a-a^{\dagger})|n\rangle\ \ =-(2n+1)
+\end{gather}$$</span>
+ולכן נקבל באותו אופן כמו עבור מצב היסוד:
+<span>$$\langle(\triangle x)^{2}\rangle_{n}\langle(\triangle p)^{2}\rangle_{n}=\frac{\hbar^{2}}{4}(2n+1)^{2}$$</span></p>
+</div>
+<h3>מצבים קוהרנטיים</h3>
+<p>ראינו כי המצב היסוד של בסיס המספר הוא יהיה עם אי וודאות מינימלית. נרצה למצוא איפיון לתכונה זו.
+<strong>הגדרה</strong> מצב קוהרנטי
+זהו מצב קוונטי <span>\(\ket{\alpha}\)</span> שמוגדר בתור המצב עצמי הייחודי של אופרטור ההשמדה <span>\(a\)</span>. נשים לב כי כיוון ש-<span>\(a\)</span> לא הרמיטי, המצב הקוהרנטי ולא בהכרח ממשי, וקיים לו אמפליטודה ופאזה מרוכבת.</p>
+<div class="proposition">
+<p>המצב הקוהרנטי הוא המצב שבו האי וודואות היא מינימלי.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי מצב קוהרנטי מקיים:
+<span>$$a|\alpha\rangle=\alpha|\alpha\rangle \implies \langle\alpha|a^{\dagger}a|\alpha\rangle=|\alpha|^{2}$$</span>
+בנוסף מתקיים:
+<span>$$\begin{array}{c}{{\langle\alpha|(a+a^{\dagger})|\alpha\rangle=(\alpha+\alpha^{\star})}}\\ {{\langle\alpha|(a-a^{\dagger})|\alpha\rangle=(\alpha-\alpha^{\star})}}\\ {{\langle\alpha|(a+a^{\dagger})(a+a^{\dagger})|\alpha\rangle=(\alpha+\alpha^{\star})^{2}+1}}\\ {{\langle\alpha|(a-a^{\dagger})(a-a^{\dagger})|\alpha\rangle=(\alpha-\alpha^{\star})^{2}-1}}\end{array}$$</span>
+כאשר מההגדרה של <span>\(x,p\)</span> בעזרת אופרטורי סולם ולינאריות התוחלת נקבל:
+<span>$$\begin{array}{l}{{\langle(\Delta x)^{2}\rangle_{\alpha}=\langle x^{2}\rangle_{\alpha}-\langle x\rangle_{\alpha}^{2}={\frac{\hbar}{2m\omega}}}}\\ {{\langle(\Delta p)^{2}\rangle_{\alpha}=\langle p^{2}\rangle_{\alpha}-\langle p\rangle_{\alpha}^{2}={\frac{\hbar m\omega}{2}}}}\end{array}$$</span>
+ולכן נקבל:
+<span>$$\langle(\Delta x)^{2}\rangle_{\alpha}\langle(\Delta p)^{2}\rangle_{\alpha}=\frac{\hbar}{4}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מצבים קוהרנטים בבסים המספר</span><p>המצב הקוהרנטי שווה:
+<span>$$|\alpha\rangle=e^{-{\frac{1}{2}}|\alpha|^{2}}\sum_{n=0}^{\infty}{\frac{\alpha^{n}}{\sqrt{n!}}}|n\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>בבסיס המספר נקבל כי ניתן לכתוב את המצב הקוהרנטי בצורה:
+<span>$$|\alpha\rangle=\sum_{n}c_{n}|n\rangle=\sum_{n}|n\rangle\langle n|\alpha\rangle$$</span>
+כאשר אנו יודעים כי:
+<span>$$|n\rangle=\frac{\left( a^{\dagger} \right)^{n}}{\sqrt{n!}}|0\rangle\implies \langle n|\alpha\rangle={\frac{\alpha^{n}}{\sqrt{n!}}}\langle0|\alpha\rangle$$</span>
+ולכן:
+<span>$$|\alpha\rangle=\langle0|\alpha\rangle\sum_{n=0}^{\infty}\frac{\alpha^{n}}{\sqrt{n!}}|n\rangle$$</span>
+כאשר ניתן למצוא את הקבוע <span>\(\left\langle  0|\alpha  \right\rangle\)</span> בעזרת נרמול:
+<span>$$1=\sum_{n}\left\langle \alpha|n \right\rangle\left\langle  n|\alpha \right\rangle=|\left\langle 0|\alpha \right\rangle|^{2}\sum_{m=0}^{\infty}{\frac{|\alpha|^{2m}}{m!}}=|\left\langle 0|\alpha \right\rangle|^{2}e^{|\alpha|^{2}}\implies\langle0|\alpha\rangle=e^{-{\frac{1}{2}}|\alpha|^{2}}$$</span></p>
+</div>
+<div class="proposition">
+<p>מצב קוהראנטי מקיים:
+<span>$$|\alpha\rangle=e^{-{\frac{1}{2}}|\alpha|^{2}+\alpha a^{\dagger}}|0\rangle=e^{\alpha a^{\dagger}-\alpha^{\star}a}|0\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>נציב את המצב הקוהרנטי שקיבלנו מהטענה הקודמת בביטוי <span>\(|n\rangle=\frac{(a^{\dagger})^{n}}{\sqrt{n!}}|0\rangle\)</span> ונקבל:
+<span>$$\sum_{n=0}^{\infty}\frac{\alpha^{n}}{\sqrt{n!}}|n\rangle=\sum_{n=0}^{\infty}\frac{\alpha^{n}}{n!}(a^{\dagger})^{n}|0\rangle=e^{\alpha a^{\dagger}}|0\rangle$$</span>
+כאשר מכאן נקבל:
+<span>$$|\alpha\rangle=e^{-\frac12|\alpha|^{2}+\alpha a^{\dagger}}|0\rangle=e^{\alpha a^{\dagger}-\alpha^{\star}a}|0\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>כאשר מבצעים אינטגרציה על המרחב כולו מתקיים:
+<span>$$\int\frac{d^{2}\alpha}{\pi}\,|\alpha\rangle\langle\alpha|=1$$</span></p>
+</div>
+<div class="proof">
+<p>מהביטוי שפיתחנו עבור מצב קוהרנטי מתקיים:
+<span>$$\int d^{2}\alpha\,|\alpha\rangle\langle\alpha|=\int d^{2}\alpha\,e^{-|\alpha|^{2}}\sum_{m,n}\frac{(\alpha^{\star})^{n}\alpha^{m}}{\sqrt{n!\,m!}}|m\rangle\langle n|$$</span>
+כאשר נבצע אינטגרציה פולרית, כלומר נכתוב <span>\(d^{2}\alpha=d\phi\,d r\,r\)</span> ונקבל שאגף ימין יהיה:
+<span>$$\begin{array}{c}{{\displaystyle{\int d^{2}\alpha\,e^{-\left|\alpha\right|^{2}}(\alpha^{\star})^{n}\alpha^{m}=\int_{0}^{\infty}d r\,r e^{-r^{2}}r^{m+n}\int_{0}^{2\pi}d\phi\,e^{i(m-n)\phi}}}}\\ {{{=2\pi\delta_{m,n}\displaystyle{\frac{1}{2}}\int_{0}^{\infty}d r^{2}\,\bigl(r^{2}\bigr)^{m}e^{-r^{2}}=\pi m!\delta_{m,n}}}}\end{array}$$</span>
+כאשר נקבל סה"כ:
+<span>$$\int d^{2}\alpha\,|\alpha\rangle\langle\alpha|=\pi\sum_{n}|n\rangle\langle n|=\pi \implies \int\frac{d^{2}\alpha}{\pi}\,|\alpha\rangle\langle\alpha|=1$$</span></p>
+</div>
+<p>אנחנו אומרים שקבוצת המצבים הקוהרנטיים <span>\(\left\{  \ket{\alpha}  \right\}\)</span> מקיים שלמות יתר, כלומר גם אם נוריד ממנו איברים, עדיין יקיים המרחב שיוצר יהיה שלם.</p>
+<div class="proposition"><span class="keyword">הצגת המקום של מצב קוהרנטי</span><p>מתקיים:
+<span>$$\psi_{\alpha}\left( x^{\prime} \right)=\left( \frac{m\omega}{\pi\hbar} \right)^{1/4}e^{\frac{i}{\hbar}\langle p\rangle_{\alpha}x^{\prime}-\frac{m\omega}{2\hbar}\left( x^{\prime}-\langle x\rangle_{\alpha} \right)^{2}}$$</span></p>
+</div>
+<div class="proof">
+<p>כיוון שהתוחלת של מצב קוהרנטי הוא מינימלי מתקיים:
+<span>$$\mathrm{Re}\left( \alpha \right)=\left\langle \alpha|\frac{a+a^{\dagger}}{2}|\alpha \right\rangle=\sqrt{\frac{m\omega}{2\hbar}}\left\langle \alpha|x|\alpha \right\rangle\implies \langle x\rangle_{\alpha}={\sqrt{\frac{\hbar}{m\omega}}}{\sqrt{2}}\Re\left( \alpha \right)$$</span>
+וגם:
+<span>$$\mathrm{Im}\left( \alpha \right)=\left\langle \alpha|\frac{a-a^{\dagger}}{2i}|\alpha \right\rangle=\frac{1}{\sqrt{2m\omega\hbar}}\left\langle \alpha|p|\alpha \right\rangle \implies \langle p\rangle_{\alpha}={\sqrt{m\omega\hbar}}\sqrt{2}\Im\left( \alpha \right)$$</span>
+כעת נקבל:
+<span>$$\begin{gather}a\left|\alpha\right\rangle=\alpha\left|\alpha\right\rangle\implies\left\langle x^{\prime}\right|a\left|\alpha\right\rangle=\alpha\langle x^{\prime}|\alpha\rangle\implies{\frac{1}{\sqrt{2}}}\left\langle x^{\prime}\right|\left({\hat{X}}+i{\hat{P}}\right)|\alpha\rangle=\alpha\langle x^{\prime}|\alpha\rangle \\\langle x^{\prime}|\,\hat{X}\,|\alpha\rangle+i\,\langle x^{\prime}|\,\hat{P}\,|\alpha\rangle=\sqrt{2}\alpha\langle x^{\prime}|\alpha\rangle\implies x^{\prime}\psi_{\alpha}\left(x^{\prime}\right)+\frac{\partial}{\partial x^{\prime}}\psi_{\alpha}\left(x^{\prime}\right)=\sqrt{2}\alpha\psi_{\alpha}\left(x^{\prime}\right) \\\frac{\partial}{\partial x^{\prime}}\psi_{\alpha}\left(x^{\prime}\right)=\left(-x,+\sqrt{2}\alpha\right)\psi_{\alpha}\left(x^{\prime}\right)\implies\psi_{\alpha}\left(x^{\prime}\right)=C e^{-\frac{x^{\prime2}}{2}+\sqrt{2}\alpha x^{\prime}}
+\end{gather}$$</span>
+ונקבל:
+<span>$$\psi_{\alpha}\left(x^{\prime}\right)=\pi^{-\frac{1}{4}}e^{-R e^{2}\left(\alpha\right)}e^{-\frac{1}{2}\left(x^{\prime}-\sqrt{2}R e(\alpha)\right)^{2}+i\sqrt{2}I m(\alpha)x^{\prime}}$$</span>
+כאשר כעת ניתן להציב את הערכים עבור החלק הממשי והמדומה.</p>
+</div>
+<div class="proposition">
+<p>מצב קוהרנטי נשאר מצב קוהרנטי תחת התפתחות בזמן, כך שאם מצב התחלתי נתון הוא <span>\(\ket{\psi(t=0)}=\ket{\alpha}\)</span> מתקיים:
+<span>$$\left|\psi\left(t\right)\right\rangle=e^{-\frac{i\omega t}{2}}\left|\alpha e^{-i\omega t}\right\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>התפתחות בזמן נתון ע"י אופרטור קידום בזמן <span>\(U\)</span>. נקבל:
+<span>$$|\alpha,t\rangle={\mathcal{U}}(t,0)|\alpha(0)\rangle=e^{-{\frac{i}{\hbar}}H t}|\alpha(0)\rangle=e^{-{\frac{i}{\hbar}}H t}e^{-{\frac{1}{2}}|\alpha(0)|^{2}}\sum_{n}{\frac{(\alpha(0))^{n}}{\sqrt{n!}}}|n\rangle$$</span>
+כאשר <span>\(\ket{n}\)</span> הם הע"ע של ההמילטוניאן, ולכן:
+<span>$$|\alpha,t\rangle=e^{-{\frac{1}{2}}|\alpha(0)|^{2}}\sum_{n}{\frac{(\alpha(0))^{n}}{\sqrt{n!}}}e^{-{\frac{i}{\hbar}}\omega\hbar(n+{\frac{1}{2}})t}{\frac{(a^{\dagger})^{n}}{\sqrt{n!}}}|0\rangle$$</span>
+ונקבל:
+<span>$$\begin{array}{c}{{\vert\alpha,t\rangle=e^{-\frac{1}{2}\vert\alpha(0)\vert^{2}}e^{-\frac{i}{2}\omega t}\sum_{n}\frac{(\alpha(0)e^{-i\omega t}a^{\dagger})^{n}}{n!}\vert0\rangle=}}\\ {{\exp{\left(-\frac{1}{2}\vert\alpha(0)\vert^{2}-\frac{i}{2}\omega t+\alpha(0)e^{-i\omega t}a^{\dagger}\right)}\vert0\rangle}}\end{array}$$</span>
+כאשר אם נשוואה לביטוי <span>\(\ket{\alpha}=e^{ \alpha a^{\dagger}-\alpha^{*}a }\)</span>  נשים לב כי:
+<span>$$|\alpha,t\rangle=e^{-{\frac{i}{2}}\omega t}|e^{-i\omega t}\alpha(0)\rangle=|\alpha(t)\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>התוחלת של המצבים הקוהרנטיים מקיימים את ההתנהגות הקלאסית של אוסצליטור הרמוני. כלומר:
+<span>$$\frac{\mathrm{d} }{\mathrm{d} t} \langle P(t) \rangle =-m\omega^{2}\langle X(t) \rangle \qquad \langle P \rangle =m \langle X \rangle  $$</span></p>
+</div>
+<div class="proof">
+<p>מהטענה הקודמת נקבל:
+<span>$$\alpha(t)=e^{-i\omega t}\alpha(0)\ \ \Rightarrow\ \ \frac{d}{d t}\alpha(t)=-i\omega\alpha(t)$$</span>
+כאשר ניתן להשוואת רכיבים ולקבל:
+<span>$$\begin{array}{l}{{\frac{d}{d t}\mathrm{Re}\left( \alpha \right)=\omega\mathrm{Im}\left( \alpha \right)}}\qquad  {{\frac{d}{d t}\mathrm{Im}\left( \alpha \right)=-\omega \mathrm{Re}\left( \alpha \right)}}\end{array}$$</span>
+נגדיר ערכי תצפית:
+<span>$$x(t)=\left\langle \alpha(t)|x|\alpha,t \right\rangle \qquad p(t)=\langle\alpha(t)|p|\alpha,t\rangle$$</span>
+ונקבל:
+<span>$$\begin{cases}{\begin{array}{l}{{\frac{d}{d t}}x(t)={\sqrt{{\frac{\hbar}{2m\omega}}}}2{\frac{d}{d t}}\mathrm{Re}\left( \alpha \right)={\sqrt{\frac{\hbar}{2m\omega}}}2\omega \mathrm{Im}\left( \alpha \right)={\frac{p(t)}{m}}}\end{array}} \\\textstyle{\frac{d}{d t}}p(t)={\dot{\imath}}{\sqrt{\frac{m\hbar\omega}{2}}}(-2i){\frac{d}{d t}}\mathrm{Im}\left( \alpha \right)=-{\sqrt{\frac{m\hbar\omega}{2}}}2\omega \mathrm{Re}\left( \alpha \right)=-m\omega^{2}x(t) \\
+\end{cases}$$</span>
+כאשר ניתן לכתוב את המשוואות האלה באופן שקול ולקבל את המשוואות המוכרות:
+<span>$$\begin{cases}p(t)=m{\frac{d}{d t}}x(t)=m v(t) \\{\begin{array}{l}{{\frac{d}{d t}}p(t)=-m\omega^{2}x(t)}\end{array}}
+\end{cases}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='prev-page'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+</ul></li>
+        </body>
+        </html>
+        

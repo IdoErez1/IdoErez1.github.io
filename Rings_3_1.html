@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרת ותכונות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_3_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_2_2`; }});</script>
+        <div class="content">
+        <h1>3.1  הגדרת ותכונות</h1>
+    <div class="definition"><span class="keyword">מודול</span><p>יהי <span>\(R\)</span> חוג עם יחידה. מודול מעל R(לעיתים גם נקרא <span>\(R\)</span> מודול) יהיה חבורה אבלית <span>\((M,+)\)</span> ביחד עם כפל סקלארי <span>\(R\times M\to M\)</span> אשר מקיים לכל <span>\(r,s \in R\)</span> ו-<span>\(m,n \in M\)</span>:</p>
+<ol>
+<li>
+<p>פילוגי מעל <span>\(M\)</span>: 
+<span>$$r\cdot\left(m+n\right)=r\cdot m+r\cdot n$$</span></p>
+</li>
+<li>
+<p>פילוגי מעל <span>\(R\)</span>: 
+<span>$$(r+s)\cdot m=r\cdot m+s\cdot m$$</span></p>
+</li>
+<li>
+<p>אסוצייטיבי: 
+<span>$$(rs)\cdot m=r\cdot(s\cdot m)$$</span></p>
+</li>
+<li>
+<p>יחידה: 
+<span>$$1\cdot m= m$$</span>
+מסומן <span>\(R^{M}\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>זה למעשה הכללה של מרחב ווקטורי, כאשר הווקטורי זה האיבר בחבורה האבלית והסקלר זה איבר בחוג. בפרט אם המודול הוא מעל שדה נקבל מרחב ווקטורי.</p>
+</div>
+<div class="remark">
+<p>זה למעשה נקרא מודול שמאלי. ניתן להגדיר מודול ימיני מוגדר באותו אופן עם סקלר מימין.</p>
+</div>
+<p>כדי לקבל אינטאיציה על ההגדרה נזכר במשפט קיילי לחוגים.</p>
+<div class="proposition">
+<p>אם <span>\(A\)</span> חבורה אבלית אזי <span>\(\text{End}(A)\)</span> הוא חוג, כאשר חיבור מוגדר על ידי:
+<span>$$(f+g)(m)=f(m)+g(m)$$</span>
+וכן כפל מוגדר על ידי הרכבה:
+<span>$$(f\cdot g)(m)=f(g(m))$$</span></p>
+</div>
+<div class="reminder"><span class="keyword">משפט קיילי לחוגים</span><p>כל חוג איזומורפי לתת חוג של <span>\(\mathrm{End}(A)\)</span> לחבורה אבלית <span>\(A\)</span> כלשהי.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול למודול</span><p>יהי <span>\(M\)</span> חוברה אבלית ו-<span>\(\rho:R\to \mathrm{End}(M)\)</span> הומומורפיזם של חוגים כאשר  <span>\(\mathrm{End}(M)\)</span> הוא החוג של כל האנדומורפיזמים של חבורה <span>\(M\)</span>.
+הפעולה של <span>\(r \in R\)</span> על <span>\(m \in M\)</span> נתונה על ידי <span>\(\rho(r)(m)\)</span>.</p>
+</div>
+<div class="symbolize">
+<p>מסמנים <span>\(R^{M}\)</span> כדי לסמן ש-<span>\(M\)</span> הוא <span>\(R\)</span> מודול.</p>
+</div>
+<div class="example">
+<p>המודול <span>\(R^{R}\)</span> זה המודול שהחבורה האבלית היא <span>\(R\)</span> בעצמה, וכפל בסקלר זה מכפלת החוג.</p>
+</div>
+<div class="definition"><span class="keyword">סכום ישר של מודולים</span><p>אם <span>\(M\)</span> ו-<span>\(N\)</span> הם <span>\(R\)</span> מודולים, אז הסכום הישר שלהם מוגדר על ידי:
+<span>$$M\oplus N=\{(m,n)\mid m\in M,\,n\in N\}$$</span>
+כאשר כפל בסקלר מוגדר רכיב רכיב:
+<span>$$r\cdot(m,n)=(r\cdot m,\,r\cdot n)$$</span></p>
+</div>
+<div class="remark">
+<p>הגדרה זו משמרת את ההגדרה הידועה עבור שדות ווקטורים.</p>
+</div>
+<div class="definition"><span class="keyword">תת מודול</span><p>יהי <span>\(R^{M}\)</span> מודול. תת קבוצה <span>\(N\subseteq M\)</span> נקרא תת מודול אם:
+- לא ריקה.
+- סגורה תחת חיבור. כלומר לכל <span>\(n_{1},n_{2} \in N\)</span> נקבל <span>\(n_{1}+n_{2} \in N\)</span>.
+- סגורה תחת כפל בסקלר - כלומר לכל <span>\(r \in R\)</span> ו-<span>\(n \in N\)</span> נקבל <span>\(r\cdot n \in N\)</span>.</p>
+</div>
+<div class="remark">
+<p>זה בדיוק ההגדרה שהייתה לנו לתת מרחב ווקטורי. </p>
+</div>
+<div class="remark">
+<p>בפרט מקיים את הנגדי כיוון שמתקיים:
+<span>$$(-1)\cdot n+n=(-1)n+1\cdot n=(-1+1)\cdot n=0\cdot n=0$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(I\)</span> אידיאלי שמאלי אז בפרט תת חוג ולכן <span>\(R^{I}\)</span> היא מודול.</p>
+</div>
+<div class="example">
+<p>יהי <span>\(R\)</span> חוג. ניתן לקחת עבור החוג <span>\(M_{3}(R)\)</span> והאידיאל השמאלי <span>\(I=\begin{pmatrix}0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\\end{pmatrix}\)</span> ולקבל את המודול<span>\(M_{3}(R)^{\begin{pmatrix}0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\\end{pmatrix}}\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword"><span>\(\mathbb{Z}\)</span> מודול</span><p>מודול של חבורה אבלית <span>\(M\)</span> מעל החוג <span>\(\mathbb{Z}\)</span> אשר כפל בסקלר מוגדר על ידי:
+<span>$$n\cdot m=(\underbrace{1+1+\cdot\cdot\cdot+1}_{n\;\mathrm{times}})\cdot m=\underbrace{m+m+\cdot\cdot\cdot+m}_{n\;\mathrm{times}}$$</span>
+עבור <span>\(n&gt; 0\)</span> כאשר נגדיר <span>\(0\cdot m = 0\)</span> נקרא <span>\(\mathbb{Z}\)</span> מודול.</p>
+</div>
+<div class="proposition">
+<p>עבור <span>\(\mathbb{Z}\)</span> מודול הכפל מקיים:
+<span>$$(-n)\cdot m=-(m+\dots+m)$$</span></p>
+</div>
+<div class="corollary">
+<p>לכל חבורה אבלית <span>\(M\)</span> יש מבנה יחיד כ-<span>\(\mathbb{Z}\)</span> מודול, כאשר הכפל מוגדר על ידי:
+<span>$$n\cdot m={\left\{\begin{array}{l l}{m+m+\cdot\cdot\cdot+m}&amp;{n&gt;0}\\ {0}&amp;{n=0}\\ {-{\big(}m+m+\cdot\cdot\cdot+m{\big)}}&amp;{n&lt;0}\end{array}\right.}$$</span></p>
+</div>
+<div class="remark">
+<p>זה מתקשר לכך שקיים חוג יחיד(כד כדי איזומורפיזם) של הקבוצה <span>\(\mathbb{Z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מודול מנה</span><p>אם <span>\(N\)</span> הוא תת מודול של <span>\(M\)</span> אז החוג מנה מותר בתור קבוצת הקוסטים:
+<span>$$M/N=\{m+N\mid m\in M\}$$</span>
+כאשר חיבור מוגדר על ידי:
+<span>$$(m+N)+(m^{\prime}+N)=(m+m^{\prime})+N$$</span>
+וכפל בסקלר מוגדר על ידי:
+<span>$$r\cdot(m+N)=(r\cdot m)+N$$</span></p>
+</div>
+<p>נוכיח כי מוגדר היטב.</p>
+<div class="proof">
+<p>אם <span>\(m+N=m'+N\)</span> אז:
+<span>$$r m - r m' = r(\underbrace{ m - m' }_{ N })$$</span>
+ולכן:
+<span>$$r m +N= r m' +N$$</span>
+עבור <span>\(m\mathbb{Z}\leq \mathbb{Z}\)</span> מודול מנה מקבלים <span>\(\mathbb{Z} / m\mathbb{Z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הומומורפיזם של מודולים</span><p>פונקציה <span>\(f:M\to N\)</span> בין <span>\(R\)</span> מודולים אשר:
+- משמרת חיבור - כלומר לכל <span>\(m,m' \in M\)</span> מתקיים:
+<span>$$f(m+m^{\prime})=f(m)+f(m^{\prime})$$</span>
+- משמרת כפל בסקלר, כלומר לכל <span>\(r \in R\)</span> ו-<span>\(m \in M\)</span> מתקיים:
+<span>$$f(r\cdot m)=r\cdot f(m)$$</span></p>
+</div>
+<div class="remark">
+<p>זה למעשה מה שקראנו לו טרנספורמצייה לינארית במקרה של מרחבים ווקטורים.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם הראשון</span><p>אם <span>\(f:M\to N\)</span> הוא הומומורפיזם של <span>\(R\)</span> מודולים אזי:
+- הגרעין <span>\(\ker f = \{ m \in M\mid f(m)=0 \}\)</span> הוא תת מודול של <span>\(M\)</span>.
+- התמונה <span>\(\mathrm{Im}f\)</span> היא תת מודול של <span>\(M\)</span>.
+- קיים איזומורפיזם:
+<span>$$M/\ker f\cong\operatorname{Im}f$$</span>
+אשר נתון על ידי ההעתקה <span>\(m+\ker f\mapsto f(m)\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם השני</span><p>אם <span>\(N\)</span> ו-<span>\(M\)</span> הם תתי מודולים של מודול <span>\(L\)</span> אזי:
+<span>$$\frac{N}{N\cap M}\cong\frac{N+M}{M}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם השלישי</span><p>אם <span>\(K\subseteq M \subseteq N\)</span> הם תתי מודולים של מודול <span>\(R\)</span> אזי:
+<span>$${\frac{N/K}{M/K}}\cong{\frac{N}{M}}.$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט האיזומורפיזם הרביעי / משפט ההתאמה</span><p>קיים התאמה חח"ע בין תתי מודולים של <span>\(M / N\)</span> לבין תתי מודולים של <span>\(M\)</span> אשר מכילות את <span>\(N\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='prev-page'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

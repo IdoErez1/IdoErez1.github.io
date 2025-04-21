@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות מדידות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_1_5'>1.5 מידות</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_1_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  פונקציות מדידות</h1>
+    <div class="definition"><span class="keyword">פונקציה מדידה</span><p>בהנתן שני מרחבים מדידים <span>\((X,\mathcal{A})\)</span> ו-<span>\((Y,e)\)</span> פונקציה <span>\(f:X\to Y\)</span> נקראת מדידה אם לכל <span>\(E \in e\)</span> מקיימת:
+<span>$$f^{-1} (E) \in \mathcal{A}$$</span></p>
+</div>
+<div class="reminder">
+<p>קבוצה <span>\(U\subseteq \left[ -\infty,\infty \right]\)</span> היא פתוחה אם"ם:
+- הקבוצה <span>\(U\cap \mathbb{R}\)</span> פתוחה ב-<span>\(\mathbb{R}\)</span>
+- אם <span>\(\infty \in U\)</span> אז קיים <span>\(\alpha \in \mathbb{R}\)</span> כך ש-<span>\(\left( \alpha,\infty \right]\subseteq U\)</span>.
+- אם <span>\(-\infty \in U\)</span> אז:
+<span>$$\exists \beta \in \mathbb{R} \qquad  \left[ -\infty,\beta \right]\subseteq U$$</span></p>
+</div>
+<div class="corollary">
+<p>כל קבוצה פתוחה ב-<span>\(\left[ -\infty,\infty \right]\)</span> היא איחוד בן מנייה של קבוצות מהצורה:
+<span>$$\begin{cases}\left( \alpha,\infty \right] \\\left[ -\infty,\beta \right) \\\left( \alpha,\beta \right)
+\end{cases}$$</span></p>
+</div>
+<div class="proposition">
+<p>פונקציה <span>\(f:X\to \left[ -\infty,\infty \right]\)</span> (עם <span>\((X,\mathcal{A})\)</span>) מדידה אם"ם המקור של כל קרן מדיד, כלומר:
+<span>$$f^{-1}\left( \left( a,\infty \right] \right)$$</span>
+מדידה לכל <span>\(\alpha \in \mathbb{R}\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון אחד מיידי, כי אם <span>\(f\)</span> מדידה בפרט:
+<span>$$\mathcal{A} \ni f^{-1}\left( \left( \alpha,\infty \right] \right)$$</span>
+בכיוון השני - מהמסקנה מספיק להראות שכל הקבוצות מהצורה:
+<span>$$(*)\qquad \left( \alpha,\infty \right]\quad \left[ -\infty,\beta \right]\quad \left( \alpha,\beta \right)$$</span>
+יש להם מקור מדיד. כי אז אם <span>\(U\subseteq \left[ -\infty,\infty \right]\)</span> אזי:
+<span>$$U=\bigcup_{n=1}^{\infty} I_{n}$$</span>
+כשכל <span>\(I_{n}\)</span> היא ביטוי מהצורה <span>\((*)\)</span> ולכן:
+<span>$$f^{-1}(U)=\bigcup_{n=1}^{\infty} f^{-1}(I_{n}) \in \mathcal{A}$$</span>
+ולכן מהטענה שעבור טופולוגיות מספיק להראות שהמקור של כל קבוצה פתוחה היא מדידה נקבל כי <span>\(f\)</span> מדידה. בהנתן <span>\(\beta \in \mathbb{R}\)</span> אז:
+<span>$$f^{-1}\left( \left[ -\infty,\beta \right) \right)=\bigcup _{n=1}^{\infty}f^{-1}\left( \left[ -\infty,\beta-\frac{1}{n} \right] \right)=\bigcup_{n=1}^{\infty}\left( f^{-1}\left( \left( \beta-\frac{1}{n},\infty \right] \right) \right)^{C}\in \mathcal{A}$$</span>
+בהנתן <span>\(-\infty&lt;\alpha&lt;\beta&lt;\infty\)</span>:
+<span>$$f^{-1}\left( \left( \alpha,\beta \right) \right)=f^{-1}\left( \left[ -\infty,\beta \right) \right)\cap f^{-1}\left( \left( \alpha,\infty \right] \right)$$</span></p>
+</div>
+<div class="remark">
+<p>מתקיימת טענה מקבילה עבור <span>\(\left[ -\infty,\beta \right)\)</span></p>
+</div>
+<div class="corollary">
+<p>בהנתן סדרת פונקציות מדידות:
+<span>$$f_{n}:X\to \left[ -\infty,\infty \right]$$</span>
+נקבל כי הפונקציות הבאות מדידות:
+<span>$$\inf_{n}f_{n},\quad \sup _{n}f_{n}, \quad \lim_{ n \to \infty } \inf_{n}f_{n},\quad \lim_{ n \to \infty } \sup _{n}f_{n} $$</span>
+כאשר הכוונה הוא גבול נקודתי.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(g=\sup_{n}f_{n}\)</span>. מספיק להראות:
+<span>$$g^{-1}\left( \left( \alpha,\infty \right] \right)$$</span>
+הוא מדיד לכל <span>\(\alpha \in \mathbb{R}\)</span>. אכן:
+<span>$$g^{-1}\left( \left( \alpha,\infty \right] \right)= \bigcup_{n=1}^{\infty}f_{n}^{-1}\left( \left( \alpha,\infty \right] \right)$$</span>
+מהטענה המקבילה לזו עבור <span>\(\left[ -\infty,\beta \right)\)</span> נסיק ש-<span>\(\inf_{n}f_{n}\)</span> מדיד. מכאן ש:
+<span>$$\lim_{ n \to \infty } \sup f_{n}=\inf_{k} \sup _{n\geq k}f_{n}$$</span>
+מדיד.</p>
+</div>
+<div class="example">
+<p><span>$$f_{n}:\mathbb{R}\to \left[ -\infty,\infty \right]\qquad f_{n}(x)=x+n$$</span>
+כאשר לכל <span>\(x \in \mathbb{R}\)</span> נקבל:
+<span>$$\sup _{n}f_{n}\equiv \infty$$</span></p>
+</div>
+<div class="lemma">
+<p>אם <span>\(f:X\to Y\)</span> ו-<span>\(g:Y\to Z\)</span> מדידות אז:
+<span>$$g\circ  f : X\to Z$$</span>
+מדידה.</p>
+</div>
+<div class="proof">
+<p>לכל קבוצה מדידה <span>\(C\subseteq Z\)</span> מתקיים:
+<span>$$(g\circ f)^{-1}(C)=f^{-1}(g^{-1}(C)).$$</span>
+כאשר כיוון ש-<span>\(g\)</span> מדיד, <span>\(g^{-1}(C)\)</span> מדיד ב-<span>\(Y\)</span>. וכן כיוון ש-<span>\(f\)</span> מדיד אז <span>\(f^{-1}(g^{-1}(C))\)</span> מדיד ב-<span>\(X\)</span>. ולכן <span>\(g\circ f\)</span> מדיד.</p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(f,g:X\to \left[ -\infty,\infty \right]\)</span> פונקציות מדידות, אזי:
+<span>$$H:X\to\left[ -\infty,\infty \right]^{2}\qquad H(x)=(f(x),g(x))$$</span>
+מדידה.</p>
+</div>
+<div class="proof">
+<p>מהתזכורת כל קבוצה פתוחה ב-<span>\(\left[ -\infty ,\infty \right]^{2}\)</span> הוא איחוד בן מנייה של מלבנים מהצורה <span>\(I_{1}\times I_{2}\)</span> כש-<span>\(I_{j}\)</span> מהצורה:
+<span>$$\left( \alpha,\infty \right]\quad \left[ -\infty,\beta \right]\quad \left( \alpha,\beta \right)$$</span>
+מספיק לבדוק ש:
+<span>$$H^{-1}\left( I_{1}\times I_{2} \right)$$</span>
+מדיד עבור כל מלבן כנ"ל. אכן:
+<span>$$H^{-1}(I_{1}\times I_{2})=\{x\in X\mid f(x)\in I_{1}{\mathrm{~and~}}g(x)\in I_{2}\}=f^{-1}(I_{1})\cap g^{-1}(I_{2}).$$</span>
+וכיוון שהחיתוך של קבוצות מדידות היא קבוצה מדידה קיבלנו כי אכן מדיד.</p>
+</div>
+<div class="corollary">
+<p>בהנתן <span>\(f,g:X\to \mathbb{R}\)</span> מדידות גם <span>\(f+g\)</span> ו-<span>\(f\cdot g\)</span> מדידות.</p>
+</div>
+<div class="proof">
+<p>נגדיר <span>\(\Phi:\mathbb{R}^{2}\to \mathbb{R}\)</span> על ידי <span>\(\Phi(x,y)=x+y\)</span> אזי:
+<span>$$f+g=\Phi \circ  H$$</span>
+כש-<span>\(H\)</span> כבטענה הקודמת. <span>\(\Phi\)</span> פונקציה רציפה ולכן מדידה מאחר שהרכבה של מדידות מדיד נסיק את הדרוש. כנ"ל לכפל.</p>
+</div>
+<div class="definition"><span class="keyword">גבול עליון ותחתון של סדרת קבוצות</span><p>יהי <span>\((A_{n})\subseteq \Sigma\)</span> סדרה של קבוצות במרחב מידה <span>\(\left( X,\Sigma,\mu \right)\)</span>. </p>
+<ol>
+<li>
+<p>נגדיר את הגבול העליון של הסדרה להיות: 
+<span>$$\operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</span>
+כאשר זה למעשה מייצג את כל האיברים שמופיעים באינסוף קבוצות בסדרה.</p>
+</li>
+<li>
+<p>נגדיר את הגבול התחתון של סדרה להיות: 
+<span>$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k}$$</span>
+כאשר זה למעשה מייצג את כל האיברים שבסופו של דבר מופיעים בכל הקבוצות בסדרה.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>האינטויציה עבור הגבול התחתון זה עבור <span>\(n\)</span> קבוע כמה איברים משותפים לכל הקבוצות עם <span>\(k\geq n\)</span>(כלומר חותכים אם כל הקבוצות עם <span>\(k\geq n\)</span>). כעת נאחד את כל הקבוצות האלה ונקבל את האיברים שמפועים בכל הקבוצות בסופו של דבר. האינטואיציה עבור גבול עליון זה שעבור <span>\(n\)</span> קבוע מסתכלים על כל האיברים שמופיעים בכל הקבוצות בסדרה החל מ-<span>\(A_{n}\)</span>(זה האיחוד) ואז חותכים את כל האיברים שמופיעים הכול.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p><span>\(\operatorname*{lim}\operatorname*{inf}A_{n},\operatorname*{lim}\operatorname*{sup}A_{n}\in\Sigma\)</span> </p>
+</li>
+<li>
+<p><span>\(\mu(\operatorname*{lim}\operatorname*{inf}A_{n})\leq\operatorname*{lim}\operatorname*{inf}\mu(A_{n})\)</span> </p>
+</li>
+<li>
+<p>אם מרחב מידה הוא סופי, כלומר <span>\(\mu(X)&lt;\infty\)</span> אז: 
+<span>$$\mu(\operatorname*{lim}\operatorname*{sup}A_{n})\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof"></div>
+<div class="theorem"><span class="keyword">הלמה של בורל קנטלי</span><p>יהי <span>\(\left( X,\mathcal{B},\mu \right)\)</span> מרחב מידה. אזי אם <span>\(\{ A_{n} \}_{n=1}^{\infty}\subseteq \mathcal{B}\)</span> מקיים:
+<span>$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$</span>
+אזי:
+<span>$$\mu\left(\limsup_{n\to\infty}A_{n}\right)=\mu\left( \bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k} \right)=0$$</span></p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\left( X,\mathcal{B} , \mu \right)\)</span> מרחב מידה. נניח <span>\(\{ A_{n} \}\subseteq B\)</span> כך שמתקיים:
+<span>$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$</span>
+מספיק להראות כי הקבוצה המתוארת על ידי התכונה "<span>\(X\)</span> שייך למספר אינסופי של <span>\(A_{n}\)</span>" היא קבוצה ממידה אפס כלומר שהקבוצה <span>\(B\subseteq X\)</span> המוגדרת על ידי:
+<span>$$E=\left\{x\in X:x\in A_{n}{\mathrm{~for~infinitely~many}}\,n\right\}$$</span>
+תקיים <span>\(\mu(E)=0\)</span>. כאשר בהתאם להדרכה, מתקיים:
+<span>$$E=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</span></p>
+</div>
+<p>כאשר זה כמו שאנחנו רוצים, מבטא את החיתוך של כל האיברים שנמצאים בכמות אינסופית של <span>\(\{ A_{n} \}\)</span>(כדי שאיבר יהיה ב-<span>\(E\)</span> נדרש שיהיה שלכל <span>\(n \in \mathbb{N}\)</span> קיים <span>\(N&gt;n\)</span> כך ש-<span>\(x \in A_{N}\)</span>). כעת לכל <span>\(n \in \mathbb{N}\)</span> נגדיר:
+<span>$$E_{n}=\bigcup_{k=n}^{\infty}A_{k}$$</span>
+כאשר לפי ההגדרה: 
+<span>$$E=\bigcap_{n=1}^{\infty}E_{n}$$</span>
+נשים לב כי הסדרה <span>\(\{ E_{n} \}\)</span> היא סדרה יורדת תחת היחס <span>\(\subseteq\)</span>:
+<span>$$E_{1}\supseteq E_{2}\supseteq E_{3}\supseteq\cdots$$</span>
+כאשר מרציפות המידה של סדרות יורדות נקבל:
+<span>$$\mu(E)=\mu\left(\bigcap_{n=1}^{\infty}E_{n}\right)=\operatorname*{lim}_{n\to\infty}\mu(E_{n}).$$</span>
+וכן מאדטיביות המידה מתקיים:
+<span>$$\mu(E_{n})=\mu\left(\bigcup_{k=n}^{\infty}A_{k}\right)\leq\sum_{k=n}^{\infty}\mu(A_{k})$$</span>
+יהי <span>\(\varepsilon&gt; 0\)</span>. מההנחה מתקיים:
+<span>$$\lim_{ n \to \infty } \sum_{k=n}^{\infty} \mu(A_{k})=0$$</span>
+ולכן מהגדרה הגבול קיים <span>\(N \in \mathbb{N}\)</span> כך שעבורו לכל <span>\(n &gt; N\)</span> מתקיים:
+<span>$$\sum_{k=n}^{\infty}\mu(A_{k})&lt;\epsilon$$</span>
+ולכן:
+<span>$$\mu(E)\leq \varepsilon\implies \mu(E)=0$$</span></p>
+<div class="definition"><span class="keyword">פונקציית מדידת בורל</span><p>יהי <span>\(X\subseteq \mathbb{R}\)</span> פונקציה <span>\(f:X\to \mathbb{R}\)</span> נקראת מדידת בורל אם <span>\(f^{-1}(B)\)</span> היא קבוצת בורל לכל קבוצת בורל <span>\(B\subseteq \mathbb{R}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כל פונקציה רציפה היא מדידת בורל.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(X \subseteq \mathbb{R}\)</span> קבוצת בורל ו-<span>\(f:X\to \mathbb{R}\)</span> רציפה. יהי <span>\(a \in \mathbb{R}\)</span>. אם <span>\(x \in X\)</span> ו-<span>\(f(x)&gt; a\)</span> אז לפי הרציפות של <span>\(f\)</span> קיים <span>\(\delta_{x}&gt; 0\)</span> כך ש-<span>\(f(y)&gt; a\)</span> לכל <span>\(y \in \left( x-\delta_{x},x+\delta _{x} \right)\cap X\)</span>. ולכן:
+<span>$$f^{-1}\big((a,\infty)\big)=\Big(\bigcup_{x\in f^{-1}\big((a,\infty)\big)}(x-\delta_{x},x+\delta_{x})\Big)\cap X.$$</span>
+כאשר האיחוד בתוך הסוגרים הגדולות היא קבוצה פתוחה ב-<span>\(\mathbb{R}\)</span>. לכן החיתוך עם <span>\(X\)</span> היא קבוצת בורל, ולכן <span>\(f^{-1}\left( \left( a,\infty \right) \right)\)</span> היא קבוצת בורל. ולכן <span>\(f\)</span> מדידת בורל.</p>
+</div>
+<div class="proposition">
+<p>כל פונקציה מונוטונית היא מדידת בורל.</p>
+</div>
+<div class="summary">
+<ul>
+<li>פונקציה מדידה היא פונקציה שהמקור של כל קבוצה מדידה היא קבוצה מדידה.</li>
+<li>עבור פונקציות מהצורה <span>\(f:X\to \left[ -\infty,\infty \right]\)</span> כדי להראות שמדידה ניתן להראות שהמקור של כל קרן <span>\(f^{-1}\left( \left( a,\infty \right] \right)\)</span> מדידה.</li>
+<li>הרכבה, סכום ומכפלה של פונקציות מדידות תהיה מדידה.</li>
+<li>עבור סדרה של קבוצות, הגבול עליון נותן קבוצה של איברים אשר מופיעים אינסוף פעמים, וגבול תחתון נותן את קבוצת האיברים אשר יפיעו בכל קבוצה החל מאיבר מסויים, ומוגדרים על ידי:
+<span>$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k}\qquad \operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</span></li>
+<li>הלמה של בורל קנטלי אומר כי אם עבור סדרה של קבוצות מתקיים <span>\(\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty\)</span> אז <span>\(\mu(\limsup A_{n})=0\)</span>.</li>
+<li>פונקציה היא מדידת בורל אם המקור שלה קבוצת בורל. בפרט כל פונקציה רציפה ומונוטונית היא מדידת בורל.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_1_5'>1.5 מידות</a></li>
+<li class='prev-page'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תורת ההפרעות התלויה בזמן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_9_6`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_9_4`; }});</script>
+        <div class="content">
+        <h1>9.5  תורת ההפרעות התלויה בזמן</h1>
+    <div class="definition"><span class="keyword">תורת ההפרעות התלויה בזמן</span><p>שיטה המאפשרת לנו למצוא את הפתרון בצורה מקורבת של מערכת עם המילטוניאן מהצורה:
+<span>$$H= H_{0}+ \lambda V(t)\qquad \lambda\ll 1$$</span>
+כאשר אנחנו יודעים את הפתרון של מערכת עם המילטוניאן <span>\(H_{0}\)</span>, ו-<span>\(V(t)\)</span> הפרעה קטנה.</p>
+</div>
+<div class="symbolize">
+<p>נסמן את המצבים העצמיים של <span>\(H_{0}\)</span> - כלומר הרכיב שלא תלוי בזמן ב-<span>\(\ket{\psi_{n}}\)</span> ואת האנרגיות העצמיות המתאימות ב-<span>\(E_{n}\)</span> כך שמתקיים:
+<span>$$\hat{H}_{0}|\psi_{n}\rangle=E_{n}|\psi_{n}\rangle$$</span>
+כאשר ללא ההפרעה המצבים מתקדמים בזמן בצורה הבאה:
+<span>$$|\Psi(t)\rangle=\sum_{n}c_{n}(t)\,e^{-i E_{n}t/\hbar}|\psi_{n}\rangle$$</span>
+כך שאם המערכת מתחילה במצה <span>\(\ket{\psi_{i}}\)</span> אז <span>\(c_{n}(0)=\delta_{n,i}\)</span>.</p>
+</div>
+<div class="symbolize">
+<p>ניתן לכתוב את המקדמים <span>\(c_{n}(t)\)</span> על ידי טור חזקות לפי <span>\(\lambda\)</span>:
+<span>$$c_{n}(t)=c_{n}^{(0)}(t)+\lambda\,c_{n}^{(1)}(t)+\lambda^{2}\,c_{n}^{(2)}(t)+\cdots$$</span></p>
+</div>
+<p>כדי להתמודד עם בתלות הזמנית של <span>\(V(t)\)</span> תוך שימור הקידום של <span>\(H_{0}\)</span> נרצה לעבור לתמונת האינטראקציה.</p>
+<div class="reminder">
+<p>המצב <span>\(\ket{\Psi_{I}}\)</span> בתמונת האינטרקציה נתון על ידי:
+<span>$$\left|\Psi_{I}(t)\right\rangle=e^{i H_{0}t/\hbar}\left|\Psi(t)\right\rangle$$</span></p>
+</div>
+<div class="corollary">
+<p>המצב <span>\(\ket{\Psi(t)}\)</span> בתמונת האינטראקציה נתון על ידי:
+<span>$$|\Psi_{I}(t)\rangle=\sum_{n}c_{n}(t)\,|\psi_{n}\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>אם נעביר את המצב <span>\(|\Psi(t)\rangle=\sum_{n}c_{n}(t)\,e^{-i E_{n}t/\hbar}|\psi_{n}\rangle\)</span> לתמונת האינטראקציה נקבל:
+<span>$$|\Psi_{I}(t)\rangle=e^{i H_{0}t/\hbar}\sum_{n}c_{n}(t)e^{-i E_{n}t/\hbar}|\psi_{n}\rangle$$</span>
+כאשר נזכור כי מצב עצמי מקיים <span>\(e^{iH_{0} t/\hbar}=e^{ iE_{n}t/\hbar }\)</span> ולכן הגורמים האקספוננציאלים מצטמצמים ונקבל:
+<span>$$|\Psi_{I}(t)\rangle=\sum_{n}c_{n}(t)\,|\psi_{n}\rangle$$</span></p>
+</div>
+<div class="symbolize">
+<p>ניתן לכתוב את <span>\(c_{n}(t)\)</span> ו- <span>\(\ket{\Psi_{I}(t)}\)</span> בתור טור חזקות לפי <span>\(\lambda\)</span>:
+<span>$$\begin{gather}c_{n}(t)=c_{n}^{(0)}(t)+\lambda\,c_{n}^{(1)}(t)+\lambda^{2}\,c_{n}^{(2)}(t)+\cdots\\|\Psi_{I}(t)\rangle=|\Psi_{I}^{(0)}(t)\rangle+\lambda\,|\Psi_{I}^{(1)}(t)\rangle+\lambda^{2}\,|\Psi_{I}^{(2)}(t)\rangle+\cdots  \end{gather}
+$$</span>
+כאשר <span>\(\ket{\Psi^{(i)}_{I}(t)}\)</span> נקרא התיקון ה-<span>\(i\)</span> לפונקציית גל.</p>
+</div>
+<div class="corollary">
+<p>מהשוואת המקדמים נקבל:
+<span>$$|\Psi_{I}^{(i)}(t)\rangle=\sum_{n}c_{n}^{(i)}(t)|\psi_{n}\rangle$$</span>
+ולכן בתמונת שרדינגר:
+<span>$$|\Psi^{(i)}(t)\rangle=\sum_{n}c_{n}^{(i)}(t)e^{-i E_{n}t}|\psi_{n}\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>אם מציבים:
+<span>$$c_{n}(t)=c_{n}^{(0)}(t)+\lambda\,c_{n}^{(1)}(t)+\lambda^{2}\,c_{n}^{(2)}(t)+\cdots$$</span>
+בביטוי:
+<span>$$|\Psi_{I}(t)\rangle=\sum_{n}c_{n}(t)|\psi_{n}\rangle$$</span>
+ניתן לפרק לטור חזקות ולהשוואות את החזקות של <span>\(|\Psi_{I}^{(0)}(t)\rangle+\lambda\,|\Psi_{I}^{(1)}(t)\rangle+\lambda^{2}\,|\Psi_{I}^{(2)}(t)\rangle+\cdots\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מתקיים:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(0)}(t)\rangle=0$$</span>
+כאשר עבור <span>\(i\geq 0\)</span> נקבל:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(i+1)}(t)\rangle=V_{I}(t)\,|\Psi_{I}^{(i)}(t)\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>משוואת שרדינגר בתמונת האינטראקציה מקיימת:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}(t)\rangle=\lambda\,V_{I}(t)\,|\Psi_{I}(t)\rangle$$</span>
+כאשר אם נציב את הפיתוח נקבל:
+<span>$$i\hbar\,\frac{d}{dt}\Big{(}|\Psi_{I}^{(0)}(t)\rangle+\lambda|\Psi_{I}^{(1)}(t)\rangle+\lambda^{2}\,|\Psi_{I}^{(2)}(t)\rangle+\cdots\Big{)}=\lambda\,V_{I}(t)\Big{(}|\Psi_{I}^{(0)}(t)\rangle+\lambda\,|\Psi_{I}^{(1)}(t)\rangle+\lambda^{2}\,|\Psi_{I}^{(2)}(t)\rangle+\cdots\Big{)}$$</span>
+ונאחד גורמים לפי <span>\(\lambda\)</span>. הגורם ה-0 מקיים:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(0)}(t)\rangle=0$$</span>
+כאשר הגורם ה-1 באגף שמאל יהיה <span>\(i\hbar \frac{\mathrm{d} }{\mathrm{d} t}\ket{\Psi_{I}^{(2)}(t)}\)</span> כאשר באגף ימין נקבל <span>\(V_{I}(t)\ket{\Psi_{I}^{(1)}(t)}\)</span> ולכן נקבל:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(2)}(t)\rangle=V_{I}(t)\,|\Psi_{I}^{(1)}(t)\rangle.$$</span>
+הדפוס הזה ממשיך לחזקות גבוהות יותר.</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב סדר אפס</span><p>תחת קירוב סדר אפס נקבל:
+<span>$$|\Psi_{I}^{(0)}(t)\rangle=|\psi_{i}\rangle \qquad c_{n}^{(0)}(t)=c_{n}(0)=\delta_{n,i}$$</span></p>
+</div>
+<div class="proof">
+<p>ראינו כי <span>\(i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(0)}(t)\rangle=0\)</span> ולכן:
+<span>$$|\Psi_{I}^{(0)}(t)\rangle=|\Psi_{I}^{(0)}(0)\rangle$$</span>
+כאשר כיוון שהמערכת במצב התחלתי <span>\(\ket{\psi_{i}}\)</span> נקבל <span>\(\ket{\Psi_{I}^{(0)}}=\ket{\psi_{i}}\)</span> כלומר <span>\(c_{n}^{(0)}(t)=c_{n}(0)=\delta_{n,i}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב סדר ראשון</span><p>תחת קירוב סדר ראשון נקבל:
+<span>$$c_{n}^{(1)}(t)=-\frac{i}{\hbar}\int_{0}^{t}V_{n i}\left( t^{\prime} \right)\,e^{i\omega_{n i}t^{\prime}}\,\mathrm{d} t^{\prime}$$</span>
+ולכן:
+<span>$$|\Psi_{I}^{(1)}(t)\rangle=-\frac{i}{\hbar}\int_{0}^{t}\mathrm{d} t^{\prime}\,V_{I}(t^{\prime})|\psi_{i}\rangle=\sum_{n}c_{n}^{(1)}(t)e^{-i E_{n}t/\hbar}|\psi_{n}\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>ראינו כי מתקיים:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}|\Psi_{I}^{(1)}(t)\rangle=V_{I}(t)|\Psi_{I}^{(0)}(t)\rangle.$$</span>
+אם נטיל על <span>\(\bra{\psi_{n}}\)</span> כאשר נזכור כי <span>\(\ket{\Psi_{I}^{(0)}(t)}=\ket{\psi_{i}}\)</span> מהטענה הקודמת נקבל:
+<span>$$(*)\qquad i\hbar\,\frac{d}{\mathrm{d} t}\left[c_{n}^{(1)}(t)\right]=\left\langle \psi_{n}|V_{I}(t)|\psi_{i} \right\rangle$$</span>
+כאשר עבור אגף שמאל נזכור כי <span>\(V_{I}(t)=e^{i H_{0}t/\hbar}\,V(t)\,e^{-i H_{0}t/\hbar}\)</span> ולכן:
+<span>$$\langle\psi_{n}|V_{I}(t)|\psi_{i}\rangle=\langle\psi_{n}|e^{i H_{0}t/\hbar}V(t)e^{-i H_{0}t/\hbar}|\psi_{i}\rangle$$</span>
+כאשר כיוון ש-<span>\(H_{0}\ket{\psi_{n}}=E_{n}\ket{\psi_{n}}\)</span> ו-<span>\(H_{0}\ket{\psi_{i}}=E_{i}\ket{\psi_{i}}\)</span> נקבל:
+<span>$$\langle\psi_{n}|V_{I}(t)|\psi_{i}\rangle=e^{i(E_{n}-E_{i})t/\hbar}\langle\psi_{n}|V(t)|\psi_{i}\rangle\equiv V_{n i}(t)e^{i\omega_{n i}t}$$</span>
+כאשר סימנו <span>\(\omega_{ni}=\frac{E_{n}-E_{i}}{\hbar}\)</span>. נפעיל על אגף ימין של <span>\((*)\)</span> נגזרת מכפלה ונקבל:
+<span>$$i\hbar\,\frac{d}{\mathrm{d} t}c_{n}^{(1)}(t)=V_{n i}(t)e^{i\omega_{n i}t}$$</span>
+כיוון שאנו מניחים כי ב-<span>\(t=0\)</span> אין תיקון מסדר ראשון מתקיים <span>\(c_{n}^{(1)}(t)=0\)</span> ולכן:
+<span>$$c_{n}^{(1)}(t)=\frac{1}{i\hbar}\int_{0}^{t}V_{n i}\left( t^{\prime} \right)\,e^{i\omega_{n i}t^{\prime}}\,\mathrm{d} t^{\prime}\implies c_{n}^{(1)}(t)=-\frac{i}{\hbar}\int_{0}^{t}V_{n i}\left( t^{\prime} \right)\,e^{i\omega_{n i}t^{\prime}}\,\mathrm{d} t^{\prime}$$</span></p>
+</div>
+<div class="example"><span class="keyword">הפרעה גאוסיאנית לפוטנציאל הרמוני</span><p>נניח חלקיק עם מסה <span>\(m\)</span> הנע בפוטנציאל חד מימד. ההמילטוניאן של מערכת זו נתונה על ידי:
+<span>$$H_{0}=\frac{p^{2}}{2m}+\frac{1}{2}m\omega^{2}x^{2}$$</span>
+המערכת נתונה להפרעה התלויה בזמן <span>\(V(t)=A_{0}xe^{ -t^{2} / 2 }\)</span> אשר פועל מזמן <span>\(t=-\infty\)</span> עד <span>\(t=\infty\)</span>. נתון כי המערכת מתחילה ב-<span>\(t=-\infty\)</span> במצב היסוד <span>\(\ket{0}\)</span>. נחשב את ההסתברות מסדר ראשון שיעבור למצב <span>\(\ket{1}\)</span> ב-<span>\(t=\infty\)</span>. אמפליטודת המעבר נתונה על ידי:
+<span>$$c_{0\rightarrow1}^{(1)}=\frac{-i}{\hbar}\int_{-\infty}^{+\infty}d t^{\prime}\bra{1} V\ket{0} (t^{\prime})e^{i\omega_{10}t^{\prime}}$$</span>
+נדרש לחשב את אלמנטי המטריצה של <span>\(V\)</span>:
+<span>$$V_{10}=\bra{1} A_{0}Xe^{ -t^{2}/\tau^{2} }\ket{0} =\bra{1} X\ket{0} A_{0}e^{ -t^{2}/\tau^{2} }=\left( -\frac{i}{\hbar}\int_{-\infty}^{\infty} A_{0}e^{ -t^{2}/\tau^{2} }e^{ i\omega_{10}t } \, dt \right)\braket{ 1|X | 0 }$$</span>
+כאשר נזכור כעת כי <span>\(E_{n}=\frac{1}{2}\hbar \omega+n\hbar \omega\)</span>. ולכן:
+<span>$$\omega_{10}=\frac{E_{1}-E_{0}}{\hbar}=\hbar \frac{\omega}{\hbar}=\omega$$</span>
+ולכן נקבל התמרת פורייה של גאוסיאן. את <span>\(\braket{ 1|X | 0 }\)</span> ניתן לחשב באופן נאייבי:
+<span>$$\langle 1|X|0 \rangle =\int_{-\infty}^{\infty} x\psi_{1}^{*}(x)\psi_{0}(x) \, \mathrm{d}x $$</span>
+או לחלופין להשתמש באופרטורי העלה והורדה <span>\(a=\frac{X-iP}{\sqrt{ 2 }}\)</span> ו-<span>\(a^{\dagger}=\frac{X+iP}{\sqrt{ 2 }}\)</span> כך שמתקיים <span>\(a^{\dagger}\ket{n}=\sqrt{ n+1 }\ket{n+1}\)</span> ו-<span>\(a\ket{n}=\sqrt{ a }\ket{n-1}\)</span> ולקבל:
+<span>$$\braket{ 1 | X | 0 } =\sqrt{ \frac{\hbar}{2m\omega} }\braket{ 1 | a+a^{\dagger}|0 } =\sqrt{ \frac{\hbar}{2m\omega} }  $$</span>
+כעת כל מה שנותר זה להכפיל בין ההתמרת פורייה של גאוסיאן לערך תצפית:
+<span>$$\!\!\!\!\!c_{0\rightarrow1}\!=\!\frac{-iA_{0}}{\hbar}\!\sqrt{\frac{\hbar}{2m\omega}}\!\!\!\int\limits_{-\infty}^{+\infty}\!\!\!d t^{\prime}e^{-t^{2}/\tau^{2}}\!e^{i\omega_{10}t^{\prime}}\!\!=\!-i A_{0}\tau\!\sqrt{\frac{\pi}{2m\hbar\omega}}e^{-\frac{\omega^{2}\tau^{2}}{4}}$$</span>
+ונקבל לאחר העלה בריבוע <span>\(P_{0\rightarrow1}=|A_{0}|^{2}\frac{\pi\tau^{2}}{2m\hbar\omega}e^{-\omega^{2}\tau^{2}/2}\)</span>.</p>
+</div>
+<div class="reminder"><span class="keyword">טור דייסון</span><p>אופרטור הקידום בזמן בתמונת האינטראקציה עבור פוטנציאל <span>\(\lambda V\)</span> יהיה:
+<span>$$U_{I}(t,0)=1-\frac{i\lambda}{\hbar}\int_{0}^{t}V_{I}(t_{1})\,\mathrm{d} t_{1}+\left(-\frac{i\lambda}{\hbar}\right)^{2}\int_{0}^{t}\mathrm{d} t_{1}\int_{0}^{t_{1}}\mathrm{d} t_{2}\,V_{I}(t_{1})V_{I}(t_{2})+\cdots$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">קשר של טור דייסון למקדמים <span>\(c_{n}^{(i)}(t)\)</span></span><p>אם נפעיל את טור דייסון על <span>\(\ket{\Psi_{I}(0)}=\ket{\psi_{i}}\)</span> נקבל את <span>\(\ket{\Psi_{I}(t)}\)</span> כאשר אם נפריד לפי חזקות נקבל ישירות את הפונקציות גל:
+<span>$$\begin{gather}|\Psi_{I}^{(0)}(t)\rangle=1\,|\psi_{i}\rangle=|\psi_{i}\rangle\\ |\Psi_{I}^{(1)}(t)\rangle=-\frac{i\lambda}{\hbar}\int_{0}^{t}\mathrm{d} t_{1}\,V_{I}(t_{1})|\psi_{i}\rangle\\|\Psi_{I}^{(2)}(t)\rangle=\left(-\frac{i\lambda}{\hbar}\right)^{2}\int_{0}^{t}\mathrm{d} t_{1}\int_{0}^{t_{1}}\mathrm{d} t_{2}\,V_{I}(t_{1})V_{I}(t_{2})|\psi_{i}\rangle 
+\end{gather}$$</span>
+כאשר ניתן כעת להטיל על <span>\(\bra{\psi_{n}}\)</span> ולקבל את המקדמים:
+<span>$$\begin{gather}c_{n}^{(0)}(t)=\delta_{n,i}\\ c_{n}^{(1)}(t)=-\frac{i}{\hbar}\int_{0}^{t}\mathrm{d} t_{1}\,V_{n i}(t_{1})e^{i\omega_{n i}t_{1}}\\c_{n}^{(2)}(t)=\left(-\frac{i}{\hbar}\right)^{2}\sum_{m}\int_{0}^{t}\mathrm{d} t_{1}\int_{0}^{t_{1}}\mathrm{d} t_{2}\,V_{n m}(t_{1})e^{i\omega_{m n}t_{1}}V_{m i}(t_{2})e^{i\omega_{m i}t_{2}} 
+\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הסתברות מעבר</span><p>ההסתברות לעבור ממצב לא מופרע <span>\(\ket{\psi_{i}}\)</span> למצב לא מופרע אחר <span>\(\ket{\psi_{f}}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הסתברות המעבר תהיה:
+<span>$$P_{i f}(t)=\left|c_{f}^{(0)}+c_{f}^{(1)}(t)+c_{f}^{(2)}(t)+\cdots\right|^{2}$$</span>
+כאשר <span>\(\omega_{fi}=\frac{1}{\hbar}\left(\left\langle \psi_{f}|\hat{H}_{0}|\psi_{f} \right\rangle-\left\langle \psi_{i}|\hat{H}_{0}|\psi_{i} \right\rangle\right)\)</span> וכן:
+<span>$$c_{f}^{(0)}=\langle\psi_{f}|\psi_{i}\rangle=\delta_{f,i}\qquad c_{f}^{(1)}(t)=-\frac{i}{\hbar}\int_{0}^{t}\langle\psi_{f}|\hat{V}(t^{\prime})|\psi_{i}\rangle e^{i\sigma_{f i}t^{\prime}}\mathrm{d}t^{\prime}\qquad  \ldots.$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לקבל את הסתברות המעבר בעזרת סדרת דייסון:
+<span>$$\begin{gather}P_{i f}(t)=\left|\left\langle \psi_{f}|\hat{U}_{I}(t,t_{i})|\psi_{i} \right\rangle\right|^{2}=\left|\left\langle \psi_{f}|\psi_{i} \right\rangle-\frac{i}{\hbar}\int_{0}^{t}e^{i\omega_{f i}t^{\prime}}\left\langle \psi_{f}|\hat{V}\left( t^{\prime} \right)|\psi_{i} \right\rangle\,\mathrm{d}t^{\prime}\right.\\ \left.+\,\left(-\frac{i}{\hbar}\right)^{2}\sum_{n}\int_{0}^{t}e^{i\omega_{f n}t_{1}}\,\left\langle \psi_{f}|\hat{V}(t_{1})|\psi_{n} \right\rangle\,\mathrm{d}t_{1}\!\!\int_{0}^{t_{1}}\!e^{i\omega_{n}t_{2}}\,\langle \psi_{n}|\hat{V}(t_{2})|\psi_{i} \rangle\,\mathrm{d}t_{2}+\cdots\right|^{2} 
+\end{gather}$$</span>
+כאשר משתמשים בכך שמתקיים:
+<span>$$\langle\psi_{f}|\hat{V}_{I}(t^{\prime})|\psi_{i}\rangle=\langle\psi_{f}| e^{i H_{0}t^{\prime}/\hbar}\hat{V}(t^{\prime})e^{-i H_{0}t^{\prime}/\hbar}|\psi_{i}\rangle=\langle\psi_{f}| V(t^{\prime})|\psi_{i}\rangle\exp\left(i\omega_{f i}t^{\prime}\right)$$</span>
+כאשר תדירות המעבר בין רמה <span>\(i\)</span> ל-<span>\(f\)</span> תקיים:
+<span>$$\omega_{f i}=\frac{E_{f}-E_{i}}{h}=\frac{1}{h}\left(\langle\psi_{f}|\hat{H}_{0}|\psi_{f}\rangle-\langle\psi_{i}|\hat{H}_{0}|\psi_{i}\rangle\right)$$</span>
+ניתן לכתוב כעת בעזרת המקדמים <span>\(c_{n}(t)\)</span> ולקבל את הטענה.</p>
+</div>
+<div class="corollary">
+<p>הסתברות המעבר עבור הפרעה מסדר ראשון תהיה:
+<span>$$P_{i f}(t)=\left|-\frac{i}{\hbar}\int_{0}^{t}\langle\psi_{f}|\hat{V}(t^{\prime})|\psi_{i}\rangle e^{i\omega_{f i}t^{\prime}}\mathrm{d}t^{\prime}\right|^{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קצב המעבר</span><p>ההסתברות מעבר ליחידת זמן. <span>\(\mathrm{d}P_{if}=\Gamma_{if}\mathrm{d}t\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">הסתברות מעבר עבור הפרעה קבועה</span><p>כאשר <span>\(V\)</span> אינו תלוי בזמן נקבל:
+<span>$$P_{i f}(t)=\frac{1}{\hbar^{2}}\left| \langle\psi_{f} | \hat{V} | \psi_{i}\rangle\int_{0}^{t}e^{i\omega_{f i}t^{\prime}}\mathrm{d}t^{\prime}\right|^{2}\!\!=\!\frac{1}{\hbar^{2}}\left| \langle\psi_{f} | \hat{V} | \psi_{i}\rangle\right|^{2}\left| \frac{e^{i\omega_{f i}t}-1}{\omega_{f i}}\right|^{2}$$</span>
+כאשר כיוון ש-<span>\(|e^{i\theta}-1|^{2}=4\sin^{2}(\theta/2),\)</span> נקבל:
+<span>$$P_{i f}(t)=\frac{4\left| \langle\psi_{f} | \hat{V} | \psi_{i}\rangle\right|^{2}}{\hbar^{2}\omega_{f i}^{2}}\sin^{2}\left(\frac{\omega_{f i}t}{2}\right)$$</span>
+כאשר <span>\(t\to \infty\)</span> ניתן להשתמש ביחס:
+<span>$$\operatorname*{lim}_{t\rightarrow\infty}\frac{\sin^{2}(y t)}{\pi y^{2}t}=\delta(y)$$</span>
+ולקבל:
+<span>$$P_{i f}(t)=\frac{2\pi t}{\hbar}\left| \langle\psi_{f} | \hat{V} | \psi_{i}\rangle\right|^{2}\delta(E_{f}-E_{i})$$</span>
+כך שקצב המעבר יהיה:
+<span>$$\Gamma_{i f}=\frac{P_{i f}(t)}{t}=\frac{2\pi}{\hbar}\left|\left&lt;\psi_{f}|\hat{V}|\psi_{i}\right&gt;\right|^{2}\delta(E_{f}-E_{i})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כלל הזהב של פרמי</span><p>אם <span>\(\rho(E_{f})\)</span> זה צפיפות המצבים של המצב הסופי, אז קצב המעבר הכולל נתון על ידי:
+<span>$$\Gamma_{i f}=\frac{2\pi}{\hbar}\left|\langle \psi_{f}|\hat{V}|\psi_{i} \rangle\right|^{2}\rho(E_{i})=\frac{2\pi}{\hbar}\lvert V_{if} \rvert ^{2}\rho(E_{f})$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\Gamma_{i f}=\int{\frac{P_{i f}(t)}{t}}\rho(E_{f})\,\mathrm{d}E_{f}={\frac{2\pi}{\hbar}}|\ \langle\psi_{f}\ |\ \hat{V}\ |\ \psi_{i}\rangle|^{2}\int\rho(E_{f})\delta(E_{f}-E_{i})\,\mathrm{d}E_{f}$$</span>
+כלומר:
+<span>$$\Gamma_{i f}=\frac{2\pi}{\hbar}\left|\langle\psi_{f}|\hat{V}|\psi_{i}\rangle\right|^{2}\rho(E_{i})$$</span></p>
+</div>
+<div class="example"><span class="keyword">מציאת ביטוי דיפרנציאלי לחתך פעולה</span><p>נמצא ביטוי דיפרנציאלי לחתך פעולה של חלקיק עם מסה <span>\(m\)</span> אשר עובר פיזור מפוטנציאל <span>\(V\left( \mathbf{r} \right)\)</span>. החלקיק מגיע עם מספר גל <span>\(\mathbf{k'}\)</span> ולאחר הפיזור המספר הגל משתנה ל-<span>\(\mathbf{k}\)</span>. נבצע טריק שבו נכתוב את החלקיק כאילו כלוא בקופסא באורך <span>\(l\)</span>, ואז ניקח את הגבול <span>\(l\to \infty\)</span>(בפועל נקבל כי כלל לא תלוי בגודל הקופסא). זאת כדי שיהיה אפשר לנרמל את הפונקציות גל. לכן ניתן לכתוב:
+<span>$$\psi_{i}=\frac{1}{\sqrt{l^{3}}}\,e^{i\,{\bf k^{\prime}\cdot r}}\;\mathrm{and}\;\;\psi_{f}=\frac{1}{\sqrt{l^{3}}}\,e^{i\,{\bf k\cdot r}}$$</span>
+כאשר מתנאי השפה המחזוריים נקבל שלמים <span>\(n_{x},n_{y},n_{z}\)</span> כך שמתקיים:
+<span>$${\bf k}=\frac{2\,\pi}{l}\left(n_{x}\,\hat{t}+n_{y}\,\hat{\jmath}+n_{z}\,\hat{k}\right)$$</span>
+ההפרעה שלנו זה פוטנציאל הפיזור <span>\(H'=V\left( \mathbf{r} \right)\)</span> כאשר אלמנטי המטריצה הרלוונטים יהיו:
+<span>$$V_{f i}=\int\psi_{f}^{*}(r)\ V({\bf r})\ \psi_{i}({\bf r})\ \mathrm{d}^{3}{\bf r}=\frac{1}{l^{3}}\ \int e^{i\,({\bf k^{\prime}-k})\cdot{\bf r}}\ V({\bf r})\ \mathrm{d}^{3}{\bf r}\,.$$</span>
+מספר המצבים בין אנרגיה <span>\(E\)</span> ל-<span>\(E+dE\)</span> תגדל באופן ריבועי במרחב ה-<span>\(k\)</span> ביחס לזווית מרחבית. כלומר יהיה שווה <span>\(k^{2}\mathrm{d}k\mathrm{\mathrm{d}\Omega}\)</span> כאשר מספר המצבים יהיה:
+<span>$$\rho(E)\;\mathrm{d} E={\frac{k^{2}\mathrm{d} k\mathrm{d}\Omega}{\left(2\pi l\right)^{3}}}=\left({\frac{l}{2\,\pi}}\right)^{3}\,k^{2}\,{\frac{\mathrm{d} k}{\mathrm{d} E}}\mathrm{d} E\,\mathrm{d}\Omega$$</span>
+כאשר כיוון ש-<span>\(E=\frac{\hbar^{2}k^{2}}{2m}\)</span> נקבל:
+<span>$$\rho(E)=\left(\frac{l}{2\,\pi}\right)^{3}\,\frac{\sqrt{2\,m^{3}\,E}}{\hbar^{3}}\;\mathrm{d}\Omega$$</span>
+ולכן מכלל הזהב של פרמי קצב הפיזור לזווית מרחבית נתון על ידי:
+<span>$$R_{i\to \mathrm{d}\Omega}=\frac{2\,\pi}{\hbar}\,\frac{1}{l^{6}}\,\left|\int e^{i\,({\bf k^{\prime}-k})\cdot{\bf r}}\,V({\bf r})\ \mathrm{d}^{3}{\bf r}\right|^{2}\left(\frac{l}{2\,\pi}\right)^{3}\,\frac{\sqrt{2\,m^{3}\,E_{f}}}{\hbar^{3}}\,\mathrm{d}\Omega$$</span>
+כאשר החתך פעולה מקיים:
+<span>$$\frac{d\sigma}{\mathrm{d}\Omega}=\frac{R_{i\to \mathrm{d}\Omega}}{J_{i}\,\mathrm{d}\Omega}$$</span>
+וכן צפיפות ההסתברות של גל מהצורה <span>\(\psi_{i}=Ae^{ i\mathbf{k'\cdot r'} }\)</span> נתון על ידי:
+<span>$$J_{i}=|A|^{2}\ v=\frac{1}{l^{3}}\,\frac{\hbar k^{\prime}}{m}$$</span>
+ולכן נקבל:
+<span>$$\frac{d\sigma}{\mathrm{d}\Omega}=\left|-\frac{m}{2\,\pi\,\hbar^{2}}\int e^{i\,({\bf k}-{\bf k}^{\prime})\cdot{\bf r}}\,V({\bf r})\,\,\mathrm{d}^{3}{\bf r}\right|^{2}$$</span></p>
+</div>
+<div class="remark">
+<p>זה ביטוי זהה למה שמתקבל מקירוב של תורת הפיזור הנקרא קירוב בורן.</p>
+</div>
+<div class="summary">
+<ul>
+<li>עבור המילטוניאן מהצורה <span>\(H=H_{0}+\lambda V(t)\)</span> עם מצבים עצמיים ידועים <span>\(\left\{  \ket{\psi_{n}}  \right\}\)</span> של <span>\(H_{0}\)</span> כאשר <span>\(\lambda\ll 1\)</span> ניתן לפתח מצב כטור על ידי:
+<span>$$|\Psi(t)\rangle=\sum_{n}c_{n}(t)\,e^{-i E_{n}t/\hbar}|\psi_{n}\rangle$$</span></li>
+<li>ניתן לפתח את המקדמים לפי סדרים של <span>\(\lambda\)</span> כך שמתקיים:
+<span>$$c_{n}(t)=c_{n}^{(0)}(t)+\lambda\,c_{n}^{(1)}(t)+\lambda^{2}\,c_{n}^{(2)}(t)+\cdots$$</span>
+כאשר פונקציית הגל המתוקנת בתמונת שרדינגר תהיה נתונה על ידי:
+<span>$$|\Psi^{(i)}(t)\rangle=\sum_{n}c_{n}^{(i)}(t)e^{-i E_{n}t}|\psi_{n}\rangle$$</span></li>
+<li>התיקון ה-<span>\(i\)</span> למקדמים הראשונים יהיו:
+<span>$$\begin{gather}c_{n}^{(0)}(t)=\delta_{n,i}\qquad  c_{n}^{(1)}(t)=-\frac{i}{\hbar}\int_{0}^{t}\mathrm{d} t_{1}\,V_{n i}(t_{1})e^{i\omega_{n i}t_{1}}\\c_{n}^{(2)}(t)=\left(-\frac{i}{\hbar}\right)^{2}\sum_{m}\int_{0}^{t}\mathrm{d} t_{1}\int_{0}^{t_{1}}\mathrm{d} t_{2}\,V_{n m}(t_{1})e^{i\omega_{m n}t_{1}}V_{m i}(t_{2})e^{i\omega_{m i}t_{2}} 
+\end{gather}$$</span>
+כאשר <span>\(\omega_{ni}=(E_{n}-E_{i}) / \hbar\)</span>.</li>
+<li>ההסתברות לעבור ממצב <span>\(\ket{\psi_{i}}\)</span> ל-<span>\(\ket{\psi_{f}}\)</span> תהיה:
+<span>$$P_{i f}(t)=\left|\sum_{k=0}^{\infty}c_{f}^{(k)}(t)\right|^{2}$$</span>
+כאשר ניתן לקחת מסדר ראשון רק את <span>\(c_{f}^{(0)}\)</span> ו-<span>\(c^{(1)}_{f}\)</span>.</li>
+<li>כלל הזהב של פרמי אומר כי עבור <span>\(t\to \infty\)</span> נקבל עבור מצב יחיד כי קצב המעבר(הסתברות ליחידת זמן) תהיה:
+<span>$$\Gamma_{i f}=\frac{2\pi}{\hbar}\left|\langle\psi_{f}|V|\psi_{i}\rangle\right|^{2}\delta(E_{f}-E_{i})$$</span>
+כך שעבור כמות גדולה של מצבים אם למצב הסופי יש צפיפות מצבים <span>\(\rho(E_{f})\)</span> נקבל:
+<span>$$\Gamma_{i f}=\frac{2\pi}{\hbar}\left|\langle\psi_{f}|V|\psi_{i}\rangle\right|^{2}\rho(E_{f})$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+<li class='prev-page'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

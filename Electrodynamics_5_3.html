@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קרינה של דיפול</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_5_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_5_2`; }});</script>
+        <div class="content">
+        <h1>5.3  קרינה של דיפול</h1>
+    <div class="definition"><span class="keyword">דיפול חשמלי המבצע אוסילציות</span><p>ניתן לדמיין מערכת זו בשתי דרכים שקולות:</p>
+</div>
+<ol>
+<li>
+<p>שתי ספרות מוליכות קטנות המרוחקות במרחק <span>\(d\)</span> ומחוברות בתיל מוליך. ספרה אחת מכילה מטען <span>\(q(t)\)</span> והשנייה(כאופייני בדיפול חשמלי) מכילה מטען <span>\(-q(t)\)</span>, כאשר <span>\(q(t)\)</span> משתנה בזמן בצורה הרמונית באופן הבא - <span>\(q(t)=q_{0}\cos\left( \omega t \right)\)</span>. </p>
+</li>
+<li>
+<p>שתי ספרות מוליכות קטנות עם מטען <span>\(q\)</span> ו-<span>\(-q\)</span> קבוע בזמן ומוברות בתיל שבמרחק שלו משתנה בזמן בצורה הרמונית - <span>\(d(t)=d_{0}\cos\left( \omega t \right)\)</span>. </p>
+</li>
+</ol>
+<div class="proposition"><span class="keyword">פוטנציאל של דיפול</span><p>ללא קירוב נקבל כי הפוטנציאל של דיפול המבצע אוסצילטיות יהיה:
+<span>$$\Phi\left( r,\theta,t \right)=q_{0}\left[\frac{\cos[\omega(t-r_{+}/c)]}{r_{+}}-\frac{\cos[\omega(t-r_{-}/c)]}{r_{-}}\right]$$</span>
+כאשר <span>\(p_{0}\equiv q_{0}d\)</span> ו-<span>\(r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נתייחס לדיפול כמו שתי ספרות עם מטען משתנה בזמן. ניתן לכתוב את הצפיפות בצורה הבאה:
+<span>$$\rho({\vec{x}},t)=q_{0}\delta({\vec{x}})\delta({\vec{y}})\delta(z-d/2)\cos(\omega t)-q_{0}\delta({\vec{x}})\delta({\vec{y}})\delta(z+d/2)\cos(\omega t)$$</span>
+כאשר ניתן להציב בביטוי של הפוטנציאל החשמלי ולקבל:
+<span>$$\begin{gather}\Phi(x,t)=\int\frac{d^{3}x^{\prime}}{|x-x^{\prime}|}\rho(x^{\prime},t-c^{-1}|x-x^{\prime}|)= \\=\int{\frac{d x^{\prime}d y^{\prime}d z^{\prime}}{|{\vec{x}}-{\vec{x^{\prime}}}|}}\left\{q_{0}\delta(x^{\prime})\delta(y^{\prime})\delta(z^{\prime}-d/2)-q_{0}\delta(x)\delta(y)\delta(z+d/2)\cos(\omega t)\right\}= \\=q_{0}\left[\frac{\cos[\omega(t-r_{+}/c)]}{r_{+}}-\frac{\cos[\omega(t-r_{-}/c)]}{r_{-}}\right]
+\end{gather}$$</span>
+כאשר לפי משפט הקוסינוסים:
+<span>$$r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}$$</span>
+נציב ונקבל את המבוקש:
+<span>$$\Phi\left( r,\theta,t \right)={\frac{p_{0}\cos\theta}{r}}\left(-{\frac{\omega}{c}}\sin\left[ \omega(t-r/c) \right]+{\frac{1}{r}}\cos\left[ \omega(t-r/c) \right]\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם נניח כי <span>\(d\ll r\)</span>(בטווח שזה דיפול), <span>\(d\ll \frac{c}{\omega}\)</span>(אוסילציות קטנות ביחס למרחק) וגם <span>\(r\gg \frac{c}{\omega}\)</span>(באיזור הקרינה) נקבל כי ניתן לכתוב את הפוטנציאלים בצורה הבאה:
+<span>$$\Phi = -\frac{p_{0}\omega}{c}\left(\frac{\cos\theta}{r}\right)\sin\left[ \omega(t-r/c) \right] \qquad \mathbf{A}(r,\theta,t)=-\frac{p_{0}\omega}{c r}\sin[\omega(t-r/c)]\,{\hat{\mathbf{z}}}.$$</span></p>
+</div>
+<div class="proof">
+<p>מהקירוב <span>\(d\ll r\)</span> נקבל:
+<span>$$r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}\approx r\left(1\mp\frac{d}{2r}\cos\theta\right)\qquad \frac{1}{r_{\pm}}=\frac{1}{r}\left(1\pm\frac{d}{2r}\cos\theta\right)$$</span>
+כאשר ניתן לקרב גם את הקוסינוסים:</p>
+<p><span>$$\cos[\omega(t-r_{\pm}/c)]\approx\cos\left[\omega(t-r/c)\pm{\frac{\omega d}{2c}}\cos\theta\right]=\cos\left[\omega(t-r/c)\right]\cos\left[{\frac{\omega d}{2c}}\cos\theta\right]\mp\sin\left[\omega(t-r/c)\right]\sin\left[{\frac{\omega d}{2c}}\cos\theta\right]$$</span></p>
+</div>
+<p>מהקירוב <span>\(d\ll \frac{c}{\omega}\)</span> נקבל:
+<span>$$\cos[\omega(t-r_{\pm}/c)]\approx\cos\left[\omega(t-r/c)\right]\mp\sin\left[\omega(t-r/c)\right]\frac{\omega d}{2c}\cos\theta$$</span>
+כאשר אם נשלב את מה שקיבלנו עד עכשיו נקבל:
+<span>$$\Phi={\frac{p_{0}\cos\theta}{r}}\left(-{\frac{\omega}{c}}\sin\left[ \omega(t-r/c) \right]+{\frac{1}{r}}\cos\left[ \omega(t-r/c) \right]\right)$$</span>
+באיזור הקרינה <span>\(r\gg \frac{c}{\omega}\)</span> נקבל:
+<span>$$\Phi({\vec{x}},t)=-{\frac{p_{0}\omega}{c}}\left({\frac{\cos\theta}{r}}\right)\sin\left[\omega(t-r/c)\right]$$</span>
+כאשר כעת נרצה למצוא את הפוטנציאל הווקטורי. ראשית נשים לב כי הזרם יהיה:
+<span>$$I(t)=\frac{d q(t)}{d z}\hat{z}=-q_{0}\omega\sin\left( \omega t \right)\hat{z} \implies {\vec A}({\vec{x}},t)={\hat{z}}{\frac{1}{c}}\int_{-d/2}^{d/2}d z{\frac{-q_{0}\omega\sin(\omega(t-r(z)/c))}{r(z)}}$$</span>
+כאשר בעזרת הקירובים ניתן להליף את האינטגרל באינטגרנד בעזרך במרכז התחום(0) ולקבל:
+<span>$${ A}(r,\theta)=-\dot{z}{\frac{p_{0}\omega}{c r}}\sin(\omega(t-r/c))=(\dot{\theta}\sin\theta-\hat{n}\cos\theta){\frac{p_{0}\omega}{cr}}\sin(\omega(t-r/c))$$</span></p>
+<div class="corollary">
+<p>השדות שנוצרות תחת הקירובים מהטענה הקודמת יהיו:
+<span>$$\begin{gather}\mathbf{E}=-\nabla \Phi-{\frac{\partial\mathbf{A}}{\partial t}}=-{\frac{p_{0}\omega^{2}}{c}}\left({\frac{\sin\theta}{r}}\right)\cos\left[ \omega(t-r/c) \right]\,{\vec{\hat{\theta}}}. \\{\vec B}={\nabla\times{\vec A}}=-\frac{p_{0}\omega^{2}}{ c^{2}}\left(\frac{\sin\theta}{r}\right)\cos\left[ \omega(t-r/c) \right]\,{\hat{\vec{\phi}}}
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ההספק של דיפול חשמלי</span><p>נקבל כי ההספק בממוצע על זמן מחזור יהיה:
+<span>$$\langle P \rangle =\frac{p_{0}^{2}\omega^{4}}{3c^{3}}$$</span></p>
+</div>
+<div class="proof">
+<p>נחשב בעזרת ווקטור פוינטינג:
+<span>$${\vec S\left( r,\,t \right)}=\frac{4\pi}{c}\left( {\vec E\times \vec B} \right)=\left(\frac{p_{0}\omega^{2}}{c^{2}}\left(\frac{\sin\theta}{r}\right)\cos\left[ \omega(t-r/c) \right]\right)^{2}\,{\hat{r}}$$</span>
+כאשר אם ניקח את הממוצע לאורך זמן מחזור נקבל:
+<span>$$\langle\mathbf{S}\rangle=\left({\frac{p_{0}^{2}\omega^{4}}{8\pi c^{2}}}\right){\frac{\sin^{2}\theta}{r^{2}}}\,\mathbf{\hat{r}}$$</span>
+כאשר עבור ספרה ברדיוס <span>\(r\)</span> נקבל:
+<span>$$\langle P\rangle=\int\langle\mathbf{S}\rangle\cdot d\mathbf{a}={\frac{p_{0}^{2}\omega^{4}}{8\pi c^{2}}}\int{\frac{\sin^{2}\theta}{r^{2}}}r^{2}\sin\theta\,d\theta\,d\phi={\frac{p_{0}^{2}\omega^{4}}{3 c^{2}}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+<li class='prev-page'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+</ul></li>
+        </body>
+        </html>
+        

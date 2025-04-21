@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שימושים של תורת ההפרעות התלויה בזמן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_10_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_9_5`; }});</script>
+        <div class="content">
+        <h1>9.6  שימושים של תורת ההפרעות התלויה בזמן</h1>
+    <div class="definition"><span class="keyword">מדרגה קוונטית</span><p>מערכת עם המילטוניאן <span>\(H(t)=H_{0}+V(t)\)</span> כאשר <span>\(V(t)\)</span> היא הפרעה קטנה הפועלת רק לזמן סופי. בזמן <span>\(t \to -\infty\)</span> אנחנו מתחלים במצב <span>\(\ket{\Psi_{i}}\)</span> של <span>\(H_{0}\)</span> עם אנרגיה <span>\(E_{i}\)</span> כאשר אנחנו רוצים למצוא את ההסתברות לעבור למצב <span>\(\ket{\Psi_{f}}\)</span> עם אנרגיה <span>\(E_{f}\)</span> לאחר שההפרעה הסתיימה(כלומר <span>\(t \to \infty\)</span>).</p>
+</div>
+<div class="proposition">
+<p>ההסתברות לעבור ממצב <span>\(i\)</span> ל-<span>\(f\)</span> במערכת של מדרגה קוונטית תהיה:
+<span>$$P(i\to f)=|c_{f}(\infty)|^{2}={\frac{1}{\hbar^{2}}}\left|\int_{-\infty}^{\infty}V_{f i}(t^{\prime})e^{i\omega_{f i}t^{\prime}}d t^{\prime}\right|^{2}$$</span>
+כאשר נשים לב כי הביטוי באינטגרל זה התמרת פורייה.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי הקידום בזמן של המערכת תהיה מהצורה:
+<span>$$|\Psi(t)\rangle=\sum_{n}c_{n}(t)e^{-i E_{n}t/\hbar}|\Psi_{n}\rangle,$$</span>
+כאשר <span>\(c_{n}(t)\)</span> הם אמפליטודות ההסתברות של המצבים <span>\(\ket{\Psi_{n}}\)</span>. כדי למצוא את ההפרעה מסדר ראשון נחשב:
+<span>$$c_{f}^{(1)}(\infty)=-\frac{i}{\hbar}\int_{-\infty}^{\infty}V_{f i}(t^{\prime})e^{i\omega_{f i}t^{\prime}}d t^{\prime},$$</span>
+כאשר 
+<span>$$V_{f i}(t)=\langle\Psi_{f}|V(t)|\Psi_{i}\rangle$$</span>
+ו-<span>\(\omega_{fi}=\frac{E_{f}-E_{i}}{\hbar}\)</span>. ההסתברות לעבור ממצב <span>\(\ket{\Psi_{i}}\)</span> ל-<span>\(\ket{\Psi_{f}}\)</span> הוא:
+<span>$$P(i\to f)=|c_{f}(\infty)|^{2}={\frac{1}{\hbar^{2}}}\left|\int_{-\infty}^{\infty}V_{f i}(t^{\prime})e^{i\omega_{f i}t^{\prime}}d t^{\prime}\right|^{2}$$</span>
+כאשר נשים לב כי זהו ההתמרת פורייה של <span>\(V_{fi}\)</span>.  לכן יש מעבר כאשר <span>\(V(t)\)</span> מכיל תדירות המתאימה ל-<span>\(\omega_{fi}\)</span>. כעת נרצה לחשב את ההסתברות להשאר ב-<span>\(\ket{\Psi_{i}}\)</span>. מתקיים:
+<span>$$c_{i}(\infty)\approx1-\frac{i}{\hbar}\int_{-\infty}^{\infty}V_{i i}(t^{\prime})d t^{\prime}+\mathcal{O}(V^{2}).$$</span>
+כאשר זה גורם מרוכב לחלוטין כיוון ש-<span>\(V_{ii}(t)\)</span> הוא ממשי(ערכי האלכסון של הרמיטי). מתי שמחשבים את <span>\(\left\lvert  c_{i}\left( \infty \right)  \right\rvert^{2}\)</span> </p>
+</div>
+<div class="example"><span class="keyword">מדרגה גאוסיאנית</span><p>נניח <span>\(V(t)=V_{0}e^{-t^{2}/\tau^{2}}\)</span> גאוסיאן ברוחב <span>\(\tau\)</span>. אזי אם נניח <span>\(V_{fi}(t)=V_{0}e^{ -t^{2} / \tau^{2} }\)</span> ונקבל כי ההתמרת פורייה תהיה:
+<span>$$\int_{-\infty}^{\infty}V_{f i}(t)e^{i\omega_{f i}t}d t=V_{0}\sqrt{\pi}\tau e^{-\omega_{f i}^{2}\tau^{2}/4}.$$</span>
+ולכן הסתברות המעבר תהיה:
+<span>$$P(i\to f)=\frac{\pi\tau^{2}|V_{0}|^{2}}{\hbar^{2}}e^{-\omega_{f i}^{2}\tau^{2}/2}.$$</span>
+כאשר נשים לב כי ההסתברות מקסימלית כאשר <span>\(\omega_{fi}\tau\ll 1\)</span> ומינימלית כאשר <span>\(\omega_{fi}\tau \gg 1\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">דעיכה קוונטית - Quantum Quench</span><p>מערכת עם המילטוניאן <span>\(H(t)=H_{0}+V(t)\)</span> כאשר <span>\(H_{0}\)</span> הוא בלתי תלוי בזמן ו-<span>\(V(t)\)</span> היא הפרעה קטנה שמתחילה ב-0 עבור <span>\(t\to -\infty\)</span> ומתכנסת אסימפטוטית ל-<span>\(V_{0}\)</span> ב-<span>\(t\to \infty\)</span>. המצב ההתחלתי של המערכת הוא המצב עצמי <span>\(\ket{\Psi_{i}}\)</span> של <span>\(H_{0}\)</span> כאשר המטרה היא למצוא את המצב הסופי <span>\(\ket{\Psi(t)}\)</span> ואת הסתברויות המעבר בזמן <span>\(t\to \infty\)</span>.</p>
+</div>
+<div class="remark">
+<p>לא ניתן לפתור בשיטה הקודמת כיוון שבאינסוף <span>\(V(t)\to V_{0} \neq 0\)</span> ולכן לא קיים התמרת פורייה.</p>
+</div>
+<div class="proposition">
+<p>באינסוף מתקיים:
+<span>$$c_{f}^{(1)}(\infty)=\frac{i}{\hbar\omega_{f i}}\int_{-\infty}^{\infty}\frac{\partial V_{f i}}{\partial t}e^{i\omega_{f i}t}d t.$$</span></p>
+</div>
+<div class="proof">
+<p>נבצע אינטגרציה בחלקים:
+<span>$$c_{f}^{(1)}(\infty)=-\frac{i}{\hbar}\int_{-\infty}^{\infty}V_{f i}(t)e^{i\omega_{f i}t}d t=-\frac{V_{f i}(t)e^{i\omega_{f i}t}}{\hbar\omega_{f i}}\Big|_{-\infty}^{\infty}+\frac{i}{\hbar\omega_{f i}}\int_{-\infty}^{\infty}\frac{\partial V_{f i}}{\partial t}e^{i\omega_{f i}t}d t.$$</span>
+כאשר כל עוד <span>\(V(t)\)</span> הוא חלק נקבל כי הגורם הראשון מתאפס ולגורם השני קיים התמרת פורייה.</p>
+</div>
+<div class="corollary">
+<p>הסתברות המעבר תהיה:
+<span>$$P(i\to f)=\frac{1}{\hbar^{2}\omega_{f i}^{2}}\left|\int_{-\infty}^{\infty}\frac{\partial V_{f i}}{\partial t}e^{i\omega_{f i}t}d t\right|^{2}$$</span></p>
+</div>
+<div class="remark">
+<p>הפרשנות הפיזיקלית זה שההסתברות במקרה זה תלויה בקצב השינוי - אם אנחנו משנים את האנרגיה בצורה קווזיסטטית, אז נשאר באותו מצב, לעומת זאת אם נשנה את המערכת ממש מהר, אז ההסתברות לעבור למצב אחר יעלה משמעותית.</p>
+</div>
+<div class="corollary">
+<p>המצב הקוונטי החדש יהיה בקירוב סדר ראשון:
+<span>$$|\Psi_{i}\rangle_{\mathrm{static}}\approx|\Psi_{i}\rangle+\sum_{f\neq i}{\frac{\langle\Psi_{f}|V_{0}|\Psi_{i}\rangle}{E_{i}-E_{f}}}|\Psi_{f}\rangle$$</span></p>
+</div>
+<div class="example">
+<p>עבור <span>\(V(t)=V_{0}\cdot \Theta(t)\)</span> נקבל <span>\(\frac{\partial }{\partial t}V_{fi}=V_{fi}\delta(t)\)</span>. אמפליטודת המעבר תהיה:
+<span>$$c_{f}^{(1)}(\infty)=\frac{i V_{f i}}{\hbar\omega_{f i}}$$</span>
+ולכן הסתברות המעבר תהיה:
+<span>$$P(i\to f)=\frac{|V_{f i}|^{2}}{\hbar^{2}\omega_{f i}^{2}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הפרעה מונוכרומטית</span><p>הפרעה אשר מבצעת אוסצילציות בתדר יחיד <span>\(\omega\)</span>. כלומר עבור המילטוניאן <span>\(H=H_{0}+V(t)\)</span> הפרעה מהצורה:
+<span>$$V(t)=U e^{-i\omega t}+U^{\dagger}e^{i\omega t},$$</span>
+כאשר <span>\(U\)</span> לא תלוי בזמן.</p>
+</div>
+<div class="proposition">
+<p>אמפליטודת המעבר למצב <span>\(\ket{\Psi_{f}}\)</span> תהיה:
+<span>$$c_{f i}(t)=-\frac{i}{\hbar}\left[U_{f i}\frac{e^{i(\omega_{f i}-\omega)t}-1}{\omega_{f i}-\omega}+U_{f i}^{*}\frac{e^{i(\omega_{f i}+\omega)t}-1}{\omega_{f i}+\omega}\right]$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי באופן כללי זה יהיה:
+<span>$$c_{f i}(t)=-\frac{i}{\hbar}\int_{0}^{t}V_{f i}(t^{\prime})e^{i\omega_{f i}t^{\prime}}d t^{\prime},$$</span>
+כאשר <span>$$\omega_{f i}=(E_{f}-E_{i})/\hbar.$$</span>ולכן אם נציב את הפוטנציאל נקבל את הטענה.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי רסוננס</span><p>עבור <span>\(\omega_{fi}\approx \omega\)</span> ועבור <span>\(\omega_{fi}\approx-\omega\)</span> נקבל מעבר.</p>
+</div>
+<div class="proposition"><span class="keyword">הסתברות מעבר</span><p>עבור <span>\(E_{f}\approx E_{i}+\hbar \omega\)</span> נקבל:
+<span>$$P(i\to f)=|c_{f i}(t)|^{2}=\frac{4|U_{f i}|^{2}}{\hbar^{2}}\frac{\sin^{2}\left((\omega_{f i}-\omega)t/2\right)}{(\omega_{f i}-\omega)^{2}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כלל הזהב של פרמי להפרעות מונוכרומטיות</span><p>בזמנים ארוכים אם נשתמש בזה ש-
+<span>$$\operatorname*{lim}_{t\rightarrow\infty}\,\frac{\sin^{2}(a t)}{\pi a^{2}t}=\delta(a)$$</span>
+נקבל כי קצב המעבר יהיה:
+<span>$$\Gamma(i\to f)=\frac{2\pi}{\hbar}|U_{f i}|^{2}\delta(E_{f}-E_{i}-\hbar\omega)$$</span></p>
+</div>
+<div class="corollary">
+<p>אם נתונה צפיפות המצבים <span>\(\rho(E_{f})\)</span> ניתן לכתוב:
+<span>$$\Gamma=\frac{2\pi}{\hbar}\int|U_{f i}|^{2}\rho(E_{f})\delta(E_{f}-E_{i}-\hbar\omega)d E_{f}=\frac{2\pi}{\hbar}|U_{f i}|^{2}\rho(E_{i}+\hbar\omega)$$</span></p>
+</div>
+<div class="remark">
+<p>זה דומה לכלל הזהב של פרמי. ההבדל הוא שבגלל ההפרעה המונוכרומטית קיבלנו כי בצפיפות מצבים יש הזזה.</p>
+</div>
+<div class="definition"><span class="keyword">המילטוניאן אינטראקציה עם שדה קרינה</span><p>אלקטרון(כלומר עם מטען <span>\(q=-e\)</span>) פועל בשדה אלקטרומגנטי עם ההמילטוניאן:
+<span>$$H={\frac{1}{2m}}\left(\mathbf{p}-q\mathbf{A}\right)^{2}-{\frac{q}{m}}\mathbf{s}\cdot\mathbf{B}+q\phi,$$</span>
+כאשר <span>\(\mathbf{A}\)</span> זה הפוטנציאל הווקטורי, <span>\(\phi\)</span> זה הפוטנציאל הסקלארי, <span>\(B=\bar{\nabla} \times \mathbf{A}\)</span> השדה המגנטי ו-<span>\(\mathbf{s}\)</span> זה הספין של האלקטרון. בנוסף נעבוד בכיול קולון - כולמר <span>\(\bar{\nabla} \cdot \mathbf{A}=0\)</span>, ונניח שאנחנו באיזור הקרינה ולכן <span>\(\phi=0\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קירוב שדה חלש</span><p>עבור שדה חלש מספיק נקבל <span>\(\mathbf{A}^{2}\)</span> זניח ונקבל:
+<span>$$H={\frac{{\bf p}^{2}}{2m}}\,-\,{\frac{q}{m}}{\bf A}\cdot{\bf p}\,-\,{\frac{q}{m}}{\bf s}\cdot{\bf B}.$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן להניח כי הפוטנציאל הווקטורי הוא גל מישורי:
+<span>$$\mathbf{A}(\mathbf{r},t)=2A_{0}{\boldsymbol{\epsilon}}\cos(\mathbf{k}_{\gamma}\cdot\mathbf{r}-{\boldsymbol{\omega}}t)=A_{0}\epsilon\left(e^{i(\mathbf{k}_{\gamma}\cdot\mathbf{r}-\omega t)}+e^{-i(\mathbf{k}_{\gamma}\cdot\mathbf{r}-\omega t)}\right)$$</span>
+כאשר <span>\(\epsilon\)</span> וקטור הפולאריזציה ו-<span>\(\omega=c|k_{\gamma}|\)</span> התדירות הזוויתית.</p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את איבר האינטראקציה על ידי:
+<span>$$V(t)=-{\frac{q}{m}}\mathbf{A}\cdot\mathbf{p}=-{\frac{q A_{0}}{m}}\mathbf{\epsilon}\cdot\mathbf{p}\left(e^{i(\mathbf{k}_{\gamma}\cdot\mathbf{r}-\omega t)}+e^{-i(\mathbf{k}_{\gamma}\cdot\mathbf{r}-\omega t)}\right)$$</span></p>
+</div>
+<div class="corollary">
+<p>אמפליטודת המעבר תהיה:
+<span>$$c_{fi}(t)=-\frac{i}{\hbar}\frac{qA_{0}}{m}\epsilon\cdot\left[\langle f|e^{i\mathbf{k}_{\gamma}\cdot\mathbf{r}}\mathbf{p}|i\rangle\frac{e^{i(\omega_{fi}-\omega)t}-1}{\omega_{fi}-\omega}+\langle f|e^{-i\mathbf{k}_{\gamma}\cdot\mathbf{r}}\mathbf{p}|i\rangle\frac{e^{i(\omega_{fi}+\omega)t}-1}{\omega_{fi}+\omega}\right]$$</span></p>
+</div>
+<div class="proof">
+<p>נובע כרגיל מהצבה ישרה של הביטוי של ההפרעה בנוסחה
+<span>$$c_{f i}(t)=-\frac{i}{\hbar}\int_{0}^{t}\langle f|V(t^{\prime})|i\rangle e^{i\omega_{f i}t^{\prime}}d t^{\prime}$$</span>
+כאשר <span>\(\omega_{f i}=(E_{f}-E_{i})/\hbar\)</span>.</p>
+</div>
+<div class="lemma">
+<p>עבור קירוב דיפולי (אורך הגל <span>\(\lambda\)</span> גודל ממש מגודל האטום) ניתן לקרב <span>\(e^{ i\mathbf{k}_{\gamma}\cdot \mathbf{r} }\approx 1\)</span> ולקבל:
+<span>$$\langle f|e^{i\mathbf{k}_{\gamma}\cdot\mathbf{r}}\mathbf{p}|i\rangle\approx\epsilon\cdot\langle f|\mathbf{p}|i\rangle.$$</span>
+כאשר על ידי שימוש בקומוטטור <span>\(\left[ \mathbf{r},H_{0} \right]=i\hbar \mathbf{p} / m\)</span> נקבל:
+<span>$$\langle f|\mathbf{p}|i\rangle=i m\omega_{f i}\langle f|\mathbf{r}|i\rangle.$$</span></p>
+</div>
+<div class="corollary">
+<p>תחת הקירוב הדיפולי נקבל:
+<span>$$c_{f i}(t)=-\frac{q A_{0}}{\hbar}\epsilon\cdot\langle f|\mathbf{r}|i\rangle\left[\frac{e^{i(\omega_{f i}-\omega)t}-1}{\omega_{f i}-\omega}+\frac{e^{i(\omega_{f i}+\omega)t}-1}{\omega_{f i}+\omega}\right].$$</span></p>
+</div>
+<div class="corollary">
+<p>הסתברות המעבר תהיה:
+<span>$$P(i\to f)=|c_{f i}(t)|^{2}=\frac{4q^{2}A_{0}^{2}}{\hbar^{2}}|\epsilon\cdot\langle f|\mathbf{r}|i\rangle|^{2}\frac{\sin^{2}\left[(\omega_{f i}-\omega)t/2\right]}{(\omega_{f i}-\omega)^{2}}$$</span>
+כאשר בזמנים ארוכים ניתן להשתמש ב-<span>\(\lim_{ t \to \infty }\sin \frac{^2(at)}{\pi a^{2}t}=\delta(a)\)</span> ולקבל:
+<span>$$\Gamma(i\to f)=\frac{2\pi}{\hbar}\left(\frac{q A_{0}}{m}\right)^{2}|\epsilon\cdot\langle f|\mathbf{r}|i\rangle|^{2}\delta(E_{f}-E_{i}-\hbar\omega)$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>עבור מערכת של הפרעה סופית <span>\(V(t)\)</span> הסתברות המעבר ממצב <span>\(\ket{\Psi_{i}}\)</span> למצב <span>\(\ket{\Psi_{f}}\)</span> נתונה על ידי:
+<span>$$P(i\to f)={\frac{1}{\hbar^{2}}}\left|\int_{-\infty}^{\infty}V_{f i}(t)e^{i\omega_{f i}t}d t\right|^{2}$$</span>
+למשל עבור גאוסיאן <span>\(V(t)=V_{0}e^{ -t^{2}/\tau^{2} }\)</span> נקבל מקסימום הסתברות כאשר <span>\(\omega_{fi}\tau\ll 1\)</span> - רסוננס.</li>
+<li>עבור הפרעה <span>\(V(t)\)</span> אשר עוברת מ-0 ל-<span>\(V_{0}\)</span> נקבל כי הסתברות המעבר תלויה בנגזרת הזמנית של ההפרעה:
+<span>$$P(i\to f)=\frac{1}{\hbar^{2}\omega_{f i}^{2}}\left|\int_{-\infty}^{\infty}\frac{\partial V_{f i}}{\partial t}e^{i\omega_{f i}t}d t\right|^{2}$$</span>
+כאשר דוגמא לכך היא פונקציית מדרגה <span>\(V(t)=V_{0}\Theta(t)\)</span> כאשר ההסתברות תהיה <span>\(\frac{|V_{fi}|^{2}}{(\hbar \omega_{fi})^{2}}\)</span>.</li>
+<li>עבור הפרעה מונוכרומטית מהצורה <span>\(V(t)=U e^{-i\omega t}+U^{\dagger}e^{i\omega t}\)</span> נקבל מעברים ברסיננס כאשר <span>\(\omega_{fi}\approx\pm \omega\)</span> כאשר במקרה זה:
+<span>$$P(i\to f)=\frac{4|U_{f i}|^{2}}{\hbar^{2}}\frac{\sin^{2}[(\omega_{f i}-\omega)t/2]}{(\omega_{f i}-\omega)^{2}}$$</span></li>
+<li>עבור שדה חשמלי עם המילטוניאן מהצורה <span>\(H\approx \frac{p^{2}}{2m}-\frac{q}{m}\mathbf{A\cdot p}\)</span> תחת קירוב דיפול <span>\(e^{ i\mathbf{k\cdot r} }=1\)</span> נקבל:
+<span>$$\Gamma(i\to f)=\frac{2\pi}{\hbar}\left(\frac{q A_{0}}{m}\right)^{2}|\epsilon\cdot\langle f|\mathbf{r}|i\rangle|^{2}\delta(E_{f}-E_{i}-\hbar\omega)$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='prev-page'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+        </body>
+        </html>
+        

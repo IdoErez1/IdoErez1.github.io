@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התמרת לג'נדר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  התמרת לג'נדר</h1>
+    <div class="definition"><span class="keyword">התמרת לג'נדר</span><p>בהנתן פונקצייה <span>\(f=f\left( u_{1},u_{2},\dots,u_{n} \right)\)</span> ניתן להגדיר <span>\(v_{i}=\frac{\partial f}{\partial u_{i}}{}\)</span>. כעת התמרת לג'נדר על <span>\(f\)</span> תיתן פונקצייה <span>\(g=g\left( v_{1},\dots,v_{n} \right)\)</span> הומוגדרת ע"י:
+<span>$$g=\sum_{i=1}^{n}u_{i}v_{i}-f$$</span></p>
+</div>
+<p>במבט ראשוני ניתן לחשוב כי <span>\(g\)</span> היא פונקציה גם של <span>\(u\)</span> וגם של <span>\(v\)</span>. נראה עכשיו שזה לא המקרה.</p>
+<div class="theorem">
+<p>כל <span>\(u_i\)</span> שווה לנגזרת של <span>\(g\)</span>(שאינה תלויה ב-<span>\(u\)</span>) לפי <span>\(v_{i}\)</span>. כלומר:
+ <span>$$u_{i}=\frac{\partial g}{\partial v_{i}}$$</span></p>
+</div>
+<div class="proof">
+<p>אם ניקח את הדיפרנציאל של ההתמרת לג'נדר נקבל:
+ <span>$$\begin{array}{c}{{d g=\displaystyle\sum_{i=1}^{n}\left(u_{i}d v_{i}+v_{i}d u_{i}\right)-\sum_{i=1}^{n}\frac{\partial f}{\partial u_{i}}d u_{i},}}\\ {{=\displaystyle\sum_{i=1}^{n}u_{i}d v_{i}+\sum_{i=1}^{n}\left(v_{i}-\frac{\partial f}{\partial u_{i}}\right)d u_{i}.}}\end{array}$$</span>
+כאשר משים לב כי בסכימה הימנית מתקבל <span>\(v_{i}-v_{i}=0\)</span>. ולכן נקבל סה"כ:
+ <span>$$d g=\sum_{i=1}^{n}u_{i}d v_{i}$$</span>
+כאשר שינויים קטנים ב-<span>\(g\)</span> נובעים רק משינויים ב-<span>\(dv_{i}\)</span>. או לחלופין ניתן לכתוב:
+ <span>$$d g={\frac{\partial g}{\partial v_{1}}}d v_{1}+{\frac{\partial g}{\partial v_{2}}}d v_{2}+\cdot\cdot\cdot+{\frac{\partial g}{\partial v_{n}}}d v_{n}=\sum_{i=1}^{n}{\frac{\partial g}{\partial v_{i}}}d v_{i}$$</span>
+כאשר מהשוואת המקדמים ניתן לקבל
+ <span>$$u_{i}={\frac{\partial g}{\partial v_{i}}}$$</span>
+ מכאן ניתן לראות כי אכן פונקציה של <span>\(v\)</span> בלבד.</p>
+</div>
+<div class="remark">
+<p>דבר נוסף שנחמד לשים לב עליו, זה שיש איזושהי סימטריה בין הפונקציה <span>\(f\)</span> להתמרת לג'נדר שלה <span>\(g\)</span>:
+<span>$$g=\sum_{i=1}^{n}u_{i}v_{i}\,-\,f,\quad{\mathrm{and}}\quad f=\sum_{i=1}^{n}u_{i}v_{i}-g$$</span>
+כלומר התמרת לג'נדר של <span>\(g\)</span> תהיה <span>\(f\)</span>.</p>
+</div>
+<h2>התמרת לג'נדר של שתי משתנים</h2>
+<p>אם מגדרים <span>$$f=f(u_{1},u_{2},\,.\,.\,,u_{n};\,w_{1},\,w_{2},.\,.\,,w_{m}).$$</span>
+כאשר אנחנו רוצים לבצע התמרת לג'נדר רק עבור <span>\(\{ u_{i} \}\)</span>, נגדיר כמו במקרה החד משתני <span>\(v_{i}=\frac{\partial f}{\partial u_{i}}\)</span> ונקבל:
+<span>$$g=\sum_{i=1}^{n}u_{i}v_{i}\,-\,f(u,\,w).$$</span>
+<strong>משפט</strong>
+<span>$$\frac{\partial g}{\partial w_{i}}=-\frac{\partial f}{\partial w_{i}}$$</span></p>
+<div class="proof">
+<p>כאשר הדיפרנציאל של <span>\(g\)</span> יהיה:
+<span>$$\begin{array}{l}{{d g=\displaystyle\sum_{i=1}^{n}\left(u_{i}d v_{i}+v_{i}d u_{i}\right)-d f,}}\\ {{=\displaystyle\sum_{i=1}^{n}\left(u_{i}d v_{i}+v_{i}d u_{i}\right)-\sum_{i=1}^{n}\frac{\partial f}{\partial u_{i}}d u_{i}-\sum_{i=1}^{m}\frac{\partial f}{\partial w_{i}}d w_{i}\,,}}\\ {{=\displaystyle\sum_{i=1}^{n}u_{i}d v_{i}+\sum_{i=1}^{n}\left(v_{i}-\frac{\partial f}{\partial u_{i}}\right)d u_{i}-\sum_{i=1}^{m}\frac{\partial f}{\partial w_{i}}d w_{i}.}}\end{array}$$</span>
+ושוב כמו במקרה החד מימדי נשים לב כי <span>\(v_{i}-\frac{\partial f}{\partial u_{i}}=0\)</span> ולכן נקבל:
+<span>$$d g=\sum_{i=1}^{n}u_{i}d v_{i}-\sum_{i=1}^{m}\frac{\partial f}{\partial w_{i}}d w_{i}$$</span>
+וכיוון ש-<span>\(g=g(v,w)\)</span> ניתן גם לכתוב:
+<span>$$d g=\sum_{i=1}^{n}\frac{\partial g}{\partial v_{i}}d v_{i}+\sum_{i=1}^{m}\frac{\partial g}{\partial w_{i}}d w_{i}\,,$$</span>
+ולכן מהשוואת המקדמים נקבל:
+<span>$${\frac{\partial g}{\partial w_{i}}}=-{\frac{\partial f}{\partial w_{i}}}$$</span></p>
+</div>
+<div class="remark">
+<p>היתרון התמרת לג'נדר זה שהיא משמרת אינפורמציה. כלומר מאפשרת לעבור משתנים ללא שינוי באינפורמציה של המשוואה. לכן ניתן לקבל ביטוי חדש אשר זהה מבחינת הפיזיקה לביטוי הקודם אך עם משתנה חדש.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='prev-page'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+</ul></li>
+        </body>
+        </html>
+        

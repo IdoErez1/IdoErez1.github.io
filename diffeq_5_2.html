@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בעיה חד מימדית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_5_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_5_1.html`;}});</script>
+        <div class="content">
+        <h1>5.2  בעיה חד מימדית</h1>
+    <div class="definition"><span class="keyword">משוואת גלים חד מימדית</span><p>משוואה מהצורה:
+<span>$$u_{tt}-cu_{x x}=0$$</span>
+כאשר הקבוע <span>\(c\)</span> נקרא מהירות הגל. לעיתים קוראים לזה בעיית המיתר.</p>
+</div>
+<div class="proposition">
+<p>פתרון כללי של משוואת הגלים החד מימדית:
+<span>$$u_{t t}=c^{2}u_{x x}\qquad\mathrm{for}\ -\infty&lt;x&lt;+\infty.$$</span>
+תהיה:
+<span>$$u(x,t)=f(x+c t)+g(x-c t)$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב:
+<span>$$u_{t t}-c^{2}u_{x x}=\bigg({\frac{\partial}{\partial t}}-c{\frac{\partial}{\partial x}}\bigg)\bigg({\frac{\partial}{\partial t}}+c{\frac{\partial}{\partial x}}\bigg)u=0$$</span>
+נגדיר <span>\(v=u_{t}+cu_{x}\)</span>. כעת ניתן להפוך את המשוואה למערכת של שתי משוואות מסדר ראשון:
+<span>$$\begin{gather}(i)\quad v_{t}-c v_{x}=0 \\(ii)\quad u_{t}+cu_{x}=v \end{gather}
+$$</span>
+עבור משוואה <span>\((i)\)</span> נקבל:
+<span>$$v(x,t)=h(x+c t)$$</span>
+כעת המשוואה השנייה תהיה:
+<span>$$u_{t}+c u_{x}=h(x+c t)$$</span>
+כאשר אם נבדוק פונקציה מהצורה <span>\(f(x+ct)\)</span> נקבל:
+<span>$$cf'(x+ct)+cf'(x+ct)=h(x+ct)\implies f'(x+ct)= \frac{1}{2c} h(x+ct)$$</span>
+ולכן פתרון אחד זה פונקציה מהצורה הזו אשר מקיימת בנוסף <span>\(f'(s)=\frac{h(s)}{2c}\)</span>. וכן עבור המשוואה ההומגנית <span>\(u_{t}+cu_{x}=0\)</span> נקבל פתרון מהצורה <span>\(g(x-ct)\)</span>.  ולכן הפתרון הכללי יהיה הסכום של הפתרון הפרטי <span>\(f(x+ct)\)</span> הפתרון ההומוגני <span>\(g(x-ct)\)</span>. כלומר:
+<span>$$u(x,t)=f(x+ct)+g(x-ct)$$</span></p>
+</div>
+<p>דרך יותר פורמלית להראות זאת זה באמצעות שיטת הקרקטריסטיקות כדי להשיג את המשתנים הטבעיים:</p>
+<div class="proof">
+<p>משוואת תהיה מהצורה:
+<span>$$ \frac{\partial^2y}{\partial x^2}=\frac1{c^2}\frac{\partial^2y}{\partial t^2}$$</span>
+כאשר זו משוואה שהטרנספורמצייה הקנונית שלה יהיה:
+<span>$$ \begin{aligned}\xi&amp;=x-c t,\\\eta&amp;=x+c t\end{aligned}$$</span>
+ולאחר הצבה נקבל את הביטוי המפושט:
+<span>$$ \frac{\partial^2y}{\partial\xi\text{ }\partial\eta}=0\implies \frac{\partial }{\partial \xi}\left( \frac{\partial y}{\partial \eta} \right)\implies \frac{\partial y}{\partial\eta}=F\left( \eta \right)\implies y=\int  F\left( \eta \right)\, \mathrm{d}\eta=f\left( \eta \right)+g\left( \xi \right) $$</span>
+וזה יהיה הפתרון של משוואת הגל. אם נציב בחזרה משתנים נקבל סה"כ:
+<span>$$ y=f(x+c t)+g(x-c t)$$</span></p>
+</div>
+<div class="remark">
+<p>במקרה ש- <span>\(f,g\)</span> שניהם מייצגים גלי סינוס, נקבל:
+<span>$$ \begin{aligned}y&amp;=f\left( x+c t \right)+g\left( x-c t \right)\\&amp;=A\sin\left( kx+\omega t \right)+A\sin\left( kx-\omega t \right)\\
+&amp;=2A\sin(kx)\cos\left( \omega t \right)\end{aligned}$$</span>
+זהו מקרה חשוב כאשר מפרקים לפורייה, כי כל גל יהיה סופרפוזציה של גלי סינוס. זה נותן את התובנה שגל נקבע ע"י התדירות והאורך גל. ואם נניח את הקשר הלינארי <span>\(\omega=kc\)</span> אז נקבל כי גל נקבע ביחידות ע"י התדירות שלו.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת דלמבר</span><p>בתחום <span>\(\mathbb{R}\)</span> פונקציה <span>\(y=(x,t)\)</span> אשר מקיימת את משוואת הגל כך שמתחילה עם מיקום התחלתי <span>\(I\)</span> ומהירות התחלתית <span>\(V\)</span> תקיים:
+<span>$$ y(x,t)=\frac12I(x+ c  t)+\frac12I(x- c  t)+\frac1{2 c }\int_{x- c  t}^{x+ c  t}V(z)dz$$</span></p>
+</div>
+<div class="proof">
+<p>נניח כי המיקום ההתחלתי נתון ע"י <span>\(I\)</span>, והמהירות התחלתית ב-<span>\(V\)</span>. במקרה זה:
+<span>$$(*)\quad  y(x,0)=f(x)+g(x)=I(x)$$</span>
+כאשר אם נחזור להציב <span>\(\eta=x+vt,\xi=x-vt\)</span> נקבל כי <span>\(\frac{\partial \xi}{\partial t}=-v,\frac{\partial \eta}{\partial t}=v\)</span> ולכן:
+<span>$$ \left.\frac{\partial y(x,t)}{\partial t}\right|_{t=0}=\left.\frac{\partial f}{\partial\eta}\frac{\partial\eta}{\partial t}\right|_{t=0}+\left.\frac{\partial g}{\partial\xi}\frac{\partial\xi}{\partial t}\right|_{t=0}\implies  \left.\frac{\partial y(x,t)}{\partial t}\right|_{t=0}=\frac{\partial f}{\partial x}v-\frac{\partial g}{\partial x}v=V(x)$$</span>
+כלומר נקבל כי מתקיים:
+<span>$$(* *)\quad  \frac{\partial f}{\partial x}-\frac{\partial g}{\partial x}=\frac{1}{v} V(x)\implies  f(x)-g(x)=\frac{1}{v}\int_0^xV(x)dx,$$</span>
+כאשר מ-<span>\((*),(* *)\)</span> ניתן להגיע למשוואת דלמבר:
+<span>$$ y(x,t)=\frac12I(x+ c  t)+\frac12I(x- c  t)+\frac1{2 c }\int_{x- c  t}^{x+ c  t}V(z)dz,$$</span>
+בשיטה זו נוח לפתור בעיות של מיתר אינסופי. אך ניתן גם לפתור בלי בעיה בעיות של מיתר חצי אינסופי עם שיטת הדמויות.</p>
+</div>
+<div class="remark">
+<p>ממשוואה זו רואים תכונה חשובה של משוואת הגלים - קוסאליות - אם פונקצייה מקיימת את משוואת הגלים אז ההתפתחום בזמן של נקודה <span>\(x_{0}\)</span> לא תשפיע על תחום אשר מרחקו ב-<span>\(x_{0}\)</span> גדול מ-<span>\(ct\)</span>.</p>
+</div>
+<div class="proposition">
+<p>בתחום סופי ניתן לפתור בעזרת הפרדת משתנים. </p>
+</div>
+<div class="proof">
+<p>בהנחה שהפתרון של המשוואה ניתן לכתיבה כמכפלה של פונקציות של משתנה יחיד, ניתן להגדיר <span>\(y(x,t)=X(x)T(t)\)</span>. וכעת משוואת הגלים תהיה:
+<span>$$ \frac{\partial^2[X(x)T(t)]}{\partial x^2}=\frac1{ c ^2}\frac{\partial^2[X(x)T(t)]}{\partial t^2}\implies T(t)\frac{\partial^2X(x)}{\partial x^2}=\frac{1}{ c ^2}X(x)\frac{\partial^2T(t)}{\partial t^2}$$</span>
+כאשר נחלק את שתי נאגפים ב-<span>\(T(t)X(x)\)</span> כדי לקבל בכל אגף איבר שתלוי במשתנה אחד ונקבל:
+<span>$$ \frac1{X(x)}\frac{\partial^2X(x)}{\partial x^2}=\frac1{ c ^2}\frac1{T(t)}\frac{\partial^2T(t)}{\partial t^2}.$$</span>
+כאשר כיוון שנכון לכל זמן ולכן מקום, שתי האגפים שווים לקבוע. כלומר נקבל שתי משוואות של משתנה יחיד:
+<span>$$ \frac{\partial^2X}{\partial x^2}=\alpha X=-k^2X\qquad \frac{\partial^2T}{\partial t^2}=\alpha c ^2T=- c ^2k^2T,$$</span>
+כאשר כל אחת מהמשוואת האלה מתאר אוסצילטור הרמוני. נוח לפתור בשיטה זו בעיות של מיתר סופי או תנאי שפה מחזוריים. או באופן כללי בעיות רב מימדיות.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון בעזרת התמרת פורייה</span><p>הפתרון של משוואת הגלים של מיתר אינסופי עם תנאי התחלה <span>\(\psi(x,0)=f(x)\)</span> ו-<span>\(\dot{\psi}(x,0)=g(x)\)</span> נתון על ידי:
+<span>$$ \psi(x,t)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\left[\tilde{\psi}^{+}\left(k\right)e^{ikct}+\tilde{\psi}^{-}\left(k\right)e^{-ikct}\right]e^{ikx}dk$$</span>
+כאשר מתקיים
+<span>$$ \begin{aligned}\tilde{\psi}^{+}(k)&amp;=\frac{1}{2}\left[\mathcal{F} [{f}](k)+\frac{1}{ikc}\mathcal{F} [{g}](k)\right]\\ \tilde{\psi}^{-}\left(k\right)&amp;=\frac{1}{2}\left[\mathcal{F[f]} (k)-\frac{1}{ikc}\mathcal{F} [{g}](k)\right]\end{aligned}$$</span>
+כאשר <span>\(\omega_{+}(k)\)</span> ו-<span>\(\omega_{-}(k)\)</span> הם יחס הנפיצה של המערכת. כלומר משוואת גלים רגילה נקבל <span>\(\omega_{-}(k)=-kc\)</span> ו-<span>\(\omega_{+}(k)=kc\)</span>.</p>
+</div>
+<div class="proof">
+<p>נתונה משוואת הגלים <span>\(\ddot{\psi}=c^{2}\psi''\)</span>. נכתוב את הפתרון הכללי על ידי:
+<span>$$\psi(x,t)=\frac{1}{\sqrt{ 2\pi }} \int_{-\infty}^{\infty} \tilde{\psi}^{+}(k) e^{ ik(x-ct) } \, dk + \int_{-\infty}^{\infty} \tilde{\psi}(k) e^{ ik(x+ct) }\, dk  $$</span>
+כאשר אם נגזור לפי זמן נקבל:
+<span>$$\dot{\psi}(x,t)=\frac{1}{\sqrt{ 2\pi }} \int_{-\infty}^{\infty} -ikc \cdot\tilde{\psi}^{+}(k) e^{ ik(x-ct) } \, dk + \int_{-\infty}^{\infty} ikc\cdot\tilde{\psi}(k) e^{ ik(x+ct) }\, dk  $$</span>
+כאשר אם נגדיר <span>\(\psi(x,0)=f(x)\)</span> ו-<span>\(\dot{\psi}(x,0)=g(x)\)</span> נקבל:
+<span>$$\begin{gather}f(x)=\frac{1}{\sqrt{ 2\pi }}\left[ \int_{-\infty}^{\infty} \tilde{\psi}^{+}(k)e^{ ikx } \, dk + \int_{-\infty}^{\infty} \tilde{\psi}^{-}(x)e^{ ikx } \, dk  \right]  \\g(x)=\frac{1}{\sqrt{ 2\pi }}\left[ \int_{-\infty}^{\infty} -ikc\cdot\tilde{\psi}^{+}(k)e^{ ikx } \, dk + \int_{-\infty}^{\infty} ikc\cdot \tilde{\psi}^{-}(x)e^{ ikx } \, dk  \right] 
+\end{gather}$$</span>
+ולכן:
+<span>$$\mathcal{F} [f](k)= \tilde{\psi}^{+}(k)+\tilde{\psi}^{-}(k) \qquad \mathcal{F} [g] (k)=-ikc \cdot\tilde{\psi}^{+}(k) + ikc \cdot \tilde{\psi}^{-}(k)
+$$</span>
+ומכאן ניתן למצוא את הביטוי עבור <span>\(\tilde{\psi}^{+}\)</span> ו-<span>\(\tilde{\psi}^{-}\)</span> בעזרת ההתמרת פורייה של התנאי התחלה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+<li class='prev-page'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

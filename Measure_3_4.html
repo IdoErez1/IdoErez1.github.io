@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>רציפות של פונקציות מדידות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_4_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_3_3`; }});</script>
+        <div class="content">
+        <h1>3.4  רציפות של פונקציות מדידות</h1>
+    <div class="theorem"><span class="keyword">לוסין - Lusin</span><p>יהי <span>\(X\)</span> מרחב האוסדורף קומפקטי מקומית ותהי <span>\(\mu\)</span> מידת רדון על <span>\(X\)</span>. תהי <span>\(f:X\to \mathbb{C}\)</span> מדידה כך ש:
+<span>$$A\supseteq\left\{  x\mid f(x)\neq 0  \right\}$$</span>
+ממידה סופית, כלומר <span>\(\mu(A)&lt;\infty\)</span> אזי לכל <span>\(\varepsilon&gt; 0\)</span> קיימת פונקציה רציפה עם תומך קומפקטי <span>\(g \in C_{c}(X)\)</span> עם:
+<span>$$\mu\left( \left\{  x\mid f(x)\neq g(x)  \right\} \right)&lt; \varepsilon$$</span>
+בנוסף ניתן לבחור <span>\(g\)</span> כך ש:
+<span>$$\sup _{x \in X}\lvert g(x) \rvert \leq \sup _{x \in X} \lvert f(x) \rvert $$</span></p>
+</div>
+<p>כלומר עד כדי שגיאה קטנה כרצוני, פונקציות מדידות הם בעצם רציפות.</p>
+<div class="proof">
+<ol>
+<li>
+<p>נראה ראשית את המקרה הפשוט - עבור <span>\(A\)</span> קומפקטית ו-<span>\(0\leq f&lt; 1\)</span>. נקרב את <span>\(f\)</span> על ידי פונקציות פשוטות המוגדרות על ידי: 
+<span>$$s_{n}(x)=2^{-n}\lfloor2^{n}f(x)\rfloor$$</span>
+כאשר <span>\(n\to \infty\)</span> נקבל <span>\(s_{n}(x)\to f(x)\)</span>.</p>
+</li>
+<li>
+<p>נגדיר <span>\(t_{n}=s_{n}-s_{n-1}\)</span> כאשר ניתן לכתב כל <span>\(t_{n}\)</span> על ידי <span>\(t_{n}(x)=2^{-n}\mathbb{1}_{T_{n}}(x)\)</span> כאשר <span>\(\mathbb{1}_{T_{n}}\)</span> היא הפונקציה המציינת של הקבוצה: 
+<span>$$T_{n}=\left\{  s_{n}\neq s_{n-1}  \right\}=\left\{ x\mid\exists k\quad k\cdot2^{-(n-1)}+2^{-n}\leq f(x)&lt;(k+1)2^{-(n-1)} \right\}$$</span>
+ובפרט כיוון שטור טלסקופי מתקיים:
+<span>$$\lim_{ n \to \infty } \sum _{k=1}^{n}t_{k}=\lim_{ n \to \infty } S_{n}=f(x)$$</span></p>
+</li>
+<li>
+<p>מרגולריות נמצא קבוצות קופמקטיות <span>\(K_{n}\)</span> וקבוצות פתוחות <span>\(V_{n}\)</span> כך שלכל <span>\(T_{n}\)</span> מתקיים: 
+<span>$$K_{n}\subseteq T_{n}\subseteq V_{n}\qquad \mu\left( V_{n}\setminus  K_{n} \right)&lt; 2^{-n}\varepsilon$$</span></p>
+</li>
+<li>
+<p>מהלמה של אוריסון נמצא פונקציות רציפות <span>\(h_{n}\)</span> כך שמתקיים: 
+<span>$$\begin{gather}\forall x \quad 0\leq h_{n}(x)\leq 1  \\\forall x \in K_{n}\quad h_{n}(x)=1 \\\forall x \not  \in V_{n} \quad h_{n}(x)=0
+\end{gather}$$</span>
+ונגדיר את הפונקציה הרציפה <span>\(g\)</span> שלנו על ידי:
+<span>$$g(x)=\sum_{n=1}^{\infty}2^{-n}h_{n}(x)$$</span>
+כיוון ש-<span>\(h_{n}(x)\leq 1\)</span> נקבל כי הטור מתכנס במידה שווה(ממבחן ה-<span>\(M\)</span> של וורשטרס למשל) ולכן משמר רציפות ו-<span>\(g(x)\)</span> תהיה רציפה.</p>
+</li>
+<li>
+<p>נשים לב כי כיוון שמתקיים <span>\(K_{n}\subseteq T_{n}\)</span> נקבל כי בתחום זה <span>\(\mathbb{1}_{T_{n}}(x)=1\)</span> ולכן <span>\(h_{n}(x)=1\)</span> ונקבל <span>\(t_{n}=2^{-n}h_{n}(x)\)</span> בתחום <span>\(V_{n}\setminus K_{n}\)</span> ולכן <span>\(f(x)=g(x)\)</span> פרט לאיחוד של הקבוצות האלו <span>\(\bigcup_{n}\left( V_{n}\setminus K_{n} \right)\)</span>. המידה של האיחוד הזה חסום על ידי: 
+<span>$$\mu \left( \bigcup_{n}\left( V_{n}\setminus K_{n} \right) \right)\leq\sum_{n=1}^{\infty}\mu\left( V_{n}\setminus K_{n} \right)&lt;\sum_{n=1}^{\infty}2^{-n}\varepsilon=\varepsilon$$</span></p>
+</li>
+<li>
+<p>כעת אם <span>\(A\)</span> לא קומפקטית נמצא תת קבוצה קומפקטית <span>\(K\)</span> של <span>\(A\)</span> כך ש-<span>\(\mu\left( A\setminus K \right)&lt;\delta\)</span>. כעת עבור <span>\(K\)</span> כיוון שקומפקטית מהטענה נקבל <span>\(g:K\to \mathbb{C}\)</span> רציפה כך שלכל <span>\(x \in K\)</span> מתקיים <span>\(\mu\left( \left\{  x\mid f|_{K}(x)\neq g(x)  \right\} \right)&lt;\varepsilon-\delta\)</span>. נגדיר <span>\(\tilde{g}:A\to \mathbb{C}\)</span> על ידי: 
+<span>$$\tilde{g}(x)=\begin{cases}g(x) &amp;  x \in K \\0  &amp; \text{else}
+\end{cases}$$</span>
+ונקבל:
+<span>$$\begin{gather}\mu\left( \left\{  x \in A\mid f(x)\neq \tilde{g}(x)  \right\} \right)\leq\mu\left( A\setminus  K \sqcup \left\{  x \in K\mid f|_{K}(x)\neq g(x)  \right\} \right)\leq\\ \leq \mu\left( A\setminus  K \right)+\mu\left( \left\{  x \in K\mid f|_{K}(x)\neq g(x)  \right\} \right)&lt; \delta+\varepsilon-\delta=\varepsilon 
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>כאשר <span>\(f\)</span> איננה חסומה נסמן <span>\(B_{n}=\left\{  \lvert f \rvert&gt;n  \right\}\)</span>. מאחר ש-<span>\(\mu(A)&lt; \infty\)</span> ו-<span>\(\bigcap_{n}B_{n}=\varnothing\)</span> הרי שמרציפות יורדת של <span>\(\mu\)</span> עבור הסדרה: 
+<span>$$A \supseteq B_{1} \supseteq \dots \supseteq B_{n}\supseteq \dots$$</span>
+נסיק ש-<span>\(\mu(B_{n})\to 0\)</span> ולכן ניתן "להתעלם" מקבוצה קטנה של x-ים עליה <span>\(f\)</span> איננה חסומה.</p>
+</li>
+<li>
+<p>עבור התנאי: 
+<span>$$\sup _{x \in X}\lvert g(x) \rvert \leq \sup _{x \in X} \lvert f(x) \rvert $$</span>
+כיוון שאנחנו יכולים להניח ש-<span>\(f\)</span> לא חסום(מהסעיף הקודם עד כדי קבוצה ממידה אפס) נגדיר:
+<span>$$\varphi = \begin{cases} z  &amp;   \lvert z \rvert\leq R \\\frac{z}{\lvert z \rvert }R &amp; \lvert z \rvert &gt; R 
+\end{cases}$$</span>
+כש-<span>\(R=\sup\lvert f \rvert&lt;\infty\)</span>. כעת <span>\(\varphi(g(x))\)</span> תהיה פונקציה רציפה המקיימת את התנאי.</p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>בתנאי משפט לוסין קיימת סדרת פונקציות <span>\(g_{n}\in C_{c}(X)\)</span> עם:
+<span>$$f(x)=\lim_{ n \to \infty } g_{n}(x)$$</span>
+עבור <span>\(\mu\)</span>-כמעט כל <span>\(x \in X\)</span>(כלומר פרט לקבוצה ממידה אפס).</p>
+</div>
+<div class="proof">
+<p>לכל <span>\(n \in \mathbb{N}\)</span> נבחר <span>\(g_{n}\in C_{c}(X)\)</span> עם:
+<span>$$J_{n}=\left\{  x\mid f(x)\neq g_{n}(x)  \right\}$$</span>
+המקיים <span>\(\mu(J_{n})&lt;2^{-n}\)</span>. בפרט <span>\(\sum_{n \in \mathbb{N}} \mu(J_{n})&lt; \infty\)</span> ולכן מהלמה של בורל קנטלי מתקיים ש-<span>\(\mu(\limsup J_{n})=0\)</span>. כלומר עבור <span>\(\mu\)</span>-כמעט כל <span>\(x \in X\)</span>, נקבל כי <span>\(x\)</span> מוכל בכל היותר מספר סופי של <span>\(J_{n}\)</span>-ים. מכאן הסדרה <span>\(g_{n}(x)\)</span> קבועה החל ממקום מסויים ושווה ל-<span>\(f(x)\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">אגורוף</span><p>יהי <span>\(\left( X,\mathcal{M},\mu \right)\)</span> מרחב מידה סופית. ונניח כי <span>\(f_{n}:X\to \mathbb{R}\)</span> מתכנסת כמעט תמיד ל-<span>\(f:X\to \mathbb{R}\)</span>. אזי לכל <span>\(\varepsilon&gt; 0\)</span> קיימת <span>\(E \in \mathcal{ M}\)</span> כך ש-<span>\(\mu(E)&lt; \varepsilon\)</span> כך ש-<span>\(f_{n}\to f\)</span> במ"ש ב-<span>\(E^{c}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. נסמן:
+<span>$$n_{k}(x)=\operatorname*{min}\left\{n:\forall N&gt;n\qquad|f_{N}(x)-f(x)|&lt;{\frac{1}{k}}\right\}$$</span>
+כאשר נשתמש בקונבנציה שהמינימום של הקבוצה הרחקה היא באינסוף. יהי <span>\(x \in X\)</span>. אם <span>\(f_{n}(x)\to f(x)\)</span> כמעט תמיד נקבל:
+<span>$$\forall k\quad n_{k}(x)&lt;\infty$$</span>
+ולכן כיוון ש-<span>\(n^{-1}_{k}\left( \left\{  \infty  \right\} \right)\)</span> ממידה אפס, נקבל:
+<span>$$0=\bigcup_{n=1}^{\infty}\mu\left( n_{k}^{-1}\left( \left\{  \infty  \right\} \right) \right)$$</span>
+כעת:
+<span>$$\bigcap_{m=1}^{\infty}n_{k}^{-1}((m,\infty])=n_{k}^{-1}(\{\infty\})$$</span>
+מרציפות מלמעלה(כיוון שאמרנו כי <span>\(\mu(X)&lt;\infty\)</span>) נקבל כי לכל <span>\(k\)</span> מתקיים:
+<span>$$\mu(n_{k}^{-1}\left( \left( m,\infty] \right) \right)\xrightarrow{m\to \infty}0$$</span>
+כעת נבחר <span>\(m_{k}\)</span> כך שלכל <span>\(N&gt; m_{k}\)</span> מתקיים:
+<span>$$\mu(\bigcup_{k=1}^{\infty}n_{k}^{-1}((m_{k},\infty]))&lt;\sum_{k=1}^{\infty}\epsilon\cdot2^{-k}=\epsilon$$</span>
+ונגדיר:
+<span>$$E=\bigcup_{k=1}^{\infty}n_{k}^{-1}((m_{k},\infty])$$</span>
+ולכן <span>\(\mu(E)&lt;\varepsilon\)</span>. נשים לב כי עבור <span>\(x \in E^{c}\)</span> אז לכל <span>\(k\)</span> מתקיים <span>\(m_{k}\geq n_{k}(x)\)</span>. ולכן אם <span>\(N&gt;m_{k}\)</span> אז <span>\(N&gt; n_{k}(x)\)</span> ולכן:
+<span>$$\lvert f_{n}(x)-f(x) \rvert &lt; \frac{1}{k}$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>כל פונקציה מדידה לבג עם תומך קומפקטי היא בקירוב רציפה(משפט לוסין).</li>
+<li>סדרת פונקציות <span>\(f_{n}:[a,b]\to \mathbb{R}\)</span> המתכנסת כמעט תמיד היא בקירוב מתכנסת במ"ש(משפט אגרוף).</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='prev-page'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

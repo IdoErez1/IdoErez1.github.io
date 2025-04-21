@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טרנספורמציית לורנץ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  טרנספורמציית לורנץ</h1>
+    <div class="definition"><span class="keyword">אינטרוואל</span><p>סוג של מרחק ביחסות פרטית. מוגדר:
+<span>$$ \mathrm{d}s^{2} = \left( c\mathrm{d}t \right)^2-\mathrm{d}x^2-\mathrm{d}y^2-\mathrm{d}z^2$$</span>
+כאשר מבחינה פיזיקלית ניתן לחשוב על זה כמו המרחק שעובר אור.</p>
+</div>
+<div class="definition"><span class="keyword">חבורת לורנץ</span><p>אוסף כל הטרנספורמציות אשר משמרות את האינטרוואל במעברת מערכות ייחוס.</p>
+</div>
+<div class="definition"><span class="keyword">חבורת פוינקרה</span><p>כל הטרנספורמציות אשר משמרות את:
+<span>$$\Delta s^{2}=(t-t_{0})^{2}-(x-x_{0})^{2}-(y-y_{0})^{2}-(z-z_{0})^{2}$$</span>
+כלומר משמרות את האינטרוואל עם הזזה. זה לעיתם נקרא טרנספורמציית לורנץ הלא הומוגנית.</p>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(t=x_{0},x=x_{1},y=x_{2},z=x_{3}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">טנזור המטריקה</span><p>זהו טנזור המתאר את הצורה של המשטח ביחסות. מוגדר כך שמתקיים:
+<span>$$\mathrm{d}s ^{2}=\eta_{\alpha \beta}\mathrm{d}x^{\alpha}\mathrm{d}x^{\beta}$$</span>
+כלומר במקרה שלנו נקבל כי <span>\(\eta_{00}=1\)</span> ו-<span>\(\eta_{11}=\eta_{22}=\eta_{33}=-1\)</span>.</p>
+</div>
+<div class="remark">
+<p>נקבל כי <span>\(\eta_{\alpha \beta}=\eta^{\alpha \beta}\)</span>. כלומר הטנזור הקורנטרא ווריאנטי שווה לטנזור הקו ווריאנטי.</p>
+</div>
+<div class="proposition"><span class="keyword">קונטרקציה/צמצום</span><p>מתקיים:<span>$$
+\eta_{\alpha\gamma}\eta^{\gamma\beta}\:=\:{\delta_{\alpha}}^{\beta}$$</span>
+כאשר <span>\({\delta_{\alpha}}^{\beta}\)</span> זה הדלתא של קרונקר ה-4 מימדית אשר שווה ל-0 לכל <span>\(\alpha \neq \beta\)</span> ו-<span>\({\delta_{\alpha}}^{\alpha}=1\)</span>.</p>
+</div>
+<div class="proposition">
+<p>ניתן לקבל את הווקטור הקו ווריאנטי המתאים לווקטור קונטרא ווריאנטי על ידי קונטרקציה עם הטנזור המטריקה:
+<span>$$x_{\alpha}=\eta_{\alpha \beta}x^{\beta}\qquad x^{\alpha}=\eta^{\alpha \beta}x_{\beta}$$</span>
+כאשר עבור הטנזור המטריקה שלנו נקבל כי רכיב הזמן ישאר זהה כאשר רכיבי המרחב יהפכו סימן. כלומר ניתן לכתוב:
+<span>$$A^{\alpha}\,=\,(A^{0},\,{\bf A}),\;\;\;\;\;\;A_{\alpha}\,=\,(A^{0},\,-{\bf A})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">המכפלה הסקלרית</span><p>תחת המטריקה שלנו נקבל:
+<span>$$B\,\cdot\,A\,\equiv\,B_{\alpha}A^{\alpha}\,=\,B^{0}A^{0}\,-\,{\bf\beta}\cdot{\bf\beta}{\bf\alpha}$$</span></p>
+</div>
+<div class="proposition">
+<p>הנגזרת לפי משתנה קונטרא ווריאנטי יהיה אופרטור קו ווריאנטי (כלומר משנה ווקטור באופן הפוך לטרנסורמציה). זאת כי:
+<span>$$\frac{\partial}{\partial x^{\prime}{}^{\alpha}}=\frac{\partial x^{\beta}}{\partial x^{\prime}{}^{\alpha}}\,\frac{\partial}{\partial x^{\beta}}$$</span>
+לפי כלל השרשרת וזה מתאים להגדרה של ווקטור קו-ווריאנטי.</p>
+</div>
+<div class="definition"><span class="keyword">4 גרדיאנט</span><p><span>$$\partial^{\alpha}\equiv\frac{\partial}{\partial x_{\alpha}}=\left(\frac{\partial}{\partial x^{0}},-\bar\nabla\right)\qquad \partial_{\alpha}\equiv\frac{\partial}{\partial x^{\alpha}}=\,\left(\frac{\partial}{\partial x^{0}}\,,\,{\bar{\nabla}}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>ה-4 דיברגנט המוגדר ע"י:
+<span>$$\partial^{\alpha}\!{ A}_{\alpha}\,=\,\partial_{\alpha}{A}^{\alpha}\,=\,{\frac{\partial{\cal A}^{0}}{\partial x^{0}}}\,+\,{\bf\nabla\cdot A}$$</span>
+הוא גודל אינווריאנטי</p>
+</div>
+<div class="definition"><span class="keyword">דלמברטיאן</span><p><span>$$\square^{2}=\partial_{\alpha}\partial^{\alpha}\,=\,\frac{\partial^{2}}{\partial x^{02}}\,-\,\nabla^{2}$$</span>
+כאשר נשים לב כי זה אופרטור של משוואת הגלים.</p>
+</div>
+<div class="example">
+<p>נחשב מכפלה טנזורית בעזרת מכפלת מטריצות.
+נניח 
+<span>$$T^{\mu\nu}=\left[\begin{array}{c c c c}{{-1}}&amp;{{3}}&amp;{{{{{7}}}}}&amp;{{-6}}\\ {{2}}&amp;{{{{{5}}}}}&amp;{{0}}&amp;{{1}}\\ {{4}}&amp;{{-1}}&amp;{{1}}&amp;{{{{{5}}}}}\\ {{8}}&amp;{{2}}&amp;{{0}}&amp;{{1}}\end{array}\right]$$</span>
+כדי לחשב בעזרת מכפלת מטריצות, נרצה למקם את האידקסים הקרובים אחד לשני. לדוגמא:
+<span>$$ {T_\mu}^\nu=\eta_{\mu\lambda}T^{\lambda\nu}=\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;-3&amp;-7&amp;6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+או לחלופין:
+<span>$$ {T^\mu}_\nu=T^{\mu\lambda}\eta_{\lambda\nu}=\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;3&amp;7&amp;-6\\-2&amp;5&amp;0&amp;1\\-4&amp;-1&amp;1&amp;5\\-8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+או אם נרצה להוריד את שתי האינדקסים:
+<span>$$ {T}_{\gamma\nu}=\eta _{\gamma \mu}T^{\mu\lambda}\eta_{\lambda\nu}=\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;-3&amp;-7&amp;6\\-2&amp;5&amp;0&amp;1\\-4&amp;-1&amp;1&amp;5\\-8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+כמובן שעדיין מתקיים <span>\(\eta_{\mu \lambda}T^{\lambda \nu}=T^{\lambda \nu}\eta_{\mu \lambda}\)</span> - זה רק טריק שנדע את סדר מכפלת המטריצות - כיוון שלהכפיל את זה ככה שקול להגדרה של כפל מטריצות. טריק זה רק יעבוד לטנזורים מסדר שני ומטה. עבור טנזורים מסדר גבוהה יותר נדרש לכתוב במפורש את הסכום. לדוגמא:
+<span>$$\eta_{\lambda \nu}T^{\mu \lambda}=\eta_{0\nu}T^{\mu 0}+\eta_{1\nu}T^{\mu 1}+\eta_{2 \nu}T^{\mu 2}+\eta_{3 \nu} T^{\mu 3}$$</span>
+ולחשב את הסכום.</p>
+</div>
+<h2>הצגה מטריציונית של טרנספורמציית לורנץ</h2>
+<p>אנו יודעים כי טרנספורמציית לורנץ זה אוסף כל הטרנספורמציות אשר משמרות את האינטרוואל. הגדרה אלטרנטיבית זה אוסף כל המטריצות שמקיימות:
+<span>$$\Lambda^{T} \eta \Lambda=\eta$$</span>
+כאשר <span>\(\eta\)</span> זה המטריצה המייצגת את טנזור המטריקה ומוגדרת <span>\(\eta=\mathrm{diag}(1,-1,-1,-1)\)</span>.</p>
+<div class="definition"><span class="keyword">טרנספורמציית לורנץ עבור מהירות מרחבית כללית</span><p><span>$$\Lambda=  \begin{pmatrix}\gamma &amp; -\gamma\frac{v_{x}}{c} &amp; -\gamma\frac{v_{y}}{c} &amp; -\gamma\frac{v_{z}}{c} \\ -\gamma\frac{v_{x}}{c} &amp; 1+(\gamma-1)\frac{v_{x}^2}{v^2} &amp; (\gamma-1)\frac{v_{x}v_{y}}{v^2} &amp; (\gamma-1)\frac{v_{x}v_{z}}{v^2} \\-\gamma\frac{v_{y}}{c} &amp; (\gamma-1)\frac{v_{x}v_{y}}{v^2} &amp; 1+(\gamma-1)\frac{v_{y}^2}{v^2} &amp; (\gamma-1)\frac{v_{z}v_{y}}{v^2} \\-\gamma\frac{v_{z}}{c} &amp; (\gamma-1)\frac{v_{x}v_{z}}{v^2} &amp; (\gamma-1)\frac{v_{z}v_{y}}{v^2} &amp; 1+(\gamma-1)\frac{v_{z}^2}{v^2}
+  \end{pmatrix}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טרנספורמציית לורנץ חד מימדית</span><p><span>$$\Lambda=  \begin{pmatrix}\gamma &amp; -\beta\gamma &amp; 0 &amp; 0 \\-\beta\gamma &amp; \gamma &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 1 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1  \end{pmatrix}$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לחשוב על <span>\(\Lambda\)</span> בתור אוסף כל המעברי בסיס ה"פיזיקליים".</p>
+</div>
+<p>ניתן לכתוב מעבר בסיס עם טרנספורמציית לורנץ גם בעזרת הסכם הסכימה ולקבל:
+<span>$$x^{\mu^{'}}=\Lambda_{\alpha}^{\mu^{'}}x^{\alpha}$$</span></p>
+<p>מספר תכונות של טרנספורמציית לורנץ:
+<span>$$\begin{gather} \det\left( \Lambda \right)=\pm 1\qquad \Lambda^T\eta \Lambda=\eta \qquad  \Lambda ^{-1}=\eta \Lambda^T \eta\\ \gamma=\frac{1}{\sqrt{ 1-\beta^2 }} \qquad 1-\beta^2=\frac{1}{\gamma^2}  \qquad \beta \gamma = \sqrt{ 1-\gamma^2 } \end{gather}$$</span></p>
+<h3>עקרונות היחסות</h3>
+<div class="definition"><span class="keyword">עקרונות יחסות</span><ol>
+<li>
+<p>חוקי הפיזיקה אינם תלויים בבחירת מערכת ייחוס. </p>
+</li>
+<li>
+<p>מהירות האור היא קבועה בכל מערכות הייחוס. </p>
+</li>
+</ol>
+</div>
+<p>ההגדרה השנייה היא תוצאה ניסויונית שנובעת בין היתר מחוקי מקסוול אשר אינם תלויות במערכת ייחוס וניסוי מיקלסון-מורילי.</p>
+<div class="proposition">
+<p>טרנספורמציית לורנץ הטרנספורמצייה היחידה שמקיימת את העקרונות של יחסות.</p>
+</div>
+<p>כעת נגדיר מחדש את המושגים הרלוונטים של טנזורים עבור יחסות כללית:</p>
+<div class="definition"><span class="keyword">טנזור</span><p>גודל אשר טרנספורמצייה לורנץ מעבירה אותו בין מערכות ייחוס. טרנספורמציית לורנץ מתארת כלל מעבר גזיר ולכן ניתן להגדיר טנזור באמצעותו.</p>
+</div>
+<div class="remark">
+<p>זהו תכונה פיזיקלית של גודל, לא מתמטית.</p>
+</div>
+<div class="definition"><span class="keyword">וקטור קונטרא-וואירנטי</span><p>וקטור שעובר טרנספורמציה באופן ישר עם המטריצה, כלומר:
+<span>$$x^{\mu^{'}}=\Lambda_{\alpha}^{\mu^{'}}x^{\alpha}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ווקטור קו-ווריאנטי</span><p>ווקטור שעבור טרנספורציה בצורה הפוכה עם המטריצת מעבר בסיס.
+<span>$$x_{\mu^{'}}=\left( \Lambda ^{-1} \right)^{\alpha}_{\mu^{'}}x_{\alpha}$$</span></p>
+</div>
+<p>כאשר נשים לב כי ווקטור קו ווריאנטי מסומן עם אינדס תחתון, ווקטור קונטרא-ווריאנטי באינדקס תחתון.</p>
+<div class="remark">
+<p>גם ווקטור קו ווריאנטי וגם ווקטור קונטרא ווריאנטי הם טנזורים, ולכן מייצגים גודל פיזיקלי אשר עובר טרנספורמציית לורנץ. וכן אם רוצים לייצג גודל פיזיקלי אשר עובר טרנספורמציה לורנץ ע"י ווקטור, נדרש לראות איך משתנה ביחס לבסיס כדי לדעם אם צריך להיות מיוצג ע"י ווקטור קו וריאנטי או קונטרא ווריאנטי.</p>
+</div>
+<div class="proposition"><span class="keyword">טרנספורמציה של מהירות</span><p>נניח ויש לנו מערכת <span>\(\mathcal{O}'\)</span> הנעה במהירות <span>\(v\)</span> ביחס למערכת <span>\(\mathcal{O}\)</span> וכן מערכת <span>\(\mathcal{O''}\)</span> הנעה במהירות <span>\(u\)</span> ביחס למערכת <span>\(\mathcal{O'}\)</span>. אזי המהירות במערכת <span>\(\mathcal{O''}\)</span> ביחס למערכת <span>\(\mathcal{O}\)</span> תהיה:
+<span>$$w=\frac{u+v}{1+\frac{uv}{c^{2}}}$$</span></p>
+</div>
+<div class="proof">
+<p>מטרנספורמטיית לורנץ נקבל כי היחס בין הקורדינטות של <span>\(\mathcal{O}\)</span> ל-<span>\(\mathcal{O'}\)</span> יהיו:
+<span>$$x'= \frac{x-vt}{\sqrt{ 1-\frac{v^2}{c^2} }}\qquad t'=\frac{t-\frac{v}{c^2}x}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span>
+ולכן:
+<span>$$x=\frac{x'+vt'}{\sqrt{ 1-\frac{v^2}{c^2} }}\qquad t = \frac{t'+\frac{v}{c^2}x'}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span>
+כעת באופן דומה הקשר בין המיקום של <span>\(\mathcal{O'}\)</span> ל-<span>\(\mathcal{O''}\)</span> יהיה:
+<span>$$x'' = \frac{x' - ut'}{\sqrt{ 1-\frac{u^2}{c^2} }}\qquad t'' = \frac{t' - \frac{u}{c^2}x'}{\sqrt{ 1-\frac{u^2}{c^2} }}$$</span>
+נציב את הקורדינטה של <span>\(x',t'\)</span> ונקבל:
+<span>$$x''  = \frac{\frac{x-vt}{\sqrt{ 1-\frac{v^2}{c^2} }}-\frac{u\left( t-\frac{v}{c^2}x \right)}{\sqrt{ 1-\frac{v^2}{c^2} }}}{\sqrt{ 1-\frac{u^2}{c^2} }}=\frac{x-vt - ut-\frac{vu}{c^2}x}{\sqrt{ 1-\frac{u^2}{c^2} }\sqrt{ 1-\frac{v^2}{c^2} }} $$</span>
+כאשר במערכת <span>\(\mathcal{O''}\)</span>, מתקיים <span>\(x'' =0\)</span>. לכן נקבל:
+<span>$$x-vt-ut-\frac{v}{c^2}x=0\implies x=\underbrace{ \frac{u+v}{1+\frac{uv}{c^2}} }_{ w }t$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 ווקטור</span><p>ביחסות לווקטור קונטרא ווריאנטי ניתן גם לקרוא בשם 4 ווקטור. כלומר זהו ווקטור שתחת שתחת טרנספומציית לורנץ מקיים:
+<span>$$\tilde{V}^\mu=\Lambda^\mu _{\nu}V^\nu$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תת החבורה של לורנץ</span><p>כל הטרנספורמציות אשר מקיימות <span>\(\det \Lambda=1\)</span> וגם <span>\(\Lambda_{0}^0&gt;0\)</span>.</p>
+</div>
+<p>כאשר יש משמעיות פיזיקליות ומעניינות עבור המקרים שאינם בתת חבורה זו, נתעסק כרגע רק בתת חבורה הזו.</p>
+<div class="proposition">
+<p>גזירה לפי רכיב קו וורינטי נותן אופרטור קורנטרא ווריאנטי, וכן גזירה לפי רכיב קו וונטרא ווריאנטי נותן אופרטור קו ווריאנטי. </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='prev-page'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

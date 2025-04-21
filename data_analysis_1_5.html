@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התפלגויות מרובות משתנים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis.html'> אנליזת נתונים</a></li>
+<li class='parent-page'><a href='./data_analysis.html'> אנליזת נתונים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הסתברות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+</ul></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_2.html'>2. מונטה קארלו</a></li>
+</ul></li>
+<li class='prev-page'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./data_analysis.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./data_analysis_1_4.html`;}});</script>
+        <div class="content">
+        <h1>1.5  התפלגויות מרובות משתנים</h1>
+    <div class="definition"><span class="keyword">פונקציית התפלגות מצטברת</span><p>מוגדר על ידי:
+<span>$$F(x,y)=P\{(x^{\prime}&lt;x)\cap(y^{\prime}&lt;y)\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית צפיפות הסתברות</span><p>מוגדר על ידי:
+<span>$$f(x,y)=\frac{F(x,y)}{\partial x\partial y}$$</span>
+כך שמקיים את תנאי הנרמול:
+<span>$$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x,y)d x d y=1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית צפיפות התפלגות שולית</span><p><span>$$f_{x}(x)=\int_{-\infty}^{\infty}f(x,y)d y$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הסתברות מותנת בעזרת התפלגות שולית</span><p><span>$$f_{x}(x|y)={\frac{f(x,y)}{\int_{-\infty}^{\infty}f(x,y)d x}}={\frac{f(x,y)}{f_{y}(y)}}$$</span>
+כך שניתן לכתוב את משפט בייס על ידי:
+<span>$$f_{x}(x|y)f_{y}(y)=f_{y}(y|x)f_{x}(x)=f(x,y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שונות משותפת - Covariance</span><p><span>$$\mathrm{Cov}(x,y)=\sigma_{x y}=E[(x-\mu_{x})(y-\mu_{y})]$$</span></p>
+</div>
+<div class="definition"><span class="keyword">דרגת קורולציה</span><p><span>$$\rho_{x y}={\frac{\sigma_{x y}}{\sigma_{x}\sigma_{y}}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משתנים בלתי תלוים/אורתוגונאליים</span><p>משתנים אשר ההתפגות ההסתברות שלהם מקיימת:
+<span>$$f_{x}(x|y)=f_{x}(x)\qquad f_{y}(y|x)=f_{y}(y)$$</span>
+או לחלופין אם מתקיים:
+<span>$$f(x,y)=f_{x}(x)f_{y}(y)$$</span></p>
+</div>
+<div class="proposition">
+<p>ערך תצפית של פונקציה <span>\(u\left( \vec{x} \right)\)</span> נתונה על ידי:
+<span>$$E(u)=\int_{-\infty}^{\infty}\cdot\cdot\cdot\int_{-\infty}^{\infty}u(\vec{x})f(\vec{x})\prod d x_{i}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצת קו ווריאנס</span><p>מטריצה שערכה נתונים על ידי:
+<span>$$C_{i j}=\langle{\big(}x_{i}-\langle x_{i}\rangle{\big)}{\big(}x_{j}-\langle x_{j}\rangle{\big)}\rangle$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצת קורולציה</span><p>מטריצה שערכיה נתונים על ידי:
+<span>$$\rho_{i j}={\frac{C_{i j}}{\sqrt{C_{i i}C_{j j}}}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis.html'> אנליזת נתונים</a></li>
+<li class='prev-page'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המילטון יעקובי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics'> מכניקה</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_4_3`; }});</script>
+        <div class="content">
+        <h1>4.4  המילטון יעקובי</h1>
+    <div class="reminder">
+<p>טרנספורמצייה קנונית מעבירה אותנו מהמילטוניאן <span>\(\mathcal{H}=\mathcal{H}(p,q,t)\)</span> להמילטוניאן מותמר מהצורה <span>\(\mathcal{\mathcal{H}}'=\mathcal{\mathcal{H}}'(P,Q,t)\)</span> כאשר:
+<span>$${{\dot{Q}_{i}=\displaystyle\frac{\partial\,\mathcal{\mathcal{H}}'}{\partial\,P_{i}}}}\qquad  {{\dot{P}_{i}=-\displaystyle\frac{\partial\,\mathcal{\mathcal{H}}'}{\partial\,Q_{i}}}}\qquad \mathcal{\mathcal{H}}'=\mathcal{H}+\frac{\partial F}{\partial t}$$</span></p>
+</div>
+<div class="proposition">
+<p>קיימות מערכת קורדינטות <span>\(\mathbf{P},\mathbf{Q}\)</span> כך ש-<span>\(\dot{\mathbf{P}},\dot{\mathbf{Q}}=0\)</span>. </p>
+</div>
+<div class="remark">
+<p>מקרה זה מתקבל בפרט במערכת בו ההמילטוניאן <span>\(\mathcal{H}'\)</span> קבוע, ולכן מספיק לדרוש <span>\(\mathcal{H}'=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כדי למצוא את היוצר של הטרנספוטרמציה הקונונית אשר מאפסת את ההמילטוניאן מספיק לפתור:
+<span>$$\mathcal{H}+\frac{\partial F}{\partial t}=0$$</span>
+ולפתור משוואה דיפרנציאלית עבור <span>\(F\)</span>. </p>
+</div>
+<div class="corollary">
+<p>אם נבחר <span>\(F=F_{2}(q,P,t)\)</span> ונסמן ב-<span>\(S\)</span>(מטעמים היסטוריים כיוון שכפי שנראה זה למעשה הפעולה) נקבל:
+<span>$${{p_{i}=\displaystyle\frac{\partial S}{\partial q_{i}}}}\qquad  {{Q_{i}=\displaystyle\frac{\partial S}{\partial P_{i}}}}\qquad {{\mathcal{\mathcal{H}}'=\mathcal{H}+\displaystyle\frac{\partial S}{\partial t}}}$$</span>
+כאשר המשוואות הנדרשות יהיו:
+<span>$$\mathcal{H}(q_{1},\ldots,q_{n};\,p_{1},\ldots,\,p_{n};\,t)+\frac{\partial S}{\partial t}=0$$</span></p>
+</div>
+<div class="remark">
+<p>הבחירה <span>\(F=F_{2}(q,P,t)\)</span>. זה בחירה סבירה ביותר כיוון שפונקציה כזה לוקחת אותנו מ-<span>\(p\)</span> ל-<span>\(P\)</span> ומ-<span>\(q\)</span> ל-<span>\(Q\)</span>.</p>
+</div>
+<div class="corollary"><span class="keyword">משוואת המילטון יעקובי</span><p>כיוון ש-<span>\(p_{i}=\frac{\partial S}{\partial q_{i}}\)</span> משוואה מהצורה:
+<span>$$\mathcal{H}(q_{1},\ldots,q_{n};\,\frac{\partial S}{\partial q_{1}},\ldots,\frac{\partial S}{\partial q_{n}};t)+\frac{\partial S}{\partial t}=0$$</span>
+זוהי המשוואה הדיפרנציאלית עבור <span>\(S\)</span> עבורה נקבל פונקציה יוצרת שהופכת את הבעיה לטריוויאלית. זו נקראת משוואת המילטון יעקובי.</p>
+</div>
+<p>בהנתן צורה פונקציונאלית של <span>\(\mathcal{H}\)</span> ניתן לפתור בשביל <span>\(F\)</span>. נזכור כי <span>\(P,Q\)</span> הם תנאי התחלה קבועים. כדי להדגיש את זה נכתוב <span>\(\alpha_{i}\)</span> בשביל <span>\(P_{i}\)</span> ו-<span>\(\beta_{i}\)</span> בשביל <span>\(Q_{i}\)</span>. כעת:
+<span>$$S=S(q_{i}\,,\,\alpha_{i}\,,\,t)$$</span>
+ולכן:
+<span>$$p_{i}=\frac{\partial S}{\partial q_{i}}=\frac{\partial S(q_{i},\alpha_{i},t)}{\partial q_{i}}$$</span>
+<span>$$\beta_{i}=Q_{i}=\frac{\partial S}{\partial\alpha_{i}}=\frac{\partial S(q_{i},\alpha_{i},t)}{\partial\alpha_{i}}$$</span>
+אם המשוואה הפיכה ניתן לבטא את <span>\(q_{i}\)</span> בעזרת <span>\(\alpha_{i},\beta_{i},t\)</span>  כלומר <span>\(q_{i}=q_{i}\left( \alpha_{i},\beta_{i},t \right)\)</span>. ולכן נוכל לקבל:
+<span>$$p_{i}=\frac{\partial}{\partial q_{i}}S(q_{i}(\alpha_{i},\,\beta_{i},t),\alpha_{i},t)$$</span>
+שזה פונקציה של <span>\(\alpha_{i},\beta_{i},t\)</span>. </p>
+<div class="proposition"><span class="keyword">סד"פ כללי לפתרון בעיות בעזרת המילטון יעקובי</span><ol>
+<li>
+<p>פותרים את משוואת המילטון יעקובי: 
+<span>$${\frac{\partial S}{\partial t}}+{\mathcal{H}}\left({\mathbf{q}},{\frac{\partial S}{\partial{\mathbf{q}}}},t\right)=0$$</span>
+ע"י הפרדת משתנים. אם לא פתיר ע"י הפרדת משתנים, המילטון יעקובי הוא לא כלי חישוב יעיל.</p>
+</li>
+<li>
+<p>באמצעות המשוואה <span>\(S=S\left( q,t;\alpha \right)\)</span> מוצאים את <span>\(q_{i}\left( \alpha,\beta,t \right)\)</span> </p>
+</li>
+<li>
+<p>באמצעות המשוואה <span>\(p=\frac{\partial S}{\partial q}\)</span> מוצאים את <span>\(p_{i}\left( \alpha,\beta,t \right)\)</span> </p>
+</li>
+<li>
+<p>מוצאים את הקבועים <span>\(\alpha,\beta\)</span> בעזרת התנאי התחלה <span>\(p(0),q(0)\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">אסצילטור הרמוני</span><p>ניתן לכתוב את ההמילטוניאן של אסצילטור הרמוני בצורה הבאה:
+<span>$$\mathcal{H}=\frac{1}{2m}\left(p^{2}+m^{2}\omega^{2}q^{2}\right)$$</span>
+כאשר <span>\(\omega=\sqrt{ \frac{k}{m} }\)</span>. כיוון ש-<span>\(\mathcal{H}\)</span> לא תלוי מפורשות בזמן, <span>\(\mathcal{H}\)</span> קבוע. משוואת המילטון יעקובי במקרה הזה יחסית פשוט כיוון שלא תלוי בזמן וניתן להפריד משתנים.  נכתוב:
+<span>$$\frac{1}{2m}\left[\left(\frac{\partial S}{\partial q}\right)^{2}+m^{2}\omega^{2}q^{2}\right]=-\frac{\partial S}{\partial t}$$</span></p>
+</div>
+<p>כאשר אם נבצע אינטגרל על שני האגפים נקבל פונקציה מהצורה:
+<span>$$S(\alpha\,,\,q\,,\,t)=W(\alpha,\,q)+V(\alpha,\,t)$$</span>
+כאשר <span>\(\alpha\)</span> הוא קבוע. כאשר ניתן להפריד בצורה כזו, לפתור משוואה כזו היא בדרך כלל פשוטה. למעשה, אם לא ניתן לבצע הפרדה כזו. בדרך כלל ננסה להציב ונראה אם נקבל תוצאה הגיונית ומקיימת את התנאי שפה. נציב את הפרנקציה המופרדת המשוואה ונקבל:
+<span>$$\frac{1}{2m}\left[\left(\frac{\partial{\cal W}}{\partial q}\right)^{2}+m^{2}\omega^{2}q^{2}\right]+\frac{\partial{\cal V}}{\partial t}=0$$</span>
+כלומר:
+<span>$${\frac{1}{2m}}\left[\left({\frac{\partial W}{\partial q}}\right)^{2}+m^{2}\omega^{2}q^{2}\right]=-{\frac{\partial V}{\partial t}}$$</span>
+כאשר שני האגפים הם בלתי תלויים והשיוויון נכון לכל הערכים לכן כל אגף שווה לאותו הקבוע אשר נסמן ב-<span>\(\alpha\)</span>. כעת מאגף ימין <span>\(V=-\alpha t\)</span>. כאשר מאגף שמאל נקבל:
+<span>$${\frac{1}{2m}}\left[\left({\frac{d W}{d q_{i}}}\right)^{2}+m^{2}\omega^{2}q^{2}\right]=\alpha$$</span>
+כאשר מיידית נקבל:
+<span>$$W=\int d q\sqrt{2m\alpha-m^{2}\omega^{2}q^{2}}$$</span>
+וכעת קיבלו את <span>\(S\)</span>:
+<span>$$S=-\alpha t+\int d q\sqrt{2m\alpha-m^{2}\omega^{2}q^{2}}$$</span>
+לפי המשוואה שפיתחנו אנו יודעים כי:
+<span>$$\beta=\frac{\partial S}{\partial\alpha}=-t+\int d q\frac{2m}{\sqrt{2m\alpha-m^{2}\omega^{2}q^{2}}}=-t+\frac{1}{\omega}\sin^{-1}\left(q\sqrt{\frac{m\omega^{2}}{2\alpha}}\right)$$</span>
+כאשר נזכור כי <span>\(\beta\)</span> זה איך שסימנו את התנאי התחלה <span>\(Q\)</span> הקבוע. ולכן:
+<span>$$q={\sqrt{\frac{2\alpha}{m\omega^{2}}}}\sin\omega(t+\beta)$$</span>
+כאשר באופן דומה ניתן למצוא את <span>\(p\)</span>:
+<span>$$p=\frac{\partial S}{\partial q}=\sqrt{2m\alpha-m^{2}\omega^{2}q^{2}}=\sqrt{2m\alpha}\left(\sqrt{1-\sin^{2}\omega(t+\beta)}\,\right)$$</span>
+כלומר:
+<span>$$p={\sqrt{2m\alpha}}\cos\omega(t+\beta)$$</span></p>
+<h3>פרשנות לפונקציה הבסיסית <span>\(S\)</span></h3>
+<p><span>$$S=S(q_{1},\,.\,.\,.\,,q_{n};\alpha_{1},.\,.\,.\,,\alpha_{n};\,t)$$</span>
+ולכן:
+<span>$${\frac{d S}{d t}}=\sum{\frac{\partial S}{\partial q_{i}}}{\frac{d q_{i}}{d t}}+{\frac{\partial S}{\partial t}}$$</span>
+וכיוון ש-<span>\(\frac{\partial S}{\partial q_{i}}=p_{i}\)</span> נקבל:
+<span>$$\frac{d S}{d t}=\sum p_{i}{\dot{q}}_{i}+\frac{\partial S}{\partial t}$$</span>
+וכאשר לפי הגדרת ההמילטוניאן מתקיים <span>\(\mathcal{\mathcal{H}}=\sum p_{i}\dot{q}_{i}-\mathcal{\mathcal{L}}\)</span> נקבל:</p>
+<p><span>$$\frac{d S}{d t}=\mathcal{H}+\mathcal{L}+\frac{\partial S}{\partial t}$$</span>
+כאשר אנו יודעים כי <span>\(\mathcal{H}+\frac{\partial S}{\partial t}=0\)</span> ולכן נקבל:
+<span>$$\frac{dS}{dt}=\mathcal{\mathcal{L}} \implies S=\int \mathcal{\mathcal{L}}   \, \mathrm{d}t +C  $$</span>
+וניתן לראות שקיבלנו את הפעולה עד כדי קבוע.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics'> מכניקה</a></li>
+<li class='prev-page'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+</ul></li>
+        </body>
+        </html>
+        

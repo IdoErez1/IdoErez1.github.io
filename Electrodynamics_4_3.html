@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פיתוח מולטיפולי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_4_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_4_2`; }});</script>
+        <div class="content">
+        <h1>4.3  פיתוח מולטיפולי</h1>
+    <p>את הפיתוח הזה אנו צריכים כדי לפשט את צורת השדה רחוק מאוד מאיזור הזרמים(מקורות).</p>
+<div class="proposition"><span class="keyword">פיתוח סדר שני</span><p>השתי איברים הראשונים של הפיתוח טיילור של הפוטנציאל יהיה:
+<span>$$\vec{A}\left( \vec{R}_{0} \right)=\frac{1}{cR_{0}^3}\int d^3R\vec{J}\cdot\left( \vec{R}_{0}\vec{R} \right)+\dots$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הפוטנציאל המגנטי(ללא קירוב) יהיה:
+<span>$$A\left( \vec{R}_{0} \right)=\frac{1}{c}\int \mathrm{d}^3 \vec{R} \frac{\vec{J}\left( \vec{R} \right)}{\left\lvert  \vec{R}_{0}-\vec{R}  \right\rvert }$$</span>
+כעת נסתכל על הקירוב <span>\(\left\lvert  \vec{R}_{0}  \right\rvert\gg \left\lvert  \vec{R}  \right\rvert\)</span> וכן <span>\(\forall \vec{R}: J\left( \vec{R} \right)\neq 0\)</span>. במצב כזה ניתן לפתח:
+<span>$$\left\lvert  \vec{R}_{0}-\vec{R}  \right\rvert =\sqrt{ \left( \vec{R}_{0}-\vec{R} \right)^2 }=\sqrt{ R_{0}^2-2\vec{R}\vec{R}_{0}+\vec{R}^2 }=R_{0}\sqrt{ 1-\frac{2\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) }$$</span>
+ונבצע קירוב טיילור ונקבל:
+<span>$$R_{0}\sqrt{ 1-\frac{2\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) } \approx R_{0}\left( 1-\frac{\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) \right)$$</span>
+ולכן:
+<span>$$\vec{A}\left( \vec{R}_{0} \right)=\frac{1}{c} \frac{1}{R_{0}}\int\mathrm{d^3}R \vec{J}\cdot\left( \vec{R} \right)+\frac{1}{cR_{0}^3}\int d^3R\vec{J}\cdot\left( \vec{R}_{0}\vec{R} \right)$$</span>
+כאשר אנו מניחים כי כל הלולאות זרם סגורות. ולכן <span>\(\bar{\nabla} \cdot \vec{J}=0\)</span> והגורם המונופולי מתאפס מגאוס</p>
+</div>
+<div class="proposition">
+<p>ניתן לכתוב את הגורם הדיפולי של הפיתוח בצורה:
+<span>$$\int\!(\vec{x}\cdot\vec{x}^{\prime})\vec{J}(\vec{x}^{\prime})\,d^{3}x^{\prime}=\,-{\textstyle{\frac{1}{2}}}\vec{x}\,\times\int\![\vec{x}^{\prime}\,\times\,\vec{J}(\vec{x}^{\prime})]\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את הגורם הדיפולי של הפוטנציאל בצורה הבאה:
+<span>$$\vec{A}\left( \vec{x} \right)={\frac{1}{2c|\vec{x}|^3}}\vec{x} \times\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מומנט דיפולי מגנטי</span><p><span>$$\vec{\mu}={\frac{1}{2c}}\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את הקירוב הדיפולי של הפוטנציאל בצורה הפשוטה בעזרת המומנט הדיפול:
+<span>$$\vec{A}\left( \vec{x} \right)={\frac{\vec{\mu}\times\vec{x}}{|\vec{x}|^{3}}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מומנט דיפול של לולאת זרם</span><p><span>$${\vec{\mu}}={\frac{I}{2c}}\oint\left({\vec{R}}\times d{\vec{\ell}}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שדה מגנטי של דיפול</span><p><span>$$\vec{B} =\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{|x|^{3}}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\vec{B}=\vec{\nabla}_{\vec{R}_{0}}\times\vec{A}\left(\vec{R}_{0}\right)=\vec{\nabla}_{\vec{R}_{0}}\times\left(\frac{\vec{\mu}\times\vec{R}}{R_{0}^{3}}\right)=-\vec{\nabla}_{\vec{R}_{0}}\times\left(\vec{\mu}\times\vec{\nabla}_{\vec{R}_{0}}\frac{1}{R_{0}}\right)\\=\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{R_{0}^{3}} 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח ומומנט שפועל על דיפול</span><p><span>$$\begin{gather}\vec{F}=\nabla\times\left( \vec{B}\times\vec{\mu} \right)=\left( \vec{\mu}\cdot\nabla \right)\vec{B}=\nabla\left( \vec{\mu}\cdot\vec{B} \right)  \\{\vec{\tau}}={\vec{\mu}}\times{\textbf{B}}
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנרגיה פוטנציאלית שפועלת על דיפול</span><p><span>$$U=-\,\vec{m}\cdot\vec{B}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+<li class='prev-page'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+</ul></li>
+        </body>
+        </html>
+        

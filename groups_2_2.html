@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מחלקות צמידות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_3_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_2_1.html`;}});</script>
+        <div class="content">
+        <h1>2.2  מחלקות צמידות</h1>
+    <div class="definition"><span class="keyword">מחלקות צמידות</span><p>המסלולים של הפעולה של חבורה <span>\(G\)</span> על עצמה על ידי הצמדה נקראים מחלקות צמידות של <span>\(G\)</span>.
+<span>$$O(g)=\{ hgh^{-1} |h\in G \}=\{  ^hG | h \in  G \}=  ^Gg$$</span></p>
+</div>
+<div class="example"><span class="keyword">מחלקות צמידות</span><ol>
+<li>
+<p>אם <span>\(G\)</span> אבלית <span>\(G_{g}=\{ g \}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(g\in Z(G)\)</span>, אז <span>\(G_{g}=\{ g \}\)</span> ורק אם: 
+אם <span>\(g\neq Z(G)\)</span> יש <span>\(h\)</span> עם <span>\(gh=hg\)</span> ואז <span>\(g\neq hgh^{-1}\)</span>.</p>
+</li>
+</ol>
+</div>
+<h2>מחלקות צמידות</h2>
+<p>הסתכלנו על הפעולה של חבורה על עצמה ע"י הצמדה. כלומר:
+<span>$$\forall g,x \in G\qquad g\cdot x=gxg^{-1} = \prescript{g}{}{x}$$</span>
+המסלול:
+<span>$$O(x)=\{ \prescript{g}{}{X}\;\bigg|\;g\in G \}$$</span>
+כאשר מתקיים <span>\(O(x)=\{ x \}\)</span> אם ורק אם <span>\(x \in Z(G)\)</span> </p>
+<p>המייצב בפעולה הזו תקרא המרכז של <span>\(x\)</span>:
+<span>$$C_{G}(x)=\{ g\in G\;\big|\; \prescript{g}{}{x}=x \}$$</span></p>
+<div class="definition"><span class="keyword">מחלקות הצמידות</span><p>המסלול של <span>\(x\)</span> נקרא מחלקת צמידות:
+<span>$$O(x)=\prescript{G}{}{x}=\{ \prescript{g}{}{x} \;\big|g \in G \}=[x]$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אם <span>\(\sigma,\tau \in S_{n}\)</span>, ו-<span>\(\sigma=(a_{1},\dots,a_{r})\)</span>. אזי:
+<span>$$\prescript{\tau}{}{\sigma}=(\tau(a_{1}), \tau(a_{2}), \dots, \tau(a_{r}))$$</span></p>
+</div>
+<div class="remark">
+<p>מכיוון שהצמדה היא אוטומורפיזם, זה מספיק לחשב ל-<span>\(\sigma\)</span> כללית:
+<span>$$\prescript{\tau}{}{\sigma}=\prescript{\tau}{}{(\rho_{1},\rho_{2},\rho_{3})}=\tau \rho_{1}\rho_{2}\rho_{3}\tau ^{-1} =\tau \rho_{1}\tau ^{-1} \tau \rho_{2}\tau ^{-1} \tau \rho_{3}\tau ^{-1} =\prescript{\tau}{}{\rho_{1}}\prescript{\tau}{}{\rho_{2}}\prescript{\tau}{}{\rho_{3}}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$(\prescript{\tau}{}{\sigma})(\tau(a_{j}))=\tau \sigma \tau ^{-1} \tau(a_{j})=\tau(a_{j+1})$$</span></p>
+</div>
+<div class="corollary">
+<p>מחלקת הצמידות של תמורה ב-<span>\(S_{n}\)</span> היא כל התמורות עם אותו מבנים מחזורים, (כלומר כמה מחזורים יש מכל אורך בפירוק למחזורים זרים).</p>
+</div>
+<p>כש-<span>\(G\circlearrowright X\)</span>, האיחוד זר של הנציגים למחלקת הצמידות   <span>\(X=\bigsqcup_{}^{}O(x)\)</span>. במקרה של <span>\(G\circlearrowright G\)</span> בהצמדה, עבור האיחוד של <span>\(g\)</span> נציגים למחלקות הצמידות:
+<span>$$G=\bigsqcup_{\text{g }}^{} \prescript{G}{}{g}$$</span>
+ומתקיים:
+<span>$$\boxed{|G|=\sum|\prescript{G}{}{g}|=\sum \frac{|G|}{|C_{G}(g)|}=|Z(G)|+\sum[G:C_{G}(g)]}
+$$</span>
+זה נקרא משוואת המחלקות.
+דוגמא עבור <span>\(S_{4}\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\sigma\)</span></th>
+<th><span>\(()\)</span></th>
+<th><span>\((1,2)\)</span></th>
+<th><span>\((1,2,3)\)</span></th>
+<th><span>\((1,2,3,4)\)</span></th>
+<th><span>\((1,2)(3,4)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\([\sigma]\)</span></td>
+<td>1</td>
+<td>6</td>
+<td>8</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>וקיבלנו שהסכום 24, ואכן, <span>\(|S_{4}|=24\)</span></p>
+<div class="proposition">
+<p>אם <span>\(G\neq \{ e \}\)</span> חבורה בגודל חזקה ראשוני, אזי <span>\(Z(G)\neq \{ e \}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(g_{1},\dots,g_{r}\)</span> נציגים למחלקות הצמידות שאינה במרכז.
+אזי:
+<span>$$|G|=|Z(G)|+\sum_{i=1}^r \frac{|G|}{|C_{G}(g_{i})|}$$</span>
+מכיוון ש-<span>\(g_{i}\not\in Z(G)\)</span>, <span>\(C_{g}\lneq G\)</span>(כלומר תת חבורה שאינה G).
+לכן מלגרנג' <span>\(|C_{G}(g_{i})|=p^m\)</span> ל-<span>\(m&lt;k\)</span>, ואז:
+<span>$$p|p^{k-m}=\frac{|G|}{|C_{G}(g_{i})|}$$</span>
+לכן <span>\(p\;\big|\;|Z(G)|\)</span>.
+לכן <span>\(p\;\big|\;|Z|\)</span>, ובפרט <span>\(|Z(G)|\geq p\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">קושי</span><p>אם <span>\(p\;\big|\;|G|\)</span> (ראשוני) אז יש ב-<span>\(G\)</span> איבר מסדר <span>\(p\)</span>.</p>
+</div>
+<div class="proof">
+<p>נגדיר:
+<span>$$X:=\{ (g_{0},g_{1},\dots,g_{p-1})\;\Big| \;g_{i}\in G\quad g_{0}\cdot \dots\cdot g_{p-1}=e \}$$</span>
+נשים לב ש-<span>\(\mathbb{Z}_{p}\)</span> פועלת על <span>\(X\)</span> ע"י סיבוב ציקלי:
+<span>$$\begin{align}1\cdot (g_{0},g_{1},\dots,g_{p-1})&amp;=(g_{1},g_{2},\dots,g_{p-1},g_{0}) \\2\cdot (g_{0},g_{1},\dots,g_{p-1})&amp;=(g_{2},g_{3},\dots,g_{0},g_{1}) \\
+\end{align}$$</span>
+כעת אם נסכום על <span>\(\vec{g}\)</span> נציגים למסלולים של <span>\(\mathbb{Z} _{p}\)</span> על <span>\(X\)</span>:
+<span>$$|X|=\sum|O(\vec{g})|$$</span>
+כאשר ממשפט מסולול מייצב:
+<span>$$|O(\vec{g})|=\frac{|\mathbb{Z} _{p}|}{Stab_{\mathbb{Z} _{p}}(\vec{g})}=\begin{cases}1  &amp; Stab_{\mathbb{Z} _{p}}(\vec{g}) \\p &amp; else
+\end{cases}$$</span>
+מתי <span>\(Stab_{\mathbb{Z} _{p}}(\vec{g})\)</span> הוא כל <span>\(\mathbb{Z}_p\)</span>? אם (ורק אם) <span>\(\vec{g}=(g,g..,g)\)</span> ל-<span>\(g\in G\)</span> כלשהו. נשים לב שזה ב-<span>\(X\)</span> אם"ם <span>\(g^p=e\)</span>, שזה מה שרצינו.
+בנוסף <span>\(|X|=G^{p-1}\)</span>,
+<span>$$X=\{ (g_{0},g_{1},g_{2},\dots,g_{p-2}, (g_{0},g_{1},\dots,g_{p-2})^{-1} )\;\big|\;g_{0},\dots,g_{p-2} \}$$</span>
+סה"כ <span>\(p\)</span> מחלק את <span>\(|X|\)</span> וגם את <span>\(|\{ \vec{g}\in X\;\big|\; \vec{g}  \text{ קבוע} \}|\)</span>
+בנוסף, <span>\((e,e, \dots,e)\)</span> מבטיח שמספר ב-<span>\(g\)</span> הקבועים אינו 0.
+זה מבטיח לפחות עוד <span>\(p-1\)</span> פתרונות.</p>
+</div>
+<div class="remark">
+<p>ניתן גם להוכיח ממשוואת המחלקה: 
+<span>$$p\;\big|\;G\to p\;\big|\;Z(g) \;\lor\;\exists g\in  G\quad p\;\big|\;C_{G(g)}$$</span>
+ומזה נובע קושי</p>
+</div>
+<div class="proposition">
+<p>יש 2 חבורות מסדר 6 עד כדי איזומורפיזם</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(|G|=G\)</span>. מקושי, יש בה איבר <span>\(x\)</span>  מסדר 2, ואיבר <span>\(y\)</span> מסדר 3. נגדיר <span>\(H:=\langle y\rangle\)</span> מאינדקס 2. לכן <span>\(H\trianglelefteq G\)</span>. ולכן <span>\(xyx ^{-1}\in xHx ^{-1}=H\)</span>
+בפרט:
+<span>$$\begin{cases}xyx^{-1} =e\to y=e\to \text{סתירה} \\xyx^{-1} =y\to xy=yx \to |xy|=6 \to G \cong \mathbb{Z}_{6} \\xyx^{-1} =y^2 \to xy=y^2x \to  G\cong D_{3}
+\end{cases}$$</span>
+כאשר את המקרה האחרון ניתן לראות ע"י מילואי טבלת הכפל.
+והשורה השנייה מתקיימת כי:
+<span>$$(xy)^l=x^ly^l=e\to x^l=y^{-l}\in \langle x\rangle \cap \langle y\rangle =\{ e \}$$</span>
+כאשר:
+<span>$$\begin{cases}x^l=e\implies 2|l \\y^l=e\implies 3|l
+\end{cases}\implies 6|l$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='prev-page'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

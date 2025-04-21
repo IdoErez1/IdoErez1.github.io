@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תבנית ריבועית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_9_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_8_2.html`;}});</script>
+        <div class="content">
+        <h1>8.3  תבנית ריבועית</h1>
+    <div class="definition"><span class="keyword">תבנית ריבועית</span><p>פונקציה <span>\(Q:V\to \mathbb{F}\)</span> עבורה קיימת תבנית בילינארית <span>\(b:V\times V\to \mathbb{F}\)</span>  כך ש:
+<span>$$Q(v)=b(v,v)$$</span>
+התבנית <span>\(Q\)</span> נקראת התנית הריבועית המאימה לתבנית הבילינאית <span>\(b\)</span>.</p>
+</div>
+<div class="remark">
+<p>ניתן לראות מיידית כי תבנית ריבועית היא תבנית בילינארית סימטרית. הרי <span>\(b(v,v)=b(v,v)\)</span> גם אם מחליפים את <span>\(v\)</span> עם <span>\(v\)</span>. כמו כן ניתן לראות כי עבור בסיס <span>\(\mathcal{ C}\)</span> מתקיים <span>\(Q(v)=[v]_{\mathcal{ C} }^{T}[b]_{\mathcal{C} }[v]_{\mathcal{ C} }\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">פולריזציה</span><p>יהי <span>\(Q\)</span> תבנית ריבועית. אם <span>\(\mathrm{char}\left( \mathbb{F}  \right)\neq 2\)</span> אז התבנית הבילינארית <span>\(b\)</span> המתאימה ל-<span>\(Q\)</span> נקבעת ביחידות ע"י:
+<span>$$b\left( \mathbf{v},\mathbf{w} \right)=\frac{1}{2}\left[Q\left( {\bf v}+{\bf w} \right)-
+Q\left( {\bf v} \right)-Q\left( {\bf w} \right)\right]$$</span></p>
+</div>
+<div class="proof">
+<p>נובע מזה שמתקיים:
+<span>$$Q\left( \mathbf{v}+\mathbf{w} \right)\,=\,b\left( \mathbf{v}+\mathbf{w},\mathbf{v}+\mathbf{w} \right)\,=b\left( \mathbf{v},\mathbf{v} \right)+b\left( \mathbf{v},\mathbf{w} \right)+b\left( \mathbf{w},\mathbf{w} \right)=Q\left( \mathbf{v} \right)+2b\left( \mathbf{v},\mathbf{w} \right)\,+\,Q\left( \mathbf{w} \right)$$</span></p>
+</div>
+<div class="proposition">
+<p>פונקציה היא תבנית ריבועית אם מתקיים:</p>
+</div>
+<ol>
+<li>
+<p>לכל <span>\(\alpha \in \mathbb{F}\)</span> נקבל <span>\(Q\left( \alpha \mathbf{v} \right)=\alpha^{2}Q\left( \mathbf{v} \right)\)</span>. </p>
+</li>
+<li>
+<p>התבנית <span>\(Q\left( \mathbf{v}+\mathbf{w} \right)-Q\left( \mathbf{v} \right)-Q\left( \mathbf{w} \right)\)</span> היא תבנית בילינארית. </p>
+</li>
+</ol>
+<p>קריטריון זה מאפשר לנו להראות כי תבנית היא ריבועית ללא תבנית בילינארית מפורשת.</p>
+<div class="example">
+<ol>
+<li>
+<p>נראה ש-<span>\(Q[(x,y)]=x^{2}+6x y+4y^{2}\)</span> היא תבנית ריבועית. מתקיים: 
+<span>$$Q[\alpha(x,y)]=(\alpha x)^{2}+6(\alpha x)(\alpha y)+4(\alpha y)^{2}=\alpha^{2}(x^{2}+6x y+4y^{2})=\alpha^{2}Q(x,y)$$</span>
+כמו כן ניתן לוודא כי התבנית הבאה היא בילינארית:
+<span>$$Q[(x_{1},y_{1})+(x_{2},y_{2})]-Q[(x_{1},y_{1})]-Q[(x_{2},y_{2})]=2x_{1}x_{2}+6x_{1}y_{2}+6x_{2}y_{1}+8y_{1}y_{2}$$</span></p>
+</li>
+<li>
+<p>נראה כי עבור <span>\(V=C([a,b])\)</span> התבנית <span>\(Q(f)=\int_{a}^{b}f(x)^{2}\,d x\)</span> היא תבנית ריבועית. מתקיים: 
+<span>$$Q(\alpha f)=\int_{a}^{b}[\alpha f(x)]^{2}\,d x=\alpha^{2}\int_{a}^{b}f(x)^{2}\,d x=\alpha^{2}Q(f)$$</span>
+וכן ניתן לוודא ידנית כי הביטוי הבא הוא תבנית בילינארית:
+<span>$$Q(f+g)-Q(f)-Q(g)=\int_{a}^{b}[f(x)+g(x)]^{2}\,dx-\int_{a}^{b}f(x)^{2}\,dx-\int_{a}^{b}g(x)^{2}\,dx=\int_{a}^{b}2f(x)g(x)\,dx$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(A\)</span> מטריצה סימטרית אזי:
+<span>$$b(v)=vAv^{T}$$</span>
+היא תבנית ריבועית, כאשר <span>\(A\)</span> תהיה המטריצת גראם של התבנית הריבועית.</p>
+</div>
+<div class="proposition">
+<p>תבנית ריבועית מקיימת:</p>
+<ol>
+<li>
+<p>עבור <span>\(\alpha=0\)</span> נקבל: 
+<span>$$Q\left( \alpha v \right)=0Q(v)=0$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(\alpha=-1\)</span> נקבל: 
+<span>$$Q(-v)=-Q(v)=0$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל פונקציה ריבועית על <span>\(\mathbb{F} ^{n}\)</span>(כלומר פולינום שהחזקה הגבוהה ביותר שלה היא 2) מייצגת תבנית ריבועית, כאשר אם נכתוב את התבנית הריבועית בצורה:
+<span>$$Q\left( \mathbf{x} \right)=b\left( \mathbf{x},\mathbf{x} \right)=\sum_{1\leq i\leq j\leq n}a_{i,j}x_{i}x_{j}$$</span>
+המטריצת גראם המתאימה לתבנית תהיה:
+<span>$$G_{j,i}=\begin{cases}a_{ij} &amp; i=j \\\frac{1}{2}a_{ij} &amp; i\neq j
+\end{cases}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='prev-page'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+</ul></li>
+        </body>
+        </html>
+        

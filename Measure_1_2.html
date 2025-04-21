@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סיגמא אלגברה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  סיגמא אלגברה</h1>
+    <div class="definition"><span class="keyword"><span>\(\sigma\)</span> אלגברה</span><p>יהי <span>\(X\)</span> קבוצה. <span>\(\sigma\)</span>-אלגברה מעל <span>\(X\)</span> הינו אוסף <span>\(\mathcal{A}\subseteq \mathcal{P}(X)\)</span> של תתי קבוצות של <span>\(X\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>הקבוצה כולה נמצאת - <span>\(X \in \mathcal{A}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(E \in \mathcal{A}\)</span> אזי <span>\(E^{c} \in \mathcal{A}\)</span>. </p>
+</li>
+<li>
+<p>בהנתן אוסף <u>בן מנייה</u> <span>\(E_{1}, E_{2},\dots, \in \mathcal{A}\)</span> אזי: 
+<span>$$\bigcup_{n}E_{n}\in \mathcal{A}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>לפעמים מוסיפים ל-1 את הדרישה <span>\(\varnothing \in \mathcal{A}\)</span> אבל זה למעשה נובע מ-2.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב מדיד וקבוצות מדידות</span><p>הצמד <span>\((X,\mathcal{A})\)</span> נקרא <u>מרחב מדיד</u> כאשר קבוצות <span>\(E \in \mathcal{A}\)</span> נקראות <u>קבוצות מדידות</u>.</p>
+</div>
+<div class="definition"><span class="keyword">אלגברה</span><p>אוסף המקיים את <span>\(1,2\)</span> וסגור תחת איחודים סופיים נקרא אלגברה. כלומר הסיגמא מציין איחוד בן מנייה. לכן <span>\(\sigma\)</span> אלגברה היא בפרט אלגברה.</p>
+</div>
+<div class="remark">
+<p>עבור אלגברה כיוון שנדרש לראות כי סגור תחת איחודים סופיים מספיק להראות כי סגור על ידי איחוד של שתי קבוצות, ואז איחודים כלליים נובע מאינדוקציה. מכלל דה מורגן מתקיים
+<span>$$\left( A\cup B \right)^{C}=A^{C}\cap B^{C}$$</span>
+ולכן מספיק להראות כי סגור לחיתוך ולמשלים.</p>
+</div>
+<div class="example">
+<p>עבור קבוצה <span>\(X\)</span> האוספים הבאים יהיו <span>\(\sigma\)</span>-אלגברה.</p>
+<ol>
+<li>
+<p>ה<span>\(\sigma\)</span>-אלגברה הטריוויאלית - <span>\(\left\{  \varnothing, X  \right\}\)</span> </p>
+</li>
+<li>
+<p>אוסף כל תתי הקבוצות <span>\(\mathcal{P}(X)=2^{X}\)</span>. </p>
+</li>
+<li>
+<p>בהנתן חלוקה של <span>\(X\)</span>: 
+<span>$$X= \bigsqcup_{n=1}^{N}P_{n}$$</span>
+כאשר <span>\(\mathcal{A}\)</span> זה קבוצת כל האיחודים האפשריים של איברים מ-<span>\(P_{1},\dots,P_{n}\)</span>.</p>
+</li>
+<li>
+<p>אוסף כל האיחודים הסופיים של קטעים ב-<span>\(\mathbb{R}\)</span>. זהו אפילו אלגברה. אך אם נסתכל על אוסף כל האיחודים של קטעים בני מנייה לא נקבל לא <span>\(\sigma\)</span> אלגברה ולא אלגברה(נובע מכל שלא יהיה סגור למשלים) </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תכונות בסיסיות של <span>\(\sigma\)</span>-אלגברה</span><ol>
+<li>
+<p>הקבוצה הריקה <span>\(\varnothing \in \mathcal{A}\)</span>. </p>
+</li>
+<li>
+<p>בהנתן <span>\(\mathcal{A}_{1},\dots.,\mathcal{A}_{n} \in \mathcal{A}\)</span> גם <span>\(\mathcal{A}_{1}\cup\dots \cup \mathcal{A}_{n}\in \mathcal{A}\)</span> יהיה מדיד. </p>
+</li>
+<li>
+<p>בהנתן <span>\(A,B \in \mathcal{A}\)</span> אזי: 
+<span>$$B\setminus A = B \cap A^{c}=\left( B^{c}\cup A\right)^{c}\in \mathcal{A}$$</span></p>
+</li>
+<li>
+<p>בהנתן <span>\({A}_{1},{A}_{2},\dots \in \mathcal{A}\)</span> וגם: 
+<span>$$\bigcap_{n=1}^{\infty} {A}_{n}\in \mathcal{A}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">העתקות מדידות</span><p>בהנתן שני מרחבים מדידים <span>\((X,\mathcal{A})\)</span> ו-<span>\(\left( Y,\mathcal{C} \right)\)</span> פונקציה <span>\(f:X\to Y\)</span> תקרא מדידה אם המקום של כל קבוצה מדידה הוא מדיד. כלומר:
+<span>$$\forall E \in \mathcal{C} \qquad f^{-1}(E)\in \mathcal{A}$$</span></p>
+</div>
+<div class="example">
+<ul>
+<li>פונקציית הזהות <span>\(\mathrm{Id}:\left( \mathbb{R},2^{\mathbb{R}} \right)\to \left( \mathbb{R},\left\{  \varnothing,\mathbb{R}  \right\} \right)\)</span> פונקציה מדידה. </li>
+<li>הפונקצית הזהות: <span>\(\mathrm{Id}:\left( \mathbb{R},\left\{  \varnothing,\mathbb{R}  \right\} \right)\to \left( \mathbb{R}, 2^{\mathbb{R}} \right)\)</span> אינה מדידה.</li>
+<li>בהנתן <span>\((X,\mathcal{A})\)</span> הפונקציה המקיימת <span>\(f^{-1} (E)\in \mathcal{A}\)</span>:
+<span>$$\mathbb{1}_{E}: X\to \mathbb{R}$$</span>
+מדידה אם"ם הקבוצה <span>\(E\)</span> מדידה(<span>\(E \in \mathcal{A}\)</span>).</li>
+</ul>
+</div>
+<div class="proposition"><span class="keyword">תכונות של המקור</span><p>יהי <span>\(f:X\to Y\)</span> פונקציה. אזי:</p>
+<ol>
+<li>
+<p>לכל <span>\(A\subseteq Y\)</span> מתקיים: 
+<span>$$f^{-1}\left( Y\setminus  A \right)= X\setminus  f^{-1}(A) \iff f^{-1}(A^{c})=f^{-1}(A)^{c}$$</span></p>
+</li>
+<li>
+<p>לכל קבוצת תתי קבוצות <span>\(\mathcal{A}\)</span> מתקיים: 
+<span>$$f^{-1}\left( \bigcup_{A \in \mathcal{A} }A \right)=\bigcup_{A \in \mathcal{A} }f^{-1}(A)$$</span></p>
+</li>
+<li>
+<p>לכל קבצות תתי קבוצות <span>\(\mathcal{A}\)</span> מתקיים: 
+<span>$$f^{-1}\left( \bigcap_{A \in \mathcal{A} }A  \right)=\bigcap_{A \in \mathcal{A} }f^{-1}(A)$$</span></p>
+</li>
+</ol>
+</div>
+<p>נוכיח את 1 ו-2.</p>
+<div class="proof">
+<ol>
+<li>
+<p>נניח <span>\(E \in M_{1}\)</span>. אזי קיים <span>\(D \in M_{2}\)</span> כך ש-<span>\(E =f^{-1}(D)\)</span>. נשים לב כי: 
+<span>$$f^{-1}(D^{c})\in M_{1}\iff f(M_{1})\in D^{c}\iff f(M_{1})\not  \in D \iff \left( f^{-1}(D)^{c} \right)\in M_{1}\iff E^{c} \in M_{1}$$</span></p>
+</li>
+<li>
+<p>בכיוון נראשון, יהי <span>\(x \in f^{-1}\left( \bigcup_{A \in \mathcal{A}}A \right)\)</span>. לכן <span>\(f(x)\in \bigcup_{A \in \mathcal{A}}A\)</span>. ולכן קיים <span>\(A \in \mathcal{A}\)</span> כך ש-<span>\(f(x) \in A\)</span>. ולכן <span>\(x \in f^{-1}(A)\)</span> עבור איזשהו <span>\(A\)</span> ולכן <span>\(x \in \bigcup_{A\in\mathcal{A}}f^{-1}(A)\)</span> ולכן <span>\(f^{-1}\left( \bigcup_{A \in \mathcal{A}}A \right)\subseteq \bigcup_{A \in \mathcal{A}}f^{-1}(A)\)</span>. עבור הכיוון השני נניח <span>\(x \in \bigcup_{A \in \mathcal{A}}f^{-1}(A)\)</span>. לכן קיים <span>\(A \in \mathcal{A}\)</span> כך ש-<span>\(x \in f^{-1}(A)\)</span>. כלומר <span>\(f(x)\in A\subseteq \bigcup_{A \in \mathcal{A}}A\)</span> ולכן <span>\(f(x)\in \bigcup_{A \in \mathcal{A}}A\)</span>. כלומר <span>\(x \in f^{-1}(\bigcup_{A \in \mathcal{A}}A\)</span>. ולכן מתקיים ההכלה השנייה. </p>
+</li>
+</ol>
+</div>
+<div class="summary">
+<ul>
+<li>סיגמא אלגברה מעל קבוצה <span>\(X\)</span> היא אוסף של תתי קבוצות של <span>\(X\)</span> אשר מכיל את הקבוצה הריקה, סגור למשלים, וסגור לאיחוד בין מנייה.</li>
+<li>מרחב מדיד הוא צמד של קבוצה עם סיגמא אלגברה עליה, כאשר כל איבר בסיגמא אלגברה נקרא קבוצה מדידה.</li>
+<li>סוגמא אלגברה יהיה סגור לחיסור קבוצות ולחיתוך בן מנייה של קבוצות.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='prev-page'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרה של מרחב מטרי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./infi_5_2.html'>5.2 גבולות</a></li>
+<li class='parent-page'><a href='./infi.html'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_1_1.html'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_1_2.html'>1.2 פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_1_3.html'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_2_1.html'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_2_2.html'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_2_3.html'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_2_4.html'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_3_1.html'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent_page-dropdown'><a href='./infi_3_2.html'>3.2 חוקי גזירה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_3_3.html'>3.3 משפטי גזירה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_3_4.html'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_3_5.html'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_4_1.html'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent_page-dropdown'><a href='./infi_4_2.html'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_4_3.html'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent_page-dropdown'><a href='./infi_4_4.html'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_4_5.html'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_5_1.html'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_2.html'>5.2 גבולות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_3.html'>5.3 כדורים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_4.html'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_5.html'>5.5 פונקציות רציפות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_6.html'>5.6 קומפקטיות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_7.html'>5.7 שלמות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_5_8.html'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_6_1.html'>6.1 נגזרות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_6_2.html'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_6_3.html'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_6_4.html'>6.4 כלל השרשרת</a></li>
+<li class='parent_page-dropdown'><a href='./infi_6_5.html'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent_page-dropdown'><a href='./infi_6_6.html'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_7_1.html'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_7_2.html'>7.2 מידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./infi_7_3.html'>7.3 נפח של קבוצות</a></li>
+<li class='parent_page-dropdown'><a href='./infi_7_4.html'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent_page-dropdown'><a href='./infi_7_5.html'>7.5 משפט פוביני</a></li>
+<li class='parent_page-dropdown'><a href='./infi_7_6.html'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./infi_8_1.html'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./infi_4_5.html'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./infi_5_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./infi_4_5.html`;}});</script>
+        <div class="content">
+        <h1>5.1  הגדרה של מרחב מטרי</h1>
+    <p>ננסה להכליל את הנושא של גבול למרחב כללי(כלומר לא רק ב-<span>\(\mathbb{R}\)</span>). הגדרת הגבול הידועה אומרת כי אם:
+<span>$$\forall\varepsilon&gt;0\quad\exists\delta&gt;0\quad\mathrm{such\,that}\quad\forall x\,:\,0&lt;\left|x-x_{0}\right|&lt;\delta\qquad\left|f(x)-y_{0}\right|&lt;\varepsilon.$$</span>
+אז ניתן להגיד שהגבול כש-<span>\(x\to x_{0}\)</span>  של <span>\(f(x)\)</span> הוא <span>\(y_{0}\)</span>. ניתן להגדיר פונקציית מרחק <span>\(d(x,y)=|x-y|\)</span> וניתן כעת לכתוב את הגדרת הגבול באופן דומה:
+<span>$$\forall\varepsilon&gt;0\quad\exists\delta&gt;0\quad\mathrm{such\,that}\quad\forall x\,:\,0&lt;d(x,x_{0})&lt;\delta\qquad d(f(x),y_{0})&lt;\varepsilon$$</span>
+כדי שההגדרה תהיה הגיונית, נגדרש כי הטווח של <span>\(d\)</span> תהיה <span>\(\mathbb{R}\)</span>, איך אין דרישה שהתחום יהיה <span>\(\mathbb{R}\)</span>.</p>
+<div class="definition"><span class="keyword">מטריקה</span><p>עבור קבוצה לא ריקה <span>\(X\)</span> פונקציה <span>\(d:X\times X\to \mathbb{R}\)</span> נקראת מטריקה אם מקיימת:</p>
+<ol>
+<li>
+<p>סימטרייה - <span>\(d(x,y)=d(y,x)\)</span> </p>
+</li>
+<li>
+<p>חיוביות - <span>\(d(x,y)\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=y\)</span>. </p>
+</li>
+<li>
+<p>אי שיוויון המשולש. לכל <span>\(x,y,z\in X\)</span> מתקיים: 
+<span>$$d(x,z)\leq d(x,y)+d(y,z)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>ניתן בעקרון לדרוש בתכונה <span>\(2\)</span> רק שיש שיוויון אם"ם <span>\(x=y\)</span> כי במקרה זה מאי שיוויון המשולש עבור <span>\((x,y,x)\)</span> נקבל:
+<span>$$d(x,x)\leq d(x,y)+d(x,y)\implies 0\leq 2d(x,y)\implies 0\leq d(x,y)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הכללה של אי שיוויון המשולש למספר ערכים</span><p><span>$$d(x_{1},x_{n})\leq\sum_{j=1}^{n-1}d(x_{j},x_{j+1})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון המשולש ההפוך</span><p><span>$$d(x,y)\geq|d(x,z)-d(y,z)|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מרחב מטרי</span><p>השילוב של הקבוצה <span>\(X\)</span> ביחד עם מטריקה <span>\(d:X\times X\to \mathbb{R}\)</span> יוצר מרחב מטרי <span>\((X,d)\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">תת קבוצה יוצר מרחב מטרי</span><p>יהי <span>\((X,d)\)</span> מרחב מטרי, ו-<span>\(Y\subseteq X\)</span> ביחד עם הצמצום של <span>\(d\)</span> ל-<span>\(Y\times Y\)</span> יוצר מרחב מטרי. </p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(y_{1},y_{2}\in Y\)</span> נקודות ב-<span>\(X\)</span> אז מקיימים את כל הדרישות של מטריקה ביחיד עם <span>\(d_{Y\times Y}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">תת מרחב מטרי</span><p>עבור <span>\((X,d)\)</span> מרחב מטרי, ו-<span>\(Y\subseteq X\)</span> תת קבוצה, אז <span>\(\left( Y,d_{Y\times Y}\right)\)</span> הוא תת מרחב מטרי של <span>\((X,d)\)</span>. <span>\(d_{Y\times Y}\)</span> נקרא המטריקה המושרת על <span>\(Y\)</span> מ-<span>\(X\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטריקה על מכפלה ישירה</span><p>יהיו <span>\((X,d_{X}),\left( Y,d_{Y} \right)\)</span> מרחבים מטרים. ניתן להגדיר מרחב מכפלה <span>\(\left( X\times Y,\rho \right)\)</span> במספר דרכים: 
+<span>$$\rho((x_{1},y_{1}),(x_{2},y_{2}))=\begin{cases}d_{X}(x_{1},x_{2})+d_{Y}(y_{1},y_{2}) \\\sqrt{d_{X}(x_{1},x_{2})^{2}+d_{Y}(y_{1},y_{2})^{2}} \\\max\{(d_{X}(x_{1},x_{2}),d_{Y}(y_{1},y_{2})\}
+\end{cases}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצה חסומה</span><p>קבוצה <span>\(A\subseteq X\)</span> תקרא חסומה ב-<span>\(X\)</span> אם קיים כדור פתוח ב-<span>\(X\)</span> שמכיל את <span>\(A\)</span>. כלומר אם קיים <span>\(x \in X\)</span> כך שעבורו קיים <span>\(r&gt;0\)</span> שמקיים <span>\(A\subseteq \mathcal{B}_{r}(x)\)</span>.</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(A\subseteq X\)</span> חסומה אז לכל <span>\(a\in X\)</span> קיים <span>\(r&gt;0\)</span> עבורו <span>\(A\subseteq B_{r}(a)\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">פסודו מטריקה</span><p>כמו מטריקה אך לא בהכרח מתקיים הדרישה
+<span>$$x\neq y\implies d(x,y)\neq 0$$</span>
+כלומר יתכן פה מצב שנקבל כי המרחק בין שתי נקודות שונות היא 0. 
+הקטע בפסודו מטריקה זה שניתן להגדיר בעזרתה מטריקה. כל מה שנדרש הוא להסתכל על מחלקות השקילות של האיברים שהמרחק ביניהם 0 - כלומר <span>\(x\sim y\)</span> אם"ם <span>\(d(x,y)=0\)</span>.
+כעת נסתכל על מטריקה חדשה <span>\(\bar{d}\)</span> של המרחק בין נציגים.</p>
+</div>
+<h2>מרחבים נורמים</h2>
+<div class="definition"><span class="keyword">נורמה</span><p>מרחב וקטורי <span>\(X\)</span> אשר מעל <span>\(\mathbb{R}\)</span> או <span>\(\mathbb{C}\)</span> נקרא מרחב נורמי אם קיים נורמה <span>\(||\cdot||:X\to \mathbb{R}\)</span> המקיימת:</p>
+</div>
+<ol>
+<li>
+<p>חיוביות - <span>\(||x||\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=0\)</span> </p>
+</li>
+<li>
+<p>הומוגניות - לכל <span>\(x \in X\)</span> ו-<span>\(a\in \mathbb{R}\)</span> מתקיים <span>\(||ax||=a||x||\)</span> </p>
+</li>
+<li>
+<p>אי שיוויון המשולש - <span>\(||x+y||\leq||x||+||y||\)</span> </p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">מטריקה מושרת מנורמה</span><p>בהנתן מרחב נורמי ניתן להגדיר מטריקה על המרחב ע"י:
+<span>$$d(x,y)=\left\|x-y\right\|$$</span></p>
+</div>
+<p>ולכן למעשה כל נורמה יוצרת מטריקה, כאשר תהיה בעלת תכונות נוספות שלא בהכרח יש למטריקה כללית. למשל:
+<span>$$\begin{array}{c}{{d(x+z,y+z)=d(x,y)}}\qquad  {{d\left( \lambda x,\lambda y \right)=|\lambda|\,d(x,y)}}\end{array}$$</span>
+כאשר למעשה אם מתקיים שתי התכונות האלו, נקבל כי המטריקה שלנו היא מטריקה שמושרת מאיזושהי נורמה.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./infi_5_2.html'>5.2 גבולות</a></li>
+<li class='prev-page'><a href='./infi_4_5.html'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

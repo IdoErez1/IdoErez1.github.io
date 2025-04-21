@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מכפלה ישרה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_4_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_3_3`; }});</script>
+        <div class="content">
+        <h1>4.1  מכפלה ישרה</h1>
+    <div class="definition"><span class="keyword">מכפלה ישרה חיצונית</span><p>לחבורות <span>\(H,K\leq G\)</span> המכפלה הישרה שלהם תהיה:
+<span>$$ H\times K=\{(h,k)\mid h\in H,k\in K\}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(H_{1}, H_{2}\)</span> חבורות כך ש-<span>\(G=H_{1}\times H_{2}\)</span> אזי קיימת תת חבורה <span>\(N\)</span> כך ש-<span>\(N\cong H_{1}\)</span> כאשר <span>\(N\trianglelefteq G\)</span> ו-<span>\(G / N \cong H_{2}\)</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(H_{1}, H_{2}\)</span> חבורות, אפשר לקחת <span>\(G=H_{1}\times H_{2}, N=H_{1}\times 1=\left\{  (h,e)\mid h\in H_{1}  \right\}\)</span> ואכן <span>\(N\cong H_{1}\)</span>. כמו כן <span>\(N\trianglelefteq G\)</span> כך שמתקיים:
+<span>$$(h_{1}h_{2})(h_{1}e)(h_{1}^{-1} h_{2}^{-1} )=h_{1}h_{2}he\in N$$</span>
+כעת <span>\(G / N \cong H_{2}\)</span>, ממשפט האיזומורפיזם הראשון עבור: 
+<span>$$\begin{cases}f:G\to H \\f(h_{1},h_{2})=h_{2}\end{cases}\implies \begin{array}{c }\operatorname{im}(f)=H_{2} \\\ker(f)=N 
+\end{array}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לקבל את אותה טענה עבור <span>\(H_{2}\)</span>. כלומר אם <span>\(G=H_{1}\times H_{2}\)</span> אזי קיים תת חבורה <span>\(N\cong H_{2}\)</span> כך ש-<span>\(N\trianglelefteq G\)</span> וגם <span>\(G / N \cong H_{1}\)</span>.</p>
+</div>
+<p>נרצה למצוא מתי אפשר לפרק חבורה למכפלה ישרה של שתי חבורות "קטנות" יותר. למשל אם <span>\(H,K\leq G\)</span>, נסתכל על הפונקציה: 
+<span>$$\begin{cases}f:H\times K\to G \\f(h,k)=hk
+\end{cases}$$</span>
+מתי <span>\(f\)</span> היא איזומורפיזם? למשל:
+<span>$$S_{1}\times R^{\times}_{&gt;0}\cong C^{\times}$$</span>
+אבל:
+<span>$$\langle (1,2) \rangle \times A_{3}\not\cong  S_{3}$$</span>
+כיוון שאומנם חח"ע ועל אך לא הומומורפיזם.</p>
+<div class="proposition">
+<p>פונקציה <span>\(f:H\times K \to G\)</span> המוגדרת על ידי <span>\(f(h,k)=hk\)</span> היא איזומורפיזם אם"ם:</p>
+<ol>
+<li>
+<p><span>\(HK=G\)</span> </p>
+</li>
+<li>
+<p><span>\(H\cap K=\{ e \}\)</span> </p>
+</li>
+<li>
+<p><span>\(H,K\trianglelefteq G\)</span> </p>
+</li>
+</ol>
+</div>
+<p><strong>הוכחה</strong></p>
+<ol>
+<li>
+<p>שקול לעל </p>
+</li>
+<li>
+<p>שקול לכך ש-<span>\(f\)</span> חח"ע(הראנו כי <span>\(\frac{|H||K|}{|H\cap K|}=|HK|\)</span>) </p>
+</li>
+<li>
+<p>אם <span>\(f\)</span> איזומורפיזם היא משמרת הכל, ובפרט משמרת נורמליות: 
+אנו יודעים כי <span>\(H\times G\)</span> נורמלית ב-<span>\(H\times K\)</span>. לכן:
+<span>$$H=f\left( H\times 1 \right)\trianglelefteq f\left( H\times K \right)=G$$</span>
+ו-<span>\(K\)</span> באותו אופן. 
+מצד שני, אם <span>\(H,K\trianglelefteq G\)</span>, נדרש להוכיח <span>\(f\)</span> הומומורפיזם(מ-1, 2נובע חח"ע ועל).
+<span>$$f\text{ הומומורפיזם}\iff f((h',k)(h,k'))\stackrel{?}{=} f((h',k))\cdot f(h,k')) \quad \forall h,h'\in H\quad \forall k,k'\in K$$</span>
+כאשר הצד הימיני שקול ל:
+<span>$$f((h'h,kk'))=h'hkk'\stackrel{?}{=} h'k \cdot hk'$$</span>
+כלומר <span>\(f\)</span> הומומורפיזם אם"ם:
+<span>$$\forall h\in H\quad k\in K\quad hk=kh \iff \forall h,k\quad \underbrace{ h\overbracket{ kh^{-1}k^{-1} }^{ \in H } }_{ \in H } =1$$</span>
+וקיבלנו: 
+<span>$$hkh^{-1} k^{-1}  \in H\cap K=1$$</span></p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">מכפלה ישרה פנימית</span><p>אם <span>\(H,K\)</span> תתי חבורות של <span>\(G\)</span>, <span>\(G\)</span> נקראת מכפלה ישרה פנימית של <span>\(H\)</span> ו-<span>\(K\)</span> אם מתקיים:</p>
+<ol>
+<li>
+<p>המכפלה זה הכל - <span>\(HK=G\)</span> </p>
+</li>
+<li>
+<p>החיתוך טריוויאלי - <span>\(H\cap K=\{ e \}\)</span> </p>
+</li>
+<li>
+<p>תתי חבורות נורמליות - <span>\(H,K \trianglelefteq G\)</span> 
+ומסומן <span>\(G=H\times K\)</span>. למשל <span>\(\mathbb{C} ^\times =\mathbb{R} _{&gt;0}\times S^1\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>סימון זה יכול להראות מבלבל. <span>\(G=H\times K\)</span> יכול להתכוון או ל-<span>\(H,K\)</span> תתי חבורות של <span>\(G\)</span> ו-<span>\(G\)</span> המכפלה ישרה פנימית, או בתור <span>\(G\)</span> כמכפלה הישרה החיצונית של <span>\(H\)</span> ו-<span>\(K\)</span>. אבל הראנו כי למעשה 2 אופציות אלו איזומורפיות.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(G\)</span> היא מכפלה ישרה פנימית(מי"פ) של <span>\(G\geq H,K\)</span> אז <span>\(G\cong H\times K\)</span>. וכן מתקיים:
+<span>$$f^{-1} :G\xrightarrow{\cong}H\times K$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}G=\mathbb{C} ^\times \quad H=\mathbb{R} _{&gt;0}\quad K=S^1 \\f^{-1} \left( \alpha \right)=\left( |\alpha|, \frac{\alpha}{|\alpha|} \right)
+\end{gathered}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(p\)</span> ו-<span>\(q\)</span> הם גורמים ראשוניים זרים, אזי כל חבורה אבלית מסדר <span>\(pq\)</span> איזומורפיית לטבעיים מודולו <span>\(pq\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='prev-page'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+        </body>
+        </html>
+        

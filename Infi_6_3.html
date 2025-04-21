@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נגזרות מסדר גבוה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_6_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_6_2`; }});</script>
+        <div class="content">
+        <h1>6.3  נגזרות מסדר גבוה</h1>
+    <p>נרצה להכליל את המושג של נגזרת לסדרים גבוההים יותר. ראשית נרצה למצוא מה מקבלים כשלקחים את הנגזרת של הנגזרת.
+<strong>הגדרה</strong> נגזרת שנייה בנקודה
+יהי <span>\(f:A\to\mathbb{R}^m\)</span> פונקציה גזירה כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה. הפונקציה תקרא גזירה פעמיים בנקודה <span>\(x\)</span> אם קיים הטנסור <span>\(D^2f(v):\mathrm{Hom}\left( \mathbb{R}^k,\mathrm{Hom}\left( \mathbb{R}^m,\mathbb{R}^m \right) \right)\)</span> (יקרא הנגזרת השנייה) אשר מקיים:
+<span>$$ \lim\limits_{ v \to0}\frac{(Df)_{x+ v }-(Df)_x-(D^2f)_x\left(  v  \right)}{\| v \|_{\mathbb{R}^k}}=0_{\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)}$$</span></p>
+<p>זהו בדיוק ההגדרה של הנגזרת עבור הפונקציית הנגזרת. נשים לב כי זהו גבול מטריציוני, כלומר נדרש שכל איבר במטריצה יתכנס לגבול. נשים לב כי הנגזרת השנייה מקבלת וקטור ומחזירה מטריצה, כאשר המטריצה הזאת תקבל וקטור ותחזיר וקטור אחר.</p>
+<div class="remark">
+<p>הנגזרת השנייה לעיתים מכונת הסיאן</p>
+</div>
+<div class="definition"><span class="keyword">נגזרת חלקית מסדר שני</span><p><span>$$\partial_{i}\partial_{j}\left(f\left(x\right)\right)=\lim_{ t \to 0 } \frac{\partial_{j}f\left(x+t e_{i}\right)-\partial_{j}f\left(x\right)}{t}$$</span></p>
+</div>
+<p>זה למעשה מציאה של הנגזרת הכיווני של הפונקציה <span>\(\partial_{j}f(x)\)</span>.</p>
+<p>לכן בפועל נקבל כי:
+<span>$$\left(D^{2}f\right)\left(v\right)\left(w\right)=\sum_{i=1}^{k}\sum_{j=1}^{k}\partial_{i}\partial_{j}f\left(x\right)v_{i}w_{j}$$</span></p>
+<div class="proposition"><span class="keyword">תנאי מספיק לדיפרנציביליות של הנגזרת השנייה</span><p>תהי <span>\(f:A\to\mathbb{R}^m\)</span> כך ש-<span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה. אם לכל <span>\(j=1,\dots,k\)</span> הפונקציה <span>\(\partial_{j}f:A\to\mathbb{R}^m\)</span> קיימת, ולכל <span>\(i=1,\dots,k\)</span> הנגזרת החלקית <span>\(\partial_{i}\partial _j(f)\)</span>, אז <span>\(f\)</span> דיפרנציאבילית פעמיים ב-<span>\(x\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הנגזרת השנייה היא תבנית בילינארית. כלומר מתקיים:
+<span>$$\begin{array}{c}{{\left(D^{2}f\right)_{x}\left(\alpha v_{1}+\beta v_{2}\right)\left(w\right)=\alpha\left(D^{2}f\right)_{x}\left(v_{1}\right)\left(w\right)+\beta\left(D^{2}f\right)_{x}\left(v_{2}\right)\left(w\right)}}\\ {{\left(D^{2}f\right)_{x}\left(v\right)\left(\alpha w_{1}+\beta w_{2}\right)=\alpha\left(D^{2}f\right)_{x}\left(v\right)\left(w_{1}\right)+\beta\left(D^{2}f\right)_{x}\left(v\right)\left(w_{2}\right)}}\end{array}$$</span></p>
+</div>
+<div class="proof">
+<p>זוהי מסקנה מיידית מכך ש- <span>\(v\mapsto (D^2f)_{x}(v)\)</span> לינארי ו-<span>\(w\mapsto (D^2f)_{x}(v)\)</span> לינארי</p>
+</div>
+<p>כיוון שזהו תבנית לינארית נסמן <span>\((D^2f)_{x}(w,v)=(D^2f)_{x}(w)(v)\)</span>.</p>
+<p><strong>משפט קלרו</strong>
+אם <span>\(f_{xy}\)</span> ו-<span>\(f_{yx}\)</span> רציפות אז <span>\(f_{xy}=f_{yx}\)</span>.</p>
+<p>נראה עם הוכחה יפה בעזרת פוביני
+<strong>הוכחה</strong>
+נניח כי קיים מלבן <span>\(R=[a,b]\times[c,d]\)</span> עבורה מוגדרת ורציפה <span>\(f_{xy},f_{yx}\)</span>. כעת, כיוון שהפונקציות רציפות הם אינטגרביליות, ומתקיים:
+<span>$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{yx}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{y}(x,y))_{x}dxdy=\int_{c}^d f_{y}(b,y)-f_{y}(a,y)\;dy \\=f(b,d)-f(b,c)-f(a,d)+f(a,c)  
+\end{gather}$$</span>
+כאשר עבור <span>\(f_{xy}\)</span> נשתמש בפוביני(ניתן כיוון שרציפות) כדי להחליף את <span>\(dxdy\)</span> ל-<span>\(dydx\)</span> ונקבל:
+<span>$$\begin{gather}\int_c^d \!\!\!\int_{a}^b f_{xy}(x,y)dxdy=\int_{c}^d \!\!\!\int_{a}^b(f_{x}(x,y))_{y}dxdy= \int_{a}^b \int_{c}^d (f_{x}(x,y))_{y} dy\;dx\\\int_{c}^d f_{x}(x,d)-f_{y}(x,c)\;dy=f(b,d)-f(b,c)-f(a,d)+f(a,c)
+\end{gather}$$</span>
+וכעת קיבלנו:
+<span>$$\int_c^d \!\!\!\int_{a}^b \!\!f_{yx}\;dxdy=\int_c^d \!\!\!\int_{a}^b \!\!f_{xy}\;dxdy\implies \int_c^d \!\!\!\int_{a}^b \!f_{yx}-f_{xy}\;dxdy=0$$</span>
+לכן מספיק להראות כי <span>\(f_{yx}-f_{xy}\)</span> זהותית אפס. נניח בשלילה שלא זהותית אפס, לכן קיים נקודה שאינה אפס, ומרציפות יש לנקודה זו סביבה שאינה אפס. כיוון שזה נכון עבור כל מלבן, זה נכון עבור מלבן שנמצא בסביבה הזו, ולכן עבור מלבן זה יהיה נפח שאינו אפס, בסתירה.</p>
+<div class="example">
+<p>נסתכל על הפונקציה:
+<span>$$f(x,y)=\begin{cases}\frac{xy(x^2-y^2)}{x^2+y^2} &amp; (x,y)\neq(0,0) \\0 &amp; (x,y)=(0,0)
+\end{cases}$$</span>
+נראה <span>\(f_{xy}\neq f_{yx}\)</span>. מתקיים ב-<span>\((0,0)\)</span>:
+<span>$$f_{x}(0,0)=\lim_{ h \to 0 } \frac{f(h,0)-f(0,0)}{h}=\lim_{ h \to 0 } \frac{0-0}{h}=0$$</span>
+<span>$$f_{y}(0,0)=\lim_{ h \to 0 } \frac{f(0,h)-f(0,0)}{h}=0$$</span>
+כעת נחשב את הנגזרות השניות:
+<span>$$f_{xy}(0,0)=(f_{x})_{y}(0,0)=\lim_{ h \to 0 } \frac{f_{x}(0,h)-\cancelto{ 0 }{ f_{x}(0,0) }}{h}$$</span>
+נחשב לשם כך את <span>\(f_{x}(0,h)\)</span> בעזרת חוקי גזירה ונקבל:
+<span>$$f_{x}(x,y)= \frac{x^4y+4x^2y^3-y^5}{(x^2+y^2)^2}\implies f_{x}(0,h)=-\frac{h^5}{h^4}=-h$$</span>
+ולכן נקבל <span>\(f_{xy}(0,0)=-1\)</span>. כעת נחשב את <span>\(f_{yx}(0,0)\)</span>, ראשית נחשב את <span>\(f_{y}(x,y)\)</span> בנקודה שונה מ-<span>\((0,0)\)</span> ונקבל:
+<span>$$f_{y}(x,y)= \frac{x^5-4x^3y^2-xy^4}{(x^2+y^2)^2}\implies f(h,0)=h$$</span>
+ומזה ניתן לקבל:
+<span>$$f_{yx}(0,0)=(f_{y})_{x}(0,0)=\lim_{ h \to 0 } \frac{f_{y}(h,0)-\cancelto{ 0 }{ f_{y}(0,0) }}{h}=1\neq f_{xy}=-1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">נגזרת מסדר n</span><p>פונקציה <span>\(f\)</span> גזירה מסדר <span>\(n\)</span> אם היא גזירה מסדר <span>\(n-1\)</span> והנגזרת <span>\(D^{n-1}f\)</span> היא גזירה. <span>$$(D^{n}f)_{x}\in\operatorname{Hom}(\mathbb{R}^{k},\operatorname{Hom}(\mathbb{R}^{k},\dots,\operatorname{Hom}(\mathbb{R}^{k},\mathbb{R}^{m}))),$$</span>
+זוהי תבנית מולטילינארית.</p>
+</div>
+<h2>טיילור רב מימדי</h2>
+<div class="theorem"><span class="keyword">טיילור</span><p>תהי <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(f:A\to\mathbb{R}^m\)</span> דיפרנציאבילית <span>\(p\)</span> פעמים ברציפות ב-<span>\(x \in A\)</span>. אזי, לכל <span>\(v\)</span> קטן מספיק כך ש-<span>\(x+v\in A\)</span> נוכל לכתוב:
+<span>$$\!\!\!\!f\left(x+v\right)\!=\!f\left(x\right)\!+\!\left(D f\right)_{x}\left(v\right)\!+\!\frac12\left(D^{2}f\right)_{x}\left(v,v\right),\ldots,\frac1{p!}\left(D^{(p)}f\right)_{x}\left(v,\ldots,v\right)\!+\!R_{p}\left(v\right)_{x}\left(v,\ldots,v\right)$$</span>
+כאשר <span>\(R_{p}(v)\)</span> היא פונקציית השארית המקיימת:
+<span>$$\operatorname*{lim}_{\nu\to0}{\frac{R_{p}(\nu)}{\|\nu\|_{\mathbb{R}^{k}}^{p}}}=0.$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">שארית לגרנג'</span><p>אם הפונקציה <span>\(f\)</span> גזירה <span>\(p+1\)</span> פעמים, פונקציית השארית מקיימת 
+<span>$$R_{p}(\nu)=\frac{1}{(p+1)!}({D}^{p+1}f)_{x+\theta\nu}(\nu,\nu,\ldots,\nu)$$</span>
+עבור <span>\(\theta \in(0,1)\)</span> כלשהו</p>
+</div>
+<h2>סיווג נקודות קיצון</h2>
+<div class="definition"><span class="keyword">חיובית בהחלט</span><p>תבנית בילינארית סימטרית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)\)</span> נקראת חיובית בהחלט אם:
+<span>$$\forall v \in \mathbb{R}^k\qquad T(v,v)&gt;0$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חיובית למחצה</span><p>תבנית בילינארית סימטרית <span>\(T\in \mathrm{Hom}\left( \mathbb{R}^k ,\mathrm{Hom}\left( \mathbb{R}^m , \mathbb{R}^m\right)\right)\)</span> נקראת חיובית למצה אם:
+<span>$$\forall v \in \mathbb{R}^k\qquad T(v,v)\geq0$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים לחיוביות בהחלט</span><p>מטריצה <span>\(S\)</span> של תבנית בילינארית סימטרית תהיה חיובית בהחלט אם כל אחד מהתנאים הבאים מתקיים:</p>
+<ol>
+<li>
+<p>כל הערכים העצמיים חיוביים ממש - <span>\(\lambda&gt;0\)</span> </p>
+</li>
+<li>
+<p>כל הערכים על האלכסון בצורה המדורגת חיוביים ממש </p>
+</li>
+<li>
+<p>אם מסתכלים על כל ה-<span>\(n\)</span> מרובעים שמכילים את המספר הקודקוד הימיני העליון אז הדטרמיננטה של כולם חיוביים ממש </p>
+</li>
+<li>
+<p>קיים <span>\(A\)</span> כך ש-<span>\(S=A^TA\)</span> כאשר ל-<span>\(A\)</span> יש עמודות בלתי תלויות(אם לא משתמשים בתנאי על העמודות נקבל שיכול להיות חיובי למחצה) </p>
+</li>
+<li>
+<p>מתקיים <span>\(x^T S x&gt;0\)</span> לכל <span>\(x\)</span> פרט ל-<span>\(x=0\)</span> (שוב התנאי האחרון בשביל המקרה שחיובי למחצה) </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>תנאים 1,2,3 שקולים לתבנית חיובית למחצה אם מסתכלים גם על המקרה של אי שיוויון חלש. כלומר המקרה שהם חיוביים אך לא ממש.</p>
+</div>
+<p>קיימים הגדרות ותנאי שקולים עבור המקרה של תבנית בילינארית סימטרית שלילית בהחלטת ושלילית למחצה.</p>
+<div class="definition"><span class="keyword">נקודת מינימום</span><p>עבור פונקציה <span>\(f:A\to\mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, נקודה <span>\(x \in A\)</span> תהיה נקודת מינימום אם קיים קבוצה <span>\(B\subseteq A\)</span> כך שלכל <span>\(b\in B\)</span> מתקיים <span>\(f(b)\geq f(x)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודת מקסימום</span><p>עבור פונקציה <span>\(f:A\to\mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, נקודה <span>\(x \in A\)</span> תהיה נקודת מקסימום אם קיים קבוצה <span>\(B\subseteq A\)</span> כך שלכל <span>\(b\in B\)</span> מתקיים <span>\(f(b)\leq f(x)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודה קריטית</span><p>נקודה שמאפסת את הנגזרת. כלומר נקודה <span>\(x\)</span> המקיימת <span>\((Df)_{x}=0\)</span>.</p>
+</div>
+<div class="theorem">
+<p>יהי <span>\(f:A\to \mathbb{R}\)</span> כאשר <span>\(A\subseteq \mathbb{R}^k\)</span> פתוחה, וגזירה פעמיים ברציפות. תהי <span>\(A\)</span> נקודה קריטית, אזי אם <span>\(D^2f\)</span> רציפה ב-<span>\(x\)</span>, מתקיים:</p>
+<ol>
+<li>
+<p>אם <span>\((D^2f)_{x}\)</span> חיובית בהחלט אז <span>\(x\)</span> נקודת מינימום. </p>
+</li>
+<li>
+<p>אם <span>\(x\)</span> נקודת מינימום אז <span>\((D^2f)_{x}\)</span> חיובית למחצה. </p>
+</li>
+</ol>
+</div>
+<p>עבור מקסימום מקומי נקבל משפט זהה עבור תבנית בילינארית שלילית בהחלט ולמחצה.</p>
+<p>עבור מטריצה <span>\(2\times 2\)</span> ניתן להשתמש בזה ש-<span>\(\det A=\lambda_{1}\lambda_{2}\)</span> ו-<span>\(\mathrm{Tr}(A)=\lambda_{1}+\lambda_{2}\)</span> כדי להסיק את הסימן של הערכים העצמיים ללא חישוב.</p>
+<p><strong>תבנית כללית למציאת נקודות קיצון:</strong>
+עבור פונקציה <span>\(f:\mathbb{R}^n\to\mathbb{R}\)</span> נבצע את השלבים הבאים</p>
+<ol>
+<li>
+<p>נחשב את הנגזרות החלקיות מסדר שני. אם לא כולם קיימות, הפונקציה לא גזירה ברציפות פעמיים ולא ניתן להמשיך בתהליך. </p>
+</li>
+<li>
+<p>נוכיח שהנגזרות החלקיות מסדר שני רציפות, ונסיק כי <span>\(f\)</span> גזירה פעמיים ברציפות </p>
+</li>
+<li>
+<p>לחפש נקודות קריטיות - נקודות שמאפסות את הנגזרת. </p>
+</li>
+<li>
+<p>בכל אחד מהנקודות האלה, יש למצוא את הערכים העצמיים של ההסיאן </p>
+</li>
+<li>
+<p>אם ישנו ערך עצמי 0, לא ניתן לסווג את הנקודה בתהליך זה. </p>
+</li>
+<li>
+<p>אם כל הערכים העצמיים חיוביים, אז הנקודה היא מינימום, אם כולם שליליים אז מקסימום, אם ישנם ערכים עם סימן מעורב, אז הנקודה היא אוכף. </p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='prev-page'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

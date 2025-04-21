@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מטריצות בלוקים ומטריצות אלכסוניות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_2_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  מטריצות בלוקים ומטריצות אלכסוניות</h1>
+    <div class="definition"><span class="keyword">מטריצת בלוקים</span><p>ניתן לסמן חלקים של מטריצות בתור "בלוקים" ולקבל מטריצה שמכילה "מטריצות" בתור רכיבים.</p>
+</div>
+<div class="example">
+<p>נסתכל על המטריצה:
+<span>$$A=\begin{bmatrix}1&amp;2&amp;-1&amp;3&amp;5\\ 0&amp;3&amp;0&amp;4&amp;7\\ 5&amp;-4&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+ניתן לסמן את המטריצה בעזרת בלוקים בצורה הבאה:
+<span>$$\left[ \begin{array}{c} B \\ D \end{array} \quad  \begin{array}{c} C \end{array} \right],\quad\text{where}\quad B=\begin{bmatrix}1&amp;2\end{bmatrix},\quad C=\begin{bmatrix}-1&amp;3&amp;5\\ 0&amp;4&amp;7\\ 2&amp;0&amp;1\end{bmatrix},\quad D=\begin{bmatrix}0&amp;3\\ 5&amp;-4\end{bmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>חיבור וחיסור של מטריצות בלוקים נעשה בלוק בלוק.</p>
+</div>
+<div class="proposition"><span class="keyword">מכפלת מטריצת בלוקים</span><p>כל עוד המימדים מתאימים למכפלות, ניתן להכפיל בלוקים כמו מכפלה רגילה.</p>
+</div>
+<div class="example">
+<p><span>$${\begin{bmatrix}A&amp;B\\ C&amp;D\end{bmatrix}}\begin{bmatrix}X\\ Y\end{bmatrix}={\begin{bmatrix}A X+B Y\\ C X+D Y\end{bmatrix}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שחלוף של מטריצת בלוקים</span><p>ניתן לקבל את המטריצה המשוחלפת של מטריצת בלוקים על ידי שלחוף המטריצה ואז שיחלוף כל אחד מהבלוקים.</p>
+</div>
+<div class="example">
+<p><span>$$\begin{array}{l l l}{{\left[A\quad B\quad C\right]^{T}=\left[\begin{array}{l}{{A^{T}}}\\ {{B^{T}}}\\ {{C^{T}}}\end{array}\right]}}\end{array}\qquad \begin{bmatrix}A &amp; B \\C &amp; D \end{bmatrix}^{T}=\begin{bmatrix}A^{T} &amp; C^{T} \\B^{T} &amp; D^{T}
+\end{bmatrix}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצת בלוקים אלכסונית</span><p>מטריצה שמכילה בלוקים על האלכסון, וכל שאר הערכים אפס.</p>
+</div>
+<div class="example">
+<p><span>$$\left[\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 4 &amp; 5 &amp; 6 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 2\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3 &amp; 4\end{matrix}\right],\quad \quad  \left[\begin{matrix}1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; -2 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 2 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 2 &amp; 3 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right]$$</span></p>
+</div>
+<div class="symbolize">
+<p>נסמן מטריצת בלוקים אלכסונית בסימון:
+<span>$$\mathrm{diag}\left( M_{1},M_{2},M_{3},\dots ,M_{n}\right)$$</span>
+כאשר <span>\(M_{1},\dots,M_{n}\)</span> הם מטריצות המייצגות בלוקים.</p>
+</div>
+<div class="proposition"><span class="keyword">מכפלה של מטריצות בלוקים אלכסוניות</span><p>המכפלה של שתי מטריצות בלוקים אלכסוניים עם בלוקים בגדלים מתאימים יהיה המכפלה של הבלוקים המתאימים. כלומר:
+<span>$$\begin{cases}M_{1}=\mathrm{diag}\left( A_{1},\dots,A_{n} \right) \\M_{2} =\mathrm{diag}\left( B_{1},\dots, B_{n}\right)
+\end{cases}\implies M_{1}M_{2}=\mathrm{diag}\left( A_{1}B_{1},\dots A_{n}B_{n} \right)$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">חזקה של מטריצת בלוקים אלסונית</span><p>אם <span>\(M\)</span> מטריצת בלוקים אלכסונית אז <span>\(M^{k}\)</span> יהיה המטריצה האלכסונית שנוצרת מהעלאת כל בלוק בנפרד בחזקת <span>\(k\)</span>. כלומר:
+<span>$$M=\mathrm{diag}\left( M_{1},\dots ,M_{n} \right)\implies M^{k}=\mathrm{diag}\left( M_{1}^{k},\dots, M_{n}^{k} \right)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצה אלכסונית</span><p>מטריצה שכל האיברים שלה הם על האלכסון.</p>
+</div>
+<div class="corollary">
+<p>מכפלה של מטריצות אלכסויות יהיה מכפלת האיברים על האלכסון בתור בלוקים מגודל <span>\(1\times 1\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+<li class='prev-page'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+</ul></li>
+        </body>
+        </html>
+        

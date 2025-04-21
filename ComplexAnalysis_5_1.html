@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טורים של פונקציה מרוכבת</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./ComplexAnalysis_5_2.html'>5.2 טורי חזקות</a></li>
+<li class='parent-page'><a href='./ComplexAnalysis.html'> פונקציות מרוכבות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לפונקציות מרוכבות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_1.html'>1.1 תזכורת - מרוכבים</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_2.html'>1.2 גבולות של פונקציות מרוכבות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_3.html'>1.3 ספרת רימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_2_1.html'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_2_2.html'>2.2 פונקציות אנליטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פונקציות והעתקות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_1.html'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_2.html'>3.2 העתקה לינארית והופכית</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_3.html'>3.3 העתקת מוביוס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_1.html'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_2.html'>4.2 משפט קושי גורסה</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_3.html'>4.3 משפט מוררה</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_4.html'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. טורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_1.html'>5.1 טורים של פונקציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_2.html'>5.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_3.html'>5.3 טורי טיילור</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_4.html'>5.4 טור לורן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./ComplexAnalysis_4_4.html'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./ComplexAnalysis_5_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./ComplexAnalysis_4_4.html`;}});</script>
+        <div class="content">
+        <h1>5.1  טורים של פונקציה מרוכבת</h1>
+    <div class="definition"><span class="keyword">טור מרוכב</span><p>סכום של סדרה של איברים מרוכבים:
+<span>$$\sum_{n=1}^{\infty}z_{n}=z_{1}+z_{2}+\cdot\cdot\cdot+z_{n}+\cdot\cdot\cdot$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סכום חלקי</span><p>זהו סכימה של האיברים בסדרה של הטור עד האיבר ה-<span>\(N\)</span>. כלומר:
+<span>$$S_{N}=\sum_{n=1}^{N}z_{n}=z_{1}+z_{2}+\cdot\cdot\cdot+z_{N}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הסתכנסות של טור מרוכב</span><p>נגיד כי טור מרוכב מתכנס אם הגבול של סדרת הסכומים החלקיים מתכנסת. כלומר:
+<span>$$\sum z_{n}=\lim_{ N \to \infty } S_{N}\equiv S$$</span></p>
+</div>
+<div class="proposition">
+<p>נניח נתון סדרה של איברים מרוכבים אשר ניתנים לייצוג בצורה הבאה:
+<span>$$z_{n}=x_{n}+iy_{n}$$</span>
+אזי:
+<span>$$\sum z_{n}=\sum x_{n}+i\sum y_{n}$$</span>
+והטור <span>\(Z=\sum z_{n}\)</span> מתכנס אם"ם הטורים הממשיים <span>\(X=\sum x_{n},Y=\sum y_{n}\)</span> מתכנסים ובמקרה זה מתקיים <span>\(X+iY=Z\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור טור מרוכב מתכנס נקבל כי כאשר <span>\(N\to \infty\)</span> נקבל <span>\(\lvert z_{n} \rvert\to 0\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון שהטור המרוכב מתכנס, גם הטורים הממשיים <span>\(\sum x_{n},\sum y_{n}\)</span> מתכנסים. לכן עבור טענה על טורים ממשיים נקבל כי <span>\(x_{n},y_{n}\to 0\)</span> ולכן:
+<span>$$\operatorname*{lim}_{n\to\infty}z_{n}=\operatorname*{lim}_{n\to\infty}x_{n}+i\operatorname*{lim}_{n\to\infty}y_{n}=0+0\cdot i=0$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור טור מתכנס האיברים <span>\(z_{n}\)</span> חסומים, כלומר קיים קבוע <span>\(M&gt;0\)</span> כך שממתקיים <span>\(\lvert z_{n} \rvert\leq M\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">התכנסות בהחלט</span><p>טור נקרא מתכנס בהחלט אם:
+<span>$$\sum_{n=1}^{\infty}|z_{n}|=\sum_{n=1}^{\infty}\sqrt{x_{n}^{2}+y_{n}^{2}}$$</span>
+מתכנס.</p>
+</div>
+<div class="proposition">
+<p>התכנסות בהחלט של טור גורר התכנסות של הטור.</p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי <span>\(\sum x_{n},\sum y_{n}\)</span> מתכנסים. אנו יודעים ממבחן ההשוואה כי מתקיים:
+<span>$$|x_{n}|\leq{\sqrt{x_{n}^{2}+y_{n}^{2}}}\quad{\mathrm{and}}\quad|y_{n}|\leq{\sqrt{x_{n}^{2}+y_{n}^{2}}}$$</span>
+ולכן אם הטור מתכנס בהחלט, כל אחד מהטורים הממשים מתכנס.</p>
+</div>
+<div class="definition"><span class="keyword">שארית של טור</span><p>שארית יהיה כמות האיברים שנשארו בסכימה שעוד לא נסכומו. ניתן להגדיר עם סכום חלקי:
+<span>$$\rho_{N}=S-S_{N}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./ComplexAnalysis_5_2.html'>5.2 טורי חזקות</a></li>
+<li class='prev-page'><a href='./ComplexAnalysis_4_4.html'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

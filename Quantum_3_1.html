@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>עוד על משוואת שרדינגר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_3_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_2_6`; }});</script>
+        <div class="content">
+        <h1>3.1  עוד על משוואת שרדינגר</h1>
+    <div class="definition"><span class="keyword">נרמול</span><p>אנו דורשים שסך ההסתברות שחלקיק נמצא איפשהו יהיה 1:
+<span>$$\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x=1$$</span></p>
+</div>
+<div class="proposition">
+<p>משוואת שרדינגר לא מבטיחה שהפתרון מנורמל. אבל באופן כללי כאשר <span>\(A=\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x\)</span> סופי מתקיים:
+<span>$$\frac{1}{A}\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x=1$$</span>
+כאשר פתרון זה פותר בעצמו את משוואת שרדינגר מלינאריות. ולכן זה יהיה הפתרון הפיזיקלי.</p>
+</div>
+<div class="proposition">
+<p>משוואת שרדינגר מבטיחה שהנרמול ישמר לאורך זמן, ולכן הפקטור נרמול <span>\(A\)</span> נשאר קבוע.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי מתקיים:
+<span>$${\frac{d}{d t}}\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x=\int_{-\infty}^{+\infty}{\frac{\partial}{\partial t}}\,|\Psi(x,t)|^{2}\;d x$$</span>
+כאשר:
+<span>$${\frac{\partial}{\partial t}}\left|\Psi\right|^{2}={\frac{\partial}{\partial t}}\left(\Psi^{*}\Psi\right)=\Psi^{*}{\frac{\partial\Psi}{\partial t}}+{\frac{\partial\Psi^{*}}{\partial t}}\Psi$$</span>
+כעת ממשוואת שרדינגר מתקיים:
+<span>$$\begin{gather}{\frac{\partial\Psi}{\partial t}}={\frac{i\hbar}{2m}}{\frac{\partial^{2}\Psi}{\partial x^{2}}}-{\frac{i}{\hbar}}V\Psi \implies{\frac{\partial\Psi^{*}}{\partial t}}=-{\frac{i\hbar}{2m}}{\frac{\partial^{2}\Psi^{*}}{\partial x^{2}}}+{\frac{i}{\hbar}}V\Psi^{*}  \\\implies {\frac{\partial}{\partial t}}\left|\Psi\right|^{2}={\frac{i\hbar}{2m}}\left(\Psi^{*}{\frac{\partial^{2}\Psi}{\partial x^{2}}}-{\frac{\partial^{2}\Psi^{*}}{\partial x^{2}}}\Psi\right)={\frac{\partial}{\partial x}}\left[{\frac{i\hbar}{2m}}\left(\Psi^{*}{\frac{\partial\Psi}{\partial x}}-{\frac{\partial\Psi^{*}}{\partial x}}\Psi\right)\right]
+\end{gather}$$</span>
+כאשר כעת ניתן לחשב את האינטגרל המקורי:
+<span>$$\frac{d}{d t}\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\ d x=\frac{i\hbar}{2m}\left.\left(\Psi^{*}\frac{\partial\Psi}{\partial x}-\frac{\partial\Psi^{*}}{\partial x}\Psi\right)\right|_{-\infty}^{+\infty}$$</span>
+כאשר נדרוש כי הפונקציית גל תדעך באינסוף, ונקבל:
+<span>$$\frac{d}{d t}\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x=0$$</span>
+כלומר האינטגרל קבוע, ואם מנורמל בזמן <span>\(t=0\)</span> ישאר מנורמל לאורך זמן.</p>
+</div>
+<div class="remark">
+<p>לעיתים קיימים פתרונות למשוואת שרדינגר שעבורם ההסתברות מתבדרת, ולכן לא ניתן לנרמל אותם. אלו פתרונות מתמטיים שאינם פיזיקאלים, ויש לפסול אותם.</p>
+</div>
+<h3>הבדל בין משוואת שרדינגר התלויה בזמן והבלתי תלוייה בזמן</h3>
+<p>המשוואת שרדינגר האמיתית היא:
+<span>$$i\hbar{\frac{\mathrm{d}}{\mathrm{d}t}}|\psi\rangle={\hat{H}}(t)|\psi\rangle$$</span>
+זה נכון תמיד, וניתן לפתור בעזרתה כל בעיה∞ במערכת סגורה. אך במקרה שההמילטוניאן(או מספיק במקרה שלנו, פוטנציאל) לא תלוי בזמן, ניתן לקבל פתרון בצורה קצרה יותר. אם נפריד את הפתרון לפתרון דינמי(תלוי בזמן), ולפתרון סטציונארי(לא תלוי בזמן), נקבל כי ניתן לפתור ישירות עבור החלק הזמני, ולקבל:
+<span>$$|\psi(t)\rangle=e^{-i E t/\hbar}|\psi_{0}\rangle$$</span>
+כאשר עבור החלק הסטציונארי נקבל:
+<span>$$H\ket{\psi_{0}} =E\ket{\psi_{0}} $$</span>
+מהמשוואה הסציונארית ניתן למצוא את <span>\(E\)</span> ואז להציב במשוואה הדינאמית. הבעיה זה שבדרך כלל יש הרבה ערכים סטציונארים, כאשר הערכים הסטציונארים הם יהיו למעשה הע"ע של ההמילטוניאן, ולכן מייצגים רמות אנרגיות שונות. לכל רמת אנרגיה יש למערכת הסתברות שונה להיות בה. ולכן נדרש לקדם כל רמת אנרגיה בנפרד בהתאם להסתרות שלה. ולכן נקבל כי ההתקדמות של הפונקציית גל תהיה:
+<span>$$|\psi(t)\rangle=\sum_{n}a_{n}e^{-i E_{n}t/\hbar}|n\rangle$$</span>
+או כאשר אנחנו במקרה רציף:
+<span>$$|\psi(t)\rangle=\int_{n}\mathrm{d}n\;a_{n}e^{-i E_{n}t/\hbar}|n\rangle$$</span></p>
+<h3>מיון פתרונות של משוואת שרדינגר</h3>
+<p>אם נכתוב את אופרטור התנע בעזרת אופרטור המיקום, ניתן לכתוב את משוואת שרדינגר הבלתי תלוייה בזמן בצורה הבאה:
+<span>$$-\,\frac{\hbar^{2}}{2m}\frac{d^{2}\psi}{d x^{2}}=(E-V(x))\psi(x)$$</span>
+כאשר סוג הפתרון של המשוואה הזאת יכול להיות או אוסצילטורי או אקספוננטי כתלות בסימן של <span>\(E-V(x)\)</span>.</p>
+<div class="proposition">
+<p>אם <span>\(E-V(x)&gt;0\)</span> נקבל כי הפתרון יהיה אקספוננט דועך או גדל. במקרה זה נקבל כי האנרגיה תהיה רציפה. במקרה זה פונקציית הגל תהיה
+<span>$$\psi(x)=\mathrm{e}^{(i p x)/\hbar} \qquad \tilde{p}=\sqrt{2m(E-V)}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(E-V(x)&lt;0\)</span> נקבל כי הפתרון יהיה אוסצילטורי, דבר זה יכניס אילוץ מחזורי אשר יגרום לכך שרמות האנרגיה יהיו דיסקרטיות. במקרה זה פונקציית הגל תהיה:
+<span>$$\psi=e^{ -\tilde{p}x/\hbar }\qquad \tilde{p}=\sqrt{ 2m(V-E) }$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פוטנציאל אינסופי</span><p>כאשר <span>\(V(x)=\infty\)</span> נקבל כי הפתרון הסטציונרי יחידי יהיה <span>\(\psi=0\)</span>.</p>
+</div>
+<p>בגלל מנהור, חלקיק יכול לעבור בור פוטנציאל, ולכן מה שבסוף משנה זה הפוטנציאל באינסוף.</p>
+<div class="definition"><span class="keyword">מצב קשור</span><p>כאשר האנרגיה של החלקיק קטן מהפוטנציאל באיסוף, כלומר כאשר <span>\(E&lt;V\left( -\infty \right),V\left( \infty \right)\)</span>. במצב זה החלקיק תקוע בתוך אזור ולא יכול להתפזר לאינסוף.</p>
+</div>
+<div class="definition"><span class="keyword">מצב חופשי/מצב פיזור</span><p>כאשר האנרגיה של החלקיק גדולה מהפוטנציאל באינסוף, כלומר <span>\(E&gt;V\left( -\infty \right),V\left( \infty \right)\)</span>. במקרה זה נקבל כי תמיד קיים הסתברות שהחלקיק יברח לאינסוף.</p>
+</div>
+<div class="remark">
+<p>קיימים פוטנציאלים שללא תלות ב-<span>\(E\)</span> נקבל כי המצב יהיה קשור(לדוגמא אוסצילטור הרמוני) ומצבים שללא תלות ב-<span>\(E\)</span> נקבל מצב חופשי(לדוגמא חלקיק חופשי) אך גם קיימים פוטנציאלים שכל אחד מהמצבים יכול להתקיים כתלות ב-<span>\(E\)</span>, ולכן כדי לקבל פתרון מלא יש לבדוק את שתי המקרים.</p>
+</div>
+<div class="definition"><span class="keyword">נרמול דלתא</span><p>עבור מצבים שאינם ניתנים לנרמול, ניתן לדרוש נרמול של פונקציית דלתא:
+<span>$$\langle p|p^{\prime}\rangle=\delta(p-p^{\prime})$$</span></p>
+</div>
+<div class="remark">
+<p>זה לא מצב פיזיקלי כיוון שלא מנורמל. זה רק נהיה מצב פיזיקלי כאשר התנאי התחלה או שפה מאלצים את המצב להיות מנורמל. בכל זאת לעיתים נוח לנתח כך בעיות כדי לפתור אותם בצורה כללית.</p>
+</div>
+<h3>צפיפות הסתברות וזרם הסתברות</h3>
+<div class="definition"><span class="keyword">צפיפות הסתברות</span><p>נסמן את צפיפות ההסתברות ב-<span>\(x\)</span> בזמן <span>\(t\)</span> ע"י:
+<span>$$\rho\left(x,t\right)\equiv\left|\psi\left(x,t\right)\right|^{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">זרם הסתברות</span><p><span>$$j\left(x\right)=\frac\hbar{2i m}\left(\overline{{{\psi}}}\frac{\partial\psi}{\partial x}-\psi\frac{\partial\overline{{{\psi}}}}{\partial x}\right)=\frac\hbar m\mathrm{Im}\left(\overline{{{\psi}}}\frac{\partial\psi}{\partial x}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משוואת הרציפות</span><p>תחת האילוץ הפיזיקלי ש-<span>\(V\)</span> ממשי, נקבל כי:
+<span>$${\frac{\partial\rho}{\partial t}}+{\frac{\partial j}{\partial x}}=0$$</span></p>
+</div>
+<div class="proof">
+<p>משוואת שרדינגר בבסיס המקום והצמוד שלה הם:
+<span>$$i\hbar\frac{\partial}{\partial t}\psi\left(x,t\right)=\left(-\frac{\hbar^{2}}{2m}\frac{\partial^{2}}{\partial x^{2}}+V\left(x\right)\right)\psi\left(x,t\right)\quad -\left.\hbar{\frac{\partial}{\partial t}}{\overline{{\psi}}}\left(x,t\right)=\left(-{\frac{\hbar^{2}}{2m}}{\frac{\partial^{2}}{\partial x^{2}}}+{\overline{{V}}}\left(x\right)\right){\overline{{\psi}}}\left(x,t\right)\right.$$</span>
+כאשר ע"י כפל המשוואה הראשונה ב-<span>\(\overline{\psi}\)</span> והשנייה ב-<span>\(\psi\)</span> נקבל כי:
+<span>$$.\hbar{\frac{\partial\rho}{\partial t}}=\hbar\left({\frac{\partial{\overline{{\psi}}}}{\partial t}}\psi+{\overline{{\psi}}}{\frac{\partial\psi}{\partial t}}\right)=-{\frac{\hbar^{2}}{2m}}\left({\overline{{\psi}}}{\frac{\partial^{2}\psi}{\partial x^{2}}}-\psi{\frac{\partial^{2}{\overline{{\psi}}}}{\partial x^{2}}}\right)+\left(V-{\overline{{V}}}\right)\rho$$</span>
+כאשר נציב את ההגדרות ונקבל:
+<span>$${\frac{\partial\rho}{\partial t}}+{\frac{\partial j}{\partial x}}=-{\frac{i}{\hbar}}\left(V-{\overline{{V}}}\right)\rho$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='prev-page'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

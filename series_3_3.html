@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סיווג התכנסויות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./series.html'> סדרות וטורים</a></li>
+<li class='parent-page'><a href='./series.html'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_1_1.html'>1.1 הגדרת הגבול</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_3.html'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_4.html'>1.4 מונוטוניות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_5.html'>1.5 שורשים וממוצעים</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_6.html'>1.6 תתי סדרות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_7.html'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_8.html'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_2_1.html'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_2.html'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_3.html'>2.3 טורים כלליים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./series.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./series_3_2.html`;}});</script>
+        <div class="content">
+        <h1>3.3  סיווג התכנסויות</h1>
+    <div class="definition"><span class="keyword">התכנסות נקודתית</span><p>אם עבור <span>\(x\in D\)</span> מתקיים <span>\(f_n \xrightarrow[n\rightarrow\infty]{} f\)</span> אז <span>\((f_n)\)</span> מתכנסת נקודתית ל-<span>\(f\)</span> בתחום. כלומר:
+<span>$$\forall \epsilon &gt; 0 \quad \exists N \in\mathbb{N}\quad \forall x\in A \quad\forall n\in\mathbb{N} \Rightarrow |f_n(x)-f(x)|&lt;\epsilon$$</span></p>
+</div>
+<div class="definition"><span class="keyword">התכנסות במידה שווה</span><p>סדרת פונקציות <span>\((f_{n})\)</span> מתכנסת במידה שווה אם מתקיים:
+<span>$$\forall \epsilon &gt; 0 \quad \exists N \in\mathbb{N}\quad \forall x\in A \quad\forall n\in\mathbb{N} \Rightarrow |f_n(x)-f(x)|&lt;\epsilon$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול להתכנסות במ"ש</span><p>נגדיר <span>\(d_\infty(f,g)=\sup_{x\in D}|f(x)-g(x)|\)</span>. סדרה מתכנסת במ"ש אם"ם <span>\(d_\infty(f_n,f)\xrightarrow[]{n\rightarrow\infty} 0\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי קושי להתכנסות במידה שווה</span><p>עבור סדרת פונקציות <span>\((f_{n})\)</span> התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הסדרה <span>\((f_{n})\)</span> מתכנסת במ"ש. </p>
+</li>
+<li>
+<p>לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N\in \mathbb N\)</span> כך שלכל <span>\(N&lt;m,n\in\mathbb N\)</span> מתקיים <span>\(|f_n-f_m|&lt;\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N\in \mathbb N\)</span> כך שלכל <span>\(N&lt;m,n\in\mathbb N\)</span> מתקיים <span>\(d_A(f_n, f_m)\)</span>. </p>
+</li>
+</ol>
+</div>
+<p>נראה 1 שקול ל-2.</p>
+<div class="proof">
+<p>נראה <span>\(1\implies 2\)</span>. תהי <span>\((f_{n})\)</span> סדרת פונקציות המתכנסת במ"ש. יהי <span>\(\varepsilon&gt;0\)</span>. מהגדרת התכנסות במ"ש, קיים <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n &gt; N\)</span> מתקיים <span>\(\lvert f_{n}(x)-f(x) \rvert&lt;\frac{\varepsilon}{2}\)</span>. מכאן עבור כל <span>\(m,n&gt;N\)</span> מתקיים:
+<span>$$\lvert f_{n}(x)-f_{m}(x) \rvert \leq \lvert f_{n}(x)-f(x) \rvert +\lvert f(x)-f_{m}(x) \rvert &lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}$$</span>
+כעת נראה <span>\(2\implies 1\)</span>. תהי <span>\((f_{n})\)</span> סדרת פונקציות המקיימת את תנאי קושי.  עבור כל <span>\(x_{0}\)</span> מקיימת את תנאי קושי של סדרת מספרים ולכן מתכנסת נקודתית. יהי <span>\(\varepsilon&gt;0\)</span>. מההנחה קיים <span>\(N \in \mathbb{N}\)</span> וקיימים <span>\(n,m \in \mathbb{N}\)</span> כך שלכל <span>\(n,m&gt; N\)</span> מתקיים:
+<span>$$\lvert f_{n}(x)-f_{m}(x) \rvert &lt;\frac{\varepsilon}{2}$$</span>
+נקבע את <span>\(m\)</span>. עבור כל <span>\(n&gt;N\)</span> מתקיים:
+<span>$$f_{m}(x)-\frac{\varepsilon}{2}&lt;f_{n}(x)&lt;f_{m}(x)+\frac{\varepsilon}{2}$$</span>
+וכאשר ניקח את הגבול נקבל:
+<span>$$f_{m}(x)-\frac{\varepsilon}{2}&lt;f_{n}(x)&lt;f_{m}(x)+\frac{\varepsilon}{2}\implies \lvert f(x)-f_{m}(x) \rvert &lt;\frac{\varepsilon}{2}$$</span>
+כעת עבור כל <span>\(n&gt;N\)</span> וכל <span>\(x \in \mathrm{Dom}(f)\)</span> מתקיים:
+<span>$$\lvert f(x)-f_{n}(x) \rvert \leq \lvert f(x)-f_{m}(x) \rvert +\lvert f_{m}(x)-f_{n}(x) \rvert \leq \frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon$$</span>
+ומתכנס במידה שווה.</p>
+</div>
+<div class="proposition">
+<p>אם מתכנס במידה שווה אז מתכנס נקודתית</p>
+</div>
+<div class="proposition">
+<p>סדרת פונקציות מתכנסת במידה שווה בקטע סגור אם"ם מתכנס במידה שווה בקטע הפתוח.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./series.html'> סדרות וטורים</a></li>
+<li class='prev-page'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

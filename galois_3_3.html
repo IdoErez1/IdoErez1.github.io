@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פולינומים ציקלוטומים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent-page'><a href='./galois.html'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_1_1.html'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_2.html'>1.2 הרחבת שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_2_1.html'>2.1 שדה פיצול</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_3.html'>2.3 שיכונים של שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_4.html'>2.4 הרחבה נורמלית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_5.html'>2.5 הרחבת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_6.html'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_6.html'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./galois_3_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./galois_3_2.html`;}});</script>
+        <div class="content">
+        <h1>3.3  פולינומים ציקלוטומים</h1>
+    <div class="definition"><span class="keyword">שורש יחידה</span><p>יהי <span>\(F\)</span> שדה, <span>\(n \in \mathbb{N}\)</span>. איבר <span>\(y \in \mathbb{F}\)</span> יקרא שורש יחידה מסדר <span>\(n\)</span> אם <span>\(y^n=1\)</span>.
+בנוסף הוא יקרא פרמיטיבי אם:
+<span>$$\forall m &lt; n\quad y^m\neq 1$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\omega_{n}=e^{ 2\pi i/n }\in \mathbb{C}$$</span></p>
+</div>
+<div class="lemma">
+<p>אם <span>\(y\)</span> שורש יחידה פרימטיבי מסדר <span>\(n\)</span> אז אוסף כל שורשי היחידה הסדר <span>\(n\)</span> יהיה:
+<span>$$\left\{  y^{k}\mid {1}\leq k\leq n  \right\}$$</span>
+כאשר אוסף כל שורשי היחידה הפרימטריבים מסדר <span>\(n\)</span> יהיו:
+<span>$$\left\{  y^k \mid 1\leq k\leq n\quad (k,n)=1 \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(\xi \in F\)</span> שורש יחידה פרימיטיבי. אזי:</p>
+<ol>
+<li>
+<p>הקבוצה <span>\(\left\{\xi^{k}\mid1\leq k\leq n\right\}\)</span> זה קבוצת שורשי היחידה מסדר <span>\(n\)</span>. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(\left\{\xi^{k}\,|\,1\leq k\leq n,\,(k,n)=1\right\}\)</span> זה הקבוצת שורשי היחידה הפרימיטיביים מסדר <span>\(n\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">פונקציית אויילר</span><p>פונקציה <span>\(\varphi:\mathbb{N}\to\mathbb{N}\)</span> המוגדרת ע"י:
+<span>$$\varphi\left(n\right)=\left|\left\{1\leq k\leq n\left|\left(k,n\right)=1\right\}\right|=\deg\left(\Phi_{n}\right)\right.$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פולינום ציקלוטומי</span><p>הפולינום הציקלוטומי מסדר <span>\(n\)</span> מעל <span>\(\mathbb{Q}\)</span> מוגדר להיות:
+<span>$$\Phi_{n}(x)=\prod_{\begin{array}{l}{0\leq k\leq n-1}\\ {\operatorname*{gcd}(k,n)=1}\end{array}}\left(x-\omega_{n}^{k}\right)$$</span></p>
+</div>
+<p>הפולינומים הציקלוטומים מקיימים:
+<span>$$x^{n}-1=\prod_{d|n}\Phi_{d}\left(x\right)$$</span></p>
+<div class="proposition">
+<p>הפולינום הציקלוטומי הוא פולינום תחת השלמים, כלומר <span>\(\Phi_{n}\in \mathbb{Z}[x]\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(y \in F\)</span> שורש יחידה פרמיטיבי מסדר <span>\(\sigma \in Aut(F)\)</span> אז <span>\(\sigma(F)\)</span> הוא גם שורש יחידה פרימיטיבי מסדר <span>\(n\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$\sigma (y)^n=\sigma(y^n)=\sigma(1)=1\implies \sigma(y)$$</span>
+שורש מסדר <span>\(n\)</span>. נדרש להראות פרימטיביות. אם <span>\(m&lt;n\)</span> מתקיים:
+<span>$$\sigma(y)^m = 1\implies \sigma(y^m)=\sigma(1)\implies y^m = 1 $$</span>
+וזוהי סתירה לפרמטיביות. ולכן <span>\(\sigma(y)\)</span> גם פרמטיבי.</p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(n\)</span> <span>\(\Phi(x) \in \mathbb{Q} [x]\)</span> מתוקן.</p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(n \in \mathbb{N}\)</span> הפולינום <span>\(\Phi_{n}\)</span> אי פריק.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(m(x)\in \mathbb{Q}[x]\)</span> הפולינום המינימלי של <span>\(\omega_{n}\)</span>. מספיק להוכיח <span>\(m(x)=\Phi_{n}(x)\)</span>. מספיק להוכיח <span>\(\deg(m(x))=\varphi(n)\)</span>.
+נשים לב של-<span>\(\Phi_{n}(x)\)</span>  אם <span>\(\Phi_{n}\left( \alpha \right)=0\)</span> אז לכל ראשוני <span>\(n\geq p\)</span> שזר ל-<span>\(n\)</span> מתקיים <span>\(\Phi\left( \alpha^p \right)=0\)</span>.
+כעת נותר להוכיח כי <span>\(m\left( \alpha^p \right)=0\)</span>. נניח בשלילה שלא. נשים לב:
+<span>$$\Phi_{n}=m(x)g(x)$$</span>
+כאשר <span>\(g(x) \in R[x]\)</span>. כעת מהטענה מתקיים <span>\(\alpha^p\)</span> שורש של <span>\(g(x)\)</span>. במילים אחרות <span>\(\alpha\)</span> הוא שורש של <span>\(g(x^p)\)</span>. ולכן:
+<span>$$g(x^p)=m(x)h(x)$$</span>
+ל-<span>\(n(x) \in R[x]\)</span> כלשהו. ולכן כל הפולינומים ב-<span>\(\mathbb{Z}[x]\)</span>. </p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(n\)</span> נקרא ל-<span>\(\mathbb{Q}\left( \omega_{n} \right)\)</span> הרחבה ציקלוטונית ה-<span>\(n\)</span>. אזי:</p>
+<ol>
+<li>
+<p>ההרחבה <span>\(\mathbb{Q}\left( \omega_{n} \right) / \mathbb{Q}\)</span> הרחבת גלואה מסדר <span>\(\varphi(n)\)</span>. </p>
+</li>
+<li>
+<p><span>\(Gal\left( \mathbb{Q} \left( \omega_{n} \right) / \mathbb{Q}  \right) \cong  \left( \mathbb{Z} / n \mathbb{Z} \right)^\times\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="corollary"><span class="keyword">פונקציית אוילר</span><ol>
+<li>
+<p>אם <span>\(n=mk\)</span> ו-<span>\((m,k)=1\)</span> אז: 
+<span>$$\varphi(n)=\varphi(1)\varphi(n)$$</span></p>
+</li>
+<li>
+<p>אם <span>\(n=p^k\)</span> אז: 
+<span>$$\varphi(n)=(p-1)p^{k-1}$$</span></p>
+</li>
+<li>
+<p>אם <span>\(n=\prod_{i}p_{i}^{k_{i}}\)</span> אזי: 
+<span>$$\varphi (n)= \prod_{i}(p_{i}-1)p_{1}^{k_{1}-1}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">השארית הסיני</span><p>החבורת גלואה המתאימה להרחבה <span>\(\mathbb{Q}\left( \omega_{n} \right) / \mathbb{Q}\)</span> איזומורפית ל-<span>\(\left( \mathbb{Z} / n\mathbb{Z} \right)^\times\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='prev-page'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+</ul></li>
+        </body>
+        </html>
+        

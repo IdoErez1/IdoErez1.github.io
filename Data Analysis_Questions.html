@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+            <link rel="stylesheet" href='./styles/style.css'> 
+            <link rel="stylesheet" href='./styles/questions_style.css'> 
+            
+    <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+    
+        <title>שאלות - אנליזת נתונים</title>
+        <style>
+            .hidden { display: none; }
+        </style>
+      <script type="text/javascript">
+        window.onload = function() {
+          const subjects = {}
+          console.log(subjects);
+          let selectedSubjects = [];
+          let currentQuestions = [];
+          let currentQuestionIndex = 0;
+
+          window.startQuiz = function() {
+            selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+            if (selectedSubjects.length === 0) {
+                alert("Please select at least one subject.");
+                return;
+            }
+            currentQuestions = [];
+            selectedSubjects.forEach(subject => {
+                currentQuestions = currentQuestions.concat(subjects[subject]);
+            });
+            shuffle(currentQuestions);
+            document.getElementById('subject-selection').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            showQuestion();
+          }
+
+          function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length){
+            location.reload()
+            return;
+            }
+            if (currentQuestionIndex >= currentQuestions.length - 1) {
+                document.getElementById('next-question').innerHTML = "לסיים";
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question').innerHTML = q.question;
+            document.getElementById('answer').innerHTML = q.answer;
+            document.getElementById('answer').classList.add('hidden');
+            document.getElementById('show-answer').classList.remove('hidden');
+            document.getElementById('next-question').classList.add('hidden');
+            MathJax.typesetPromise(["#question"]).then(() => {
+  MathJax.typesetPromise(["#answer"]);
+});
+            document.getElementById('question-counter').innerHTML = "שאלה "+ (currentQuestionIndex + 1) +" מתוך "+ currentQuestions.length;
+          }
+
+          window.showAnswer = function() {
+            document.getElementById('answer').classList.remove('hidden');
+            document.getElementById('show-answer').classList.add('hidden');
+            document.getElementById('next-question').classList.remove('hidden');
+          }
+
+          window.nextQuestion = function() {
+            currentQuestionIndex++;
+            showQuestion();
+          }
+
+          function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+        };
+      </script>
+</head>
+<body>
+<ul class='top-navigation'>
+        <li class="parent-page"> <a href="./Data Analysis"> 
+         חזרה לספר
+         </a></li></ul><div class="content">
+    <div id="subject-selection">
+     <div class="download-container">
+        <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <div class="download-dropdown">
+            <a href="./Data Analysis_deck.apkg" download>Anki</a>
+        </div>
+    </div>
+        <h1>נושאים:</h1>
+    <div class="all-checkboxes-container">
+        
+        </div>
+    <button class="quiz-button" onclick="startQuiz()">להתחיל</button>
+    </div>
+    <div id="quiz-section" class="hidden">
+        <h1>שאלות</h1>
+        <div class="question-answer-container">
+        <div id="question-counter"></div>
+        <div id="question"></div>
+        <div id="answer" class="hidden"></div>
+        </div>
+        <button class="quiz-button" id="show-answer" onclick="showAnswer()">הצג תשובה</button>
+        <button class="quiz-button" id="next-question" class="hidden" onclick="nextQuestion()">שאלה הבאה</button>
+    </div>
+    </div>
+</body>
+</html>
+    

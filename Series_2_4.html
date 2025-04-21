@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מבחני התכנסות טורים אי שליליים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page'><a href='./Series'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_1_1'>1.1 הגדרת הגבול</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_3'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_6'>1.6 תתי סדרות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_8'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_2'>3.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_3'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Series_3_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Series_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  מבחני התכנסות טורים אי שליליים</h1>
+    <div class="theorem"><span class="keyword">מבחן ההשוואה</span><p>יהיו <span>\((a_n)_{n=1}^\infty\)</span> ו-<span>\((b_n)_{n=1}^\infty\)</span> סדרות כך ש-<span>\(0\leq a_{n}\leq b_{n}\)</span> לכל <span>\(n \in \mathbb{N}\)</span>. אם <span>\(\sum b_{n}\)</span> מתכנס אז <span>\(\sum a_{n}\)</span> מתכנס. ואם <span>\(\sum a_{n}\)</span> מתבדר אז <span>\(\sum b_{n}\)</span> מתבדר.</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\((T_{k}),(S_{k})\)</span> סדרות הסכומים של <span>\((b_{n}),(a_{n})\)</span> בהתאמה. נניח כי <span>\(\sum b_{n}\)</span> מתכנס. מתקיים <span>\((T_{k}),(S_{k})\)</span> מונוטוניות עולות כיוון שהסדרות אי שליליות. כיוון ש-<span>\(\sum b_{n}\)</span> מתכנס נקבל כי <span>\((T_{k})\)</span> מתכנס. מזה נקבל:
+<span>$$\forall n \in \mathbb{N} \quad a_{n}\leq b_{n}$$</span>
+וכן מתקיים:
+<span>$$S_{k}=\sum_{i=1}^{n} a_{k}\leq \sum_{k=1}^{\infty}b_{k}=T_{k}$$</span>
+וכן <span>\(T_{k}\)</span> מתכנס ולכן חסומה ולכן <span>\(S_{k}\)</span> חסומה מלעיל ומונוטונית ולכן מתכנסת. ההוכחה עבור התבדרות כמעט זהה.</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן המנה</span><p>אם <span>\(a_n, b_n\)</span> אי-שליליים ו-<span>\(\frac{a_n}{b_n} = L &gt;0\)</span> אז <span>\(\sum a_n , \sum b_n\)</span> מתכנסים ומתבדרים יחד</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן המנה הגבולי</span><p>אם <span>\(a_n, b_n\)</span> אי-שליליים ו-<span>\(\lim_{n\rightarrow \infty} \frac{a_n}{b_n} = L &gt;0\)</span> אז <span>\(\sum a_n , \sum b_n\)</span> מתכנסים ומתבדרים יחד</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן המנה באמצעות עוקבים</span><p>אם <span>\(\sum a_{n},\sum b_{n}\)</span> טורים אי שליליים, אזי אם <span>\(\frac{a_{n+1}}{a_{n}}\leq \frac{b_{n+1}}{b_{n}}\)</span> כמעט תמיד, ו-<span>\((b_{n})\)</span> מתכנס אז <span>\((a_{n})\)</span> מתכנס.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(n \in \mathbb{N}\)</span> כך שלכל <span>\(n &gt; N\)</span> מתקיים:
+<span>$$0 &lt; \frac{a_{n+1}}{a_{n}}&lt;\frac{b_{n+1}}{b_{n}}$$</span>
+עבור <span>\(k \in \mathbb{N}\)</span> מתקיים:
+<span>$$0&lt; \frac{a_{N+2}}{a_{N+1}}\leq \frac{b_{N+2}}{b_{N+1}}\land \dots \land 0&lt; \frac{a_{N+k}}{a_{N+k-1}}\leq \frac{b_{N+k}}{b_{N+k-1}}$$</span>
+כאשר נכפיל את כל האי שיוויונות ונקבל מכפלה שמתבטלת:
+<span>$$0&lt; \frac{a_{N+k}}{a_{N+1}}\leq \frac{b_{N+k}}{b_{N+1}}\implies \frac{a_{N+k}}{b_{N+k}}\leq \frac{a_{N+1}}{b_{N+1}}=\mathrm{const}$$</span>
+כאשר נסמן את הקבוע ב-<span>\(v\)</span>. מתקיים לכל <span>\(n&gt;N\)</span> כי <span>\(\frac{a_{n}}{b_{n}}\leq v\)</span> ולכן <span>\(a_{n}\leq v b_{n}\)</span> ולכן כיוון ש-<span>\(\sum b_{n}\)</span> מתכנס אז מאריתמטיקה של טורים גם <span>\(\sum v b_{n}\)</span> מתכנס וכעת ממבחן ההשוואה גם <span>\(\sum a_{n}\)</span> מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן דלמבר</span><p>יבי <span>\(\sum a_{n}\)</span> טור חיובי כך ש-<span>\(a_{n}\neq 0\)</span> כמעט תמיד. אזי:</p>
+<ol>
+<li>
+<p>אם קיים <span>\(0&lt;q&lt;1\)</span> כך ש-<span>\(\frac{a_{n+1}}{a_{n}}&lt;q\)</span> אז <span>\(\sum a_{n}\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם קיים <span>\(q&gt; 1\)</span> כך ש-<span>\(\frac{a_{n+1}}{a_{n}}&gt;q\)</span> אז <span>\(\sum a_{n}\)</span> מתבדר. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>נניח <span>\(\frac{a_{n+1}}{a_{n}}&lt;q=\frac{q^{n+1}}{q^{n}}\)</span> כאשר <span>\(0&lt;q&lt;1\)</span>. ולכן כיוון ש-<span>\(\sum q^{n}\)</span> מתכנס נקבל ממבחן השורש באמצעות מנות עוקבות כי <span>\(\sum a_{n}\)</span> מתכנס. עבור <span>\(q\geq 1\)</span> נקבל כי הסדרה <span>\(a_{n}\)</span> מונוטונית עולה, ולכן בפרט לא אפסה והטור <span>\(\sum a_{n}\)</span> לא מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">מבחן השורש של קושי</span><p>יהי <span>\(\sum a_{n}\)</span> טור אי שלילי.</p>
+<ol>
+<li>
+<p>אם קיים <span>\(q \in \mathbb{R}\)</span> עם <span>\(0&lt;q&lt;1\)</span> כך ש-<span>\(\sqrt[n]{ a_{n} }\leq q\)</span> כמעט תמיד אז <span>\(\sum a_{n}\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם <span>\(\sqrt[n]{ a_{n} }\geq 1\)</span> באופן שכיח אז <span>\(\sum a_{n}\)</span> מתבדר </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>קיים <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n &gt; N\)</span> מתקיים <span>\(\sqrt[n]{ a_{n} }\leq q\)</span>. לכן <span>\(0\leq a_{n}\leq q^{n}\)</span>. היות ו- <span>\(0&lt;q&lt; 1\)</span> הטור <span>\(\sum q^{n}\)</span> מתכנס. ולכן ממבחן ההשוואה <span>\(\sum a_{n}\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם <span>\(\sqrt[n]{ a_{n} }&gt; 1\)</span> באופן שכיח, אזי <span>\(a_{n}\geq 1^{n}=1\)</span> באופן שכיח, ולכן <span>\((a_n)_{n=1}^\infty\)</span> לא מתכנס ל-0, והטור <span>\(\sum a_{n}\)</span> לא מתכנס. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">מבחן השורש הגבולי</span><p>יהי <span>\(\sum a_{n}\)</span> טור אי שלילי. אם <span>\(\lim_{ n \to \infty } \sqrt[n]{ a_{n} }=L \in \mathbb{R}\)</span>, מתקיים:</p>
+<ol>
+<li>
+<p>אם <span>\(0\leq L &lt; 1\)</span> אז <span>\(\sum a_{n}\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם <span>\(1&lt; L\)</span> אז <span>\(\sum a_{n}\)</span> מתבדר. </p>
+</li>
+<li>
+<p>אם <span>\(L=1\)</span> אז לא ניתן להכריע. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>אם <span>\(0\leq L&lt; 1\)</span> אז נגדיר <span>\(L&lt;q&lt;1\)</span>. וכעת נבחר <span>\(\varepsilon=q-L&gt; 0\)</span> ובהגדרת הגבול נקבל כי <span>\(\sqrt[n]{ a_{n} }&lt;L+\varepsilon&gt;0\)</span> כמעט תמיד. ולכן ממבחן השורש של קושי נקבל כי <span>\(\sum a_{n}\)</span> מתכנס. </p>
+</li>
+<li>
+<p>אם <span>\(1&lt; L\)</span>  אז נגדיר <span>\(1&lt;q&lt;L\)</span>. נבחר <span>\(\varepsilon=L-q&gt;0\)</span>. מהגדרת הגבול נקבל כי <span>\(q=L-\varepsilon&lt;\sqrt[n]{ a_{n} }\)</span> כמעט תמיד. לכן ממבחן השורש מתבדר. </p>
+</li>
+<li>
+<p>נסתכל על <span>\(a_{n}=\frac{1}{n^{2}}\)</span>. אנו יודעים כי <span>\(\sum a_{n}\)</span> מתכנס. וכן מתקיים<br />
+<span>$$\frac{1}{\sqrt[n]{ n^{2} }} \xrightarrow{n\to \infty}1$$</span>
+באופן דומה עבור <span>\(b_{n}=\frac{1}{n}\)</span> אנו יודעים כי <span>\(\sum b_{n}\)</span> מתדבר, ומתקיים:
+<span>$$\frac{1}{\sqrt[n]{ n }}\xrightarrow{n\to \infty} 1$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">מבחן האינטגרל</span><p>אם <span>\(f:[1:\infty)\rightarrow [0:\infty)\)</span>  פונקציה חיובית
+הטור <span>\(\sum f(n)\)</span> מתכנס אם"ם האינטגרל <span>\(\int_1^\infty f(x)\)</span> מתכנס, ומתקיים <span>$$\sum_{n=2}^\infty f(x) \leq \int_1^\infty f dx \leq \sum_{n=1}^\infty f(x) $$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='prev-page'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

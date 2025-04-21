@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פשטות התמורות הזוגיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_5_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_4_3.html`;}});</script>
+        <div class="content">
+        <h1>4.4  פשטות התמורות הזוגיים</h1>
+    <p>נרצה להוכיח את הטענה הבאה:</p>
+<div class="proposition">
+<p>חבורת תמורות הזוגיות <span>\(A_{5}\)</span> פשוטה.</p>
+</div>
+<div class="reminder">
+<p>מחלקת הצמידות של תמורה <span>\(\sigma\)</span> ב-<span>\(S_{n}\)</span> עם אותו מבנה מחזורים.
+<span>$$\tau\left( a_{1}, a_{2},\dots,a_{r} \right)\tau ^{-1} =\left( \tau (a_{1}), \tau(a_{2}),\dots,\tau(a_{r})\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>תת חבורה <span>\(H\)</span> של <span>\(G\)</span> היא נורמלית אם"ם איחוד של מחלקות צמידות.</p>
+</div>
+<div class="proposition">
+<p>מחלקות הצמידות של <span>\(\sigma\)</span> ב-<span>\(S_{n}\)</span> היא או:</p>
+<ol>
+<li>
+<p>נשארת מחלקת צמידות ב-<span>\(A_{n}\)</span> </p>
+</li>
+<li>
+<p>מתפרקת לשתי מחלקות צמידות שווה לגודל ב-<span>\(A_{n}\)</span>. 
+בפרט עבור <span>\(\sigma, \tau \in A_{n}\)</span> עבור <span>\(n\geq 2\)</span> אם הם צמודות ב-<span>\(A_{n}\)</span>(זאת אומרת קיים <span>\(\rho \in A_{n}\)</span> כך ש-<span>\(\rho \sigma \rho ^{-1} =\tau\)</span> ) הן צמודות ב-<span>\(S_{n}\)</span>(כלומר <span>\(\exists \rho \in S_{n}\quad \rho \sigma \rho ^{-1} =\tau\)</span>). אבל לא בהכרח להיפך!</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ממשפט מסלול מייצב:
+<span>$$|\prescript{A_{n}}{}{\sigma}|= \frac{|A_{n}|}{|C_{A_{n}}\left( \sigma \right)|}=\frac{|A_{n}|}{|A_{n}\cap C_{S_{n}}\left( \sigma \right)|}$$</span>
+כאשר ממשפט האיזומורפיזם השני:
+<span>$$\frac{|A_{n}|}{|A_{n}\cap C_{S_{n}}\left( \sigma \right)|}=\frac{|A_{n}\cdot C_{S_{n}}\left( \sigma \right)|}{|C_{S_{n}}|}$$</span>
+כאשר השתמשנו בזה ש:
+<span>$$H / H\cap N \cong HN / N \implies \frac{|H|}{|H\cap N|}= \frac{|HN|}{|N|}\implies \frac{|N|}{|H\cap N|}= \frac{|HN|}{|H|}$$</span>
+ניתן לפצל כעת למקרים - אם המרכז מורכב כולו מתמורות זוגיות וכאשר לא,
+כלומר:
+<span>$$\frac{|A_{n}\cdot C_{S_{n}}\left( \sigma \right)|}{|C_{S_{n}}|}=\begin{cases}\frac{|A_{n}|}{|C_{S_{n}}\left( \sigma \right)|} &amp; C_{S_{n}}\subseteq A_{n} \\\frac{|S_{n}|}{|C_{S_{n}}\left( \sigma \right)|} &amp; else\end{cases}=\begin{cases}\frac{1}{2}|\prescript{S_{n}}{}{\sigma} &amp; C_{S_{n}}\subseteq A_{n} \\\frac{|S_{n}|}{| \prescript{S_{n}}{}{\sigma} |} &amp; else
+\end{cases}$$</span></p>
+</div>
+<p>כעת נחזור להוכיח את הטענה ש-<span>\(A_{5}\)</span> פשוטה.</p>
+<div class="proof">
+<p>רעיון: נמצא את מחלקות הצמידות, ונראה שאין איחוד של חלק מהן שמהווה תת חבורה למעט <span>\(e,A_{5}\)</span>. נתחיל במחלקות הצמידות של <span>\(S_{5}\)</span></p>
+<table>
+<thead>
+<tr>
+<th><span>\(\sigma\)</span></th>
+<th><span>\(()\)</span></th>
+<th><span>\((12)\)</span></th>
+<th><span>\((123)\)</span></th>
+<th><span>\((1234)\)</span></th>
+<th><span>\((12345)\)</span></th>
+<th><span>\((12)(34)\)</span></th>
+<th><span>\((12)(345)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\(\sigma\)</span></td>
+<td>1</td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>24</td>
+<td>15</td>
+<td>20</td>
+</tr>
+<tr>
+<td><span>\(C_{S_5}\)</span></td>
+<td>120</td>
+<td>12</td>
+<td>6</td>
+<td>4</td>
+<td>5</td>
+<td>8</td>
+<td>6</td>
+</tr>
+<tr>
+<td><span>\(C_{S_5}(\sigma)\)</span></td>
+<td><span>\(S_5\)</span></td>
+<td></td>
+<td><span>\(\langle (123), (45) \rangle \cong \mathbb{Z}_3 \times \mathbb{Z}_2\)</span></td>
+<td></td>
+<td><span>\(\langle (12345) \rangle\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>\(A_5\sigma\)</span></td>
+<td>1</td>
+<td></td>
+<td>20</td>
+<td></td>
+<td>12</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>כאשר ניתן לפסול את העמודות האי זוגיות של התמורות האי זוגיות. סך הכל
+מחלקות הצמידות ב-<span>\(A_{5}\)</span> הם: <span>$$\begin{matrix}()  &amp; (123) &amp; (12345) &amp; (21345) &amp; (12)(34) \\1 &amp; 20 &amp; 12 &amp; 12 &amp; 15
+\end{matrix}$$</span> תהי <span>\(1\nleq N \triangleleft A_{5}\)</span>. אזי הגודל של <span>\(N\)</span> שווה
+לסכום של חלק מבין <span>\(20,12,12,15\)</span> ועוד אחד, ולכן <span>\(|N|\geq 13\)</span>. מצד שני, <span>\(|N|\big|60\)</span> מלגרנג': <span>$$N=\cancel{ 60 },30,20,15,\cancel{ 12,10,6 }$$</span>
+כאשר פסלנו את האיברים שקטנים מ-13 כאשר 30,20,15 נפסלות כיוון שלא ניתן להגיע עליהם בעזרת סכימה של צירוף של האיברים <span>\(15,12,12,20\)</span>. ואין פתרון. כלומר הוכחנו כי <span>\(A_{n}\)</span> פשוטה(אם <span>\(N\trianglelefteq A_{5}\)</span> אז <span>\(N=A_{5}\)</span> או <span>\(N=1\)</span>).</p>
+<div class="proposition">
+<p>התמורות הזוגיים <span>\(A_{n}\)</span> נוצרת ע"י ה-3 מחזורים ב-<span>\(S_{n}\)</span> עבור <span>\(n&gt;3\)</span>.</p>
+</div>
+<div class="proposition">
+<p>ב-<span>\(A_{n}\)</span> כל ה-3 מחזורים צמודים(עבור <span>\(5\leq n\)</span>).</p>
+</div>
+<div class="proof">
+<p>כל ה-3 מחזורים ב-<span>\(S_{n}\)</span> הם צמודים, וראינו ששני מחלקות צמידות
+של <span>\(\sigma\)</span> נשארת מחלקת צמידות ב-<span>\(A_{n}\)</span> אם"ם <span>\(\sigma\)</span> זוגית,
+ו-<span>\(C_{S_{n}}\left( \sigma \right)\not\subseteq A_{n}\)</span>. עבורנו:
+<span>$$|\prescript{S_{n}}{}{\left( 1\;2\;3 \right)}|= \frac{n(n-1)(n-2)}{3}$$</span>
+ולכן:
+<span>$$|C_{S_{n}}\left( \left( 1\;2\;3 \right) \right)|= \frac{n!}{\frac{n(n-1)(n-2)}{3}}=3(n-3)!$$</span>
+לכן:
+<span>$$C_{S_{n}}\left( \left( 1\;2\;3 \right) \right)=\left\langle  \left( 1\;2\;3 \right) \right\rangle \times S_{\left\{  4,5,\dots,n  \right\}}=S_{4\dots n}\bigsqcup \left( 1\;2\;3 \right)\cdot S_{4\dots n}\bigsqcup \left( 1\;2\;3 \right)^2 S_{4\dots n}$$</span>
+כי הם מתחלפות. וזה המספר שחיפשנו. נשאר להחליט האם כל אלו זוגיות. אם <span>\(n\geq 5\)</span>. לא: <span>\(\left( 4\;5 \right)\in S_{4\dots n}\)</span>. לכן סיימנו.</p>
+</div>
+<p>כעת נוכיח את הטענה כללית.</p>
+<div class="proposition">
+<p>חבורת התמורות הזוגיות <span>\(A_{n}\)</span> פשוטה עבור <span>\(n\geq 5\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(1\neq N\trianglelefteq A_{n}\)</span>(<span>\(n\geq 6\)</span>). נחפש <span>\(i,j,k,l,r\)</span> כך ש-<span>\(\tau \in H=A_{\{ i,j,k,l,r \}}\)</span>(התמורות הזוגיות ב-<span>\(S_{\{ i,j,k,l,r \}}\)</span>). ואז נסתכל על <span>\(H\cap N\trianglelefteq H\cong A_{5}\)</span>. <span>\(H\cong A_{5}\)</span> פשוטה, לכן או <span>\(N\cap H=1\)</span> (לא ייתכן כי <span>\(\tau \in H\cap N\)</span>) או ש-<span>\(N\cap H=H\)</span>, ולכן <span>\(A_{i,j,k,l,r}=H\leq N\)</span>. בפרט מכילה 3-מחזור(למשל <span>\((i,j,k)\)</span>). מכיוון ש-<span>\(N\)</span> נורמלית ב-<span>\(A_{n}\)</span>, היא מכילה את כל הצמודים (ב-<span>\(A_{n}\)</span>) של <span>\((i,j,k)\)</span> כלומר את כל ה-3 מחזורים, מהטענה השנייה. ואז מטענה 1 נובע <span>\(N=A_{n}\)</span>. נבחר <span>\(id\neq \sigma \in N\)</span>. יש <span>\(i\neq j\)</span> כך ש-<span>\(\sigma(i)=j\)</span>. נסתכל על:
+<span>$$\tau=\underbracket{ \sigma\left( x\;y\;z \right)\sigma ^{-1} }_{ \left( \sigma(x)\;\sigma(y)\;\sigma(z) \right) } \left( x\;y\;z \right)$$</span>
+ניקח <span>\((x\;y\;z)=(i\;j\;k)\)</span> כש-<span>\(k\notin \left\{  i,j,\sigma(j)  \right\}\)</span> ואז:
+<span>$$\tau=\left( \sigma(i),\sigma(j),\sigma(k) \right)(i,k,j)=\left( j, \sigma(j), \sigma(k) \right)(i,k,j)$$</span>
+ולכן <span>\(\tau\)</span> מזיזה 5 איברים לכל היותר: <span>\(i,j,k,\sigma(j),\sigma(k)\)</span> ו-<span>\(\tau \neq id\)</span> ולכן <span>\(\tau(k)=\sigma(j)\neq k\)</span> </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='prev-page'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

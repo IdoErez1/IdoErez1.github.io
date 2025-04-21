@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שדות ממציין ראשוני</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent-page'><a href='./galois.html'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_1_1.html'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_2.html'>1.2 הרחבת שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_2_1.html'>2.1 שדה פיצול</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_3.html'>2.3 שיכונים של שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_4.html'>2.4 הרחבה נורמלית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_5.html'>2.5 הרחבת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_6.html'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_6.html'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./galois_3_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./galois_3_1.html`;}});</script>
+        <div class="content">
+        <h1>3.2  שדות ממציין ראשוני</h1>
+    <div class="reminder">
+<p>המציין של כל שדה יהיה חזקה של מספר ראשוני.</p>
+</div>
+<div class="proposition">
+<p>קיים ויחיד עד כדי איזומורפיזם שדה מגודל <span>\(p^{n}\)</span>, ונסמנו <span>\(\mathbb{F}_{p^{n}}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>שדה סופי ממציין <span>\(p\)</span> מקיים <span>\((x+y)^{p}=x^{p}+y^{p}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">אוטומורפיזם פרוביניוס</span><p>עבור שדה סופי <span>\(E\)</span> ממציין <span>\(p\)</span> ההעתקה <span>\(\phi(x)=x^{p}\)</span> היא אוטומורפיזם.</p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$\phi(0)=0^{0}\qquad \phi(1)=1^{p}=1$$</span>
+ולכן <span>\(p\)</span> שולחת את איבר היחידה לאיבר היחידה, ואת איבר ה-0 לאיבר ה-0. יהי <span>\(x,y \in E\)</span> מתקיים:
+<span>$$\begin{gather}\phi\left( x\cdot y \right)=\left( x\cdot y \right)^{p}=x^{p}\cdot y^{p}=\phi(x)\cdot \phi(y)  \\\phi(x+y)=(x+y)^{p}=\sum_{i=1}^{p} {p \choose i}x^{i}y^{p-i}\overset{*}{=} x^{p}+y^{p} 
+\end{gather}$$</span>
+כאשר המעבר <span>\(*\)</span> זה כיוון שכל המקדמים יהיו כפולה של <span>\(p\)</span> פרט לראשון ולאחרון. ולכן הומומורפיזם. כיוון ששדה סופי מספיק להראות כי חח"ע. ובשביל זה מספיק להראות כי הגרעיון טריוויאלי. יהי <span>\(a \in \ker\left( \phi \right)\)</span>. ולכן:
+<span>$$\phi(a)=0\implies a^{p}=0\implies a=0$$</span>
+כאשר המעבר האחרון נובע מזה ששדה הוא תחום שלמות.</p>
+</div>
+<div class="proposition">
+<p>ההרחבה <span>\(E / F_{p}\)</span> כאשר <span>\(E\)</span> שדה סופי ממציין <span>\(p\)</span> היא הרחבת גלואה המקיימת <span>\(\mathrm{Gal}(E / F_{p})=\left\langle  \phi  \right\rangle\)</span>.</p>
+</div>
+<div class="proof">
+<p>ראשית נזכור כי מתקיים <span>\(\lvert E \rvert=p^n\)</span> עבור <span>\(n\)</span> כלשהו. נראה כי ההרחבת שדות היא שדה פיצול של הפולינום <span>\(p(x)=x^{p^{n}}-x\)</span>. נשים לב כי מתקיים:
+<span>$$p(0)=0^{p^n}=0$$</span>
+כעת נראה כי כל איבר בשדה הכפלי <span>\(E^{\times}\)</span> הוא שורש של הפולינום. זה יראה לנו כי בסה"כ כל האיברים ב-<span>\(E\)</span> הם שורש של הפולינום. מתקיים:
+<span>$$\left\lvert  E^\times  \right\rvert =p^{n}-1$$</span>
+ולכן ממשפט לגרנג' מתקיים עבור <span>\(a \in E^\times\)</span> כי <span>\(a^{p^{n}-1}=1\)</span> ולכן <span>\(a^{p^{n}}=a\)</span>
+<span>$$p(a)=a^{p^{n}}-a=a-a=0$$</span>
+וכיוון שזה מתקיים לכל <span>\(a\in E^{\times}\)</span> ועבור 0 נקבל כי יש <span>\(p^{n}\)</span> שורשים ולכן כל איבר ב-<span>\(E\)</span> הוא שורש, ולכן פולינום ספרבילי. וכיוון ששדה פיצול של פולינום ספרבילי נקבל כי זוהי הרחבת גלואה. 
+נראה כעת כי <span>\(\mathrm{Gal}(E / F_{p})=\left\langle  \phi  \right\rangle\)</span>. כעת נשים לב כי <span>\(\phi|_{F_{p}}=id\)</span>. זה נכון לכל אוטומורפיזם על השדה הראשי שלו. נסמן <span>\(\left\lvert  \left\langle  \phi  \right\rangle  \right\rvert=r\)</span>. לכן מתקיים:
+<span>$$\phi^r = id \implies \forall a \in E\quad \phi^{r}(a)=a^{p^{r}}=a\implies \forall a \in E\quad a^{p^{r}}-a=0$$</span>
+כאשר לפולינום <span>\(a^{p^{r}}-a\)</span> יש לכל היותר <span>\(p^{r}\)</span> שורשים, ולכן <span>\(p^{n}\leq p^{r}\)</span> ולכן <span>\(n\leq r\)</span>. בנוסף, הסדר של <span>\(\left\langle  \phi  \right\rangle\)</span> חייב לחלק את הסדר של <span>\(\lvert Gal(E / F_{p}) \rvert\)</span>. ולכן כיוון ש:
+<span>$$\lvert E / F_{p} \rvert=\lvert Gal(E / F_{p}) \rvert=n$$</span>
+נקבל כי <span>\(r\leq n\)</span> ולכן נקבל סה"כ כי <span>\(r=n\)</span> ולכן הסדר של <span>\(\left\lvert  \left\langle  \phi  \right\rangle  \right\rvert=n=\lvert G \rvert\)</span> ולכן <span>\(G\)</span> חבורה ציקלית עם היוצר <span>\(\left\langle  \phi  \right\rangle\)</span>.
+<strong>טענה</strong>
+האיחוד <span>\(\bigcup_{n}\mathbb{F}_{p^{n}}\)</span> היא הרחבת שדות סגורה אלגברית של <span>\(\mathbb{F} _p\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='prev-page'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

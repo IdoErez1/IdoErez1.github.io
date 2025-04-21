@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הצגות של חבורות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups'> תורת החבורות</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_7_1'>7.1 מילים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_7_1`; }});</script>
+        <div class="content">
+        <h1>7.2  הצגות של חבורות</h1>
+    <p>נסתכל על:
+<span>$$D_{n}\cong \prescript{F\left( \sigma,\tau \right)}{}{/\ker\left( \tilde{\iota}:F\left( \sigma,\tau \right)\to D_{n} \right) }$$</span>
+כדי להבין את <span>\(F\)</span> נדרש להבין את הגרעין. הגרעין פה מכיל איברים כמו <span>\(\sigma^n,\tau^2,\left( \sigma \tau \right)^2,\tau^8\)</span>.</p>
+<div class="definition">
+<p>עבור <span>\(S\subseteq G\)</span>, התת חבורה הנורמלית שנוצרת ע"י <span>\(S\)</span> היא:
+<span>$$\langle S\rangle = \bigcap_{S\subseteq N\trianglelefteq G} N=\left\{  \prod_{i=1}^r gs_{i}^{\varepsilon_{i}}g^{-1} \mid s_{i}\in S\;\;\varepsilon_{i}\in \left\{  \pm 1  \right\}\;\;r\in \mathbb{N} \;\;g\in G  \right\}$$</span>
+נחפש <span>\(S\)</span> סופית כך ש:
+<span>$$\ker\left( \tilde{\iota} \right) = \left\langle  \langle S\rangle  \right\rangle$$</span>
+כאשר עבור <span>\(D_{n}\)</span>:
+<span>$$\ker\left( \tilde{\iota} \right)=\left\langle  \left\langle  \tau^n, \sigma^n , \left( \tau \sigma \right)^2\right\rangle  \right\rangle$$</span></p>
+</div>
+<div class="example">
+<p><span>$$G=D_{n}=\left\langle  \sigma,\tau \right\rangle$$</span>
+<span>$$\tilde{\iota}:F\left( \sigma,\tau \right)\to D_{n}$$</span>
+<span>$$\ker\left( \tilde{\iota} \right)=\left\{  \sigma^n,\tau^2, \sigma^{2n}, \left( \sigma \tau \right)^2,\dots  \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">יוצרים ויחסים</span><p>אם <span>\(S\)</span> יוצרת את <span>\(G\)</span>, איברי <span>\(S\)</span> נקראים יוצרים (<span>\(generators\)</span>) ואיברי <span>\(\ker\left( \tilde{\iota}:F(s)\to G \right)\)</span> נקראים יחסים(<span>\(relators / relations\)</span>). למשל "<span>\(\sigma \tau \sigma \tau\)</span> הוא יחס ב-<span>\(D_{n}\)</span>", "<span>\(\tau \sigma \tau=\sigma ^{-1}\)</span>" הוא יחס ב-<span>\(D_{n}\)</span>.</p>
+</div>
+<div class="example">
+<p>המילה "<span>\(\sigma \tau \sigma \tau\)</span> הוא יחס ב-<span>\(D_{n}\)</span>", ו-"<span>\(\tau \sigma \tau=\sigma ^{-1}\)</span>" הוא יחס ב-<span>\(D_{n}\)</span>.</p>
+</div>
+<p>אנחנו הגדרנו עבור <span>\(S\subseteq G\)</span> את:
+<span>$$\left\langle  \langle S\rangle  \right\rangle =\bigcap_{S\subseteq N\trianglelefteq G}N=\left\langle  \left\{  \prescript{g}{}{s}\mid g\in G\quad s \in S  \right\} \right\rangle$$</span>
+כאשר אנחנו מחפשים <span>\(R\subseteq F(s)\)</span> כךש-<span>\(\ker\left( \tilde{\iota} \right)= \left\langle \langle R\rangle\right\rangle\)</span>.</p>
+<div class="symbolize">
+<p><span>\(G=\left\langle  S\mid R  \right\rangle\)</span> הצגה של <span>\(G\)</span> ע"י היוצרים של <span>\(S\)</span> ויחסים <span>\(R\)</span>. </p>
+<p><span>$$\begin{gathered}S\subseteq R\quad S\subseteq G \\\left\langle  \langle R\rangle  \right\rangle =\ker\left( \left( \tilde{\iota}:F(s)\to G \right) \right)\quad R\subseteq F(s)
+\end{gathered}$$</span>
+נובע:
+<span>$$G\cong F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\qquad Z_{n}=\left\langle  a\mid a^n \right\rangle \qquad \ker\left( \tilde{\iota}:\overbracket{ F(a) }^{ \cong\mathbb{Z}  }\to \mathbb{Z} _{n} \right) = \langle a^n\rangle =\left\langle  \langle a^n\rangle  \right\rangle$$</span>
+<span>$$D_{n}=\left\langle  \sigma,\tau \mid \sigma^n,\tau^2,\left( \sigma \tau \right)^2 \right\rangle$$</span>
+כאשר תיכף נוכיח את הדוגמא השנייה.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f:G\to H\)</span> הומומורפיזם ו-<span>\(N\trianglelefteq  G\)</span> אזי ישנו הומומורפיזם <span>\(\bar{f}:G / N\to H\)</span> כך ש-<span>\(f=\bar{f}\circ \pi\)</span></p>
+</div>
+<div class="proof">
+<p>הטרנה מתקיימת אם ורק אם <span>\(N\subseteq \ker(f)\)</span> אם"ם <span>\(f\)</span> קבועה על כל קוסט של <span>\(N\)</span> אם"ם <span>\(\bar{f}(gN)=f(g)\)</span> מוגדרת היטב. נחזור לדוגמא על דיהדרלים: נוכיח ש-<span>\(D_{n}=\left\langle  \underbrace{ \sigma,\tau }_{ S } \mid \underbrace{ \sigma^n,\tau^2,\left( \sigma \tau \right)^2 }_{ R }  \right\rangle\)</span>. נסמן <span>\(K=\left\langle  \langle R\rangle\right\rangle \trianglelefteq F(s)\)</span>(רוצים: <span>\(K=\ker\left( \tilde{\iota} \right)\)</span>). נסתכל על הדיאגרמה הבאה:</p>
+</div>
+<p>כיוון ש-<span>\(R\subseteq \ker\left( \tilde{\iota} \right)\)</span> נקבל <span>\(\left\langle  \langle R\rangle\right\rangle\subseteq \ker\left( \tilde{\iota} \right)\)</span> ולכן <span>\(\bar{\tilde{\iota}}\)</span> קיים. וכן זה יהיה איזומורפיזם כיוון שעל(כי <span>\(\left\{  \sigma,\tau  \right\}=im\left( \iota \right)\subseteq im\left( \tilde{\iota} \right)=im\left( \bar{\tilde{\iota}} \right)\)</span>) נוכיח כי
+<span>$$2n\geq |F\left( \sigma,\tau \right) / \left\langle  \langle R\rangle  \right\rangle |$$</span>
+ולכן <span>\(\tau\)</span> איזומורפיזם. נוכיח שע"י מכפלה באיברי <span>\(\left\langle  \langle R\rangle\right\rangle\)</span> אפשר להגיע ממילה כללית ב-<span>\(F\left( \sigma,\tau \right)\)</span> לאחת מהמילים <span>\(\sigma^i\tau^k\)</span> כאשר <span>\(0\leq j&lt;n, 0\leq k\leq 1\)</span>. נשים לב שב <span>\(F\left( \sigma,\tau \right) / \left\langle \langle R\rangle\right\rangle\)</span> מתקיים <span>\(\sigma^n=e\)</span>(כלומר <span>\(\sigma^n\left\langle \langle R\rangle\right\rangle=\left\langle  \langle R\rangle  \right\rangle\)</span>) כאשר <span>\(\tau^2=e\)</span> וכן:
+<span>$$\sigma \tau=\sigma \tau\left( \sigma \tau \right)^{-2}=\tau ^{-1} \sigma ^{-1} =\tau ^{-1} \left( \tau^2 \right)\sigma ^{-1} =\tau ^{-1}$$</span>
+מ-<span>\(e=\tau^2=\sigma^4\)</span> , <span>\(\sigma \tau=\tau \sigma ^{-1}\)</span> אתם יודעים לעבור ממילה כללית ב-<span>\(\sigma ,\tau,\sigma ^{-1} ,\tau ^{-1}\)</span> לאחת המילים <span>\(\sigma^i\tau^k\)</span> כאשר <span>\(0\leq j&lt;n,0\leq k&lt;2\)</span> (כי אפשר להחליף <span>\(\tau^k \sigma^j\)</span> ב-<span>\(\sigma^m\tau^\ell\)</span> כלשהו).
+נקבל כי <span>\(\bar{f}\)</span> מונומורפיזם(שיכון/חח"ע) אם"ם <span>\(N=\ker(f)\)</span>: אם <span>\(k\in \ker(f)\)</span> אזי <span>$$\bar{f}(kN)=\bar{f}(k)=f(k)=e$$</span>
+<span>$$\bar{f} \text{ ע"חח } \implies kN=N\implies k\in N$$</span></p>
+<div class="proposition">
+<p><span>$$\left\langle  \langle R\rangle  \right\rangle =\ker\left( \left( F(s)\to G \right) \right) \quad \langle s\rangle =G\implies G\cong F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span>
+ו-<span>\(H\)</span> חבורה כלשהי אז אם <span>\(f:S\to H\)</span> פונקציה אז קיים הומומורפיזם <span>\(\tilde{f}:G\to H\)</span> שמרחיב את <span>\(f\)</span> (<span>\(\tilde{f}|_{S}=f\)</span>) אם"ם לכל <span>\(R\ni r=\prod_{i=1}^m s_{i}^{\varepsilon_{i}}\)</span> מתקיים <span>\(\prod_{i=1}^mf(s_{i})^{\varepsilon_{i}}=1\)</span> ב-<span>\(H\)</span>.</p>
+</div>
+<div class="example">
+<p>תהי <span>\(H\)</span> חבורה אזי יש הומומורפיזם <span>\(f:D_{n}\to H\)</span> שמקיים <span>\(f\left( \pi \right)=h', f\left( \sigma \right)=h\)</span> אם"ם <span>\((hh')^2=h^n=h'^2=e\)</span></p>
+</div>
+<div class="proof">
+<p>אם קיימת <span>\(f\)</span> כזו אז בפרט מתקיים:
+<span>$$\forall r=\prod_{i=1}^m s_{i}^{\varepsilon_{i}}\qquad \prod_{i=1}^{m}f(s_{i})^{\varepsilon_{i}}=\prod_{i=1}^{m}\tilde{f}(s_{i})^{\varepsilon_{i}}=\tilde{f}\left( \prod_{i=1}^{m}s_{i}^{\varepsilon_{i}}O \right)=\tilde{f}(e)=e$$</span>
+מצד שני, נסתכל על:
+<span>$$G= f(s) / \ker\left( \tilde{\iota} \right)=F(s) / \left\langle  \langle R\rangle  \right\rangle$$</span>
+לפי הקרטריון של התפרקות הומומורפיזם דרך חבורת מנה, <span>\(\tilde{f}\)</span> מוגדרת אם"ם <span>\(\left\langle  \langle R\rangle  \right\rangle\subseteq \ker\left( \tilde{f}^{F(s)} \right)\)</span>
+וזה שקול ל-<span>\(R\subseteq \ker\left( \tilde{f}^{F(s)} \right)\)</span> </p>
+</div>
+<div class="example">
+<p><span>$$\begin{gathered}\mathbb{Z} =\left\langle  a\mid \varnothing\right\rangle \qquad \mathbb{Z} _{n}=\left\langle  a\mid a^n \right\rangle \qquad F_{n}=\left\langle  a_{1},\dots,a_{n}\mid \varnothing\right\rangle \\ \mathbb{Z} ^2=\left\langle  a,b\mid aba^{-1} b^{-1}  \right\rangle  \qquad \mathbb{Z}^3=\left\langle  a,b,c\mid[a,b],[b,c],[a,c] \right\rangle   \\S_{n}=\left\langle  a_{1},\dots,a_{n-1}\mid a_{i}^2 \;\;\forall i\leq n-1\quad (a_{i}a_{i+1})^3\;\;\forall i\leq n-2\qquad a_{i}a_{j}a_{i}^{-1} a_{j}^{-1}\;\; \forall j\geq i+2 \right\rangle
+\end{gathered}$$</span></p>
+</div>
+<div class="remark">
+<p>אין אלגוריתם שמכריע בהנתן <span>\(S,R\)</span> סופית האם <span>\(\left\langle  S\mid R  \right\rangle\)</span> טריווירליות סופיות או אין סופיות.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups'> תורת החבורות</a></li>
+<li class='prev-page'><a href='./Groups_7_1'>7.1 מילים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

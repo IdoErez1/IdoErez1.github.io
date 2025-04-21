@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מדידה אורתוגונאלית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent-page'><a href='./Quantum_computation.html'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2.html'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1.html'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3.html'>2.3 ערוצים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_5.html'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2.html'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1.html'>4.1 חישוב</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2.html'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_3.html'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_1.html'>5.1 שערים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_3.html'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_1.html'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_1.html'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_2.html'>7.2 מחזוריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_3.html'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_4.html'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_1.html'>8.1 טרוטריזציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_2.html'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_2_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_1_4.html`;}});</script>
+        <div class="content">
+        <h1>2.1  מדידה אורתוגונאלית</h1>
+    <div class="definition"><span class="keyword">מדידה אורתוגונאלית</span><p>עבור ערך מדיד <span>\(X\)</span> אוסף של אופרטורי הטלה אשר מוגדרים לפי המצבים העצמים של <span>\(X\)</span> המוגדרים על ידי:
+<span>$$\Pi_{n}=\ket{n} \bra{n} $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של מדידה אורתונורמלי</span><p>מדידה אורתוגונאלית מקיימת:
+<span>$$\Pi_{n}\Pi_{m}=\delta_{mn}\Pi_{n}\quad \Pi_{n}^{2}=\mathbb{1} \quad \Pi_{n}=\Pi_{n}^{\dagger}$$</span>
+וכן מקיים יחס שלמות:
+<span>$$\Pi_{1}+\Pi_{2}+\dots+\Pi_{n}=\sum_{i}\Pi_{i}=\mathbb{1} $$</span></p>
+</div>
+<div class="proposition">
+<p>ההסתברות לקרוס למצב <span>\(n\)</span> נתון על ידי:
+<span>$$p_{n}=\left\langle  \Pi_{n}  \right\rangle $$</span></p>
+</div>
+<div class="proposition">
+<p>המערכת תקרוס למטיצת צפיפות:
+<span>$$\rho'= \frac{\Pi_{n}\rho \Pi_{n}}{\mathrm{Tr}\left( \Pi_{n}\rho \Pi_{n} \right)}$$</span></p>
+</div>
+<div class="proof">
+<p>המערכת תעבור לבסיס שבה מופעל האופרטור <span>\(\Pi_{n}\)</span>, כלומר <span>\(\Pi_{n}^{\dagger}\rho \Pi_{n}\)</span> כאשר נדרש לנרמל וכן נשים לב כי <span>\(\Pi ^{\dagger}_{n}=\Pi_{n}\)</span> ולכן:
+<span>$$\rho'= \frac{\Pi_{n}\rho \Pi_{n}}{\mathrm{Tr}\left( \Pi_{n}\rho \Pi_{n} \right)}$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אם נבצע מדידה חוזרת מייד אחרי, נקבל את אותה מטריצת צפיפות.</p>
+</div>
+<div class="proposition"><span class="keyword">ביצוע מדידה</span><p>כעת נסתכל על איך ניתן לבצע מדידה בפועל. נדרש לשזור את המערכת המיקרוסקופית למערכת מאקרוסקופית, אותה ניתן למדוד. נבצע את השלבים הבאים:</p>
+<ol>
+<li>
+<p>נגדיר גודל מדיד <span>\(Q\)</span>, אותו אנחנו יכולים לקרוא ומייצג מכשיר מדידה, ויהיה עם פירוק ספקטרלי <span>\(Q\ket{q}=q\ket{q}\)</span>. </p>
+</li>
+<li>
+<p>נאתחל את המערכת ב-<span>\(\ket{q=0}\)</span>. נרצה שהמדידה תעביר את המערכת ל-<span>\(\ket{q=x_{n}}\)</span> עבור ערך נמדד <span>\(x_{n}\)</span> של <span>\(X\)</span>. </p>
+</li>
+<li>
+<p>כדי למדוד נפעיל את האופרטור האוניטרי: 
+<span>$$U=\sum_{n,q}\Pi_{n}\otimes|q+x_{n}\rangle\,\langle q|$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ראשית נראה שאוניטרי:
+<span>$$\begin{gather}U U^{\dagger}=\!\!\!\sum_{n,q\ n^{\prime},q^{\prime}}\left(\Pi_{n}\otimes\left|q+x_{n}\right\rangle\left\langle q\right|\right)\left(\Pi_{n^{\prime}}\otimes\left|q^{\prime}\right\rangle\left\langle q^{\prime}+x_{n^{\prime}}\right|\right)=\\=\sum_{n,q}\sum_{n^{\prime},q^{\prime}}\Pi_{n}\Pi_{n^{\prime}}\otimes\left|q+x_{n}\right\rangle\left\langle q|q^{\prime}\right\rangle\left\langle q^{\prime}+x_{n^{\prime}}\right|=\sum_{n,q}\Pi_{n}\otimes\left|q+x_{n}\right\rangle\left\langle q+x_{n}\right| 
+\end{gather}$$</span>
+כיוון ש-<span>\(q+x_{n}\)</span> הוא גם ערך עצמי של <span>\(Q\)</span> ניתן לשנות את אינדקס הסכימה ל-<span>\(q''=q+x_{n}\)</span> וכעת:
+<span>$$U U^{\dagger}=\sum_{n}\Pi_{n}\otimes\sum_{q^{\prime\prime}}|q^{\prime\prime}\rangle\,\langle q^{\prime\prime}|=\mathbb{I}\otimes\mathbb{I}$$</span>
+כאשר כאשר נפעיל את האונירי על מצב <span>\(\ket{\psi}\otimes \ket{q=0}\)</span> נקבל כי אם <span>\(\ket{\psi}=\sum_{n}a_{n}\ket{n}\)</span> נקבל:
+<span>$$|\Psi\rangle\equiv U\,|\psi\rangle\!\otimes\!|q=0\rangle=U\left(\sum_{n}a_{n}\,|n\rangle\right)\!\otimes\!|q=0\rangle=\sum_{n}a_{n}\,|n\rangle\!\otimes\!|q=x_{n}\rangle$$</span></p>
+</div>
+<div class="corollary">
+<p>נמצב שהתקבל יהיה:
+<span>$$|n\rangle\otimes|q=x_{n}\rangle$$</span>
+כאשר ההסתברות נתונה על ידי:
+<span>$$p_{n}=\left\langle\Psi\right|\left(\mathbb{1}\otimes\left|q=x_{n}\right\rangle\left\langle q=x_{n}\right|\right)\left|\Psi\right\rangle$$</span></p>
+</div>
+<div class="example"><span class="keyword">מדידה על קיוביט</span><p>נניח כי נתון קיוביט מהצורה:
+<span>$$|\psi\rangle_{A}=a|0\rangle_{A}+b|1\rangle_{A}$$</span>
+נרצה למדוד את <span>\(A\)</span> בבסיס <span>\(Z\)</span>(הבסיס החישובי). על ידי שימוש בקיוביט נוסף <span>\(E\)</span> כמכשיר מדידה.
+<strong>דרך 1</strong> - נרצה שאם <span>\(A\)</span> ב-<span>\(\ket{0}\)</span> אז <span>\(E\)</span> לא ישתנה(הרי מכשיר מדידה מאותחל ל-0) כאשר אם <span>\(A\)</span> ב-<span>\(\ket{1}\)</span> אז <span>\(E\)</span> יהפוך את המצב שלו, וספציפית יהפוך את <span>\(\ket{0}\)</span> ל-<span>\(\ket{1}\)</span>. האופורטור שעושה את זה הוא <span>\(X_{E}\)</span>. לכן נקבל:
+<span>$$U=|0\rangle\langle0|_{A}\otimes \mathbb{1}_{E}+|1\rangle\langle1|_{A}\otimes X_{E}$$</span>
+<strong>דרך 2</strong> - נשתמש בצורה הכללית של מדידה אורתוגונאלית:
+<span>$$U=\sum_{n=0,1}\Pi_{n}\otimes|q+n\rangle\langle q|$$</span>
+אם נציב את ה-n-ים ונסכום נקבל:
+<span>$$U=|0\rangle\langle0|_{A}\otimes|q\rangle\langle q|+|1\rangle\langle1|_{A}\otimes|q\oplus1\rangle\langle q|$$</span>
+כיוון שמכישר המדידה הוא קיוביט וניתן לקבל רק את הערכים 0 ו-1 ניתן לכתוב:
+<span>$$U=|0\rangle\langle0|_{A}\otimes \mathbb{1}_{E}+|1\rangle\langle1|_{A}\otimes X_{E}$$</span></p>
+</div>
+<div class="example">
+<p>נסתכל על מערכת של קיוביט יחיד:
+<span>$$|\psi\rangle=a\,\ket{\uparrow } +b\,\ket{\downarrow } $$</span>
+כאשר אם נמדוד ישירות בבסיס <span>\(z\)</span> יש לנו הסתברות של <span>\(\lvert a \rvert^{2}\)</span> ו-<span>\(\lvert b \rvert^{2}\)</span> עבור <span>\(\ket{\uparrow}\)</span> ו-<span>\(\ket{\downarrow}\)</span> בהתאמה. אם נמדוד בבסיס <span>\(x\)</span> נקבל הסתברויות של <span>\(\frac{1}{2}\lvert a+b \rvert^{2}\)</span> ו-<span>\(\frac{1}{2}\lvert a-b \rvert^{2}\)</span> עבור <span>\(\ket{\uparrow_{x}}\)</span> ו-<span>\(\ket{\downarrow_{x}}\)</span>. כעת אם נרצה לבצע את המדידה בעזרת מכשיר מדידה, נדרש שזה יהיה אופרטור ספין. נתחל אותו במצב <span>\(\ket{\uparrow}\)</span> ונצמד אותו למערכת בעזרת האופרטור האוניטרי:
+<span>$$U=|\!\uparrow\rangle\left\langle\uparrow\!|\otimes\mathbb{1}+|\!\downarrow\rangle\left\langle\downarrow\!|\otimes\sigma_{x}\right.\right.$$</span>
+כך ש:
+<span>$$U\left|\psi\right\rangle\otimes\left|\uparrow\right\rangle=a\left|\uparrow\right\rangle\otimes\left|\uparrow\right\rangle+b\left|\downarrow\right\rangle\otimes\left|\downarrow\right\rangle$$</span>
+כעת נמדוד בבסיס ה-<span>\(z\)</span>. נקבל <span>\(\ket{\uparrow}\otimes \ket{\uparrow}\)</span> או <span>\(\ket{\downarrow}\otimes \ket{\downarrow}\)</span> עם הסתברויות של <span>\(\lvert a \rvert^{2}\)</span> ו-<span>\(\lvert b \rvert^{2}\)</span> כמו שהיינו רוצים. אך אם נרצה למדוד בבסיס <span>\(x\)</span> נקבל:
+<span>$$U\left|\psi\right\rangle\otimes\left|\uparrow\right\rangle=\frac{1}{\sqrt{2}}\left(a\left|\uparrow\right\rangle+b\left|\downarrow\right\rangle\right)\otimes\left|\uparrow_{x}\right\rangle+\frac{1}{\sqrt{2}}\left(a\left|\uparrow\right\rangle-b\left|\downarrow\right\rangle\right)\otimes\left|\downarrow_{x}\right\rangle$$</span>
+עם הסתברות קבוע של <span>\(\frac{1}{2}\)</span> עבור שתי המקרים, שזה תוצאה שונה מאשר אם היינו מודדים את המערכת ישירות.</p>
+</div>
+<div class="remark">
+<p>מדידה בצורה הזאת מעלה בעיה - אנחנו נדרשים למדוד בבסיס של <span>\(Q\)</span>.</p>
+</div>
+<div class="remark">
+<p>נדרש להגדיר צורה חדשה למדוד כדי לפתור את הבעיה זו. צורה זו תהיה הכללה של המדידה האורתוגונאלית. זה נקרא מדידה מוכללת.</p>
+</div>
+<div class="example"><span class="keyword">מדידת פון-נוימן</span><p>נתון המילטוינאן <span>\(H_{0}\)</span> של המערכת, מכשיר מדידה עם מציין(pointer) <span>\(Q\)</span> ותנע <span>\(P\)</span>. המצב ההתחלתי יהיה <span>\(\ket{\psi}=\sum_{n}a_{n}\ket{n}\)</span> ו-<span>\(\ket{q=0}\)</span>. המילטוניאן האינטרקציה בין מכשיר המדידה למערכת נתון על ידי:
+<span>$$H_{i n t}(t)=\lambda\delta(t)X P$$</span>
+נראה איך המדידה תאפשר לקרוא במכשיר מדידה את המדידה של המערכת.
+אנו יודעים כי יחס החילוף נתון על ידי <span>\([Q,P]=i\mathbb{1}\)</span>. הקידום בזמן בחלק קטן זמני קטן סביב <span>\(t=0\)</span> יהיה:
+<span>$$U=\operatorname*{lim}_{\epsilon\rightarrow0}e^{-i\int_{-\epsilon}^{\epsilon}d t H_{\mathrm{int}}(t)}=e^{-i\lambda X P}$$</span>
+כאשר ניתן לכתוב את האופרטור בעזרת אופרטורי הטלה:
+<span>$$U=e^{ -i\lambda X\otimes P }=\sum_{n}\Pi_{n}\otimes e^{-i\lambda x_{n}P}$$</span>
+ולכן המצב השזור הסופי יהיה:
+<span>$$U|\psi\rangle\otimes|q=0\rangle=\sum_{n}a_{n}\left|n\right\rangle\otimes e^{-i\lambda x_{n}P}\left|q=0\right\rangle=\sum_{n}a_{n}|n\rangle\otimes|q=\lambda x_{n}\rangle$$</span>
+כך שהמציין נותן לנו את הערך עצמי הנמדד.</p>
+</div>
+<div class="summary">
+<ul>
+<li>כדי למדוד מצב קוונטי נדרש לשזור אותו למכשיר מדידה <span>\(Q\)</span>.</li>
+<li>אופרטור אוניטרי אשר מאפשר הוא:
+<span>$$U=\sum_{n=0,1}\Pi_{n}\otimes|q+n\rangle\langle q|$$</span></li>
+<li>תלויה בבסיס של מכשיר המדידה <span>\(Q\)</span>.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='prev-page'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

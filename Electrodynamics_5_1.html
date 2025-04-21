@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גלים אלקטרומגנטיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_5_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_4_4`; }});</script>
+        <div class="content">
+        <h1>5.1  גלים אלקטרומגנטיים</h1>
+    <p>נתחיל מחוקי מקסוואל:
+<span>$$\begin{gather} \bar{\nabla} \cdot \vec{B} = 0 \qquad \bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} \\\bar{\nabla} \cdot \vec{E}=4\pi \rho \qquad -\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J} 
+\end{gather}$$</span></p>
+<div class="definition"><span class="keyword">כיול לורנץ</span><p>ניתן להגדיר את הפוטנציאלים כך שמתקיים:
+<span>$${\frac{1}{c}}\,\frac{\partial\Phi}{\partial t}\,+\,{\vec\nabla\cdot A}\,=\,0$$</span></p>
+</div>
+<div class="proposition">
+<p>חוקי מקסוואל תחת כיול לורנץ שקולות למשוואות:
+<span>$${\frac{1}{c^{2}}}\,{\frac{\partial^{2}\vec{A}}{\partial t^{2}}}\,-\,\nabla^{2}\vec{A}\,=\,{\frac{4\pi}{c}}\,\vec{J}\qquad {\frac{1}{c^{2}}}\,{\frac{\partial^{2}\Phi}{\partial t^{2}}}\,-\,\nabla^{2}\Phi\,=\,4\pi\rho$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי:
+<span>$$\vec{E}=-\nabla\varphi-{\frac{\partial\vec{A}}{\partial t}}\qquad\vec{B}=\nabla\times\vec{A}.$$</span>
+ולכן עצם השימוש ב-<span>\(\Phi,A\)</span>  שקול ל:
+<span>$$\bar{\nabla} \cdot \vec{B}=0\qquad \bar{\nabla} \times \left( E+\frac{\partial A}{\partial t}  \right)=0\iff \bar{\nabla} \times  \vec{E}=\frac{\partial }{\partial t} \left( \bar{\nabla} \times \vec{A} \right)=\frac{\partial \vec{B}}{\partial t} $$</span>
+ולכן כבר שקול לשתי משוואת מקסוואל. כדי להראות שמתקיימים שתי חוקי מקסוואל השניים נציב את ההגדרות של הפוטנציאלים בחוקים הנותרים:
+<span>$$\bar{\nabla} \cdot  \vec{E}=\bar{\nabla}\cdot\left(-\bar{\nabla}\phi-{\frac{\partial{\vec{A}}}{\partial t}}\right)=4\pi \rho \implies -\nabla^{2}\phi-{\frac{\partial}{\partial t}}\,\nabla\cdot{\vec{A}}=4\pi \rho$$</span>
+כאשר תחת כיול לורנץ נקבל:
+<span>$$\nabla^{2}\phi-{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\phi}{\partial t^{2}}}=-4\pi \rho$$</span>
+עבור המשוואה הנותרת נקבל:
+<span>$$c^{}\nabla\times B-{\frac{\partial E}{\partial t}}=4\pi j\implies c{\vec{\nabla}}\times\left({\vec{\nabla}}\times{\vec{A}}\right)-{\frac{\partial}{\partial t}}\left(-{\vec{\nabla}}\phi-{\frac{\partial{\vec{A}}}{\partial t}}\right)=4\pi j$$</span>
+נשתשמש בזהות <span>\(\nabla\times(\nabla\times\vec{c})=\nabla(\nabla\cdot\vec{c})-\nabla^{2}\vec{c}\)</span> ונקבל:
+<span>$$-c\nabla^{2}A+c\nabla\left( \nabla\cdot A \right)+\frac{\partial}{\partial t}\;{\vec{\nabla}}\phi+\frac{\partial^{2}{\vec{A}}}{\partial t^{2}}=4\pi j$$</span>
+כאשר מכיול לורנץ נקבל כי <span>\({\frac{1}{c}}\,\frac{\partial\Phi}{\partial t}\,+\,{\vec\nabla\cdot A}\,=\,0\)</span> וניתן להציב בגורם של הדיברגנץ ולקבל כי <span>\(\frac{\partial }{\partial t} \bar{\nabla}\phi\)</span> מתבטל. לכן נקבל סה"כ:
+<span>$${\frac{1}{c^{2}}}\,{\frac{\partial^{2}\vec{A}}{\partial t^{2}}}\,-\,\nabla^{2}\vec{A}\,=\,{\frac{4\pi}{c}}\,\vec{J}$$</span></p>
+</div>
+<p>הדמיות הראשיות של האלקטרו מגנטיות הם למעשה הפוטנציאלים <span>\(\phi,\vec{A}\)</span>, ולא השדות החשמליים והמגנטיים. הם פותרים הכל. למעשה נקבל כי משוואות מקסוואל שקולות לשתי משוואות גלים.</p>
+<div class="remark">
+<p>כיוון שהפוטנציאל החשמלי הוא רכיב של ה-4 פוטנציאל, ניתן לכתוב משוואות שקולות משוואות מקסוואל בשורה אחת בעזרת ה-4 פוטנציאל וה-4 זרם:
+<span>$$\partial^{\nu}\partial_\nu A^{\mu}=-\frac{4\pi}{c^{2}}J^{\mu}$$</span></p>
+</div>
+<h2>משוואת הגלים</h2>
+<p>נרצה למצוא פתרון כללי למשוואת הגלים מהצורה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=f(t,s)$$</span>
+עבור מקור נקודתי נקבל כי המשוואה תהיה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=\delta(r)$$</span>
+כאשר אנו יודעים מגלים כי זה יהיה פשוט גל כדורי, אשר הפתרון שלו יהיה מהצורה:
+<span>$$\psi(x,y,z,t)={\frac{f(t-r/c)}{r}}$$</span>
+כאשר אם זה לא מקור נקודתי, אפשר יהיה לחשוב על זה כסופרפוזיציה של מקורות נקודתיים. כלומר נדרש לבצע אינטגרל מרחבי, 
+ולכן נקבל את הטענה הבאה:
+<strong>טענה</strong>
+הפתרון של משוואת הגלים מהצורה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=-f(x,t)$$</span>
+יהיה:
+<span>$$\psi=\int \frac{f\left(x, t-\frac{r}{c} \right)}{r}dV$$</span></p>
+<div class="remark">
+<p>העקרון שעשינו עכשיו של לחשוב על משהו כאוסף של מקורות נקודתיים זה הרעיון מאחורי פונקצית גרין. ולכן מה שעשינו שקול ללפתח פונקציית גרין כדי להגיע לפתרון הזה.</p>
+</div>
+<div class="corollary">
+<p>פתרונות משוואות הגלים אשר שקולות משוואות מקסוואל יהיו:
+<span>$$\Phi(\vec{x},t)=\int d^{3}x^{\prime}\frac{\rho(\vec{x}^{\prime},t_{r})}{|\vec{x}-\vec{x}^{\prime}|} \qquad \vec{A}(\vec{x},t)=\frac{1}{c}\int d^{3}x^{\prime}\frac{\vec{J}(\vec{x}^{\prime},t_{r})}{|\vec{x}-\vec{x}^{\prime}|} $$</span>
+כאשר:
+<span>$$t_{r}=t-{\frac{|{\vec{x}}-{\vec{x}}^{\prime}|}{c}}$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן לפתח משוואת גלים ישירות עבור השדה החשמלי והמגנטי:
+<span>$$\nabla^{2}\vec{E}-{\frac{1}{c^{2}}}{\frac{\partial^{2}\vec{E}}{\partial t^{2}}}={\frac{1}{\epsilon_{0}}}\nabla\rho+\frac{4\pi}{c}{\frac{\partial\vec{j}}{\partial t}}\qquad \nabla^{2}\vec{B}-{\frac{1}{c^{2}}}{\frac{\partial^{2}\vec{B}}{\partial t^{2}}}=-\frac{4\pi}{c}\nabla\times\vec{j}$$</span></p>
+</div>
+<h2>גלים אלקטרומגנטים בריק</h2>
+<p>עבור ריק נקבל עבור השדה החשמלי והמגנטי את משוואות הגלים:
+<span>$$\nabla^{2}\vec{E}=\frac{1}{c^{2}}{\frac{\partial^{2}\vec{E}}{\partial t^{2}}},\quad\nabla^{2}\vec{B}=\frac{1}{c^{2}}{\frac{\partial^{2}\vec{B}}{\partial t^{2}}}$$</span>
+כאשר אנו יודעים שהפתרונות של המשוואה הזו זה גלים מישוריים מהצורה:
+<span>$$\tilde{\vec E}(z,t)=\tilde{\vec E}_{0}e^{i\,(k z-\omega t)},\quad\tilde{\vec B}(z,t)=\tilde{\vec B}_{0}e^{i\,(k z-\omega t)}$$</span></p>
+<div class="proposition">
+<p>מזה ש-<span>\(\bar{\nabla} \cdot \vec{B}=0\)</span> וגם <span>\(\bar{\nabla} \cdot \vec{E}=0\)</span> נקבל כי הגל טרנזטיבי/רוחבי, כלומר:
+<span>$$(\tilde{E}_{0})_{z}=(\tilde{B}_{0})_{z}=0$$</span>
+והגלים החשמלים והמגנטיים שניהם מאונכים לכיוון התקדמות הכל.</p>
+</div>
+<div class="remark">
+<p>גם כאשר אנחנו בחומר נקבל כי הגל טרנזטיבי, אך ייתכן רכיבים אורכיים.</p>
+</div>
+<div class="proposition">
+<p>מחוק פאראדיי נקבל כי <span>\(\bar{\nabla} \times \vec{E}=-\frac{\partial \vec{B}}{\partial t}\)</span> ולכן:
+<span>$$-k\left( \tilde{E}_{0} \right)_{y}=\omega\left( \tilde{B}_{0} \right)_{x},\;\;\;k\left( \tilde{E}_{0} \right)_{x}=\omega\left( \tilde{B}_{0} \right)_{y}\implies \tilde{{\vec B}}_{0}=\frac{k}{\omega}\left( \hat{{\vec z}}\times\tilde{{\vec E}}_{0} \right)=c\left( \hat{z}\times \vec{E}_{0} \right)$$</span>
+כלומר הגלים החשמליים והמגנטיים נמצאים באותו פאזה כאשר האמפליטודות שלהם מקיימות את הקשר:
+<span>$$B_{0}=\frac{k}{\omega}E_{0}=\frac{1}{c}E_{0}$$</span></p>
+</div>
+<div class="example">
+<p>אם <span>\(\vec{E}\)</span> בכיוון <span>\(\hat{x}\)</span> אז <span>\(\vec{B}\)</span> בכיוון <span>\(\hat{y}\)</span> ומתקיים:
+<span>$$\tilde{\vec E}(z,t)=\tilde{E}_{0}e^{i(k z-\omega t)}\hat{\vec x},\quad\tilde{\vec B}(z,t)=\frac1c\tilde{E}_{0}e^{i(k z-\omega t)}\hat{\vec y}$$</span>
+או אם נקח את החלק הממשי:
+<span>$$\vec{E}(z,t)=E_{0}\cos(k z-\omega t+\delta)\,{\hat{\vec{x}}},\quad\vec{B}(z,t)={\frac{1}{c}}E_{0}\cos(k z-\omega t+\delta)\,{\hat{\vec{y}}}$$</span></p>
+</div>
+<div class="remark">
+<p>אם נכילל את זה למערכת צירים כללית, שבה כיוון ההתקדמות היא <span>\(\vec{k}\)</span> והכיוון של <span>\(\vec{E}\)</span> הוא <span>\(\vec{n}\)</span> אז נדרש שיתקיים <span>\({\hat{\vec{n}}}\cdot{\hat{\vec{k}}}=0\)</span> כיוון שזה גל רוחבי וכן הכיוון של <span>\(\vec{B}\)</span> יהיה <span>\(\hat{n} \times \hat{k}\)</span>.</p>
+</div>
+<h2>אנרגיה של גל אלקטרומגנטי</h2>
+<p>אנו יודעים כי האנרגיה של שדה חשמלי יהיה האינטגרל של השדה בריבוע על המרחב, וכן האנרגיה של השדה המגנטי יהיה האניטגרל על המרחב של השדה המגנטי בריבוע. לכן האנרגיה הכוללת של גל אלקטרומגנטי יהיה שתי התרומות האלה.</p>
+<div class="proposition"><span class="keyword">אנרגיה של השדה החשמלי והמגנטי</span><p>ברגע זמן נתון, צפיפות האנרגיה <span>\(u\)</span> והאנרגיה הכוללת <span>\(U_{tot}\)</span> יהיו:
+<span>$$u=\frac{1}{8\pi}\left( E^{2}+B^{2} \right)\implies U_{tot}=\iiint u \;\mathrm{dV}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">האנרגיה המכנית שנוצר מהשדה החשמלי והמגנטי לזמן</span><p>כיוון שהשדה המגנטי לא מבצע עבודה, בעזרת כוח לורנץ על צפיפות בנפח <span>\(V\)</span> נקבל:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,(\rho\,\vec{E}+\vec{j}\times\vec{B})\cdot{\vec{v}}=\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}$$</span>
+כאשר השתמשנו בזה ש-<span>\(\vec{j}(\vec{r},\,t)=\rho(\vec{r},\,t){\vec{\upsilon}}(\vec{r},\,t)\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">ווקטור פוינטינג</span><p><span>$${\vec S}=\frac{c}{4\pi}{\vec E}\times{\vec B}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט פוינטנג</span><p>השטף של ווקטור פוינטינג על מעטפת של נפח שווה לסך האנרגיה(במכנה והאנרגיה של השדה) שנובעים מהשדות החשמליים והמגנטיים:
+<span>$$\int_{\partial V}\vec{S}\cdot\vec{n}\;\mathrm{d}A=U_{\mathrm{EM}}+U_{\mathrm{mech}}$$</span>
+או לחלופין ניתן לכתוב בעזרת צפיפות אנרגיה משוואת רציפות:
+<span>$$\frac{\partial u_{\mathrm{EM}}}{\partial t}+\nabla\cdot{\vec S}=-{\vec j}\cdot{\vec E}$$</span></p>
+</div>
+<div class="proof">
+<p>נתחיל מהמשוואה של האנרגיה המכנית:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}$$</span>
+נבודד את <span>\(\vec{j}\)</span> ממשוואת אמפר-מקסוואל ונקבל כי האנרגיה המכנית תהיה שווה:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,\left[\frac{c}{4\pi}\nabla\times{\vec B}-\frac{1}{4\pi}\frac{\partial{\vec E}}{\partial t}\right]\cdot{\vec E}$$</span>
+כעת נשתמש בזהות:
+<span>$$\nabla\cdot\left(\vec{E}\times\vec{B}\right)=\vec{B}\cdot\left(\nabla\times\vec{E}\right)-\vec{E}\cdot\left(\nabla\times\vec{B}\right)=-\vec{B}\cdot{\frac{\partial\vec{B}}{\partial t}}-\vec{E}\cdot\left(\nabla\times\vec{B}\right)$$</span>
+ונקבל:
+<span>$$\int_{V}d^{3}r\,{\frac{\partial}{\partial t}}{\frac{1}{8\pi}}\left[\vec{E}\cdot\vec{E}+\vec{B}\cdot\vec{B}\right]=-\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}-\int_{V}d^{3}r\,{\frac{c}{4\pi}}\nabla\cdot\left(\vec{E}\times\vec{B}\right)$$</span>
+כאשר נזהה את הגדלים המתאימים:
+<span>$$U_{\mathrm{EM}}=-U_{\mathrm{mech}}-\int_{V}\bar{\nabla} \cdot \vec{S} \;\mathrm{d}V$$</span>
+כאשר ממשפט הדיברגנץ נקבל כי:
+<span>$$\int_{\partial V}\vec{S}\cdot\vec{n}\;\mathrm{d}A=U_{\mathrm{EM}}+U_{\mathrm{mech}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='prev-page'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+        </body>
+        </html>
+        

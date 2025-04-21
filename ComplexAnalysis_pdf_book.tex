@@ -1,0 +1,856 @@
+\documentclass{tstextbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Example Document}
+\author{HTML2LaTeX Converter}
+\maketitle
+
+\section{מבוא לפונקציות מרוכבות}
+
+\subsection{תזכורת - מרוכבים}
+
+מספר מרוכב הוא הרחבת שדות של הממשיים עם הפולינום \(x^2+1\) אשר מסומן ב-\(\mathbb{C}\). כלומר \(\mathbb{C}=\mathbb{R} / (x^2+1)\). זה אומר שזה למעשה מרחב ווקטורי דו מימדי עם ערך ממשי וערך מרוכב. כלומר מוסיפים איבר, אשר נסמן ב-\(i\) אשר פותר את הפולינום \(i^2+1=0\). 
+
+\begin{proposition}[הצגה קרטזית]
+$$\mathbb{C}=\left\{  x+iy\mid x,y \in \mathbb{R}  \right\}$$
+כאשר נסמן \(\mathrm{Re}(x+iy)=x\) ו-\(\mathrm{Im}(x+iy)=y\).
+
+\end{proposition}
+זה נובע מזה שזה מרחב ווקטורי, וניתן להציג כל ווקטור בצורה יחידה.
+
+\begin{proposition}[הצגה פולארית]
+$$\mathbb{C}=\left\{  re^{i\theta}\mid r\in \mathbb{R}^+,\theta \in\left[ 0,2\pi \right)  \right\}$$
+כאשר נסמן \(\left\lvert  re^{i\theta}  \right\rvert=r\) ו-\(\arg\left( re^{i\theta} \right)=\theta\).
+
+\end{proposition}
+\begin{definition}[צמוד מרוכב]
+עבור מספר \(z=x+iy\) נגדיר את הצמוד \(\overline{z}=x-iy\). או לחלופין עבור \(z=re^{i\theta}\) נקבל \(\overline{z}=re^{-i\theta}\).
+
+\end{definition}
+\begin{proposition}[חזקות של i]
+$$i^n=\begin{cases}i & r=1 \\-1 &r=2 \\-i & r=3\\1 & r=0\end{cases}
+$$
+
+\end{proposition}
+\begin{proposition}[זהות אוילר]
+$$e^{i\theta}=\cos \left( \theta \right)+i\sin \left( \theta \right)$$
+
+\end{proposition}
+\begin{proposition}[תכונות של ארגיומנט]
+$$\begin{gather}\arg(z)+\arg(w)=\arg(z+w)\qquad \arg(z^n)= n \cdot \arg(z)  \\\arg(\bar z)= - \arg (z)\end{gather}
+$$
+
+\end{proposition}
+\begin{proposition}[תכונות של הצמוד]
+$$\begin{gather}z\cdot \bar z = |z|^2 \qquad z + \bar z = 2Re(z) \qquad \overline{z+w}=\bar z +\bar w  \\e^{i\theta}\cdot e^{-i\theta}=1\qquad \text{cis}(\theta)\cdot \text{cis}(-\theta)=1 \qquad |z|^n = |z^n|\end{gather}
+$$
+
+\end{proposition}
+\begin{proposition}[חלק ממשי ומדומה]
+$$\begin{gather}Re(az)=a\cdot Re(z)\qquad Im(az)=a\cdot Im(z) \\ Re(z+w)=Re(z)+Re(w) \qquad Im(z+w)= Im(z)+Im(w) \\ Re(z)=Im(-iz)\qquad Im(z)=Re(-iz) \\ z= Re(z)+i\cdot Im(z)\qquad Re(\bar z)=Re(z) \\Im(\bar z)=-Im(z)\qquad e^z = e^w\implies z=w+2\pi i K\end{gather}
+$$
+
+\end{proposition}
+\begin{proposition}[שורשים של מרוכבים]
+$$\sqrt[n]{re^{i\theta}}= \sqrt[n]{r} e^{\frac{\theta+2\pi k}{n}}= \sqrt[n]{r}\left(\cos\frac{\theta+2\pi k}{n}+i\sin \frac{\theta+2\pi k}{n}\right)
+$$
+
+\end{proposition}
+\subsection{גבולות של פונקציות מרוכבות}
+
+\begin{definition}[גבול בנקודה]
+אם לכל \(\varepsilon>0\) קיים \(\delta>0\)  כך ש-
+$$|z-z_{0}|<\delta\implies\lvert f(z)-w_{0} \rvert <\varepsilon$$
+אז נגיד שכש-\(z\to z_{0}\) מתקיים:
+$$\lim_{ z \to z_{0} } f(z)=w_{0}$$
+
+\end{definition}
+נשים לב כי בהגדרה אנחנו מתעסקים עם הנורמה, דבר ההופך את הגבול שקול להתעסקות עם \(\mathbb{R}^2\)
+
+\begin{proposition}
+אם קיים גבול, אז הוא יחיד.
+
+\end{proposition}
+\begin{proposition}
+נניח \(f(z)=u(x,y)+i v(x,y)\) וכן נסמן \(z_{0}=x_{0}+iy_{0},w_{0}=u_{0}+iv_{0}\) אזי \(\operatorname*{lim}_{z\to z_{0}}f(z)=w_{0}\) אם"ם:
+$$\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}u\left(x,y\right)=u_{0}\quad{\mathrm{and}}\quad\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}v\left(x,y\right)=v_{0}$$
+
+\end{proposition}
+\begin{proof}
+נניח ראשית כי \(\lim_{ z \to z_{0} }f(z)=w_{0}\). לכן לכל \(\varepsilon>0\) קיים \(\delta>0\) כך ש:
+$$0<|(x+i y)-(x_{0}+i y_{0})|<\delta\implies|(u+i v)-(u_{0}+i v_{0})|<\varepsilon$$
+כאשר מתקיים:
+$$\begin{array}{l}{{|u-u_{0}|=|\big(u-u_{0}\big)+i\big(v-v_{0}\big)|~=~|\big(u+i v\big)-\big(u_{0}+i v_{0}\big)|,}}\\ {{|v-v_{0}|=|\big(u-u_{0}\big)+i\big(v-v_{0}\big)|~=~|\big(u+i v\big)-\big(u_{0}+i v_{0}\big)|}}\end{array}$$
+וכן מתקיים:
+$$|(x+i y)-(x_{0}+i y_{0})|=|(x-x_{0})+i(y-y_{0})|={\sqrt{(x-x_{0})^{2}+(y-y_{0})^{2}}}$$
+לכן הגרירה לעיל שקולה לגרירה:
+$$0<\sqrt{(x-x_{0})^{2}+(y-y_{0})^{2}}<\delta\implies\left|u-u_{0}\right|<\varepsilon\quad{\mathrm{and}}\quad\left|v-v_{0}\right|<\varepsilon$$
+וזה בדיוק אומר כי:
+$$\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}u\left(x,y\right)=u_{0}\quad{\mathrm{and}}\quad\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}v\left(x,y\right)=v_{0}$$
+נראה כעת את הכיוון השני. יהי \(\varepsilon>0\). נניח:
+$$\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}u\left(x,y\right)=u_{0}\quad{\mathrm{and}}\quad\operatorname*{lim}_{(x,y)\to(x_{0},y_{0})}v\left(x,y\right)=v_{0}$$
+לכן מהגדרת הגבול עבור \(\frac{\varepsilon}{2}\) נקבל \(\delta_{1},\delta_{2}\) כך שעבור \(\delta<\min\left( \delta_{1},\delta_{2} \right)\) מתקיים: 
+$$0<\sqrt{(x-x_{0})^{2}+(y-y_{0})^{2}}<\delta \implies|u-u_{0}|<\frac{\varepsilon}{2}\quad{\mathrm{and}}\quad|v-v_{0}|<\frac{\varepsilon}{2}$$
+כאשר מתקיים:
+$${\sqrt{(x-x_{0})^{2}+(y-y_{0})^{2}}}=|(x-x_{0})+i(y-y_{0})|\leq|(x+i y)-(x_{0}+i y_{0})|$$
+וגם:
+$$|(u+i v)-(u_{0}+i v_{0})|=|(u-u_{0})+i(v-v_{0})|\leq|u-u_{0}|+|v-v_{0}|<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon$$
+ולכן מתקיים עבור עבור \(z=x+iy,z_{0}=x_{0}+iy_{0},w=u+iv,w_{0}=u_{0}+iv\)$$|z-z_{0}|<\delta\implies |w-w_{0}|<\varepsilon$$
+
+\end{proof}
+\begin{example}
+נראה כי הגבול \(\operatorname*{lim}_{z\to0}{\frac{z}{\overline{{z}}}}\) לא קיים. נכתוב \(z=x+iy\). עבור החלק הממשי נקבל:
+$$f(z)={\frac{x+i0}{x-i0}}=1;$$
+עבור החלק המדומה נקבל:
+$$f(z)={\frac{0+i y}{0-i y}}=-1.$$
+כיוון שהגבול יחיד, והערכים שונים, הגבול לא קיים.
+
+\end{example}
+\subsection{ספרת רימן}
+
+ל-\(\mathbb{C}\) בניגוד ל-\(\mathbb{R}\) אין יחס סדר. לכן כאשר ל-\(\mathbb{R}\) יש שתי "אינסופים" - \(\pm\infty\), יש במרוכבים אינסוף יחיד אשר נסמן ב-\(\infty\). לכן נגדיר:
+
+\begin{definition}[מישור המרוכב המורחב]
+$$\mathbb{C}^*=\mathbb{C}\cup \left\{  \infty  \right\}$$
+כאשר הפעולה היא תהיה הרחבה של חיבור וכפל אשר מוגדרת באופן זהה עבור איברים ב-\(\mathbb{C}\). כאשר מגדירים את הפעולות בין \(z\in \mathbb{C}\) ל-\(\left\{  \infty   \right\}\) בצורה הבאה:
+$$\begin{gather}z+\infty=\infty \qquad z\cdot \infty=\infty \qquad \infty+\infty=\infty \\\infty\cdot \infty=\infty \qquad \frac{z}{\infty}=0 
+\end{gather}$$
+כאשר הפעלות:
+$$\frac{\infty}{\infty},0\cdot \infty,\infty-\infty$$
+אינם מוגדרים.
+
+\end{definition}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_1.svg}
+\begin{proposition}
+קיימת העתקה חח"ע ועל בין המספרים המרוכבים המוכללים לנקודות על הספרה המוגדרת:
+$$f(x+iy)=\left( \frac{4x}{4+x^2+y^2},\frac{4y}{4+x^2+y^2},\frac{2(x^2+y^2)}{4+x^2+y^2} \right)$$
+אול לחלופין:
+$$f(z)=\left( \frac{4\mathrm{Re}(z)}{4+\lvert z \rvert ^2},\frac{4\mathrm{Im}(z)}{4+\lvert z \rvert ^2},\frac{2\lvert z \rvert ^2}{4+\lvert z \rvert ^2} \right)$$
+
+\end{proposition}
+\begin{definition}[הטלה סטראוגרפית]
+ההטלה של איברים מרוכבים על ספרת רימן כמתואר לעיל נקרא הטלה סטראוגרפית. כלומר ההטלה של הקו המחבר בין הנקודה לנקודה \(\infty\) על הספרה של רימן.
+
+\end{definition}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_2.svg}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_3.svg}
+\section{גזירות}
+
+\subsection{נגזרת מרוכבת וקושי רימן}
+
+\begin{definition}[גזירות בנקודה]
+פונקציה \(f(z)\) גזירה בנקודה \(z_{0}\) אם"ם הגבול הבא קיים:
+$$f^{\prime}(z_{0})=\operatorname*{lim}_{z\to z_{0}}{\frac{f(z)-f(z_{0})}{z-z_{0}}}$$
+
+\end{definition}
+ניתן לחלופין להגדיר \(\Delta z=z-z_{0}\) ולקבל:
+$$f^{\prime}(z_{0})=\operatorname*{lim}_{\Delta z\to0}{\frac{f(z_{0}+\Delta z)-f(z_{0})}{\Delta z}}.$$
+כאשר לעיתים מגדירים
+$$\Delta w=f(z+\Delta z)-f(z).$$
+וניתן כעת לכתוב:
+$$\frac{d w}{d z}=\operatorname*{lim}_{\Delta z\to0}\frac{\Delta w}{\Delta z}.$$
+
+\begin{theorem}[קושי רימן]
+לפונקציה מרוכבת \(f(z)=u(x,y)+iv(x,y)\) יש נגזרת מרוכבת \(f'(z)\) אם"ם החלקים המרוכבים והממשיים הם גזירים ברציפות ומקיימות את משוואות קושי רימן:
+$$u_{x}=v_{y},\quad u_{y}=-v_{x}$$
+כאשר הנגזרת המרוכת תהיה שווה:
+$$f^{\prime}(z)=u_{x}+i v_{x}=v_{y}-i u_{y}$$
+
+\end{theorem}
+\begin{proof}
+נרצה להגיע לנקודה משתי הכיוונים הפשוטים דרך הציר הממשי, ודרך הציר המדומה. נכתוב:
+$$z=z_{0}+h=(x_{0}+h)+i y_{0},\quad h\in\mathbb{R},$$
+ראשית נסתכל מתי \(z\to z_{0}\) דרך הציר הממשי, כלומר כאשר \(h\to 0\).
+נסמן \(f(z)=u(x,y)+iv(x,y)\) ונקבל $$f^{\prime}(z_{0})=\operatorname*{lim}_{h\to0}{\frac{f(z_{0}+h)-f(z_{0})}{h}}.$$
+וכעת:
+$$\begin{gather}{f^{\prime}(z_{0})=\operatorname*{lim}_{h\to0}{\frac{f(z_{0}+h)-f(z_{0})}{h}}=\operatorname*{lim}_{h\to0}{\frac{f(x_{0}+h+i y_{0})-f(x_{0}+i y_{0})}{h}}}\\ {=\operatorname*{lim}_{h\to0}\left[{\frac{u\left(x_{0}+h,y_{0}\right)-u\left(x_{0},y_{0}\right)}{h}}\right]+i\operatorname*{lim}_{h\to0}\left[{\frac{v\left(x_{0}+h,y_{0}\right)-v\left(x_{0},y_{0}\right)}{h}}\right]}\\ {=u_{x}(x_{0},y_{0})+i v_{x}(x_{0},y_{0})}\end{gather}$$
+
+\end{proof}
+כעת נסתכל על איך שהפונקציה מתקדמת דרך הציר המדומה, כלומר אם נגדיר
+$$z=z_{0}+i k=x_{0}+i(y_{0}+k),\quad k\in\mathbb{R},$$
+אז כאשר \(z\to 0\) דרך הציר המדומה, זה שקול ללהשאיף \(k\to 0\). נקבל:
+$$\begin{gather}{f^{\prime}(z_{0})=\operatorname*{lim}_{k\to0}{\frac{f(z_{0}+i k)-f(z_{0})}{i k}}=\operatorname*{lim}_{k\to0}\left[-i{\frac{f(x_{0}+i(y_{0}+k))-f(x_{0}+i y_{0})}{k}}\right]}\\ {=\operatorname*{lim}_{k\to0}\left[{\frac{v\left(x_{0},y_{0}+k\right)-v\left(x_{0},y_{0}\right)}{k}}-i{\frac{u\left(x_{0},y_{0}+k\right)-u\left(x_{0},y_{0}\right)}{k}}\right]}\\ {=v_{y}(x_{0},y_{0})-i u_{y}(x_{0},y_{0})}\end{gather}$$
+כאשר אם נשוואה את החלק הממשי והמדומה נקבל את המערכות הלינארית החלקית ההומגינית:
+$$u_{x}=v_{y},\quad u_{y}=-v_{x}.$$
+
+\subsection{פונקציות אנליטיות}
+
+\begin{definition}[פונקציה אנליטית בנקודה]
+פונקציה \(f:\mathbb{C}\to \mathbb{C}\) נקראת אנליטית בנקודה \(z_{0}\) אם יש לה נגזרת בכל נקודה בסביבה של \(z_{0}\).
+
+\end{definition}
+\begin{corollary}
+אם \(f:\mathbb{C}\to\mathbb{C}\) אנליטי בנקודה אז גם אניטית בסביבה.
+
+\end{corollary}
+\begin{definition}[אנליטיות בקבוצה פתוחה]
+פונקציה \(f:\mathbb{C}\to \mathbb{C}\) נקראת אנליטית בקבוצה פתוחה אם גזירה בכל נקודה בה.
+
+\end{definition}
+\begin{definition}[אנליטיות בקבוצה שאינה פתוחה]
+פונקציה \(f:\mathbb{C}\to \mathbb{C}\) נקראת אנליטית בקבוצה שאינה פתוחה \(B\) אם קיים קבוצה פתוחה \(B\subseteq A\) כך ש-\(A\) אנליטית.
+
+\end{definition}
+\begin{definition}[נקודה סינגולארית]
+נקודה שבה לכל סביבה קיים נקודה בסביבה שעבורה הפונקציה אנליטית.
+
+\end{definition}
+\begin{proposition}
+הרכבה של פונקציות אנליטיות היא אנליטית
+
+\end{proposition}
+זה נובע ישירות מכלל השרשרת.
+
+\subsection{פונקציות הרמוניות}
+
+\begin{definition}[פונקציה הרמונית]
+פונקציה ממשית אשר מקיימת את משוואת לפלס נקראת הרמונית.
+
+\end{definition}
+\begin{theorem}
+אם פונקציה \(f:\mathbb{C}\to \mathbb{C}\) המוגדרת \(f(z)=u(x,y)+iv(x,y)\) אנליטית ב-\(D\). אז הפונקציות \(u,v\) הם פונקציות הרמוניות.
+
+\end{theorem}
+\begin{proof}
+כיוון שאנליטית, גזירה, ולכן מקושי רימן מתקיים:
+$$u_{x}=v_{y},\quad u_{y}=-v_{x}.$$
+כאשר אם נגזור את שתי אגפי המשוואה לפי \(x\) נקבל:
+$$u_{x x}=v_{y x},\quad u_{y x}=-v_{x x}.$$
+כאשר באופן דומה אם היינו גוזרים לפי \(y\) היינו מקבלים:
+$$u_{x y}=v_{y y},\quad u_{y y}=-v_{x y}$$
+אנו יודעים כי כיוון שהפונקציה אנליטית, הנגזרות החלקיות רציפות, ולכן מתקיים \(v_{xy}=v_{yx}\) ו-\(u_{xy}=u_{yx}\) ולכן:
+$$u_{x x}+u_{y y}=0\quad{\mathrm{and}}\quad v_{x x}+v_{y y}=0.$$
+ומקיימות את משוואת לפלס לכן פונקציות הרמוניות.
+
+\end{proof}
+\begin{definition}[צמוד הרמוני]
+אם \(u(x,y)\) פונקציה הרמונית, הצמוד ההרמוני יהיה פונקציה \(v(x,y)\) אשר מקיים את משוואות קושי רימן. כלומר:
+$$u_{x}=v_{y}\qquad u_{y}=-v_{x}$$
+
+\end{definition}
+\section{פונקציות והעתקות}
+
+\subsection{פונקציות אלמנטריות}
+
+\begin{definition}[פונקציית האקספוננט]
+פונקציה מהצורה \(e^z\)
+
+\end{definition}
+\begin{proposition}
+אם נכתוב \(z=x+iy\) מתקיים:
+$$\lvert e^z \rvert =e^x\qquad \arg(e^z)=y+2\pi n\quad n\in \mathbb{Z}$$
+
+\end{proposition}
+\begin{definition}[פונקציה לוגוריתמית]
+פונקציה \(w\) אשר פתרון למשוואה \(e^w=z\) נקראת פונקציית לוגוריתם. מסמנים אותה ב-\(\ln\) ניתן לפרק את האקספוננט ל-\(w=x+iy\) ונקבל:
+$$e^xe^{iy}=re^{i\Theta} \implies w=\ln r+i\,\left( \Theta+2n\pi 
+\right)$$
+
+\end{definition}
+\begin{proposition}
+$$\ln|z_{1}z_{2}|=\ln|z_{1}|+\ln|z_{2}|$$
+
+\end{proposition}
+תכונה זו נובעת מהתכונה:
+$$\arg(z_{1}z_{2})=\arg z_{1}+\arg z_{2}$$
+של הארגיומנט של אקספוננט.
+
+\begin{definition}[חזקה כללית]
+$$f(z)=z^{c}=\exp(c\log z)\quad z\neq0.$$
+
+\end{definition}
+\begin{definition}[קוסינוס וסינוס]
+$$\sin z={\frac{e^{i z}-e^{-i z}}{2i}}\quad{\mathrm{and}}\quad\cos x={\frac{e^{i z}+e^{-i z}}{2}}$$
+
+\end{definition}
+בניגוד לפונקציות ממשיות. זה לא חסום.
+
+\begin{proposition}
+$$\begin{array}{l}{{|\sin z|^{2}=\sin^{2}x+\sinh^{2}y,}}\\ {{|\cos z|^{2}=\cos^{2}x+\sinh^{2}y.}}\end{array}$$
+
+\end{proposition}
+\begin{proposition}
+$$\sin(i y)=i\cdot\mathrm{sinh}y\quad\mathrm{and}\quad\cos(i y)=\mathrm{cosh}y.$$
+
+\end{proposition}
+\subsection{העתקה לינארית והופכית}
+
+\begin{definition}[סימטרי ביחס לישר]
+עבור ישר \(\ell\) נקבל כי \(z_{1}\) נקודה סימטרית ל-\(z_{2}\) אם הם נקודות שונות אשר המרחקים שלהם שווים מהישר.
+
+\end{definition}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_4.svg}
+\begin{proposition}[תנאי שקול לסימטריה ביחס לישר]
+יהי \(S\) ישר. שתי הנקודות \(z_{1},z_{2}\) יהיו סימטריות ביחס לישר \(S\) אם"ם כל ישר ומעגל שעובר דרכם חותך את \(S\) בזווית ישרה. 
+
+\end{proposition}
+\begin{definition}[סימטרי ביחס למעגל]
+עבור מעגל עם רדיוס \(r_{0}\) הממורכז סביב \(z_{0}\) נקבל כי הנקודה \(z_{1}\) סימטרית ל-\(z_{2}\) אם קיים \(k\) כך ש-\(z_{2}-z_{0}=k(z_{1}-z_{0})\) ומתקיים:
+$$|z_{1}-z_{0}||z_{2}-z_{0}|=r_{0}^2$$
+
+\end{definition}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_5.svg}
+\begin{remark}
+המספרים \(z_{0},\infty\) הם תמיד סימטריות ביחס למעגל אחד לשני. כמו כן עבור כל נקודה על המעגל הנקודה שסימטרית לה תהיה הנקודה עצמה.
+
+\end{remark}
+\begin{proposition}[העתקת הכפל]
+$$w=Az\implies A=a e^{i\alpha}\quad  z=r e^{i\theta}\implies w=(a r)e^{i\left( \alpha+\theta \right)}$$
+כלומר העתקה שמכפילה המספר קבוע יוצר סיבוב ומתיחה של התחום.
+
+\end{proposition}
+\begin{proposition}[העתקת ההזזה]
+$$w=z+B\implies \mathrm{Re}(w)+i\mathrm{Im}(w)=\mathrm{Re}(z)+\mathrm{Re}(B)+i\left[ \mathrm{Im}(z)+\mathrm{Im}(B) \right]$$
+
+\end{proposition}
+\begin{definition}[העתקה לינארית/אפינית]
+העתקה מהצורה
+$$w=A z+B\qquad(A\neq0)$$
+
+\end{definition}
+\begin{remark}
+זה הרכבה של פונקציה \(w=Az\) עם \(w=z+B\).
+
+\end{remark}
+\begin{proposition}
+העתקה לינארית מעבירה מעגלים למעגלים וישרים לישרים
+
+\end{proposition}
+\begin{definition}[ההעתקה ההופכית]
+העתקה מהצורה \(z\mapsto \frac{1}{z}\)
+
+\end{definition}
+\begin{proposition}
+העתקה ההופכית מעבירה כל נקודה אל נקודת הסימטרייה שלו ביחס למעגל היחידה
+
+\end{proposition}
+\begin{proposition}
+ההעתקה ההופכית מעבירה מעגל שאינו עובר בראשית למעגל, ומעגל שעובר בראשית לישר
+
+\end{proposition}
+\begin{definition}[מעגל מוכלל]
+ישר או עיגול במישור המרוכב. שקול למעגל בספרה של רימן.
+
+\end{definition}
+\begin{remark}
+אומנם למעגל נדרש 3 נקודות כדי להגדיר אותו באופן יחיד, ונדרש 2 נקודות כדי להגדיר ישר באופן יחיד, אבל בעיה זו נפתרת אם חושבים על זה שאחד הנקודות שנדרש כדי להגדיר ישר הוא אינסוף, ולכן זה למעשה אותו הדבר.
+
+\end{remark}
+\begin{corollary}
+העתקת הופכית מעבירה מעגלים מוכללים למעגלים מוכללים.
+
+\end{corollary}
+\subsection{העתקת מוביוס}
+
+\begin{definition}[העתקת מוביוס]
+$$f(z)=\frac{az+b}{cz+d}$$
+כאשר \(a,b,c,d\in \mathbb{C}\) קבועים, כך ש-\(\begin{vmatrix}a&b\\ c&d\end{vmatrix}\neq 0\).
+
+\end{definition}
+\begin{remark}
+לא ייתכן כי \(c,d\) שניהם 0 כיוון שבמקרה זה נקבל כי הדטרמיננטה 0.
+
+\end{remark}
+\begin{proposition}
+אם \(c=0\) אזי \(d\neq 0\) ומתקיים:
+$$f(z)=\frac{az+b}{d}=\frac{a}{d}z+\frac{b}{d}$$
+כלומר העתקת מוביוס תהיה העתקה לינארית.
+
+\end{proposition}
+\begin{proposition}
+אם \(c\neq 0\) נקבל קבועים \(\alpha,\beta,\gamma\) קבועים כך ש:
+$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$
+
+\end{proposition}
+\begin{proof}
+אם \(c\neq 0\) אנחנו נקבל:
+$$f(z)= \frac{\frac{a}{c}z+\frac{b}{c}}{z+\frac{d}{c}}= \frac{\frac{a}{c}\left( z+\frac{d}{c}-\frac{ad}{c^2}+\frac{b}{c} \right)}{z+\frac{d}{c}}=\frac{a}{c}+\frac{\frac{b}{c}-\frac{ad}{c^2}}{z+\frac{d}{c}}$$
+כאשר אפשר לסמן את הקבועים ב-\(\alpha,\beta,\gamma\) ולקבל:
+$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$
+
+\end{proof}
+\begin{corollary}
+העתקת מוביוס למעשה הרכבה של הזזה של \(\frac{1}{z}\) ופונקציה לינארית.
+
+\end{corollary}
+\begin{corollary}
+העתקת מוביוס מעבירה מעגלים מוכללים למעגלים מוכללים
+
+\end{corollary}
+\begin{proposition}
+העתקת מוביוס \(f:\mathbb{C}^*\to \mathbb{C}^*\) חח"ע ועל וכן מוגדר \(f^{-1}: \mathbb{C}^*\to \mathbb{C}^*\)
+
+\end{proposition}
+\begin{proposition}
+$$f^{-1}(w)= \frac{b-wd}{wc-a}$$
+
+\end{proposition}
+\begin{proof}
+$$w=f(z)=\frac{az+b}{cz+d}\implies w(cz+d)=az+b \implies z = \frac{b-wd}{wc-a}=f^{-1}(w)$$
+
+\end{proof}
+\begin{remark}
+העתקת מוביוס נקראת העתקה בי-לינארית. כי לינארית ביחס לחלקת המרוכב ולחלק הממשי.
+
+\end{remark}
+\begin{proposition}
+אם \(f \in M\), ו-\(\gamma\) זה מעגל או ישר. \(z_{1},z_{2}\) סימטריות יחסית ל-\(\gamma\). אזי \(f(z_{1}),f(z_{2})\) סימטריות יחסית ל-\(f\left( \gamma \right)\).
+
+\end{proposition}
+\begin{example}
+נתון:
+$$\gamma:\lvert z \rvert=1\qquad f(z)= \frac{z+i}{z-2i}$$
+נמצא לאן שולחת \(f(z)\) את \(\gamma\). נשים לב כי המסילה היא מעגל היחידה. נשים לב כי לא חתוך את הראשית.
+$$f(2i)=\infty \qquad 2i \not \in \gamma \qquad \infty \not \in f\left( \gamma \right)$$
+נסתכל על:
+$$f(z)=\frac{z+i}{z-2i}=\frac{z-2i+3i}{z-2i}=1+\frac{3i}{z-2i}$$
+
+\end{example}
+וכן נגדיר:
+$$f_{1}(z)=z-2i=h\qquad f_{2}(h)=\frac{1}{h}\qquad f_{3}(q)=1+3iq$$
+כך שמתקיים:
+$$f=\left( f_{3}\circ f_{2}\circ f_{1} \right)(z)$$
+
+\begin{remark}
+אומנם למעגל נדרש 3 נקודות כדי להגדיר אותו באופן יחיד, ונדרש 2 נקודות כדי להגדיר ישר באופן יחיד, אבל בעיה זו נפתרת אם חושבים על זה שאחד הנקודות שנדרש כדי להגדיר ישר הוא אינסוף, ולכן זה למעשה אותו הדבר.
+
+\end{remark}
+\begin{proposition}
+העתקת מוביוס מעבירה מעגלים מוכללים למעגלים מוכללים.
+
+\end{proposition}
+\begin{proposition}
+לכל 3 נקודות זרות \(z_{1},z_{2},z_{3}\) ו-3 נקודות זרות \(w_{1},w_{2},w_{3}\) קיימת העתקת מוביוס יחידה \(f \in M\) כך ש:
+$$\forall k \in \{ 1,2,3 \}\qquad f(z_{k})=w_{k}$$
+
+\end{proposition}
+\textbf{טענה}
+עבור 3 נקודות זרות \(z_{1},z_{2},z_{3}\) ו-3 נקודות זרות \(w_{1},w_{2},w_{3}\) העתקת המוביוס שמעבירה ביניהם תקיים:
+$$\left( \frac{w-w_{1}}{w-w_{3}}  \right)/  \left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right) = \left( \frac{z - z_{1}}{z-z_{3}} \right) / \left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)$$
+
+\begin{proof}
+מקרה פרטי - העתקת לינארית. אנו יודעים כי:
+$$\begin{gather}w = f(z)=az+b  \qquad w_{1}=az_{1}+b \qquad w_{2} = az_{2}+b \qquad w_{3}=az_{3}+b 
+\end{gather}$$
+ונקבל:
+$$\begin{gather}w_{1}-w_{2} = a(z_{1}-z_{2}) \qquad w_{1}-w=a(z_{1}-z) \\\frac{w_{1}-w_{2}}{w_{1}-w}=\frac{z_{1}-z_{2}}{z_{1}-z} \qquad \frac{w-w_{1}}{w_{2}-w_{1}}=\frac{z-z_{1}}{z_{2}-z_{1}} 
+\end{gather}$$
+
+\end{proof}
+באופן כללי נכתוב:
+$$f=\frac{az+b}{cz+d}$$
+נניח \(c\neq 0\) כיוון שאחרת העתקה לינארית. לכן ניתן לכתוב:
+$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$$$\begin{gather}w=\alpha+\frac{\beta}{z+\gamma} \qquad  w_{1}=\alpha+\frac{\beta}{z_{1}+\gamma}  \\w_{2}=\alpha+\frac{\beta}{z_{2}+\gamma} \qquad w_{3}=\alpha+\frac{\beta}{z_{3}+\gamma}
+\end{gather}$$
+כעת נשאר:
+$$\begin{gather}w-w_{1}=\beta\left( \frac{1}{z+\gamma}-\frac{1}{z_{1}+\gamma} \right)  \qquad w-w_{1}=\beta \frac{z_{1}-z}{\left( z+\gamma \right)\left( z_{1}+\gamma \right)} \\w-w_{3} =\left( \frac{\beta (z_{3}-z)}{\left( z+\gamma \right)\left( z_{3}+\gamma \right)} \right) \qquad \frac{w-w_{1}}{w-w_{3}}=\frac{(z_{1}-z)\left( z_{3}+\gamma \right)}{(z_{3}-z)\left( z_{1}+\gamma \right)} \\\frac{w-w_{1}}{w-w_{3}} = \frac{(z-z_{1})\left( z_{3}+\gamma \right)}{(z-z_{3})\left( z_{1}+\gamma \right)} \qquad \frac{w_{2}-w_{1}}{w_{2}-w_{3}} = \frac{(z_{2}-z_{1})\left( z_{3}+\gamma \right)}{(z_{2}-z_{3})\left( z_{1}+\gamma \right)} 
+\end{gather}$$
+ונקבל סה"כ:
+$$\left( \frac{w-w_{1}}{w-w_{3}}  \right)/  \left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right) = \left( \frac{z - z_{1}}{z-z_{3}} \right) / \left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)$$
+או בכתיבה פחות ברורה:
+$$\frac{\left( \frac{w-w_{1}}{w-w_{3}}  \right)}{\left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right)} = \frac{\left( \frac{z - z_{1}}{z-z_{3}} \right)}{\left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)}$$
+
+\section{אינטגרציה}
+
+\subsection{אינטגרל של פונקציה מרוכבת}
+
+\begin{definition}[אינטגרל של פונקצייה מרוכבת]
+נגדיר את האינטגרל בעזרת פרמטריזציה על המסילה:
+$$\int_{C}f(z)\,d z=\int_{a}^{b}f\left(z(t)\right)z^{\prime}(t)\,d t.$$
+
+\end{definition}
+\begin{proposition}
+עבור פרמטריזציה \(z(t)=x(t)+iy(t)\) מתקיים:
+$$\int_{a}^{b}w(t)\,d t=\int_{a}^{b}u(t)\,d t+i\int_{a}^{b}v(t)\,d t$$
+
+\end{proposition}
+\begin{proof}
+האגף הימיני אינטגרל על משתנה ממשי, ולכן:
+$$\int_{a}^{b}f\left(z(t)\right)z^{\prime}(t)\,d t=$$
+
+\end{proof}
+\begin{example}
+$$\int_{0}^{1}(1+i t)^{2}\,d t=\int_{0}^{1}(1-t^{2})\,d t+i\int_{0}^{1}2\,t\,d t={\frac{2}{3}}+i$$
+
+\end{example}
+\begin{theorem}[קושי גורסה]
+תהי \(\gamma\) מסילה פשוטה סגורה, נניח \(f(z)\) אנליטית בתחום פשוט קשר על \(\gamma\) ובתוכה. אזי \(f\) שדה משמר. כלומר:
+$$\oint_{\gamma}f(z)\;\mathrm{d}z=0$$
+
+\end{theorem}
+\begin{proof}
+ראשית נסמן:
+$$f(z)=u(x,\,y)+i\,v(x,\,y)$$
+ונרצה לבצע פרמטריזציה ל-\(z\):
+$$z(t)=x(t)+i y(t) \qquad  a\leq t\leq b$$
+ולכן ניתן לכתוב:
+$$\int_{C}f(z)\,d z=\int_{a}^{b}f[z(t)]z^{\prime}(t)\,d t= \int_{a}^{b} \left( u\left[ x(t),\,y(t) \right]+i\,v\left[ x(t),\,y(t) \right] \right)(x^{\prime}(t)+i y^{\prime}(t))$$
+כאשר מטעמי קיצור מקום נכתוב רק \(u,v\), כעת נקבל:
+$$\int_{C}f(z)\ d z=\int_{a}^{b}(u x^{\prime}-v y^{\prime})\,d t+i\int_{a}^{b}(v x^{\prime}+u y^{\prime})\,d t=\int_{C}u\ d x-v\ d y+i\int_{C}v\ d x+u\ d y$$
+כאשר נשים לב כי בפועל היינו יכולים להציב \(f(z)=u+iv\) וגם \(dz=dx+i\,dy\) ולקבל ביטוי זהה.
+כעת נשתמש במשפט גרין:
+$$\int_{C}\,\,P d x+Q\,d y=\iint_{R}(Q_{x}-P_{y})\,d A \implies \int_{C}f(z)\ d z=\iint_{R}(-v_{x}-u_{y})\,d A+i\iint_{R}(u_{x}-v_{y})\,d A$$
+כעת מקושי רימן, כיוון שהתחום אנליטי מתקיים:
+$$u_{x}=v_{y},\quad u_{y}=-v_{x}$$
+כאשר נציב ונקבל כי האינטגרל מתאפס כאשר \(f'\) רציף. כאשר כיוון שבתחום אנליטי נקבל כי \(f'\) רציף, זהו תנאי שלא צריך לבדוק.
+
+\end{proof}
+\subsection{משפט קושי גורסה}
+
+\begin{theorem}[קושי גורסה]
+תהי \(\gamma\) מסילה פשוטה סגורה נגד השעון. יהי \(D\) תחום(פשוט קשר) אשר כלוא בתוך \(\gamma\). נניח \(f(z)\) אנליטית על \(\gamma\) וב-\(D\). אזי:
+$$\oint_{\gamma}f(z)\;\mathrm{d}z=0$$
+
+\end{theorem}
+\begin{theorem}[גרין]
+נניח ויש תחום \(D\) כאשר \(\gamma\) זה השפה של \(D\) נגד השעון. סגורה. ונתון:
+$$\begin{pmatrix}P(x,y) \\Q(x,y) 
+\end{pmatrix}$$
+אזי:
+$$\oint_{\partial D} Pdx+Qdy\oint_{\partial D}\begin{pmatrix}P\\Q\end{pmatrix} \cdot \begin{pmatrix}dx\\ dy
+\end{pmatrix} = \iint_{D} (Q_{x}-P_{y})dx\;dy$$
+
+\end{theorem}
+\begin{theorem}[גרין בתחום רב קשר]
+אותו דבר רק שהשפה משתנה. האינטגרל יהיה על השפה החיצונית פחות האינטגרלים על השפה הפנימית בכיוונים הפוכים.
+
+\end{theorem}
+כעת נוכיח את קושי גורסה עם משפט גרין:
+\textbf{הוכחה}
+נניח \(f=u+iv\) אנליטית. לכן מתקיים:
+$$u_{x}=v_{y}\qquad u_{y}=-v_{x}$$
+ולכן מתקיים:
+$$\oint_{\gamma} f(z)\;dz=\oint_{\gamma }(u+iv)(dx+idy)=\oint_{\gamma}udx-vdy+i\oint vdx+ydy = \oint_{\gamma} \begin{pmatrix}u\\ -v \end{pmatrix}\cdot \begin{pmatrix}dx \\ dy\end{pmatrix}+i\oint_{\gamma}\begin{pmatrix}v \\ u\end{pmatrix}\cdot \begin{pmatrix}dx \\ dy
+\end{pmatrix}$$
+
+\begin{proposition}
+אם \(z_{0} \in D\) אז האינטגרל על מסילה סגורה יהיה:
+$$2\pi i = \oint_{\gamma} \frac{1}{z-z_{0}}dz$$
+
+\end{proposition}
+\begin{theorem}[קושי גורסה בתחום רב קשר]
+לסכום על האינטגרלים על השפה הפנימית בכיוון ההפוך לכיוון של השפה החיצונית.
+$$\oint_{\gamma} f(z) \;\mathrm{d}z = \oint_{\gamma_{1}} f(z)\;\mathrm{d}z+\oint_{\gamma_{2}} f(z)\;\mathrm{d}z$$
+
+\end{theorem}
+\subsubsection{שימושים במשפט קושי}
+
+\begin{proposition}[תכונת הממוצע]
+נניח \(f\) אנליטית ב-\(\lvert z-z_{0} \rvert\leq b\) אז לכל \(0<a\leq b\) מתקיים:
+$$f(z_{0})=\frac{1}{2\pi}\int_{-\pi}^{\pi} f(z_{0}+ae^{ it })\;\mathrm{d}t$$
+
+\end{proposition}
+\begin{proof}
+נגדיר \(\gamma_{a}:|z-z_{0}|=a\) מסילה נגד השעון. אזי:
+$$f(z_{0})=\frac{1}{2\pi i}\int_{\gamma_{a}} \frac{f(s)}{s-z_{0}} \;\mathrm{d}s $$
+כאשר נגדיר את הפרמטריזציה \(\gamma_{a}:s=z_{0}+ae^{ it }\) ונקבל:
+$$f(z_{0})=\frac{1}{2\pi i} \int_{-\pi}^{\pi} \frac{f(z_{0}+ae^{ it })}{ae^{ it }}(iae^{ it })\;\mathrm{d}t=\int f(z_{0}+ae^{ it }) \;\mathrm{d} t $$
+
+\end{proof}
+הטענה בעצם אומרת כי כל נקודה היא הממוצע של הערכים סביבה.
+
+\begin{corollary}
+אם \(u(x,y)\) הרמונית ב-\((x-x_{0})^{2}+(y-y_{0})^{2}\leq b^{2}\) אז לכל \(0<a\leq b\) מתקיים:
+$$u(x_{0},y_{0})=\frac{1}{2\pi}\int u\left( x_{0}+a\cos(t),y_{0}+a\sin(t) \right) \;\mathrm{d} t $$
+
+\end{corollary}
+\begin{proposition}[משפט המקסימום]
+נניח \(D\subseteq \mathbb{C}\) תחום פתוח וקשיר. \(f:D\to \mathbb{C}\) אנליטית ולא קבועה, אז \(\lvert f \rvert\) לא מקבל את ערכו המקסימלי ב-\(D\).
+
+\end{proposition}
+נוכיח הוכחה חלקית:
+\textbf{הוכחה}
+נניח בשלילה \(z_{0} \in D\) כך ש-\(\max_{z \in D}\lvert f(z) \rvert=\lvert f(z_{0}) \rvert\). קיים \(b>0\) כך ש:
+$$\left\{  z \in \mathbb{C} \mid |z-z_{0}|\leq b  \right\}$$
+לכן מתכונת הממוצע לכל \(0<a\leq b\) מתקיים:
+$$f(z_{0})=\frac{1}{2\pi i} \int_{-\pi}^{\pi}f(z_{0}+ae^{ it })\;\mathrm{d}t$$
+
+\begin{definition}[פונקציה שלמה]
+פונקציה אשר אנליטית בכל \(\mathbb{C}\).
+
+\end{definition}
+\begin{definition}[פונקציה חסומה]
+פונקצייה שעבורה קיים \(k \in \mathbb{R}\) כך שלכל \(z \in \mathbb{C}\) נקבל \(\left\lvert  f(z)  \right\rvert\leq k\).
+
+\end{definition}
+\begin{theorem}[ליוביל]
+אם \(f\) שלמה וחסומה אזי \(f\) קבועה.
+
+\end{theorem}
+\begin{corollary}
+המשפט היסודי של האלגברה
+
+\end{corollary}
+\subsection{משפט מוררה}
+
+\begin{definition}[תחום פשוט קשר]
+תחום שבו כל מסילה ניתנת לצימצום לנקודה. פשוט קשר ב-\(\mathbb{R}^2\) או \(\mathbb{C}\) זה פשוט ללא חורים.
+
+\end{definition}
+\begin{definition}[תחום קשיר מסילתית]
+תחום הוא קשיר מסילתית אם לכל \(z_{1},z_{2}\) קיימת מסימה \(\gamma\) אשר מחברת ביניהם
+
+\end{definition}
+\begin{theorem}[ מוררה]
+יהי \(D\) תחום פתוח וקשיר(אין דרישה לפשוט קשר). נניח לכל \(\gamma \in D\) פשוטה סגורה מתקיים:
+$$\oint_{\gamma} f(z)\;\mathrm{d}z=0$$
+ונניח \(f(z)\) רציפה ב-\(D\). אזי ל-\(f\) קיימת פונקציה קדומה \(F(z)\) כך ש-\(f(z)=F'(z)\).
+
+\end{theorem}
+\begin{proof}
+נשים לב כי \(\int_{\beta}f(z)\;\mathrm{d}z\) לא תלוי המסילה \(\beta\) אלה בנקודות התחלה וסוף בלבד. יהיו \(\beta_{1},\beta_{2}\) מסילות המחברות בין \(z_{1},z_{2}\). נניח \(\beta_{1}\cup \beta_{2}\) סגורה. מתקיים:
+$$0=\oint_{\beta_{1} \cup \left( -\beta_{2} \right)} f\;\mathrm{d}z=\int_{\beta_{1}}f\;\mathrm{d}z-\int_{\beta_{2}}f\;\mathrm{d}z\implies \int_{\beta_{1}}f\;\mathrm{d}z=\int_{\beta_{2}}f\;\mathrm{d}z$$
+ניקח \(z_{0} \in D\) כלשהו. נגדיר \(F:D\to \mathbb{C}\):
+$$F(z)=\int_{z_{0}}^z f(z)\;\mathrm{d}z$$
+כאשר \(F\) מוגדרת היטב כיוון שאין תלות במסילה. נראה \(F'(z)=f(z)\). צריך להוכיח:
+$$f(z)=\frac{d}{dz}\int_{z_{0}}^{z} f(s) \, ds $$
+אכן:
+$$\frac{\mathrm{d} }{\mathrm{d} z} \left( \int_{z_{0}}^z f(s)\;\mathrm{d}s \right)=\lim_{ \Delta z \to 0 }  \frac{F\left( z+\Delta z \right)-F(z)}{\Delta z}$$
+וכעת:
+$$\begin{gather}F'(z)=\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}\left( \int\limits_{z_{0}}^{z+\Delta z} f(s)\;\mathrm{d}s -\int_{z_{0}}^{z} f(s)\;\mathrm{d}s    \right)= \\=\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}\left( \int_{z}^{\Delta z}  \!\!\!f\; \mathrm{d}s+ \int_{z_{0}}^{z} f(s)\;\mathrm{d}s -\int_{z_{0}}^{z} f(s)\;\mathrm{d}s    \right) = \\= \lim_{ \Delta z \to 0 } \frac{1}{\Delta z} \int_{z}^{z+\Delta z} f(s)\;\mathrm{ds}= \lim_{ \Delta z \to 0 } \frac{1}{\Delta z} \int_{z}^{z+\Delta z} [(f(s)+f(z))-f(z)]\;\mathrm{ds}= \\= \lim_{ \Delta z \to 0 } \left[ \frac{1}{\Delta z} \int\limits_{z}^{z+\Delta z} f(z)\;\mathrm{ds}+\frac{1}{\Delta z}\int\limits_{z}^{z+\Delta z} (f(s)-f(z))  \, ds \right] = \\= \lim_{ \Delta z \to 0 } \left[ \frac{1}{\Delta z} f(z)\int\limits_{z}^{z+\Delta z} \mathrm{ds}+\frac{1}{\Delta z}\underbrace{ \int\limits_{z}^{z+\Delta z} (f(s)-f(z))  }_{ J } \, ds \right] =    \\=f(z)+\lim_{ \Delta z \to 0 } \frac{1}{\Delta z}J
+\end{gather}$$
+ונדרש רק להראות כי הגבול \(\lim_{ \Delta z \to 0 } \frac{J}{\Delta z}=0\). נסמן ב-\(\alpha\) את הקטע הישר בין \(z\) ל-\(z+\Delta z\). מתקיים:
+$$\lvert J \rvert =\left\lvert  \int_{z}^{z+\Delta z}(f(s)-f(z))  \;\mathrm{d}s\right\rvert =\left\lvert  \int_{\alpha} (f(s)-f(z))ds \right\rvert \leq \max _{s \in \alpha}\lvert f(s)-f(z) \rvert \cdot L\left( \alpha \right)$$
+ולכן:
+$$\lvert J \rvert <\varepsilon \left\lvert  \Delta z  \right\rvert \implies \left\lvert  \frac{J}{\Delta z}  \right\rvert < \frac{\varepsilon \left\lvert  \Delta z  \right\rvert}{\Delta z}=\varepsilon\implies \frac{J}{\Delta z}\to 0$$
+אם \(\oint_{\gamma}f(s)=0\) לכל מסילה סגורה \(\gamma\), ו-\(f\) רציפה אז יש פונקציה קדומה.
+
+\end{proof}
+\begin{remark}
+בהמשך נראה - אם \(g(z)\) אנליטית אזי גם הנגזרת \(g'(z)\) אנליטית ו-\(g(z)\) גזירה מכל סדר. כאן \(F(z)\) אנליטית ולכן הנגזרת של \(F'(z)=f(z)\) אנליטית.
+
+\end{remark}
+\subsection{משפט ההצגה של קושי}
+
+\begin{theorem}[ההצגה של קושי]
+אם \(\gamma\) מסילה פשוטה נגד כיוון השעון. \(f\) אנליטית על \(\gamma\) הבתוך התחום שסוגרת.
+אם \(z_{0}\) פנימית ל-\(\gamma\) אזי:
+$$2\pi i f(z_{0})=\oint_{\gamma} \frac{f(z)}{z-z_{0}} \mathrm{d}z$$
+זאת אומרת:
+$$f(z_{0})=\frac{1}{2\pi i}\oint_{\gamma} \frac{f(z)}{z-z_{0}}\mathrm{d}z$$
+
+\end{theorem}
+\begin{proof}
+נסמן \(g(z)=\frac{f(z)}{z-z_{0}}\). \(g\) אנליטית על \(\gamma\) ובתוכה פרט ל-\(z_{0}\) אשר פנימית ל-\(\gamma\).
+ניקח \(a>0\) קטן. נגדיר:
+$$\gamma_{a}:\lvert z-z_{0} \rvert = a$$
+סגורה נגד השעון \(\gamma_{a}\) פנימית ל-\(\gamma\). ו-\(g\) אנילטית בתחום בכלוא בין \(\gamma,\gamma_{a}\). מקושי-גורסה בתחום רב קשר נקבל:
+$$\begin{gather}\oint_{\gamma} \frac{f(z)}{z-z_{0}}\;\mathrm{d}z=\oint_{\gamma}g(z)\mathrm{d}z=\oint_{\gamma_{a}}g(z)\;\mathrm{d}z=\oint_{\gamma_{z}} \frac{f(z)-f(z_{0})+f(z_{0})}{z-z_{0}}\;\mathrm{d}z= \\=f(z_{0})\overbrace{ \oint_{\gamma_{a}} \frac{1}{z-z_{0}}dz }^{ 2\pi i }+\overbrace{ \oint_{\gamma_{a}}\frac{f(z)-f(z_{0})}{z-z_{0}}\;\mathrm{d}z }^{ J_{a} }=2\pi if(z_{0})+J_{a} 
+\end{gather}$$
+נראה \(J_{a}=0\). מתקיים:
+$$\left\lvert  \frac{f(z)-f(z_{0})}{z-z_{0}}  \right\rvert =\frac{\lvert f(z)-f(z_{0}) \rvert}{\lvert z-z_{0} \rvert } $$
+כאשר מעל \(\gamma _a\) מתקיים \(\lvert z-z_{0} \rvert=a\). \(f(z)\) אנליטית, לכן רציפה פרט ל-\(z_{0}\). לכל לכל \(\varepsilon>0\) קיים \(\delta > 0\) כך ש:
+$$\lvert z-z_{0} \rvert <\delta \implies \lvert f(z)-f(z_{0}) \rvert <\varepsilon$$
+יהי \(\varepsilon>0\). עבור \(\delta>0\) המתאים נקבל עבור \(0<a<\delta\) כי מתקיים לכל \(z \in \gamma a\):
+$$\frac{\lvert f(z)-f(z_{0}) \rvert }{\lvert z-z_{0} \rvert }<\frac{\varepsilon}{a}$$
+וכן מתקיים לכל \(\varepsilon\)$$\lvert J_{a} \rvert \leq \max _{z \in \gamma(z)}\frac{\lvert f(z)-f(z_{0}) \rvert }{\lvert z-z_{0} \rvert }\cdot J\left( \gamma a \right) < \frac{\varepsilon}{a} 2 \pi a = 2 \pi \varepsilon\implies J_{a} = 0$$
+
+\end{proof}
+אינטואיצה למשפט זה שאם נסתכל על הפונקציה \(\frac{f(z)}{z-a}\) נקבל כי הפונקציה הזאת הולומורפית בכל הנקודות פרט לאולי \(a\). לכן ממשפט קושי גורסה האינטגרל על לולאה סביב הפונקציה הזאת תהיה זהה לכל לולאה סביב \(a\), ולכן ניתן לקחת את הלולאה קטנה כרצונינו, ונקבל כי בתחום של הלולואה \(f(z)\approx f(a)\) וניתן להוציא אותו מהאינטגרל ולקבל:
+$$\int \frac{f(z)}{z-a}\approx f(a) \int \frac{1}{z-a}=f(a) \cdot 2\pi i$$
+
+\begin{proposition}[הכללה של נוסחאת ההצגה של קושי]
+$$f^{(n)}(z)=\frac{n!}{2\pi i} \oint_{\gamma} \frac{f(s)}{(s-z)^{n+1}}\;\mathrm{d}s$$
+
+\end{proposition}
+\begin{lemma}
+אם \(\beta\) מסילה חלקה למקטעין \(g(s,z)\) כך ש-\(g,\frac{\partial g}{\partial z}\) רציפות במידה שווה ב-\(\lvert z-z_{0} \rvert\leq a\), \(s \in \beta\). אזי:
+$$\int_{\beta} \frac{\partial }{\partial z} g(s,z)\;\mathrm{d}s = \frac{\mathrm{d} }{\mathrm{d} z} \oint_{\beta}g(s,z)ds$$
+בנקודה \(z=z_{0}\).
+
+\end{lemma}
+נוכיח את הטענה
+
+\begin{proof}
+נניח \(f\) אנליטית על מסילה פשוטה סגורה \(\gamma\) ובתוכה אזי לכל \(z\) פנימית ל-\(\gamma\) נקבל:
+$$f(z)=\frac{1}{2\pi i}\oint_{\gamma} \frac{f(s)}{s-z}ds$$
+אזי:
+$$f'(z)=\frac{1}{2\pi i} \frac{\mathrm{d} }{\mathrm{d} z} \oint_{\gamma} \frac{f(s)}{s-z}\;\mathrm{d}s$$
+ומתקיים:
+$$f'(z)=\frac{1}{2\pi i}\frac{\mathrm{d} }{\mathrm{d} z} \oint_{\gamma}\frac{f(s)}{s-z}\mathrm{d}s\overset{*}{=} \frac{1}{2\pi i}\oint_{\gamma}\frac{\partial }{\partial z} \left( \frac{f(s)}{s-z} \right)\;\mathrm{d}s$$
+ניתן להמשיך לגזור:
+$$f'(z)=\frac{1}{2\pi i}\oint_{\gamma} \frac{\partial }{\partial z} (f(s)(s-z)^{-1})\;\mathrm{d}s = \frac{1}{2\pi i} \oint_{\gamma}f(s) (-1)(s-z)^{-2}(-1)ds$$
+ונקבל את הנוסחה היפה:
+$$f'(z)=\frac{1}{2\pi i}\oint_{\gamma} \frac{f(s)}{(s-z)^2}\;\mathrm{d}s \implies f''(z)=\frac{1}{2\pi i}\oint_{\gamma} \frac{\partial }{\partial z} \left( f(s)\cdot(s-z)^{-2} \right)ds=\frac{1}{2\pi i}\cdot 2 \frac{\oint_{\gamma}f(s)}{s-z^3}ds$$
+כאשר מזה נקבל את אינטגרל קושי:
+$$\boxed{f^{(n)}(z)=\frac{n!}{2\pi i} \oint_{\gamma} \frac{f(s)}{(s-z)^{n+1}}\;\mathrm{d}s}
+$$
+כאשר עבור \(n=0\) זה נוסחאת ההצגה של קושי.
+
+\end{proof}
+\begin{corollary}
+כאשר הפונקציה אנליטית בנקודה, אז היא אנליטית בה מכל סדר.
+
+\end{corollary}
+\section{טורים}
+
+\subsection{טורים של פונקציה מרוכבת}
+
+\begin{definition}[טור מרוכב]
+סכום של סדרה של איברים מרוכבים:
+$$\sum_{n=1}^{\infty}z_{n}=z_{1}+z_{2}+\cdot\cdot\cdot+z_{n}+\cdot\cdot\cdot$$
+
+\end{definition}
+\begin{definition}[סכום חלקי]
+זהו סכימה של האיברים בסדרה של הטור עד האיבר ה-\(N\). כלומר:
+$$S_{N}=\sum_{n=1}^{N}z_{n}=z_{1}+z_{2}+\cdot\cdot\cdot+z_{N}$$
+
+\end{definition}
+\begin{definition}[הסתכנסות של טור מרוכב]
+נגיד כי טור מרוכב מתכנס אם הגבול של סדרת הסכומים החלקיים מתכנסת. כלומר:
+$$\sum z_{n}=\lim_{ N \to \infty } S_{N}\equiv S$$
+
+\end{definition}
+\begin{proposition}
+נניח נתון סדרה של איברים מרוכבים אשר ניתנים לייצוג בצורה הבאה:
+$$z_{n}=x_{n}+iy_{n}$$
+אזי:
+$$\sum z_{n}=\sum x_{n}+i\sum y_{n}$$
+והטור \(Z=\sum z_{n}\) מתכנס אם"ם הטורים הממשיים \(X=\sum x_{n},Y=\sum y_{n}\) מתכנסים ובמקרה זה מתקיים \(X+iY=Z\).
+
+\end{proposition}
+\begin{proposition}
+עבור טור מרוכב מתכנס נקבל כי כאשר \(N\to \infty\) נקבל \(\lvert z_{n} \rvert\to 0\).
+
+\end{proposition}
+\begin{proof}
+כיוון שהטור המרוכב מתכנס, גם הטורים הממשיים \(\sum x_{n},\sum y_{n}\) מתכנסים. לכן עבור טענה על טורים ממשיים נקבל כי \(x_{n},y_{n}\to 0\) ולכן:
+$$\operatorname*{lim}_{n\to\infty}z_{n}=\operatorname*{lim}_{n\to\infty}x_{n}+i\operatorname*{lim}_{n\to\infty}y_{n}=0+0\cdot i=0$$
+
+\end{proof}
+\begin{corollary}
+עבור טור מתכנס האיברים \(z_{n}\) חסומים, כלומר קיים קבוע \(M>0\) כך שממתקיים \(\lvert z_{n} \rvert\leq M\).
+
+\end{corollary}
+\begin{definition}[התכנסות בהחלט]
+טור נקרא מתכנס בהחלט אם:
+$$\sum_{n=1}^{\infty}|z_{n}|=\sum_{n=1}^{\infty}\sqrt{x_{n}^{2}+y_{n}^{2}}$$
+מתכנס.
+
+\end{definition}
+\begin{proposition}
+התכנסות בהחלט של טור גורר התכנסות של הטור.
+
+\end{proposition}
+\begin{proof}
+מספיק להראות כי \(\sum x_{n},\sum y_{n}\) מתכנסים. אנו יודעים ממבחן ההשוואה כי מתקיים:
+$$|x_{n}|\leq{\sqrt{x_{n}^{2}+y_{n}^{2}}}\quad{\mathrm{and}}\quad|y_{n}|\leq{\sqrt{x_{n}^{2}+y_{n}^{2}}}$$
+ולכן אם הטור מתכנס בהחלט, כל אחד מהטורים הממשים מתכנס.
+
+\end{proof}
+\begin{definition}[שארית של טור]
+שארית יהיה כמות האיברים שנשארו בסכימה שעוד לא נסכומו. ניתן להגדיר עם סכום חלקי:
+$$\rho_{N}=S-S_{N}$$
+
+\end{definition}
+\subsection{טורי חזקות}
+
+\begin{proposition}
+טור מתכנס אם"ם השארית של הטור שואף ל-0.
+
+\end{proposition}
+\begin{definition}[טור חזקות]
+טור מהצורה:
+$$\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}=a_{0}+a_{1}(z-z_{0})+a_{2}(z-z_{0})^{2}+\cdot\cdot\cdot+a_{n}(z-z_{0})^{n}+\cdot\cdot\cdot$$
+כאשר \(z_{0},a_{n}\) הם קבועים מרוכבים, ו-\(z\) היא כל נקודה בתחום מצויין שכולל את \(z_{0}\).
+
+\end{definition}
+\begin{proposition}[סכום של טור חזקות]
+$$\sum z^{n}={\frac{1}{1-z}}$$
+כאשר \(|z|<1\)
+
+\end{proposition}
+\begin{proposition}
+אם טור חזקות מהצורה:
+$$\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$$
+מתכנס עבור \(z=z_{1}\) אז מתכנס בהחלט בכל נקודה בדיסקה \(|z-z_{0}|<R_{1}\) כאשר \(R_{1}=|z_{1}-z_{0}|\).
+
+\end{proposition}
+כלומר המושג רדיוס התכנסות מוגדר היטב
+
+\begin{proposition}
+אם \(z_{1}\) נקודה בתוך הרדיוס התכנסות, נקבל כי הטור מתכנס במידה שווה בתוך הדיסקה \(|z-z_{0}|<|z_{1}-z_{0}|=R_{1}\)
+
+\end{proposition}
+\begin{proposition}
+טור חזקות מהצורה \(\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}\) מייצג פונקציה רציפה \(S(z)\) בכל נקודה בתוך הרדיוס התכנסות.
+
+\end{proposition}
+\begin{proposition}[אינטגרציה איבר איבר]
+$$\int_{C}g(z)\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}\ d z=\sum_{n=0}^{\infty}a_{n}\int_{C}g(z)(z-z_{0})^{n}\ d z$$
+
+\end{proposition}
+\begin{proposition}[גזירה איבר איבר]
+עבור כל נקודה פנימית ניתן לבצע גזירה איבר איבר:
+$$\left( \sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n} \right)'=\sum_{n=1}^{\infty}n a_{n}(z-z_{0})^{n-1}$$
+
+\end{proposition}
+\begin{proposition}[יחידות הטור חזקות]
+קיימת הצגה יחידה עם מקדמים עבור טור חזקות.
+
+\end{proposition}
+\subsection{טורי טיילור}
+
+\begin{theorem}[טיילור]
+נניח \(f\) אנליטית בתוך דיסקה \(|z_{\mathrm{-}}-z_{0}|\,<\,R_{0}\) הממורכז סביב \(z_{0}\) עם רדיוס \(R_{0}\). אזי ל-\(f(z)\) יש את הטור חזקות:
+$$f(z)=\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n} \qquad a_{n}={\frac{f^{(n)}(z_{0})}{n!}}$$
+כאשר טור זה מתכנס כאשר \(|z-z_{0}|<R_{0}\)
+
+\end{theorem}
+כלומר כמו בפונקציות ממשיות ניתן לכתוב:
+$$f(z)=f(z_{0})+\frac{f^{\prime}(z_{0})}{1!}(z-z_{0})+\frac{f^{\prime\prime}(z_{0})}{2!}(z-z_{0})^{2}+\cdot\cdot\cdot\quad(\left|z-z_{0}\right|<R_{0})$$
+
+\begin{proof}
+נסמן \(r=|z|\) וכן נגדיר מסילה מעגלית \(C_{0}\) עם רדיוס \(r_{0}\) כך שמתקיים \(r<r_{0}<R_{0}\).
+מנוסחת ההצגה של קושי מתקיים:
+$$f(z)={\frac{1}{2\pi i}}\int_{C_{0}}{\frac{f(s)\;d s}{s-z}}$$
+וכן עבור 0 נקבל מהביטוי עבור ההצגה עם הנגזרת של נוסחאת ההצגה של קושי כי:
+$$\frac{1}{2\pi i}\int_{{\cal C}_{0}}\frac{f(s)~d s}{s^{n+1}}=\frac{f^{(n)}(0)}{n!}$$
+מתקיים:
+$$\frac{1}{s-z}=\frac{1}{s}\cdot\frac{1}{1-(z/s)}$$
+ ניתן לפצל את הסכום של הטור ההנדסי לסכום של הסכום הסופי של ה-\(N\) איברים הראשונים עם יתר איברי הטור. כלומר:
+$$\frac{1}{1-z}=\sum_{n=0}^{N-1}z^{n}+\frac{z^{N}}{1-z}$$
+כאשר נציב בביטוי שקיבלנו ונקבל:
+$$\frac{1}{s-z}=\sum_{n=0}^{N-1}\frac{1}{s^{n+1}}\,z^{n}+z^{N}\frac{1}{(s-z)s^{N}}$$
+כאשר ניתן להכפיל ב-\(f(s)\) ולבצע אינטגרציה סביב \(C_{0}\):
+$$\int_{C_{0}}{\frac{f(s)\ d s}{s-z}}=\sum_{n=0}^{N-1}\int_{C_{0}}{\frac{f(s)\ d s}{s^{n+1}}}\,z^{n}+z^{N}\int_{C_{0}}{\frac{f(s)\ d s}{(s-z)s^{N}}}$$
+ולכן אם נכפיל ב-\(\frac{1}{2\pi i}\) את הביטוי נקבל כי מופיע הביטוי של נוסחאת ההצגה של קושי ושל הנגזרת, ונקבל:
+$$f(z)=\sum_{n=0}^{N-1}\frac{f^{(n)}(0)}{n!}\,z^{n}+\rho_{N}(z) \qquad \rho_{N}(z)=\frac{z^{N}}{2\pi i}\int_{C_{0}}\frac{f(s)\ d s}{(s-z)s^{N}}$$
+ונדרש להראות רק כי \(\rho_{N}\to 0\). מתקיים:
+$$|s-z|\geq||s|-|z||=r_{0}-r$$
+כאשר ניתן כעת לבצע את האינטגרל ונקבל:
+$$|\rho_{N}(z)|\leq{\frac{r^{N}}{2\pi}}\cdot{\frac{M}{(r_{0}-r)r_{0}^{N}}}\,2\pi r_{0}={\frac{M r_{0}}{r_{0}-r}}\left({\frac{r}{r_{0}}}\right)^{N}$$
+וכיוון ש-\(r<r_{0}\) נקבל כי \(\rho_{N}\to 0\), ומתקיים השיוויון. כעת ניתן לבצע הזזה על התחום ולראות כי מתקיים באופן כללי.
+
+\end{proof}
+\begin{proposition}
+טור הוא טור חזקות אם"ם הוא טור טיילור
+
+\end{proposition}
+\subsection{טור לורן}
+
+\begin{theorem}[לורן]
+נניח פונקציה \(f\) אנליטית בתחום טבעתי \(R_{1} < |z-z_{0}|< R_{2}\). ונניח כי \(C\) מתאר מסילה פשוטה סגורה סביב \(z_{0}\) מתוך התחום. ניתן להציג את \(f(z)\) בצורה הבאה:
+$$f(z)=\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}+\sum_{n=1}^{\infty}\frac{b_{n}}{(z-z_{0})^{n}}$$
+כאשר:
+$$a_{n}={\frac{1}{2\pi i}}\int_{C}{\frac{f(z)\ d z}{(z-z_{0})^{n+1}}} \qquad b_{n}=\frac{1}{2\pi i}\int_{C}\frac{f(z)\ d z}{(z-z_{0})^{-n+1}}$$
+
+\end{theorem}
+\begin{corollary}
+בתנאים של המשפט, נקבל כי ניתן לכתוב את \(f(z)\) בצורה הבאה:
+$$f(z)=\sum_{n=-\infty}^{\infty}c_{n}(z-z_{0})^{n}$$
+כאשר:
+$$c_{n}=\frac{1}{2\pi i}\int_{C}\frac{f(z)\,d z}{(z-z_{0})^{n+1}}$$
+
+\end{corollary}
+כאשר המסקנה נובעת מזה שניתן לכתוב:
+$$b_{-n}=\frac{1}{2\pi i}\int_{C}\frac{f(z)\,d z}{(z-z_{0})^{n+1}}\implies f(z)=\sum_{n=-\infty}^{-1}b_{-n}(z-z_{0})^{n}+\sum_{n=0}^{\infty}a_{n}(z-z_{0})^{n}$$
+ולאחד את הסכומים.
+\end{document}

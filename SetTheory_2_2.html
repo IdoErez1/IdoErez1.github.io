@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המערכת ZF</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page'><a href='./SetTheory.html'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_1.html'>1.1 מבוא</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_2.html'>1.2 פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_3.html'>1.3 יחסי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_4.html'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_5.html'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_1.html'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_2.html'>2.2 המערכת ZF</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_4.html'>2.4 סודרים ומונים</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_5.html'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./SetTheory_2_1.html'>2.1 מחלקות וקבוצות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./SetTheory_2_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./SetTheory_2_1.html`;}});</script>
+        <div class="content">
+        <h1>2.2  המערכת ZF</h1>
+    <p>נגדיר כעת את האקסימות של ZF</p>
+<div class="definition"><span class="keyword">אקסיומת ההיקפיות</span><p>שתי קבוצות הם שוות אם"ם יש בהם את אותם איברים. או פורמלית:
+<span>$$\forall x\forall y\left( x = y \iff \left( \forall z\quad z \in x \iff z \in y \right) \right)$$</span></p>
+</div>
+<div class="corollary">
+<ol>
+<li>
+<p><span>\(\forall x\quad x = x\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall x \forall y\quad x=y\implies y = x\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall x\forall y\forall z \left[ \left( x=y\land y=z \right)\implies x=z \right]\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אקסיומת הקבוצה הריקה</span><p>קיימת קבוצה ריקה:
+<span>$$\exists x\quad \varphi_{0}(x)$$</span></p>
+</div>
+<div class="remark">
+<p>יש מקומות בהם מגדירים את האקסימה הזו בצורה אחרת - ומשלבים את זה ביחד עם הגדרת המחלקה - וקוראים זה אקסימת בניית המחלקה. האקסיומה אומרת כי אוסף כל האובייקטים המתאים תכונה הם מחלקה, ואז בפרט הקבוצה הריקה היא מחלקה.</p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת הזוג הלא סדור</span><p>לכל קבוצות <span>\(x,y\)</span> קיימות קבוצה <span>\(\{ x,y \}\)</span>. כלומר:
+<span>$$\forall x\forall y\exists z\quad[\forall w\quad w\in z\leftrightarrow(w=x\lor w=y)]$$</span></p>
+</div>
+<div class="remark">
+<p>נסיק שקיים יחידונים לכל <span>\(x\)</span>.
+<span>$$\{ x,x \}=\{ x \}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת האיחוד</span><p>לכל קבוצה <span>\(x\)</span> קיימת הקבוצה <span>\(\displaystyle{\cup_{a \in x}a}\)</span>.
+<span>$$\forall x\exists y\quad\forall w\,[w\in y\leftrightarrow\exists z\,(z\in x\land w\in z)]$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסימות קבוצות החזקה</span><p>לכל קבוצה קיימת קבוצת חזקה <span>\(\mathcal{P}(x)\)</span>. כלומר:
+<span>$$\forall x\exists y\forall z\quad(z\in y\leftrightarrow z\subseteq x)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת הסדירות</span><p>אם <span>\(x\)</span> קבוצה לא ריקה, אז קיים <span>\(y \in x\)</span> שהוא מזערי ביחס <span>\(\in\)</span> מאיברי <span>\(x\)</span>.
+(כלומר אין <span>\(z \in x\)</span> <span>\(z \in y\)</span>)
+<span>$$\forall x\left[\underbrace{\exists z\qquad z\in x}_{x\neq\varnothing}\rightarrow\exists y\,(y\in x\land\forall z\quad z\in x\rightarrow z\notin y)\right]$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת האינסוף</span><p>קיים קבוצה אינסופית, בפרט קיים קבוצה <span>\(Z\)</span> שמכילה את <span>\(\varnothing\)</span> ומתקיימת אם <span>\(A \in Z\)</span> אז <span>\(\cup \left\{  A,\{ A \}  \right\}\in Z\)</span>. כלומר:
+<span>$$\exists y\quad[\varnothing\in y\land\forall x\,(x\in y)\rightarrow S\,(x)\in y]$$</span></p>
+</div>
+<div class="remark">
+<p>אקסיומת האינסוף נותת לנו שקבוצה אינדוקטיבית היא קבוצה. כלומר קבוצה המקיימת את התנאי:
+<span>$$X \in A\implies X\cup \{ X \} \in A$$</span></p>
+</div>
+<p>לכל תכונה <span>\(p(x)\)</span> וקבוצה <span>\(A\)</span> קיימת קבוצה <span>\(\left\{  x \in A \mid p(x)  \right\}\)</span>. כלומר:
+<span>$$\forall x\forall u_{1}\ldots\forall u_{k}\exists y\quad\left[\forall z\quad z\in y\leftrightarrow z\in x\land\varphi\left(z;u_{1},\ldots,u_{k}\right)\right]$$</span>
+או לחלופין קיים איבר ב-<span>\(A\)</span> שהחיתוך עם <span>\(A\)</span> הוא ריק.</p>
+<div class="definition"><span class="keyword">אקסיומת(סכמת) ההחלפה</span><p>לכל מחלקה המקיימת את תנאי הפונקציה(כלומר אוסף של זוגות סדורים ביחד עם תכונה המקיימת את תנאי הפונקציה) נקבל כי עבור קבוצה <span>\(X\)</span>, התמונה:
+<span>$$F[X]=\left\{  \langle x,y \rangle \mid p\left( \langle x,y \rangle  \right)  \right\}$$</span>
+תהיה קבוצה.</p>
+</div>
+<div class="remark">
+<p>שתי האקסיומות האחרונות נקראות סכמה כיוון שלמעשה זהו לא אקסיומה אחת, אלה אקסיומה נפרדת עבור כל תכונה <span>\(p(x)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת היסוד</span><p>לכל קבוצה לא ריקה <span>\(A\)</span> קיים איבר מינימלי תחת היחס <span>\(\in\)</span>. </p>
+</div>
+<div class="corollary">
+<ol>
+<li>
+<p><span>\(\forall x\forall y \exists z\quad z = x\cup y\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall x\forall y \exists z\quad z=x\cap y\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall x \forall y x \in y \implies y \not \in x\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall x \quad x \not \in x\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אוסף האקסיומות ללא אקסיומת הבחירה נראה ZF כאשר ביחד עם אקסימת הבחירה נקרא ZFC</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='prev-page'><a href='./SetTheory_2_1.html'>2.1 מחלקות וקבוצות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

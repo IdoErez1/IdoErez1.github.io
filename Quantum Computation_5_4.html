@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קבצות שערים אוניברסליים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent-page'><a href='./Quantum Computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_1'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_2'>2.2 מדידה מוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_3'>2.3 ערוצים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_4'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_5'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_1'>3.1 מצבי בל</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_2'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_1'>4.1 חישוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_3'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_1'>5.1 שערים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_2'>5.2 מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_4'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_2'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_2'>7.2 מחזוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_3'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum Computation_6_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum Computation_5_3`; }});</script>
+        <div class="content">
+        <h1>5.4  קבצות שערים אוניברסליים</h1>
+    <div class="reminder">
+<p>ניתן לבנות כל אינטרי בעזרת אוסף כל השערים שפועלים על שתי קיוביטים. כלומר אוסף כל השערי שתי קיוביט(אוניטריות <span>\(4\times 4\)</span> היא קבוצת שערים אוניברסליים).</p>
+</div>
+<div class="reminder">
+<p>ניתן לכתוב כל אוניטרי <span>\(2\times 2\)</span> בעזרת זוויות אויילר בצורה הבאה:
+<span>$$U\left(\alpha,\beta,\gamma\right)=e^{-i\alpha Z}e^{-i\beta Y}e^{-i\gamma Z}$$</span></p>
+</div>
+<div class="lemma">
+<p>עבור:
+<span>$$A\left(\alpha,\beta\right)=e^{-i\alpha Z}e^{-i\beta Y/2}\quad B\left(\alpha,\beta,\gamma\right)=e^{i\beta Y/2}e^{i\left(\gamma+\alpha\right)Z/2}\quad C\left(\alpha,\gamma\right)=e^{-i\left(\gamma-\alpha\right)Z/2}$$</span>
+מתקיים:
+<span>$$A B C=\mathbb{1}\quad{\mathrm{and}}\quad A X B X C=U$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן בעזרת <span>\(A,B,C\)</span> המוגדרים לעיל ו-CNOT ליצור את <span>\(\Lambda(U)\)</span> עבור כל אוניטרי <span>\(U\)</span>.</p>
+</div>
+<div class="proof">
+<p>נרצה שאם מקבלים 0 נפעיל עם <span>\(ABC=\mathbb{1}\)</span> ואם נקבל 1 נפעל עם <span>\(U=AXBXC\)</span>. לכן נפעל ראשית עם <span>\(C\)</span> ואז עם <span>\(\Lambda(X)\)</span>(לא יעשה כלום אם 0 ואחרת יפעיל <span>\(X\)</span>) לאחר מכן נפעל עם <span>\(B\)</span> ואז שוב עם <span>\(\Lambda(X)\)</span> ולבסוף שוב עם <span>\(A\)</span>.</p>
+</div>
+<div class="proposition">
+<p>קבוצת השערים שפועלים על קיוביט אחד, עם CNOT היא קבוצת שערים אוניברסליית</p>
+</div>
+<div class="proof">
+<p>ראינו כי בעזרת אופרטורי קיוביט יחיד ו-CNOT ניתן לבנות את כל השערי שתי קיוביט מהצורה <span>\(\Lambda(U)\)</span> כאשר הראנו שכל קבוצת השערים הזו היא קבוצת שערים אונברסליים.</p>
+</div>
+<div class="proposition">
+<p>נגדיר:
+<span>$$S=\left(\begin{array}{l l}{{1}}&amp;{{0}}\\ {{0}}&amp;{{i}}\end{array}\right)$$</span>
+כעת האדמר(H) ו-<span>\(\Lambda(S)\)</span> יוצרים קבוצת שערים אוניברסליים.</p>
+</div>
+<div class="lemma">
+<p>האופרטור <span>\(T=\exp\left(-i\pi Z/8\right)\)</span> מקיים <span>\(T^{2}=e^{ -i\pi/4 }S\)</span></p>
+</div>
+<p><span>$$T^{2}\;=\;\exp\left(-i\pi Z/4\right)\;=\;\left(\begin{array}{c c}{{e^{-i\pi/4}}}&amp;{{0}}\\ {{0}}&amp;{{e^{i\pi/4}}}\end{array}\right)\;=\;e^{-i\pi/4}\left(\begin{array}{c c}{{1}}&amp;{{0}}\\ {{0}}&amp;{{i}}\end{array}\right)=e^{ i\pi/4 }$$</span></p>
+<div class="proposition">
+<p>קבוצת השערים <span>\(\left\{  T,H,\mathrm{CNOT}  \right\}\)</span> היא קבוצת שערים אוניברסליים.</p>
+</div>
+<div class="proof">
+<p>ראשית נשים לב כי כיוון ש-<span>\(S^{4}=\mathbb{1}\)</span> אזי <span>\(T^{8}=\left( e^{ -i\pi/4 }S \right)^{4}=-\mathbb{I}\)</span>, ולכן <span>\(T^{\dagger}=-T^{7}\)</span> ולכן עד כדי פאזה גלובלית נקבל כי <span>\(T^{7}\)</span> שקול ללהפעיל את ההופכי שלו (אם מאיזושהי סיבה אכפת לנו מפאזה גלובלית נדרש <span>\(T^{15}=T^{\dagger}\)</span>). כעת כיוון ש-<span>\(T^{\dagger}T^{\dagger}T^{2}=\mathbb{1}\)</span> ו-<span>\(T^{\dagger}XT^{\dagger}XT^{2}=T^{2}\)</span> ניתן לבחור <span>\(A=B=-T^{\dagger}=T^{7}\)</span>, ו-<span>\(C=T^{2}\)</span> כך שנקבל <span>\(\Lambda(T^{2})=\Lambda \left( e^{ -i\pi/4 }S \right)\)</span> ולכן ניתן בעזרת <span>\(T\)</span> ו-CNOT לקבל את <span>\(\Lambda(S)\)</span> עד כדי פאזה גלובלית ובפרט כיוון ש-<span>\(\left\{  H,\Lambda(S)  \right\}\)</span> קבוצת שערים אוניברסלים אזי גם <span>\(\{ H,CNOT,T \}\)</span> תהי קבוצת שערים אוניברסליים.</p>
+</div>
+<div class="example">
+<p>נתון לנו מערכת של <span>\(n\)</span> קיוביטים שעליהם ניתן לבצע את האוניטריות <span>\(U_{n}^{Z}\left( \phi \right)=e^{ -i\phi Z_{n} }\)</span> ו-<span>\(U_{n}^{X}\)</span> לכל פאזה <span>\(\phi \in \left[ 0,2\pi \right)\)</span> וכן ניתן לבצע את <span>\(V_{mn}^{Z Z}=e^{ i\pi Z_{m}Z_{n}/4 }\)</span> עבור כל שתי קיוביטים <span>\(m,n\)</span>. ראשית נשים לב כי ניתן לממש כל שער של קיוביט יחיד כיוון שראינו כי אם ניתן להשיג את <span>\(e^{ i\alpha J_{1}/n  }\)</span> ואת <span>\(e^{ i\alpha J_{2}/n }\)</span> אז ניתן להשיג גם את <span>\(e^{ i\alpha(J_{1}+J_{2})/n }\)</span>, ואף גם את <span>\(e^{ i\alpha [J_{1},J_{2}] }=e^{ i\alpha J_{3} }\)</span> ולכן כיוון ש-<span>\(Z,X\)</span> יוצרים של <span>\(SU(2)\)</span> ניתן ליצור את כל השערים של קיוביט יחיד. כעת נסתכל על השער controlled-Z:
+<span>$$\begin{gather}C_{m n}^{Z}=\left|0\right\rangle\left\langle0\right|_{m}\otimes\mathbb{I}_{n}+\left|1\right\rangle\left\langle1\right|_{m}\otimes Z_{n}=\frac{1}{2}\left( \mathbb{1}_{m} +Z_{m} \right)\otimes \mathbb{1}_{n} +\frac{1}{2}\left( \mathbb{1}_{m} -Z_{m} \right)\otimes Z_{n} = \\=\frac{1}{2}\left( \mathbb{1}_{m} \otimes \mathbb{1} _{n} +Z_{m}\otimes \mathbb{1} _{n}+\mathbb{1} _{m}\otimes Z_{n}-Z_{m}\otimes Z_{n} \right)
+\end{gather}$$</span>
+נשים לב כי ניתן לכתוב אותו על ידי <span>\(C_{mn}^{Z}=e^{ i\alpha(1-Z_{m})(1-Z_{n}) }\)</span> עבור <span>\(\alpha=\frac{\pi}{4}\)</span> כיוון שמתקיים:
+<span>$$e^{ i\frac{\pi}{4}(1-Z_{m})(1-Z_{n}) }=e^{ i\frac{\pi}{4} \left( \mathbb{1} -Z_{m} -Z_{n}-Z_{m}Z_{n}\right)}=e^{ i\frac{\pi}{4} }e^{ -i\frac{\pi}{4} Z_{n} }e^{ -i\frac{\pi}{4}Z_{m} }e^{ i\frac{\pi}{4} Z_{m}Z_{n} }$$</span>
+כאשר נזכור כי <span>\(e^{ i\pi/4 }=\frac{1}{\sqrt{ 2 }}(1+i)\)</span> וכן אנו יודעים כי עבור מטריצות פאולי מתקיים:
+<span>$$e^{ i\pi Z/4 }=\cos\left( \frac{\pi}{4} \right)\mathbb{1} +i\sin\left( \frac{\pi}{4} \right)Z=\frac{1}{\sqrt{ 2 }}\mathbb{1} +\frac{i}{\sqrt{ 2 }}Z=\frac{1}{\sqrt{ 2 }}\left( \mathbb{1} +iZ \right)$$</span>
+ולכן נקבל סה"כ בעזרת כתיבה קצת יותר קומפקטית:
+<span>$$\begin{gather}e^{ i\frac{\pi}{4} }e^{ -i\frac{\pi}{4} Z_{n} }e^{ -i\frac{\pi}{4}Z_{m} }e^{ i\frac{\pi}{4} Z_{m}Z_{n} }=\frac{1}{4}(1+i)(1-iZ_{m})(1-iZ_{n})(1+iZ_{m}Z_{n})=  \\=\frac{1}{4}\cancelto{ 2 }{ (i+1)(i-1) }(1+Z_{m}+Z_{m}+Z_{m}Z_{n})=\frac{1}{2}\left( \mathbb{1}_{m} \otimes \mathbb{1} _{n} +Z_{m}\otimes \mathbb{1} _{n}+\mathbb{1} _{m}\otimes Z_{n}-Z_{m}\otimes Z_{n} \right)
+\end{gather}$$</span>
+כלומר עד כדי פאזה גלובלית ניתן לממש את <span>\(C_{mn}^{Z}\)</span> עם האוניטריות הנתונות, ולכן ניתן לממש כל שער של קיוביט יחיד ו-<span>\(C_{mn}^{Z Z}\)</span> וראינו כי זה קבוצת שערים אוניברסלית.</p>
+</div>
+<div class="summary">
+<p>הקבוצות הבאות הם קבוצות שערים אוניברסליים:
+- קבוצת כל השערים שפועלים של 2 קיוביטים.
+- הקבוצה של השערים הנשלטים <span>\(\Lambda(U)\)</span>.
+- קבוצת השערים שפועלים על קיוביט אחד ו-CNOT.
+- האדמר ו-<span>\(S\)</span> כאשר:
+<span>$$S=\left(\begin{array}{c c}{{1}}&amp;{{0}}\\ {{0}}&amp;{{i}}\end{array}\right)$$</span>
+- קבוצת השערים <span>\(\left\{  T,H,\mathrm{CNOT}  \right\}\)</span> כאשר <span>\(T=\exp\left(-i\pi Z/8\right)\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='prev-page'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

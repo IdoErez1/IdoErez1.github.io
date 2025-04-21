@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אינטגרציית לבג</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_1_5`; }});</script>
+        <div class="content">
+        <h1>2.1  אינטגרציית לבג</h1>
+    <div class="definition"><span class="keyword">פונקציה פשוטה</span><p>פונקציה <span>\(s:X\to \mathbb{C}\)</span> על מרחב מדיד <span>\(\left( X,\mathcal{A} \right)\)</span> נקראת פשוטה אם היא מדידה ובעלת תמונה סופית. כלומר:
+<span>$$\lvert s(X) \rvert &lt;\infty$$</span>
+באופן שקול ניתן לומר שקיימים קבועים <span>\(\alpha_{1},\dots,\alpha_{k}\in \mathbb{C}\)</span> וקבוצות מדידות <span>\(E_{1},\dots,E_{k}\in \mathcal{A}\)</span> כך ש:
+<span>$$s=\sum_{i=1}^{k}\alpha_{i}\mathbb{1} _{E_{i}}$$</span></p>
+</div>
+<div class="remark">
+<p>תמיד ניתן לבחור את <span>\(E_{1},\dots,E_{k}\)</span> כך ש-<span>\(\{ E_{1},..,E_{k} \}\)</span> הינה חלוקה של <span>\(X\)</span>. כלומר הקבוצות זרות בזוגות ואיחודן כל <span>\(X\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל של פונקציה פשוטה</span><p>על המרחב מידה <span>\(\left( X,\mathcal{A},\mu \right)\)</span> האינטגרל של פונקציה פשוטה <span>\(s:X\to \left[ 0,\infty \right)\)</span> מוגדר להיות:
+<span>$$s=\sum_{i=1}^{k} \alpha_{i}\mathbb{1} _{E_{i}}$$</span>
+מעל קבוצה מדידה <span>\(A\in \mathcal{A}\)</span> מוגדר להיות:
+<span>$$\int_{A} s\;\mathrm{d}\mu:= \sum_{i=1}^{k} \alpha_{i}\mu\left( A\cap E_{i} \right)$$</span></p>
+</div>
+<div class="remark">
+<p>אריתמטיקה ב-<span>\(\left[ 0,\infty \right]\)</span> לכל <span>\(\alpha \in \left[ 0,\infty \right]\)</span> נקבל <span>\(\alpha+\infty=\infty\)</span> ולכל <span>\(\alpha&gt;0\)</span> נקבל <span>\(\alpha\cdot \infty=\infty\)</span> ו-<span>\(0\cdot \infty = 0\)</span>. זהו מוסכמה שאנחנו משתמשים בה כרגע, ולא נכונות באופן כללי(למשל עם סדרות ניתן להראות שסדרה מתכנסת לא בצורה רצויה).</p>
+</div>
+<div class="proposition">
+<p>לכל פונקציה מדידה <span>\(f:X\to \left[ 0,\infty \right]\)</span> קיימת סדרת פונקציות פשוטות <span>\(s_{n}:X\to \left[ 0,\infty \right)\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>זוהי סדרה עולה של פונקציות פשוטות: 
+<span>$$0\leq s_{1} \leq s_{2} \leq \dots \leq f$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(x \in X\)</span> נקבל: 
+<span>$$\lim_{ n \to \infty } s_{n}(x)=f(x)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>קיימים הרבה דרכים לבנות סדרת פונקציות כאלה, למשל אם נסתכל על <span>\(\varphi_{n}:\left[ 0,\infty \right)\to\left[ 0,\infty \right)\)</span> המוגדרת על ידי:
+<span>$$\varphi_{n}=\begin{cases}n  &amp; x\geq n \\2^{-n}\cdot \left\lfloor  2^{n}\cdot x  \right\rfloor  &amp; 0\leq x &lt; n
+\end{cases}$$</span>
+כאשר זוהי סדרה של פונקציות פשוטות כך ש:
+<span>$$s_{n}=\varphi_{n}\circ  f$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אינטגרל לבג</span><p>תהי <span>\(f:X\to \left[ 0,\infty \right]\)</span> פונקציה מדידה. נגדיר את האינטגרל לבג שלה ביחס ל-<span>\(\mu\)</span> מעל קבוצה מדידה <span>\(A \in \mathcal{ A}\)</span> להיות:
+<span>$$\int _{A}f \;\mathrm{d} \mu := \sup _{0\leq s \leq f} \int _{A}s \;\mathrm{d} \mu $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות בסיסיות של אינטגרל לבג</span><ol>
+<li>
+<p>אם <span>\(0\leq f\leq g\)</span> אז: 
+<span>$$0\leq \int _{A}f \;\mathrm{d} \mu \leq \int _{A}g \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>אם <span>\(0\leq f\)</span> ו-<span>\(A\subseteq B\)</span> נקבל: 
+<span>$$\int _{A}f \;\mathrm{d} \mu \leq \int _{B} f\;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>אם <span>\(0\leq f\)</span> ו-<span>\(0\leq c\)</span> קבוע אז: 
+<span>$$\int _{A} c\cdot f  \;\mathrm{d} \mu= c \int _{A}f \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>אם <span>\(f|_{E}\equiv 0\)</span> אז: 
+<span>$$\int _{E}f \;\mathrm{d} \mu=0 $$</span>
+גם אם <span>\(\mu(E)=\infty\)</span>.</p>
+</li>
+<li>
+<p>אם <span>\(\mu(E)=0\)</span> אז <span>\(\int _{E}f \;\mathrm{d} \mu=0\)</span> (גם אם <span>\(f  \equiv \infty\)</span>). </p>
+</li>
+<li>
+<p>אם <span>\(0\leq f\)</span> אזי: 
+<span>$$\int _{E}f \;\mathrm{d} \mu=\int _{X}f \cdot \mathbb{1} _{E} \;\mathrm{d} \mu  $$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון מרקוב</span><p>אם <span>\(f:X\to \left[ 0,\infty \right]\)</span> פונקציה מדידה אי שלילית, אזי לכל <span>\(a&gt; 0\)</span> מתקיים:
+<span>$$\mu\left( f^{-1}\left( \left[ a,\infty \right] \right) \right)\leq \frac{1}{a}\int _{X}f\;\mathrm{d} \mu $$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='prev-page'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

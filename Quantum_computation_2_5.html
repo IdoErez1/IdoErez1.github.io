@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת המאסטר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent-page'><a href='./Quantum_computation.html'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2.html'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1.html'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3.html'>2.3 ערוצים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_5.html'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2.html'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1.html'>4.1 חישוב</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2.html'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_3.html'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_1.html'>5.1 שערים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_3.html'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_1.html'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_1.html'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_2.html'>7.2 מחזוריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_3.html'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_4.html'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_1.html'>8.1 טרוטריזציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_2.html'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_3_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_2_4.html`;}});</script>
+        <div class="content">
+        <h1>2.5  משוואת המאסטר</h1>
+    <div class="definition"><span class="keyword">ההנחה המרקובית</span><p>כאשר יש לנו מערכת שמתקדמת בזמן בצורה הסתברויתית, כאשר ההתדמות בכל שלב תלויה אך ורק בשלב שלפנייה, נאמר שמקיימת את ההנחה המרקובית.</p>
+</div>
+<div class="remark">
+<p>דרך אחת לפרש את ההנחה המרקובית היא שהעתיד היא לא תלויה בעבר בהינתן ההווה.</p>
+</div>
+<div class="remark">
+<p>כאשר המערכת מקיימת את ההנחה המרקובית, ניתן לכתוב משוואה שתלויה ב-<span>\(\rho(t)\)</span> ו-<span>\(\rho\left( t+\mathrm{d}t \right)\)</span> בלבד, ולקבל משוואה דיפרנציאלית עבור המערכת.</p>
+</div>
+<p>משוואת שרודינגר נכונה רק למערכות סגורות, ומניחה שימור הסתברות וקידום בזמן אוניטרי. נרצה למצוא משוואה אשר מכלילה את זה למערכת כללית, כאשר נדרש שתקיים את ההנחה המרקובית.</p>
+<div class="definition"><span class="keyword">אופרטורי קראוס מוכללים</span><p><span>$$M_{0}=\mathbb{1} +(-i H+K)\mathrm{d} t,\quad M_{i}=\sqrt{\mathrm{d} t}L_{i}$$</span>
+כאשר <span>\(L_{i}\)</span> נקראים אופרטורי קפיצה ומייצגים אופרטורי קראוס אשר אינם קרובים ליחידה(כלומר קפיצה), ו-<span>\(K\)</span> הוא אופקטור הרמיטי כך שמתקיים היחס:
+<span>$$K=-\frac{1}{2}\sum_{i}L_{i}^{\dagger}L_{i}$$</span></p>
+</div>
+<p>הגדרות אלו נובעות באופן טבעי מהמשפט הבא.</p>
+<div class="theorem"><span class="keyword">משוואת המאסטר - תמונת שרדינגר</span><p><span>$$\frac{d}{d t}\rho=-i\left[H,\rho\right]+\sum_{i}\left({ L}_{i}\rho{ L}_{i}^{\dagger}-\frac{1}{2}{ L}_{i}^{\dagger}{ L}_{i}\rho-\frac{1}{2}\rho{ L}_{i}^{\dagger}{ L}_{i}\right)$$</span>
+כאשר <span>\(L_{i}\)</span> הם אופרטורים קפיצה המתארים את השינוי של המערכת בגלל הצימוד עם הסביבה.</p>
+</div>
+<div class="proof">
+<p>נניח כי מערכת מתוארת על ידי ערוץ קוונטי:
+<span>$$\rho\left(t+d t\right)=\mathcal{E}_ {d t}\left(\rho\left(t\right)\right)=\sum_{\mu}M_{\mu}\rho\left(t\right)M_{\mu}^{\dagger}=\rho\left(t\right)+O\left(d t\right)$$</span>
+יש לנו אופרטור קראוס שמתאר את זה שלא קורה כלום:
+<span>$$M_{0}=\mathbb{1}+\left(-i H+K\right)d t$$</span>
+כאשר אם נדרוש שלמות של אופרטורי קראוס נקבל:
+<span>$$\mathbb{1}\ =\ \sum_{\mu}M_{\mu}^{\dagger}M_{\mu}\ =\ \mathbb{1}\ +d t\left(2K+\sum_{i}L_{i}^{\dagger}L_{i}\right)+O\left(d t^{2}\right)$$</span>
+נקבלאת  הגדרה של <span>\(K=-\frac{1}{2}\sum_{i}L_{i}^{\dagger}L_{i}\)</span>.  נמצא כעת את הנגזרת <span>\(\frac{\mathrm{d} \rho}{\mathrm{d} t}\)</span> על ידי חישוב הגבול:
+<span>$${\frac{d}{d t}}\rho=\operatorname*{lim}_{d t\longrightarrow0}{\frac{\rho\left(t+d t\right)-\rho\left(t\right)}{d t}}=-i\left[H,\rho\right]+\sum_{i}\left(L_{i}\rho L_{i}^{\dagger}-{\frac{1}{2}}L_{i}^{\dagger}L_{i}\rho-{\frac{1}{2}}\rho L_{i}^{\dagger}L_{i}\right)$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אם המערכת היא סגורה אין צימוד עם הסביבה ולכן <span>\(L_{i}=0\)</span> ונקבל:
+<span>$$\frac{d}{d t}\rho=-i\left[H,\rho\right]$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משוואת המאסטר בתמונת היזנברג</span><p><span>$$\frac{\mathrm{d} A}{\mathrm{d} t} =i[H,A]+\sum_{i}\left( L_{i}A^{\dagger}L_{i}-\frac{1}{2}L_{i}^{\dagger} L_{i}A-\frac{1}{2}AL_{i}^{\dagger}L_{i} \right)$$</span></p>
+</div>
+<div class="proof">
+<p>ערך תצפית של גודל מדיד <span>\(A\)</span> בזמן <span>\(t+\mathrm{d}t\)</span> נתון על ידי:
+<span>$$\left\langle A\right\rangle_{t+d t}=\mathrm{Tr}\left[\rho\left(t+d t\right)A\right]=\mathrm{Tr}\left[\mathcal{E}_{d t}\left(\rho\left(t\right)\right)A\right]=\sum\mathrm{Tr}\left[M_{\mu}\rho\left(t\right)M_{\mu}^{\dagger}A\right]$$</span>
+נרצה להגדיר ערוץ בתמונת האיזברג על ידי:
+<span>$$A\left(t+d t\right)=\mathcal{E}_{d t}^{*}\left(A\left(t\right)\right)$$</span>
+כאשר זה יתן לנו:
+<span>$$\left\langle A\right\rangle_{t+d t}=\mathrm{Tr}\left[\rho\left(t\right)A\left(t+d t\right)\right]=\mathrm{Tr}\left[\rho\left(t\right)\mathcal{E}_{d t}^{\ast}\left(A\left(t\right)\right)\right].$$</span>
+נדרוש כי ערך התצפית יהיה זהה בשתי התמונות:
+<span>$$\mathrm{Tr}\left[\rho\left(t\right)\mathcal{E}_{d t}^{\ast}\left(A\left(t\right)\right)\right]=\sum_{\mu}\mathrm{Tr}\left[M_{\mu}\rho\left(t\right)M_{\mu}^{\dagger}A\left(t\right)\right]=\sum_{\mu}\mathrm{Tr}\left[\rho\left(t\right)M_{\mu}^{\dagger}A\left(t\right)M_{\mu}\right]$$</span>
+כאשר השתמשנו בציקליות של העקבה. מזה נסיק כי הערוץ <span>\(\mathcal{E}_{\mathrm{d}t}\)</span> יהיה הערוץ הדואלי של <span>\(\mathcal{E}_{\mathrm{d}t}\)</span> ויקיים:
+<span>$$A\left(t+d t\right)=\mathcal{E}_{d t}^{*}\left(A\left(t\right)\right)=\sum_{\mu}M_{\mu}^{\dagger}A\left(t\right)M_{\mu}$$</span>
+ולכן אם נחשב את הנגזרת <span>\(\frac{\mathrm{d} }{\mathrm{d} t}A(t)\)</span> נקבל:
+<span>$$\begin{gather}{{\frac{d}{d t}A\left(t\right)=\operatorname*{lim}_{d t\longrightarrow0}\frac{A\left(t+d t\right)-A\left(t\right)}{d t}}}\\ {{=i\left[H,A\left(t\right)\right]+\sum_{i}\left(L_{i}^{\dagger}A\left(t\right)L_{i}-\frac{1}{2}L_{i}^{\dagger}L_{i}A\left(t\right)-\frac{1}{2}A\left(t\right)L_{i}^{\dagger}L_{i}\right)}}\end{gather}$$</span></p>
+</div>
+<div class="example"><span class="keyword">משוואת המאסטר על ערוץ דפולריזציה</span><p>עבור ערוץ דיפולריזציה יש 3 אופרטורי קראוס אשר מתאימים לאופרטור קפיצה:
+<span>$$M_{i}=\sqrt{ \frac{p}{3} }\sigma_{i}$$</span>
+כאשר על ידי <span>\(M_{i}=\sqrt{ \mathrm{d}t }L_{i}\)</span> ביחד עם <span>\(p=\Gamma \mathrm{d}t\)</span> נקבל את האופרטורי קפיצה:
+<span>$$L_{i}=\sqrt{\frac{\Gamma}{3}}\sigma_{i}$$</span>
+נציב את אופרטורי הקפיצה במשוואת המאסטר תוך שימוש בזה שמטריצות פאולי הם הרמיטיות ואוניטריות(ולכן הריבוע שלהם עצמם) ונקבל:
+<span>$$\frac{d}{d t}\rho=\frac{\Gamma}{3}\sum_{i}\left(\sigma_{i}\rho\sigma_{i}-\rho\right)$$</span>
+כעת אם נציב על ערוץ קיוביט מהצורה <span>\(\rho\left(\mathbf{P}\right)={\frac{1}{2}}\left(\mathbb{1}+\mathbf{P}\cdot\boldsymbol{\sigma}\right)\)</span>. נקבל עבור אגף שמאל:
+<span>$$\frac{d}{d t}\rho=\frac{1}{2}\frac{d{\bf P}}{d t}\cdot\boldsymbol{\sigma}$$</span>
+כאשר עבור אגף ימין נקבל:
+<span>$$\sum_{i}\sigma_{i}\rho\sigma_{i}=\frac{1}{2}\sum_{i}\left(\sigma_{i}^{2}+\sum_{j}P_{j}\sigma_{i}\sigma_{j}\sigma_{i}\right)$$</span>
+האיבר הראשון יהיה היחידה, כאשר אם נזכור כי <span>\(\sigma_{j}\sigma_{i}=-\sigma_{i}\sigma_{j}+2\delta_{ij}\)</span> נקבל:
+<span>$$\sum_{i}\sigma_{i}\rho\sigma_{i}=\frac{3}{2}\left(\mathbb{I}-\mathbf{P}\cdot\boldsymbol{\sigma}\right)$$</span>
+ולכן נקבל:
+<span>$$\frac{\Gamma}{3}\sum_{i}\left(\sigma_{i}\rho\sigma_{i}-\rho\right)=-\frac{2\Gamma}{3}{\bf P}\cdot\boldsymbol{\sigma}$$</span>
+כאשר המשוואה תהיה:
+<span>$${\frac{d\mathbf{P}}{d t}}\cdot\boldsymbol\sigma=-{\frac{4\Gamma}{3}}\mathbf{P}\cdot\boldsymbol\sigma\implies\frac{d{\bf P}}{d t}=-\frac{4{\Gamma}}{3}{\bf P}.$$</span>
+אם נניח כעת את התנאי התחלה <span>\(P(t=0)=P_{0}\)</span> נקבל:
+<span>$${\bf P}\left(t\right)={\bf P}_{0}e^{-\frac{4\Gamma}{3}t}$$</span>
+כך שאם <span>\(t\ll 1\)</span> נקבל:
+<span>$$\mathbf{P}\approx\mathbf{P}_{0}\left(1-{\frac{4\Gamma}{3}}d t\right)=\left(1-{\frac{4p}{3}}\right)\mathbf{P}_{0}$$</span></p>
+</div>
+<div class="example"><span class="keyword">אוסצילטור הרמוני קוונטי מרוסן</span><p>ניתן לכתוב עם המילטוניאן מהצורה:
+<span>$$H_{\mathrm{{int}}}=g\sum_{k}\left(a^{\dagger}a_{k}+a_{k}^{\dagger}a\right)$$</span>
+אנו יודעים כי כאשר המערכת נמצאת במצב וואקום, היא לא יכולה לפלוט פוטון, ורק יכולה לקלוט פוטון. יהיה רק אופרטור קפיצה אחד. ולכן:
+<span>$$M=\sqrt{p}a$$</span>
+ולכן <span>\(p=\Gamma \mathrm{d}t\)</span>. כלומר <span>\(L=\sqrt{ \Gamma }a\)</span>. ניתן כעת לכתוב את משוואת המאסטר בתמונת שרדינגר:
+<span>$$\frac{d\rho}{d t}=-i\omega\left[a^{\dagger}a,\rho\right]+\Gamma\left(a\rho a^{\dagger}-\frac{1}{2}a^{\dagger}a\rho-\frac{1}{2}\rho a^{\dagger}a\right)$$</span>
+ניתן לעבור לתמונת היזנברג:
+<span>$${\frac{d a}{d t}}=i\omega[a^{\dagger}a,a]+\Gamma\sum_{i}\left(a^{\dagger}a a-{\frac{1}{2}}a^{\dagger}a a-{\frac{1}{2}}a a^{\dagger}a\right)$$</span>
+כאשר על ידי שימוש ב-<span>\(\left[ a^{\dagger}a,a \right]=-a\)</span> נקבל:
+<span>$${\frac{1}{2}}a^{\dagger}a a-{\frac{1}{2}}a a^{\dagger}a=-{\frac{1}{2}}\left[a,a^{\dagger}\right]a=-{\frac{1}{2}}a.$$</span>
+ולכן:
+<span>$${\frac{d a}{d t}}=-\left(i\omega+{\frac{\Gamma}{2}}\right)a\implies a\left(t\right)=e^{-\left(i\omega+\frac{F}{2}\right)t}a\left(0\right).$$</span>
+נשים לב כעת כי המצב עבור מצב התחלתי בבסיס המספר <span>\(\ket{n}\)</span> יהיה:
+<span>$$\langle a^{\dagger}\,a\rangle_{t=0}=n$$</span>
+כאשר אם נקדם בזמן נקבל:
+<span>$$\langle a^{\dagger}a\rangle_{t}=\langle n|a^{\dagger}(t)a(t)|n\rangle=e^{-\Gamma t}\langle a^{\dagger}a\rangle_{t=0}=n e^{-\Gamma t}$$</span>
+כיוון שהפוטציאל ההרמוני הוא פונקציאל ריבועי, נקבל כי התוכלת שלו מקיים את משוואות המילטון(משוואת אהרנפסט):
+<span>$$\frac{d}{d t}\left\langle X\right\rangle^{\mathrm{free}}=\frac{1}{m}\left\langle P\right\rangle^{\mathrm{free}},\qquad\frac{d}{d t}\left\langle P\right\rangle^{\mathrm{free}}=-m\omega^{2}\left\langle X\right\rangle^{\mathrm{free}}.$$</span>
+ונקבל:
+<span>$$\langle X\rangle_{t}=e^{-\frac{\Gamma_{t}}{2}}\langle X\rangle_{\mathrm{free}},\quad\langle P\rangle_{t}=e^{-\frac{\Gamma_{t}}{2}}\langle P\rangle_{\mathrm{free}}.$$</span>
+כאשר ממשפט האמסטר בתמונת שרדינגר עבור תנאי התחלה <span>\(\rho(0)=\ket{\alpha}\bra{\alpha}\)</span> נקבל:
+<span>$$\rho(t)=|\alpha e^{-(i\omega+\frac{\Gamma}{2})t}\rangle\langle\alpha e^{-(i\omega+\frac{\Gamma}{2})t}|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מצבי חתול  - Cat</span><p>נסתכל על סופרבוזציה של שתי מצבים קוהרנטים:
+<span>$$|\psi\rangle=\frac{1}{\sqrt{C}}(|\alpha\rangle+|\beta\rangle)$$</span>
+כאשר <span>\(C\)</span> קבוע נקמול המתאים. המטריצת צפיפות המתאימה תהיה:
+<span>$$\rho(0)=\frac{1}{C}(|\alpha\rangle\langle\alpha|+|\alpha\rangle\langle\beta|+|\beta\rangle\langle\alpha|+|\beta\rangle\langle\beta|)$$</span></p>
+</div>
+<div class="proposition">
+<p>הקידום בזמן של <span>\(\ket{\alpha}\bra{\alpha}\)</span> ו-<span>\(\ket{\beta}\bra{\beta}\)</span> נתון על ידי:
+<span>$$\begin{gather}|\alpha\rangle\langle\alpha|\mapsto|\alpha e^{-(i\omega+\frac{\Gamma}{2})t}\rangle\langle\alpha e^{-(i\omega+\frac{\Gamma}{2})t}|\\|\beta\rangle\langle\beta|\mapsto|\beta e^{-(i\omega+\frac{\Gamma}{2})t}\rangle\langle\beta e^{-(i\omega+\frac{\Gamma}{2})t}| 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>הגורם המעורב נתון על ידי:
+<span>$$|\alpha\rangle\langle\beta|\mapsto \langle\beta|\alpha\rangle^{1-e^{-\Gamma t}}|\alpha e^{-(i\omega+\frac{\Gamma}{2})t}\rangle\langle\beta e^{-(i\omega+\frac{\Gamma}{2})t}|$$</span></p>
+</div>
+<div class="proof">
+<p>ננחש פתרון מהצורה:
+<span>$$|\alpha\rangle\langle\beta|\to f(t)|\alpha e^{-(i\omega+\frac{\Gamma}{2})t}\rangle\langle\beta e^{-(i\omega+\frac{\Gamma}{2})t}|$$</span>
+כאשר אם נמצב למשוואת המאסטר נקבל <span>\(f(t)=\langle\beta|\alpha\rangle^{1-e^{-\Gamma t}}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(t\ll T_{\mathrm{decay}}\)</span> ניתן לפתח:
+<span>$$1-e^{ -\Gamma t }\approx \Gamma t\implies f(t)\approx \left\lvert  \braket{ \beta | \alpha }   \right\rvert ^{\Gamma t}e^{ i\varphi\left( \beta,\alpha \right) }$$</span>
+כאשר הגורמים שלא באלכסון דועכים בצורה:
+<span>$$|\langle\beta|\alpha\rangle|^{\mathsf{T}t}=e^{-\frac{\mathsf{r}}{2}|\beta-\alpha|^{2}t}$$</span>
+והזמן דה-קוהרנטיות תהיה:
+<span>$$T_{\mathrm{decoherence}}={\frac{T_{\mathrm{decay}}}{|\beta-\alpha|^{2}}}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור מערכות עם <span>\(\left\lvert  \beta-\alpha  \right\rvert^{2}\gg 1\)</span> הדה-קוהרנטיות הרבה יותר מהיר מהדעיכה. זבה זה יכול להסביר את האתגר של מערכות קוונטיות מקארוסקופיות.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='prev-page'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+</ul></li>
+        </body>
+        </html>
+        

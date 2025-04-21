@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המערכת הפתוחה - הצבר הגאנד קנוני</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_5_6`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_5_4`; }});</script>
+        <div class="content">
+        <h1>5.5  המערכת הפתוחה - הצבר הגאנד קנוני</h1>
+    <div class="reminder"><span class="keyword">פוטנציאל הכימי</span><p>מדד לכמה "קשה" להכניס חלקיקים למערכת. מסומן ב-<span>\(\mu\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הצבר הגראנד קנוני</span><p>מערכת שיכולה להחליף גם אנרגיה וגם חלקיקים עם אמבט. כאשר נניח כי האמבט גדול משמעותית מהמערכת. כיוון שאנו דורשים שיווי משקל נקבל כי הטמפרטורה של המערכת שווה לטמפרטורה של המאגר(<span>\(T=T_{R}\)</span>) וכן הפוטנציאלים הכימים שווים(<span>\(\mu=\mu_{R}\)</span>).</p>
+</div>
+<div class="proposition">
+<p><span>$$P_{i}=\frac{\mathrm{e}^{\beta\left(\mu N_{i}-E_{i}\right)}}{\mathcal{Z}}\qquad {\mathcal Z}=\sum_{i}\mathrm{e}^{\beta\left( \mu N_{i}-E_{i} \right)}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">גראנד פוטנציאל</span><p>ההתמרת לג'נדר של ההאנרגיה הפנימית עם הפוטנציאל הכימי והטמפרטורה:
+<span>$$\Phi[T,\mu]=U-T S-\mu N$$</span></p>
+</div>
+<div class="remark">
+<p>הסיבה שמשתמשים בהתמרת לג'נדר זה כי זה משמר אינפורמציה. כלומר המשוואה הזאת היא זהה מבחינת הפיזיקה אך עם משתנים שונים.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת איילר</span><p>אם מערכת היא אקסטניבית האנרגיה שלנו היא פונקציה הומוגנית מסדר ראשון, ומקיימת לכל <span>\(\lambda\)</span>:
+<span>$$\lambda U(S,V,N)=U(\lambda S,\lambda V,\lambda N)$$</span>
+וכן מתקיים:
+<span>$$U=T S-P V+\mu N$$</span></p>
+</div>
+<div class="proof">
+<p>נגזור את המשוואה לפי <span>\(\lambda\)</span> ונקבל:
+<span>$$\begin{gather}{{U(S,V,N)=\frac{\partial U\left( \lambda S,\lambda V,\lambda N \right)}{\partial\left( \lambda S \right)}\frac{\partial\left( \lambda S \right)}{\partial\lambda}}} \\{{+\frac{\partial U\left( \lambda S,\lambda V,\lambda N \right)}{\partial\left( \lambda V \right)}\frac{\partial\left( \lambda V \right)}{\partial\lambda}}}{{+\frac{\partial U\left( \lambda S,\lambda V,\lambda N \right)}{\partial\left( \lambda N \right)}\frac{\partial\left( \lambda N \right)}{\partial\lambda}}} 
+\end{gather}$$</span>
+כאשר עבור <span>\(\lambda=1\)</span> נקבל:
+<span>$$U(S,V,N)=\frac{\partial U(S,V,N)}{\partial S}S+\frac{\partial U(S,V,N)}{\partial V}V+\frac{\partial U(S,V,N)}{\partial N}N$$</span>
+כאשר אם נציב את ההגדרות של הגדלים המתאימים נקבל:
+<span>$$U=T S-P V+\mu N$$</span></p>
+</div>
+<div class="remark">
+<p>משוואה זו מאוד מזכירה את המשוואה:
+<span>$$d U=T d S-P d V+\mu d N$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור מערכת אקסטנסיבית הפוטנציאל הכימי מקיים:
+<span>$$\mu= \frac{U-TS+PV}{N}=\frac{G}{N}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור מערכת אקסטנסיבית אם נגדיל את המערכת פי <span>\(\lambda\)</span> נצפה כי כל המשתנים יגדלו פי <span>\(\lambda\)</span>, כלומר:
+<span>$$U\to\lambda U,\qquad S\to\lambda S,\qquad V\to\lambda V,\qquad N\to\lambda N,$$</span>
+כאשר אם נכתוב את האנטרופיה <span>\(S\)</span> בעזרת <span>\(U,V,N\)</span> נקבל:
+<span>$$\lambda S(U,V,N)=S(\lambda U,\lambda V,\lambda N)$$</span>
+כאשר אם נגזור לפי <span>\(\lambda\)</span> נקבל:
+<span>$$S=\frac{\partial S}{\partial(\lambda U)}\frac{\partial(\lambda U)}{\partial\lambda}+\frac{\partial S}{\partial(\lambda V)}\frac{\partial(\lambda V)}{\partial\lambda}+\frac{\partial S}{\partial(\lambda N)}\frac{\partial(\lambda N)}{\partial\lambda}$$</span>
+כאשר אם נקבע <span>\(\lambda=1\)</span> ונשתמש ביחסים:
+<span>$$\left({\frac{\partial S}{\partial U}}\right)_{N,V}={\frac{1}{T}},\qquad\left({\frac{\partial S}{\partial V}}\right)_{N,U}={\frac{p}{T}},\qquad\left({\frac{\partial S}{\partial N}}\right)_{U,V}=-{\frac{\mu_{0}}{T}}$$</span>
+נקבל:
+<span>$$U-T S+p V=\mu N$$</span>
+כאשר נזהה את פונקציית גיבס באגף שמאל ולכן:
+<span>$$G=\mu N\implies \mu=\frac{G}{N}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור מערכות אקסטנסיביות, משוואת אוילר מתקיימת, ונקבל כי הגראנד פוטנציאל מקיים:
+<span>$$\Phi[T,\mu]=U-T S-\mu N=-P V$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">התפלגות ההסתברות של הצבר הגראנד קנוני</span><p><span>$$P(E,N)=\frac{1}{\mathcal{Z}}\Omega(E,V,N)\exp\left[-\beta E+\beta\mu N\right]$$</span>
+כאשר <span>\(\mathcal{Z}\)</span> נקבע על פי תנאי נרמול.</p>
+</div>
+<div class="proof">
+<p>באופן דומה לצבר הקנוני, נדרוש שההסתברות תקיים:
+<span>$$P(E,N)=\frac{\Omega(E,V,N)\Omega_{R}(E_{T}-E,V_{R},N_{T}-N)}{\Omega_{T}(E_{T},V_{T},N_{T})}$$</span>
+ניקח לוגוריתם ונפתח את הטור טיילור של <span>\(\ln \Omega_{R}(E_{T}-E, V_{R},N_{T}-N)\)</span> בחזקות של <span>\(\frac{E}{E_{T}},\frac{N}{N_{T}}\)</span>:
+<span>$$\begin{gather}\ln P(E,N)=\ln\Omega(E,V,N)+\ln\Omega_{R}(E_{T}-E,V_{R},N_{T}-N)-\ln\Omega_{T}(E_{T},V_{T},N_{T})  \\\approx\ln\Omega(E,V,N)+\ln\Omega_{R}(E_{T},V_{R},N_{T})+E\frac{\partial}{\partial E_{T}}\ln\Omega_{R}(E_{T},V_{R},N_{T})+ \\+N\frac{\partial}{\partial N_{T}}\ln\Omega_{R}(E_{T},V_{R},N_{T})-\ln\Omega_{R}(E_{T},V_{T},N_{T})
+\end{gather}$$</span>
+כאשר כעת נזכור כי:
+<span>$$S_{R}=k_{B}\ln\Omega_{R}(E_{T},V_{R},N_{T})$$</span>
+לכן נקבל כעת כי <span>\(\beta_{R}=\frac{1}{k_{B}T_{R}}\)</span> יהיה שווה:
+<span>$$\beta_{R}\equiv\frac{\partial}{\partial E_{T}}\ln\Omega_{R}(E_{T},V_{R},N_{T})$$</span>
+כאשר מזהות נוספת עבור הפוטנציאל הכימי של המאגר נקבל:
+<span>$$-\mu_{R}\beta_{R}\equiv\frac{\partial}{\partial N_{T}}\ln\Omega_{R}(E_{T},V_{R},N_{T})$$</span>
+כעת כיוון ש-<span>\(\beta=\beta_{R}\)</span> ו-<span>\(\mu=\mu_{R}\)</span> נקבל כי הגדלים <span>\(E_{T},N_{T},V_{R}\)</span> לא תלויים ב-<span>\(E\)</span> או <span>\(N\)</span>. ניתן לשלב את <span>\(\ln \Omega_{R}(E_{T},V_{R},N_{T})\)</span> ו-<span>\(\ln\left( \Omega_{R}(E_{T}, V_{T},N_{T}) \right)\)</span> לערך יחיד המסומן ב-<span>\(-\ln \mathcal{Z}\)</span>. לכן:
+<span>$$\ln P(E,N)\approx\ln\Omega(E,V,N)-\beta E+\beta\mu N-\ln{\mathcal{Z}}$$</span>
+כאשר אם ניקח את האקספוננט נקבל:
+<span>$$P(E,N)=\frac{1}{\mathcal{Z}}\Omega(E,V,N)\exp\left[-\beta E+\beta\mu N\right]$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">הפונקציית הגראנד חלוקה</span><p><span>$${\mathcal{Z}}=\sum_{N=0}^{\infty}\int_{0}^{\infty}d E\,\Omega(E,V,N)\exp\left[-\beta E+\beta\mu N\right]$$</span>
+או לחלופין בעזרת הפונקציית חלוקה המוגדרת על ידי:
+<span>$$Z(T,V,N)=\int_{0}^{\infty}d E\,\Omega(E,V,N)\exp(-\beta E)d E$$</span>
+ניתן לכתוב:
+<span>$${\mathcal{Z}}(T,V,\mu)=\sum_{N=0}^{\infty}Z(T,V,N)\exp\left[\beta\mu N\right]$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">גראנד פוטנציאל בעזרת הפונקציית הגראנד חלוקה</span><p>הפונקציית הגראנד חלוקה מקיימת:
+<span>$$\ln \mathcal{Z} = -\beta \Phi\left( T,\mu \right)$$</span>
+כאשר אם המערכת אקסטנסיבית ומקיימת את משוואת אויילר מתקיים בנוסף:
+<span>$$\ln \mathcal{Z} = \beta PV$$</span></p>
+</div>
+<div class="example"><span class="keyword">פונקציית הגראנד חלוקה עבור גז אידיאלי</span><p>ראינו כי פונקציית החלוקה עבור גז אידיאלי תהיה:
+<span>$$Z=\frac{1}{h^{3N}N!}\left(2\pi m k_{B}T\right)^{3N/2}V^{N}$$</span>
+כאשר מזה נקבל:
+<span>$$\begin{gather}{\mathcal{Z}}\left( T,V,\mu \right)=\sum_{N=0}^{\infty}{\frac{1}{h^{3N}N!}}\left(2\pi m k_{B}T\right)^{3N/2}V^{N}\exp\left[\beta\mu N\right]\\=\sum_{N=0}^{\infty}\frac{1}{N!}\left(\frac{\left(2\pi m k_{B}T\right)^{3/2}}{h^{3}}V e^{\beta\mu}\right)^{N}=\exp\left(\left(2\pi m k_{B}T\right)^{3/2}h^{-3}V e^{\beta\mu}\right) 
+\end{gather}$$</span>
+כאשר אם ניקח את הלוגוריתם של שתי האגפים נקבל מהטענה הקודמת את האנרגיה:
+<span>$$-\beta \Phi[T,\mu]=\left(2\pi m k_{B}T\right)^{3/2}h^{-3}V e^{\beta\mu}=\beta P V$$</span>
+כאשר השיוויון האחרון נובע מכך שהגז האידיאלי אקסטנסיבי. על ידי חלוקה ב-<span>\(\beta V\)</span> נקבל:
+<span>$$P=k_{B}T\left(2\pi m k_{B}T\right)^{3/2}h^{-3}e^{\beta\mu}$$</span>
+כאשר ניתן לכתוב את כל הביטיים בעזרת <span>\(\lambda_{T}=\frac{h}{\sqrt{ 2\pi mk_{B}T }}\)</span> ולקבל:
+<span>$${\mathcal{Z}}\left( T,V,\mu \right)=\exp\left({\frac{V}{\lambda^{3}}}e^{\beta\mu}\right)\quad \Phi\left( T,V,\mu \right)=-k_{B}T\frac{V}{\lambda^{3}}e^{\beta\mu}\quad P=\frac{k_{B}T}{\lambda^{3}}e^{\beta\mu}$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\begin{gather}N=\sum_{i}N_{i}P_{i}=k_{\mathrm{B}}T\left({\frac{\partial\mathrm{ln}\;{\mathcal{Z}}}{\partial\mu}}\right)_{\beta}\\ U=\sum_{i}E_{i}P_{i}=-\left(\frac{\partial\mathrm{ln}\;\mathcal{Z}}{\partial\beta}\right)_{\mu}+\mu N\\ S=-k_{\mathrm{B}}\sum_{i}P_{i}\ln P_{i}={\frac{U-\mu N+k_{\mathrm{B}}T\ln{\mathcal{Z}}}{T}} 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מציאת הפוטנציאל הכימי</span><p>נעשה בשלבים הבאים:</p>
+<ol>
+<li>
+<p>כותבים את <span>\(\mathcal{Z}\)</span> בעזרת <span>\(T,V,\mu\)</span> ורמות האנרגיה. </p>
+</li>
+<li>
+<p>נשתמש ביחס <span>\(N=k_{B}T \frac{\partial \ln \mathcal{Z}}{\partial \mu}\)</span>. </p>
+</li>
+<li>
+<p>נפתור משוואה עבור <span>\(\mu\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">מציאת פוטנציאל הכימי</span><p>פונקציית הגראנד חלוקה של גז אידיאלי תהיה:
+<span>$${\mathcal{Z}}=\sum_{N=0}^{\infty}{\frac{1}{N!}}\left({\frac{V}{\lambda^{3}}}e^{\beta\mu}\right)^{N}=\exp\left( \frac{V}{\lambda^{3}}e^{ \beta \mu }\right)$$</span>
+כאשר כעת ניתן לגזור ולהשתמש ביחס <span>\(\langle N\rangle=\frac{1}{\beta}\frac{\partial\ln{\mathcal{Z}}}{\partial\mu}\)</span> ונקבל:
+<span>$$\langle N\rangle=e^{\beta\mu}\frac{V}{\lambda^{3}}$$</span>
+וכעת בהנחה ש-<span>\(N\)</span> נתון ניתן לבודד עבור <span>\(\mu\)</span> ולקבל:
+<span>$$\mu=k_{B}T\ln\left(\frac{\langle N\rangle\lambda^{3}}{V}\right)$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>הצבר הגאנד קנוני מתאר מערכת שיכול להחליף חלקיקים וגם אנרגיה עם אמבט.</li>
+<li>הגראנד פואנציאל הוא ביטוי לאנרגיה במשתנים הטבעיים של הצבר, ומוגדר על ידי:
+<span>$$\Phi[T,\mu]=U-T S-\mu N$$</span></li>
+<li>פונקציית הגראנד חלוקה מוגדרת על ידי:
+<span>$${\mathcal{Z}}=\sum_{N=0}^{\infty}\int_{0}^{\infty}d E\,\Omega(E,V,N)\exp\left[-\beta E+\beta\mu N\right]$$</span></li>
+<li>הקשר בין הפונקציית הגאנד חלוקה לגראנד פוטנציאל הוא:
+<span>$${\mathcal{Z}}=\exp(-\beta \Phi[T,\mu])=\exp(\beta P V)$$</span>
+כאשר השיוויון האחרון נכון רק כאשר המערכת אקסטנסיבית.</li>
+<li>מהגראנד פוטנציאל ניתן להשיג את הגדלים הבאים:
+<span>$$\begin{gather}N=k_{\mathrm{B}}T\left({\frac{\partial\mathrm{ln}\;{\mathcal{Z}}}{\partial\mu}}\right)_{\beta}\quad U=-\left(\frac{\partial\mathrm{ln}\;\mathcal{Z}}{\partial\beta}\right)_{\mu}+\mu N\quad S={\frac{U-\mu N+k_{\mathrm{B}}T\ln{\mathcal{Z}}}{T}} 
+\end{gather}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+<li class='prev-page'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

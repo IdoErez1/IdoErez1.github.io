@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הכנסת סוגריים ושינוי סדר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page'><a href='./Series'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_1_1'>1.1 הגדרת הגבול</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_3'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_6'>1.6 תתי סדרות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_8'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_2'>3.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_3'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Series_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Series_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  הכנסת סוגריים ושינוי סדר</h1>
+    <div class="definition"><span class="keyword">הכנסת סוגריים</span><p>"לקבץ" איברים ולסכום אותם ביחד. אחרי הקיבוץ איברים לא מקבלים אותה סדרה. סדרה זו תהיה תת סדרה של סדרת הסכומים החלקיים</p>
+</div>
+<div class="example">
+<p>נסתכל על הטור <span>\(\sum(-1)^{n+1}\)</span>. זהו טור שסדרת הסכומים החלקיים שלו משתנה בין 0 ל-1. כלומר:
+<span>$$S_{n}=\left( 1,0,1,0,1,0,\dots \right)$$</span>
+כאשר זהו טור שבפרוש מתבדר. אם נכניס סוגריים כל שתי איברים אבל נקבל את הטור 0, והטור הזה הוא טור מתכנס.</p>
+</div>
+<div class="proposition">
+<p>אם הטור מתכנס אז ניתן להכניס סוגרים וערך הטור לא ישתנה.</p>
+</div>
+<div class="proposition">
+<p>אם קיימים 2 הכנסות סוגריים עם תוצאות שונות אז הטור מתבדר.</p>
+</div>
+<div class="proposition">
+<p>הכנסת סוגריים על איברים שווי סימן לא משנה את התכנסות הטור או את ערך הטור.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(\sum b_{n}\)</span> הוא הטור המתקבל מהכנסת סוגריים של <span>\(\sum a_{n}\)</span> עבור איברי שווי סימן. נסמן ב-<span>\((S_{n})\)</span> את סדרת הסכומים החלקיים של <span>\(\sum a_{n}\)</span> וב-<span>\((T_{n})\)</span> את סדרת הסכומים החלקיים של <span>\(\sum b_{n}\)</span>. </p>
+</li>
+<li>
+<p>כיוון ש-<span>\((b_{n})\)</span> הכנסת סוגריים מתקיים <span>\(T_{k}=S_{n_{k}}\)</span> עבור כל <span>\(k \in \mathbb{N}\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> יש <span>\(k \in \mathbb{N}\)</span> יחיד כך ש: 
+<span>$$n_{k-1}&lt;n\leq n_{k}$$</span> 
+ומתקיים:
+<span>$$S_{n_{k-1}}= S_{n}+ \sum_{j=n_{k}+1}^{n_{k+1}} a_{j}$$</span></p>
+</li>
+<li>
+<p>אם <span>\(a_{n_{k+1}},\dots,a_{n_{k}+1}\)</span> כלום אי חיוביים אז: 
+<span>$$S_{n_{k-1}}\leq S_{n}\leq S_{n_{k}}$$</span>
+בכל מקרה, מתקיים:
+<span>$$\min(S_{n_{k-1}},S_{n_{k}})\leq S_{n}\leq \max (S_{n_{k-1}},S_{n_{k}})$$</span></p>
+</li>
+<li>
+<p>אם <span>\(\sum b_{n}\)</span> מתכנס אז <span>\(\underset{ n \to \infty }{\lim }S_{n_{k}}=L\)</span> ולכן: 
+<span>$$\lim_{ n \to \infty } \max (S_{n_{k}},S_{n_{k-1}})=\lim_{ n \to \infty } \min(S_{n_{k}},S_{n_{k-1}})$$</span>
+וקיבלנו כי <span>\(\sum a_{n}\)</span> מתכנס ממשפט הסנדוויץ.</p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>הוספת סוגריים באורך חסום לא משנה את התכנסות הטור או את ערך הטור כאשר הטור שואף ל-0.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\sum b_{k}\)</span> טור המתקבל מהכנסת סוגרים של <span>\(\sum a_{n}\)</span> במקומות ה-<span>\(n_{k}\)</span>. נניח כי <span>\(n_{k+1}-n_{k}\leq M\)</span> לכל <span>\(k \in \mathbb{N}\)</span>(כלומר הכנסת סוגריים באורך חסום). נסמן ב-<span>\((S_{n})\)</span> את סדרת הסכומים החלקיים של <span>\(\sum a_{n}\)</span>. נשים לב כי מתקיים:
+<span>$$\sum_{k=1}^{\infty}b_{k}=S_{n_{k}} $$</span>
+נניח <span>\(\underset{ n \to \infty }{\lim }a_{n}=0\)</span>. יהי <span>\(\varepsilon &gt; 0\)</span>.  מהגדרת הגבול קיים <span>\(N_{1}&gt; 0\)</span> כך שלכל <span>\(n&gt;N_{1}\)</span> מתקיים:
+<span>$$\lvert a_{n} \rvert =\lvert a_{n}-0 \rvert &lt; \frac{\varepsilon}{M}$$</span>
+אנו יודעים כי לכל <span>\(n \in \mathbb{N}\)</span> קיים <span>\(k_{0} \in \mathbb{N}\)</span> כך שמתקיים:
+<span>$$n_{k_{0}}&lt;n\leq n_{k_{0}+1}$$</span>
+כאשר נשים לב להבדל בין הסדרה <span>\(n_{k}\)</span> למספר הטבעי <span>\(n\)</span>. כעת עבור <span>\(n&gt;N\)</span> מתקיים:
+<span>$$S_{n_{k_{0}}}-S_{n}=\sum_{j=n_{k_{0}}}^{n_{k_{0}+1}}a_{j}\leq \sum_{j=n_{k_{0}}}^{n_{k_{0}+1}}\lvert a_{j} \rvert \leq \frac{\varepsilon}{M}(n_{k_{0}+1}-n_{k_{0}})\leq \frac{\varepsilon}{M}\cdot M=\varepsilon $$</span>
+ולכן <span>\(\underset{ n \to \infty }{\lim }S_{n_{k_{0}}}-S_{n}=0\)</span> ולכן אם <span>\(S_{n}\)</span> מתכנס ל-<span>\(L\)</span> נקבל מאריתמטיקה של גבולות כי:
+<span>$$\lim_{ n \to \infty } S_{n_{k_{0}}}=\lim_{ n \to \infty } S_{n_{k_{0}}}-S_{n}+S_{n}=\lim_{ n \to \infty } (S_{n_{k_{0}}}-S_{n})+\lim_{ n \to \infty } S_{n}=0+L$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שינוי סדר איברים</span><p>סדרה <span>\(b_n\)</span> היא שינוי סדר של <span>\(a_n\)</span> אם קיימת תמורה <span>\(\sigma(n)\)</span> (חח"ע ועל) כך ש-<span>\(b_n = a_{\sigma(n)}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם טור הוא מתכנס בהחלט ניתן לשנות את הסדר וערך הטור לא ישתנה</p>
+</div>
+<div class="theorem"><span class="keyword">רימן לטורים</span><p>אם מתכנס בתנאי ניתן לבנות טור עם החלפת סדר שמתבדר, או אפילו שווה לכל מספר ממשי אפשרי(משפט רימן)</p>
+</div>
+<div class="proposition">
+<p>אם קיימים 2 ערכים שונים של הטור שמתקבלים ע"י שינוי סדר, אז הטור לא מתכנס בהחלט</p>
+</div>
+<div class="proposition">
+<p>ביצוע תמורה באורך חסום על האינדקסים של הטור(כלומר קיים <span>\(M\)</span> כך ש-<span>\((\sigma(n) - n)&lt;M\)</span>) לא משנה את התכנסות הטור או את ערך הטור.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='prev-page'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

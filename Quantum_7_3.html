@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פאזה גאומטרית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_7_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_7_2`; }});</script>
+        <div class="content">
+        <h1>7.3  פאזה גאומטרית</h1>
+    <div class="proposition"><span class="keyword">המשפט האדיאבטי</span><p>מערכת פיזיקלי תשאר במצב עצמי הרגעי שלו אם הפרעה פועלת לאט מספיק ויש רווח בין הערכים עצמיים ושאר הספקטרום.
+כלומר אם ב-<span>\(t=0\)</span> מתקיים <span>\(H_{0}\ket{\phi}=E_{0}\ket{\phi}\)</span> כאשר המצב ההתחלתי יהיה <span>\(\ket{\psi(0)}=\ket{\phi}\)</span> אז הפתרון למשוואה:
+<span>$$i\hbar{\frac{\partial}{\partial t}}|\psi(t)\rangle=H(t)|\psi(t)\rangle$$</span>
+מקיימת:
+<span>$$|\psi(t)\rangle=e^{i\theta_{n}(t)}\,e^{i\gamma_{n}(t)}\,|\phi_{n}(t)\rangle$$</span>
+כאשר <span>\(\ket{\phi_{n}(t)}\)</span> הוא המצב עצמי הרגעי של <span>\(H(t)\)</span> של המצב עצמי המשתנה <span>\(E_{n}(t)\)</span> המקיים:
+<span>$$H(t)\ket{\psi(t)} =E_{n}(t)\ket{\psi(t)} $$</span></p>
+</div>
+<div class="remark">
+<p>יש הרבה משפטים אדיאבטים, זה רק אחד מהם המשויך ל-Born ו-Fock. </p>
+</div>
+<div class="remark">
+<p>נדרש רק שהמצב עצמי שאנחנו מתעניינים בו לא שווה לאף מצב עצמי אחר.</p>
+</div>
+<div class="proof">
+<p>נניח כי מתקיים משוואת הערכים עצמיים הרגעית:
+<span>$$H(t)\left|\phi_{n}(t)\right\rangle=E_{n}(t)\left|\phi_{n}(t)\right\rangle$$</span>
+תחת הנרמול <span>\(\langle\phi_{m}(t)|\phi_{n}(t)\rangle=\delta_{m n}\)</span>. משוואת שרדינגר התלויה בזמן נתונה על ידי:
+<span>$$i\hbar\,\frac{\partial}{\partial t}|\Psi(t)\rangle=H(t)|\Psi(t)\rangle$$</span>
+נניח פתרון מהצורה:
+<span>$$|\Psi(t)\rangle=\sum_{n}c_{n}(t)\,|\phi_{n}(t)\rangle\,e^{i\theta_{n}(t)}$$</span>
+כאשר <span>\(\theta_{n}(t)\)</span> נקראת הפאזה הדינאמית ומוגדרת על ידי:
+<span>$$\theta_{n}(t)=-\frac{1}{\hbar}\int_{0}^{t}E_{n}(t^{\prime})\,d t^{\prime}$$</span>
+אם נגזור את הניחוש שלנו נקבל:
+<span>$$\frac{\partial}{\partial t}|\Psi(t)\rangle=\sum_{n}\Bigl[\dot{c}_{n}(t)|\phi_{n}(t)\rangle+c_{n}(t)|\dot{\phi}_{n}(t)\rangle+i\,c_{n}(t)\,\dot{\theta}_{n}(t)|\phi_{n}(t)\rangle\Bigr]e^{i\theta_{n}(t)}$$</span>
+כיוון שמהמשפט היסודי של האינפי מתקיים <span>\(\dot{\theta}_{n}(t)=-\frac{E_{n}(t)}{\hbar}\)</span> נקבל לאחר הכפלה ב-<span>\(i\hbar\)</span>:
+<span>$$i\hbar\,\frac{\partial}{\partial t}|\Psi(t)\rangle=\sum_{n}\Bigl[i\hbar\,\dot{c}_{n}(t)|\phi_{n}(t)\rangle+i\hbar\,c_{n}(t)|\dot{\phi}_{n}(t)\rangle-c_{n}(t)E_{n}(t)|\phi_{n}(t)\rangle\Bigr]e^{i\theta_{n}(t)}$$</span>
+מצד שני מתקיים ממשוואת שרדינגר התלויה בזמן זה יהיה שווה לביטוי:
+<span>$$H(t)|\Psi(t)\rangle=\sum_{n}c_{n}(t)E_{n}(t)|\phi_{n}(t)\rangle\,e^{i\theta_{n}(t)}$$</span>
+כאשר הגורמים <span>\(E_{n}(t)\)</span> מתבטלים ולכן:
+<span>$$\sum_{n}\Bigl[i\hbar\,\dot{c}_{n}(t)|\phi_{n}(t)\rangle+i\hbar\,c_{n}(t)|\dot{\phi}_{n}(t)\rangle\Bigr]e^{i\theta_{n}(t)}=0$$</span>
+נטיל על מצב עצמי רגעי <span>\(\bra{\phi_{m}(t)}\)</span> ונקבל:
+<span>$$i\hbar\,\dot{c}_{m}(t)+i\hbar\,c_{m}(t)\langle\phi_{m}(t)|\dot{\phi}_{m}(t)\rangle+i\hbar\,\sum_{n\neq m}c_{n}(t)\langle\phi_{m}(t)|\dot{\phi}_{n}(t)\rangle\,e^{i(\theta_{n}(t)-\theta_{m}(t))}=0$$</span>
+נחלק ב-<span>\(i\hbar\)</span> ונקבל:
+<span>$$\dot{c}_{m}(t)+c_{m}(t)\langle\phi_{m}(t)|\dot{\phi}_{m}(t)\rangle+\sum_{n\neq m}c_{n}(t)\langle\phi_{m}(t)|\dot{\phi}_{n}(t)\rangle\,e^{i(\theta_{n}(t)-\theta_{m}(t))}=0$$</span>
+כעת נבצע קירוב. בגבול האדיאבטי ההפרש פאזה:
+<span>$$\theta_{n}(t)-\theta_{m}(t)=-\frac{1}{\hbar}\int_{0}^{t}[E_{n}(t^{\prime})-E_{m}(t^{\prime})]\,d t^{\prime}$$</span>
+מבצעת אוסצילציות מהירות עבור <span>\(n\neq m\)</span> ולכן הערכים הלא אלכסוניים<span>\(\left( n\neq m \right)\)</span> שונים מ-0. נקבל תחת קירוב זה:
+<span>$$\dot{c}_{m}(t)\approx-c_{m}(t)\langle\phi_{m}(t)|\dot{\phi}_{m}(t)\rangle.$$</span>
+כאשר הפתרון של משוואה זו תהיה:
+<span>$$c_{m}(t)=c_{m}(0)\,\exp\left[-\int_{0}^{t}\langle\phi_{m}(t^{\prime})|\dot{\phi}_{m}(t^{\prime})\rangle\,d t^{\prime}\right]$$</span>
+נגדיר את הפאזה הגאומטרית על ידי:
+<span>$$\gamma_{m}(t)=i\int_{0}^{t}\langle\phi_{m}(t^{\prime})|\dot{\phi}_{m}(t^{\prime})\rangle\,d t^{\prime}$$</span>
+וניתן כעת לכתוב:
+<span>$$c_{m}(t)=c_{m}(0)\,e^{i\gamma_{m}(t)}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פאזה גאומטרית</span><p><span>$$\gamma_{m}(t)\equiv i\int_{0}^{t}\langle m|\dot{m}\rangle d t^{\prime}.$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\gamma_{m}(T)=i\oint_{c}\langle m|\nabla_{R}m\rangle d{\bf R}$$</span></p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$0=\frac{d}{d t}(\left&lt;m|m\right&gt;)=\left&lt;\dot{m}|m\right&gt;+\left&lt;m|\dot{m}\right&gt;=2\mathrm{Re}\,\left(\left&lt;m|\dot{m}\right&gt;\right)$$</span>
+ולכן <span>\(\gamma\)</span> ממשי. נסתכל על מצב שבו ההמילטוניאן תלוי באוסף של פרמטרים <span>\(\mathbf{R}(t)\)</span>. במקרה זה נקבל:
+<span>$${\frac{\partial\varphi_{m}}{\partial t}}=\nabla_{R}\varphi\cdot{\frac{d R}{d t}}$$</span>
+כאשר הפאזה הגאומטרית תהיה מהצורה:
+<span>$$\gamma_{m}(t)=i\int_{0}^{t}\langle m|\nabla_{R}m\rangle\frac{d\mathbf{R}}{d t}d t=i\int_{i}^{f}\langle m|\nabla_{R}m\rangle d\mathbf{R}.$$</span>
+כך שלאחר זמן <span>\(T\)</span> הההמילטוניאן חוזר לצורתו המקורית, והשינוי בפאזה הגאומטרית תהיה:
+<span>$$\gamma_{m}(T)=i\oint_{c}\langle m|\nabla_{R}m\rangle d R.$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(\mathbf{R}\)</span> חד מימדי הפאזה הגאומרטית תהיה אפס.</p>
+</div>
+<div class="example"><span class="keyword">אהרונוב בורם</span><p>נסתכל על האפקט של חלקיק טעין המאולץ לנועב בקופסא קטנה במרחק <span>\(T\)</span> מסלונאויד על ידי פוטנציאל <span>\(V\left( \mathbf{r}-\mathbf{R} \right)\)</span> כאשר המצבים העצמיים פותרים את משוואת שרדינגר:
+<span>$$\left[{\frac{1}{2m}}\left(-i\hbar\nabla-q A(\mathbf{r})\right)^{2}+V(\mathbf{r}-\mathbf{R})\right]\varphi_{n}=E_{n}\varphi_{n}.$$</span>
+כאשר אם נציב <span>$$\varphi_{n}=e^{i S(\mathbf{r})}\varphi_{n}^{\prime}$$</span>
+עם <span>$$S(\mathbf{r})={\frac{q}{\hbar}}\int_{\mathbf{R}}^{\mathbf{r}}A(\mathbf{r}^{\prime})\cdot d\mathbf{r}^{\prime}$$</span>
+אז נקבל כי <span>\(\varphi'_{n}\)</span> מקיימת את משוואת שרדינגר עבור <span>\(A=0\)</span>:
+<span>$$\left[-\frac{1}{2m}\nabla^{2}+V(\mathbf{r}-\mathbf{R})\right]\varphi_{n}^{\prime}=E_{n}\varphi_{n}^{\prime}.$$</span>
+כאשר נשים לב כי <span>\(\varphi'_{n}\)</span> היא פונקציה של <span>\(\mathbf{r-R}\)</span>. ניתן כעת להזיז את הקופסא לאט מסביב לסלונואיד ולקבל:
+<span>$$\nabla_{R}\varphi_{n}=\nabla_{R}\left[e^{i S}\varphi_{n}^{\prime}(\mathbf{r}-\mathbf{R})\right]=\left[-i{\frac{q}{\hbar}}A^{i S}\varphi_{n}^{\prime}(\mathbf{r}-\mathbf{R})+e^{i S}\nabla_{R}\varphi_{n}^{\prime}(\mathbf{r}-\mathbf{R})\right]$$</span>
+כאשר נמצא כי:
+<span>$$\langle n\nabla_{R}n\rangle=-i\frac{q}{\hbar}A.$$</span>
+<span>$$\gamma_{n}=\frac{q}{\hbar}\oint\mathbf{A}\cdot d\mathbf{R}=\frac{q}{\hbar}\int\mathbf{B}\cdot d\mathbf{a}=\frac{q\Phi_{B}}{\hbar}.$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='prev-page'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+</ul></li>
+        </body>
+        </html>
+        

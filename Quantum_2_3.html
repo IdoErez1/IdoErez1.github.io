@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קידום בזמן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  קידום בזמן</h1>
+    <div class="definition"><span class="keyword">המילטוניאן</span><p>נקרא לאופרטור של האנרגיה ההמילטוניאן, ונסמנו ב-<span>\(H\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מתוך פירוק לאופני התנודה של האנרגיה נקבל:
+<span>$$H=\sum_{n=1}^{d}\!E_{n}\left|n\right\rangle\left\langle n\right|\implies H\left|n\right\rangle=E_{n}\left|n\right\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>למערכת פיזיקלית יש שתי דרכים להתפתח בזמן:</p>
+<ol>
+<li>
+<p>מדידה - התפתחות לא דטרמינסטית ולא הפיכה. </p>
+</li>
+<li>
+<p>כל עוד לא מדדנו, מצפים לאיזשהו הפתפתחות רציפה והפיכה של המערכת. </p>
+</li>
+</ol>
+</div>
+<p>כרגע אנחנו נתייחס למערכות ללא המדידה. כלומר מקרה 2.</p>
+<div class="proposition"><span class="keyword">קידום בזמן</span><p>לקדם את המצב קוונטי בזמן שקול ללהפעיל אופרטור לינארי.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות אופרטור קידום בזמן</span><ol>
+<li>
+<p>אופרטור אוניטרי - נדרש שהאופרטור קידום בזמן משמר הסתברות, לכן שולח איברים עם נורמה 1 לאיברים עם נורמה 1. </p>
+</li>
+<li>
+<p>בזמן <span>\(t_{0}\)</span> אופרטור קידום בזמן יהיה הזהות. כלומר <span>\(U(t_{0},t_{0})=Id\)</span>. </p>
+</li>
+<li>
+<p>לקדם בזמן יקיים: 
+<span>$$\left|\psi\left(t_{1}\right)\right\rangle=U\left(t_{1},t_{0}\right)\left|\psi\left(t_{0}\right)\right\rangle$$</span></p>
+</li>
+<li>
+<p>הרכבה של אופרטורי קידום בזמן יקיים: 
+<span>$$\left|\psi\left(t_{2}\right)\right\rangle=U\left(t_{2},t_{1}\right)\left|\psi\left(t_{1}\right)\right\rangle=U\left(t_{2},t_{1}\right)U\left(t_{1},t_{0}\right)\left|\psi\left(t_{0}\right)\right\rangle \implies U\left(t_{2},t_{1}\right)U\left(t_{1},t_{0}\right)=U\left(t_{2},t_{0}\right)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אופרטור הקידום בזמן יהיה:
+<span>$$U\left(t-t_{0}\right)=e^{-i H\left(t-t_{0}\right)/\hbar}$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה כי בזמן <span>\(t_{0}\)</span> נקבל כי האופרטור קידום בזמן הוא הזהות. לכן:
+<span>$$U(t_{0},t_{0})=1$$</span>
+וכן יקדם בזמן:
+<span>$$\left|\psi\left(t_{1}\right)\right\rangle=U\left(t_{1},t_{0}\right)\left|\psi\left(t_{0}\right)\right\rangle$$</span>
+וגם שעבור זמנים <span>\(t_{0}&lt;t_{1}&lt;t_{2}\)</span> מתקיים:
+<span>$$\left|\psi\left(t_{2}\right)\right\rangle=U\left(t_{2},t_{1}\right)\left|\psi\left(t_{1}\right)\right\rangle=U\left(t_{2},t_{1}\right)U\left(t_{1},t_{0}\right)\left|\psi\left(t_{0}\right)\right\rangle$$</span>
+ולכן:
+<span>$$U\left(t_{2},t_{1}\right)U\left(t_{1},t_{0}\right)=U\left(t_{2},t_{0}\right)$$</span>
+כיוון שאוניטרי, הע"ע נמצאים על מעגל היחידה המרוכב. ולכן ניתן לכתוב:
+<span>$$U\left(s\right)\left|n\right\rangle=e^{i\phi_{n}\left(s\right)}\left|n\right\rangle$$</span>
+כאשר ניתן לכתוב:
+<span>$$\mathcal{\phi}_{n}\left(s\right)=\sum_{k=0}^{\infty}a_{k}^{\left(n\right)}s^{k}$$</span>
+מהדרישה <span>\(U(t_{0},t_{0})=1\)</span> נקבל ש-<span>\(\psi_{n}(s=0)=0\)</span> ולכן <span>\(a_{0}^{(n)}=0\)</span>. מדרישת ההרכבה נקבל:
+<span>$$U\left(s_{2}\right)U\left(s_{1}\right)=U\left(s_{1}+s_{2}\right)$$</span>
+ולכן:
+<span>$$\sum_{k=1}^{\infty}a_{k}^{(n)}\left(s_{1}^{k}+s_{2}^{k}\right)=\sum_{k=1}^{\infty}a_{k}^{(n)}\left(s_{1}+s_{2}\right)^{k}$$</span>
+כדי שיתקיים לכל <span>\(s_{1},s_{2}\)</span> כל מקדמי הפיתוח פרט ל-<span>\(a_{1}^{(n)}\)</span> חייבים להתאפס. נקבל:
+<span>$$U\left(t-t_{0}\right)|n\rangle=e^{i a_{1}^{\left(n\right)}\left(t-t_{0}\right)}\left|n\right\rangle$$</span>
+כעת ניתן להגדיר אופרטור התדר:
+<span>$$\Omega=\sum_{n=1}^{d}\omega_{n}\left|n\right\rangle\left\langle n\right|$$</span>
+ומכאן אופרטור הקידום בזמן יהיה:
+<span>$$U\left(t-t_{0}\right)=e^{-i\Omega\left(t-t_{0}\right)}$$</span>
+נזכור כי לפי פלנק מתקיים <span>\(E = \hbar \omega\)</span>. ולכן נגדיר את אופני התנודה של האנרגיה(אנרגיות עצמיות) בתור:
+<span>$$E_{n}=\hbar\omega_{n}\,$$</span>
+ולכן נכתוב את אופרטור האנרגיה <span>\(H=\hbar \Omega\)</span>. ולכן <span>\(\Omega=\frac{H}{\hbar}\)</span> ולכן:
+<span>$$\left|\psi\left(t\right)\right\rangle=e^{-i H\left(t-t_{0}\right)/\hbar}\left|\psi\left(t_{0}\right)\right\rangle$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משוואת שרדינגר</span><p><span>$$i\hbar\frac{\partial}{\partial t}\left|\psi\right\rangle=H\left|\psi\right\rangle$$</span></p>
+</div>
+<div class="proof">
+<p>נכתוב:
+<span>$$\left|\psi\left(t\right)\right\rangle=e^{-i H\left(t-t_{0}\right)/\hbar}\left|\psi\left(t_{0}\right)\right\rangle$$</span>
+נגזור את שני צידי המשוואה לפי זמן ונקבל:
+<span>$$\frac{\partial}{\partial t}\left|\psi\left(t\right)\right\rangle=-\frac{i H}{\hbar}e^{-i H\left(t-t_{0}\right)/\hbar}\left|\psi\left(t_{0}\right)\right\rangle=-\frac{i H}{\hbar}\left|\psi\left(t\right)\right\rangle$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תמונת הייזנברג</span><p>האופרטורים משתנים בזמן והמצבים קוונטים קבועים בזמן.</p>
+</div>
+<div class="definition"><span class="keyword">תמונת שרדינגר</span><p>האופרטורים קבועים בזמן והמצבים הקוונטים משתנים בזמן.</p>
+</div>
+<p>שתי המצבים התמונות האלה שקולות לחלוטין.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='prev-page'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרצאה 5</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings'> תורת חוגים</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_4_4`; }});</script>
+        <div class="content">
+        <h1>4.5  הרצאה 5</h1>
+    <h2>תחומי שלמות(קומוטטיבי ואין מחלקי אפס)</h2>
+<div class="definition"><span class="keyword">אי פריק</span><p>איבר <span>\(0\neq r \not\in R^{\times}\)</span> נקרא אי פריק אם <span>\(r=st\)</span> =&gt; <span>\(s\)</span> או <span>\(t\)</span> פיכים.</p>
+</div>
+<div class="definition"><span class="keyword">ראשוני</span><p>איבר <span>\(r\)</span> נקרא ראשוני אם <span>\(r|xy\)</span> גורר <span>\(r|x\)</span> או <span>\(r|y\)</span>.</p>
+</div>
+<div class="example">
+<p>ב-<span>\(\mathbb{Z}[\sqrt{ -3 }]\)</span>:
+<span>$$(1+\sqrt{ -3 })(1-\sqrt{ -3 })=4=2\cdot 2$$</span>
+כעת:
+<span>$$2|(1+\sqrt{ -3 })(1+\sqrt{ -3 })$$</span>
+אבל <span>\(2\nmid 1\pm \sqrt{ 3 }\)</span> כלומר 2 לא ראשוני אבל כן אי פריק. עבור:
+<span>$$(a+b\sqrt{ -3 })(c+d\sqrt{ -3 })=2$$</span>
+אין פתרונות לא טריוויאלי</p>
+</div>
+<div class="proposition">
+<p>ראשוני ⟸ אי פריק</p>
+</div>
+<div class="proof">
+<p>תרגיל</p>
+</div>
+<div class="definition"><span class="keyword">תחום אוקלידי</span><p>חוג <span>\(R\)</span> נקרא תחום אוקלידי אם יש פונקציה <span>\(\lvert \cdot \rvert:R\setminus 0 \to \mathbb{N}\)</span> כך שלכל <span>\(a,d \in R\)</span> כאשר <span>\(d\neq 0\)</span> יש <span>\(q,r\)</span> עם <span>\(a=dq+r\)</span>. וכן <span>\(\lvert r \rvert&lt;\lvert d \rvert\)</span></p>
+</div>
+<div class="example">
+<p>עבור <span>\(\mathbb{F}[x]\)</span> נקבל <span>\(\lvert p(x) \rvert=\deg p\)</span>. עבור <span>\(\mathbb{Z}\)</span> נגדיר <span>\(\lvert n \rvert=\lvert n \rvert\)</span> וכן עבור <span>\(\mathbb{Z}[i]\)</span> נגדיר <span>\(\lvert a+bi \rvert=a^{2}+b^{2}\)</span></p>
+</div>
+<div class="definition"><span class="keyword">תחום PID</span><p>כל אידיאל ראשי</p>
+</div>
+<div class="proposition">
+<p>תחום אוקלידי ⟸ תחום ראשי PID</p>
+</div>
+<div class="proof">
+<p>אם <span>\(I\trianglelefteq R\)</span> אזי <span>\(I=(m)\)</span>. לכל <span>\(m \in I\)</span> עם <span>\(\lvert m \rvert\)</span> מינימלי ב-<span>\(I\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">תחום פריקות חד ערכית - UFD</span><p>לכל איבר יש פירוק יחיד לראשוניים(עד כדי סדר וחברות)</p>
+</div>
+<div class="example">
+<p>החוג <span>\(\mathbb{Z}[\sqrt{ -3 }]\)</span> לא UFD.</p>
+</div>
+<div class="proposition">
+<p>בתחום UFD ראשוני(שונה מ-0) = אי פריק.</p>
+</div>
+<div class="example">
+<p>החוגים:
+<span>$$\mathbb{F} [x,y]\qquad \mathbb{Z} [x]$$</span>
+הם UFD לא PID</p>
+</div>
+<div class="proposition">
+<p>תחום אוקלידי ⟸ תחום ראשי PID ⟸ תחום פריקות חד ערכית(פח"ע) UFD.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(R\)</span> הוא UFD אזי <span>\(R[x]\)</span> הוא UFD.</p>
+</div>
+<div class="example">
+<p><span>$$\mathbb{Z}\left[ \frac{1+\sqrt{ -19 }}{2} \right]$$</span>
+תחום PID לא אוקלידי(Motzkin).</p>
+</div>
+<p>בזמן הקרוב <span>\(R=PID\)</span> בפרט זה אומר ש-UFD. זה אומר שראשוני(שונה מ-0) ואי פריק זה אותו דבר.</p>
+<div class="remark">
+<p>יש gcd. זה כיוון שאם ניקח את האידיאלי שנוצר על ידי שתי איברים <span>\((a,b)\)</span> אנו יודעים כי קיים תחום ראשי שזה שווה אליו <span>\((g)\)</span>. ונגדיר את <span>\(g\)</span> להיות ה-gcd:
+<span>$$d\mid g\impliedby d\mid a,b\qquad g\mid a,b$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">bezout</span><p>ה-<span>\(gcd\)</span> הוא הצירוף לינארי:
+<span>$$\mathrm{gcd}(a,b)=xa+yb$$</span>
+עבור <span>\(x,y \in R\)</span>.</p>
+</div>
+<div class="example">
+<p>עבור <span>\(\mathrm{gcd}_{\mathbb{Z}[x]}(2,x)=1\)</span> לא צירוף לינארי.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט השארית הסיני CRT</span><p>אם <span>\(r_{1},r_{2},\dots ,r_{m}\in R\)</span> זרים בזוגות(כלומר <span>\(\gcd=1\)</span> לכל זוג) אזי:
+<span>$$\frac{R}{\prod r_{i}}\cong R / (r_{i})\times \dots \times R / (r_{m})$$</span>
+לדוגמא:
+<span>$$\mathbb{Z} / 6 \cong  \mathbb{Z} / 2 \times \mathbb{Z} / 3$$</span></p>
+</div>
+<div class="example"><span class="keyword">PID</span><p><span>$$\mathbb{F} ,\mathbb{Z},\mathbb{Z}[i], \mathbb{Z}[e^{2\pi \frac{i}{3}}],\mathbb{F} [x], \mathbb{F}[[x]], \mathbb{Z}_{p}  $$</span>
+כאשר <span>\(\mathbb{Z}[e^{ 2\pi i/23 }]\)</span> לא UFD ובפרט לא PID</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>כל מודול נוצר סופית מעל PID איזומורפי ל: 
+<span>$$R / (d_{1}) \oplus \dots \oplus R / (d_{m})$$</span>
+עבור <span>\(d_{1}|d_{2}|\dots|d_{m}\)</span> יחידים(ולא הפיכים) עד כדי חברות.</p>
+</li>
+<li>
+<p>איזומורפי ל: 
+<span>$$R / (p_{1}^{e_{1}})\oplus\dots \oplus R / (p_{r}^{e_{r}})$$</span>
+ל-<span>\(p_{i}\)</span> ראשוניים. <span>\(e_{i}\)</span> נקבעים ביחידות <span>\(p_{i}\)</span> עד כדי חברות.</p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>עבור <span>\(R=\mathbb{Z}\)</span> אם A חבורה אבלית נוצרת סופית:
+<span>$$A\cong  Z / d_{1} \times \dots \mathbb{Z} / d_{m} \times \underbrace{ \mathbb{Z} \times \dots\times\mathbb{Z} }_{ r } $$</span>
+ל-<span>\(r\geq 0\)</span> כלשהו. ו-<span>\(d_{1}|d_{2}|\dots|d_{m}\)</span> שונים מאפס. למשל עבור <span>\(\mathbb{Z} / 3 \times \mathbb{Z} / 12 \times \mathbb{Z}\)</span> ניתן לכתוב(בעזרת משפט השארית הסינית)
+<span>$$\mathbb{Z} / 3 \times \mathbb{Z} / 3 \times \mathbb{Z} / 4 \times \mathbb{Z}$$</span>
+ואכן בצורה הרצויה. אם נרצה ללכת בכיוון ההפוך, של לכתוב בצורה של חלוקות אשר מחלקות אחת את השנייה ניתן לכתוב:
+<span>$$\mathbb{Z} / 9 \times \mathbb{Z} / 3 \times \mathbb{Z} / 4 \times \mathbb{Z} / 8 \cong  \mathbb{Z} / 12 \times \mathbb{Z} / 72$$</span></p>
+</div>
+<div class="example">
+<p>עבור <span>\(R=\mathbb{F}\)</span> נקבל מרחב ווקטורי; כאשר האיבר הראשוני היחיד בשדה הוא 0. לכן נקבל:
+<span>$$V\cong  \mathbb{F} / 0 \oplus \dots \oplus \mathbb{F} / 0$$</span></p>
+</div>
+<p>תרגיל: <span>\(R=\mathbb{Z}[\sqrt{ -3 },\sqrt{ -5 }]\)</span> אז ל-<span>\(12,(1+\sqrt{ -3 })(1+\sqrt{ -5 })\)</span> אין <span>\(\gcd\)</span>. למעשה המחלקים המשותפים הם:
+<span>$$\{ 1,1+\sqrt{ -3 },1+\sqrt{ -5 } \}$$</span></p>
+<div class="example">
+<p>עבור <span>\(R=\mathbb{F}[x]\)</span>. נזכר שמודול נוצר סופית וסוף <span>\(\mathbb{F}\)</span> מימדי ⇔ מרחב ווקטורי סוף מימדי עם טרנספורמצייה לינארית על <span>\(X=T\)</span>.
+<span>$$V \cong  R / (p_{i})\oplus \dots \oplus R / (p_{m})\qquad p_{i}\neq 0$$</span>
+כי <span>\(\dim_{\mathbb{F}}(R / 0)= \infty\)</span>.
+נרצה לראות איך נראה אחד מהם:
+<span>$$x^{n}+a_{n-1}x^{n-1}+\dots+a_{0}=p=p(x)$$</span>
+נסתכל על המודול:
+<span>$$V=\mathbb{F} [x] / (p)$$</span>
+כאשר זהו מימד ווקטורי סוף מימדי עם <span>\(\dim_{\mathbb{F}}V=\deg p = n\)</span> כאשר <span>\(V=\mathbb{F}[x] / (p)\)</span>.
+<span>$$\{ 1,x,x^{2},\dots,x^{n-1} \}$$</span>
+יהיה <span>\(\mathbb{F}\)</span> בסיס ל-<span>\(V\)</span>.
+<span>$$T:V\to V\qquad T(q)=xq$$</span>
+וזה אומר כי:
+<span>$$[T]=\begin{pmatrix}0 &amp;  &amp;  &amp;   &amp; -a_{0}\\1 &amp; 0 &amp;  &amp;   &amp; -a_{1}\\ &amp; 1 &amp; 0 &amp;   &amp; \vdots\\ &amp;  &amp;  &amp;  \ddots &amp;  \\ &amp;  &amp;  &amp; 1 &amp; -a_{n-1}
+\end{pmatrix}$$</span>
+זה נקרא מטריצה מלווה(Companion matrix) מטריצה מלווה של <span>\(p(x)\)</span> מתוקן.
+תרגיל - הפולינום האופייני יהיה:
+<span>$$\text{charpoly}(C_{p})=p\;(=\det(xI-C_{p}))$$</span>
+נאמר שמטריצה A היא מטריצה מלווה אם היא שווה למטריצה המלווה של הפולינום האופייני שלה:
+<span>$$A=C_{\text{charpoly}}(A)$$</span>
+כלומר קיבלנו סה"כ כי אם <span>\(V\)</span> מרוב ווקטורי ממימד סופי <span>\(T:V\to V\)</span> נגדיר <span>\(\mathbb{F}[x]\)</span> מודול על ידי <span>\(xv=T(v)\)</span>. ממשפט המיון:
+<span>$$V\cong  \underbrace{ \mathbb{F} [x] / (p_{1}) }_{ 1,x\dots x^{\deg p_{1}-1} }\oplus \dots \oplus \underbrace{ \mathbb{F}[x] / (p_{m}) }_{ 1,x ,\dots, x^{\deg p_{m}-1} } $$</span>
+ו-<span>\(p_{1}|p_{2}|\dots|p_{m}\)</span>. ניקח בסיס <span>\(\mathcal{B}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">פורובניוס</span><p>ל-<span>\(A\in M_{n}(\mathbb{F})\)</span> יש מטריצה יחידה שדומה לה מהצורה:
+<span>$$\begin{pmatrix}A_{1} &amp;  &amp;   &amp; \\   &amp; A_{2} &amp;   &amp; \\ &amp;  &amp; \ddots  &amp; \\ &amp;  &amp;  &amp; A_{m}
+\end{pmatrix}$$</span>
+כש-<span>\(A_{i}\)</span> מטריצות מלוות ו-<span>\(p_{A_{1}}|p_{A_{2}}|\dots|p_{A_{m}}\)</span> כאשר צורה זו נקראת הצורה הקנונית נורמלית, רציונלית, פרובניוס(לבחור 2 מ-4).</p>
+</div>
+<p>זה נותן לנו אלגוריתמים להכריע אם <span>\(A\)</span> דומות ל-<span>\(B\)</span>.</p>
+<div class="theorem">
+<p>אם <span>\(A,B\in M_{n}(\mathbb{F})\)</span> ו-<span>\(\mathbb{E / F}\)</span> אזי <span>\(A \sim B\)</span> מעל <span>\(\mathbb{F}\)</span> אם"ם <span>\(A\sim B\)</span> מעל <span>\(\mathbb{E}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נחשב צורות קנוניות <span>\(A'\)</span> ו-<span>\(B'\)</span> ב-<span>\(M_{n}(\mathbb{F})\)</span> אבל <span>\(A'\)</span> ו-<span>\(B'\)</span> הן מהצורה כמטריצת מעל <span>\(M_{n}(\mathbb{E})\)</span> לכן הן הצורה הקנונית של <span>\(A,B\)</span> כמטריצות ב-<span>\(M_{n}(\mathbb{E})\)</span>. אם <span>\(A\overset{\mathbb{E}}{\sim}B\)</span> הן שוות ולכן <span>\(A\overset{\mathbb{F}}{\sim}B\)</span>.</p>
+</div>
+<p>צורה 2 של המשפט:
+אומר ש:
+<span>$$V\cong  \mathbb{F} [x] / (p_1^{e_{1}})\oplus \dots \oplus \mathbb{F} [x] / (p_{m}^{e_{m}})$$</span>
+כש-<span>\(p_{i}\)</span> אי פריקים. אם <span>\(\mathbb{F}\)</span> סגור אלגברית נקבל <span>\(p_{i}=x-\alpha_{i}\)</span> ל-<span>\(\alpha_{i}\in \mathbb{F}\)</span>. ולכן:
+<span>$$V\cong  \bigoplus_{i} \mathbb{F} [x] / ((x-\alpha_{i})^{e_{i}})$$</span>
+ניקח בסיס <span>\(1,x-\alpha,(x-\alpha)^{2},\dots,(x-\alpha)^{e-1}\)</span> ל-<span>\(\mathbb{F}[x] / ((x-\alpha)^{e})\)</span>.
+<span>$$x\cdot(x-\alpha)^{j}=(x-\alpha+\alpha)(x-\alpha )^{j}=(x-\alpha)^{j+1}+\alpha(x-\alpha)^{j}$$</span>
+כש-<span>\((x-\alpha)^{e}=0\)</span>. כעת:
+<span>$$[x]=\begin{pmatrix}\alpha &amp;  &amp;  &amp;   &amp;   \\1 &amp; \alpha &amp;  &amp;  &amp;    \\ &amp; 1 &amp; \alpha &amp;  &amp;    \\ &amp;  &amp; \ddots &amp; \ddots  &amp;  \\ &amp;  &amp;  &amp; 1 &amp; \alpha  
+\end{pmatrix}$$</span></p>
+<p>נחזור לצורה הקנונית הרציונאלית:
+<span>$$A\sim  \begin{pmatrix}C_{p_{1}} &amp; 0 &amp; 0 &amp; 0 \\0 &amp; C_{p_{2}} &amp; 0 &amp; 0 \\0 &amp; 0 &amp; \ddots &amp; 0 \\0 &amp; 0 &amp; 0 &amp; C_{p_{m}}
+\end{pmatrix}$$</span>
+כאשר <span>\(p_{1}|\dots | p_{m}\)</span> אז כעת:
+<span>$$P_{A}=p_{1}\cdot p_{2} \cdot \dots \cdot p_{m}\qquad m_{A}=p_{m}$$</span>
+נשאר לבדוק שהפולינום המינימלי של מטריצה מלווה הוא גם הפולינום:
+<span>$$m_{C_{p}}=p\to m_{A}=p_{m}$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings'> תורת חוגים</a></li>
+<li class='prev-page'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+</ul></li>
+        </body>
+        </html>
+        

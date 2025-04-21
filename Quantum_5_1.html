@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מבוא לתורת ההצגות של חבורות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_5_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_4_3`; }});</script>
+        <div class="content">
+        <h1>5.1  מבוא לתורת ההצגות של חבורות</h1>
+    <div class="definition"><span class="keyword">חבורה</span><p>קבוצה <span>\(A\)</span> עם פעולה <span>\(\cdot:A\times A\to A\)</span>  אשר מקיימת:</p>
+<ol>
+<li>
+<p>קיום איבר זהות <span>\(1\)</span> אשר מקיים: 
+<span>$$\forall a \in A\quad a \cdot 1 = 1 \cdot a = 1$$</span></p>
+</li>
+<li>
+<p>לכל איבר <span>\(a \in A\)</span> קיים <span>\(a^{-1} \in A\)</span> כך ש: 
+<span>$$a \cdot a^{-1} = a ^{-1} \cdot a = 1$$</span></p>
+</li>
+<li>
+<p>אסוצייטיביות. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>לרוב נשמיט את הסימן של הכפל.</p>
+</div>
+<div class="definition"><span class="keyword">חבורה אבלית</span><p>חבורה אשר קומוטטיבית.</p>
+</div>
+<div class="definition"><span class="keyword">הצגה של חוברה</span><p>יהי <span>\(G\)</span> חבורה, ו-<span>\(V\)</span> מרחב ווקטורי. הומומורפיזם <span>\(\rho:G\to GL(V)\)</span> כאשר <span>\(GL(V)\)</span> מייצג את החבורת אוטומורפיזמים של <span>\(V\)</span>(כלומר כל העתקות הלינארית ההפיכות על <span>\(V\)</span>) נקראת הצגה של החבורה <span>\(G\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">ההצגה הטריוויאלית</span><p>נדרש רק שיהיה הומומורפיזם, ולכן לא נדרש חח"ע ועל. לכן ההצגה הטריוויאלית <span>\(e\mapsto \mathbb{1}\)</span> עם <span>\(V=\mathbb{C}^{n}\)</span> יהיה של כל חבורה למרות שרק ממפה איבר יחיד. וכן נשים לב כי ניתן להגדיר הצגה זו עם מטריצה יחידה מכל גודל.</p>
+</div>
+<div class="example"><span class="keyword">הצגה של תמורה</span><p>ניתן את החבורה <span>\(S_{n}\)</span> על ידי מטריצת תמורה על <span>\(V=\mathbb{F} _2\)</span>(או כל שדה שמכיל את 0 ו-1). למשל ניתן להציג את התמורה <span>\((1,2,3)\)</span> על ידי:
+<span>$$T((1,2,3))=\begin{pmatrix}0&amp;0&amp;1\\ 1&amp;0&amp;0\\ 0&amp;1&amp;0\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>כיוון שכל חבורה מגודל <span>\(n\)</span> היא תת חבורה של <span>\(S_{n}\)</span>(משפט קיילי) וכל תמורה ספית ניתן לייצג כמטריצה, לכל חבורה יש הצגה של החבורה בעזרת תמורות.</p>
+</div>
+<div class="remark">
+<p>הצגה זו נקראת לפעמים ההצגה הרגילה.</p>
+</div>
+<p>דבר זה אבל מעלה 2 שאלות:</p>
+<ol>
+<li>
+<p>האם ההצגה היא יחידה. </p>
+</li>
+<li>
+<p>האם ואיך ניתן לפשט את ההצגה? (מטריצה מגודל <span>\(n!\)</span> היא תהיה גדולה עם 0 או 1 בערכים שלה מרגיש לא יעיל). </p>
+</li>
+</ol>
+<div class="example">
+<p>עבור כל תמורה למשל ניתן ליצור הצגה על ידי הסימן של התמורה. זה יהיה הומומורפיזם של "מטריצה" מגודל 1 שיהיה או 1 או <span>\(-1\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מימד של הצגה</span><p>עבור הצגה <span>\(R:G\to GL_{n}\left( \mathbb{F}  \right)\)</span> המימד של ההצגה יהיה <span>\(n\)</span>. כלומר זה יהיה גודל המטריצות שבתמונה.</p>
+</div>
+<div class="example">
+<p>עבור חבורת הממשיים עם פעולת החיבור ניתן להגדיר הצגה על ידי אקספוננט כיוון שמתקיים:
+<span>$$e^{ u+v }=e^{ u }e^{ v }$$</span>
+ולכן המומומורפיזם, כאשר זה יהיה הצגה ממימד 1. ניתן להגדיר גם על ידי הפעולה הבאה:
+<span>$$D(u)=\left(\begin{array}{l l}{{1}}&amp;{{0}}\\ {{u}}&amp;{{1}}\end{array}\right)$$</span>
+כיוון שאכן מתקיים:
+<span>$$D(u+v)=D(u)D(v),$$</span>
+וזה יהיה הצגה מגודל 2.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(g\mapsto R(g)\)</span> הצגה אזי גם <span>\(g\mapsto UR(g)U^{-1}\)</span> יהיה הצגה. הצגות כאלה אשר נבדלות ביחס דמיון לעיתים נקראים הצגות שקולות.</p>
+</div>
+<div class="proposition">
+<p>מכל שתי הצגות <span>\(\left( \rho_{1},V_{1} \right),\left( \rho_{2},V_{2} \right)\)</span> ניתן להרכיב הצגה שלישית על ידי לקחת המרחב המתקבל מהסכום הישר <span>\(V_{1} \oplus V_{2}\)</span> של שתי המרחבים ביחד עם ההומומורפיזם המוגדר על ידי:
+<span>$$\rho(av_{1}+bv_{2})=a\rho_{1}(v_{1})+b\rho_{2}(v_{2})$$</span>
+כאשר <span>\(v_{1} \in V_{1}\)</span> ו-<span>\(v_{2} \in V_{2}\)</span>(ניתן להציג כל ווקטור בצורה הזאת מתכונות של הסכום הישר)</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(R_{1}\)</span> ו-<span>\(R_{2}\)</span> הצגות אז גם הפונקציה:
+<span>$$g \mapsto \begin{pmatrix}R_{1}(g) &amp; 0 \\0 &amp; R_{2}(g)
+\end{pmatrix}$$</span>
+תהיה הצגה.</p>
+</div>
+<div class="reminder"><span class="keyword">תת מרחב אינווריאנטי</span><p>תת מרחב <span>\(U\leq V\)</span> נקרא אינווריאנטי תחת העתקה <span>\(T:V\to V\)</span> אם לכל <span>\(v \in U\)</span> מתקיים <span>\(Tv \in U\)</span>. כלומר זהו מרחב שההעתקה משאירה אותה במרחב. כאשר נזכור כי המרחב כולו ומרחב האפס הם המרחבים שתמיד <span>\(T\)</span>-אינווריאנטיים.</p>
+</div>
+<div class="definition"><span class="keyword">תת יצוג</span><p>יהי <span>\(R\)</span> ייצוג על מרחב ווקטורי <span>\(V\)</span>. תת מרחב <span>\(U\subset V\)</span> אשר אינווריאנטי תחת כל אופרטור <span>\(R(g)\)</span> כאשר <span>\(g\in G\)</span> יקרא תת ייצוג.</p>
+</div>
+<div class="corollary">
+<p>תת ייצוג מייצג תת חבורה במטריצה המקורית.</p>
+</div>
+<div class="definition"><span class="keyword">הצגה בלתי פריקה</span><p>זוהי תהיה הצגה שהתת ייצוג היחיד שלה יהיה התת יצוג הטריוויאלי והיצוג עצמו.</p>
+</div>
+<div class="corollary">
+<p>עבור הצגה בלתי פריקה אין בסיס שעבורה כל <span>\(g\in G\)</span> בחבורה תהיה מטריצת בלוקים. כלומר אין לה תת מרחב אינווריאנטי.</p>
+</div>
+<div class="proposition">
+<p>עבור כל חבורה סופית כל הצגה בלתי פריקה תהיה סופית.</p>
+</div>
+<div class="remark">
+<p>בפועל ניתן להכליל טענה זו גם עבור חבורות אינסופיות אך נדרש להגדיר חבורה טופולוגית ולדרוש כי הקבוצה תהיה קומפקטית תחת הטופולוגיה.</p>
+</div>
+<div class="definition"><span class="keyword">הצגה אוניטרית</span><p>הצגה <span>\(T\)</span> שעבורה לכל <span>\(g \in G\)</span> נקבל <span>\(T(g)\)</span> אוניטרית.</p>
+</div>
+<div class="proposition">
+<p>כל הצגה מימד סופי של חבורה סופית תהיה שקולה להצגה אונטרית, כלומר ניתן להביא אותה לצורה אוניטרית על ידי טרנספורמציית דמיון.</p>
+</div>
+<div class="remark">
+<p>עבור חבורה אינסופית לא בהכרח נקבל כי קיים הצגה אוניטרית עבורה. לדוגמא עבור החבורה <span>\(R\)</span> עם חיבור עם ההצגה:
+<span>$$T(u)={\left(\begin{array}{l l}{1}&amp;{0}\\ {u}&amp;{1}\end{array}\right)}\,\qquad u\in\mathbb{R}$$</span>
+נקבל:
+<span>$$\begin{array}{c}{{T^{\dagger}(u)T(u)=\left(\begin{array}{c c}{{1}}&amp;{{u}}\\ {{0}}&amp;{{1}}\end{array}\right)\left(\begin{array}{c c}{{1}}&amp;{{0}}\\ {{u}}&amp;{{1}}\end{array}\right)}} {{=\left(\begin{array}{c c}{{1+u^{2}}}&amp;{{u}}\\ {{u}}&amp;{{1}}\end{array}\right)}}\end{array}$$</span>
+ולמעשה נדרש תנאי נוסף כדי שיהיה נכון עבור חבורה אינסופית, שעבורה נדרש חבורה טופולוגית.</p>
+</div>
+<div class="proposition">
+<p>כל הצגה מימד סופי של חבורה טופולוגית אינסופית קומפקטית תהיה שקולה להצגה אונטרית, כלומר ניתן להביא אותה לצורה אוניטרית על ידי טרנספורמציית דמיון.</p>
+</div>
+<div class="proposition">
+<p>כל הצגה אוניטרית תהיה סכום ישר של הצגות בלתי פריקות.</p>
+</div>
+<div class="corollary">
+<p>כל הצגה של חבורה סופית או חבורה טופולוגית קומפקטית תהיה ניתנת לפירוק לסכום ישר של הצגות בלתי פריקות.</p>
+</div>
+<div class="lemma"><span class="keyword">הראשונה של שור</span><p>יהי <span>\(T:G\to GL(V)\)</span> ו-<span>\(S:G\to GL(U)\)</span> הצגות בלתי פריקות. אם מטריצה <span>\(A\)</span> היא כך ש:
+<span>$$A T(g)=S(g)A\qquad\forall g\in G,$$</span>
+אז או ש-<span>\(A=0\)</span> או ש-<span>\(A\)</span> מטריצה הפיכה ולכן שתי ההצגות הם שקולות.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(\dim T=n\)</span> ו-<span>\(\dim S = m\)</span>. נניח כי קיים תת מרחב <span>\(W\subset V\)</span> כך ש-<span>\(Aw=0\)</span> אם"ם <span>\(w \in W\)</span>. יהי <span>\(P\)</span> מטריצת ההטלה על התת מרחב <span>\(W\subset V\)</span> אזי <span>\(AP=0\)</span>. מזה נקבל:
+<span>$$A T(g)P=S(g)A P=0.$$</span>
+אבל אז נקבל כי <span>\(T(g)P \in W\)</span> כלומר <span>\(T(f)w \in W\)</span> לכל <span>\(w \in W\)</span>. זה אומר ש-<span>\(W\)</span> הוא תת מרחב <span>\(T\)</span> אינווריאנטי, ולכן נקבל כי או ש-<span>\(W=0\)</span> ואז <span>\(A=0\)</span> או ש-<span>\(W=V\)</span> אז זה אומר כי לכל <span>\(0 \neq v \in V\)</span> נקבל <span>\(Av \neq 0\)</span>.
+ניתן לבצע את אותו התהליך על <span>\(W' \in U\)</span> כך ש-<span>\(uA=0\)</span> אם"ם <span>\(u \in W'\)</span>. נקבל כי או ש-<span>\(A=0\)</span> או ש-<span>\(uA\)</span> לא אפס לכל <span>\(0\neq u \in U\)</span>.
+נותרנו עם שתי מקרים. או ש-<span>\(A=0\)</span> או ש-<span>\(Av\)</span> ו-<span>\(uA\)</span> הם אף פעם לא אפס עבור <span>\(u\in U, v\in V\)</span> אשר שונים מ-0. כעת נראה שהמקרה השני שקול לכך שמטריצה ריבועית הפיכה. אם מספר השורות קטן ממספר העמודות, קיים <span>\(v \in V\)</span> כך ש-<span>\(Av=0\)</span>, בסתירה. באופן דומה, אם מספר העמודות קטן ממספר השורות, קיים <span>\(u \in U\)</span> כך ש-<span>\(uA=0\)</span>, בסתירה. לכן <span>\(A\)</span> ריבועית. והיא תהיה הפיכה כיוון שהגרעין שלה לא טריוויאלי.</p>
+</div>
+<div class="lemma"><span class="keyword">השנייה של שור</span><p>יהי <span>\(T:G\to GL(V)\)</span> הצגה בפלתי פריקה של חבורה סופית <span>\(G\)</span>. אם מטריצה <span>\(A\)</span> מתחלפת עם <span>\(T(g)\)</span> לכל <span>\(g \in G\)</span>, כלומר אם:
+<span>$$A T(g)=T(g)A\qquad\forall g\in G,$$</span>
+נקבל <span>\(A=\lambda I\)</span> עבור <span>\(\lambda \in \mathbb{C}\)</span> כלשהו. כלומר <span>\(A\)</span> יהיה כפולה של המטריצת יחידה</p>
+</div>
+<div class="proof">
+<p>הלמה השנייה היא מסקנה ישירה של הראשונה. ל-<span>\(A\)</span> חייב להיות לפחות ערך עצמי אחד. לכן <span>\(A-\lambda I\)</span> תהיה עם דטרמיננטה 1 ולכן לא תהיה הפיכה. כליוון ש-<span>\(AT(g)=T(g)A\)</span> נקבל:
+<span>$$(A-\lambda I)T(g)=T(g)(A-\lambda I)$$</span></p>
+</div>
+<div class="remark">
+<p>אומנם ניסחנו והוכחנו עבור חבורות סופיות. הטענות(הלמה הראשונה והשנייה של שור) יהיו נכונות גם עבור חבורות טופולוגיות קומפקטויות.</p>
+</div>
+<div class="corollary">
+<p>בתנאי הלמה השנייה של שור(חבורה סופית או חבורה טופולוגית קומפקטית) כל ההצגות הבלתי פריקות של חבורה <u>אבלית</u> יהיו ממימד 1.</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(T:G\to GL(V)\)</span> הצגה בלתי פריקה של חבורה אבלית סופית <span>\(G\)</span>. אזי לכל <span>\(a \in G\)</span> נקבל כי <span>\(T(a)\)</span> מתחלף עם כל <span>\(T(g)\)</span>. לכן לפי הלמה השנייה של שור נקבל <span>\(T(a)=\lambda I\)</span> עבור <span>\(\lambda \in \mathbb{C}\)</span> וזה נכון לכל <span>\(a \in G\)</span> ולכן <span>\(T(a)\)</span> היא כפולה סקלארית של היחידה. כעת הדרך היחידה ש-<span>\(T\)</span> תהיה אי פריקה היא הם היא חד מימדית.</p>
+</div>
+<div class="theorem"><span class="keyword">האורתוגונאליות</span><p>יהי <span>\(T:G\to GL(V)\)</span> ו-<span>\(S:G\to GL(V)\)</span> הצגות בלתי פריקות של חבורה סופית <span>\(G\)</span>. נסמן ב-<span>\(T(g)_{ij}\)</span> וב-<span>\(S(g)_{ij}\)</span> את אלמנטי המטריצה של המטריצות המתאימות. אזי:</p>
+<ol>
+<li>
+<p>אם <span>\(S\)</span> ו-<span>\(G\)</span> הם לא שקולות: 
+<span>$$\sum_{g\in G}T^{\dagger}(g)_{i j}S(g)_{k l}=0.$$</span></p>
+</li>
+<li>
+<p>אם <span>\(S\)</span> ו-<span>\(G\)</span> שקולות נסמן את מימד ההצגה ב-<span>\(d\)</span> ונקבל: 
+<span>$$\sum_{g\in G}T^{\dagger}(g)_{i j}T(g)_{k l}=\frac{|G|}{d}\delta_{i l}\delta_{j k},$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>לחבורה סופית תהיה מספר סופי של הצגות בלתי פריקות לא שקולות כיוון שכל אחת צריכה להיות אורתוגונאלית לכל האחרות.</p>
+</div>
+<div class="summary">
+<ul>
+<li>חבורה היא קבוצה עם פעולה על הקבוצה אשר אסוצייטיבית, סגורה להופכי ומכילה יחידה.</li>
+<li>עבור חבורה <span>\(\left( G,\cdot \right)\)</span> צירוף של מרחב ווקטורי ביחד עם הומומורפיזם <span>\(\rho:G\to GL(V)\)</span> נקרא הצגה של <span>\(G\)</span>.</li>
+<li>שתי הצגות אשר מייצגות את אותה ההצגה בבסיסים שונים נקראות הצגות שקולות, ונבדלות ביחס דמיון.</li>
+<li>מכל שתי הצגות ניתן להרכיב הצגה שלישית על ידי הסכום הישר של המרחבים. כאשר כל הצגה תהווה תת מרחב אינוורינטי.</li>
+<li>הצגה ללא תתי מרחבים אינווריאנטים לא טריוויאלים נקראים הצגות בלתי פריקות.</li>
+<li>מהלמה הראשונה של שור אם יש שתי הצגות בלתי פריקות כך שמטריצה <span>\(A\)</span> מתחלפת עם שתינן לכל איבר בחבורה, נקבל כי אם ההצגות לא שקולות <span>\(A=0\)</span>.</li>
+<li>מהלמה השנייה של שור, עבור הצגה בלתי פריקה אם יש מטריצה שמתחלפת איתה לכל איבר בחבורה המטריצה הזאת תהיה פרופורציונית ליחידה.</li>
+<li>משפט האורתוגונאליות נותן סוג של יחס אורתוגונאליות עבור ההצגות הבלתי פריקות.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='prev-page'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

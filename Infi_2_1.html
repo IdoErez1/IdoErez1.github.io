@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרה של פונקציה רציפה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_1_3`; }});</script>
+        <div class="content">
+        <h1>2.1  הגדרה של פונקציה רציפה</h1>
+    <div class="definition"><span class="keyword">רציפות בנקודה</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ו-<span>\(x_{0} \in \mathbb{R}\)</span>. נאמר כי <span>\(f\)</span> רציפה ב-<span>\(x_{0}\)</span> אם מתקיים:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(f\)</span> מוגדרת בסביבה מלאה של <span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>קיים ל-<span>\(f\)</span> גבול ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>הגבול שווה לערך בהקודה. כלומר: 
+<span>$$\lim_{ x \to x_{0} } f(x)=f(x_{0})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אנחנו הרבה פעמים משתמשים בכיוון השני, אם פונקציה היא רציפה, אז זה מאפשר למצוא את הגבול ממש בקלות! פשוט מציבים את הנקודה, וזה יהיה הגבול.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה רציפה בתחום</span><p>פונקציה <span>\(f\)</span> נקראת רציפה בתחום <span>\(D\)</span> אם לכל <span>\(x \in D\)</span> הפונקציה רציפה ב-<span>\(x\)</span>. אם רציפה בכל תחום הגדרתה נאמר שהיא פונקציה רציפה.</p>
+</div>
+<div class="proposition"><span class="keyword">אפיון היינה לרציפות</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> פונקציה ממשית. יהי <span>\(x_{0} \in \mathbb{R}\)</span>. אם כל סדרה <span>\((x_{n})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(x_{n}\in D\)</span>. </p>
+</li>
+<li>
+<p>הגבול של הסדרה שואפת ל-<span>\(x_{0}\)</span>. 
+מקיימת <span>\(f(x_{n})\xrightarrow{n\to \infty}f(x_{0})\)</span> אם"ם מתקיים <span>\(\lim_{ x \to x_{0} }f(x)=L\)</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">אריתמטיקה של פונקציות רציפות</span><p>יהיו <span>\(g,f\)</span> פונקציות רציפות ב-<span>\(x_{0} \in \mathbb{R}\)</span>. </p>
+<ol>
+<li>
+<p>הסכום <span>\(f+g\)</span> יהיה רציף ב-<span>\(x_{0}\)</span> </p>
+</li>
+<li>
+<p>המכפלה <span>\(f\cdot g\)</span> תהיה רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>אם בנוסף <span>\(0\neq g(x_{0})\)</span> אז <span>\(\frac{1}{g}\)</span> רציפה ב-<span>\(x_{0}\)</span>, וכן במקרה זה גם <span>\(\frac{f}{g}\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\lambda \in \mathbb{R}\)</span> אז <span>\(\lambda f\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+<li>
+<p>ההפרש <span>\(f-g\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>נובע ישירות מאריתמטיקה של גבולות של פונקציות.</p>
+</div>
+<div class="definition"><span class="keyword">רציפות חד צצדית</span><p>תהי <span>\(f:D\to \mathbb{R}\)</span> ו-<span>\(x_{0} \in \mathbb{R}\)</span>.</p>
+<ol>
+<li>
+<p>אם מתקיים <span>\(\underset{ x \to x_{0}^{+} }{\lim }f(x)=f(x_{0})\)</span> אז נאמר כי רציף מימין. </p>
+</li>
+<li>
+<p>אם מתקיים <span>\(\underset{ x \to x_{0}^{-} }{\lim }f(x)=f(x_{0})\)</span> אז נאמר כי רציף משמאל. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>פונקציה רציפה בנקודה אם"ם רציפה גם משמאל וגם מימין.</p>
+</div>
+<div class="theorem"><span class="keyword">הרכבה של פונקציות רציפות</span><ol>
+<li>
+<p>תהי <span>\(f\)</span> פונקציה המוגדרת בסיבה מנוקבת של <span>\(x_{0}\)</span> כך ש-<span>\(\underset{ x \to x_{0} }{\lim }f(x)=y_{0}\)</span>. תהי <span>\(g\)</span> רציפה ב-<span>\(y_{0}\)</span>. אזי <span>\(g\circ f\)</span> בעלת גבול ב-<span>\(x_{0}\)</span> ומתקיים: 
+<span>$$\lim_{ x \to x_{0} } g(f(x))=\lim_{ x \to x_{0} } \left( g \circ  f \right)(x)=g(y_{0})$$</span></p>
+</li>
+<li>
+<p>אם בנוסף <span>\(f\)</span>  רציפה ב-<span>\(x_{0}\)</span> אז מתקיים <span>\(g \circ f\)</span> רציפה ב-<span>\(x_{0}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(\varepsilon&gt;0\)</span>. תהי <span>\(g\)</span> רציפה ב-<span>\(y_{0}\)</span>. לכן קיים <span>\(\delta_{1}&gt;0\)</span> כך שלכל <span>\(y \in \mathrm{Dom}(g)\)</span> מתקיים: 
+<span>$$0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert g(y)-g(y_{0}) \rvert &lt;\varepsilon$$</span>
+עכשיו <span>\(\underset{ x \to x_{0} }{\lim }f(x)=y\)</span> נותן <span>\(\delta&gt;0\)</span> כך שלכל <span>\(x \in \mathrm{Dom}\left( g \circ f \right)\)</span> מתקיים:
+<span>$$\begin{gather}0&lt;\lvert x-x_{0} \rvert &lt;\delta\implies \lvert f(x)-y_{0} \rvert &lt;\delta_{1}\implies \lvert g(f(x))-y_{0} \rvert &lt;\delta_{1} \implies \\\implies \lvert g(f(x))-g(y_{0}) \rvert &lt;\varepsilon \implies \lim_{ x \to x_{0} } \left( g\circ f \right)(x_{0})=g(y_{0})
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>כעת נתון כי <span>\(f\)</span> רציפה ב-<span>\(x_{0}\)</span>. לכן <span>\(\underset{ x \to x_{0} }{\lim }f(x)=f(x_{0})=y\)</span>. נקבל כי: 
+<span>$$\lim_{ x \to x_{0} } g \circ f(x)=g(f(x_{0}))=\left( g\circ f \right)(x_{0})$$</span>
+זאת אומרת <span>\(g\circ f\)</span> רציפה ב-<span>\(x_{0}\)</span>.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='prev-page'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

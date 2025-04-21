@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואות מסדר ראשון</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_4_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_4_2.html`;}});</script>
+        <div class="content">
+        <h1>4.3  משוואות מסדר ראשון</h1>
+    <div class="symbolize">
+<p>הנגזרת החלקית של <span>\(u\)</span> לפי משתנה <span>\(x\)</span> יסומן <span>\(u_{x}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">לינארית מסדר ראשון</span><p>משוואה מהצורה:
+<span>$$a(x,y){\frac{\partial u}{\partial x}}+b(x,y){\frac{\partial u}{\partial y}}=c(x,y,u)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משוואה קווזילינארית מסדר ראשון</span><p>משוואה מהצורה:
+<span>$$a(x,y,u){\frac{\partial u}{\partial x}}+b(x,y,u){\frac{\partial u}{\partial y}}=c(x,y,u)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שיטת הקרקטריסטיקות</span><p>שיטה אלגברית של למצוא החלפת משתנים כך שהמשוואה הדיפרנציאלית החלקית תהיה תלוייה רק בנגזרת חלקית של משתנה אחד, ולכן יהיה למעשה משוואה דיפרנציאלית רגילה. ניתן להשתמש בשיטה זו עבור כל משוואה קווזילינארית.</p>
+</div>
+<p>נראה שיטה זו עבור משוואה פשוטה.</p>
+<div class="proposition">
+<p>עבור משוואת מקדמים קבועים מהצורה:
+<span>$$a u_{x}+b u_{y}=0,$$</span>
+הפתרון יהיה מהצורה:
+<span>$$u(x,\,y)=f(b x-a y)$$</span></p>
+</div>
+<div class="proof">
+<p>נבצע החלפת משתנים:
+<span>$$x^{\prime}=a x+b y\qquad y^{\prime}=b x-a y.$$</span>
+כאשר מכלל השרשרת נקבל:
+<span>$$u_{x}={\frac{\partial u}{\partial x}}={\frac{\partial u}{\partial x^{\prime}}}{\frac{\partial x^{\prime}}{\partial x}}+{\frac{\partial u}{\partial y^{\prime}}}{\frac{\partial y^{\prime}}{\partial x}}=a u_{x^{\prime}}+b u_{y^{\prime}}$$</span>
+<span>$$u_{y}={\frac{\partial u}{\partial y}}={\frac{\partial u}{\partial y^{\prime}}}{\frac{\partial y^{\prime}}{\partial y}}+{\frac{\partial u}{\partial x^{\prime}}}{\frac{\partial x^{\prime}}{\partial y}}=b u_{x^{\prime}}-a u_{y^{\prime}}.$$</span>
+ולכן:
+<span>$$a u_{x}+b u_{y}=a(a u_{x^{\prime}}+b u_{y^{\prime}})+b(b u_{x^{\prime}}-a u_{y^{\prime}})=(a^{2}+b^{2})u_{x^{\prime}}$$</span>
+כאשר כיוון ש-<span>\(a^{2}+b^{2}\neq 0\)</span> נקבל כי הפתרון בקורדינטה <span>\(x'\)</span> יהיה:
+<span>$$u_{x'}=0\implies u=f(y')=f(bx-ay)$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לתת לפתרון הזה פרשנות גאומטרית. ניתן לכתוב את המשוואה בצורה:
+<span>$$\begin{pmatrix}a \\ b\end{pmatrix}\cdot \begin{pmatrix}u_{x}\\u_{y}\end{pmatrix}=0\implies \begin{pmatrix} a \\ b
+\end{pmatrix}\bar{\nabla}  u =0$$</span>
+וכאשר נשים לב כי זו פשוט ההגדרה של הנגזרת הכיוונית בכיוון של <span>\(\vec{v}=\begin{pmatrix}a \\ b\end{pmatrix}\)</span>(עד כדי נרמול שלא משנה שמשוואים ל-0). ולכן <span>\(u(x,y)\)</span> קבוע בכיוון של <span>\(\vec{v}\)</span>. כלומר אוסף הפתרונות יהיה אוסף כל הווקטורים שמקבילים ל-<span>\(\vec{v}\)</span>, כאשר כיוון שאנחנו ב-<span>\(\mathbb{R}^{2}\)</span> מימד המרחב המאונך הוא 1, ולכן מספק למצוא ווקטור אחד כזה. נשים לב למשל כי:
+<span>$$\begin{pmatrix}a \\b\end{pmatrix}\begin{pmatrix}b \\ -a
+\end{pmatrix}=0$$</span>
+ולכן אוסף הווקטורים שמאונכים לאנך(כלומר מקבילים ל-<span>\(v\)</span>) יהיו:
+<span>$$\left\{  \begin{pmatrix}x\\y\end{pmatrix}\mid \begin{pmatrix}b \\ -a\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=0  \right\}=\left\{  \begin{pmatrix}x\\y
+\end{pmatrix}\mid bx-ay=0  \right\}=\left\{  bx-ay=0\mid x,y \in \mathbb{R}  \right\}$$</span>
+כאשר נרצה כי הפונקציה תהיה קבועה עבור ישרים אלו, כלומר אם נציב את הביטוי עבור הישר הזה בפונקציה הוא יהיה קבוע לכל הערכים של <span>\(x,y \in \mathbb{R}\)</span> ולכן <span>\(f(bx-ay)=c\)</span>.</p>
+</div>
+<div class="example">
+<p>נפתור את המשוואה:
+<span>$$4u_{x}-3u_{y}=0$$</span>
+עם התנאי <span>\(y(0,y)=y^{3}\)</span>. ראינו כי הפתרון יהיה מהצורה:
+<span>$$f(-3x-4y)=c$$</span>
+נציב כעת את התנאי ונקבל:
+<span>$$f(-4y)=c$$</span>
+כעת נרצה להגדיר משתנה <span>\(w=-4y\)</span> ולבטא את התנאי בעזרתו:
+<span>$$f(w)=\left( \frac{w}{-4} \right)^{3}=-\frac{w^{3}}{64}$$</span>
+וכעת מצאנו את <span>\(f\)</span>. נציב את הביטוי הידוע עבורו:
+<span>$$f(-3x-4y)=- \frac{(-3x-4y)^{3}}{64}=\frac{(3x+4y)^{3}}{64}$$</span>
+וניתן גם לוודא שזה אכן פתרון.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי למעשה בשיטה האלגברית מצאנו עקומה אשר הופכת את הפתרון לתלוי במשתנה אחד, ולכן בפועל המשוואה תחת משתנה זה תהיה מד"ר, אשר אנו יודעים לפתור.</p>
+</div>
+<div class="definition"><span class="keyword">קרקטריסטיקה</span><p>עקומה(או יריעה) שעליה המד"ח מתנהג בפועל כמו מדר - כלומר מכיל נגזרת חלקית מסוג אחד בלבד.</p>
+</div>
+<div class="proposition">
+<p>אם פונקציה קבועה על מסילה <span>\(\gamma:\mathbb{R}\to \mathbb{R}^{n}\)</span> אז בפרט זו תהיה עקומת קרקטריסטיקה. זאת כיוון שמתקיים <span>\(u=u\left( \vec{\gamma}(t) \right)\)</span> ולכן בפרט <span>\(u\)</span> יהיה תלוי על העקומה רק במשתנה אחד - <span>\(t\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור משוואה מסדר ראשון מהצורה:
+<span>$$A(x,y)\frac{\partial u}{\partial x}+B(x,y)\frac{\partial u}{\partial y}=F(x,y,u).$$</span>
+נקבל כי על העקומה <span>\(\vec{r}:\mathbb{R}\to \mathbb{R}^{2}\)</span> תלוי רק במשתנה אחד כאשר מתקיים:
+<span>$$\frac{d y}{d x}=\frac{B(x,y)}{A(x,y)}$$</span></p>
+</div>
+<div class="proof">
+<p>נסמן את העקומה ע"י <span>\(\gamma:\mathbb{R}\to \mathbb{R}^{2}\)</span> וכן <span>\(x=x(s),y=y(s)\)</span>. מתקיים מכלל השרשרת:
+<span>$${\frac{d u}{d s}}={\frac{\partial u}{\partial x}}{\frac{d x}{d s}}+{\frac{\partial u}{\partial y}}{\frac{d y}{d s}}=\frac{\mathrm{d} x}{\mathrm{d} s} u_{x}+\frac{\mathrm{d} y}{\mathrm{d} s} u_{y}=\frac{\mathrm{d} \gamma}{\mathrm{d} s} $$</span>
+כעת ניתן לתאר את הבעיה בעזרת מטריצה:
+<span>$$\begin{pmatrix}\frac{\partial x}{\partial s}  &amp; \frac{\partial y}{\partial s} \\ A &amp; B\end{pmatrix}\begin{pmatrix}u_{x}\\u_{y}\end{pmatrix}=\begin{pmatrix}\gamma(s)\\F(x,y,u)
+\end{pmatrix}$$</span>
+כאשר נרצה שיהיה תלוי רק במשתנה אחד, ולכן נדרוש שיהיה ניוון, כלומר שתלוי לינארית ובפרט הדטרמיננטה מתאפסת.
+<span>$$\left|\begin{array}{c c}{{d x/d s}}&amp;{{d y/d s}}\\ {{A}}&amp;{{B}}\end{array}\right|=0\implies B\frac{d x}{d s}-A\frac{d y}{d s}=0\implies \frac{d y}{d x}=\frac{B(x,y)}{A(x,y)}$$</span>
+כאשר נשים לב כי למעשה הדרישה לניוון נבעה מזה שאם לא היה ניוון, אז לא היה ניתן לייצג את המשוואה בעזרת אחת הנגזרות בלבד, ולכן לא היה מצטמצם למדר.</p>
+</div>
+<div class="example">
+<p>נסתכל על המשוואה:
+<span>$$u_{x}+y u_{y}=0$$</span>
+עקומת הקרקטריסטיקה תהיה:
+<span>$$\frac{d y}{d x}=\frac{y}{1}\implies y=Ce^{ x }\implies ye^{ -x }=C$$</span>
+ולכן נקבל כי זה עקומה עליה הפונקציה תהיה קבועה, ולכן הפתרון של המשוואה תהיה:
+<span>$$u(x,\,y)=f(e^{-x}y)$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='prev-page'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

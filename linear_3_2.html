@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מציאת הצגה פרמטרית למערכת משוואות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_3_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_3_1.html`;}});</script>
+        <div class="content">
+        <h1>3.2  מציאת הצגה פרמטרית למערכת משוואות</h1>
+    <div class="definition"><span class="keyword">פתרון של משוואה לינארית</span><p>נקרא ל-<span>\(n\)</span>-יה <span>\(\begin{pmatrix} d_{1}\\\vdots\\d_{n}\end{pmatrix}\)</span> פתרון של המשוואה לינארית 
+<span>$$a_{1}x_{1}+a_{2}x_{2}+\dots+a_{n}x_{n}=b$$</span>
+אם מתקיים:
+<span>$$a_{1}d_{1}+a_{2}d_{2}+\dots+a_{n}d_{n}=b$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הצגה פרמטרית של פתרון של משוואה לינארית</span><p>ניתן לכתוב את אוסף כל הפתרונות של משוואה לינארית בצורה פרמטרית. כלומר לכתוב את הפתרון הכללי בתור <span>\(n\)</span>-יה עם פרמטר חופשי. </p>
+</div>
+<div class="example">
+<p>למשוואה:
+<span>$$x_{1}-x_{2}=1$$</span>
+נקבל כי ה-<span>\(n\)</span>-יות <span>\(\begin{pmatrix}1 \\0\end{pmatrix}\)</span> ו-<span>\(\begin{pmatrix}0 \\ 1\end{pmatrix}\)</span> הם פתרונות. אם נרצה לרשום את הצורה הכללית של הפתרון:
+<span>$$\left\{  \begin{pmatrix}x_{1}\\x_{2}\end{pmatrix}  \in \mathbb{R}\mid x_{1}-x_{2}=1\right\}=\left\{  \begin{pmatrix}1+x_{2}\\x_{2}\end{pmatrix}\mid x_{2} \in \mathbb{R}  \right\}=\left\{  \begin{pmatrix}1\\0\end{pmatrix}+t\begin{pmatrix}1\\1
+\end{pmatrix}\mid t \in \mathbb{R}  \right\}$$</span>
+זוהי ההצגה הפרמטרית של הפתרון. לכל <span>\(t\)</span> שנבחר קיים פתרון למשוואה, ולכן פתרון למשוואה קיים <span>\(t\)</span> כלשהו. </p>
+</div>
+<div class="remark">
+<p>לקבוצה הריקה אין הצגה פרמטרית, לכן למשל למשוואה <span>\(0x_{1}+0x_{2}+\dots+0x_{n}=1\)</span> אין פתרונות ואין הצגה פרמטרית.</p>
+</div>
+<div class="definition"><span class="keyword">מערכת משוואות לינאריות</span><p>מערכת של משוואות עם מספר משתנים, כאשר כל גורם יהיה עם דרגה של לכל היותר 1. זה אומר כי לא ייתכן גורם מהצורה <span>\(x_{1}x_{2}\)</span> כיוון שזה יהיה גורם מסדר 2. מערכת של <span>\(m\)</span> משוואות לינאריות עם <span>\(n\)</span> משתנים תהיה מהצורה:
+<span>$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\dots+a_{1n}x_{n}=b_{1} \\a_{21}x_{1}+a_{22}x_{2}+\dots+a_{2n}x_{n}=b_{2} \\\qquad \qquad \qquad \quad \;\;\vdots \\a_{m 1}x_{1}+a_{m2}x_{2}+\dots+a_{mn}x_{n}=b_{m}
+\end{cases}$$</span>
+כאשר הסוגרים המסולסלות מסמנות "וגם"</p>
+</div>
+<div class="example">
+<p>נסתכל על המערכת משוואות:
+<span>$$\begin{cases}a_{1}x+a_{2}y=a_{3}  \\b_{1}x+b_{2}y=b_{3}
+\end{cases}\qquad a_{1},a_{2},b_{1},b_{2}\in \mathbb{F}  ^{\times}=\mathbb{F}  \setminus \{ 0 \}$$</span>
+ניתן כעת לנסות למצוא את הפתרון בעזרת השיטה הבאה. ניקח את המשוואה השנייה, נכפיל ב-<span>\(\frac{a_{1}}{b_{1}}\)</span> ונחסר מהראשונה:
+<span>$$\begin{cases}a_{1}x+a_{2}y=a_{3} \\a_{1}x+\frac{b_{2}}{b_{1}}a_{1}y=\frac{b_{3}}{b_{1}}a_{1} \end{cases}\implies \begin{cases}a_{1}x+a_{2}y=a_{3} \\0x +\left( \frac{b_{2}}{b_{1}}a_{1}-a_{2} \right)y=\frac{b_{3}}{b_{1}}a_{1}-a_{3}
+\end{cases}$$</span>
+וכעת אם נניח כי <span>\(c\equiv\frac{b_{2}}{b_{1}}a_{1}-a_{2}\neq 0\)</span> אז ניתן להכפיל את המשוואה השנייה ב-<span>\(\frac{a_{2}}{c}\)</span> ואז להחסיר את המשוואה השנייה מהראשונה:
+<span>$$\begin{cases}a_{1}x+a_{2}y=a_{3} \\0x+a_{2}y=\left( \frac{b_{3}}{b_{1}}a_{1}-a_{3} \right) \frac{a_{2}}{c}\end{cases}\implies \begin{cases}a_{1}x+0y=a_{3}-\left( \frac{b_{3}}{b_{1}}a_{1}-a_{3} \right) \frac{a_{2}}{c} \\0x+a_{2}y=\left( \frac{b_{3}}{b_{1}}a_{1}-a_{3} \right) \frac{a_{2}}{c}
+\end{cases}$$</span>
+ומכאן הפתרון הוא די מיידי. זוהי דוגמא פשוטה לאלגוריתם הנקרא דירוג ג'ורדן.</p>
+</div>
+<div class="definition"><span class="keyword">פתרון של מערכת משוואות לינארית</span><p>נקרא ל-<span>\(n\)</span>-יה פתרון של מערכת משוואות לינארית אם היא פתרון של כל אחת מהמשוואות. כלומר זה יהיה החיתוך של קבוצת הפתרון של כל אחת מהמשוואות של המערכת בנפרד.</p>
+</div>
+<p>עבור מערכת משוואות מהצורה:
+<span>$$\begin{cases}a_{11}x_{1}+a_{12}x_{2}+\dots+a_{1n}x_{n}=b_{1} \\a_{21}x_{1}+a_{22}x_{2}+\dots+a_{2n}x_{n}=b_{2} \\\qquad \qquad \qquad \quad \;\;\vdots \\a_{m 1}x_{1}+a_{m2}x_{2}+\dots+a_{mn}x_{n}=b_{m}
+\end{cases}$$</span>
+ניתן לכתוב את המשוואה בצורה הבאה:
+<span>$$\underbrace{ \begin{pmatrix}a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\a_{21} &amp; a_{22} &amp; \dots  &amp; a_{2n} \\\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\a_{m 1} &amp; a_{m 2} &amp; \dots &amp; a_{mn}\end{pmatrix} }_{ A }\underbrace{ \begin{pmatrix}x_{1} \\ x_{2}\\\vdots \\ x_{n}\end{pmatrix} }_{ \mathbf{x} }=\underbrace{ \begin{pmatrix}b_{1} \\ b_{2} \\ \vdots \\ b_{n}
+\end{pmatrix} }_{ \mathbf{b} }$$</span></p>
+<div class="definition"><span class="keyword">מטריצה המייצגת של מערכת משוואות</span><p>מתייחסים מטריצה של המקדמים <span>\(A\)</span>. </p>
+</div>
+<div class="proposition"><span class="keyword">מטריצה מורחבת של מערכת משוואות</span><p>עבור מערכת משוואות מהצורה שראינו, נגדיר את המטריצה המורחבת להיות:</p>
+<p><span>$$\left(\begin{array}{cccc|c}a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp;b_{1} \\a_{21} &amp; a_{22} &amp; \dots  &amp; a_{2n}  &amp;b_{2}\\\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots\\a_{m 1} &amp; a_{m 2} &amp; \dots &amp; a_{mn} &amp; b_{m}\end{array}\right)
+$$</span>
+אם <span>\(A\)</span> הצורה המצומצמת נסמן לעיתים צורה זו ב-<span>\(A|b\)</span>.</p>
+</div>
+<p>באופן כללי כדי למצוא הצגה פרמטרית למערכת משוואות יהיה נוח לעבור לצורה המדורגת מצומצמת. נראה זאת בעזרת דוגמא:</p>
+<div class="example">
+<p>נסתכל על המערכת משוואות המטריצה ההבאה המתאימה לה:
+<span>$$\begin{cases}x_{2}-2x_{3}-x_{5}=3 \\x_{4}+2x_{5}=-1 \\0=0\end{cases}\implies\left(\begin{array}{ccccc|c}0&amp;\boxed{1}&amp;-2&amp;0&amp;-1 &amp;3\\0&amp;0&amp;0&amp;\boxed{1}&amp;2 &amp;-1\\0&amp;0&amp;0&amp;0&amp;0&amp;0
+\end{array}\right)$$</span>
+נשים לב כי העבודה השנייה והרביעית הם עם איברים מובלים(מסומנים במלבן) לכן <span>\(x_{2},x_{4}\)</span> הם משתנים קשורים. לעומת זאת המשתנים <span>\(x_{1},x_3,x_{5}\)</span> הם משתנים חופשיים.</p>
+</div>
+<div class="example">
+<p>נסתכל על המערכת משוואות המטריצה ההבאה המתאימה לה:
+<span>$$\begin{cases}x_{2}-2x_{3}-x_{5}=3 \\x_{4}+2x_{5}=-1 \\0=0\end{cases}\implies\left(\begin{array}{ccccc|c}0&amp;\boxed{1}&amp;-2&amp;0&amp;-1 &amp;3\\0&amp;0&amp;0&amp;\boxed{1}&amp;2 &amp;-1\\0&amp;0&amp;0&amp;0&amp;0&amp;0
+\end{array}\right)$$</span>
+נשים לב כי העבודה השנייה והרביעית הם עם איברים מובלים(מסומנים במלבן) לכן <span>\(x_{2},x_{4}\)</span> הם משתנים קשורים. לעומת זאת המשתנים <span>\(x_{1},x_3,x_{5}\)</span> הם משתנים חופשיים. נשים לב כי מתקיים:
+<span>$$\begin{cases}x_{2}=3+2x_{3}+x_{5} \\x_{4}=-1-2x_{5}
+\end{cases}$$</span>
+כעת קבוצת הפתרונות יהיה:
+<span>$$\begin{gather}\left.\left\{  \begin{pmatrix}x_{1} \\3+2x_{3}+x_{5} \\x_{3} \\-1-2x_{5} \\x_{5}\end{pmatrix} \in \mathbb{R}^{5} \;\right\rvert\;   x_{1},x_{3},x_{5} \in \mathbb{R}   \right\}= \\=\left.\left\{  \begin{pmatrix}0 \\3 \\0 \\-1 \\0\end{pmatrix} +\begin{pmatrix}1\\0\\0\\0\\0\end{pmatrix}x_{1}+\begin{pmatrix}0\\2\\1\\0\\0\end{pmatrix}x_{3}+\begin{pmatrix}0\\1\\0\\-2\\1 \end{pmatrix} x_{5}\;\right\rvert\;x_{1},x_{3},x_{5} \in \mathbb{R}\right\} 
+\end{gather}$$</span></p>
+</div>
+<p>עכשיו שראינו כמה נוח הצורה הזאת כדי למצוא את כל הפתרונות של מערכות משוואות, נראה איך מגיעים עליה.</p>
+<div class="proposition">
+<p>כמות המשתנים החופשיים זה יהיה כמות הפרמטריים הנדרשים כדי לייצג את קבוצת הפתרונות. זאת כיוון שברגע שבוחרים את המשתנים החופשיים, המשתנים הקשורים נקבעיים לפיהם.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='prev-page'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+</ul></li>
+        </body>
+        </html>
+        

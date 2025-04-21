@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרצאה 4</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_4_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_4_3`; }});</script>
+        <div class="content">
+        <h1>4.4  הרצאה 4</h1>
+    <div class="reminder">
+<p>מודול <span>\(R^{M}\)</span> נטרי אם:
+- כל תת מודול נוצר סופית.
+- כל שרשרת עולה של תתי מודלים מתייצבים.
+- לכל אוסף של תת מודולים יש מקסימים.</p>
+</div>
+<div class="example">
+<p>המודול <span>\(\mathbb{Z}\)</span> נטרי כאשר <span>\(\mathbb{Q}\)</span> לא נטרי.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(N\leq M\)</span> אזי <span>\(M\)</span> נטרי אם"ם <span>\(N,M / N\)</span> נטריים.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(M\)</span> נטרי ו-<span>\(N\leq M\)</span> אז <span>\(N\)</span> נטרי(כי <span>\(L\leq N \leq M\)</span>). כמו כן, <span>\(M / N\)</span> נטרי:
+אם <span>\(L\leq M / N\)</span> אזי ממשפט ההתאמה יש <span>\(\overline{L}\leq M\)</span>(ספציבית <span>\(\overline{L}=\bigcup_{\ell \in L}\ell\)</span>) כך ש-<span>\(L = L / N\)</span>. אזי <span>\(\overline{L}\)</span> נוצר סופית על ידי <span>\(\ell_{1},\dots,\ell_{n}\)</span> ואז <span>\(L=\langle \ell_{1}+N, \dots,\ell_{n}+N \rangle\)</span>.
+אם <span>\(N\)</span> ו-<span>\(M / N\)</span> נטריים:
+עבור <span>\(L\leq M\)</span> נקבל מאיזו 2:
+<span>$$\frac{L+N}{N}\overset{II}{\cong } \frac{L}{N\cap  L}$$</span>
+(כאשר <span>\(\frac{L+N}{N}\)</span> תת מודול של <span>\(\frac{M}{ N}\)</span> לכן נוצר סופית) לכן <span>\(\frac{L}{N \cap L}\)</span> נוצר סופית. כמו כן <span>\(N\cap L\)</span> נוצר סופית(כי <span>\(N\)</span> נטרית) ולכן <span>\(L\)</span> נוצר סופית(על ידי יוצרים של <span>\(N\cap L\)</span> + יוצרים של <span>\(\frac{L}{N\cap L}\)</span>).</p>
+</div>
+<div class="remark">
+<p>סכום של תתי מודולים הוא תת מודול.</p>
+</div>
+<div class="remark">
+<p>נוצרות סופית לא מתנהגת כזה יפה, זה הופך את נתרי לסוג של תיקון של נוצר סופית.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(R\)</span> נתרי(חוג נתרי = חוג כמודול מעל עצמו = כל אידיאל שמאלי נוצר סופית) אז ל-<span>\(R\)</span> מודולים נ"ס = נתרי</p>
+</div>
+<div class="proof">
+<p>תמיד נתרי גורר נוצר סופית. אם <span>\(R\)</span> נתרי גם <span>\(R^{n}\)</span> נתרי לכל <span>\(n\)</span>.
+<span>$$\frac{R\oplus R}{R\oplus 0}\cong R\cong R\oplus 0 \leq  R\oplus R$$</span>
+ואז גם <span>\(R^{n} / N\)</span> נתרי לכל <span>\(N\leq R^{n}\)</span> וכל <span>\(R\)</span> מודול נוצר סופית איזומורפי ל-<span>\(R^{n} / N\)</span> לאיזשהו <span>\(n \in \mathbb{N}\)</span> ו-<span>\(N\leq R^{n}\)</span> כלשהם.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט הבסיס של הילברט</span><p>אם <span>\(R\)</span> חוג נתרי אזי <span>\(R[x]\)</span> נתרי. בפרט <span>\(R[x_{1},\dots,x_{n}]\)</span> נתרי.</p>
+</div>
+<div class="remark">
+<p>היום מה שנקרה בסיסי Grobner זו הדרך הנכונה לעשות את זה.</p>
+</div>
+<p>לא נוכיח את זה כי זה מאוד טכני.</p>
+<p>(בקירוב <span>\(\mathbb{R}=\mathbb{F}[x]\)</span>).</p>
+<p>חוג ראשית ⟸ כל אידיאל נוצר סופית ⟸ נתרי</p>
+<h2>אנדומורפיזמים</h2>
+<p>עבור מודול <span>\(R^{M}\)</span> מתקיים:
+<span>$$\{ f\mid f(r m=rf(m)) \}=\mathrm{End}_{R}(M)\leq \mathrm{End}(M)$$</span></p>
+<div class="example">
+<p>ראינו כי:
+<span>$$\mathrm{End}_{\mathbb{F} }(\mathbb{F} ^{n})=M_{n}(\mathbb{F} )$$</span>
+וכן:
+<span>$$\mathrm{End}_{M_{n}}(\mathbb{F} ^{n})=\mathbb{F} \qquad \mathrm{End}_{R}(R)=R^{\mathrm{op}} $$</span>
+כש-<span>\(R^{\text{op}}\)</span> היא <span>\(R\)</span> עם כפל הפוך. הגדרנו לכל <span>\(r \in R\)</span> <span>\(m_{r}(x)=xr\)</span>, וראינו <span>\(m_{r} \in \mathrm{End}_{R}(R)\)</span> כאשר <span>\(r \mapsto m_{r}:R\to \mathrm{End}_{R}(R)\)</span> חח"ע ועל, מכבדת חיבור:
+<span>$$m_{r+r'}=m_{r}+m_{r'}$$</span>
+והופכת כפל:
+<span>$$m_{r r'}= m_{r'}\circ m_{r}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הלמה של שור</span><p>אם <span>\(R^{M}\)</span> מודול פשוט אזי <span>\(\mathrm{End}_{R}(M)\)</span> חוג חילוק.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(0\neq f \in \mathrm{End}_{R}(M)\)</span> אזי <span>\(\mathrm{\mathrm{Im}}f\neq \{ 0 \}\)</span> ולכן <span>\(\mathrm{Im} f = M\)</span> ולכן <span>\(f\)</span> על.
+אם <span>\(\ker f \neq M\)</span> אז <span>\(\ker f = \{ 0 \}\)</span> ואז <span>\(f\)</span> חח"ע.
+זה גורר <span>\(f\)</span> הפיך כפונקציה מ-<span>\(M\)</span> ל-<span>\(M\)</span>. ואז <span>\(f ^{-1} \in \mathrm{End}_{R}(M)\)</span>.
+<span>$$f^{-1} (m+n)=f^{-1} (f(f^{-1} (m))+f(f^{-1} (n)))=f^{-1} (f(f^{-1} (m)+f^{-1} (n)))$$</span></p>
+</div>
+<p>האם <span>\(R \cong R^{\text{op}}\)</span>? אם <span>\(R\)</span> קומוטטיבי אז <span>\(R=R^{\mathrm{op}}\)</span>. <span>\(R=M_{n}(\mathbb{F})\)</span> ב-<span>\(M_{n}(\mathbb{F})^{\mathrm{op}}\)</span>:
+נקבל כי <span>\(f(A)=A^{T}\)</span> הוא איזומורפיזם <span>\(f:M_{R}(\mathbb{F})\to M_{n}(\mathbb{F})^{\mathrm{op}}\)</span>.
+<span>$$f(I)=I\qquad f(A+B)=fA+fB\qquad f(AB)=f(A)\cdot f(B)=f(B)f(A)$$</span></p>
+<p>חידה - עבור משולשיות עליות ב-<span>\(R=M_{n}(\mathbb{F})\)</span>, האם <span>\(R\cong R^{\mathrm{op}}\)</span>?</p>
+<p>לא תמיד מתקיים עבור מודולים.</p>
+<p>בחבורות <span>\(G\cong G^{\text{op}}\)</span></p>
+<p>באותו אופן <span>\(M_{n}(R)^{\text{op}}\cong M_{n}(R^{\text{op}})\)</span> בעזרת האיזומורפיזם <span>\(A\mapsto A^{T}\)</span>.</p>
+<p>הדבר הזה בא באופן טבעי כאשר אנחנו מסתכלים על מודולים חופשיים.
+ניקח <span>\(M=R^{n}\)</span>. מהו <span>\(\mathrm{End}_{R}(R^{n})\)</span>? </p>
+<p>המודול <span>\(M_{n}(R)^{\text{op}}\)</span> פועל על <span>\(R^{n}\)</span> כאנדומורפיזם על ידי:
+<span>$$A\times v = \begin{pmatrix}v_{1}a_{11}+\dots+v_{1}a_{1n} \\\vdots \\v_{n}a_{n_{1}}+\dots+v_{n}a_{nn}
+\end{pmatrix}=(v^{T}A^{T})^{T}$$</span>
+כאשר אם החוג היה קומוטטיבי זה היה פשוט <span>\(AB\)</span>. כעת נקבל:
+<span>$$A\times(rv)=((rv^{T})A^{T})^{T}=r(v^{T}A^{T})^{T}=r(A\times v)$$</span>
+<span>$$A\times(v+w)=((v+w)^{T}A^{T})^{T}=r(v^{T}A^{T})^{T}=((v^{T}+w^{T})A^{T})^{T}=(v^{T}A^{T}+w^{T}A^{T})^{T}=(A\times v+A\times w)$$</span>
+כעת:
+<span>$$(A\times B)\times v=A\times(B\times v)$$</span>
+אסוצייטביות של כפל מטריצות בגדלים שונים עם איברים ב-<span>\(R^{\text{op}}\)</span>.</p>
+<p><span>$$\mathrm{End}_{\mathbb{F}}(\mathbb{F} ^{n})=M_{n}(\mathbb{F} )\qquad \mathrm{End}_{R}(R^{n})=M_{n}(R^{\text{op}})$$</span></p>
+<div class="symbolize">
+<p>כפל ב-<span>\(R\)</span> וב-<span>\(M_{n}(R)\)</span> נסמן ב- <span>\(\cdot\)</span> כאשר כאפל ב-<span>\(R^{\text{op}}\)</span> וב-<span>\(M_{n}(R^{\text{op}})\)</span> יסומן על ידי <span>\(\times\)</span>.</p>
+</div>
+<p>מודולים <span>\(M_{i},N_{i}\)</span> מעל <span>\(R\)</span>.
+<span>$$\mathrm{Hom}_{R}(\bigoplus^{\ell}M_{i},\bigoplus ^{r}N_{i})=\left\{ \begin{pmatrix}\varphi_{11} &amp; \dots &amp; \varphi_{1\ell} \\\vdots  &amp; \ddots &amp; \vdots\\\varphi_{r_{1}} &amp; \dots &amp; \varphi_{r\ell}
+\end{pmatrix} \mid  \varphi_{ij}\in \mathrm{Hom}_{{R}}(M_{i},N_{j})\right\}$$</span></p>
+<p>לכל <span>\(f \in \mathrm{End}_{R}(R^{n})\)</span> מתקבל ממטריצה:
+<span>$$f(v)=f\left( \sum_{i=1}^{n} v_{i}e_{i} \right)=\sum_{i=1}^{n} v_{i}f(e_{i})$$</span>
+עבור:
+<span>$$A=\begin{pmatrix}| &amp;  &amp; | \\f(\ell_{i}) &amp; \dots  &amp; f(\ell_{n}) \\| &amp;  &amp; |
+\end{pmatrix}$$</span>
+מתקבל:
+<span>$$A\times e_{i}=A\times \begin{pmatrix}0\\ \vdots \\ 0 \\1 \\0\\ \vdots\\0\end{pmatrix}=A\cdot \begin{pmatrix}0\\ \vdots \\ 0 \\1 \\0\\ \vdots\\0
+\end{pmatrix}=f(e_{i})$$</span></p>
+<h2>פולינומים מעל שדה</h2>
+<p>נסתכל על <span>\(R=\mathbb{F}[x]\)</span>. אני יודעים כי <span>\(\mathbb{F}[x]\)</span> ראשי ⟸ נתרי ⟸(מודול נוצר סופית אם"ם נתרי).</p>
+<p>ניקח <span>\(\mathbb{F}[x]=V\)</span> מודול ממימד <span>\(\mathbb{F}\)</span> סופי(<span>\(V\)</span> מרחב ווקטורי מעל <span>\(\mathbb{F}[x]\supseteq \mathbb{F}\)</span>)</p>
+<p>ראינו ש-<span>\(x\)</span> פועל על <span>\(V\)</span> כהעתקה לינארית. נסמן אותה ב-<span>\(T_{V}\)</span>, ולהיפך:
+לכל מרחב ווקטורי <span>\(V\)</span> (מעל <span>\(\mathbb{F}\)</span>) והעתקה לינארית <span>\(T\)</span> אפשר להגדיר על <span>\(V\)</span> מבנה של <span>\(\mathbb{F}[x]\)</span>-מודול על <span>\(x\cdot v=T(v)\)</span>(⟸ <span>\(p(x)(v)=p(T)(v)\)</span>)</p>
+<p>מהו <span>\(\mathrm{End}_{\mathbb{F}[x]}(V)\)</span>. כל <span>\(\mathbb{F}[x]\)</span> -אנדומורפיזם הוא <span>\(\mathbb{F}\)</span> אנדומורפיזם = העתקה לינארית.
+<span>$$f(T_{V}(v))=f(xv)=xf(v)=T_{V}(f(v))$$</span></p>
+<p>כלומר:
+<span>$$\text{End}_{\mathbb{F} [x]}(V)=\{ S:V\to V \text{ linear transformation} \mid  T_{V}\cdot S = S\cdot T_{V}\}$$</span></p>
+<div class="proposition">
+<p>אם <span>\(A,B\)</span> לכסינות אזי <span>\(A,B\)</span> לכסינות אזי <span>\(AB=BA\)</span> אם"ם הן לכסינות בו זמנית.</p>
+<p><span>$$\mathrm{Hom}_{\mathbb{F}[x] }(V,W)=\{ S:V\to W \text{ linear transformation}\mid  T_{W}\circ  S = S\circ  T_{V} \}$$</span></p>
+<div style="display: block;"><svg
+   width="148.63124"
+   height="113.9945"
+   viewBox="0 0 74.31562 56.99725"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="tikzcd_output_507596.svg"
+   inkscape:version="1.4.1 (1:1.4.1+202503302257+93de688d07)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview17"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.2617266"
+     inkscape:cx="67.373322"
+     inkscape:cy="28.412727"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg17" />
+  <defs
+     id="defs6">
+    <g
+       id="g6">
+      <g
+         id="glyph-0-0">
+        <path
+           d="M 6.265625,-5.671875 C 6.75,-6.453125 7.171875,-6.484375 7.53125,-6.5 c 0.125,-0.015625 0.140625,-0.171875 0.140625,-0.1875 0,-0.078125 -0.0625,-0.125 -0.140625,-0.125 -0.25,0 -0.546875,0.03125 -0.8125,0.03125 -0.328125,0 -0.671875,-0.03125 -0.984375,-0.03125 -0.0625,0 -0.1875,0 -0.1875,0.1875 0,0.109375 0.078125,0.125 0.15625,0.125 0.265625,0.015625 0.453125,0.125 0.453125,0.328125 0,0.15625 -0.140625,0.375 -0.140625,0.375 l -3.0625,4.875 -0.6875,-5.28125 C 2.265625,-6.375 2.5,-6.5 2.953125,-6.5 c 0.140625,0 0.25,0 0.25,-0.203125 0,-0.078125 -0.078125,-0.109375 -0.125,-0.109375 -0.40625,0 -0.828125,0.03125 -1.25,0.03125 -0.171875,0 -0.359375,0 -0.546875,0 -0.171875,0 -0.359375,-0.03125 -0.53125,-0.03125 -0.078125,0 -0.1875,0 -0.1875,0.1875 0,0.125 0.078125,0.125 0.25,0.125 0.546875,0 0.5625,0.09375 0.59375,0.34375 L 2.1875,-0.015625 C 2.21875,0.1875 2.265625,0.21875 2.390625,0.21875 c 0.15625,0 0.203125,-0.046875 0.28125,-0.171875 z m 0,0"
+           id="path1" />
+      </g>
+      <g
+         id="glyph-0-1">
+        <path
+           d="m 9.140625,-5.65625 c 0.25,-0.4375 0.484375,-0.796875 1.125,-0.84375 0.07813,-0.015625 0.1875,-0.015625 0.1875,-0.203125 0,-0.03125 -0.04687,-0.109375 -0.125,-0.109375 -0.234375,0 -0.515625,0.03125 -0.765625,0.03125 -0.34375,0 -0.703125,-0.03125 -1.046875,-0.03125 -0.046875,0 -0.1875,0 -0.1875,0.1875 0,0.109375 0.09375,0.125 0.15625,0.125 0.234375,0.015625 0.59375,0.09375 0.59375,0.390625 0,0.109375 -0.0625,0.1875 -0.140625,0.328125 L 6.25,-1.09375 5.875,-6.03125 c 0,-0.203125 -0.015625,-0.453125 0.703125,-0.46875 0.171875,0 0.265625,0 0.265625,-0.203125 0,-0.09375 -0.109375,-0.109375 -0.140625,-0.109375 -0.40625,0 -0.828125,0.03125 -1.21875,0.03125 -0.234375,0 -0.8125,-0.03125 -1.046875,-0.03125 -0.0625,0 -0.1875,0 -0.1875,0.203125 C 4.25,-6.5 4.34375,-6.5 4.484375,-6.5 4.921875,-6.5 5,-6.4375 5.015625,-6.25 l 0.0625,0.765625 -2.53125,4.390625 -0.375,-5.046875 c 0,-0.125 0,-0.34375 0.765625,-0.359375 0.09375,0 0.203125,0 0.203125,-0.203125 C 3.140625,-6.8125 3.015625,-6.8125 3,-6.8125 c -0.390625,0 -0.8125,0.03125 -1.21875,0.03125 -0.359375,0 -0.71875,-0.03125 -1.046875,-0.03125 -0.0625,0 -0.1875,0 -0.1875,0.1875 0,0.125 0.09375,0.125 0.25,0.125 0.5,0 0.515625,0.09375 0.53125,0.375 l 0.453125,6.078125 c 0,0.1875 0.015625,0.265625 0.15625,0.265625 0.109375,0 0.140625,-0.0625 0.234375,-0.203125 l 2.9375,-5.09375 0.359375,5.03125 C 5.5,0.171875 5.515625,0.21875 5.625,0.21875 c 0.140625,0 0.203125,-0.09375 0.25,-0.1875 z m 0,0"
+           id="path2" />
+      </g>
+      <g
+         id="glyph-1-0">
+        <path
+           d="m 4.953125,-4.8125 c 0,-0.03125 -0.03125,-0.09375 -0.09375,-0.09375 -0.046875,0 -0.046875,0.015625 -0.140625,0.109375 L 4.375,-4.40625 c -0.265625,-0.375 -0.703125,-0.5 -1.125,-0.5 -0.984375,0 -1.859375,0.796875 -1.859375,1.609375 0,0.09375 0.03125,0.375 0.234375,0.640625 0.234375,0.265625 0.5,0.328125 0.96875,0.453125 0.140625,0.03125 0.484375,0.109375 0.59375,0.140625 0.21875,0.046875 0.640625,0.203125 0.640625,0.71875 0,0.5625 -0.59375,1.234375 -1.375,1.234375 -0.625,0 -1.359375,-0.21875 -1.359375,-0.984375 0,-0.078125 0.015625,-0.234375 0.046875,-0.359375 0,-0.03125 0,-0.03125 0,-0.03125 0,-0.09375 -0.078125,-0.09375 -0.109375,-0.09375 -0.09375,0 -0.109375,0.015625 -0.125,0.140625 l -0.359375,1.390625 c -0.015625,0.03125 -0.03125,0.0625 -0.03125,0.109375 0,0.03125 0.03125,0.078125 0.109375,0.078125 0.03125,0 0.046875,-0.015625 0.140625,-0.09375 0.078125,-0.09375 0.25,-0.3125 0.328125,-0.390625 C 1.46875,0.0625 2,0.140625 2.421875,0.140625 c 1.0625,0 1.90625,-0.90625 1.90625,-1.734375 0,-0.296875 -0.125,-0.578125 -0.28125,-0.734375 -0.234375,-0.25 -0.34375,-0.28125 -1.25,-0.5 C 2.65625,-2.859375 2.421875,-2.90625 2.359375,-2.9375 2.1875,-3 1.890625,-3.171875 1.890625,-3.5625 c 0,-0.5625 0.625,-1.109375 1.34375,-1.109375 0.765625,0 1.125,0.421875 1.125,1.078125 0,0.09375 -0.03125,0.25 -0.03125,0.3125 0,0.109375 0.078125,0.109375 0.125,0.109375 0.09375,0 0.109375,-0.046875 0.125,-0.15625 z m 0,0"
+           id="path3" />
+      </g>
+      <g
+         id="glyph-1-1">
+        <path
+           d="m 3.390625,-4.21875 c 0.046875,-0.203125 0.0625,-0.21875 0.21875,-0.234375 0.03125,0 0.265625,0 0.40625,0 0.4375,0 0.609375,0 0.78125,0.046875 0.3125,0.09375 0.328125,0.296875 0.328125,0.546875 0,0.109375 0,0.203125 -0.046875,0.5625 L 5.0625,-3.21875 c 0,0.078125 0.046875,0.109375 0.125,0.109375 0.109375,0 0.109375,-0.0625 0.125,-0.171875 L 5.5,-4.609375 c 0,-0.09375 -0.078125,-0.09375 -0.203125,-0.09375 h -4.28125 c -0.171875,0 -0.1875,0 -0.234375,0.140625 l -0.453125,1.234375 c 0,0.03125 -0.03125,0.09375 -0.03125,0.125 0,0.03125 0.015625,0.09375 0.125,0.09375 0.09375,0 0.09375,-0.03125 0.140625,-0.171875 0.40625,-1.109375 0.640625,-1.171875 1.703125,-1.171875 h 0.28125 c 0.21875,0 0.21875,0 0.21875,0.0625 0,0 0,0.046875 -0.03125,0.140625 L 1.8125,-0.578125 C 1.75,-0.328125 1.734375,-0.25 1,-0.25 c -0.25,0 -0.3125,0 -0.3125,0.15625 C 0.6875,-0.078125 0.703125,0 0.8125,0 1,0 1.21875,-0.015625 1.40625,-0.015625 1.609375,-0.015625 1.8125,-0.03125 2,-0.03125 c 0.203125,0 0.4375,0 0.640625,0.015625 C 2.828125,-0.015625 3.03125,0 3.21875,0 3.28125,0 3.375,0 3.375,-0.15625 3.375,-0.25 3.3125,-0.25 3.09375,-0.25 c -0.125,0 -0.265625,-0.015625 -0.40625,-0.015625 -0.234375,-0.015625 -0.25,-0.046875 -0.25,-0.125 0,-0.0625 0,-0.0625 0.03125,-0.171875 z m 0,0"
+           id="path4" />
+      </g>
+      <g
+         id="glyph-2-0">
+        <path
+           d="m 4.1875,-2.78125 c 0.046875,-0.046875 0.046875,-0.0625 0.109375,-0.125 0.078125,-0.109375 0.234375,-0.25 0.546875,-0.28125 0.0625,0 0.140625,0 0.140625,-0.125 0,-0.03125 -0.015625,-0.09375 -0.078125,-0.09375 -0.078125,0 -0.15625,0.015625 -0.21875,0.015625 -0.078125,0 -0.15625,0 -0.234375,0 -0.09375,0 -0.1875,0 -0.28125,0 -0.078125,0 -0.1875,-0.015625 -0.28125,-0.015625 -0.078125,0 -0.125,0.0625 -0.125,0.140625 0,0.078125 0.09375,0.078125 0.125,0.078125 0.078125,0.015625 0.203125,0.03125 0.203125,0.125 0,0.046875 -0.015625,0.109375 -0.09375,0.203125 L 2.25,-0.46875 1.671875,-3 c 0,-0.0625 0,-0.0625 0,-0.078125 0,-0.078125 0.15625,-0.109375 0.328125,-0.109375 0.0625,0 0.140625,0 0.140625,-0.125 0,-0.046875 -0.015625,-0.09375 -0.078125,-0.09375 -0.109375,0 -0.234375,0.015625 -0.34375,0.015625 -0.109375,0 -0.234375,0 -0.34375,0 -0.109375,0 -0.21875,0 -0.328125,0 -0.09375,0 -0.203125,-0.015625 -0.296875,-0.015625 -0.03125,0 -0.109375,0 -0.109375,0.140625 0,0.078125 0.0625,0.078125 0.15625,0.078125 0.296875,0 0.296875,0.046875 0.328125,0.140625 l 0.671875,3.015625 c 0.03125,0.09375 0.046875,0.140625 0.171875,0.140625 0.0625,0 0.125,0 0.203125,-0.109375 z m 0,0"
+           id="path5" />
+      </g>
+      <g
+         id="glyph-2-1">
+        <path
+           d="m 6,-2.78125 c 0.234375,-0.375 0.4375,-0.390625 0.640625,-0.40625 0.046875,0 0.078125,-0.0625 0.078125,-0.125 0,-0.078125 -0.046875,-0.09375 -0.078125,-0.09375 -0.0625,0 -0.140625,0.015625 -0.203125,0.015625 -0.078125,0 -0.15625,0 -0.234375,0 0,0 -0.28125,0 -0.28125,0 -0.09375,0 -0.203125,-0.015625 -0.296875,-0.015625 -0.078125,0 -0.125,0.03125 -0.125,0.140625 0,0.078125 0.078125,0.078125 0.125,0.078125 0.046875,0.015625 0.265625,0.03125 0.265625,0.15625 0,0.0625 -0.03125,0.125 -0.0625,0.171875 l -1.5,2.3125 L 3.9375,-3.078125 C 4,-3.171875 4.140625,-3.1875 4.28125,-3.1875 c 0.09375,0 0.171875,0 0.171875,-0.125 0,-0.0625 -0.046875,-0.09375 -0.09375,-0.09375 -0.109375,0 -0.21875,0.015625 -0.328125,0.015625 -0.125,0 -0.234375,0 -0.34375,0 -0.109375,0 -0.203125,0 -0.296875,0 -0.09375,0 -0.203125,-0.015625 -0.296875,-0.015625 -0.078125,0 -0.109375,0.0625 -0.109375,0.140625 0,0.078125 0.078125,0.078125 0.140625,0.078125 0.078125,0 0.234375,0 0.265625,0.0625 0.015625,0.015625 0.046875,0.265625 0.046875,0.28125 0,0.015625 0,0.015625 -0.03125,0.078125 L 1.96875,-0.546875 1.609375,-3 c 0,0 -0.015625,-0.0625 -0.015625,-0.0625 0,-0.125 0.3125,-0.125 0.34375,-0.125 0.078125,0 0.171875,0 0.171875,-0.125 0,-0.046875 -0.046875,-0.09375 -0.09375,-0.09375 -0.109375,0 -0.21875,0.015625 -0.328125,0.015625 -0.125,0 -0.234375,0 -0.359375,0 -0.09375,0 -0.203125,0 -0.296875,0 -0.046875,0 -0.28125,-0.015625 -0.28125,-0.015625 -0.0625,0 -0.125,0.03125 -0.125,0.140625 0,0.078125 0.078125,0.078125 0.140625,0.078125 0.28125,0 0.28125,0.03125 0.296875,0.15625 l 0.453125,3 C 1.53125,0.0625 1.546875,0.109375 1.65625,0.109375 1.765625,0.109375 1.796875,0.0625 1.828125,0 L 3.484375,-2.546875 3.875,-0.03125 C 3.890625,0.0625 3.890625,0.109375 4,0.109375 c 0.109375,0 0.140625,-0.046875 0.1875,-0.125 z m 0,0"
+           id="path6" />
+      </g>
+    </g>
+  </defs>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g7"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-0-0"
+       x="5.2859998"
+       y="11.45"
+       id="use6" />
+  </g>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g8"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-0-1"
+       x="69.710999"
+       y="11.45"
+       id="use7" />
+  </g>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g9"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-0-0"
+       x="5.2859998"
+       y="61.416"
+       id="use8" />
+  </g>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g10"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-0-1"
+       x="69.710999"
+       y="61.416"
+       id="use9" />
+  </g>
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 11.952281,4.3234382 H 58.975719"
+     id="path10" />
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="m 57.104625,1.9289062 c 0.375,1.4375 1.21875,2.113282 2.070313,2.3945315 -0.851563,0.2773435 -1.695313,0.9531255 -2.070313,2.3906255"
+     id="path11" />
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g11"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-1-0"
+       x="38.874001"
+       y="16.069"
+       id="use11" />
+  </g>
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 3.4483752,10.659375 V 45.725781"
+     id="path12" />
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 5.8390002,43.854688 C 4.4054062,44.233594 3.7296252,45.077344 3.4483752,45.925 3.1710312,45.077344 2.4952502,44.233594 1.0577502,43.854688"
+     id="path13" />
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g13"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-1-1"
+       x="11.642"
+       y="34.910999"
+       id="use13" />
+  </g>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g14"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-2-0"
+       x="16.348"
+       y="35.912998"
+       id="use14" />
+  </g>
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 69.260875,10.659375 V 45.725781"
+     id="path14" />
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 71.6515,43.854688 C 70.214,44.233594 69.538219,45.077344 69.260875,45.925 68.979625,45.077344 68.303844,44.233594 66.87025,43.854688"
+     id="path15" />
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g15"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-1-1"
+       x="60.323002"
+       y="34.910999"
+       id="use15" />
+  </g>
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g16"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-2-1"
+       x="65.028"
+       y="35.912998"
+       id="use16" />
+  </g>
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="butt"
+     stroke-linejoin="miter"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="M 11.952281,54.288281 H 58.975719"
+     id="path16" />
+  <path
+     fill="none"
+     stroke-width="0.39848"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke="#000000"
+     stroke-opacity="1"
+     stroke-miterlimit="10"
+     d="m 57.104625,51.897656 c 0.375,1.433594 1.21875,2.109375 2.070313,2.390625 -0.851563,0.277344 -1.695313,0.957032 -2.070313,2.390625"
+     id="path17" />
+  <g
+     fill="#000000"
+     fill-opacity="1"
+     id="g17"
+     transform="translate(-5.8484998,-4.6374998)">
+    <use
+       xlink:href="#glyph-1-0"
+       x="38.874001"
+       y="56.581001"
+       id="use17" />
+  </g>
+</svg>
+</div>
+<p><span>$$\mathrm{End}_{\mathbb{F} [x]}(V)^{\times}=\text{invertible Endomorphisms} = \mathrm{Aut}_{\mathbb{F} [x]}(V)$$</span>
+יהי <span>\(S:V\to V\)</span> העתקה לינארית הפיכה. <span>\(T_{V}S=ST_{V}\)</span>.  כלומר <span>\(S^{-1}T_{V}S=T_{V}\)</span>.</p>
+</div>
+<p>נניח של-<span>\(V(=V')\)</span> יש 2 מבנים של <span>\(\mathbb{F} [x]\)</span> על ידי <span>\(T,T'\)</span>. מתי <span>\(V\cong V'\)</span>?
+מתקיים <span>\(V\cong V'\)</span> אם"ם יש <span>\(S:V\to V'=V\)</span> כך ש-<span>\(S\)</span> העתקה לינארית, הפיכה, והומומורפיזם של <span>\(\mathbb{F}[x]\)</span> מודולים. כלומר:
+<span>$$S\circ  T=T'\circ  S$$</span>
+כלומר <span>\(S\circ T S^{-1} = T'\)</span> כלומר <span>\(T,T'\)</span> דומות.</p>
+<div class="proposition"><span class="keyword">משפט המבנה למודולים נוצרים סופית מעל <span>\(\text{PID}\)</span>(תחום ראשי)</span><p>גרסה 1 - כל מודול נוצר סופית על תחום ראשי <span>\(R\)</span> איזומורפי ל:
+<span>$$\frac{R}{(d_{1})}\oplus \dots \oplus \frac{R}{(d_{m})}$$</span>
+עבור <span>\(m\geq 0\)</span> (יחיד) ו-<span>\(d_{1}|d_{2}|\dots|d_{m}\)</span> ויחידים עד כדי חבורות:
+<span>$$(d)=(d')\iff d \in R^{\times}d'\iff d \sim  d'$$</span></p>
+</div>
+<p>למשל חבורה אבלית נוצרת סופית:
+<span>$$\mathbb{Z} / (3) \oplus \mathbb{Z} / (12) \oplus \mathbb{Z} / (60)$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+<li class='prev-page'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+</ul></li>
+        </body>
+        </html>
+        

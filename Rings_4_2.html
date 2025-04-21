@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרצאה 2</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_4_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_4_1`; }});</script>
+        <div class="content">
+        <h1>4.2  הרצאה 2</h1>
+    <p>כמו שיש לנו פעולה של חבורה על קבוצה <span>\(X\circlearrowright G\)</span> פעולה אז יש:
+<span>$$\rho:G\to S_{X}=\mathrm{End}(X)$$</span>
+כאשר אנחנו מדברים על <span>\(M\circlearrowright R\)</span> פעולה <span>\(\rho:R\to \mathrm{End}(M)\)</span> כחבורה אבלית.</p>
+<div class="reminder"><span class="keyword">מודל</span><p>חבורה אבלית <span>\(M\)</span> עם פעולה של חוג <span>\(R\)</span>(כאנדומורפיזם).
+כש-<span>\(R\)</span> שדה אז מודול זה פשוט מרחב ווקטורי.</p>
+</div>
+<div class="symbolize">
+<p>מסמנים <span>\(R^{M}\)</span> כדי לסמן <span>\(M\)</span> מודול מעל <span>\(R\)</span>.</p>
+</div>
+<div class="example">
+<p>המודול <span>\(R^{R}\)</span> עם כפל מ-<span>\(R\)</span>.</p>
+</div>
+<div class="example">
+<p>אם <span>\(M,N\)</span> מודולים:
+<span>$$\begin{gather}M\oplus N=\{ (m,n)\mid m \in M, n \in N \} \\r\cdot(m,n)=(r m, rn)
+\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תת מודול</span><p>אם <span>\(R^{M}\)</span> ו-<span>\(N\subseteq M\)</span> שמקיימת:
+<span>$$RN, N+N\subseteq N$$</span>
+וגם <span>\(N\neq \varnothing\)</span>. אזי <span>\(N\)</span> תת מודול. צמצום הפעולה של <span>\(R\)</span> עליו נותן מודול.</p>
+</div>
+<div class="remark">
+<p>זה בדיוק ההגדרה שהייתה לנו לתת מרחב ווקטורי. בפרט מקיים את הנגדי כיוון שמתקיים:
+<span>$$(-1)\cdot n+n=(-1)n+1\cdot n=(-1+1)\cdot n=0\cdot n=0$$</span></p>
+</div>
+<p>אם <span>\(I\leq R\)</span> אידיאל שמאלי אז אפשר לחשוב על <span>\(R^{I}\)</span> כמודול. למשל ניתן לקחת:
+<span>$$M_{3}(R)^{\begin{pmatrix}0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\0&amp; \star &amp;\star\\
+\end{pmatrix}}$$</span>
+אם <span>\(R=\mathbb{Z}\)</span> אז אם <span>\(M\)</span> הוא <span>\(\mathbb{Z}\)</span> מודול אזי <span>\(M\)</span> חבורה אבלית ו-<span>\(\mathbb{Z}\)</span> פועלת:
+<span>$$\mathbb{Z} \in n\cdot m =(1+1+\dots+1)\cdot m=m+\dots+m$$</span></p>
+<p>תרגיל - להראות כי:
+<span>$$(-n)\cdot m=-(m+\dots+m)$$</span>
+כלומר לכל חבורה אבלית יש מבנה יחיד של <span>\(\mathbb{Z}\)</span> מודול.</p>
+<p>ניתן לקחת את <span>\(R=M_{n}(\mathbb{F})\)</span> ו-<span>\(M=\mathbb{F}^{n}\)</span> כאשר הפעולה היא כפל מטריצה בווקטור.</p>
+<div class="proposition">
+<p>תתי מודולים של <span>\(\mathbb{Z}^{\mathbb{Z}}\)</span> איזומורפיים כמודול ל-<span>\(\mathbb{Z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מודול מנה</span><p>אם <span>\(N\leq M\)</span> תת מודול יש מודול מנה <span>\(M \setminus N\)</span> כחבורה אבלית, ו:
+<span>$$r\cdot (m+N):= r m +N$$</span>
+מוגדל היטב:
+אם <span>\(m+N=m'+N\)</span> אז:
+<span>$$r m - r m' = r(\underbrace{ m - m' }_{ N })$$</span>
+ולכן:
+<span>$$r m +N= r m' +N$$</span>
+עבור <span>\(m\mathbb{Z}\leq \mathbb{Z}\)</span> מודול מנה מקבלים <span>\(\mathbb{Z} / m\mathbb{Z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">המומומורפיזמים של מודולים</span><p>פונקציה <span>\(f:M\to N\)</span> כאשר <span>\(M\)</span> ו-<span>\(N\)</span> הם <span>\(R\)</span> מודולים אשר מקיימת:
+<span>$$f(m+m')=f(m)+f(m')\qquad f(r m)=rf(m)$$</span></p>
+</div>
+<div class="remark">
+<p>זה למעשה מה שקראנו לו טרנספורמצייה לינארית במקרה של מרחבים ווקטורים.</p>
+</div>
+<p><strong>משפט</strong> איזו 1
+ אם <span>\(f:M\to N\)</span> הומומורפיזמים של <span>\(R\)</span> מודולים אזי:
+<span>$$\mathrm{Im}f\leq N, \ker f\leq M$$</span>
+ומתקיים:
+<span>$$M / \ker f\cong  \mathrm{Im} f$$</span>
+על ידי:
+<span>$$m+\ker f\mapsto f(m)$$</span></p>
+<div class="theorem"><span class="keyword">איזו 2,3,4</span><p>השני:
+<span>$$N / N\cap  M \cong  (N+M) / M$$</span>
+השלישי:
+<span>$$(N / K )/(M / K)\cong N / M$$</span>
+הרביעי:
+בין תתי מודולים של <span>\(M / N\)</span> למודולים ב-<span>\(M\)</span> שמכילים את <span>\(N\)</span>.</p>
+</div>
+<p>במרחבים ווקטורים אם <span>\(M\)</span> מודול הוא <span>\(\mathbb{F}\)</span> מודול (נוצר סופית). אזי <span>\(M\cong F^{n}\)</span> ל-<span>\(n\)</span> כלשהו.
+(כי קיים בסיס <span>\(\mathcal{B}\)</span> ואז <span>\(v\mapsto [v]_{\mathcal{B}}\)</span> ו-<span>\(M\cong \mathbb{F}^{n}\)</span>).
+זה לא קורה באופן כללי:
+<span>$$\mathbb{R} =\mathbb{Z}\qquad  M= \mathbb{Z} / 3 \mathbb{Z}$$</span>
+שלא ניתן לבנות איזומורפיזם מטעמי גודל.</p>
+<p>אם <span>\(W\leq V\)</span> תת מרחב ווקטורי. תמיד יש <span>\(U\leq V\)</span> כך ש-<span>\(V=W \oplus U\)</span>(<span>\(U\)</span> נקרא משלים ישר ל-<span>\(W\)</span>)</p>
+<p>לא נכון במודולים
+<span>$$R=\mathbb{Z},\quad M=C_{4}=\{ 0,1,2,3 \}$$</span>
+ניקח את <span>\(N\)</span> להיות:
+<span>$$N=\langle 2 \rangle =\{ 0,2 \}$$</span>
+נראה למה אין במקרה הזה משלים ישר. זה כי התתי מודלים של <span>\(M\)</span> הם:
+<span>$$0,N,M$$</span></p>
+<p>חוג שמקיים שלכל תת מודול שלו יש משלים ישר נקרא פשוט למחצה.</p>
+<p>זה הנושא של מושגי יסוד בהצגות.</p>
+<p>ניקח את <span>\(R=M=\mathbb{Z}\)</span> וניקח את הקבוצה <span>\(\{ 2,3 \}\)</span> ונטען כי היא פורשת מינימלית אבל לא בת"ל כי:
+<span>$$3\cdot 2 + (-2)\cdot 3 = 0$$</span>
+אם ניקח לעומת זאת את <span>\(\{ 2 \}\)</span> היא בת"ל מקסימלית לא פורשת(הוספה של כל איבר שגרום לכך שכמו בדוגמא הקודמת שזה לא בת"ל).</p>
+<p>אם <span>\(R^{M}\)</span> ו-<span>\(S\subseteq M\)</span> אזי <span>\(\langle S \rangle\)</span> זה המודול שנוצר על ידי <span>\(S\)</span>:
+<span>$$\mathrm{Span}_{\mathbb{R}}(s)=\left\{  \sum_{i=1}^{m}r_{i}s_{i}\mid  m \in \mathbb{N}, r_{i}\in R, s_{i}\in S  \right\}=\bigcap_{S\subseteq N\leq  M}N$$</span>
+כלומר כמו בלינארית הפרוש זה החיתוך של כל המרחבים הלינארים שנפרשים.</p>
+<p>נסתכל כעת על החוג <span>\(R=\mathbb{F}[x]\)</span>. נרצה להסתכל מי הם ה-<span>\(R\)</span> מודולים? אם <span>\(M\)</span> הוא <span>\(R\)</span> מודול הוא בפרט <span>\(\mathbb{F}\)</span> מודול.
+זה בפרט מרחב ווקטורי. בנוסף יש פעולה של האיבר <span>\(x\)</span>. זה מגדיר את הכל כי באופן כללי איבר כללי יראה בצורה הבאה:
+<span>$$(a_{0}+a_{1}x+\dots+a_{n}x^{n})m=a_{0}m+a_{1}xm+a_{2}x x m+\dots$$</span></p>
+<p>נטען כי <span>\(x\)</span> פועל כטרנספורמציה לינארית ולכן נקרא לזה מעכשיו <span>\(V\)</span>. כאשר <span>\(x\)</span> פועל על <span>\(v+v'\)</span> נקבל:
+<span>$$x(v+v')=xv+xv'$$</span>
+כאשר:
+<span>$$x(\alpha v)=(x\cdot \alpha)v=(\alpha \cdot x)v=\alpha(xv)$$</span>
+כלומר <span>\(xv=T(v)\)</span> ל-<span>\(T\)</span> טרנפורמצייה לינארית כלשהי.</p>
+<p>(אם היינו מגדירים <span>\(T(v)=xv\)</span> אזי <span>\(T\)</span> טרנספורמצייה לינארית).</p>
+<div class="proposition">
+<p>אם <span>\(V\)</span> מרחב ווקטורי מעל השדה <span>\(\mathbb{F}\)</span> ו-<span>\(T:V\to V\)</span> טרנספורמצייה לינארית אזי אפשר להגדיר מבנה של <span>\(\mathbb{F}[x]\)</span> מודול על <span>\(V\)</span> על ידי זה שנגדיר <span>\(x\cdot V=T(v)\)</span>.
+(ולכן <span>\(p(x)\cdot v=p(T)(v)\)</span>).</p>
+</div>
+<p>למשל:
+<span>$$1\cdot v = T^{0}(v)=v$$</span>
+<span>$$(p(x)\cdot q(x))(v)=(pq(x))(v)=(p(T)\cdot q(T))(v)=(p(T)(q(T)))(v)=p(T)(q(T)(v))$$</span></p>
+<p>ראינו שיש התאמה בין <span>\(Z\)</span> מודולים לחבורות אבליות
+כעת נרצה להראות כי יש התאמה בין <span>\(\mathbb{F}[x]\)</span>-מודלים למרחבים ווקטורים עם טרנספורמציות לינאריות נבחרות.</p>
+<p>מה קרה פה?
+אנחנו חיפשנו הומומורפיזם מבנה שילך מ-<span>\(\rho:\mathbb{F}[x]\to \mathrm{End}(V)\)</span>. בגלל ש-<span>\(\alpha x=x\alpha\)</span> ב-<span>\(\mathbb{F}[x]\)</span> אז אנחנו חייבים לשלוח
+<span>$$\rho:\mathbb{F} [x]\to \mathrm{End}_{\mathbb{F} }(V)$$</span></p>
+<p><span>$$\rho:\mathbb{F} [x]\to \mathrm{End}_{Grp}(V)$$</span>
+<span>$$\alpha \mapsto m_{\alpha}(v)=\alpha v$$</span>
+<span>$$x\mapsto T$$</span>
+מ-<span>\(x\alpha=\alpha x\)</span> הועב ש-<span>\(\rho(x)\rho(\alpha)=\rho(\alpha)\rho(x)\)</span>. זה אומר שמתקיים:
+<span>$$T\circ  m_{\alpha}=m_{\alpha}(T)$$</span>
+<span>$$\forall v\quad T(\alpha v)=\alpha T(v)$$</span></p>
+<div class="definition"><span class="keyword">בסיס</span><p>יהי <span>\(M\)</span> מודול. <span>\(S\subseteq M\)</span> נקרא בסיס אם לכל <span>\(m \in M\)</span> יש ייצור יחיד כצירוף לינארי של איברי <span>\(S\)</span> עם מקדמים ב-<span>\(R\)</span>.</p>
+</div>
+<p>שקול: פורש ובתל. הפורש נותן שלכל איבר יש ייצוג, הבתל גורר יחידות.</p>
+<p>שקול: לכך ש-<span>\(M\cong R \oplus S\)</span>. </p>
+<div class="reminder">
+<p>כאשר אנחנו רואים <span>\(R^{S}\)</span> אנחנו חושבים על פונקציות מ-<span>\(S\)</span> ל-<span>\(R\)</span>. כאשר אנחנו חושבים על <span>\(R^{\mathbb{N}}\)</span> חושבים על סדרות וכשיש לנו <span>\(R^{n}\)</span> אנחנו חושבים על ווקטורים.</p>
+</div>
+<div class="definition">
+<p>לקבוצה <span>\(S\)</span> וחוג <span>\(R\)</span> נגדיר:
+<span>$$R^{\oplus S}=\{ f \in R^{S}\mid  f(s)=0 \quad \text{for almost all s}\}$$</span>
+כלומר מתאפס מהחל מאיבר מסויים.</p>
+<p><span>$$\mathbb{R}^{\mathbb{N}}=(a_{0},a_{1},a_{2},\dots)\qquad R^{\oplus \mathbb{N}}=(a_{0},a_{1},a_{2},\dots, a_{m},0,0,0,\dots)$$</span></p>
+</div>
+<p>כעת:
+<span>$$R^{\oplus S}=\left\{  \sum_{i=1}^{m} r_{i}s_{i}\mid m \in \mathbb{N}, r_{i}\in R, s_{i}\in S  \right\}$$</span></p>
+<p>בלינארית <span>\(\mathbb{F}^{n}\)</span> זה מרחב ווקטורי עם בסיס <span>\(e_{1},\dots, e_{n}\)</span>.</p>
+<p>כעת <span>\(\mathbb{F}^{\oplus S}\)</span> זה מרחב ווקטורי עם בסיס. למשל <span>\(\mathbb{R}^{\oplus \mathbb{N}}\)</span> מרחב ווקטורי עם בסיס:
+<span>$$\begin{gather}e_{1}=(1,0,\dots) \\e_{2}=(0,1,0,\dots) \\ \vdots
+\end{gather}$$</span></p>
+<p>מודול שיש לו בסיס נקרא חופשי.</p>
+<p>האם <span>\(\mathbb{R}^{\mathbb{N}}\)</span> הוא <span>\(\mathbb{R}\)</span>-מודול חופשי?
+כן - לכל מרחב ווקטורי יש בסיס.</p>
+<p>האם <span>\(\mathbb{Z}^{\mathbb{N}}\)</span> הוא <span>\(\mathbb{Z}\)</span> מודול חופשי?</p>
+<p>עבור סופי אנו יודעים כי <span>\(C_{3}=\mathbb{Z} / 3\mathbb{Z}\)</span> - לא <span>\(\mathbb{Z}\)</span> מודול חופשי.</p>
+<p>לפי Baer התשובה היא לא.
+לפי Specker כל תחבורה בת מנייה היא חופשית.</p>
+<p>אם <span>\(\mathbb{Z}^{\oplus S}\cong \mathbb{Z}^{N}\)</span> אז <span>\(|S|&gt; \aleph_{0}\)</span>. </p>
+<p>עבור <span>\(R^{M}\)</span> אזי <span>\(\mathrm{End}_{R}(M)\)</span>(הומומורפיזמים מ-<span>\(M\)</span> לעצמו כ-<span>\(R\)</span> מודול) מקיים:
+<span>$$\mathrm{End}_{R}(M)\subseteq \mathrm{End}(M)$$</span>
+כחבורה אבלית.</p>
+<div class="example">
+<p>עבור <span>\(\mathrm{End}_{\mathbb{Z}}(\mathbb{Z})\cong \mathbb{Z}\)</span> לכל <span>\(m\)</span> ב-<span>\(\mathbb{Z}\)</span> נגדיר:
+<span>$$f_{m}(n)=mn$$</span>
+זה אנדומורפיזם:
+<span>$$f_{m}(n+n')=m(n+n')=f_{m}(n)+f_{m}(n')$$</span>
+<span>$$f_{m}(m'n)=m(m'n)=(mm')n=m'mn=m'f_{m}(n)$$</span>
+מצד שני אם <span>\(f \in \mathrm{End}_{\mathbb{Z}}(\mathbb{Z})\)</span> אזי <span>\(\varphi=f_{\varphi(1)}\)</span> כי:
+<span>$$\varphi(n)=\varphi(n\cdot 1)=n\cdot \varphi( 1)=f_{\varphi(1)}(n)$$</span></p>
+</div>
+<p>זה בעצם מראה ש:
+<span>$$\mathrm{End}_{R}(R)\cong  R$$</span>
+לכל חוג קומוטטיבי <span>\(R\)</span>. </p>
+<p>דוגמא - ניקח את החוג:
+<span>$$R=M_{n}(\mathbb{F} )\qquad M=\mathbb{F} ^{n}\qquad \mathrm{End}_{M_{n}(\mathbb{F} )}(\mathbb{F^{n}} )=?$$</span>
+כפל בסקלר - <span>\(m_{\alpha}(v)=\alpha v\)</span> עבור <span>\(\alpha \in \mathbb{F}\)</span>. עבור <span>\(m_{\alpha}\in \mathrm{End}_{R}(M)\)</span>.
+<span>$$m_{\alpha}(v+v')=\alpha v+\alpha v'=m_{\alpha}(v)+m_{\alpha}(v')$$</span>
+<span>$$m_{\alpha}(Av)=\alpha Av=A\cdot \alpha v=Am_{\alpha}(v)$$</span>
+וזה הכל: אם <span>\(m \in \mathrm{End}_{R}(\mathbb{F}^{n})\)</span> אזי <span>\(m\)</span> מכבד חיבור ו-<span>\(m\)</span> מתחלפת עם:
+<span>$$\begin{pmatrix}\alpha &amp;  &amp;  &amp;      \\ &amp; \alpha &amp;  &amp;      \\ &amp;  &amp;   \ddots &amp;    \\ &amp;  &amp;    &amp; \alpha   
+\end{pmatrix}$$</span></p>
+<p><span>$$m(\alpha v)=m(\begin{pmatrix}\alpha &amp;  &amp;  &amp;      \\ &amp; \alpha &amp;  &amp;      \\ &amp;  &amp;   \ddots &amp;    \\ &amp;  &amp;    &amp; \alpha   \end{pmatrix}v)=\begin{pmatrix}\alpha &amp;  &amp;  &amp;      \\ &amp; \alpha &amp;  &amp;      \\ &amp;  &amp;   \ddots &amp;    \\ &amp;  &amp;    &amp; \alpha   
+\end{pmatrix}m(v)=\alpha m(v)$$</span>
+בנוסף <span>\(m\)</span> מתחלפת עם כל טרנספורמציה לינארית <span>\(m(Av)=Am(v)\)</span>. <span>\(m\)</span> טרנספורמציה שמתחלפת עם כל ט"ל.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='prev-page'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+</ul></li>
+        </body>
+        </html>
+        

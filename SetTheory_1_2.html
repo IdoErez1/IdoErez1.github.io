@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_1_3.html'>1.3 יחסי סדר</a></li>
+<li class='parent-page'><a href='./SetTheory.html'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_1.html'>1.1 מבוא</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_2.html'>1.2 פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_3.html'>1.3 יחסי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_4.html'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_5.html'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_1.html'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_2.html'>2.2 המערכת ZF</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_4.html'>2.4 סודרים ומונים</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_5.html'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./SetTheory_1_1.html'>1.1 מבוא</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./SetTheory_1_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./SetTheory_1_1.html`;}});</script>
+        <div class="content">
+        <h1>1.2  פונקציות</h1>
+    <div class="definition"><span class="keyword">פונקציה</span><p>פונקציה <span>\(F:A\to B\)</span> הוא יחס <span>\(F\subseteq A\times B\)</span> המקיים כי:
+<span>$$\forall a \in A\quad \exists! b\in B\quad \langle a, b \rangle \in F$$</span>
+כאשר נזכור כי <span>\(\exists!\)</span> אומר קיים ויחיד.</p>
+</div>
+<div class="definition"><span class="keyword">ערך של פונקציה</span><p>בהנתן <span>\(F:A\to B\)</span>, נסמן לכל <span>\(a \in A\)</span> את <span>\(F(a)\)</span> להיות ה-<span>\(b \in B\)</span> היחיד עבורו <span>\(\langle a, b \rangle\in F\)</span></p>
+</div>
+<div class="example">
+<p>נגדיר:
+<span>$$A=\{ 0,1 \}\quad B=\left\{  3,\pi  \right\}$$</span>
+ונגדיר את היחס <span>\(R_{1}=\left\{  \langle 0, 3 \rangle   \right\}\)</span>
+זהו אינו פונקציה מ-<span>\(A,B\)</span> כיוון שלא קיים <span>\(b \in B\)</span> כך ש-<span>\(\langle 1, b \rangle\in R_{1}\)</span>.
+כעת נגדיר את היחס:<span>\(R_{2}=\left\{  \left\langle  0, \pi  \right\rangle ,\left\langle  1,\pi   \right\rangle   \right\}\)</span>. הפעם <span>\(R_{2}\)</span> מקיימת את תנאי ההגדרה של הפונקציה מ-<span>\(A\)</span> ל-<span>\(B\)</span> ולכן נוכל לרשום <span>\(R_{2}:A\to B\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציית הזהות</span><p>לכל קבוצה <span>\(X\)</span> נסמן:
+<span>$$id_{X}=\left\{  \langle a,a \rangle \mid a\in X  \right\}$$</span>
+מתקיים:
+<span>$$id_{X}:X\to X$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תחום</span><p>יהי <span>\(R\subseteq A\times B\)</span> יחס. נגדיר את התחום של <span>\(R\)</span>:
+<span>$$\operatorname{dom}\left(R\right)=\left\{a\in A\mid\exists b\in B\quad\left\langle a,b\right\rangle\in R\right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טווח</span><p>יהי <span>\(R\subseteq A\times B\)</span> יחס. נגדיר את הטווח של <span>\(R\)</span>:
+<span>$$\operatorname{rng}\left(R\right)=\left\{b\in B\mid\exists a\in A\quad\langle a,b\rangle\in R\right\}$$</span></p>
+</div>
+<div class="remark">
+<p>אם <span>\(R\subseteq A\times B\)</span> היא פונקציה מ-<span>\(A\)</span> ל-<span>\(B\)</span>, אז <span>\(\mathrm{dom}(R)=A\)</span> ו-<span>\(\mathrm{rng}(R)\subseteq B\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">חח"ע</span><p>פונקציה <span>\(F:A\to B\)</span> היא חח"ע אם לכל <span>\(a_{1}\neq a_{2}\)</span> אברי <span>\(A\)</span> מתקיים <span>\(F(a_{1})=F(a_{2})\)</span>.</p>
+</div>
+<div class="corollary">
+<p>פונקציה <span>\(F:A\to B\)</span> תהיה חח"ע אם <span>\(F(x)=F(y)\)</span> גורר <span>\(x=y\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">על</span><p>פונקציה <span>\(F:A\to B\)</span> היא על <span>\(B\)</span> אם <span>\(\mathrm{rng}(F)=B\)</span>.</p>
+</div>
+<div class="remark">
+<p>נניח כי המספרים הטבעיים מתחילים מ-0.</p>
+</div>
+<div class="definition"><span class="keyword">היחס ההופכי</span><p>בהנתן יחס <span>\(R\subseteq A\times B\)</span> נגדיר את היחס ההופכי <span>\(R^{-1}\subseteq B\times A\)</span> להיות:
+<span>$$R^{-1}=\{\langle b,a\rangle\mid\langle a,b\rangle\in R\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציה הופכית</span><p>פונקציה <span>\(F:A\to B\)</span> מ-<span>\(A\)</span> ל-<span>\(B\)</span> נקראת הפיכה אם היחס ההופכי <span>\(F^{-1}\)</span> הוא פונקציה מ-<span>\(B\)</span> ל-<span>\(A\)</span>. ובמקרה זה אפשר לרשום <span>\(F^{-1}:B\to A\)</span>.</p>
+</div>
+<div class="proposition">
+<p>פונקציה <span>\(F:A\to B\)</span> היא הפיכה אם"ם היא חח"ע ועל <span>\(B\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(F:A\to B\)</span> היא חח"ע ועל אז <span>\(F^{-1}:B\to A\)</span> גם חח"ע ועל.</p>
+</div>
+<div class="proof">
+<p>נתון <span>\(F:A\to B\)</span> חח"ע ועל <span>\(B\)</span>. לכן <span>\(F\)</span> הפיכה. כלומר <span>\(F^{-1}:B\to A\)</span> פונקציה. נשים לב כי <span>\((F^{-1})^{-1}=F\)</span> היא פונקציה, ולכן <span>\(F^{-1}\)</span> היא הפיכה. </p>
+</div>
+<div class="definition"><span class="keyword">הרכבת יחסים</span><p>נניח <span>\(A,B,C\)</span> קבוצות, <span>\(R\subseteq A\times B\)</span> ו-<span>\(S\subseteq B\times C\)</span>. נגדיר יחס <span>\(S\circ R\subseteq A\times C\)</span> ע"י:
+<span>$$S\circ R = \left\{  \langle a, c \rangle \mid a\in A\quad c\in C \quad \exists b \in B\quad \langle a, b \rangle \in R\quad \langle b, c \rangle \in S \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(F:A\to B, G:B\to C\)</span> פונקציות אז היחס <span>\(G\circ F\subseteq A\times C\)</span> הוא גם כן פונקציה.</p>
+</div>
+<div class="proposition">
+<p>בנינתן <span>\(F:A\to B\)</span> ו-<span>\(G:B\to C\)</span> מתקיים:</p>
+<ol>
+<li>
+<p>אם <span>\(F,G\)</span> חח"ע אז ההרכבה <span>\(G\circ F\)</span> חח"ע </p>
+</li>
+<li>
+<p>אם <span>\(F\)</span> על <span>\(B\)</span> ו-<span>\(G\)</span> על <span>\(C\)</span> אז <span>\(G\circ F\)</span> על C </p>
+</li>
+<li>
+<p>אם <span>\(F,G\)</span> הפיכות, אז <span>\(G\circ F\)</span> הפיכה. </p>
+</li>
+<li>
+<p>אם <span>\(F\)</span> הפיכה, אז <span>\(id_{A}=F^{-1}\circ F\quad id_{B}=F\circ F^{-1}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G \circ F\)</span> חח"ע אז <span>\(F\)</span> חח"ע. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהיו <span>\(x,y \in A\)</span> כך ש-<span>\(G \circ F(x)=G \circ F(y)\)</span>. לכן <span>\(G(F(x))=G(F(y))\)</span> מכל ש-<span>\(G\)</span> חח"ע נובע <span>\(F(x)=F(y)\)</span> וכן מכך ש-<span>\(F\)</span> חח"ע נקבל <span>\(x=y\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(F(x)=F(y)\)</span> נקבל <span>\(G(F(x))=G(F(y))\)</span> כיוון ש-<span>\(G\)</span> פונקציה, ולכן מחח"ע נקבל <span>\(x=y\)</span> ולכן <span>\(F\)</span> חח"ע. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>פונקציה <span>\(F:A\to B\)</span> היא הפיכה אם"ם <span>\(\exists G:B\to A\)</span> כך ש:
+<span>$$F\circ G = id_{B}\quad G\circ  F = id_{A}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_1_3.html'>1.3 יחסי סדר</a></li>
+<li class='prev-page'><a href='./SetTheory_1_1.html'>1.1 מבוא</a></li>
+</ul></li>
+        </body>
+        </html>
+        

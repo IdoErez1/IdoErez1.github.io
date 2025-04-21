@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אנדומורפיזמים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_3_7`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_3_5`; }});</script>
+        <div class="content">
+        <h1>3.6  אנדומורפיזמים</h1>
+    <div class="proposition">
+<p>עבור מודול <span>\(R^{M}\)</span> מתקיים האנדומורפיזמים של המודול יהיה תת חוג של האנדומורפיזמים של החוג. כלומר:
+<span>$$\operatorname{End}_{R}(M)=\left\{f:M\to M\mid f(r m)=r f(m)\,{\mathrm{for~all}}\,r\in R,m\in M\right\}\leq \mathrm{End}(M)$$</span></p>
+</div>
+<div class="example"><span class="keyword">מרחבים ווקטורים</span><p><span>$${\mathrm{End}}_{\mathbb{F}}{\bigl(}\mathbb{F}^{n}{\bigr)}=M_{n}{\bigl(}\mathbb{F}{\bigr)}$$</span></p>
+</div>
+<div class="example"><span class="keyword">מודולים מעל חוג מטריצות</span><p><span>$$\operatorname{End}_{M_{n}(\mathbb{F})}(\mathbb{F}^{n})=\mathbb{F}$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\operatorname{End}_{R}(R)=R^{\mathrm{op}}$$</span>
+כש-<span>\(R^{\text{op}}\)</span> היא <span>\(R\)</span> עם כפל הפוך. לכל <span>\(r \in R\)</span> הגדרנו <span>\(m_{r}(x)=xr\)</span>, וראינו <span>\(m_{r} \in \mathrm{End}_{R}(R)\)</span> כאשר <span>\(r \mapsto m_{r}:R\to \mathrm{End}_{R}(R)\)</span> חח"ע ועל, מכבדת חיבור:
+<span>$$m_{r+r'}=m_{r}+m_{r'}$$</span>
+והופכת כפל:
+<span>$$m_{r r'}= m_{r'}\circ m_{r}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הלמה של שור</span><p>אם <span>\(R^{M}\)</span> מודול פשוט אזי <span>\(\mathrm{End}_{R}(M)\)</span> חוג חילוק.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(0\neq f \in \mathrm{End}_{R}(M)\)</span> אזי <span>\(\mathrm{\mathrm{Im}}f\neq \{ 0 \}\)</span> ולכן <span>\(\mathrm{Im} f = M\)</span> ולכן <span>\(f\)</span> על.
+אם <span>\(\ker f \neq M\)</span> אז <span>\(\ker f = \{ 0 \}\)</span> ואז <span>\(f\)</span> חח"ע.
+זה גורר <span>\(f\)</span> הפיך כפונקציה מ-<span>\(M\)</span> ל-<span>\(M\)</span>. ואז <span>\(f ^{-1} \in \mathrm{End}_{R}(M)\)</span>.
+<span>$$f^{-1} (m+n)=f^{-1} (f(f^{-1} (m))+f(f^{-1} (n)))=f^{-1} (f(f^{-1} (m)+f^{-1} (n)))$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+<li class='prev-page'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואות מסדר גבוה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_2_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_1_3.html`;}});</script>
+        <div class="content">
+        <h1>1.4  משוואות מסדר גבוה</h1>
+    <div class="definition"><span class="keyword">קבוצה פורשת של מרחב הפתרונות</span><p>קבוצה של פונקציות אשר פורשת את מרחב הפתרונות. כלומר המרחב הפתרונות יהיה הפרוש של כל הפונקציות בקבוצה. כלומר זוהי קבוצה <span>\(A\)</span> כך שאם פונקציה <span>\(y\)</span> היא פתרון אז <span>\(y \in \mathrm{Span}(A)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">בסיס של מרחב הפתרונות</span><p>הקבוצה הפורשת המינימלית. נזכור כי זו תהיה קבוצה בלתי תלייה לינארית.</p>
+</div>
+<div class="definition"><span class="keyword">וורונסקיאן</span><p><span>$$W(f_{1},f_{2},\ldots,f_{n})=\left|\begin{array}{cccc}f_{1}&amp;f_{2}&amp;\cdot&amp;\cdot&amp;\cdot&amp;f_{n}\\ f_{1}^{\prime}&amp;f_{2}^{\prime}&amp;\cdot&amp;\cdot&amp;\cdot&amp;f_{n}^{\prime}\\ \cdot&amp;\cdot&amp;\cdot&amp;\cdot&amp;\cdot\\ \cdot&amp;\cdot&amp;\cdot&amp;\cdot&amp;\cdot\\ f_{1}^{(n-1)}&amp;f_{2}^{(n-1)}&amp;\cdot&amp;\cdot&amp;\cdot&amp;f_{n}^{(n-1)}\end{array}\right|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משוואה לינארית הומוגנית עם מקדמים קבועים</span><p>זוהי משוואה דיפרנציאלית מהצורה:
+<span>$$a_n y^{(n)} + ...+ a_1 y' + a_0 y = 0$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן למצוא את הבסיס של מרחב הפתרונות של משוואה מהצורה <span>\(a_n y^{(n)} + ...+ a_1 y' + a_0 y = 0\)</span> בצורה הבאה:</p>
+<ol>
+<li>
+<p>נפתור את המשוואה: 
+<span>$$a_n \lambda^n + ... + a_1\lambda + a_0=0$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(\lambda \in \mathbb{C}\)</span> פתרון, <span>\(e^{\lambda x}\)</span> נמצא בקבוצה הפורשת.  </p>
+</li>
+<li>
+<p>אם קיים ל-<span>\(\lambda\)</span> ריבוי אלגברי <span>\(k\)</span> אזי גם <span>\(xe^{ \lambda x },\dots,x^{k}e^{ \lambda x }\)</span> יהיו פתרונות. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>כיוון שאנו יודעים לפתור את המשוואה מסדר ראשון נמיר את המשוואה למערכת משוואות מסדר ראשון. נגדיר:
+<span>$${{Y_{1}=y}}\quad  {{Y_{2}=y^{\prime}}}\quad  {{Y_{3}=y^{\prime\prime}}}\quad  {{\dots}}\quad  {{Y_{n}=y^{(n-1)}}}$$</span>
+כעת נבטא את המשתנים בעזרת הנגזרת:
+<span>$${{Y_{1}^{\prime}=Y_{2}}}\quad  {{Y_{2}^{\prime}=Y_{3}}}\quad  \dots\quad  {{Y_{n-1}^{\prime}=Y_{n}}}$$</span>
+כרגע יש לנו <span>\(n-1\)</span> משוואות. ניתן לקבל את המשוואה האחרונה - ביטוי עבור <span>\(Y_{n}\)</span> בעזרת המשוואה הדיפרנציאלית:
+<span>$$Y_{n}^{\prime}=y^{(n)}=-{\frac{a_{n-1}}{a_{n}}}y^{(n-1)}-\cdots-{\frac{a_{0}}{a_{n}}}y=-{\frac{a_{n-1}}{a_{n}}}Y_{n}-\cdots-{\frac{a_{0}}{a_{n}}}Y_{1}$$</span>
+כעת ניתן לכתוב את המערכת משוואות בעזרת מטריצה בבסיס הציקלי תחת אופרטור הגזירה. כלומר נגדיר <span>\(e_{i}=Y_{i}\)</span> בסיס כאשר <span>\(1\leq i\leq n\)</span>. נקבל:
+<span>$$A=\begin{pmatrix}0&amp;0&amp;0&amp;\dots&amp;-{\frac{a_{0}}{a_{n}}}\\ 1&amp;0&amp;0&amp;\dots&amp;-{\frac{a_{1}}{a_{n}}}\\ 0&amp;1&amp;0&amp;\dots&amp;-{\frac{a_{2}}{a_{n}}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\ \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\ 0&amp;0&amp;0&amp;\dots&amp;-{\frac{a_{n-1}}{a_{n}}}\end{pmatrix}$$</span>
+כאשר המשוואה שלנו תהיה <span>\(A\vec{Y}=Y'\)</span>. כיוון שאנחנו תחת המרוכבים, קיימת צורת ג'ורד <span>\(J\)</span>:
+<span>$$J=\begin{pmatrix}J_{1}&amp;0&amp;\cdot\cdot\cdot&amp;0\\ 0&amp;J_{2}&amp;\cdot\cdot\cdot&amp;0\\ \vdots&amp;\vdots&amp;\cdot\cdot&amp;\vdots\\ 0&amp;0&amp;\cdot\cdot\cdot&amp;J_{k}\end{pmatrix}\qquad J_{\lambda}=\begin{pmatrix}\lambda&amp;0&amp;0&amp;\cdot\cdot\cdot&amp;0\\ 1&amp;\lambda&amp;0&amp;\cdot\cdot\cdot&amp;0\\ 0&amp;1&amp;\lambda&amp;\cdot\cdot\cdot&amp;0\\ \vdots&amp;\vdots&amp;\vdots&amp;\cdot\cdot\cdot&amp;0\\ \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;0\\ 0&amp;0&amp;0&amp;1&amp;\lambda\end{pmatrix}$$</span>
+כאשר <span>\(J_{\lambda}\)</span> זה הבלוק ג'ורדן המתאים לערך עצמי <span>\(\lambda\)</span>. ולכן המשוואה שקולה למשוואה <span>\(J\vec{x}=0\)</span>. מספיק לפתור עבור כל בלוק.
+נקבל:</p>
+<ol>
+<li>
+<p>כאשר הבלוק מגדול אחד המשוואה תהיה <span>\(y'=\lambda y\)</span> ונקבל <span>\(y=e^{ \lambda x }\)</span>. </p>
+</li>
+<li>
+<p>כאשר יש בלוק בגודל גדול <span>\(k&gt;1\)</span> נקבל מערכת משוואות פשוטה שנותנת: 
+<span>$$y_{1}=e^{\lambda_{1}x}\quad y_{2}=xe^{ \lambda x }\quad \dots \quad y_{k}=x^{k}e^{\lambda x}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">משוואת אויילר</span><p>משוואה דיפרנציאלית מהצורה:
+<span>$$a_n x^n y^{(n)}+...+a_1 x y' + a_0 y = 0$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן למצוא את הבסיס של מרחב הפתרונות של משוואת אויילר מהצורה <span>\(a_n x^n y^{(n)}+...+a_1 x y' + a_0 y = 0\)</span> בצורה הבאה:</p>
+<ol>
+<li>
+<p>נפתור את המשוואה: 
+<span>$$a_n \lambda^n + ... + a_1\lambda + a_0$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(\lambda \in \mathbb{C}\)</span> פתרון, נקבל כי <span>\(x^{\lambda}\)</span> נמצא בבסיס של מרחב הפתרונות. </p>
+</li>
+<li>
+<p>אם יש ל-<span>\(\left( x-\lambda \right)\)</span> ריבוי אלגברי <span>\(k\)</span>, אז גם <span>\(\ln(x)x^{\lambda},\dots,\ln(x)^{k}x^{\lambda}\)</span> איברים בבסיס של מרחב הפתרון. </p>
+</li>
+</ol>
+</div>
+<p>ההוכחה דומה להוכחה עם מקדמים קבועים.</p>
+<div class="example"><span class="keyword">מערכת של משוואות מסדר גבוה</span><p>נסתכל על המשוואה:
+<span>$$My''+Ky=0$$</span>
+כאשר <span>\(M,K\)</span> מטריצות(ניתן לחשוב על זה כמערכת של קפיצים מצומדים כאשר <span>\(M\)</span> זה המסות ו-<span>\(K\)</span> זה קבוע קפיץ).</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='prev-page'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+</ul></li>
+        </body>
+        </html>
+        

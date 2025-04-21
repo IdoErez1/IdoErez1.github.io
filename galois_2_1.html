@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שדה פיצול</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent-page'><a href='./galois.html'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_1_1.html'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_2.html'>1.2 הרחבת שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_2_1.html'>2.1 שדה פיצול</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_3.html'>2.3 שיכונים של שדות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_4.html'>2.4 הרחבה נורמלית</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_5.html'>2.5 הרחבת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_2_6.html'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./galois_3_1.html'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_2.html'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_3.html'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_4.html'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_5.html'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent_page-dropdown'><a href='./galois_3_6.html'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./galois_2_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./galois_1_3.html`;}});</script>
+        <div class="content">
+        <h1>2.1  שדה פיצול</h1>
+    <div class="definition"><span class="keyword">שדה פיצול</span><p>עבור פולינום <span>\(p \in F[x]\)</span> השדה פיצול של <span>\(p\)</span> יהיה ההרחבת שדות <span>\(E / F\)</span> מהדרגה המינימלית בו <span>\(p\)</span> מתפצל לחלוטין.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבה נורמלית</span><p>הרחבת שדות אשר נוצר משדה פיצול נקרא הרחבה נורמלית.</p>
+</div>
+<div class="proposition">
+<p>ההרחבה שבו כל הפולינומים מעל <span>\(F\)</span> מתפצלים (כלומר ההרחבה שמכילה את כל שדות הפיצול) יהיה הסוגר האלגברי.</p>
+</div>
+<div class="proposition">
+<p>מימד ההרחבה המירבי של שדה פיצול של פולינום מדרגה <span>\(n\)</span> יהיה <span>\(n!\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">יחידות שדה הפיצול</span><p>שדה הפיצול של פולינום הוא יחיד על כדי איזומורפיזם(כאשר מתכוונים לאיזומורפיזמים בין השדות שמקבעות את התת שדה <span>\(K\)</span>).</p>
+</div>
+<div class="proof">
+<p>יהיו <span>\(E_{1},E_{2}\)</span> שדות פיצול של <span>\(P \in F[x]\)</span> ויהי <span>\(\Omega\)</span> שדה סגור אלגברית שמכיל את <span>\(E_{2}\)</span>.</p>
+<ol>
+<li>
+<p>מספר השיכונים <span>\(\tau:E_{1}\to \Omega\)</span> כך ש-<span>\(\tau|_{F}=id_{F}\)</span> הוא מוגדר <span>\(\iota(E_{1} / F)\)</span> שהוא יהיה לפחות 1 </p>
+</li>
+<li>
+<p>נסמן <span>\(\alpha_{1}^{i},\dots,\alpha_{k}^{i} \in E_{i}\)</span> את השורשים של <span>\(P\)</span> ב-<span>\(E_{i}\)</span>. כלומר <span>\(E_{i}=F\left( \alpha_{1}^{i},\dots,\alpha_{k}^{i} \right)\)</span>. </p>
+</li>
+<li>
+<p>כיוון ש-<span>\(\tau(P)=P\)</span> נקבל כי: 
+<span>$$\tau\left( \left\{  \alpha_{1}^{1},\dots,\alpha_{k}^{1}  \right\} \right)=P= \left\{  \alpha_{1}^{2},\dots,\alpha_{k}^{2}  \right\}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>ניקח <span>\(p(x)=x-a_{0}\)</span> ב-<span>\(F\)</span>. שדה הפיצול יהיה <span>\(F\)</span></p>
+</div>
+<div class="example">
+<p>ניקח <span>\(p(x)=x^2+a_{1}x+a_{0}=0\)</span>. נניח שלא פריק. ניתן לבנות שדה חדש:
+<span>$$E =  F / (p)$$</span>
+זה מכיל את השורשים של <span>\(p\)</span>. וזה יהיה שדה הפיצול.</p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(p(x)=x^3 - 2\)</span> מעל <span>\(\mathbb{Q}\)</span>. כיוון שלא פריק תחת <span>\(\mathbb{Q}\)</span> נגדיר:
+<span>$$L=\mathbb{Q} \left( \sqrt[3]{ 2 } \right) \cong \mathbb{Q} (x) / (x^3 - 2)$$</span>
+נשים לב כי הפולינום <span>\((x^3 - 2)\)</span> מתפצל תחת <span>\(L\)</span>:
+<span>$$p=x^3-2=\left( x-\sqrt[3]{ 2 } \right)\left( x^2+\sqrt[3]{ 2 } x+\sqrt[3]{ 2 }^2\right)$$</span>
+כאשר הגורם השני לא פריק תחת <span>\(L\)</span>! נדרש לבצע הרחבה נוספת:
+<span>$$M= L  /\left( y^2+\sqrt[3]{ 2 }y+\sqrt[3]{ 2 }^2 \right)$$</span>
+כעת מתקיים <span>\(K\subseteq L \subseteq M\)</span>
+כאשר <span>\([M:K]=[M:L][L:K]=6\)</span></p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(p(x)=x^4+1\)</span> מעל <span>\(\mathbb{Q}\)</span>. אם <span>\(\alpha\)</span> הוא שורש, גם <span>\(\alpha^3,\alpha^5, \alpha^7\)</span> שורש. השדה הפיצול הוא:
+<span>$$\mathbb{Q} \left( \alpha \right)\cong  \mathbb{Q} [x] / (x^4+1)$$</span>
+כאשר מסדר 4.</p>
+</div>
+<div class="example">
+<p>יהי <span>\(p(x)=x^4+2x^2-8\)</span> פולינום ב-<span>\(\mathbb{Q}[x]\)</span>. אזי ל-<span>\(p(x)\)</span> יש את הגורמים האי פריקים <span>\(x^2-2\)</span> ו-<span>\(x^2+4\)</span>. לכן השדה <span>\(\mathbb{Q}\left( \sqrt{ 2 },i \right)\)</span> יהיה השדה פיצול.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./galois_2_2.html'>2.2 הרחבה ספרבילית</a></li>
+<li class='prev-page'><a href='./galois_1_3.html'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

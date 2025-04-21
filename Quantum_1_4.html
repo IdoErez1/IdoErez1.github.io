@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ספין</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_1_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  ספין</h1>
+    <div class="definition"><span class="keyword">ספין</span><p>תכונה קוונטית חומר. ניתן למדוד ב-3 כיוונים, אשר נסמן אותם <span>\(\sigma_{z},\sigma_{y},\sigma_{x}\)</span></p>
+</div>
+<div class="proposition">
+<p>עבור כל ערך של ספין(<span>\(\sigma _{x},\sigma_{y},\sigma_{z}\)</span>) הערכים האפשריים הם רק <span>\(1,-1\)</span>.</p>
+</div>
+<p>היינו יכולים אולי לצפות שיהיו ערכים רציפים. אבל למעשה יש רק 2 ערכים דיסקרטים.</p>
+<div class="proposition">
+<p>כאשר מודדים ערך של ספין בכיוון מסויים(למשל <span>\(z\)</span>) ומקבלים 1, אז מדידות עוקבות יתנו את אותו הערך.</p>
+</div>
+<div class="proposition">
+<p>אם נהפוך את הגלאי נקבל <span>\(-1\)</span>. זה נכון גם עבור מדידות עוקבות.</p>
+</div>
+<div class="remark">
+<p>אפשר לחשוב על זה בתור - המדידה הראשונה מקבעת את הערך. ומדידות נוספות מאשרות אותו.</p>
+</div>
+<div class="proposition">
+<p>כאשר מודדים ערך של ספין בכיוון <span>\(z\)</span> ולאחר מכן מודדים את הערך של הספין בכיוון <span>\(x\)</span>. נקבל כי התוצאה של הספין בכיוון <span>\(x\)</span> תהיה או <span>\(1\)</span> או <span>\(-1\)</span> בהסתרות שווה לחלוטין. כלומר הממוצע לאחר מדידות רבות תהיה 0.</p>
+</div>
+<div class="remark">
+<p>יש כאן קצת אינטואיציה קלאסית, כיוון שאם הספין הוא בכיוון <span>\(z\)</span> אז נצפה כי הערך שלו בכיוון <span>\(x\)</span> הוא 0.</p>
+</div>
+<div class="proposition">
+<p>כאשר מודדים את הערך של הספין בכיוון <span>\(z\)</span>. ולאחר מכן מודדים את הערך של הספין בכיוון בין <span>\(x\)</span> ל-<span>\(z\)</span>. נקבל כי התוצאה של הספין בכיוון הזה יהיה שוב או <span>\(1\)</span> או <span>\(-1\)</span>. אך הפעם ההסתבריות לכל אפשרות לא תהיה שווה. אם הווקטור של הכיוון של המדידה הוא <span>\(\hat{n}\)</span> כאשר הכיוון של ציר <span>\(z\)</span> יהיה <span>\(\hat{z}\)</span> אז הממוצע לאחר הטלות רבות יהיה <span>\(\hat{z}\hat{n}\)</span>.</p>
+</div>
+<div class="remark">
+<p>שוב יש כאן קצת אינטואיציה קלאסית. בפיזיקה הקלאסית נקבל כי אם ווקטור בכיוון <span>\(\hat{z}\)</span> אז אם נחפש את הערך שלו על ציר בכיוון <span>\(\hat{m}\)</span> נקבל כי הוא יהיה <span>\(\hat{z}\hat{m}\)</span> - הערך הממוצע שמתקבל פה בפועל.</p>
+</div>
+<div class="proposition">
+<p>ניתן לייצג כל מצב ספין מרחב הילברט דו מימדי.</p>
+</div>
+<div class="symbolize">
+<p>נרצה לייצג את כל הספינים האפשריים בעזרת ווקטורים. עבור <span>\(\sigma_{z}=\pm 1\)</span> נקבל את הווקטורים <span>\(\ket{\uparrow_{z}}\)</span> ו-<span>\(\ket{\downarrow_{z}}\)</span>.
+כאשר באופן דומה נייצג את <span>\(\sigma_{x}=1\)</span> ע"י <span>\(\ket{\uparrow_{x}}\)</span> ו-<span>\(\sigma_{x}=-1\)</span> ע"י <span>\(\ket{\downarrow_{x}}\)</span>. כנל לגבי <span>\(\sigma_{y}\)</span> ע"י הווקטורים <span>\(\ket{\uparrow_{y}}\)</span> ו-<span>\(\ket{\downarrow_{y}}\)</span>.</p>
+</div>
+<p>נדרוש כי ווקטורים אלו יהיו מנורמלים. כלומר <span>\(\braket{ \uparrow_{z} | \uparrow_{z} }=1\)</span>.</p>
+<p>ניתן לייצג ווקטור(או מצב) במרחב הדו מימדי על ידי כל שתי ווקטורים באוסף הזה. לכן עבור המצב <span>\(\ket{A}\)</span> ניתן לכתוב:
+<span>$$\ket{A} = \alpha_{1}\ket{\uparrow_{z}} +\alpha_{2}\ket{\downarrow_{z}} \implies \alpha_{1}=\braket{  \uparrow_{z}|  A}\quad \alpha_{2}=\braket{ \downarrow | A }    $$</span>
+בפני עצמם, למספרים המרוכבים <span>\(\alpha_{1},\alpha_{2}\)</span> אין משמעות. אך לגודל שלהם יש משמעות חשובה.</p>
+<div class="proposition">
+<p>עבור <span>\(\ket{A} = \alpha_{1}\ket{\uparrow_{z}} +\alpha_{2}\ket{\downarrow_{z}}\)</span> ההסתרות של תוצאות המדידה יהיו:
+<span>$$P\left( \uparrow_{z} \right)=\left\lvert  \alpha_{1}  \right\rvert =\alpha_{1}^*\alpha_{1}^\qquad P\left( \downarrow_{z} \right)=\left\lvert  \alpha_{2}  \right\rvert =\alpha_{2}^{*}\alpha_{2}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$P\left( \uparrow_{z} \right)=\braket{ \uparrow_{z} | A }^{\dagger} \braket{ \uparrow_{z} | A }  =\braket{ A | \uparrow_{z} } \braket{ \uparrow_{z} | A } $$</span></p>
+</div>
+<div class="proposition">
+<p>כיוון שלא יכול להיות גם במצב <span>\(\ket{\uparrow_{z}}\)</span> וגם <span>\({} \ket{\downarrow_{z}} {}\)</span> נדרוש כי <span>\(\braket{ \uparrow_{z} | \downarrow_{z} }=0\)</span>. כלומר המצבים חד משמעיים ולכן אורתוגונאלים.</p>
+</div>
+<div class="proposition">
+<p>כיוון שבוודאות נמצא או במצב <span>\(\ket{\uparrow_{z}}\)</span> או במצב <span>\(\ket{\downarrow_{z}}\)</span> נצפה כי סך ההסתרויות יהיה 1. נשים לב כי כיוון שהווקטורים האלו מנורמלים, נדרש גם ש-<span>\(A\)</span> יהיה מנורמל. לכן <span>\(\lvert A \rvert=1\)</span>.</p>
+</div>
+<p>נזכור כי אמרנו כי אם המערכת הייתה במצב של <span>\(\ket{\uparrow_{z}}\)</span> נקבל כי יש הסתברות שווה שזה יהי ב-<span>\(\ket{\uparrow_{x}}\)</span> ו-ב-<span>\(\ket{\downarrow_{y}}\)</span>. ולכן
+<span>$$\left\lvert  \braket{ \uparrow_{z} | \uparrow_{x} }  \right\rvert  =\frac{1}{2}\quad \left\lvert  \braket{ \downarrow_{z} | \uparrow_{x} }\right\rvert = \frac{1}{2}\implies    \ket{\uparrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}} $$</span></p>
+<p>כאשר יש חופש בחירה של המקדמים, כיוון שגם למשל <span>\(\frac{i}{\sqrt{ 2 }},-\frac{1}{\sqrt{ 2 }}\)</span> מקיימים את הדרישה שההסתברות היא חצי.
+<strong>הגדרה</strong> חופש פאזה
+כפל של המקדמים עם מספר על המעל היחידה <span>\(z = e^{i\theta}\)</span> לא משנה את ההסתברות.</p>
+<div class="remark">
+<p>חופש של הפאזה למעשה נובע מהחופש בחירה של הצירים.</p>
+</div>
+<div class="proposition">
+<p><span>$$\ket{\downarrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} -\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}} $$</span></p>
+</div>
+<div class="proof">
+<p>כעת נזכור כי המצב <span>\(\ket{\uparrow_{x}}\)</span> לא יכול להיות בו זמנית עם המצב <span>\(\ket{\downarrow_{x}}\)</span>. ולכן נדרוש <span>\(\braket{ \uparrow_{x} | \downarrow_{x} }=0\)</span>. מתנאי זה נקבל כי:
+<span>$$\ket{\uparrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}} \implies 0 = \frac{1}{\sqrt{ 2 }}\braket{ \downarrow_{x} |\uparrow_{z}  }+\frac{1}{\sqrt{ 2 }}\braket{ \downarrow_{x} | \downarrow_{z} }\implies   \braket{ \downarrow_{x} | \downarrow_{z} } = - \braket{ \downarrow_{x} | \uparrow_{z} }$$</span>
+כאשר שוב נדרוש כי ההסתברות תהיה שווה לחצי שנקבל <span>\(\ket{\downarrow_{x}}\)</span>. </p>
+</div>
+<div class="proposition">
+<p><span>$$
+\ket{\uparrow_{y}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{i}{\sqrt{ 2 }}\ket{\downarrow_{z}} \qquad \ket{\downarrow_{y}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} -\frac{i}{\sqrt{ 2 }}\ket{\downarrow_{z}} $$</span></p>
+</div>
+<div class="proof">
+<p>ראשית נדורש כי לא ייתכן ויהיה גם במצב <span>\(\sigma_{y}=1\)</span> וגם במצב <span>\(\sigma_{y}=-1\)</span>. כלומר <span>\(\braket{ \uparrow_{y} | \downarrow_{y} }=0\)</span>.
+כעת נדרוש גם כמו מקודם כי אם נמדד את אחד הערכים האחרים <span>\(\ket{\uparrow_{z}},\ket{\uparrow_{x}},\ket{\downarrow_{z}},\ket{\downarrow_{x}}\)</span> נקבל:
+<span>$$\left\lvert  \braket{ \uparrow_{x} | \uparrow_{y} }   \right\rvert =\left\lvert  \braket{ \uparrow_{x} | \downarrow_{y} }   \right\rvert =\left\lvert  \braket{ \downarrow_{x} | \uparrow_{y} }   \right\rvert =\left\lvert  \braket{ \downarrow_{x} | \downarrow_{y} }   \right\rvert =\left\lvert  \braket{ \uparrow_{z} | \uparrow_{y} }   \right\rvert =\left\lvert  \braket{ \uparrow_{z} | \downarrow_{y} }   \right\rvert =\left\lvert  \braket{ \downarrow_{z} | \uparrow_{y} }   \right\rvert =\left\lvert  \braket{ \downarrow_{z} | \downarrow_{y} }   \right\rvert=\frac{1}{2}$$</span></p>
+</div>
+<div class="corollary">
+<p>תחת הבסיס של <span>\(\ket{\uparrow_{z}}\)</span> ו-<span>\(\ket{\downarrow_{z}}\)</span> מתקיים:
+<span>$$\begin{gather}\ket{\uparrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}}  \qquad \ket{\downarrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} -\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}}  \\\ket{\uparrow_{y}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{i}{\sqrt{ 2 }}\ket{\downarrow_{z}} \qquad \ket{\downarrow_{y}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} -\frac{i}{\sqrt{ 2 }}\ket{\downarrow_{z}} 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ייצוג של הבסיס כווקטורים</span><p>ניתן להציג את הספין כווקטורים אורתוגונאלים כרצונינו, ולכן הבחירה הטבעית תהיה:
+<span>$$\ket{\uparrow_{z}} =\begin{pmatrix}1 \\ 0\end{pmatrix}\qquad  \ket{\downarrow_{z}} =\begin{pmatrix}0 \\ 1
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ייצוג של מדידה של ספין כמטריצה</span><p><span>$$\sigma_{z}=\begin{pmatrix}1 &amp; 0 \\0 &amp; -1\end{pmatrix}\qquad \sigma_{x}=\begin{pmatrix}0 &amp; 1 \\1 &amp; 0\end{pmatrix}\qquad \sigma_{y}=\begin{pmatrix}0 &amp; i \\i &amp; 0
+\end{pmatrix}$$</span>
+כאשר מטריצות אלו נקראות מטריצות פאולי.</p>
+</div>
+<div class="proof">
+<p>נרצה למצוא מטריצה <span>\(\sigma_{z}\)</span> ששקולה למדידה של הספין בכיוון <span>\(z\)</span>. ראשית נדרוש:
+<span>$$\begin{gather}\sigma _{z}\ket{\uparrow_{z}} =\ket{\uparrow_{z}}\implies \begin{pmatrix}\left( \sigma_z \right)_{11} &amp; \left( \sigma_{z} \right)_{12} \\\left( \sigma_{z} \right)_{21} &amp; \left( \sigma_z \right)_{22}\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}=\begin{pmatrix}1\\0\end{pmatrix}\\\sigma_{z}\ket{\downarrow_{z}} =-\ket{\downarrow_{z}} \implies   \begin{pmatrix}\left( \sigma_{z} \right)_{11} &amp; \left( \sigma_{z} \right)_{12} \\\left( \sigma_{z} \right)_{21} &amp; \left( \sigma_{z} \right)_{22}\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}=-\begin{pmatrix}0\\1\end{pmatrix}
+\end{gather}$$</span>
+כלומר נרצה שתי ערכים עצמיים שמייצגים ערכי מדידה - <span>\(1,-1\)</span>. זוהי מערכת של 4 משוואות עם 4 נעלמים. נקבל לבסוף:
+<span>$$\sigma_{z}=\begin{pmatrix}1 &amp; 0 \\0 &amp; -1
+\end{pmatrix}$$</span>
+כעת נשתמש בערכים שמצאנו מקודם כדי למצוא את המטריצת מדידה בכיוון <span>\(y\)</span> ו-<span>\(x\)</span>.
+<span>$$\begin{gather}\ket{\uparrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} +\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}} \implies \begin{pmatrix}\left( \sigma_{x} \right)_{11} &amp; \left( \sigma_{x} \right)_{12} \\\left( \sigma_{x} \right)_{21} &amp; \left( \sigma_{x} \right)_{22}\end{pmatrix}\begin{pmatrix}\frac{1}{\sqrt{ 2 }} \\\frac{1}{\sqrt{ 2 }}\end{pmatrix}=\begin{pmatrix}\frac{1}{\sqrt{ 2 }} \\\frac{1}{\sqrt{ 2 }}\end{pmatrix} \\\ket{\downarrow_{x}} = \frac{1}{\sqrt{ 2 }}\ket{\uparrow_{z}} -\frac{1}{\sqrt{ 2 }}\ket{\downarrow_{z}} \implies \begin{pmatrix}\left( \sigma_{x} \right)_{11} &amp; \left( \sigma_{x} \right)_{12} \\\left( \sigma_{x} \right)_{21} &amp; \left( \sigma_{x} \right)_{22}\end{pmatrix}\begin{pmatrix}\frac{1}{\sqrt{ 2 }} \\-\frac{1}{\sqrt{ 2 }}\end{pmatrix}=-\begin{pmatrix}\frac{1}{\sqrt{ 2 }} \\-\frac{1}{\sqrt{ 2 }}\end{pmatrix} 
+\end{gather}$$</span>
+כאשר נקבל שוב מערכת של 4 משוואות עם 4 נעלמים, אשר תתן:
+<span>$$\sigma_{x}=\begin{pmatrix}0 &amp; 1 \\1 &amp; 0
+\end{pmatrix}$$</span>
+כאשר באופן דומה נקבל:
+<span>$$\sigma_{y}=\begin{pmatrix}0 &amp; i \\i &amp; 0
+\end{pmatrix}$$</span></p>
+</div>
+<div class="remark">
+<p>מטריצות פאולי ביחד עם מטריצת היחידה יוצרות בסיס למרחב המטריצות ה-<span>\(2\times 2\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+<li class='prev-page'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

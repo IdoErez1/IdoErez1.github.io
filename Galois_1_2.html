@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרחבת שדות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+<li class='parent-page'><a href='./Galois'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_2'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_4'>2.4 הרחבה נורמלית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_5'>2.5 הרחבת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_6'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_3_1'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_2'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_3'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_4'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_5'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_6'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Galois_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Galois_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  הרחבת שדות</h1>
+    <div class="definition"><span class="keyword">הרחבת שדות</span><p>שתי שדות <span>\(F\subseteq E\)</span> כך ש-<span>\(F\)</span> הוא תת שדה של <span>\(E\)</span>. מסומן <span>\(E / F\)</span>.</p>
+</div>
+<div class="proposition">
+<p>להרחבת שדות יש מבנה של מרחב ווקטורי.</p>
+</div>
+<div class="definition"><span class="keyword">מימד ההרחבה</span><p>המימד של המרחב הווקטורי שנוצר ע"י הרחבת השדות. מסומן <span>\([E:F]\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבה אינסופית</span><p>הרחבה שהמימד הרחבה שלה הוא אינסופי.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבת שדות סופית</span><p>תת שדות אשר נוצרת על ידי כמות ספית של איברים</p>
+</div>
+<div class="definition"><span class="keyword">תת שדה הנוצר על ידי איברים</span><p>עבור הרחבת שדות <span>\(E / F\)</span> נסמן את התת שדה המנימלי של <span>\(E\)</span> שמכיל את <span>\(F\)</span> ואת <span>\(\alpha_{1},\dots,\alpha_{n}\in E\)</span> ע"י <span>\(F\left( \alpha_{1},\dots,\alpha_{n} \right)\)</span></p>
+</div>
+<div class="remark">
+<p>יש הבדל משמעותי בין הקבוצת יוצרים לבין הבסיס של המרחב הווקטורי.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבה אלגברית</span><p>יהי <span>\(E / F\)</span> הרחבת שדות. אם עבור <span>\(\alpha \in E\)</span> קיים פולינום <span>\(0 \neq f \in F\)</span> כך ש-<span>\(f\left( \alpha \right)=0\)</span>, נקרא ל-<span>\(\alpha\)</span> אלגברי.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבה טרנזנדנטית</span><p>הרחבה שאינה אלגברית</p>
+</div>
+<div class="proposition">
+<p>הרחבה היא סופית אם"ם נוצר סופי ואלגברי</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(E / F\)</span> הרחבה סופית. לכן קיים עבורו בסיס <span>\(\alpha_{1},\dots,\alpha_{m} \in E\)</span>. מתקיים <span>\(E=F\left( \alpha_{1},\dots,\alpha_{m} \right)\)</span> ולכן <span>\(E / F\)</span> נוצר סופית.</p>
+</div>
+<p>כעת נניח נוצר סופי ואלגברי. לכן קיימים <span>\(\alpha_{1},\dots,\alpha_{m} \in E\)</span> אלגברים כך ש-<span>\(E=F\left( \alpha_{1},\dots,\alpha_{m} \right)\)</span>. אנו יודעים כי:
+<span>$$[E:F]=\prod_{i=1}^{n}\left[ F\left( \alpha_{1},\dots,\alpha_{i} \right):F\left( \alpha_{1},\dots \alpha_{i-1} \right) \right]$$</span>
+כאשר כל אחת ההרחבות היא סופית כיוון שזו הרחבה פשוטה של איבר אלגברי, ולכן בפרט המכפלה שלהם פשוטה.</p>
+<div class="proposition">
+<p>אם <span>\(E / F\)</span> הרחבת שדות, ו-<span>\(\alpha,\beta \in E\)</span> אלגבריים מעל <span>\(F\)</span>, אזי <span>\(\alpha\pm \beta,\alpha \beta,\frac{\alpha}{\beta}\in E\)</span> אלגברים.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי <span>\(F\left( \alpha,\beta \right)\)</span> הרחבה שנוצרת מאיברים אלגברים ולכן בפרט נוצרת סופית ואלגברית</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(F\subseteq E \subseteq K\)</span>  הרחברת שדות אם <span>\(K / E\)</span> ו-<span>\(E / F\)</span> אלגברית, אז <span>\(K / F\)</span> אלגבריות.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\alpha \in K\)</span> ויהי <span>\(m_{\alpha}=\sum_{i=0}^{n} \beta_{i}x^{i}\)</span> כאשר <span>\(\beta_{i} \in E\)</span> הפולינום המינימלי של <span>\(\alpha\)</span> מעל <span>\(E\)</span>. נסמן <span>\(S=F\left( \beta_{1},\dots,\beta_{n} \right)\)</span>. מהטענה הקודמת <span>\(S / F\)</span> הרחבה סופית. .נקבל כי
+<span>$$\left[ F\left( \alpha \right):F \right]$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פולינום מינימלי</span><p>מוגדר עבור איבר אלגברי <span>\(\alpha \in E\)</span>. זהו הפולינום המתוקן <span>\(m_{\alpha}\in F[x]\)</span> מהמעלה הנמוכה ביותר שמקיים <span>\(m_{\alpha}\left( \alpha \right)=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הפולינום המינימלי הוא אי פריק</p>
+</div>
+<div class="proposition">
+<p>אם יש פולינום אי פריק שמאפס את האיבר, אז הוא יהיה הפולינום המינימלי.</p>
+</div>
+<div class="proposition">
+<p>מתקיים <span>\(F\left( \alpha \right)\cong F[x] / \left( m_{\alpha}(x) \right)\)</span>. כלומר השדה התת שדה שנוצר ע"י <span>\(\alpha\)</span> איזומורפי להרחבת שדות של האידיאל שנוצר ע"י <span>\(m_{\alpha}(x)\)</span> עם הפולינומים עם מקדמים ב-<span>\(F\)</span>.</p>
+</div>
+<div class="proposition">
+<p>התת שדה הנוצר מקיים:
+<span>$$\left[ F\left( \alpha \right):F \right]=\deg\left( \alpha \right)=\deg\left( m_{\alpha}(x) \right)$$</span></p>
+</div>
+<h2>אוטומורפיזם של שדות</h2>
+<div class="definition"><span class="keyword">אוטומורפיזם של שדות</span><p>יהי <span>\(F\)</span> שדה. פונקציה הפיכה <span>\(\phi:F\to F\)</span> תקרא אוטומורפיזם של שדות אם לכל <span>\(a,b\in F\)</span> מתקיים:
+<span>$$\phi(a+b)=\phi(a)+\phi(b)\qquad \phi(ab)=\phi(a)\phi(b)$$</span></p>
+</div>
+<p>כלומר <span>\(\phi\)</span> משמר את המבנה של השדה. אוטומורפיזם של שדות שקול לאוטומורפיזם של חוגים.</p>
+<div class="example">
+<p>עבור השדה <span>\(F=\mathbb{Q}\left( \sqrt{ 2 } \right)\)</span> נגדיר:
+<span>$$\phi:\mathbb{Q} \left( \sqrt{ 2 } \right)\to\mathbb{Q} \left( \sqrt{ 2 } \right) \qquad \phi:a+b\sqrt{ 2 }\mapsto a-b\sqrt{ 2 }$$</span>
+כאשר מוגדר היטב כי תחת הרחבה זו ניתן להציג כל מספר ב-<span>\(a+\sqrt{ 2 }b\)</span> כאשר <span>\(a,b \in \mathbb{Q}\)</span>. זהו אוטומורפיזם כיוון שמתקיים:
+<span>$$\begin{gather}\phi\left( \left( a+b{\sqrt{2}} \right)+\left( c+d{\sqrt{2}} \right) \right)=\cdot\cdot\cdot=\phi\left( a+b{\sqrt{2}} \right)+\phi\left( c+d{\sqrt{2}} \right)  \\\phi((a+b{\sqrt{2}})(c+d{\sqrt{2}}))=\cdot\cdot\cdot=\phi(a+b{\sqrt{2}})\,\phi(c+d{\sqrt{2}})
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\phi\)</span> אוטומורפיזם של <span>\(F / \mathbb{Q}\)</span> אז מקיים:
+<span>$$\forall q \in \mathbb{Q} \qquad \phi(q)=q$$</span></p>
+</div>
+<div class="proof">
+<p>נניח <span>\(\phi(1)=q\)</span>. נשים לב כי <span>\(q\neq0\)</span> כיוון שאחרת נקבל כי לא חח"ע:
+<span>$$\phi(2)=\phi(1+1)=\phi(1)+\phi(1)=0=\phi(1)$$</span>
+כעת מתקיים:
+<span>$$\begin{gather}q=\phi(1)=\phi\left( 1\cdot 1 \right)=\phi(1)\phi(1)=q^2  \\q=\phi(1)=\phi\left( 1\cdot 1 \cdot 1 \right)=q^3 
+\end{gather}$$</span>
+ולכן בהכרח מתקיים <span>\(q^n=q\)</span> לכל <span>\(n\geq 1\)</span>, ולכן <span>\(q=1\)</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+<li class='prev-page'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

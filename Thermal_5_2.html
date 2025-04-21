@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המערכת המבודדת - הצבר המיקרוקנוני</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_5_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_5_1`; }});</script>
+        <div class="content">
+        <h1>5.2  המערכת המבודדת - הצבר המיקרוקנוני</h1>
+    <div class="definition"><span class="keyword">צבר מיקרוקנוני</span><p>המערכת המבודדת. זוהי מערכת שבה האנרגיה, מספר החלקיקים והנפח נשארים קבועים.</p>
+</div>
+<div class="proposition">
+<p>אם אין אינטרקציה בין החלקיקים האנרגיה הפוטנציאלית תהיה אפס.</p>
+</div>
+<div class="corollary">
+<p>סך האנרגיה של מערכת ללא אינטרקציה בין החלקיקים תהיה:
+<span>$$E=\sum_{i=1}^{3N}\frac{p_{i}^{2}}{2m}.$$</span></p>
+</div>
+<div class="reminder">
+<p>נפח של כדור <span>\(N\)</span> מימדי יהיה:
+<span>$$V_{N}(R)=\frac{\pi^{N/2}}{\Gamma\left(\frac{N}{2}+1\right)}R^{N}$$</span>
+כאשר עבור אליפסויד הנפח יהיה:
+<span>$$V_{N}=\frac{2}{N}\frac{\pi^{N/2}}{\Gamma(N/2)}(a_{1}a_{2}a_{3}\ldots a_{N})$$</span>
+כאשר <span>\(a_{1},\dots,a_{n}\)</span> מייצגות את אורך החציר(חצי ציר ראשי).</p>
+</div>
+<div class="definition"><span class="keyword">הפונקציה הצוברת של מספר המצבים</span><p>מספר המיקרו מצבים עד האנרגיה <span>\(E\)</span>. מסומן ב-<span>\(\Gamma=\Gamma(E)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם נחלק את המרחב פאזה לנפחים קטנים כך שיש סיכוי שווה שיהיה מצב בכל יחידת נפח נקבל כי כל המיקרומצבים האפשריים יהיו המקירומצבים עם אנרגיה קטנה מ-<span>\(E\)</span>. זה יהיה אוסף כל ה-<span>\(p_{i}\)</span> אשר מקיימים:
+<span>$$E\,\geq\,\sum_{i=1}^{3N}\frac{p_{i}^{2}}{2m}\implies 2mE \geq \sum_{i=1}^{3N} p_{i}^{2}$$</span>
+כלומר זה יהיה כדור <span>\(3N\)</span> מימדי עם רדיוס <span>\(\sqrt{ 2mE }\)</span>.</p>
+</div>
+<div class="remark">
+<p>הגודל של הקוביות שאנחנו מחלקים הוא שרירותי, ואין לו חשיבות במכניקה סטטיסטית קלאסית, אך בדרך כלל כדי שיהיה זהה לתוצאות במכניקה סטטיסטית קוונטית נבחר קוביות קטנות בנפח <span>\(h\)</span> כיוון שזה הנפח הבסיסי לפי העקרון האי וודואות הקוונטי:
+<span>$$\Delta x\Delta p_{x}\geq h.$$</span></p>
+</div>
+<div class="proposition">
+<p>במרחב הפאזה אם אנחנו מניחים שמורכב מקוביות שוות הסתברות נקבל כי:
+<span>$$\Gamma\left(E\right)={\frac{\text{Volume in phase space up to energy }E}{\text{Volume in phase space of a single state}}}=\frac{\int_{U\left( \mathbf{p},\mathbf{x} \right)\leq E}\mathrm{d}\mathbf{p}\mathrm{d}\mathbf{x}}{h^{d}} $$</span>
+כאשר הנפח של קובייה יחידה תהיה <span>\(h^{d}\)</span>. והגבולות נקבעות לפי הדרישה שהאנרגיה המקסילית היא <span>\(E\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">פונקציה צוברת של המצבים עבור גז אידיאלי</span><p>עבור גז אידיאלי נקבל כי <span>\(\mathcal{H}= \frac{p^{2}}{2m}\)</span>. נסכום על כל הקוביות במרחב פאזה כאשר הגבולות שלנו נקבעות לפי האנרגיה המקסימלית:
+<span>$$E_{\max }=\frac{p_{\max }^{2}}{2m}\implies p_{\max }^{2}=2E_{\max }m\implies p\leq \sqrt{ 2E_{\max }m }$$</span>
+נשים לב כי זה לעשה מייצג נפח של כדור תלת מידי במרחב הפאזה. בנוסף אפשר לראות כי האנרגיה אינה תלויה במיקום ולכן אין אילוץ כלל על המקום <span>\(\mathbf{x}\)</span>. באופן כללי נדרש לבצע אינטגרל על המרחב כולו אבל כדי שהאינטגרל לא יתבדר נדרוש כי הנפח של המיכל הוא <span>\(V\)</span>, ולכן:
+<span>$$\Gamma(E)=\frac{1}{h^{3}}\int_{0}^{\sqrt{ 2Em }}  \, d\vec{p} \int_{V}  \, d\vec{x}=  \frac{V}{h^{3}}V_{\text{Sphere}}=\frac{V}{h^{3}} \frac{4\pi}{3}(2Em)^{3/2}$$</span></p>
+</div>
+<div class="corollary">
+<p>מספר המיקרו מצבים המתאימים עבור אנרגיה <span>\(E\)</span> נפח <span>\(V\)</span> ומספר חלקיקים <span>\(N\)</span> יהיה:
+<span>$$\Gamma(E,V,N)=\frac{V^{N}}{h^{3N}N!}\frac{\left( 2\pi m E \right)^{3N/2}}{\Gamma\left(\frac{3N}{2}+1\right)}$$</span>
+כאשר חלקנו ב-<span>\(N!\)</span> כיוון שהחלקיקים לא מובחנים. כלומר אם נחליף בין שתי חלקיקים זה יהיה עדיין אותו מצב. בלי חלוקה זו האנטרופיה לא תהיה גודל אקסטנסיבי.</p>
+</div>
+<div class="proposition">
+<p>מספר המצבים בין רמת אנרגיה <span>\(E\)</span> לרמת אנרגיה <span>\(E+\Delta E\)</span> לא תלויה -<span>\(\Delta E\)</span> בגבול התרמודינמי, כלומר כאשר דרגות החופש שואפות לאינסוף.</p>
+</div>
+<div class="proof">
+<p>השינוי בכמות המצבים כתוצאה בשינוי קטן באנרגיה יהיה שקול לשינוי שנפח של כדור <span>\(N\)</span> מימדי עבור שינוי קטן ברדיוס. אנחנו רוצים להסתכל על הצפיפות של המצבים ולכן נסתכל על היחס של הקלפה הקטנה לעומת הנפח הכולל כאשר מספר המימדים יהיה גדול.
+<span>$$\frac{V_{N}(R)-V_{N}\left( R-\Delta R \right)}{V_{N}(R)}=\frac{R^{N}-\left( R-\Delta R \right)^{N}}{R^{N}}= 1-\left( 1-\frac{\Delta R}{R} \right)^{N}\xrightarrow{N\gg 1} 1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">צפיפות המצבים</span><p>מספר המיקרו מצבים בין אנרגיה <span>\(E\)</span> לאנרגיה <span>\(E+dE\)</span>. מקיים:
+<span>$$\Omega\left(N,V,E\right)=\Gamma\left(N,V,E\right)-\Gamma\left(N,V,E-d E\right)\equiv g\left(N,V,E\right)d E$$</span>
+כאשר צפיפות המצבים היא פונקציה <span>\(g\)</span> כך שמתקיים:
+<span>$$g(E)=\frac{\partial \Gamma}{\partial E} $$</span></p>
+</div>
+<div class="corollary">
+<p>צפיפות המצבים היא תהיה הפונקציה <span>\(g(E)\)</span> אשר מקיימת:
+<span>$$\Gamma(E)=\int_{0}^{E}g\left( E^{\prime} \right)d E^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור המרחב הפאזה של המיקום ותנע נקבל מהתוצאה הקודמת על הפונקציה הצוברת את הצפיפות מצבים הבאה:
+<span>$$g(E,V,N)=\frac{\partial \Gamma}{\partial E} =\frac{V^{N}}{h^{3N}N!}\frac{\left( 2\pi m \right)^{3N/2}}{\Gamma\left( \frac{3N}{2}+1 \right)}\frac{3N}{2}E^{(3N/2)-1}$$</span></p>
+</div>
+<div class="example">
+<p>עבור חלקיק יחיד נקבל:
+<span>$$g(E,V)=\frac{V}{h^{3}}\frac{\pi}{4}(8m)^{3/2}E^{1/2}$$</span></p>
+</div>
+<div class="proposition">
+<p>בעזרת קירוב סטרלינג נקבל כי האנטרופיה של גז אידיאלי תהיה:
+<span>$$S(E,V,N)=N k_{B}\left[\ln\left(\frac{V}{N}\right)+\frac{3}{2}\ln\left(\frac{E}{N}\right)+\frac{3}{2}\ln\left(\frac{4\pi m}{3h^{2}}\right)+\frac{5}{2}\right]$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור גז אידיאלי נקבל כי הטמפרטורה תהיה נתונה על ידי:
+<span>$$T(E,V,N)={\frac{2E}{3N k_{B}}}$$</span></p>
+</div>
+<div class="proof">
+<p>נובע ישירות מהגדרת האנטרופיה:
+<span>$$\left({\frac{\partial S}{\partial E}}\right)_{V,N}\!\!\!={\frac{1}{T}}={\frac{3N k_{B}}{2E}}$$</span>
+ועל ידי העברת אגפים נקבל את המבוקש.</p>
+</div>
+<div class="corollary"><span class="keyword">חוק החלוקה השווה</span><p><span>$$E=3N\left({\frac{1}{2}}k_{B}T\right)$$</span>
+כאשר כל גורם ריבועי בהמילטוניאן למעשה יתן אנרגיה של <span>\(\frac{k_{B}T}{2}\)</span>. וכן בפרט עבור גז אידיאלי יש <span>\(3N\)</span> גורמים ריבועיים.</p>
+</div>
+<div class="proposition">
+<p>לחץ של מערכת מבודדת של גז אידיאלי תהיה נתונה על ידי:
+<span>$$P={\frac{N k_{B}T}{V}} = \frac{3E}{2V}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\left(\frac{\partial S}{\partial V}\right)_{E,N}=\frac{P}{T}=\frac{N k_{B}}{V}$$</span>
+וכן מחוק החלוקה השוואה ניתן לקבל מזה:
+<span>$$P=\frac{3E}{2V}$$</span></p>
+</div>
+<div class="example"><span class="keyword">מגנט מבודד</span><p>נמצא מה המגנטיזציה כתלות בשדה החיצונית <span>\(\vec{B}\)</span>. מומנט מגנטי:
+<span>$$E=-\vec{m}\cdot \vec{B} = -m_{z}{B}$$</span>
+כאשר <span>\(m_{z}\)</span> נתון על ידי:
+<span>$$m_{z}= \pm \frac{1}{2}g \mu$$</span>
+כאשר קבוע בור <span>\(\mu= \frac{|e|\hbar}{2m}\)</span>(Bohr magnetism) והפקטור <span>\(g\approx 2\)</span> (g-factor). ולכן <span>\(m_{z}\approx \pm \mu\)</span>.
+עבור ספין <span>\(\uparrow_{z}\)</span> נקבל <span>\(m_{z}=-\mu\)</span> ויהיה עם אנרגיה <span>\(E=\mu B\)</span> כאשר עבור ספין <span>\(\downarrow_{z}\)</span> נקבל <span>\(m_{z}=\mu\)</span> ויהיה עם אנרגיה <span>\(E=-\mu B\)</span>.
+נסמן ב-<span>\(N_{\uparrow}\)</span> את כמות הספינים כלפי מעלה, וב-<span>\(N_{\downarrow}\)</span> את כמות הספינים כלי מטה, כך שמתקיים <span>\(N=N_{\uparrow}+N_{\downarrow}\)</span>. כעת נגדיר:
+<span>$$\tilde{m}=\frac{N_{\uparrow }-N_{\downarrow }}{N_{\uparrow }+N_{\downarrow }}\implies \begin{cases}E=\mu B N \cdot \tilde{m} \\\frac{M}{N}=-\mu \cdot \tilde{m}
+\end{cases}$$</span>
+לפי בולצמן נדרש לחשב את הכפליות.
+<span>$$\Omega\left( N_{\uparrow },N_{\downarrow } \right)=\frac{N!}{N_{\uparrow }!N_{\downarrow }!}$$</span>
+כאשר נשתמש כעת בקירוב סטרלינג:
+<span>$$\begin{gather}\log\left( \Omega \right)=\log(N!)-\log\left( N_{\uparrow }! \right) - \log\left( N_{\downarrow }! \right)= \\= N \log N - N -N_{\uparrow }\log\left( N_{\uparrow } \right)+N_{\uparrow }-N_{\downarrow }\log\left( N_{\downarrow } \right)+N_{\downarrow }=  \\=\left( N_{\uparrow }+N_{\downarrow } \right) \log N -N_{\uparrow }\log\left( N_{\uparrow } \right)-N_{\downarrow }\log\left( N_{\downarrow } \right)= \\=N_{\uparrow }\log\left( \frac{N}{N_{\uparrow }} \right)+N_{\downarrow }\log\left( \frac{N}{N_{\downarrow }} \right)
+\end{gather}$$</span>
+כאשר כעת:
+<span>$$\tilde{m}= \frac{N_{\uparrow }-N_{\downarrow }}{N_{\uparrow }+N_{\downarrow }}\implies \begin{cases} \tilde{m}N = N_{\uparrow }-N_{\downarrow } \\N= N_{\uparrow }+N_{\downarrow }\end{cases}\implies  \begin{cases}N_{\uparrow }= \frac{\tilde{m} + 1}{2} N \\N_{\downarrow }= \frac{1 - \tilde{m}}{2} N
+\end{cases}$$</span>
+ולכן נקבל כי כפליות המצב תהיה:
+<span>$$\log\left( \Omega \right)=-N_{\uparrow }\log\left( \frac{1+\tilde{m}}{2} \right)-N_{\downarrow }\log\left( \frac{1-\tilde{m}}{2} \right)=-N\left[ \frac{\tilde{m}+1}{2}\log\left( \frac{\tilde{m}+1}{2} \right)+\frac{1-\tilde{m}}{2} \log\left( \frac{1-\tilde{m}}{2} \right)\right]$$</span>
+כאשר האנטרופיה לחלקיק תהיה:
+<span>$$\frac{S}{N}=\frac{k_{B}\log\left( \Omega \right)}{N}$$</span>
+כאשר לדוגמא עבור <span>\(\tilde{m}=0\)</span> נקבל:
+<span>$$\frac{S}{N}\left( \tilde{m} = 0 \right)=k_{B}\left( -\frac{1}{2}\log\left( \frac{1}{2} \right)-\frac{1}{2}\log\left( \frac{1}{2} \right) \right)=k_{B}\log(2)$$</span>
+כעת:
+<span>$$\frac{S\left( \tilde{m} \right)}{Nk_{B}}=-\frac{\tilde{m}+1}{2}\log\left( \frac{1+\tilde{m}}{2} \right)- \frac{1-\tilde{m}}{2}\log\left( \frac{1-\tilde{m}}{2} \right)$$</span>
+כאשר כעת:
+<span>$$S(E,V,N,B)=N k_{B} f\left( \tilde{m} \right)$$</span>
+כאשר:
+<span>$$f\left( \tilde{m} \right)= - \frac{1+\tilde{m}}{2}\log\left( \frac{1+\tilde{m}}{2} \right)-\frac{1-\tilde{m}}{2}\log\left( \frac{1-\tilde{m}}{2} \right)$$</span>
+ניתן למצוא את הטמפרטורה:
+<span>$$\frac{1}{T}=\left.\frac{\partial S}{\partial E}\right|_{V,B} $$</span>
+כאשר כיוון ש-<span>\(E=\mu B\left( N_{\uparrow}-N_{\downarrow} \right)=\mu BN\tilde{m}\)</span> נקבל:
+<span>$$\frac{1}{T} = \frac{\partial  S}{\partial \tilde{m}} \frac{\partial \tilde{m}}{\partial E} = Nk_{B}\frac{\mathrm{d} f\left( \tilde{m} \right)}{\mathrm{d} \tilde{m}}  \frac{1}{\mu B N}=\frac{k_{B}}{\mu B}\frac{\mathrm{d} f}{\mathrm{d} \tilde{m}} $$</span>
+כאשר מתקיים:
+<span>$$\frac{\mathrm{d} f}{\mathrm{d} \tilde{m}} =-\frac{\mathrm{d} }{\mathrm{d} \tilde{m}} \left(\frac{ 1-\tilde{m}}{2}\log\left( \frac{1-\tilde{m}}{2} \right)+\frac{1+\tilde{m}}{2}\log\left( \frac{1+\tilde{m}}{2} \right) \right)=\frac{1}{2}\log\left( \frac{1-\tilde{m} }{1+\tilde{m}}\right)$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>הצבר המיקרוקנוני הוא מערכת מבודדת אשר מתאפיינת בכך שהאנרגיה, הנפח ומספר החלקיקים קבועים.</li>
+<li>המשתנה המרכזי בצבר זה הוא האנטרופיה, כאשר אם מוצאים את האנטרופיה ניתן למצוא הכל.</li>
+<li>מוצאים את האנטריפיה על ידי ספירת מצבים ושימוש באנטרופיית בולצמן עם קירוב סטרלינג.</li>
+<li>ניתן לספור את המצבים על ידי מציאת צפיפות המצבים ואז <span>\({\Omega}(E)=\int_{0}^{E}g(E^{\prime})d E^{\prime}\)</span></li>
+<li>האנטרופיה מקיימת <span>\(dS= \frac{1}{T}dE+\frac{p}{T}dV\)</span> ולכן:
+<span>$$\frac{1}{T}=\left. \frac{\partial S}{\partial E} \right \rvert_{V} \qquad \frac{p}{T}=\left. \frac{\partial S}{\partial V} \right \rvert_{E}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='prev-page'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

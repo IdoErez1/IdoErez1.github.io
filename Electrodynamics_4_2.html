@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ביו סבר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_4_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_4_1`; }});</script>
+        <div class="content">
+        <h1>4.2  ביו סבר</h1>
+    <div class="theorem"><span class="keyword">חוק ביו סבר</span><p>עבור צפיפות זרם קבוע נקבל
+<span>$$\vec{B} = \frac{I}{c}\oint \frac{d\vec{l} \times \vec{r}}{r^3}$$</span>
+כאשר עבור צפיפות זרם משתנה נקבל:
+<span>$$\vec{B}\left( \vec{x} \right)={\frac{1}{c}}\int\!\vec{J}\left( \vec{x}^{\prime} \right)\,\times\,{\frac{\left( \vec{x}-\vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|^{3}}}\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="proof">
+<p>נפעיל דיברגנץ על הביטוי:
+<span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</span>
+נראה שהפתרון שמצאנו מקיים <span>\(\bar{\nabla} \cdot \vec{A}=0\)</span>. כלומר מקיים את התנאי כיול:
+<span>$$\begin{gather}\bar{\nabla} \cdot \vec{A} = \partial_{i}A^i = \frac{\partial }{\partial x^i} \int\mathrm{d^3}\tilde{x} \frac{\frac{1}{c}J^i\left( \tilde{x} \right)}{\left\lvert  \vec{x}  -\tilde{\vec{x}}\right\rvert }=-\int\mathrm{d^3}\tilde{x} \left( \frac{\partial }{\partial \tilde{x}} \cdot \frac{1}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right) \frac{1}{c} \vec{J}'\left( \tilde{x} \right)  \\=\frac{\partial }{\partial \tilde{x}^{i}} \left( \frac{1}{c} \frac{J'\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)-\cancelto{ 0 }{ \frac{1}{c} \frac{\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } } = -\iint\vec{V} d\vec{\Sigma}=0
+\end{gather}$$</span>
+כאשר ה<span>\(\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)\)</span> התאפס בגלל משוואת הרציפות - <span>\(0 = \frac{\partial \rho}{\partial t}=\bar{\nabla} \cdot \vec{J}\)</span>, והאינטגרל על הנפח מתאפס עבור מעטפת מספיק גדולה.</p>
+<p><span>$$\vec{B} = \bar{\nabla} \times \vec{A} = \frac{1}{c}\int\mathrm{d^3}\tilde{x} \;\bar{\nabla}_{x} \times \left( \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)$$</span>
+נעזר בזהות:
+<span>$$\left[\vec{\nabla}\times\left(\vec{V}f\left(x\right)\right)\right]_{i}=\epsilon_{i j k}\partial_{j}\left(V_{k}f\left(x\right)\right)=\epsilon_{i j k}\left(\partial_{j}f\right)V_{k}=\left(\vec{\nabla}f\times\vec{V}\right)_{i}$$</span>
+ונקבל:
+<span>$$\vec{B}=\frac{1}{c}\int d^{3}\vec{x}^{\prime}\frac{\vec{J}\left(\vec{x}^{\prime}\right)\times\left(\vec{x}-\vec{x}^{\prime}\right)}{\mid\vec{x}-\vec{x}^{\prime}\mid^{3}}$$</span>
+כאשר זהו חוק ביו-סבר.</p>
+</div>
+<div class="remark">
+<p>זה למעשה המקביל לחוק קולון עבור מגנטיות, כאשר עבור השדה החשמלי בעזרת צפיפות <span>\(\rho\)</span> מטען קיבלנו:
+<span>$$\vec{E}(\vec{x})=\!\int\!\rho(\vec{x}^{\prime})\,{\frac{(\vec{x}-\vec{x}^{\prime})}{|\vec{x}-\vec{x}^{\prime}|^{3}}}\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="example">
+<p>הגודל של השדה המגנטי של תיל אינסופי הנושא זרם <span>\(I\)</span> יהיה:
+<span>$$|\vec{B}|={\frac{I R}{c}}\!\!\int_{-\infty}^{\infty}\!{\frac{d l}{(R^{2}+l^{2})^{3\zeta}}}={\frac{2I}{c R}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח של אלמנט תיל</span><p><span>$$d\vec{F}={\frac{I_{1}}{c}}\left(d\vec{I}_{1}\,\times\,\vec{B}\right)$$</span></p>
+</div>
+<p>בעזרת החוק ניתן לרשום את הביטוי לכוח בין שתי לולאות זרם קבועות. </p>
+<div class="proposition"><span class="keyword">כוח בין שתי תילים</span><p><span>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</span></p>
+</div>
+<div class="proof">
+<p>נסתכל על הכוח שפועל בין שתי תילים עם זרמים  <span>\(I_{1},I_{2}\)</span>. הכוח בין שתי אלמנטים על התיל <span>\(d\vec{l}_{1},d\vec{l}_{2}\)</span>.
+<span>$$d\vec{F}_{1\leftarrow 2 } = \frac{1}{c}dq_{1}\left( \vec{v}_{1} \times \vec{B}_{2} \right)= \frac{I_{1}}{c}\left( d\vec{l}_{1}\times \vec{B}_{2} \right) = \frac{I_{1}}{c}d\vec{l}_{1}\times\left( \frac{I_{2}}{c}\oint_{L_{2}} \frac{d\vec{l}_{2} \times x_{12}}{\left\lvert  \vec{x}_{12}  \right\rvert ^3} \right)$$</span>
+הכוח השקול נתון ע"י:
+<span>$$\vec{F}_{1\leftarrow 2} = \sum d\vec{F}_{1\leftarrow 2}=\frac{I_{1}I_{2}}{c^2}\oint_{L_{1}}\oint_{L_{2}} \frac{d\vec{l}_{1} \times \left( d\vec{l}_{2}\times \vec{x}_{12} \right)}{\left\lvert  \vec{x}_{12}  \right\rvert }$$</span>
+נשתמש בזהות הווקטורית <span>\(\vec{A}\times\left( \vec{B}\times \vec{C} \right)=\vec{B}\left( \vec{A}\cdot \vec{C} \right)-\vec{C}\left( \vec{A}\cdot \vec{B} \right)\)</span> ונקבל:
+<span>$$\frac{d\vec{l}_{1} \times d\vec{l}_{2} \times \vec{x}_{12}}{\lvert x_{12} \rvert ^3}=d\vec{l}_{2}\left( d\vec{l}_{1} \cdot \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3} \right)- \frac{\vec{x}_{12}}{\left\lvert  \vec{x}_{13}  \right\rvert ^3}\left( d\vec{l}_{1}d\vec{l}_{2} \right)$$</span>
+כאשר הגורם <span>\(d\vec{l}_{2}\left( d\vec{l}_{1} \cdot \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3} \right)\)</span> מתאפס לאחר אינטגרציה על <span>\(L_{1}\)</span>. נקבל:
+<span>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</span>
+כאשר נשים לב כי בפרט מתקיים החוק השלישי של ניוטון.</p>
+</div>
+<div class="example">
+<p>עבור שני תילים אינסופיים ומקבילים
+<span>$$\frac{d\vec{F}_{1\leftarrow {2}}}{dl}=\frac{2I_{1}I_{2}}{c^2d}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח ומומנט בעזרת צפיפות זרם</span><p><span>$$\vec{F}={\frac{1}{c}}\int\vec{J(x)}\;\times\;\vec{B(x)}\;d^{3}x\qquad {{{\vec{N}}={\frac{1}{c}}\int\vec{x\,\times\,(J\,\times\,B)}\;d^{3}x}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='prev-page'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מטריצות חיוביות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_9_6.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_9_4.html`;}});</script>
+        <div class="content">
+        <h1>9.5  מטריצות חיוביות</h1>
+    <div class="definition"><span class="keyword">מטריצה חיובית</span><p>כל הערכים עצמיים מקיימים <span>\(\lambda &gt;0\)</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצה חיובית למחצה</span><p>כל הערכים העצמיים מקיימים <span>\(\lambda \geq 0\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים למטריצה חיובית</span><p>עבור מטריצות <u>סימטריות</u> S התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>כל הערכים העצמיים חיוביים. </p>
+</li>
+<li>
+<p>כל הערכים הקשורים בצורה המדורגת יהיו חיוביים. </p>
+</li>
+<li>
+<p>כל הדטרמיננטות של בלוקים עליוניים יהיו חיוביים. </p>
+</li>
+<li>
+<p>קיים <span>\(A\)</span> כך ש-<span>\(S=A^{ T}A\)</span> כאשר העמודות של <span>\(A\)</span> בת"ל. </p>
+</li>
+<li>
+<p>לכל <span>\(x \in V\)</span> מתקיים <span>\(x^{T}Sx &gt; 0\)</span> פרט עבור <span>\(x=0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים למטריצה חיובית בהחלט</span><p>עבור מטריצות <u>סימטריות</u> S התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>כל הערכים העצמיים אי שליליים </p>
+</li>
+<li>
+<p>כל הערכים הקשורים בצורה המדורגת יהיו אי שליליים. </p>
+</li>
+<li>
+<p>כל הדטרמיננטות של בלוקים עליוניים יהיו אי שליליים. </p>
+</li>
+<li>
+<p>קיים <span>\(A\)</span> כך ש-<span>\(S=A^{ T}A\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(x \in V\)</span> מתקיים <span>\(x^{T}Sx \geq 0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אופרטור חיובי</span><p>אופרטור <span>\(T:V\to V\)</span> נקרא חיובי אם <span>\(T\)</span> צמוד לעצמו ומקיים לכל <span>\(v \in V\)</span>:
+<span>$$\langle Tv,v \rangle \geq 0$$</span></p>
+</div>
+<div class="remark">
+<p>כאשר אם <span>\(V\)</span> הוא מרחב ווקטורי תחת המרוכבים לא צריך לדרוש ש-<span>\(T\)</span> צמוד לעצמו כיוון שזה נובע מהאי שיוויון.</p>
+</div>
+<div class="example">
+<ul>
+<li>אם <span>\(U\)</span> הוא תת מרחב של <span>\(V\)</span> אז ההטלה האורתוגונאלית <span>\(P_{U}\)</span> הוא אופרטור חיובי.</li>
+<li>אם <span>\(T\)</span> הוא צמוד לעצמו כך ו-<span>\(b,c \in \mathbb{R}\)</span> כך ש-<span>\(b^{2}\leq 4c\)</span> אזי:
+<span>$$T^{2}+bT+cI$$</span>
+הוא אופרטור חיובי.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">שורש של אופרטור</span><p>אופרטור <span>\(R\)</span> יהיה השורש של אופרטור <span>\(T\)</span> אם <span>\(R^{2}=T\)</span>.</p>
+</div>
+<div class="example">
+<p>אם <span>\(T:\mathbb{F} ^{3}\to \mathbb{F} ^{3}\)</span> מוגדר על ידי:
+<span>$$T(z_{1},z_{2},z_{3})=(z_{3},0,0)$$</span>
+אזי השורש של <span>\(T\)</span> יהיה <span>\(R:\mathbb{F} ^{3}\to \mathbb{F} ^{3}\)</span> המוגדר על ידי:
+<span>$$R(z_{1},z_{2},z_{3})=(z_{2},z_{3},0)$$</span></p>
+</div>
+<div class="example">
+<p><span>$$T=\begin{pmatrix}36 &amp; 0 &amp; 0 \\0 &amp; 25 &amp; 0 \\0 &amp; 0 &amp; 16\end{pmatrix}\implies R=\begin{pmatrix}6 &amp; 0 &amp; 0 \\0 &amp; 5 &amp; 0 \\0 &amp; 0 &amp; 4
+\end{pmatrix}=\sqrt{ T }$$</span></p>
+</div>
+<div class="proposition">
+<p>הביטיים הבאים שקולים</p>
+<ol>
+<li>
+<p>האופרטור <span>\(T\)</span> הוא חיובי. </p>
+</li>
+<li>
+<p>האופרטור <span>\(T\)</span> צמוד לעצמו וכל הערכים העצמים שלו הם אי שליליים </p>
+</li>
+<li>
+<p>לאופרטור <span>\(T\)</span>  יש שורש חיובי(כלומר האופרטור המקיים <span>\(R^{2}=T\)</span> הוא אופרטור חיובי) </p>
+</li>
+<li>
+<p>לאופרטור <span>\(T\)</span> יש שורש צמוד לעצמו </p>
+</li>
+<li>
+<p>קיים אופרטור <span>\(R\)</span> כך ש-<span>\(T=R^{*}R\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(T\)</span> אופרטור חיובי. מההגדרה <span>\(T\)</span> יהיה צמוד לעצמו. נניח <span>\(\lambda\)</span> ערך עצמי של <span>\(T\)</span> עם ווקטור עצמי מתאים <span>\(v\)</span>. מתקיים: 
+<span>$$0\leq\langle Tv,v \rangle =\left\langle  \lambda v,v  \right\rangle =\lambda \langle v,v \rangle \implies \lambda \geq 0$$</span></p>
+</li>
+<li>
+<p>כעת נניח כי <span>\(T\)</span> צמוד לעצמו וכל הערכים העצמיים אי שליליים. לפי המשפט הספקטרלי קיים בסיס אורתונורמלי <span>\(e_{1},\dots,e_{n}\)</span> של <span>\(V\)</span> כך ווקטורים עצמיים של <span>\(T\)</span>. יהיו <span>\(\lambda_{1},\dots,\lambda_{n}\)</span> הערכים העצמים המתאימים. מההנחה <span>\(\lambda_{j}\geq 0\)</span>. נגדיר את האופרטור <span>\(R\)</span> לפי איך שפועל על איברי הבסיס: 
+<span>$$R (e_{j})=\sqrt{ \lambda_{j} }e_{j}$$</span>
+ניתן להראות כי <span>\(R\)</span> אופרטור חיובי. בנוסף <span>\(R^{2}e_{j}=\lambda_{j}e_{j}=Te_{j}\)</span> ולכן <span>\(R^{2}=T\)</span>.</p>
+</li>
+<li>
+<p>נניח כי ל-<span>\(T\)</span> יש שורש חיובי. אזי ל-<span>\(T\)</span> יש שורש שצמוד לעצמו כיוון שחיוביות דורש שיהיה צמוד לעצמו. </p>
+</li>
+<li>
+<p>נניח כי ל-<span>\(T\)</span> יש שורש צמוד לעצמו. כלומר קיים אופרטור צמוד לעצמו כך ש: 
+<span>$$T=R^{2}=R^{*}R\implies R=R ^{*}R$$</span></p>
+</li>
+<li>
+<p>נניח כי קיים אופרטור <span>\(T\)</span> כך ש-<span>\(T=R^{*}R\)</span>. האופרטור <span>\(T\)</span> צמוד לעצמו כי: 
+<span>$$T^{*}=(R^{*}R)^{*}=R^{*}(R^{*})^{*}=R^{*}R=T$$</span>
+כעת מתקיים לכל <span>\(v \in V\)</span>:
+<span>$$\langle Tv,v \rangle =\langle R^{*}Rv,v \rangle =\langle Rv,Rv \rangle \geq 0$$</span>
+ולכן <span>\(T\)</span> אופרטור חיובי.</p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>לכל אופרטור חיובי קיים שורש חיובי יחיד.</p>
+</div>
+<div class="remark">
+<p>ייתכן עדיין אינסוף שורשים שאינם חיוביים. לדוגמא לאופרטור היחידה יש אינסוף שורשים אם מימד המרחב גדול מ-1.</p>
+</div>
+<h2>פירוק פולארי</h2>
+<div class="reminder">
+<p>ניתן לכתוב כל מספר מכוב בצורה הבאה:
+<span>$$z=\left( \frac{z}{\lvert z \rvert } \right)\lvert z \rvert = \left( \frac{z}{\lvert z \rvert } \right)\sqrt{ \overline{z} z }$$</span></p>
+</div>
+<p>נראה את האנלוגיה בין המספרים המרוכבים לאופרטורים בעזרת טבלה.</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\mathbb{C}\)</span></th>
+<th><span>\(\mathrm{End}(V)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\(z\)</span></td>
+<td><span>\(T\)</span></td>
+</tr>
+<tr>
+<td><span>\(z^{*}\)</span></td>
+<td><span>\(T^{*}\)</span></td>
+</tr>
+<tr>
+<td><span>\(z \in \mathbb{R}\left( z=\overline{z} \right)\)</span></td>
+<td>האופרטור <span>\(T\)</span> צמוד לעצמו(<span>\(T=T^{*}\)</span>)</td>
+</tr>
+<tr>
+<td><span>\(z=\overline{w}w\)</span></td>
+<td><span>\(T=R^{*}R\)</span></td>
+</tr>
+<tr>
+<td><span>\(\lvert z \rvert=1\)</span></td>
+<td>האופרטור <span>\(T\)</span> הוא איזומטרייה</td>
+</tr>
+<tr>
+<td><span>$$z = \left( \frac{z}{\lvert z \rvert } \right)\sqrt{ \overline{z} z }$$</span></td>
+<td><span>\(T=S\sqrt{ T^{*}T }\)</span> עבור איזומטריה <span>\(S\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="theorem"><span class="keyword">פירוק פולארי</span><p>נניח <span>\(T \in \mathrm{End}(V)\)</span> אזי קיים איזומטרייה <span>\(S \in \mathrm{End}(V)\)</span> כך ש:
+<span>$$T=S\sqrt{ T^{*}T }$$</span></p>
+</div>
+<div class="proof">
+<p>נניח <span>\(v \in V\)</span>. מתקיים:
+<span>$$\left\|T v \right\|^{2}=\left\langle T v ,T v \right\rangle =\left\langle T^{\ast}T v , v \right\rangle=\left\langle\sqrt{T^{\ast}T}\sqrt{T^{\ast}T} v , v \right\rangle =\left\langle\sqrt{T^{\ast}T} v ,\sqrt{T^{\ast}T} v \right\rangle=\left\|\sqrt{T^{\ast}T} v \right\|^{2}$$</span>
+ולכן <span>\(\lVert Tv \rVert=\left\lVert  \sqrt{ T^{*}T }  \right\rVert\)</span>. כעת נגדיר <span>\(S:\mathrm{Im}\left( \sqrt{ T^{*}T } \right)\to \mathrm{Im}(T)\)</span> על ידי:
+<span>$$S\left( \sqrt{ T^{*}T } v\right)=Tv$$</span>
+כאשר כיוון שמתקיים <span>\(\left\lVert  \sqrt{ T^{*}T }v  \right\rVert=\lVert Tv \rVert\)</span> נקבל לכל <span>\(u \in \mathrm{Im}\left( \sqrt{ T^{*}T } \right)\)</span> כי מתקיים:
+<span>$$\lVert Su \rVert =\lVert u \rVert $$</span>
+אם התמונה של <span>\(\sqrt{ T^{*}T }\)</span> אינה שווה ל-<span>\(V\)</span> ניתן להרחב את <span>\(S\)</span> לאיזומטריה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+<li class='prev-page'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

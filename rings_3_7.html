@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חוג הפוך</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings.html'> תורת חוגים</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_3_6.html`;}});</script>
+        <div class="content">
+        <h1>3.7  חוג הפוך</h1>
+    <div class="definition"><span class="keyword">אנטי הומומרפיזם של חוגים</span><p>הומומורפיזם שבמקום שמשמר כפל הופך את הכפל, כלומר:
+<span>$$\Phi(rr')=\Phi(r')\Phi(r)$$</span></p>
+</div>
+<div class="reminder">
+<p>אם <span>\(f \in \mathrm{End}_{R}(R)\)</span> אז <span>\(f\)</span> נקבע על ידי <span>\(f(1)\)</span>. כי:
+<span>$$\forall x \in R\quad f(x)=f(x\cdot 1)=xf(1)$$</span>
+בנוסף, לכל <span>\(r \in R\)</span> אפשר להגדיר <span>\(f_{r}(x)=xr\)</span>. נשים לב כי <span>\(f_{r}\in \mathrm{End}_{R}(R)\)</span>. זה כיוון שמתקיים:
+<span>$$f_{r}(r'x)=(r'x)r=r'(xr)=r'f_{r}(x)$$</span>
+סה"כ:
+<span>$$\Phi:R\to \mathrm{End}_{R}(R)\qquad \Phi(r)=f_{r}$$</span>
+וכן <span>\(\Phi\)</span> חח"ע ועל.</p>
+</div>
+<div class="proposition">
+<p>ההעתקה <span>\(\Phi:R\to \mathrm{End}_{R}(R)\)</span> המוגדרת לעיל היא אנטי הומומואפיזם של חוגים.</p>
+</div>
+<div class="proof">
+<p><span>$$\Phi(r+r')(x)=f_{r+r'}(x)=xr+xr'=(\Phi(r)+\Phi(r'))(x)$$</span>
+עבור הכפל:
+<span>$$\Phi(rr')(x)=f_{rr'}(x)=xrr'=(\Phi(r')\circ  \Phi(r))(x)$$</span>
+כלומר קיבלנו:
+<span>$$\Phi(rr')=\Phi(r')\Phi(r)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חוג הפוך</span><p>לחוג <span>\(R\)</span> החוג ההפוך <span>\(R^{\text{op}}\)</span> הוא <span>\(R\)</span> כקבוצה וכחבורה חבורה אבל עם הכפל:
+<span>$$x\cdot_{R^{\mathrm{op}}}y := y\cdot_{R} x$$</span></p>
+</div>
+<div class="corollary">
+<p>קיבלנו:
+<span>$$\Phi:R^{\text{op}}\xrightarrow{\cong }\mathrm{End}_{R}(R)$$</span>
+<strong>דוגמא</strong>
+נקבל כי <span>\(f(A)=A^{T}\)</span> הוא איזומורפיזם <span>\(f:M_{R}(\mathbb{F})\to M_{n}(\mathbb{F})^{\mathrm{op}}\)</span>.
+<span>$$f(I)=I\qquad f(A+B)=fA+fB\qquad f(AB)=f(A)\cdot f(B)=f(B)f(A)$$</span></p>
+</div>
+<div class="remark">
+<p>אם <span>\(R\)</span> קומוטטיבי אז <span>\(R\cong R^{\text{op}}\)</span>. כמו כן בחבורות תמיד מתקיים <span>\(R\cong R^{\text{op}}\)</span> כאשר באותו אופן <span>\(M_{n}(R)^{\text{op}}\cong M_{n}(R^{\text{op}})\)</span> בעזרת האיזומורפיזם <span>\(A\mapsto A^{T}\)</span>. אבל לא לא תמיד מתקיים עבור מודולים.</p>
+</div>
+<div class="proposition"><span class="keyword">אנדומורפיזמים של מודולים חופשיים</span><p>נתון <span>\(R\)</span> מודול חופשי <span>\(M=R^{n}\)</span> מדרגה <span>\(n\)</span>. אזי:
+<span>$$\operatorname{End}_{R}(R^{n})\cong M_{n}(R^{\mathrm{op}})$$</span></p>
+</div>
+<div class="proof">
+<p>כפל ב-<span>\(R\)</span> וב-<span>\(M_{n}(R)\)</span> נסמן ב- <span>\(\cdot\)</span> כאשר כאפל ב-<span>\(R^{\text{op}}\)</span> וב-<span>\(M_{n}(R^{\text{op}})\)</span> יסומן על ידי <span>\(\times\)</span>.
+המודול <span>\(M_{n}(R)^{\text{op}}\)</span> פועל על <span>\(R^{n}\)</span> כאנדומורפיזם <span>\(\Psi:M_{n}(R^{\text{op}})\to \mathrm{End}_{R}(R^{n})\)</span> על ידי: 
+<span>$$A\times v = \begin{pmatrix}v_{1}a_{11}+\dots+v_{1}a_{1n} \\\vdots \\v_{n}a_{n_{1}}+\dots+v_{n}a_{nn}
+\end{pmatrix}=(v^{T}A^{T})^{T}$$</span>
+כאשר אם החוג היה קומוטטיבי זה היה פשוט <span>\(Av\)</span>. כעת נראה כי <span>\(R\)</span>-לינארי:</p>
+<ol>
+<li>
+<p>הומוגניות: 
+<span>$$A\times(r\,v)=\left((r\,v)^{T}A^{T}\right)^{T}=\left(r\,v^{T}A^{T}\right)^{T}=r\left(v^{T}A^{T}\right)^{T}=r\,(A\times v)$$</span></p>
+</li>
+<li>
+<p>אדיטיביות: 
+<span>$$A\times(v+w)=\left((v+w)^{T}A^{T}\right)^{T}=\left((v^{T}+w^{T})A^{T}\right)^{T}=\left(v^{T}A^{T}+w^{T}A^{T}\right)^{T}=(A\times v)+(A\times w)$$</span>
+ולכן <span>\(\Psi(A)\in \mathrm{End}_{R}(R^{n})\)</span>. נראה כי הומומואפיזם:</p>
+</li>
+<li>
+<p>משמר חיבור: 
+<span>$$\Psi(A+B)(v)=(A+B)\times v=A\times v+B\times v=(\Psi(A)+\Psi(B))(v)$$</span></p>
+</li>
+<li>
+<p>משמר כפל(עם היפוך): 
+<span>$$(A\star B)_{i j}=\sum_{k=1}^{n}a_{i k}\star b_{k j}=\sum_{k=1}^{n}b_{k j}\,a_{i k}$$</span>
+כאשר:
+<span>$$\Psi(A\star B)(v)=(A\star B)\times v=\left(v^{T}(A\star B)^{T}\right)^{T}=\left(v^{T}(B^{T}A^{T})\right)^{T}=A\times(B\times v)=(\Psi(A)\circ\Psi(B))(v)=(\alpha\star B)$$</span>
+ולכן <span>\(\Psi(A\star B)=\Psi(A)\circ\Psi(B).\)</span> כלומר <span>\(\Psi\)</span> הומומורפיזם של חוגים. נראה כי על. יהי <span>\(f\in \mathrm{End}_{R}(R^{n})\)</span>. נמצא <span>\(A \in M_{n}(R^{\text{op}})\)</span> עם <span>\(\Psi(A)=f\)</span>. יהי <span>\(\{ e_{1},\dots,e_{n}  \}\)</span> הבסיס הסטנדרטי של <span>\(R^{n}\)</span>. עבור כל <span>\(j\)</span> נכתוב:
+<span>$$f(e_{j})\;=\;\sum_{i=1}^{n}a_{i j}\,e_{i},\quad a_{i j}\in R.$$</span>
+נגדיר את המטריצה <span>\(A=(a_{ij})\)</span> וכעת עבור <span>\(v=\sum_{j}v_{j}e_{j}\)</span> נקבל:
+<span>$$f(v)=\sum_{j}v_{j}f(e_{j})=\sum_{j}v_{j}\sum_{i}a_{i j}e_{i}=\sum_{i}\Bigl(\sum_{j}v_{j}a_{i j}\Bigr)e_{i}=A\times v$$</span>
+ולכן <span>\(f=\Psi(A)\)</span>. הייחודיות של <span>\(a_{ij}\)</span> מראה ש-A ייחודי. נראה כי חח"ע. אם <span>\(\Psi(A)=0\)</span> אזי <span>\(A\times e_{j}=0\)</span> לכל <span>\(j\)</span> אבל:
+<span>$$A\times e_{j}=\begin{pmatrix}a_{1j}\\ a_{2j}\\ \vdots\\a_{nj}
+\end{pmatrix}$$</span>
+לכן כל עמודה מתאפסת ו-<span>\(A=0\)</span>. כלומר קיבלנו כי הומומואפיזם חח"ע ועל ולכן איזומומורפיזם של חוגים.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings.html'> תורת חוגים</a></li>
+<li class='prev-page'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

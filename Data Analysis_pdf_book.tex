@@ -1,0 +1,374 @@
+\documentclass{tstextbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Example Document}
+\author{HTML2LaTeX Converter}
+\maketitle
+
+\section{הסתברות}
+
+\subsection{אקסיומות ההסתברות}
+
+\begin{definition}[אירוע]
+תרחיש אפשרי של ניסוי
+
+\end{definition}
+\begin{definition}[מדידה]
+ביצוע ניסוי, ומציאת הערך שהתקבל בפועל
+
+\end{definition}
+\begin{definition}[אקסוימות קולמוגורוב - Kolmogorov]
+  \begin{itemize}
+    \item ההסתברות של אירוע הוא מספר ממשי חיובי - \(P(A)\geq 0\).
+    \item ההסתברות של אירוע וודאי הוא 1 - \(P\left( \Omega \right)=1\).
+    \item ההסתברות של אירועים זרים הם סכום ההסתברויות. כלומר אם \(A\cap B = \varnothing\) אזי:
+$$P\left( A\cup B \right)=P(A)+P(B)$$
+  \end{itemize}
+\end{definition}
+\begin{corollary}
+$$P\left( \overline{A}  \right)=1-P(A)\qquad P\left( \varnothing  \right)=0\qquad P\left( A\cup B \right)=P(A)+P(B)-P\left( A\cap B \right)$$$$A\subseteq B\implies P(A)\leq P(B)$$
+
+\end{corollary}
+\begin{definition}[הסתברות מותנת]
+ההסתברות \(P(A|B)\) תהיה ההסתברות שיקרא מאורע \(A\) תחת התנאי שמעורה \(B\) מתרחש.
+
+\end{definition}
+\begin{proposition}
+ההסתברות המותנת נתונה על ידי:
+$$P\{A|B\}={\frac{P\{A\cap B\}}{P\{B\}}},\,P\{B\}\neq0$$
+
+\end{proposition}
+\begin{corollary}[משפט בייס]
+$$P\{A|B\}={\frac{P\{B|A\}P\{A\}}{P\{B\}}}$$
+
+\end{corollary}
+\begin{definition}[פונקציה התפלגות מצטברת - CDF]
+פונקציה \(F\) המוגדרת על ידי:
+$$F(t)=P(X<t),\,-\infty<t<\infty$$
+
+\end{definition}
+\begin{proposition}[תכונות של CDF]
+  \begin{enumerate}
+    \item פונקציה מונוטונית עולה. 
+
+
+    \item ערכה ב-\(-\infty\) יהיה 0. 
+
+
+    \item ערכה ב-\(\infty\) תהיה 1. 
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{definition}[התפלגות דיסקרטית]
+התפלגות המכילה מספר בין מנייה. של אירועים. ניתן לכתוב על ידי:
+$$\sum_{i=1}p(x_{i})=1$$
+
+\end{definition}
+\begin{proposition}
+ניתן לכתוב את ההסתברות של אירוע בהתפלגות דיסקרטית על ידי:
+$$p(x_{i})=P(x=x_{i})=F(x_{i}+\delta)-F(x_{i}-\delta),$$
+כאשר עבור \(\delta\) קטן ניתן לקרב לפונקציית דלתא. לכן ניתן להתייחס רק למקרא של התפלגות רציפה
+
+\end{proposition}
+\begin{definition}[צפיפות הסתברות]
+עבור פונקציית התפלגות מצטברת \(F(x)\) ניתן להגדיר את צפיפות ההסתברות על ידי:
+$$f(x)=\frac{d F(x)}{d x}$$
+
+\end{definition}
+\begin{proposition}[תכונות של צפיפות הסתברות]
+  \begin{enumerate}
+    \item הקצוות מתאפסת, כלומר: 
+$$f(-\infty)=f(\infty)=0$$
+
+
+    \item אינטגרל על התחום כולו יהיה 1: 
+$$\int_{-\infty}^{\infty}f(x)d x=1$$
+
+
+    \item ההסתברות להיות בין \(x_{1}\) ל-\(x_{2}\) נתונה על ידי: 
+$$P\{x_{1}\leq x\leq x_{2}\}=F(x_{2})-F(x_{1})=\int_{x_{1}}^{x_{2}}f(x)d x$$
+
+
+  \end{enumerate}
+\end{proposition}
+\subsection{מומנטים}
+
+\begin{definition}[ערך תצפית]
+ערך תצפית של \(u(x)\) אשר תלוי במשתנה המקרי \(x\) מוגדר על ידי:
+$$E(u(x))=\sum_{i=1}^{\infty}u(x_{i})p(x_{i})\qquad E(u(x))=\int_{-\infty}^{\infty}u(x)f(x)$$
+
+\end{definition}
+\begin{corollary}[תכונות של ערך תצפית]
+  \begin{enumerate}
+    \item ערך תצפית של קבוע הוא קבוע - \(E(c)=c\). 
+
+
+    \item ערך תצפית של ערך תצפית מקיים - \(E(E(u))=E(u)\). 
+
+
+    \item לינאריות - \(E(v+u)=E(v)+E(u)\). 
+
+
+    \item הומוגניות - \(E(cu)=c\cdot E(u)\). 
+
+
+    \item אם \(u,v\) בלתי תלוים מקיימים: 
+$$E\left( u\cdot v \right)=E(u)\cdot E(v)$$
+
+
+  \end{enumerate}
+\end{corollary}
+\begin{symbolize}
+לעיתים מסמנים ערך תצפית ב-\(E(u)\equiv \langle u \rangle\). לעיתים גם מכונה ממוצע או מרכז המסה ונהוג להיות מסומן על ידי \(\mu\).
+
+\end{symbolize}
+\begin{definition}[שונות]
+יהי \(x\) משתנה מקרי כאשר \(\mu=\langle x \rangle\). השונות \(\mathrm{var}(x)\) מוגדר על ידי המרחק הממוצע מהממוצע, כלומר:
+$$\mathrm{var}(x)=E\left( \left( x-\mu \right)^{2} \right)$$
+
+\end{definition}
+\begin{proposition}[תכונות של שונות]
+  \begin{enumerate}
+    \item כפל בסקלר מקיים: 
+$$\mathrm{var}(cx)=c^{2}\mathrm{var}(x)$$
+
+
+    \item ניתן לכתוב בעזרת ערך תצפית על ידי: 
+$$\mathrm{var}(x)=E(x^{2})-\mu^{2}=\langle x^{2} \rangle -\langle x \rangle ^{2}$$
+
+
+    \item אינווריאנטי להזזה של ההתפלגות. 
+
+
+    \item עבור שתי התפגויות בלתי תלויות \(x_{1},x_{2}\) מתקיים: 
+$$\mathrm{var}(x_{1}+x_{2})=\mathrm{var}(x_{1})+\mathrm{var}(x_{2})$$
+כאשר בפרט עבור סכום \(x_{i}\) של התפלגויות בלתי תלויות מתקיים \(\mathrm{var}\left( \sum x_{i} \right)=\sum_{i}\mathrm{var}(x_{i})\).
+
+
+  \end{enumerate}
+\end{proposition}
+\begin{definition}[סטיית תקן]
+השורש של השונות. מסומן על ידי \(\sigma=\sqrt{ \mathrm{var}(x) }\). לעיתים מסמנים את סטיית התקן על ידי \(\sigma^{2}\).
+
+\end{definition}
+\begin{remark}
+הגודל \(\frac{\sigma}{\mu}\) הוא גודל שלא תלוי בסקלות של ההתפלגות. זאת כי גם \(\mu\) וגם \(\sigma\) לינארים לכפל בסקלר.
+
+\end{remark}
+\begin{definition}[צידוד]
+מודד את האי-סימטרייה של התפלגות ביחס לממוצע. מוגדר על ידי:
+$$\gamma_{1}=E[(x-\mu)^{2}]/\sigma^{2}={\frac{E(x^{2})-3\mu\sigma^{2}-\mu^{2}}{\sigma^{3}}}$$
+
+\end{definition}
+\begin{definition}[מומנט]
+המומנט ה-\(n\) של התפלגות \(f(x)\) מוגדרת על ידי:
+$$\mu_{n}=E(x^{n})=\int_{-\infty}^{\infty}x^{n}f(x)d x$$
+
+\end{definition}
+\begin{definition}[מומנט מרכזי]
+המומנט סביב המרכז של ההתפלגות. מוגדר על ידי:
+$$\mu_{n}^{\prime}=E{\big(}(x-\mu)^{n}{\big)}=\int_{-\infty}^{\infty}(x-\mu)^{n}f(x)d x$$
+
+\end{definition}
+\begin{corollary}
+ניתן לראות כי \(\mu'_{1}= 0\), \(\mu'_{2}=\sigma^{2}\) ו-\(\mu'_{3}=\gamma_{1}\sigma^{2}\).
+
+\end{corollary}
+\subsection{החלפת משתנה}
+
+\begin{proposition}[החלפת משתנה]
+אם \(g(u)\) ו-\(f(x)\) מייצגים את אותה התפלגות הסתברות מתקיים:
+$$g(u)=f(x)\left|{\frac{d x}{d u}}\right|$$
+
+\end{proposition}
+\begin{proof}
+מתקיים:
+$$P(x_{1}<x<x_{2})=\int_{x_{1}}^{x_{2}}f(x^{\prime})d x^{\prime}=\int_{u_{1}}^{u_{2}}g(u^{\prime})d u^{\prime}$$
+ולכן:
+$$|g(u)d u|=|f(x)d x|\implies g(u)=f(x)\left|{\frac{d x}{d u}}\right|$$
+
+\end{proof}
+\begin{example}
+נחשב את צפיפות ההתסברות של נפח של ספרה בעזרת צפיפות ההסתברות של הרדיוס. נניח כי צפיפות ההסתברות של הרדיוס נתונה על ידי התפלגות אחידה:
+$$f(r)=\begin{cases}\frac{1}{r_{2}-r_{1}} & r_{1}<r<r_{2} \\0 & \text{else}
+\end{cases}$$
+אזי כעת \(g(V)=f(r)\left|{\frac{d r}{d V}}\right|\) כאשר אנו יודעים כי \({\frac{d V}{d r}}=4\pi r^{2}\) ולכן:
+$$g(V)=\frac{1}{r_{2}-r_{1}}\frac{1}{4\pi r^{2}}=\frac{1}{V_{2}^{1/3}-V_{1}^{1/3}}\frac{1}{3}V^{-2/3}$$
+
+\end{example}
+\begin{proposition}[פונקציית מעבר התפלגות]
+בהנתן שתי התפלגותיות \(f(x),g(u)\) עם פונקציות הסתברות מצטברות \(F(x),G(u)\) הטרנספורמציה המקשרת ביניהן תהיה:
+$$u(x)=G^{-1}(F(x))$$
+
+\end{proposition}
+\begin{proof}
+$$\int_{-\infty}^{x}f\left( x^{\prime} \right)d x^{\prime}=\int_{-\infty}^{u}g\left( u^{\prime} \right)d u^{\prime}\implies F(x)=G(u)\implies u(x)=G^{-1}(F(x))$$
+
+\end{proof}
+\begin{example}
+נניח ויש לנו דרך ליצור התפלגות אחידה ואנחנו רוצים ליצוא התפלגות אקספוננציאלית:
+$$g(u)=\begin{cases}\lambda e^{ -\lambda u } & 0<u \\0 & \text{else}
+\end{cases}$$
+אזי ניתן לכתוב:
+$$G(u)=1-e^{-\lambda u}=F(x)=x$$
+כאשר נבודד את \(u\) ונקבל:
+$$u=-\frac{\ln(1-x)}{\lambda}$$
+
+\end{example}
+\begin{proposition}[התפלגות רב משתנית]
+\end{proposition}
+\subsection{התפלגויות ידועות}
+
+\begin{definition}[התפלגות בינומית]
+ההתפלגות של להצליח \(k\) מתוך \(n\) נסיונות עם הסתברות של \(p\) עבור כל ניסיון. נתון על ידי:
+$$B_{p}^{n}(k)={\binom{n}{k}}p^{k}(1-p)^{(n-k)}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות בינומית]
+  \begin{itemize}
+    \item ערך התצפית נתון על ידי:
+$$E(k)=np$$
+    \item סטיית התקן נתון על ידי:
+$$\sigma^{2}=np(1-p)$$
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות מולטינומית]
+אם יש \(N\) אפשרויות עם הסתברות של \(p_{1},p_{2},\dots,p_{N}\) אזי ההסתברות לקבל את התוצאה \(k_{1},k_{2},\dots,k_{N}\) תהיה:
+$$M_{p_{1},p_{2},\ldots,p_{N}}^{n}(k_{1},k_{2},\ldots,k_{N})={\frac{n!}{\prod k_{i}!}}\prod_{i=1}^{N}p_{i}^{k_{i}}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות מולטינומית]
+  \begin{itemize}
+    \item מתקיים:
+$$\sum p_{i}=1\,\qquad \sum k_{i}=n$$
+    \item ערך התצפית נתון על ידי:
+$$E(k_{i})=n p_{i}$$
+    \item מטריצת הקו וריאנס נתונה על ידי:
+$$E(k_{i})=n p_{i}$$
+כאשר בפרט עבור \(N=2\) נקבל את ההתפלגות הבינומית.
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות פואסונית]
+כאשר יש סיכוי אקראי שאירוע מסויים יתרחש עם תדירות ממוצעת \(\lambda\) בפרק זמן נתון אז ההסתברות יהיה \(k\) אירועים כאלה בפרק זמן יהיה נתון על ידי התפלגות פואסונית:
+$$p_{\lambda}(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות פואסונית]
+  \begin{itemize}
+    \item ערך התצפית מקיים \(E(k)=\lambda\).
+    \item השונות מקיימת \(\mathrm{var}(x)=\lambda\).
+    \item מקרה גבולי של התפלגות בינומית עם \(np=\lambda\).
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות איחידה]
+התפלגות רציפה שהצפיפות הסתברות המוגדרת עבור תחום באורך \(\alpha\) וממוצע \(\mu\) על ידי:
+$$f(x)=\begin{cases}\frac{1}{\alpha} & \left\lvert  x-\mu  \right\rvert \leq \alpha / 2 \\0 & \text{else}
+\end{cases}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות אחידה]
+  \begin{itemize}
+    \item הערך הממוצע זה הערך תצפית - \(\langle x \rangle=\mu\).
+    \item השונות תקיים -\(\sigma^{2}=\frac{\alpha^{2}}{12}\).
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות נורמלית]
+עבור ממוצע \(\mu\) וסטיית תקן \(\sigma\) פונקציית הצפיפות ההסתברות מוגדרת על ידי:
+$$N(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^{2}/(2\sigma^{2})}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות נורמלית]
+  \begin{itemize}
+    \item סכום של התפלגויות נורמלית תהיה התפלגות נורמלית עם \(\sigma^{2}=\sum\sigma_{i}^{2}\) ו-\(\mu=\sum\mu_{i}\).
+    \item בגבול של מספרים גדולים, התפלגות בינומית, פואסנית, ו-\(\chi^{2}\) שואפות להתפלגות נורמלית.
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות נורמלית רב מימדית]
+עבור מטריצת קו ווריאנס \(C\) מוגדר על ידי:
+$$N(\vec{x})=\frac{1}{\sqrt{(2\pi)^{n}\det(C)}}\exp\left(-\frac{1}{2}(\vec{x}-\vec{x_{0}})^{T}C^{-1}(\vec{x}-\vec{x_{0}})\right)$$
+כאשר לעיתים קוראים ל-\(V=C^{-1}\) מטריצת משקל.
+
+\end{definition}
+\begin{example}
+במקרה הדו מימדי
+$$C=\left(\begin{array}{c c}{{s_{x}^{2}}}&{{\rho s_{x}s_{y}}}\\ {{\rho s_{x}s_{y}}}&{{s_{y}^{2}}}\end{array}\right)\implies V=\frac{1}{1-\rho^{2}}\left(\!\!\begin{array}{c c}{{1/s_{x}^{2}}}&{{-\rho/s_{x}s_{y}}}\\ {{-\rho/s_{x}s_{y}}}&{{1/s_{y}^{2}}}\end{array}\!\!\right)$$
+כאשר \(\det(C)=s_{x}^{2}s_{y}^{2}\left( 1-\rho^{2} \right)=1/\det(V)\).
+
+\end{example}
+\begin{definition}[התפלגות אקספוננציאלית]
+התפלגות אשר צפיפות ההסתברות מוגדרת על ידי:
+$$f(t)=\lambda e^{-\lambda t}$$
+
+\end{definition}
+\begin{proposition}[תכונות של התפלגות אקספוננציאלית]
+  \begin{itemize}
+    \item חסר זיכרון - כלומר אינווריאנטי להזזה של זמן.
+    \item ממוצע יהיה \(\mu =\frac{1}{\lambda}\) כאשר השונות תהיה \(\sigma^{2}=\frac{1}{\lambda^{2}}\).
+  \end{itemize}
+\end{proposition}
+\begin{definition}[התפלגות חי-בריבוע]
+\end{definition}
+\subsection{התפלגויות מרובות משתנים}
+
+\begin{definition}[פונקציית התפלגות מצטברת]
+מוגדר על ידי:
+$$F(x,y)=P\{(x^{\prime}<x)\cap(y^{\prime}<y)\}$$
+
+\end{definition}
+\begin{definition}[פונקציית צפיפות הסתברות]
+מוגדר על ידי:
+$$f(x,y)=\frac{F(x,y)}{\partial x\partial y}$$
+כך שמקיים את תנאי הנרמול:
+$$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x,y)d x d y=1$$
+
+\end{definition}
+\begin{definition}[פונקציית צפיפות התפלגות שולית]
+$$f_{x}(x)=\int_{-\infty}^{\infty}f(x,y)d y$$
+
+\end{definition}
+\begin{proposition}[הסתברות מותנת בעזרת התפלגות שולית]
+$$f_{x}(x|y)={\frac{f(x,y)}{\int_{-\infty}^{\infty}f(x,y)d x}}={\frac{f(x,y)}{f_{y}(y)}}$$
+כך שניתן לכתוב את משפט בייס על ידי:
+$$f_{x}(x|y)f_{y}(y)=f_{y}(y|x)f_{x}(x)=f(x,y)$$
+
+\end{proposition}
+\begin{definition}[שונות משותפת - Covariance]
+$$\mathrm{Cov}(x,y)=\sigma_{x y}=E[(x-\mu_{x})(y-\mu_{y})]$$
+
+\end{definition}
+\begin{definition}[דרגת קורולציה]
+$$\rho_{x y}={\frac{\sigma_{x y}}{\sigma_{x}\sigma_{y}}}$$
+
+\end{definition}
+\begin{definition}[משתנים בלתי תלוים/אורתוגונאליים]
+משתנים אשר ההתפגות ההסתברות שלהם מקיימת:
+$$f_{x}(x|y)=f_{x}(x)\qquad f_{y}(y|x)=f_{y}(y)$$
+או לחלופין אם מתקיים:
+$$f(x,y)=f_{x}(x)f_{y}(y)$$
+
+\end{definition}
+\begin{proposition}
+ערך תצפית של פונקציה \(u\left( \vec{x} \right)\) נתונה על ידי:
+$$E(u)=\int_{-\infty}^{\infty}\cdot\cdot\cdot\int_{-\infty}^{\infty}u(\vec{x})f(\vec{x})\prod d x_{i}$$
+
+\end{proposition}
+\begin{definition}[מטריצת קו ווריאנס]
+מטריצה שערכה נתונים על ידי:
+$$C_{i j}=\langle{\big(}x_{i}-\langle x_{i}\rangle{\big)}{\big(}x_{j}-\langle x_{j}\rangle{\big)}\rangle$$
+
+\end{definition}
+\begin{definition}[מטריצת קורולציה]
+מטריצה שערכיה נתונים על ידי:
+$$\rho_{i j}={\frac{C_{i j}}{\sqrt{C_{i i}C_{j j}}}}$$
+
+\end{definition}
+\section{מונטה קארלו}
+\end{document}

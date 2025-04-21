@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התכנסות במידה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_3_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_2_4.html`;}});</script>
+        <div class="content">
+        <h1>2.5  התכנסות במידה</h1>
+    <div class="definition"><span class="keyword">התכנסות נקודתית כמעט תמיד</span><p>יהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב מידה ו-<span>\(f_{n},f:X\to \mathbb{R}\)</span> פונקציות מדידות. נגדיר <span>\(f_{n}\to f\)</span> נקודתית כמעט תמיד אם כמעט לכל <span>\(x \in X\)</span> מתקיים:
+<span>$$f(x)=\lim_{ n \to \infty } f_{n}(x)$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לראות כי התנסות נקודתית גוררת התכנסות כמעט תמיד.</p>
+</div>
+<div class="definition"><span class="keyword">התכנסות ב-<span>\(L^{1}\)</span></span><p>יהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב מידה ו-<span>\(f_{n},f :X\to \mathbb{R}\)</span> פונקציות מדידות. אזי אם:
+<span>$$\int \lvert f_{n}-f \rvert  \;\mathrm{d} \mu\to 0 $$</span>
+נגיד שהסדרה <span>\(f_{n}\)</span> מתכנסת ל-<span>\(f\)</span> ב-<span>\(L^{1}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">התכנסות במידה</span><p>יהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב מידה ו-<span>\(f_{n},f:X\to \mathbb{R}\)</span> פונקציות מדידות. אם לכל <span>\(\varepsilon&gt; 0\)</span> מתקיים:
+<span>$$\mu\left( \left\{  x\mid \lvert f_{n}(x)-f(x) \rvert \geq \varepsilon  \right\} \right)\to 0$$</span>
+נאמר ש-<span>\(f_{n}\to f\)</span> במידה.</p>
+</div>
+<div class="corollary">
+<p>התכנסות של סדרה ב-<span>\(L^{1}\)</span> ל-<span>\(f\)</span> גוררת התכנסות במידה ל-<span>\(f\)</span>.</p>
+</div>
+<div class="proof">
+<p>מאי שיוויון מרקוב נקבל:
+<span>$$\mu\left(\left\{x\in X\mid\underbrace{\left|f_{n}\left(x\right)-f\left(x\right)\right|}_{y}&gt;\varepsilon\right\}\right)\leq\frac{\int\left|f_{n}-f\right|}{\varepsilon}\stackrel{*}{\to}0$$</span></p>
+</div>
+<div class="proposition">
+<p>התכנסות במידה גוררת קיום של תת סדרה המתכנסת כמעט תמיד, ואם למרחב יש מידה סופית אז ההתכנסות כמעט תמיד גוררת התכנסות מידה.</p>
+</div>
+<div class="remark">
+<p>ניתן לנסח את משפט ההתכנסות הנשלטת בצורה הבאה:
+אם <span>\(f_{n}\to f\)</span> נקודתית ויש <span>\(g \in L^{1}\left( X,\mu \right)\)</span> כך ש-<span>\(\lvert f_{n} \rvert\leq g\)</span> לכל <span>\(n \in \mathbb{N}\)</span> אזי <span>\(f_{n}\to f\)</span> ב-<span>\(L^{1}\left( X,\mu \right)\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על סדרת הפונקציות:
+<span>$$f_{n}=n\cdot \mathbb{1} _{\left[ 0,\frac{1}{n} \right]}$$</span>
+נקבל כי הפונקציה הנקודתית תהיה <span>\(\infty\)</span> אם <span>\(x=0\)</span> ו-0 אחרת, ולכן יש לה גבול כמעט תמיד ובמידה <span>\(f=0\)</span>. אי לה גבול ב-<span>\(L^{1}\)</span> כי <span>\(\int\lvert f_{n} \rvert \mathrm{d}\mu =1\)</span> לכל <span>\(n\)</span> ולכן <span>\(f_{n}\)</span> לא מתכנסת ב-<span>\(L^{1}\)</span> ל-0(כאשר אם היה מתכנס ב-<span>\(L^{1}\)</span> היה צריך בהכרח להתכנס ל-0 כיוון שזה הגבול של התכנסות במידה). </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='prev-page'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+</ul></li>
+        </body>
+        </html>
+        

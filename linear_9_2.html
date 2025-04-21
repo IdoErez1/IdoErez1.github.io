@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אורתוגונאליות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_9_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_9_1.html`;}});</script>
+        <div class="content">
+        <h1>9.2  אורתוגונאליות</h1>
+    <div class="definition"><span class="keyword">ווקטורים ניצבים</span><p>וקטורים הם ניצבים אם <span>\(\langle v, w \rangle = 0\)</span>. לעיתים נקראים ווקטורים אורתוגונאלים, ומסומנים <span>\(v\perp w\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אפס אורתוגונאלי להכל. כלומר מתקיים לכל <span>\(x \in V\)</span>:
+<span>$$\langle 0,x \rangle =\langle x,0 \rangle =0$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">פתגורס</span><p>אם <span>\(v\perp w\)</span> אז <span>\(||v+w|| = ||v||^2 + ||w||^2\)</span>. המשפט ההפוך נכון עבור הממשיים כאשר לא נכון עבור המרוכבים.</p>
+</div>
+<div class="proof">
+<p><span>$$\|\mathbf{u}+\mathbf{v}\|^{2}=\langle\mathbf{u}+\mathbf{v},\mathbf{u}+\mathbf{v}\rangle=\langle\mathbf{u},\mathbf{u}\rangle+\langle\mathbf{v},\mathbf{v}\rangle+\langle\mathbf{u},\mathbf{v}\rangle+\langle\mathbf{v},\mathbf{u}\rangle=\|\mathbf{u}\|^{2}+\|\mathbf{v}\|^{2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ווקטור אורתוגונלי לתת מרחב</span><p>נאמר כי ווקטור <span>\(v\)</span> אורתוגונאלי לתת מרחב <span>\(E\)</span> אם <span>\(v\)</span> אורתוגונלי לכל <span>\(w \in E\)</span>. כלומר:
+<span>$$\forall w \in E\quad \langle w,v \rangle =0$$</span></p>
+</div>
+<div class="proposition">
+<p>ווקטור אורתוגונאלים למרחב אם"ם אורתוגונאלי לכל ווקטור בקבוצה פורשת של התת מרחב. בפרט מספיק שאורתוגונאלי לכל אחד מאיברי הבסיס.</p>
+</div>
+<div class="definition"><span class="keyword">מערכת אורתוגונאלית</span><p>קבוצה של ווקטורים בממ"פ אם כל 2 ווקטורים בקבוצה מאונכים אחת לשנייה. כאשר כל אחד מהווקטורים במערכת עם נורמה 1 אז נקרא למערכת אורתונורמלית.</p>
+</div>
+<div class="theorem"><span class="keyword">פתגורס המוכלל</span><p>אם <span>\(v_{1},\dots,v_{n}\)</span> מערכת אורתוגונאלית, אזי מתקיים:
+<span>$$\left\|\sum_{k=1}^{n}\alpha_{k}\mathbf{v}_{k}\right\|^{2}=\sum_{k=1}^{n}|\alpha_{k}|^{2}\|\mathbf{v}_{k}\|^{2}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\left\|\sum_{k=1}^{n}\alpha_{k}\mathbf{v}_{k}\right\|^{2}=\left(\sum_{k=1}^{n}\alpha_{k}\mathbf{v}_{k},\sum_{j=1}^{n}\alpha_{j}\mathbf{v}_{j}\right)=\sum_{k=1}^{n}\sum_{j=1}^{n}\alpha_{k}{\overline{{\alpha}}}_{j}\langle\mathbf{v}_{k},\,\mathbf{v}_{j}\rangle$$</span>
+כאשר בכלל אורתוגונאליות כאשר <span>\(k\neq j\)</span> נקבל <span>\(\langle v_{k},v_{j} \rangle=0\)</span> ולכן:
+<span>$$\left\|\sum_{k=1}^{n}\alpha_{k}\mathbf{v}_{k}\right\|^{2} = \sum_{k=1}^{n}|\alpha_{k}|^{2}\langle{\bf v}_{k},{\bf v}_{k}\rangle=\sum_{k=1}^{n}|\alpha_{k}|^{2}||{\bf v}_{k}||^{2}$$</span></p>
+</div>
+<div class="corollary">
+<p>כל מערכת אורתוגנאלית של ווקטורים שאינם אפס היא בלתי תלוייה לינארית</p>
+</div>
+<div class="proof">
+<p>נניח כי יש לנו צרוף מאפס. כלומר קיימים <span>\(\alpha_{1},\dots,\alpha_{n}\)</span> כך ש:
+<span>$$\sum_{k=1}^{n}\alpha_{k}v_{k}=0$$</span>
+ולכן ממשפט פתגורס המוכלל נקבל:
+<span>$$0=\|\mathbf{0}\|^{2}=\sum_{k=1}^{n}|\alpha_{k}|^{2}\|\mathbf{v}_{k}\|^{2}$$</span>
+כאשר כיוון ש-<span>\(\lVert v_{k} \rVert\neq 0\)</span> לכל <span>\(k\)</span> לפי ההנחה, נקבל כי <span>\(\alpha_{k}=0\)</span> ולכן הצירוף היחיד המאפס הוא הטריוויאלי ובת"ל.</p>
+</div>
+<div class="definition"><span class="keyword">בסיס אורתוגונאלי</span><p>מערכת אורתוגונאלית אשר היא גם בסיס של המרחב.</p>
+</div>
+<div class="proposition"><span class="keyword">ייצוג ווקטור בסיס אורתונורמלי</span><p>יהי <span>\(v \in V\)</span> ו-<span>\(\left( e_{1},\dots,e_{n} \right)\)</span> בסיס אורתוגונאלי של <span>\(V\)</span>. אזי:
+<span>$$v=\sum_{k=1}^{n}\frac{\langle v,v_{k} \rangle}{\lVert v_{k} \rVert ^{2}} $$</span>
+כאשר אם הבסיס אורתונורמלי נקבל פשוט:
+<span>$$v=\sum_{k=1}^{n} \langle v,v_{k} \rangle $$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$\mathbf{x}=\alpha_{1}\mathbf{v}_{1}+\alpha_{2}\mathbf{v}_{2}+\ldots+\alpha_{n}\mathbf{v}_{n}=\sum_{j=1}^{n}\alpha_{j}\mathbf{v}_{j}$$</span>
+אם ניקח את המכפלה הפנימית של שתי האגלפים עם <span>\(v_{k}\)</span> נקבל:
+<span>$$\langle\mathbf{x},\mathbf{v}_{k}\rangle=\sum_{j=1}^{n}\alpha_{j}\langle\mathbf{v}_{j},\mathbf{v}_{k}\rangle=\alpha_{k}\langle\mathbf{v}_{k},\mathbf{v}_{k}\rangle=\alpha_{k}||\mathbf{v}_{k}||^{2}$$</span>
+כאשר כל המכפלות הפנימיות נתאפסות בפט למכפלה <span>\(\langle x,v_{k} \rangle\)</span>. לכן:
+<span>$$\alpha_{k}={\frac{\left\langle\mathbf{x},\mathbf{v}_{k}\right\rangle}{\|\mathbf{v}_{k}\|^{2}}}$$</span></p>
+</div>
+<div class="remark">
+<p>כדי למצוא בבסיס כללי נזכור שהיינו צריכים לפתור מערכת משוואות. טענה זו הופכת בסיסים אתוגונאליים לשימושיים במיוחד.</p>
+</div>
+<div class="definition"><span class="keyword">המרחב הניצב</span><p>עבור <span>\(W\leq V\)</span>  נגדיר את <span>\(W^{\perp}\)</span> להיות קבוצת כל הווקטורים שמאונכים לכל הווקטורים ב-<span>\(W\)</span>. כלומר:
+<span>$$W^{\perp}=\left\{  v\mid v\perp W  \right\}=\left\{  v\mid \forall w \in W\quad \langle v,w \rangle =0  \right\}$$</span>
+כאשר נשים לב כי זה יהיה תת מרחב ווקטורי כיוון שכל צירוף לינארי של ווקטורים מאונכים גם כן יהיה מאונך.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(W \leq V\)</span> תת מרחב ווקטורי. אזי לכל <span>\(v \in V\)</span> קיים הצגה יחידה כסכום של ווקטור ב-<span>\(W\)</span> ווקטור ב-<span>\(W^{\perp}\)</span>. ולכן <span>\(V=W\oplus W^{\perp}\)</span>. וכן בפרט מתקיים:
+<span>$$\dim W^{\perp}=\dim  V-\dim  W$$</span></p>
+</div>
+<div class="proposition">
+<p>כאשר המרחב נוצר סופית(לא נכון כאשר לא) מתקיים:
+<span>$$\left( W^{\perp} \right)^{\perp}=W$$</span></p>
+</div>
+<div class="reminder"><span class="keyword">אופרטור הטלה</span><p>אם <span>\(V=W\oplus U\)</span> קיים אופרטור <span>\(P_{W}:V\to V\)</span> כך שלכל <span>\(v\in V\)</span> מתקיים <span>\(P_{W}v \in W\)</span>. העתקה זו למעשה לוקח את הרכיב ה-<span>\(W\)</span> של הווקטור(הרי ניתן לכתוב כל ווקטור כסכום של ווקטור מ-<span>\(W\)</span> ווקטור מ-<span>\(U\)</span>). אופרטור זה מקיים את התכונות הבאות:</p>
+</div>
+<ol>
+<li>
+<p>לכל <span>\(W\leq V\)</span> קיימת הטלה יחידה על <span>\(W\)</span>. </p>
+</li>
+<li>
+<p>התמונה של <span>\(P\)</span> תהיה <span>\(W\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(P_{W}|_{W}=Id\)</span> - זאת כיוון שלקחת את הרכיב של <span>\(W\)</span> כאשר נמצאים ב-<span>\(W\)</span> יחזיר את עצמו. </p>
+</li>
+<li>
+<p>מתקיים <span>\(P^{2}=P\)</span> - זאת כיוון שאם לקחנו פעם אחת את הרכיב של <span>\(W\)</span> אז אנחנו ב-<span>\(W\)</span>, ואז התכונה הקודמת לא עשית כלום. </p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">הטלה אורתוגונאלית</span><p>העתקה <span>\(P:V\rightarrow W\)</span> שמקיימת
+<span>$$\forall v\in V\quad v-P(v) \in W^\perp$$</span>
+כאשר נשים לב כי בפרט הטלה ולכן מקיימת את כל התכונות.</p>
+</div>
+<div class="proposition">
+<p>ההטלה האורתוגונאלית של הבסיס האותונורמלי יהיה <span>$$P_{w_1,...,w_n}=\sum_{j=1}^{i-1}\langle  w_j, v_i \rangle w_j$$</span></p>
+</div>
+<div class="remark">
+<p>עבור אופרטור כללי לא פשוט למצוא את אופרטור ההטלה. כאשר עבור אופרטור אורתונורמלית הראנו כרגע שיש נוסחה מפורשת ישירה.</p>
+</div>
+<div class="proposition"><span class="keyword">פירוק גראם שמידט</span><p>אלגוריתם אשר הופך כל אוסף ווקטורים לאוסף אורתונורמלי תוך כדי זה שמשמר את הפרוש של האוסף. נדרש לבצע את השלבים הבאים:</p>
+<ol>
+<li>
+<p>מתחילים עם אוסף ווקטורים <span>\(v_1,...,v_n\)</span>.  </p>
+</li>
+<li>
+<p>נבחר את אחד הווקטורים ונגדיר <span>\(w_1=\frac{v_1}{||v_1||}\)</span> </p>
+</li>
+<li>
+<p>עבור <span>\(2\leq i \leq n\)</span> נגדיר 
+<span>$$w_i' = v_i - P_{span(v_1,..., v_{i-1})} (v_i)$$</span>
+וננרמל:    <span>$$w_i = \frac{w_i'}{||w_i'||}$$</span></p>
+</li>
+<li>
+<p>הסדרה <span>\((w_1,...,w_n)\)</span> תהיה קבוצה אותונורמלית עם אותו פרוש כמו הקבוצה המקורית. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>לכל מרחב ווקטורי קיים בסיס אורתונורמלי.</p>
+</div>
+<div class="definition"><span class="keyword">המרחב הניצב</span><p>לכל מרחב ווקטורי <span>\(W\leq V\)</span> קיים מרחב <span>\(W^{\perp}\)</span> אשר יהיה אוסף כל הווקטורים אשר ניצבים ל-<span>\(W\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='prev-page'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

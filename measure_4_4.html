@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>רציפות בהחלט וסינגולאריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_5_1.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_4_3.html`;}});</script>
+        <div class="content">
+        <h1>4.4  רציפות בהחלט וסינגולאריות</h1>
+    <div class="reminder">
+<p>בהנתן מידה <span>\(\mu\)</span> על <span>\(X\)</span> ופונקציה מדידה <span>\(h:X\to\left[ 0,\infty \right]\)</span> הגדרנו מידה <span>\(\nu\)</span> עד ידי <span>\(\mathrm{d}\nu=h\mathrm{d}\mu\)</span> (כלומר <span>\(\nu(A)=\int _{A}h \;\mathrm{d} \mu\)</span>) כאשר הראנו שמתקיים במקרה זה:
+<span>$$\mu(E)=0\implies \nu(E)=0$$</span>
+לכל <span>\(E \in \mathcal{A}\)</span> מדידה.</p>
+</div>
+<div class="definition"><span class="keyword">רציפות בהחלט</span><p>נאמר ש-<span>\(\mu\ll \nu\)</span>  ונאמר ש-<span>\(\mu\)</span> <u>רציפה בהחלט</u> ביחס ל-<span>\(\nu\)</span> אם:
+<span>$$\nu(A)=0\implies \mu(A)=0$$</span></p>
+</div>
+<div class="example">
+<p>נניח כי <span>\(\mu\)</span> מידה וכי <span>\(f:X\to \left[ 0,\infty \right]\)</span> פונקציה מידה אי שלילית. נזכור כי הפונקציה <span>\(\mu_{f}(A)=\int _{A}f \;\mathrm{d} \mu\)</span> מגדיר מידה,
+וכן מתקיים:
+<span>$$\mu=0\implies\int _{A}f \;\mathrm{d} \mu=0  $$</span>
+ולכן <span>\(\mu_{f}\ll \mu\)</span>. אם בנוסף <span>\(\mu_{f}\ll \mu\)</span> נקבל כי <span>\(\mu \sim \mu_{f}\)</span>. בחזרה לדוגמא, אם נדרוש:
+<span>$$\mu_{f}\left( f^{-1}\left( \left( 0,\infty \right] \right) \right)=0\implies \mu_{f}\sim \mu$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mu\)</span> סופית אז <span>\(\mu\ll \nu\)</span> שקול לכך שלכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt; 0\)</span> כך ש-<span>\(\nu(A)&lt;\varepsilon\)</span> גורר <span>\(\mu(A)&lt;\delta\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח שלכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt; 0\)</span> כך ש-<span>\(\nu(A)&lt;\varepsilon\)</span> גורר <span>\(\mu(A)&lt;\delta\)</span>. ונניח כי <span>\(\nu(A)=0\)</span> נקבל:
+<span>$$\forall \delta&gt;0\quad \nu(A)&lt;\delta\implies \forall\varepsilon&gt;0\quad  \mu(A)&lt;\varepsilon\implies \mu(A)=0$$</span>
+נניח <span>\(\mu\ll \nu\)</span>. נניח בשלילה שקיים <span>\(\varepsilon&gt;0\)</span> כך שלכל <span>\(n \in \mathbb{N}\)</span> יש <span>\(A_{n}\)</span> עם <span>\(\nu(A_{n})&lt;2^{-n}\)</span> כך ש-<span>\(\mu(A_{n})\geq \varepsilon\)</span>. ולפי בורל קנטלי:
+<span>$$\nu(A)=\nu\left( \bigcap_{k=1}^{\infty}\bigcup_{n=k}^{\infty} A_{n} \right)$$</span>
+כמו כן מתקיים:
+<span>$$\mu\left( \bigcap_{m=1}^{\infty}\bigcup_{n=m}^{\infty}A_{n} \right)=\mu\left( \operatorname*{lim}\operatorname*{sup}A_{n} \right)\geq\operatorname*{lim}\operatorname*{sup}\mu(A_{n})\geq\epsilon $$</span></p>
+</div>
+<div class="definition"><span class="keyword">מידה סינגולארית</span><p>נאמר ש-<span>\(\mu \perp \nu\)</span> אם קיימות <span>\(A,B\)</span> כך ש-<span>\(A\sqcup B\)</span> ו-<span>\(\mu(A)=0\)</span> וגם <span>\(\nu(B)=0\)</span>.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>המידה <span>\(\delta_{X}\)</span> ומידת לבג. </p>
+</li>
+<li>
+<p>אם <span>\(fg=0\)</span> כמעט תמיד אז <span>\(\mu_{f}\perp \mu_{g}\)</span>. </p>
+</li>
+<li>
+<p>המידה <span>\(\nu_{\frac{1}{3}}\)</span> שנבנת על קבוצת קנטור <span>\(\frac{1}{3}\)</span> סינגולאית ביחס ל-Leb וגם ביחס ל-<span>\(\delta_{x}\)</span> לכל <span>\(x \in \mathbb{R}\)</span>. </p>
+</li>
+<li>
+<p>המידה <span>\(\mu=\mathrm{Leb}+\delta_{0}\)</span> איננה סינגולרית ביחס ל-Leb ואיננה רציפה בהחלט ביחס ל-Leb. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mu\ll \nu\)</span> וגם <span>\(\mu \perp \nu\)</span> אזי <span>\(\mu = 0\)</span>. כלומר אי אפשר להיות שתי הדברים האלה חוץ מעבור המידה הטריוויאלית.</p>
+</div>
+<div class="proof">
+<p>מתקיים <span>\(\mu(B)=0\)</span> כי <span>\(\nu(0)=0\)</span> אבל גם <span>\(\mu(A)=0\)</span> ולכן <span>\(\mu(X)=0\)</span>.</p>
+</div>
+<div class="corollary">
+<p>המידה <span>\(\delta_{X}\)</span> לא נתונה על ידי <span>\(\lambda_{F}\)</span> עבור איזושהי <span>\(f\)</span> מדידה.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(\left( X,\mathcal{M} \right)\)</span> מרחב מידה, ו-<span>\(\mu,\nu\)</span> מדידות. אזי <span>\(\mu \perp \nu\)</span> אם"ם:
+<span>$$ \forall\varepsilon&gt; 0 \quad \exists A \quad  \mu(A)&lt;\varepsilon \quad \nu(A^{c})&lt;\varepsilon$$</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(\mu \perp \nu\)</span> אז קיימת קבוצה <span>\(A\)</span> כך ש-<span>\(\mu(A)=0\)</span> ו-<span>\(\nu(A^{c})=0\)</span>.
+נוכיח כעת את הכיוון השני. עבור <span>\(\varepsilon=2^{-n}\)</span> נבחר <span>\(A_{n}\)</span>. נגדיר:
+<span>$$A=\limsup_{ n \to \infty } (A_{n})$$</span>
+וכן נקבל <span>\(\nu(A)=0\)</span>. מצד שני:
+<span>$$\nu\left( A^{c}  \right)=\nu\left( \liminf_{ n \to \infty } A_{n} \right)\leq \liminf_{ n \to \infty } \nu(A_{n})=0$$</span></p>
+</div>
+<div class="reminder">
+<p>המידה <span>\(\lambda\)</span> נקראת <span>\(\sigma\)</span> סופית על <span>\(\left( X,\mathcal{A} \right)\)</span> אם <span>\(X=\bigcup_{n}A_{n}\)</span> עם <span>\(\lambda(A_{n})&lt;\infty\)</span>.</p>
+</div>
+<div class="lemma">
+<p>תהי <span>\(\mu\)</span> מידה <span>\(\sigma\)</span> סופית על <span>\(\left( X,\mathcal{A} \right)\)</span> אזי קיימת מידה סופית <span>\(\nu\)</span> כך ש-<span>\(\nu \sim \mu\)</span>(המידות שקולות - כלומר גם מתקיים <span>\(\nu\ll \mu\)</span> וגם <span>\(\mu\ll \nu\)</span>).</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\mu\)</span> מידה <span>\(\sigma\)</span> סופית, עם <span>\(X=\bigcup_{n=1}^{\infty}A_{n}\)</span> כאשר <span>\(\mu(A_{n})\ll \infty\)</span> לכל <span>\(n\)</span>. נגדיר:
+<span>$$w(x)=\sum_{n=1}^{\infty}\frac{2^{-n}}{1+\mu(A_{n})}\mathbb{1} _{A_{n}}(x).$$</span>
+כאשר כל גורם הוא חיובי וחסום על ידי <span>\(2^{-n}\)</span> . לכן הטור מתכנס ממבחן ההשוואה לטורים אי שליליים. לכן <span>\(0&lt;w(x)\leq 1\)</span> לכל <span>\(x \in X\)</span>.
+נגדיר פונקציה סופית <span>\(\nu\)</span> על ידי:
+<span>$$d\nu=w\,d\mu\quad(\nu(E)=\int_{E}w\,d\mu\,\mathrm{for~all}\,\,E\in{\mathcal{A}}).$$</span>
+זו תהיה מידה סופית כיוון שמתקיים:
+<span>$$\nu(X)=\int_{X}w\,d\mu=\sum_{n=1}^{\infty}{\frac{2^{-n}}{1+\mu(A_{n})}}\mu(A_{n})\leq\sum_{n=1}^{\infty}2^{-n}=1$$</span>
+נשים לב כעת לשקילות:
+- אם <span>\(\mu(E)=0\)</span> אז <span>\(\nu(E)=\int _{E}w \;\mathrm{d} \mu=0\)</span> ולכן <span>\(\nu\ll \mu\)</span>.
+- אם <span>\(\nu(E)=0\)</span> כיוון ש-<span>\(w(x)&gt; 0\)</span> לכל <span>\(x\)</span> האינטגרל <span>\(\int _{E}w \;\mathrm{d} \mu=0\)</span> גורר <span>\(\mu(E)=0\)</span> ולכן <span>\(\mu\ll \nu\)</span>.</p>
+</div>
+<div class="corollary">
+<p>מההוכחה ראינו כי אם <span>\(\mu\)</span> מידה <span>\(\sigma\)</span> -סופית על <span>\(\left( X,\mathcal{A} \right)\)</span> אזי קיימת פונקציה מדידה <span>\(w:X\to \mathbb{R}\)</span> עם <span>\(0&lt;w\leq 1\)</span> עבורה המידה <span>\(\mu'=w\mathrm{d}\mu\)</span> הינה מידה סופית ו-<span>\(\mu' \sim \mu\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">Lebesgue-Radon-Nikodym</span><p>אם <span>\(\mu\)</span> ו-<span>\(\nu\)</span> מידות <span>\(\sigma\)</span> סופיות על <span>\(\left( X,\mathcal{A} \right)\)</span> אזי:</p>
+<ol>
+<li>קיים צמד מידות יחיד <span>\(\nu_{a},\nu_{s}\)</span> המקיים: </li>
+<li><span>\(\nu=\nu_{a}+\nu_{s}\)</span></li>
+<li><span>\(\nu_{a}\ll \mu\)</span></li>
+<li>
+<p><span>\(\nu_{s} \perp \mu\)</span></p>
+</li>
+<li>
+<p>קיים פונקציה מדידה <span>\(h:X\to\left[ 0,\infty \right)\)</span> אשר נקראת הנגזרת רדון ניקודין ומקיימת: </p>
+</li>
+<li><span>\(\mathrm{d}\nu_{a}=h\mathrm{d}\mu\)</span></li>
+<li>אם <span>\(X=\bigcup_{n}A_{n}\)</span> כך ש-<span>\(\nu(A_{n})&lt;\infty\)</span> לכל <span>\(n\)</span> נקבל <span>\(h\cdot \mathbb{1}_{A_{n}}\in L^{1}\)</span> כלומר פונקציה ממידה סופית.</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>ראשית נעשה רדוקציה למקרה של מידה סופית. נניח <span>\(\nu\)</span> היא <span>\(\sigma\)</span> סופית. לכן ניתן לכתוב <span>\(\nu=\sum_{n}\nu_{n}\)</span> כאשר כל <span>\(\nu_{n}\)</span> היא סופית. כעת: 
+<span>$$\nu_{a}=\sum_{n} \nu_{n,a}\qquad \nu_{s}=\sum_{n}\nu_{n,s}$$</span>
+ולכן אם הטענה נכונה עבור מידות סופית תהיה נכונה עבור מידות <span>\(\sigma\)</span> סופיות ומספיק להוכיח עבור מקרה זה.</p>
+</li>
+<li>
+<p>מהלמה קיים <span>\(w:X\to (0,1]\)</span> כך ש-<span>\(w\mathrm{d}\mu\)</span> היא סופית ושקולה ל-<span>\(\mu\)</span>. נגדיר כעת <span>\(\lambda=\nu+w\mathrm{d}\mu\)</span> כך ש-<span>\(\lambda\)</span> תהיה מידה סופית. מתקיים בפרט: 
+<span>$$\nu(E)\leq\lambda(E),\quad\mu(E)\leq\frac{1}{\operatorname*{inf}w}\lambda(E).$$</span></p>
+</li>
+</ol>
+<p>3.תהי <span>\(f \in L^{2}\left( \lambda \right)\)</span>. אזי: 
+<span>$$\left\lvert  \int f \;\mathrm{d} \nu   \right\rvert \leq \int \lvert f \rvert  \;\mathrm{d} \nu \leq \int \lvert f \rvert  \;\mathrm{d} \lambda =\int |f|\cdot 1 \;\mathrm{d} \lambda \overset{*}{\leq}  \left[ \int \lvert f \rvert ^{2} \;\mathrm{d} \lambda  \right]^{1/2}\cdot\left[ \int 1 \;\mathrm{d} \lambda  \right]^{1/2}=\left( \lambda(x) \right)^{1/2}\cdot \lVert f \rVert _{2} &lt; \infty$$</span>
+כאשר המעבר ב-<span>\((*)\)</span> תהיה שימוש בקושי שוורץ עם המכפלה של <span>\(|f|\cdot 1\)</span>. </p>
+<ol>
+<li>
+<p>נגדיר <span>\(\phi:L^{2}\left( \lambda \right)\to \mathbb{C}\)</span> על ידי <span>\(\phi(f)=\int f \;\mathrm{d} \nu\)</span>. מאי שיוויון קושי שוורץ נקבל: 
+<span>$$|\phi(f)|\leq\int|f|\,d\nu\leq\int|f|\,d\lambda\leq\sqrt{\lambda(X)}||f||$$</span>
+ולכן חסום על <span>\(L^{2}\left( \lambda \right)\)</span>. נזכור כי במקרה זה <span>\(\phi(f)\)</span> לפי המסקנה ממשפט ההצגה של פרשה-ריס:
+<span>$$\left( \triangle \right) \qquad \int f \;\mathrm{d} \nu = \int f \cdot g \;\mathrm{d} \lambda $$</span></p>
+</li>
+<li>
+<p>נשים לב שלכל <span>\(E\in \mathcal{A}\)</span> עם <span>\(\lambda(E)&gt;0\)</span> מתקיים: 
+<span>$$0\leq\overbrace{ \frac{1}{\lambda(E)}\cdot \int _{E}g \;\mathrm{d} \lambda }^{(1) } = \frac{\nu(E)}{\lambda(E)} \leq 1$$</span>
+כאשר <span>\((1)\)</span> זה למעשה הממוצע של <span>\(g\)</span> ביחס ל-<span>\(\lambda\)</span> על <span>\(E\)</span>. ולכן מלמה שהוכחנו מזמן העובדה הנ"ל גוררת ש-<span>\(0\leq g \leq 1\)</span> מתקיים <span>\(\lambda\)</span> כמעט תמיד.</p>
+</li>
+<li>
+<p>נסמן: 
+<span>$$A=\left\{  x\mid 0\leq g(x)&lt;1  \right\}\qquad B=\left\{  x\mid g(x)=1  \right\}$$</span>
+וכן נגדיר <span>\(\nu_{a}=\nu|_{A}\)</span> ו-<span>\(\nu_{s}=\nu|_{B}\)</span>.</p>
+</li>
+</ol>
+<p>7.כעת נרצה להוכיח <span>\(\nu_{s}\perp \mu\)</span>. מספיק להראות כי <span>\(\mu(B)=0\)</span> כי כעת <span>\(B \sqcup B^{c}\)</span> הפירוק המתאים. נשים לב כי ניתן לכתוב את <span>\(\triangle\)</span> בצורה הבאה: 
+<span>$$\int f \;\mathrm{d} \nu =\int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \nu+\int f\cdot g\cdot w \;\mathrm{d} \mu    $$</span>
+ולכן:
+<span>$$(*)\quad \int f\cdot g\cdot w \;\mathrm{d} \mu = \int f(1-g) \;\mathrm{d} \nu  $$</span>
+על ידי הצבה של <span>\(f=\mathbb{1}_{B}\)</span> ב-<span>\((*)\)</span> נקבל ש:
+<span>$$\int_{B} \cancelto{ 1 }{ g } \;\mathrm{d} \mu = \int_{B} \cancelto{ 0 }{ (1-g) } \;\mathrm{d} \nu  =0$$</span>
+ולכן <span>\(\mu(B)=0\)</span> כי <span>\(0&lt;w\)</span> תמיד ולכן <span>\(\nu_{s}\perp \mu\)</span> (עם <span>\(B\cap B^{c}=\varnothing\)</span> הפירוק המתאים).</p>
+<ol>
+<li>
+<p>נרצה כעת להראות כי <span>\(\nu_{a}\ll \mu\)</span>. נגדיר את הסדרה: 
+<span>$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$</span>
+נציב ב-<span>\((*)\)</span> ונקבל:
+<span>$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$</span>
+וכן:
+<span>$$\int_{A}\left(1+g+\cdots+g^{n}\right)\cdot g\cdot w\,d\mu=\int_{A}\left(1+g+\cdots+g^{n}\right)\left(1-g\right)d\nu.$$</span>
+כאשר ניתן לפשט את אגף ימין בעזרת סכום טלסקופי ולקבל:
+<span>$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)\left(1-g\right)d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}$$</span>
+כאשר ניתן לפשט את אגף שמאל על ידי זיהוי טור גאומטרי:
+<span>$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)g\cdot w\,d\mu=\int_{A}\left(g+g^{2}+\cdots+g^{n+1}\right)w\,d\mu$$</span>
+אם ניקח את הגבול <span>\(n\to \infty\)</span> נקבל עבור אגף ימין כי <span>\(g^{n+1}\to 0\)</span> ולכן:
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}=\int_{A}1\,d\nu_{a}=\nu_{a}(E).$$</span>
+ועבור אגף שמאל נקבל:
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1+g+\cdots+g^{n}\right)g\cdot w\,d\mu=\int_{A}{\frac{g}{1-g}}\cdot w\,d\mu.$$</span></p>
+</li>
+<li>
+<p>אם נשוואה את שתי האגפים נקבל: 
+<span>$$\nu_{a}(E)=\int_{E}\underbrace{\frac{g\cdot w}{1-g}}_{h}\,d\mu\quad\mathrm{for~all~}E\in\mathcal{A}.$$</span></p>
+</li>
+<li>
+<p>מאחר ש-<span>\(\nu_{a}\)</span> מידה סופית נסיק ש-<span>\(h \in L^{1}\left( \mu \right)\)</span>. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='prev-page'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט ההצגה של ריס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_3_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_2_5.html`;}});</script>
+        <div class="content">
+        <h1>3.1  משפט ההצגה של ריס</h1>
+    <div class="example">
+<p>בהנתון קטע פתוח וחסום ב-<span>\(\mathbb{R}\)</span> נסמן <span>\(\ell((a,b))=b-a\)</span>. ניתן להגדיר את המידה הבאה:
+<span>$$\lambda^{*}=\inf\left\{  \sum_{i=1}^{\infty} \ell((a_{n},b_{n}))\mid E\subseteq \bigcup_{n} (a_{n},b_{n})  \right\}$$</span>
+כאשר ניתן להראות כי מתקיים:
+<span>$$\lambda^{*}((a,b))=\lambda^{*}([a,b])=\ell((a,b))$$</span>
+אכן לכל <span>\(\varepsilon&gt;0\)</span> ניקח מנייה של <span>\(\{ q_{n} \}_{n \in \mathbb{N}}=\mathbb{Q}\)</span> ואוסף קטעים:
+<span>$$I_{n}=\left( q_{n}-\frac{\varepsilon}{2^{n+1}},q_{n}+\frac{\varepsilon}{2^{n+1}} \right)$$</span>
+אזי:
+<span>$$\sum_{n=1}\ell(I_{n})=\varepsilon \qquad  \mathbb{Q} \subseteq \bigcup_{n}I_{n}$$</span>
+ונקבל מזה כי:
+<span>$$\forall\varepsilon&gt;0 \quad \lambda^{*}\left( \mathbb{Q}  \right)\leq \varepsilon$$</span></p>
+</div>
+<div class="theorem">
+<p>קיימת <span>\(\sigma\)</span> אלגברה <span>\(m\)</span> המכילה את <span>\(\sigma\)</span>-אלגברה בורל על <span>\(\mathbb{R}\)</span> כך ש-<span>\(\lambda^{*}|_{m}\)</span> הינה מידה(מידת לבג).</p>
+</div>
+<div class="remark">
+<p>היינו יכולים להסתכל על הגדרה דומה עם:
+<span>$$\ell'((a,b))=(b-a)^{\alpha}$$</span>
+עבור <span>\(0\leq \alpha\)</span>.</p>
+</div>
+<div class="reminder"><span class="keyword">מרחב האוסדורף וקומפקטיות מקומית</span><p>מרחב טופולוגי נקרא האוסדורף אם לכל <span>\(x,y \in X\)</span> שונות קיימות קבוצות פתוחות <span>\(x \in U\)</span> ו-<span>\(y\in V\)</span> כך ש-<span>\(U\cap V = \varnothing\)</span>.
+מרחב נקרא קומפקטית מקומית אם לכל נקודה <span>\(x \in X\)</span> קיימת סביבה פתוחה <span>\(x \in V_{x}\)</span> כך ש-<span>\(\overline{V}_{x}\)</span> קומפקטי.</p>
+</div>
+<div class="definition"><span class="keyword">תומך טופוליגי</span><p>בהנתן פונקציה רציפה <span>\(f:X\to \mathbb{C}\)</span> נגדיר את התומך הטופולוגי של <span>\(f\)</span> להיות:
+<span>$$\mathrm{supp}(f):= \left\{  f\neq 0  \right\}$$</span>
+נסמן ב-<span>\(C_{c}(X)\)</span> את מרחב הפונקציות הרציפות בעלות תומך קומפקטי.</p>
+</div>
+<div class="remark">
+<p>הסימון <span>\(C_{c}\)</span> מייצג Continuous Compact support.</p>
+</div>
+<div class="symbolize">
+<p>בהנתון קבוצה פתוחה <span>\(V\)</span> וקומפקטית <span>\(K\)</span> נסמן <span>\(f \prec V\)</span> ו-<span>\(K\prec f\)</span> אם <span>\(f \in C_{c}(X)\)</span> ומקיימת <span>\(\mathbb{1}_{K} \leq f\)</span>ו-<span>\(f\leq \mathbb{1} _{V}\)</span> בהתאמה.</p>
+</div>
+<div class="theorem"><span class="keyword">הלמה של Urysohn</span><p>אם <span>\(X\)</span> מרחב טופולוגי האוסדורף קומפקטי מקומית ו-<span>\(K\subseteq V\)</span> קומפקטית בתוך פתוחה אזי קיימת פונקציה <span>\(f\in C_{c}(x)\)</span> המקיימת:
+<span>$$K \prec f \prec V$$</span>
+כלומר פונקציה <span>\(f\)</span> מקיימת את תכונות הבאות:
+<span>$$\begin{gather}\forall x \in K \quad f(x)=1\\ \forall x \not  \in V \quad  f(x) = 0 \\ \forall x \in X \quad 0\leq f(x)\leq 1 
+\end{gather}$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב שבהנתן מידת בורל "יפה" <span>\(\mu\)</span>(סופית) על מרחב האוסדורף קומפקטית מקומית. העתקה <span>\(\Lambda_{\mu}:C_{c}(x)\to \mathbb{C}\)</span> המוגדרת על ידי:
+<span>$$\Lambda_{\mu}f := \int f \;\mathrm{d} \mu $$</span>
+הינו פונקציונאל לינארי חיובי.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציונאל לינארי חיובי</span><p>פונקציונאל לינארי על <span>\(\mathbb{C}_{c}\)</span> נקראת <u>חיובי</u> אם לכל <span>\(0\leq f\)</span> מתקיים <span>\(\Lambda f \geq 0\)</span>. משפט ההצגה של ריס יתן גרירה הפוכה, מפונקציונאל לינארי חיובי על <span>\(C_{c}\)</span> למידות.</p>
+</div>
+<div class="lemma"><span class="keyword">קיום חלוקה יחידה</span><p>יהי <span>\(X\)</span> האסדורף קומפקטית ויהיו <span>\(V_{1},\dots V_{n}\)</span> קבוצות פתוחות המכסות קבוצות קופקטיות:
+<span>$$k\subseteq \bigcup_{i}^{n} V_{i}$$</span>
+אזי קיימות פונקציות <span>\(h_{i}\prec \sum_{i=1}^{n}h_{i}\)</span> המקיימות:
+<span>$$k\prec \sum_{i=1}^{n} h_{i}$$</span></p>
+</div>
+<div class="proof">
+<p>לכל <span>\(x \in k\)</span> קיימת קבוצה פתוחה <span>\(W_{x}\)</span> עם סגור קומפקטי <span>\(\overline{W}_{x}\subseteq V_{i}\)</span> לאיזשהו <span>\(i\)</span>. <span>\(k\)</span> קופקטית אז קיים כיסוי סופי:
+<span>$$W_{x_{1}},\dots,W_{x_{k}}$$</span>
+נגדיר:
+<span>$$H_{i}=\bigcup_{x_{i}\in V_{i}}\overline{W} _{x_{i}\subseteq V_{i}}$$</span>
+נקח <span>\(H_{i}\prec g_{i}\prec V_{i}\)</span> מהלמה של אוריסון. נגדיר:
+<span>$$h_{1}=g_{1}\qquad h_{2}=(1-g_{1})g_{2}\dots h_{n}=(1-g_{1})(1-g_{2})\dots(1-g_{n})g_{n}$$</span>
+ונבחין ש-<span>\(h_{i}\prec V_{i}\)</span> וכן:
+<span>$$\sum_{i=1}^{n} h_{i}= 1-(1-g_{1})(1-g_{2})\dots.(1-g_{n})$$</span>
+ולכן <span>\(\sum h_{i}=1\)</span> לכל <span>\(x \in k\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ההצגה של ריס Riesz</span><p>יהי <span>\(X\)</span> מרחב האוסדורף קומפקטי מקומית ופונקציונל לינארי חיובי ו-<span>\(\Lambda:C_{c}(X)\to \mathbb{C}\)</span> קיימת <span>\(\sigma\)</span>-אלגברה <span>\(\mathfrak{M}\)</span> על <span>\(X\)</span> המכילה את <span>\(\sigma\)</span>-אלגברת בורל ומידה יחידה <span>\(\mu\)</span> על <span>\(\mathfrak{M}\)</span> המקיימת:</p>
+<ol>
+<li>
+<p><span>$$\forall f \in C_{c}(X)\qquad \Lambda f=\int f \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>לכל קבוצה קומפקטית <span>\(K\leq X\)</span>  נקבל <span>\(\mu(K)&lt; \infty\)</span>. </p>
+</li>
+<li>
+<p>רגולריות חיצונית: לכל <span>\(E \in \mathfrak{M}\)</span>: 
+<span>$$\mu(E)=\inf \left\{  \mu(V) \mid E\subseteq V \text{ is open} \right\}$$</span></p>
+</li>
+<li>
+<p>רגולריות פנימית: לכל <span>\(E \subseteq m\)</span> פתוחה או בעלת מידה סופית <span>\(\mu(E)&lt;\infty\)</span> מתקיים: 
+<span>$$\mu(E)= \sup \left\{  \mu(K)\mid K\subseteq E\text{ is compact}  \right\}$$</span></p>
+</li>
+<li>
+<p>הקבוצה <span>\(\mathfrak{M}\)</span> תהיה <span>\(\sigma\)</span>-אלגברה שלמה ביחס ל-<span>\(\mu\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">יחידות ההצגה</span><p>המידה <span>\(\mu\)</span> המוגדרת על ידי משפט ההצגה של ריס היא יחידה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>תהי <span>\(V\subseteq X\)</span> קבוצה פתוחה ויהי <span>\(\varepsilon&gt; 0\)</span>. רגולריות חיצונית(תכונה 3) והעובדה ש-<span>\(\mu_{2}\)</span> סופית בתחום קומפקטי(תכונה 2) נקבל <span>\(K\subseteq V\)</span> קומפקטית כך ש: 
+<span>$$\mu_{2}(V)\leq\mu_{2}(K)+\varepsilon.$$</span></p>
+</li>
+<li>
+<p>מהלמה של אוריסון נקבל פונקציה <span>\(f \in C_{c}(X)\)</span> רציפה אשר מקיימת <span>\(\mathbb{1}_{K}\leq f(x)\leq \mathbb{1}_{V}\)</span>.  </p>
+</li>
+<li>
+<p>כיוון ששתי המידות מייצגות את <span>\(\Lambda\)</span> נקבל: 
+<span>$$\mu_{1}(K)=\int \mathbb{1} _{K} \;\mathrm{d} \mu \leq \int f \;\mathrm{d}\mu = \Lambda f=\int f \;\mathrm{d} \mu_{2}\leq \int \mathbb{1} _{V} \;\mathrm{d} \mu_{2} = \mu_{2}(V)&lt;\mu_{2}(k)+\varepsilon    $$</span></p>
+</li>
+<li>
+<p>כיוון ש-<span>\(\varepsilon\)</span> שרירותי נקבל: 
+<span>$$\mu_{1}(K)\leq\mu_{2}(K)$$</span></p>
+</li>
+<li>
+<p>מטעמי סימטריה(ניתן לבצע את אותו תהליך עם תפקידים הפוכים של <span>\(\mu_{1},\mu_{2}\)</span>) נקבל: 
+<span>$$\mu_{1}(K)=\mu_{2}(K).$$</span></p>
+</li>
+<li>
+<p>כעת מרגולריות פנימית (תכונה 3) ורגולריות חיצונית(תכונה 4) נקבל כי יש שיווין עבור כל ה-<span>\(\sigma\)</span> אלגברה. </p>
+</li>
+</ol>
+</div>
+<p>כעת כדי להוכיח את המשפט נבנה את הקבוצה הבאה:
+<span>$$\mu(V):= \sup \left\{  \Lambda f\mid f\prec V  \right\}$$</span>
+כאשר <span>\(f\prec V\)</span>  אומר:
+<span>$$f(x) \in [0,1]\quad f \in C_{c}(x)\quad f \subseteq \mathbb{1} _{V}$$</span>
+הגדרנו לכל <span>\(E \leq X\)</span>:
+<span>$$\mu(E)=\inf \left\{   \mu(V)\mid V\supseteq E \text{ is open}    \right\}$$</span>
+הגדרנו את האוסף <span>\(\mathfrak{M}_{F}\)</span> להיות האוסף של כל הקבוצות <span>\(E\)</span> בעלות מידה סופית ורגולריות פנימית, כלומר מקיימות:
+<span>$$\mu(E)=\sup \left\{  \mu(k)\mid K \subseteq E \text{ is compact}  \right\}\qquad \mu(E)&lt;\infty$$</span>
+ממנו הגדרנו:
+<span>$$\mathfrak{M} =\left\{  E\subseteq X \mid E\cap K \in \mathfrak{M} _{F}, \text{for all compact K}  \right\}$$</span></p>
+<p>ונוכיח את ה-10 שלבים אשר נתאר כלמות:</p>
+<div class="lemma"><span class="keyword">שלב 1</span><p>לכל <span>\(E_{1},E_{2},\dots \subseteq X\)</span> מתקיים:
+<span>$$\mu\left( \bigcup_{n}E_{n} \right)\leq \sum_{n}\mu(E_{n})$$</span></p>
+</div>
+<div class="proof">
+<p>ראשית נוכיח את הטענה על קבוצות פתוחות <span>\(V_{1},V_{2}\)</span>. תהי <span>\(g\prec V_{1} \cup V_{2}\)</span>. לפי חלוקת היחידה קיימים <span>\(h_{1},h_{2} \in C_{c}(X)\)</span> כך שמתקיים:
+<span>$$h_{1}\prec V_{1},h_{2}\prec V_{2}\qquad h_{1}+h_{2}\geq 1$$</span>
+כך שניתן לפרק את <span>\(g\)</span> בצורה הבאה:
+<span>$$g=gh_{1}+gh_{2}$$</span>
+כיוון ש-<span>\(gh_{i}\prec V_{i}\)</span> מלינאריות, חיוביות של <span>\(\Lambda\)</span> נקבל:
+<span>$$\Lambda g=\Lambda(g h_{1})+\Lambda(g h_{2})\leq\mu(V_{1})+\mu(V_{2})$$</span>
+כאשר השתמשנו בזה ש-<span>\(\mu\)</span> לוקח את הסופרמום. אם ניקח את הסופרמום מעל כל <span>\(g\prec V_{1}\cup V_{2}\)</span> נקבל:
+<span>$$\mu(V_{1}\cup V_{2})\leq\mu(V_{1})+\mu(V_{2})$$</span>
+כלומר נובע מההגדרה של <span>\(\mu\)</span>. כאשר מאינדוקציה ניתן לכליל לכל סכום סופי:
+<span>$$\mu\left(\bigcup_{i=1}^{N}V_{i}\right)\leq\sum_{i=1}^{N}\mu(V_{i})$$</span>
+כעת נכליל עבור קבוצות כללית(לאו דווקא פתוחה). יהי <span>\(E=\bigcup_{n=1}^{\infty}E_{n}\)</span>. לכל <span>\(\varepsilon&gt; 0\)</span> נבחר קבוצה פתוחה <span>\(V_{n}\supseteq E_{n}\)</span> כך ש:
+<span>$$\mu(V_{n})\leq\mu(E_{n})+\frac{\varepsilon}{2^{n}}.$$</span>
+יהי <span>\(V=\bigcup_{n=1}^{\infty}V_{n}\)</span>. לכל <span>\(g\prec V\)</span> הקבוצה <span>\(\text{supp}(g)\)</span> היא קומפקטית ומכוסה על ידי כמות סופית של <span>\(V_{n}\)</span>. לכן מתת אדטיביות סופית נקבל:
+<span>$$\Lambda g\leq\mu\left(\bigcup_{i=1}^{N}V_{i}\right)\leq\sum_{i=1}^{N}\mu(V_{i})\leq\sum_{i=1}^{N}\mu(E_{i})+\varepsilon\leq\sum_{i=1}^{\infty}\mu(E_{i})+\varepsilon.$$</span>
+מאחר ש-<span>\(g\prec V\)</span> שרירותית הרי ש:
+<span>$$\mu\left( \bigcup_{n}E_{n} \right)\leq \mu(V)\leq \sum_{n=1}^{\infty} \mu(E_{n})+\varepsilon $$</span>
+מאחר ש-<span>\(\varepsilon\)</span> שרירותית נסיק את הדרישה.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 2</span><p>אם <span>\(K\subseteq X\)</span> קומפקטית אז <span>\(K \in \mathfrak{M}_{F}\)</span> ומתקיים:
+<span>$$\mu(K)=\inf \left\{  \Lambda f\mid k=F\prec f  \right\}$$</span></p>
+</div>
+<div class="proof">
+<p>תהי <span>\(K\prec f\)</span> כלשהי ויהי <span>\(0&lt;\alpha &lt; 1\)</span>. נתבונן ב:
+<span>$$V_{\alpha}=\left\{  f &gt; \alpha  \right\}$$</span>
+פתוחה. תהי <span>\(K\prec g\prec V_{\alpha}\)</span> כלשהי(קיים מהלמה של אוריסון). נבחין כי <span>\(\alpha g \leq f\)</span> ולכן:
+<span>$$\Lambda g \leq \Lambda \alpha ^{-1} f = \alpha ^{-1} \Lambda f$$</span>
+ונקבל:
+<span>$$\mu(K)\leq \mu\left( V_{\alpha} \right)=\sup \left\{  \Lambda g \mid g \prec V_{\alpha}  \right\}\leq \alpha ^{-1} \Lambda f$$</span>
+ניקח <span>\(\alpha \to 1\)</span> ונקבל <span>\(\mu(K)\leq \Lambda f &lt; \infty\)</span>. כמובן שברור ש:
+<span>$$\mu(K)=\sup \left\{  \mu(K')\mid K' \subseteq K \text{ is compact}  \right\}$$</span>
+ולכן <span>\(k \in m_{F}\)</span>. מהגדרה <span>\(\mu(K)\)</span> לכל <span>\(0&lt;\varepsilon\)</span> קיים <span>\(K\subseteq V\)</span> פתוחה עם <span>\(\mu(V)&lt;\mu(K)+\varepsilon\)</span>. ניקח <span>\(K \prec f \prec V\)</span> ונקבל ש:
+<span>$$\Lambda f \leq \mu(V) &lt; \mu(K)+\varepsilon$$</span>
+אבל הראנו ש:
+<span>$$\mu(K)\leq \Lambda f$$</span>
+ולכן:
+<span>$$\mu(K)=\inf \left\{  \Lambda f \mid k \prec f  \right\}$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">שלב 3</span><p>לכל פתוחה <span>\(V\)</span>:
+<span>$$\mu(V)=\sup \left\{  \mu(K) \mid K \subseteq V \text{ is compact}  \right\}$$</span>
+ולכן כל פתוחה עם <span>\(\mu(V)&lt; \infty\)</span> תהיה ב-<span>\(\mathfrak{M}_{F}\)</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(\mu(V)\)</span> אז <span>\(V \in \mathfrak{M}_{F}\)</span>. אחרת ניקח <span>\(0&lt;\alpha&lt; \mu(V)\)</span>. מהגדרת <span>\(\mu(V)\)</span> קיימת <span>\(f\prec V\)</span> עם <span>\(\alpha &lt; \Lambda f\)</span>. נבחין שלכל פוחה <span>\(\text{supp}(f)\subseteq W\)</span> מתקיים:
+<span>$$f\prec W$$</span>
+ולכן <span>\(\Lambda f\leq \mu(W)\)</span> ומכאן:
+<span>$$\alpha&lt; \Lambda f \leq \infty \left\{  \mu(W)\mid \text{supp}(f) \subseteq W \text{ is open}  \right\}=\mu\left( \text{supp}(f) \right)\leq \mu(V)$$</span>
+ולכן מצאנו קבוצה קומפקטית <span>\(\text{supp}(f)\)</span> עם מידה בין <span>\(\alpha\)</span> ל-<span>\(\mu(V)\)</span> ומכאן הטענה</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 4</span><p>לכל <span>\(E_{1}, E_{2}, \dots \in \mathfrak{M}_{F}\)</span> זרות בזוגות מתקיים:
+<span>$$\mu\left( \bigsqcup_{n} E_{n} \right)=\sum_{n=1}^{\infty} \mu(E_{n})$$</span>
+כמו כן אם <span>\(\infty&gt; \mu\left( \bigcup_{n}E_{n} \right)\)</span> אז <span>\(\bigcup_{n}E_{n}\in \mathfrak{M}_{F}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נתחיל מלהוכיח את הטעה עבור <span>\(K_{1},K_{2} \in \mathfrak{ M}_{F}\)</span> קומפקטיות זרות. מהלמה של אוריסון קיימת <span>\(K_{1}\prec f\prec K_{2}^{c}\)</span>. יהי <span>\(\varepsilon&gt; 0\)</span>. תהי <span>\(K_{1}\cup K_{2}\prec g\)</span> עם <span>\(\Lambda g &lt;\mu\left( K_{1}\cup K_{2} \right)+\varepsilon\)</span>. נבחין ש:
+<span>$$K_{1}\prec fg \qquad  K_{2}\prec (1-f)g$$</span>
+לכן:
+<span>$$\mu(K_{1})+\mu(K_{2})\leq \Lambda fg + \Lambda(1-f)g = \Lambda g &lt;\mu\left( K_{1} \cup K_{2} \right)+\varepsilon$$</span>
+מאחר ש-<span>\(\varepsilon\)</span> שרירותי ומשלב <span>\(I\)</span> נסיק כי:
+<span>$$\mu\left( K_{1} \cup K_{2} \right)= \mu(K_{1}+K_{2})$$</span>
+באינדוקציה נסיק את הטענה עבור כל אוסף סופי של קומפקטיות זרות בזוגות. תהי <span>\(E_{1},E_{2},\dots \in \mathfrak{M}_{f}\)</span> סדרה כלשהי של קבוצות זרות בזוגות. נסמן <span>\(E=\bigsqcup_{n} E_{n}\)</span>. יהי <span>\(\varepsilon&gt;0\)</span>. מאחר ש- <span>\(E_{n} \in \mathfrak{M}_{F}\)</span> הרי שקיימות <span>\(K_{n}\subseteq E_{n}\)</span> קומפקטיות עם:
+<span>$$\mu(E_{n})&lt;\mu(K_{n})+\frac{\varepsilon}{2^{n}}$$</span>
+לכן:
+<span>$$\mu(E)\geq \mu\left( E_{1} \cup \dots \cup E_{N} \right)\geq \mu\left( K_{1} \sqcup \dots \sqcup K_{N} \right) = \sum_{i=1}^{N} \mu(K_{n})\geq \sum_{i=1}^{N} \mu(E_{n})-\varepsilon$$</span>
+מאחר ש-<span>\(\varepsilon\)</span> ו-<span>\(N\)</span> שרירותיים:
+<span>$$\mu(E)\geq \sum_{n=1}^{\infty} \mu(E_{n})$$</span>
+בשילוב עם שלב 1 מקבלים שיוויון. אם <span>\(\mu(E)&lt;\infty\)</span>. אז מהגדרת הטור לכל <span>\(0&lt;\varepsilon\)</span> קיים <span>\(N\)</span> כך ש:
+<span>$$\mu(E)&lt;\sum_{i=1}^{N} \mu(E_{n})+\varepsilon$$</span>
+ולכן:
+<span>$$\mu(E)&lt; \sum_{i=1}^{N} \mu(E_{n})+\varepsilon$$</span>
+ולכן:
+<span>$$\mu(E)&lt;\sum_{n=1}^{N} \mu(K_{n})+2\varepsilon$$</span>
+מאחר ש-<span>\(K_{1}\sqcup \dots \sqcup K_{N}\)</span> קומפקטי נסיק את תנאי 2 מהגדרה <span>\(\mu_{F}\implies E \in \mathfrak{M}_{F}\)</span>.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 5</span><p>לכל <span>\(E \in \mathfrak{M}_{F}\)</span> ו-<span>\(0&lt;\varepsilon\)</span> קיימות <span>\(K\subseteq E \subseteq V\)</span> כאשר <span>\(K\)</span> קומפקטית ו-<span>\(V\)</span> פתוחה עם <span>\(\mu\left( V\setminus K \right)&lt; \varepsilon\)</span>.</p>
+</div>
+<div class="proof">
+<p>קיימות <span>\(K\subseteq E \subseteq V\)</span> המקיימות:
+<span>$$\mu(V)-\frac{\varepsilon}{2}&lt; \mu(E) &lt; \mu(K)+\frac{\varepsilon}{2}$$</span>
+מאחר ש-<span>\(V \setminus K\)</span> פתוחה וממידה סופית. הרי ש-<span>\(V \setminus K \in \mathfrak{M}_{F}\)</span> משלב 3. כלומר <span>\(K,V, V\setminus K \in \mathfrak{M}_{F}\)</span> ולכן מ-4 נסיק כי:
+<span>$$\mu\left( V \setminus  K \right)= \mu(V)-\mu(K)$$</span>
+כנדרש.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 6</span><p>לכל <span>\(A,B \in \mathfrak{M}_{F}\)</span>. מתקיים:
+<span>$$A\cup B, A\cap B , A \setminus  B \in \mathfrak{M} _{F}$$</span></p>
+</div>
+<div class="proof">
+<p>משלב 5 לכל <span>\(\varepsilon&gt;0\)</span> קיימות <span>\(K\subseteq B \subseteq V_{2}\)</span> ו-<span>\(K_{1} \subseteq B \subseteq V_{2}\)</span> עם <span>\(\mu\left( V_{i}\setminus K_{i} \right)&lt;\frac{\varepsilon}{2}\)</span>. נבחין כי:
+<span>$$A-B\subset V_{1}-K_{2}\subset(V_{1}-K_{1})\cup(K_{1}-V_{2})\cup(V_{2}-K_{2}),$$</span>
+ולכן:
+<span>$$\mu\left( A\setminus  B \right)&lt; \mu\left( V_{1} \setminus  K_{1} \right)+\mu\left( K_{1} \setminus  V_{2} \right)+\mu\left( V_{2}\setminus  K_{2} \right)&lt; \mu\left( K_{1} \setminus  V_{2} \right)+\varepsilon$$</span>
+מאחר ש-<span>\(K_{1} \setminus V_{2}\)</span> קומפקטית(חיסור של קבוצה פתוחה מקבוצה קומפקטית תהיה תת קבוצה סגורה של קבוצה קומפקטית ולכן קומפקטית) ו-<span>\(\varepsilon\)</span> שרירותי הרי ש- <span>\(A \setminus B \in \mathfrak{M}_{F}\)</span>:
+<span>$$A\cup B = A \sqcup B \setminus  A \in \mathfrak{ M} _{F} \qquad  A \cap B = A \setminus  \left( A \setminus  B \right)\in \mathfrak{ M} _{F}$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">שלב 7</span><p>הקבוצה <span>\(\mathfrak{M}\)</span> היא סיגמה אלגברה המכילה את <span>\(\sigma\)</span>-אלגברת בורל.</p>
+</div>
+<div class="proof">
+<p>תהי <span>\(A\in \mathfrak{ M}\)</span> ו-<span>\(K \subseteq X\)</span> קומפקטית. אזי:
+<span>$$A^{c}\cap K = K \setminus  \left( A \cap K \right)$$</span>
+שזה הפרש של שתי קבוצות ב-<span>\(\mathfrak{M}_{F}\)</span> ולכן מ-6 נקבל:
+<span>$$A^{c}\cap K \in \mathfrak{M} _{F}\implies A^{c}\in \mathfrak{M} $$</span>
+יהיו <span>\(A_{1},A_{2},\dots \in \mathfrak{M}\)</span> ו-<span>\(K\)</span> קומפקטית. נגדיר:
+<span>$$B_{i}=A_{1} \cap K\qquad  B_{N}=\left( A_{N}\cap K \right)\setminus \left( B_{1} \cup \dots B_{N-1} \right)$$</span>
+אזי <span>\(B_{1},B_{2},\dots \in \mathfrak{M}_{F}\)</span> זרים בזוגות. ולכן מ-4 האיחוד שלהם ב-<span>\(\mathfrak{M}_{F}\)</span> קרי:
+<span>$$\bigsqcup_{n}B_{n}= \bigcup_{n} A_{n}\cap K \in \mathfrak{M} _{F}  \implies \bigcup_{n} A_{n}  \in \mathfrak{ M} \implies \mathfrak{ M} \text{ is sigma algebra}$$</span>
+תהי <span>\(C\)</span> קבוצה סגורה כלשהי ו-<span>\(K\)</span> קומפקטית. אזי:
+<span>$$C\cap K \in \mathfrak{M} _{F}$$</span>
+כי היא קונפקטית(2) ולכן <span>\(C_{1} \in \mathfrak{M}\)</span> ולכן <span>\(\mathfrak{M}\geq \text{borel}\)</span>.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 8</span><p>מתקיים:
+<span>$$\mathfrak{M} _{F}=\left\{  E \in \mathfrak{M} \mid \mu(E)&lt; \infty  \right\}$$</span>
+ולכן למעשה ה-<span>\(F\)</span> מייצג Finite. כלומר כל הקבוצות ממידה סופית.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(E \in \mathfrak{M}_{F}\)</span> ו-<span>\(K\)</span> קומפקטית אזי מ-2 ו-4 נסיק כי <span>\(E\cap K \in \mathfrak{M}_{F}\)</span>. לכן <span>\(E \in \mathfrak{M}\)</span>. תהי <span>\(E \in \mathfrak{M}\)</span> עם <span>\(\mu(E)&lt;\infty\)</span>. קיימת <span>\(E \subseteq V\)</span> פתוחה עם <span>\(\mu(V)&lt;\mu(E)+\frac{\varepsilon}{2}\)</span>. מאחר ש-<span>\(V \in \mathfrak{M}_{F}\)</span>(משלב 3) הרי שקיימת קומפקטית <span>\(K \subseteq V\)</span> עם
+<span>$$\mu(V)&lt;\mu(K)+\frac{\varepsilon}{2}$$</span>
+מאחר ש-<span>\(E\cap K \in \mathfrak{M}_{F}\)</span> קיימת קומפקטית <span>\(H \subseteq E \cap K\)</span> עם <span>\(\mu\left( E\cap K \right)&lt;\mu(H)+\varepsilon\)</span>. לכן:
+<span>$$E\subseteq \left( E\cap K \right)\bigsqcup \left( V \setminus  K \right)$$</span>
+מזה נסיק כי:
+<span>$$\mu(E)\leq\mu\left( E\,\cap\,K \right)+\mu\left( V\setminus K \right)&lt;\mu(H)+2\epsilon,$$</span>
+מאחר ש-<span>\(H\)</span> קומפקטית ו-<span>\(\varepsilon\)</span> שרירותי נסיק <span>\(E \in \mathfrak{M}_{F}\)</span>.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 9</span><p>המידה <span>\(\mu\)</span> היא מידה על <span>\(\mathfrak{M}\)</span></p>
+</div>
+<div class="proof">
+<p>הראנו ב-<span>\(4\)</span> את ה-<span>\(\sigma\)</span>-אדטיביות של <span>\(\mu\)</span> על <span>\(\mathfrak{M}_{F}\)</span>. מ-8 כל הקבוצות ב-<span>\(\mathfrak{M}\setminus \mathfrak{M}_{F}\)</span> הן ממידה אינסופית וממילא ה-<span>\(\sigma\)</span>-אדטיבית נובעת.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי הוכחנו את כל החלקים של משפט ההצגה של ריס פרט לראשון. וזה יהיה השלב האחרון שלנו.</p>
+</div>
+<div class="lemma"><span class="keyword">שלב 10</span><p><span>$$\forall f \in C_{c}(X)\qquad \Lambda f=\int f \;\mathrm{d} \mu $$</span></p>
+</div>
+<div class="proof">
+<p>ראשית מספיק להוכיח את הטענה עבור פונקציות ממשיות. והאמת שמספיק להוכיח את האי שוויון
+<span>$$\Lambda f\leq\int_{X}f\,d\mu$$</span>
+כיוון שאם נראה זאת עבור כל פונקציה ממשית:
+<span>$$-\Lambda f=\Lambda(-f)\leq\int_{X}(-f)\;d\mu=-\int_{X}f\,d\mu,$$</span>
+ונקבל <span>\(\Lambda f \geq \int f \;\mathrm{d} \mu\)</span>.
+הערה מקדימה:
+<span>$$C_{c}(X)\subseteq L^{1}\left( \mu \right)$$</span>
+כי מאחר ש-<span>\(\text{supp}(f)\)</span> קומפקטית ו-<span>\(f\)</span> קציפה האי ש-<span>\(f(x)=f\left( \text{supp}(f) \right)\subseteq \mathbb{C}\)</span> קומפקטי ולכן:
+<span>$$M=\sup \lvert f \rvert &lt; \infty$$</span>
+ומכאן <span>\(f\leq M\cdot \mathbb{1}_{\text{supp}(f)}\)</span> וממונוטוניות האינטגרל:
+<span>$$\int \lvert f \rvert  \;\mathrm{d} \mu \leq M \cdot \mu\left( \text{supp}(f) \right)&lt;\infty $$</span>
+כאשר האי שוויון האחרון נובע משלב 2 בהוכחה(שזה גם תכונה 2 של משפט ההצגה של ריס). נסמן <span>\(K=\text{supp}(f)\)</span> ו-<span>\(f(x)\subseteq [a,b]\subseteq \mathbb{R}\)</span>. יהי <span>\(0&lt;\varepsilon\)</span>. ניקח חלוקה:
+<span>$$y_{0}&lt;a&lt;y_{1}&lt;\cdots&lt;y_{n}=b$$</span>
+המקיימים <span>\(y_{i}-y_{i-1}&lt;\varepsilon\)</span>. נסמן:
+<span>$$E_{i}=\{x\colon y_{i-1}&lt;f(x)\leq y_{i}\}\cap K$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>משפט ההצגה של ריס אומר כי לכל פונקציונאל חיובי <span>\(\Lambda:C_{c}(X)\to \mathbb{C}\)</span> עם תומך קומפקטי קיים מידת רדון ייחודים <span>\(\mu\)</span>(רגולאריות פנימית וחיצונית ומידה סופית על תחום קומפקטי) כך שמתקיים:
+<span>$$\Lambda(f)=\int_{X}f\,d\mu\quad\mathrm{for~all~}f\in C_{c}(X).$$</span></li>
+<li>
+<p>כדי להוכיח זאת הגדרנו עבור קבוצות פתוחות:
+<span>$$\mu(V):= \sup \left\{  \Lambda f\mid f\prec V  \right\}$$</span>
+כך שבעזרת זה הגדרנו לכל <span>\(E \leq X\)</span>:
+<span>$$\mu(E)=\inf \left\{   \mu(V)\mid V\supseteq E \text{ is open}    \right\}$$</span>
+הגדרנו את האוסף <span>\(\mathfrak{M}_{F}\)</span> להיות האוסף של כל הקבוצות <span>\(E\)</span> בעלות מידה סופית ורגולריות פנימית, כלומר מקיימות:
+<span>$$\mu(E)=\sup \left\{  \mu(k)\mid K \subseteq E \text{ is compact}  \right\}\qquad \mu(E)&lt;\infty$$</span>
+ממנו הגדרנו:
+<span>$$\mathfrak{M} =\left\{  E\subseteq X \mid E\cap K \in \mathfrak{M} _{F}, \text{for all compact K}  \right\}$$</span>
+כעת הוכחנו בעזרת השלבים הבאים:</p>
+</li>
+<li>
+<p>הפונקציה <span>\(\mu\)</span> היא תת אדטיבית </p>
+</li>
+<li>
+<p>הראנו כי עבור קבוצות קופקטיות <span>\(\mu(K)=\operatorname*{inf}\{\Lambda(f)\mid K\prec f\}\)</span>. </p>
+</li>
+<li>
+<p>הראנו כי עבור קבוצות פתוחות <span>\(V\)</span> מתקיים <span>\(\mu(V)=\operatorname*{sup}\{\mu(K):K\subseteq V\ \mathrm{compact}\}\)</span>. </p>
+</li>
+<li>
+<p>אדיטוביות עבור <span>\(\mathfrak{M}_{F}\)</span>. כלומר לכל <span>\(E_{n}\in \mathfrak{M}_{F}\)</span> זרים, מתקיים <span>\(\mu\left( \sqcup E_{n}\right)=\sum\mu(E_{n})\)</span>. </p>
+</li>
+<li>
+<p>קירוב של <span>\(E \in \mathfrak{M}_{F}\)</span> על ידי קבוצות קומפקטיות ופתוחות. כלומר לכל <span>\(E \in \mathfrak{M}_{F}\)</span> ו-<span>\(\varepsilon&gt; 0\)</span> קיים <span>\(K \subseteq E \subseteq V\)</span> כך ש-<span>\(\mu\left( V\setminus K \right)&lt; \varepsilon\)</span>. </p>
+</li>
+<li>
+<p>סגירות תחת איחודים וחיתוכים סופיים של <span>\(\mathfrak{M}_{F}\)</span>. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(\mathfrak{M}\)</span> היא <span>\(\sigma\)</span> אלגברה. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(\mathfrak{M}_{F}\)</span> מכילה את כל הקבוצות ב-<span>\(\mathfrak{M}\)</span> עם מידה סופית. </p>
+</li>
+<li>
+<p>הפונקציה <span>\(\mu\)</span> היא מידה. </p>
+</li>
+<li>
+<p>ההצגה - מתקיים <span>\(\Lambda f=\int f \;\mathrm{d} \mu\)</span>. </p>
+</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='prev-page'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

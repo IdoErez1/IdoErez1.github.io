@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נוסחאות גרין</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_8_1.html`;}});</script>
+        <div class="content">
+        <h1>8.2  נוסחאות גרין</h1>
+    <p>לפני שנתחיל נזכיר את פונקציות דלתא בקורדינטות שונות:</p>
+<table>
+<thead>
+<tr>
+<th>קואורדינטות</th>
+<th>שלושה מימדים</th>
+<th>שני מימדים</th>
+<th>מימד אחד</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>קרטזיות</td>
+<td><span>\(\delta(x-\xi)\delta(y-\eta)\delta(z-\zeta)\)</span></td>
+<td><span>\(\delta(x-\xi)\delta(y-\eta)\)</span></td>
+<td><span>\(\delta(x-\xi)\)</span></td>
+</tr>
+<tr>
+<td>גליליות</td>
+<td><span>\(\frac{\delta(r-\rho)\delta(\varphi-\varphi^{\prime})\delta(z-\zeta)}{r}\)</span></td>
+<td><span>\(\frac{\delta(r-\rho)\delta(z-\zeta)}{2\pi r}\)</span></td>
+<td><span>\(\frac{\delta(r-\rho)}{2\pi r}\)</span></td>
+</tr>
+<tr>
+<td>כדוריות</td>
+<td><span>\(\frac{\delta(r-\rho)\delta(\theta-\theta^{\prime})\delta(\varphi-\varphi^{\prime})}{r^{2}sin(\theta)}\)</span></td>
+<td><span>\(\frac{\delta(r-\rho)\delta(\theta-\theta^{\prime})}{2\pi r^{2}sin(\theta)}\)</span></td>
+<td><span>\(\frac{\delta(r-\rho)}{4\pi r^{2}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="proposition"><span class="keyword">הנוסחא הראשונה של גרין</span><p><span>$$\iiint_{V}\nabla\varphi\cdot\nabla\chi\,d V+\iiint_{V}\varphi\nabla^{2}\chi\,d V={\subset\!\supset} \mathllap{\iint}_{S}\varphi\left( \nabla\chi\cdot\mathbf{n} \right)\,d S,$$</span></p>
+</div>
+<div class="proof">
+<p>נובעת מהזהות הווקטורית:
+<span>$$\nabla\cdot(\varphi\nabla\chi)=\nabla\varphi\cdot\nabla\chi+\varphi\nabla^{2}\chi.$$</span>
+כאשר אם נבצע אינטגרציה מעל נפח סגור נקבל:
+<span>$$\iiint_{V}\nabla\cdot(\varphi\nabla\chi)\ d V=\iiint_{V}\left(\nabla\varphi\cdot\nabla\chi+\varphi\nabla^{2}\chi\right)\ d V.$$</span>
+כאשר שימוש במשפט הדיברגנץ של גאוס יתן את הנוסחא.</p>
+</div>
+<div class="proposition"><span class="keyword">הנוסחא השנייה של גרין</span><p><span>$$\iiint_{V}\left(\varphi\nabla^{2}\chi-\chi\nabla^{2}\varphi\right)\,d V={\subset\!\supset} \mathllap{\iint}_{S}\left(\varphi\nabla\chi-\chi\nabla\varphi\right)\cdot\mathbf{n}\,d S,
+$$</span></p>
+</div>
+<div class="proof">
+<p>נתחיל מהנוסחא הראשונה:
+<span>$$\iiint_{V}\nabla\varphi\cdot\nabla\chi\,d V+\iiint_{V}\varphi\nabla^{2}\chi\,d V={\subset\!\supset} \mathllap{\iint}_{S}\varphi(\nabla\chi\cdot\mathbf{n})\,d S,$$</span>
+כאשר נכתוב באופן דומה:
+<span>$$\iiint_{V}\nabla\chi\cdot\nabla\varphi\,d V+\iiint_{V}\chi\nabla^{2}\varphi\,d V={\subset\!\supset} \mathllap{\iint}_{S}\chi\left( \nabla\varphi\cdot\mathbf{n} \right)\,d S.$$</span>
+כעת אם נחסיר את המשוואה השנייה מהראשונה נקבל את הנוסחא השנייה.</p>
+</div>
+<div class="remark">
+<p>נוסחאות גרין למעשה נותנות לנו את הקשר בין מקורות(הלפלאסיאנים) והשטף של שתי שדות סקלארים.</p>
+</div>
+<div class="corollary">
+<p>פונקציה אשר חסומה על ידי משפט חסום <span>\(S\)</span> נתונה על ידי:
+<span>$$u\left( \xi,\eta,\zeta \right)={\frac{1}{4\pi}}{\subset\!\supset} \mathllap{\iint}_{S}\left[u\,\nabla\!\left({\frac{1}{r}}\right)-{\frac{1}{r}}\,\nabla u\right]\cdot\mathbf{n}\,d S-{\frac{1}{4\pi}}\iiint_{V}{\frac{1}{r}}\,\nabla^{2}u\,d V.$$</span></p>
+</div>
+<div class="proof">
+<p>נשתמש בנוסחא השנייה של גרין על ספרה סגורה <span>\(S\)</span> מסביב לנקודה <span>\((\xi,\eta,\zeta)\)</span> כאשר:
+<span>$$\varphi=r^{-1} \quad \varphi=r^{-1}\quad r^{2}=\left( x{-}\xi \right)^{2}{+}\left( y{-}\eta \right)^{2}{+}\left( z{-}\zeta \right)^{2}$$</span>
+כיוון שלא ניתן להשתמש בנוסחאות גרין אם הנקודה <span>\(\left( \xi,\eta,\zeta \right)\)</span> כלולה בנפח הסגור נגדיר ספרה קטנה עם שפה <span>\(\Sigma\)</span> ורדיוס <span>\(\varepsilon\)</span> שמרכזו ב-<span>\((\xi,\eta,\zeta)\)</span>. נציב את <span>\(\varphi\)</span> ו-<span>\(\chi\)</span> בנוסחאת גרין השנייה:
+<span>$$\begin{gather}\iiint_{V}{\frac{1}{r}}\,\nabla^{2}u\,d V={\subset\!\supset} \mathllap{\iint}_{S+\Sigma}\left[u\,\nabla\!\left({\frac{1}{r}}\right)-{\frac{1}{r}}\,\nabla u\right]\cdot\mathbf{n}\,d S=\\=\oint_{S}\left[u\,\nabla\!\left({\frac{1}{r}}\right)\,-\,{\frac{1}{r}}\,\nabla u\right]\cdot\mathbf{n}\,d S+\oint_{\Sigma}\left[u\,\nabla\!\left({\frac{1}{r}}\right)-{\frac{1}{r}}\,\nabla u\right]\cdot\mathbf{n}\,d S 
+\end{gather}$$</span>
+כאשר השתמשנו בכך ש-<span>\(\bar{\nabla}^2(r^{-1})=0\)</span> מעל נפח סגור. מתקיים:
+<span>$$(*)\quad {\subset\!\supset} \mathllap{\iint}_{\Sigma}u\,\nabla\!\left({\frac{1}{r}}\right)\cdot\mathbf{n}\,d S=-\int_{0}^{2\pi}\int_{0}^{\pi}u\left( \epsilon,\varphi,\theta \right)\,\,{\frac{1}{\epsilon^{2}}}\,\,\epsilon^{2}\sin\left( \theta \right)\,d\theta\,d\varphi,$$</span>
+כאשר עבור:
+<span>$$(* *)\quad {\subset\!\supset} \mathllap{\iint}_{\Sigma}{\frac{1}{r}}\,\nabla u\cdot\mathbf{n}\,d S=\epsilon\int_{0}^{2\pi}\,\int_{0}^{\pi}\,\nabla u\left( \epsilon,\varphi,\theta \right)\ \sin\left( \theta \right)\,d\theta\,d\varphi.$$</span>
+נקבל כי בגבול <span>\(\varepsilon\to 0\)</span> המשוואה <span>\((* *)\)</span> מתאספת כי <span>\(\bar{\nabla}u\)</span> סופי כאשר המשוואה <span>\((*)\)</span> תתן:
+<span>$${\subset\!\supset} \mathllap{\iint}_{\Sigma}u\,\nabla\!\left({\frac{1}{r}}\right)\cdot\mathbf{n}\,d S=-4\pi u\left( \xi,\eta,\zeta \right).$$</span>
+כך שנקבל סה"כ כי:
+<span>$$u\left( \xi,\eta,\zeta \right)={\frac{1}{4\pi}}{\subset\!\supset} \mathllap{\iint}_{S}\left[u\,\nabla\!\left({\frac{1}{r}}\right)-{\frac{1}{r}}\,\nabla u\right]\cdot\mathbf{n}\,d S-{\frac{1}{4\pi}}\iiint_{V}{\frac{1}{r}}\,\nabla^{2}u\,d V.$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לקבל כל ערך בפנים של <span>\(S\)</span> אם נתון:</p>
+<ol>
+<li>
+<p>הלפלסיאן בתוך הנפח. </p>
+</li>
+<li>
+<p>הערך של <span>\(u\)</span> בכל נקודה על השפה. </p>
+</li>
+<li>
+<p>הגרדיאנט של <span>\(u\)</span> לאורך הנורמל של <span>\(S\)</span> בכל נקודה על <span>\(s\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>מהנוסחא נקבל כי אם <span>\(u\)</span> היא הרמונית אז <span>\(\bar{\nabla}^2u=0\)</span>  ונקבל:
+<span>$$u\left( \xi,\eta,\zeta \right)=\frac{1}{4\pi}{\subset\!\supset} \mathllap{\iint}_{S}\left[u\,\nabla\!\left(\frac{1}{r}\right)-\frac{1}{r}\,\nabla u\right]\cdot\mathbf{n}\,d S.$$</span>
+ומספיק לדעת את <span>\(u\)</span> על השפה ואת הגרדיאנט של <span>\(u\)</span> על השפה. </p>
+</div>
+<div class="corollary"><span class="keyword">יחידות הפתרון של בעיית לפלס</span><p>נניח כי <span>\(u_{1},u_{2}\)</span> שתיהן המשכה אנליטית(פתרונות של משוואת לפלס). לכן <span>\(v=u_{1}-u_{2}\)</span> היא גם הרמונית וכן <span>\(v=0\)</span> על השפה. לכן מהנוסחא הראשונה של גרין עבור <span>\(\varphi=\chi=v\)</span> נקבל:
+<span>$$\iiint_{V}\left[\left({\frac{\partial v}{\partial x}}\right)^{2}+\left({\frac{\partial v}{\partial y}}\right)^{2}+\left({\frac{\partial v}{\partial z}}\right)^{2}\right]\,d V={\subset\!\supset} \mathllap{\iint}_{S}v{\frac{\partial v}{\partial n}}\,d S-\iiint_{V}v\nabla^{2}v\,d V.$$</span>
+כאשר כיוון שגם <span>\(v=0\)</span> על השפה וגם <span>\(\bar{\nabla}^2v=0\)</span> נקל כי האינטגרנד באגף שמאל מתאפס לכל נפח ולכן:
+<span>$${\frac{\partial v}{\partial x}}={\frac{\partial v}{\partial y}}={\frac{\partial v}{\partial z}}=0,$$</span>
+ו-<span>\(v\)</span> קבוע. לכן נדרש כי אפס בתוך הנפח ו-<span>\(u_{1}=u_{2}\)</span>.</p>
+</div>
+<div class="remark">
+<p>הוכחה זו תקפה גם עבור תנאי שפה דיריכלה כיוון שהאינטגרל עדיין מתאפס גם אם רק הנגזרת שווה ל-0.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a></li>
+<li class='prev-page'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

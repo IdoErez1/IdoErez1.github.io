@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואות מקסוול</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_4_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  משוואות מקסוול</h1>
+    <div class="proposition">
+<p>ניתן לרשום זוג ראשון של משוואות מקסוול באופן הבא:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\qquad F_{\alpha \beta}=\partial_{\alpha}A_{\beta}-\partial_{\beta}A_{\alpha}$$</span></p>
+</div>
+<div class="proof">
+<p>רק נוודא שהמשוואות האלה באמת תואמות את מה שאנחנו מכירים. עבור <span>\(\mu=0\)</span> נקבל:
+<span>$$2\varepsilon^{0123}\partial_{1}F_{23}+2\varepsilon^{0213}\partial_{2}F_{13}+2\varepsilon^{0312}\partial_{3}F_{12}=0$$</span>
+נפשט ונקבל:
+<span>$$\partial_{1}F_{23}-\partial_{2}F_{13}+\partial_{3}F_{12}=0$$</span>
+נציב ערכים ונקבל:
+<span>$$\partial_{x} (-B_{x})-\partial_{y}B_{y}+\partial_{z}(-B_{z})=0\implies -\bar{\nabla} \cdot \vec{B}=0\implies \bar{\nabla} \cdot \vec{B}=0$$</span>
+ואכן קיבלנו את משוואת מקסוואל - אין מונופול.
+עבור <span>\(\mu=1\)</span> נקבל:
+<span>$$2\varepsilon^{1023}\partial_{0} F_{23}+2\varepsilon^{1203}\partial _{2}F_{03}+2\varepsilon^{1302}\partial_{3}F_{02}=0$$</span>
+וניתן לפשט:
+<span>$$-\partial_{0}F_{23}+\partial_{2}F_{02}-\partial_{3}F_{02}=0$$</span>
+כאשר אם נציב ערכים:
+<span>$$-\frac{1}{c}\frac{\partial }{\partial t} (-B_{x})+\underbrace{ \partial_{y}E_{z}-\partial_{z}E_{y} }_{ \left( \bar{\nabla} \times \vec{E} \right)_{x} }=0\implies \frac{1}{c}\frac{\partial \vec{B}}{\partial t} +\left( \bar{\nabla} \times \vec{E} \right)=0$$</span>
+וקיבלנו את משוואת פראדיי.</p>
+</div>
+<p>עתה נרצה לבנות פעולה לשדה <span>\(A^\mu\)</span>, כך שהפועלה הכוללת תהיה נתונה ע"י:
+<span>$$S=S_{f}+S_{m}+S_{int}$$</span>
+כאשר <span>\(S_{f}\)</span> זה הפעולה עבור השדה האלקטרומגנטי, <span>\(S_{m}\)</span> זה הפעולה עבור כל חלקיק - כל מסה. כלומר:
+<span>$$S_{m}=-\sum_{n}m_{n}c\int dS_{n}$$</span>
+ו-<span>\(S_{int}\)</span> זה הפעולה של האינטרקציה בין השדה למסה. כאשר נקבל:
+<span>$$S_{int} = - \sum_{n} \frac{e_{n}}{c}\int A_{\mu} dx^\mu_{n}$$</span>
+ולכן נותר למצוא רק את <span>\(S_{f}\)</span>. ניתן למעשה לקבוע את <span>\(S_{f}\)</span> לחלוטין מהעקרונות הבאים:</p>
+<ol>
+<li>
+<p>אינווריאנטיות תחת טרנספורמציית לורנץ. </p>
+</li>
+<li>
+<p>אינוואירנטיות תחת טרנספורמציית כיול. </p>
+</li>
+<li>
+<p>עקרון הסופרפוזיציה.  </p>
+</li>
+</ol>
+<div class="remark">
+<p>השדה היחידה בערך שאנחנו מכירים שמקיים סופרפוזיציה הוא השדה האלקטרומגנטי. כבידה למשל(תחת יחסות כללית) אינו מקיים סופרפוזיציה. עיקרון סופרפוזיציה למעשה נובעת מזה שהמשוואות הם לינאריות.</p>
+</div>
+<div class="definition"><span class="keyword">אינווריאנטיות תחת טרנספורמציית כיול</span><p>ניתן לעבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu}f\)</span> כלומר להוסיף 4-גרדיאנט ולקבל <span>\(A_{\mu}\)</span> חדש אשר לכל היותר מוסיף קבוע לפעולה.</p>
+</div>
+<p>אומנם מרגיש שאלו הנחות מאוד טבעיות, אבל למעשה מאוד חזקות אשר לא קיימים באופן כללי בטבע, ולכן בסופו של דבר זה הנחות מבוססות ניסוי.</p>
+<div class="proposition">
+<p>שלושת העקרונות האלו קובעים את <span>\(S_{f}\)</span> ביחידות.</p>
+</div>
+<div class="proof">
+<p>מעקרון הסופרפוזיציה, אנו יודעים כי משוואות התנועה של שדה הם לינארים. מכאן הפעולה חייבת להיות ריבועית בשדה. 
+מטרנספורמציית כיול נקבל כי לא נרצה להשתמש ב-<span>\(A_{\mu}\)</span>(לא אינווריאנטי תחת שינוי כיול).
+כמו כן לא נשים נגזרת שנייה בתוך פעולה כדי לשמור על סדר ראשון בפעולה, הפועלה צריך להיות אובייקט תלוי בנגזרות הראשון. ולכן נשארנו עם <span>\(F_{\mu \nu}\)</span>. 
+המבנה היחיד שמקיים את שלושת העקרונות הוא <span>\(F_{\mu \nu}F^{\mu \nu}\)</span>. וזה אכן מקיים את שלושת הדרישות. </p>
+</div>
+<p>עקרונית יש עוד מבנה לא רלוונטי - <span>\(\varepsilon^{\mu \nu \alpha \beta}F_{\mu \nu}F_{\alpha \beta}=\partial_{\mu}V^\mu\)</span> כי זה נגזרת שלמה(4 דיוורגנץ)
+לכן למעשה קיים יחיד. למעשה:
+<span>$$S_{f}=\alpha\int \;\mathrm{d}t\mathrm{d}^3xF_{\mu \nu}F^{\mu \nu}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu}$$</span></p>
+<p>כלומר קיבלנו פעולה כוללת המתארת דינמיקה של שדה וחומר(מטענים) המתארת דינמיקה של שדה וחומר(מטענים).
+<span>$$\begin{gather}S=S_{f}+S_{m}+S_{int}  \\S_{f}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu} \qquad  F_{\mu \nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}\\S_{m}=-\sum_{n}m_{m}c\int dS_{n} \\S_{int} = - \sum_{n} \frac{e_{n}}{c}\int A_{\mu} dx^\mu_{n}
+\end{gather}$$</span>
+כמו שאנו מכירים, ניתן להגיע למשוואות התנועה ע"י מציאת האקסטרימום של הפונקציונאל של הפעולה בעזרת אוילר לגרנג'. לפני שנגזור את משוואות התנועה עבור השדה נרצה לכתוב את האיבר האינטרקציה <span>\(S_{int}\)</span> בצורה קצת שונה שתהיה נוחה בהמשך. עבור מערכת של מטענים נקודתיים צפיפות המטען נתונה על ידי:
+<span>$$\rho\left( t,\vec{x} \right)=\sum_{n} e_{n}\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right)$$</span>
+ואילו צפיפות הזרם ניתן לרשום באופן הבא:
+<span>$$\vec{J}\left( t,\vec{x} \right)=\rho\frac{ \mathrm{d}\vec{x}}{\mathrm{d}t}=\sum_{n} e_{n}\delta\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}\vec{x}_{n}(t)}{\mathrm{d}t}$$</span>
+בעבר התייחסנו לצפיפות זרם בתור סקלר, אבל כעת מתייחסים עליו בתור ווקטור כדי שנוכל לבצע טרנספורמציית יחסותיות.</p>
+<p>כעת בעזרת 4-זרם נוכל לרשום:
+<span>$$\begin{align}S_{int}&amp;=-\sum_{n} \frac{e_{n}}{c}\int A_{\mu} \frac{\mathrm{d}x^\mu_{\;n}}{\mathrm{d}t} \cdot \mathrm{d}t= \\&amp;=-\sum_{n} \frac{e_{n}}{c}\int \mathrm{d}t \int\mathrm{d}^3 \vec{x}A_{\mu}\left( t,\vec{x} \right)\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}x^\mu_{n}}{\mathrm{d}t} = \\&amp;=-\frac{1}{c^2} \int \mathrm{d}x^0 \int \mathrm{d}^3\vec{x} A_{\mu}\left( t,\vec{x} \right)\underbrace{ \sum_{n} e_{n}\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}x}{\mathrm{d}t} }_{ J^\mu\left( t,\vec{x} \right) }= \\&amp;=-\frac{1}{c^2}\int \mathrm{d}^4 x A_{\mu}(x) J^\mu(x) 
+\end{align}$$</span></p>
+<p>זוהי צורה מאוד נוחה לכתוב את הפעולה של האינטרקציה. כעת ניתן לגזור את משוואות התנועה.
+הפעולה הנתונה ע"י:
+<span>$$S=-\frac{1}{16\pi c} \int F_{\mu \nu} F^{\mu \nu} \mathrm{d}^4x-\frac{1}{c^2}\int\mathrm{d^4}x A_{\mu}J^\mu +S_{m}$$</span>
+נחשב את הווריאציה של <span>\(S\)</span> לפי <span>\(A_{\mu}\)</span>.(כלומר <span>\(A_{\mu}\mapsto A_{\mu}+\delta A_{\mu}\)</span>). נחשב:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)=F_{\mu \nu}\delta F^{\mu \nu}+\delta F_{\mu \nu}F^{\mu \nu}$$</span>
+כאשר יכולתו לכתוב <span>\(\delta F^{\mu \nu}=\eta^{\mu \nu}\eta^{\nu \beta}\delta F_{\alpha \beta}\)</span>. נקבל כי שתי האיברים הם אותו הדבר ולכן:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)=2\delta F_{\mu \nu}F^{\mu \nu}$$</span>
+כאשר:
+<span>$$\begin{gather}F_{\mu \nu}\mapsto \partial_{\mu}\left( A_{\nu}+\delta A_{\nu} \right)-\partial_{\nu}\left( A_{\mu}+\delta A_{\mu} \right)  \\\tilde{F}_{\mu \nu}=\partial_{\mu} A_{\nu}-\partial_{\nu} A_{\mu}+\partial_{\mu}\delta A_{\nu}-\partial_{\nu}\delta A_{\mu}
+\end{gather}$$</span>
+וכעת:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)= 2 \left( \partial_{\mu}\delta A_{\nu}-\partial_{\nu}\delta A_{\nu} \right) F^{\mu \nu}=4\partial_{\mu}\delta A_{\nu}F^{\mu \nu}$$</span>
+ונקבל:
+<span>$$\delta S= -\frac{4}{16\pi c} \int \mathrm{d}^4x\underbrace{ \left( \partial_{\mu}\delta A_{\nu}F^{\mu \nu} \right) }_{ \partial_{\mu}\left( \delta A_{\nu }F^{\mu \nu} \right)-\delta A_{\nu}\partial_{\mu}F^{\mu \nu} }-\frac{1}{c^2}\int \mathrm{d}^4x \delta A_{\mu}J^\mu$$</span>
+כאשר ממשוואת הרציפות נקבל כי כיוון שאנו עושים אינטגרל על דיווגנץ 4 מימדי על תחום עם תנאי שפה אפס(מקבעים את התנאי שפה לאפס כאשר אנחנו מחשבים ווריאציה) נקבל כי האיבר זניח, והאיבר <span>\(\partial_{\mu}\left( \delta A_{\nu }F^{\mu \nu} \right)=\partial_{\mu}\left( \delta A_{\nu}F^{\mu \nu} \right)\)</span>. ונקבל סה"כ:
+<span>$$\delta S = \frac{1}{4\pi c}\int \mathrm{d}^4 x \left( \partial_{\mu} F^{\mu \nu}-\frac{4\pi}{c} J^\nu \right)\delta A_{\nu}\overset{!}{=} 0$$</span>
+ונדרוש כי יתאפס לכל <span>\(\delta A_{\nu}\)</span> ולכן נדרש שהאינטגרנד מתאפס. נקבל:
+<span>$$\boxed{\partial_{\mu}F^{\mu \nu}=\frac{4\pi}{c}J^{\nu}}
+$$</span>
+וזה משוואה נוספת שמתווספת למשוואה שמצאנו קודם:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\implies \begin{cases}\bar{\nabla} \cdot \vec{B} = 0 \\\bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} 
+\end{cases}$$</span></p>
+<p>עבור <span>\(\nu=0\)</span> נקבל מהמשוואה:
+<span>$$\begin{gather}\nu=0\implies \partial_{\mu} F^{\mu 0}= \frac{4\pi}{c}J^0=4\pi \rho  \\\partial_{\mu}F^{\mu 0}=\partial_{i} F^{i_{0}}= \bar{\nabla} \cdot \vec{E}
+\end{gather}$$</span>
+כאשר השתמשנו ב-<span>\(F_{i_{0}}=-\left( \vec{E} \right)_{i}\)</span>. וביחד קיבלנו את חוק גאוס:
+<span>$$\bar{\nabla} \cdot \vec{E}=4\pi \rho$$</span>
+עבור <span>\(\nu=1\)</span> נקבל:
+<span>$$\begin{gather}\partial_{\mu}F^{\mu 1}=\frac{4\pi}{c}\left( \vec{J} \right)_{x}  \\\partial_{\mu} F^{\mu 1} = \partial_{0} F^{01}+\partial_{2} F^{21}+\partial_{3}F{31}=-\frac{1}{c}\underbrace{ \left( \frac{\partial E_{x}}{\partial t} +\frac{\partial B_{z}}{\partial y} -\frac{\partial B_{y}}{\partial z}  \right) }_{ \left( \bar{\nabla} \times \vec{B} \right)_{x} }
+\end{gather}$$</span>
+כאשר נקבל מזה סה"כ את חוק אמפר-מקסוול:
+<span>$$-\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J}$$</span></p>
+<div class="corollary">
+<p>מהמשוואות שלנו קיבלנו כי:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\implies \begin{cases}\bar{\nabla} \cdot \vec{B} = 0 \\\bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} 
+\end{cases}$$</span>
+<span>$$\partial_{\mu}F^{\mu \nu}=\frac{4\pi}{c}J^{\nu}\implies\begin{cases} \bar{\nabla} \cdot \vec{E}=4\pi \rho \\-\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J} 
+\end{cases}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='prev-page'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

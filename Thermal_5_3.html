@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>המערכת הסגורה - הצבר הקנוני</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_5_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_5_2`; }});</script>
+        <div class="content">
+        <h1>5.3  המערכת הסגורה - הצבר הקנוני</h1>
+    <div class="definition"><span class="keyword">הצבר הקנוני</span><p>מאגר חום עם אנרגיה <span>\(E_{R}\)</span> המחובר למערכת עם אנרגיה <span>\(E_{A}\)</span> כך ש-<span>\(E_{R}\gg E_{A}\)</span> והאנרגיה הכוללת <span>\(E_{0}=E_{A}+E_{R}\)</span> היא קבועה.</p>
+</div>
+<div class="proposition"><span class="keyword">התפלגות הההסתברות של הצבר הקנוני</span><p>ההסתברות של מצב להיות באנרגיה <span>\(E_{A}\)</span> יהיה פרופורציונאלי ל-<span>\(e^{ -E_{A}/k_{B}T }\)</span></p>
+</div>
+<div class="remark">
+<p>התפלגות זו מכונה התפלגות בולצמן.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי <span>\(S(E_{R})=S(E_{0}-E_{A})\)</span> כאשר כיוון ש<span>\(E_{R}\gg E_{A}\)</span> נקבל כי ניתן לפתח בעזרת טור טיילור ולקבל:
+<span>$$S(E_{\mathrm{R}})=S(E_{0})-E_{\mathrm{A}}\frac{\partial S}{\partial E}+\cdots$$</span>
+כאשר ניתן להזניח גורמים מסדר גבוה ולהציב <span>\(\frac{1}{T}=\frac{\partial S}{\partial E}\)</span>. נקבל:
+<span>$$S(E_{\mathrm{R}})=S(E_{0})-{\frac{E_{\mathrm{A}}}{T}}$$</span>
+כאשר אנו יודעים כי <span>\(S=k_{B}\ln \Omega\)</span> ולכן ההסתברות שיהיה במצב <span>\(E_{R}\)</span> תהיה פרופורציונית לכמות המיקרו מצבים <span>\(\Omega(E_{R})\)</span> ולכן:
+<span>$$P(E_{R})\propto e^{S(E_R)/k_{B}}\approx e^{S(E_{0})-E_{A}/k_{B}T}=e^{ S(E_{0}) }e^{ -E_{A}/k_{B}T }$$</span>
+כלומר נקבל כי ההסתברות ברופורצינאלית ל-<span>\(e^{ -E_{A}/k_{B}T }\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">ניוון</span><p>כמות המיקרו מצבים עם רמת אנרגיה <span>\(E_{i}\)</span>. לכרגע נסמן את זה ב-<span>\(g_{i}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פונקצייית החלוקה</span><p>הפקטור נרמול של ההסתברות:
+<span>$$Z=\sum_{i}g_{i}e^{-E_{i}/k_{\mathrm{{B}}}T}$$</span>
+כאשר:
+<span>$$ P(E_{i})={\frac{1}{Z}}g_{i}e^{-E_{i}/k_{\mathrm{B}}T}$$</span></p>
+</div>
+<div class="remark">
+<p>למעשה פונקציית החלוקה היה תהיה התמרת לפלס של פונקציית מספר המצבים.</p>
+</div>
+<div class="example"><span class="keyword">מערכת שתי רמות</span><p>עבור מערכת שתי רמות, נניח והמערכת יכולה להיות במצב <span>\(-\frac{\Delta}{2}\)</span> או <span>\(\frac{\Delta}{2}\)</span>. מתקיים:
+<span>$$Z=\sum_{\alpha}\mathrm{e}^{-\beta E_{\alpha}}=\mathrm{e}^{\beta\Delta/2}+\mathrm{e}^{-\beta\Delta/2}=2\cosh\left({\frac{\beta\Delta}{2}}\right)$$</span></p>
+</div>
+<div class="example"><span class="keyword">אוסצילטור הרמוני קוונטי</span><p>האנרגיות האפשריות של המערכת יהיו מהצורה <span>\(\left( n+\frac{1}{2} \right)\hbar \omega\)</span> ולכן:
+<span>$$Z=\sum_{\alpha}\mathrm{e}^{-\beta E_{\alpha}}=\sum_{n=0}^{\infty}\mathrm{e}^{-\beta\left( n+\frac{1}{2} \right)\hbar\omega}=\mathrm{e}^{-\beta\frac{1}{2}\hbar\omega}\sum_{n=0}^{\infty}\mathrm{e}^{-n\beta\hbar\omega}=\frac{\mathrm{e}^{-\frac{1}{2}\beta\hbar\omega}}{1-\mathrm{e}^{-\beta\hbar\omega}}=\frac{2}{\sinh\left( \frac{1}{2}\beta\hbar \omega \right)}$$</span></p>
+</div>
+<div class="example"><span class="keyword">מערכת של <span>\(N\)</span> רמות</span><p>נסמן את רמות האנרגיה ב-<span>\(0,\hbar {\omega},\dots,(N-1)\hbar \omega\)</span> ונקבל:
+<span>$$Z=\sum_{\alpha}\mathrm{e}^{-\beta E_{\alpha}}=\sum_{j=0}^{N-1}\mathrm{e}^{-j\beta\hbar\omega}=\frac{1-\mathrm{e}^{-N\beta\hbar\omega}}{1-\mathrm{e}^{-\beta\hbar\omega}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנרגיה פנימית בעזרת התפלגות בולצמן</span><p><span>$$U=-\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta} =k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}}$$</span></p>
+</div>
+<div class="proof">
+<p>אם נגדיר <span>\(\beta=\frac{1}{k_{B}T}\)</span> נקבל כי האנרגיה הפנימית תהיה שווה ל:
+<span>$$U=\sum_{i}E_{i}P(E_{i})=\frac{\sum_{i}E_{i}\mathrm{e}^{-\beta E_{i}}}{\sum_{i}\mathrm{e}^{-\beta E_{i}}}$$</span>
+כאשר המכנה זה פונקציית החלוקה, ולכן מתקיים:
+<span>$$-{\frac{\mathrm{d}Z}{\mathrm{d}\beta}}=\sum_{i}E_{i}\mathrm{e}^{-\beta E_{i}}$$</span>
+ולכן:
+<span>$$U=-\frac{1}{Z}\left( \frac{\mathrm{d} Z}{\mathrm{d} \beta}  \right)\implies U=-\frac{\mathrm{d} \ln Z}{\mathrm{d} \beta} \implies U=k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנטרופיה בעזרת פונקציית החלוקה</span><p><span>$$S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z$$</span></p>
+</div>
+<div class="proof">
+<p>כמו מקודם נגדיר <span>\(\beta = \frac{1}{k_{B}T}\)</span>. אנו יודעים כי <span>\(P_{j}=\frac{e^{ -\beta E_{j} }}{Z}\)</span> ולכן:
+<span>$$\ln{ P}_{j}=-\beta E_{j}-\ln Z$$</span>
+וכן מתקיים <span>\(S=-k_{\mathrm{B}}\sum_{i}P_{i}\ln P_{i}\)</span>. ולכן נקבל:
+<span>$$\begin{gather}{{S}}={{-k_{\mathrm{B}}\sum_{i}P_{i}\ln P_{i}}}= k_{\mathrm{B}}\sum_{i}P_{i}\left( \beta E_{i}+\ln Z \right)= k_{B}\left( \beta \sum_{i}P_{i}E_{i}+\sum_{i}P_{i}\ln Z \right)
+\end{gather}$$</span>
+כאשר כיוון ש-הסכום של ההסתברות להיות הרמת אנרגיה כפול האנרגיה ברמה תהיה סך האנרגיה נקבל:
+<span>$$k_{\mathrm{{B}}}\left( \beta U+\frac{1}{Z} \ln Z\sum e^{ -\beta_{i}E_{i} } \right) =k_{B}\left( \beta U+ \frac{Z}{Z}\ln Z \right)$$</span>
+כאשר כתבנו בסכום השני את <span>\(P_{i}\)</span> מפורשות, הוצאנו את <span>\(Z\)</span> ו-<span>\(\ln Z\)</span> מהסכום וקיבלנו מהסכום את פונקציית החלוקה. נציב חזרה את <span>\(\beta\)</span> ונקבל:
+<span>$$S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנרגיה חופשית של הלמהולץ בעזרת פונקציית החלוקה</span><p><span>$$F=-k_{\mathrm{B}}T\ln Z$$</span>
+ולכן גם ניתן לכתוב:
+<span>$$Z=e^{ -F/k_{B}T }$$</span></p>
+</div>
+<div class="proof">
+<p>נובע מההגדרה <span>\(F=  U-  T  S\)</span> עם הביטוי לאנטרופיה מהטענה הקודמת.</p>
+</div>
+<div class="corollary">
+<p>ניתן בעזרת הגדרה זו להשיג ביטוי של הרבה גדלים אחרים בעזרת הפונקציית חלוקה. למשל:
+<span>$$\begin{gather}p=-\left({\frac{\partial F}{\partial V}}\right)_{T}=k_{\mathrm{B}}T\left({\frac{\partial\mathrm{ln}\,Z}{\partial V}}\right)_{T}  \\H=U+p V=k_{\mathrm{{B}}}T\left[T\left({\frac{\partial\mathrm{ln}\,Z}{\partial T}}\right)_{V}+V\left({\frac{\partial\mathrm{ln}\,Z}{\partial V}}\right)_{T}\right] \\G=F+p V=k_{\mathrm{{B}}}T\left[-\ln Z+V\left({\frac{\partial\ln Z}{\partial V}}\right)_{T}\right] \\C_{V}=k_{\mathrm{{B}}}T\left[2\left(\frac{\partial\mathrm{ln}\,Z}{\partial T}\right)_{V}+T\left(\frac{\partial^{2}\mathrm{ln}\,Z}{\partial T^{2}}\right)_{V}\right]
+\end{gather}$$</span></p>
+</div>
+<div class="example">
+<p>עבור מערכת שתי רמות(עם אנרגיות <span>\(\frac{\Delta}{2}\)</span> ו-<span>\(-\frac{\Delta}{2}\)</span>) ראינו כי פונקציית החלוקה היא מהצורה:
+<span>$$Z=2\cosh\left(\frac{\beta\Delta}{2}\right)$$</span>
+ולכן האנרגיה הפנימית תהיה:
+<span>$$U=-\frac{\mathrm{d}\ln Z}{\mathrm{d}\beta}=-\frac{\Delta}{2}\operatorname{tanh}\left(\frac{\beta\Delta}{2}\right).$$</span>
+קיבול החום יהיה:
+<span>$$C_{V}=\left({\frac{\partial U}{\partial T}}\right)_{V}=k_{\mathrm{B}}\left({\frac{\beta\Delta}{2}}\right)^{2}\mathrm{sech}^{2}\left({\frac{\beta\Delta}{2}}\right)$$</span>
+פונקציית הלמהולדס תהיה:
+<span>$$F=-k_{\mathrm{B}}T\ln Z=-k_{\mathrm{B}}T\ln\left[2\cosh\left({\frac{\beta\Delta}{2}}\right)\right]$$</span>
+ותן לקבל מזה ישירות את האנטרופיה:
+<span>$$S=\frac{U-F}{T}=-\frac{\Delta}{2T}\operatorname{tanh}\left(\frac{\beta\Delta}{2}\right)+k_{\mathrm{B}}\ln\left[2\cosh\left(\frac{\beta\Delta}{2}\right)\right]$$</span>
+כלומר מפונקציית החלוקה ניתן לקבל את כל הגדלים של המערכת!</p>
+</div>
+<div class="proposition"><span class="keyword">איחוד פונקציות חלוקה</span><p>אם האנרגיה <span>\(E\)</span> היא סכום של שתי תרומות <span>\(E^{(a)}\)</span> ו-<span>\(E^{(b)}\)</span> כך שהרמת אנרגיה <span>\(E_{ij}\)</span> נתונה על ידי:
+<span>$$E_{i,j}=E_{i}^{(a)}+E_{j}^{(b)}$$</span>
+מתקיים:
+<span>$$Z=Z_{a}Z_{b}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$Z=\sum_{i}\sum_{j}\mathrm{e}^{-\beta(E_{i}^{(a)}+E_{j}^{(b)})}=\sum_{i}\mathrm{e}^{-\beta E_{i}^{(a)}}\sum_{j}\mathrm{e}^{-\beta E_{j}^{(b)}}=Z_{a}Z_{b}$$</span></p>
+</div>
+<div class="corollary">
+<p>פונקציית החלוקה של רכיבים בלתי תלויים מכפילים אחד בשני, ולכן בפרט <span>\(\ln Z\)</span> עבור רכיבים בלתי תלויים נסכמים אחד עם השני(<span>\(\ln(Z)=\ln(Z_{a})+\ln(Z_{b})\)</span>).</p>
+</div>
+<h2>התפלגות בולצמן במרחב הפאזה</h2>
+<div class="proposition"><span class="keyword">התפלגות הסתברות במרחב הפאזה</span><p><span>$$P(p,q)=\frac{1}{\tilde{Z}(T,V,N)}\exp[-\beta H(p,q)]$$</span>
+כאשר מתנאי הנרמול:
+<span>$$\tilde{Z}(T,V,N)=\int\!\!d q\int\!\!d p\,\exp[-\beta H(q,p)]$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$P(p,q)=\frac{\Omega_{R}(E_{T}-H(p,q))}{\Omega_{T}(E_{T})}$$</span>
+כאשר כיוון ש-<span>\(E_{T}\gg H(p,q)\)</span> ניתן לקחת את הלוגריתם של שתי הצדדים ולפתח את <span>\(\ln\left( \Omega_{R} \right)\)</span> על ידי חזקות של <span>\(\frac{H(p,q)}{E_{T}}\)</span> ולקבל:
+<span>$$\ln P(p,q)=\ln\Omega_{R}(E_{T})-H(p,q)\frac{\partial}{\partial E_{T}}\Omega_{R}(E_{T})-\ln\Omega_{T}(E_{T})+\cdots$$</span>
+כאשר נזכור כי:
+<span>$$\beta=\beta_{R}\equiv\frac{\partial}{\partial E_{T}}\Omega_{R}(E_{T})$$</span>
+כאשר רק האיבר השני תלוי ב-<span>\(p,q\)</span> ולכן ניתן לאחד את יתר הגורמים בפונקציה <span>\(\tilde{Z}\)</span>:
+<span>$$\ln P(p,q)=-\beta H(p,q)-\ln\tilde{Z}(T,V,N)$$</span>
+כלומר:
+<span>$$P(p,q)=\frac{1}{\tilde{Z}(T,V,N)}\exp[-\beta H(p,q)]$$</span></p>
+</div>
+<div class="reminder">
+<p>המשוואה הכללית של מספר המצבים במרחב פאזה הוא:
+<span>$$\Omega(E,V,N)=\frac{1}{h^{3N}N!}\int\!\!d q\int\!\!d p\,\delta(E-H(q,p))$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$\widetilde{Z}=\,\frac{1}{h^{3N}N!}\int\!\!d q\int\!\!d p\,\exp[-\beta H(q,p)]$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\widetilde{Z}=\int\!\!d E\frac{1}{h^{3N}N!}\int\!\!d q\int\!\!d p\,\delta(E-H(q,p))\exp\left( -\beta E \right)=\\=\frac{1}{h^{3N}N!}\int\!\!d q\int\!\!d p\,\int\!\!d E\,\delta(E-H(q,p))\exp\left( -\beta E \right)=\\=\frac{1}{h^{3N}N!}\int\!\!d q\int\!\!d p\,\exp\left[ -\beta H(q,p) \right] 
+\end{gather}$$</span></p>
+</div>
+<div class="corollary">
+<p>אם נשוואה להתפלגות בולצמן נקבל:
+<span>$$\tilde{Z}(T,V,N)=h^{3N}N!\,Z$$</span>
+ולכן ההתפלגות במרחב הפאזה נתונה על ידי:
+<span>$$P(p,q)=\frac{1}{h^{3N}N!\,Z}\exp[-\beta H(p,q)]$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>מערכת שלא מחליפה חלקיקים עם הסביבה אבל כן מחליפה אנרגיה מכונה הצבר הקנוני. כאשר לרוב נבצע אידיאליזציה שבה הסביבה היא אמבט חום.</li>
+<li>ההסתברות להיות באנרגיה <span>\(E\)</span> נתונה על ידי התפלגות בולצמן <span>\(P(E)=\frac{1}{Z}\Omega(E)\exp(-\beta E)\)</span> כאשר <span>\(Z\)</span> נקראת פונקציית החלוקה.</li>
+<li>בעזרת פונקציית החלוקה ניתן לקבל את האנרגיה החופשית של הלמהולץ, האנטרופיה והאנרגיה הפנימית בצורה הבאה:
+<span>$$U=k_{\mathrm{B}}T^{2}{\frac{\mathrm{d}\ln Z}{\mathrm{d}T}} \qquad F=-k_{\mathrm{B}}T\ln Z \qquad S={\frac{U}{T}}+k_{\mathrm{B}}\ln Z
+$$</span></li>
+<li>אם יש רכיבים שונים(בלתי תלויים) לאנרגיה הפונקצייה החלוקה הכוללת תהיה המכפלה של כל אחד מהם.</li>
+<li>במרחב הפאזה ההסתברות להיות בתנע <span>\(p\)</span> ומיקום <span>\(q\)</span> יהיה נתון על ידי:
+<span>$$P(p,q)=\frac{1}{h^{3N}N!\,Z}\exp[-\beta H(p,q)]$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='prev-page'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+</ul></li>
+        </body>
+        </html>
+        

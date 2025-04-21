@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ערכים, ווקטורים ומרחבים עצמיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_7_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_6_3.html`;}});</script>
+        <div class="content">
+        <h1>7.1  ערכים, ווקטורים ומרחבים עצמיים</h1>
+    <div class="definition"><span class="keyword">ערך עצמי ווקטור עצמי</span><p>יהי <span>\(V\)</span> מרחב ווקטורי ו-<span>\(T:V\to V\)</span> אופרטור לינארי. מספר <span>\(\lambda \in \mathbb{F}\)</span> נקרא ערך עצמי המתאים לווקטור עצמי <span>\(v \in V\)</span> אם מקיים <span>\(T(v)=\lambda v\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים ללהיות ערך עצמי</span><ol>
+<li>
+<p>הערך <span>\(\lambda\)</span> הוא ערך עצמי של <span>\(T\)</span>. כלומר קיים <span>\(v \in V\)</span> כך ש-<span>\(Tv=\lambda v\)</span>. </p>
+</li>
+<li>
+<p>קיים <span>\(0\neq v\in V\)</span> כך ש <span>\(\left( T-\lambda I \right)v=0\)</span>. </p>
+</li>
+<li>
+<p>קיים <span>\(0\neq v \in V\)</span> כך ש- <span>\(v \in \ker\left( T-\lambda I \right)\)</span>.  </p>
+</li>
+<li>
+<p>העתקה <span>\(T-\lambda I\)</span> היא לא חח"ע. </p>
+</li>
+<li>
+<p>ההעתקה <span>\(T-\lambda I\)</span> היא לא על. </p>
+</li>
+<li>
+<p>ההעתקה <span>\(T-\lambda I\)</span> לא הפיכה. </p>
+</li>
+<li>
+<p>מתקיים <span>\(\det\left( T-\lambda I \right)=0\)</span>. כלומר <span>\(\lambda\)</span> היא שורש של הפולינום האופייני. </p>
+</li>
+</ol>
+</div>
+<p>זה הופך את הפולינום האופייני לשימושי במיוחד כיוון שיכול להראות לנו אם ערך הוא ערך עצמי, ומאפשר למצוא אותם ביותר קלות.</p>
+<div class="proposition"><span class="keyword">תכונות של ערכים עצמיים</span><ol>
+<li>
+<p>שורשים של הפולינום האופייני. </p>
+</li>
+<li>
+<p>המימד של הגרעין זה הריבוי האלגברי של הערך עצמי 0. </p>
+</li>
+<li>
+<p>סכום הע"ע זה העקבה. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(v\)</span> וקטור עצמי אז גם <span>\(cv\)</span> וקטור עצמי.</p>
+</div>
+<div class="proof">
+<p>אם מתקיים <span>\(Tv=\lambda v\)</span> אז:
+<span>$$T(cv)=c(Tv)=c\lambda v=\lambda(cv)$$</span></p>
+</div>
+<div class="proposition">
+<p>וקטורים עצמיים עם ע"ע שונים הם בלתי תלויים לינארית</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי אוסף הווקטורים <span>\(\{X_{1},X_{2},\cdots,X_{k}\}\)</span> תלויים לינארית. מטענה שראינו קיים <span>\(j\)</span> כך ש האוסף <span>\(\left\{X_{1},X_{2},\cdots,X_{j-1}\right\}\)</span>
+בלתי תלוי לינארית כאשר <span>\(\{X_{1},X_{2},\cdots,X_{j}\}\)</span> בלתי תלוי לינארית. ניקח צירוף לינארי <span>\(a_{1},\dots,a_{j}\in \mathbb{F}\)</span> מאפס:
+<span>$$a_{1}X_{1}+a_{2}X_{2}+\cdot\cdot\cdot+a_{j}X_{j}=0$$</span>
+כאשר כיוון שתלוי לינארית נניח כי לא כולם 0. נכפיל את המשוואה כולה ב-<span>\(\lambda_{j}\)</span> ונקבל:
+<span>$$a_{1}\lambda_{j}X_{1}+a_{2}\lambda_{j}X_{2}+\cdots+a_{j}\lambda_{j}X_{j}=0$$</span>
+כעת נחסיר את שתי המשוואות ונקבל:
+<span>$$a_{1}(\lambda_{1}-\lambda_{j})X_{1}+a_{2}(\lambda_{2}-\lambda_{j})X_{2}+\cdot\cdot\cdot+a_{j-1}(\lambda_{j-1}-\lambda_{j})X_{j-1}=0$$</span>
+וכיוון שקיבלנו צירוף לינארי של האיברים הבלתי תלויים לינארית <span>\(\left\{  X_{1},\dots, X_{j-1}  \right\}\)</span> נדרש כי כל המקדמים הם 0:
+<span>$$a_{1}(\lambda_{1}-\lambda_{j})=a_{2}(\lambda_{2}-\lambda_{j})=\cdots=a_{j-1}(\lambda_{j-1}-\lambda_{j})=0$$</span>
+וקיבלנו כי <span>\(a_{j}X_{i}=0\)</span> ולכן סתירה. כלומר האוסף <span>\(\{X_{1},X_{2},\cdots,X_{k}\}\)</span> הוא בלתי תלוי לינארית.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב עצמי</span><p>תהי <span>\(A\)</span> מטריצה. עבור ערך עצמי <span>\(\lambda\)</span> נגדיר את המרחב העצמי של <span>\(A\)</span> להיות:
+<span>$$V_{\lambda}=\ker(\lambda I-A)$$</span>
+כלומר זהו אוסף כל הווקטורים שהם וקטורים העצמים עם ע"ע <span>\(\lambda\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הריבוי גאומטרי של הערך עצמי <span>\(\lambda\)</span> יהיה מימד המרחב העצמ <span>\(\dim V_{\lambda}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור משולשי</span><p>אופרטור שקיים בסיס שעבורו יהיה משולשי</p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים לבסיס משולשי</span><p>יהי <span>\(\mathcal{A}=\left( v_{1},\dots,v_{n} \right)\)</span> בסיס של <span>\(V\)</span>. התנאים הבאים שקולים:</p>
+</div>
+<ol>
+<li>
+<p>האופרטור <span>\(T\)</span> תחת הבסיס <span>\(\mathcal{ A}\)</span> הוא משולשי. </p>
+</li>
+<li>
+<p>המרחב <span>\(\mathrm{Span\left( v_{1},\dots,v_{i} \right)}\)</span> אינווריאנטי תחת <span>\(T\)</span> לכל <span>\(1\leq i\leq n\)</span>.  </p>
+</li>
+<li>
+<p>מתקיים <span>\(Tv_{i}\in \mathrm{Span\left( v_{1},\dots,v_{i} \right)}\)</span> לכל <span>\(1\leq i\leq n\)</span>. </p>
+</li>
+</ol>
+<p>כהאינטואציה מאחורי טענה זו ברורה. הווקטור הראשון יכול ללכת רק לכפולה של עצמו כדי שרק הרכיב על האלכסון יהיה שונה מ0. הווקטור השני יכול ללכת לצירוף לינארי של עצמו ושל ווקטור הראשון, וכן הלאה.</p>
+<div class="proposition">
+<p>הפולינום האופייני(או המינימלי) של אופרטור מתפרק לגורמים לינארים אם"ם האופרטור משולשי.</p>
+</div>
+<div class="proposition">
+<p>הע"ע של אופרטור משולשי יהיו הערכים על האלכסון.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור לכסין</span><p>אופרטור אשר עבורו קיים בסיס שבה המטריצה המייצגת שלו תהיה אלכסונית.</p>
+</div>
+<div class="definition"><span class="keyword">מטריצה לכסינה</span><p>מטריצה אשר דומה למטריצה אלכסונית.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\dim V=n\)</span> ויש <span>\(n\)</span> ערכים עצמיים שונים אז <span>\(T\)</span> לכסין.</p>
+</div>
+<div class="proof">
+<p>יש אוסף של <span>\(n\)</span> ווקטורים עצמיים עם ערכים עצמיים שונים ולכן מטענה שראינו הוקטורים העצמיים יהיו בת"ל. יש אוסף של <span>\(n\)</span> ווקטורים כאלה ולכן פורשים את המרחב ובסיס.</p>
+</div>
+<div class="proposition">
+<p>אופרטור הוא לכסין אם"ם קיים בסיס של ווקטורים עצמיים.</p>
+</div>
+<div class="proposition">
+<p>אופרטור הוא לכסין אם"ם הפולינום המינימלי מתפרק לגורמים עם ריבוי אלגברי של לכל היותר 1.</p>
+</div>
+<div class="proposition">
+<p>עבור מטריצה <span>\(2\times 2\)</span> הערכים העצמיים נתונים על ידי:
+<span>$$\lambda_{1},\lambda_{2}=m\pm \sqrt{ m^{2}-p }$$</span>
+כאשר <span>\(m\)</span> זה הממוצע של האלכסון הראשי ו-<span>\(p\)</span> זה הדטרימיננטה.</p>
+</div>
+<div class="proof">
+<p>נכתוב מטריצה כללית:
+<span>$$A=\begin{pmatrix}a &amp; b \\c &amp; d
+\end{pmatrix}$$</span>
+הפולינום האופייני יהיה:
+<span>$$\lambda^{2}-\mathrm{Tr}(A)\lambda+\det(A)=\lambda^{2}-(a+d)\lambda+\det A\equiv \lambda^{2}-2m\lambda+p$$</span>
+כאשר סימנו כמו בטענה <span>\(m=\frac{a+d}{2}\)</span> ו-<span>\(p=\det A\)</span>. כעת מנוסחאת השורשים נקבל:
+<span>$$\lambda_{1,2}=\frac{2m\pm\sqrt{ 4 m^{2}-4p}}{2}=m\pm \sqrt{ m^{2}-p }$$</span></p>
+</div>
+<div class="corollary">
+<p>כיוון שהערכים העצמיים מקיימים שהממוצע שלהם הוא <span>\(m\)</span> והמכפלה שלהם היא הדטטרמיננטה(<span>\(p\)</span>) נוסחה זו מאפשרת למצוא שתי מספרים שהממוצע שלהם הוא <span>\(m\)</span> והמכפלה שלהם היא <span>\(p\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='prev-page'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

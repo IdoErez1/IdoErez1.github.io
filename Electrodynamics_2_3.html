@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גדלים שמורים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  גדלים שמורים</h1>
+    <div class="definition"><span class="keyword">סקלר לורנץ</span><p>סקלר אשר נשמר בין מערכות ייחוס. נקרא לעיתים 4-סקלר</p>
+</div>
+<div class="proposition">
+<p>האינטרוואל הוא סקלר לורנץ. כלומר הגודל קבוע בין כל המערכות ייחוס.</p>
+</div>
+<div class="definition"><span class="keyword">זמן עצמי</span><p>הזמן במערכת של החלקיק.</p>
+</div>
+<p>הביטוי לזמן עצמי נובע באופן מיידי מהאינטרוואל. 
+<span>$$ds^2 =c^2d\tau^2=c^2dt^2-dx^2-dy^2-dz^2\implies d\tau=dt\sqrt{ 1-\frac{v^2}{c^2} }=\frac{dt}{\gamma}$$</span></p>
+<div class="definition"><span class="keyword">מסה מנוחה/מסה עצמית</span><p>המסה של הגוף במערכת שלו.</p>
+</div>
+<div class="proposition">
+<p>4 דלתא זה סקלר לורנץ. כלומר <span>\(\delta^{(4)}\left( \vec{r} \right)\)</span> יהיה זהה בכל המערכות ייחוס. </p>
+</div>
+<h2>הארבע ווקטורים</h2>
+<div class="definition"><span class="keyword">אירוע</span><p>זהו ארבע ווקטור המתאר מיקום. ווקטור מהצורה:
+<span>$$\vec{u}=\begin{pmatrix}ct \\x \\y \\z
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>מכפלה של גודל אינווריאנטי ב-4 ווקטור זה 4 ווקטור.</p>
+</div>
+<div class="definition"><span class="keyword">4 מהירות</span><p>חלקיק הנע במהירות <span>\(v&lt;c\)</span> ניתן להגדיר 4-מהירות:
+<span>$$u^\mu = \frac{dx^\mu}{ds}=\frac{dx^\mu}{cd\tau} $$</span>
+כאשר <span>\(ds\)</span> זה האינטרוואל, ו-<span>\(d\tau\)</span> זה הזמן העצמי - הזמן שהחלקיק מודד במערכת שלו. </p>
+</div>
+<p>אנו יודעים כי השלוש רכיבי המיקום מיצגים סוג של מהירות, אבל מה מייצג הרכיב של הזמן?
+מתקיים:
+<span>$$u^0=\frac{cdt}{cd\tau}=\frac{dt}{d\tau}=\gamma=\frac{1}{\sqrt{ 1+\frac{v^2}{c^2} }}$$</span>
+כאשר הרכיבים המרחביים מקיימים:
+<span>$$u^i=\frac{V^i}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span></p>
+<div class="definition"><span class="keyword">4 תנע</span><p>עבור חלקיק עם מסה מנוחה <span>\(m_{0}\)</span> נקבל
+<span>$$p=\begin{pmatrix}p^0\\p^1\\p^2\\p^3\end{pmatrix}=\begin{pmatrix}\frac{E}{c}  \\p_{x} \\p_{y} \\p_{z}
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>זה שווה למהירות המוכללת כפול המסה, בדומה לתנע הקלאסי. </p>
+</div>
+<div class="remark">
+<p>ניתן לחלופין לפתח את ה-4 תנע בתור התנע הצמוד קנוני של המהירות המוכללת של הלגרנג'יאן היחסותי של חלקיק חופשי. התוצאה תהיה זהה.</p>
+</div>
+<div class="definition"><span class="keyword">4-כוח</span><p>הנגזרת של התנע המוכלל לפי הזמן העצמי.</p>
+</div>
+<div class="proposition">
+<p>הנורמה של 4 ווקטור נשמר תחת טרנספורמציית לורנץ.</p>
+</div>
+<div class="proof">
+<p>יהי מערכות יחוס <span>\(\mathcal{O}\)</span> ו-<span>\(\mathcal{O}'\)</span> כאשר נסמן את הרכיבים במערכת <span>\(\mathcal{O'}\)</span> עם <span>\(\prime\)</span>. יהי <span>\(V^\mu\)</span> 4 ווקטור. נזכור כי ניתן לעבור מערכות יחוס בעזרת מטריצת לורנץ בצורה הבא:
+<span>$$V^{\prime\mu}=\Lambda_{\;\nu}^{\mu}V^{\nu}$$</span>
+כאשר הנורמה של ה-4 ווקטור במערכת <span>\(\mathcal{O'}\)</span> תהיה:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\mu\nu}V^{\prime\mu}V^{\prime\nu}$$</span>
+כאשר נציב  <span>\(V^{\prime\mu}=\Lambda_{\alpha}^{\mu}V^{\alpha}\)</span> ו-<span>\(V^{\prime\nu}=\Lambda_{\beta}^{\nu}V^{\beta}\)</span> ונקבל:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\mu\nu}(\Lambda_{\alpha}^{\mu}V^{\alpha})(\Lambda_{\beta}^{\nu}V^{\beta})$$</span>
+כאשר נשתמש ב-<span>\(\eta_{\mu\nu}\Lambda_{\;\alpha}^{\mu}\Lambda_{\;\beta}^{\nu}=\eta_{\alpha\beta}\)</span> ונקבל:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\alpha\beta}V^{\alpha}V^{\beta}= V^\alpha V_{\alpha}$$</span></p>
+</div>
+<div class="remark">
+<p>זה נכון עבור יחסות פרטית, אך לא בהכרח יהיה נכון עבור יחסות כללית.</p>
+</div>
+<div class="corollary">
+<p>משימור נורמת הארבע מיקום(אירוע) נקבל כי האינטרוול נשמר</p>
+</div>
+<div class="corollary">
+<p>משימור ה-4 תנע נקבל:
+<span>$$E^{2}=(p\mathrm{c})^{2}+\left(m_{0}\mathrm{c}^{2}\right)^{2}$$</span>
+כאשר <span>\(p\)</span> זה הגודל של ה-3 תנע המוכר.</p>
+</div>
+<div class="corollary">
+<p>ניתן מביטוי זה לקבל כי התנע של גוף חסר מסה יהיה:
+<span>$$p=\frac{E}{c}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 כוח</span><p>כוח המוגדר בעזרת ה-4 תנע עם הזמן במוכלל בצורה הבאה:
+<span>$$\mathbf{F}={\frac{d\mathbf{P}}{d\tau}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 גרדיאנט</span><p>אופרטור דיפרנציאלי שמוגדר בצורה הבאה:
+<span>$${\frac{\partial}{\partial X^{\mu}}}=(\partial_{0},\partial_{1},\partial_{2},\partial_{3})=(\partial_{0},\partial_{i})=\left({\frac{1}{c}}{\frac{\partial}{\partial t}},{\vec{\nabla}}\right)=\left({\frac{\partial_{t}}{c}},{\vec{\nabla}}\right)=\left({\frac{\partial_{t}}{c}},\partial_{x},\partial_{y},\partial_{z}\right)=\partial_{\mu}$$</span></p>
+</div>
+<div class="proposition">
+<p>הווקטור הקונטרא ווריאנטי שמתאים ל-4 גרדיאנט יהיה:
+<span>$$\partial=\partial^{\alpha}=\eta^{\alpha\beta}\partial_{\beta}=\left(\partial^{0},\partial^{1},\partial^{2},\partial^{3}\right)=\left(\partial^{0},\partial^{i}\right)=\left(\frac{1}{c}\frac{\partial}{\partial t},-\vec{\nabla}\right)=\left(\frac{\partial_{t}}{c},-\vec{\nabla}\right)=\left(\frac{\partial_{t}}{c},-\partial_{z},-\partial_{y},-\partial_{z}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>הטנזור לוי-צוייטה ה-4 מימדי <span>\(\varepsilon^{\mu \nu \alpha \beta}\)</span> הוא אכן 4 טנזור תחת טרנספורמציית לורנץ.</p>
+</div>
+<div class="proof">
+<p>אכן, נניח כי זהו אובייקט במערכת <span>\(\mathcal{S}\)</span> אז כדי לקבל את הערכים שלו במערכת <span>\(S'\)</span> נדרש לורנץ:
+<span>$$f\varepsilon^{\mu_{1}\mu_{2}\mu_{3}\mu_{4}}=\Lambda^{\mu_{1}}_{\;\nu_{1}}\Lambda^{\mu_{2}}_{\;\nu_{2}}\Lambda^{\mu_{3}}_{\;\nu_{3}}\Lambda^{\mu_{4}}_{\; \nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}$$</span>
+נשים לב כי להחליף בין <span>\(\mu_{i},\mu_{j}\)</span> זה שקול ללהחליף בין <span>\(\nu_{i},\nu_{j}\)</span> אשר שקול ללבצע חילוף בטנזור לווי ציוויטה, אשר שקול ללהכפיל ב-<span>\((-1)\)</span>. 
+כדי לקבוע <span>\(f\)</span> נציב <span>\(\left( \mu_{1},\mu_{2},\mu_{3},\mu_{4} \right)=(0,1,2,3)\)</span>. נקבל:
+<span>$$f=\Lambda^0_{\;\nu_{1}}\Lambda^1_{\;\nu_{2}} \Lambda^2_{\;\nu_{3}}\Lambda^3_{\;\nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}=\det\left( \Lambda\right)=1$$</span>
+כאשר הסכימה זה למעשה נוסחאת ליבניץ לדטרמיננטה. וכיוון שקיבלנו 1 זה אכן עובר בצורה הרצויה תחת טרנספורמציית לורנץ ולכן טנזור.</p>
+</div>
+<div class="proposition">
+<p>מהטענה הראשונה נצפה כי חוקי הפיזיקה יהיו מנוסחים ע"י גדלים שמקיימים את טרנספורמציית לורנץ, כלומר ע"י סקלרי לורנץ, 4 ווקטורים ו-4 טנזורים.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+<li class='prev-page'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

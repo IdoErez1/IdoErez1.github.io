@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גז בוזונים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_7_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_6_4`; }});</script>
+        <div class="content">
+        <h1>6.5  גז בוזונים</h1>
+    <div class="reminder">
+<p>עבור גז בוזונים מתקיים:
+<span>$$\begin{gather}{N=\int_{0}^{\infty}g\left( \epsilon \right)\left(\exp\left[ \beta\left( \epsilon-\mu \right) \right]-1\right)^{-1}d\epsilon}\\  {U=\int_{0}^{\infty}g\left( \epsilon \right)\,\epsilon\left(\exp\left[ \beta\left( \epsilon-\mu \right) \right]-1\right)^{-1}d\epsilon} 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>הפוטנציאל הכימי עבור גז בוזונים יהיה קטן או שווה לרמת יסוד</p>
+</div>
+<div class="proof">
+<p>מספר החלקיקים הממוצע צריך להיות חיובי, ולכן בפרט ההתפלגות בוז אינשטיין צריך להיות חיובי, לכן:
+<span>$$\frac{1}{e^{ \beta\left( \varepsilon-\mu \right) }-1}\geq 0\implies e^{ \beta\left( \varepsilon-\mu \right) }-1\geq 0\implies e^{ \beta\left( \varepsilon-\mu \right) }\geq 1$$</span>
+ובפרט נכון עבור אנרגיה <span>\(\varepsilon_{0}\)</span> ולכן:
+<span>$$e^{ \beta\varepsilon_{0}-\beta \mu }\geq 1\implies \beta \mu \leq \beta\varepsilon_{0}\implies \mu\leq\varepsilon_{0}$$</span></p>
+</div>
+<div class="remark">
+<p>לרוב מטעמי נוחות קובעים <span>\(\varepsilon_{0}=0\)</span> עבור בוזונים כיוון שקיים אנרגיה אפס של הספינים(בניגוד לפרמיונים).</p>
+</div>
+<div class="reminder">
+<p>צפיפות המצבים של גז אידיאלי הוא:
+<span>$$g\left( \epsilon \right)=\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}\epsilon^{1/2}$$</span></p>
+</div>
+<div class="proposition">
+<p>מספר החלקיקים עבור גז בוזונים חופשי יהיה:
+<span>$$N=\frac{(2S+1)V}{\lambda_{\mathrm{T}}^{3}}\mathrm{Li}_{3/2}(z)\qquad \lambda_{\mathrm{T}}=\frac{h}{\sqrt{2\pi m k_{\mathrm{B}}T}}$$</span>
+כאשר <span>\(z=\exp\left( \beta \mu \right)\)</span>.</p>
+</div>
+<div class="proof">
+<p>נציב את הצפופות המצבים של גז אידיאלי בביטוי עבור מספר החלקיקים וכן נבצע החלפת משתנים <span>\(x=\beta\epsilon\)</span> ונקבל:
+<span>$$\begin{gather}N=\int_{0}^{\infty}\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}\epsilon^{1/2}\left(\exp\left[ \beta\left( \epsilon-\mu \right) \right]-1\right)^{-1}d\epsilon\\={\frac{V}{4\pi^{2}}}\left({\frac{2m}{\hbar^{2}}}\right)^{3/2}(k_{B}T)^{3/2}\int_{0}^{\infty}x^{1/2}\left(\exp\left( -\beta\mu \right)\exp(x)-1\right)^{-1}d x 
+\end{gather}$$</span>
+כאשר אם נציב את הפוגסיטי <span>\(z=\exp\left( \beta \mu \right)\)</span> ונקבל:
+<span>$$N=\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}\left(k_{B}T\right)^{3/2}\int_{0}^{\infty}x^{1/2}\left(z^{-1}\exp(x)-1\right)^{-1}d x$$</span>
+נזהה את הפולילוגוריתם, נכפיל בניוון ספין ונקבל את הטענה.</p>
+</div>
+<div class="corollary">
+<p>כאשר <span>\(T\to 0\)</span> נקבל כי המקדם <span>\(T^{3/2}\to 0\)</span> אבל כיוון שמספר החלקיקים <span>\(N\)</span> נשאר קבוע נדרש כי האינטגרל יתבדר. נשים לב כי אם <span>\(\mu&lt; 0\)</span> נדרש כי <span>\(z^{-1}&gt;1\)</span>. לכן האינטגרל חסום על ידי:
+<span>$$\int_{0}^{\infty}x^{1/2}\left(\exp(x)-1\right)^{-1}d x={\frac{\sqrt{\pi}}{2}}\zeta\left({\frac{3}{2}}\right)=1.306{\sqrt{\pi}}=2.315$$</span>
+ולא מתבדר! קיבלנו סתירה.</p>
+</div>
+<div class="corollary">
+<p>המשוואה שיפתחנו לא תהיה נכונה עבור טמפרטורות נמוכות מ-<span>\(T_c\)</span> אשר מתקבל על ידי קבועת האינטגרל לערך המקסימלי שלו אשר נקבע על ידי:
+<span>$$k_{B}T_c=\left(\frac{2\pi\hbar^{2}}{m}\right)\left(\frac{N}{2.612V}\right)^{2/3}$$</span>
+כאשר <span>\(T_c\)</span> נקראת טמפרטורת אינשטיין, ולעיתים מסומנת ב-<span>\(T_{E}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$N=\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}\left(k_{B}T_c\right)^{3/2}1.306\sqrt{\pi}$$</span>
+כאשר ניתן לכתוב גם בצורה הבאה:
+<span>$$N=2.315\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}(k_{B}T_c)^{3/2}$$</span>
+וכעת ניתן להעביר אגפים ולקבל:
+<span>$$k_{B}T_c=\left(\frac{2\pi\hbar^{2}}{m}\right)\left(\frac{N}{2.612V}\right)^{2/3}$$</span></p>
+</div>
+<div class="proposition">
+<p>התיקון הנדרש למשוואה:
+<span>$$N=\int_{0}^{\infty}g\left( \epsilon \right)\left(\exp\left[ \beta\left( \epsilon-\mu \right) \right]-1\right)^{-1}d\epsilon$$</span>
+בטמפרטורות נמוכות הוא:
+<span>$$N=N_{0}+\int_{0}^{\infty}g(\epsilon)\left(\exp[\beta(\epsilon-\mu)]-1\right)^{-1}d\epsilon$$</span>
+כאשר <span>\(N_{0}\)</span> זה מספר החלקיקים ברמת יסוד כך שמתקיים <span>\(N=N_{0}+N_{1}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ננסה להסביר את המקור של הבעיה. מספר החלקיקים ברמת אנרגיה <span>\(\epsilon\)</span> תהיה:
+<span>$$f_{B E}\left( \epsilon \right)=\left\langle  n_{\epsilon} \right\rangle=\frac{1}{e^{\beta(\epsilon-\mu)}-1}$$</span>
+כאשר ברמת היסוד נקבל:
+<span>$$f_{B E}(0)=\langle n_{0}\rangle=N_{0}=\frac{1}{e^{-\beta\mu}-1}$$</span>
+ואם <span>\(\mu\to 0\)</span> נקבל כי מספר החלקיקים ברמת יסוד מתבדר. כלומר <span>\(N_{0}\to \infty\)</span>. וכדי להתחשב בזה משוואה נגדיר את <span>\(N_{0}\)</span> בתור מספר החלקיקים ברמת יסוד.</p>
+</div>
+<div class="definition"><span class="keyword">עיבוי בוז אינשטיין</span><p>המצב שבה המערכת נמצאת למתחת לטמפרטורה הקריטית ולכן <span>\(N_{0}&gt; 0\)</span>. במצב זה נקבל <span>\(\mu=\varepsilon_{0}\)</span> כיוון שלא נדרשת אנרגיה כלל כדי לאכלס עוד חלקיקים ברמת יסוד.</p>
+</div>
+<div class="corollary">
+<p>עבור בוזונים חופשיים נקבל:
+<span>$$N=N_{0}+{\frac{V}{4\pi^{2}}}\left({\frac{2m}{\hbar^{2}}}\right)^{3/2}(k_{B}T)^{3/2}\int_{0}^{\infty}x^{1/2}\left(\lambda^{-1}\exp(x)-1\right)^{-1}d x=N_{0}+\frac{V}{\lambda_{T}}\mathrm{Li}_{3 / 2}(z)$$</span></p>
+</div>
+<div class="remark">
+<p>אם מוסיפים ריבוי מספין נקבל:
+<span>$$N_{1}=\frac{(2S+1)V}{[\lambda_{\mathrm{T}}(T)]^{3}}\mathrm{Li}_{3/2}(z)$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור גז חופשי ניתן ניתן לכתוב את מספר החלקיקים בעזרת טמפרטורת אינשטיין ולקבל:
+<span>$$N=N_{0}+N\left(\frac{T}{T_c}\right)^{3/2}\implies N_{0}=N\left[1-\left(\frac{T}{T_c}\right)^{3/2}\right]$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי כאשר <span>\(T\to T_c\)</span> מלמטה אז <span>\(N_{0}\to 0\)</span>. כלומר אם <span>\(T&gt;T_c\)</span> נקבל <span>\(N_{0}\ll N\)</span> ולכן ניתן להזניח את האפקט בקירוב טוב בטמפרטורות יותר גבוההות.</p>
+</div>
+<div class="proposition"><span class="keyword">תלות של פוטנציאל כימי בטמפרטורה</span><p>הפוטנציאל הכימי יהיה בקירוב נתון על ידי:
+<span>$$\mu\approx-\frac{k_{B}T}{N}\left[1-\left(\frac{T}{T_c}\right)^{3/2}\right]^{-1}$$</span></p>
+</div>
+<div class="proof">
+<p>מהמשוואה:
+<span>$$\frac{N_{0}}{N}=\left[1-\left(\frac{T}{T_c}\right)^{3/2}\right]$$</span>
+כאשר אם נציב את הביטוי:
+<span>$$N_{0}=(\exp[-\beta\mu]-1)^{-1}$$</span>
+נקבל:
+<span>$$N_{0}=\left[\exp(-\beta\mu)-1\right]^{-1}=N\left[1-\left({\frac{T}{T_c}}\right)^{3/2}\right]$$</span>
+וכיוון ש-<span>\(\beta \mu\ll 1\)</span> מתחת ל-<span>\(T_c\)</span> ניתן לפתח את <span>\(-\beta \mu\)</span> בטור טיילור ולקבל:
+<span>$$\mu\approx-\frac{k_{B}T}{N}\left[1-\left(\frac{T}{T_c}\right)^{3/2}\right]^{-1}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנרגיה של גז בוזון אידיאלי</span><p><span>$$U=1.7826\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}(k_{B}T)^{5/2}$$</span></p>
+</div>
+<div class="proof">
+<p>הפיתוח דומה לפיתוח עבור מספר החלקיקים. נכתוב:
+<span>$$U=U_{0}+\int_{0}^{\infty}f_{B E}(\epsilon)\epsilon\left(\exp[\beta(\epsilon-\mu)]-1\right)^{-1}\epsilon\,d\epsilon$$</span>
+כאשר עבור משוואה זו נקבל כי <span>\(U_{0}=0\)</span> כיוון שהאנרגיה של מצב היסוד הוא 0. כעת נגדיר כמו מקודם <span>\(x=\beta\epsilon\)</span> ונכתוב:
+<span>$$U=\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}(k_{B}T)^{5/2}\int_{0}^{\infty}x^{3/2}\left(z^{-1}\exp(x)-1\right)^{-1}d x$$</span>
+כאשר האינטגרל נתון על ידי:
+<span>$$\int_{0}^{\infty}x^{3/2}\left(\exp(x)-1\right)^{-1}d x=\mathrm{Li}_{5 / 2}(1)=\zeta\left({\frac{5}{2}}\right)\Gamma\left({\frac{5}{2}}\right)=1.341\left({\frac{3}{4}}\right)\pi^{1/2}=1.7826$$</span>
+ולכן נקבל:
+<span>$$U=1.7826\frac{V}{4\pi^{2}}\left(\frac{2m}{\hbar^{2}}\right)^{3/2}(k_{B}T)^{5/2}$$</span></p>
+</div>
+<div class="corollary">
+<p>האנרגיה לחלקיק תהיה:
+<span>$${\frac{U}{N}}=\left({\frac{1.7826}{2.315}}\right)\left({\frac{T}{T_c}}\right)^{3/2}k_{B}T=.7700\,\left({\frac{T}{T_c}}\right)^{3/2}k_{B}T$$</span></p>
+</div>
+<div class="corollary">
+<p>קיבול החום סגולי בנפח קבוע מתקבל גזירה האנרגיה לחלקיק לפי טמפרטורה:
+<span>$$c_{V}=1.925\,k_{B}\,\left(\frac{T}{T_c}\right)^{3/2}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מציאת הטמפרטורה הקריטית</span><ol>
+<li>
+<p>נמצא את מספר החלקיקים במצב המעורער: 
+<span>$$N_{\mathrm{exc}}=\int_{\epsilon&gt;0}g(\epsilon)f_{\mathrm{BE}}(\epsilon)\,d\epsilon$$</span></p>
+</li>
+<li>
+<p>מניחים <span>\(\mu\to 0\)</span>.  </p>
+</li>
+<li>
+<p>מבודדים את הטמפרטורה. אם ניתן לקבל ביטוי גדול מ-0, אז קיים עיבוי בוז אינשטיין. אחרת לא ייתכן </p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">עבוי בוז אינשטיין בגז אידיאלי דו מימדי</span></div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='prev-page'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

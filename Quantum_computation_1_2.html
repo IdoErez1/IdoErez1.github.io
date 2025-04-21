@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ספינים וסיבובים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent-page'><a href='./Quantum_computation.html'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_2.html'>1.2 ספינים וסיבובים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_1_4.html'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_1.html'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_2.html'>2.2 מדידה מוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_3.html'>2.3 ערוצים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_4.html'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_2_5.html'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_1.html'>3.1 מצבי בל</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_3_2.html'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_1.html'>4.1 חישוב</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_2.html'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_4_3.html'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_1.html'>5.1 שערים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_2.html'>5.2 מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_3.html'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_5_4.html'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_1.html'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_6_2.html'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_1.html'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_2.html'>7.2 מחזוריות</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_3.html'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_7_4.html'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_1.html'>8.1 טרוטריזציה</a></li>
+<li class='parent_page-dropdown'><a href='./Quantum_computation_8_2.html'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./Quantum_computation_1_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./Quantum_computation_1_1.html`;}});</script>
+        <div class="content">
+        <h1>1.2  ספינים וסיבובים</h1>
+    <div class="definition"><span class="keyword">הקיו-ביט</span><p>במערכת החישובית(computational basis)
+<span>$$\left\{  \ket{0}   ,\ket{1} \right\}$$</span>
+כאשר ניתן לתאר קיו-ביט כללית על ידי:
+<span>$$a\ket{0} +b\ket{1} =\ket{\psi} \qquad \lvert a \rvert ^{2}+\lvert b \rvert ^{2}=1$$</span></p>
+</div>
+<div class="corollary">
+<p>את דרישת הנורמול ניתן לבטא בעזרת שימוש בפונקציות טריגונומטריות וכן ניתן להשתמש בפאזה גלובאלית כדי לכתוב קיו-ביט בצורה הבאה:
+<span>$$\left|\psi\left(\theta,\varphi\right)\right\rangle=e^{-i\varphi/2}\cos\theta\left|0\right\rangle+e^{i\varphi/2}\sin\theta\left|1\right\rangle,\qquad\varphi \in\left[ 0,2\pi \right)\quad \theta\in\left[ 0,\pi \right]$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לבטא את הקיו ביט בתור נקודה על ספרת בלוך.</p>
+<div style="display: block;"><svg
+   width="238"
+   height="252"
+   version="1.1"
+   id="svg15"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <marker
+       id="dot"
+       overflow="visible">
+      <circle
+         r="2.5"
+         id="circle1"
+         cx="0"
+         cy="0" />
+    </marker>
+    <marker
+       id="arrow"
+       orient="auto"
+       overflow="visible">
+      <path
+         d="m -4,4.5 q 3,-4.5 0,-9 L 8,0 Z"
+         id="path1" />
+    </marker>
+  </defs>
+  <g
+     fill="none"
+     stroke="#000000"
+     id="g2">
+    <circle
+       cx="103"
+       cy="133"
+       r="100"
+       stroke-width="2"
+       id="circle2" />
+    <ellipse
+       cx="103"
+       cy="133"
+       rx="100"
+       ry="25"
+       stroke-dasharray="4.9, 4.9"
+       stroke-dashoffset="4"
+       stroke-linecap="round"
+       stroke-width="1.6"
+       id="ellipse2" />
+  </g>
+  <g
+     stroke="#000000"
+     marker-end="url(#arrow)"
+     id="g4">
+    <path
+       d="M 103,133 68,168"
+       id="path2" />
+    <path
+       d="M 103,133 V 9"
+       id="path3" />
+    <path
+       d="M 103,133 H 227"
+       id="path4" />
+  </g>
+  <path
+     d="m 103,133 35,15 V 58"
+     stroke="#000000"
+     stroke-dasharray="2, 2"
+     fill="none"
+     id="path5" />
+  <path
+     d="M 103,133 138,58"
+     stroke="#000000"
+     marker-end="url(#dot)"
+     id="path6" />
+  <g
+     fill="none"
+     stroke="#000000"
+     id="g8">
+    <path
+       d="m 103,88 a 24,45 0 0 1 16,10"
+       id="path7" />
+    <path
+       d="M 118.5,140 A 32,16 0 0 1 96,140"
+       id="path8" />
+  </g>
+  <g
+     font-size="12px"
+     font-family="'Bitstream Vera Sans'"
+     font-weight="400"
+     font-style="italic"
+     id="g12">
+    <text
+       x="70"
+       y="183"
+       id="text8">x</text>
+    <text
+       x="230"
+       y="147"
+       id="text9">y</text>
+    <text
+       x="110"
+       y="16"
+       id="text10">z</text>
+    <text
+       x="106"
+       y="151"
+       font-size="14px"
+       id="text11">φ</text>
+    <text
+       x="110"
+       y="87"
+       font-size="14px"
+       id="text12">θ</text>
+  </g>
+  <g
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-width="1.5"
+     id="g13">
+    <circle
+       cx="103"
+       cy="33"
+       r="4.5"
+       id="circle12" />
+    <circle
+       cx="103"
+       cy="233"
+       r="4.5"
+       id="circle13" />
+  </g>
+  <path
+     d="m 110,239 v 12 m 12,0 3,-6 -3,-6"
+     fill="none"
+     stroke="#000000"
+     id="path13" />
+  <text
+     x="113"
+     y="249"
+     font-size="12px"
+     font-family="'Bitstream Vera Sans'"
+     font-weight="400"
+     id="text13">1</text>
+  <path
+     d="m 83,15 v 12 m 12,0 3,-6 -3,-6"
+     fill="none"
+     stroke="#000000"
+     id="path14" />
+  <text
+     x="86"
+     y="25"
+     font-size="12px"
+     font-family="'Bitstream Vera Sans'"
+     font-weight="400"
+     id="text14">0</text>
+  <path
+     d="m 145,60 v 12 m 12,0 3,-6 -3,-6"
+     fill="none"
+     stroke="#000000"
+     id="path15" />
+  <text
+     x="147"
+     y="68"
+     font-size="12px"
+     font-family="'Bitstream Vera Serif'"
+     font-weight="400"
+     font-style="italic"
+     id="text15">ψ</text>
+</svg>
+</div>
+</div>
+<div class="proposition">
+<p>ניתן להציג מערכת שתי רמות על ידי מרחב ווקטורי דו מימדי מעל <span>\(\mathbb{C}\)</span>. כאשר נסמן:
+<span>$$\ket{0} \leftrightarrow  \begin{pmatrix}1 \\ 0\end{pmatrix}\qquad \ket{1}  \leftrightarrow  \begin{pmatrix}0 \\ 1
+\end{pmatrix}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצות פאולי</span><p><span>$$\begin{array}{c}{{\sigma_{1}=\sigma_{x}=\left(\begin{array}{c c}{{0}}&amp;{{1}}\\ {{1}}&amp;{{0}}\end{array}\right)}}\\ {{\sigma_{2}=\sigma_{y}=\left(\begin{array}{c c}{{0}}&amp;{{-i}}\\ {{i}}&amp;{{0}}\end{array}\right)}}\\ {{\sigma_{3}=\sigma_{z}=\left(\begin{array}{c c}{{1}}&amp;{{0}}\\ {{0}}&amp;{{-1}}\end{array}\right)}}\end{array}$$</span>
+כאשר כל אחת מהמטריצות הם אוניטריות והרמיטיות.</p>
+</div>
+<div class="proposition">
+<p>אופרטור כללי הפועל על מרחב הילברט ניתן להצגה על ידי מטריצה מרוכבות מגודל <span>\(2\times 2\)</span> מהצורה:
+<span>$$M=\left(\begin{array}{c c}{{m_{0}+m_{3}}}&amp;{{m_{1}-i m_{2}}}\\ {{m_{1}+i m_{2}}}&amp;{{m_{0}-m_{3}}}\end{array}\right)=m_{0}\mathbb{1}+\mathbf{m}\cdot\boldsymbol\sigma$$</span></p>
+</div>
+<div class="proof">
+<p>המטריצה ההרמיטית הכללית ביותר:
+<span>$$M=\begin{pmatrix}a  &amp; m_{1}-im_{2} \\m_{1}+im_{2} &amp; b
+\end{pmatrix}\qquad a,b,m_{1},m_{2} \in \mathbb{R}$$</span>
+אם נגדיר מחדש:
+<span>$$a=m_{0}+m_{3},\quad b=m_{0}-m_{3}$$</span>
+ניתן לקבל מערכת משוואות ולהגדיר מחדש את המטריצה כך שתראה מצורה הבאה:
+<span>$$M=\left(\begin{array}{c c}{{m_{0}+m_{3}}}&amp;{{m_{1}-i m_{2}}}\\ {{m_{1}+i m_{2}}}&amp;{{m_{0}-m_{3}}}\end{array}\right)=m_{0}\mathbb{1}+\mathbf{m}\cdot\boldsymbol{\sigma}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של מטריצות פאולי</span><p><span>$$\sigma_{i}^{\dagger}=\sigma_{i}\qquad \sigma_{i}^{\dagger}\sigma_{i}=1\implies \sigma_{i}^{2}=1$$</span>
+ניתן להגיד שהאינטי קומוטטור יוצר אלגברת קליפורד(clifford algebra) כי מקיים:
+<span>$$\left\{\sigma_{i},\sigma_{j}\right\}=\sigma_{i}\sigma_{j}+\sigma_{j}\sigma_{i}=2\delta_{i j}\mathbb{1}$$</span>
+והקוממוטטור יוצר אלגברת לי כי מקיים:
+<span>$$[\sigma_{i},\sigma_{j}]=\sigma_{i}\sigma_{j}-\sigma_{j}\sigma_{i}=2i{\sum_{k}}\epsilon_{i j k}\sigma_{k}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצת פאולי בכיוון כללי</span><p>וכן לכל ווקטור יחידה <span>\(\mathbf{n}\left( \theta,\varphi \right)\)</span> על ספרת בלוך מתקיים:
+<span>$$\sigma_{\hat{n}}=\hat{n}\cdot \boldsymbol{\sigma}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אופרטור הספין</span><p>הספין של חלקיקים כמו אלקטרון נמדד על ידי אופרטור הספין, המוגדר על ידי:
+<span>$$S_{i}=\frac{1}{2}\sigma_{i}$$</span>
+כאשר ניתן לשייך את המרחב ההילברט של הקיו-ביט עם זה של ספין.
+<span>$$\begin{gather}\ket{ 0} \leftrightarrow  \begin{pmatrix}1 \\ 0\end{pmatrix} \leftrightarrow  \ket{\uparrow _{z}} \equiv \ket{\uparrow }   \\\ket{ 0} \leftrightarrow  \begin{pmatrix}0 \\ 1\end{pmatrix} \leftrightarrow  \ket{\downarrow _{z}} \equiv \ket{\downarrow } 
+\end{gather}$$</span>
+זהו למעשה בחירה של בסיס.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של מטריצה פאולי כללית</span><p><span>$$\forall \hat{n} \in S^{2}\quad \sigma_{\hat{n}}^{2}=1$$</span>
+ולכן ל-<span>\(\sigma_{\hat{n}}\)</span> יש ספקטרום של <span>\(\pm 1\)</span>.
+<span>$$\begin{gather}\sigma_{\hat{n}}\ket{\uparrow _{\hat{n}}} =\ket{\uparrow _{\hat{n}}} \qquad \sigma_{\hat{n}} \ket{\downarrow _{\hat{n}}} =-\ket{\downarrow _{\hat{n}}} 
+\end{gather}$$</span>
+כאשר עבור <span>\(\hat{n}=\left( \theta,\varphi \right)\)</span> נקבל 
+<span>$$\ket{\uparrow_{\hat{n}}}=\ket{\psi\left( \theta,\varphi \right)}=e^{ -i\varphi/2 }\cos\left( \theta \right)\ket{\uparrow}+e^{  i \varphi/2 }\sin\left( \theta \right)\ket{\downarrow } $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ספין x ו-y</span><p>כאשר ניתן גם לכתוב את הערכים של ספין <span>\(x\)</span> ו-<span>\(y\)</span>:
+<span>$$\begin{array}{c}{{\left|\uparrow_{x}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\uparrow\right\rangle+\left|\downarrow\right\rangle\right)}}\\ {{\left|\downarrow_{x}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\uparrow\right\rangle-\left|\downarrow\right\rangle\right)}}\\{{\left|\uparrow_{y}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\uparrow\right\rangle+i\left|\downarrow\right\rangle\right)}}\\ {{\left|\downarrow_{y}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\uparrow\right\rangle-i\left|\downarrow\right\rangle\right)}}\end{array}$$</span></p>
+</div>
+<div class="example"><span class="keyword">ספקטרומטר ראמזי</span><p>נניח שיש לנו ספין יחיד, אשר מתואר על ידי ההמילטוניאן <span>\(H=\omega \sigma_{z}\)</span>. ניתן לזה מצב התחלה:
+<span>$$\ket{\psi(0)} =\ket{\uparrow _{x}} = \frac{1}{\sqrt{ 2 }}\left( \ket{\uparrow } +\ket{\downarrow }  \right)$$</span>
+כאשר לאחר קידום בזמן נקבל:
+<span>$$\left|\psi\left(t\right)\right\rangle=e^{-i H t}\left|\psi\left(0\right)\right\rangle=\frac{1}{\sqrt{2}}\left(e^{-i\omega t}\left|\uparrow\right\rangle+e^{i\omega t}\left|\downarrow\right\rangle\right)$$</span>
+האם ניתן למדוד את <span>\(\omega\)</span>? הרעיון הוא לעבור לבסיס <span>\(x\)</span> ולקבל:
+<span>$$\left|\psi\left(t\right)\right\rangle=\cos\left(\omega t\right)\left|\uparrow_{x}\right\rangle+\sin\left(\omega t\right)\left|\downarrow_{x}\right\rangle$$</span>
+וכעת:
+<span>$$p_{\uparrow x}\left(t\right)=\cos^{2}\left(\omega t\right),\quad p_{\downarrow x}\left(t\right)=\sin^{2}\left(\omega t\right)$$</span>
+ולאחר חזרה על הניסוי מספר פעמים ניתן למצוא את <span>\(\omega\)</span> ולקבל את ההסתברות.</p>
+</div>
+<div class="remark">
+<p>זה לא סותר את זה שאי אפשר לשכפל כיוון שהמשפט החוסר שיכפול אומר שאי אפשר לשכפל מצב קוונטי כללי, אבל זה לא אומר שלא קיים אופרטור אוניטרי אשר מעביר את המערכת למצב קוונטי ספציפי.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות נוספות של מטריצות פאולי</span><ol>
+<li>
+<p>חסר עקבה - <span>\(\mathrm{Tr}\left( \sigma_{i} \right)=0\)</span>. </p>
+</li>
+<li>
+<p>מכפלה של מטריצות פאולי תהיה: 
+<span>$$\sigma_{i}\sigma_{j}=\delta_{i j}\mathbb{1}+i\sum_{k}\epsilon_{i j k}\sigma_{k}$$</span></p>
+</li>
+<li>
+<p>העקבה של המכפלה תהיה: 
+<span>$$\mathrm{Tr}\left[\sigma_{i}\sigma_{j}\right]=2\delta_{i j}$$</span></p>
+</li>
+<li>
+<p>הריבוע שלהם יחידה: 
+<span>$$\sigma_{\mathbf{\hat{n}}}^{2}=\left({\hat{\mathbf{n}}}\cdot \boldsymbol\sigma\right)^{2}=\mathbb{1}$$</span></p>
+</li>
+<li>
+<p>זהות אויילר עבור אקספוננט: 
+<span>$$e^{-i{\frac{\theta}{2}}{\hat{\mathbf{n}}}\cdot\boldsymbol{\sigma}}=\cos\left({\frac{\theta}{2}}\right)\mathbb{1}-i\sin\left({\frac{\theta}{2}}\right){\hat{\mathbf{n}}}\cdot\boldsymbol\sigma$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נובע מיידית מהגדרות </p>
+</li>
+<li>
+<p>בעזרת היחס קומוטטור והאנטי קומוטטור נקבל: 
+<span>$$\sigma_{i}\sigma_{j}={\frac{1}{2}}\left(\{\sigma_{i},\sigma_{j}\}+[\sigma_{i},\sigma_{j}]\right)={\frac{1}{2}}\left(2\delta_{i j}\mathbb{1}+2i{\underset{k}{\sum}}\epsilon_{i j k}\sigma_{k}\right)=\delta_{i j}\mathbb{1}+i{\underset{k}{\sum}}\epsilon_{i j k}\sigma_{k}$$</span></p>
+</li>
+<li>
+<p>מיידית מהשתי זהויות הקודמות </p>
+</li>
+<li>
+<p>מהזהות של המכפלה נקבל: 
+<span>$$\sigma_{\mathbf{\hat{n}}}^{2}=\left({\hat{\mathbf{n}}}\cdot\boldsymbol\sigma\right)^{2}=\sum_{i j}n_{i}n_{j}\sigma_{i}\sigma_{j}=\sum_{i j}n_{i}n_{j}\delta_{i j}\mathbb{1}=\sum_{i}n_{i}n_{i}\mathbb{1}={\hat{\mathbf{n}}}\cdot{\hat{\mathbf{n}}}\mathbb{1}=\mathbb{1}$$</span></p>
+</li>
+<li>
+<p>מפתיחה כטור טיילור ושימוש בזהויות הקודמות נקבל: 
+<span>$$e^{-i{\frac{\theta}{2}}{\hat{\mathbf{n}}}\cdot\boldsymbol\sigma}=\sum_{n}\left({\frac{-i\theta}{2}}\right)^{2n}({\hat{\mathbf{n}}}\cdot\boldsymbol\sigma)^{2n}+\sum_{n}\left({\frac{-i\theta}{2}}\right)^{2n+1}({\hat{\mathbf{n}}}\cdot\boldsymbol\sigma)^{2n+1}=\cos\left({\frac{\theta}{2}}\right)-i\sin\left({\frac{\theta}{2}}\right){\hat{\mathbf{n}}}\cdot\boldsymbol\sigma$$</span></p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_computation_1_3.html'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='prev-page'><a href='./Quantum_computation_1_1.html'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

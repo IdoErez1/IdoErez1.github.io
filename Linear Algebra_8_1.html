@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תבנית בילינארית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_8_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_7_4`; }});</script>
+        <div class="content">
+        <h1>8.1  תבנית בילינארית</h1>
+    <div class="definition"><span class="keyword">תבנית בילינארית</span><p>פונקציה <span>\(b:V\times V\rightarrow \mathbb F\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לינאריות לחיבור לפי הרכיב הראשון: 
+<span>$$b(u+v,w)=b(u,w)+b(v,w)$$</span></p>
+</li>
+<li>
+<p>לינאריות לחיבור לפי הרכיב השני: 
+<span>$$b(u,v+w)=b(u,v)+b(u,w)$$</span></p>
+</li>
+<li>
+<p>לינאריות לכפל בסקלאר לפי הרכיב הראשון: 
+<span>$$b(\alpha u,v)=\alpha b(u,v)$$</span></p>
+</li>
+<li>
+<p>לינארית לכפל בסקלאר לפי הרכיב השני: 
+<span>$$b\left( u,\alpha v \right)=\alpha b(u,v)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>המכפלה הסקלארית <span>\(b(v,u)=v^{T}u\)</span> היא תבנית בילינארית. </p>
+</li>
+<li>
+<p>אם <span>\(V=\mathbb{F} [x]\)</span> מרחב הפולינומים ו-<span>\(a,b \in \mathbb{F}\)</span> אזי <span>\(b(p,q)=p(a)q(b)\)</span> היא תבנית בילינארית. </p>
+</li>
+<li>
+<p>אם <span>\(V=C[a,b]\)</span> מרחב הפונקציות הרציפות על <span>\([a,b]\)</span>, אז <span>\(b(f,g)=\int_{a}^{b} f(x)g(x) \, dx\)</span> היא תבנית בלינארית. </p>
+</li>
+<li>
+<p>אם <span>\(A \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> אז <span>\(b(v,u)=v^{T}Au\)</span> היא תבנית בילינארית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">תבנית ססקילינארית</span><p>תבנית שבמקום תנאי 3 מקיימת:
+<span>$$ \alpha b(v, w) = \overline \alpha b( v, w )$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצת גראם</span><p>יהי <span>\(V\)</span> מרחב ווקטורי נוצר סופית, <span>\(\mathcal{C}=\left( v_{1},\dots,v_{n} \right)\)</span> בסיס של <span>\(V\)</span>, ו-<span>\(b:V\to V\)</span> תבנית בילינארית. אזי:
+<span>$$[b]_{\mathcal{C} }=\begin{pmatrix}b(v_{1},v_{1})&amp;b(v_{1},v_{2})&amp;\dots&amp;b(v_{1},v_{n})\\ b(v_{2},v_{1})&amp;b(v_{2},v_{2})&amp;\dots&amp;b(v_{2},v_{n})\\ &amp;&amp;\dots\\ b(v_{n},v_{1})&amp;b(v_{n},v_{2})&amp;\dots&amp;b(v_{n},v_{n})\end{pmatrix}$$</span></p>
+</div>
+<div class="corollary">
+<p>לכל תבנית בליניארית קיימת מטריצה גראם יחידה.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(\mathcal{C}=\left( v_{1},\dots,v_{n} \right)\)</span>  בסיס ו-<span>\(b\)</span> תבנית בילינארית. אזי לכל <span>\(x,y \in V\)</span> מתקיים:
+<span>$$b(x,y)=[x]_{\mathcal{C}}[b]_{\mathcal{C}}[y]_{\mathcal{C}}^{T}$$</span></p>
+</div>
+<div class="proof">
+<p>נסמן את הרכיבים של <span>\([x]_{\mathcal{C}}\)</span> ו-<span>\([u]_{\mathcal{C}}\)</span>:
+<span>$$[x]_{\mathcal{C}}=\left( \alpha_{1},\ldots,\alpha_{n} \right)\qquad [y]_{\mathcal{C}}=\left( \beta_{1},\ldots,\beta_{n} \right)$$</span>
+כעת ניתן לכתוב:
+<span>$$\begin{gather}b(x,y)=b\left( \alpha_{1}v_{1}+\ldots+\alpha_{n}v_{n},\beta_{1}v_{1}+\ldots+\beta_{n}v_{n} \right)=\sum_{i=1}^{n}\sum_{j=1}^{n}\alpha_{i}\beta_{j}b(v_{i},v_{j})  \\=\sum_{i=1}^{n}\sum_{j=1}^{n}\alpha_{i}\beta_{j}\big{(}[b]_{\mathcal{C}}\big{)}_{i,j}=[x]_{\mathcal{C}}[b]_{\mathcal{C}}[y]_{\mathcal{C}}^{T}
+\end{gather}$$</span> </p>
+</div>
+<div class="corollary">
+<p>יהי <span>\(V\)</span> מרחב ווקטורי עם בסיס <span>\(\mathcal{C}=\left( v_{1},\dots,v_{n} \right)\)</span>. לכל מטריצה <span>\(M \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> קיימת תבנית בילינארית יחידה כך ש:
+<span>$$\forall i,j\quad  1\leq i,j\leq n\qquad b(v_{i},v_{j})=M_{i,j}$$</span></p>
+</div>
+<div class="proof">
+<p>נגדיר <span>\(b(x,y)=[x]_{\mathcal{C}}M[y]_{\mathcal{C}}^{T}\)</span>. נשים לב כי זהו תבנית בלינארית. וכן לכל תבנית בילינארית קיימת מטריצת גראם <span>\(M\)</span> יחידה ולכן קיימת תבנית בילינארית יחידה כזו.</p>
+</div>
+<div class="remark">
+<p>ניתן לראות כי למעשה מטריצה ריבועית מאפיינת תבנית בילינארית. זה נותן לנו שמטריצה ריבועית למעשה מייצגת שתי "יצורים" שונים - מצד אחד מייצגת אופרטור לינארי, ומצד שני תבנית בילינארית, תלוי איך מסתכלים על המטריצה.</p>
+</div>
+<div class="proposition"><span class="keyword">מעבר בסיס</span><p>אם <span>\(\mathcal{B}=\left( v_{1},\dots,v_{n} \right)\)</span> ו-<span>\(\mathcal{C}=\left( u_{1},\dots,u_{n} \right)\)</span> אזי אם נסמן <span>\(S=[Id]_{\mathcal{B}}^{\mathcal{C}}\)</span> מתקיים:
+<span>$$[b]_{B}=S^{T}[b]_{\mathcal{C}}S.$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}{{\left(S^{T}[b]_{\mathcal{C}}S\right)_{i,j}=e_{i}^{T}S^{T}[b]_{\mathcal{C}}S e_{j}}} {{=[v_{i}]_{B}S^{T}[b]_{\mathcal{C}}S[v_{j}]_{B}^{T}}}\\ {{=[v_{i}]_{\mathcal{C}}[b]_{\mathcal{C}}[v_{j}]_{\mathcal{C}}^{T}}} {{=b(v_{i},v_{j})=([b]_{B})_{i,j}}}\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצות חופפות</span><p>שתי מטריצות <span>\(A, B \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> נקראות חופפות אם מייצגות את אותו תבנית בילינארית בבסיסים שונים. כלומר קיימת מטריצה הפיכה <span>\(P\)</span> כך שמתקיים:
+<span>$$B=P^{T}AP$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תבנית מנוונת</span><p>תבנית בילינארית <span>\(b\)</span> נקראת מנוונת עם קיים <span>\(0\neq x \in V\)</span> כך שמתקיים:
+<span>$$b(x,v)=0$$</span>
+אחרת נאמר כי לא מנוונת.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='prev-page'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+        </body>
+        </html>
+        

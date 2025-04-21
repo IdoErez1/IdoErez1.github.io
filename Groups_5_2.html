@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פתירות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_5_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_5_1`; }});</script>
+        <div class="content">
+        <h1>5.2  פתירות</h1>
+    <div class="definition"><span class="keyword">פתירות</span><p>חבורה <span>\(G\)</span> נקראת פתירה אם יש לה סדרה נורמלית עם מנות אבליות.</p>
+</div>
+<div class="proposition">
+<p>חבורה <span>\(G\)</span> סופית היא פתירה אם"ם גורמה ההרכב שלה הם חבורות ציקליות
+ראשוניות(כלומר רק <span>\(\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני)</p>
+</div>
+<div class="proof">
+<p>הכיוון הראשון ברור, אם יש <span>\(G\)</span> כך שחבורות ההרכב שלה הם חבורות
+ציקליות ראשוניות, אז <span>\(G\)</span> פתירה. בכיוון השני, נניח:
+<span>$$1=G_{0}\triangleleft \dots \trianglelefteq G_{r}=G$$</span>
+סדרת נורמלית עם מנות אבליות, אפשר להמשיך להוסיף לה איברים עד שמגיעים לסדרת הרכב. אם <span>\(G_{i}\triangleleft \dots \triangleleft H'\triangleleft \dots \triangleleft G_{i+1}\)</span> אזי:
+<span>$$G_{i}\triangleleft \dots \triangleleft H\triangleleft H'\triangleleft \dots \triangleleft G_{i+1}$$</span>
+נלך למנה ב-<span>\(G_{i}\)</span>:
+<span>$$1=G_{i} / G_{i} \triangleleft \dots \triangleleft H / G_{i}\triangleleft \dots G_{i+1} / G_{i}$$</span>
+ואז <span>\(H' / H \cong (H' / G_{i}) / (H / G_{i})\cong H' / H\)</span>. כאשר מנה של תת חבורה של <span>\(G_{i+1} / G_{i}\)</span> אבלית. לכן גורמי ההרכב אבלים ולכן הם <span>\(\mathbb{Z} _p\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(G\)</span> פתירה ו-<span>\(H\leq G\)</span> אז <span>\(H\)</span> פתירה</p>
+</div>
+<div class="proof">
+<p>נבחר <span>\(1=G_{0}\triangleleft \dots \triangleleft G_{r} = G\)</span>. עם <span>\(G_{i+1} / G_{i}\)</span> אבלית. נחתוך עם <span>\(H\)</span>:
+<span>$$1=H_{0}\triangleleft \dots \triangleleft H_{r}=H$$</span>
+נגדיר <span>\(H_{i}=H\cap G_{i}\)</span>. צריך להראות ש-<span>\(H_{i}\)</span> נורמלית, <span>\(H_{i}\trianglelefteq H_{i+1}\)</span> והמנה אבלית.
+<span>$$H_{i}=H\cap G_{i}=H\cap G_{i+1}\cap G_{i}=H_{i+1}\cap G_{i}\trianglelefteq H_{i+1}$$</span>
+וניתן להשתמש במשפט האיזומורפיזם השני:
+<span>$$H_{i+1} / H_{i} = H_{i+1} / \left( H_{i+1}\cap G_{i} \right)\cong (G_{i} H_{i+1}) / G_{i} \leq G_{i+1} / G_{i}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(N\trianglelefteq G\)</span> אזי <span>\(G\)</span> פתירה אם"ם <span>\(N\)</span> ו-<span>\(G / N\)</span> פתירות.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(G\)</span> פתירה אז <span>\(N\)</span> פתירה(גם ל-<span>\(N\leq G\)</span>, הוכחנו). נניח ש-<span>\(N\)</span> ו-<span>\(G / N\)</span> פתירות ונוכיח ש-<span>\(G\)</span> פתירה. ניקח סדרה נורמלית:
+<span>$$1=N / N = G_{0} / N \trianglelefteq  \dots \trianglelefteq G_{r-1} / N \trianglelefteq  G_{r} / N = G / N$$</span>
+עם מנות אבליות(אנחנו יודעים שתתי חבורות של <span>\(G / N\)</span> הן מהצורה <span>\(H / N\)</span> ל-<span>\(N\leq H\leq G\)</span>). ממשפט ההתאמה, <span>\(G_{i}\triangleleft G_{i+1}\)</span> מאיזו 3:
+<span>$$\overbracket{ (G_{i+1} / N) / (G_{i} / N) }^{ abelian! } \cong G_{i+1} / G_{i}$$</span>
+ניקח סדרה נורמלית <span>\(\{ N_{i} \}_{i=0}^l\)</span> ל-<span>\(N\)</span> עם מנות אבליות, ונקבל סדרה נורמלית עם מנות אבליות. כעת נראה <span>\(G\)</span> פתירה גורר <span>\(G / N\)</span> פתירה. נבחר סדרה
+נורמלית עם מנות אבליות: 
+<span>$$\begin{aligned}1.\quad &amp;1=G_{0}\triangleleft G_{1} \triangleleft \dots G_{r}= G \xRightarrow{\times N}\\2.\quad &amp;1=N&lt;G_{1}N&lt;\dots &lt;G_{r}N=G \xrightarrow{ \div N} \\3.\quad &amp;1=N / N &lt; G_{1} N / N&lt;\dots &lt; G_{r}N / N = G / N
+\end{aligned}$$</span>
+נראה שהמעבר 2 הוא סדרה נורמלית עם מנות אבליות(סנעמ"ב). מתקיים <span>\(G_{i}N\trianglelefteq G_{i+1}N\)</span> כי: 
+<span>$$\begin{gathered}\forall g \in  G_{i+1}\quad  gG_{i}N\stackrel{G_{i} \triangleleft G_{i+1}}{=} G_{i}gN\stackrel{N\triangleleft G}{=} G_{i}Ng \\\forall n \in N\quad nG_{i}N \stackrel{N\triangleleft G}{=} = NG_{i}N = G_{i}Nn
+\end{gathered}$$</span>
+ועכשיו:
+<span>$$G_{i+1}N / G_{i}N= G_{i+1 }G_{i}N / G_{i}N \cong G_{i+1} /\left(  G_{i+1}\cap G_{i}N \right) \cong (G_{i+1} / G_{i}) / \left( G_{i+1} \cap G_{i}N \right) / G_{i}$$</span>
+כעת נראה שמעבר 3 היא סנעמ"א. ממשפטי האיזו הרביעי(זו סדרה נורמלית) והשלישי (עם אותן מנות כמו 2).</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+<li class='prev-page'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+</ul></li>
+        </body>
+        </html>
+        

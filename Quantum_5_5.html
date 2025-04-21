@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>היפוך בזמן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_6_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_5_4`; }});</script>
+        <div class="content">
+        <h1>5.5  היפוך בזמן</h1>
+    <h3>היפוך בזמן הפיזיקה קלאסית</h3>
+<div class="definition"><span class="keyword">מערכת סימטרית להיפוך בזמן</span><p>מערכת פיזיקלית אשר מקיימת שעבור כל פתרון <span>\(\mathbf{x}(t)\)</span> גם <span>\(\mathbf{x}(-t)\)</span> יהיה פתרון.</p>
+</div>
+<div class="example">
+<p>מערכת מהצורה <span>\(m\ddot{\mathbf{x}}=-\bar{\nabla}V(\mathbf{x})\)</span> תהיה אינווריאנטית תחת היפוך בזמן, כאשר מערכת מרוסנת מהצורה:
+<span>$$m{\ddot{\mathbf{x}}}=-\nabla V(\mathbf{x})-\gamma{\dot{\mathbf{x}}}$$</span>
+לא תהיה אינווריאנטית להיפוך בזמן.</p>
+</div>
+<div class="remark">
+<p>נרצה כי כל מערכת המילטונית תהיה אינווריאנטית להיפוך זמן. לכן למשל אם נסתכל על חליקיק עם מטען <span>\(q\)</span> הנע בשדה מגנטי משוואות התנועה נתונות על ידי:
+<span>$$m{\ddot{\mathbf{x}}}=q{\dot{\mathbf{x}}}\times\mathbf{B}$$</span>
+כאשר זו מערכת המילטוניאנית אשר אינה אינווריאנטית להיפוך בזמן כאשר נניח כי המטען <span>\(q\)</span> והשדה המגנטי <span>\(\vec{B}\)</span> לא משתנים עם היפוך בזמן. לכן המוסכמה היא שאנחנו מחליפים את הסימן של <span>\(\vec{B}\)</span> תחת היפוך בזמן כאשר המטען לא משתנה. נדרש היה לדרוש כי המטען משנה סימן תחת היפוך בזמן והשדה המגנטי לא והפיזיקה הייתה זהה.</p>
+</div>
+<div class="corollary">
+<p>תחת היפוך בזמן נקבל:
+<span>$$t\mapsto-t\quad \mathbf{x}(t)\mapsto \mathbf{x}(-t)\quad \mathbf{p}(t)\mapsto-\mathbf{p}(-t)$$</span>
+כאשר השדות החשמליים והמגנטיים יקיימו:
+<span>$$\mathbf{E}\mapsto\mathbf{E}\qquad \mathbf{B}\mapsto-\mathbf{B}$$</span></p>
+</div>
+<h3>אופרטור אנטי אוניטרי</h3>
+<div class="definition"><span class="keyword">אופרטור אנטי לינארי</span><p>עבור <span>\(\alpha,\beta \in \mathbb{C}\)</span> אופרטור <span>\(B\)</span> נקרא אנטי לינארי אם מקיים:
+<span>$$B(\alpha|\psi_{1}\rangle+\beta|\psi_{2}\rangle)=\alpha^{\star}B|\psi_{1}\rangle+\beta^{\star}B|\psi_{2}\rangle$$</span></p>
+</div>
+<div class="corollary">
+<p>אופרטור אנטי אוניטרי לא מתחלף עם סקלארים מרוכבים ולמעשה מקיים:
+<span>$$B\alpha=\alpha^{\star}B$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ברא עבור אופרטורים אנטי לינארים</span><p><span>$$(\langle\phi|B\rangle|\psi\rangle=[\langle\phi|(B|\psi\rangle)]^{\star}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אופרטור אנטי אוניטרי</span><p>אופרטור אנטי לינארי אשר בנוסף מקיים:
+<span>$$B^{\dagger}B=B B^{\dagger}=\mathbb{1} $$</span></p>
+</div>
+<h3>היפוך בזמן בפיזיקה קוונטית</h3>
+<div class="reminder"><span class="keyword">משוואת שרדינגר התלויה בזמן</span><p><span>$$i\hbar{\frac{\partial\psi}{\partial t}}=H\psi$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אם ההמילטוניאן סימטרי להיפוך בזמן אז היינו מצפים כי מצב יתקדם בזמן באופן המתאים להיפוך בזמן. אבל משוואת שרדינגר היא מסדר ראשון בזמן, ולכן אם <span>\(\psi(t)\)</span> פתרון אז <span>\(\psi(-t)\)</span> באופן כללי הוא לא פתרון נוסף.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\psi(t)\)</span> פתרון אז <span>\(\psi^{*}(-t)\)</span> יהיה פתרון.</p>
+</div>
+<div class="definition"><span class="keyword">אופרטור ההיפוך בזמן</span><p>אופרטור <span>\(\mathcal{T}\)</span> אנטי לינארי ואנטי אוניטרי אשר מייצג היפוך בזמן.</p>
+</div>
+<div class="proposition">
+<p>נדרוש שאופרטור ההיפוך בזמן מקיים:
+<span>$$\mathcal{T} i H=-i H\mathcal{T}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי מצב מתקדם בזמן על ידי:
+<span>$$\left|\psi(t)\right\rangle=e^{-i H t/\hbar}\left|\psi(0)\right\rangle$$</span>
+כאשר אם ניקח את המצב <span>\(\mathcal{T}\ket{\psi(0)}\)</span> ונקדם אותו קדימה בזמן ונדרוש שיהיה שווה להיפוך בזמני של במצב <span>\(\ket{\psi(0)}\)</span> אשר מקודם אחורה בזמן נקבל:
+<span>$$\mathcal{T}\,e^{+i H t/\hbar}\,|\psi(0)\rangle=e^{-i H t/\hbar}\,\mathcal{T}\,|\psi(0)\rangle$$</span>
+נפתח לזמן אינפוניטסימלי ונקבל:
+<span>$$\mathcal{T} i H=-i H\mathcal{T}$$</span></p>
+</div>
+<div class="remark">
+<p>הדבר הטבעי שנראה שאפשר לעשות כרגע זה לצמצם את ה-<span>\(i\)</span>, אבל זה לא נכון! אופרטור אנטי אונטרי אינו מתחלף עם סקלארים מרוכבים.</p>
+</div>
+<div class="corollary">
+<p>אם נשתמש באנטי לינאריות של ההיפוך בזמן נקבל:
+<span>$$[\mathcal{T} ,H]=0$$</span></p>
+</div>
+<div class="remark">
+<p>עבור אופרטורים לינארים זה אומר שיש לנו גודל שמור. כיוון שזה לא אופרטור לינארי זה לא המקרה כאן, אבל עדיין מאפשר לנו להגיד דברים מעניינים.</p>
+</div>
+<div class="proposition"><span class="keyword">חלקיק חסר ספין</span><p>עבור חלקיק חסר ספין עם המילטוניאן מהצורה <span>\(H={\frac{\mathbf{p}^{2}}{2m}}+V(\mathbf{x})\)</span> נקבל כי מתקיים:
+<span>$$T\psi(\mathbf{x})=\psi^*(\mathbf{x})\qquad\mathcal{T} \ket{p} =\ket{-p} $$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי אופרטור נקבע ביחידות לפי לאן ששולח את איברי הבסיס שלו. נסתכל על בסיס המיקום ונדרוש:
+<span>$$\mathcal{T}|\mathbf{x}\rangle=|\mathbf{x}\rangle\implies \mathcal{T} \alpha \ket{x} =\alpha^{*}\ket{x} $$</span>
+ניתן כעת לפתח מצב כללי על ידי:
+<span>$$|\psi\rangle=\int d^{3}x~|{\bf x}\rangle\langle{\bf x}|\psi\rangle=\int d^{3}x~\psi({\bf x})|{\bf x}\rangle$$</span>
+וכעת נקבל כי היפוך בזמן נתון על ידי:
+<span>$$\mathcal{T}|\psi\rangle=\int d^{3}x\,\mathcal{T}\psi({\bf x})|{\bf x}\rangle=\int d^{3}x\,\,\psi^{\star}({\bf x})\mathcal{T}|{\bf x}\rangle=\int d^{3}x\,\,\psi^{\star}({\bf x})|{\bf x}\rangle$$</span>
+ניתן באופן דומה לכתוב את הבסיס התנע ולקבל:
+<span>$$|{\bf p}\rangle=\int d^{3}x~e^{i{\bf p}\cdot{\bf x}}|{\bf x}\rangle$$</span>
+כאשר אם נפעיל היפוך בזמן נקבל:
+<span>$$\mathcal{T}|{\bf p}\rangle=\int d^{3}x~\mathcal{T} e^{i{\bf p}\cdot{\bf x}}|{\bf x}\rangle=\int d^{3}x~e^{-i{\bf p}\cdot{\bf x}}|{\bf x}\rangle=|-{\bf p}\rangle$$</span>
+ניתן לעשות זאת גם על האופרטורים ולקבל:
+<span>$$\hat{\bf x}=\int d^{3}\!x\ {\bf x}|{\bf x}\rangle\langle{\bf x}|\implies\mathcal{T}\hat{\bf x}\mathcal{T}=\int d^{3}\!x\ {\bf x}\mathcal{T}|{\bf x}\rangle\langle{\bf x}|\mathcal{T}=\hat{\bf x}$$</span>
+וגם:
+<span>$$\hat{\bf p}=\int d^{3}p\ {\bf p}|{\bf p}\rangle\langle{\bf p}|\implies\mathcal{T}\hat{\bf p}\mathcal{T}=\int d^{3}p\ {\bf p}\mathcal{T}|{\bf p}\rangle\langle{\bf p}|\mathcal{T}=-\hat{\bf p}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור חלקיק חסר ספין עם פוטנציאל מרכזי(<span>\(V(\mathbf{x})=V(\lvert \mathbf{x} \rvert)\)</span>) מתקיים בנוסף:
+<span>$$\mathcal{T} L\mathcal{T} ^{-1} =-L$$</span>
+כאשר עבור פונקציית הגל נקבל <span>\(\psi_{n l m}^{\star}({\bf x})=(-1)^{m}\psi_{n l,-m}({\bf x})\)</span></p>
+</div>
+<div class="proof">
+<p>במקרה של פוטנציאל מרכזי מטעמי סימטריה נקבל כי <span>\(\mathbf{L}\)</span> נשמר, וכן כיוון ש-<span>\(\mathbf{L}=\mathbf{x}\times \mathbf{p}\)</span> נקבל כי מקבל סימן מינוס תחת היפוך בזמן. כעת ניתן לכתוב את הפונקציית הגל בבסיס על ידי:
+<span>$$\psi_{n l m}({\bf x})=R_{n l}(r)Y_{l m}(\mathcal{T},\phi)$$</span>
+כאשר ניתן לקחת את החלק הרדיאלי כך שממשית, ולכתוב את ההרמוניות הספריות על ידי:
+<span>$$Y_{l m}(\mathcal{T},\phi)\,=\,e^{i m\phi}P_{l}^{m}(\cos\mathcal{T})$$</span>
+מההגדרה של הפונקציות נקבל:
+<span>$$\psi_{n l m}^{\star}({\bf x})=(-1)^{m}\psi_{n l,-m}({\bf x})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">היפוך בזמן של ספין</span><p>ספין עובר היפוך זמני על ידי:
+<span>$$\mathcal{T}{\bf S}\mathcal{T}^{-1}=-{\bf S}$$</span></p>
+</div>
+<div class="proof">
+<p>נראה עבור חלקיק עם ספין חצי. נזכור כי <span>\(\mathbf{S}=\frac{\hbar}{2}\boldsymbol\sigma\)</span>. המרחב הילברט הוא מרחב דו מימדי ולכן ניקח עבורו את הבסיס של ווקטורים עצמיים של <span>\(S_{z}\)</span>:
+<span>$$\left|+\right&gt;={\binom{1}{0}}\quad{\mathrm{and}}\quad\left|-\right&gt;={\binom{0}{1}}$$</span>
+כך שמתקיים <span>\(S_{z}\ket{\pm}=\pm \frac{\hbar}{2}\ket{\pm}\)</span>. הפעולה של היפוך בזמן נתונה על ידי:
+<span>$$\mathcal{T}|+\rangle=i|-\rangle\,\,\,\,\,\,,\,\,\,\,\,\mathcal{T}|-\rangle=-i|+\rangle$$</span>
+נשים לב כי כאשר נפעיל פעמיים על הבסיס נקבל:
+<span>$$\begin{gather}\mathcal{T}^{2}|+\rangle=\mathcal{T}(i|-\rangle)=-i\mathcal{T}|-\rangle=-|+\rangle \\\mathcal{T}^{2}|-\rangle=\mathcal{T}(-i|+\rangle)=i\mathcal{T}|+\rangle=-|-\rangle
+\end{gather}$$</span>
+ולכן <span>\(\mathcal{T}^{2}=-\mathbb{1}\)</span>. כמו כן נשים לב כי מתקיים:
+<span>$$\begin{gather}\bra{+} \mathcal{T} =i\bra{-} \qquad\bra{-} \mathcal{T} =-i\bra{+}  \\\mathcal{T}^{\dagger}|+\rangle=-i|-\rangle\quad,\quad\mathcal{T}^{\dagger}|-\rangle=i|+\rangle
+\end{gather}$$</span>
+ונשים לב כי <span>\(\mathcal{T}^{\dagger}=-\mathcal{T}\)</span>. נפעיל כעת על כל רכיב של אופרטור הספין:
+<span>$$\begin{gather}S_{x}=|+\rangle\langle-|+|-\rangle\langle+|\implies\mathcal{T} S_{x}\mathcal{T}^{\dagger}=-S_{x} \\S_{z}=|+\rangle\langle+|-|-\rangle\langle-|\implies\mathcal{T} S_{z}\mathcal{T}^{\dagger}=-S_{z} \\S_{y}\,=\,-i|+\rangle\langle-|+i|-\rangle\langle+|\implies\mathcal{T} S_{y}\mathcal{T}^{\dagger}=-S_{y}
+\end{gather}$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור ספין שלם מתקיים <span>\(\mathcal{T}^{2}=\mathbb{1}\)</span> כאשר עבור ספין חצי שלם מתקיים <span>\(\mathcal{T}^{2}=-\mathbb{1}\)</span>.
+<strong>הגדרה</strong> היפוך בזמן
+אופרטור אנטי לינארי ואנטי ואוניטרי המוגדר על ידי <span>\(t\mapsto -t\)</span>.</p>
+</div>
+<div class="corollary">
+<p>כיוון שאנטי לינארי מתקיים:
+<span>$$T\alpha=\alpha^{*}T$$</span></p>
+</div>
+<div class="proposition">
+<p>תחת היפוך בזמן <span>\(T:t\to -t\)</span>, גורמים שאינם תלוים בזמן לא משתנים, למשל מיקום לא ישתנה - <span>\(TXT^{-1}=X\)</span>. לעומת זאת גורמים אשר תלוים בזמן מסדר ראשון(למשל שווים לנגזרת לפי זמן כמו מהירות, תנע, תנע זוויתי וספין) יהפכו סימן, כלומר:
+<span>$$TXT^{-1}=X \qquad TPT^{-1}=-P \qquad TLT^{-1} = -L \qquad TST^{-1}=-S$$</span></p>
+</div>
+<div class="proposition">
+<p>אופרטור הקידום בזמן <span>\(U(t)\)</span> עובר תחת היפוך בזמן ל-<span>\(U^{\dagger}(t)\)</span>. כלומר <span>\(T U(t)T^{-1}=U^{\dagger}(t)\)</span></p>
+</div>
+<div class="example">
+<p>נתון כי לרמת אנרגיה <span>\(E_{n}\)</span> של ההמילטוניאן <span>\(H\)</span> יש מצב עצמי יחיד <span>\(\ket{\psi_{n}}\)</span>. נראה כי אם <span>\(\Pi\)</span> מתחלף עם ההמילטוניאן אז <span>\(\ket{\psi_{n}}\)</span> הוא מצב עצמי של <span>\(\Pi\)</span> עם ערך עצמי <span>\(\pm 1\)</span>.
+נתחיל מכך שמתקיים <span>\(H\ket{\psi_{n}}=E_{n}\ket{\psi_{n}}\)</span> כך שמתקיים:
+<span>$$\Pi H\ket{\psi_{n}} =H\left( P\ket{\psi_{n}}  \right)=E_{n}\left( \Pi\ket{\psi_{n}}  \right)$$</span>
+כאשר כיוון ש-<span>\(\ket{\psi_{n}}\)</span> לא מנוון אין מצב עם אנרגיה <span>\(E_{n}\)</span> אבל הביטוי אומר ש-<span>\(\Pi \ket{\psi_{n}}\)</span> הוא מצב עם <span>\(E_{n}\)</span> ולכן הם זהים עד כדי פאזה ומתקיים:
+<span>$$\Pi \ket{\psi_{n}} =\alpha \ket{\psi_{n}} \implies \Pi^{2}\ket{\psi_{n}}=\alpha^{2}\ket{\psi_{n}}\implies \alpha=\pm 1$$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(Q\)</span> אופרטור אינווראנטי לזמן(כלומר אופרטור המקיים <span>\([H,Q]=0\)</span>). אזי אם <span>\(\ket{\psi_{n}}\)</span> מצב עצמי של <span>\(H\)</span> אז גם <span>\(Q\ket{\psi_{n}}\)</span> מצב עצמי של <span>\(H\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$${\hat{H}} \left|\psi_{n}^{\prime}\right\rangle={\hat{H}}\left({\hat{Q}}\ |\psi_{n}\rangle\right)={\hat{Q}}\,{\hat{H}}\ |\psi_{n}\rangle={\hat{Q}}\,E_{n}\ |\psi_{n}\rangle=E_{n}\left({\hat{Q}}\ |\psi_{n}\rangle\right)=E_{n}\ \left|\psi_{n}^{\prime}\right\rangle$$</span></p>
+</div>
+<div class="remark">
+<p>סימטריה כזו היא המקור של רוב הניוון בפיזיקה, אך לרוב קשה לזהות את הסימטריה המתאימה.</p>
+</div>
+<div class="example">
+<p>יהי <span>\(\psi_{n\ell m}\)</span> מצב עצמי של פוטנציאל מרכזי עם אנרגיה <span>\(E_{n}\)</span>. כיוון שהמילטוניאן מרכזי מתחלף עם כל רכיב של <span>\(\mathbf{L}\)</span> נקבל כי גם <span>\(L_{+},L_{-}\)</span> מתחלפים עם ההמילטוניאן. לכן:
+<span>$$\left(\hat{H}\,\hat{L}_{\pm}-\hat{L}_{\pm}\,\hat{H}\right)\,\psi_{n\ell m}=0,$$</span>
+כלומר:
+<span>$$\hat{H}\,\hat{L}_{\pm}\,\psi_{n\ell m}=\hat{L}_{\pm}\,\hat{H}\,\psi_{n\ell m}=E_{n}\,\hat{L}_{\pm}\,\psi_{n\ell m}$$</span>
+או לחלופין:
+<span>$$\hat{H}\,\psi_{n\ell m\pm1}=E_{n}\,\psi_{n\ell m\pm1}$$</span>
+וגם <span>\(\psi_{n\ell m\pm 1}\)</span> מצב עצמי. ולכן הסימטריה הזו לסיבובים מסבירה את הניוון של <span>\(m\)</span>. אכן אם אנחנו מבטלים את הסימטריה הזו על ידי שדה חשמלי או מגנטי אנחנו מאבדים את הניוון.</p>
+</div>
+<div class="example"><span class="keyword">שבירת סימטריה כמקור לאיבוד ניוון</span><p>עבור למשל בעיית אטום המימן ניתן להוסיף הפרעה של שדה חשמלי אשר הורסת את הזוגיות המרחבית של ההמילטוניאן. זה גורם לאיבוד של הניוון.</p>
+</div>
+<div class="summary">
+<ul>
+<li>היפוך בזמן הופך את הסימן של גדלים התלויים בזמן בצורה אי זוגית, כמו תנע, תנע זוויתי וספין כאשר משאירים את האברים שלא תלויים בזמן כמו מיקום. כלומר:
+<span>$$x\mapsto x\quad v\mapsto -v\quad a\mapsto a\quad L\mapsto -L\quad t\mapsto-t$$</span></li>
+<li>השדה החשמלי והמגנטי עוברים היפוך בזמן על ידי:
+<span>$$\vec{E}\mapsto \vec{E}\qquad \vec{B}\mapsto-\vec{B}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='prev-page'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+</ul></li>
+        </body>
+        </html>
+        

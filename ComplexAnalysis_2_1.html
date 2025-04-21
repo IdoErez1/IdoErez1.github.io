@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נגזרת מרוכבת וקושי רימן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./ComplexAnalysis_2_2.html'>2.2 פונקציות אנליטיות</a></li>
+<li class='parent-page'><a href='./ComplexAnalysis.html'> פונקציות מרוכבות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לפונקציות מרוכבות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_1.html'>1.1 תזכורת - מרוכבים</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_2.html'>1.2 גבולות של פונקציות מרוכבות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_1_3.html'>1.3 ספרת רימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_2_1.html'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_2_2.html'>2.2 פונקציות אנליטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פונקציות והעתקות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_1.html'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_2.html'>3.2 העתקה לינארית והופכית</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_3_3.html'>3.3 העתקת מוביוס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_1.html'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_2.html'>4.2 משפט קושי גורסה</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_3.html'>4.3 משפט מוררה</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_4_4.html'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. טורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_1.html'>5.1 טורים של פונקציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_2.html'>5.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_3.html'>5.3 טורי טיילור</a></li>
+<li class='parent_page-dropdown'><a href='./ComplexAnalysis_5_4.html'>5.4 טור לורן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./ComplexAnalysis_1_3.html'>1.3 ספרת רימן</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./ComplexAnalysis_2_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./ComplexAnalysis_1_3.html`;}});</script>
+        <div class="content">
+        <h1>2.1  נגזרת מרוכבת וקושי רימן</h1>
+    <div class="definition"><span class="keyword">גזירות בנקודה</span><p>פונקציה <span>\(f(z)\)</span> גזירה בנקודה <span>\(z_{0}\)</span> אם"ם הגבול הבא קיים:
+<span>$$f^{\prime}(z_{0})=\operatorname*{lim}_{z\to z_{0}}{\frac{f(z)-f(z_{0})}{z-z_{0}}}$$</span></p>
+</div>
+<p>ניתן לחלופין להגדיר <span>\(\Delta z=z-z_{0}\)</span> ולקבל:
+<span>$$f^{\prime}(z_{0})=\operatorname*{lim}_{\Delta z\to0}{\frac{f(z_{0}+\Delta z)-f(z_{0})}{\Delta z}}.$$</span>
+כאשר לעיתים מגדירים
+<span>$$\Delta w=f(z+\Delta z)-f(z).$$</span>
+וניתן כעת לכתוב:
+<span>$$\frac{d w}{d z}=\operatorname*{lim}_{\Delta z\to0}\frac{\Delta w}{\Delta z}.$$</span></p>
+<div class="theorem"><span class="keyword">קושי רימן</span><p>לפונקציה מרוכבת <span>\(f(z)=u(x,y)+iv(x,y)\)</span> יש נגזרת מרוכבת <span>\(f'(z)\)</span> אם"ם החלקים המרוכבים והממשיים הם גזירים ברציפות ומקיימות את משוואות קושי רימן:
+<span>$$u_{x}=v_{y},\quad u_{y}=-v_{x}$$</span>
+כאשר הנגזרת המרוכת תהיה שווה:
+<span>$$f^{\prime}(z)=u_{x}+i v_{x}=v_{y}-i u_{y}$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה להגיע לנקודה משתי הכיוונים הפשוטים דרך הציר הממשי, ודרך הציר המדומה. נכתוב:
+<span>$$z=z_{0}+h=(x_{0}+h)+i y_{0},\quad h\in\mathbb{R},$$</span>
+ראשית נסתכל מתי <span>\(z\to z_{0}\)</span> דרך הציר הממשי, כלומר כאשר <span>\(h\to 0\)</span>.
+נסמן <span>\(f(z)=u(x,y)+iv(x,y)\)</span> ונקבל <span>$$f^{\prime}(z_{0})=\operatorname*{lim}_{h\to0}{\frac{f(z_{0}+h)-f(z_{0})}{h}}.$$</span>
+וכעת:
+<span>$$\begin{gather}{f^{\prime}(z_{0})=\operatorname*{lim}_{h\to0}{\frac{f(z_{0}+h)-f(z_{0})}{h}}=\operatorname*{lim}_{h\to0}{\frac{f(x_{0}+h+i y_{0})-f(x_{0}+i y_{0})}{h}}}\\ {=\operatorname*{lim}_{h\to0}\left[{\frac{u\left(x_{0}+h,y_{0}\right)-u\left(x_{0},y_{0}\right)}{h}}\right]+i\operatorname*{lim}_{h\to0}\left[{\frac{v\left(x_{0}+h,y_{0}\right)-v\left(x_{0},y_{0}\right)}{h}}\right]}\\ {=u_{x}(x_{0},y_{0})+i v_{x}(x_{0},y_{0})}\end{gather}$$</span></p>
+</div>
+<p>כעת נסתכל על איך שהפונקציה מתקדמת דרך הציר המדומה, כלומר אם נגדיר
+<span>$$z=z_{0}+i k=x_{0}+i(y_{0}+k),\quad k\in\mathbb{R},$$</span>
+אז כאשר <span>\(z\to 0\)</span> דרך הציר המדומה, זה שקול ללהשאיף <span>\(k\to 0\)</span>. נקבל:
+<span>$$\begin{gather}{f^{\prime}(z_{0})=\operatorname*{lim}_{k\to0}{\frac{f(z_{0}+i k)-f(z_{0})}{i k}}=\operatorname*{lim}_{k\to0}\left[-i{\frac{f(x_{0}+i(y_{0}+k))-f(x_{0}+i y_{0})}{k}}\right]}\\ {=\operatorname*{lim}_{k\to0}\left[{\frac{v\left(x_{0},y_{0}+k\right)-v\left(x_{0},y_{0}\right)}{k}}-i{\frac{u\left(x_{0},y_{0}+k\right)-u\left(x_{0},y_{0}\right)}{k}}\right]}\\ {=v_{y}(x_{0},y_{0})-i u_{y}(x_{0},y_{0})}\end{gather}$$</span>
+כאשר אם נשוואה את החלק הממשי והמדומה נקבל את המערכות הלינארית החלקית ההומגינית:
+<span>$$u_{x}=v_{y},\quad u_{y}=-v_{x}.$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./ComplexAnalysis_2_2.html'>2.2 פונקציות אנליטיות</a></li>
+<li class='prev-page'><a href='./ComplexAnalysis_1_3.html'>1.3 ספרת רימן</a></li>
+</ul></li>
+        </body>
+        </html>
+        

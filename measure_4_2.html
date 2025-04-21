@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נורמות ומרחבי Lᵖ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_4_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_4_1.html`;}});</script>
+        <div class="content">
+        <h1>4.2  נורמות ומרחבי Lᵖ</h1>
+    <div class="definition"><span class="keyword">נורמת <span>\(p\)</span> של <span>\(f\)</span></span><p>לכל <span>\(f:X\to \mathbb{C}\)</span> מדידה ולכל <span>\(1\leq p \leq \infty\)</span> נגדיר:
+<span>$$\lVert f \rVert _{p} := \left[ \int  \lvert f \rvert ^{p} \;\mathrm{d} \mu  \right]^{1/p}$$</span>
+ונקרא לזה נורמת ה-<span>\(p\)</span> של <span>\(f\)</span>. עבור <span>\(p=\infty\)</span>:
+<span>$$\lVert f \rVert _{\infty}=\text{ess-sup}\left( \lvert f \rvert  \right):= \inf \left\{  \alpha \geq 0 \mid \mu\left( \left\{  x\mid \lvert f(x) \rvert &gt;\alpha  \right\} \right)=0  \right\}$$</span></p>
+</div>
+<p>מוסכמה - <span>\(\inf \varnothing = \infty\)</span>. נסמן:
+<span>$$\mathcal{L} ^{p}\left( \mu \right):=\left\{  f:X\to \mathbb{C} \text{ measurable}\mid \lVert f \rVert _{p}&lt;\infty  
+\right\}$$</span></p>
+<div class="proposition">
+<p>אם <span>\(1\leq p,q\leq \infty\)</span> חזקות צמודות ו-<span>\(f \in \mathcal{L}^{p}\)</span>, <span>\(g \in \mathcal{L}^{q}\)</span> אזי <span>\(f\cdot g \in \mathcal{L}^{1}\)</span>.</p>
+</div>
+<div class="proof">
+<p>עבור <span>\(1&lt;p,q&lt;\infty\)</span> נובע מאי שיוויון הלדר. עם <span>\(p=1,q=\infty\)</span> מתקיים <span>\(\lvert g(x) \rvert \leq \lVert g \rVert _{\infty}\)</span> מתקיים <span>\(\mu\)</span>-כמעט תמיד. לכן:
+<span>$$\int \left\lvert  f\cdot g  \right\rvert  \;\mathrm{d} \mu \leq \lVert g \rVert _{\infty}\int \lvert f \rvert  \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(f,g \in \mathcal{L}^{p}\)</span> עם <span>\(1\leq p\leq \infty\)</span> מתקיים:
+<span>$$\lVert f+g \rVert_{p} \leq \lVert f \rVert _{p} + \lVert g \rVert _{p}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור <span>\(1&lt;p&lt; \infty\)</span> נקבל את אי שיוויון מנקובסקי.
+עבור <span>\(p=1,\infty\)</span> נובע ישירות מאי שיוויון המשולש.</p>
+</div>
+<div class="corollary">
+<p>המרחב <span>\(\mathcal{L}^{p}\)</span> הוא מרחב ווקטורי לכל <span>\(1\leq p\leq \infty\)</span>.</p>
+</div>
+<div class="proof">
+<p>עבור <span>\(f \in \mathcal{L}^{p}\)</span> ו-<span>\(\alpha \in \mathbb{C}\)</span> קבוע נקבל <span>\(\alpha f \in \mathcal{L}^{p}\)</span>.</p>
+</div>
+<div class="remark">
+<p>הפונקציה <span>\(||\cdot||\)</span> איננה נורמה על <span>\(\mathcal{L}^{p}\)</span> כי <span>\(||f||_{p}=0\)</span> גם במקרה ש-<span>\(f\neq 0\)</span>. עם זרת נשים לב שלכל <span>\(1\leq p\leq \infty\)</span> אם <span>\(\lVert f \rVert_{p}=0\)</span> אז <span>\(f \overset{\mu}{=} 0\)</span>. 
+נזכר בתרגיל בו הגדרנו יחס שקילות <span>\(f \sim g\)</span> אם <span>\(f\overset{\mu}{=} g\)</span>. נגדיר:
+<span>$$L^{p}\left( \mu \right)=\left\{  [f]\mid f \in \mathcal{L} ^{p}  \right\}$$</span>
+וכעת <span>\(\left( L^{p}\left( \mu \right),||\cdot||_{p} \right)\)</span> מרחב נורמי.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב בנך</span><p>מרחב נורמי שלם נקרא מרחב באנך.</p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(1\leq p\leq \infty\)</span> מתקיים כי <span>\(L^{p}\)</span> מרחב נורמי שלם(שלם כמרחב מטרי ביחס ל-<span>\(d(x,y)=\lVert x-y \rVert_{p}\)</span>).</p>
+</div>
+<div class="proof">
+<p>נתחיל מהמקרה של <span>\(1\leq p&lt; \infty\)</span>. תהי <span>\((f_{n})\subseteq L^{p}\)</span> סדרת קושי כלשהי. נבחר תת סדרה <span>\(f_{n_{k}}\)</span> המקיימת:
+<span>$$\forall k \in \mathbb{N}\quad \lVert f_{n_{k+1}}-f_{n_{k}} \rVert _{p}&lt;2^{-k}$$</span>
+נגדיר:
+<span>$$g_{k}= \sum_{i=1}^{k} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert $$</span>
+אזי <span>\(g_{k}\in L^{p}\)</span>. נסמן <span>\(g=\sum_{i=1}^{\infty} \lvert f_{n_{i+1}}-f_{n_{i}} \rvert\)</span>. נבחין כי <span>\(0\leq g_{1}\leq g_{2}\leq \dots\)</span>. ו-<span>\(g=\lim_{ k \to \infty }g_{k}\)</span> לכן ממשפט ההתכנסות המונוטונית:
+<span>$$\lVert g \rVert _{p}^{p}=\int g^{p} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k}^{p} \;\mathrm{d} \mu &lt; 1  $$</span>
+כי מאי שיוויון מינקובסקי:
+<span>$$\lVert g_{k} \rVert_{p}\leq \sum_{i=1}^{k}\lVert f_{n_{i+1}}-f_{n_{i}} \rVert_{p} &lt; 1$$</span>
+מכך ש-<span>\(\lVert g \rVert_{p}\)</span> נובע ש-<span>\(g(x)&lt;\infty\)</span> מתקיים <span>\(\mu\)</span> כמעט תמיד כלומר הטור <span>\(\sum_{i=1}^{\infty} (f_{n_{i+1}}-f_{n_{i}})\)</span> מתכנס בהחלט <span>\(\mu\)</span>-כמעט תמיד. נגדיר 
+<span>$$f=f_{n_{1}} + \sum_{i=1}^{\infty}  (f_{n_{i+1}}-f_{n_{i}})$$</span>
+ונסיק כי <span>\(f \in L^{p}\)</span>. מוגדר <span>\(\mu\)</span>-כמעט תמיד. נקבע <span>\(f=0\)</span> היכן שאיננו מוגדר נבחין כי:
+<span>$$f(x)=\lim_{ i \to \infty } f_{n_{i}}(x)$$</span>
+מתקיים <span>\(\mu\)</span> כמעט תמיד. מהלמה של פאטו(Fatou) עבור כל <span>\(m \in \mathbb{N}\)</span>:
+<span>$$\int \lvert f_{m}-f\rvert^{p}  \;\mathrm{d} \mu \leq \liminf_{ i \to \infty } \int \lvert f_{m}-f_{n_{i}} \rvert ^{p} \;\mathrm{d} \mu = \liminf  \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}$$</span>
+מאחר ש-<span>\((f_{n})\)</span> סדרת קושי, הרי שלכל <span>\(0&lt;\varepsilon\)</span> קיים <span>\(N\)</span> כך שלכל <span>\(m,n &gt; N\)</span> מתקיים:
+<span>$$\lVert f_{m}-f_{n} \rVert _{p}&lt;\varepsilon$$</span>
+בפרט עבור <span>\(m&gt; N\)</span>:
+<span>$$\lVert f_{m}-f \rVert _{p}^{p}\leq \liminf_{i\to \infty} \lVert f_{m}-f_{n_{i}} \rVert _{p}^{p}&lt;\varepsilon^{p} $$</span>
+ולכן
+<span>$$\lVert f \rVert _{p}\leq \lVert f_{m} \rVert _{p}+\lVert f_{m}-f \rVert_{p}&lt; \infty$$</span>
+כלומר <span>\(f \in L^{p}\)</span>. יתר על כן הראנו ש-<span>\(\lVert f_{m}-f \rVert\xrightarrow{m\to \infty} 0\)</span>.
+עבור <span>\(p=\infty\)</span> ניקח סדרת קושי <span>\((f_{n})\subseteq L^{\infty}\left( \mu \right)\)</span>. נסמן:
+<span>$$A_{n}=\left\{  x\mid \lvert f_{n}(x) \rvert &gt;\lVert f_{n} \rVert _{\infty}  \right\}\qquad B_{n,k}=\left\{  x \mid \lvert f_{n}(x)-f_{k}(x) \rvert &gt; \lVert f_{n}-f_{k} \rVert _{\infty}  \right\}$$</span>
+כאשר:
+<span>$$\mu\left( \underbrace{ \bigcup_{n}A_{n}\cup \bigcup_{n,k}B_{n,k}  }_{ E }\right)=0$$</span>
+מכיוון שעל  <span>\(X \setminus E\)</span> מתקיים ש-<span>\(f_{n}\)</span> מתכנס במ"ש.
+בפרט <span>\(f(x)=\lim_{ n \to \infty }f_{n(x)}\)</span> מוגדר <span>\(\mu\)</span> כמעט תמיד וחסום על ידי <span>\(\lim_{ n \to \infty }\lVert f_{n} \rVert_{\infty}\)</span> כלומר <span>\(f \in L^{\infty}\)</span> ומתקיים:
+<span>$$\lVert f-f_{n} \rVert _{\infty}\xrightarrow{n\to \infty} 0$$</span></p>
+</div>
+<div class="proposition">
+<p>לכל <span>\(1\leq p\leq \infty\)</span> המרחב <span>\(L^{p}\left( \mu \right)\)</span> שלם(מרחב בנך).</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(S\)</span> אוסף כל הפונקציות הפשוטות <span>\(s:X\to \mathbb{C}\)</span> המקיימות:
+<span>$$\mu\left( \left\{  x\mid s(x)\neq 0  \right\} \right)&lt; \infty$$</span>
+אזי לכל <span>\(1\leq p &lt; \infty\)</span> הקבוצה <span>\(S\)</span> צפופה ב-<span>\(L^{p}\left( \mu \right)\)</span>.</p>
+</div>
+<div class="remark">
+<p>כאשר <span>\(\mu\)</span> מידה אינסופית(<span>\(\mu(X)=\infty\)</span>) אז <span>\(S\)</span> איננה צפופה ב-<span>\(L^{\infty}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ראשי מאחר שלכל <span>\(s \in S\)</span> התמונה <span>\(s(X)\)</span> סופית(המשמעות של להיות פונקציה פשוטה) הרי שיחד עם <span>\(\mu\left( \left\{  s\neq 0  \right\} \right)&lt;\infty\)</span> נסיק כי <span>\(S\subseteq L^{p}\left( \mu \right)\)</span> לכל <span>\(1\leq p\leq \infty\)</span>. תהי <span>\(f \in L^{p}\left( \mu \right)\)</span> כלשהי. ניקח את הסדרה:
+<span>$$0\leq s_{1} \leq s_{2} \leq s_{3} \leq \dots \leq f$$</span>
+פשוטות שבנינו בעבר. אכן מהתנאי <span>\(0\leq s_{n}\leq f\)</span> נסיק כי <span>\(\mu\left( \left\{  s_{n}\neq 0  \right\} \right)\)</span>.
+נניח בשלילה <span>\(s_{n}\in S\)</span>. נסמן:
+<span>$$c=\min \left\{  \alpha&gt; 0\mid \mu\left( \left\{  s_{n}=\alpha  \right\} \right)=\infty  \right\}$$</span>
+אזי:
+<span>$$\int f^{p} \;\mathrm{d} \mu \geq \int  s_{n}^{p} \;\mathrm{d} \mu \geq c^{p}\mu\left( \{ s_{n}=c \} \right)=\infty $$</span>
+בסתירה לכך ש-<span>\(f \in L^{p}\left( \mu \right)\)</span>. נזכר ש-<span>\(s_{n}\to f\)</span> נקודתית ולכן <span>\(\lvert f-s_{n} \rvert^{p}\xrightarrow{n\to \infty}0\)</span>. כמו כן <span>\(\lvert f-s_{n} \rvert^{p}\leq f^{p}\in L^{1}\left( \mu \right)\)</span> ולכן אנחנו מתקיימים את התנאים של משפט ההתכנסות בנשלטת. ולכן:
+<span>$$\lVert f -s_{n}\rVert _{p}^{p}= \int \lvert f-s_{n} \rvert ^{p} \;\mathrm{d} \mu \xrightarrow{n\to \infty}0\implies L^{p}\left( \mu \right)=\overline{S}  $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">קירוב על ידי פונקציות רציפות</span><p>יהי <span>\(X\)</span> מרחב האוסדורף קומפקטית מקומית ותהי <span>\(\mu\)</span> מידת רדין על <span>\(X\)</span>.
+לכל <span>\(1\leq p&lt;\infty\)</span> הקבוצה <span>\(C_{c}(X)\)</span> צפופה ב-<span>\(L^{p}\left( \mu \right)\)</span>.</p>
+</div>
+<div class="proof">
+<p>ראשית, מאחר ש-<span>\(\mu\)</span> מידת רדון, הרי ש-<span>\(C_{c}(X)\leq L^{p}\left( \mu \right)\)</span>. מספיק להראות ש-<span>\(S\subseteq \overline{C_{c}(X})\)</span>. תהי <span>\(s \in S\)</span> כלשהי. ממשפט Lusin הרי שלכל <span>\(0&lt; \varepsilon\)</span> קיימת <span>\(g \in C_{c}(X)\)</span> המקיימת:
+<span>$$\mu\left( \left\{  s \neq g  \right\} \right)&lt; \varepsilon$$</span>
+יתר על כן נוכל לדרש
+<span>$$\sup_{x \in X}\lvert g \rvert\leq \sup_{x \in X}\lvert s \rvert=M$$</span>
+כאשר נבחין כי מכך נובע ש-<span>\(\lvert g-s \rvert\leq 2M\)</span>. לכן:
+<span>$$\lVert g-s \rVert _{p}^{p}=\int \lvert g-s \rvert ^{p} \;\mathrm{d} \mu=\cancelto{ 0 }{ \int_{\{ g=s \}} \lvert g-s \rvert ^{p} \;\mathrm{d} \mu }  + \int _{\left\{  g\neq s  \right\}}\lvert g-s \rvert ^{p} \;\mathrm{d} \mu \leq 2M\varepsilon$$</span></p>
+</div>
+<div class="remark">
+<ol>
+<li>
+<p>זו עוד עדות לכך שמידת לבג היא ההכללה ה"נכונה" של אינטגרל רימן - כלומר ש-<span>\(L^{p}\left( \text{Leb},\mathbb{R} \right)\)</span> הינו ההשלמה המטרית של <span>\(C_{c}\left( \mathbb{R} \right)\)</span> ביחס למטריקה המתאימה מאינטגרל רימן. </p>
+</li>
+<li>
+<p>הכל <span>\(L^{p}\)</span> ההשלמה של <span>\(C_{c}(X)\)</span> היא שונה(כי המטריקה שונה). </p>
+</li>
+<li>
+<p>ההשלמה המטרית של <span>\(C_{c}\left( \mathbb{R} \right)\)</span> לפי נורמת-<span>\(\infty\)</span> ביחס ל-Leb היא <span>\(C_{0}\left( \mathbb{R} \right)\)</span> - קבוצת הפונקציות הרציפות שדועכות ל-0 באינסוף. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='prev-page'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

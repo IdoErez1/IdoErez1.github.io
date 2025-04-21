@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>צורת ג'ורדן</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_7_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_7_1`; }});</script>
+        <div class="content">
+        <h1>7.2  צורת ג'ורדן</h1>
+    <div class="definition"><span class="keyword">מרחב עצמי מוכלל</span><p><span>$$V_\lambda^+ = \bigcup_{k=1}^\infty \ker\left[(\lambda I - A)^k \right] $$</span>
+כלומר זהו המרחב שמתקבל מהפעלה חוזרת של <span>\(\lambda I-A\)</span> על האופרטור. במרחב נוצר סופית בהכרך ייתיצב בשלב מסויים ולכן קיים <span>\(k\)</span> כך ש:
+<span>$$V_{\lambda}^{+}=\ker \left( \lambda I-A \right)^{k}$$</span></p>
+</div>
+<div class="proposition">
+<p>הריבוי האלגברי יהיה המימד של המרחב העצמי המוכלל.</p>
+</div>
+<div class="definition"><span class="keyword">בלוק ג'ורדן</span><p>בלוק אשר מכיל אפסים בכל האיברים פרט לאיבר מתחת לאלכסון. נסמן אותו ב-<span>\(J_{n}(0)\)</span> כאשר <span>\(n\)</span> זה גודל הבלוק. נשים לב מיידית כי זוהי מטריצה משולשית ממש ולכן נילפונטנטית.</p>
+</div>
+<div class="example">
+<p><span>$$J_{3}\left( \lambda \right)= \left[\begin{matrix}\lambda &amp; 0 &amp; 0\\1 &amp; \lambda &amp; 0\\0 &amp; 1 &amp; \lambda\end{matrix}\right]\qquad J_{4}\left( \lambda \right)=\left[\begin{matrix}\lambda &amp; 0 &amp; 0 &amp; 0\\1 &amp; \lambda &amp; 0 &amp; 0\\0 &amp; 1 &amp; \lambda &amp; 0\\0 &amp; 0 &amp; 1 &amp; \lambda\end{matrix}\right]\qquad  J_{6}\left( \lambda \right)=\left[\begin{matrix}\lambda &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\1 &amp; \lambda &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 1 &amp; \lambda &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; \lambda &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1 &amp; \lambda &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; \lambda\end{matrix}\right]$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">ג'ורדן</span><p>יהי <span>\(T:V\to V\)</span> העתקה. אם הפולינום האופייני של <span>\(T\)</span> מתפרק לגורמים לינארים אזי קיים בסיס כך שהמטריצה המייצגת של <span>\(T\)</span> תהיה בלוקי ג'ורדן על האלכסון:
+<span>$$A=\begin{pmatrix}J_{a_{1}}(\lambda_{1})&amp;0&amp;\cdots&amp;0\\ 0&amp;J_{a_{2}}(\lambda_{2})&amp;\ddots&amp;0\\ \vdots&amp;\ddots&amp;J_{a_{i}}(\lambda_{i})&amp;0\\ 0&amp;0&amp;0&amp;J_{a_{n}}(\lambda_{n})\end{pmatrix}$$</span>
+כאשר נקרא לצורה זו צורת ג'ורדן.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נוכיח באינדוקציה שלמה על מספר המימדים <span>\(\dim V\)</span>. אם <span>\(\dim V=1\)</span> אז כל מטריצה היא תהיה בצורה של בלוקי ג'ורדן, והטענה מתקיימת. כעת נניח כי מתקיים עבור <span>\(\dim V-1\)</span>.  </p>
+</li>
+<li>
+<p>כיוון ש-<span>\(V\)</span> מרחב ווקטורי מעל <span>\(\mathbb{C}\)</span>, לפולינום האופייני יש לפחות שורש אחד <span>\(\lambda\)</span>, אשר הוא ערך עצמי של <span>\(T\)</span>. לכן האופרטור <span>\(S=T-\lambda I\)</span> הוא לא הפיך(0 יהיה ערך עצמי ולכן הגרעין לא טריוויאלי ולא הפיך) </p>
+</li>
+<li>
+<p>נפעיל את משפט פירוק פיטנג על <span>\(S\)</span>, כלומר קיימים <span>\(V_{I},V_{N}\)</span> כך שמתקיים <span>\(V=V_{I}\oplus V_{N}\)</span> ומתקיים <span>\(S|_{V_{I}}\)</span> הוא הפיך ו-<span>\(S|_{V_{N}}\)</span> נילפוטנטי. </p>
+</li>
+<li>
+<p>כיוון ש-<span>\(S\)</span> לא הפיך, נקבל כי <span>\(\dim V_{I}&lt;\dim V\)</span>. אנו יודעים כי כיוון ש-<span>\(S|_{V_{N}}\)</span> אופרטור נילפוטנטי קיים צורת ג'ורדן נילפוטנטית. וכן מהנחת האינדוקציה קיים ל-<span>\(S|_{V_{I}}\)</span> צורת ג'ורדן.  </p>
+</li>
+<li>
+<p>קיבלנו כי יש בסיס <span>\(\mathcal{ B}\)</span> עבורו <span>\([S]_{\mathcal{B}}\)</span> בצורת ג'ורדן, כאשר יש <span>\(J(0)\)</span> בבלוק העליון. כעת עבור <span>\(T=S+\lambda I\)</span> נקבל כי <span>\([T]_{\mathcal{ B}}\)</span> תהיה מטריצה עם בלוק ג'ורדן <span>\(J\left( \lambda\right)\)</span> בבלוק העליון. ולכן בצורת ג'ורדן. </p>
+</li>
+</ol>
+</div>
+<div class="corollary"><span class="keyword">אלגוריתם מטריצת מעבר לצורת ג'ורדן</span><ol>
+<li>
+<p>מוצאים ע"ע. עבור כל ע"ע <span>\(\lambda\)</span> עוברים על השלבים הבאים </p>
+</li>
+<li>
+<p>מסמנים <span>\(S=T-\lambda Id\)</span>. זה יהיה העתקה נילפוטנטית. </p>
+</li>
+<li>
+<p>מוצאים את הסיס השרשראות של <span>\(S\)</span>. </p>
+</li>
+<li>
+<p>אם נאחד את כל הבסיסי שרשראות נקבל את הבסיס שעבורה המטריצה תהיה בצורת ג'ורדן. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">תכונות של צורת ג'ורדן</span><ol>
+<li>
+<p>קיימת צורת ג'ורדן יחידה עד כדי שינוי סדר הבלוקים. </p>
+</li>
+<li>
+<p>הפילונום המינימלי הוא יהיה המכפלה של הע"ע כאשר הריבוי האלגברי זה גודל הבלוק הגדול ביותר של הע"ע. </p>
+</li>
+<li>
+<p>כל בלוק מייצג בסיס שרשאות. כמות השרשאות יהיו מספר הבלוקים וגודל כל שרשראת יהיה גודל של בלוק. </p>
+</li>
+<li>
+<p>כל בלוק מייצג מרחב עצמי מוכלל. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אם לא מעניין אותנו מטריצת מעבר והמטריצה קטנה מספיק ניתן למצוא את המטריצת ישירות בעזרת השלבים והשיקולים הבאים:</p>
+</div>
+<ol>
+<li>
+<p>מחשבים פולינום אופייני ומוצאים ע"ע.  </p>
+</li>
+<li>
+<p>מחשבים את הגרעין של האופרטור <span>\(S=T-\lambda Id\)</span>. זה יהיה כמות הבלוקים של הע"ע.  ניתן לבדוק אם ניתן לשבץ בלוקים כאשר אנו יודעים שהגודל המקסימלי של בלוק יהיה הריבוי האלגברי שלו. </p>
+</li>
+<li>
+<p>ניתן להעלות בריבוע ולחשב את הגרעין. ההפרש בין המימד הגרעין של <span>\(A^2\)</span> למימד הגרעין של <span>\(A\)</span> יהיה כמות הבלוקים בגודל 2. </p>
+</li>
+<li>
+<p>ניתן לנסות שוב לשבץ בלוקים תוך זה שאנו יודעים כי סך הגדלים של הבלוקים של כל ע"ע יהיה הריבוי האלגברי. </p>
+</li>
+<li>
+<p>במידת הצורך להמשיך הלאה עד שאנו משבצים את כל הבלוקים 
+כאשר הרעיון כאן הוא למעשה להשתמש בתכונות של מטריצת ג'ורדן נילפוטנטית כדי לשבץ את הבלוקים בכל שלב.</p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">צורת ג'ורדן ממשית</span><p>מטריצה המורכת מבלוקים על האלכסון, כאשר מתחתיהם יש מטריצות יחידה.</p>
+</div>
+<div class="proposition">
+<p>לכל מטריצה ממשית קיימת צורת ג'ורדן ממשית. </p>
+</div>
+<div class="proposition"><span class="keyword">שיטת מציאת מטריצת ג'ורדן ממשית</span><ol>
+<li>
+<p>נסמן <span>\(C(a+bi)=\begin{pmatrix} a &amp; b \\ -b &amp; a\end{pmatrix}\)</span> </p>
+</li>
+<li>
+<p>נמצא את הצורת ג'ורדן תחת המרוכבים. </p>
+</li>
+<li>
+<p>אם קיימת מטריצת ג'ורדן ממשית, אז מופיע בלוק של איבר והצמוד שלו. כלומר אם יש בלוק של <span>\(\lambda=a+bi\)</span> ע"ע אז צריך להיות בלוק של <span>\(\overline{\lambda}=a-bi\)</span> מאותו גודל. </p>
+</li>
+<li>
+<p>נחליף את הבלוק המרוכב בבלוק <span>\(C(\lambda)\)</span>. </p>
+</li>
+<li>
+<p>מתחת לאלכסון נמקם לפי הצורה של <span>\(\lambda\)</span> בצורת ג'ורדן את מטריצת היחידה. </p>
+</li>
+<li>
+<p>נצפה לקבל מטריצה של בלוקים שכל בלוק של ע"ע מרוכב יהיה גדול פי 2 מהבלוק בצורת ג'ורדן וכמות המטריצות יחידה מתחתיו שווה לכמות ה-1 מתחת לאלכסון בצורת ג'ורדן. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם מטריצה מורכבת מבלוקים של <span>\(A\)</span> כאשר מופיע ה-<span>\(\overline{A}\)</span> אז קיימת צורת ג'ורדן ממשית.</p>
+</div>
+<div class="proposition">
+<p>אם קיים ע"ע מדומה שהצמוד שלו הוא לא ע"ע אז לא קיים צורת ג'ורדן ממשית.</p>
+</div>
+<div class="proposition">
+<p>כל מטריצה דומה לשחלוף שלה.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(A \in M_{n\times n}\)</span> מטריצה. נסתכל על המרחב ההווקטורי תחת השדה הסגור אלגברי. אזי קיים עבורה צורת ג'ורדן <span>\(J_{A}\)</span>. נקבל כי <span>\(J_{A}\)</span> דומה למטריצה <span>\(J_{A}^{T}\)</span> בעזרת המטריצת מעבר בסיס:
+<span>$$\begin{pmatrix}0 &amp; 0 &amp; \dots &amp; 0 &amp; 1\\0 &amp; 0 &amp; \ddots &amp; 1 &amp; 0\\\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots\\0 &amp; 1 &amp; \ddots &amp; 0 &amp; 0\\1 &amp; 0 &amp; \dots &amp; 0 &amp; 0
+\end{pmatrix}$$</span>
+כלומר בעזרת המטריצת המכילה 1 על האלכסון הנגדי. בנוסף נשים לב כי מתקיים:
+<span>$$A=P ^{-1} J_{A}P\implies A^{T}=\left( P ^{-1} J_{A} P \right)^{T}=(P)^{T}J_{A}^{T}(P ^{-1})^{T}$$</span>
+ולכן <span>\(A^{T}\)</span> דומה לצורת ג'ורדן <span>\(J_{A}^{T}\)</span> אשר דומה לצורת ג'ורדן <span>\(J_{A}\)</span> אשר דומה ל-<span>\(A\)</span> וכיוון שדימיון הוא יחס שקילות מתקיים <span>\(A\)</span> דומה ל-<span>\(A^{T}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='prev-page'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מסלולים ומייצבים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+<li class='parent-page'><a href='./groups.html'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_1_1.html'>1.1 הגדרה ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_2.html'>1.2 תתי חבורות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_2_1.html'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_3_1.html'>3.1 הומומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_2.html'>3.2 מנות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_3_3.html'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_4_1.html'>4.1 מכפלה ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_2.html'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_3.html'>4.3 חבורות פשוטות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_4_4.html'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_5_1.html'>5.1 סדרות הרכב</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_2.html'>5.2 פתירות</a></li>
+<li class='parent_page-dropdown'><a href='./groups_5_3.html'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_6_1.html'>6.1 חבורות p סילו</a></li>
+<li class='parent_page-dropdown'><a href='./groups_6_2.html'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./groups_7_1.html'>7.1 מילים</a></li>
+<li class='parent_page-dropdown'><a href='./groups_7_2.html'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./groups_2_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./groups_1_3.html`;}});</script>
+        <div class="content">
+        <h1>2.1  מסלולים ומייצבים</h1>
+    <div class="definition"><span class="keyword">פעולות\Action</span><p>פעולה של חבורה <span>\(G\)</span> על קבוצה <span>\(X\)</span> היא אופרטור בינארי <span>\(G\times X\to X\)</span> שמקיימת:</p>
+</div>
+<ol>
+<li>
+<p><span>\(\forall x \in X\quad ex=x\)</span> </p>
+</li>
+<li>
+<p><span>\(\forall g,h \in G \quad x \in X \qquad (gh)x=g(hx)\)</span> </p>
+</li>
+</ol>
+<p>לרוב נסמן אותו בכפל, כאשר את הפעולה "<span>\(G\)</span> פועלת על X" נסמן ב-<span>\(G\circlearrowright X\)</span>.</p>
+<div class="example"><span class="keyword">פעולות</span><ul>
+<li>נגדיר <span>\(S \circlearrowright \{ 1,\dots,n \}\)</span> ע"י <span>\(\sigma\cdot j=\sigma(j)\)</span>.</li>
+<li>נגדיר <span>\(S_{x}\circlearrowright X\)</span> כנ"ל</li>
+<li>נגדיר <span>\(GL_{n}(\mathbb{F})\circlearrowright \mathbb{F}^n\)</span> ע"י <span>\(A\cdot v=Av\)</span>(כפל מטריצה בווקטור)</li>
+<li>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(H\leq G\)</span> אזי נגדיר <span>\(H\circlearrowright X\)</span> ע"י צמצום הפעולה.</li>
+<li>אם <span>\(V\)</span> מרחב וקטורי מעל <span>\(\mathbb{F}\)</span>, <span>\(\mathbb{F}^\times \circlearrowright V\)</span> ע"י כפל בסקלר.</li>
+<li>החבורה <span>\(D_{n}\)</span>  פועלת על קודקודי המצולה המשוכלל ה-<span>\(n\)</span> </li>
+<li>החבורה <span>\(D_n\)</span> פועלת על צביעת קודקודי ה-<span>\(n\)</span> מצולע ב-<span>\(k\)</span> צבעים(כאשר <span>\(|x|=k^n\)</span>).</li>
+</ul>
+</div>
+<div class="remark">
+<p>אם נתון הפעולה <span>\(G\circlearrowright X\)</span> אז <span>\(\langle s\rangle=G\)</span>, מספיק להבין איך איברי <span>\(S\)</span> פועלים כדי להבין את הפעולה. 
+זה נעשה ע"י אסוציטיביות: <span>\(s_{1}(s_{2}x)=(s_{1}s_{2})x\)</span>  ובנוסף:
+<span>$$s(s ^{-1}x)=(ss ^{-1})x-ex=x$$</span>
+כלומר <span>\(s ^{-1}x\)</span> היה האיבר <span>\(y\in X\)</span> שנשלח ל-<span>\(x\)</span> ע"י <span>\(s\)</span>.</p>
+</div>
+<div class="remark">
+<p>אם <span>\(G\circlearrowright X\)</span> אזי כל <span>\(g\in G\)</span> משרה, ע"י כפל, פרמוטציה של X:
+<span>$$\Pi_{g}(x)=gx$$</span>
+כאשר <span>\(\Pi_{g}\)</span> היא פרמוטציה של <span>\(X\)</span> כי <span>\(\Pi_{g^{-1}}\)</span> היא ההופכית שלה:
+<span>$$\Pi_{g^{-1}}(\Pi_{g}(x))=\Pi_{g^{-1}}(gx)=g^{-1}(gx)=(g^{-1}g)x=ex=x$$</span>
+בפרט זה אומר שאם <span>\(s\)</span> פועלת ע"י תמורה <span>\(\Pi_{s}\)</span>, <span>\(s ^{-1}\)</span> פועלת ע"י התמורה ההופעית <span>\(\Pi_{s}^{-1}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">עוד פעולות</span><ul>
+<li>לכל חבורה <span>\(G\)</span> נגדיר <span>\(G\circlearrowright G\)</span> ע"י כפל:
+ <span>$$g,x \in G\qquad g\cdot x:=g\times x$$</span>
+ כאשר <span>\(\cdot\)</span> היא הפעולה ו-<span>\(\times\)</span> היא כפל ב-<span>\(G\)</span>.</li>
+<li>ניתן להגדיר <span>\(G\circlearrowright G\)</span>  ע"י הצמדה: 
+ <span>$$\forall g,x \in  G \qquad g* x :=g\times g^{-1}$$</span>
+נבדוק פעולה:
+<span>$$\begin{aligned}1.&amp;  &amp;\forall x \in G &amp;  e_{x}=e\times e^{-1}=x \\2.&amp; &amp;\forall g,h,x \in  G &amp;  ^h(^yx)=hgx g^{-1}h^{-1}=(hg)\times (hg)^{-1}=x
+\end{aligned}$$</span></li>
+</ul>
+</div>
+<p><strong>הגדרה</strong> מסלול
+אם <span>\(G\circlearrowright X\)</span> ו-<span>\(x \in G\)</span>, המסלול(orbit) של <span>\(X\)</span>(תחת G) הוא:
+<span>$$O_{G}(x)=O(x)=\{ gx \;\big|\; g\in G \} \subseteq X$$</span></p>
+<div class="proposition">
+<p>אם <span>\(G\circlearrowright X\)</span> אז היחס "להיות באותו מסלול" זה יחס שקילות</p>
+</div>
+<div class="proof">
+<p>נראה שמקיים את שלושת הדרישות:
+<span>$$\begin{gather}1.\quad  ex=x \implies x \in O(g) \\2.\quad  y\in O(x)\implies \exists g\quad y=gx\implies x=g^{-1}y\implies x \in O(y) \\3.\quad z\in O(y),y\in O(x)\implies \dots \;?\;\dots\implies z\in O(x)
+\end{gather}$$</span>
+כלומר פעולה של <span>\(G\)</span> על <span>\(X\)</span> משרה פירוק זר למסלולים.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(x_{1},\dots,x_{r}\)</span> נציגים למסלולים שונים אז הקבוצה היא האיחוד הזר של המסלולים:
+<span>$$X=\bigsqcup_{i=1}^r O(x_{i})$$</span></p>
+</div>
+<div class="example">
+<p>עבור:
+<span>$$\left\{ \begin{pmatrix}\cos \theta &amp; \sin \theta \\-\sin \theta  &amp; \cos \theta
+\end{pmatrix} \right\}=SO(2)\circlearrowright\mathbb{R}^2$$</span>
+המסלולים של הפעולה הם המעגלים ברדיוסים שונים. </p>
+</div>
+<div class="symbolize">
+<p>עבור <span>\(G\circlearrowright X\)</span> מסמנים ב-<span>\(G\setminus X\)</span> את אוסף המסלולים של הפעולה.</p>
+</div>
+<div class="remark">
+<p>הרבה בעיות במתמטיקה הם מהצורה <span>\(G\setminus X=?\)</span>. למשל <span>\(|D_{n}\setminus X |=\)</span> כאשר <span>\(X\)</span> זה צבעות של n-מצולע ב-<span>\(k\)</span> צבעים</p>
+</div>
+<div class="remark">
+<p>הסימון של <span>\(G\setminus H\)</span> מסמן גם את הקוסטים הימניים של <span>\(H\)</span> ב-<span>\(G\)</span>, וכן גם מסמן את המסלולים של <span>\(H\circlearrowright G\)</span> ע"י כפל אשר שווה ל-<span>\(\{ hg|h\in H \}=Hg\)</span> כאשר גדלים אלו שווים!
+ניתן גם להגדיר פעולה ימינית של חבורה באופן מקביל לאיך שהגדרנו פעולה, ויתקבל שהמסלולים של הפעולה יהיה שווה לקוסטים השמאליים.</p>
+</div>
+<div class="definition"><span class="keyword">פעולה טרנזטיבית</span><p>פעולה נקראת טרנזטיבית אם יש מסלול יחיד</p>
+</div>
+<div class="definition"><span class="keyword">פעולה נאמנה</span><p>אם האיבר היחיד שמשרה את פרמוטציית הזהות על <span>\(X\)</span> הוא <span>\(e\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פעולה חופשייה</span><p>אם <span>\(gx=x\)</span> גורר <span>\(g=e\)</span></p>
+</div>
+<div class="definition"><span class="keyword">מייצב</span><p>אם <span>\(G\circlearrowright X\)</span>, המייצב של <span>\(x \in X\)</span> הוא:
+<span>$$\text{Stab}_{G}(x)=G_{x}=\left\{  g\in G \;\big|\;gx=x  \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>המייצב תמיד תת חבורה של G:
+<span>$$\begin{gather}ex=x\implies e\in  G_{x} \\gx=hx=x\implies ghx=x\implies g^{-1} \in  G_{x} \\
+\end{gather}$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">מסלול מייצב</span><p>אם <span>\(G\circlearrowright X\)</span> ו-<span>\(x \in X\)</span> אזי:
+<span>$$|O(x)|=[G:G_x]$$</span>
+ואם <span>\(|G|\)</span> סופית נובע <span>\(|O(x)|\cdot|G_{x}|=|G|\)</span> מלגרנג'.</p>
+</div>
+<div class="proof">
+<p>נשים לב שאם ורק אם <span>\(g_{1},g_{2}\)</span> באותו קוסט(שמאלי) של <span>\(G_{x}\)</span>, אזי <span>\(g_{1}x=g_{2}x\)</span>. זאת כי:
+<span>$$g_{1}^{-1} g_{2}\in G_{x}\rightleftarrows g_{1}^{-1} g_{2}x=x \rightleftarrows g_{2}x=g_{1}x$$</span>
+בנוסף לכל <span>\(y\in O(x)\)</span> יש <span>\(g \in G\)</span> עם <span>\(gx=y\)</span>(מהגדרת המסלול)
+קיבלנו התאמה בין אוסף הקוסטים בשמאליים של <span>\(G_{x}\)</span> לבין המסלולים <span>\(O(x)\)</span>.
+פורמלית, בנינו פונקציה:
+<span>$$f:G/G_{x}\to O(x)\quad f(gG_{x})=gx$$</span>
+הוכחנו <span>\(f\)</span> מוגדרת היטב, על וחח"ע.
+נסכם את ההוכחה. הפונקציה <span>\(f\)</span> מוגדרת היטב כי לא תלוייה באיזה איבר מתחילים
+<span>$$C=g_{1}G_{x}=g_{2}G_{x}$$</span>
+כאשר הגדרנו:
+<span>$$f(C)=g_{1}x\qquad f(C)=g_{2}x$$</span>
+על: מהגדרת המסלול, וחח"ע:
+חח"ע:
+<span>$$f(g_{1}G_{x})=f(g_{2}G_{x})\to g_{1}x=g_{2}x\to g_{1}^{-1} g_{2}x\to g_{1}^{-1} g_{2}\in G_{x}\to g_{1}G_{x}=g_{2}G_{x}$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן להוכיח ע"י בניית  <span>\(f:O(x)\to G/G_{x}\)</span>.</p>
+</div>
+<div class="lemma"><span class="keyword">שאינה של ברנסייד</span><p>תהי <span>\(G\)</span> סופית ו-<span>\(G\circlearrowright X\)</span>. מתקיים:
+<span>$$\overbracket{ |G\setminus X| }^{ orbits }=\frac{1}{|G|}\sum_{g\in  G}|\mathrm{fix}(g)|$$</span>
+כאשר <span>\(\mathrm{fix}(g)=\{ x|gx=x \}\)</span> נקודות השבת של <span>\(g\)</span>.</p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\frac{1}{|G|}\sum_{g\in G}|fix(g)|=\frac{1}{|G|} \sum_{g \in  G}\sum_{x \in  X}\delta_{x,gx}=\frac{1}{|G|}\sum_{x \in  X}\sum_{g \in  G}\delta_{x,gx}= \\\frac{1}{|G|}\sum_{x \in X}|G_{x}|=\sum_{x \in X} \frac{1}{|O(x)|}=|G\setminus X|
+\end{gather}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./groups_2_2.html'>2.2 מחלקות צמידות</a></li>
+<li class='prev-page'><a href='./groups_1_3.html'>1.3 תמורות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

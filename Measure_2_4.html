@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קבוצות ממידה אפס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_2_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  קבוצות ממידה אפס</h1>
+    <div class="definition"><span class="keyword"><span>\(\mu\)</span> כמעט תמיד</span><p>במרחב מידה <span>\(\left( X,\mathcal{A},\mu \right)\)</span> נאמר שכונה <span>\(P\)</span> מתקיימת <span>\(\mu\)</span>-כמעט תמיד(<span>\(\mu\)</span>-כת) אם קיימת קבוצה <span>\(N \in \mathcal{A}\)</span> עם <span>\(\mu(N)=0\)</span> כך ש-<span>\(P\)</span> מתקיימת לכל <span>\(x \in X\setminus N\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פונקציות שוות כמעט תמיד</span><p>פונקציות אשר שוות פרט לקבוצה במידה אפס. אם <span>\(f \underset{\mu}{=} g\)</span> אז <span>\(\mu\left( \left\{  f\neq g  \right\} \right)=0\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה ממידה אפס</span><p>קבוצה אשר המידה שלה שווה ל-0.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה מקו-מידה אפס</span><p>קבוצה אשר המשלים שלה הוא קבוצה ממידה אפס.</p>
+</div>
+<div class="remark">
+<p>לעיתים נרצה לעסוק בפונקציות המוגדרות כמעט תמיד. כלומר פונקציות המגודרות רק על קבוצה מקו מידה אפס(המשלים של מידה אפס). במקרה זה ניתן לדבר בצורה מוגדרת היטב על האינטגרל של אותו פונקציה, למשל על ידי קבועת ערכיה להיות אפס היכן שאיננה מוגדרת.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(f_{n}:X\to \mathbb{C}\)</span> סדרה של פונקציות מדידות המוגדרות כמעט-תמיד כך ש:
+<span>$$\sum_{i=1}^{\infty} \int  \lvert f_{n} \rvert  \;\mathrm{d} \mu &lt; \infty $$</span>
+אזי:</p>
+<ol>
+<li>
+<p>הטור <span>\(f(x)=\sum_{i=1}^{\infty} f_{n}(x)\)</span> מתכנס כמעט תמיד(כלומר <span>\(f\)</span> מוגדר כמעט תמיד). </p>
+</li>
+<li>
+<p>מתקיים <span>\(f\in L^{1}\left( \mu \right)\)</span> וכן: 
+<span>$$\int f \;\mathrm{d} \mu = \sum_{i=1}^{\infty} \int f_{n} \;\mathrm{d} \mu  $$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כל <span>\(f_{n}\)</span> מוגדר כמעט תמיד ולכן קיים קבוצה <span>\(S_{n}\subseteq X\)</span> כך ש-<span>\(\mu(S_{n}^{c})=0\)</span> עבורה <span>\(S_{n}\)</span> מוגדרת. נגדיר: 
+<span>$$\varphi(x)=\sum_{i=1}^{\infty}\lvert f_{n} \rvert$$</span>
+אשר תהיה מוגדרת על <span>\(S=\bigcap_{n}S_{n}\)</span> כך ש-<span>\(\mu(S^{c})=\mu\left( \bigcup_{n}S_{n}^{c} \right)=0\)</span>. </p>
+</li>
+<li>
+<p>לפי משפט ההתכנסות המונוטונית על פונקציות אי שליליות ניתן להחליף גבול ואינטגרל ולקבל: 
+<span>$$\int \varphi \;\mathrm{d} \mu =\sum_{i=1}^{\infty} \int \lvert f_{n} \rvert  \;\mathrm{d} \mu &lt; \infty $$</span>
+ולכן <span>\(\varphi&lt;\infty\)</span> מתקיים <span>\(\mu\)</span> כמעט תמיד וכן <span>\(\varphi \in L^{1}\left( \mu \right)\)</span>. ולכן <span>\(\mu\)</span>-כמעט תמיד <span>\(\sum_{i=1}^{\infty}f_{n}(x)\)</span> מתכנס בהחלט. כיוון שהתכנסות בהחלט ב-<span>\(\mathbb{C}\)</span> גורר התכנסות נקבל כי מתכנס ב-<span>\(\mathbb{C}\)</span> ו-<span>\(f\)</span> מוגדרת כמעט תמיד.</p>
+</li>
+<li>
+<p>נסמן <span>\(g_{k}=\sum_{i=1}^{k}f_{n}\)</span> ונבחין כי: 
+<span>$$\lvert g_{k}(x) \rvert \leq \sum_{i=1}^{k} \lvert f_{n}(x) \rvert \leq \varphi(x)$$</span>
+ולכן <span>\(\varphi(x)\in L^{1}\left( \mu \right)\)</span> היא פונקציה שולטת. ממשפט ההתכנסות הנשלטת נקבל:
+<span>$$\int f \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu\implies\int\,f\,d\mu=\sum_{n=1}^{\infty}\int\,f_{n}\,d\mu.$$</span>
+ובנוסף נקבל <span>\(f \in L^{1}\left( \mu \right)\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<ol>
+<li>
+<p>המקרה האי שלילי - יהי <span>\(f:X\to\left[ 0,\infty \right]\)</span> פונקציה מדידה. אם <span>\(\int f \;\mathrm{d} \mu=0\)</span> אז <span>\(f=0\)</span> <span>\(\mu\)</span> כמעט תמיד. </p>
+</li>
+<li>
+<p>המקרה המרוכב - תהי <span>\(f:X\to \mathbb{C}\)</span> פונקציה מדידה. אם לכל קבוצה מדידה <span>\(E \in \mathcal{A}\)</span> מתקיים <span>\(\int _{E}f \;\mathrm{d} \mu=0\)</span> אזי <span>\(f\underset{\mu}{=} 0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח <span>\(\int f \;\mathrm{d} \mu=0\)</span>. נגדיר: 
+<span>$$A_{n}=\{x\in X\mid f(x)\geq1/n\}.$$</span>
+כיוון ש-<span>\(f\geq \frac{1}{n}\cdot \mathbb{1}_{A_{n}}\)</span>, ניתן לכתוב:
+<span>$$0=\int f\,d\mu\geq\int\frac{1}{n}\cdot \mathbb{1} _{A_{n}}\,d\mu=\frac{1}{n}\cdot\mu(A_{n})\implies \mu(A_{n})=0$$</span>
+כאשר נשים לב כי מתקיים:
+<span>$$\mu\left(\bigcup_{n=1}^{\infty}A_{n}\right)\leq\sum_{n=1}^{\infty}\mu(A_{n})=0$$</span></p>
+</li>
+<li>
+<p>נסמן <span>\(f=a^{+}-a^{-}+iv^{+}-iv^{-}\)</span> נתבונן ב: 
+<span>$$E=\left\{  x \in X \mid u^{+}(x)&gt; 0  \right\}$$</span>
+ונשים לב כי:
+<span>$$0=\mathrm{Re}\int_{E} f \;\mathrm{d} \mu  = \int _{E}u \;\mathrm{d} \mu = \int _{X}u^{+} \;\mathrm{d} \mu  $$</span>
+כאשר השיוויון הראשון נובע מההנחה ש-<span>\(\int _{E}f \;\mathrm{d} \mu=0\)</span> לכל <span>\(E \in \mathcal{A}\)</span>. לכן מסעיף א נקבל:
+<span>$$u^{+}=u^{-}=v^{+}=v^{-}=0$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>תהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב מידה סופי(<span>\(\mu(X)&lt;\infty\)</span>) ותהי <span>\(f \in L^{1}\left( \mu \right)\)</span>. נניח <span>\(\Omega \subseteq \mathbb{C}\)</span> קבוצה סגורה כך שלכל קבוצה מדידה <span>\(E \in \mathcal{A}\)</span> עם <span>\(\mu(E)&gt; 0\)</span> הממוצע:
+<span>$$A_{E}(f)=\frac{1}{\mu(E)}\int_{E}f\,d\mu$$</span>
+הוא כך ש-<span>\(A_{E}(f)\in \Omega\)</span>. לכן <span>\(f(x) \in \Omega\)</span> <span>\(\mu\)</span> כמעט תמיד.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כיוון ש-<span>\(\Omega\)</span> סגורה, המשלים <span>\(\Omega^{c}\)</span> יהיה פתוח. כל קבוצה פתוחה ניתן לכתוב כאיחוד בן מנייה של כדורים סגורים. 
+כדי להראות ש-<span>\(f(x) \in \Omega\)</span> מספיק להראות כי <span>\(\mu\left( f^{-1}\left( \overline{B_{r}\left( \alpha \right)} \right) \right)= 0\)</span> לכל כדור סגור <span>\(\overline{B_{r}\left( \alpha \right)}\subseteq \Omega^{c}\)</span>.</p>
+</li>
+<li>
+<p>נניח בשלילה כי קיים כדור סגור <span>\(\overline{B_{r}\left( \alpha \right)}\subseteq \Omega^{c}\)</span> כך ש-<span>\(E=f^{-1}\left( \overline{B_{r}\left( \alpha \right)}  \right)\)</span> יהיה בעל מידה חיובית <span>\(\mu(E)&gt; 0\)</span>. 
+נחשב את הממוצע:
+<span>$$\left\lvert  A_{\varepsilon}(f)-\alpha  \right\rvert =\left\lvert  \frac{1}{\mu(E)}\int _{E}f \;\mathrm{d} \mu -\frac{1}{\mu(E)}\int _{E}\alpha \;\mathrm{d} \mu \right\rvert=\frac{1}{\mu(E)}   \left\lvert  \int f-\alpha \;\mathrm{d} \mu   \right\rvert \leq \frac{1}{\mu(E)}\int _{E}\left\lvert  f-\alpha  \right\rvert  \;\mathrm{d} \mu \leq r$$</span></p>
+</li>
+<li>
+<p>קיבלנו <span>\(A_{E}(f)\in \overline{B}_{r}\left( \alpha \right) \subseteq \Omega^{c}\)</span> בסתירה להנחה <span>\(A_{E}(f)\in \Omega\)</span> לכל <span>\(E\)</span>. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+<li class='prev-page'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+</ul></li>
+        </body>
+        </html>
+        

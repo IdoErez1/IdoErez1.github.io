@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אופרטור נילפוטנטי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_6_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_6_1.html`;}});</script>
+        <div class="content">
+        <h1>6.2  אופרטור נילפוטנטי</h1>
+    <div class="definition"><span class="keyword">אופרטור נילפוטנטי</span><p>אופרטור <span>\(T:V\to V\)</span> אשר הפעלה ממושכת שלו שקולה לאופרטור האפס. כלומר קיים <span>\(k \in \mathbb{N}\)</span> כך ש-<span>\(T^{k}=0\)</span>, כאשר ה-<span>\(k\)</span> המינימלי אשר מקיים דרישה זו נקראת דרגה הנילפוטנטיות.</p>
+</div>
+<div class="definition"><span class="keyword">גובה של ווקטור</span><p>אם <span>\(T:V\to V\)</span> אופרטור נילפוטנטי אז הגובה <span>\(h\)</span> של ווקטור <span>\(v \in V\)</span> זה הכמות המינימלית של פעמים שצריך להפעיל את <span>\(T\)</span> עד שהווקטור מתאפס. כלומר המספר <span>\(k\in \mathbb{N}\)</span> כך ש-<span>\(T^{k}v=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הפולינום האופייני של אופרטור נילפוטנטי יהיה <span>\(x^{k}\)</span></p>
+</div>
+<div class="proposition">
+<p>העקבה היא אפס והדטרמיננטה הם אפס.</p>
+</div>
+<div class="proposition">
+<p>מתקיים:
+<span>$$\begin{array}{c}{\{0\}=\ker T^{0}&lt;\ker T^{1}&lt;\ldots&lt;\ker T^{k}=V}\\ {V=\mathrm{Im}\;T^{0}&gt;\mathrm{Im}\;T^{1}&gt;\ldots&gt;\mathrm{Im}\;T^{k}=\{0\}}\end{array}$$</span></p>
+</div>
+<div class="proposition">
+<p>קיים בסיס עבורה המטריצה משולשית עם אפס על האלכסון.</p>
+</div>
+<div class="proposition">
+<p>מטריצה משולשית עם 0 על האלכסון היא נילפוטנטית.</p>
+</div>
+<div class="definition"><span class="keyword">שרשרת</span><p>יהי <span>\(T:V\to V\)</span> אופרטור. שרשרת תהיה סדרה <span>\(v_{1},\dots,v_{k}\in V\)</span> של ווקטורים אשר נקבעת לחלוטין על ידי האיבר הראשון <span>\(v_{1} \in V\)</span> באופן הבא:</p>
+<ul>
+<li>לכל איבר נגדיר <span>\(v_{i}=Tv_{i-1}\)</span> עד אשר מקבלים <span>\(Tv_{i}=0\)</span> בפעם הראשונה, וזה יהיה סוף השרשרת.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">גובה של שרשרת</span><p>גובה השרשרת תהיה כמות האיברים בשרשרת. כלומר עבור ווקטור <span>\(v\)</span> נקבל כי השרשרת שנוצרת מ-<span>\(v\)</span> תהיה:
+<span>$$S=\left( v, Tv, T^{2}v ,\dots ,T^{k}v \right)$$</span>
+כאשר קבוצה זו היא שרשרת מגובה <span>\(k\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(\mathbb{R}^{3}\)</span> ועל אופרטור הנקבע על ידי כפל במטריצה:
+<span>$$J_{3}(0)=\left[\begin{matrix}0 &amp; 0 &amp; 0\\1 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 0\end{matrix}\right]$$</span></p>
+<ol>
+<li>
+<p>השרשרת <span>\(S\)</span> הנוצרת על ידי <span>\(e_{1}\)</span> תהיה: 
+<span>$$e_{1}\xrightarrow{\;T\;} e_{2}\xrightarrow{\;T\;} e_{3}\xrightarrow{\;T\;} 0\implies S=(e_{1},e_{2},e_{3})$$</span></p>
+</li>
+<li>
+<p>השרשרת <span>\(S\)</span> הנוצרת על ידי <span>\(e_{2}\)</span> תהיה: 
+<span>$$e_{2}\xrightarrow{\;T\;} e_{3}\xrightarrow{\;T\;} 0\implies S=(e_{2},e_{3})$$</span></p>
+</li>
+<li>
+<p>השרשרת הנוצרת על ידי <span>\(e_{1}+e_{2}\)</span> תהיה: 
+<span>$$e_{1}+e_{2}\xrightarrow{\;T\;} e_{2}+e_{3}\xrightarrow{\;T\;} e_{3}+0\xrightarrow{\;T\;} 0+0=0\implies S=(e_{1}+e_{2},e_{2}+e_{3},e_{3})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>נשים לב כי השרשרות מוגדרות בצורה טובה רק עבור אופרטור נילפוטנטי. במובן שעבור אופרטור שלא נילפוטנטי ייתכן שהשרשרת חוזרת על עצמה - לא הייתה לה סוף.</p>
+</div>
+<div class="definition"><span class="keyword">בסיס שרשראות</span><p>אוסף של שרשראות שהסכום הישר שלהם פורש את המרחב - מה שהופך אותם לבסיס.</p>
+</div>
+<div class="proposition">
+<p>עבור אופרטור נילפוטנטי קיים בסיס שרשראות.</p>
+</div>
+<p>כאשר הטענה הזו נובעת בהאלגוריתם למציאת בסיס שרשראות:</p>
+<div class="proposition"><span class="keyword">מציאת בסיס שרשראות</span><ol>
+<li>
+<p>מתחילים מקבוצה פורשת(כמו הבסיס הסטנדרטי). יוצרים מכל איבר שרשרת עד שמגיעים ל-0. </p>
+</li>
+<li>
+<p>יש לנו אוסף שרשראות פורש. אם בת"ל, סיימנו. </p>
+</li>
+<li>
+<p>אם לא, נדרש לצמצם ווקטורים עד שיהיה בסיס בעזרת הדרכים הבאות: </p>
+</li>
+<li>
+<p>אם ראש של שרשרת שייך לפרוש של אחד מהשרשראות האחרות - מיותר. </p>
+</li>
+<li>
+<p>אם יש לנו תלות לינארית, אז יש תלות לינארית בין הווקטורים בסוף השרשרת. נמצא את הצירוף הלינארי המאפס וניקח את הווקטור שכאשר מעלים עליו את האופרטור מגיעים לווקטור האפס. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>בסיס שרשראות רלוונטי רק עבור אופרטורים נילפוטנטיים כיוון שרק עבור אופרטורים נילפוטנטיים יפרוש את המרחב.</p>
+</div>
+<div class="proposition"><span class="keyword">פירוק פיטינג</span><p>לכל אופרטור <span>\(T\)</span> קיים פירוק יחיד לתתי מרחבים אינווריאנטים <span>\(V_{I},V_{N}\)</span> כאשר <span>\(V=V_{I}\oplus V_{N}\)</span> וכן <span>\(T|_{V_{I}}\)</span> אינווריאנטי והפיך ו-<span>\(T|_{V_{N}}\)</span> אינווריאנטי ונילפוטנטי. </p>
+</div>
+<div class="proposition"><span class="keyword">מציאת פירוק פיטינג</span><p>נחפש את הפעם הראשונה שבה מתקיים <span>\(T^{k}=T^{k+1}\)</span>. במקרה זה הגרעין לא יגדל יותר ומתקיים:
+<span>$$V_{I}=\mathrm{Im}(T^{k})\qquad  V_{N}=\ker (T^{k})$$</span>
+כאשר נמצאים בסכום ישר מטעמי מימד(ממשפט המימדים הראשון). כלומר:
+<span>$$\ker \left( T \right)^{k}\oplus \mathrm{Im}\left( T\right)^{n-k}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+<li class='prev-page'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גבלות ויחס סדר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page'><a href='./Series'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_1_1'>1.1 הגדרת הגבול</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_3'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_5'>1.5 שורשים וממוצעים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_6'>1.6 תתי סדרות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_7'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent-page-dropdown'><a href='./Series_1_8'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_2_1'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_2'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_3'>2.3 טורים כלליים</a></li>
+<li class='parent-page-dropdown'><a href='./Series_2_4'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Series_3_1'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_2'>3.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Series_3_3'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Series_1_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Series_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  גבלות ויחס סדר</h1>
+    <div class="definition">
+<p>תהי <span>\(P(n)\)</span> טענה עבור המספר הטבעי <span>\(n\)</span>. </p>
+<ol>
+<li>
+<p>נאמר ש-<span>\(P(n)\)</span> מתקיימת תמיד אם הפסוק <span>\(\forall n\quad P(n)\)</span> הוא פסוק אמת </p>
+</li>
+<li>
+<p>נאמר ש-<span>\(P(n)\)</span> מתקיימת כמעט תמיד(או החל ממקום מסויים, או לכל <span>\(n\)</span> מספיק גדול) אם קיים <span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N\)</span> מתקיים <span>\(P(n)\)</span>. </p>
+</li>
+<li>
+<p>נאמר ש-<span>\(P(n)\)</span> תכונה שכיחה(או מתקיימת אינסוף פעמים) אם <span>\(\forall N\in N \quad\exists n \in \mathbb{N}\quad n&gt;N\land P(n)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור <span>\(\varepsilon&gt;0\)</span> התכונה <span>\(P(n): \frac{1}{n}&lt;\varepsilon\)</span> היא תכונה שכיחה </p>
+</li>
+<li>
+<p>התכונה "<span>\(n\)</span> ראשוני" היא תכונה שכיחה </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם <span>\(P_{1}(n),P_{2}(n)\)</span> מתקיימות כמעט תמיד אז <span>\(Q(n)=P_{1}(n)\land P_{2}(n)\)</span> מתקיים כמעט תמיד.</p>
+</div>
+<div class="proof">
+<p>קיים <span>\(N_{1} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{1}\)</span> מתקיים <span>\(P_{1}(n)\)</span>. כמו כן קיים <span>\(N_{2} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{2}\)</span> מתקיים <span>\(P_{2}(n)\)</span>. לכן עבור כל <span>\(N&gt;\max(N_{1},N_{2})\)</span> מתקיים <span>\(P_{1}(n)\land P_{2}(n)\)</span> ולכן מתקיים כמעט תמיד.</p>
+</div>
+<div class="remark">
+<p>מהגדרת הגבול נקבל כי עבור <span>\(\varepsilon&gt;0\)</span> התכונה <span>\(P(n):|a_{n}-L|&lt;\varepsilon\)</span> מתקיימת כמעט תמיד.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(P(n)\)</span> טענה עבור מספר טבעי <span>\(n\)</span>. אם <span>\(\lnot P(n)\)</span> אז </p>
+</div>
+<div class="theorem"><span class="keyword">אי שיוויון חריף בין הגבולות של שתי סדרות מתכנסות</span><p>יהיו <span>\((a_n)_{n=1}^\infty,(b_{n})_{n=1}^\infty\)</span> שתי סדרות מתכנסות. נסמן:
+<span>$$A=\lim_{ n \to \infty } a_{n}\qquad B=\lim_{ n \to \infty } b_{n}$$</span>
+אזי אם <span>\(A&lt;B\)</span> אז החל ממקום מסויים <span>\(a_{n}&lt;b_{n}\)</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נגדיר <span>\(\varepsilon= \frac{B-A}{2}\)</span> כאשר גדול מ-0 כי <span>\(B&lt;A\)</span>. </p>
+</li>
+<li>
+<p>מהגדרת הגבול נקבל כי התכונות <span>\(P_{A}(n):|a_{n}-A|&lt;\varepsilon\)</span> וכן <span>\(P_{B}(n):|b_{n}-B|&lt;\varepsilon\)</span> מתקיימות כמעט תמיד. </p>
+</li>
+<li>
+<p>מהטענה לעיל אנו יודעים כי התכונה: 
+<span>$$Q:|b_{n}-B|&lt;\varepsilon \land|a_{n}-A|&lt;\varepsilon$$</span>
+מתקיים כמעט תמיד. כלומר כמעט תמיד מתקיים:
+<span>$$a_{n}&lt;A+\varepsilon=A+\frac{B-A}{2}=\frac{A+B}{2}=B-\varepsilon&lt;b_{n}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אם ידוע רק כי <span>\(A\leq B\)</span> לא ניתן להסיק כי <span>\(a_{n}\leq b_{n}\)</span>. לדוגמא עבור <span>\(a_{n}=1+\frac{1}{n}\)</span> ו-<span>\(b_{n}=1-\frac{1}{n}\)</span>. חייבים אי שיוויון חריף.</p>
+</div>
+<div class="theorem"><span class="keyword">אי שיוויון שכיח בין איבר של 2 סדרות מתכנסות</span><p>יהיו <span>\((a_n)_{n=1}^\infty,(b_{n})_{n=1}^\infty\)</span> שתי סדרות מתכנסות. אם <span>\(a_{n}\leq b_{n}\)</span> מתקיים אינסוף פעמים אז:
+<span>$$A=\lim_{ n \to \infty } a_{n}\leq \lim_{ n \to \infty } b_{n}=B$$</span></p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי <span>\(B&lt;A\)</span>. אז מהמשפט הקודם החל ממקום מסויים <span>\(b_{n}&lt;a_{n}\)</span>. כלומר קיים <span>\(N_{0} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{0}\)</span> מתקיים <span>\(b_{n}&lt;a_{n}\)</span>.  זאת אומרת שקיים  <span>\(n_{0}&gt;N_{0}\)</span> כך שמתקיים <span>\(a_{n_{0}}&lt;b_{n_{0}}\)</span>, בסתירה. לכן <span>\(A\leq B\)</span>.</p>
+</div>
+<div class="remark">
+<p>אם ידוע כי <span>\(a_{n}&lt;b_{n}\)</span> איסנוף פעמים לא ניתן להסיק כי <span>\(A&lt;B\)</span>.  לדוגמא <span>\(b_{n}=1+\frac{1}{n}&gt;a_{n}=1-\frac{1}{n}\)</span> לכל <span>\(n\)</span> אבל הגבולות שלהם שווים.</p>
+</div>
+<div class="definition"><span class="keyword">סדרה כמעט קבוע</span><p>סדרה שקבועה החל מאיבר מסיים. כלומר קיים <span>\(\lambda \in \mathbb{R}\)</span> ו-<span>\(N \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N\)</span> מתקיים <span>\(a_{n}=\lambda\)</span></p>
+</div>
+<div class="proposition">
+<p>הגבול של סדרה כמעט קבוע עם קבוע <span>\(\lambda \in \mathbb{R}\)</span> יהיה <span>\(\lambda\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(\lambda \leq a_{n}\)</span> אז <span>\(\lambda \leq \lim_{ n \to \infty }a_{n}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">הכריך</span><p>יהיו <span>\((a_n)_{n=1}^\infty,(b_{n})_{n=1}^\infty\)</span> ו-<span>\((c_n)_{n=1}^\infty\)</span> סדרות כך ש:</p>
+<ol>
+<li>
+<p>קיים <span>\(N_{0} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{0}\)</span> מתקיים <span>\(a_{n}\leq b_{n}\leq c_{n}\)</span>. </p>
+</li>
+<li>
+<p>הסדרות <span>\((a_n)_{n=1}^\infty,(c_n)_{n=1}^\infty\)</span> מתכנסות </p>
+</li>
+<li>
+<p>הגבול מקיים: 
+<span>$$L=\lim_{ n \to \infty } a_{n}=\lim_{ n \to \infty }c_{n} $$</span>
+אזי מתקיים כי <span>\((b_{n})_{n=1}^\infty\)</span> גם מתכנסת, ו-<span>\(\lim_{ n \to \infty }b_{n}=L\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt;0\)</span>.</p>
+<ol>
+<li>
+<p>הגבול <span>\(a_{n}\to L\)</span> נותן <span>\(N_{1} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{1}\)</span> מתקיים <span>\(|a_{n}-L|&lt;\varepsilon\)</span> ובפרט <span>\(a_{n}&gt;L-\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>הגבול <span>\(c_{n}\to L\)</span> נותן <span>\(N_{2} \in \mathbb{N}\)</span> כך שלכל <span>\(n&gt;N_{2}\)</span> מתקיים <span>\(|c_{n}-L|&lt;\varepsilon\)</span> ובפרט <span>\(c_{n}&lt;L+\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>נגדיר <span>\(N=\max\{ N_{0},N_{1},N_{2} \}\)</span>. לכל <span>\(n \in \mathbb{N}\)</span> אם <span>\(n\geq N\)</span> מתקיים: 
+<span>$$L-\varepsilon \leq a_{n}\leq b_{n}\leq c_{n}&lt;L+\varepsilon$$</span></p>
+</li>
+<li>
+<p>קיבלנו כי <span>\(|b_{n}-L|&lt;\varepsilon\)</span> ולכן <span>\(\lim_{ n \to \infty }b_{n}=L\)</span>. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Series_1_4'>1.4 מונוטוניות</a></li>
+<li class='prev-page'><a href='./Series_1_2'>1.2 אריתמטיקה של גבולות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

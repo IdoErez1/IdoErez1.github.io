@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גוף קשיח</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_3_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  גוף קשיח</h1>
+    <div class="definition"><span class="keyword">גוף קשיח</span><p>גוף אשר אינו יכול להתעוות או להשתנות. המרחק בין כל שתי נקודות בגוף הוא קבוע.</p>
+</div>
+<p>ההבדל העיקרי כשאנחנו עוסקים בגוף קשיח לעומת גוף נקודתי זה שיש גם אנרגיה מהסיבוב של המערכת.</p>
+<p>נסתכל על אוסף חלקיקים עם מסה <span>\(m_{i}\)</span> אשר נמצאים במרחק <span>\(r_{i}\)</span> מנקודת הסיבוב. כיוון שזהו גוף קשיח, כל הלקיקים מסתובבים באותה מהירות זוויתית <span>\(\omega\)</span>. נקבל:
+<span>$$\omega=\frac{\dot{r}_{i}}{r_{i}}\implies \dot{r}_{i}=\omega r_{i}\implies E_{i}=\frac{1}{2}mr_{i}^2\omega^2$$</span>
+ולכן האנרגיה הכוללת תהיה
+<span>$$E=\sum_{i}E_{i}=\sum_{i} \frac{1}{2}m_{i}r_{i}^2\omega^2=\frac{1}{2}\omega^2 \sum_{i}m_{i}r_{i}^2 $$</span>
+כאשר נסמן את האיבר בסכום ב-<span>\(I\)</span>.  זהו גודל שתלוי אך ורק בגאומטריה והצורה של הגוף.</p>
+<div class="definition"><span class="keyword">מומנט התמד</span><p>כאשר החלקיקים דיסקרטים נגדיר <span>\(I=\sum_{i}m_{i}r_{i}^{2}\)</span>. בגבול הרצף נגדיר:
+<span>$$I=\int r^2 \, \mathrm{d}m $$</span></p>
+</div>
+<p>כאשר נזכור כי במקרה של צפיפות נפחית <span>\(dm=\rho(r)dV\)</span>, במקרה של צפיפות משטחית <span>\(dm=\sigma(r)dS\)</span> ומקרה של צפיפות חד מימדית <span>\(dm=\lambda(x)dx\)</span>
+המומנט התמד מופיע בכמעט כל הגדלים המעניים שקשורים לגוף קשיח, לדוגמא התנע הזוויתי - <span>\(\vec{L}=I \dot{\vec{\theta}}=I\vec{\omega}\)</span>, המומנט - <span>\(\vec{\tau}=I \ddot{\vec{\theta}}=I \dot{\vec{\omega}}\)</span> והגודל שאותנו מעניין במיוחד - האנרגיה הקינטית - <span>\(T =\frac{1}{2}I\omega^2\)</span>. הגודל הזה למעשה מתאר את היכולת של הגוף להסתובב. ככל שהוא גדול יותר, נדרש יותר אנרגיה כדי לסובב את הגוף. גודל זה כמובן תלוי בציר הסיבוב. כל עוד אין ציר מקובע. זה יהיה מרכז המסה.</p>
+<div class="theorem"><span class="keyword">פירוק אנרגיה סביב מרכז מסה</span><p>תמיד ניתן לפרק אנרגיה קינטית של גוף קשיח לאנרגיה של מרכז מסה ולאנרגיה סביב מרכז המסה. כלומר:
+<span>$$T=T_{c m}+T_{r o t}=\frac12m v_{c m}^{2}+\frac12I_{c m}{\omega}^{2}$$</span></p>
+</div>
+<p>זה נכון במקרה של סיבוב סביב המרכז מסה, כאשר <span>\(I_{cm}\)</span> זה המומנט התמד סביב המרכז מסה. ניתן לפרק באופן דומה את התנע הזוויתי:
+<span>$$\vec{J}=\vec{L}+\vec{S}=M\vec{R}_{c m}\times\vec{v}_{c m}+I_{c m}\vec{\omega}$$</span>
+כאשר <span>\(\vec{R}_{cm}\)</span> המיקום של מרכז המסה.
+להלן טבלה של מומנטי התמד נפוצים:</p>
+<table>
+<thead>
+<tr>
+<th>גוף</th>
+<th>I</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>נקודתי</td>
+<td><span>\(mr^2\)</span></td>
+</tr>
+<tr>
+<td>מוט מהמרכז</td>
+<td><span>\(\frac{1}{12}ML^2\)</span></td>
+</tr>
+<tr>
+<td>מוט מהקצה</td>
+<td><span>\(\frac{1}{3}ML^2\)</span></td>
+</tr>
+<tr>
+<td>גליל בציר מרכזי</td>
+<td><span>\(\frac{1}{2}MR^2\)</span></td>
+</tr>
+<tr>
+<td>גליל עם עובי</td>
+<td><span>\(\frac{1}{2}M(r_1^2+r_2^2)\)</span></td>
+</tr>
+<tr>
+<td>כדור(מרכז)</td>
+<td><span>\(\frac{2}{5}MR^2\)</span></td>
+</tr>
+<tr>
+<td>כדור חלול</td>
+<td><span>\(\frac{2}{3}MR^2\)</span></td>
+</tr>
+<tr>
+<td>דיסקה סביב ציר</td>
+<td><span>\(\frac{1}{4} MR^2\)</span></td>
+</tr>
+<tr>
+<td>ריבוע</td>
+<td><span>\(\frac{1}{6}MR^2\)</span></td>
+</tr>
+<tr>
+<td>מלבן סביב הציר</td>
+<td><span>\(\frac{1}{3}Ma^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="theorem"><span class="keyword">שטייניר</span><p>אם הסיבוב מתבצע סביב נקודה שהיא לא מרכז המסה, סביב ציר בכיוון <span>\(\hat{n}\)</span> אז מומנט האינרציה יהיה:
+<span>$$I_{\hat{n}}=I_{\hat{n},c m}+m d^{2}$$</span>
+כאשר <span>\(m\)</span> מרכז מסת הגוף, ו-<span>\(d\)</span> במרחק בין הנקודה לבין מרכז המסה.</p>
+</div>
+<h2>מומנט התמד בתלת מימד</h2>
+<p>במקרה התלת מימדי, לא בהכרח סביב כל ציר הסיבוב היא אותה מהירות זוויתית <span>\(\omega\)</span>. ייתכן ו-<span>\(\omega_{x}\neq \omega_{y}\neq \omega_{z}\)</span>,  כאשר במקרה זה <span>\(\vec{\omega}=\left( \omega _{x},\omega_{y},\omega_{z} \right)\)</span> יסמן את הסיבוב בכל ציר. המקרה זה נקבל כי:
+<span>$$T=T_{c m}+T_{r o t}=\frac{1}{2}M v_{c m}^{2}+\frac{1}{2}\vec{\omega}^{T}{\stackrel{\leftrightarrow}{ I}}_{c m}\vec{\omega}$$</span></p>
+<div class="definition"><span class="keyword">טנזור התמד</span><p>זהו מטריצה <span>\(\stackrel{\leftrightarrow}{ I}\)</span> מהמקיימת
+<span>$$T_{rot}=\frac{1}{2}\vec{\omega}^t\!\!\stackrel{\leftrightarrow}{I}\!\!\vec{\omega}\qquad \vec{L}=\stackrel{\leftrightarrow}{ I}\!\!\vec{\omega}$$</span></p>
+</div>
+<p>במקרה התלת מימדי שאנחנו נשתמש בו, זה יהיה פשוט מטריצה <span>\(3\times 3\)</span>.
+ניתן להראות כי ערכי מטריצה זו יהיו שווים ל:
+<span>$$I_{i j}=\sum_{\alpha}m_{\alpha}\left(r_{\alpha}^{2}\delta_{i j}-r_{\alpha,i}r_{\alpha,j}\right)\to\int d m\left(r^{2}\delta_{i j}-r_{i}r_{j}\right)$$</span>
+לדוגמא במקרה הבדיד נקבל:
+<span>$$I=\left(\begin{array}{c c c}{{\sum_{\alpha}m_{\alpha}\left(y_{\alpha}^{2}+z_{\alpha}^{2}\right)}}&amp;{{-\sum_{\alpha}m_{\alpha}x_{\alpha}y_{\alpha}}}&amp;{{-\sum_{\alpha}m_{\alpha}x_{\alpha}z_{\alpha}}}\\ {{-\sum_{\alpha}m_{\alpha}x_{\alpha}y_{\alpha}}}&amp;{{\sum_{\alpha}m_{\alpha}\left(x_{\alpha}^{2}+z_{\alpha}^{2}\right)}}&amp;{{-\sum_{\alpha}m_{\alpha}y_{\alpha}z_{\alpha}}}\\ {{-\sum_{\alpha}m_{\alpha}x_{\alpha}z_{\alpha}}}&amp;{{-\sum_{\alpha}m_{\alpha}y_{\alpha}z_{\alpha}}}&amp;{{\sum_{\alpha}m_{\alpha}\left(x_{\alpha}^{2}+y_{\alpha}^{2}\right)}}\end{array}\right)$$</span>
+או במקרה הרציף:
+<span>$$I=\left(\begin{array}{c c c}{\int (y^2+z^2) \, \mathrm{d}m }&amp;{-\int xy \, \mathrm{d}m }&amp;-\int xz \, \mathrm{d}m \\ -\int xy \, \mathrm{d}m &amp;\int (x^2+z^2) \, \mathrm{d}m &amp;-\int yz \, \mathrm{d}m \\ -\int xz \, \mathrm{d}m &amp;-\int yz \, \mathrm{d}m &amp;\int (x^2+y^2) \, \mathrm{d}m \end{array}\right)$$</span></p>
+<p>כיוון שזוהי מטריצה סימטרית, קיים מערכת צירים שעבורה היא תהיה אלסונית. מערכת זאת נקראת מערכת צירים ראשית. ובמקרה זה אפשר להשתמש בנוסחה הפשוטה <span>\(T=\frac{1}{2}I\omega^2\)</span>. כלומר אם אנחנו יודעים שמסתובב סביב ציר, תמיד ניתן לחשב <span>$$I_{\hat{n}}=I_{\hat{n},c m}+m d^{2}$$</span> ואז להתייחס לבעיה באופן שראינו קודם.</p>
+<div class="theorem"><span class="keyword">הצירים המאונכים</span><p>עבור גוף דו מימדי, או לפחות גוף שטוח, מתקיים <span>\(I_{x x}+I_{yy}=I_{zz}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='prev-page'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מרחבים ציקלים ומרחבים אינוורינטיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_5_3`; }});</script>
+        <div class="content">
+        <h1>6.1  מרחבים ציקלים ומרחבים אינוורינטיים</h1>
+    <div class="definition"><span class="keyword">תת מרחב ציקלי</span><p>תהי <span>\(V\)</span> מרחב ווקטורי ו-<span>\(T:V\to V\)</span> אופרטור לינארי. התת מרחב ה-<span>\(T\)</span> ציקלי של ווקטור <span>\(v \in V\)</span> הוא התת מרחב <span>\(U\leq V\)</span> שנוצר מהפרוש של כל החזקות של <span>\(T^{k}v\)</span>. כלומר:
+<span>$$U=\mathrm{Span}\left( v,Tv,T^{2}v, \dots, T^{k}v, \dots \right)$$</span></p>
+</div>
+<div class="proposition">
+<p>כאשר המרחב ווקטורי <span>\(V\)</span> נוצר סופית עם מימד <span>\(n\)</span>, נקבל כי קיים <span>\(k\leq n\)</span> כך ש:
+<span>$$U=\mathrm{Span}\left( v,Tv, \dots, T^{k}v \right)$$</span>
+כאשר <span>\(v,Tv, \dots, T^{k}v\)</span> הם בלתי תלויים לינארית, ולכל <span>\(m&gt;k\)</span> מתקיים <span>\(T^{m}(v)\in U\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה שלא קיים <span>\(k\leq n\)</span> כזה. אזי יש אוסף של <span>\(k&gt;n\)</span> ווקטורים בת"ל במרחב הווקטורי, בסתירה לכך שהמימד הוא <span>\(n\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(U\)</span> תת מרחב ציקלי עם מימד <span>\(n\)</span>, אזי <span>\(T^{n}v\)</span> הוא החזקה הראשונה <span>\(n\)</span> כך ש-<span>\(T^{n}v\)</span> הוא צירף הלינארי של כל האיברים שלפניו. כלומר קיימים <span>\(a_{0},a_{1},\dots,a_{n-1}\in \mathbb{F}\)</span> כך ש:
+<span>$$T^{n}(v)=a_{0}v+a_{1}T^{1}(v)+ \dots + a_{n-1}T^{n-1}(v)$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן להציג את האופרטור <span>\(T\)</span> במרחב ציקלי בבסיס <span>\(\mathcal{A}=\left( v,Tv, \dots,T^{n-1}v \right)\)</span>, אז אם <span>\(a_{0},\dots ,a_{n-1} \in \mathbb{F}\)</span> הם כך שמתקיים:
+<span>$$a_{0}v+a_{1}Tv+ \dots + a_{n-1}T^{n-1}v + T^{n}v = 0$$</span>
+נקבל כי המטריצה המייצגת תהיה:
+<span>$$[T]_{\mathcal{A} }=\begin{pmatrix}0&amp;0&amp;0&amp;\cdot\cdot\cdot&amp;-a_{0}\\ 1&amp;0&amp;0&amp;\cdot\cdot\cdot&amp;-a_{1}\\ 0&amp;1&amp;0&amp;\cdot\cdot\cdot&amp;-a_{2}\\ \cdot&amp;\cdot&amp;\cdot\cdot&amp;\cdot\cdot&amp;\cdot\\ \vdots&amp;\vdots&amp;\cdot\cdot&amp;\cdot\cdot&amp;\cdot\\ 0&amp;0&amp;0&amp;\cdot\cdot\cdot&amp;-a_{n-1}\end{pmatrix}$$</span>
+כך שהפולינום המינימלי יהיה:
+<span>$$m_{T,v}=x^{n}-\sum_{i=0}^{n-1} a_{i}x^{i}$$</span></p>
+</div>
+<div class="proof">
+<p>ראשית נשים לב כי:
+<span>$$T^{n}(v)=-a_{0}v-a_{1}T^{1}(v)- \dots - a_{n-1}T^{n-1}(v)$$</span>
+אנו יודעים כי:
+<span>$$\begin{gather}[T]_{\mathcal{A} }=\begin{bmatrix}[T(v)]_{\mathcal{A} } \bigg| [T(Tv)]_{\mathcal{A} } \bigg| [T^{2}(Tv)]_{\mathcal{A} }\bigg|\dots \bigg| [T(T^{n-1}v)]_{\mathcal{A} }\end{bmatrix}=  \\=\begin{bmatrix}[T(v)]_{\mathcal{A} } \bigg| [T^2 v]_{\mathcal{A} } \bigg| [T^{2}(Tv)]_{\mathcal{A} }\bigg|\dots \bigg| T^{n}(v)\end{bmatrix} =  \\= \begin{bmatrix}e_{2}\big| e_{3} \big| e_{4} \big| \dots \big| -a_{1}e_{1}-a_{2}e_{2}-\dots a_{n-1}e_{n-1}\end{bmatrix}
+\end{gather}$$</span>
+וזוהי מטריצה הרצויה.</p>
+</div>
+<div class="definition"><span class="keyword">תת מרחב אינווריאנטי</span><p>תת מרחב <span>\(U\leq V\)</span> נקרא אינווריאנטי תחת העתקה <span>\(T:V\to V\)</span> אם לכל <span>\(v \in U\)</span> מתקיים <span>\(Tv \in U\)</span>. כלומר זהו מרחב שההעתקה משאירה אותה במרחב.</p>
+</div>
+<div class="remark">
+<p>המרחב כולו ומרחב האפס הם המרחבים שתמיד <span>\(T\)</span>-אינווריאנטיים.</p>
+</div>
+<div class="proposition">
+<p>התת מרחב ה-<span>\(T\)</span> אינווריאנטי הקטן ביותר(כלומר עם המימד הקטן ביותר) שמכיל את הווקטור <span>\(v \in V\)</span> יהיה המרחב ה-<span>\(T\)</span> ציקלי שנוצר על ידי <span>\(v\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(V\)</span> מרחב וקטורי נוצר סופית. אם <span>\(U\leq V\)</span> תת מרחב <span>\(T:V\to V\)</span> איווריאנטי, אז קיים תת מרחב <span>\(W\leq V\)</span> כך שמתקיים <span>\(V=U \oplus W\)</span>, כאשר קיים בסיס של <span>\(T\)</span> כך שהמטריצה תהיה מטריצת בלוקים משולשית.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>אנו יודעים כי לכל <span>\(u \in U\)</span> מתקיים <span>\(Tu \in U\)</span>. לכן ניתן להסתכל על האופרטור <span>\(T|_{U}:U\to U\)</span>. </p>
+</li>
+<li>
+<p>כיוון ש-<span>\(U\)</span> תת מרחב של מרחב ווקטורי נוצר סופית קיים עבורו בסיס <span>\(\mathcal{U}=\left( u_{1},\dots, u_{m} \right)\)</span>.  </p>
+</li>
+<li>
+<p>מטענה שראינו, ניתן להרחיב את הבסיס לבסיס של <span>\(V\)</span>. נסמן <span>\(\mathcal{C}=\left( u_{m+1},\dots,u_{n} \right)\)</span>, וכן <span>\(W=\mathrm{Span}(C)\)</span>. </p>
+</li>
+<li>
+<p>ניתן לראות כי <span>\(V=W\oplus U\)</span> מטעמי מימד(מתקיים <span>\(m+(n-m)=n\)</span>). </p>
+</li>
+<li>
+<p>נותר להראות רק כי מטריצת בלוקים משולשית.  מספיק להראות כי <span>\(T(u)\in U\)</span> לכל <span>\(u \in \mathcal{ U}\)</span>, אך זה מתקיים כיוון ש-<span>\(T\)</span> אינווריאנטית. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>אם קיימים סכום ישר של שתי מרחבים <span>\(T\)</span>-אינווריאנטיים, נקבל כי קיים בסיס שבו המטריצה היא בלוקים על האלכסון.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='prev-page'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>העתקת מוביוס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_4_1'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent-page'><a href='./Complex Analysis'> פונקציות מרוכבות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לפונקציות מרוכבות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_1'>1.1 תזכורת - מרוכבים</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_2'>1.2 גבולות של פונקציות מרוכבות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_1_3'>1.3 ספרת רימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_1'>2.1 נגזרת מרוכבת וקושי רימן</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_2_2'>2.2 פונקציות אנליטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פונקציות והעתקות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_1'>3.1 פונקציות אלמנטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_2'>3.2 העתקה לינארית והופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_3_3'>3.3 העתקת מוביוס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_1'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_2'>4.2 משפט קושי גורסה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_3'>4.3 משפט מוררה</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_4_4'>4.4 משפט ההצגה של קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. טורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_1'>5.1 טורים של פונקציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_2'>5.2 טורי חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_3'>5.3 טורי טיילור</a></li>
+<li class='parent-page-dropdown'><a href='./Complex Analysis_5_4'>5.4 טור לורן</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Complex Analysis_3_2'>3.2 העתקה לינארית והופכית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Complex Analysis_4_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Complex Analysis_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  העתקת מוביוס</h1>
+    <div class="definition"><span class="keyword">העתקת מוביוס</span><p><span>$$f(z)=\frac{az+b}{cz+d}$$</span>
+כאשר <span>\(a,b,c,d\in \mathbb{C}\)</span> קבועים, כך ש-<span>\(\begin{vmatrix}a&amp;b\\ c&amp;d\end{vmatrix}\neq 0\)</span>.</p>
+</div>
+<div class="remark">
+<p>לא ייתכן כי <span>\(c,d\)</span> שניהם 0 כיוון שבמקרה זה נקבל כי הדטרמיננטה 0.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(c=0\)</span> אזי <span>\(d\neq 0\)</span> ומתקיים:
+<span>$$f(z)=\frac{az+b}{d}=\frac{a}{d}z+\frac{b}{d}$$</span>
+כלומר העתקת מוביוס תהיה העתקה לינארית.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(c\neq 0\)</span> נקבל קבועים <span>\(\alpha,\beta,\gamma\)</span> קבועים כך ש:
+<span>$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(c\neq 0\)</span> אנחנו נקבל:
+<span>$$f(z)= \frac{\frac{a}{c}z+\frac{b}{c}}{z+\frac{d}{c}}= \frac{\frac{a}{c}\left( z+\frac{d}{c}-\frac{ad}{c^2}+\frac{b}{c} \right)}{z+\frac{d}{c}}=\frac{a}{c}+\frac{\frac{b}{c}-\frac{ad}{c^2}}{z+\frac{d}{c}}$$</span>
+כאשר אפשר לסמן את הקבועים ב-<span>\(\alpha,\beta,\gamma\)</span> ולקבל:
+<span>$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$</span></p>
+</div>
+<div class="corollary">
+<p>העתקת מוביוס למעשה הרכבה של הזזה של <span>\(\frac{1}{z}\)</span> ופונקציה לינארית.</p>
+</div>
+<div class="corollary">
+<p>העתקת מוביוס מעבירה מעגלים מוכללים למעגלים מוכללים</p>
+</div>
+<div class="proposition">
+<p>העתקת מוביוס <span>\(f:\mathbb{C}^*\to \mathbb{C}^*\)</span> חח"ע ועל וכן מוגדר <span>\(f^{-1}: \mathbb{C}^*\to \mathbb{C}^*\)</span></p>
+</div>
+<div class="proposition">
+<p><span>$$f^{-1}(w)= \frac{b-wd}{wc-a}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$w=f(z)=\frac{az+b}{cz+d}\implies w(cz+d)=az+b \implies z = \frac{b-wd}{wc-a}=f^{-1}(w)$$</span></p>
+</div>
+<div class="remark">
+<p>העתקת מוביוס נקראת העתקה בי-לינארית. כי לינארית ביחס לחלקת המרוכב ולחלק הממשי.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f \in M\)</span>, ו-<span>\(\gamma\)</span> זה מעגל או ישר. <span>\(z_{1},z_{2}\)</span> סימטריות יחסית ל-<span>\(\gamma\)</span>. אזי <span>\(f(z_{1}),f(z_{2})\)</span> סימטריות יחסית ל-<span>\(f\left( \gamma \right)\)</span>.</p>
+</div>
+<div class="example">
+<p>נתון:
+<span>$$\gamma:\lvert z \rvert=1\qquad f(z)= \frac{z+i}{z-2i}$$</span>
+נמצא לאן שולחת <span>\(f(z)\)</span> את <span>\(\gamma\)</span>. נשים לב כי המסילה היא מעגל היחידה. נשים לב כי לא חתוך את הראשית.
+<span>$$f(2i)=\infty \qquad 2i \not \in \gamma \qquad \infty \not \in f\left( \gamma \right)$$</span>
+נסתכל על:
+<span>$$f(z)=\frac{z+i}{z-2i}=\frac{z-2i+3i}{z-2i}=1+\frac{3i}{z-2i}$$</span></p>
+</div>
+<p>וכן נגדיר:
+<span>$$f_{1}(z)=z-2i=h\qquad f_{2}(h)=\frac{1}{h}\qquad f_{3}(q)=1+3iq$$</span>
+כך שמתקיים:
+<span>$$f=\left( f_{3}\circ f_{2}\circ f_{1} \right)(z)$$</span></p>
+<div class="remark">
+<p>אומנם למעגל נדרש 3 נקודות כדי להגדיר אותו באופן יחיד, ונדרש 2 נקודות כדי להגדיר ישר באופן יחיד, אבל בעיה זו נפתרת אם חושבים על זה שאחד הנקודות שנדרש כדי להגדיר ישר הוא אינסוף, ולכן זה למעשה אותו הדבר.</p>
+</div>
+<div class="proposition">
+<p>העתקת מוביוס מעבירה מעגלים מוכללים למעגלים מוכללים.</p>
+</div>
+<div class="proposition">
+<p>לכל 3 נקודות זרות <span>\(z_{1},z_{2},z_{3}\)</span> ו-3 נקודות זרות <span>\(w_{1},w_{2},w_{3}\)</span> קיימת העתקת מוביוס יחידה <span>\(f \in M\)</span> כך ש:
+<span>$$\forall k \in \{ 1,2,3 \}\qquad f(z_{k})=w_{k}$$</span></p>
+</div>
+<p><strong>טענה</strong>
+עבור 3 נקודות זרות <span>\(z_{1},z_{2},z_{3}\)</span> ו-3 נקודות זרות <span>\(w_{1},w_{2},w_{3}\)</span> העתקת המוביוס שמעבירה ביניהם תקיים:
+<span>$$\left( \frac{w-w_{1}}{w-w_{3}}  \right)/  \left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right) = \left( \frac{z - z_{1}}{z-z_{3}} \right) / \left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)$$</span></p>
+<div class="proof">
+<p>מקרה פרטי - העתקת לינארית. אנו יודעים כי:
+<span>$$\begin{gather}w = f(z)=az+b  \qquad w_{1}=az_{1}+b \qquad w_{2} = az_{2}+b \qquad w_{3}=az_{3}+b 
+\end{gather}$$</span>
+ונקבל:
+<span>$$\begin{gather}w_{1}-w_{2} = a(z_{1}-z_{2}) \qquad w_{1}-w=a(z_{1}-z) \\\frac{w_{1}-w_{2}}{w_{1}-w}=\frac{z_{1}-z_{2}}{z_{1}-z} \qquad \frac{w-w_{1}}{w_{2}-w_{1}}=\frac{z-z_{1}}{z_{2}-z_{1}} 
+\end{gather}$$</span></p>
+</div>
+<p>באופן כללי נכתוב:
+<span>$$f=\frac{az+b}{cz+d}$$</span>
+נניח <span>\(c\neq 0\)</span> כיוון שאחרת העתקה לינארית. לכן ניתן לכתוב:
+<span>$$f(z)=\alpha+\frac{\beta}{z+\gamma}$$</span>
+<span>$$\begin{gather}w=\alpha+\frac{\beta}{z+\gamma} \qquad  w_{1}=\alpha+\frac{\beta}{z_{1}+\gamma}  \\w_{2}=\alpha+\frac{\beta}{z_{2}+\gamma} \qquad w_{3}=\alpha+\frac{\beta}{z_{3}+\gamma}
+\end{gather}$$</span>
+כעת נשאר:
+<span>$$\begin{gather}w-w_{1}=\beta\left( \frac{1}{z+\gamma}-\frac{1}{z_{1}+\gamma} \right)  \qquad w-w_{1}=\beta \frac{z_{1}-z}{\left( z+\gamma \right)\left( z_{1}+\gamma \right)} \\w-w_{3} =\left( \frac{\beta (z_{3}-z)}{\left( z+\gamma \right)\left( z_{3}+\gamma \right)} \right) \qquad \frac{w-w_{1}}{w-w_{3}}=\frac{(z_{1}-z)\left( z_{3}+\gamma \right)}{(z_{3}-z)\left( z_{1}+\gamma \right)} \\\frac{w-w_{1}}{w-w_{3}} = \frac{(z-z_{1})\left( z_{3}+\gamma \right)}{(z-z_{3})\left( z_{1}+\gamma \right)} \qquad \frac{w_{2}-w_{1}}{w_{2}-w_{3}} = \frac{(z_{2}-z_{1})\left( z_{3}+\gamma \right)}{(z_{2}-z_{3})\left( z_{1}+\gamma \right)} 
+\end{gather}$$</span>
+ונקבל סה"כ:
+<span>$$\left( \frac{w-w_{1}}{w-w_{3}}  \right)/  \left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right) = \left( \frac{z - z_{1}}{z-z_{3}} \right) / \left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)$$</span>
+או בכתיבה פחות ברורה:
+<span>$$\frac{\left( \frac{w-w_{1}}{w-w_{3}}  \right)}{\left( \frac{w_{2} - w_{1}}{w_{2}-w_{3}} \right)} = \frac{\left( \frac{z - z_{1}}{z-z_{3}} \right)}{\left( \frac{z_{2} - z_{1}}{z_{2}-z_{3}} \right)}$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Complex Analysis_4_1'>4.1 אינטגרל של פונקציה מרוכבת</a></li>
+<li class='prev-page'><a href='./Complex Analysis_3_2'>3.2 העתקה לינארית והופכית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

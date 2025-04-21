@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרה ותכונות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups'> תורת החבורות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups`; }});</script>
+        <div class="content">
+        <h1>1.1  הגדרה ותכונות</h1>
+    <h2>הגדרת החבורה</h2>
+<div class="definition"><span class="keyword">חבורה</span><p>חבורה היא קבוצה <span>\(G\)</span> עם פעולה בינארית <span>\(\circ:G\times G\to G\)</span>  המקיימת:</p>
+<ol>
+<li>
+<p>אסוציאטיביות: <span>\(\forall x,y,z\in G\quad(x\circ y)\circ z=x\circ(y\circ z)\)</span> </p>
+</li>
+<li>
+<p>קיים איבר ניטרלי/יחידה <span>\(e\in G\)</span> </p>
+</li>
+<li>
+<p>קיום הופכי - לכל <span>\(x \in G\)</span> קיים <span>\(y\in G\)</span> כך ש- <span>\(x\circ y=y\circ x=e\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>איבר ניטרלי הוא יחיד</p>
+</div>
+<div class="proof">
+<p>אם <span>\(e_{1},e_{2}\in G\)</span> שניהם ניטרלים אזי
+<span>$$e_{1}=e_{1}\circ e_{2}=e_{2}$$</span></p>
+</div>
+<div class="remark">
+<p>לא דרשנו קומוטטיביות</p>
+</div>
+<div class="example">
+<p>הצירופים הבאים של קבוצות ופעולה יהיו חבורה:
+- השלמים עם חיבור - <span>\((\mathbb{Z},+)\)</span>
+- רציונלים ללא 0 עם פעולת הכפל
+- רציונאלים חיוביים עם פעולת הכפל
+- חיבור מודולרי
+- קבוצה טבעיים ללא 0 עם כפל מודולו <span>\(n\)</span> כאשר <span>\(n\)</span> ראשוני
+- הטבעיים עם חיסור - <span>\((\mathbb{Z},-)\)</span>. יש ניטרלי מצד אחד(0) והופכי(<span>\(x\)</span> הופכי ל-<span>\(x\)</span>)</p>
+</div>
+<div class="example">
+<p>הצירופים הבאים של קבוצות ופעולה הם לא חבורה:
+- שלמים בלי אפס עם כפל - <span>\((\mathbb{Z}\setminus \{ 0 \},\times)\)</span> - לא חבורה כיוון שאין איבר הופכי לכל איבר
+- קבוצה טבעיים ללא 0 עם כפל מודולו <span>\(n\)</span> כאשר <span>\(n\)</span> לא ראשוני</p>
+</div>
+<div class="remark">
+<p>בכל שדה יש עבור כל פעולה חבורות. ולכן מכל שדה ניתן ליצור 2 חבורות. כנל עם מרחב וקטורי. זאת כיוון שהאקסיומות של המרחב וקטורי והשדה מכילות בתוכם את האקסיומות של החבורה.</p>
+</div>
+<p><strong>דוגמה</strong>
+חבורת הסימטריות - <span>\((Sym_{x},\circ)\)</span> כאשר <span>\(\circ\)</span> היא פעולת ההרכבה ו- <span>\(Sym_{x}\)</span> זה הקבוצת הפונקציות החח"ע ועל. פונקציות הזהות היא איבר היחידה, כיוון שהפונקציות הם חח"ע ועל אז הם הפיכות ולכל איבר קיים הופכי.</p>
+<div class="example">
+<p>סוגרי לי(Lie): <span>\((M_{n}(\mathbb{R}),[\cdot,\cdot])\)</span> - לא אסוצייטבית:</p>
+<p><span>$$[A,B]=A\cdot B-B\cdot A$$</span></p>
+</div>
+<div class="example">
+<p>מטריצות הפיכות <span>\(n\times n\)</span> עם כפל מטריצות. מסומן ב-<span>\(GL_{n}(\mathbb{R})\)</span></p>
+</div>
+<div class="remark">
+<p>בדרכ נקרא לפעולה כפל, ונסמן אותה ב-<span>\(\times\)</span> ונשמיט אותה. </p>
+</div>
+<h2>תכונות של חבורות</h2>
+<p>במשפטים הבאים, <span>\((G,\cdot)\)</span> חבורה, ו-<span>\(e\)</span> איבר ניטרלי.</p>
+<div class="proposition">
+<p>ההופכי הוא יחיד.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(x \in G\)</span> ו-<span>\(y,z\)</span> הופכיים של <span>\(x\)</span> אזי:
+<span>$$xy=yx=xz=zx=e$$</span>
+לכן:
+<span>$$y=ye=y(xz)=(yx)z=ez=z$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של חבורות</span><ol>
+<li>
+<p>מתקיים <span>\((x^{-1})^{-1}=x\)</span> </p>
+</li>
+<li>
+<p>הופכי של כפל מקיים <span>\((xy)^{-1}=y^{-1}x ^{-1}\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(xy=e\)</span> אז <span>\(y=x ^{-1}\)</span> </p>
+</li>
+<li>
+<p>צמצום:<br />
+<span>$$xy=xz\implies y=z \impliedby yx=zx$$</span></p>
+</li>
+<li>
+<p>העברת אגף:<br />
+<span>$$xy=z\iff y=x ^{-1}z$$</span></p>
+</li>
+<li>
+<p>פתרון משוואה: לכל <span>\(a,b\in G\)</span>, למשוואה <span>\(ax=b\)</span> יש פתרון יחיד ב-<span>\(G\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(a\in G\)</span>, אזי <span>\(f:G\to G\)</span> המוגדרת <span>\(f(g)=ag\)</span> היא תמורה על <span>\(G\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">פרמה</span><p>אם <span>\(p\)</span> ראשוני ו-<span>\(0&lt;a &lt;p\)</span> אזי <span>\(a^{p-1}\equiv 1\mod p\)</span></p>
+</div>
+<p>נוכיח טענה כללית יותר:</p>
+<div class="theorem"><span class="keyword"></span><p>אם <span>\((G,\cdot)\)</span> חבורה והפעולה קומוטטיבית אזי לכל <span>\(a\in G\)</span> מתקיים <span>\(a^{|G|}=e\)</span> (כאשר פרמה זה במקרה <span>\(G=(\mathbb{F}_{p}\setminus \{ 0 \},\otimes)\)</span>)</p>
+</div>
+<div class="proof">
+<p>נמספר את איברי <span>\(G\)</span>: <span>\(g_{1},g_{2},\dots,g_{|G|}\)</span>. 
+ראינו שכפל ב-<span>\(a\)</span> זה תמורה, כלומר:
+<span>$$\{ ag_{1},ag_{2},\dots,ag_{|G|} \}=\{ g_{1},\dots,g_{|G|} \}$$</span>
+ולכן:
+<span>$$a^{|G|}\prod_{i=1}^{|G|}(g_{i})=\prod_{i=1}^{|G|}(ag_{i})=\prod_{i=1}^{|G|}(g_{i})$$</span>
+וניתן לצמצם ולקבל:
+<span>$$a^{|G|}=e$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אלגוריתם של פרמה לבדיקת ראשוניות</span><p>אלגוריתם הסתבוריתי להכרעה אם מספר הוא ראשוני הפועל בצורה הבאה:</p>
+<ol>
+<li>
+<p>בהנתן <span>\(n\in \mathbb{N}\)</span>, מגרילים <span>\(1&lt;a&lt;n\)</span>. ובודקים האם: 
+<span>$$a^{n-1} \equiv 1\mod n$$</span></p>
+</li>
+<li>
+<p>אם כן - לא ידוע אם ראשוני. נצפה שראשוני, וננסה לחזור עם עוד <span>\(a\)</span>. </p>
+</li>
+<li>
+<p>אם לא - בוודאות לא ראשוני. </p>
+</li>
+<li>
+<p>אם חוזרים על זה הרבה פעמים, הסבירות שהמספר ראשוני יעלה.  </p>
+</li>
+</ol>
+</div>
+<h2>לוח כפל</h2>
+<p>עבור חבורה ניתן לבנות לוח כפל עם האיברים של החבורה. נזכיר כי בגלל חוק הביטול אם <span>\(a\cdot b=a\cdot c\)</span> אז <span>\(b=c\)</span>. לכן בכל שורה ועמודה כל ערך יכול להופיע רק פעם אחת. נבנה לוח כפל עבור החבורה <span>\(D_{3}\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span>\(\circ\)</span></th>
+<th><strong>Id</strong></th>
+<th><span>\(\mathbf{R_{120}}\)</span></th>
+<th><span>\(\mathbf{R_{240}}\)</span></th>
+<th><span>\(\mathbf{F_{0}}\)</span></th>
+<th><span>\(\mathbf{F_{120}}\)</span></th>
+<th><span>\(\mathbf{F_{240}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Id</strong></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{R_{120}}\)</span></td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{R_{240}}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{0}}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{120}}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+<td><span>\(R_{120}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span>\(\mathbf{F_{240}}\)</span></td>
+<td><span>\(F_{240}\)</span></td>
+<td><span>\(F_{0}\)</span></td>
+<td><span>\(F_{120}\)</span></td>
+<td><span>\(R_{123}\)</span></td>
+<td><span>\(R_{240}\)</span></td>
+<td>Id</td>
+</tr>
+</tbody>
+</table>
+<p>כאשר <span>\(R_{\theta}\)</span> מסמנת סיבוב ב-<span>\(\theta\)</span> מעלות, ו-<span>\(F_{\theta}\)</span> מסמן להפוך את הצורה לאורך הציר שנמצא ב-<span>\(\theta\)</span> מעלות.
+ניתן לראות כי חבורה זו אינה קומוטטיבית</p>
+<h2>איזומורפיזם</h2>
+<p>ננסה לבנות חבורה כללית עם שלושה איברים, נסמן <span>\(G=\{ e,a,b \}\)</span>. ננסה לבנות טבלת כפל:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\cdot\)</span></th>
+<th>e</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>e</strong></td>
+<td>e</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td><strong>a</strong></td>
+<td>a</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>b</strong></td>
+<td>b</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>כאן נראה כאילו יש לנו בחירה, אך למעשה לא ייתכן ש-<span>\(a\cdot a=a\)</span> ויהיה את אותו ערך פעמיים בשורה. לכן הטבלת כפל שלנו תראה:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\cdot\)</span></th>
+<th>e</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>e</strong></td>
+<td>e</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td><strong>a</strong></td>
+<td>a</td>
+<td>b</td>
+<td>e</td>
+</tr>
+<tr>
+<td><strong>b</strong></td>
+<td>b</td>
+<td>e</td>
+<td>a</td>
+</tr>
+</tbody>
+</table>
+<p>ועבור מספרים כלליים קיבלנו טבלה יחידה. זה אומר שלכל החבורות עם שלושה איברים תהיה את הטבלה הזו, כלומר אפשר לחשוב על זה כאילו יש סוג של שיוויון בין בחבורות בגודל 3</p>
+<div class="definition">
+<p>אם <span>\((G,\circ)\)</span> ו-<span>\((H,\times)\)</span> שתי חבורות, אזי פונקציה <span>\(f:G\to H\)</span> נקראת איזומורפיזם(של חבורות) אם היא חח"ע ועל ושומרת כפל:
+<span>$$\forall g,g' \in G,\quad f(g\circ g')=f(g)\times f(g')$$</span></p>
+</div>
+<div class="symbolize">
+<p>אם קיים איזומורפיזם מחבורה <span>\(G\)</span> לחבורה <span>\(H\)</span>, הן נקראות איזומורפיות. מסומן <span>\(G\cong H\)</span></p>
+</div>
+<div class="proposition">
+<p>איזומורפיות היא יחס שקילות. אם <span>\(G,H,K\)</span> חבורות, אזי:</p>
+<ol>
+<li>
+<p>חבורה איזומורפית לעצמה - <span>\(G\cong G\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G \cong H\)</span> אזי <span>\(H\cong G\)</span> </p>
+</li>
+<li>
+<p>אם <span>\(G\cong H\cong K\)</span> אזי <span>\(G\cong K\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$(\{ \pm 1 \},x)\cong (\mathbb{Z}_{2},\oplus_{2}) \cong (\mathbb{F}_{3}\setminus \{ 0 \}, \otimes_{3} )$$</span>
+<span>$$(\mathbb{R},+)\cong (R_{&gt;0},\times)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מכפלה ישרה</span><p>אם <span>\(G\)</span>,<span>\(H\)</span> חבורות, המכפלה הישרה שלהם (מסומנת <span>\(G\times H\)</span>) היא החבורה שאיבריה הם הזוגות<span>\((g,h)\)</span> כש-<span>\(g\in G\)</span> ו-<span>\(h\in H\)</span>, והפעולה:
+<span>$$(g,h)\cdot (g',h')=(g\cdot g', h\cdot h')$$</span></p>
+</div>
+<div class="remark">
+<p>שאלה מתבקשתי היא מתי חבורה מסויימת איזומורפית למכפלה?
+למשל, החבורה.
+<span>$$\mathbb{C}^{\times}\cong\mathbb{R}_{&gt;0}^{\times}\times \underbrace{ S^1 }_{ \{ z\in \mathbb{C}\mid |z|=1 \} }$$</span>
+זו שאלה שנענה עליה בהמשך.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='prev-page'><a href='./Groups'> תורת החבורות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

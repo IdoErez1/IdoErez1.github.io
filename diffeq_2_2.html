@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פתרון בעזרת טור חזקות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page'><a href='./diffeq.html'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_1_1.html'>1.1 מושגים כללים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_2.html'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_3.html'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_1_4.html'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_2.html'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_4.html'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_5.html'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_2_6.html'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_3_1.html'>3.1 פונקציות מוכללות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_2.html'>3.2 התמרת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_3.html'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_4.html'>3.4 התמרת פורייה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_3_5.html'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_4_1.html'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_2.html'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_3.html'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_4.html'>4.4 משוואות מסדר שני</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_4_5.html'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_5_1.html'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_2.html'>5.2 בעיה חד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_5_3.html'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_6_1.html'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_2.html'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_3.html'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_6_4.html'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_7_1.html'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_2.html'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_7_3.html'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./diffeq_8_1.html'>8.1 משוואת הגלים</a></li>
+<li class='parent_page-dropdown'><a href='./diffeq_8_2.html'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./diffeq_2_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./diffeq_2_1.html`;}});</script>
+        <div class="content">
+        <h1>2.2  פתרון בעזרת טור חזקות</h1>
+    <div class="definition"><span class="keyword">נקודה רגולרית וסינגולארית</span><p>עבור משוואה מהצורה:
+<span>$$P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0$$</span>
+כאשר <span>\(P(x),Q(x),R(x)\)</span> אנילטיות, נקרא לנקודה <span>\(x_{0} \in \mathbb{R}\)</span> נקודה רגולרית אם <span>\(P(x_{0})\neq 0\)</span> ונקודה סינגולארית אם <span>\(P(x_{0})=0\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קיום פתרון בעזרת טור חזקות</span><p>תהי <span>\(x_{0}\)</span> נקודה רגולרית של המשוואה <span>\(P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0\)</span>. אזי קיים פתרון כללי מהצורה של טור חזקות:
+<span>$$y\left(x\right)=\sum_{n=0}^{\infty}a_{n}\left(x-x_{0}\right)^{n}$$</span>
+או לחלופין ניתן להציג כצירוף לינארי <span>\(y=ay_{1}+by_{2}\)</span> של שתי פונקציות אנליטיות בלתי תלויות לינארית <span>\(y_{1},y_{2}\)</span> כאשר רדיוס ההתכנסות יהיה לפחות המינימום בין הרדיוסים של <span>\(y_{1},y_{2}\)</span>. </p>
+</div>
+<div class="proposition"><span class="keyword">שיטת פתרון בעזרת טור חזקות</span><ol>
+<li>
+<p>נציב טור חזקות מהצורה <span>\(y=\sum_{n=0}^\infty a_{n}x^n\)</span> </p>
+</li>
+<li>
+<p>כיוון שטור חזקות גזיר איבר איבר מתקיים: 
+<span>$$\begin{gather}y'=\sum_{n=0}^\infty na_{n}x^{n-1}=\sum_{n=1}^\infty n a_{n}x^{n-1}=\sum_{n=0}^\infty (n+1)a_{n}x^{n} \\y''=\sum_{n=0}^\infty n(n-1)a_{n}x^{n-2}=\sum_{n=2}n(n-1)a_{n}x^{n-2}=\sum_{n=0}(n+2)(n+1)a_{n}x^n
+\end{gather}$$</span></p>
+</li>
+<li>
+<p>נאחד את כל הטורים ואנו יודעים כי טור חזקות שווה ל-0 אם"ם כל אחד מהמקדמים שלו שווים ל-0. ולכן נשוואה מקדם כללי של טור ל-0 </p>
+</li>
+<li>
+<p>נקבל נוסחת נסיגה. נעביר אותה לצורה <span>\(a_{n}=f(n)a_{n-1}\)</span>(יתכן וצריך לפרק לזוגיים ואי זוגיים) כעת נזכור את הנוסחה: 
+<span>$$a_{n}=f(n)a_{n-1}\implies a_{n}= \prod_{k=0}^n f(n)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="reminder"><span class="keyword">אנליטית בנקודה</span><p>פונקציה <span>\(f(x)\)</span> נקראת אנליטית בנקודה <span>\(x_{0}\)</span> אם הטור חזקות שלה מתכנס בנקודה <span>\(x_{0}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודה רגולרית/רגילה</span><p>יהי  <span>\(P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0\)</span> משוואה דיפרנציאלית. נקודה <span>\(x_{0}\)</span> נקראת נקודה רגולרית אם <span>\(\frac{Q(x_{0})}{P(x_{0})}\)</span> ו-<span>\(\frac{R(x_{0})}{P(x_{0})}\)</span> פונקציות אנליטיות.</p>
+</div>
+<div class="definition"><span class="keyword">סינגולאריות רגילה</span><p>עבור משוואה מהצורה <span>\(P\left(x\right)y^{\prime\prime}+Q\left(x\right)y^{\prime}+R\left(x\right)y=0\)</span> נקודה <span>\(x_{0}\in \mathbb{R}\)</span> תקרא סינגולראית אם הפונקציות:
+<span>$$(x-x_{0})\,\frac{Q(x)}{P(x)},\,\,\left(x-x_{0}\right)^{2}\frac{R(x)}{P(x)}$$</span>
+אנליטיות ב-<span>\(x_{0}\)</span></p>
+</div>
+<div class="corollary">
+<p>נקודה <span>\(x_{0}\)</span> היא סינגולארית רגילה אם"ם קיימים שתי הגבולות:
+<span>$$\operatorname*{lim}_{x\to x_{0}}\,\left(x-x_{0}\right){\frac{Q\left(x\right)}{P\left(x\right)}}\;,\quad\operatorname*{lim}_{x\to x_{0}}\,\left(x-x_{0}\right)^{2}{\frac{R\left(x\right)}{P\left(x\right)}}$$</span></p>
+</div>
+<div class="remark">
+<p>הרעיון הוא להעביר את המשוואה לצורה:
+<span>$$y''+P(x)y'+Q(x)=0$$</span>
+ואז מספיק לדרוש כי <span>\(P(x)\)</span> ו-<span>\(Q(x)\)</span> אנליטיות כדי שהנקודה תהיה רגילה.</p>
+</div>
+<div class="example">
+<p>נסתכל על המשוואה הדיפרנציאלית:
+<span>$$y''+x^{2}y-4y=0$$</span>
+בנקודה <span>\(x=0\)</span> תהיה נקודה רגולרית. עבור למשל:
+<span>$$xy''+y'+y=0$$</span>
+נקבל כי:
+<span>$$\frac{Q(x)}{P(x)}=\frac{1}{x}\quad \frac{R(x)}{P(x)}=\frac{1}{x}$$</span>
+ולכן ב-<span>\(x=0\)</span> נקבל סינגולארית רגילה. כעת עבור:
+<span>$$x^{2}y''+y'+y$$</span>
+נקבל כי נקודה סינגולארית לא רגולארית.</p>
+</div>
+<div class="example"><span class="keyword">משוואת צ'בישב</span><p><span>$$(1-x^{2})y''-xy'+p^{2}y=0\iff y'' - \frac{x}{1-x^{2}}y'+\frac{p^{2}}{1-x^{2}}$$</span>
+נקבל כי ב-<span>\(x=\pm 1\)</span> הנקודה היא סינגולארית רגילה. ולכן ניתן למצוא פתרון בעזרת טור חזקות ב-<span>\(x=0\)</span> עבור <span>\(R\leq 1\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">פרוביניוס</span><ol>
+<li>
+<p>יהי <span>\(y''+P(x)y'+Q(x)y=f(x)\)</span>. אם <span>\(x_{0}\)</span> היא נקודה רגילה ו-<span>\(P(x),Q(x)\)</span> ו-<span>\(f(x)\)</span> אנליטיים עם רדיוס התכנסות <span>\(R_{P},R_{Q},R_{f}\)</span> אזי קיים פתרון בעזרת טור חזקות מהצורה: 
+<span>$$y(x)=\sum_{n=0}^{N}  a_{n}(x-x_{0})^{n}$$</span>
+כאשר רדיוס ההתכנסות יהיה <span>\(R=\min(R_{P},R_{Q},R_{f})\)</span>.</p>
+</li>
+<li>
+<p>אם <span>\(x_{0}\)</span> היא נקודה סינגורית רגולארית ו-<span>\((x-x_{0})P(x),(x-x_{0})^{2}Q(x)\)</span> ו-<span>\(f(x)\)</span> יש רדיוס התכנסות <span>\(R_{P},R_{Q},R_{f}\)</span> בהתאמה אזי יש פתרון בעזרת טור חזקות מוכלל מהצורה: 
+<span>$$y(x)=(x-x_{0})^{r}\sum_{n=0}^{\infty}a_{n}(x-x_{0})^{n}$$</span>
+כאשר <span>\(r\in \mathbb{R}\)</span> קבוע ורדיוס ההתכנסות יהיה:
+<span>$$R=\min (R_{P},R_{Q},R_{f})$$</span></p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>נסתכל על המשוואה:
+<span>$$2xy''+y'+y=0\iff y''+\frac{1}{2x}y'+\frac{1}{2x}y=0$$</span>
+נניח פתרון מהצורה:
+<span>$$\begin{gather}y(x)=\sum_{n=0}^{\infty} a_{n}x^{n+r}\implies y'=\sum_{n=0}^{\infty} (n+r)a_{n}x^{n+r-1}\implies \\\implies y''(x)=\sum_{n=0}^{\infty} (n+r)(n+r-1)a_{n}x^{n+r-2} 
+\end{gather}$$</span>
+כאשר נציב כעת במשוואה ונקבל:
+<span>$$\sum_{n=0}^{\infty}2(n+r)(n+r-1)a_{n}x^{n+r-1}+\sum_{n=0}^{\infty}2(n+r)a_{n}x^{n+r-1}+ \sum_{n=0}^{\infty} a_{n}x^{n+r}=0$$</span>
+כאשר ניתן לאחד את הטור הראשון והשני:
+<span>$$\sum_{n=0}^{\infty} (2n+2r-1)(n+r)a_{n}x^{n-1}+\sum_{n=0}^{\infty} a_{n}x^{n}$$</span>
+כאשר נזיז את הטור הראשון כך שיתחיל מ-<span>\(-1\)</span> כדי שהחזקות יהיו זהות:
+<span>$$\sum_{n=-1}^{\infty} (2n+2r+1)(n+r+1)a_{n+1}x^{n}+\sum_{n=0}^{\infty} a_{n}x^{n}=0  $$</span>
+הנכתוב בנפרד את הרכיב ה-<span>\(-1\)</span> ונאחד את הטורים:
+<span>$$(2r-1)ra_{0}x^{-1}+\sum_{n=0}^{\infty}[(2n+2r+1)(n+r+1)a_{n+1}+a_{n}]x^{n}=0$$</span>
+כאשר נדרוש כי המקדמים מתאפסים. כלומר:
+<span>$$(2r-1)ra_{0}=0\land (2n+2r+1)(n+r+1)a_{n+1}+a_{n}$$</span>
+כאשר מהמשוואה הראשונה נקבל כי <span>\(r=0\)</span> או <span>\(r=\frac{1}{2}\)</span> ומהמשוואה השנייה נקבל את הנוסחאת נסיגה:
+<span>$$a_{n+1}=-\frac{1}{(2n+2r+1)(n+r+1)}a_{n}$$</span>
+כאשר נשים לב כי בניגוד לשיטה הרגילה, עבור משוואה מסדר שני לא תמיד מקבלים ביטוי שונה עבור הערכים הזוגיים והאי זוגיים! נדרש כעת לפתור בנפרד עבור <span>\(r=0\)</span> ועבור <span>\(r=\frac{1}{2}\)</span>. עבור <span>\(r=0\)</span> נקבל:
+<span>$$y_{1}(x)=\sum_{n=0}^{\infty}a_{n}x^{n}\quad a_{n+1}= -\frac{1}{(2n+1)(n+1)}a_{n}$$</span>
+עבור <span>\(r=\frac{1}{2}\)</span> נקבל:
+<span>$$y_{2}(x)=\sum_{n=0}^{\infty} a_{n}x^{n+1/2}\quad a_{n+1}=- \frac{1}{(2n+2)\left( n+\frac{3}{2} \right)}$$</span>
+כאשר הפתרון הכללי יהיה מהצורה:
+<span>$$y(x)=C_{1}y_{1}(x)+C_{2}y_{2}(x)$$</span></p>
+</div>
+<p>נסכם את סכמת פתרון - שיטת פרוביניוס:</p>
+<ol>
+<li>
+<p>נניח פתרון מהצורה: 
+<span>$$y(x)=(x-x_{0})^{r}\sum_{k=0}^{\infty}a_{k}(x-x_{0})^{k}=\sum_{k=0}^{\infty}a_{k}(x-x_{0})^{k+r}$$</span></p>
+</li>
+<li>
+<p>בעזרת גזירה איבר איבר והזזה נקבל: </p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./diffeq_2_3.html'>2.3 פתרון באמצעות טור</a></li>
+<li class='prev-page'><a href='./diffeq_2_1.html'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

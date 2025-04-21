@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מודולים ומרחבים ווקטורים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings_3_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_3_2.html`;}});</script>
+        <div class="content">
+        <h1>3.3  מודולים ומרחבים ווקטורים</h1>
+    <div class="proposition">
+<p>אם <span>\(M\)</span> מודול נוצר סופית מעל שדה <span>\(\mathbb{F}\)</span> אז <span>\(M\cong \mathbb{F}^{n}\)</span>.</p>
+</div>
+<div class="proof">
+<p>מודול נוצר סופית מעל שדה הוא מרחב ווקטורי, וניתן תמיד למצוא בסיס <span>\(\mathcal{B}\)</span>. ההעתקה <span>\(v\mapsto[v]_{\mathcal{B}}\)</span> היא איזומורפיזם ולכן נקבל כי איזומורפי ל-<span>\(\mathbb{F}^{n}\)</span>.</p>
+</div>
+<div class="remark">
+<p>זה לא נכון עבור חוגים כלליים. למשל עבור <span>\(R=\mathbb{Z}\)</span> ו-<span>\(M=\mathbb{Z} / 3\mathbb{Z}\)</span> נקבל כי <span>\(\mathbb{Z}\)</span> לא איזומורפי ל-<span>\(\mathbb{Z}^{m}\)</span> כיוון ש-<span>\(\mathbb{Z}^{n}\)</span> הוא אינסופי אבל <span>\(\mathbb{Z} / 3\mathbb{Z}\)</span> הוא סופי.</p>
+</div>
+<div class="reminder">
+<p>במרחבים ווקטורים אם <span>\(W\leq V\)</span> הוא תת מרחב תמיד קיים משלים <span>\(U\leq V\)</span> כך ש-<span>\(V=W\oplus U\)</span>.</p>
+</div>
+<div class="remark">
+<p>זה לא נכון תמיד לגבי מודולים. למשל אם <span>\(R=\mathbb{Z}\)</span> ו-<span>\(M=C_{4}\)</span> אז עבור תת מודול <span>\(N=\langle 2 \rangle=\{ 0,2 \}\)</span> לא נקבל משלים. זאת כי התתי מודולים של <span>\(M\)</span> יהיו <span>\(0,N,M\)</span> ולא קיים משלים כיוון שאף אחד מהם לא מקיים <span>\(M=N\oplus U\)</span> עבור כל תת מודול <span>\(U\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">חוג פשוט למחצה</span><p>חוג שלכל תת מודול שלו יש משלים.</p>
+</div>
+<div class="reminder">
+<p>במרחבים ווקטורים כל קבוצה פורשת מינימלית הוא בסיס, וכן כל קבוצה בת"ל מקסימלית תהיה בסיס.</p>
+</div>
+<div class="remark">
+<p>לא תמיד נכון לגבי מודולים. למשל עבור <span>\(R=\mathbb{Z},M=\mathbb{Z}\)</span> הקבוצה <span>\(\{ 2,3 \}\)</span> פורשת את <span>\(\mathbb{Z}\)</span>(כיוון ש-<span>\(3-2=1\)</span>) אבל לא בת"ל:
+<span>$$3\cdot 2+(-2)\cdot 3 = 0$$</span>
+לעומת זאת הקבוצה <span>\(\{ 2 \}\)</span> היא בת"ל אבל לא פורשת את <span>\(\mathbb{Z}\)</span>(לא ניתן לקבל מספרים אי זוגיים).</p>
+</div>
+<div class="proposition">
+<p>מודול מעל <span>\(\mathbb{F}[x]\)</span> שקול למרחב ווקטורי <span>\(V\)</span> מעל <span>\(\mathbb{F}\)</span> עם אופרטור לינארי <span>\(T:V\to V\)</span> כך שהפעולה על <span>\(x\)</span> מוגדרת על ידי <span>\(x \cdot v = T(v)\)</span> והפעולה של פולינום תהיה מהצורה <span>\(p(x)=a_{0}+a_{1}x+\dots + a_{n}x^{n}\)</span> תהיה:
+<span>$$p(x)\cdot v=a_{0}v+a_{1}T(v)+\cdot\cdot\cdot+a_{n}T^{n}(v)$$</span>
+כלומר קיים הומומואפיזם <span>\(\rho:\mathbb{F}[x]\to \mathrm{End}(V)\)</span> אשר פועל כנאמר לעיל.</p>
+</div>
+<div class="example">
+<p>עבור <span>\(V=\mathbb{F}^{2}\)</span> ו-<span>\(T=\begin{pmatrix}0&amp;1\\1&amp; 0\end{pmatrix}\)</span> נקבל:
+<span>$$x\cdot\left(v_{1},v_{2}\right)=(v_{2},v_{1}).$$</span>
+ועבור פילינום:
+<span>$$\left(x^{2}+1\right)\cdot\left(v_{1},v_{2}\right)=T^{2}(v)+v=\left(v_{1},v_{2}\right)+\left(v_{1},v_{2}\right)=\left(2v_{1},2v_{2}\right)$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='prev-page'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

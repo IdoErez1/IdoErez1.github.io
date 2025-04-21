@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בעיית לנדאו ואהרונוב-בוהם</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_7_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_7_1`; }});</script>
+        <div class="content">
+        <h1>7.2  בעיית לנדאו ואהרונוב-בוהם</h1>
+    <div class="definition"><span class="keyword">כיול לנדאו</span><p><span>$$\phi=0\;,\quad A=-B_{0}\,y\,\hat{x}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">בעיית לאנדאו</span><p>הבעיה של מציאת רמות האנרגיה של חלקיק בשדה מגנטי אחיד הנתון על ידי <span>\(\mathbf{B}=B_{0}\hat{z}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>תחת בעיית לאנדאו מתקיים:
+<span>$$B=\nabla\times A=B_{0}\hat{z}\;.$$</span>
+כך שמשוואת שרדינגר תהיה:
+<span>$$-\frac{\hbar^{2}}{2m}\left[\left(\frac{\partial}{\partial x}+i\frac{q B_{0}}{\hbar}y\right)^{2}+\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}}\right]\Psi(\mathbf{r})=E\Psi(\mathbf{r})$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי הבחירה של הכיול שוברת את הסימטריה להזזה מרחבית באופן חלקי - ההמילטוניאן תלוי כעת ב-<span>\(y\)</span>.</p>
+</div>
+<div class="proposition">
+<p>הרמות אנרגיה של בעיית לנדאו נתונות על ידי
+<span>$$E_{n,k_{z}}=\hbar\omega_{B}\big(n+\frac{1}{2}\big)+\frac{\hbar^{2}k_{z}^{2}}{2m}$$</span>
+כך שהגורם הראשון נקרא רמות לנדאו. הפונקציית הגל תהיה:
+<span>$$\varphi_{n}(y)=\frac{1}{\pi^{1/4}a_{B}^{1/2}\sqrt{2^{n}n!}}\exp\left(-\frac{(y-y_{0})^{2}}{2a_{B}^{2}}\right)H_{n}\left(\frac{y-y_{0}}{a_{B}}\right)$$</span>
+כאשר <span>\(H_{n}(x)\)</span> הם פולינומי הרמיט ו-<span>\(a_{B}=\sqrt{ \frac{\hbar}{m\omega_{B}} }\)</span> הוא אורך אופייני.</p>
+</div>
+<div class="proof">
+<p>ההמילטוניאן מתחלף עם <span>\(p_{x},p_{z}\)</span> ולכן נחפש פתרון מהצורה:
+<span>$$\Psi(\mathbf{r})=e^{i(k_{x}x+k_{z}z)}\varphi(y)$$</span>
+נציב במשוואת שרדינגר ונקבל:
+<span>$$-\frac{\hbar^{2}}{2m}\left[\left(i k_{x}+i\frac{q B_{0}}{\hbar}y\right)^{2}+\frac{\partial^{2}}{\partial y^{2}}-k_{z}^{2}\right]\varphi(y)=E\varphi(y)\;.$$</span>
+כלומר:
+<span>$$-\frac{\hbar^{2}}{2m}\varphi^{\prime\prime}(y)+\frac{\hbar^{2}}{2m}\left(k_{x}+\frac{q B_{0}}{\hbar}y\right)^{2}\varphi(y)=\left(E-\frac{\hbar^{2}k_{z}^{2}}{2m}\right)\varphi(y)$$</span>
+אם נגדיר את הקבועים:
+<span>$$y_{0}=-\frac{\hbar k_{x}}{q B_{0}}\,,\quad\omega_{B}=\frac{|q|B_{0}}{m}\,,\quad\tilde{E}=E-\frac{\hbar^{2}k_{z}^{2}}{2m}$$</span>
+נקבל את המשוואות:
+<span>$$-\frac{\hbar^{2}}{2m}\varphi^{\prime\prime}(y)+\frac{m\omega_{B}^{2}}{2}\left(y-y_{0}\right)^{2}\varphi(y)=\tilde{E}\varphi(y)$$</span>
+שזה בדיוק המשוואה של אוסצילטור הרמוני החד מימדי הממורכז סביב <span>\(y=y_{0}\)</span>, האנרגיות יהיו:
+<span>$$\tilde{E}_{n}=\hbar\omega_{B}(n+\frac{1}{2})$$</span>
+ולכן:
+<span>$$E_{n,k_{z}}=\hbar\omega_{B}\big(n+\frac{1}{2}\big)+\frac{\hbar^{2}k_{z}^{2}}{2m}$$</span>
+כאשר פונקציית הגל תהיה הפונקציית הגל המתאימה של אוסצילטור הרמוני.</p>
+</div>
+<div class="remark">
+<p>המצב הקוונטי נקבע לחלוטין על ידי <span>\(k_{x},k_{z},n\)</span> כאשר הרמות אנרגיה נקבעות רק על ידי <span>\(k_{z},n\)</span>, כלומר בלתי תלויות ב-<span>\(k_{x}\)</span>. לכן כיוון ש-<span>\(k_{x}\)</span> רציף הניוון של כל רמת לאנדאו היא אינסופית. אם אבל למשל נתחום את הבעיה שלנו בקופסא באורך <span>\(L\)</span>, נקבל כי <span>\(k_{x}\)</span> נהיה דיסקרטי:
+<span>$$k_{x}=\frac{2\pi}{L_{x}}\,n_{x},\quad n_{x}\in\mathbb{Z}\,.$$</span>
+כאשר בנוסף מוגבל על ידי האילוץ:
+<span>$$0\leq y_{0}\leq L_{y}\quad\Leftrightarrow\quad0\leq k_{x}\leq{\frac{|q|B_{0}L_{y}}{\hbar}}$$</span>
+אחרת המרכז של <span>\(\varphi_{n}(y)\)</span> מחוץ לקופסא התחומה. באופן שקול:
+<span>$$0\leq n_{x}\leq\frac{|q|B_{0}L_{y}L_{x}}{2\pi\hbar}=\frac{|q|\Phi_{B}}{2\pi\hbar}$$</span>
+כאשר <span>\(\Phi_{B}=B_{0}L_{y}L_{x}\)</span> הוא השטף המגנטי החודר את התחום שבו החלקיק נע. ולכן הניוון יהיה נתון על ידי:
+<span>$$\mathrm{degeneracy}=\frac{|q|\Phi_{B}}{2\pi\hbar}=\frac{L_{y}L_{x}}{2\pi a_{B}^{2}}\gg1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">בעיית אהרונוב בוהר</span><p>נניח כי חלקיק מאולץ לנוע בטבעת ברדיוס <span>\(r=b\)</span> מסביב לציר <span>\(\hat{z}\)</span>. כמו כן נניח כי נמקם סולנואיד אינסופי עם זרם אחיד <span>\(I\)</span> ברדיוס <span>\(a&lt; b\)</span>.</p>
+</div>
+<div class="lemma">
+<p>הפוטנציאל הווקטורי נתון על ידי:
+<span>$$A=\begin{cases} \frac{B_{0}r}{2}\hat{\theta} &amp; r\leq a\\\frac{B_{0}a^{2}}{2r}\hat{\theta} &amp; r&gt;a\end{cases}=\begin{cases} \frac{B_{0}r}{2}\hat{\theta} &amp; r\leq a\\\frac{\Phi_{B}}{2\pi r}\hat{\theta} &amp; r&gt;a
+\end{cases}$$</span></p>
+</div>
+<div class="proof">
+<p>נובע ישירות מכך שהפוטנציאל הווקטורי נתון על ידי:
+<span>$$(\nabla\times A)_{z}={\frac{1}{r}}\left({\frac{\partial(r A_{\theta})}{\partial r}}-{\frac{\partial A_{r}}{\partial\theta}}\right)={\begin{cases}B_{0}&amp;{\mathrm{if}}\;\;r\leq a\\ 0&amp;{\mathrm{if}}\;\;r&gt;a\end{cases}}$$</span></p>
+</div>
+<div class="proposition">
+<p>ההמילטוניאן נתון על ידי:
+<span>$$H=\frac{1}{2m}\left[-\hbar^{2}\nabla^{2}+q^{2}A^{2}+2i\hbar q A\cdot\nabla\right]$$</span></p>
+</div>
+<div class="corollary">
+<p>משוואת שרדינגר נתונה על ידי:
+<span>$$\frac{1}{2m}\left[-\frac{\hbar^{2}}{b^{2}}\frac{d^{2}}{d\theta^{2}}+\left(\frac{q\Phi_{B}}{2\pi b}\right)^{2}+i\frac{\hbar q\Phi_{B}}{\pi b^{2}}\frac{d}{d\theta}\right]\Psi(\theta)=E\Psi(\theta)$$</span></p>
+</div>
+<div class="proof">
+<p>כיוון שהתנועה מאולצת על מעגל נקבל <span>\(\nabla\rightarrow\hat{\theta}(1/b)(d/d\theta)\)</span>. נציב את ההמילטוניאן והפוטנציאל הווקטורי ונקבל את המשוואה.</p>
+</div>
+<div class="proposition">
+<p>פתרון בעיית אהרונוב בוהר נתון על ידי אנרגיות:
+<span>$$E_{n}=\frac{\hbar^{2}}{2m b^{2}}\left(n-\frac{q\Phi_{B}}{2\pi\hbar}\right)^{2},\quad n\in\mathbb{Z}$$</span>
+ופונקציות גל:
+<span>$$\Psi=A e^{i\lambda\theta}\qquad \lambda=\frac{q\Phi_{B}}{2\pi\hbar}\pm\frac{b}{\hbar}\sqrt{2m E}$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב את משוואת שרדינגר בצורה:
+<span>$$\frac{d^{2}\Psi}{d\theta^{2}}+2i\beta\frac{d\Psi}{d\theta}-\epsilon\Psi=0$$</span>
+כאשר:
+<span>$$\beta=\frac{q\Phi_{B}}{2\pi\hbar}\quad\mathrm{and}\quad\epsilon=\frac{2m b^{2}E}{\hbar^{2}}-\beta^{2}$$</span>
+כאשר פונקציות הגל יהיו:
+<span>$$\Psi=A e^{i\lambda\theta}\qquad \lambda=\beta\pm\sqrt{\beta^{2}+\epsilon}=\beta\pm\frac{b}{\hbar}\sqrt{2m E}$$</span>
+ורמות אנרגיה:
+<span>$$E_{n}=\frac{\hbar^{2}}{2m b^{2}}\left(n-\frac{q\Phi_{B}}{2\pi\hbar}\right)^{2},\quad n\in\mathbb{Z}$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>בעיית לנדאו זה כשחלקיק נמצא בשדה מגנטי אחיד <span>\(\mathbf{B}=B_{0}\hat{z}\)</span>.</li>
+<li>עבור הכיול <span>\(\phi=0\)</span> ו-<span>\(A=-B_{0}y\hat{x}\)</span> נקבל <span>\(B=\bar{\nabla} \times A=B_{0}\hat{z}\)</span> ומשוואת שרדינגר תהיה:
+<span>$$-\frac{\hbar^{2}}{2m}\left[\left(\frac{\partial}{\partial x}+i\frac{q B_{0}}{\hbar}y\right)^{2}+\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}}\right]\Psi(\mathbf{r})=E\Psi(\mathbf{r}).$$</span></li>
+<li>הפתרון יהיה מהצורה <span>\(\Psi(\mathbf{r})=e^{i(k_{x}x+k_{z}z)}\varphi(y),\)</span> כאשר נקבל בעזרת משוואת שרדינגר משוואת אוסצילטור הרמוני:
+<span>$$-\frac{\hbar^{2}}{2m}\varphi^{\prime\prime}(y)+\frac{m\omega_{B}^{2}}{2}(y-y_{0})^{2}\varphi(y)=\tilde{E}\varphi(y),$$</span>
+כאשר:
+<span>$$y_{0}=-\frac{\hbar k_{x}}{q B_{0}},\quad\omega_{B}=\frac{|q|B_{0}}{m},\quad\tilde{E}=E-\frac{\hbar^{2}k_{z}^{2}}{2m}$$</span></li>
+<li>הרמות אנרגיה יקיימו:
+<span>$$E_{n,k_{z}}=\hbar\omega_{B}\Big(n+\frac{1}{2}\Big)+\frac{\hbar^{2}k_{z}^{2}}{2m}$$</span></li>
+<li>בעיית אהרונוב בוהם זה כשחלקיק נע לאורך טבעת ברדיוס <span>\(b\)</span> מסביב לסולנויד אינסופי ברדיוס <span>\(a&lt;b\)</span>.</li>
+<li>מחוץ לסולנואיד הפוטנציאל הווקטורי נתון על ידי <span>\(A=\frac{\Phi_{B}}{2\pi r}\,\hat{\theta}\)</span>.</li>
+<li>משוואת שרדינגר תהיה:
+<span>$$H=\frac{1}{2m}\left[-\hbar^{2}\nabla^{2}+q^{2}A^{2}+2i\hbar q A\cdot\nabla\right]$$</span>
+לאחר שמאלצים תנועה בטבעת נקבל:
+<span>$$\frac{1}{2m}\left[-\frac{\hbar^{2}}{b^{2}}\frac{d^{2}}{d\theta^{2}}+\left(\frac{q\Phi_{B}}{2\pi b}\right)^{2}+i\frac{\hbar q\Phi_{B}}{\pi b^{2}}\frac{d}{d\theta}\right]\Psi(\theta)=E\Psi(\theta)$$</span></li>
+<li>הספקטרום אנרגיה תהיה:
+<span>$$E_{n}=\frac{\hbar^{2}}{2m b^{2}}\left(n-\frac{q\Phi_{B}}{2\pi\hbar}\right)^{2},\quad n\in\mathbb{Z},$$</span>
+כאשר פונקציות הגל יהיו:
+<span>$$\Psi=A e^{i\lambda\theta}\qquad \lambda=\frac{q\Phi_{B}}{2\pi\hbar}\pm\frac{b}{\hbar}\sqrt{2m E}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='prev-page'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+</ul></li>
+        </body>
+        </html>
+        

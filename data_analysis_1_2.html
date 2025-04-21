@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מומנטים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='parent-page'><a href='./data_analysis.html'> אנליזת נתונים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הסתברות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+</ul></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_2.html'>2. מונטה קארלו</a></li>
+</ul></li>
+<li class='prev-page'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./data_analysis_1_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./data_analysis_1_1.html`;}});</script>
+        <div class="content">
+        <h1>1.2  מומנטים</h1>
+    <div class="definition"><span class="keyword">ערך תצפית</span><p>ערך תצפית של <span>\(u(x)\)</span> אשר תלוי במשתנה המקרי <span>\(x\)</span> מוגדר על ידי:
+<span>$$E(u(x))=\sum_{i=1}^{\infty}u(x_{i})p(x_{i})\qquad E(u(x))=\int_{-\infty}^{\infty}u(x)f(x)$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">תכונות של ערך תצפית</span><ol>
+<li>
+<p>ערך תצפית של קבוע הוא קבוע - <span>\(E(c)=c\)</span>. </p>
+</li>
+<li>
+<p>ערך תצפית של ערך תצפית מקיים - <span>\(E(E(u))=E(u)\)</span>. </p>
+</li>
+<li>
+<p>לינאריות - <span>\(E(v+u)=E(v)+E(u)\)</span>. </p>
+</li>
+<li>
+<p>הומוגניות - <span>\(E(cu)=c\cdot E(u)\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(u,v\)</span> בלתי תלוים מקיימים: 
+<span>$$E\left( u\cdot v \right)=E(u)\cdot E(v)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="symbolize">
+<p>לעיתים מסמנים ערך תצפית ב-<span>\(E(u)\equiv \langle u \rangle\)</span>. לעיתים גם מכונה ממוצע או מרכז המסה ונהוג להיות מסומן על ידי <span>\(\mu\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">שונות</span><p>יהי <span>\(x\)</span> משתנה מקרי כאשר <span>\(\mu=\langle x \rangle\)</span>. השונות <span>\(\mathrm{var}(x)\)</span> מוגדר על ידי המרחק הממוצע מהממוצע, כלומר:
+<span>$$\mathrm{var}(x)=E\left( \left( x-\mu \right)^{2} \right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של שונות</span><ol>
+<li>
+<p>כפל בסקלר מקיים: 
+<span>$$\mathrm{var}(cx)=c^{2}\mathrm{var}(x)$$</span></p>
+</li>
+<li>
+<p>ניתן לכתוב בעזרת ערך תצפית על ידי: 
+<span>$$\mathrm{var}(x)=E(x^{2})-\mu^{2}=\langle x^{2} \rangle -\langle x \rangle ^{2}$$</span></p>
+</li>
+<li>
+<p>אינווריאנטי להזזה של ההתפלגות. </p>
+</li>
+<li>
+<p>עבור שתי התפגויות בלתי תלויות <span>\(x_{1},x_{2}\)</span> מתקיים: 
+<span>$$\mathrm{var}(x_{1}+x_{2})=\mathrm{var}(x_{1})+\mathrm{var}(x_{2})$$</span>
+כאשר בפרט עבור סכום <span>\(x_{i}\)</span> של התפלגויות בלתי תלויות מתקיים <span>\(\mathrm{var}\left( \sum x_{i} \right)=\sum_{i}\mathrm{var}(x_{i})\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סטיית תקן</span><p>השורש של השונות. מסומן על ידי <span>\(\sigma=\sqrt{ \mathrm{var}(x) }\)</span>. לעיתים מסמנים את סטיית התקן על ידי <span>\(\sigma^{2}\)</span>.</p>
+</div>
+<div class="remark">
+<p>הגודל <span>\(\frac{\sigma}{\mu}\)</span> הוא גודל שלא תלוי בסקלות של ההתפלגות. זאת כי גם <span>\(\mu\)</span> וגם <span>\(\sigma\)</span> לינארים לכפל בסקלר.</p>
+</div>
+<div class="definition"><span class="keyword">צידוד</span><p>מודד את האי-סימטרייה של התפלגות ביחס לממוצע. מוגדר על ידי:
+<span>$$\gamma_{1}=E[(x-\mu)^{2}]/\sigma^{2}={\frac{E(x^{2})-3\mu\sigma^{2}-\mu^{2}}{\sigma^{3}}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מומנט</span><p>המומנט ה-<span>\(n\)</span> של התפלגות <span>\(f(x)\)</span> מוגדרת על ידי:
+<span>$$\mu_{n}=E(x^{n})=\int_{-\infty}^{\infty}x^{n}f(x)d x$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מומנט מרכזי</span><p>המומנט סביב המרכז של ההתפלגות. מוגדר על ידי:
+<span>$$\mu_{n}^{\prime}=E{\big(}(x-\mu)^{n}{\big)}=\int_{-\infty}^{\infty}(x-\mu)^{n}f(x)d x$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לראות כי <span>\(\mu'_{1}= 0\)</span>, <span>\(\mu'_{2}=\sigma^{2}\)</span> ו-<span>\(\mu'_{3}=\gamma_{1}\sigma^{2}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='prev-page'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

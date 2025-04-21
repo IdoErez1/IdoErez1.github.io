@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אידיאלים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings_1_5.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_1_3.html`;}});</script>
+        <div class="content">
+        <h1>1.4  אידיאלים</h1>
+    <div class="definition"><span class="keyword">אידיאל</span><p>תת חוג <span>\(I\)</span> של <span>\(R\)</span> נקרא אידיאל(דו צדדי) אם לכל <span>\(r\in R\)</span> ולכן <span>\(i \in I\)</span> מתקיים <span>\(ri,ir\in I\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">מבחן האידיאל</span><p>קבוצה לא ריקה <span>\(I\)</span> הוא אידיאל של החוג <span>\(R\)</span> אם:</p>
+<ol>
+<li>
+<p>אם <span>\(a,b \in I\)</span> גורר <span>\(a-b\in I\)</span> </p>
+</li>
+<li>
+<p>כאשר <span>\(i \in I\)</span> ו-<span>\(r \in R\)</span> גורר <span>\(ir,ri \in I\)</span> </p>
+</li>
+</ol>
+</div>
+<p>נשים לב כי תנאי אחד מראה כי תת חבורה חיבורית, ותנאי 2 מראה שזה אידיאל</p>
+<div class="remark">
+<ol>
+<li>
+<p>החוג כולו <span>\(R\)</span> והאידיאל הטריוויאלי <span>\(\{ 0 \}\)</span> הם תמיד אידיאלים </p>
+</li>
+<li>
+<p>מסומן <span>\(I\trianglelefteq R\)</span>. </p>
+</li>
+<li>
+<p>האידיאל יכיל את היחידה רק אם הוא החוג כולו. </p>
+</li>
+</ol>
+</div>
+<p>כעת ננסה להגדיר חוגי מנה כמו בחבורות. </p>
+<div class="proposition"><span class="keyword">חוג מנה</span><p>יהי <span>\(R\)</span> חוג, ו-<span>\(A\)</span> תת חוג של <span>\(R\)</span>. הקבוצה:
+<span>$$\left\{  r+A\mid r\in R  \right\}$$</span>
+יוצרת תת חוג ביחד עם הפעולה <span>\((s+A)+(t+A)=s+t+A\)</span> ו-<span>\((s+A)\cdot(t+A)=st+A\)</span> אם"ם החוג <span>\(A\)</span> הוא אידיאל.</p>
+</div>
+<div class="definition"><span class="keyword">חוג פשוט</span><p>חוג נקרא פשוט אם האידיאלים היחידים בו הם <span>\((0)=0\)</span> ו-<span>\((1)=R\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כל חוג חילוק פרט לחוג הטריוויאלי הוא פשוט</p>
+</div>
+<div class="proposition">
+<p>עבור חוג קומוטטיבי <span>\(R\)</span>, <span>\(R\)</span> הוא פשוט אם"ם הוא שדה.</p>
+</div>
+<div class="proposition">
+<p>לכל שדה <span>\(F\)</span> ו-<span>\(n\)</span> טבעי, חוג המטריצות <span>\(M_{n}(F)\)</span> פשוט.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+<li class='prev-page'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התפלגויות ידועות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+<li class='parent-page'><a href='./data_analysis.html'> אנליזת נתונים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הסתברות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_1.html'>1.1 אקסיומות ההסתברות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_2.html'>1.2 מומנטים</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_4.html'>1.4 התפלגויות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+</ul></li>
+<li class='parent_page-dropdown'><a href='./data_analysis_2.html'>2. מונטה קארלו</a></li>
+</ul></li>
+<li class='prev-page'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./data_analysis_1_5.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./data_analysis_1_3.html`;}});</script>
+        <div class="content">
+        <h1>1.4  התפלגויות ידועות</h1>
+    <div class="definition"><span class="keyword">התפלגות בינומית</span><p>ההתפלגות של להצליח <span>\(k\)</span> מתוך <span>\(n\)</span> נסיונות עם הסתברות של <span>\(p\)</span> עבור כל ניסיון. נתון על ידי:
+<span>$$B_{p}^{n}(k)={\binom{n}{k}}p^{k}(1-p)^{(n-k)}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות בינומית</span><ul>
+<li>ערך התצפית נתון על ידי:
+<span>$$E(k)=np$$</span></li>
+<li>סטיית התקן נתון על ידי:
+<span>$$\sigma^{2}=np(1-p)$$</span></li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות מולטינומית</span><p>אם יש <span>\(N\)</span> אפשרויות עם הסתברות של <span>\(p_{1},p_{2},\dots,p_{N}\)</span> אזי ההסתברות לקבל את התוצאה <span>\(k_{1},k_{2},\dots,k_{N}\)</span> תהיה:
+<span>$$M_{p_{1},p_{2},\ldots,p_{N}}^{n}(k_{1},k_{2},\ldots,k_{N})={\frac{n!}{\prod k_{i}!}}\prod_{i=1}^{N}p_{i}^{k_{i}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות מולטינומית</span><ul>
+<li>מתקיים:
+<span>$$\sum p_{i}=1\,\qquad \sum k_{i}=n$$</span></li>
+<li>ערך התצפית נתון על ידי:
+<span>$$E(k_{i})=n p_{i}$$</span></li>
+<li>מטריצת הקו וריאנס נתונה על ידי:
+<span>$$E(k_{i})=n p_{i}$$</span>
+כאשר בפרט עבור <span>\(N=2\)</span> נקבל את ההתפלגות הבינומית.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות פואסונית</span><p>כאשר יש סיכוי אקראי שאירוע מסויים יתרחש עם תדירות ממוצעת <span>\(\lambda\)</span> בפרק זמן נתון אז ההסתברות יהיה <span>\(k\)</span> אירועים כאלה בפרק זמן יהיה נתון על ידי התפלגות פואסונית:
+<span>$$p_{\lambda}(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות פואסונית</span><ul>
+<li>ערך התצפית מקיים <span>\(E(k)=\lambda\)</span>.</li>
+<li>השונות מקיימת <span>\(\mathrm{var}(x)=\lambda\)</span>.</li>
+<li>מקרה גבולי של התפלגות בינומית עם <span>\(np=\lambda\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות איחידה</span><p>התפלגות רציפה שהצפיפות הסתברות המוגדרת עבור תחום באורך <span>\(\alpha\)</span> וממוצע <span>\(\mu\)</span> על ידי:
+<span>$$f(x)=\begin{cases}\frac{1}{\alpha} &amp; \left\lvert  x-\mu  \right\rvert \leq \alpha / 2 \\0 &amp; \text{else}
+\end{cases}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות אחידה</span><ul>
+<li>הערך הממוצע זה הערך תצפית - <span>\(\langle x \rangle=\mu\)</span>.</li>
+<li>השונות תקיים -<span>\(\sigma^{2}=\frac{\alpha^{2}}{12}\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות נורמלית</span><p>עבור ממוצע <span>\(\mu\)</span> וסטיית תקן <span>\(\sigma\)</span> פונקציית הצפיפות ההסתברות מוגדרת על ידי:
+<span>$$N(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma}e^{-(x-\mu)^{2}/(2\sigma^{2})}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות נורמלית</span><ul>
+<li>סכום של התפלגויות נורמלית תהיה התפלגות נורמלית עם <span>\(\sigma^{2}=\sum\sigma_{i}^{2}\)</span> ו-<span>\(\mu=\sum\mu_{i}\)</span>.</li>
+<li>בגבול של מספרים גדולים, התפלגות בינומית, פואסנית, ו-<span>\(\chi^{2}\)</span> שואפות להתפלגות נורמלית.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות נורמלית רב מימדית</span><p>עבור מטריצת קו ווריאנס <span>\(C\)</span> מוגדר על ידי:
+<span>$$N(\vec{x})=\frac{1}{\sqrt{(2\pi)^{n}\det(C)}}\exp\left(-\frac{1}{2}(\vec{x}-\vec{x_{0}})^{T}C^{-1}(\vec{x}-\vec{x_{0}})\right)$$</span>
+כאשר לעיתים קוראים ל-<span>\(V=C^{-1}\)</span> מטריצת משקל.</p>
+</div>
+<div class="example">
+<p>במקרה הדו מימדי
+<span>$$C=\left(\begin{array}{c c}{{s_{x}^{2}}}&amp;{{\rho s_{x}s_{y}}}\\ {{\rho s_{x}s_{y}}}&amp;{{s_{y}^{2}}}\end{array}\right)\implies V=\frac{1}{1-\rho^{2}}\left(\!\!\begin{array}{c c}{{1/s_{x}^{2}}}&amp;{{-\rho/s_{x}s_{y}}}\\ {{-\rho/s_{x}s_{y}}}&amp;{{1/s_{y}^{2}}}\end{array}\!\!\right)$$</span>
+כאשר <span>\(\det(C)=s_{x}^{2}s_{y}^{2}\left( 1-\rho^{2} \right)=1/\det(V)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">התפלגות אקספוננציאלית</span><p>התפלגות אשר צפיפות ההסתברות מוגדרת על ידי:
+<span>$$f(t)=\lambda e^{-\lambda t}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של התפלגות אקספוננציאלית</span><ul>
+<li>חסר זיכרון - כלומר אינווריאנטי להזזה של זמן.</li>
+<li>ממוצע יהיה <span>\(\mu =\frac{1}{\lambda}\)</span> כאשר השונות תהיה <span>\(\sigma^{2}=\frac{1}{\lambda^{2}}\)</span>.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">התפלגות חי-בריבוע</span></div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./data_analysis_1_5.html'>1.5 התפלגויות מרובות משתנים</a></li>
+<li class='prev-page'><a href='./data_analysis_1_3.html'>1.3 החלפת משתנה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

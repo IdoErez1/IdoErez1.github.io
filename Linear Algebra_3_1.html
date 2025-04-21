@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>צורה מדורגת מצומצת</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_3_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_2_5`; }});</script>
+        <div class="content">
+        <h1>3.1  צורה מדורגת מצומצת</h1>
+    <div class="definition"><span class="keyword">מרחב העמודות</span><p>יהי <span>\(A \in M_{n,m}\left( \mathbb{F}  \right)\)</span> מטריצה עם עמודות <span>\(a_{i}\in \mathbb{F}^{n}\)</span>. אזי מרחב העמודות יהיה:
+<span>$$U=\mathrm{Span}\left\{  a_{1},a_{2},\dots,a_{m}  \right\}$$</span>
+כאשר זהו תת מרחב של <span>\(\mathbb{F} ^{n}\)</span> כיוון שזהו פרוש של איברים במרחב ווקטורי.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב השורות</span><p>יהי <span>\(A \in M_{n,m}\left( \mathbb{F}  \right)\)</span> מטריצה עם שורות <span>\(a_{i}\in \mathbb{F}^{m}\)</span>. אזי מרחב השורות יהיה:
+<span>$$U=\mathrm{Span}\left\{  a_{1},a_{2},\dots,a_{m}  \right\}$$</span>
+כאשר זהו תת מרחב של <span>\(\mathbb{F} ^{m}\)</span> כיוון שזהו פרוש של איברים במרחב ווקטורי.</p>
+</div>
+<div class="definition"><span class="keyword">פעולת שורה אלמנטרית</span><p>פעולה שניתן לבצע על המטריצה אשר אינה משנה את מרחב העמודות. ניתן לחלק אותם לשלושה סוגים:</p>
+<ol>
+<li>
+<p>להחליף שתי שורות של המטריצה - זה פשוט לשנות את הסדר שלהם בפרוש, ולכן לא ישנה את המרחב המתקבל. נסמן את החלפת השורה ה-<span>\(i\)</span> עם השורה ה-<span>\(j\)</span> בסימון <span>\(R_{i}\leftrightarrow R_{j}\)</span>. </p>
+</li>
+<li>
+<p>להכפיל שורה של המטריצה בקבוע - לא ישפיע על הפרוש כי ניתן להכפיל כל ווקטור בפרוש בסקלר. נסמן את כפל השורה ה-<span>\(i\)</span> בקבוע <span>\(c\)</span> בסימון <span>\(R_{i}\to cR_{i}\)</span>. </p>
+</li>
+<li>
+<p>להוסיף כפולה של שורה אחת לשורה אחרת - לא ישפיע על הפרוש כי הפרוש כולל גם את החיסור של הכפולה. נסמן את הוספה של השורה ה-<span>\(j\)</span> כפול <span>\(c\)</span> לשורה ה-<span>\(i\)</span> בסימון <span>\(R_{i}\to R_{i}+cR_{j}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>לכל פעולת שורה אלמטרית <span>\(\varepsilon\)</span> קיים פעולת שורה אלמטרית הופכית:</p>
+<ol>
+<li>
+<p>אם <span>\(\varepsilon=R_{i}\leftrightarrow R_{j}\)</span> אז הפעולה ההפוכה תהיה אותה הפעולה - <span>\(\varepsilon ^{-1}=R_{i}\leftrightarrow R_{j}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\varepsilon=R_{i}\to cR_{j}\)</span> אז הפעולה ההפוכה תהיה <span>\(\varepsilon ^{-1}=R_{i}\to \frac{1}{c}R_{j}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\varepsilon=R_{i}\to R_{i}+cR_{j}\)</span> אז הפעולה ההפוכה תהיה <span>\(\varepsilon ^{-1}=R_{i}\to R_{i}+(-cR_{j})\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מטריצת שורה אלמטרית</span><p>אלו המטריצות שהמכפלה בהם מימין שקול לביצוע פעולת שורה אלמנטרית. למעשה מקבלים אותם מביצוע הפעולות על מטריצת היחידה:</p>
+<ol>
+<li>
+<p>לכל <span>\(1\leq i,j\leq n\)</span> כך ש-<span>\(i\neq j\)</span> המטריצה <span>\(P_{i,j}\)</span> זה המטריצה היחידה שמחליפים את השורה ה-<span>\(i\)</span> וה-<span>\(j\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(1\leq i\leq n\)</span> ו-<span>\(a \in \mathbb{F} ^{\times}\)</span> נגדיר <span>\(M_{i}(a)\)</span> המטריצת שמתקבלת ממטריצת היחידה לאחר הכפלת השורה ה-<span>\(i\)</span> ב-<span>\(a\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(1\leq i,j\leq n\)</span> כך ש-<span>\(i\neq j\)</span> ו-<span>\(a \in \mathbb{F}\)</span> נגדיר את <span>\(E_{i,j}(a)\)</span> להיות המטריצה האלמנטרית המתקבלת ממטריצת היחידה ע"י הוספה של השורה ה-<span>\(i\)</span> כפול <span>\(a\)</span> לשורה ה-<span>\(j\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p><span>$$P_{1,3}=\begin{bmatrix}0&amp;0&amp;1&amp;0\\ 0&amp;1&amp;0&amp;0\\ 1&amp;0&amp;0&amp;0\\ 0&amp;0&amp;0&amp;1\end{bmatrix}\qquad M_{4}(-2)=\begin{bmatrix}1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;1&amp;0\\ 0&amp;0&amp;0&amp;-2\end{bmatrix}\qquad E_{2,4}(3)=\begin{bmatrix}1&amp;0&amp;0&amp;0\\ 0&amp;1&amp;0&amp;0\\ 0&amp;0&amp;1&amp;0\\ 0&amp;3&amp;0&amp;1\end{bmatrix}$$</span></p>
+</div>
+<div class="corollary">
+<p>כמו הפעולות שורה האלמנטריות, כל המטריצות האלמטריות הפיכות כך שמתקיים:
+<span>$$P_{i,j}P_{i,j}=I,\quad M_{i}(a)M_{i}(a^{-1})=I,\quad E_{i,j}(a)E_{i,j}(-a)=I$$</span></p>
+</div>
+<div class="remark">
+<p>ההכפלה מימין זה חשוב. אם נכפיל בשמאל נקבל כי המטריצה פועלת על העמודות, ולכן למעשה יהיה שקול לביצוע פעולת עמודה אלמנטרית. </p>
+</div>
+<div class="definition"><span class="keyword">מטריצות שקולות שורה</span><p>מטריצות אשר ניתן להגיע מאחת לשנייה על ידי פעולות שורה אלמטריות נקראות שקולות שורה. כלומר מטריצות <span>\(A,B\)</span> יהיו שקולות שורה אם קיים סדרה של פעולות שורה אלמנטריות <span>\(\varepsilon_{1},\dots,\varepsilon_{p}\)</span> כך ש:
+<span>$$B=\varepsilon_{p}\left( \dots\varepsilon_{2}\left( \varepsilon_{1}(A) \right) \right)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצה מדורגת מצומצמת</span><p>מטריצה אשר מקיימת את התנאים הבאים:</p>
+<ol>
+<li>
+<p>איבר מוביל(האיבר הראשון שלא אפס) של כל שורה(אם הוא קיים - זה בסדר אם יש שורה של אפסים) שווה ל-1. </p>
+</li>
+<li>
+<p>כל המקדמים בעמודה של איבר מוביל כלשהו הם 0 פרט לאיבר מוביל עצמו - כלומר בכל עמודה תהיה רק איבר אחד ששווה ל-1(כמובן, שוב ייתכן כי כל העמודה אפסים). </p>
+</li>
+<li>
+<p>צריכה להיות "בצורה של מדרגות יורדות" - אם בשורה כלשהי יש איבר מוביל, אז גם בשורה שמעליה יש איבר מוכיל והוא נמצא בצד שמאל מהאיבר המוביל של השורה המקורית. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>מתנאי 3 נובע כי אם בשורה כלשהי אין איבר מוביל, אז גם בכל השורות שמתחתיה אין איבר מוביל.</p>
+</div>
+<div class="definition"><span class="keyword">איבר חופשי וקשור</span><p>נניח כי המטריצה המורחבת של מערכת משוואות כלשהי היא מדורגת מצומצמת.</p>
+<ol>
+<li>
+<p>נעלם של המערכת בעמודה המתאימה לעמודה שיש בה איבר מוביל יקרא קשור - כלומר נעלם המתאים לעמודה שיש בה 1. </p>
+</li>
+<li>
+<p>נעלם של המערכת בעמודה שבה אין איבר מוביל יקרא חופשי. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>ניתן להעביר כל מטריצה לצורה מדורגת מצומצת</p>
+</div>
+<div class="example">
+<p>נסתכל על המטריצה:
+<span>$$A=\begin{pmatrix} 0 &amp; 2 &amp; 4 &amp; -2 \\3 &amp; 2 &amp; -2 &amp; -5 \\1 &amp; -1 &amp; -4 &amp; 1\end{pmatrix}$$</span>
+וננסה צורה שקולת שורה אשר מדורגת מצומצמת:
+<span>$$\begin{gather}\begin{pmatrix}0 &amp; 2 &amp; 4 &amp; -2 \\3 &amp; 2 &amp; -2 &amp; -5 \\1 &amp; -1 &amp; -4 &amp; 1\end{pmatrix}\xrightarrow{R_{1}\to \frac{1}{2}R_{2}}\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; -1 \\3 &amp; 2 &amp; -2 &amp; -5 \\1 &amp; -1 &amp; -4 &amp; 1\end{pmatrix}\xrightarrow{R_{3}\to  R_{3}+R_{1}}\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; -1 \\3 &amp; 2 &amp; -2 &amp; -5 \\1 &amp; 0 &amp; -2 &amp; 0\end{pmatrix}\xrightarrow{R_{2}\to R_{2}-2R_{1}} \\\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; -1 \\3 &amp; 0 &amp; -6 &amp; -3 \\1 &amp; 0 &amp; -2 &amp; 0\end{pmatrix}\xrightarrow{R_{2}\to \frac{1}{3}R_{2}}\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; -1 \\1 &amp; 0 &amp; -2 &amp; -1 \\1 &amp; 0 &amp; -2 &amp; 0\end{pmatrix}\xrightarrow{R_{3}\to R_{3}-R_{2}}\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; -1 \\1 &amp; 0 &amp; -2 &amp; -1 \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\xrightarrow{R_{1}\to R_{1}+R_{3}} \\\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; 0 \\1 &amp; 0 &amp; -2 &amp; -1 \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\xrightarrow{R_{2}\to R_{2}+R_{3}}\begin{pmatrix}0 &amp; 1 &amp; 2 &amp; 0 \\1 &amp; 0 &amp; -2 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\xrightarrow{R_{1}\leftrightarrow  R_{2}}\begin{pmatrix}1 &amp; 0 &amp; -2 &amp; 0 \\0 &amp; 1 &amp; 2 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}
+\end{gather}$$</span>
+והגענו לצורה מדורגת מצומצת. </p>
+</div>
+<div class="proposition">
+<p>מטריצה ריבועית היא הפיכה אם"ם היא מכפלה של מטריצות אלמטריות</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>עבור הכיוון הראשון אנו יודעים כי מכפלה של מטריצות הפיכות היא הפיכה, ולכן כיוון שכל מטריצה אלמנטרית היא הפיכה נקבל כי אם מטריצה היא מכפלה של מטריצות אלמנטריות אז היא הפיכה. </p>
+</li>
+<li>
+<p>בכיוון השני נניח כי <span>\(A\)</span> הפיכה. לכן היא שקולת שורה למטריצת היחידה, ולכן קיים מכפלה של מטריצות אלמטריות אשר יהיה שווה למטריצה. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='prev-page'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

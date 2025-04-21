@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שימוש במטריצות הופכיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+<li class='parent-page'><a href='./Linear Algebra'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_1'>1.1 שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_2'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_3'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_4'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_5'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_1_6'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_1'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_2'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_3'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_4'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_2_5'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_1'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_3'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_1'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_2'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_3'>4.3 פונקציות נפח</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_4'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_4_5'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_1'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_2'>5.2 פולינום מינימלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_5_3'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_1'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_2'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_6_3'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_1'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_2'>7.2 צורת ג'ורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_3'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_7_4'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_1'>8.1 תבנית בילינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_2'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_8_3'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_1'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_2'>9.2 אורתוגונאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_3'>9.3 צמוד ואונטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_4'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_5'>9.5 מטריצות חיוביות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_9_6'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_1'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_2'>10.2 המרחב הדואלי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_10_3'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_1'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_2'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent-page-dropdown'><a href='./Linear Algebra_11_3'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Linear Algebra_3_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Linear Algebra_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  שימוש במטריצות הופכיות</h1>
+    <div class="definition"><span class="keyword">מערכת עם עודף משוואות</span><p>באנגלית נקרא Over-determined system. זוהי מערכת עם יותר משוואות מאשר משתנים.</p>
+</div>
+<div class="definition"><span class="keyword">מערכת עם חוסר משוואות</span><p>באנגלית נקרא under-determined system. זוהי מערכת משוואות עם יותר משתנים מאשר משוואות.</p>
+</div>
+<div class="definition"><span class="keyword">מטריצה רחבה</span><p>מטריצה עם יותר עמודות משורות. כלומר <span>\(A \in M_{n \times m}\left( \mathbb{F}  \right)\)</span> כאשר <span>\(m&gt;n\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטריצה גבוהה</span><p>מטריצה עם יותר שורות מעמודות. כלומר <span>\(A \in M_{n \times m}\left( \mathbb{F}  \right)\)</span> כאשר <span>\(m&lt;n\)</span>.</p>
+</div>
+<p>כאשר נשים לב כי:</p>
+<ol>
+<li>
+<p>מערכת עם עודף משוואות היא מיוצגת על ידי מטריצה גבוהה. </p>
+</li>
+<li>
+<p>מערכת עם חוסר משוואות מיוצגת על ידי מטריצה רחבה. </p>
+</li>
+</ol>
+<h3>הופכי שמאלי</h3>
+<div class="definition"><span class="keyword">הופכי שמאלי</span><p>יהי <span>\(A \in M_{n,m}\left( \mathbb{F}  \right)\)</span> מטריצה. מטריצה <span>\(X \in M_{l,n}\left( \mathbb{F}  \right)\)</span> נקראת מטריצה הופכית שמאלית אם מקיימת:
+<span>$$XA=Id$$</span></p>
+</div>
+<div class="example">
+<p>עבור
+<span>$$\mathbf{a}={\left[\begin{array}{c}{2}\\ {0}\\ {-1}\\ {1}\end{array}\right]}$$</span>
+נקבל כי:
+<span>$$\begin{array}{l l l l l}{{\left[1/2\quad0\quad0\quad0\right]}}&amp;{{\left[0\quad0\quad-1\quad0\right]}}&amp;{{\left[0\quad0\quad0\quad1\right]}}\end{array}$$</span>
+ולמשל עבור:
+<span>$$A={\left[\begin{array}{l l}{4}&amp;{3}\\ {-6}&amp;{-4}\\ {-1}&amp;{-1}\end{array}\right]}$$</span>
+נקבל כי למשל המטריצות הבאות יהיו הופכיות שמאליות:
+<span>$$B={\frac{1}{9}}\begin{bmatrix}-7&amp;-8&amp;11\\ 11&amp;10&amp;-16\end{bmatrix}\quad\quad C={\frac{1}{2}}\begin{bmatrix}0&amp;-1&amp;4\\ 0&amp;1&amp;-6\end{bmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם ל-<span>\(A\)</span> יש הופכי שמאלי, אז העמודות של <span>\(A\)</span> הם בלתי תלויות לינארית</p>
+</div>
+<div class="proof">
+<p>נניח כי ל-<span>\(A \in M_{m,n}\left( \mathbb{F}  \right)\)</span> יש הופכי שמאלי <span>\(B\)</span>. ויהי <span>\(a_{1},\dots,a_{n}\in F^{m}\)</span> העמודות של <span>\(A\)</span>. אזי:
+<span>$$x_{1}\mathbf{a}_{1}+\cdots+x_{n}\mathbf{a}_{n}=0$$</span>
+עבור <span>\(x_{1},\dots,x_{n}\in \mathbb{F}\)</span> כלשהם. כעת נסמן <span>\(x=\left( x_{1},\dots,x_{n} \right)\)</span> ונקבל:
+<span>$$x=Ix=BAx=B 0 = 0\implies x_{1}=x_{2}=\dots=x_{n}=0$$</span>
+ונקבל כי בלתי תלוי לינארית.</p>
+</div>
+<div class="corollary">
+<p>אם ל-<span>\(A\)</span> יש הופכי שמאלי, אזי <span>\(A\)</span> היא או מטריצה ריבועית, או מטריצה "גבוהה".</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי <span>\(A\)</span> מטריצה רחבה. כלומר <span>\(A \in M_{m,n}\left( \mathbb{F}  \right)\)</span> כך ש-<span>\(m&lt;n\)</span>. כעת יש לו <span>\(n\)</span> עמודות, שכל אחד מהם הוא ווקטור ב-<span>\(\mathbb{F} ^{m}\)</span>. כיוון שמימד המרחב קטן מאוסף הווקטורים נקבל סתירה לזה שבלתי תלוי לינארית.</p>
+</div>
+<div class="corollary">
+<p>כלומר נקבל כי ההופכי השמאלי אם קיים זה מתי שיש לנו עודף משוואות. </p>
+</div>
+<div class="proposition">
+<p>עבור מערכת משוואות <span>\(Ax=b\)</span> כאשר ל-<span>\(A\)</span> יש הופכי שמאלי <span>\(C\)</span>, נקבל כי:</p>
+<ol>
+<li>
+<p>אם <span>\(ACb=b\)</span> אזי <span>\(x=Cb\)</span> הוא הפתרון היחיד. </p>
+</li>
+<li>
+<p>אם <span>\(ACb\neq b\)</span> אזי לא קיים פתרון כלל. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>אם קיים <span>\(x\)</span> אשר מקיים את המשוואה אז נקבל:
+<span>$$Ax=b\implies CAx=Cb\implies x=Cb$$</span>
+כאשר אם לא קיים זה כמובן לא יהיה פתרון.</p>
+</div>
+<div class="proposition">
+<p>להעתקה לינארית <span>\(T_{A}=Ax\)</span> יש הופכי שיאמלי אם"ם <span>\(T_{A}\)</span> היא חח"ע.</p>
+</div>
+<h3>הופכי ימיני</h3>
+<div class="definition"><span class="keyword">הופכי ימיני</span><p>יהי <span>\(A \in M_{n,m}\left( \mathbb{F}  \right)\)</span> מטריצה. מטריצה <span>\(X \in M_{m,l}\left( \mathbb{F}  \right)\)</span> נקראת מטריצה הופכית ימינית אם מקיימת:
+<span>$$AX=Id$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מטריצה משוחלפת</span><p>יהי <span>\(A\in M_{n,m}\left( \mathbb{F}  \right)\)</span> מטריצה. אזי המטריצה <span>\(A^{t}\in M_{m,n}\left( \mathbb{F}  \right)\)</span> תהיה המטריצה שעבורה השורות והעמודות מתהפכות. כלומר:
+<span>$$(A^{t})_{ij}=A_{ji}$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{bmatrix}\pi&amp;i&amp;-1\\ 5&amp;7&amp;3/2\end{bmatrix}^{T}=\begin{bmatrix}\pi&amp;5\\ i&amp;7\\ -1&amp;3/2\end{bmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$(AB)^{t}=B^{t}A^{t}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(B\)</span> הוא הופכי ימיני של <span>\(A\)</span> אז <span>\(B^{t}\)</span> הוא הופכי שמאלי של <span>\(A^{t}\)</span>. ובאופן מקבל אם <span>\(B\)</span> הוא הופכי שמאלי של <span>\(A\)</span> אז <span>\(B^{t}\)</span> הוא הופכי ימיני של <span>\(A^{t}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(B\)</span> הופכי ימיני של <span>\(A\)</span>. לכן:
+<span>$$B^{T}A^{T}=(A B)^{T}=Id$$</span>
+ואם <span>\(B\)</span> הוא הופכי שמאלי של <span>\(A\)</span> מתקיים באופן זהה:
+<span>$$A^{T}B^{T}=(BA)^{T}=Id$$</span></p>
+</div>
+<p>כעת ניתן להמיר את התוצאות הקודמות שלנו על הופכי שמאלי לגבי הופכי ימיני:</p>
+<div class="proposition">
+<ol>
+<li>
+<p>אם ל-<span>\(A\)</span> יש מטריצה הופכית ימינית היא תהיה ריבועית או רחבה. </p>
+</li>
+<li>
+<p>אם למטריצה יש הופכית ימינית אז השורות שלה יהיו בלתי תלויות לינארית. </p>
+</li>
+<li>
+<p>אם <span>\(T_{A}=Ax\)</span> אופרטור לינארי אז קיים הופכי ימיני אם"ם <span>\(T_{A}\)</span> הוא על. </p>
+</li>
+</ol>
+</div>
+<h3>הופכי דו צדדי</h3>
+<div class="definition"><span class="keyword">מטריצה הפוכית</span><p>יהי <span>\(A\)</span> מטריצה. <span>\(A^{-1}\)</span> יקרא המטריצה ההופכית אם מתקיים:
+<span>$$AA^{-1}=Id=A^{-1}A$$</span>
+כאשר אם קיים הופכי אז המטריצה <span>\(A\)</span> נקראת הפיכה.</p>
+</div>
+<div class="corollary">
+<p>מטריצה היא הפיכה אם"ם קיים הופכי ימיני וגם קיים הופכי שמאלי.</p>
+</div>
+<div class="proposition">
+<p>קיימת מטריצה הופכית יחידה.</p>
+</div>
+<div class="proposition">
+<p>אם מטריצה היא הפיכה, אז היא ריבועית.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(A \in M_{n\times n}\left( \mathbb{F}  \right)\)</span> מטריצה ריבועית. אזי הביטויים הבאים שקולים:</p>
+<ol>
+<li>
+<p>המטריצה <span>\(A\)</span> הפיכה. </p>
+</li>
+<li>
+<p>למטריצה <span>\(A\)</span> קיים הופכי ימיני. </p>
+</li>
+<li>
+<p>למטריצה <span>\(A\)</span> קיים הופכי שמאלי. </p>
+</li>
+<li>
+<p>השורות של <span>\(A\)</span> הם בלתי תלויות לינאריות. </p>
+</li>
+<li>
+<p>העמודות של <span>\(A\)</span> הם בלתי תליות לינארית. </p>
+</li>
+</ol>
+</div>
+<h2>פסודו הופכי</h2>
+<div class="definition"><span class="keyword">מטריצת גראם</span><p>עבור <span>\(A\in M_{n,m}\left( \mathbb{R} \right)\)</span> נגדיר את המטריצת גראם להיות המטריצה הבאה:
+<span>$$A^{T}A \in M_{n,n}\left( \mathbb{R} \right)$$</span></p>
+</div>
+<div class="proposition">
+<p>למטריצה <span>\(A\)</span> יש עומדות בלתי תלויות לינארית אם"ם המטריצת גראם <span>\(A^{T}A\)</span> הפיכה, ובמקרה זה קיים הופכי שמאלי.</p>
+</div>
+<div class="proposition">
+<p>למטריצה <span>\(A\)</span> יש שורות בלתי תלויות לינארית אם"ם המטריצה <span>\(AA^{T}\)</span> הפיכה. ובמקרה זה קיים הופכי שמאלי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Linear Algebra_3_4'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+<li class='prev-page'><a href='./Linear Algebra_3_2'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+            <link rel="stylesheet" href='./styles/style.css'> 
+            <link rel="stylesheet" href='./styles/questions_style.css'> 
+            
+    <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+    
+        <title>שאלות - אלגברה לינארית</title>
+        <style>
+            .hidden { display: none; }
+        </style>
+      <script type="text/javascript">
+        window.onload = function() {
+          const subjects = {"הפיכות": [{"question": "<p>ציין כמה שיותר שקילויות לך שמטריצה ריבועית הפיכה.\n?\nהביטויים הבאים שקולים:</p>\n<ol>\n<li>\n<p>המטריצה <span>\\(A\\)</span> הפיכה. </p>\n</li>\n<li>\n<p>למערכת <span>\\(Ax=0\\)</span> יש רק את הפתרון הטריוויאלי. </p>\n</li>\n<li>\n<p>הצורה המדורגת מצומצת של <span>\\(A\\)</span> זו מטריצת היחידה </p>\n</li>\n<li>\n<p>המטריצה <span>\\(A\\)</span> היא מכפלה של מטריצות אלמטריות. </p>\n</li>\n<li>\n<p>למשוואה <span>\\(Ax=b\\)</span> יש בדיוק פתרון אחד לכל <span>\\(b\\)</span>. </p>\n</li>\n<li>\n<p>הדטרמיננטה שונה מ-0. </p>\n</li>\n<li>\n<p>העמודות של <span>\\(A\\)</span> הם בת\"ל. </p>\n</li>\n<li>\n<p>השורשות של <span>\\(A\\)</span> הם בת\"ל. </p>\n</li>\n<li>\n<p>המרחב השורות של <span>\\(A\\)</span> פורש את כל המרחב. </p>\n</li>\n<li>\n<p>המרחב עמודות של <span>\\(A\\)</span> פורש את המרחב. </p>\n</li>\n<li>\n<p>הדרגה של המטריצה היא <span>\\(n\\)</span>. </p>\n</li>\n<li>\n<p>מימד הגרעין יהיה 0. </p>\n</li>\n<li>\n<p>המרחב המאונך לגרעין יהיה המרחב כולו. </p>\n</li>\n<li>\n<p>המימד המאונך לתמונה יהיה <span>\\(\\{ 0 \\}\\)</span>. </p>\n</li>\n<li>\n<p>הערך <span>\\(\\lambda=0\\)</span> הוא לא ערך עצמי של <span>\\(A\\)</span>. </p>\n</li>\n</ol>", "answer": ""}], "ערכים עצמיים וצורת ג'ורדן": [{"question": "<p>ווקטורים עצמיים עם ערכים עצמיים שונים יהיו:\n?\nבלתי תלויים לינארית.</p>\n<p>הריבוי הגאומטרי של ע\"ע <span>\\(\\lambda\\)</span> יהיה:\n?\nמימד המרחב העצמי של <span>\\(\\lambda\\)</span>.</p>\n<p>הערכים העצמיים של אופרטור משולשי?\n?\nהם הערכים על האלכסון.</p>\n<p>איך ניתן למצוא את סכום ומכפלת הערכים העצמיים?\n?\nסכום הערכים העצמיים - העקבה. מכפלת הערכים העצמיים - הדטרימיננטה. נכון גם כאשר לא לכסין.</p>\n<p>הריבוי האלגברי של <span>\\(\\left( x-\\lambda \\right)\\)</span> בפולינום האופייני יהיה:\n?\nמימד המרחב העצמי המוכלל.</p>\n<p>מה הקשר בין הריבוי האלגברי לריבוי הגאומטרי?\n?\nהריבוי האלגברי תמיד גדול או שווה לריבוי הגאומטרי, כאשר הם שווים עבור כל ערך עצמי אז האופרטור לכסין.</p>\n<p>מה מייצג הריבוי האלגברי של <span>\\(\\left( x-\\lambda \\right)\\)</span> בפולינום <u>המינימלי</u>\n?\nגודל הבלוק הגדול ביותר בצורת ג'ורדן.</p>", "answer": ""}]}
+          console.log(subjects);
+          let selectedSubjects = [];
+          let currentQuestions = [];
+          let currentQuestionIndex = 0;
+
+          window.startQuiz = function() {
+            selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value);
+            if (selectedSubjects.length === 0) {
+                alert("Please select at least one subject.");
+                return;
+            }
+            currentQuestions = [];
+            selectedSubjects.forEach(subject => {
+                currentQuestions = currentQuestions.concat(subjects[subject]);
+            });
+            shuffle(currentQuestions);
+            document.getElementById('subject-selection').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            showQuestion();
+          }
+
+          function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length){
+            location.reload()
+            return;
+            }
+            if (currentQuestionIndex >= currentQuestions.length - 1) {
+                document.getElementById('next-question').innerHTML = "לסיים";
+            }
+            const q = currentQuestions[currentQuestionIndex];
+            document.getElementById('question').innerHTML = q.question;
+            document.getElementById('answer').innerHTML = q.answer;
+            document.getElementById('answer').classList.add('hidden');
+            document.getElementById('show-answer').classList.remove('hidden');
+            document.getElementById('next-question').classList.add('hidden');
+            MathJax.typesetPromise(["#question"]).then(() => {
+  MathJax.typesetPromise(["#answer"]);
+});
+            document.getElementById('question-counter').innerHTML = "שאלה "+ (currentQuestionIndex + 1) +" מתוך "+ currentQuestions.length;
+          }
+
+          window.showAnswer = function() {
+            document.getElementById('answer').classList.remove('hidden');
+            document.getElementById('show-answer').classList.add('hidden');
+            document.getElementById('next-question').classList.remove('hidden');
+          }
+
+          window.nextQuestion = function() {
+            currentQuestionIndex++;
+            showQuestion();
+          }
+
+          function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+          }
+        };
+      </script>
+</head>
+<body>
+<ul class='top-navigation'>
+        <li class="parent-page"> <a href="./linear.html"> 
+         חזרה לספר
+         </a></li></ul><div class="content">
+    <div id="subject-selection">
+     <div class="download-container">
+        <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <div class="download-dropdown">
+            <a href="./linear_deck.apkg" download>Anki</a>
+        </div>
+    </div>
+        <h1>נושאים:</h1>
+    <div class="all-checkboxes-container">
+        <label class="checkbox-container">הפיכות<input type="checkbox" name="subject" value="הפיכות" checked="checked"> <span class="checkmark"></span></label><label class="checkbox-container">ערכים עצמיים וצורת ג'ורדן<input type="checkbox" name="subject" value="ערכים עצמיים וצורת ג'ורדן" checked="checked"> <span class="checkmark"></span></label>
+        </div>
+    <button class="quiz-button" onclick="startQuiz()">להתחיל</button>
+    </div>
+    <div id="quiz-section" class="hidden">
+        <h1>שאלות</h1>
+        <div class="question-answer-container">
+        <div id="question-counter"></div>
+        <div id="question"></div>
+        <div id="answer" class="hidden"></div>
+        </div>
+        <button class="quiz-button" id="show-answer" onclick="showAnswer()">הצג תשובה</button>
+        <button class="quiz-button" id="next-question" class="hidden" onclick="nextQuestion()">שאלה הבאה</button>
+    </div>
+    </div>
+</body>
+</html>
+    

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הרחבה ספרבילית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='parent-page'><a href='./Galois'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_2'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_4'>2.4 הרחבה נורמלית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_5'>2.5 הרחבת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_6'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_3_1'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_2'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_3'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_4'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_5'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_6'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Galois_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Galois_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  הרחבה ספרבילית</h1>
+    <div class="definition"><span class="keyword">פולינום ספרבילי</span><p>יהי <span>\(K\)</span> שדה. פולינום <span>\(f \in K[x]\)</span> נקרא ספרבילי אם אין לו שורשים מרובים בשדה שההרחבה <span>\(L\)</span> שבו הוא מתפצל.</p>
+</div>
+<div class="definition"><span class="keyword">איבר ספרבילי</span><p>תהי <span>\(L / K\)</span> הרחבת שדות. איבר <span>\(\alpha \in L\)</span> יקרא ספרבילי אם הפולינום המינימלי שלו מעל <span>\(K\)</span> הוא ספרבילי.</p>
+</div>
+<div class="definition"><span class="keyword">הרחבה ספרבילית</span><p>הרחבה נקראת ספרבילית אם כל איבר בהרחבה הוא ספרבילי.</p>
+</div>
+<div class="proposition"><span class="keyword">הגדרה שקולה לספרביליות</span><p>הרחבה <span>\(E / F\)</span> ו- <span>\(P \in F[x]\)</span> שמתפצל ב-<span>\(E\)</span>. כלומר
+<span>$$P=c \prod_{i=1}^k  \left( x - \alpha _{i} \right)^{n_{i}}$$</span>
+כך ש-<span>\(\alpha_{i}=\alpha_{j}\)</span> לכל <span>\(i\neq j\)</span>. אז נאמר ש-<span>\(P\)</span> ספרבלית אם <span>\(n_{1}=\dots=n_{k}=1\)</span> כל שורש שלו פשוט.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(L / M\)</span> ו-<span>\(M / K\)</span> ספרביולות של שדות(לאו דווקא סופיות), אז גם <span>\(L / K\)</span> ספרבילי.</p>
+</div>
+<div class="remark">
+<p>אם <span>\(P,Q\in F[x]\)</span> נסמן ב-<span>\((P,Q)\in F[x]\)</span> את ה-<span>\(gcd\)</span> שלהם שהוא הפולינום המתוקן המקסימלי שמחלק גם את <span>\(P\)</span> וגם את <span>\(Q\)</span>.
+<span>$$(P,Q)=gcd(P,Q)$$</span></p>
+</div>
+<div class="lemma">
+<p>יהיו <span>\(0 \neq P,Q \in F[x]\)</span> ו-<span>\(E / F\)</span> הרחבת שדות. נסמן <span>\((P,Q)_{E}\)</span> את ה-<span>\(gcd\)</span> של <span>\(P\)</span> ו-<span>\(Q\)</span> בשדות <span>\(E\)</span> ו-<span>\(F\)</span> בהתאמה. אזי:  <span>$$(P,Q)_{E}=(P,Q)_{F}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">נגזרת</span><p>בהנתן הפולינום:
+<span>$$P=\textstyle\sum_{i=0}^{n}a_{i}x^{i}\in F[x]$$</span>
+נגדיר את הנגזרת להיות:
+<span>$$.P^{\prime}=\textstyle\sum_{i=1}^{d}i a_{i}x^{i-1}\in F[x]$$</span></p>
+</div>
+<div class="remark">
+<p>אם השדה אינסופי, אז <span>\(\deg P'=\deg P-1\)</span></p>
+</div>
+<div class="lemma">
+<p>כלל ליבניץ. נגזרות מקיימות:
+<span>$$.\left( P\cdot Q \right)^{\prime}=P^{\prime}\cdot Q+P\cdot Q^{\prime}\qquad (P+Q)^{\prime}=P^{\prime}+Q^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$P=(x-\alpha_{1})^{n_{1}}\cdot\cdot\cdot(x-\alpha_{k})^{n_{k}}\in F[x]$$</span></p>
+</div>
+<div class="proposition">
+<p>פולינום <span>\(P \in F[x]\)</span> ספרבילי אם"ם <span>\((P,P^{\prime})=1\)</span></p>
+</div>
+<div class="proposition">
+<p>עבור הרחבה סופית <span>\(L / K\)</span> התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>ההרחבה <span>\(L / K\)</span> ספרבילית. </p>
+</li>
+<li>
+<p>יש קבוצת יוצרים של <span>\(L\)</span> מעל <span>\(K\)</span> שכל איבריה ספרבליים. </p>
+</li>
+<li>
+<p>כל קבוצת יוצרים של <span>\(L\)</span> מעל <span>\(K\)</span> מורכבת מאיברים ספרביליים. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>שדה פיצול של פולינום ספרבילי היא הרחבה ספרבילית.</p>
+</div>
+<div class="proposition">
+<p>כל הרחבה אלגברית של שדות ממציין 0 הוא ספרבילי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='prev-page'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+</ul></li>
+        </body>
+        </html>
+        

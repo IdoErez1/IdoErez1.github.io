@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אנטרופיה סטטיסטית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_5_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_4_2`; }});</script>
+        <div class="content">
+        <h1>5.1  אנטרופיה סטטיסטית</h1>
+    <div class="definition"><span class="keyword">מיקרו מצב</span><p>ניתן לחלק את המצבים האפשריים של מערכת לאוסף מצבים שווי הסתברות.</p>
+</div>
+<div class="definition"><span class="keyword">מאקרו מצב</span><p>קונפיגורציה כלשהי של המערכת. לא בהכרח שוות הסתברות.</p>
+</div>
+<div class="theorem"><span class="keyword">העקרון היסודי של פיזיקה סטטיסטית</span><p>כל אחד מהמיקרו מצבים הם שווי הסתברות.</p>
+</div>
+<p>כאשר העקרון הזה זה בעצם ההגדרה של מיקרו מצב. ולמעשה נראה כי עקרון זה ניתן לקבל את כל חוקי התרמודינמיקה.</p>
+<div class="example">
+<p>נסתכל על מערכת עם 100 מטבעות הוגנים. יש <span>\(2^{100}\)</span> מצבים אפשרים עבור כל מטבע. זה יהיה המיקרו מצבים.
+כאשר יש 100 קונפיגורציות של המערכת סה"כ - כמה מטבעות הם עץ וכמה הם פאלי. זה יהיה המאקרו מצבים.</p>
+</div>
+<div class="corollary">
+<ul>
+<li>ניתן לתאר מערכת ע"י כמות גדולה של מיקרו מצבים שווי הסתברות.</li>
+<li>מה שאנחנו מודדים בפועל זה המאקרו מצבים.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>התוצאה שתתקבל בפועל תהיה התוצאה המאקרוסקופית עם הכי הרבה מצבים מיקרוסקופים.</p>
+</div>
+<p>הרעיון מבוסס על ההנחות הבאות:</p>
+<ol>
+<li>
+<p>כל אחד מהמיקרו מצבים הם שווי הסתברות. </p>
+</li>
+<li>
+<p>הדינמיקה של המערכת פועלת כך שהמערכת משתנה ונמצאת בכל מיקרו מצב כמות שווה של זמן. </p>
+</li>
+<li>
+<p>עבור מערכות גדולות, המצב עם הכי הרבה מיקרו מצבים יהיה עם משמעותית הרבה יותר מיקרו מצבים מאשר המערכות האחרות. </p>
+</li>
+</ol>
+<div class="corollary">
+<p>עבור שתי מערכות עם אנרגיה <span>\(E = E_{1}+E_{2}\)</span> החלוקה של אנרגיה שתתקבל תהיה החלוקה שתמקסם את <span>\(\Omega_{1}(E_{1})\Omega_{2}(E_{2})\)</span> כאשר <span>\(\Omega_{1}(E_{1}),\Omega_{2}(E_{2})\)</span> הם כמות המיקרו מצבים המתאימים עבור אנרגיה נתונה.</p>
+</div>
+<div class="proposition">
+<p><span>$$\frac{\mathrm{d}\ln\Omega_{1}}{\mathrm{d}E_{1}}=\frac{\mathrm{d}\ln\Omega_{2}}{\mathrm{d}E_{2}}$$</span></p>
+</div>
+<div class="proof">
+<p>כיוון שאנו מניחים שאנו נמצאים בגבול התרמודינמי, נמצא מקסימום ע"י גזירה והשוואה ל-0:
+<span>$$\frac{\mathrm{d}}{\mathrm{d}E_{1}}\left(\Omega_{1}(E_{1})\Omega_{2}(E_{2})\right)=0 \implies \Omega_{2}(E_{2})\frac{\mathrm{d}\Omega_{1}(E_{1})}{\mathrm{d}E_{1}}+\Omega_{1}(E_{1})\frac{\mathrm{d}\Omega_{2}(E_{2})}{\mathrm{d}E_{2}}\frac{\mathrm{d}E_{2}}{\mathrm{d}E_{1}}=0$$</span>
+כאשר נשים לב כי <span>\(dE_{1}=-dE_{2}\)</span> מגזירה של האנרגיה הכוללת. ולכן <span>\(\frac{dE_{2}}{dE_{1}}=-1\)</span> ונקבל:
+<span>$$\frac{1}{\Omega_{1}}\frac{\mathrm{d}\Omega_{1}}{\mathrm{d}E_{1}}-\frac{1}{\Omega_{2}}\frac{\mathrm{d}\Omega_{2}}{\mathrm{d}E_{2}}=0 \implies {\frac{\mathrm{d}\ln\Omega_{1}}{\mathrm{d}E_{1}}}={\frac{\mathrm{d}\ln\Omega_{2}}{\mathrm{d}E_{2}}}$$</span></p>
+</div>
+<p>כעת נזכור כי הגדרנו את הטמפרטורה של המערכת בתור גודל המאפיין את המערכת ומשתווה בין שתי מערכות המגיעות לשיווי משקל תרמי. כעת ראינו שהגודל שהתקבל הוא גודל כזה, וניתן להגדיר את הטמפרטורה בצורה יותר ריגורוזית:</p>
+<div class="definition"><span class="keyword">טמפרטורה</span><p>גודל <span>\(T\)</span> המוגדר ע"י המשוואה:
+<span>$${\frac{1}{k_{\mathrm{B}}T}}={\frac{\mathrm{d}\ln\Omega}{\mathrm{d}E}}$$</span>
+כאשר <span>\(k_{B}\)</span> זה קבוע בולצמן, <span>\(\Omega\)</span> זה מספר המיקרומצבים כתלות באנרגיה, ו-<span>\(E\)</span> זה האנרגיה.</p>
+</div>
+<div class="proposition"><span class="keyword">הגדרה סטטיסטית לאנטרופיה</span><p><span>$$S=k_{B}\ln \Omega$$</span>
+כאשר <span>\(k_{B}\)</span> זה קבוע בולצמן ו-<span>\(\Omega\)</span> זה כמות המיקרו מצבים המתאימים למאקרו מצב הנמדד. </p>
+</div>
+<div class="proof">
+<p>נזכור כי:
+<span>$$T=\left({\frac{\partial U}{\partial S}}\right)_{V}\implies {\frac{1}{T}}=\left({\frac{\partial S}{\partial U}}\right)_{V}$$</span>
+וכן מהגדרת הטמפרטורה נקבל:
+<span>$${\frac{1}{k_{\mathrm{B}}T}}={\frac{\mathrm{d}\ln\Omega}{\mathrm{d}E}}\implies \frac{1}{k_{B}T}=\frac{1}{k_{B}}\left( \frac{\partial S}{\partial U} \right)_{V}=\frac{d\ln \Omega}{dE} $$</span>
+כאשר עבור <span>\(E=U\)</span> המשוואה מתקיימת עבור <span>\(S=k_{B}\ln \Omega\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">מערכת 2 רמות</span><p>נניח מערכת חליקים שהם יכולים להיות או <span>\(\uparrow\)</span> או <span>\(\downarrow\)</span>. כאשר אם הם מצביעים למעלה האנרגיה שלהם היא <span>\(u_{\uparrow}=\mathcal{E}\)</span> ואם הם מצביעים למטה הם מקיימים <span>\(u_{\downarrow}=0\)</span> כאשר:
+<span>$$U=U(T)=N_{\uparrow}\cdot\mathcal{E}$$</span>
+כאשר סך החלקיקים יהיה <span>\(N=N_{\uparrow}+N_{\downarrow}\)</span>. כאשר סך המצבים יהיה:
+<span>$$\Omega\left(N_{\uparrow};N\right)={\binom{N}{N_{\uparrow}}}=\frac{N!}{N_{\uparrow}!\left(N-N_{\uparrow}\right)!}\;.$$</span>
+כאשר אם נשתמש בקירוב סטרילינג <span>\(\ln(n!)\approx n\ln(n)-n\)</span>. נקבל:
+<span>$$\frac{S}{k_{B}}=\ln \Omega \approx N\ln\left(N\right)-N_{\uparrow}\ln\left(N_{\uparrow}\right)-\left(N-N_{\uparrow}\right)\ln\left(N-N_{\uparrow}\right)$$</span>
+נשתמש במשוואה היסודית
+<span>$$dS = \frac{1}{T}dU+ \frac{P}{T}dV=\left( \frac{\partial S}{\partial U}  \right)_{V,N}du+\left( \frac{\partial S}{\partial V}  \right)_{U,N}\implies \frac{1}{T}=\left( \frac{\partial S}{\partial U}  \right)_{V,N}\quad \frac{P}{T}=\left( \frac{\partial S}{\partial V}  \right)_{U,N}$$</span>
+ונקבל:
+<span>$$S\left(U,N\right)=k_{\mathrm{B}}\left[N\ln\left(N\right)-\left(N-\frac{U}{\mathcal{E}}\right)\ln\left(N-\frac{U}{\mathcal{E}}\right)-\frac{U}{\mathcal{E}}\ln\left(\frac{U}{\mathcal{E}}\right)\right]$$</span>
+ונשתמש בקשר:
+<span>$$
+{\frac{1}{T}}=\left({\frac{\partial S}{\partial U}}\right)_{N}={\frac{1}{\mathcal{E}}}\left({\frac{\partial S}{\partial\left(U/\mathcal{E}\right)}}\right)_{N}={\frac{k_{\mathrm{B}}}{\mathcal{E}}}\left[\ln\left(N-{\frac{U}{\mathcal{E}}}\right)-\ln\left({\frac{U}{\mathcal{E}}}\right)\right]={\frac{k_{\mathrm{B}}}{\mathcal{E}}}\ln\left({\frac{N-{\frac{U}{\mathcal{E}}}}{{\frac{U}{\mathcal{E}}}}}\right)_{N}={\frac{1}{\mathcal{E}}}\ln\left({\frac{N-{\frac{U}{\mathcal{E}}}}{{\frac{U}{\mathcal{E}}}}}\right)$$</span>
+נבודד את <span>\(U\)</span> ונקבל:
+<span>$$U\left(T\right)=\frac{N\mathcal{E}}{1+e^{\frac{\mathcal{E}}{k_{\mathrm{B}}T}}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='prev-page'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

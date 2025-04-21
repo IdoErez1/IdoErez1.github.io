@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת סאהא</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_6_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_5_5`; }});</script>
+        <div class="content">
+        <h1>5.6  משוואת סאהא</h1>
+    <div class="definition"><span class="keyword">יינון</span><p>תהליך שבו אטום או מולקולה מאבדים אלקטרונים, וגורם להתווצרות של יונים. ניתן לכתוב תהליך זה בצורה הבאה:
+<span>$$\mathrm{\mathrm{Atom}}\rightleftharpoons\mathrm{\mathrm{Ion}}^{+}+e^{-}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">צפיפות הפרוטונים</span><p>כמות הפרוטונים ליחידת נפח אשר מיוניים(ללא אלקטרונים). מסומן ב-<span>\(n_{p}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">צפיפות האלקטרונים</span><p>כמות האלקטרונים ליחידת נפח אשר אינם קשורים לכלום. מסומן ב-<span>\(n_{e}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">צפיפות האטומים</span><p>צפיפות הפרטונים ליחידת נפח אשר אינם מיוננים(כלומר מכילים אלקטרון). מוסמן ב-<span>\(n_{H}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">צפיפות הכוללת של גרעיני המימן</span><p>סך גרעיני מימן, כלומר כולל גם את הפרוטונים המיוניים וגם הלא מיונים. מסומן ב-<span>\(n_{0}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>נובע מידית מההגדרות כי <span>\(n_{p}+n_{H}=n_{0}\)</span>, ו-<span>\(n_{p}=n_{e}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>קיים פונקציה <span>\(x=x(n_{0},T)\)</span> הנקרא השבר היינון אשר מקיים:
+<span>$$n_{p}=n_{e}=x n_{0}\;\;\;\;n_{H}=(1-x)\,n_{0}$$</span></p>
+</div>
+<div class="symbolize">
+<p>נסמן את הפוטנציאלים הכימים המתאימים על ידי <span>\(\mu_{p},\mu_{H},\mu_{e}\)</span>.</p>
+</div>
+<div class="reminder">
+<p>כאשר אנחנו בשיווי משקל אנחנו עם טמפרטורה קבועה ועבור תהליך כמו זה שבו הנפח קבוע נקבל כי בשיווי משקל האנרגיה החופשית של הלמהולדס<span>\((F)\)</span> תהיה אקסטרימלית. </p>
+</div>
+<div class="proposition">
+<p>הפוטנציאל הכימי מקיים:
+<span>$$\sum_{j}\mu_{j}d N_{j}=0\qquad \mu_{j}=\frac{\partial F}{\partial N_{j}}=-\frac{1}{\beta}\frac{\partial \ln Z}{\partial N_{j}}$$</span></p>
+</div>
+<div class="proof">
+<p>האנרגיה החופשית של הלמהולדס נתונה על ידי:
+<span>$$d F=-S d T-P d V+\sum_{j\in\{ p,e,H \}}\mu_{j}d N_{j}$$</span>
+ולכן מצד אחד מתקיים:
+<span>$$\mu_{j}=\frac{\partial F}{\partial N_{j}}=-\frac{1}{\beta}\frac{\partial \ln Z}{\partial N_{j}}$$</span>
+וכן בנוסף כיוון שהנפח והטמפרטורה קבועות נקבל כי <span>\(\mathrm{d}F=0\)</span> וכן <span>\(\mathrm{d}T=\mathrm{d}V=0\)</span> ונקבל:
+<span>$$\sum_{j\in\{ p,e,H \}}\mu_{j}\mathrm{d}N_{j}=0$$</span></p>
+</div>
+<div class="proposition">
+<p>מהקשר <span>\(H\rightleftarrows p+e\)</span> נקבל כי שינוי המספר חלקיקים מקיים:
+<span>$$d N_{p}=d N_{e}=-d N_{H}$$</span></p>
+</div>
+<div class="corollary">
+<p>משלוב שתי הטענות הקודמות נקבל:
+<span>$$\mu_{p}d N_{p}+\mu_{e}d N_{e}+\mu_{H}d N_{H}=\mu_{p}d N+\mu_{e}d N-\mu_{H}d N=0\implies \mu_{p}+\mu_{e}=\mu_{H}$$</span></p>
+</div>
+<div class="lemma">
+<p>פונקציית החלוקה של המערכת שלנו תהיה בקירוב של הרבה חלקיקים:
+<span>$$Z\approx\sum_{j}\left(N_{j}l n\left(z_{j}\right)-N_{j}l n N_{j}+N_{j}\right)$$</span>
+כאשר <span>\(z_{j}\)</span> היא פונקציה חלוקה חד חלקיקית של כל חלקיק.</p>
+</div>
+<div class="proof">
+<p>כיוון שיש לנו חלקיקים מסוגים שונים המיקרומצבים של בחלקיקים בלתי תלויים, ולכן הפונקציית החלוקה הכוללת תהיה המכפלה של הפונקציות חלוקה של כל אוכלוסיה:
+<span>$$Z=Z_{p}\cdot Z_{e}\cdot Z_{H}$$</span>
+כאשר ניתן לפרק את למכפלת פונקציות החלוקה החד חלקיקיות של כל חלקיק <span>\(Z=\prod_{j} \frac{z_{j}^{N_{j}}}{N_{j}!}\)</span>. ניקח את הלוגוריתם ונקבל:
+<span>$$\ln Z=\sum_{j}\ln\left(\frac{z_{j}^{N_{j}}}{N_{j}!}\right)=\sum_{j}\left(N_{j}\ln\left(z_{j}\right)-\ln\left(N_{j}!\right)\right)\approx\sum_{j}\left(N_{j}\ln\left(z_{j}\right)-N_{j}\ln N_{j}+N_{j}\right)$$</span>
+כאשר השתמשנו בקירוב סטרלינג.</p>
+</div>
+<div class="corollary">
+<p>ניתן לקבל את הפוטנציאל הכימי של כל אוכלוסיה על ידי:
+<span>$$\mu_{j}=-\frac{1}{\beta}\ln \frac{z_{j}}{N_{j}}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\mu_{j}=-\frac{1}{\beta}\frac{\partial}{\partial N_{j}}\sum_{i}\left(N_{i}\ln\left(z_{i}\right)-N_{i}\ln N_{i}+N_{i}\right)=-\frac{1}{\beta}\left(l n\left(z_{j}\right)-\ln N_{j}-N_{j}\cdot\frac{1}{N_{j}}+1\right)=-\frac{1}{\beta}\ln\frac{z_{j}}{N_{j}}$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור כל חלקיק ב-<span>\(H\)</span>(גרעינים מיוניים - עם אלקטרון) ניתן לפצל את האנרגיה של כל חלקיק לאנרגיה של הגרעין ושל האלקטרון:
+<span>$$\mathcal{E} _{H}=\frac{p^{2}_{\text{nucleus}}}{2m_{\text{nucleus}}}+\frac{p^{2}_{e}}{2m_{e}}+\mathcal{E} _{0H}$$</span>
+כאשר <span>\(\mathcal{E}_{0H}\)</span> היא אנרגיית הקשר. אך כיוון שמסת האלקטרון קטנה מפאקטור של 4 סדרי גודל נזניח את הגורם של האלקטרון.</p>
+</div>
+<div class="corollary">
+<p>פונקציית החלוקה החד חלקיקית נתונה על ידי:
+<span>$$g_{s j}V\left(\frac{m_{j}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}e^{-\beta\varepsilon_{0j}}$$</span>
+כאשר:
+<span>$$\varepsilon_{0,j}=\begin{cases}0&amp;j=p,e\\ -E_{0}&amp;j=H\end{cases};\ g_{s j}=\begin{cases}2&amp;j=p,e\\ 4&amp;j=H\end{cases}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$z_{j}=\frac{g_{s j}}{h^{3}}\int d^{3}r d^{3}p e^{-\beta\left(\frac{p^{2}}{2m_{j}}+\varepsilon_{0j}\right)}$$</span></p>
+</div>
+<div class="corollary">
+<p>הפוטנציאל הכימי של כל אוכלוסיה נתונה על ידי:
+<span>$$\mu_{j}=-k_{B}T l n\left(\frac{g_{s j}}{n_{j}}\left(\frac{m_{j}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)+\varepsilon_{0j}$$</span></p>
+</div>
+<div class="proof">
+<p>נובע ישירות מ-<span>\(\mu_{j}=-\frac{1}{\beta}\ln \frac{z_{j}}{N_{j}}\)</span> והפונקציית חלוקה שמצאנו.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת סאהא</span><p><span>$$\frac{x^{2}}{1-x}=\frac{1}{n_{0}\lambda_{T}^{3}}e^{-\frac{E_{0}}{k_{B}T}}\qquad \lambda_{T}\equiv\left(\frac{2\pi\hbar^{2}}{m_{e}k_{B}T}\right)^{\frac{1}{2}}$$</span></p>
+</div>
+<div class="proof">
+<p>מהמשוואה <span>\(\mu_{p}+\mu_{e}=\mu_{H}\)</span> נקבל:
+<span>$$-k_{B}T \ln\left(\frac{2}{n_{p}}\left(\frac{m_{p}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)-k_{B}T \ln\left(\frac{2}{n_{e}}\left(\frac{m_{e}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)=-k_{B}T \ln\left(\frac{4}{n_{H}}\left(\frac{m_{p}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)-E_{0}$$</span>
+כאשר כיוון שהנחנו <span>\(m_{H}\approx m_{p}\)</span> נחלק ב-<span>\(-k_{B}T\)</span> ונחבר את הלוגריתמים:
+<span>$$\ln\left(\frac{2}{n_{p}}\left(\frac{m_{p}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\cdot\frac{2}{n_{e}}\left(\frac{m_{e}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)=\ln\left(\frac{4}{n_{H}}\left(\frac{m_{p}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}\right)+\frac{E_{0}}{k_{B}T}$$</span>
+ניקח אקספוננט לשתי האגפים:
+<span>$${\frac{4}{n_{p}n_{e}}}{\bigg(}{\frac{m_{p}k_{B}T}{2\pi\hbar^{2}}}{\bigg)}^{\frac{3}{2}}\left({\frac{m_{e}k_{B}T}{2\pi\hbar^{2}}}\right)^{\frac{3}{2}}={\frac{4}{n_{H}}}{\bigg(}{\frac{m_{p}k_{B}{T}}{2\pi\hbar^{2}}}{\bigg)}^{\frac{3}{2}}\cdot e^{\frac{E_{0}}{k_{B}T}}$$</span>
+ולכן:
+<span>$$\frac{n_{p}n_{e}}{n_{H}}=\left(\frac{m_{e}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}e^{-\frac{E_{0}}{k_{B}T}}$$</span>
+מהיחסים <span>\(n_{p}=n_{e}=x n_{0},n_{H}=(1-x)\,n_{0}\)</span> נקבל:
+<span>$$\frac{x^{2}}{1-x}=\frac{1}{n_{0}}\left(\frac{m_{e}k_{B}T}{2\pi\hbar^{2}}\right)^{\frac{3}{2}}e^{-\frac{E_{0}}{k_{B}T}}$$</span>
+כאשר ניתן כעת לזהות את האורך גל התרמי <span>\(\lambda_{T}\)</span> ולקבל את המשוואה.</p>
+</div>
+<div class="corollary">
+<p>עבור המרחק הממוצע בין החלקיקים <span>\(a\)</span> כאשר <span>\(n_{0}=\frac{1}{a^{3}}\)</span> ולקבל:
+<span>$$\frac{x^{2}}{1-x}=\left(\frac{a}{\lambda_{T}}\right)^{3}e^{-\frac{E_{0}}{k_{B}T}}$$</span></p>
+</div>
+<div class="example">
+<p>נתון גז אידיאלי המורכב מאטומים שיכולים להיות באחד משני מצבים - ניטרלי או מיונן פעם אחת. נרצה למצוא את <span>\(n_{e},n_{p},n_{H}\)</span>.
+התהליך הנתון הוא <span>\(\mathrm{\mathrm{A}}\rightleftharpoons\mathrm{\mathrm{A}}^{+}+e^{-}\)</span> כמו שראינו. ראשית נשים לב כי בשיווי משקל מתקיים:
+<span>$$\sum_{i}\frac{\partial F}{\partial N_{i}}=0\implies \mu^{A^{+}}+\mu^{e^{-}}-\mu^{A}=0$$</span>
+ראינו כי הפוטנציאל הכימי של גז אידיאלי נתון על ידי <span>\(\mu=-k_{B}T\left( \frac{V}{N_{A}\lambda_{A}^{3}} \right)\)</span> ולכן:
+<span>$$\mu_{A}=-k_{B}T\ln\left( \frac{V}{N_{A}\lambda_{A}^{3}} \right)\qquad \mu_{e^{-}}=-k_{B}T\ln\left( \frac{V}{N_{A}\lambda_{e}^{3}} \right)$$</span></p>
+<p>2016 מועד ב שאלה 1 סעיף ג להשלים. </p>
+</div>
+<div class="summary">
+<p>שלבים למציאת סאהא</p>
+<ol>
+<li>
+<p>היחס <span>\(x=x(n_{0},T)\)</span> יקיים: 
+<span>$$n_{e}=n_{p}=x\cdot n_{0}\qquad n_{p}+n_{H}=n_{0}=(1-x)n_{0}$$</span></p>
+</li>
+<li>
+<p>כותבים את <span>\(\mu_{j}=-\frac{1}{\beta}\frac{\partial \ln Z}{\partial N_{j}}\)</span> כאשר מדרישת שיווי משקל נקבל <span>\(\sum_{j}\mu_{j}\mathrm{d}N_{j}=0\)</span> כאשר <span>\(j \in \{ e,p,H \}\)</span>.  </p>
+</li>
+<li>
+<p>מתקיים <span>\(\mathrm{d}N_{p}=\mathrm{d}N_{e}=-\mathrm{d}N_{H}\)</span>. נציב בשלב 2 ונקבל <span>\(\mu_{p}+\mu_{e}=\mu_{H}\)</span>. </p>
+</li>
+<li>
+<p>נרשום את פונקציית החלוקה של כל המערכת: 
+<span>$$Z\approx\sum_{j}\left(N_{j}l n\left(z_{j}\right)-N_{j}l n N_{j}+N_{j}\right)\implies \mu_{j}=-\frac{1}{\beta}\ln \frac{z_{j}}{N_{j}}$$</span>
+כאשר <span>\(z_{j}\)</span> היא פונקציית החלוקה עבור כל אוכלוסייה.</p>
+</li>
+<li>
+<p>מציבים במשוואה <span>\(\mu_{p}+\mu_{e}=\mu_{H}\)</span> כאשר זוכרים כי יש ל-<span>\(z_{H}\)</span> יש ריבוי ספין 4 ולא 2 כמו <span>\(z_{e},z_{H}\)</span> כאשר נציב את היחסים משלב 1. </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='prev-page'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+</ul></li>
+        </body>
+        </html>
+        

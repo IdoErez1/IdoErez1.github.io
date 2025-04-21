@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אוילר לגרנג'</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  אוילר לגרנג'</h1>
+    <div class="definition"><span class="keyword">פונקציונאל</span><p>זהו פונקציה שמקבלת פונקציה ומחזירה מספר. </p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>פונקצינאל שמחזיר את השטח מתחת לגרף: 
+<span>$$I[f(x)]=\int_{a}^b |f(x)| \, \mathrm{d}x $$</span></p>
+</li>
+<li>
+<p>פונקציונאל שמחשב את אורך העקומה שיוצר: 
+<span>$$I[f(x)]=\int_{a}^b \sqrt{ 1+f'(x)^2 } \, \mathrm{d}x $$</span></p>
+</li>
+</ol>
+</div>
+<p>אנחנו נסתכל על פונקצינאלים בצורה אינטגרלית כפונקציה של איברים עד הנגזרת השנייה:
+<span>$$I[y(x)]=\int F(y',y,x) \, \mathrm{d}x $$</span>
+המטרה שלנו היא למצוא מתי הפונקציונאל משיג ערך אקסטרימאלי. כלומר מתי משיג ערך מינימלי/מקסימלי. </p>
+<div class="theorem"><span class="keyword">אויילר לגרנג'</span><p>אם פונקציונאל מהצורה <span>\(I[y(x)]=\int_{a}^b F(y',y,x) \, \mathrm{d}x\)</span> משיג ערך אקסטרימלי אז:
+<span>$${\frac{\partial F}{\partial y}}={\frac{d}{d x}}\left({\frac{\partial F}{\partial y^{\prime}}}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>נניח כי עבור <span>\(y(x)\)</span> הפונקצינאל משיג ערך אקסטרימלי. כעת נסתכל על וריאציה קטנה בערך של הפונקצינאל. כלומר נסתכל על
+<span>$$\tilde{y}(x)=y(x)+\varepsilon\eta(x)\implies \tilde{y}'(x)=y'(x)+\varepsilon \eta'(x)$$</span>
+כאשר <span>\(\eta\)</span> היא פונקציה המקיימת את תנאי השפה <span>\(\eta(a)=\eta (b)=0\)</span>, ו-<span>\(\varepsilon&gt;0\)</span>. כלומר עבור <span>\(\tilde{y}\)</span> ערך הפונקציונאל שלנו יהיה:
+<span>$$I[y(x)]=\int_{a}^b F\left( \tilde{y}',\tilde{y},x \right) \, \mathrm{d}x=\int_{a}^b F\left( y'(x)+\varepsilon \eta'(x),y(x)+\varepsilon\eta(x),x \right) \, \mathrm{d}x $$</span>
+כיוון ש-<span>\(y\)</span> נתון ו-<span>\(\eta\)</span> שרירותי, נקבל כי <span>\(I\)</span> תלוי רק ב-<span>\(\varepsilon\)</span>. כלומר זהו פונקציה במשתנה אחד, אשר כיוון שמקבל ערך אקסטרימלי מתקיים <span>\(\frac{d I}{d \varepsilon}=0\)</span>. נגזור לפי <span>\(\varepsilon\)</span> ונקבל:
+<span>$$\frac{d }{d \varepsilon}\int_{a}^b F\left( y'+\varepsilon \eta',y+\varepsilon\eta,x \right) \, \mathrm{d}x=\int_{a}^b \frac{\partial }{\partial \varepsilon}F\left( y'+\varepsilon \eta',y+\varepsilon\eta,x \right) \, \mathrm{d}x $$</span>
+כאשר מכלל השרשרת ניתן לכתוב:
+<span>$$\frac{\partial }{\partial \varepsilon}\left( F\left( \tilde{y}',\tilde{y},x \right) \right)=\frac{\partial F}{\partial \tilde{y}}\frac{\partial \tilde{y}}{\partial \varepsilon}+\frac{\partial F}{\partial \tilde{y}'}\frac{\partial \tilde{y}'}{\partial \varepsilon}+\cancelto{ 0 }{ \frac{\partial F}{\partial x}\frac{\partial x}{\partial \varepsilon} }=\frac{\partial F}{\partial \tilde{y}'}\eta'+\frac{\partial F}{\partial y}\eta$$</span>
+נציב חזרה באינטגרל:
+<span>$$\int_{a}^b \frac{\partial }{\partial \varepsilon}F\left( y'+\varepsilon \eta',y+\varepsilon\eta,x \right) \, \mathrm{d}x=\int _{a}^b \frac{\partial F}{\partial \tilde{y}'}\eta'+\frac{\partial F}{\partial \tilde{y}}\eta \, \mathrm{d}x $$</span>
+כאשר מאינטגרציה בחלקים נקבל:
+<span>$$\int _{a}^b \frac{\partial F}{\partial \tilde{y}'}\eta' \, \mathrm{d}x =\cancelto{ 0 }{ \frac{\partial F}{\partial \tilde{y}}\eta\bigg|_{a}^b- }\int_{a}^b \frac{d}{dt}\left( \frac{\partial F}{\partial \tilde{y}'} \right)\eta  \, \mathrm{d}x $$</span>
+כאשר אם נציב חזרה נקבל:
+<span>$$\int _{a}^b \frac{\partial F}{\partial \tilde{y}'}\eta'-\frac{\partial F}{\partial \tilde{y}}\eta \, \mathrm{d}x=\int_{a}^b \left(\frac{\partial F}{\partial \tilde{y}}-\frac{d}{dt}\left( \frac{\partial F}{\partial \tilde{y}'} \right) \right)\eta  \, \mathrm{d}x=\int_{a}^b \left(\frac{\partial F}{\partial y}-\frac{d}{dt}\left( \frac{\partial F}{\partial y'} \right) \right)\eta  \, \mathrm{d}x $$</span>
+כאשר במעבר האחרון לקחנו את הגבול שבו <span>\(\varepsilon\to 0\)</span>, כאשר בגבול זה <span>\(\tilde{y}\to y\)</span>. כמו שאמרנו מקודם ביטוי זה שווה ל-<span>\(0\)</span>. וכיוון ששווה ל-<span>\(0\)</span> עבור כל <span>\(\eta\)</span> שרירותי, הביטוי בתוך הסוגריים חייב להתאפס. לכן:
+<span>$$\frac{\partial F}{\partial y}-\frac{d}{dt}\left( \frac{\partial F}{\partial y'} \right) =0$$</span></p>
+</div>
+<div class="theorem">
+<p>אם <span>\(F\)</span> מקבל ערך אקסטרימלי לא תלוי מפורשות ב-<span>\(x\)</span>, מתקיים:
+<span>$$F-y'\frac{\partial F}{\partial y'}=const$$</span></p>
+</div>
+<div class="proof">
+<p>נכפיל את משוואת אוילר לגרנג' ב-<span>\(y'\)</span> ונשתמש בזה ש:
+<span>$${\frac{d}{d x}}\left(y^{\prime}{\frac{\partial F}{\partial y^{\prime}}}\right)=y^{\prime}{\frac{d}{d x}}\left({\frac{\partial F}{\partial y^{\prime}}}\right)+y^{\prime\prime}{\frac{\partial F}{\partial y^{\prime}}}$$</span>
+ונקבל:
+<span>$$y^{\prime}{\frac{\partial F}{\partial y}}+y^{\prime\prime}{\frac{\partial F}{\partial y^{\prime}}}={\frac{d}{d x}}\left(y^{\prime}{\frac{\partial F}{\partial y^{\prime}}}\right).$$</span>
+כיוון שאגף שמאל לא תלוי מפורשות ב-<span>\(x\)</span> נקבל כי הוא שווה לנגזרת השלמה של <span>\(F\)</span> לפי <span>\(x\)</span>:
+<span>$$\frac{dF}{dx}=\frac{\partial F}{\partial y}\frac{\partial y}{\partial x}+\frac{\partial F}{\partial y'}\frac{\partial y'}{\partial x}+\cancelto{ 0 }{ \frac{\partial F}{\partial x} }=y'\frac{\partial F}{\partial y}+y''\frac{\partial F}{\partial x}$$</span>
+ולכן:
+<span>$$\frac{dF}{dx}=\frac{d}{dx}\left( y'\frac{\partial F}{\partial y'} \right)\implies F-y'\frac{\partial F}{\partial y'}=C$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משתנים תלויים</span><p>במקרה זה 
+<span>$$F=F(y_{1},y_{1}^{\prime},y_{2},y_{2}^{\prime},\ldots,y_{n},y_{n}^{\prime},x)$$</span>
+כאשר כל <span>\(y_{i}\)</span> הוא פונקציה של <span>\(x\)</span>. כלומר <span>\(y_{i}=y_{i}(x)\)</span>, נדרש לפתור <span>\(n\)</span> מערכות משוואות עבור כל משתנה, כלומר:
+<span>$$\frac{\partial F}{\partial y_{i}}=\frac{d}{d x}\left(\frac{\partial F}{\partial y_{i}^{\prime}}\right)\qquad i=1,2,\ldots,n$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משתנים בלתי תלויי</span><p>במקרה זה אין משתנה אחד <span>\(x\)</span> שכל המשתנים פונקציות שלו, אבל יש משתפר משתנים <span>\(x\)</span> ומספר נגזרות חלקיות עבור כל משתנה. נצפה לקבל משוואה דיפרציאלית חלקית. זה יהיה פונקציונאל מהצורה:
+<span>$$I=\int\int\dots\int F\left(y,{\frac{\partial y}{\partial x_{1}}},{\frac{\partial y}{\partial x_{2}}},\ldots,{\frac{\partial y}{\partial x_{n}}},x_{1},x_{2},\ldots,x_{n}\right)\,d x_{1}\,d x_{2}\cdot\cdot\cdot d x_{n}$$</span>
+והפונקציה האסטרימלית נדרשת לקיים:
+<span>$${\frac{\partial F}{\partial y}}=\sum_{i=1}^{n}{\frac{\partial}{\partial x_{i}}}\left({\frac{\partial F}{\partial y_{x_{i}}}}\right)$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='prev-page'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

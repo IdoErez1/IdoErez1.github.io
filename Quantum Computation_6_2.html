@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מלכודת פאול - קוונטי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent-page'><a href='./Quantum Computation'> חישוב קוונטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. יסודות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_1'>1.1 עקרונות הפיזיקה הקוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_2'>1.2 ספינים וסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_3'>1.3 מטריצת צפיפות וצברים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_1_4'>1.4 שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מערכות פתוחות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_1'>2.1 מדידה אורתוגונאלית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_2'>2.2 מדידה מוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_3'>2.3 ערוצים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_4'>2.4 שלושה ערוצי קיוביט</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_2_5'>2.5 משוואת המאסטר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שזירה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_1'>3.1 מצבי בל</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_3_2'>3.2 שימושים של שזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מעגלים קלאסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_1'>4.1 חישוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_2'>4.2 מחלקות סיבוכיות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_4_3'>4.3 מעגלים הפיכים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מעגלים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_1'>5.1 שערים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_2'>5.2 מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_3'>5.3 אוניברסליות של מעגלים קוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_5_4'>5.4 קבצות שערים אוניברסליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מימוש פיזי של מחשב קוונטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_6_2'>6.2 מלכודת פאול - קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אלגוריתמים קוונטים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_2'>7.2 מחזוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_3'>7.3 התמרת פורייה קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_7_4'>7.4 חיפוש</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. סימולציה קוונטית והצפנה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_1'>8.1 טרוטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum Computation_8_2'>8.2 תיקון שגיאות - קוד שור</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum Computation_7_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum Computation_6_1`; }});</script>
+        <div class="content">
+        <h1>6.2  מלכודת פאול - קוונטי</h1>
+    <div class="proposition">
+<p>נניח כי ההמילטוניאן של כל יון יהיה מהצורה:
+<span>$$H_{\mathrm{ion}}=\sum_{\mu}\Omega_{\mu}\left|\mu\right\rangle\left\langle\mu\right|$$</span>
+כך שעבור <span>\(n\)</span> יונים נקבל <span>\(\sum_{n}H_{\text{ion},n}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>האינטרקציה בין היונים היא אינטרקציה קולומבית. לכן מספיק לעשות קוונטיזיציה של התנודות הקטנות הקלאסיות ולקבל:
+<span>$$H_{\mathrm{ph}}=\sum_{k}\left(\frac{P_{k}^{2}}{2M}+\frac{1}{2}M\omega_{k}^{2}Q_{k}^{2}\right)$$</span>
+כאשר <span>\(P_{k},Q_{k}\)</span> הם אופרטורים המקיימים את היחסים הקנונים:
+<span>$$[P_{k},P_{k^{\prime}}]=[Q_{k},Q_{k^{\prime}}]=0$$</span>
+כך שמתקיים:
+<span>$$\left[Q_{k},P_{k^{\prime}}\right]=i\delta_{k k^{\prime}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אופרטורי העלה והורדה</span><p>נגדיר את <span>\(a_{k}\)</span> ו-<span>\(a_{k}^{\dagger}\)</span> על ידי:
+<span>$$Q_{k}=\frac{1}{\sqrt{2M\omega_{k}}}\left(a_{k}+a_{k}^{\dagger}\right)\qquad P_{k}=-i\sqrt{\frac{M\omega_{k}}{2}}\left(a_{k}-a_{k}^{\dagger}\right)$$</span>
+כך שנקבל:
+<span>$$\left[a_{k},a_{k^{\prime}}\right]=\left[a_{k}^{\dagger},a_{k^{\prime}}^{\dagger}\right]=0\qquad \left[a_{k},a_{k^{\prime}}^{\dagger}\right]=\delta_{k k^{\prime}}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב:
+<span>$$H_{\mathrm{ph}}=\sum_{k}\left(\omega_{k}a_{k}^{\dagger}a_{k}+\frac{1}{2}\right)$$</span>
+כאשר נסמן את אופרטור המספר על אופן <span>\(k\)</span> על ידי <span>\(n_{k}=a_{k}^{\dagger}a_{k}\)</span>. </p>
+</div>
+<div class="proposition">
+<p><span>$$a_{k}\left|n_{k}\right\rangle=\sqrt{n_{k}}\left|n_{k}-1\right\rangle \qquad a_{k}^{\dagger}\left|n_{k}\right\rangle=\sqrt{n_{k}+1}\left|n_{k}+1\right\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>המצב הווקום של כל אופן מקיים:
+<span>$$a_{k}\left|0_{k}\right\rangle=0$$</span>
+כאשר קיים ווקום גלובאלי <span>$$|0\rangle=\otimes_{k}|0_{k}\rangle$$</span>
+אשר מקיים:
+<span>$$a_{k}\left|0\right\rangle=0,\qquad\forall k$$</span></p>
+</div>
+<div class="remark">
+<p>האקסיטציות הבוזוניות האלה נקראות פונונים(phonons), ומכאן הסימון <span>\(H_{\text{ph}}\)</span>. אלו קווזי חלקיקים(לא באמת חלקיקים אבל אפשר להתחייס עליהם כחלקיקים) ונוצרים ומושמדים על ידי האופרטורים <span>\(a_{k},a_{k}^{\dagger}\)</span>.</p>
+</div>
+<h2>קירוב דיפולי</h2>
+<div class="symbolize">
+<p><span>$$\ket{g} \equiv \ket{0} \qquad \ket{e} \equiv \ket{1} $$</span>
+כאשר המצב <span>\(\ket{g}\)</span> מסמן את מצב ביסוד ולכן לא יכול לדעוך(מצב יציב) כאשר המצב <span>\(\ket{e}\)</span> זה מצב מעורער אשר אנחנו מניחים שסמי יציב - יכול לדעוך ספונטנית אבל עם זמן מחצית חיים ארוך חסית. בנוסף נסמן:
+<span>$$\left|g\right\rangle\left\langle e\right|_{n}=\sigma_{-}^{n},\quad\left|e\right\rangle\left\langle g\right|_{n}=\sigma_{+}^{n}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם המצבים <span>\(\ket{g}\)</span> ו-<span>\(\ket{e}\)</span> מופרדים על ידי תדירות <span>\(\Omega\)</span> עבור כל סיבה פרקטית ניתן לכתוב:
+<span>$$H_{\mathrm{ion,}n}=\frac{\mathcal{Q}}{2}\left(|e\rangle\left\langle e|_{n}-|g\rangle\langle g|_{n}\right\rangle\equiv\frac{\Omega}{2}\sigma_{n}^{z}\right)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">לייזר</span><p>שדה אלקטרומגנטי עם תדירות <span>\(\omega_{L}\)</span> ווקטור גל <span>\(\kappa=\frac{\omega_{L}}{c}\)</span>. נסמן את ווקטור הפולריזציה שלו ב-<span>\(\hat{\epsilon}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>השדה האלקטרומגנטי המתאים לליזר ניתן לכתיבה על ידי:
+<span>$$\mathbf{E}\left(\mathbf{x},t\right)=E_{0}\cos\left(\omega_{L}t-\kappa\cdot\mathbf{x}+\phi_{0}\right){\hat{\mathbf{\epsilon}}}$$</span>
+כאשר <span>\(E_{0}\)</span> היא האמפליטודה ו-<span>\(\phi_{0}\)</span> היא הפזאה. </p>
+</div>
+<div class="proposition"><span class="keyword">קירוב דיפול של האינטרקציה</span><p>ניתן לקרב את האינטקרציה על ידי קירוב דיפולי. כלומר המילטוניאן האינטרקציה יהיה מהצורה:
+<span>$$H_{\mathrm{int},n}=-\mathbf{d}_{n}\cdot\mathbf{E}\left(\mathbf{x}_{n},t\right)$$</span>
+כאשר <span>\(\mathbf{d}_{n}\)</span> הוא אופרטור הדיפול של היון ויהיה מהצורה <span>\(\mathbf{d}_{n}=-e\mathbf{r}_{n}\)</span> כאשר <span>\(e\)</span> הוא מטען האלקטרון ו-<span>\(\mathbf{r}_{n}\)</span> הוא המיקום של האלקטורון החיצוני.</p>
+</div>
+<div class="proposition">
+<p>אכפת לנו רק מהרמות הזהות <span>\(\ket{g}_{n}\)</span> ו-<span>\(\ket{e}_{n}\)</span> כאשר הרמות האחרות לא מאוכלסות אף פעם. לכן ניתן לכתוב את היחידה על ידי:
+<span>$$\mathbb{1}_{n}=|g\rangle\,\langle g|_{n}+|e\rangle\,\langle e|_{n}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את אופרטור הדיפול על ידי:
+<span>$${\bf d}_{n}=-e\left(\left|g\right\rangle\left\langle g\right|_{n}+\left|e\right\rangle\left\langle e\right|_{n}\right){\bf r}_{n}\left(\left|g\right\rangle\left\langle g\right|_{n}+\left|e\right\rangle\left\langle e\right|_{n}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם נסמן <span>\(u_{g}\left( \mathbf{r} \right)=\braket{ \mathbf{r} | g }\)</span> ו-<span>\(u_{e}\left( \mathbf{r} \right)=\braket{ \mathbf{r} | e }\)</span> ונניח כי <span>\(u_{g},u_{f}\)</span> סימטריות מרחבית אז:
+<span>$$\mathbf{d}_{n}=-e\left[\left\langle g\right|\mathbf{r}\left|e\right\rangle\left|g\right\rangle\left\langle e\right|_{n}+\left\langle e\right|\mathbf{r}\left|g\right\rangle\left|e\right\rangle\left\langle g\right|_{n}\right]$$</span></p>
+</div>
+<div class="proof">
+<p>כיוון שיש סימטריה מרחבית נקבל <span>\(u_{g}\left( \mathbf{r} \right)=u_{g}\left( \mathbf{-r} \right)\)</span> ו- <span>\(u_{f}\left( \mathbf{r} \right)=u_{f}\left( \mathbf{-r} \right)\)</span> ולכן:
+<span>$$\left\langle  g|\,\mathbf{r}\,|g \right\rangle=\int d^{3}r\mathbf{r}\,|u_{g}\left(\mathbf{r}\right)|^{2}=0\qquad \left\langle  e|\,\mathbf{r}\,|e \right\rangle=\int d^{3}r\mathbf{r}\,|u_{e}\left(\mathbf{r}\right)|^{2}=0.$$</span>
+כאשר נציב בביטוי שקיבלנו עבור אופרטור הדיפול ונקבל:
+<span>$$\mathbf{d}_{n}=-e\left[\left\langle g\right|\mathbf{r}\left|e\right\rangle\left|g\right\rangle\left\langle e\right|_{n}+\left\langle e\right|\mathbf{r}\left|g\right\rangle\left|e\right\rangle\left\langle g\right|_{n}\right]$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן לסמן את המילטוניאן האינטרקציה על ידי:
+<span>$$H_{\mathrm{int},n}=E_{0}\cos\left(\omega_{L}t-\kappa\cdot{\bf x}_{n}+\phi_{0}\right)\left(d\sigma_{-}^{n}+\overline{{{d}}}\sigma_{+}^{n}\right)$$</span>
+כאשר <span>\(d=e\left\langle g|\,\mathbf{r}\,|e\right\rangle\cdot{\hat{\boldsymbol{\epsilon}}}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>כיוון ש-<span>\(\mathbf{x}_{n}\)</span> הוא המיקום של היון ה-<span>\(n\)</span> של המלכודת נקבל:
+<span>$$\mathbf{x}_{n}=(0,0,z_{n})=\left[z_{n}^{(0)}+\sum_{k}{\frac{1}{\sqrt{2M\omega_{k}}}}D_{m k}\left(a_{k}+a_{k}^{\dagger}\right)\right]\hat{\mathbf{z}}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$e^{i\left(\omega_{L}t-\kappa\cdot{\bf x}_{n}+\phi_{0}\right)}\equiv e^{i\omega_{L}t}e^{i\sum_{k}\eta_{k}\left(a_{k}+a_{k}^{\dagger}\right)}e^{i\phi}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את ההמילטוניאן אינטרקציה על ידי:
+<span>$$H_{\mathrm{int},n}=\frac{E_{0}}{2}\left(e^{i\omega_{L}t}e^{i\sum_{k}\eta_{k}\left(a_{k}+a_{k}^{\dagger}\right)}e^{i\phi}+h.c.\right)\left(d\sigma_{-}^{n}+h.c.\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן למצוא את הקידום בזמן בעזרת המשוואה:
+<span>$$i\frac{\partial}{\partial t}\left|\widetilde{\psi}\right\rangle=e^{i H_{0}t}H_{\mathrm{int}}\left|\psi\right\rangle\equiv\widetilde{H}\left(t\right)\left|\widetilde{\psi}\right\rangle$$</span>
+כאשר:
+<span>$$\widetilde{H}=\frac{E_{0}}{2}\left(e^{i\omega_{L}t}\exp\left(i\sum_{k}\eta_{k}\left(a_{k}e^{-i\omega_{k}t}+a_{k}^{\dagger}e^{i\omega_{k}t}\right)\right)e^{i\phi}+h.c.\right)\left(d\sigma_{-}^{n}e^{-i\Omega t}+h.c.\right)$$</span></p>
+</div>
+<div class="proof">
+<p>נעבור למערכת:
+<span>$$\left|\psi\right\rangle\longrightarrow\left|\widetilde{\psi}\right\rangle=e^{i H_{0}t}\left|\psi\right\rangle$$</span>
+ממשוואת שרדינגר:
+<span>$$i\frac{\partial}{\partial t}\left|\widetilde{\psi}\right\rangle=i\frac{\partial}{\partial t}\left(e^{i H_{0}t}\left|\psi\right\rangle\right)=-H_{0}\left|\widetilde{\psi}\right\rangle+e^{i H_{0}t}\left(i\frac{\partial}{\partial t}\left|\psi\right\rangle\right)$$</span>
+כאשר כיוון ש:
+<span>$$i\frac{\partial}{\partial t}\left|\psi\right\rangle=H\left|\psi\right\rangle=\left(H_{0}+H_{\mathrm{int}}\right)\left|\psi\right\rangle$$</span>
+נקבל:
+<span>$$i\frac{\partial}{\partial t}\left|\widetilde{\psi}\right\rangle=e^{i H_{0}t}H_{\mathrm{{int}}}\left|\psi\right\rangle\equiv\widetilde{H}\left(t\right)\left|\widetilde{\psi}\right\rangle$$</span>
+כאשר <span>\(\tilde{H}(t)=e^{ iH_{0}t }H_{\text{int}}e^{ -iH_{0} }t\)</span> כנתון בטענה.</p>
+</div>
+<div class="proposition">
+<p>אם נפעל בתחום Lamb-Dicke שבו <span>\(\eta_{k}\ll 1\)</span> ניתן לפתוח את הסוגריים ולקבל המילטוניאן ללא כוללים את דרגת החופש של הפונונים:
+<span>$$\widetilde{H}_{\mathrm{carrier}}\left(t\right)\equiv\frac{E_{0}}{2}e^{i\phi}\left(d e^{i\left(\omega_{L}-\Omega\right)t}\sigma_{-}^{n}+\overline{{{d}}}e^{i\left(\omega_{L}+\Omega\right)t}\sigma_{+}^{n}\right)+h.c.$$</span>
+ועוד גורם אשר יוצרים או משמידים פוטון יחיד:
+<span>$$\widetilde{H}_{\mathrm{sidelband}}\left(t\right)\equiv i\frac{E_{0}}{2}e^{i\phi}\left(d e^{i\left(\omega_{L}-\Omega\right)t}\sigma_{-}^{n}+\overline{{{d}}}e^{i\left(\omega_{L}+\Omega\right)t}\sigma_{+}^{n}\right)\sum_{k}\eta_{k}\left(a_{k}e^{-i\omega_{k}t}+a_{k}^{\dagger}e^{i\omega_{k}t}\right)+h.c.$$</span></p>
+</div>
+<div class="corollary">
+<p>על ידי בחירה של תדירות הלייזר <span>\(\omega_{L}\)</span> ניתן לבחור איזה גורמים מבצעים אוסצילציות גבוהות ואיזה ברסוננס ויהיו עם תדירות אפסית(או כמעט אפסית).</p>
+</div>
+<div class="proposition">
+<p>כדי לממש שער קיוביט יחיד ניתן לבחר <span>\(\omega_{L}=\Omega\)</span>.</p>
+</div>
+<div class="proof">
+<p>עבור <span>\(\omega_{L}=\Omega\)</span> נקבל:
+<span>$$\tilde{H}\left(t\right)\approx\tilde{H}_{\mathrm{carrier}}\approx\frac{E_{0}}{2}e^{i\phi}d\sigma_{-}^{n}+h.c.\equiv\mu e^{i\theta}\sigma_{-}^{n}+h.c.$$</span>
+אינטרקציה זו לא משנה את מספר הפונונים ופועלת לוקאלית על היונים. נקבל:
+<span>$$\widetilde{H}\approx\mu\left(e^{i\theta}\sigma_{-}^{n}+e^{-i\theta}\sigma_{+}^{n}\right)=\mu\left(\cos\theta\sigma_{x}^{n}+\sin\theta\sigma_{y}^{n}\right)\equiv\mu\sigma_{\theta}^{n}$$</span>
+כאשר הקידום בזמן יתן:
+<span>$$e^{-i\tilde{H}t}=e^{-i\mu\sigma_{\theta}^{n}t}=\cos\left(\mu t\right)\mathbb{1}-i\sin\left(\mu t\right)\left(\cos\theta\sigma_{x}^{n}+\sin\theta\sigma_{y}^{n}\right)$$</span></p>
+</div>
+<div class="example">
+<p>אם נפעיל את הלייזר ל-<span>\(t=\frac{\pi}{4\mu}\)</span> ו-<span>\(\theta=\frac{\pi}{2}\)</span> נקבל:
+<span>$$e^{-i\tilde{H}t}=\frac{1}{\sqrt{2}}\left(\mathbb{1}-i\sigma_{y}\right)=\frac{1}{\sqrt{2}}\left(\begin{array}{c c}{{1}}&amp;{{1}}\\ {{-1}}&amp;{{1}}\end{array}\right)$$</span>
+כאשר אם נפעל על המצב בסיס נקבל:
+<span>$$\frac{1}{\sqrt{2}}\left(\mathbb{1}-i\sigma_{y}\right)|g\rangle=\frac{1}{\sqrt{2}}\left(|g\rangle+|e\rangle\right)\qquad \frac{1}{\sqrt{2}}\left(\mathbb{I}-i\sigma_{y}\right)|e\rangle=-\frac{1}{\sqrt{2}}\left(|g\rangle-|e\rangle\right)$$</span>
+אם נכפיל בשמאל ב-<span>\(\sigma_{z}\)</span> נקבל:
+<span>$$\frac{1}{\sqrt{2}}\sigma_{z}\left(\mathbb{I}-i\sigma_{y}\right)=\frac{\sigma_{z}+\sigma_{x}}{\sqrt{2}}=U_{H}$$</span></p>
+</div>
+<div class="proposition">
+<p>כדי לממש שער Control ניתן לבחור <span>\(\omega_{L}=\Omega-\omega_{1}\)</span>. כאשר במקרה זה נקבל כי הגורמים של carrier הם זניחים, ויש רזונס עם אופן מרכז המסה ובקירוב הגל המסתובב נקבל:
+<span>$$\tilde{H}\approx\tilde{H}_{\mathrm{sideband}}\approx i\mu e^{i\theta}\eta a^{\dagger}\sigma_{-}+h.c.$$</span></p>
+</div>
+<div class="example"><span class="keyword">מודל ג'יימס קומינגס</span><p>נתון המילטוניאן מהצורה:
+<span>$$H=\omega\left(a^{\dagger}a+\sigma_{+}\sigma_{-}\right)+\left(\gamma a^{\dagger}\sigma_{-}+\overline{{{\gamma}}}\sigma_{+}a\right)\equiv H_{0}+H_{\mathrm{int}}$$</span>
+וכן נגדיר:
+<span>$$Q=a^{\dagger}a+\sigma_{+}\sigma_{-}$$</span>
+נשים לב ראשית כי <span>\(Q\)</span> הוא גודל שמור כיוון ש:
+<span>$$H_{0}=\omega Q\implies [H_{0},Q]=\left[ \omega Q,Q \right]=0$$</span>
+ולכן מספיק להראות כי <span>\(H_{\text{int}}\)</span> מתחלף עם <span>\(Q\)</span>. זה מתקיים מטיעונים פיסיקלים. נשים לב כי <span>\(a^{\dagger}\sigma_{-}\)</span> מעלה את <span>\(a^{\dagger}a\)</span> ב-1 ומוריד את <span>\(\sigma_{+}\sigma_{-}\)</span> ב-1. ולכן משמר את <span>\(Q\)</span> ומתחלף איתו. באופן דומה <span>\(\sigma_{+}a\)</span> מוריד את <span>\(a^{\dagger}a\)</span> ב-1 ומעלה את <span>\(\sigma_{+}\sigma_{-}\)</span> ב-1 ולכן מתחלף עם <span>\(Q\)</span>. לכן בפרט אם מצב מתחיל באיזהו מצב עם ערך <span>\(Q\)</span> הוא ישאר עם אותו עם <span>\(Q\)</span>.
+הערכים העצמיים של <span>\(Q\)</span> יהיו הסכום של הערכים העצמיים של <span>\(\sigma_{+}\sigma_{-}=\frac{1}{2}\left( \mathbb{1}+\sigma_{z} \right)\)</span> ושל <span>\(a^{\dagger}a\)</span>.
+ניתן ללכסן את <span>\(H_{\text{int}}\)</span> ולקבל את היחס:
+<span>$$\begin{gather}e^{-i H_{\mathrm{int}}t}\left|g\right\rangle\left|1\right\rangle=\cos\left(\mu\eta t\right)\left|g\right\rangle\left|1\right\rangle-e^{-i\theta}\sin\left(\mu\eta t\right)\left|e\right\rangle\left|0\right\rangle\\ e^{-i H_{\mathrm{int}}t}\left|e\right\rangle\left|0\right\rangle=\cos\left(\mu\eta t\right)\left|e\right\rangle\left|0\right\rangle+e^{i\theta}\sin\left(\mu\eta t\right)\left|g\right\rangle\left|1\right\rangle 
+\end{gather}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum Computation_7_1'>7.1 בעיות קבועה-מאוזנת</a></li>
+<li class='prev-page'><a href='./Quantum Computation_6_1'>6.1 מלכודת פאול - קלאסי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

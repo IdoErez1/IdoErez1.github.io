@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טורי חזקות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+<li class='parent-page'><a href='./series.html'> סדרות וטורים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. סדרות של מספרים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_1_1.html'>1.1 הגדרת הגבול</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_2.html'>1.2 אריתמטיקה של גבולות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_3.html'>1.3 גבלות ויחס סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_4.html'>1.4 מונוטוניות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_5.html'>1.5 שורשים וממוצעים</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_6.html'>1.6 תתי סדרות</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_7.html'>1.7 סדרות אפסות וסדרות השואפות לאינסוף</a></li>
+<li class='parent_page-dropdown'><a href='./series_1_8.html'>1.8 סדרות קושי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורים ממשיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_2_1.html'>2.1 הגדרות ותכונות של טורים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_2.html'>2.2 הכנסת סוגריים ושינוי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_3.html'>2.3 טורים כלליים</a></li>
+<li class='parent_page-dropdown'><a href='./series_2_4.html'>2.4 מבחני התכנסות טורים אי שליליים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. סדרות וטורי פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_2.html'>3.2 טורי חזקות</a></li>
+<li class='parent_page-dropdown'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./series_3_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./series_3_1.html`;}});</script>
+        <div class="content">
+        <h1>3.2  טורי חזקות</h1>
+    <div class="definition"><span class="keyword">טור חזקות</span><p>טור מהצורה
+<span>$$S_{n}=\sum_{k=1}^{\infty}a_{k}(x-x_{0})^{k}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תחום התכנסות</span><p>הקבוצה של ה-<span>\(x\)</span>-ים עבורו הטור מתכנס.</p>
+</div>
+<div class="proposition"><span class="keyword">הלמה של אבל</span><p>אם קיים <span>\(x_{1}\)</span> עבורו הטור <span>\(\sum a_{k}x_{1}^{k}\)</span> מתכנס אז הטור <span>\(\sum a_{k}x^{k}\)</span> מתכנס בהחלט לכל <span>\(x \in \mathbb{R}\)</span> המקיים <span>\(\lvert x \rvert&lt;\lvert x_{1} \rvert\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(x \in \mathbb{R}\)</span> כך ש-<span>\(\lvert x \rvert&lt;\lvert x_{1} \rvert\)</span>. התכנסות הטור <span>\(\sum a_{k}x^{k}\)</span> גוררת שהסדרה <span>\((a_{k}x^{k})\)</span> אפסה, ובפרט חסומה. כלומר קיים <span>\(M \in \mathbb{R}\)</span> כך ש-<span>\(\lvert a_{k}x_{1}^{k} \rvert&lt;M\)</span>. מתקיים:
+<span>$$\lvert a_{k}x^{k} \rvert =\left\lvert  a_{k}x^{k}\cdot \frac{x_{1}^{k}}{x_{1}^{k}}  \right\rvert =\lvert a_{k}x_{1}^{k} \rvert \left\lvert  \frac{x^{k}}{x_{1}^{k}}  \right\rvert =\lvert a_{k}x_{1}^{k} \rvert \left\lvert  \frac{x}{x_{1}} \right\rvert^{k} $$</span>
+כיוון ש-<span>\(x&lt;x_{1}\)</span> הטור <span>\(\left\lvert  \frac{x}{x_{1}}  \right\rvert\)</span> מתכנס מכאן <span>\(\sum M\left\lvert  \frac{x}{x_{1}}  \right\rvert^{k}\)</span> מתכנס וממבחן ההשוואה הטור <span>\(\sum a_{k}x^{k}\)</span> מתכנס בהחלט.</p>
+</div>
+<div class="proposition">
+<p>תחום התכנסות של טור חזקות הוא סימטרי</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>אם תחום ההתכנסות <span>\(D\)</span> אינו חסום אז לכל <span>\(x \in \mathbb{R}\)</span> קיים <span>\(x_{1} \in D\)</span> עבורו <span>\(\lvert x \rvert&lt;\lvert x_{1} \rvert\)</span> ולכן עבור כל <span>\(x \in \mathbb{R}\)</span> מתכנס מהלמה של אבל, ולכן <span>\(D=\mathbb{R}\)</span>. </p>
+</li>
+<li>
+<p>אם התחום ההתכנסות <span>\(D\)</span> חסום נסמן <span>\(R=\sup(D)\)</span>. נחלק למקרים. עבור <span>\(R=0\)</span> נרצה להראות כי <span>\(D=\{ 0 \}\)</span>. נניח בשלילה כי <span>\(D\neq \{ 0 \}\)</span>. לכן קיים <span>\(0&lt;\lvert x_{1} \rvert\)</span> עבורו <span>\(0&lt;\left\lvert  \frac{x_{1}}{2}  \right\rvert\)</span> ומתכנס מהלמה של אבל, בסתירה לכך ש-<span>\(R=0\)</span>, ולכן <span>\(D=\{ 0 \}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(R&gt; 0\)</span> אם <span>\(x&lt; R\)</span> אז קיים איבר <span>\(x_{1} \in D\)</span> כך ש-<span>\(x&lt;x_{1}\)</span> ולכן <span>\(x \in D\)</span> מהלמה של אבל. אם <span>\(\lvert x \rvert&gt; R\)</span> קיים <span>\(\lvert x \rvert&gt;x_{1}&gt;R\)</span> ולכן לו <span>\(x \in D\)</span> אז <span>\(x_{1} \in D\)</span> בסתירה לזה ש-<span>\(x &gt; R\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">רדיוס התכנסות</span><p>המרחק מנקודה <span>\(x_0\)</span> עבורה הטור מתכנס. מרחק זה תמיד יהיה סימטרי, ולכן יהיה רק מהשלוש אפשריות הבאות: הנקודה עצמה בלבד, תחום סימטרי או כל הממשיים.</p>
+</div>
+<div class="reminder">
+<p>רדיוס בבתכנסות של טור חזקות בעזרת מבחן דלמבר יהיה:
+<span>$$\operatorname*{lim}_{n\to\infty}\left|{\frac{a_{n+1}}{a_{n}}}\right|=L$$</span>
+כאשר בעזרת קושי הדמר:
+<span>$$L=\sup \sqrt[n]{a_n}$$</span></p>
+</div>
+<div class="proposition">
+<p>רדיוס בבתכנסות של טור חזקות בעזרת מבחן דלמבר יהיה:
+<span>$$\operatorname*{lim}_{n\to\infty}\left|{\frac{a_{n+1}}{a_{n}}}\right|=L\,,$$</span>
+כאשר רדיוס ההתכנסות יהיה <span>\(\frac{1}{L}\)</span> כאשר אם <span>\(L=0\)</span> תחום ההתכנסות יהיה <span>\(R\)</span> ואם <span>\(L=\infty\)</span> אז רדיוס ההתכנסות יהיה 0.</p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור הטור <span>\(\sum_{n=0}^{\infty}n!x^{n}\)</span> נקבל: 
+<span>$$\operatorname*{lim}_{n\to\infty}\left|{\frac{a_{n+1}}{a_{n}}}\right|=\operatorname*{lim}_{n\to\infty}{\frac{(n+1)!}{n!}}=\operatorname*{lim}_{n\to\infty}(n+1)=\infty.$$</span>
+ולכן רדיוס ההתכנסות הוא <span>\(R=0\)</span></p>
+</li>
+<li>
+<p>עבור <span>$$\sum_{n=10}^{\infty}\left(-1\right)^{n}{\frac{x^{n}}{n!}}$$</span> 
+נקבל כי:
+<span>$$\operatorname*{lim}_{n\to\infty}\left|{\frac{a_{n+1}}{a_{n}}}\right|=\operatorname*{lim}_{n\to\infty}{\frac{n!}{(n+1)!}}=\operatorname*{lim}_{n\to\infty}{\frac{1}{n+1}}=0.$$</span>
+ולכן רדיוס ההתכנסות יהיה <span>\(R=\infty\)</span>.</p>
+</li>
+<li>
+<p>עבור <span>$$\sum_{n=0}^{\infty}2^{n}n^{2}(x-1)^{n}.$$</span> 
+נקבל:
+<span>$$\operatorname*{lim}_{n\to\infty}\left|{\frac{a_{n+1}}{a_{n}}}\right|=\operatorname*{lim}_{n\to\infty}{\frac{2^{n+1}(n+1)^{2}}{2^{n}n^{2}}}=2\operatorname*{lim}_{n\to\infty}\left(1+{\frac{1}{n}}\right)^{2}=2.$$</span>
+ולכן <span>\(R=\frac{1}{2}\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>טור חזקות מתכנס במ"ש בכל קטע סגור בתחום התכנסות. בפרט ניתן לגזור איבר איבר גזיר איבר איבר כאשר תחום ההתכנסות של הנגזרת עלול לא לכלול קצוות וכן ניתן לבצע אינטגרציה איבר איבר כאשר התחום התכנסות של הטור של האינטגרל עלול כן לכלול קצוות.</p>
+</div>
+<div class="definition"><span class="keyword">טור טיילור</span><p>תהי <span>\(f\)</span> פונקציה גזירה מכל סדר בנוקדה <span>\(x=x_{0}\)</span>. אזי הטור טיילור סביב <span>\(x_{0}\)</span> יהיה:
+<span>$$\sum_{n=0}^{\infty}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}.$$</span></p>
+</div>
+<div class="example">
+<p><span>$$\begin{array}{r c l}{{e^{x}}}&amp;{{=}}&amp;{{\sum_{n=0}^{\infty}\frac{x^{n}}{n!},\quad-\infty&lt;x&lt;\infty,}}\\ {{\sin x}}&amp;{{=}}&amp;{{\sum_{n=0}^{\infty}(-1)^{n}\frac{x^{2n+1}}{(2n+1)!},\quad-\infty&lt;x&lt;\infty,}}\\ {{\cos x}}&amp;{{=}}&amp;{{\sum_{n=0}^{\infty}(-1)^{n}\frac{x^{2n}}{(2n)!},\quad-\infty&lt;x&lt;\infty,}}\\ {{\frac{1}{1-x}}}&amp;{{=}}&amp;{{\sum_{n=0}^{\infty}x^{n},\quad-1&lt;x&lt;1.}}\end{array}$$</span></p>
+</div>
+<div class="proposition">
+<p>טור הוא טור חזקות אם"ם הוא טור טיילור.</p>
+</div>
+<div class="definition">
+<p>הכיוון שטור טיילור הוא טור חזקות הוא ברור. בכיוון השני נניח כי:
+<span>$$f(x)=\sum_{n=0}^{\infty}a_{n}(x-x_{0})^{n}$$</span>
+כעת ניתן לקבל את הנגזרות של <span>\(f(x)\)</span> על ידי גזירה של <span>\(f\)</span> (גזיר כי <span>\((x-x_{0})^{n}\)</span> גזיר). כלומר:
+<span>$$\begin{gather}f^{\prime}(x)=\sum_{n=1}^{\infty}na_{n}(x-x_{0})^{n-1}\\f^{\prime\prime}(x)=\sum_{n=2}^{\infty}n(n-1)a_{n}(x-x_{0})^{n-2}\\ \vdots \\f^{(k)}(x)=\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)a_{n}(x-x_{0})^{n-k} 
+\end{gather}$$</span>
+כאשר בפרט לכל טורים האלו יש את אותו רדיוס התכנסות כמו <span>\(f(x)\)</span>. כעת ניתן לבצע הזזה של הטור על ידי ההצבה <span>\(n-k=m\)</span> ולקבל:
+<span>$$f^{(k)}(x)=\sum_{m=0}^{\infty}(m+k)(m+k-1)\cdots(m+1)a_{m+k}(x-x_{0})^{m}$$</span>
+אם נציב <span>\(x=x_{0}\)</span> נקבל כי כל הגורמים מתאפסים פרט הגורם עם החזקה <span>\(m=0\)</span>. ונקבל:
+<span>$$f^{(k)}(x_{0})=k!a_{k}\implies a_{k}=\frac{f^{(k)}(x_{0})}{k!}$$</span>
+כאשר זהו לפי ההגדרה המקדם של טור טיילור.</p>
+</div>
+<div class="proposition"><span class="keyword">יחידות הטור חזקות</span><p>אם:
+<span>$$\sum_{n=0}^{\infty}a_{n}(x-x_{0})^{n}=\sum_{n=0}^{\infty}b_{n}(x-x_{0})^{n}$$</span>
+לכל <span>\(x\)</span> בסביבה שמכילה את <span>\(x_{0}\)</span>, אזי <span>\(a_{n}=b_{n}\)</span> לכל <span>\(n\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./series_3_3.html'>3.3 סיווג התכנסויות</a></li>
+<li class='prev-page'><a href='./series_3_1.html'>3.1 התכנסות במ"ש של טורי פונקציות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

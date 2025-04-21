@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>התכנסויות אינטגרלית של סדרות פונקציות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  התכנסויות אינטגרלית של סדרות פונקציות</h1>
+    <div class="definition"><span class="keyword">התכנסות נקודתית</span><p>יהי <span>\(\left( X,\mathcal{A},\mu \right)\)</span> מרחב מידה ו-<span>\(f_{n},f:X\to \mathbb{R}\)</span> פונקציות מדידות. נגדיר <span>\(f_{n}\to f\)</span> נקודתית אם לכל <span>\(x \in X\)</span> מתקיים:
+<span>$$f(x)=\lim_{ n \to \infty } f_{n}(x)$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">ההתכנסות המונוטונית</span><p>תהי <span>\(\left\{  f_{n}:X\to \left[ 0,\infty \right]  \right\}\)</span> סדרה עולה:
+<span>$$0\leq f_{1} \leq f_{2} \leq \dots$$</span>
+של פונקציות מדידות. אזי:
+<span>$$f=\lim_{ n \to \infty } f_{n}\quad \left( =\sup _{n}f_{n} \right)$$</span>
+מקיימת לכל <span>\(A \in \mathcal{A}\)</span>:
+<span>$$\int_{A}f \;\mathrm{d}\mu = \lim_{ n \to \infty } \int_{A}f_{n}\;\mathrm{d}\mu$$</span></p>
+</div>
+<div class="remark">
+<p>הפונקציה <span>\(f\)</span> מדידה כגבול של מדידות.</p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(\alpha=\int _{A} f_{n} \;\mathrm{d} \mu\)</span>. נוכיח כי <span>\(\alpha\)</span> שווה ל-<span>\(\int _{A}f \;\mathrm{d} \mu\)</span> על ידי להראות שתי אי שיוויונות חלשים.</p>
+<ol>
+<li>
+<p>נראה <span>\(\alpha \leq \int_{A} f \;\mathrm{d} \mu\)</span> בצורה הבאה: 
+לכל <span>\(n\in \mathbb{N}\)</span> נשים לב כי:
+<span>$$f_{n}\leq \sup _{n}f_{n}=f$$</span>
+ולכן ממונוטוניות האינטגרל:
+<span>$$\int f_{n} \;\mathrm{d} \mu \leq \int f \;\mathrm{d} \mu $$</span>
+וכעת משימור אי שיוויון חלש בין גבולות נקבל:
+<span>$$\lim_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu=\alpha \leq \int f \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>עבור הכיוון השני, נרצה להראות כי עבור פונקציה פשוטה <span>\(s(x)\leq f(x)\)</span> ו-<span>\(0&lt;c&lt;1\)</span> מתקיים <span>\(\int c\cdot s(x) \;\mathrm{d} \mu \geq \alpha\)</span> וכיוון שסופרמום משמר אי שוויון חלש נקבל את הטענה. נגדיר את הקבוצה: 
+<span>$$E_{n}=\left\{  x \in X\mid f_{n}(x)\geq c\cdot s(x)  \right\}$$</span>
+כאשר נשים לב כי כל <span>\(E_{n}\)</span> יהיה מדיד.</p>
+</li>
+<li>
+<p>נשים לב כי מתקיים: 
+<span>$$E_{1} \subseteq E_{2} \subseteq E_{3} \subseteq\dots \qquad X=\bigcup_{n}E_{n}$$</span>
+כדי לראות זאת נניח <span>\(x \in X\)</span>. מספיק להראות כי קיים <span>\(n \in \mathbb{N}\)</span> כך ש-<span>\(x \in E_{n}\)</span>.
+אם <span>\(f(x)=0\)</span> אזי <span>\(x \in E_{1}\)</span>. אם <span>\(f(x)&gt; 0\)</span> אחרת נזכור כי מתקיים:
+<span>$$f(x)=\sup_{n} f_{n}(x)\implies \forall \varepsilon&gt;0 \quad \exists n \quad f(x)-f_{n}(x)&lt;\varepsilon$$</span>
+ובפרט עבור <span>\(\varepsilon=f(x)-cs(x)&gt;0\)</span> נקבל <span>\(n \in \mathbb{N}\)</span> כך ש:
+<span>$$f(x)-f_{n}(x)&lt;f(x)-cs(x)\implies cs(x)&gt; f_{n}(x)$$</span>
+ולכן <span>\(x \in E_{n}\)</span> עבור <span>\(n\)</span> מספיק גדול.</p>
+</li>
+<li>
+<p>כיוון שלכל <span>\(E_{n}\)</span> נקבל <span>\(E_{n}\subseteq  X\)</span>: 
+<span>$$\int_{E_{n}}  c s(x) \;\mathrm{d} \mu \leq\int_{E_{n}} f_{n} \;\mathrm{d} \mu \leq \int _{X} f_{n}\;\mathrm{d} x  $$</span>
+כאשר השתמשנו בכך שבתחום <span>\(E_{n}\)</span> מתקיים <span>\(cs(x)\leq f_{n}\)</span> ומונוטוניות האינטגרל.</p>
+</li>
+<li>
+<p>אם ניקח את הגבול <span>\(n\to \infty\)</span> נקבל משימור אי שיוויון חלש בין גבולות: 
+<span>$$\lim_{ n \to \infty } \int _{E_{n}}c\cdot s \;\mathrm{d} \mu \leq \lim_{ n \to \infty } \int _{E_{n}}f_{n} \;\mathrm{d} \mu \leq \lim_{ n \to \infty } \int _{X}f_{n} \;\mathrm{d} \mu = \alpha$$</span>
+כאשר נזכור כי <span>\(\int c\cdot s(x) \;\mathrm{d} \mu=c\cdot \int s(x) \;\mathrm{d} \mu\)</span>.</p>
+</li>
+<li>
+<p>נראה <span>\(\lim_{ n \to \infty }\int _{E_{n}}s \;\mathrm{d} \mu=\int _{X}s \;\mathrm{d} \mu\)</span> בצורה הבאה: 
+נסמן <span>\(s=\sum_{i=1}^{k}\alpha_{i}\mathbb{1}_{A_{i}}\)</span> כש-<span>\(\left\{  A_{1},\dots,A_{k}  \right\}\)</span> חלוקה של <span>\(X\)</span>. כאשר כעת מתקיים:
+<span>$$\int _{E_{n}}s \;\mathrm{d} \mu = \sum_{i=1}^{k}  \alpha_{i}\mu\left( A_{i}\cap E_{n} \right) $$</span>
+מאחר שלכל <span>\(1\leq i \leq k\)</span> נקבל:
+<span>$$A_{i}\cap E_{1}\subseteq A_{i}\cap E_{2}\subseteq A_{i}\cap E_{3}\subseteq \dots$$</span>
+כאשר נקבל:
+<span>$$\bigcup_{n}A_{i}\cap E_{n}=A_{i}$$</span>
+ולכן מרציפות של מידה של סדרות עולות נקבל:
+<span>$$\mu\left( A_{i}\cap E_{n} \right)\xrightarrow{n\to \infty} \mu(A_{i})$$</span>
+ולכן:
+<span>$$\int _{E_{n}} s\;\mathrm{d} \mu \xrightarrow{n\to\infty } \sum_{i=1}^{k}\alpha_{i}\mu(A_{i})=\int _{X}s \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>משלבים 5 ו-6 נסיק כי: 
+<span>$$\alpha \geq c \cdot \int _{X} s  \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>מאחר ש-<span>\(0\leq s\leq f\)</span> פשוטה שרירותית ו-<span>\(0&lt; c &lt; 1\)</span> שרירותי נסיק ש: 
+<span>$$\alpha \geq \sup_{n}  \int_{X} s \;\mathrm{d} \mu =\int _{X}f \;\mathrm{d} \mu$$</span>
+וכיוון שיש לנו אי שוייונות בשתי כיוונים הוכחנו את הטענה.</p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>עבור סדרת הפונקציות הפשוטות מהצורה:
+<span>$$0\leq s_{1}\leq s_{2} \leq\dots \leq f$$</span>
+נקבל:
+<span>$$\int f \;\mathrm{d} \mu =\lim_{ n \to \infty } \int s_{n} \;\mathrm{d} \mu $$</span></p>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(f_{n}\nearrow f\)</span> כדי לסמן ש-<span>\(f_{n}\)</span> מתכנסת ל-<span>\(f\)</span> בצורה מונוטונית.</p>
+</div>
+<div class="lemma">
+<p>יהיו <span>\(f,g:X\to\left[ 0,\infty \right]\)</span> מדידות. אזי:
+<span>$$\int (f+g) \;\mathrm{d} \mu = \int f \;\mathrm{d} \mu+\int  g \;\mathrm{d} \mu   $$</span></p>
+</div>
+<div class="proof">
+<p>האסטרטגיה תהיה להוכיח את הטענה עבור פונקציות פשוטות ומשם להסיק את הטענה לכל פונקציה מדידה בעזרת משפט ההתכנסות המונוטונית.
+יהיו <span>\(s,t :X\to \left[ 0,\infty \right)\)</span> פונקציות פשוטות כלשהן. נגדיר:
+<span>$$t=\sum_{j=1}^{m} \beta_{j}\mathbb{1} _{B_{j}}\qquad s=\sum_{i=1}^{n} \alpha_{i}\mathbb{1} _{A_{i}}$$</span>
+כש-<span>\(\{ A_{i} \}\)</span> ו-<span>\(\{ B_{i} \}\)</span> חלוקות של <span>\(X\)</span>. נשים לב שהסכום <span>\(s+t\)</span> היא פונקציה פשוטה, כאשר <span>\(\left\{  A_{i}\cap B_{j}  \right\}_{i,j}\)</span> תהיה חלוקה. לכן נקבל:
+<span>$$\int (s+t) \;\mathrm{d} \mu = \sum_{i,j} \left( \alpha_{i}+\beta_{j} \right)\cdot\left( A_{i}\cap B_{j} \right)=\sum_{i}\alpha_{i}\overbrace{ \sum_{j}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(A_{i}) }  +\sum_{j}\beta_{j}\overbrace{ \sum_{i}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(B_{j}) }=\int s \;\mathrm{d} \mu +\int t \;\mathrm{d} \mu $$</span>
+יהיו <span>\(f,g\)</span> מדידות יהיו <span>\(s_{n}\to f\)</span> ו-<span>\(t_{n}\to g\)</span> סדרות עולות של פונקציות פשוטות, אזי <span>\(s_{n}+t_{n}\to f+g\)</span> וממשפט ההתכנסות המונוטונית:
+<span>$$\int (f+g) \;\mathrm{d} \mu = \lim_{n\to \infty} \int  s_{n}\;\mathrm{d}\mu + \int t \;\mathrm{d} \mu =\int f \;\mathrm{d} \mu+\int g \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן בדרך דומה להראות הומוגניות, כלומר עבור <span>\(c \in \mathbb{R}\)</span> מתקיים:
+<span>$$\int cf \;\mathrm{d} \mu=c\int f \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(f_{n}:X\to \left[ 0,\infty \right]\)</span> פונקציות מדידות. אזי:
+<span>$$\int \sum_{n=1}^{\infty} f_{n} \;\mathrm{d}\mu= \sum_{n=1}^{\infty}\int  f_{n} \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="proof">
+<p>מאינדוקציה על הלמה הקודמת:
+<span>$$\int \sum_{i=1}^{N} f_{n} \;\mathrm{d} \mu = \sum_{i=1}^{N} \int f_{n} \;\mathrm{d} \mu  $$</span>
+כמו כן:
+<span>$$\sum_{i=1}^{N} f_{n}\to \sum_{i=1}^{\infty} f_{n}$$</span>
+מונוטונית עולה. ולכן ממשפט ההתכנסות המונוטונית נובעת הטענה.</p>
+</div>
+<div class="corollary">
+<p>לכל סדרת מספרים אי שליליים <span>\(a_{ij}\)</span> מתקיים:
+<span>$$\sum_{i=1}^{\infty} \sum_{j=1}^{\infty} a_{ij}=\sum_{j=1}^{\infty} \sum_{i=1}^{\infty} a_{ij}
+$$</span></p>
+</div>
+<div class="proof">
+<p>יישום הטענה הקודמת על מרחב המידה:
+<span>$$\left( \mathbb{N},2^{\mathbb{N}}, \mu \right)$$</span>
+כאשר <span>\(\mu\)</span> זה מידת המנייה.</p>
+</div>
+<div class="proposition">
+<p>בהנתן מרחב מידה <span>\(\left( X,\mathcal{ A, \mu} \right)\)</span> נגדיר פונקציית מדידה <span>\(h:X\to \left[ 0,\infty \right)\)</span>. הפונקציית מידה <span>\(\nu:\mathcal{A}\to \left[ 0,\infty \right]\)</span> המוגדרת על ידי:
+<span>$$\nu(E)=\int _{X}h \;\mathrm{d} \mu $$</span>
+הינה מידה על <span>\(\left( X,\mathcal{A} \right)\)</span>. נסמן במקרה זה <span>\(\mathrm{d}\nu=h\cdot \mathrm{d\mu}\)</span>. מעבר לכך לכל <span>\(g:X\to\left[ 0,\infty \right]\)</span> מדידה נגדיר:
+<span>$$\int g \;\mathrm{d} \nu = \int g \cdot h \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="proof">
+<p>ראשית ש-<span>\(\nu\left( \varnothing \right)=0\)</span> לכן אם <span>\(E_{1},E_{2},\dots\)</span> סדרה כלשהי של קבוצות מדידות זרות עם איחוד <span>\(E=\bigcup_{n}E_{n}\)</span>. מתקיים ש:
+<span>$$\nu(E)=\int _{E}h \;\mathrm{d} \mu = \int _{X}h\cdot \mathbb{1} _{E} \;\mathrm{d} \mu = \int h \sum_{n=1}^{\infty} \mathbb{1}_{E_{n}} \;\mathrm{d} \mu   = \sum_{n=1}^{\infty} \nu(E_{n})$$</span>
+כאשר השתמשנו בזה ש-<span>\(\mathbb{1}_{E}=\sum_{n=1}^{\infty}\mathbb{1}_{E_{n}}\)</span> ובטענה הקודמת. קיבלנו כי <span>\(\nu\)</span> מידה על <span>\(\left( X,\mathcal{ A} \right)\)</span>. קל להשתכנע כי <span>\((*)\)</span> מתקיימת עבור פונקציות פשוטות. לכן עבור <span>\(g\)</span> מדידה נקח <span>\(S_{n}\to g\)</span> סדרה עולה של פונקציות פשוטות ונקבל ממשפט ההתכנסות המונוטונית על מרחב המידה <span>\(\left( X,\mathcal{A},\nu \right)\)</span> כי:
+<span>$$\int g \;\mathrm{d} \nu =\lim_{ n \to \infty } \int s_{n} \;\mathrm{d} \nu = \lim_{ n \to \infty } \int s_{n}h \;\mathrm{d} \mu $$</span>
+כעת כיוון ש-<span>\(s_{n}\cdot h \to g\cdot h\)</span> סדרה עולה נקבל כי:
+<span>$$\lim_{ n \to \infty } \int s_{n}h \;\mathrm{d} \mu=\int g\cdot h \;\mathrm{d} \mu \implies \int g \;\mathrm{d} \nu=\int g\cdot h \;\mathrm{d} \mu  $$</span></p>
+</div>
+<div class="remark">
+<p>התכונה "אם <span>\(\mu(E)=0\)</span> אז <span>\(\nu(E)=0\)</span>" נקראת רציפות בהחלט. נבחין שלכל <span>\(E \in \mathcal{A}\)</span> אם <span>\(\mathrm{d}\nu=h\mathrm{d}\mu\)</span> נקבל כי רציף בהחלט.</p>
+</div>
+<div class="theorem"><span class="keyword">הלמה של פאטו - Fatou</span><p>תהי <span>\(f_{n}:X\to \left[ 0,\infty \right]\)</span> סדרה של פונקציות מדידות. אזי:
+<span>$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נגדיר סדרה חדשה <span>\(\{ g_{k} \}_{k=1}^{\infty}\)</span> על ידי <span>\(g_{k}=\inf_{n\geq k}f_{n}\)</span>. </p>
+</li>
+<li>
+<p>נשים לב כי הסדרה <span>\(g_{k}\)</span> היא מונוטונית עולה. זאת כיוון שכל איבר בסדרה יהיה אינפומום של קבוצה קטנה יותר. </p>
+</li>
+<li>
+<p>נשים לב כי הגבול של הסדרה <span>\(\{ g_{k} \}\)</span> הוא בדיוק ההגדרה של הגבול התחתון של הסדרה המקורית: 
+<span>$$\lim_{ k \to \infty } g_{k}=\liminf_{ n \to \infty } f_{n} $$</span></p>
+</li>
+<li>
+<p>כעת ממשפט ההתכנסות המונוטונית נקבל: 
+<span>$$\int \liminf_{ n \to \infty } f_{n} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>מצד שני לכל <span>\(k\)</span> נקבל <span>\(g_{k}\leq f_{k}\)</span> ולכן <span>\(\int g_{k} \;\mathrm{d} \mu \leq \int f_{k} \;\mathrm{d} \mu\)</span> וזה גורר כי: 
+<span>$$\lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu \leq \lim_{ k \to \infty }   \int f_{k} \;\mathrm{d} \mu \implies \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu \leq \liminf_{ k \to \infty }   \int f_{k} \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>אם נשלב את התוצאות נקבל: 
+<span>$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>אי אפשר לצפות לשיוויון בטענה(בכלליות הזו). למשל, עבור <span>\(\left( \mathbb{R},\mathcal{B},\text{Leb} \right)\)</span> ניקח:
+<span>$$f_{n}= \begin{cases} \mathbb{1}  _{[0,1]} &amp; n\text{ is even} \\\mathbb{1} _{[-1,0]} &amp; n\text{ is odd} 
+\end{cases}$$</span>
+וכעת:
+<span>$$\liminf_{ n \to \infty } f_{n} = \mathbb{1} _{\{ 0 \}}$$</span>
+ומתקיים:
+<span>$$0\leq \int  \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \text{Leb} \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \text{Leb}=1  $$</span></p>
+</div>
+<div class="remark">
+<p>האינטואיציה זה שאם יש פונקציה שמתנדנדת מסביב לגבול הנקודתית שלה, אז השטח הנמוך ביותר יהיה השטח מתחת לערך הכי נמוך בסדרה, ולא ייתכן</p>
+</div>
+<div class="summary">
+<ul>
+<li>משפט ההתכנסות המונוטונית אומר כי עבור סדרת פונקציה <span>\(\{ f_{n} \}\)</span> המתכנסת מונוטונית לפונקציה <span>\(f_n \nearrow f\)</span> מתקיים:
+<span>$$\int_A f \, d\mu = \lim_{n \to \infty} \int_A f_n \, d\mu$$</span></li>
+<li>בפרט לכל פונקציה קיים סדרה מונוטית של פונקציות פשוטות <span>\(s_n \nearrow f\)</span> כך ש:
+<span>$$\int f \, d\mu = \lim_{n \to \infty} \int s_n \, d\mu$$</span></li>
+<li>האינטגרל הוא לינארי, לכן עבור <span>\(f,g \geq 0\)</span> מתקיים:
+<span>$$\int \left( \alpha f+\beta g \right) \, d\mu = \alpha\int f \, d\mu + \beta\int g \, d\mu$$</span></li>
+<li>הלמה של פאטו אומר כי עבור סדרת פונקציות כללית <span>\(f_{n}\)</span> המקיימת <span>\(f_n \geq 0\)</span> מתקיים:
+<span>$$\int \liminf_{n \to \infty} f_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='prev-page'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סודרים ומונים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_2_5.html'>2.5 אקסיומת הבחירה</a></li>
+<li class='parent-page'><a href='./SetTheory.html'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_1.html'>1.1 מבוא</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_2.html'>1.2 פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_3.html'>1.3 יחסי סדר</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_4.html'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_1_5.html'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_1.html'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_2.html'>2.2 המערכת ZF</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_4.html'>2.4 סודרים ומונים</a></li>
+<li class='parent_page-dropdown'><a href='./SetTheory_2_5.html'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./SetTheory_2_5.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./SetTheory_2_3.html`;}});</script>
+        <div class="content">
+        <h1>2.4  סודרים ומונים</h1>
+    <div class="definition"><span class="keyword">מחלקה טרנזטיבית</span><p>מחלקה <span>\(A\)</span> נקראת טרנזטיבית אם לכל <span>\(b \in A\)</span> מתקיים <span>\(b \subseteq A\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה טרנזטיבית</span><p>קבוצה אשר כל התתי איברים שלה גם מוכלים בקבוצה נקראת טרנזטיבית. כלומר:
+<span>$$x\in y\in A\implies x\in A$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הגדרות שקולות לקבוצה טרנזטיבית</span><ul>
+<li>מתקיים <span>\(x \in S\implies x\subseteq S\)</span></li>
+<li>האיחוד של האיברים מוכל בקבוצה - <span>\(\bigcup S\subseteq S\)</span></li>
+<li>הקבוצה מוכלת בקבוצת החזקה שלה - <span>\(A\subseteq \mathcal{P}(A)\)</span>.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>אם <span>\(A\)</span> קבוצה כך שלכל <span>\(a \in A\)</span> מתקיים כי <span>\(a\)</span> טרנזטיבית אז גם <span>\(\cup A\)</span> ו-<span>\(\cap A\)</span> הם מחלקות טרנזטיביות.</p>
+</div>
+<div class="proof">
+<p>נראה ראשית <span>\(\cup A\)</span> היא טרנזטיבית. ניקח <span>\(x \in \cup A\)</span>. מהגדרת האיחוד קיים קבוצה <span>\(A_{i}\)</span> כך ש-<span>\(x \in A_{i}\)</span>. כיוון ש-<span>\(A_{i}\)</span> קבוצה טרנזטיבית מתקיים <span>\(x \subseteq A_{i}\)</span>. כאשר מתקיים לכל קבוצה <span>\(A_{i}\subseteq \cup A\)</span> ולכן <span>\(x\subseteq \cup A\)</span> וטרנזטיבית.
+כעת נסתכל על החיתוך <span>\(\cap A\)</span>. לפי ההגדרה:
+<span>$$\bigcap A=\{z\mid\forall B\in A,z\in B\}$$</span>
+נניח <span>\(x \in \cap A\)</span>. לכן לפי ההגדרה <span>\(x \in B\)</span>  לכל <span>\(B \in A\)</span>. כיוון ש-<span>\(B\)</span> טרנזיטיבי נקבל כי אם <span>\(x \in B\)</span> וגם <span>\(y \in x\)</span> אזי <span>\(y \in B\)</span>. כאשר כיוון ש-<span>\(y \in B\)</span> לכל <span>\(B \in A\)</span> נקבל כי <span>\(y \in \cap A\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">סודר</span><p>קבוצה <span>\(x\)</span> נקרא סודר אם הוא טרנזטיבי כך שביחד עם היחס <span>\(\in\)</span> הוא מבוסס ביטב ויחס לינארי(כלומר סדר טוב). </p>
+</div>
+<div class="remark">
+<p>ניתן לתאר את התכונה של להיות טרנזטיבית, וכן את התכונה של להיות מבוסס היטב בשפה הפורמלית. ולכן ניתן להגדיר את המחלקה של כל הסדורים.</p>
+</div>
+<div class="symbolize">
+<p>מסמנים תמיד סודרים באותיות יווניות, פרט לסודרים סופיים, אשר מסמנים באותיות לטיניות.</p>
+</div>
+<div class="proposition">
+<p>כל שתי סודרים <span>\(\alpha,\beta\)</span> מתקיים <span>\(\alpha \leq \beta\)</span> או <span>\(\beta \leq \alpha\)</span>(כאשר <span>\(\alpha \leq \beta\)</span> אומר <span>\(\alpha \in \beta\)</span> או <span>\(\alpha = \beta\)</span>). כלומר מחלקת הסודרים יוצרת יחס סדר טוב ביחד עם היחס <span>\(\in\)</span>, כאשר יחס סדר זה יהיה יחס סדר חד(מתקיים <span>\(\alpha \not \in \alpha\)</span> לכל איבר כיוון שסודרים הם קבוצות)</p>
+</div>
+<div class="symbolize">
+<p>עבור סודרים <span>\(\alpha,\beta\)</span> נהוג לסימן <span>\(\alpha&lt;\beta\)</span> עבור <span>\(\alpha \in \beta \iff \alpha \subset \beta\)</span>, וכן <span>\(\alpha \leq \beta\)</span> עבור <span>\(\alpha \subseteq \beta\)</span>. </p>
+</div>
+<div class="proposition">
+<p>קבוצה <span>\(\alpha\)</span> הוא סודר אם"ם <span>\(\alpha\)</span> קבוצה טרנזטיבית וכל האיברים שלה הם קבוצות טרנזטיביות.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(\alpha\)</span> סודר גם <span>\(\cup \alpha\)</span> סודר וגם <span>\(\cap \alpha\)</span> סודר. וכן כל איבר <span>\(\beta \in \alpha\)</span> יהיה סודר.</p>
+</div>
+<div class="proposition">
+<p>עבור קבוצה של סודרים <span>\(A\)</span> נקבל כי <span>\(\cup A,\cap A\)</span> סודרים וכן:</p>
+<ol>
+<li>
+<p><span>\(\cup A=\sup A\)</span> </p>
+</li>
+<li>
+<p><span>\(\cap A=\min A\)</span> </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(A\)</span> היא קבוצה של סוגרים וסודרים הם טרנזיטיבים אז <span>\(\cup A,\cap A\)</span> הוא טרנזיטיבי.</p>
+<ol>
+<li>
+<p>נסתכל על <span>\(\cup A\)</span>. נראה ראשית כי סודר. כל איבר <span>\(x \in \cup A\)</span> שייך לאיזשהו סודר <span>\(\alpha \in A\)</span>. כל <span>\(\alpha\)</span> הוא סדר טוב. אם נסתכל על קבוצה לא ריקה <span>\(S\subseteq \cup A\)</span> נקבל כי כל איבר ב-<span>\(S\)</span> נמצא באיזשהו <span>\(\alpha \in A\)</span>. וכיוון שסודרים הם מובססים היטב, קיים איבר מינימלי ב-<span>\(S\)</span>, ולכן <span>\(\cup A\)</span> הוא סדר טוב וטרנזטיבי ולכן סודר. 
+נראה כי <span>\(\sup A = \cup A\)</span>. לכל <span>\(\alpha \in A\)</span> מתקיים <span>\(\alpha \subseteq \cup A\)</span>. כיוון ש-<span>\(\cup A\)</span> הוא סודר וסודרים הם מסודרים היטב, אז <span>\(\alpha \leq \cup A\)</span> לכל <span>\(\alpha \in A\)</span>. לכן <span>\(\cup A\)</span> הוא החסם העליון של <span>\(A\)</span>. כיוון שכל איבר ב-<span>\(A\)</span> הוא קטן או שווה ל-<span>\(\cup A\)</span> נקבל כי זהו החסם העליון המינימלי, ולכן שווה לסופרמום.</p>
+</li>
+<li>
+<p>נסתכל על <span>\(\cap A\)</span>. נראה כי סודר. כיוון שהראינו כבר כי טרנזיטיבי מספיק להראות כי מסודר היטב. אנו יודעים כי <span>\(\cap A\)</span> זה תת קבוצה של כל <span>\(\alpha \in A\)</span>. ולכן כיוון שכל <span>\(\alpha \in A\)</span> מסודר היטב, אז גם <span>\(\alpha\)</span> מסודר היטב, ולכן החיתוך מסודר היטב ונקבל כי גם התת קבוצה שלו <span>\(\cap A\)</span> מסודר היטב. 
+נראה מינימליות. אנו יודעים כי לכל <span>\(\alpha \in A\)</span> מתקיים <span>\(\cap A\subseteq \alpha\)</span>. ולכן כיוון ש-<span>\(\cap A\)</span> הוא סודר וסודרים הם מסודרים היטב אז <span>\(\cap A\leq \alpha\)</span> לכל <span>\(\alpha \in A\)</span>. לכן <span>\(\cap A\)</span> הוא האיבר המינימלי.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סודר עוקב</span><p>אם <span>\(\alpha\)</span> סודר אז <span>\(\alpha+1\equiv\alpha \cup \left\{  \alpha  \right\}\)</span> נקרא הסודר העוקב.</p>
+</div>
+<div class="definition"><span class="keyword">סודר גבולי</span><p>סודר שלא עוקב של אף סודר אחר. במקרה של-<span>\(A\)</span> אין מקסימום נקבל כי <span>\(\cup A\)</span> הוא סודר גבולי.</p>
+</div>
+<div class="proposition">
+<p>המחלקה של הסודרים, אשר נסמן:
+<span>$$\mathrm{Ord} = \left\{  \alpha \mid \alpha \text{ is an ordinal}  \right\}$$</span>
+היא טרנזיטיביות וסדורה היטב, ולכן מחלקה נאותה.</p>
+</div>
+<div class="proof">
+<p>נניח בשלילה כי <span>\(\mathrm{O rd}\)</span> קבוצה. מאקסיומת האיחוד נקבל כי האיחוד של <span>\(\mathrm{Ord}\)</span> - כלומר האיחוד של כל הסודרים יהיה סודר, לכן <span>\(\mathrm{Ord}\)</span> יהיה סודר, ובפרט איבר בקבוצה. בסתירה לאקסיומת היסוד.</p>
+</div>
+<div class="definition"><span class="keyword">אומגה</span><p>יהי <span>\(\omega\)</span> הקבוצה הקטן ביותר אשר מכיל את 0 וסגור ע"י הפעולה של לקחת עוקב(כלומר הוספת אחד). בצורה פורמלית:
+<span>$$\omega=\cap \left\{  u \mid 0 \in u \land \forall v \in u\quad v+1 \in u  \right\}$$</span>
+כאשר <span>\(\omega\)</span> היא קבוצה לפי אקסיומת האינסוף. </p>
+</div>
+<div class="proposition">
+<p>הקבוצה <span>\(\omega\)</span> היא סודר.  </p>
+</div>
+<div class="proposition"><span class="keyword">אינדוקציה על סודרים</span><p>תהי <span>\(p\)</span> תכונה. אם לכל <span>\(\alpha \in \mathrm{Ord}\)</span> מתקיים:
+<span>$$\forall \beta \in \alpha \quad p\left( \beta \right)\implies p\left( \alpha \right)$$</span>
+אז <span>\(p\left( \alpha \right)\)</span> לכל <span>\(\alpha \in \mathrm{Or d}\)</span>. ניתן לחלופין לחלק את כל הסודרים לסודרים גבוליים ועוקבים, ובמקרה זה אם מתקיים:</p>
+<ol>
+<li>
+<p>אם <span>\(\alpha = \alpha'+1\)</span> וגם <span>\(p\left( \alpha' \right)\)</span> אז <span>\(p\left( \alpha \right)\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\alpha\)</span> סודר גבולי ו-<span>\(p\left( \beta \right)\)</span> מתקיים לכל <span>\(\beta \in \alpha\)</span> אז <span>\(p\left( \alpha \right)\)</span>. 
+אז התכונה <span>\(p\left( \alpha \right)\)</span> מתקיימת לכל <span>\(\alpha \in \mathrm{ Or d}\)</span>.</p>
+</li>
+</ol>
+</div>
+<p>השימוש העיקרי של סודרים זה לתאר קבוצות סדורות היטב.
+<strong>טענה</strong>
+לכל יחס סדר <span>\(\langle A,&lt; \rangle\)</span> כך ש-<span>\(&lt;\)</span> יחס סדר טוב קיים איזומורפיזם יחיד ל-<span>\(\left\langle  \alpha,\in  \right\rangle\)</span> עבור סודר כלשהו <span>\(\alpha\)</span>.</p>
+<p>נוכיח קיום.</p>
+<div class="proof">
+<p>נגדיר את האיזומורפיזם <span>\(f:A\to\alpha\)</span> בצורה אינדוקטיבית:
+<span>$$f(y)=\left\{  f(z)\mid z&lt;y  \right\}$$</span>
+כאשר <span>\(\alpha=\mathrm{Im}(f)\)</span> זה יהיה הסודר המתאים.</p>
+</div>
+<div class="definition"><span class="keyword">מונה</span><p>סודר <span>\(\kappa\)</span> כך שלכל <span>\(\alpha&lt; \kappa\)</span> מתקיים <span>\(|\alpha|&lt;|\kappa|\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(\alpha\)</span> סודר. אז קיים מונים <span>\(\kappa,\lambda\)</span> כך ש-<span>\(|\kappa|=|\alpha|&lt;|\lambda|\)</span> ולכל <span>\(\beta&lt;\lambda\)</span> מתקיים <span>\(|\beta|\leq \kappa\)</span>. כלומר, <span>\(\lambda\)</span> הוא העוקב של <span>\(\kappa\)</span> בסדר על המונים. </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./SetTheory_2_5.html'>2.5 אקסיומת הבחירה</a></li>
+<li class='prev-page'><a href='./SetTheory_2_3.html'>2.3 טענות ובניות בסיסיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

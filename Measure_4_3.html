@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מרחבי הילברט</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_4_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_4_2`; }});</script>
+        <div class="content">
+        <h1>4.3  מרחבי הילברט</h1>
+    <div class="reminder">
+<p>מרחב מכפלה פנימית <span>\(V\)</span> מעל <span>\(\mathbb{C}\)</span> הינו מרחב ווקטורי עם <span>\(\left\langle  \cdot,\cdot  \right\rangle\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>לכל <span>\(w \in V\)</span> ההעתקה <span>\(v\mapsto \langle v,w \rangle\)</span> היא <span>\(\mathbb{C}\)</span>-לינארית. </p>
+</li>
+<li>
+<p>לכל <span>\(0\neq v \in V\)</span> מתקיים <span>\(\langle v,v \rangle&gt;0\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(u,v \in V\)</span> מתקיים <span>\(\langle u,v \rangle=\overline{\langle v,u \rangle}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מרחב הילברט</span><p>מרחב מכפלה פנימי נקרא מרחב הילברט אם הוא שלם ביחס למטריקה המושרית מהמכפלה הפנימית(כלומר <span>\(d(x,y)=\lVert x-y \rVert=\sqrt{ \langle x-y,x-y \rangle }\)</span>)</p>
+</div>
+<div class="corollary">
+<p>המרחב ההווקטורי <span>\(L^2\left( \mu \right)\)</span> הינו מרחב הילברט ביחס למכפלה הפנימית:
+<span>$$\langle f,g \rangle =\int f \cdot \overline{g}  \;\mathrm{d} \mu $$</span></p>
+</div>
+<div class="symbolize">
+<p>מסמנים ב-<span>\(\mathcal{H}\)</span> במרחב בילברט.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה קמורה במרחב הילברט</span><p>קבוצה <span>\(D \subseteq \mathcal{H}\)</span> נקראת קבומרה אם לכל <span>\(x,y \in D\)</span> ולכל <span>\(\alpha \in[0,1]\)</span> מתקיים:
+<span>$$\alpha x+\left( 1-\alpha \right)y \in D$$</span></p>
+</div>
+<div class="reminder">
+<p>במרחבי מכפלה פנימית מתקיים:</p>
+<ol>
+<li>
+<p>אי שיוויון קושי שוורץ: 
+<span>$$\forall x,y \in \mathcal{H}\qquad \left\lvert  \langle x,y \rangle   \right\rvert \leq \lVert x \rVert \cdot \lVert y 
+\rVert $$</span></p>
+</li>
+<li>
+<p>כלל המקבילית: 
+<span>$$\forall x,y \in \mathcal{H} \qquad \lVert x+y \rVert ^{2}+\lVert x-y \rVert ^{2}=2\left( \lVert x \rVert^{2}+\lVert y \rVert ^{2}  \right)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>תהי <span>\(\varnothing \neq D \subseteq \mathcal{H}\)</span> סגורה וקמורה אזי קיים <span>\(z \in D\)</span> עבורו:
+<span>$$\lVert z \rVert =\inf\left\{  \lVert x \rVert \mid x \in D \right\}$$</span></p>
+</div>
+<div class="proof">
+<p>נסמן:
+<span>$$\delta=\inf\left\{  \lVert x \rVert  \mid x \in D  \right\}$$</span>
+אם <span>\(\delta =0\)</span> כיוון ש-<span>\(D\)</span> סגור נקבל <span>\(0 \in D\)</span> והטענה מתקיימת. 
+אם <span>\(\delta&gt; 0\)</span> ניקח <span>\(\{ x_{n} \}\subseteq D\)</span> עם <span>\(\lVert x_{n} \rVert\xrightarrow{n\to \infty}\delta\)</span>. לכל <span>\(0&lt;\varepsilon\)</span> קיים <span>\(N\)</span> כך שלכל <span>\(n&gt;N\)</span> נקבע <span>\(n,m&gt;N\)</span> כלשהם. מאחר ש- <span>\(\frac{x_{n}+x_{m}}{2}\in D\)</span> נקבל
+<span>$$\lVert x_{n}+x_{m} \rVert \geq 2\delta$$</span>
+מצד שני, מבחירת <span>\(n,m\)</span> כך ש-<span>\(\lVert x_{n} \rVert,\lVert x_{m} \rVert&lt;\delta+\varepsilon\)</span> לכן מכלל המקבילית נקבל:
+<span>$$\lVert x_{n}-x_{m} \rVert ^{2}= 2\left( \lVert x_{n} \rVert ^{2}+\lVert x_{m} \rVert ^{2}-\lVert x_{n}+x_{m} \rVert ^{2} \right)\leq 4\left( \varepsilon+\delta \right)-\left( 2\delta \right)^{2}=8\varepsilon \cdot \delta+4\varepsilon^{2}$$</span>
+ולכן <span>\(\{ x_{n} \}\)</span> הינה סדרת קושי המתכנסת ל-<span>\(z \in D\)</span>(כי <span>\(\mathcal{H}\)</span> שלם ו-<span>\(D\)</span> סגור). מרציפות <span>\(||\cdot||\)</span> נסיק ש-<span>\(||z||=\delta\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב מאונך</span><p>בהנתן <span>\(Y\subseteq H\)</span> נגדיר:
+<span>$$Y^{\perp}= \left\{  x \in \mathcal{H} \mid \forall y \in Y\quad \langle x,y \rangle =0 \right\}$$</span></p>
+</div>
+<div class="theorem"><span class="keyword">ההטלה האורתוגונלית</span><p>יהי <span>\(V\subseteq \mathcal{H}\)</span> תת מרחב סגור. אזי לכל <span>\(u\in \mathcal{H}\)</span> קיימת הצגה יחידה בתור <span>\(u=v+w\)</span>  כך ש-<span>\(v \in V\)</span> ו-<span>\(w \in V^{\perp}\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(u\in V\)</span> אז <span>\(u=u+0\)</span>. אחרת נניח <span>\(u\not \in V\)</span> נסמן <span>\(D=V-u\)</span>. אזי <span>\(D\)</span> תת קבוצה סגורה וקמורה. מהלמה הקודמת:
+<span>$$\exists z \in D\qquad \lVert z \rVert = \inf \left\{  \lVert x \rVert \mid x \in D  \right\}$$</span>
+נראה ש-<span>\(z \in V^{\perp}\)</span>. אם נראה זאת נסיק כי <span>\(u=\underbrace{ (z+u) }_{ \in D+u=V }-\overbrace{ z }^{ \in V^{\perp} }\)</span>.
+לכן מספיק להראות כי המכפלה הפנימית של <span>\(z\)</span> עם כל <span>\(v\in V\)</span> יהיה 0. יהי <span>\(v \in V\)</span> ו-<span>\(t \in C\)</span>. נתבונן ב:
+<span>$$\lVert \underbrace{ z+tv }_{ \in D } \rVert ^{2}=\langle z+tv,z+tv \rangle =\lVert z \rVert ^{2}+|t|^{2}\lVert v \rVert ^{2}+2\mathrm{Re}\left( t\cdot \langle z,v \rangle  \right)$$</span>
+כש-<span>\(t \in \mathbb{R}\)</span> הביטוי הנ"ל הינו פולינום ריבועי שהוא חיובי תמיד כי 
+<span>$$\lVert z+tv \rVert^{2}\geq \delta^{2}$$</span>
+ומקבל מינימום עבור <span>\(t=0\)</span>(מבחירת <span>\(z \in D\)</span>). לכן אם נגזרות את הביטוי ב-<span>\(z=0\)</span> נקבל נגזרת 0. כלומר:
+<span>$$2\mathrm{Re}\left( \langle z,v \rangle  \right)=0$$</span>
+באופן דומה אם ניקח את <span>\(t=i\cdot s\)</span> כאשר <span>\(s \in \mathbb{R}\)</span> נסיק באופן דומה:
+<span>$$2\mathrm{Im}\left( \langle z,v \rangle  \right)=0$$</span>
+ולכן נקבל <span>\(\langle z,v \rangle=0\)</span> ולכן <span>\(z\in V^{\perp}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(V\subseteq \mathcal{H}\)</span> תת מרחב סגור אזי <span>\(V \neq \mathcal{H}\)</span> אם"ם <span>\(V^{\perp}\neq \{ 0 \}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נורמה אופרטורית</span><p>בהנתן פונקציונאל לינארי <span>\(\phi:\mathcal{H}\to \mathbb{C}\)</span> נגדיר את הנורמה האופרטורית שלו בתור:
+<span>$$\left\lVert  \phi  \right\rVert _{\mathrm{op}} := \sup _{x \in \mathcal{H}} \frac{\left\lvert  \phi(x)  \right\rvert }{\lVert x \rVert }=\sup _{x \in \mathcal{H}, \lVert x \rVert =1} \left\lvert  \phi(x)  \right\rvert $$</span>
+כלומר התמונה של ספרת היחידה ב-<span>\(\mathcal{H}\)</span> ורואים מה המרחק הכי גדול שמתקבל. נאמר ש-<span>\(\phi\)</span> <u>חסום</u> אם הנורמה האופרטורית שלו סופית.</p>
+</div>
+<div class="lemma">
+<p>פונקציונאל לינארי <span>\(\phi:\mathcal{H}\to \mathbb{C}\)</span> הינו רציף אם"ם הינו חסום.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(\phi\)</span> חסום הרי הינו שלכל <span>\(x,y \in \mathcal{H}\)</span> מתקיים:
+<span>$$\left\lvert  \phi(x)-\phi(y)  \right\rvert =\left\lvert  \phi(x-y)  \right\rvert \leq \left\lVert  \phi  \right\rVert _{\mathrm{op}}\cdot \lVert x-y \rVert $$</span>
+ולכן <span>\(\phi\)</span> רציף(אפילו ליפשיץ).
+עבור הכיוון השני, אם <span>\(\phi\)</span> רציף הרי שקיים <span>\(0&lt; \delta\)</span> כך שלכל <span>\(\lVert x \rVert&lt; \delta\)</span> מתקיים <span>\(\left\lvert  \phi(x)  \right\rvert&lt;1\)</span> ולכל <span>\(\lVert x \rVert\leq \frac{\delta}{2}\)</span> מתקיים <span>\(\left\lvert  \phi(x)  \right\rvert&lt;1\)</span>. 
+ולכן <span>\(\lVert x \rVert\leq 1\)</span> מתקיים <span>\(\left\lvert  \phi(x)  \right\rvert&lt; \frac{2}{\delta}\)</span> ולכן <span>\(\left\lVert  \phi  \right\rVert_{\mathrm{op}}\leq \frac{2}{\delta}\)</span>. נסמן:
+<span>$$\mathcal{H}^{*}=\left\{  \phi \mid \mathcal{H}\to \mathbb{C}   \text{ is a bounded linear functional}\right\}$$</span>
+המרחב הדואלי של <span>\(\mathcal{H}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ההצגה של Frechet-Riesz</span><p>ההעתקה <span>\(\Phi:\mathcal{H}\to \mathcal{H}^{*}\)</span> שולחת כל <span>\(h \in \mathcal{H}\)</span> לפונקציונאל <span>\(\phi_{h}(z)=\langle z,h \rangle\)</span> אז העתקה זו הינה איזומורפיזם צמוד לינארי ואיזומטריה בין <span>\(\mathcal{H} \cong \mathcal{H}^{*}\)</span>. כלומר <span>\(\phi\)</span> תתקיים:</p>
+<ol>
+<li>
+<p>משמר אדטיביות - לכל <span>\(h_{1},h_{2} \in \mathcal{H}\)</span> מתקיים <span>\(\phi(h_{1}+h_{2})=\phi(h_{1})+\phi(h_{2})\)</span>. </p>
+</li>
+<li>
+<p>הומוגניות למחצה - לכל <span>\(h \in \mathcal{H}\)</span> ולכל <span>\(\lambda \in \mathbb{C}\)</span> מתקיים <span>\(\phi\left( \lambda h \right)=\overline{\lambda}\phi(h)\)</span>. </p>
+</li>
+<li>
+<p>משמר נורמה - <span>\(\left\lVert  \phi(h)  \right\rVert_{\mathrm{op}}=\left\lVert  \phi_{h}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\)</span>. </p>
+</li>
+<li>
+<p>הפיכה. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>ראשית מאקסיומת המכפלה הפנימית <span>\(\Phi\)</span> היא צמוד לינארית. יהי <span>\(h \in \mathcal{H}\)</span> כלשהו. מאי שיוויון קושי שוורץ נקבל שלכל <span>\(x \in \mathcal{H}\)</span> מתקיים:
+<span>$$\left\lvert  \phi_{h}(x)  \right\rvert =\left\lvert  \langle x,h \rangle   \right\rvert \leq \lVert h \rVert \cdot \lVert x \rVert $$</span>
+ומזה כבר מקבלים כי הנורמה האופרטורית חסומה - <span>\(\left\lVert  \phi_{h}  \right\rVert\leq \lVert h \rVert\)</span>. כאשר למעשה יש שיוויון ממש. מספיק להראות כי קיים ווקטור אשר מקיים את השיוויון הזה. 
+<span>$$\left\lvert  \phi_{n}(h)  \right\rvert =\lVert h \rVert ^{2}$$</span>
+ולכן <span>\(\left\lVert  \phi_{n}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\)</span>. בפרט <span>\(\phi_{h}\in \mathcal{H}^{*}\)</span> ו-<span>\(\Phi\)</span> הינה איזומטרייה. נותר להראות כי <span>\(\Phi\)</span> היא על. 
+יהי <span>\(\ell \in \mathcal{H}^{*}\)</span>. נסמן <span>\(v=\ker\left( \ell \right)\)</span>. אם <span>\(v = \mathcal{H}\)</span> אז <span>\(\ell=0\)</span> ו-<span>\(\ell=\phi_{0}\)</span> אחרת <span>\(V\subsetneq \mathcal{H}\)</span> ומאחר ש-<span>\(\ell\)</span> רציף(כי חסום) נסיק כי <span>\(V= \ell^{-1}\left( \{ 0 \} \right)\)</span> סגור.
+מהמסקנה ממשפט ההטלה נסיק כי <span>\(V^{\perp}\neq \{ 0 \}\)</span>. ולכן קיים <span>\(0\neq z \in V^{\perp}\)</span>. נסמן:
+<span>$$w=\frac{\overline{\ell(z)}}{\lVert z \rVert ^{2}}\cdot z $$</span>
+כעת נראה שניתן להציג את <span>\(\ell\)</span> על ידי <span>\(\ell=\phi_{W}\)</span>. אכן לכל <span>\(x \in \mathcal{H}\)</span> ניתן לנסתכל על <span>\(\ell(x)z-\ell(z)x\)</span>. אם נפעיל על זה את <span>\(\ell\)</span> נקבל:
+<span>$$\ell\left( \ell(x)z-\ell(z)x \right)=\ell(x)\ell(z)-\ell(z)\ell(x)=0$$</span>
+במילים אחרות:
+<span>$$\ell(x)z-\ell(z)x \in \ker \left( \ell \right)=V$$</span>
+ולכן מאחר ש-<span>\(z \in V^{\perp}\)</span> נסיק ש:
+<span>$$0=\left\langle  \ell(x)z-\ell(z)x,z  \right\rangle =\ell(x)\cdot \lVert z \rVert ^{2}-\ell(z)\langle x,z \rangle $$</span>
+וכעת:
+<span>$$\ell(x)= \frac{1}{\lVert z \rVert ^{2}}\ell(z)\langle x,z \rangle =\langle x,w \rangle =\phi(x)$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור <span>\(\mathcal{H}=L^{2}\left( \mu \right)\)</span> קיבלנו שלכל פונקציונל לינארי <span>\(\phi:\mathcal{H}\to \mathbb{C}\)</span>  קיימת פונקציה <span>\(h \in L^{2}\left( \mu \right)\)</span> המקיימת:
+<span>$$\forall f \in L^{2}\quad \phi(f)=\int f\cdot h \;\mathrm{d} \mu $$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+<li class='prev-page'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

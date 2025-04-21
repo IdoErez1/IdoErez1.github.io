@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הצגות של מספרים ממשיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Numerical Physics_1_5'>1.5 מציאת שורשים</a></li>
+<li class='parent-page'><a href='./Numerical Physics'> פיזיקה חישובית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. אלגברה ואנליזה נומרית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_1'>1.1 אינטגרציה נומרית</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_2'>1.2 אינטרפולציה</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_3'>1.3 גזירה נומרית</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_4'>1.4 הצגות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Numerical Physics_1_5'>1.5 מציאת שורשים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Numerical Physics_1_3'>1.3 גזירה נומרית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Numerical Physics_1_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Numerical Physics_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  הצגות של מספרים ממשיים</h1>
+    <div class="definition"><span class="keyword">שגיאה מחולטת</span><p>כמה שאנחנו שוגאים באופן מוחלט - כלומר ערך <span>\(\epsilon\)</span> כך ש- <span>\(x\pm \varepsilon\)</span> זה הטווח ערכים שלנו כתוצאה מהשגיאה.</p>
+</div>
+<div class="definition"><span class="keyword">שגיאה יחסית</span><p>שגיאה ביחס לתוצאה. כלומר אם יש לנו שגיאה מחולטת של <span>\(\epsilon\)</span> אז השגיאה היחסית שלנו היא <span>\(\frac{x+\epsilon}{x}\)</span>. זה כמובן תלוי בערך של <span>\(x\)</span>, וככל ש-<span>\(x\)</span> קטן יותר ביחס לשגיאה אז השגיאה היחסית יותר גדולה.</p>
+</div>
+<div class="proposition">
+<p>מחשב הדרך כלל מייצג מספרים על ידי בצורה הבאה:
+<span>$$x=\pm m\times2^{e},$$</span>
+כאשר <span>\(m\)</span> נקרא המאנטיסה(mantissa) ומאכסן בקירוב 24 ביטים של אינפורמציה(באיזור 7 ספרות עשרוניות) והאקספוננט מאכן בערך 8 ביטים.</p>
+</div>
+<div class="corollary">
+<p>לא ניתן ייצג כל מספר ממשי בצורה מדוייקת, ולכן המספר יהיה בקירוב:
+<span>$$\tilde{x}=x(1+\epsilon_{x})$$</span>
+כאשר <span>\(\varepsilon_{x}\)</span> זה השגיאה היחסית(יהיה בסדר גודל של הדיוק של המכשיר <span>\(\epsilon_{\text{mach}}\)</span>, שזה יהיה שווה למספר הקטן ביותר כך שבהצגה שלו <span>\(1+\epsilon_{\text{mach}}\neq 1\)</span>).</p>
+</div>
+<div class="proposition"><span class="keyword">שגיאת עיגול בכפל</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של המכפלה <span>\(\tilde{x}\tilde{y}\)</span> תקיים:
+<span>$$\frac{\tilde{x}\tilde{y}-xy}{xy}\approx \delta_{x}+\delta_{y}$$</span>
+כלומר כאשר אנחנו כופלים מספרים עם שגיאות אז השגיאות היחסית נסכמות.</p>
+</div>
+<div class="proof">
+<p>נסמן:
+<span>$$\tilde{z}=\tilde{x}\cdot\tilde{y}=x\,y\,(1+\delta_{x})(1+\delta_{y})$$</span>
+כאשר אם נפתח את המכפלה נקבל:
+<span>$$\tilde{z}=x y\left(1+\delta_{x}+\delta_{y}+\delta_{x}\delta_{y}\right)$$</span>
+כאשר נניח ש-<span>\(\delta_{x}\delta_{y}\)</span> זניח כיוון שמכפלה של שתי גדלים קטנים ונבודד את השגיאה היחסית כך שנקבל:
+<span>$${\frac{\tilde{z}-x y}{x y}}\approx\delta_{x}+\delta_{y}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שגיאה של חילוק</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של המנה <span>\(\frac{\tilde{x}}{\tilde{y}}\)</span> תקיים:
+<span>$$\frac{\frac{\tilde{x}}{\tilde{y}}-\frac{x}{y}}{\frac{x}{y}}\approx \delta_{x}-\delta_{y}$$</span>
+כאשר אנחנו מחלקים מספרים עם שגיאות אז השגיאות היחסית יהיו ההפרש.</p>
+</div>
+<div class="proof">
+<p>נסמן:
+<span>$$\tilde{q}=\frac{\tilde{x}}{\tilde{y}}=\frac{x(1+\delta_{x})}{y(1+\delta_{y})}$$</span>
+כאשר ניתן לכתוב את זה על ידי:
+<span>$$\tilde{q}=\frac{x}{y}(1+\delta_{x})\cdot\frac{1}{1+\delta_{y}}$$</span>
+כאשר על ידי קירוב טיילור מסדר ראשון עבור <span>\(\frac{1}{1+\delta_{y}}\)</span> כיוון ש-<span>\(\delta_{y}\)</span> קטן נקבל:
+<span>$$\tilde{q}\approx\frac{x}{y}(1+\delta_{x})(1-\delta_{y})=\frac{x}{y}(1+\delta_{x}-\delta_{y}-\delta_{x}\delta_{y})$$</span>
+אם נזניח את הגורם <span>\(\delta_{x}\delta_{y}\)</span> נקבל:
+<span>$$\tilde{q}\approx\frac{x}{y}(1+\delta_{x}-\delta_{y})$$</span>
+וכעת השגיאה היחסית תהיה:
+<span>$${\frac{\tilde{q}-{\frac{x}{y}}}{{\frac{x}{y}}}}\approx\delta_{x}-\delta_{y}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חיבור של שגיאות</span><p>נניח כי שתי מספרים שמורים על ידי <span>\(\tilde{x}=x(1+\delta_{x})\)</span> ו-<span>\(\tilde{y}=y(1+\delta_{y})\)</span> כאשר <span>\(\delta_{x},\delta_{y}\)</span> הם שגיאות יחסיתיות קטנות , אזי השגיאה היחסית של <span>\(\tilde{x}+\tilde{y}\)</span> תהיה:
+<span>$$\frac{x\delta_{x}+y\delta_{y}}{x+y}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$${\tilde{x}}+{\tilde{y}}=x{\big(}1+\delta_{x}{\big)}+y{\big(}1+\delta_{y}{\big)}={\big(}x+y{\big)}+{\big(}x\delta_{x}+y\delta_{y}{\big)}$$</span>
+ולכן השגיאה המוחלטת תהיה <span>\(x\delta_{x}+y\delta_{y}\)</span>, ולכן השגיאה היחסית תיהיה:
+<span>$$\frac{x\delta_{x}+y\delta_{y}}{x+y}$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור הפרש נקבל:
+<span>$${\frac{x\delta_{x}+y\delta_{y}}{|x-y|}}$$</span>
+וזה יכול ליצור בעיות משמעותיות כאשר <span>\(x \approx y\)</span> כיוון שהשגיאה היחסית תגדל משמעותית.</p>
+</div>
+<div class="corollary">
+<p>נוסחאות עם הפרש של גדלים מאותו סדר גודל יהיו פחות טובות, לדוגמא עבור נוסחאת השורשים:
+<span>$$x={\frac{-b\pm{\sqrt{b^{2}-4a c}}}{2a}}$$</span>
+יש בעיה עבור הביטוי עם ה-<span>\(-\)</span>. ניתן לחשב עבור שורש אחד את ה-<span>\(+\)</span>:
+<span>$$x_{1}={\frac{-b+{\sqrt{b^{2}-4a c}}}{2a}}$$</span>
+ועבור השורש השני(של ה-<span>\(-\)</span>) בעזרת נוסחא שקולה אשר עוקפת את הבעיה של החיסור:
+<span>$$x_{2}={\frac{-2c}{b+{\sqrt{b^{2}-4a c}}}}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Numerical Physics_1_5'>1.5 מציאת שורשים</a></li>
+<li class='prev-page'><a href='./Numerical Physics_1_3'>1.3 גזירה נומרית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

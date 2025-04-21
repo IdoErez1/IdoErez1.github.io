@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מעברי פאזה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_5_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_4_1`; }});</script>
+        <div class="content">
+        <h1>4.2  מעברי פאזה</h1>
+    <div class="definition"><span class="keyword">פאזה תרמודינמית</span><p>דרך לייחד חומר המתחום במרחב(כלומר נמצא ביחד כגוש) ע"י התכונות הכימיות והפיזיות שלו. לדוגמא, צפיפות, מוליכות חשמלית, צורה, סידור פנימי של אטומים ועוד. מצבי הצבירה מוצק נוזל וגז הם דוגמאות לפאזות.</p>
+</div>
+<p>כאשר מערכת משנה פאזה תרמודינמית, יש שלב שבה הטמפרטורה נשארת קבוע למרות שמכניסים חום למערכת. זה אומר שהתיאור של קיבול חום כבר לא יהיה נכון. לצורך זה נגדיר מושג חדש.</p>
+<div class="proposition">
+<p>המעבר פאזה תלוי בלחץ ובטמפרטורה, כאשר מעבר פאזה מתרחש בלחץ וטמפרטורה קבועה.</p>
+</div>
+<div class="definition"><span class="keyword">חום כמוס</span><p>כמות האנרגיה התרמית הנדרשת כדי להעביר חומר מצב צבירה כאשר הלחץ קבוע.
+<span>$${L}=\Delta Q_{\mathrm{rev}}=T_{\mathrm{c}}(S_{2}-S_{1})$$</span></p>
+</div>
+<div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="304.77" height="304.435" viewBox="0 0 304.77 304.435">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 4.25 -6.046875 C 4.328125 -6.328125 4.359375 -6.390625 4.484375 -6.421875 C 4.578125 -6.4375 4.90625 -6.4375 5.109375 -6.4375 C 6.125 -6.4375 6.5625 -6.40625 6.5625 -5.625 C 6.5625 -5.46875 6.53125 -5.078125 6.484375 -4.828125 C 6.484375 -4.78125 6.453125 -4.671875 6.453125 -4.640625 C 6.453125 -4.578125 6.484375 -4.5 6.578125 -4.5 C 6.6875 -4.5 6.703125 -4.578125 6.734375 -4.734375 L 7 -6.46875 C 7.015625 -6.515625 7.015625 -6.609375 7.015625 -6.640625 C 7.015625 -6.75 6.921875 -6.75 6.75 -6.75 L 1.21875 -6.75 C 0.984375 -6.75 0.96875 -6.734375 0.890625 -6.546875 L 0.296875 -4.796875 C 0.296875 -4.78125 0.234375 -4.640625 0.234375 -4.609375 C 0.234375 -4.5625 0.296875 -4.5 0.359375 -4.5 C 0.453125 -4.5 0.46875 -4.5625 0.53125 -4.71875 C 1.0625 -6.265625 1.328125 -6.4375 2.796875 -6.4375 L 3.1875 -6.4375 C 3.46875 -6.4375 3.46875 -6.40625 3.46875 -6.3125 C 3.46875 -6.265625 3.4375 -6.140625 3.421875 -6.109375 L 2.09375 -0.78125 C 2 -0.421875 1.96875 -0.3125 0.90625 -0.3125 C 0.546875 -0.3125 0.484375 -0.3125 0.484375 -0.125 C 0.484375 0 0.59375 0 0.65625 0 C 0.921875 0 1.203125 -0.015625 1.46875 -0.015625 C 1.75 -0.015625 2.046875 -0.03125 2.328125 -0.03125 C 2.609375 -0.03125 2.875 -0.015625 3.15625 -0.015625 C 3.4375 -0.015625 3.734375 0 4.015625 0 C 4.109375 0 4.234375 0 4.234375 -0.203125 C 4.234375 -0.3125 4.15625 -0.3125 3.890625 -0.3125 C 3.65625 -0.3125 3.515625 -0.3125 3.265625 -0.328125 C 2.96875 -0.359375 2.890625 -0.390625 2.890625 -0.546875 C 2.890625 -0.5625 2.890625 -0.609375 2.9375 -0.75 Z M 4.25 -6.046875 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 6.4375 -6.921875 C 6.4375 -6.953125 6.40625 -7.03125 6.3125 -7.03125 C 6.265625 -7.03125 6.265625 -7.015625 6.140625 -6.875 L 5.65625 -6.3125 C 5.40625 -6.78125 4.890625 -7.03125 4.234375 -7.03125 C 2.96875 -7.03125 1.78125 -5.875 1.78125 -4.671875 C 1.78125 -3.875 2.296875 -3.40625 2.8125 -3.265625 L 3.875 -2.984375 C 4.25 -2.890625 4.796875 -2.734375 4.796875 -1.921875 C 4.796875 -1.03125 3.984375 -0.09375 3 -0.09375 C 2.359375 -0.09375 1.25 -0.3125 1.25 -1.546875 C 1.25 -1.78125 1.3125 -2.03125 1.3125 -2.078125 C 1.328125 -2.125 1.328125 -2.140625 1.328125 -2.15625 C 1.328125 -2.25 1.265625 -2.265625 1.21875 -2.265625 C 1.171875 -2.265625 1.140625 -2.25 1.109375 -2.21875 C 1.078125 -2.1875 0.515625 0.09375 0.515625 0.125 C 0.515625 0.171875 0.5625 0.21875 0.625 0.21875 C 0.671875 0.21875 0.6875 0.203125 0.8125 0.0625 L 1.296875 -0.5 C 1.71875 0.078125 2.40625 0.21875 2.984375 0.21875 C 4.34375 0.21875 5.515625 -1.109375 5.515625 -2.34375 C 5.515625 -3.03125 5.171875 -3.375 5.03125 -3.515625 C 4.796875 -3.734375 4.640625 -3.78125 3.765625 -4 C 3.53125 -4.0625 3.1875 -4.171875 3.09375 -4.1875 C 2.828125 -4.28125 2.484375 -4.5625 2.484375 -5.09375 C 2.484375 -5.90625 3.28125 -6.75 4.234375 -6.75 C 5.046875 -6.75 5.65625 -6.3125 5.65625 -5.203125 C 5.65625 -4.890625 5.625 -4.703125 5.625 -4.640625 C 5.625 -4.640625 5.625 -4.546875 5.734375 -4.546875 C 5.84375 -4.546875 5.859375 -4.578125 5.890625 -4.75 Z M 6.4375 -6.921875 "/>
+</g>
+</g>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 31 L 274 31 L 274 304.433594 L 0 304.433594 Z M 0 31 "/>
+</clipPath>
+</defs>
+<path fill="none" stroke-width="0.19925" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(84.999084%, 84.999084%, 84.999084%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -0.00184375 0.0000625 L 280.634875 0.0000625 M -0.00184375 28.347719 L 280.634875 28.347719 M -0.00184375 56.695375 L 280.634875 56.695375 M -0.00184375 85.039125 L 280.634875 85.039125 M -0.00184375 113.386781 L 280.634875 113.386781 M -0.00184375 141.734437 L 280.634875 141.734437 M -0.00184375 170.082094 L 280.634875 170.082094 M -0.00184375 198.425844 L 280.634875 198.425844 M -0.00184375 226.7735 L 280.634875 226.7735 M -0.00184375 255.121156 L 280.634875 255.121156 M -0.00184375 0.0000625 L -0.00184375 280.632875 M 28.345813 0.0000625 L 28.345813 280.632875 M 56.693469 0.0000625 L 56.693469 280.632875 M 85.041125 0.0000625 L 85.041125 280.632875 M 113.388781 0.0000625 L 113.388781 280.632875 M 141.732531 0.0000625 L 141.732531 280.632875 M 170.080187 0.0000625 L 170.080187 280.632875 M 198.427844 0.0000625 L 198.427844 280.632875 M 226.7755 0.0000625 L 226.7755 280.632875 M 255.123156 0.0000625 L 255.123156 280.632875 " transform="matrix(1, 0, 0, -1, 6.662, 297.711)"/>
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00184375 0.0000625 L 282.263781 0.0000625 " transform="matrix(1, 0, 0, -1, 6.662, 297.711)"/>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.272246 3.027406 C -2.08084 1.894594 0.00119125 0.187562 0.567598 0.0000625 C 0.00119125 -0.187438 -2.08084 -1.894469 -2.272246 -3.027281 " transform="matrix(1, 0, 0, -1, 288.92459, 297.711)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="294.244" y="301.114"/>
+</g>
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00184375 0.0000625 L -0.00184375 282.261781 " transform="matrix(1, 0, 0, -1, 6.662, 297.711)"/>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.27034 3.029187 C -2.08284 1.892469 -0.00080875 0.189344 0.569504 0.00184375 C -0.00080875 -0.189563 -2.08284 -1.892688 -2.27034 -3.029406 " transform="matrix(0, -1, -1, 0, 6.662, 15.44841)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="3.32" y="10.129"/>
+</g>
+<g clip-path="url(#clip-0)">
+<path fill="none" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00184375 0.0000625 L 99.213 99.214906 L 99.213 198.425844 L 255.123156 255.121156 " transform="matrix(1, 0, 0, -1, 6.662, 297.711)"/>
+</g>
+</svg>
+</div>
+<div class="definition"><span class="keyword">דיאגרמת פאזה</span><p>זה גרף של לחץ כפונקציה של טמפרטורה. כל תחום קשיר מייצג פאזה.</p>
+</div>
+<p>נרצה כעת להסתכל על מערכת שמורכבת משתי פאזות ושל אותו החומר ונרצה לראות מה התנאי לשיווי משקל.
+<strong>טענה</strong>
+בשיווי משקל נדרש כי לשתי הפאזות יש פוטנציאל כימי שווה - <span>\(\mu_{1}=\mu_{2}\)</span></p>
+<div class="proof">
+<p>נכתוב:
+<span>$$G=M_{1}\mu_{1}+M_{2}\mu_{2}$$</span>
+כאשר אנו יודעים כי בלחץ וטמפרטורה קבועה השיווי משקל הדיפרנציאל יהיה 0. כלומר:
+<span>$$dG=0=\mu_{1}dM_{1}+\mu_{2}dM_{2}$$</span>
+כאשר אם המערכת סגורה כך ש-<span>\(M\)</span> קבוע נקבל:
+<span>$$dM=dM_{1}+dM_{2}=0$$</span>
+ומזה ניתן להסיק כי <span>\(\mu_{1}=\mu_{2}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת קלאסיוס קלפירון</span><p><span>$${\frac{\mathrm{d}p}{\mathrm{d}T}}={\frac{L}{T(V_{2}-V_{1})}}$$</span>
+כאשר זה נותן את המביטוי של המעבר פאזה כתלות בחום בכמוס, הטמפרטורה הקריטית וההבדלי נפח.</p>
+</div>
+<div class="proof">
+<p>נסתכל על מערכת שמורכבת משתי פאזות אשר נמצא על הגבול בין שתי הפאזות. מהטענה הקודמת נקבל:
+<span>$$\mu_{1}(p,T)=\mu_{2}(p,T)$$</span>
+כאשר אם נבצע הזזה קטנה נקבל:
+<span>$$\mu_{1}\left( p+\mathrm{d}p,T+\mathrm{d}T \right)=\mu_{2}\left( p+\mathrm{d}p,T+\mathrm{d}T \right)\implies d\mu_{1}=d\mu_{2}$$</span>
+כאשר אם אין מעבר חלקיקים נקבל כי <span>\(dG_{1}=dG_{2}\)</span> ולכן:
+<span>$$-S_{1}\mathrm{d}T+v_{1}\mathrm{d}p=-S_{2}\mathrm{d}T+v_{2}\mathrm{d}p \implies \frac{\mathrm{d}p}{\mathrm{d}T}=\frac{S_{2}\,-\,S_{1}}{v_{2}\,-\,v_{1}}$$</span>
+כאשר ניתן לכתוב <span>\(L=T\Delta S\)</span> ולקבל את המשוואה.</p>
+</div>
+<div class="definition"><span class="keyword">מעבר פאזה מסדר ראשון</span><p>כאשר הנפח משתנה, יש קפיצה באנטרופיה וקיים חום כמוס, אבל הפוטנציאל החופשי של גיבס נשאר רציף וזהה. כלומר:
+<span>$$G_{1}=G_{2}\qquad V_{1}\neq V_{2}\qquad L\neq 0\qquad S_{1}\neq S_{2}$$</span></p>
+</div>
+<p>דוגמאות כוללות שינוי מצב צבירה.</p>
+<div class="definition"><span class="keyword">מעבר פאזה מסדר שני</span><p>הפוטנציאל החופשי של גיבס נשאר רציף, אך אין חום כמוס, אין קפיצה באנטרופיה ואין שינוי בנפח, אבל הנגזרות הם לא רציפות. כלומר:
+<span>$$\left( \frac{\partial S}{\partial T}  \right)_{p},\left( \frac{\partial S}{\partial P}  \right)_{T},\left( \frac{\partial V}{\partial T}  \right)_{P},\left( \frac{\partial V}{\partial P}  \right)_{T}$$</span>
+הם לא רציפים. זה אומר כי:
+<span>$$C_{p}=T\left( \frac{\partial S}{\partial T}  \right)_{p}\qquad \beta=\frac{1}{V}\left( \frac{\partial V}{\partial T}  \right)_{p}\qquad \kappa=\frac{1}{V}\left( \frac{\partial V}{\partial P}  \right)_{T}$$</span>
+הם גדלים לא רציפים. </p>
+</div>
+<p>מעבר פאזה לדוגמא מסדר שני זה טמפרטורת קירי, חומרים פאראמגנטיים שמגיעים לטמפרטורה מסויימת ומאבדים את הזכרון המגנטי שלהם.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='prev-page'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,1947 @@
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --c1: #EEB902;
+  --c2: #F45D01;
+  --symbolize-text: #8377D1;
+  --c4: #7FBC69;
+  --c5: #005C7A;
+  --remark-text: #7EBCED;
+  --definition-text: #2E8A3D;
+  --proposition-text: #E1403D;
+  --theorem-text: #F39237;
+  --iyellow: #F9C762;
+  --idark: #1A535C;
+  --definition-bg: rgba(249, 199, 98, 0.1);
+  --proposition-bg: rgba(225, 64, 61, 0.05);
+  --example-bg: rgba(26, 83, 92, 0.2);
+  --remark-bg: rgba(126, 188, 230, 0.11);
+  --theorem-bg: rgba(228, 147, 82, 0.05);
+  --symbolize-bg: rgba(131, 119, 209, 0.05);
+  --corollary-bg: rgba(255, 195, 0, 0.05); /* Light yellow for corollary */
+  --corollary-text: #FFC300;
+  --reminder-bg: rgba(255, 165, 0, 0.05); /* Light orange for reminder */
+  --reminder-text: #FFA500;
+
+  --lemma-bg: rgba(75, 192, 192, 0.05); /* Soft teal for lemma */
+  --lemma-text: #4BC0C0;
+  --table-even-bg: #f2f2f2;
+  /* --svg-path-color: #111; */
+
+  --table-background: #f5f5f5; /* Light grey for table background */
+  --table-border-color: #cccccc; /* Light border color */
+  --table-header-bg: #e1e1e1; /* Light background for table header */
+  --table-header-text: #2c3e50; /* Darker text for headers */
+  --table-row-bg-odd: #ffffff; /* White for odd rows */
+  --table-row-text: #2c3e50; /* Dark text for rows */
+  --table-disabled-text: #b0b0b0; /* Disabled row text color */
+
+  /* Define light mode colors as CSS variables */
+  --summary-bg-color: #f9f9f9;
+  --summary-label-bg: #4a90e2;
+  --summary-background-color: #4a90e255;
+  --summary-border-color: #e0e0e0;
+  --summary-label-color: white;
+  --summary-text-color: #333;
+
+  direction: rtl;
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--corollary-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--corollary-text);
+  padding: 10pt;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--corollary-text);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--corollary-text);
+}
+
+/* Lemma Block */
+.lemma {
+  background-color: var(--lemma-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--lemma-text);
+  padding: 10pt;
+}
+
+.lemma::before {
+  font-weight: bold;
+  color: var(--lemma-text);
+  content: "למה";
+}
+
+.lemma::first-line {
+  color: var(--lemma-text);
+}
+
+/* Your existing styles */
+.definition {
+  display: block;
+  background: var(--definition-bg);
+  text-align: right;
+  border-right: 1.5mm;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-style: solid;
+  border-color: var(--definition-text);
+  padding: 10pt;
+}
+
+h1 {
+  color: var(--remark-text);
+}
+
+.definition::before {
+  font-weight: bold;
+  color: var(--definition-text);
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--definition-text);
+}
+
+.proposition {
+  background-color: var(--proposition-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--proposition-text);
+  padding: 10pt;
+}
+
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--proposition-text);
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--proposition-text);
+}
+
+.proof {
+  padding: 10pt;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: var(--example-bg);
+  border: 2pt solid var(--example-bg);
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--remark-text);
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: var(--remark-bg);
+  border: 0;
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--summary-label-bg);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--summary-background-color);
+  margin-top: 15px;
+  color: var(--summary-text-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--summary-label-bg);
+  color: var(--summary-label-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+.theorem {
+  background-color: var(--theorem-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--theorem-text);
+  padding: 10pt;
+}
+
+.theorem::first-line {
+  color: var(--theorem-text);
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--theorem-text);
+  content: "משפט";
+}
+
+.symbolize {
+  background-color: var(--symbolize-bg);
+  border-radius: 8pt;
+  border: 2pt solid var(--symbolize-text);
+  padding: 10pt;
+}
+
+
+.symbolize::before {
+  font-weight: bold;
+  color: var(--symbolize-text);
+  content: "סימון";
+}
+
+div {
+  margin: 6pt 0;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  background: var(--table-background);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--table-header-text);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--table-header-bg);
+}
+
+td {
+  color: var(--table-row-text);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--table-row-bg-odd);
+}
+
+@page {
+  @bottom-center {
+    /*background: #f1c55675;*/
+    content: counter(page); 
+    display: block;
+  }
+}
+@page :blank {
+  @bottom-center { content: none }
+}
+@page no-chapter {
+  @bottom-center { content: none }
+}
+@page :first {
+  /*background: url(cover.jpg) no-repeat center;*/
+  background-size: cover;
+  margin: 0;
+  @bottom-center{
+    content: none;
+  }
+}
+@page chapter {
+  background: #fbc847;
+  margin: 0;
+  @bottom-center { content: none }
+}
+
+#cover {
+  margin: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  background-repeat: repeat;
+  padding: 10cm 0;
+width: 100vw;
+  align-content: space-between;
+  height: 29.7cm;
+  text-align: center;
+  color: white;
+  align-items: center;  
+  text-shadow: 15px 15px 20px #0000008c;
+  text-align: center;
+}#cover h1{
+  margin: 0;
+  font-size: 60px;
+  page-break-before: auto;
+}
+#cover h2{
+  font-size: 40px;
+}
+
+h1{
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+#toc a::after { 
+  content: leader(".") target-counter(attr(href), page); 
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+/* ol{
+  counter-reset: list-counter 0;
+}
+ol li{
+  counter-increment: list-counter 1;
+} */
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+            <script>
+                // MathJax configuration
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                        displayMath: [["$$", "$$"], ["\[", "\]"]],
+                        processEscapes: true,
+                        packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+                    },
+                    options: {
+                        ignoreHtmlClass: 'tex2jax_ignore',
+                        processHtmlClass: 'tex2jax_process'
+                    },
+                    loader: {
+                        load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+                    }
+                };
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+        <body>
+            <div id='cover' style='background-color: #026873;'>
+                <h1>חשמל אנליטי</h1>
+                <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+            <h1 id='Electrodynamics_1'>מבוא</h1>
+<h2 id='Electrodynamics_1_1'>יחידות</h2>
+ <p>נהוג ביחסות להשתמש ביחידות של <span>\(CGS\)</span>. במערכת זאת קובעים את היחידות של זרם כתלות ביחידות האחרות. נציג ראשית את היחידות הבסיסיות בטבלה:</p>
+<table>
+<thead>
+<tr>
+<th>unit</th>
+<th>CGS</th>
+<th>MKS</th>
+<th>יחס</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>תאוצה</td>
+<td>cm/s^2</td>
+<td>m/s^2</td>
+<td>100</td>
+</tr>
+<tr>
+<td>אורך</td>
+<td>cm</td>
+<td>m</td>
+<td>100</td>
+</tr>
+<tr>
+<td>מהירות</td>
+<td>cm/s</td>
+<td>m/s</td>
+<td>100</td>
+</tr>
+<tr>
+<td>כוח</td>
+<td>dyne</td>
+<td>N</td>
+<td><span>\(100,000\)</span></td>
+</tr>
+<tr>
+<td>עבודה</td>
+<td>erg</td>
+<td>Joule</td>
+<td><span>\(10,000,000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>הרעיון ביחידות <span>\(cgs\)</span>, זה שהקבוע הדיאלקטרי הוא חסר יחידות, ולכן היחידות של המטען נקבעות לפי היחידות של הכוח והמרחק. כלומר מחוק קולון נקבל:
+<span>$$F={\frac{q_{1}q_{2}}{r^{2}}}\rightarrow[F]\sim[Q]^{2}/[r]^{2}\rightarrow d y n e=e s u^{2}/c m^{2}\rightarrow e s u=c m\sqrt{d y n e}$$</span>
+כאשר נזכור כי <span>\(dyne=gram\cdot \frac{cm}{s^2}\)</span> ולכן נגדיר יחידות מטען <span>\(esu\text{(electrostatic unit)}\)</span> ב-<span>\(cgs\)</span> ע"י:
+<span>$$1\;\mathrm{esu}=\sqrt{ \mathrm{cm}^3\cdot \mathrm{\frac{gr}{s^2}} }$$</span>
+ומכאן נקבל כי יחידות של זרם יהיו <span>\(I=\mathrm{\frac{esu}{s}}\)</span>. לפעמים <span>\(\mathrm{esu}\)</span> נקרא <span>\(\mathrm{statcoulomb}\)</span>.
+באופן דומה ניתן להגדיר יחידת <span>\(cgs\)</span> למתח הנקראת <span>\(\mathrm{statvolt}\)</span>. מתקיים:
+<span>$$\frac{\mathrm{statvolt}}{\mathrm{cm}}=\mathrm{erg}\implies \mathrm{statvolt=erg\cdot cm}$$</span></p>
+<h3>משוואות מקסוואל</h3>
+<p>יש מספר יחידות של <span>\(cgs\)</span> שמשתמשים בהם באלקטרומגנטיות. אנחנו נשתמש ב-<span>\(cgs-emu\)</span> הידוע לפעמים בתור יחידות גאוסיות. ביחידות אלו מתקיים:
+<span>$$\varepsilon_{0}=\frac{1}{4\pi}\quad \varepsilon_{0}\mu_{0}=\frac{1}{c^{2}}\quad \mu_{0}=\frac{4\pi}{c^{2}}$$</span>
+כאשר נשים לב כי לשדה החשמלי ולשדה המגנטי יש את אותם יחידות - <span>\(\mathrm{statvolt}\)</span>.</p>
+<p>סכמת מעבר מ-<span>\(MKS\)</span> ל-<span>\(CGS-emu\)</span>:</p>
+<ol>
+<li>
+<p>מחליפים את <span>\(\varepsilon_{0}\)</span> ב-<span>\(\frac{1}{4\pi}\)</span>. </p>
+</li>
+<li>
+<p>מחליפים את <span>\(\mu_{0}\)</span> ב-<span>\(\frac{4\pi}{c^{2}}\)</span>. </p>
+</li>
+<li>
+<p>מחליפים את <span>\(B\)</span> ב-<span>\(\frac{B}{c}\)</span>. </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>שם</th>
+<th>משוואה דיפרנציאלית</th>
+<th>משוואה אינטגרלית</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>חוק גאוס</td>
+<td><span>\(\bar{\nabla} \cdot \vec{E}=4\pi \rho\)</span></td>
+<td><span>\(\iint_{\partial\Omega}\mathbf{E}\cdot\mathrm{d}\mathbf{S}=4\pi\iiint_{\Omega}\rho\,\mathrm{d}V\)</span></td>
+</tr>
+<tr>
+<td>אין מונופול</td>
+<td><span>\(\bar{\nabla} \cdot \vec{B}=0\)</span></td>
+<td><span>\(\iiint_{\partial\Omega}\mathbf{B}\cdot\mathrm{d}\mathbf{S}=0\)</span></td>
+</tr>
+<tr>
+<td>חוק פראדיי</td>
+<td><span>\(\nabla\times\mathbf{E}=-{\frac{1}{c}}{\frac{\partial\mathbf{B}}{\partial t}}\)</span></td>
+<td><span>\(\oint_{\partial\Sigma}\mathbf{E}\cdot\mathrm{d}{\bf{\ell}}=-{\frac{1}{c}}{\frac{\mathrm{d}}{\mathrm{d}t}}\iint_{\Sigma}\mathbf{B}\cdot\mathrm{d}\mathbf{S}\)</span></td>
+</tr>
+<tr>
+<td>חוק אמפר</td>
+<td><span>\(\nabla\times\mathbf{B}={\frac{1}{c}}\left(4\pi\mathbf{J}+{\frac{\partial\mathbf{E}}{\partial t}}\right)\)</span></td>
+<td><br><span>\(\oint_{\partial\Sigma}\mathbf{B}\cdot\mathrm{d}{\bf{\ell}}={\frac{1}{c}}\left(4\pi\iint_{\Sigma}\mathbf{J}\cdot\mathrm{d}\mathbf{S}+{\frac{\mathrm{d}}{\mathrm{d}t}}\iint_{\Sigma}\mathbf{E}\cdot\mathrm{d}\mathbf{S}\right)\)</span></td>
+</tr>
+</tbody>
+</table><h2 id='Electrodynamics_1_2'>הסכם הסכימה של אינשטיין</h2>
+ <p>הסכם הסכימה של אינשטיין זה נוטצייה כתיבתית אשר מאפשרת לסכום על ווקטורים, מטריצות וטנזורים ללא שימוש בסימן הסכימה. </p>
+<div class="definition"><span class="keyword">חוקי הסכימה של אינשטיין</span><p>אם מופיע אינדקס כפול, כאשר אינדקס אחד הוא אינדקס עליון ואינדקס שני הוא תחתון, סוכמים על האינדקס הזה כאשר גבולות הסכימה הם כל הערכים האפשריים עבור המשתנה הזה.</p>
+</div>
+<p>מסוכמה ביחסות זה שמשתמשים באותיות יווניות עבור החלקים הזמניים או מרחביים(בדרך כלל משתמשים ב-<span>\(\mu,\nu\)</span>) כאשר הערכים האפשריים הם <span>\(0,1,2,3\)</span>.
+כאשר משתמשים באותיות לטיניות רק בשביל החלקים המרחביים(בדרך כלל משתמשים ב-<span>\(i,j\)</span>) כאשר הערכים האפשריים הם <span>\(1,2,3\)</span>.</p>
+<div class="remark">
+<p>ווקטורים עם אינדקס עליון מסמנים איבר במרחב הווקטורי כאשר ווקטורים עם אינדקס תחתון מסמנים איבר במרחב הדואלי. הכפל בין שתי איברים באותו מרחב אינו מוגדר היטב ולכן תמיד נצפה כי בסכימה יהיה אינדקס אחד עליון ואינדקס אחד תחתון.</p>
+</div>
+<div class="example">
+<p>עבור סכימה רגילה ניתן לכתוב:
+<span>$$\sum_{i=1}^{3}c_{i}x^{i}=c_{1}x^{1}+c_{2}x^{2}+c_{3}x^{3}=c_{i}x^i$$</span>
+<span>$$\left\langle  \vec{u},\vec{v}  \right\rangle =\sum_{i=1}^{n}u_{i}v^{i}=u_{i}v^{i}$$</span>
+ונקבל למשל כי עבור איבר בבסיס <span>\(e_{i}\)</span> נקבל:
+<span>$$u\cdot e_{i}=u_{j}e_{j}\cdot e_{i}=u_{j}\delta_{ji}=u_{i}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סימון לוי צוויטה</span><p>בשלוש מימדים נקבל כי:
+<span>$$\varepsilon_{i j k}={\left\{\begin{array}{l l}{+1}&amp;{{\mathrm{if}}\;(i,j,k)\;{\mathrm{is}}\;(1,2,3),(2,3,1),\;{\mathrm{or}}\;(3,1,2),}\\ {-1}&amp;{{\mathrm{if}}\;(i,j,k)\;{\mathrm{is}}\;(3,2,1),(1,3,2),\;{\mathrm{or}}\;(2,1,3),}\\ {0}&amp;{{\mathrm{if}}\;i=j,\;{\mathrm{or}}\;j=k,\;{\mathrm{or}}\;k=i}\end{array}\right.}$$</span>
+כאשר ב-4 מימדים נקבל:
+<span>$$\varepsilon_{i j k l}={\left\{\begin{array}{l l}{+1}&amp;{{\mathrm{if~}}(i,j,k,l){\mathrm{~is~an~even~permutation~of~}}(1,2,3,4)}\\ {-1}&amp;{{\mathrm{if~}}(i,j,k,l){\mathrm{~is~an~odd~permutation~of~}}(1,2,3,4)}\\ {0}&amp;{{\mathrm{otherwise}}}\end{array}\right.}$$</span></p>
+</div>
+<p>כאשר נזכור כי עם הסכם הסכימה של אינשטיין מתקיים <span>\(\varepsilon_{i j k}\varepsilon^{i m n}\equiv\sum_{i=1,2,3}\varepsilon_{i j k}\varepsilon^{i m n}\)</span>.
+כעת בעזרת סימון לווי ציוויטה ניתן להגדיר דברים נוספים עם הסכם הסכימה.</p>
+<div class="proposition"><span class="keyword">מכפלה ווקטורית</span><p><span>$$\vec{u}\times \vec{v}=\varepsilon_{j k}^{i}u_{j}v_{k}e_{i}$$</span>
+כאשר אין הבדל בין <span>\(\varepsilon_{jk}^i\)</span> ל-<span>\(\varepsilon_{ijk}\)</span> פרט למיקום של האינקס.</p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$\begin{array}{l}{{(u\times v)_{1}=u_{2}v_{3}-u_{3}v_{2}}}\\ {{(u\times v)_{2}=u_{3}v_{1}-u_{1}v_{3}}}\\ {{(u\times v)_{3}=u_{1}v_{3}-u_{3}v_{1}}}\end{array}$$</span>
+כאשר עבור הרכיב ה-<span>\(i\)</span> אנחנו מוסיפים את האיבר עם האינדקס שאינו <span>\(i\)</span>. כלומר רק איברים שהם תמורות של <span>\((1,2,3)\)</span>. וכן אנחנו מוספים את האיברים שהם תמורות זוגיות ומחסירים תמורות אי זוגיות. וזה בדיוק מה שעושה סימון לוי-ציוויטה. כלומר:
+<span>$$(u\times v)_{i}=\sum_{j,k=1}^{3}\varepsilon_{i j k}u_{j}v_{k}\implies \varepsilon_{j k}^{i}u_{j}v_{k}e_{i}$$</span></p>
+</div>
+<p>נרצה להראות איך נראת מכפלת מטריצה בווקטור. נזכור כי מכפלת מטריצה בווקטור באופן כללי יהיה</p>
+<div class="proposition"><span class="keyword">מכפלת מטריצה בווקטור</span><p><span>$$u^{i}={A^{i}}_{j}v^{j}$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי באופן כללי הביטוי לרכיב ה-<span>\(i\)</span> של מכפלה של מטריצה בווקטור הוא:
+ <span>$$\mathbf{u}_{i}=(\mathbf{A}\mathbf{v})_{i}=\sum_{j=1}^{N}A_{i j}v_{j}$$</span>
+ בעזרת ההסכם הסכימה של אינשטיין נקבל:
+<span>$$u^{i}={A^{i}}_{j}v^{j}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מכפלת מטריצות</span><p><span>$${C^{i}}_{k}={A^{i}}_{j}{B^{j}}_{k}$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הנוסחה לאיבר ה-<span>\(ik\)</span> במכלה של מטריצות הוא:
+<span>$$\left(\mathbf{A}\mathbf{B}\right)_{i k}=\sum_{j=1}^{n}A_{i j}B_{j k}\,=A_{i j}B_{j k}$$</span>
+בעזרת הסכם הסכימה של אינשטיין נקבל:
+<span>$${C^{i}}_{k}={A^{i}}_{j}{B^{j}}_{k}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">העלאה והורדה של אינדקס</span><p>אם <span>\(g_{\mu \nu}\)</span> הטנזור המטרי. נקבל:
+<span>$$g_{\mu\sigma}{T^{\sigma}}_{\beta}=T_{\mu\beta}$$</span>
+וכן:
+<span>$$g^{\mu\sigma}T_{\sigma}{}^{\alpha}=T^{\mu\alpha}$$</span></p>
+</div>
+<h2>אופרטורים דיפרנציאלים</h2>
+<p>ניתן לסמן את הנגזרת החלקית לפי הרכיב ה-<span>\(i\)</span> ב-<span>\(\frac{\partial }{\partial x_{i}}\)</span> ואת הנגזרת המלאה ב-<span>\(dx^i\)</span>. זהו צירוף של ווקטור קו-ווראינטי ווקטור קונטרא-ווריאנטי ולכן ניתן לסכום בעזרת הסכם הסכימה של אינשטיין. ניתן לקבל את הפעולות הבאות:</p>
+<ol>
+<li>
+<p>גרדיאנט: 
+<span>$$\bar{\nabla} f = \sum_{i=1}^n \frac{\partial f}{\partial x_{i}} e_{i}\to \bar{\nabla} f=\frac{\partial f}{\partial x_{i}} e_{i}$$</span>
+כאשר אם רוצים לכתוב רק רכיב יחיד לא נדרש סכימה - <span>\(\left( \bar{\nabla}f \right)_{i}=\frac{\partial f}{\partial x_{i}}\)</span></p>
+</li>
+<li>
+<p>דיברגנץ: 
+<span>$$\bar{\nabla} \cdot f = \sum_{i=1}^n \frac{\partial f}{\partial x_{i}} \implies \bar{\nabla} \cdot f=\frac{\partial f}{\partial x_{i}} \delta^i$$</span></p>
+</li>
+</ol><h2 id='Electrodynamics_1_3'>מושגים בסיסיים באנליזה טנזורית</h2>
+ <div class="definition"><span class="keyword">כלל מעבר</span><p>מעבר או טרנפורמציה מוגדרת היטב(גזירה ברציפות) אשר מחזיר קורדינטות חדשות לפי איזשהו כלל:
+<span>$$x^{\prime\alpha}\,=\,x^{\prime\alpha}(x^{0},\,x^{1},\,x^{2},\,x^{3})\qquad(\alpha\,=\,0,\,1,\,2,\,3)$$</span></p>
+</div>
+<p>כאשר נתעסק כרגע רק כאשר <span>\(\alpha \in \{ 0,1,2,3 \}\)</span></p>
+<div class="definition"><span class="keyword">סקלר/טנזור מסדר אפס</span><p>ערך שאינו משתנה תחת הכלל מעבר.</p>
+</div>
+<div class="definition"><span class="keyword">ווקטור/טנזור מסדר ראשון</span><p>נדרש כעת להבדיל בין שתי סוגים ווקטור <u>קונטרא ווריאנטי</u> המקיים:
+<span>$$A^{\prime\,\alpha}=\frac{\partial x^{\prime\,\alpha}}{\partial x^{\beta}}\:A^{\beta}={\frac{\partial x^{\prime\,\alpha}}{\partial x^{0}}}\,A^{0}\,+\,{\frac{\partial x^{\prime\,\alpha}}{\partial x^{1}}}\,A^{1}\,+\,{\frac{\partial x^{\prime\,\alpha}}{\partial x^{2}}}\,A^{2}\,+\,{\frac{\partial x^{\prime\,\alpha}}{\partial x^{3}}}\,A^{3}$$</span>
+ווקטור קו ווריאנטי המקיים:
+<span>$$B_{\alpha}^{\prime}=\frac{\partial x^{\beta}}{\partial x^{\prime\alpha}}B_{\beta}=\frac{\partial x^{0}}{\partial{x^{\prime}}^{\alpha}}\,B_{0}\,+\,\frac{\partial x^{1}}{\partial{x^{\prime}}^{\alpha}}\,B_{1}\,+\,\frac{\partial{x}^{2}}{\partial{x^{\prime}}^{\alpha}}\,B_{2}\,+\,\frac{\partial{x}^{3}}{\partial{x^{\prime}}^{\alpha}}\,B_{3}$$</span></p>
+</div>
+<div class="proposition">
+<p>הרכיבים של ווקטור קונטרה ווריאנטי משתנה ביחס הפוך לשינוי באורך ווקטורי הבסיס.</p>
+</div>
+<div class="remark">
+<p>הווקטור לא משתנה, הוא נשאר אותו הדבר תחת כל בסיס. מה שמשתנה זה הרכיבים תחת הבסיס הזה.</p>
+</div>
+<div class="proposition">
+<p>ווקטור קו-ווריאנטי משתנה ביחס ישר למעבר בסיס. </p>
+</div>
+<div class="definition"><span class="keyword">טנזור מסדר שני</span><p>ניתן כעת שוב להחלק למספר סוגים. טנזור <u>קונטרא וורינטי</u> מסדר שני מוגדר:
+<span>$$F^{\prime\,\alpha\beta}=\frac{\partial x^{\prime\,\alpha}}{\partial x^{\gamma}}\,\frac{\partial x^{\prime\,\beta}}{\partial x^{\delta}}\,F^{\gamma\delta}$$</span>
+טנזור <u>קו-ווריאנטי</u> מסדר שני מוגדר:
+<span>$$G_{\alpha\beta}^{\prime}\,=\,{\frac{\partial x^{\gamma}}{\partial x^{\prime\alpha}}}\,{\frac{\partial x^{\delta}}{\partial x^{\prime\beta}}}\ G_{\gamma\delta}$$</span>
+טנזור <u>מעורב</u> מסדר שני מוגדר:</p>
+<p><span>$${H^{\prime}}_{\beta}^{\alpha}=\frac{\partial x^{\prime\alpha}}{\partial x^{\gamma}}\,\frac{\partial x^{\delta}}{\partial x^{\prime\beta}}\,{H^{\gamma}}_{\delta}$$</span></p>
+</div>
+<p>כאשר ניתן להמשיך להגדיר באופן דומה טנזור מכל סדר.</p>
+<div class="definition"><span class="keyword">מכפלה סקלרית</span><p>המכפלה של האיברים הו קו ווריאנטי וקונטרא ווריאנטיים:
+<span>$$B\,\cdot\,A\,\equiv\,B_{\alpha}A^{\alpha}$$</span></p>
+</div>
+<div class="proposition">
+<p>מכפלה סקלרית היא אינווריאנטית תחת הטרנספורמצייה.
+<span>$$B^{\prime}\cdot A^{\prime}=\frac{\partial x^{\beta}}{\partial x^{\prime\,\alpha}}\,\frac{\partial x^{\prime\,\alpha}}{\partial x^{\gamma}}\,B_{\beta}A^{\gamma}=\frac{\partial x^{\beta}}{\partial x^{\gamma}}\,B_{\beta}A^{\gamma}=\,\delta^{\beta}{}_{\gamma}B_{\beta}A^{\gamma}=B\cdot A$$</span></p>
+</div>
+<div class="remark">
+<p>נשים לב כי אנחנו רק משתמשים בנגזרות של <span>\(x\)</span> בכיוונים שונים. כאשר אנו יודעים כי ניתן לייצג את אוסף הנגזרות של של שדה ווקטורי גזיר ע"י מטריצה ריבועית. זה מה שנעשה בהמשך.</p>
+</div><h2 id='Electrodynamics_1_4'>פונקציות מיוחדות</h2>
+ <p>פרק זה זה בעיקר אוסף תכונות שימושיות של פונקציות מיוחדות.</p>
+<h2>פולינומי לג'נדר</h2>
+<p>נקבעים ע"י הפונקצייה היוצרת:
+<span>$$\frac{1}{\sqrt{1-2x t+t^{2}}}\ \equiv\ \sum_{\ell=0}^{\infty}t^{\ell}P_{\ell}(x)\qquad|x|\leq1,\;0&lt;t&lt;1.$$</span></p>
+<p>פותרים את משוואת לג'נדר:
+<span>$$(1-x^{2})\frac{d^{2}P(x)}{d x^{2}}-2x y\frac{d P(x)}{d x}+\ell(\ell+1)P(x)=0.$$</span></p>
+<p>מקיימים יחס אורתוגונאליות:
+<span>$$\int_{-1}^{1}d x\,P_{\ell}(x)P_{m}(x)=\frac{2}{2\ell+1}\delta_{\ell m}$$</span>
+ומקיימים יחס שלמות:
+<span>$$\sum_{\ell=0}^{\infty}\left(\ell+\textstyle{\frac{1}{2}}\right)P_{\ell}(x)P_{\ell}(x^{\prime})=\delta(x-x^{\prime}).$$</span>
+כלומר ניתן לבטא כל פונקציה בעזרת צירוף לינארי(לאו דווקא סופי) של פולינומי לג'נדר.
+נוסחאת רודריגאז:
+<span>$$P_{\ell}(x)={\frac{1}{2^{\ell}\ell!}}{\frac{d^{\ell}}{d x^{\ell}}}(x^{2}-1)^{\ell},$$</span>
+ערכים ראשונים:
+<span>$$\begin{gather}{{P_{0}(x)=1}}\qquad  {{P_{1}(x)=x}}\qquad  {{P_{2}(x)=\displaystyle\frac{1}{2}(3x^{2}-1)}}\\ {{P_{3}(x)=\frac{1}{2}(5x^{3}-3x)}}\qquad  {{P_{4}(x)=\displaystyle\frac{1}{8}(35x^{4}-30x^{2}+3)}}\end{gather}$$</span>
+ערך ב-<span>\(x=0\)</span>:
+<span>$$P_{\ell}(0)=\left\{\begin{array}{c c}{{0}}&amp;{{\mathrm{odd\,\,}\ell,}}\\ {{}}&amp;{{}}\\ {{\displaystyle\frac{(\ell-1)!!}{(-2)^{\ell/2}(\ell/2)!}}}&amp;{{\mathrm{even\,\,}\ell\ge2.}}\end{array}\right.$$</span>
+וכן באופן כללי מקיים יחס זוגיות <span>\(P_{\ell}(-x)=(-1)^{\ell}P_{\ell}(x)\)</span>. נוסחאות נסיגה:
+<span>$$\begin{array}{c}{{(2\ell+1)P_{\ell}(x)=P_{\ell+1}^{\prime}(x)-P_{\ell-1}^{\prime}(x)}}\\ {{(2\ell+1)x P_{\ell}(x)=(\ell+1)P_{\ell+1}(x)+\ell P_{\ell-1}(x)}}\\ {{P_{\ell}(x)=P_{\ell+1}^{\prime}(x)-2x P_{\ell}^{\prime}(x)+P_{\ell-1}^{\prime}(x).}}\end{array}$$</span></p>
+<h2>פולינומי לג'נדר מוכללים</h2>
+<p>פולינום <span>\(P_{\ell}^{m}(x)\)</span> אשר פותרים את המשוואה:
+<span>$$(1-x^{2})\frac{d^{2}P(x)}{d x^{2}}-2x y\frac{d P(x)}{d x}+\left\{\ell(\ell+1)-\frac{m^{2}}{1-x^{2}}\right\}P(x)=0$$</span>
+עבור ערכים שלמים כך ש-<span>\(\lvert m \rvert\leq \ell\)</span>. שלמים(ניתן לבטא כל פונקציה בעזרתם) ואורתוגונאלים. נוסחא מפורשת:
+<span>$$P_{\ell}^{m}(x)=(-1)^{m}(1-x^{2})^{m/2}{\frac{d^{m}}{d x^{m}}}P_{\ell}(x)$$</span>
+מקיימות:
+<span>$$P_{\ell}^{0}(x)=P_{\ell}(x),\phantom{s p a c e}P_{\ell}^{1}(0)=P_{\ell}^{\prime}(0),\phantom{s p a c e}\mathrm{and}\phantom{s p a c e}P_{\ell}^{m}(1)=0.$$</span>
+תכונות שימושיות:
+<span>$$\begin{gather}\frac{d}{d\theta}P_{\ell}(\cos\theta)=-P_{\ell}^{1}(\cos\theta) \\P_{\ell}^{1}(\cos\theta)=(-1)^{\ell+1}P_{\ell}^{1}(-\cos\theta) \\\int_{0}^{\pi}d\theta\sin\theta P_{\ell}^{m}(\cos\theta)P_{\ell^{\prime}}^{m}(\cos\theta)=\frac{2}{2\ell+1}\frac{(\ell+m)!}{(\ell-m)!}\delta_{\ell\ell^{\prime}}
+\end{gather}$$</span></p>
+<h2>הרמוניות ספריות</h2>
+<p>נסתכל על המשוואה:
+<span>$$\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)+\frac{1}{\sin^{2}\theta}\frac{\partial^{2}Y}{\partial\theta^{2}}=-\ell(\ell+1)Y.$$</span>
+כאשר ניתן לכתוב את הפונקציות העצמיות שלה ע"י פולינומי לג'נדר המוכללות:
+<span>$$Y_{\ell\,m}(\theta,\phi)=\sqrt{\frac{2\ell+1}{4\pi}\frac{(\ell-m)!}{(\ell+m)!}}P_{\ell}^{m}(\cos\theta)e^{i m\phi}\qquad m\ge0,$$</span>
+מקיימים יחס אורתוגונאליות:
+<span>$$\int_{0}^{2\pi}d\phi\,\int_{0}^{\pi}d\theta\,\sin\theta\;Y_{\ell m}(\theta,\phi)Y_{\ell^{\prime}m^{\prime}}^{\ast}(\theta,\phi)=\delta_{\ell\ell^{\prime}}\delta_{m m^{\prime}}$$</span>
+ויחס שלמות:
+<span>$$\sum_{\ell=0}^{\infty}\sum_{m=-\ell}^{\ell}Y_{\ell m}(\theta,\phi)Y_{\ell m}^{*}(\theta^{\prime},\phi^{\prime})=\delta(\cos\theta-\cos\theta^{\prime})\delta(\phi-\phi^{\prime}).$$</span></p><h1 id='Electrodynamics_2'>יחסות פרטית</h1>
+<h2 id='Electrodynamics_2_1'>מערכות ב-3 מימדים</h2>
+ <div class="definition"><span class="keyword">המרחב האוקלידי</span><p>מרחב 3 מימדי. כלומר ניתן לתאר כל נקודה במרחב ע"י 3 מספרים.</p>
+</div>
+<div class="definition"><span class="keyword">מערכת צירים</span><p>נקודה במרחב הנקראת ראשית הצירים ביחד עם 3 כיוונים בלתי לתלויים נקרא מערכת צירים.</p>
+</div>
+<div class="remark">
+<p>מערכת צירים היא למעשה דרך לתאר מיקום במרחב. לרוב נבחר את המערכת צירים להיות אורתוגונאלים, ונסמן אותם ב-<span>\(x,y,z\)</span> כך ששלושה ימינית - כלומר <span>\(\hat{x} \times \hat{y} = \hat{z}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">טרנספורמציה של מערכת צירים</span><p>פונקציה המעבירה ממערכת צירים אחת למערכת צירים אחרת.</p>
+</div>
+<div class="proposition">
+<p>לפי ההגדרה מערכת צירים שונות נבדלות אחד מהשני בשתי דרכים עיקריות:</p>
+<ol>
+<li>
+<p>הכיוונים של הצירים. </p>
+</li>
+<li>
+<p>המיקום של הראשית. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל טרנספורמציה של מערכת צירים ניתן לייצג ע"י שינוי של הכיוונים, מתיחה של הצירים, והמיקום של הראשית.</p>
+</div>
+<div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="227.17" height="227.17" viewBox="0 0 227.17 227.17">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 3.328125 -3.015625 C 3.390625 -3.265625 3.625 -4.1875 4.3125 -4.1875 C 4.359375 -4.1875 4.609375 -4.1875 4.8125 -4.0625 C 4.53125 -4 4.34375 -3.765625 4.34375 -3.515625 C 4.34375 -3.359375 4.453125 -3.171875 4.71875 -3.171875 C 4.9375 -3.171875 5.25 -3.34375 5.25 -3.75 C 5.25 -4.265625 4.671875 -4.40625 4.328125 -4.40625 C 3.75 -4.40625 3.40625 -3.875 3.28125 -3.65625 C 3.03125 -4.3125 2.5 -4.40625 2.203125 -4.40625 C 1.171875 -4.40625 0.59375 -3.125 0.59375 -2.875 C 0.59375 -2.765625 0.703125 -2.765625 0.71875 -2.765625 C 0.796875 -2.765625 0.828125 -2.796875 0.84375 -2.875 C 1.1875 -3.9375 1.84375 -4.1875 2.1875 -4.1875 C 2.375 -4.1875 2.71875 -4.09375 2.71875 -3.515625 C 2.71875 -3.203125 2.546875 -2.546875 2.1875 -1.140625 C 2.03125 -0.53125 1.671875 -0.109375 1.234375 -0.109375 C 1.171875 -0.109375 0.953125 -0.109375 0.734375 -0.234375 C 0.984375 -0.296875 1.203125 -0.5 1.203125 -0.78125 C 1.203125 -1.046875 0.984375 -1.125 0.84375 -1.125 C 0.53125 -1.125 0.296875 -0.875 0.296875 -0.546875 C 0.296875 -0.09375 0.78125 0.109375 1.21875 0.109375 C 1.890625 0.109375 2.25 -0.59375 2.265625 -0.640625 C 2.390625 -0.28125 2.75 0.109375 3.34375 0.109375 C 4.375 0.109375 4.9375 -1.171875 4.9375 -1.421875 C 4.9375 -1.53125 4.859375 -1.53125 4.828125 -1.53125 C 4.734375 -1.53125 4.71875 -1.484375 4.6875 -1.421875 C 4.359375 -0.34375 3.6875 -0.109375 3.375 -0.109375 C 2.984375 -0.109375 2.828125 -0.421875 2.828125 -0.765625 C 2.828125 -0.984375 2.875 -1.203125 2.984375 -1.640625 Z M 3.328125 -3.015625 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 4.84375 -3.796875 C 4.890625 -3.9375 4.890625 -3.953125 4.890625 -4.03125 C 4.890625 -4.203125 4.75 -4.296875 4.59375 -4.296875 C 4.5 -4.296875 4.34375 -4.234375 4.25 -4.09375 C 4.234375 -4.03125 4.140625 -3.734375 4.109375 -3.546875 C 4.03125 -3.296875 3.96875 -3.015625 3.90625 -2.75 L 3.453125 -0.953125 C 3.421875 -0.8125 2.984375 -0.109375 2.328125 -0.109375 C 1.828125 -0.109375 1.71875 -0.546875 1.71875 -0.921875 C 1.71875 -1.375 1.890625 -2 2.21875 -2.875 C 2.375 -3.28125 2.421875 -3.390625 2.421875 -3.59375 C 2.421875 -4.03125 2.109375 -4.40625 1.609375 -4.40625 C 0.65625 -4.40625 0.296875 -2.953125 0.296875 -2.875 C 0.296875 -2.765625 0.390625 -2.765625 0.40625 -2.765625 C 0.515625 -2.765625 0.515625 -2.796875 0.5625 -2.953125 C 0.84375 -3.890625 1.234375 -4.1875 1.578125 -4.1875 C 1.65625 -4.1875 1.828125 -4.1875 1.828125 -3.875 C 1.828125 -3.625 1.71875 -3.359375 1.65625 -3.171875 C 1.25 -2.109375 1.078125 -1.546875 1.078125 -1.078125 C 1.078125 -0.1875 1.703125 0.109375 2.296875 0.109375 C 2.6875 0.109375 3.015625 -0.0625 3.296875 -0.34375 C 3.171875 0.171875 3.046875 0.671875 2.65625 1.203125 C 2.390625 1.53125 2.015625 1.828125 1.5625 1.828125 C 1.421875 1.828125 0.96875 1.796875 0.796875 1.40625 C 0.953125 1.40625 1.09375 1.40625 1.21875 1.28125 C 1.328125 1.203125 1.421875 1.0625 1.421875 0.875 C 1.421875 0.5625 1.15625 0.53125 1.0625 0.53125 C 0.828125 0.53125 0.5 0.6875 0.5 1.171875 C 0.5 1.671875 0.9375 2.046875 1.5625 2.046875 C 2.578125 2.046875 3.609375 1.140625 3.890625 0.015625 Z M 4.84375 -3.796875 "/>
+</g>
+<g id="glyph-0-2">
+<path d="M 1.328125 -0.828125 C 1.859375 -1.40625 2.15625 -1.65625 2.515625 -1.96875 C 2.515625 -1.96875 3.125 -2.5 3.484375 -2.859375 C 4.4375 -3.78125 4.65625 -4.265625 4.65625 -4.3125 C 4.65625 -4.40625 4.5625 -4.40625 4.546875 -4.40625 C 4.46875 -4.40625 4.453125 -4.390625 4.390625 -4.296875 C 4.09375 -3.8125 3.890625 -3.65625 3.65625 -3.65625 C 3.40625 -3.65625 3.296875 -3.8125 3.140625 -3.984375 C 2.953125 -4.203125 2.78125 -4.40625 2.453125 -4.40625 C 1.703125 -4.40625 1.25 -3.484375 1.25 -3.265625 C 1.25 -3.21875 1.28125 -3.15625 1.359375 -3.15625 C 1.453125 -3.15625 1.46875 -3.203125 1.5 -3.265625 C 1.6875 -3.734375 2.265625 -3.734375 2.34375 -3.734375 C 2.546875 -3.734375 2.734375 -3.671875 2.96875 -3.59375 C 3.375 -3.4375 3.484375 -3.4375 3.734375 -3.4375 C 3.375 -3.015625 2.546875 -2.296875 2.359375 -2.140625 L 1.453125 -1.296875 C 0.78125 -0.625 0.421875 -0.0625 0.421875 0.015625 C 0.421875 0.109375 0.53125 0.109375 0.546875 0.109375 C 0.625 0.109375 0.640625 0.09375 0.703125 -0.015625 C 0.9375 -0.375 1.234375 -0.640625 1.5625 -0.640625 C 1.78125 -0.640625 1.890625 -0.546875 2.140625 -0.265625 C 2.296875 -0.046875 2.484375 0.109375 2.765625 0.109375 C 3.765625 0.109375 4.34375 -1.15625 4.34375 -1.421875 C 4.34375 -1.46875 4.296875 -1.53125 4.21875 -1.53125 C 4.125 -1.53125 4.109375 -1.46875 4.078125 -1.390625 C 3.84375 -0.75 3.203125 -0.5625 2.875 -0.5625 C 2.6875 -0.5625 2.5 -0.625 2.296875 -0.6875 C 1.953125 -0.8125 1.796875 -0.859375 1.59375 -0.859375 C 1.578125 -0.859375 1.421875 -0.859375 1.328125 -0.828125 Z M 1.328125 -0.828125 "/>
+</g>
+<g id="glyph-0-3">
+<path d="M 4.53125 -4.984375 C 4.53125 -5.640625 4.359375 -7.03125 3.34375 -7.03125 C 1.953125 -7.03125 0.421875 -4.21875 0.421875 -1.9375 C 0.421875 -1 0.703125 0.109375 1.609375 0.109375 C 3.015625 0.109375 4.53125 -2.75 4.53125 -4.984375 Z M 1.46875 -3.625 C 1.640625 -4.25 1.84375 -5.046875 2.25 -5.765625 C 2.515625 -6.25 2.875 -6.8125 3.328125 -6.8125 C 3.8125 -6.8125 3.875 -6.171875 3.875 -5.609375 C 3.875 -5.109375 3.796875 -4.609375 3.5625 -3.625 Z M 3.46875 -3.296875 C 3.359375 -2.84375 3.15625 -2 2.765625 -1.28125 C 2.421875 -0.59375 2.046875 -0.109375 1.609375 -0.109375 C 1.28125 -0.109375 1.078125 -0.40625 1.078125 -1.328125 C 1.078125 -1.75 1.140625 -2.328125 1.390625 -3.296875 Z M 3.46875 -3.296875 "/>
+</g>
+<g id="glyph-0-4">
+<path d="M 7.375 -4.34375 C 7.375 -5.953125 6.3125 -7.03125 4.828125 -7.03125 C 2.6875 -7.03125 0.484375 -4.765625 0.484375 -2.4375 C 0.484375 -0.78125 1.609375 0.21875 3.046875 0.21875 C 5.15625 0.21875 7.375 -1.96875 7.375 -4.34375 Z M 3.09375 -0.046875 C 2.109375 -0.046875 1.421875 -0.84375 1.421875 -2.15625 C 1.421875 -2.609375 1.5625 -4.0625 2.328125 -5.21875 C 3.015625 -6.265625 3.984375 -6.78125 4.78125 -6.78125 C 5.59375 -6.78125 6.484375 -6.21875 6.484375 -4.734375 C 6.484375 -4.015625 6.21875 -2.46875 5.234375 -1.234375 C 4.75 -0.625 3.9375 -0.046875 3.09375 -0.046875 Z M 3.09375 -0.046875 "/>
+</g>
+<g id="glyph-1-0">
+<path d="M 2.015625 -3.296875 C 2.078125 -3.40625 2.078125 -3.46875 2.078125 -3.515625 C 2.078125 -3.734375 1.890625 -3.890625 1.671875 -3.890625 C 1.40625 -3.890625 1.328125 -3.671875 1.296875 -3.5625 L 0.375 -0.546875 C 0.359375 -0.53125 0.328125 -0.453125 0.328125 -0.4375 C 0.328125 -0.359375 0.546875 -0.28125 0.609375 -0.28125 C 0.65625 -0.28125 0.65625 -0.296875 0.703125 -0.40625 Z M 2.015625 -3.296875 "/>
+</g>
+</g>
+</defs>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 111.395469 -0.0009375 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 226.972656 113.585938 L 223.785156 111.992188 L 224.980469 113.585938 L 223.785156 115.179688 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="217.757" y="121.394"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 0.0009375 111.393594 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 113.585938 0.199219 L 111.992188 3.386719 L 113.585938 2.191406 L 115.179688 3.386719 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="117.105" y="8.008"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -42.245156 -42.243125 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="1" d="M 69.929688 157.238281 L 73.3125 156.109375 L 71.339844 155.828125 L 71.058594 153.855469 "/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="67.396" y="153.718"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L 96.469688 55.698281 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 211.78125 56.890625 L 208.222656 57.105469 L 210.054688 57.886719 L 209.816406 59.867188 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="207.536" y="53.372"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="213.23" y="49.757"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -55.698281 96.471719 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 56.890625 15.386719 L 57.105469 18.945312 L 57.886719 17.113281 L 59.867188 17.351562 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="52.874" y="26.399"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="58.116" y="22.784"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(100%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M 0.0009375 -0.0009375 L -42.245156 -42.243125 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(100%, 0%, 0%)" fill-opacity="1" d="M 69.929688 157.238281 L 73.3125 156.109375 L 71.339844 155.828125 L 71.058594 153.855469 "/>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="65.999" y="153.718"/>
+</g>
+<g fill="rgb(100%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="71.07" y="150.103"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 100%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M 56.692344 -0.0009375 C 56.692344 9.948281 54.07125 19.729531 50.094688 26.620156 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 100%)" fill-opacity="1" d="M 162.683594 85.238281 L 162.898438 88.796875 L 163.679688 86.964844 L 165.65625 87.203125 "/>
+<g fill="rgb(0%, 0%, 100%)" fill-opacity="1">
+<use xlink:href="#glyph-0-3" x="171.866" y="95.392"/>
+</g>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-4" x="102.189" y="123.913"/>
+</g>
+<path fill="none" stroke-width="0.3985" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(50%, 50%, 50%)" stroke-opacity="1" stroke-dasharray="0.3985 1.99255" stroke-miterlimit="10" d="M -113.385781 -113.387656 L 113.387656 -113.387656 M -113.385781 -56.692344 L 113.387656 -56.692344 M -113.385781 -0.0009375 L 113.387656 -0.0009375 M -113.385781 56.694375 L 113.387656 56.694375 M -113.385781 113.36625 L 113.387656 113.36625 M -113.385781 -113.387656 L -113.385781 113.385781 M -56.694375 -113.387656 L -56.694375 113.385781 M 0.0009375 -113.387656 L 0.0009375 113.385781 M 56.692344 -113.387656 L 56.692344 113.385781 M 113.368125 -113.387656 L 113.368125 113.385781 " transform="matrix(1, 0, 0, -1, 113.585, 113.585)"/>
+</svg>
+</div>
+<div class="corollary">
+<p>חוק פיזיקלי אשר אינו תלוי במערכת צירים מקיים הומוגניות(סימטריה להזזות) ולאיזוטרופיות(סימטריה לסיבובים). </p>
+</div>
+<div class="remark">
+<p>בעתיד כשנתעסק במרחב 4 מימדי מתווסף מימד של זמן, ולכן חופש בחירת מערכת ייחוס גורר גם להומוגניות בזמן.</p>
+</div>
+<div class="proposition">
+<p>כל מעבר מערכת צירים ניתנת לייצוג ע"י טרנספורמציה לינארית(מתיחה + סיבוב) והזזה, לכן ניתן לייצג מעבר קורדינטות כללי ע"י:
+<span>$$\left(\begin{array}{c}{{\Delta x^{\prime}}}\\ {{\Delta y^{\prime}}}\\ {{\Delta z^{\prime}}}\end{array}\right)=T\left(\begin{array}{c}{{\Delta x}}\\ {{\Delta y}}\\ {{\Delta z}}\end{array}\right)$$</span></p>
+</div>
+<p>המצב נהיה קצת יותר מסובך כאשר מכניסים זמן.</p>
+<div class="definition"><span class="keyword">מערכת ייחוס</span><p>מערכת צירים שהיא פונקציה של זמן. ניתן לחשוב על זה שכל אחד מהמאפיינים של מערכת צירים היא פונקציה של הזמן. כלומר גם כל אחד מהצירים וגם המיקום של הראשית זה פונקציה של הזמן.</p>
+</div>
+<p>באופן כללי אנחנו מניחים שהטבע לא מאיץ באופן פתאומי בלי סיבה, לכן נניח שהמערכת ייחוס היא פונקציה גזירה, ולכן ניתן לבצע קירוב לינארי לשינוי במערכת ייחוס:
+<span>$$\begin{pmatrix}dx' \\dy' \\dz' \\dt'\end{pmatrix}=T\begin{pmatrix}dx\\ dy \\ dz \\ dt
+\end{pmatrix}$$</span>
+כאשר כמו במעבר של מערכת קורדינטות, נקבל כי <span>\(dx,dy,dz,dt\)</span> מייצגות את השינוי במיקום של הראשית, וההעתקה <span>\(T\)</span> מייצג כמה שמשתנה כל רכיב.
+כפי שניתן לתאר, יש מספר רב של דרכים שניתן לעבור דרכם מערכות ייחוס. </p>
+<div class="definition"><span class="keyword">טרנספורמציית גלילאו</span><p>דרך לעבור ממערכת ייחוס <span>\(\mathcal{O}\)</span> למערכת ייחוס <span>\(\mathcal{O}'\)</span> הנעה במהירות קבועה <span>\(v\)</span> ביחס ל-<span>\(\mathcal{O}\)</span>. מעבר מהמערכת <span>\(x,y,z\)</span> למערכת <span>\(x',y',z'\)</span> מוגדרת:
+<span>$$\begin{pmatrix}d x' \\d y' \\d  z' \\dt' \end{pmatrix}=\begin{pmatrix}d x-v_{x}t \\d y-v_{y}t \\d z-v_{z}t \\t'\end{pmatrix}\implies \begin{pmatrix}d x' \\d y' \\d z' \\dt'\end{pmatrix}=\begin{pmatrix}1  &amp; 0 &amp; 0 &amp; -v_{x} \\0 &amp; 1 &amp; 0 &amp; -v_{y} \\0 &amp; 0 &amp; 1 &amp; -v_{z} \\0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\begin{pmatrix}dx \\dy \\dz  \\dt
+\end{pmatrix}$$</span>
+כאשר אם נסמן את המטריצה ב-<span>\(A\)</span> ניתן בעזרת הסכם הסכמיה של אינשטיין לכתוב:
+<span>$$dx'^i=A_{i}dx^i$$</span></p>
+</div>
+<div class="proposition">
+<p>הטרנספורמציה היחידה שמשמרת את חוקי ניוטון תחת מעבר במערכות צירים היא טרספונמציית גלילי.</p>
+</div><h2 id='Electrodynamics_2_2'>טרנספורמציית לורנץ</h2>
+ <div class="definition"><span class="keyword">אינטרוואל</span><p>סוג של מרחק ביחסות פרטית. מוגדר:
+<span>$$ \mathrm{d}s^{2} = \left( c\mathrm{d}t \right)^2-\mathrm{d}x^2-\mathrm{d}y^2-\mathrm{d}z^2$$</span>
+כאשר מבחינה פיזיקלית ניתן לחשוב על זה כמו המרחק שעובר אור.</p>
+</div>
+<div class="definition"><span class="keyword">חבורת לורנץ</span><p>אוסף כל הטרנספורמציות אשר משמרות את האינטרוואל במעברת מערכות ייחוס.</p>
+</div>
+<div class="definition"><span class="keyword">חבורת פוינקרה</span><p>כל הטרנספורמציות אשר משמרות את:
+<span>$$\Delta s^{2}=(t-t_{0})^{2}-(x-x_{0})^{2}-(y-y_{0})^{2}-(z-z_{0})^{2}$$</span>
+כלומר משמרות את האינטרוואל עם הזזה. זה לעיתם נקרא טרנספורמציית לורנץ הלא הומוגנית.</p>
+</div>
+<div class="symbolize">
+<p>נסמן <span>\(t=x_{0},x=x_{1},y=x_{2},z=x_{3}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">טנזור המטריקה</span><p>זהו טנזור המתאר את הצורה של המשטח ביחסות. מוגדר כך שמתקיים:
+<span>$$\mathrm{d}s ^{2}=\eta_{\alpha \beta}\mathrm{d}x^{\alpha}\mathrm{d}x^{\beta}$$</span>
+כלומר במקרה שלנו נקבל כי <span>\(\eta_{00}=1\)</span> ו-<span>\(\eta_{11}=\eta_{22}=\eta_{33}=-1\)</span>.</p>
+</div>
+<div class="remark">
+<p>נקבל כי <span>\(\eta_{\alpha \beta}=\eta^{\alpha \beta}\)</span>. כלומר הטנזור הקורנטרא ווריאנטי שווה לטנזור הקו ווריאנטי.</p>
+</div>
+<div class="proposition"><span class="keyword">קונטרקציה/צמצום</span><p>מתקיים:<span>$$
+\eta_{\alpha\gamma}\eta^{\gamma\beta}\:=\:{\delta_{\alpha}}^{\beta}$$</span>
+כאשר <span>\({\delta_{\alpha}}^{\beta}\)</span> זה הדלתא של קרונקר ה-4 מימדית אשר שווה ל-0 לכל <span>\(\alpha \neq \beta\)</span> ו-<span>\({\delta_{\alpha}}^{\alpha}=1\)</span>.</p>
+</div>
+<div class="proposition">
+<p>ניתן לקבל את הווקטור הקו ווריאנטי המתאים לווקטור קונטרא ווריאנטי על ידי קונטרקציה עם הטנזור המטריקה:
+<span>$$x_{\alpha}=\eta_{\alpha \beta}x^{\beta}\qquad x^{\alpha}=\eta^{\alpha \beta}x_{\beta}$$</span>
+כאשר עבור הטנזור המטריקה שלנו נקבל כי רכיב הזמן ישאר זהה כאשר רכיבי המרחב יהפכו סימן. כלומר ניתן לכתוב:
+<span>$$A^{\alpha}\,=\,(A^{0},\,{\bf A}),\;\;\;\;\;\;A_{\alpha}\,=\,(A^{0},\,-{\bf A})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">המכפלה הסקלרית</span><p>תחת המטריקה שלנו נקבל:
+<span>$$B\,\cdot\,A\,\equiv\,B_{\alpha}A^{\alpha}\,=\,B^{0}A^{0}\,-\,{\bf\beta}\cdot{\bf\beta}{\bf\alpha}$$</span></p>
+</div>
+<div class="proposition">
+<p>הנגזרת לפי משתנה קונטרא ווריאנטי יהיה אופרטור קו ווריאנטי (כלומר משנה ווקטור באופן הפוך לטרנסורמציה). זאת כי:
+<span>$$\frac{\partial}{\partial x^{\prime}{}^{\alpha}}=\frac{\partial x^{\beta}}{\partial x^{\prime}{}^{\alpha}}\,\frac{\partial}{\partial x^{\beta}}$$</span>
+לפי כלל השרשרת וזה מתאים להגדרה של ווקטור קו-ווריאנטי.</p>
+</div>
+<div class="definition"><span class="keyword">4 גרדיאנט</span><p><span>$$\partial^{\alpha}\equiv\frac{\partial}{\partial x_{\alpha}}=\left(\frac{\partial}{\partial x^{0}},-\bar\nabla\right)\qquad \partial_{\alpha}\equiv\frac{\partial}{\partial x^{\alpha}}=\,\left(\frac{\partial}{\partial x^{0}}\,,\,{\bar{\nabla}}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>ה-4 דיברגנט המוגדר ע"י:
+<span>$$\partial^{\alpha}\!{ A}_{\alpha}\,=\,\partial_{\alpha}{A}^{\alpha}\,=\,{\frac{\partial{\cal A}^{0}}{\partial x^{0}}}\,+\,{\bf\nabla\cdot A}$$</span>
+הוא גודל אינווריאנטי</p>
+</div>
+<div class="definition"><span class="keyword">דלמברטיאן</span><p><span>$$\square^{2}=\partial_{\alpha}\partial^{\alpha}\,=\,\frac{\partial^{2}}{\partial x^{02}}\,-\,\nabla^{2}$$</span>
+כאשר נשים לב כי זה אופרטור של משוואת הגלים.</p>
+</div>
+<div class="example">
+<p>נחשב מכפלה טנזורית בעזרת מכפלת מטריצות.
+נניח 
+<span>$$T^{\mu\nu}=\left[\begin{array}{c c c c}{{-1}}&amp;{{3}}&amp;{{{{{7}}}}}&amp;{{-6}}\\ {{2}}&amp;{{{{{5}}}}}&amp;{{0}}&amp;{{1}}\\ {{4}}&amp;{{-1}}&amp;{{1}}&amp;{{{{{5}}}}}\\ {{8}}&amp;{{2}}&amp;{{0}}&amp;{{1}}\end{array}\right]$$</span>
+כדי לחשב בעזרת מכפלת מטריצות, נרצה למקם את האידקסים הקרובים אחד לשני. לדוגמא:
+<span>$$ {T_\mu}^\nu=\eta_{\mu\lambda}T^{\lambda\nu}=\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;-3&amp;-7&amp;6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+או לחלופין:
+<span>$$ {T^\mu}_\nu=T^{\mu\lambda}\eta_{\lambda\nu}=\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;3&amp;7&amp;-6\\-2&amp;5&amp;0&amp;1\\-4&amp;-1&amp;1&amp;5\\-8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+או אם נרצה להוריד את שתי האינדקסים:
+<span>$$ {T}_{\gamma\nu}=\eta _{\gamma \mu}T^{\mu\lambda}\eta_{\lambda\nu}=\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;3&amp;7&amp;-6\\2&amp;5&amp;0&amp;1\\4&amp;-1&amp;1&amp;5\\8&amp;2&amp;0&amp;1\end{bmatrix}\begin{bmatrix}-1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{bmatrix}=\begin{bmatrix}1&amp;-3&amp;-7&amp;6\\-2&amp;5&amp;0&amp;1\\-4&amp;-1&amp;1&amp;5\\-8&amp;2&amp;0&amp;1\end{bmatrix}$$</span>
+כמובן שעדיין מתקיים <span>\(\eta_{\mu \lambda}T^{\lambda \nu}=T^{\lambda \nu}\eta_{\mu \lambda}\)</span> - זה רק טריק שנדע את סדר מכפלת המטריצות - כיוון שלהכפיל את זה ככה שקול להגדרה של כפל מטריצות. טריק זה רק יעבוד לטנזורים מסדר שני ומטה. עבור טנזורים מסדר גבוהה יותר נדרש לכתוב במפורש את הסכום. לדוגמא:
+<span>$$\eta_{\lambda \nu}T^{\mu \lambda}=\eta_{0\nu}T^{\mu 0}+\eta_{1\nu}T^{\mu 1}+\eta_{2 \nu}T^{\mu 2}+\eta_{3 \nu} T^{\mu 3}$$</span>
+ולחשב את הסכום.</p>
+</div>
+<h2>הצגה מטריציונית של טרנספורמציית לורנץ</h2>
+<p>אנו יודעים כי טרנספורמציית לורנץ זה אוסף כל הטרנספורמציות אשר משמרות את האינטרוואל. הגדרה אלטרנטיבית זה אוסף כל המטריצות שמקיימות:
+<span>$$\Lambda^{T} \eta \Lambda=\eta$$</span>
+כאשר <span>\(\eta\)</span> זה המטריצה המייצגת את טנזור המטריקה ומוגדרת <span>\(\eta=\mathrm{diag}(1,-1,-1,-1)\)</span>.</p>
+<div class="definition"><span class="keyword">טרנספורמציית לורנץ עבור מהירות מרחבית כללית</span><p><span>$$\Lambda=  \begin{pmatrix}\gamma &amp; -\gamma\frac{v_{x}}{c} &amp; -\gamma\frac{v_{y}}{c} &amp; -\gamma\frac{v_{z}}{c} \\ -\gamma\frac{v_{x}}{c} &amp; 1+(\gamma-1)\frac{v_{x}^2}{v^2} &amp; (\gamma-1)\frac{v_{x}v_{y}}{v^2} &amp; (\gamma-1)\frac{v_{x}v_{z}}{v^2} \\-\gamma\frac{v_{y}}{c} &amp; (\gamma-1)\frac{v_{x}v_{y}}{v^2} &amp; 1+(\gamma-1)\frac{v_{y}^2}{v^2} &amp; (\gamma-1)\frac{v_{z}v_{y}}{v^2} \\-\gamma\frac{v_{z}}{c} &amp; (\gamma-1)\frac{v_{x}v_{z}}{v^2} &amp; (\gamma-1)\frac{v_{z}v_{y}}{v^2} &amp; 1+(\gamma-1)\frac{v_{z}^2}{v^2}
+  \end{pmatrix}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טרנספורמציית לורנץ חד מימדית</span><p><span>$$\Lambda=  \begin{pmatrix}\gamma &amp; -\beta\gamma &amp; 0 &amp; 0 \\-\beta\gamma &amp; \gamma &amp; 0 &amp; 0 \\0 &amp; 0 &amp; 1 &amp; 0 \\0 &amp; 0 &amp; 0 &amp; 1  \end{pmatrix}$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לחשוב על <span>\(\Lambda\)</span> בתור אוסף כל המעברי בסיס ה"פיזיקליים".</p>
+</div>
+<p>ניתן לכתוב מעבר בסיס עם טרנספורמציית לורנץ גם בעזרת הסכם הסכימה ולקבל:
+<span>$$x^{\mu^{'}}=\Lambda_{\alpha}^{\mu^{'}}x^{\alpha}$$</span></p>
+<p>מספר תכונות של טרנספורמציית לורנץ:
+<span>$$\begin{gather} \det\left( \Lambda \right)=\pm 1\qquad \Lambda^T\eta \Lambda=\eta \qquad  \Lambda ^{-1}=\eta \Lambda^T \eta\\ \gamma=\frac{1}{\sqrt{ 1-\beta^2 }} \qquad 1-\beta^2=\frac{1}{\gamma^2}  \qquad \beta \gamma = \sqrt{ 1-\gamma^2 } \end{gather}$$</span></p>
+<h3>עקרונות היחסות</h3>
+<div class="definition"><span class="keyword">עקרונות יחסות</span><ol>
+<li>
+<p>חוקי הפיזיקה אינם תלויים בבחירת מערכת ייחוס. </p>
+</li>
+<li>
+<p>מהירות האור היא קבועה בכל מערכות הייחוס. </p>
+</li>
+</ol>
+</div>
+<p>ההגדרה השנייה היא תוצאה ניסויונית שנובעת בין היתר מחוקי מקסוול אשר אינם תלויות במערכת ייחוס וניסוי מיקלסון-מורילי.</p>
+<div class="proposition">
+<p>טרנספורמציית לורנץ הטרנספורמצייה היחידה שמקיימת את העקרונות של יחסות.</p>
+</div>
+<p>כעת נגדיר מחדש את המושגים הרלוונטים של טנזורים עבור יחסות כללית:</p>
+<div class="definition"><span class="keyword">טנזור</span><p>גודל אשר טרנספורמצייה לורנץ מעבירה אותו בין מערכות ייחוס. טרנספורמציית לורנץ מתארת כלל מעבר גזיר ולכן ניתן להגדיר טנזור באמצעותו.</p>
+</div>
+<div class="remark">
+<p>זהו תכונה פיזיקלית של גודל, לא מתמטית.</p>
+</div>
+<div class="definition"><span class="keyword">וקטור קונטרא-וואירנטי</span><p>וקטור שעובר טרנספורמציה באופן ישר עם המטריצה, כלומר:
+<span>$$x^{\mu^{'}}=\Lambda_{\alpha}^{\mu^{'}}x^{\alpha}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ווקטור קו-ווריאנטי</span><p>ווקטור שעבור טרנספורציה בצורה הפוכה עם המטריצת מעבר בסיס.
+<span>$$x_{\mu^{'}}=\left( \Lambda ^{-1} \right)^{\alpha}_{\mu^{'}}x_{\alpha}$$</span></p>
+</div>
+<p>כאשר נשים לב כי ווקטור קו ווריאנטי מסומן עם אינדס תחתון, ווקטור קונטרא-ווריאנטי באינדקס תחתון.</p>
+<div class="remark">
+<p>גם ווקטור קו ווריאנטי וגם ווקטור קונטרא ווריאנטי הם טנזורים, ולכן מייצגים גודל פיזיקלי אשר עובר טרנספורמציית לורנץ. וכן אם רוצים לייצג גודל פיזיקלי אשר עובר טרנספורמציה לורנץ ע"י ווקטור, נדרש לראות איך משתנה ביחס לבסיס כדי לדעם אם צריך להיות מיוצג ע"י ווקטור קו וריאנטי או קונטרא ווריאנטי.</p>
+</div>
+<div class="proposition"><span class="keyword">טרנספורמציה של מהירות</span><p>נניח ויש לנו מערכת <span>\(\mathcal{O}'\)</span> הנעה במהירות <span>\(v\)</span> ביחס למערכת <span>\(\mathcal{O}\)</span> וכן מערכת <span>\(\mathcal{O''}\)</span> הנעה במהירות <span>\(u\)</span> ביחס למערכת <span>\(\mathcal{O'}\)</span>. אזי המהירות במערכת <span>\(\mathcal{O''}\)</span> ביחס למערכת <span>\(\mathcal{O}\)</span> תהיה:
+<span>$$w=\frac{u+v}{1+\frac{uv}{c^{2}}}$$</span></p>
+</div>
+<div class="proof">
+<p>מטרנספורמטיית לורנץ נקבל כי היחס בין הקורדינטות של <span>\(\mathcal{O}\)</span> ל-<span>\(\mathcal{O'}\)</span> יהיו:
+<span>$$x'= \frac{x-vt}{\sqrt{ 1-\frac{v^2}{c^2} }}\qquad t'=\frac{t-\frac{v}{c^2}x}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span>
+ולכן:
+<span>$$x=\frac{x'+vt'}{\sqrt{ 1-\frac{v^2}{c^2} }}\qquad t = \frac{t'+\frac{v}{c^2}x'}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span>
+כעת באופן דומה הקשר בין המיקום של <span>\(\mathcal{O'}\)</span> ל-<span>\(\mathcal{O''}\)</span> יהיה:
+<span>$$x'' = \frac{x' - ut'}{\sqrt{ 1-\frac{u^2}{c^2} }}\qquad t'' = \frac{t' - \frac{u}{c^2}x'}{\sqrt{ 1-\frac{u^2}{c^2} }}$$</span>
+נציב את הקורדינטה של <span>\(x',t'\)</span> ונקבל:
+<span>$$x''  = \frac{\frac{x-vt}{\sqrt{ 1-\frac{v^2}{c^2} }}-\frac{u\left( t-\frac{v}{c^2}x \right)}{\sqrt{ 1-\frac{v^2}{c^2} }}}{\sqrt{ 1-\frac{u^2}{c^2} }}=\frac{x-vt - ut-\frac{vu}{c^2}x}{\sqrt{ 1-\frac{u^2}{c^2} }\sqrt{ 1-\frac{v^2}{c^2} }} $$</span>
+כאשר במערכת <span>\(\mathcal{O''}\)</span>, מתקיים <span>\(x'' =0\)</span>. לכן נקבל:
+<span>$$x-vt-ut-\frac{v}{c^2}x=0\implies x=\underbrace{ \frac{u+v}{1+\frac{uv}{c^2}} }_{ w }t$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 ווקטור</span><p>ביחסות לווקטור קונטרא ווריאנטי ניתן גם לקרוא בשם 4 ווקטור. כלומר זהו ווקטור שתחת שתחת טרנספומציית לורנץ מקיים:
+<span>$$\tilde{V}^\mu=\Lambda^\mu _{\nu}V^\nu$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תת החבורה של לורנץ</span><p>כל הטרנספורמציות אשר מקיימות <span>\(\det \Lambda=1\)</span> וגם <span>\(\Lambda_{0}^0&gt;0\)</span>.</p>
+</div>
+<p>כאשר יש משמעיות פיזיקליות ומעניינות עבור המקרים שאינם בתת חבורה זו, נתעסק כרגע רק בתת חבורה הזו.</p>
+<div class="proposition">
+<p>גזירה לפי רכיב קו וורינטי נותן אופרטור קורנטרא ווריאנטי, וכן גזירה לפי רכיב קו וונטרא ווריאנטי נותן אופרטור קו ווריאנטי. </p>
+</div><h2 id='Electrodynamics_2_3'>גדלים שמורים</h2>
+ <div class="definition"><span class="keyword">סקלר לורנץ</span><p>סקלר אשר נשמר בין מערכות ייחוס. נקרא לעיתים 4-סקלר</p>
+</div>
+<div class="proposition">
+<p>האינטרוואל הוא סקלר לורנץ. כלומר הגודל קבוע בין כל המערכות ייחוס.</p>
+</div>
+<div class="definition"><span class="keyword">זמן עצמי</span><p>הזמן במערכת של החלקיק.</p>
+</div>
+<p>הביטוי לזמן עצמי נובע באופן מיידי מהאינטרוואל. 
+<span>$$ds^2 =c^2d\tau^2=c^2dt^2-dx^2-dy^2-dz^2\implies d\tau=dt\sqrt{ 1-\frac{v^2}{c^2} }=\frac{dt}{\gamma}$$</span></p>
+<div class="definition"><span class="keyword">מסה מנוחה/מסה עצמית</span><p>המסה של הגוף במערכת שלו.</p>
+</div>
+<div class="proposition">
+<p>4 דלתא זה סקלר לורנץ. כלומר <span>\(\delta^{(4)}\left( \vec{r} \right)\)</span> יהיה זהה בכל המערכות ייחוס. </p>
+</div>
+<h2>הארבע ווקטורים</h2>
+<div class="definition"><span class="keyword">אירוע</span><p>זהו ארבע ווקטור המתאר מיקום. ווקטור מהצורה:
+<span>$$\vec{u}=\begin{pmatrix}ct \\x \\y \\z
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>מכפלה של גודל אינווריאנטי ב-4 ווקטור זה 4 ווקטור.</p>
+</div>
+<div class="definition"><span class="keyword">4 מהירות</span><p>חלקיק הנע במהירות <span>\(v&lt;c\)</span> ניתן להגדיר 4-מהירות:
+<span>$$u^\mu = \frac{dx^\mu}{ds}=\frac{dx^\mu}{cd\tau} $$</span>
+כאשר <span>\(ds\)</span> זה האינטרוואל, ו-<span>\(d\tau\)</span> זה הזמן העצמי - הזמן שהחלקיק מודד במערכת שלו. </p>
+</div>
+<p>אנו יודעים כי השלוש רכיבי המיקום מיצגים סוג של מהירות, אבל מה מייצג הרכיב של הזמן?
+מתקיים:
+<span>$$u^0=\frac{cdt}{cd\tau}=\frac{dt}{d\tau}=\gamma=\frac{1}{\sqrt{ 1+\frac{v^2}{c^2} }}$$</span>
+כאשר הרכיבים המרחביים מקיימים:
+<span>$$u^i=\frac{V^i}{\sqrt{ 1-\frac{v^2}{c^2} }}$$</span></p>
+<div class="definition"><span class="keyword">4 תנע</span><p>עבור חלקיק עם מסה מנוחה <span>\(m_{0}\)</span> נקבל
+<span>$$p=\begin{pmatrix}p^0\\p^1\\p^2\\p^3\end{pmatrix}=\begin{pmatrix}\frac{E}{c}  \\p_{x} \\p_{y} \\p_{z}
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>זה שווה למהירות המוכללת כפול המסה, בדומה לתנע הקלאסי. </p>
+</div>
+<div class="remark">
+<p>ניתן לחלופין לפתח את ה-4 תנע בתור התנע הצמוד קנוני של המהירות המוכללת של הלגרנג'יאן היחסותי של חלקיק חופשי. התוצאה תהיה זהה.</p>
+</div>
+<div class="definition"><span class="keyword">4-כוח</span><p>הנגזרת של התנע המוכלל לפי הזמן העצמי.</p>
+</div>
+<div class="proposition">
+<p>הנורמה של 4 ווקטור נשמר תחת טרנספורמציית לורנץ.</p>
+</div>
+<div class="proof">
+<p>יהי מערכות יחוס <span>\(\mathcal{O}\)</span> ו-<span>\(\mathcal{O}'\)</span> כאשר נסמן את הרכיבים במערכת <span>\(\mathcal{O'}\)</span> עם <span>\(\prime\)</span>. יהי <span>\(V^\mu\)</span> 4 ווקטור. נזכור כי ניתן לעבור מערכות יחוס בעזרת מטריצת לורנץ בצורה הבא:
+<span>$$V^{\prime\mu}=\Lambda_{\;\nu}^{\mu}V^{\nu}$$</span>
+כאשר הנורמה של ה-4 ווקטור במערכת <span>\(\mathcal{O'}\)</span> תהיה:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\mu\nu}V^{\prime\mu}V^{\prime\nu}$$</span>
+כאשר נציב  <span>\(V^{\prime\mu}=\Lambda_{\alpha}^{\mu}V^{\alpha}\)</span> ו-<span>\(V^{\prime\nu}=\Lambda_{\beta}^{\nu}V^{\beta}\)</span> ונקבל:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\mu\nu}(\Lambda_{\alpha}^{\mu}V^{\alpha})(\Lambda_{\beta}^{\nu}V^{\beta})$$</span>
+כאשר נשתמש ב-<span>\(\eta_{\mu\nu}\Lambda_{\;\alpha}^{\mu}\Lambda_{\;\beta}^{\nu}=\eta_{\alpha\beta}\)</span> ונקבל:
+<span>$$V^{\prime\mu}V_{\mu}^{\prime}=\eta_{\alpha\beta}V^{\alpha}V^{\beta}= V^\alpha V_{\alpha}$$</span></p>
+</div>
+<div class="remark">
+<p>זה נכון עבור יחסות פרטית, אך לא בהכרח יהיה נכון עבור יחסות כללית.</p>
+</div>
+<div class="corollary">
+<p>משימור נורמת הארבע מיקום(אירוע) נקבל כי האינטרוול נשמר</p>
+</div>
+<div class="corollary">
+<p>משימור ה-4 תנע נקבל:
+<span>$$E^{2}=(p\mathrm{c})^{2}+\left(m_{0}\mathrm{c}^{2}\right)^{2}$$</span>
+כאשר <span>\(p\)</span> זה הגודל של ה-3 תנע המוכר.</p>
+</div>
+<div class="corollary">
+<p>ניתן מביטוי זה לקבל כי התנע של גוף חסר מסה יהיה:
+<span>$$p=\frac{E}{c}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 כוח</span><p>כוח המוגדר בעזרת ה-4 תנע עם הזמן במוכלל בצורה הבאה:
+<span>$$\mathbf{F}={\frac{d\mathbf{P}}{d\tau}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">4 גרדיאנט</span><p>אופרטור דיפרנציאלי שמוגדר בצורה הבאה:
+<span>$${\frac{\partial}{\partial X^{\mu}}}=(\partial_{0},\partial_{1},\partial_{2},\partial_{3})=(\partial_{0},\partial_{i})=\left({\frac{1}{c}}{\frac{\partial}{\partial t}},{\vec{\nabla}}\right)=\left({\frac{\partial_{t}}{c}},{\vec{\nabla}}\right)=\left({\frac{\partial_{t}}{c}},\partial_{x},\partial_{y},\partial_{z}\right)=\partial_{\mu}$$</span></p>
+</div>
+<div class="proposition">
+<p>הווקטור הקונטרא ווריאנטי שמתאים ל-4 גרדיאנט יהיה:
+<span>$$\partial=\partial^{\alpha}=\eta^{\alpha\beta}\partial_{\beta}=\left(\partial^{0},\partial^{1},\partial^{2},\partial^{3}\right)=\left(\partial^{0},\partial^{i}\right)=\left(\frac{1}{c}\frac{\partial}{\partial t},-\vec{\nabla}\right)=\left(\frac{\partial_{t}}{c},-\vec{\nabla}\right)=\left(\frac{\partial_{t}}{c},-\partial_{z},-\partial_{y},-\partial_{z}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>הטנזור לוי-צוייטה ה-4 מימדי <span>\(\varepsilon^{\mu \nu \alpha \beta}\)</span> הוא אכן 4 טנזור תחת טרנספורמציית לורנץ.</p>
+</div>
+<div class="proof">
+<p>אכן, נניח כי זהו אובייקט במערכת <span>\(\mathcal{S}\)</span> אז כדי לקבל את הערכים שלו במערכת <span>\(S'\)</span> נדרש לורנץ:
+<span>$$f\varepsilon^{\mu_{1}\mu_{2}\mu_{3}\mu_{4}}=\Lambda^{\mu_{1}}_{\;\nu_{1}}\Lambda^{\mu_{2}}_{\;\nu_{2}}\Lambda^{\mu_{3}}_{\;\nu_{3}}\Lambda^{\mu_{4}}_{\; \nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}$$</span>
+נשים לב כי להחליף בין <span>\(\mu_{i},\mu_{j}\)</span> זה שקול ללהחליף בין <span>\(\nu_{i},\nu_{j}\)</span> אשר שקול ללבצע חילוף בטנזור לווי ציוויטה, אשר שקול ללהכפיל ב-<span>\((-1)\)</span>. 
+כדי לקבוע <span>\(f\)</span> נציב <span>\(\left( \mu_{1},\mu_{2},\mu_{3},\mu_{4} \right)=(0,1,2,3)\)</span>. נקבל:
+<span>$$f=\Lambda^0_{\;\nu_{1}}\Lambda^1_{\;\nu_{2}} \Lambda^2_{\;\nu_{3}}\Lambda^3_{\;\nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}=\det\left( \Lambda\right)=1$$</span>
+כאשר הסכימה זה למעשה נוסחאת ליבניץ לדטרמיננטה. וכיוון שקיבלנו 1 זה אכן עובר בצורה הרצויה תחת טרנספורמציית לורנץ ולכן טנזור.</p>
+</div>
+<div class="proposition">
+<p>מהטענה הראשונה נצפה כי חוקי הפיזיקה יהיו מנוסחים ע"י גדלים שמקיימים את טרנספורמציית לורנץ, כלומר ע"י סקלרי לורנץ, 4 ווקטורים ו-4 טנזורים.</p>
+</div><h2 id='Electrodynamics_2_4'>מערכות דמויי זמן ודמויי מקום</h2>
+ <div class="definition"><span class="keyword">מערכת דמויית מרחב</span><p>מערכת שבו האינטרוואל קטנה מ-0. כלומר <span>\(\Delta s&lt;0\)</span></p>
+</div>
+<div class="proposition">
+<p>במערכות דמוי מרחב עבור כל שתי אירועיים במערכת <span>\(S\)</span> קיים מערכת <span>\(S'\)</span> שבו התרכשו באותו זמן.</p>
+</div>
+<div class="proof">
+<p>מתקיים הקשר הבא:
+<span>$$\begin{pmatrix}x'_{A} \\ct'_{A} \end{pmatrix}=\begin{pmatrix}\gamma &amp; \frac{v}{c}\gamma \\\frac{v}{c}\gamma &amp; \gamma\end{pmatrix}\begin{pmatrix}x_{A}  \\ct_{A}\end{pmatrix}\iff \begin{cases}x'=\gamma(x+vt) \\t'=\gamma\left( t+\frac{v}{c^2}x \right)
+\end{cases}$$</span>
+נציב <span>\(t'_{A}=0\)</span>. נקבל:
+<span>$$\begin{gather}t_{A}+\frac{v}{c^2}x_{A}=0 \\v=-\frac{t_{A}}{x_{A}}\cdot c^2 = - \left( \frac{ct_{A}}{x_{A}} \right)\cdot c &lt;c
+\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מערכת דמויית זמן</span><p>מערכת שבה האינטרוואל גדול מ-0. כלומר <span>\(\Delta s&gt;0\)</span></p>
+</div>
+<div class="proposition">
+<p>עבור שני מאורעות דמוי זמן ניתן למצוא מערכת יחס בה מאורעות אלה מתרשים באותו מקום. </p>
+</div>
+<div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="304.367" height="297.827" viewBox="0 0 304.367 297.827">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 3.328125 -3.015625 C 3.390625 -3.265625 3.625 -4.1875 4.3125 -4.1875 C 4.359375 -4.1875 4.609375 -4.1875 4.8125 -4.0625 C 4.53125 -4 4.34375 -3.765625 4.34375 -3.515625 C 4.34375 -3.359375 4.453125 -3.171875 4.71875 -3.171875 C 4.9375 -3.171875 5.25 -3.34375 5.25 -3.75 C 5.25 -4.265625 4.671875 -4.40625 4.328125 -4.40625 C 3.75 -4.40625 3.40625 -3.875 3.28125 -3.65625 C 3.03125 -4.3125 2.5 -4.40625 2.203125 -4.40625 C 1.171875 -4.40625 0.59375 -3.125 0.59375 -2.875 C 0.59375 -2.765625 0.703125 -2.765625 0.71875 -2.765625 C 0.796875 -2.765625 0.828125 -2.796875 0.84375 -2.875 C 1.1875 -3.9375 1.84375 -4.1875 2.1875 -4.1875 C 2.375 -4.1875 2.71875 -4.09375 2.71875 -3.515625 C 2.71875 -3.203125 2.546875 -2.546875 2.1875 -1.140625 C 2.03125 -0.53125 1.671875 -0.109375 1.234375 -0.109375 C 1.171875 -0.109375 0.953125 -0.109375 0.734375 -0.234375 C 0.984375 -0.296875 1.203125 -0.5 1.203125 -0.78125 C 1.203125 -1.046875 0.984375 -1.125 0.84375 -1.125 C 0.53125 -1.125 0.296875 -0.875 0.296875 -0.546875 C 0.296875 -0.09375 0.78125 0.109375 1.21875 0.109375 C 1.890625 0.109375 2.25 -0.59375 2.265625 -0.640625 C 2.390625 -0.28125 2.75 0.109375 3.34375 0.109375 C 4.375 0.109375 4.9375 -1.171875 4.9375 -1.421875 C 4.9375 -1.53125 4.859375 -1.53125 4.828125 -1.53125 C 4.734375 -1.53125 4.71875 -1.484375 4.6875 -1.421875 C 4.359375 -0.34375 3.6875 -0.109375 3.375 -0.109375 C 2.984375 -0.109375 2.828125 -0.421875 2.828125 -0.765625 C 2.828125 -0.984375 2.875 -1.203125 2.984375 -1.640625 Z M 3.328125 -3.015625 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 2.046875 -3.984375 L 2.984375 -3.984375 C 3.1875 -3.984375 3.296875 -3.984375 3.296875 -4.1875 C 3.296875 -4.296875 3.1875 -4.296875 3.015625 -4.296875 L 2.140625 -4.296875 C 2.5 -5.71875 2.546875 -5.90625 2.546875 -5.96875 C 2.546875 -6.140625 2.421875 -6.234375 2.25 -6.234375 C 2.21875 -6.234375 1.9375 -6.234375 1.859375 -5.875 L 1.46875 -4.296875 L 0.53125 -4.296875 C 0.328125 -4.296875 0.234375 -4.296875 0.234375 -4.109375 C 0.234375 -3.984375 0.3125 -3.984375 0.515625 -3.984375 L 1.390625 -3.984375 C 0.671875 -1.15625 0.625 -0.984375 0.625 -0.8125 C 0.625 -0.265625 1 0.109375 1.546875 0.109375 C 2.5625 0.109375 3.125 -1.34375 3.125 -1.421875 C 3.125 -1.53125 3.046875 -1.53125 3.015625 -1.53125 C 2.921875 -1.53125 2.90625 -1.5 2.859375 -1.390625 C 2.4375 -0.34375 1.90625 -0.109375 1.5625 -0.109375 C 1.359375 -0.109375 1.25 -0.234375 1.25 -0.5625 C 1.25 -0.8125 1.28125 -0.875 1.3125 -1.046875 Z M 2.046875 -3.984375 "/>
+</g>
+</g>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 141 13 L 144 13 L 144 297.828125 L 141 297.828125 Z M 141 13 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 5 L 293 5 L 293 297.828125 L 0 297.828125 Z M 0 5 "/>
+</clipPath>
+</defs>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="0.2" d="M 142.527344 155.296875 L 281.429688 16.398438 L 3.628906 16.398438 L 142.527344 155.296875 L 3.628906 294.195312 L 281.429688 294.195312 L 142.527344 155.296875 "/>
+<path fill="none" stroke-width="0.19925" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(84.999084%, 84.999084%, 84.999084%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 -113.385594 L 138.900688 -113.385594 M -138.900094 -85.041844 L 138.900688 -85.041844 M -138.900094 -56.694187 L 138.900688 -56.694187 M -138.900094 -28.346531 L 138.900688 -28.346531 M -138.900094 0.001125 L 138.900688 0.001125 M -138.900094 28.344875 L 138.900688 28.344875 M -138.900094 56.692531 L 138.900688 56.692531 M -138.900094 85.040188 L 138.900688 85.040188 M -138.900094 113.387844 L 138.900688 113.387844 M -113.388375 -138.897312 L -113.388375 138.899563 M -85.040719 -138.897312 L -85.040719 138.899563 M -56.693062 -138.897312 L -56.693062 138.899563 M -28.345406 -138.897312 L -28.345406 138.899563 M -0.00165625 -138.897312 L -0.00165625 138.899563 M 28.346 -138.897312 L 28.346 138.899563 M 56.693656 -138.897312 L 56.693656 138.899563 M 85.041313 -138.897312 L 85.041313 138.899563 M 113.388969 -138.897312 L 113.388969 138.899563 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -141.732125 0.001125 L 140.529594 0.001125 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.272374 3.028469 C -2.080968 1.89175 0.00106375 0.188625 0.56747 0.001125 C 0.00106375 -0.190281 -2.080968 -1.893406 -2.272374 -3.030125 " transform="matrix(1, 0, 0, -1, 283.05753, 155.298)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="295.353" y="157.442"/>
+</g>
+<g clip-path="url(#clip-0)">
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00165625 -141.73325 L -0.00165625 140.528469 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+</g>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.269593 3.029 C -2.082093 1.892281 -0.00006125 0.189156 0.566345 0.00165625 C -0.00006125 -0.18975 -2.082093 -1.892875 -2.269593 -3.029594 " transform="matrix(0, -1, -1, 0, 142.529, 14.76947)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="140.73" y="9.448"/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill="none" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 -138.897312 L 138.900688 138.899563 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 138.899563 L 138.900688 -138.897312 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+</g>
+</svg>
+</div>
+<p>כאשר האיזור הצבוע נקרא הקונוס אור וזה אוסף כל האירועים אשר הם דמויי זמן. חלקיק יכול להשפיע על האיזורים שנמצאים בקונוס הזמן החיובי ולהיות מושפע מאירועים מהקונוס זמן השלילי.</p>
+<div class="definition"><span class="keyword">אורך</span><p>המרחק בין שתי נקודות כאשר הזמן קבוע.</p>
+</div>
+<div class="definition"><span class="keyword">התקצרות האורך</span><p>במעבר בין מערכות יחוס, האורך מתקצר.</p>
+</div>
+<div class="example"><span class="keyword">התקצרות האורך</span><p>נניח שסרגל באורך <span>\(l_{0}\)</span> במערכת <span>\(S'\)</span> ומודדים את אורך הסרגל במערכת <span>\(S\)</span>. 
+הקשר בין קצוות הסרגל בשתי המערכות נתון ע"י:
+<span>$$x_{1}'=\gamma(x_{1}+vt);x_{2}'=\gamma(x_{2}+vt)$$</span>
+כאשר במערכת <span>\(S\)</span> מקפידים להסתכל על הקצוות באותו רגע זמן(הגדרת המדידה של האורך. נקבל:
+<span>$$l_{0}=|x_{1}'-x_{2}'|=\gamma|\underbrace{ x_{1}-x_{2} }_{ l }|\implies l=\frac{1}{\gamma}l_{0}&lt;l_{0}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">התקצרות הזמן</span><p>הזמן מתקדם בקצב שונה בין מערכות יחוס שונות.</p>
+</div>
+<div class="example">
+<p>עבור חלקיק במנוחה במערכת <span>\(S\)</span>, החלקיקי מתפרק תוך זמן <span>\(d\tau\)</span>. 
+במערכת <span>\(S\)</span> אינטרוואל בין שהי המואורעות(יש/אין חלקיק בראשית) נתון ע"י:
+<span>$$ds^2=(cdt)^2 - { \left( d\vec{x} \right)^2 }=\left( cd\tau \right)^2$$</span>
+במערכת <span>\(S'\)</span> אותו אינטרוול נתון ע"י:
+<span>$$c^2dt^2=ds^2=ds'^2=\left( c\;dt' \right)^2-(cx')^2=c^2dt'^2\left( 1-\left( \frac{dx'}{cdt'} \right)^2 \right)=c^2dt'^2\left( 1-\frac{v^2}{c^2} \right)=c^2 \frac{dt'^2}{\gamma ^2}$$</span>
+ולכן <span>\(dt=\frac{dt'}{\gamma}\)</span> ולכן <span>\(dt'&gt;d\tau\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קו עולם</span><p>המסלול שחלקיק מסרטט בעולם 4 מימדי.</p>
+</div><h1 id='Electrodynamics_3'>אלקטרומגנטיות ויחסות</h1>
+<h2 id='Electrodynamics_3_1'>הגדרות בסיסיות</h2>
+ <div class="definition"><span class="keyword">4 פוטנציאל</span><p>4 ווקטור המייצג את הפוטנציאל של החלקיק. מוגדר ביחידות <span>\(cgs\)</span> ע"י: 
+<span>$$A^{\alpha}=(\phi,\vec{A})$$</span>
+כאשר <span>\(\vec{A}\)</span> זה הפוטנציאל המגנטי ו-<span>\(\phi\)</span> זה הפוטנציאל החשמלי.</p>
+</div>
+<div class="definition"><span class="keyword">אינווריאטיות תחת טרנספורמציית כיול</span><p>גודל הוא אינווריאנטי תחת טרנספורמציית כיול אם עבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu }f\)</span> נקבל כי לא משתנה.</p>
+</div>
+<div class="remark">
+<p>נצפה באופן כללי כי כל חוקי הפיזיקה יהיו אינווריאנטים תחת טרנספורמציית כיול.</p>
+</div>
+<div class="definition"><span class="keyword">השדה החשמלי</span><p><span>$${\vec{E}}=-{\bar{\nabla}}\varphi-{\frac{1}{c}}{\frac{\partial{\vec{A}}}{\partial t}}=-\bar{\nabla} A^0 - \frac{1}{c}\frac{\partial \vec{A}}{\partial t} $$</span></p>
+</div>
+<div class="definition"><span class="keyword">השדה המגנטי</span><p><span>$$ {\vec{B}}={\bar{\nabla}}\times{\vec{A}}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טנזור השדה האלקטרומגנטי</span><p><span>$$F_{\mu \nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}=\frac{\partial A_{\nu}}{\partial x^\mu}-\frac{\partial A_{\mu}}{\partial x^\nu} $$</span></p>
+</div>
+<p>כאשר נשים לב כי זה דומה לרוטור של וקטור:
+<span>$$\begin{gather}\left( \bar{\nabla} \times \vec{A} \right)_{i}=\varepsilon_{ikj}\partial_{j}A_{k}  \\\left( \bar{\nabla} \times \vec{A} \right)_{1}=\varepsilon_{123} \partial_{2}A_{3}+\varepsilon_{123}\partial_{3}A_{2}=\partial_{2}A_{3}-\partial_{3}A_{2}
+\end{gather}$$</span></p>
+<div class="proposition">
+<p>הטנזור השדה האלקטרומגנטי <span>\(F_{\mu \nu}\)</span> הוא טנזור אנטי סמטרי. כלומר:
+<span>$$F_{\mu \nu}=-F_{\nu \mu}$$</span></p>
+</div>
+<div class="remark">
+<p>מרחב הפונקציות האנטי-סימטריות הוא מימיד 6, ולכן יש 6 דרגות חופש לטנזור השדה האלקטרומגנטי. וכן 3 מהם נותנים מידע על השדה המגנטי, ו-3 על השדה החשמלי. לכן אין מידע מיותר בטנזור השדה האלקטרו-מגנטי.</p>
+</div>
+<div class="proposition">
+<p>טנזור השדה האלקטרומגנטי אינווריאנטי תחת טרנספורמציית כיול
+כלומר נקבל עבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu }f\)</span>:
+<span>$$F_{\mu \nu}\mapsto \partial_{\mu}\left( A_{\nu}+\partial_{\nu}f \right)-\partial_{\nu}\left( A_{\mu}+\partial_{\mu}f \right)=0$$</span>
+כאשר נקבל:
+<span>$$F_{\mu\nu}={\left[\begin{array}{c c c c}{0}&amp;{E_{x}}&amp;{E_{y}}&amp;{E_{z}}\\ {-E_{x}}&amp;{0}&amp;{-B_{z}}&amp;{B_{y}}\\ {-E_{y}}&amp;{B_{z}}&amp;{0}&amp;{-B_{x}}\\ {-E_{z}}&amp;{-B_{y}}&amp;{B_{x}}&amp;{0}\end{array}\right]}$$</span></p>
+</div>
+<p>בעזרת <span>\(F_{\mu \nu}\)</span> ניתן לכתוב את הזוג הראשון של משוואות מקסוואל באופן הבא:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}$$</span>
+כאשר <span>\(\varepsilon^{\mu \nu \alpha \beta}\)</span>  זה סימון לוי צ'יווטה ב-4 מימדים. <span>\(\varepsilon^{0123}=1\)</span>, <span>\(\varepsilon^{1023}=-1\)</span> ו-<span>\(\varepsilon^{1032}=1\)</span>.</p>
+<div class="proposition">
+<p>הטנזור לוי-צוייטה ה-4 מימדי <span>\(\varepsilon^{\mu \nu \alpha \beta}\)</span> הוא אכן 4 טנזור תחת טרנספורמציית לורנץ.</p>
+</div>
+<div class="proof">
+<p>אכן, נניח כי זהו אובייקט במערכת <span>\(\mathcal{S}\)</span> אז כדי לקבל את הערכים שלו במערכת <span>\(S'\)</span> נדרש לורנץ:
+<span>$$f\varepsilon^{\mu_{1}\mu_{2}\mu_{3}\mu_{4}}=\Lambda^{\mu_{1}}_{\;\nu_{1}}\Lambda^{\mu_{2}}_{\;\nu_{2}}\Lambda^{\mu_{3}}_{\;\nu_{3}}\Lambda^{\mu_{4}}_{\; \nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}$$</span>
+נשים לב כי להחליף בין <span>\(\mu_{i},\mu_{j}\)</span> זה שקול ללהחליף בין <span>\(\nu_{i},\nu_{j}\)</span> אשר שקול ללבצע חילוף בטנזור לווי ציוויטה, אשר שקול ללהכפיל ב-<span>\((-1)\)</span>. 
+כדי לקבוע <span>\(f\)</span> נציב <span>\(\left( \mu_{1},\mu_{2},\mu_{3},\mu_{4} \right)=(0,1,2,3)\)</span>. נקבל:
+<span>$$f=\Lambda^0_{\;\nu_{1}}\Lambda^1_{\;\nu_{2}} \Lambda^2_{\;\nu_{3}}\Lambda^3_{\;\nu_{4}}\varepsilon^{\nu_{1}\nu_{2}\nu_{3}\nu_{4}}=\det\left( \Lambda\right)=1$$</span>
+כאשר הסכימה זה למעשה נוסחאת ליבניץ לדטרמיננטה. וכיוון שקיבלנו 1 זה אכן עובר בצורה הרצויה תחת טרנספורמציית לורנץ ולכן טנזור.</p>
+</div>
+<div class="definition"><span class="keyword">4-זרם</span><p><span>$$J^\mu\left( x^\alpha \right)=J^\mu\left( t,\vec{x} \right)=\begin{pmatrix}c\rho \\\vec{J}
+\end{pmatrix}$$</span></p>
+</div>
+<div class="proposition">
+<p>הצפיפות זרם <span>\(J^\mu\)</span> הוא 4 ווקטור קונטרא-ווריאנטי.</p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$J^\mu\left( x^\alpha \right)=\sum_{n}\int \mathrm{d}\tilde{x}^0e_{n}\underbrace{ \delta^{(3)}\left( \vec{x}-\vec{x}_{n}\left( \tilde{x}^0 \right) \right)\delta\left( x^0-\tilde{x}^0 \right) }_{ \delta^{(4)}\left( x^\alpha-x_{n}^\alpha\left( \tilde{x}^0 \right) \right) } \frac{\mathrm{d}x_{n}^\mu\left( \tilde{x}^0 \right)}{\mathrm{d}\tilde{x}^0}\cdot c$$</span>
+כאשר נזכור כי <span>\(\tilde{x}^0\)</span> זה שקול לזמן, וניתן לבחור <span>\(d\tau_{n}\)</span> לפי זמן מוחלט. המטען החשמלי <span>\(e_{n}\)</span> הוא סקלר, הפונקציה <span>\(\delta^{(4)}\)</span> מחזירה סקלר. לכן למעשה הגורם הווקטורי היחידי פה זה ה-4 מהירות.</p>
+</div>
+<p>בנוסף מתקיים:
+<span>$$\bar{\nabla} \cdot \vec{J}=\partial_{i}J^i = \sum_{n} e_{n} \frac{\partial \delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right)}{\partial x^i} \frac{\mathrm{d}x_{n}^i}{\mathrm{d}t}$$</span>
+כאשר נזכר בזהות פשוטה:
+<span>$$\frac{\partial \delta(x-y)}{\partial x}=-\frac{\partial \delta(x-y)}{\partial y}  $$</span>
+ונקבל:
+<span>$$\begin{gather}\bar{\nabla} \cdot \vec{J}=-\sum_{n}e_{n}\frac{\partial \delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right)}{\partial x_{n}^i} \frac{\mathrm{d}x_{n}^i}{\mathrm{d}t} = \\= -\sum_{n} e_{n} \frac{\partial }{\partial t} \delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right)
+\end{gather}$$</span>
+כאשר גזרנו פשוט לפי כלל שרשרת. נוציא את הנגזרת החלקית לפי זמן החוצה ונקבל:
+<span>$$\bar{\nabla} \cdot \vec{J}=-\frac{\partial }{\partial t} \sum_{n} e_{n} \delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right) = -\frac{\partial }{c\partial t} \left( c\rho \right)=-\frac{\partial }{\partial x^0} J^0$$</span>
+וקיבלנו למעשה את משוואות הרציפות.
+<span>$$\frac{\partial }{\partial t} \rho + \bar{\nabla} \cdot \vec{J}=0 \iff \partial_{0}J^0+\partial_{i}J^i =0 \iff \partial_{\mu J^\mu} = 0$$</span>
+לפי הכתיבה הזאת, משוואת הרציפות נראת אותו דבר בכל המערכות ייחוס. מזה נקבל את חוק שימור המטען, כלומר:
+<span>$$\iiint d^3 x\frac{\partial }{\partial t} \rho + \underbrace{ \iiint d^3 x \bar{\nabla} \cdot \vec{J} }_{ \iint_{\Sigma\to \infty} \vec{J} d\vec{S}=0 }=0 \implies \frac{\partial }{\partial t} \underbrace{ \int d^3 \vec{x} \rho }_{ Q } = 0$$</span></p>
+<div class="theorem"><span class="keyword">משוואות התנועה של חלקיק יחסותי תחת שדה מגנטי</span><p><span>$${\frac{d{\vec{p}}}{d t}}=e{\vec{E}}+{\frac{e}{c}}v\times{\vec{B}}$$</span></p>
+</div><h2 id='Electrodynamics_3_2'>הפעולה של התנועה</h2>
+ <h2>פעולה של חלקיק חופשי</h2>
+<div class="definition"><span class="keyword">פעולה יחסותית</span><p>הפעולה של חלקיק חופשי מוגדרת בצורה הבאה:
+<span>$$S=-mc\int_\gamma d s=-mc\int_\gamma\sqrt{c^2d t^{2}-d x^{2}-d y^{2}-d z^{2}}=-mc \int_{\gamma} \sqrt{ \frac{\partial x^\mu}{\partial \tau} \frac{\partial x^\nu}{\partial \tau} \eta_{\mu \nu} } \;\mathrm{d}\tau$$</span></p>
+</div>
+<div class="remark">
+<p>זה למעשה המסולול של הפעולה תחת קו עולם. כאשר מעקרון הפעולה המינימלית נקבל כי הקו העולם שנקבל יהיה הקו עולם עם "אורך" אקסטרימלי.</p>
+</div>
+<p>הקבוע <span>\(-m\)</span> אינו ישפיע על משוואות התנועה, אבל יגרום לכך שבמהירויות נמוכות, הפעולה תסכים עם הלגרנג'יאן הניוטוני שמופיע עם <span>\(m\)</span>. נראה זאת במפורש:
+<span>$$\begin{array}{r c l}{{S}}&amp;{{=}}&amp;{{\displaystyle-mc\int_{i}^{f}d s=-m\int_{i}^{f}\sqrt{c^2d t^{2}-d x^{2}-d y^{2}-d z^{2}}=-mc\int_{i}^{f}\sqrt{1-\left( \frac{d x}{cd t} \right)^{2}-\left( \frac{d y}{cd t} \right)^{2}-\left( \frac{d z}{cd t} \right)^{2}}~d t}}\\ {{}}&amp;{{\approx}}&amp;{{\displaystyle-mc\int_{i}^{f}\left[ 1-\frac{1}{2c}|\vec{v}|^{2} \right]d t=-mc(t_{f}-t_{i})+\int_{i}^{f}\frac{1}{2}m|\vec{v}|^{2}d t}}\end{array}$$</span>
+כאשר הקבוע <span>\(-mc(t_{f}-t_{i})\)</span> אינו ישפיע על משוואות התנועה.</p>
+<div class="remark">
+<p>הגדרה זו מוגדרת היטב כיוון שגם האינטרוואל וגם הזמן העצמי הם סקלרי לורנץ, ולכן הלגרנג'יאן יהיה זהה בכל מערכות הייחוס.</p>
+</div>
+<h2>הפעולה שהשדה מפעיל על המטען</h2>
+<div class="definition"><span class="keyword">השדה</span><p>מופיע במרחב ומשפיע על החלקיק. השדה משפיע על החלקיק אבל באותו אופן החלקיק משפיע על השדה.</p>
+</div>
+<p>ביחסות כללית למשל, המסה משפיע על העיקום של המרחב זמן, אבל העיקום של המרחב זמן משפיע על תנועת המסה.
+כאן באופן דומה, המטען משפיע על השדה האלקטרומגנטי, אבל השדה משפיע על המטען. לכן אם נרצה למצוא את הלגרנג'יאן של מערכת כולה. נרצה למצוא את הלגרנג'יאן של השדה(אשר נסמן <span>\(\mathcal{L}_{f}\)</span>), וכן את הלגרנג'יאן של ההשפעה של השדה והחלקיק(אשר נסמן <span>\(\mathcal{L}_{int}\)</span>).</p>
+<p>הפעולה של האינטרקציה בין השדה לחלקיק תהיה האינטגרל המסלולי על הקו עולם של הביטוי הבא:
+<span>$$S_{int}=-\frac{e}{c} \int_{\gamma} A_{i} dx^i$$</span>
+כאשר <span>\(e\)</span> זה המטען, ונדרש כמו מקודם לנרמל <span>\(\frac{1}{c}\)</span> כדי שיתאים בגבול הקלאסי לתוצאות הידועות(כאשר כמובן לא משפיע על משוואות התנועה)</p>
+<h2>הפעולה של השדה</h2>
+<p>ולכן נותר למצוא רק את <span>\(S_{f}\)</span>. ניתן למעשה לקבוע את <span>\(S_{f}\)</span> לחלוטין מהעקרונות הבאים:</p>
+<ol>
+<li>
+<p>אינווריאנטיות תחת טרנספורמציית לורנץ. </p>
+</li>
+<li>
+<p>אינוואירנטיות תחת טרנספורמציית כיול. </p>
+</li>
+<li>
+<p>עקרון הסופרפוזיציה.  </p>
+</li>
+</ol>
+<div class="remark">
+<p>השדה היחידה בערך שאנחנו מכירים שמקיים סופרפוזיציה הוא השדה האלקטרומגנטי. כבידה למשל(תחת יחסות כללית) אינו מקיים סופרפוזיציה. עיקרון סופרפוזיציה למעשה נובעת מזה שהמשוואות הם לינאריות.</p>
+</div>
+<div class="definition"><span class="keyword">אינווריאנטיות תחת טרנספורמציית כיול</span><p>ניתן לעבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu}f\)</span> כלומר להוסיף 4-גרדיאנט ולקבל <span>\(A_{\mu}\)</span> חדש אשר לכל היותר מוסיף קבוע לפעולה.</p>
+</div>
+<p>אומנם מרגיש שאלו הנחות מאוד טבעיות, אבל למעשה מאוד חזקות אשר לא קיימים באופן כללי בטבע, ולכן בסופו של דבר זה הנחות מבוססות ניסוי.</p>
+<div class="proposition">
+<p>שלושת העקרונות האלו קובעים את <span>\(S_{f}\)</span> ביחידות.</p>
+</div>
+<div class="proof">
+<p>מעקרון הסופרפוזיציה, אנו יודעים כי משוואות התנועה של שדה הם לינארים. מכאן הפעולה חייבת להיות ריבועית בשדה. 
+מטרנספורמציית כיול נקבל כי לא נרצה להשתמש ב-<span>\(A_{\mu}\)</span>(לא אינווריאנטי תחת שינוי כיול).
+כמו כן לא נשים נגזרת שנייה בתוך פעולה כדי לשמור על סדר ראשון בפעולה, הפועלה צריך להיות אובייקט תלוי בנגזרות הראשון. ולכן נשארנו עם <span>\(F_{\mu \nu}\)</span>. 
+המבנה היחיד שמקיים את שלושת העקרונות הוא <span>\(F_{\mu \nu}F^{\mu \nu}\)</span>. וזה אכן מקיים את שלושת הדרישות. </p>
+</div>
+<p>עקרונית יש עוד מבנה לא רלוונטי - <span>\(\varepsilon^{\mu \nu \alpha \beta}F_{\mu \nu}F_{\alpha \beta}=\partial_{\mu}V^\mu\)</span> כי זה נגזרת שלמה(4 דיוורגנץ)
+לכן למעשה קיים יחיד. למעשה:
+<span>$$S_{f}=\alpha\int \;\mathrm{d}t\mathrm{d}^3xF_{\mu \nu}F^{\mu \nu}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu}$$</span></p><h2 id='Electrodynamics_3_3'>משוואות מקסוול</h2>
+ <div class="proposition">
+<p>ניתן לרשום זוג ראשון של משוואות מקסוול באופן הבא:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\qquad F_{\alpha \beta}=\partial_{\alpha}A_{\beta}-\partial_{\beta}A_{\alpha}$$</span></p>
+</div>
+<div class="proof">
+<p>רק נוודא שהמשוואות האלה באמת תואמות את מה שאנחנו מכירים. עבור <span>\(\mu=0\)</span> נקבל:
+<span>$$2\varepsilon^{0123}\partial_{1}F_{23}+2\varepsilon^{0213}\partial_{2}F_{13}+2\varepsilon^{0312}\partial_{3}F_{12}=0$$</span>
+נפשט ונקבל:
+<span>$$\partial_{1}F_{23}-\partial_{2}F_{13}+\partial_{3}F_{12}=0$$</span>
+נציב ערכים ונקבל:
+<span>$$\partial_{x} (-B_{x})-\partial_{y}B_{y}+\partial_{z}(-B_{z})=0\implies -\bar{\nabla} \cdot \vec{B}=0\implies \bar{\nabla} \cdot \vec{B}=0$$</span>
+ואכן קיבלנו את משוואת מקסוואל - אין מונופול.
+עבור <span>\(\mu=1\)</span> נקבל:
+<span>$$2\varepsilon^{1023}\partial_{0} F_{23}+2\varepsilon^{1203}\partial _{2}F_{03}+2\varepsilon^{1302}\partial_{3}F_{02}=0$$</span>
+וניתן לפשט:
+<span>$$-\partial_{0}F_{23}+\partial_{2}F_{02}-\partial_{3}F_{02}=0$$</span>
+כאשר אם נציב ערכים:
+<span>$$-\frac{1}{c}\frac{\partial }{\partial t} (-B_{x})+\underbrace{ \partial_{y}E_{z}-\partial_{z}E_{y} }_{ \left( \bar{\nabla} \times \vec{E} \right)_{x} }=0\implies \frac{1}{c}\frac{\partial \vec{B}}{\partial t} +\left( \bar{\nabla} \times \vec{E} \right)=0$$</span>
+וקיבלנו את משוואת פראדיי.</p>
+</div>
+<p>עתה נרצה לבנות פעולה לשדה <span>\(A^\mu\)</span>, כך שהפועלה הכוללת תהיה נתונה ע"י:
+<span>$$S=S_{f}+S_{m}+S_{int}$$</span>
+כאשר <span>\(S_{f}\)</span> זה הפעולה עבור השדה האלקטרומגנטי, <span>\(S_{m}\)</span> זה הפעולה עבור כל חלקיק - כל מסה. כלומר:
+<span>$$S_{m}=-\sum_{n}m_{n}c\int dS_{n}$$</span>
+ו-<span>\(S_{int}\)</span> זה הפעולה של האינטרקציה בין השדה למסה. כאשר נקבל:
+<span>$$S_{int} = - \sum_{n} \frac{e_{n}}{c}\int A_{\mu} dx^\mu_{n}$$</span>
+ולכן נותר למצוא רק את <span>\(S_{f}\)</span>. ניתן למעשה לקבוע את <span>\(S_{f}\)</span> לחלוטין מהעקרונות הבאים:</p>
+<ol>
+<li>
+<p>אינווריאנטיות תחת טרנספורמציית לורנץ. </p>
+</li>
+<li>
+<p>אינוואירנטיות תחת טרנספורמציית כיול. </p>
+</li>
+<li>
+<p>עקרון הסופרפוזיציה.  </p>
+</li>
+</ol>
+<div class="remark">
+<p>השדה היחידה בערך שאנחנו מכירים שמקיים סופרפוזיציה הוא השדה האלקטרומגנטי. כבידה למשל(תחת יחסות כללית) אינו מקיים סופרפוזיציה. עיקרון סופרפוזיציה למעשה נובעת מזה שהמשוואות הם לינאריות.</p>
+</div>
+<div class="definition"><span class="keyword">אינווריאנטיות תחת טרנספורמציית כיול</span><p>ניתן לעבור <span>\(A_{\mu}\mapsto A_{\mu}+\partial_{\mu}f\)</span> כלומר להוסיף 4-גרדיאנט ולקבל <span>\(A_{\mu}\)</span> חדש אשר לכל היותר מוסיף קבוע לפעולה.</p>
+</div>
+<p>אומנם מרגיש שאלו הנחות מאוד טבעיות, אבל למעשה מאוד חזקות אשר לא קיימים באופן כללי בטבע, ולכן בסופו של דבר זה הנחות מבוססות ניסוי.</p>
+<div class="proposition">
+<p>שלושת העקרונות האלו קובעים את <span>\(S_{f}\)</span> ביחידות.</p>
+</div>
+<div class="proof">
+<p>מעקרון הסופרפוזיציה, אנו יודעים כי משוואות התנועה של שדה הם לינארים. מכאן הפעולה חייבת להיות ריבועית בשדה. 
+מטרנספורמציית כיול נקבל כי לא נרצה להשתמש ב-<span>\(A_{\mu}\)</span>(לא אינווריאנטי תחת שינוי כיול).
+כמו כן לא נשים נגזרת שנייה בתוך פעולה כדי לשמור על סדר ראשון בפעולה, הפועלה צריך להיות אובייקט תלוי בנגזרות הראשון. ולכן נשארנו עם <span>\(F_{\mu \nu}\)</span>. 
+המבנה היחיד שמקיים את שלושת העקרונות הוא <span>\(F_{\mu \nu}F^{\mu \nu}\)</span>. וזה אכן מקיים את שלושת הדרישות. </p>
+</div>
+<p>עקרונית יש עוד מבנה לא רלוונטי - <span>\(\varepsilon^{\mu \nu \alpha \beta}F_{\mu \nu}F_{\alpha \beta}=\partial_{\mu}V^\mu\)</span> כי זה נגזרת שלמה(4 דיוורגנץ)
+לכן למעשה קיים יחיד. למעשה:
+<span>$$S_{f}=\alpha\int \;\mathrm{d}t\mathrm{d}^3xF_{\mu \nu}F^{\mu \nu}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu}$$</span></p>
+<p>כלומר קיבלנו פעולה כוללת המתארת דינמיקה של שדה וחומר(מטענים) המתארת דינמיקה של שדה וחומר(מטענים).
+<span>$$\begin{gather}S=S_{f}+S_{m}+S_{int}  \\S_{f}=\frac{1}{16\pi c}\int d^4x F_{\mu \nu}F^{\mu \nu} \qquad  F_{\mu \nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}\\S_{m}=-\sum_{n}m_{m}c\int dS_{n} \\S_{int} = - \sum_{n} \frac{e_{n}}{c}\int A_{\mu} dx^\mu_{n}
+\end{gather}$$</span>
+כמו שאנו מכירים, ניתן להגיע למשוואות התנועה ע"י מציאת האקסטרימום של הפונקציונאל של הפעולה בעזרת אוילר לגרנג'. לפני שנגזור את משוואות התנועה עבור השדה נרצה לכתוב את האיבר האינטרקציה <span>\(S_{int}\)</span> בצורה קצת שונה שתהיה נוחה בהמשך. עבור מערכת של מטענים נקודתיים צפיפות המטען נתונה על ידי:
+<span>$$\rho\left( t,\vec{x} \right)=\sum_{n} e_{n}\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right)$$</span>
+ואילו צפיפות הזרם ניתן לרשום באופן הבא:
+<span>$$\vec{J}\left( t,\vec{x} \right)=\rho\frac{ \mathrm{d}\vec{x}}{\mathrm{d}t}=\sum_{n} e_{n}\delta\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}\vec{x}_{n}(t)}{\mathrm{d}t}$$</span>
+בעבר התייחסנו לצפיפות זרם בתור סקלר, אבל כעת מתייחסים עליו בתור ווקטור כדי שנוכל לבצע טרנספורמציית יחסותיות.</p>
+<p>כעת בעזרת 4-זרם נוכל לרשום:
+<span>$$\begin{align}S_{int}&amp;=-\sum_{n} \frac{e_{n}}{c}\int A_{\mu} \frac{\mathrm{d}x^\mu_{\;n}}{\mathrm{d}t} \cdot \mathrm{d}t= \\&amp;=-\sum_{n} \frac{e_{n}}{c}\int \mathrm{d}t \int\mathrm{d}^3 \vec{x}A_{\mu}\left( t,\vec{x} \right)\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}x^\mu_{n}}{\mathrm{d}t} = \\&amp;=-\frac{1}{c^2} \int \mathrm{d}x^0 \int \mathrm{d}^3\vec{x} A_{\mu}\left( t,\vec{x} \right)\underbrace{ \sum_{n} e_{n}\delta^{(3)}\left( \vec{x}-\vec{x}_{n}(t) \right) \frac{\mathrm{d}x}{\mathrm{d}t} }_{ J^\mu\left( t,\vec{x} \right) }= \\&amp;=-\frac{1}{c^2}\int \mathrm{d}^4 x A_{\mu}(x) J^\mu(x) 
+\end{align}$$</span></p>
+<p>זוהי צורה מאוד נוחה לכתוב את הפעולה של האינטרקציה. כעת ניתן לגזור את משוואות התנועה.
+הפעולה הנתונה ע"י:
+<span>$$S=-\frac{1}{16\pi c} \int F_{\mu \nu} F^{\mu \nu} \mathrm{d}^4x-\frac{1}{c^2}\int\mathrm{d^4}x A_{\mu}J^\mu +S_{m}$$</span>
+נחשב את הווריאציה של <span>\(S\)</span> לפי <span>\(A_{\mu}\)</span>.(כלומר <span>\(A_{\mu}\mapsto A_{\mu}+\delta A_{\mu}\)</span>). נחשב:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)=F_{\mu \nu}\delta F^{\mu \nu}+\delta F_{\mu \nu}F^{\mu \nu}$$</span>
+כאשר יכולתו לכתוב <span>\(\delta F^{\mu \nu}=\eta^{\mu \nu}\eta^{\nu \beta}\delta F_{\alpha \beta}\)</span>. נקבל כי שתי האיברים הם אותו הדבר ולכן:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)=2\delta F_{\mu \nu}F^{\mu \nu}$$</span>
+כאשר:
+<span>$$\begin{gather}F_{\mu \nu}\mapsto \partial_{\mu}\left( A_{\nu}+\delta A_{\nu} \right)-\partial_{\nu}\left( A_{\mu}+\delta A_{\mu} \right)  \\\tilde{F}_{\mu \nu}=\partial_{\mu} A_{\nu}-\partial_{\nu} A_{\mu}+\partial_{\mu}\delta A_{\nu}-\partial_{\nu}\delta A_{\mu}
+\end{gather}$$</span>
+וכעת:
+<span>$$\delta\left( F_{\mu \nu}F^{\mu \nu} \right)= 2 \left( \partial_{\mu}\delta A_{\nu}-\partial_{\nu}\delta A_{\nu} \right) F^{\mu \nu}=4\partial_{\mu}\delta A_{\nu}F^{\mu \nu}$$</span>
+ונקבל:
+<span>$$\delta S= -\frac{4}{16\pi c} \int \mathrm{d}^4x\underbrace{ \left( \partial_{\mu}\delta A_{\nu}F^{\mu \nu} \right) }_{ \partial_{\mu}\left( \delta A_{\nu }F^{\mu \nu} \right)-\delta A_{\nu}\partial_{\mu}F^{\mu \nu} }-\frac{1}{c^2}\int \mathrm{d}^4x \delta A_{\mu}J^\mu$$</span>
+כאשר ממשוואת הרציפות נקבל כי כיוון שאנו עושים אינטגרל על דיווגנץ 4 מימדי על תחום עם תנאי שפה אפס(מקבעים את התנאי שפה לאפס כאשר אנחנו מחשבים ווריאציה) נקבל כי האיבר זניח, והאיבר <span>\(\partial_{\mu}\left( \delta A_{\nu }F^{\mu \nu} \right)=\partial_{\mu}\left( \delta A_{\nu}F^{\mu \nu} \right)\)</span>. ונקבל סה"כ:
+<span>$$\delta S = \frac{1}{4\pi c}\int \mathrm{d}^4 x \left( \partial_{\mu} F^{\mu \nu}-\frac{4\pi}{c} J^\nu \right)\delta A_{\nu}\overset{!}{=} 0$$</span>
+ונדרוש כי יתאפס לכל <span>\(\delta A_{\nu}\)</span> ולכן נדרש שהאינטגרנד מתאפס. נקבל:
+<span>$$\boxed{\partial_{\mu}F^{\mu \nu}=\frac{4\pi}{c}J^{\nu}}
+$$</span>
+וזה משוואה נוספת שמתווספת למשוואה שמצאנו קודם:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\implies \begin{cases}\bar{\nabla} \cdot \vec{B} = 0 \\\bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} 
+\end{cases}$$</span></p>
+<p>עבור <span>\(\nu=0\)</span> נקבל מהמשוואה:
+<span>$$\begin{gather}\nu=0\implies \partial_{\mu} F^{\mu 0}= \frac{4\pi}{c}J^0=4\pi \rho  \\\partial_{\mu}F^{\mu 0}=\partial_{i} F^{i_{0}}= \bar{\nabla} \cdot \vec{E}
+\end{gather}$$</span>
+כאשר השתמשנו ב-<span>\(F_{i_{0}}=-\left( \vec{E} \right)_{i}\)</span>. וביחד קיבלנו את חוק גאוס:
+<span>$$\bar{\nabla} \cdot \vec{E}=4\pi \rho$$</span>
+עבור <span>\(\nu=1\)</span> נקבל:
+<span>$$\begin{gather}\partial_{\mu}F^{\mu 1}=\frac{4\pi}{c}\left( \vec{J} \right)_{x}  \\\partial_{\mu} F^{\mu 1} = \partial_{0} F^{01}+\partial_{2} F^{21}+\partial_{3}F{31}=-\frac{1}{c}\underbrace{ \left( \frac{\partial E_{x}}{\partial t} +\frac{\partial B_{z}}{\partial y} -\frac{\partial B_{y}}{\partial z}  \right) }_{ \left( \bar{\nabla} \times \vec{B} \right)_{x} }
+\end{gather}$$</span>
+כאשר נקבל מזה סה"כ את חוק אמפר-מקסוול:
+<span>$$-\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J}$$</span></p>
+<div class="corollary">
+<p>מהמשוואות שלנו קיבלנו כי:
+<span>$$\varepsilon^{\mu \nu \alpha \beta}\partial_{\nu}F_{\alpha \beta}=0\implies \begin{cases}\bar{\nabla} \cdot \vec{B} = 0 \\\bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} 
+\end{cases}$$</span>
+<span>$$\partial_{\mu}F^{\mu \nu}=\frac{4\pi}{c}J^{\nu}\implies\begin{cases} \bar{\nabla} \cdot \vec{E}=4\pi \rho \\-\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J} 
+\end{cases}$$</span></p>
+</div><h1 id='Electrodynamics_4'>מגנטוסטטיקה</h1>
+<h2 id='Electrodynamics_4_1'>פוטנציאל מגנטי</h2>
+ <div class="definition"><span class="keyword">סימטרייה להזזה בזמן</span><p>זה אומר שהמערכת לא משתנה תחת הטרנספורמצייה <span>\(t\mapsto t+a\)</span>. זוהי העתקה רציפה.</p>
+</div>
+<div class="definition"><span class="keyword">סימטרייה לשיקוף בזמן</span><p>מערכת שלא משתנה תחת הטרנספורמצייה <span>\(t\mapsto -t\)</span>. זוהי לא העתקה רציפה.</p>
+</div>
+<div class="definition"><span class="keyword">אלקטרוסטטיקה</span><p>מקרה מיוחד של משוואות מקסוואל שבו יש סימטרייה לשיקוף בזמן. זה יותר חזק מסימטריה להזזה בזמן.</p>
+</div>
+<div class="corollary">
+<p>מתקיים באלקטרוסטטיקה <span>\(\vec{B} = 0\)</span> כיוון שראינו שתחת ההעתקה <span>\(t\mapsto -t\)</span> נקבל <span>\(\vec{B}\mapsto-\vec{B}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מגנטוסטטיקה</span><p>מערכת נטרלית עם זרימה סטציונאריית(<span>\(\frac{\partial \vec{J}}{\partial t}=0,\rho=0\)</span>). פתרונות אלו מכבדים הזזות בזמן אך אינם מכבדים שיקופים בזמן.</p>
+</div>
+<div class="definition"><span class="keyword">צפיפות זרם נפחית</span><p><span>$$\vec{J} = \frac{d\vec{I}}{dA}=\rho\cdot \vec{v}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">צפיפות זרם משטחית</span><p><span>$$\vec{K}=\frac{\mathrm{d} \vec{I}}{\mathrm{d} l} $$</span></p>
+</div>
+<div class="definition"><span class="keyword">זרם</span><p><span>$$I=\int_{A}\vec{J}\cdot \mathrm{d}A=\int_{C}\vec{K}\cdot \mathrm{d}\vec{l}$$</span></p>
+</div>
+<div class="proposition">
+<p>משוואות מקסוול במגנטוסטטיקה יהיו:
+<span>$$\begin{gather}\bar{\nabla} \cdot \vec{B}=0 \qquad \bar{\nabla} \times  \vec{B} = \frac{4\pi}{c}\left( \vec{J}+\cancel{ \frac{1}{4\pi}\frac{\partial \vec{E}}{\partial t} }  \right)=\frac{4\pi \vec{J}}{c}\\\bar{\nabla} \cdot \vec{E} = 4\pi \rho = 0 \qquad 
+\bar{\nabla} \times \vec{E} =  \cancel{ -\frac{1}{c}\frac{\partial \vec{B}}{\partial t} } =0 \end{gather}$$</span></p>
+</div>
+<h3>פוטנציאל מגנטי ווקטורי</h3>
+<div class="definition"><span class="keyword">פוטנציאל מגנטי ווקטורי</span><p>נגדיר <span>\(\vec{A}\)</span> כך ש-<span>\(\bar{\nabla} \times \vec{A}=\vec{B}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כל מה שנדרש לפתור עבור מערכת מגנטוסטטית תהיה:
+<span>$$\begin{cases} \bar{\nabla} \cdot \vec{B}=0 \\\bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J}\end{cases}
+\iff -\bar{\nabla}^2 \vec{A}=\frac{4\pi}{c}\vec{J}$$</span></p>
+</div>
+<div class="proof">
+<p>ניתן להמיר למשוואה וקטורית אחת ע"י הצבה <span>\(\vec{B} = \bar{\nabla} \times \vec{A}\)</span> ולקבל:
+<span>$$\begin{gather}\left[ \bar{\nabla} \times \left( \bar{\nabla} \times \vec{A} \right) \right]_{i}=\varepsilon_{ijk}\partial_{j}\left( \bar{\nabla} \times \vec{A} \right)_{k}=\varepsilon_{ijk}\partial_{j}\left( \varepsilon_{k\ell m}\partial_{\ell} A_{m} \right)= \\=\left( \delta_{i\ell} \delta_{jm} - \delta_{im}\delta_{j\ell} \right) \partial_{j}\partial_{\ell} A_{m}=\partial_{i}\left( \partial_{j}A_{j} \right)-\partial_{j}\partial_{j}A_{i}= \\=\partial_{i}\left( \bar{\nabla} \cdot \vec{A} \right)-\bar{\nabla}^2 A_{i}
+\end{gather}$$</span>
+ולכן:
+<span>$$\bar{\nabla} \left( \bar{\nabla} \cdot \vec{A} \right)-\bar{\nabla}^2 \vec{A}=\frac{4\pi}{c}\vec{J}$$</span>
+נבחר כיול כך ש-<span>\(\bar{\nabla} \cdot \vec{A}=0\)</span>. נראה כי קיימת <span>\(f\)</span> כזו. כדי למצוא אותה יש לפתור את המשוואה הבאה:
+<span>$$0\overset{!}{=} \bar{\nabla} \cdot A'=\bar{\nabla} \cdot \vec{A}+\bar{\nabla}^2 f\implies \bar{\nabla}^2 f=-\bar{\nabla} \cdot A$$</span>
+זוהי משוואת פואסון עם מקור נתון, ולכן קיים פתרון.</p>
+</div>
+<div class="proposition"><span class="keyword">צורה אינטגרלית של המשוואת פואסון</span><p><span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</span></p>
+</div>
+<div class="proof">
+<p>נרצה לכתוב את המשוואת פואסון <span>\(-\bar{\nabla}^2 \vec{A}=\frac{4\pi}{c}\vec{J}\)</span> בצורה אינטגרלית. ניתן לפרק לריכיבים של <span>\(\vec{A}\)</span>.
+<span>$$-\bar{\nabla}^2 \vec{A}_{x}=\frac{4\pi}{c}\vec{J}_{x}$$</span>
+ונקבל 3 משוואות סקלאריות
+<span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן גם לקשר לאלקטרוסטטיקה:
+<span>$$\bar{\nabla} \cdot \vec{E}=4\phi \rho \implies - \bar{\nabla}^2  \varphi = 4\pi \rho\implies \varphi\left( \vec{x} \right)=\int \frac{\rho dV}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</span>
+כאשר משוואה זו זהה לחלוטין עד כדי שינוי שמות.</p>
+</div>
+<div class="proposition">
+<p>עבור זרם משטחי בלבד מתקיים:
+<span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int d^{2}x^{\prime}\frac{\vec{K}\left( \vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|}$$</span>
+כאשר אם יש לנו נפח <span>\(V\)</span> עם צפיפות נפחית <span>\(\vec{J}\)</span> ועל השפה צפיפות משטחית <span>\(\vec{K}\)</span> נקבל:
+<span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }+\frac{1}{c}\int d^{2}x^{\prime}\frac{\vec{K}\left( \vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חוסר יחידות של הפוטנציאל המגנטי הווקטורי</span><p>עבור פונקציה סקלרית <span>\(\chi\left( \vec{r} \right)\)</span> נקבל כי כיוון שמתקיים <span>\(\bar{\nabla} \times \bar{\nabla}\chi=0\)</span> אז מתקיים:
+<span>$$\mathbf{A}^{\prime}\left( \mathbf{r} \right)=\mathbf{A}\left( \mathbf{r} \right)+\nabla\chi\,\left( \mathbf{r} \right)\implies \bar{\nabla} \times  \vec{A}'=\bar{\nabla} \times \vec{A}$$</span></p>
+</div>
+<div class="example">
+<p>נסתכל על תיל איסופי עם זרם <span>\(I\)</span> הנע לאורך ציר <span>\(z\)</span>. מהסימטרייה הגלילית, נקבל כי <span>\(A_{z}=A_{z}\left( \rho \right)\)</span>. כעת:
+<span>$$A_{z}(\rho)=\frac{I}{c}\int_{-\infty}^{\infty}\frac{d z^{\prime}}{\sqrt{z^{2}+\rho^{2}}}$$</span>
+כאשר האינטרגל נותן:
+<span>$$\int_{-L}^{L}\frac{d z^{\prime}}{\sqrt{z^{2}+\rho^{2}}}\;=\;\ln\frac{\sqrt{1+\left( \rho/L \right)^{2}}+1}{\sqrt{1+\left( \rho/L \right)^{2}-1}}\approx\ln4+2\ln\left( L/\rho \right)=\ln 4 +2\ln L - 2\ln \rho$$</span>
+אומנם נראה שהגורם <span>\(\ln L\)</span> מתבדר כש-<span>\(L\to \infty\)</span>, אך עבור <span>\(L\)</span> סופי נקבל כי נופל מהשדה המגנטי <span>\(\vec{B}=\bar{\nabla} \times \vec{A}\)</span> ולכן נקבל:
+<span>$$A_{z}\left( \rho \right)=-\frac{2I}{c}\ln\rho \implies {\bf B}\left( \rho \right)=\frac{2\pi I}{c\rho}\hat{\phi}.$$</span></p>
+</div>
+<div class="remark">
+<p>רק כאשר הזרם זורם דרך רכיב כיוויני של המערכת קורדינטות שאינם משתנים במרחב(כמו המערכת הקרטזית <span>\(\hat{x},\hat{y},\hat{z}\)</span> ולא כמו ווקטורי יחידה <span>\(\hat{\varphi},\hat{\theta}\)</span>)  אז ניתן להשתמש בטיעון שאם הזרם זורם לאורך הכיוון הזה אז גם הפוטנציאל יכיל רכיב בכיוון הזה בלבד.
+לדוגמא אם יש תיל שבו זורם זרם לאורך ציר ה-<span>\(z\)</span> אז הפוטנציאל הווקטורי יכיל רק את הגורמים לאורך ציר ה-<span>\(z\)</span>. לעומת זאת עבור טבעת זרם לא ניתן להגיד את אותו הטיעון, וכמו שנראה עוד מאט, הפוטנציאל יכיל גם גורם בכיוון <span>\(\hat{\varphi}\)</span> וגם גורם בכיוון <span>\(\hat{z}\)</span>.</p>
+</div>
+<h3>פוטנציאל מגנטי סקלארי</h3>
+<div class="definition"><span class="keyword">פוטנציאל מגנטי סקלרי</span><p>במקומות בהם אין זרם ניתן להגדיר <span>\(\varphi\)</span> כך ש-<span>\(\bar{\nabla}\varphi=\vec{B}\)</span></p>
+</div>
+<div class="proposition">
+<p>הפוטנציאל המגנטי הסקלארי מקיים את משוואת לפלס. כלומר מתקיים:
+<span>$$\bar{\nabla}^2 \varphi = 0$$</span></p>
+</div>
+<div class="proof">
+<p><span>$${\vec{\nabla}}\times{\vec{B}}=0\implies {\vec{B}}=-{\frac{4\pi}{c}}\nabla\psi\implies \nabla^{2}\psi=\nabla\cdot(\nabla\psi)=-{\frac{c}{4\pi}}\nabla\cdot{\vec{B}}=0$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שפה של השדה המגנטי</span><p><span>$$\left( \vec{B}_{2}-\vec{B}_{1} \right)\cdot\hat{n}=0 \qquad (\vec{B}_{2}-\vec{B}_{1})\times\hat{n}=-\frac{4\pi}{c}\vec{K}$$</span></p>
+</div>
+<div class="remark">
+<p>אפשר לכתוב את התנאי שפה השני גם בתור:
+<span>$$\left( \vec{B}_{2}-\vec{B}_{1} \right)=-\frac{4\pi}{c}\vec{K}\times \hat{n}$$</span></p>
+</div>
+<div class="example">
+<p>נסתכל כעת על המקרה של טבעת זרם אחידה. נרצה לחשב את הפוטנציאל החשמלי במרחב. במרחב לא זורם זרם ולכן ניתן להגדיר פוטנציאל סקלרי <span>\(\varphi\)</span>.
+אנו יודעים כי מתקיים משוואת לפלס עבור הפוטנציאל הסקלרי. כלומר <span>\(\bar{\nabla}\varphi=0\)</span>. כיוון שיש סימטריה אזימוטלית/גלילית אנו יכולים לכתוב את הפתרון של משוואת לפלס בעזרת ההרמוניות הספריות:
+<span>$$\psi(r,\theta)=\left\{\begin{array}{l l}{{\displaystyle\sum_{\ell\,=1}^{\infty}A_{\ell}\,\left(\frac{r}{R}\right)^{\ell}\,P_{\ell}(\cos\theta)\qquad}}&amp;{{r\,&lt;R,}}\\ {{\displaystyle\sum_{\ell\,=1}^{\infty}B_{\ell}\,\left(\frac{R}{r}\right)^{\ell+1}P_{\ell}(\cos\theta)\qquad}}&amp;{{r\,&gt;R.}}\end{array}\right.$$</span>
+כאשר אנחנו בקורדינטות כדוריות, <span>\(R\)</span> זה הרדיוס של הטבעת, והטבעת ממוקמת כאשר <span>\(\theta=\frac{\pi}{2}\)</span>. מהתנאי שפה של השדה המגנטי  <span>\(\hat{r}\cdot \bar{\nabla} \psi_{out}=\hat{r}\cdot \bar{\nabla}\psi_{in}\)</span> נקבל כי:
+<span>$$B_{\ell}=-{\frac{\ell}{\ell+1}}A_{\ell}$$</span>
+וכדי להמנע מלהשתמש בפולינומי לג'נדר מוכללים נשתמש בטריק הבא. אנו יודעים מביו סבר כי השדה לאורך ציר ה-<span>\(z\)</span> יהיה:
+<span>$$B_{z}(z)=\frac{2\pi I}{c}\frac{R^{2}}{(R^{2}+z^{2})^{3/2}}\implies \psi(z)=-{\frac{\mu_{0}I}{2}}{\frac{z}{\sqrt{R^{2}+z^{2}}}}$$</span>
+ניתן לכתוב את <span>\(\psi(z)\)</span> ע"י פולינומי לג'נדר ולקבל:
+<span>$$\psi(z)=-\frac{2\pi I}{c}\sum_{\ell\,=1}^{\infty}\left(\frac{z}{R}\right)^{\ell}\,P_{\ell\,-1}(0)$$</span>
+ונציב ב-<span>\(\psi\left( r,\theta \right)\)</span> עבור <span>\(r=z,\theta=0\)</span> ונקבל ע"י שימוש בנוסחא <span>\(\ell\,P_{\ell-1}(0)=-(\ell+1)P_{\ell\,+1}(0)\)</span> ועל ידי זה ש<span>\(P_{\ell}(0)=0\)</span> כש-<span>\(\ell\)</span> אי זוגי כי:
+<span>$$\psi\left( r,\theta \right)=\left\{\begin{array}{l l}{{\displaystyle-\frac{2\pi I}{c}\sum_{\ell=1,3,...}^{\infty}\left(\frac{r}{R}\right)^{\ell}P_{\ell-1}(0)P_{\ell}\left( \cos\theta \right)\qquad}}&amp;{{r&lt;R,}}\\ {{\displaystyle-\frac{2\pi I}{c}\sum_{\ell=1,3,...}^{\infty}\left(\frac{R}{r}\right)^{\ell+1}P_{\ell+1}(0)P_{\ell}\left( \cos\theta \right)\qquad}}&amp;{{r&gt;R.}}\end{array}\right.$$</span>
+כאשר לגזור את הביטוי הזה זה כבר יותר מסובך, אך אם אנחנו רחוקים מהטבעת ניתן לקרב על ידי לקיחת הגורם הראשון בטור ולקבל:
+<span>$$\psi\left( r,\theta \right)\approx\frac{1}{c}\frac{\pi R^{2}I}{r^{2}}\cos\theta$$</span>
+כאשר זה אכן הביטוי עבור דיפול.</p>
+</div><h2 id='Electrodynamics_4_2'>ביו סבר</h2>
+ <div class="theorem"><span class="keyword">חוק ביו סבר</span><p>עבור צפיפות זרם קבוע נקבל
+<span>$$\vec{B} = \frac{I}{c}\oint \frac{d\vec{l} \times \vec{r}}{r^3}$$</span>
+כאשר עבור צפיפות זרם משתנה נקבל:
+<span>$$\vec{B}\left( \vec{x} \right)={\frac{1}{c}}\int\!\vec{J}\left( \vec{x}^{\prime} \right)\,\times\,{\frac{\left( \vec{x}-\vec{x}^{\prime} \right)}{|\vec{x}-\vec{x}^{\prime}|^{3}}}\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="proof">
+<p>נפעיל דיברגנץ על הביטוי:
+<span>$$\vec{A}\left( \vec{x} \right)=\frac{1}{c}\int\mathrm{d}^3\tilde{x}  \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert }$$</span>
+נראה שהפתרון שמצאנו מקיים <span>\(\bar{\nabla} \cdot \vec{A}=0\)</span>. כלומר מקיים את התנאי כיול:
+<span>$$\begin{gather}\bar{\nabla} \cdot \vec{A} = \partial_{i}A^i = \frac{\partial }{\partial x^i} \int\mathrm{d^3}\tilde{x} \frac{\frac{1}{c}J^i\left( \tilde{x} \right)}{\left\lvert  \vec{x}  -\tilde{\vec{x}}\right\rvert }=-\int\mathrm{d^3}\tilde{x} \left( \frac{\partial }{\partial \tilde{x}} \cdot \frac{1}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right) \frac{1}{c} \vec{J}'\left( \tilde{x} \right)  \\=\frac{\partial }{\partial \tilde{x}^{i}} \left( \frac{1}{c} \frac{J'\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)-\cancelto{ 0 }{ \frac{1}{c} \frac{\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } } = -\iint\vec{V} d\vec{\Sigma}=0
+\end{gather}$$</span>
+כאשר ה<span>\(\bar{\nabla} \cdot \vec{J}\left( \vec{x} \right)\)</span> התאפס בגלל משוואת הרציפות - <span>\(0 = \frac{\partial \rho}{\partial t}=\bar{\nabla} \cdot \vec{J}\)</span>, והאינטגרל על הנפח מתאפס עבור מעטפת מספיק גדולה.</p>
+<p><span>$$\vec{B} = \bar{\nabla} \times \vec{A} = \frac{1}{c}\int\mathrm{d^3}\tilde{x} \;\bar{\nabla}_{x} \times \left( \frac{\vec{J}\left( \tilde{x} \right)}{\left\lvert  \vec{x}-\tilde{\vec{x}}  \right\rvert } \right)$$</span>
+נעזר בזהות:
+<span>$$\left[\vec{\nabla}\times\left(\vec{V}f\left(x\right)\right)\right]_{i}=\epsilon_{i j k}\partial_{j}\left(V_{k}f\left(x\right)\right)=\epsilon_{i j k}\left(\partial_{j}f\right)V_{k}=\left(\vec{\nabla}f\times\vec{V}\right)_{i}$$</span>
+ונקבל:
+<span>$$\vec{B}=\frac{1}{c}\int d^{3}\vec{x}^{\prime}\frac{\vec{J}\left(\vec{x}^{\prime}\right)\times\left(\vec{x}-\vec{x}^{\prime}\right)}{\mid\vec{x}-\vec{x}^{\prime}\mid^{3}}$$</span>
+כאשר זהו חוק ביו-סבר.</p>
+</div>
+<div class="remark">
+<p>זה למעשה המקביל לחוק קולון עבור מגנטיות, כאשר עבור השדה החשמלי בעזרת צפיפות <span>\(\rho\)</span> מטען קיבלנו:
+<span>$$\vec{E}(\vec{x})=\!\int\!\rho(\vec{x}^{\prime})\,{\frac{(\vec{x}-\vec{x}^{\prime})}{|\vec{x}-\vec{x}^{\prime}|^{3}}}\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="example">
+<p>הגודל של השדה המגנטי של תיל אינסופי הנושא זרם <span>\(I\)</span> יהיה:
+<span>$$|\vec{B}|={\frac{I R}{c}}\!\!\int_{-\infty}^{\infty}\!{\frac{d l}{(R^{2}+l^{2})^{3\zeta}}}={\frac{2I}{c R}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח של אלמנט תיל</span><p><span>$$d\vec{F}={\frac{I_{1}}{c}}\left(d\vec{I}_{1}\,\times\,\vec{B}\right)$$</span></p>
+</div>
+<p>בעזרת החוק ניתן לרשום את הביטוי לכוח בין שתי לולאות זרם קבועות. </p>
+<div class="proposition"><span class="keyword">כוח בין שתי תילים</span><p><span>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</span></p>
+</div>
+<div class="proof">
+<p>נסתכל על הכוח שפועל בין שתי תילים עם זרמים  <span>\(I_{1},I_{2}\)</span>. הכוח בין שתי אלמנטים על התיל <span>\(d\vec{l}_{1},d\vec{l}_{2}\)</span>.
+<span>$$d\vec{F}_{1\leftarrow 2 } = \frac{1}{c}dq_{1}\left( \vec{v}_{1} \times \vec{B}_{2} \right)= \frac{I_{1}}{c}\left( d\vec{l}_{1}\times \vec{B}_{2} \right) = \frac{I_{1}}{c}d\vec{l}_{1}\times\left( \frac{I_{2}}{c}\oint_{L_{2}} \frac{d\vec{l}_{2} \times x_{12}}{\left\lvert  \vec{x}_{12}  \right\rvert ^3} \right)$$</span>
+הכוח השקול נתון ע"י:
+<span>$$\vec{F}_{1\leftarrow 2} = \sum d\vec{F}_{1\leftarrow 2}=\frac{I_{1}I_{2}}{c^2}\oint_{L_{1}}\oint_{L_{2}} \frac{d\vec{l}_{1} \times \left( d\vec{l}_{2}\times \vec{x}_{12} \right)}{\left\lvert  \vec{x}_{12}  \right\rvert }$$</span>
+נשתמש בזהות הווקטורית <span>\(\vec{A}\times\left( \vec{B}\times \vec{C} \right)=\vec{B}\left( \vec{A}\cdot \vec{C} \right)-\vec{C}\left( \vec{A}\cdot \vec{B} \right)\)</span> ונקבל:
+<span>$$\frac{d\vec{l}_{1} \times d\vec{l}_{2} \times \vec{x}_{12}}{\lvert x_{12} \rvert ^3}=d\vec{l}_{2}\left( d\vec{l}_{1} \cdot \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3} \right)- \frac{\vec{x}_{12}}{\left\lvert  \vec{x}_{13}  \right\rvert ^3}\left( d\vec{l}_{1}d\vec{l}_{2} \right)$$</span>
+כאשר הגורם <span>\(d\vec{l}_{2}\left( d\vec{l}_{1} \cdot \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3} \right)\)</span> מתאפס לאחר אינטגרציה על <span>\(L_{1}\)</span>. נקבל:
+<span>$$\vec{F}_{1\leftarrow 2}= - \frac{I_{1}I_{2}}{c^2} \oint_{L_{1}}\oint_{L_{2}} d\vec{l}_{1}d\vec{l}_{2} \frac{\vec{x}_{12}}{\lvert x_{12} \rvert ^3}$$</span>
+כאשר נשים לב כי בפרט מתקיים החוק השלישי של ניוטון.</p>
+</div>
+<div class="example">
+<p>עבור שני תילים אינסופיים ומקבילים
+<span>$$\frac{d\vec{F}_{1\leftarrow {2}}}{dl}=\frac{2I_{1}I_{2}}{c^2d}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח ומומנט בעזרת צפיפות זרם</span><p><span>$$\vec{F}={\frac{1}{c}}\int\vec{J(x)}\;\times\;\vec{B(x)}\;d^{3}x\qquad {{{\vec{N}}={\frac{1}{c}}\int\vec{x\,\times\,(J\,\times\,B)}\;d^{3}x}}$$</span></p>
+</div><h2 id='Electrodynamics_4_3'>פיתוח מולטיפולי</h2>
+ <p>את הפיתוח הזה אנו צריכים כדי לפשט את צורת השדה רחוק מאוד מאיזור הזרמים(מקורות).</p>
+<div class="proposition"><span class="keyword">פיתוח סדר שני</span><p>השתי איברים הראשונים של הפיתוח טיילור של הפוטנציאל יהיה:
+<span>$$\vec{A}\left( \vec{R}_{0} \right)=\frac{1}{cR_{0}^3}\int d^3R\vec{J}\cdot\left( \vec{R}_{0}\vec{R} \right)+\dots$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הפוטנציאל המגנטי(ללא קירוב) יהיה:
+<span>$$A\left( \vec{R}_{0} \right)=\frac{1}{c}\int \mathrm{d}^3 \vec{R} \frac{\vec{J}\left( \vec{R} \right)}{\left\lvert  \vec{R}_{0}-\vec{R}  \right\rvert }$$</span>
+כעת נסתכל על הקירוב <span>\(\left\lvert  \vec{R}_{0}  \right\rvert\gg \left\lvert  \vec{R}  \right\rvert\)</span> וכן <span>\(\forall \vec{R}: J\left( \vec{R} \right)\neq 0\)</span>. במצב כזה ניתן לפתח:
+<span>$$\left\lvert  \vec{R}_{0}-\vec{R}  \right\rvert =\sqrt{ \left( \vec{R}_{0}-\vec{R} \right)^2 }=\sqrt{ R_{0}^2-2\vec{R}\vec{R}_{0}+\vec{R}^2 }=R_{0}\sqrt{ 1-\frac{2\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) }$$</span>
+ונבצע קירוב טיילור ונקבל:
+<span>$$R_{0}\sqrt{ 1-\frac{2\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) } \approx R_{0}\left( 1-\frac{\vec{R}\vec{R}_{0}}{R_{0}^2}+O\left( \frac{R^2}{R_{0}^2} \right) \right)$$</span>
+ולכן:
+<span>$$\vec{A}\left( \vec{R}_{0} \right)=\frac{1}{c} \frac{1}{R_{0}}\int\mathrm{d^3}R \vec{J}\cdot\left( \vec{R} \right)+\frac{1}{cR_{0}^3}\int d^3R\vec{J}\cdot\left( \vec{R}_{0}\vec{R} \right)$$</span>
+כאשר אנו מניחים כי כל הלולאות זרם סגורות. ולכן <span>\(\bar{\nabla} \cdot \vec{J}=0\)</span> והגורם המונופולי מתאפס מגאוס</p>
+</div>
+<div class="proposition">
+<p>ניתן לכתוב את הגורם הדיפולי של הפיתוח בצורה:
+<span>$$\int\!(\vec{x}\cdot\vec{x}^{\prime})\vec{J}(\vec{x}^{\prime})\,d^{3}x^{\prime}=\,-{\textstyle{\frac{1}{2}}}\vec{x}\,\times\int\![\vec{x}^{\prime}\,\times\,\vec{J}(\vec{x}^{\prime})]\,d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את הגורם הדיפולי של הפוטנציאל בצורה הבאה:
+<span>$$\vec{A}\left( \vec{x} \right)={\frac{1}{2c|\vec{x}|^3}}\vec{x} \times\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מומנט דיפולי מגנטי</span><p><span>$$\vec{\mu}={\frac{1}{2c}}\int\vec{x}^{\prime}\,\times\,\vec{J\left( x^{\prime} \right)}\ d^{3}x^{\prime}$$</span></p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את הקירוב הדיפולי של הפוטנציאל בצורה הפשוטה בעזרת המומנט הדיפול:
+<span>$$\vec{A}\left( \vec{x} \right)={\frac{\vec{\mu}\times\vec{x}}{|\vec{x}|^{3}}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מומנט דיפול של לולאת זרם</span><p><span>$${\vec{\mu}}={\frac{I}{2c}}\oint\left({\vec{R}}\times d{\vec{\ell}}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שדה מגנטי של דיפול</span><p><span>$$\vec{B} =\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{|x|^{3}}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}\vec{B}=\vec{\nabla}_{\vec{R}_{0}}\times\vec{A}\left(\vec{R}_{0}\right)=\vec{\nabla}_{\vec{R}_{0}}\times\left(\frac{\vec{\mu}\times\vec{R}}{R_{0}^{3}}\right)=-\vec{\nabla}_{\vec{R}_{0}}\times\left(\vec{\mu}\times\vec{\nabla}_{\vec{R}_{0}}\frac{1}{R_{0}}\right)\\=\frac{3\hat{R}_{0}\left(\vec{\mu}\cdot\hat{R}_{0}\right)-\vec{\mu}}{R_{0}^{3}} 
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">כוח ומומנט שפועל על דיפול</span><p><span>$$\begin{gather}\vec{F}=\nabla\times\left( \vec{B}\times\vec{\mu} \right)=\left( \vec{\mu}\cdot\nabla \right)\vec{B}=\nabla\left( \vec{\mu}\cdot\vec{B} \right)  \\{\vec{\tau}}={\vec{\mu}}\times{\textbf{B}}
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אנרגיה פוטנציאלית שפועלת על דיפול</span><p><span>$$U=-\,\vec{m}\cdot\vec{B}$$</span></p>
+</div><h2 id='Electrodynamics_4_4'>מגנטיות בחומר</h2>
+ <p>נזכור כי ניתן לאפיין שדה מגנטי של לולאת זרם בעזרת דיפול. כאשר השדה המגנטי לולאת זרם עם זרם <span>\(I\)</span> שטח כלוא <span>\(\vec{A}\)</span> יהיה:
+<span>$$\vec{m} = \frac{I}{c}\vec{A}$$</span>
+כאשר באופן כללי נקבל כי עבור דיפול מתקיים:
+<span>$$\vec{A}\left( \vec{r} \right)={\frac{\vec{m}\times\vec{r}}{r^{3}}}\implies\vec{B}\left( \vec{r} \right)={\frac{3\left( \vec{m}\cdot{\hat{\vec{r}}} \right){\hat{\vec{r}}}-\vec{m}}{r^{3}}}$$</span>
+לחומרים יש זרמים פנימיים שנובעים מכך שהאלקטרונים באטום יוצרים סוג של דיפול מגנטי. בממוצע ברוב החומרים, הכיוונים מקזזים זה את זה כשאין שדה מגנטי. אך כאשר יש שדה מגנטי, הכיוונים של הזרמים משתנה, כך שנוצר זרם בחומר. מדובר בתופעות קוונטיות במהותם ולכם לא נתעסק בהם כעת.</p>
+<div class="definition"><span class="keyword">זרם מגנטיזציה</span><p>הזרם שנוצר בחומר כתוצאה מהשדה המגנטי המופעל. מסומן <span>\(\vec{J}_{M}\)</span>. כאשר יש זרם מגנטיזציה משטחי נסמן אותו ב-<span>\(\vec{K}_{M}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מגנטיזציה</span><p>ערך הממוצע של סך הדיפולים <span>\(\vec{m}\)</span> בחומר. כלומר:
+<span>$$\vec{M}(\vec{r})=n\langle\vec{m}(\vec{r})\rangle$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן לכתוב את השדה המגנטי בתוך החומר בצורה:
+<span>$$\vec{B}_{tot}=\vec{B}_{ext}+\vec{B}_{self}$$</span>
+כאשר ניתן גם לכתוב את הזרם הכולל עם הזרם החופשי:
+<span>$$\vec{J}_{t o t}=\vec{J}_{f}+\vec{J}_{M}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הקשר בין מגנטיזציה לשדה המגנטי</span><p>ביחידות גאוסיות עבור חומר מגנטי לינארי מתקיים:
+<span>$$\vec{M}=\frac{\chi}{1+4\pi\chi}\vec{B}=\frac{\chi}{\mu}\vec{B} \qquad \vec{B}_{self}=4\pi \vec{M}$$</span>
+כאשר <span>\(\chi\)</span> נקרא הסספקפילות המגנטית ו-<span>\({\mu}=1+4\pi\chi\)</span> נקרא פרמביליות מגנטית תכונות שתלויות בחומר.</p>
+</div>
+<p>טענה זו תופיע בהמשך.</p>
+<div class="definition"><span class="keyword">סיווג חומרים לינארים</span><ul>
+<li>דיאמגנט - כאשר <span>\(-1&lt;\chi_{m}&lt;0\)</span>. במקרה זה השדה המגנטי של החומר יהיה בכיוון ההפוך מהשדה המגנטי של השדה המופעל.</li>
+<li>מוליך על - כאשר <span>\(\chi_{m}=-1\)</span> נשים לב כי זה אומר שהמגנטיזיציה בדיוק תבטל את השדה המגנטי המופעל. ולכן בחומר לא יהיה שדה מגנטי בתוכו.</li>
+<li>פאראמגנטי - כאשר <span>\(\chi_{m}&gt; 0\)</span>. השדה המגנטי שבתוך החומר יחזק את השדה המגנטי המופעל.</li>
+<li>פאררו מגנטי - כאשר <span>\(\vec{M}\neq 0\)</span> כאשר <span>\(\vec{B} =0\)</span>. זהו מצב שבו למערכת יש זיכרון, וזהו אינו חומר לינארי ולא נתעסק בו כעת.</li>
+</ul>
+</div>
+<div class="symbolize">
+<p><span>$${{\vec{J}_{M}=c\vec{\nabla}\times\vec{M}}}\qquad {{\vec{K}_{M}=c\left(\vec{M}\times\hat{n}\right)}}$$</span></p>
+</div>
+<p>ה-<span>\(c\)</span> מופיע בגלל המרה מ-<span>\(mks\)</span>. ננסה לפתח אינטואיציה לסימון זה. כאשר המגטיזציה קבועה, נקבל כי הצפיפות דיפולים מגנטיים קבועה, ולכן ניתן לדמיין את המגנטיזציה בצורה הבאה:</p>
+<p>כאשר נשים לב כי כל הזרמים של הדיפולים מבטלים אחד את השני, כאשר זה יהיה כמו שיהיה מגנטיזציה על השפה בלבד. ולכן נצפה כי <span>\(\vec{K}_{M}\propto \vec{M} \times \vec{n}\)</span> כאשר <span>\(\vec{n}\)</span> זה הנורמל למשטח. כאשר צפיפות הדיפולים אינה קבועה, ניתן לדמיין את המערכת בצורה הבאה:</p>
+<p>כאשר כעת המגנטיזציה בפנים אינה מתאפסת, וזה נובע מהשינוי במגנטיזציה. כאשר הזרם יהיה מאונך למגנטיזציה וללולאה שעליה עושים אינטגרל. ולכן נצפה כי <span>\(\vec{J}_{M}\propto \bar{\nabla} \times \vec{M}\)</span></p>
+<div class="proposition"><span class="keyword">פוטנציאל של שדה המגנטיזציה</span><p><span>$$\vec{A}_{M}\left(\vec{r}\right)=\int d^{3}\vec{r}^{\prime}\frac{\vec{M}\left(\vec{r}^{\prime}\right)\times\left(\vec{r}-\vec{r}^{\prime}\right)}{|\vec{r}-\vec{r}^{\prime}|^{3}}$$</span></p>
+</div>
+<p>ההסבר זה שזה למעשה סכימה על הדיפולים המגנטיים בחומר. ניתן לכתוב את זה בדרך נוחה יותר.</p>
+<div class="proposition">
+<p>עבור חומרים מגנטיים מתקיים:
+<span>$$\vec{A}_{M}=\frac{1}{c}\int_{V}d^{3}\vec{r}^{\prime}\frac{\vec{J}_{M}\left(\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid}+\frac{1}{c}\oint_{\partial V}\frac{\vec{K}_{M}}{\mid\vec{r}-\vec{r}^{\prime}\mid}dS'$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים הפוטנציאל של המומנט המגנטי שנובע מהצפיפות דיפולות <span>\(\vec{M}\)</span> יהיה בקירוב דיפולי: 
+<span>$$\vec{A}_{M}\left(\vec{r}\right)=\int d^{3}\vec{r}^{\prime}\frac{\vec{M}\left(\vec{r}^{\prime}\right)\times\left(\vec{r}-\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid^{3}}$$</span>
+כאשר בעזרת מניפולציות וקטוריות ניתן להגיע לביטוי:
+<span>$$\vec{A}_{M}\left(\vec{r}\right)=\int_{V}d^{3}\vec{r}\frac{\vec{\nabla}\times\vec{M}}{\mid\vec{r}-\vec{r}^{\prime}\mid}-\int_{V}d^{3}\vec{r}\vec{\nabla}_{\vec{r}^{\prime}}\times\left(\frac{\vec{M}\left(\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid}\right)$$</span>
+כאשר נזכור את הזהות:
+<span>$$\int_{V}\left({\vec{\nabla}}\times{\vec{a}}\right)d V=\oint_{\partial V}\left({\hat{n}}\times{\vec{a}}\right)d\Sigma$$</span>
+ונקבל:
+<span>$$\vec{A}_{M}\left(\vec{r}\right)=\int_{V}d^{3}\vec{r}\frac{\vec{\nabla}\times\vec{M}}{\mid\vec{r}-\vec{r}^{\prime}\mid}-\oint_{\partial V}\frac{\hat{n}\times\vec{M}\left(\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid}d\Sigma$$</span></p>
+</div>
+<p>כאשר נשתמש בהגדרה של <span>\(\vec{J}_{m},\vec{K}_{m}\)</span> ונקבל:
+<span>$$\vec{A}_{M}=\frac{1}{c}\int_{V}d^{3}\vec{r}^{\prime}\frac{\vec{J}_{M}\left(\vec{r}^{\prime}\right)}{\mid\vec{r}-\vec{r}^{\prime}\mid}+\frac{1}{c}\oint_{\partial V}\frac{\vec{K}_{M}}{\mid\vec{r}-\vec{r}^{\prime}\mid}dS'$$</span></p>
+<div class="definition"><span class="keyword">עוצמה מגנטית</span><p><span>$$\vec{H}=\vec{B}-4\pi\vec{M}$$</span>
+ולכן נקבל גם <span>\(\vec{M}=\chi \vec{H}\)</span> וגם <span>\(\vec{B}=\mu \vec{H}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>העוצמה המגנטית מקיימת:
+<span>$$\vec{\nabla}\times \bar{H}=\frac{4\pi}{c}\vec{J}_{f}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\bar{\nabla} \times \vec{B} =\frac{4\pi}{c}\vec{J}\implies\vec{\nabla}\times\vec{B}={\frac{4\pi}{c}}\left(\vec{J}_{f}+\vec{J}_{M}\right)={\frac{4\pi}{c}}\left(\vec{J}_{f}+c\vec{\nabla}\times\vec{M}\right)$$</span>
+כעת ניתן להעביר את האיבר עם הרוטור אגף השני ולהציב את ההגדרה של <span>\(\vec{H}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטען מדומה</span><p><span>$$\rho^{*}(\vec{r})=-\nabla\cdot\vec{M}(\vec{r})\qquad\qquad\sigma^{*}(\vec{r})=\vec{M}(\vec{r})\cdot\hat{n}(\vec{r})$$</span></p>
+</div>
+<p>כאשר ניתן לפתח אינטואיציה בדומה לפוטנציאל ווקטורי.</p>
+<div class="proposition">
+<p>כאשר אין זרמים, מתקיים <span>\(\bar{\nabla} \times \vec{H}=0\)</span> ולכן קיים פוטנציאל סקלארי המקיים <span>\(\vec{H}=-\bar{\nabla}\psi\left( \vec{r} \right)\)</span> ניתן בדומה לפונטציאל הווקטורי להגיע לביטוי:
+<span>$$\psi_{M}(\vec{r})=\frac{1}{c}\int_{V}d^{3}x'\frac{\rho^{*}(\vec{r})}{|\vec{r}-\vec{r'}|}+\frac{1}{c}\int_{S}d a^{\prime}\frac{\sigma^{*}(\vec{r})}{|\vec{r}-\vec{r'}|}$$</span>
+כאשר הפונטציאל רציף וגם הנגזרת שלו רציפה.</p>
+</div><h1 id='Electrodynamics_5'>קרינה</h1>
+<h2 id='Electrodynamics_5_1'>גלים אלקטרומגנטיים</h2>
+ <p>נתחיל מחוקי מקסוואל:
+<span>$$\begin{gather} \bar{\nabla} \cdot \vec{B} = 0 \qquad \bar{\nabla} \times \vec{E} = -\frac{1}{c} \frac{\partial \vec{B}}{\partial t} \\\bar{\nabla} \cdot \vec{E}=4\pi \rho \qquad -\frac{1}{c}\frac{\partial \vec{E}}{\partial t} + \bar{\nabla} \times \vec{B} = \frac{4\pi}{c}\vec{J} 
+\end{gather}$$</span></p>
+<div class="definition"><span class="keyword">כיול לורנץ</span><p>ניתן להגדיר את הפוטנציאלים כך שמתקיים:
+<span>$${\frac{1}{c}}\,\frac{\partial\Phi}{\partial t}\,+\,{\vec\nabla\cdot A}\,=\,0$$</span></p>
+</div>
+<div class="proposition">
+<p>חוקי מקסוואל תחת כיול לורנץ שקולות למשוואות:
+<span>$${\frac{1}{c^{2}}}\,{\frac{\partial^{2}\vec{A}}{\partial t^{2}}}\,-\,\nabla^{2}\vec{A}\,=\,{\frac{4\pi}{c}}\,\vec{J}\qquad {\frac{1}{c^{2}}}\,{\frac{\partial^{2}\Phi}{\partial t^{2}}}\,-\,\nabla^{2}\Phi\,=\,4\pi\rho$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי:
+<span>$$\vec{E}=-\nabla\varphi-{\frac{\partial\vec{A}}{\partial t}}\qquad\vec{B}=\nabla\times\vec{A}.$$</span>
+ולכן עצם השימוש ב-<span>\(\Phi,A\)</span>  שקול ל:
+<span>$$\bar{\nabla} \cdot \vec{B}=0\qquad \bar{\nabla} \times \left( E+\frac{\partial A}{\partial t}  \right)=0\iff \bar{\nabla} \times  \vec{E}=\frac{\partial }{\partial t} \left( \bar{\nabla} \times \vec{A} \right)=\frac{\partial \vec{B}}{\partial t} $$</span>
+ולכן כבר שקול לשתי משוואת מקסוואל. כדי להראות שמתקיימים שתי חוקי מקסוואל השניים נציב את ההגדרות של הפוטנציאלים בחוקים הנותרים:
+<span>$$\bar{\nabla} \cdot  \vec{E}=\bar{\nabla}\cdot\left(-\bar{\nabla}\phi-{\frac{\partial{\vec{A}}}{\partial t}}\right)=4\pi \rho \implies -\nabla^{2}\phi-{\frac{\partial}{\partial t}}\,\nabla\cdot{\vec{A}}=4\pi \rho$$</span>
+כאשר תחת כיול לורנץ נקבל:
+<span>$$\nabla^{2}\phi-{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\phi}{\partial t^{2}}}=-4\pi \rho$$</span>
+עבור המשוואה הנותרת נקבל:
+<span>$$c^{}\nabla\times B-{\frac{\partial E}{\partial t}}=4\pi j\implies c{\vec{\nabla}}\times\left({\vec{\nabla}}\times{\vec{A}}\right)-{\frac{\partial}{\partial t}}\left(-{\vec{\nabla}}\phi-{\frac{\partial{\vec{A}}}{\partial t}}\right)=4\pi j$$</span>
+נשתשמש בזהות <span>\(\nabla\times(\nabla\times\vec{c})=\nabla(\nabla\cdot\vec{c})-\nabla^{2}\vec{c}\)</span> ונקבל:
+<span>$$-c\nabla^{2}A+c\nabla\left( \nabla\cdot A \right)+\frac{\partial}{\partial t}\;{\vec{\nabla}}\phi+\frac{\partial^{2}{\vec{A}}}{\partial t^{2}}=4\pi j$$</span>
+כאשר מכיול לורנץ נקבל כי <span>\({\frac{1}{c}}\,\frac{\partial\Phi}{\partial t}\,+\,{\vec\nabla\cdot A}\,=\,0\)</span> וניתן להציב בגורם של הדיברגנץ ולקבל כי <span>\(\frac{\partial }{\partial t} \bar{\nabla}\phi\)</span> מתבטל. לכן נקבל סה"כ:
+<span>$${\frac{1}{c^{2}}}\,{\frac{\partial^{2}\vec{A}}{\partial t^{2}}}\,-\,\nabla^{2}\vec{A}\,=\,{\frac{4\pi}{c}}\,\vec{J}$$</span></p>
+</div>
+<p>הדמיות הראשיות של האלקטרו מגנטיות הם למעשה הפוטנציאלים <span>\(\phi,\vec{A}\)</span>, ולא השדות החשמליים והמגנטיים. הם פותרים הכל. למעשה נקבל כי משוואות מקסוואל שקולות לשתי משוואות גלים.</p>
+<div class="remark">
+<p>כיוון שהפוטנציאל החשמלי הוא רכיב של ה-4 פוטנציאל, ניתן לכתוב משוואות שקולות משוואות מקסוואל בשורה אחת בעזרת ה-4 פוטנציאל וה-4 זרם:
+<span>$$\partial^{\nu}\partial_\nu A^{\mu}=-\frac{4\pi}{c^{2}}J^{\mu}$$</span></p>
+</div>
+<h2>משוואת הגלים</h2>
+<p>נרצה למצוא פתרון כללי למשוואת הגלים מהצורה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=f(t,s)$$</span>
+עבור מקור נקודתי נקבל כי המשוואה תהיה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=\delta(r)$$</span>
+כאשר אנו יודעים מגלים כי זה יהיה פשוט גל כדורי, אשר הפתרון שלו יהיה מהצורה:
+<span>$$\psi(x,y,z,t)={\frac{f(t-r/c)}{r}}$$</span>
+כאשר אם זה לא מקור נקודתי, אפשר יהיה לחשוב על זה כסופרפוזיציה של מקורות נקודתיים. כלומר נדרש לבצע אינטגרל מרחבי, 
+ולכן נקבל את הטענה הבאה:
+<strong>טענה</strong>
+הפתרון של משוואת הגלים מהצורה:
+<span>$$\nabla^{2}\psi-\,{\frac{1}{c^{2}}}\,{\frac{\partial^{2}\psi}{\partial t^{2}}}=-f(x,t)$$</span>
+יהיה:
+<span>$$\psi=\int \frac{f\left(x, t-\frac{r}{c} \right)}{r}dV$$</span></p>
+<div class="remark">
+<p>העקרון שעשינו עכשיו של לחשוב על משהו כאוסף של מקורות נקודתיים זה הרעיון מאחורי פונקצית גרין. ולכן מה שעשינו שקול ללפתח פונקציית גרין כדי להגיע לפתרון הזה.</p>
+</div>
+<div class="corollary">
+<p>פתרונות משוואות הגלים אשר שקולות משוואות מקסוואל יהיו:
+<span>$$\Phi(\vec{x},t)=\int d^{3}x^{\prime}\frac{\rho(\vec{x}^{\prime},t_{r})}{|\vec{x}-\vec{x}^{\prime}|} \qquad \vec{A}(\vec{x},t)=\frac{1}{c}\int d^{3}x^{\prime}\frac{\vec{J}(\vec{x}^{\prime},t_{r})}{|\vec{x}-\vec{x}^{\prime}|} $$</span>
+כאשר:
+<span>$$t_{r}=t-{\frac{|{\vec{x}}-{\vec{x}}^{\prime}|}{c}}$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן לפתח משוואת גלים ישירות עבור השדה החשמלי והמגנטי:
+<span>$$\nabla^{2}\vec{E}-{\frac{1}{c^{2}}}{\frac{\partial^{2}\vec{E}}{\partial t^{2}}}={\frac{1}{\epsilon_{0}}}\nabla\rho+\frac{4\pi}{c}{\frac{\partial\vec{j}}{\partial t}}\qquad \nabla^{2}\vec{B}-{\frac{1}{c^{2}}}{\frac{\partial^{2}\vec{B}}{\partial t^{2}}}=-\frac{4\pi}{c}\nabla\times\vec{j}$$</span></p>
+</div>
+<h2>גלים אלקטרומגנטים בריק</h2>
+<p>עבור ריק נקבל עבור השדה החשמלי והמגנטי את משוואות הגלים:
+<span>$$\nabla^{2}\vec{E}=\frac{1}{c^{2}}{\frac{\partial^{2}\vec{E}}{\partial t^{2}}},\quad\nabla^{2}\vec{B}=\frac{1}{c^{2}}{\frac{\partial^{2}\vec{B}}{\partial t^{2}}}$$</span>
+כאשר אנו יודעים שהפתרונות של המשוואה הזו זה גלים מישוריים מהצורה:
+<span>$$\tilde{\vec E}(z,t)=\tilde{\vec E}_{0}e^{i\,(k z-\omega t)},\quad\tilde{\vec B}(z,t)=\tilde{\vec B}_{0}e^{i\,(k z-\omega t)}$$</span></p>
+<div class="proposition">
+<p>מזה ש-<span>\(\bar{\nabla} \cdot \vec{B}=0\)</span> וגם <span>\(\bar{\nabla} \cdot \vec{E}=0\)</span> נקבל כי הגל טרנזטיבי/רוחבי, כלומר:
+<span>$$(\tilde{E}_{0})_{z}=(\tilde{B}_{0})_{z}=0$$</span>
+והגלים החשמלים והמגנטיים שניהם מאונכים לכיוון התקדמות הכל.</p>
+</div>
+<div class="remark">
+<p>גם כאשר אנחנו בחומר נקבל כי הגל טרנזטיבי, אך ייתכן רכיבים אורכיים.</p>
+</div>
+<div class="proposition">
+<p>מחוק פאראדיי נקבל כי <span>\(\bar{\nabla} \times \vec{E}=-\frac{\partial \vec{B}}{\partial t}\)</span> ולכן:
+<span>$$-k\left( \tilde{E}_{0} \right)_{y}=\omega\left( \tilde{B}_{0} \right)_{x},\;\;\;k\left( \tilde{E}_{0} \right)_{x}=\omega\left( \tilde{B}_{0} \right)_{y}\implies \tilde{{\vec B}}_{0}=\frac{k}{\omega}\left( \hat{{\vec z}}\times\tilde{{\vec E}}_{0} \right)=c\left( \hat{z}\times \vec{E}_{0} \right)$$</span>
+כלומר הגלים החשמליים והמגנטיים נמצאים באותו פאזה כאשר האמפליטודות שלהם מקיימות את הקשר:
+<span>$$B_{0}=\frac{k}{\omega}E_{0}=\frac{1}{c}E_{0}$$</span></p>
+</div>
+<div class="example">
+<p>אם <span>\(\vec{E}\)</span> בכיוון <span>\(\hat{x}\)</span> אז <span>\(\vec{B}\)</span> בכיוון <span>\(\hat{y}\)</span> ומתקיים:
+<span>$$\tilde{\vec E}(z,t)=\tilde{E}_{0}e^{i(k z-\omega t)}\hat{\vec x},\quad\tilde{\vec B}(z,t)=\frac1c\tilde{E}_{0}e^{i(k z-\omega t)}\hat{\vec y}$$</span>
+או אם נקח את החלק הממשי:
+<span>$$\vec{E}(z,t)=E_{0}\cos(k z-\omega t+\delta)\,{\hat{\vec{x}}},\quad\vec{B}(z,t)={\frac{1}{c}}E_{0}\cos(k z-\omega t+\delta)\,{\hat{\vec{y}}}$$</span></p>
+</div>
+<div class="remark">
+<p>אם נכילל את זה למערכת צירים כללית, שבה כיוון ההתקדמות היא <span>\(\vec{k}\)</span> והכיוון של <span>\(\vec{E}\)</span> הוא <span>\(\vec{n}\)</span> אז נדרש שיתקיים <span>\({\hat{\vec{n}}}\cdot{\hat{\vec{k}}}=0\)</span> כיוון שזה גל רוחבי וכן הכיוון של <span>\(\vec{B}\)</span> יהיה <span>\(\hat{n} \times \hat{k}\)</span>.</p>
+</div>
+<h2>אנרגיה של גל אלקטרומגנטי</h2>
+<p>אנו יודעים כי האנרגיה של שדה חשמלי יהיה האינטגרל של השדה בריבוע על המרחב, וכן האנרגיה של השדה המגנטי יהיה האניטגרל על המרחב של השדה המגנטי בריבוע. לכן האנרגיה הכוללת של גל אלקטרומגנטי יהיה שתי התרומות האלה.</p>
+<div class="proposition"><span class="keyword">אנרגיה של השדה החשמלי והמגנטי</span><p>ברגע זמן נתון, צפיפות האנרגיה <span>\(u\)</span> והאנרגיה הכוללת <span>\(U_{tot}\)</span> יהיו:
+<span>$$u=\frac{1}{8\pi}\left( E^{2}+B^{2} \right)\implies U_{tot}=\iiint u \;\mathrm{dV}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">האנרגיה המכנית שנוצר מהשדה החשמלי והמגנטי לזמן</span><p>כיוון שהשדה המגנטי לא מבצע עבודה, בעזרת כוח לורנץ על צפיפות בנפח <span>\(V\)</span> נקבל:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,(\rho\,\vec{E}+\vec{j}\times\vec{B})\cdot{\vec{v}}=\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}$$</span>
+כאשר השתמשנו בזה ש-<span>\(\vec{j}(\vec{r},\,t)=\rho(\vec{r},\,t){\vec{\upsilon}}(\vec{r},\,t)\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">ווקטור פוינטינג</span><p><span>$${\vec S}=\frac{c}{4\pi}{\vec E}\times{\vec B}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט פוינטנג</span><p>השטף של ווקטור פוינטינג על מעטפת של נפח שווה לסך האנרגיה(במכנה והאנרגיה של השדה) שנובעים מהשדות החשמליים והמגנטיים:
+<span>$$\int_{\partial V}\vec{S}\cdot\vec{n}\;\mathrm{d}A=U_{\mathrm{EM}}+U_{\mathrm{mech}}$$</span>
+או לחלופין ניתן לכתוב בעזרת צפיפות אנרגיה משוואת רציפות:
+<span>$$\frac{\partial u_{\mathrm{EM}}}{\partial t}+\nabla\cdot{\vec S}=-{\vec j}\cdot{\vec E}$$</span></p>
+</div>
+<div class="proof">
+<p>נתחיל מהמשוואה של האנרגיה המכנית:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}$$</span>
+נבודד את <span>\(\vec{j}\)</span> ממשוואת אמפר-מקסוואל ונקבל כי האנרגיה המכנית תהיה שווה:
+<span>$$\frac{d W_{\mathrm{mech}}}{d t}=\int_{V}d^{3}r\,\left[\frac{c}{4\pi}\nabla\times{\vec B}-\frac{1}{4\pi}\frac{\partial{\vec E}}{\partial t}\right]\cdot{\vec E}$$</span>
+כעת נשתמש בזהות:
+<span>$$\nabla\cdot\left(\vec{E}\times\vec{B}\right)=\vec{B}\cdot\left(\nabla\times\vec{E}\right)-\vec{E}\cdot\left(\nabla\times\vec{B}\right)=-\vec{B}\cdot{\frac{\partial\vec{B}}{\partial t}}-\vec{E}\cdot\left(\nabla\times\vec{B}\right)$$</span>
+ונקבל:
+<span>$$\int_{V}d^{3}r\,{\frac{\partial}{\partial t}}{\frac{1}{8\pi}}\left[\vec{E}\cdot\vec{E}+\vec{B}\cdot\vec{B}\right]=-\int_{V}d^{3}r\,\vec{j}\cdot\vec{E}-\int_{V}d^{3}r\,{\frac{c}{4\pi}}\nabla\cdot\left(\vec{E}\times\vec{B}\right)$$</span>
+כאשר נזהה את הגדלים המתאימים:
+<span>$$U_{\mathrm{EM}}=-U_{\mathrm{mech}}-\int_{V}\bar{\nabla} \cdot \vec{S} \;\mathrm{d}V$$</span>
+כאשר ממשפט הדיברגנץ נקבל כי:
+<span>$$\int_{\partial V}\vec{S}\cdot\vec{n}\;\mathrm{d}A=U_{\mathrm{EM}}+U_{\mathrm{mech}}$$</span></p>
+</div><h2 id='Electrodynamics_5_2'>קרינה של חלקיק</h2>
+ <div class="definition"><span class="keyword">קרינה</span><p>ההספק הכולל יהיה האינטגרל המשטחי על ספרה ברדיוס <span>\(r\)</span> של הווקטור פוינטינג. כלומר ההספק הכולל יהיה:
+<span>$$P\left(r,t\right)=\oint\vec{S}\cdot d\vec{a}={\frac{c}{4\pi}}\oint\left( \vec{E}\times\vec{B} \right)\cdot d\vec{a}.$$</span>
+כאשר נגדיר את הקרינה בתור הגבול כאשר הרדיוס שואף לאינסוף:
+<span>$$P_{\mathrm{rad}}(t_{0})=\operatorname*{lim}_{r\to\infty}P\left(r,t_{0}+{\frac{r}{c}}\right)$$</span></p>
+</div>
+<p>הקרינה זה למעשה האנרגיה ליחידת זמן שעוזבת את המערכת ולא חוזרת.</p>
+<div class="remark">
+<p>השטח פנים של ספרה זה <span>\(4\pi r^{2}\)</span>. כדי שקרינה תתרחש, נדרש שהווקטור פוינטינג תקטן בקצב שלא יותר מהיר מ-<span>\(\frac{1}{r^{2}}\)</span>(כלומר אם ילך כמו <span>\(\frac{1}{r^{3}}\)</span> נקבל כי האינטגרל על הווקטור פוינטינג ישאף ל-0, וההספק של הקרינה יהיה 0).  כלומר קרינה זה למעשה מתיחחס לגורמים של השדה האלקטרומגנטי שהאנרגיה שלהם אינה דועכת ל-0 באינסוף.</p>
+</div>
+<div class="definition"><span class="keyword">איזור הקרינה/radiation zone</span><p>האיזור שבו האנרגיה היחידה שנשאר היא הקרינה - כלומר במרחק גדול מהמקור.</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחאת לינרארד-ויכארט</span><p>עבור חלקיק הנע במיקום <span>\(\vec{R}=\vec{r}-\vec{r}_{0}(t)=R(t)\hat{n}(t)\)</span> ו-<span>\(\beta=\frac{v}{c}\)</span> מתקיים:
+<span>$$\Phi(\vec{x},\,t)\,=\,\left[{\frac{q}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}},\qquad\vec{A}(\vec{x},\,t)\,=\,\left[{\frac{q{\vec{\beta}}}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי הפתרון של הפוטנציאלים יהיו:
+<span>$$\varphi\left( \vec{r},t \right)=\int d^{3}r^{\prime}\,{\frac{\rho\left( \vec{r}^{\prime},t-|\vec{r}-\vec{r}^{\prime}|/c \right)}{|\vec{r}-\vec{r}^{\prime}|}}\qquad \vec{A}(\vec{r},t)={\frac{1}{c}}\int d^{3}r^{\prime}\,{\frac{{\vec{j}(\vec{r}^{\prime},t-|\vec{r}-\vec{r}^{\prime}|/c)}}{|\vec{r}-\vec{r}^{\prime}|}}$$</span>
+(לחלופין בעזרת סימון טנזורי היה אפשר לכתוב <span>\({ A}^{\alpha}(x)\,=\,\frac{4\pi}{c}\int\,d^{4}x^{\prime}\,\,G_{r}(x\,-\,x^{\prime})J^{\alpha}(x^{\prime})\)</span>). כאשר עבור חלקיק מתקיים:
+<span>$$\rho\left( {\vec r},t \right)=q\delta\left( {\vec r}-{\vec r}_{0}(t) \right)\qquad {\vec j}({\vec r},\,t)=q{\vec v}(t)\delta({\vec r}-{\vec r}_{0}(t))$$</span>
+ניתן להציב את הזרם בפוטנציאל ע"י הוספת אינטרגל נוסף:
+<span>$$\varphi(\vec{r},t)={ }\int d^{3}r^{\prime}\int d t^{\prime}{\frac{\rho(\vec{r}^{\prime},t^{\prime})}{|\vec{r}-\vec{r}^{\prime}|}}\delta(t^{\prime}-t+|\vec{r}-\vec{r}^{\prime}|/c)$$</span>
+כאשר כעת נציב את הצפיפות מטען:
+<span>$$\varphi({\vec r},t)=\frac{q}{4\pi\epsilon_{0}}\int d t^{\prime}\frac{\delta(t^{\prime}-t+R(t^{\prime})/c)}{R(t^{\prime})}.$$</span>
+נשתמש בזהות של פונקציית דלתא האומרת:
+<span>$$\delta[g(x)]=\sum_{n}\frac{1}{|g^{\prime}(x_{n})|}\delta(x-x_{n})\quad g(x_{n})=0,\ \ g^{\prime}(x_{n})\ne0$$</span>
+כאשר עבור חלקיק עם מהירות <span>\(v&lt;c\)</span> נקבל כי הארגיומנט של הפונקציית דלתא הוא אפס בזמן יחודי <span>\(t_{\mathrm{ret}}=t-{\frac{R(t_{\mathrm{ret}})}{c}}\)</span>. כעת ניתן לסמן <span>\(\beta=\frac{v}  {c}\)</span> ולכתוב:
+<span>$$g(t^{\prime})={\frac{d}{d t^{\prime}}}\left[t^{\prime}-t+R(t^{\prime})/c\right]=1+{\frac{1}{c}}{\frac{d}{d t^{\prime}}}{\sqrt{\vec{R}(t^{\prime})\cdot\vec{R}(t^{\prime})}}=1-{\vec{\beta}}(t^{\prime})\cdot{\hat{\vec{n}}}(t^{\prime})&gt;0$$</span>
+ולכן נקבל עבור הפוטנציאל הסקלארי:
+<span>$$\varphi(\vec{r},t)={ }\left[{\frac{q}{R(t)g(t)}}\right]_{t=t_{\mathrm{ret}}}={ }\left[{\frac{q}{R-{\vec{\beta}}\cdot\vec{R}}}\right]_{\mathrm{ret}}$$</span>
+כאשר עבור הפוטנציאל הווקטורי נדרש להכפיל ב-<span>\(v\)</span> כדי לקבל זרם ולכן:
+<span>$$\vec{A}(\vec{r},t)={ \frac{1}{c}}\left[{\frac{q\vec{v}(t)}{R(t)g(t)}}\right]_{t=t_{\mathrm{rel}}}={ \frac{1}{c}}\left[{\frac{q\vec{v}}{R-{\vec{\beta}}\cdot\vec{R}}}\right]_{\mathrm{ret}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שדות לינרארד-ויכארט</span><p>השדות שנוצרות עבור חלקיק נע יהיו:
+<span>$$\begin{gather}\vec{E}(\vec{r},t)=q\left[{\frac{\hat{\vec{n}}}{g R^{2}}}\right]_{\mathrm{ret}}+q{\frac{d}{d t}}\left[{\frac{\hat{\vec{n}}-\beta}{g c R}}\right]_{\mathrm{ret}} \\\vec{B}(\vec{r},t)={\frac{q}{c}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g R^{2}}}\right]_{\mathrm{ret}}+{\frac{q}{c}}{\frac{d}{d t}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g c R}}\right]_{\mathrm{ret}}
+\end{gather}$$</span></p>
+</div>
+<p>ניתן להראות את זה ע"י שימוש בפוטנציאלים מהטענה הקודמת, או אם אנחנו מרגישים מספיק נוח אם טנזורים, ניתן לחשב את ה-4 פוטנציאל <span>\(A^{\alpha}\)</span> ואז לגזור אותו ולקבל:
+<span>$$\partial^{\alpha}A^{\beta}\,=\,2e\,\int\,d\tau\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}}{V\,\cdot\,(x\,-\,r)}\right]\,\theta[x_{0}\,-\,r_{0}(\tau)]\,\,\delta\{[x\,-\,r(\tau)]^{2}\}\,$$</span>
+כאשר בעזרת זה ניתן לקבל את טנזור השדה האלקטרומגנטי:
+<span>$$F^{\alpha\beta}=\frac{e}{V\cdot\,(x\,-\,r)}\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}\,-\,(x\,-\,r)^{\beta}V^{\alpha}}{V\cdot\,(x\,-\,r)}\right]$$</span></p>
+<div class="proposition"><span class="keyword">נוסחאת לאמור</span><p>בגבול שבו <span>\(v\ll c\)</span> נקבל כי ההספק יהיה:
+<span>$$P={\frac{2}{3}}\,{\frac{q^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}$$</span></p>
+</div>
+<div class="proof">
+<p>תחת קירוב זה נקבל כי:
+<span>$$\vec{E}_{a}\,=\,{\frac{e}{c}}\left[{\frac{\vec{n}\,\times\,(\vec{n}\,\times\,{\dot{\vec{\beta}}})}{R}}\right]_{\mathrm{ret}}$$</span>
+כאשר ניתן לקבל את שטף האנרגיה בעזרת ווקטור פוינטינג:
+<span>$${\textbf{S}}={\frac{c}{4\pi}}{\textbf{E}}\times{\textbf{B}}={\frac{c}{4\pi}}\,|{\textbf{E}}_{a}|^{2}{\textbf{n}}$$</span>
+ולכן ההספק ליחידת זווית מרחבית יהיה:
+<span>$$\frac{d P}{d\Omega}=\frac{c}{4\pi}\,|R{\vec E}_{a}|^{2}=\frac{e^{2}}{4\pi c}\,|{\vec n}\,\times\,({\vec n}\,\times\,{\dot{\vec\beta}})|^{2}={\frac{e^{2}}{4\pi c^{3}}}\,\vert{\dot{\vec{v}}}\vert^{2}\,\sin^{2}\!\Theta$$</span>
+כאשר <span>\(\Theta\)</span> זה הזווית בין התאוצה <span>\(\dot{\vec{v}}\)</span> לבין <span>\(\vec{n}\)</span>. אם נבצע אינטגרל על כל הזווית המרחבית נקבל כי <span>\(P={\frac{2}{3}}\,{\frac{e^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחא להספק של לינרארד</span><p><span>$$P=\frac{2}{3}\,\frac{e^{2}}{c}\,\gamma^{6}[(\dot{\vec\beta})^{2}\,-\,({\vec\beta}\,\times\,\dot{\vec\beta})^{2}]$$</span></p>
+</div>
+<div class="remark">
+<p>בשתי המקרים, ניתן לראות כי אם אין תאוצה - אין קרינה.</p>
+</div><h2 id='Electrodynamics_5_3'>קרינה של דיפול</h2>
+ <div class="definition"><span class="keyword">דיפול חשמלי המבצע אוסילציות</span><p>ניתן לדמיין מערכת זו בשתי דרכים שקולות:</p>
+</div>
+<ol>
+<li>
+<p>שתי ספרות מוליכות קטנות המרוחקות במרחק <span>\(d\)</span> ומחוברות בתיל מוליך. ספרה אחת מכילה מטען <span>\(q(t)\)</span> והשנייה(כאופייני בדיפול חשמלי) מכילה מטען <span>\(-q(t)\)</span>, כאשר <span>\(q(t)\)</span> משתנה בזמן בצורה הרמונית באופן הבא - <span>\(q(t)=q_{0}\cos\left( \omega t \right)\)</span>. </p>
+</li>
+<li>
+<p>שתי ספרות מוליכות קטנות עם מטען <span>\(q\)</span> ו-<span>\(-q\)</span> קבוע בזמן ומוברות בתיל שבמרחק שלו משתנה בזמן בצורה הרמונית - <span>\(d(t)=d_{0}\cos\left( \omega t \right)\)</span>. </p>
+</li>
+</ol>
+<div class="proposition"><span class="keyword">פוטנציאל של דיפול</span><p>ללא קירוב נקבל כי הפוטנציאל של דיפול המבצע אוסצילטיות יהיה:
+<span>$$\Phi\left( r,\theta,t \right)=q_{0}\left[\frac{\cos[\omega(t-r_{+}/c)]}{r_{+}}-\frac{\cos[\omega(t-r_{-}/c)]}{r_{-}}\right]$$</span>
+כאשר <span>\(p_{0}\equiv q_{0}d\)</span> ו-<span>\(r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נתייחס לדיפול כמו שתי ספרות עם מטען משתנה בזמן. ניתן לכתוב את הצפיפות בצורה הבאה:
+<span>$$\rho({\vec{x}},t)=q_{0}\delta({\vec{x}})\delta({\vec{y}})\delta(z-d/2)\cos(\omega t)-q_{0}\delta({\vec{x}})\delta({\vec{y}})\delta(z+d/2)\cos(\omega t)$$</span>
+כאשר ניתן להציב בביטוי של הפוטנציאל החשמלי ולקבל:
+<span>$$\begin{gather}\Phi(x,t)=\int\frac{d^{3}x^{\prime}}{|x-x^{\prime}|}\rho(x^{\prime},t-c^{-1}|x-x^{\prime}|)= \\=\int{\frac{d x^{\prime}d y^{\prime}d z^{\prime}}{|{\vec{x}}-{\vec{x^{\prime}}}|}}\left\{q_{0}\delta(x^{\prime})\delta(y^{\prime})\delta(z^{\prime}-d/2)-q_{0}\delta(x)\delta(y)\delta(z+d/2)\cos(\omega t)\right\}= \\=q_{0}\left[\frac{\cos[\omega(t-r_{+}/c)]}{r_{+}}-\frac{\cos[\omega(t-r_{-}/c)]}{r_{-}}\right]
+\end{gather}$$</span>
+כאשר לפי משפט הקוסינוסים:
+<span>$$r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}$$</span>
+נציב ונקבל את המבוקש:
+<span>$$\Phi\left( r,\theta,t \right)={\frac{p_{0}\cos\theta}{r}}\left(-{\frac{\omega}{c}}\sin\left[ \omega(t-r/c) \right]+{\frac{1}{r}}\cos\left[ \omega(t-r/c) \right]\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם נניח כי <span>\(d\ll r\)</span>(בטווח שזה דיפול), <span>\(d\ll \frac{c}{\omega}\)</span>(אוסילציות קטנות ביחס למרחק) וגם <span>\(r\gg \frac{c}{\omega}\)</span>(באיזור הקרינה) נקבל כי ניתן לכתוב את הפוטנציאלים בצורה הבאה:
+<span>$$\Phi = -\frac{p_{0}\omega}{c}\left(\frac{\cos\theta}{r}\right)\sin\left[ \omega(t-r/c) \right] \qquad \mathbf{A}(r,\theta,t)=-\frac{p_{0}\omega}{c r}\sin[\omega(t-r/c)]\,{\hat{\mathbf{z}}}.$$</span></p>
+</div>
+<div class="proof">
+<p>מהקירוב <span>\(d\ll r\)</span> נקבל:
+<span>$$r_{\pm}=\sqrt{r^{2}\mp r d\cos\theta+(d/2)^{2}}\approx r\left(1\mp\frac{d}{2r}\cos\theta\right)\qquad \frac{1}{r_{\pm}}=\frac{1}{r}\left(1\pm\frac{d}{2r}\cos\theta\right)$$</span>
+כאשר ניתן לקרב גם את הקוסינוסים:</p>
+<p><span>$$\cos[\omega(t-r_{\pm}/c)]\approx\cos\left[\omega(t-r/c)\pm{\frac{\omega d}{2c}}\cos\theta\right]=\cos\left[\omega(t-r/c)\right]\cos\left[{\frac{\omega d}{2c}}\cos\theta\right]\mp\sin\left[\omega(t-r/c)\right]\sin\left[{\frac{\omega d}{2c}}\cos\theta\right]$$</span></p>
+</div>
+<p>מהקירוב <span>\(d\ll \frac{c}{\omega}\)</span> נקבל:
+<span>$$\cos[\omega(t-r_{\pm}/c)]\approx\cos\left[\omega(t-r/c)\right]\mp\sin\left[\omega(t-r/c)\right]\frac{\omega d}{2c}\cos\theta$$</span>
+כאשר אם נשלב את מה שקיבלנו עד עכשיו נקבל:
+<span>$$\Phi={\frac{p_{0}\cos\theta}{r}}\left(-{\frac{\omega}{c}}\sin\left[ \omega(t-r/c) \right]+{\frac{1}{r}}\cos\left[ \omega(t-r/c) \right]\right)$$</span>
+באיזור הקרינה <span>\(r\gg \frac{c}{\omega}\)</span> נקבל:
+<span>$$\Phi({\vec{x}},t)=-{\frac{p_{0}\omega}{c}}\left({\frac{\cos\theta}{r}}\right)\sin\left[\omega(t-r/c)\right]$$</span>
+כאשר כעת נרצה למצוא את הפוטנציאל הווקטורי. ראשית נשים לב כי הזרם יהיה:
+<span>$$I(t)=\frac{d q(t)}{d z}\hat{z}=-q_{0}\omega\sin\left( \omega t \right)\hat{z} \implies {\vec A}({\vec{x}},t)={\hat{z}}{\frac{1}{c}}\int_{-d/2}^{d/2}d z{\frac{-q_{0}\omega\sin(\omega(t-r(z)/c))}{r(z)}}$$</span>
+כאשר בעזרת הקירובים ניתן להליף את האינטגרל באינטגרנד בעזרך במרכז התחום(0) ולקבל:
+<span>$${ A}(r,\theta)=-\dot{z}{\frac{p_{0}\omega}{c r}}\sin(\omega(t-r/c))=(\dot{\theta}\sin\theta-\hat{n}\cos\theta){\frac{p_{0}\omega}{cr}}\sin(\omega(t-r/c))$$</span></p>
+<div class="corollary">
+<p>השדות שנוצרות תחת הקירובים מהטענה הקודמת יהיו:
+<span>$$\begin{gather}\mathbf{E}=-\nabla \Phi-{\frac{\partial\mathbf{A}}{\partial t}}=-{\frac{p_{0}\omega^{2}}{c}}\left({\frac{\sin\theta}{r}}\right)\cos\left[ \omega(t-r/c) \right]\,{\vec{\hat{\theta}}}. \\{\vec B}={\nabla\times{\vec A}}=-\frac{p_{0}\omega^{2}}{ c^{2}}\left(\frac{\sin\theta}{r}\right)\cos\left[ \omega(t-r/c) \right]\,{\hat{\vec{\phi}}}
+\end{gather}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ההספק של דיפול חשמלי</span><p>נקבל כי ההספק בממוצע על זמן מחזור יהיה:
+<span>$$\langle P \rangle =\frac{p_{0}^{2}\omega^{4}}{3c^{3}}$$</span></p>
+</div>
+<div class="proof">
+<p>נחשב בעזרת ווקטור פוינטינג:
+<span>$${\vec S\left( r,\,t \right)}=\frac{4\pi}{c}\left( {\vec E\times \vec B} \right)=\left(\frac{p_{0}\omega^{2}}{c^{2}}\left(\frac{\sin\theta}{r}\right)\cos\left[ \omega(t-r/c) \right]\right)^{2}\,{\hat{r}}$$</span>
+כאשר אם ניקח את הממוצע לאורך זמן מחזור נקבל:
+<span>$$\langle\mathbf{S}\rangle=\left({\frac{p_{0}^{2}\omega^{4}}{8\pi c^{2}}}\right){\frac{\sin^{2}\theta}{r^{2}}}\,\mathbf{\hat{r}}$$</span>
+כאשר עבור ספרה ברדיוס <span>\(r\)</span> נקבל:
+<span>$$\langle P\rangle=\int\langle\mathbf{S}\rangle\cdot d\mathbf{a}={\frac{p_{0}^{2}\omega^{4}}{8\pi c^{2}}}\int{\frac{\sin^{2}\theta}{r^{2}}}r^{2}\sin\theta\,d\theta\,d\phi={\frac{p_{0}^{2}\omega^{4}}{3 c^{2}}}$$</span></p>
+</div><h2 id='Electrodynamics_5_4'>טנזור המאמץ האלקטרומגנטי</h2>
+ <div class="definition"><span class="keyword">טנזור המאמץ החשמלי</span><p><span>$$T_{i j}({\vec E})=\epsilon_{0}(E_{i}E_{j}\,-\,{\textstyle{\frac{1}{2}}}\delta_{i j}E^{2})$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור נפח נתון <span>\(V\)</span>, צפיפות הכוח(כוח ליחידת נפח) עבור כוח אלקטרומגנטי יהיה:
+<span>$$\begin{array}{c}{{\displaystyle{\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}+(\vec{E}\cdot\nabla)\vec{E}\right]+\frac{1}{\mu_{0}}\left[(\nabla\cdot\vec{B})\vec{B}+(\vec{B}\cdot\nabla)\vec{B}\right]}}}\\ {{\displaystyle{-\frac{1}{2}\nabla\left(\epsilon_{0}E^{2}+\frac{1}{\mu_{0}}B^{2}\right)-\epsilon_{0}\frac{\partial}{\partial t}(\vec{E}\times\vec{B}).}}}\end{array}$$</span></p>
+</div>
+<div class="proof">
+<p>בעזרת כוח לורנץ, אנו יודעים כי:
+<span>$$\vec{F}=\int_{\mathcal{V}}(\vec{E}+\vec{v}\times\vec{B})\rho\,d\tau=\int_{\mathcal{V}}\left(\rho\vec{E}+\vec{J}\times\vec{B}\right)d\tau.$$</span>
+ולכן הכוח ליחידת נפח יהיה:
+<span>$$\vec{f}=\rho\vec{E}+\vec{J}\times\vec{B}.$$</span>
+כאשר ניתן להחליף את <span>\(\vec{J}\)</span> בעזרת נוחאת אמפר-מקסוואל ואת <span>\(\rho\)</span> בעזרת חוק גאוס ולקבל:
+<span>$$\vec{f}=\epsilon_{0}(\nabla\cdot\vec{E})\vec{E}+\left({\frac{1}{\mu_{0}}}\nabla\times\vec{B}-\epsilon_{0}{\frac{\partial\vec{E}}{\partial t}}\right)\times\vec{B}$$</span>
+כאשר נזכור כי עבור מכפלה וקטורית מתקיים נוסחאת ליבניץ:
+<span>$${\frac{\partial}{\partial t}}(\vec{E}\times\vec{B})=\left({\frac{\partial\vec{E}}{\partial t}}\times\vec{B}\right)+\left(\vec{E}\times{\frac{\partial\vec{B}}{\partial t}}\right)$$</span>
+כעת חוק פאראדיי אומר כי <span>\({\frac{\partial{\vec B}}{\partial t}}=-{\vec\nabla\times E}\)</span>, וניתן להציב ולקבל:
+<span>$${\frac{\partial{\vec E}}{\partial t}}\times{\vec B}={\frac{\partial}{\partial t}}({\vec E}\times{\vec B})+{\vec E}\times({\vec\nabla}\times{\vec E})$$</span>
+וכעת:
+<span>$$\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}-\vec{E}\times(\nabla\times\vec{E})\right]-{\frac{1}{\mu_{0}}}\left[\vec{B}\times(\nabla\times\vec{B})\right]-\epsilon_{0}{\frac{\partial}{\partial t}}(\vec{E}\times\vec{B})$$</span>
+כאשר ניתן להוסיף לביטוי <span>\(\left( \bar{\nabla} \cdot \vec{B} \right)\cdot \vec{B}\)</span> כדי שהביטוי יהיה יותר סימטרי(הרי <span>\(\bar{\nabla} \cdot \vec{B}=0\)</span>). הנוסף מכלל מספכלה מתקיים:
+<span>$$\nabla(E^{2})=2(\vec{E}\cdot\nabla)\vec{E}+2\vec{E}\times(\nabla\times\vec{E})$$</span>
+ולכן:
+<span>$$\vec{E}\times(\nabla\times\vec{E})={\frac{1}{2}}\nabla(E^{2})-(\vec{E}\cdot\nabla)\vec{E}$$</span>
+כאשר מתקבל ביטוי זהה עבור <span>\(\bar{\nabla}(B^{2})\)</span>. ולכן נקבל סה"כ:
+<span>$$\begin{array}{c}{{\displaystyle{\vec{f}=\epsilon_{0}\left[(\nabla\cdot\vec{E})\vec{E}+(\vec{E}\cdot\nabla)\vec{E}\right]+\frac{1}{\mu_{0}}\left[(\nabla\cdot\vec{B})\vec{B}+(\vec{B}\cdot\nabla)\vec{B}\right]}}}\\ {{\displaystyle{-\frac{1}{2}\nabla\left(\epsilon_{0}E^{2}+\frac{1}{\mu_{0}}B^{2}\right)-\epsilon_{0}\frac{\partial}{\partial t}(\vec{E}\times\vec{B}).}}}\end{array}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טנזור המאמץ</span><p>זהי מטריצה 3 מימדית המוגדרת:
+<span>$$\sigma_{i j}\equiv\epsilon_{0}\left(E_{i}E_{j}-\frac{1}{2}\delta_{i j}E^{2}\right)+\frac{1}{\mu_{0}}\left(B_{i}B_{j}-\frac{1}{2}\delta_{i j}B^{2}\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>ניתן כעת לכתוב את צפיפות האנרגיה בצורה הבאה:
+<span>$${\vec f}=\nabla\cdot \sigma-\epsilon_{0}\mu_{0}\frac{\partial{\vec S}}{\partial t}$$</span>
+כאשר <span>\(\sigma\)</span> זה טנזור המאמץ, ו-<span>\(S\)</span> זה ווקטור פוינטינג.</p>
+</div>
+<div class="proposition"><span class="keyword">אוילר לגרנג' עבור שדות</span><p><span>$$\frac{\partial{\cal L}}{\partial\psi}-\partial_{\mu}\frac{\partial{\cal L}}{\partial\left(\partial_{\mu}\psi\right)}=0$$</span>
+כאשר תנאי השפה הם <span>\(\psi\left( \vec{x},t_{i} \right)\)</span> ו-<span>\(\psi\left( \vec{x},t_{f} \right)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אוילר לגרנג' עבור שדות שקול ל:
+<span>$$\partial_{\nu}{ \left(\frac{\partial L}{\partial\left(\partial_{\nu}\psi\right)}\partial_{\mu}\psi-\delta_{\mu}^{~\nu}L\right) }=0$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טנזור המאמץ-אנרגיה תנע</span><p>טנזור המוגדר
+<span>$${T^{\nu}}_{\mu}=\left(\frac{\partial L}{\partial\left(\partial_{\nu}\psi\right)}\partial_{\mu}\psi-\delta_{\mu}^{~\nu}L\right)$$</span>
+כלומר מוגדר כך שהפתרון של משוואת אוילר לגרנג' עבור השדה יהיה <span>\(\partial_{\nu}{T^{\nu}}_{\mu}=0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>עבור הלגרנג'יאן של השדה שפיתחנו <span>\(\mathcal{L}=-\frac{1}{16\pi}F_{\alpha \beta}F^{\alpha \beta}\)</span> נקבל כי טנזור המאמץ יהיה שווה:
+<span>$$T^{\nu\mu}=-\frac{1}{4\pi}F^{\nu\rho}F_{\;\;\rho}^{\mu}+\frac{1}{16\pi}\eta^{\nu\mu}\left(F_{\alpha\beta}F^{\alpha\beta}\right)$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הלגרנג'יאן של השדה האלקטרומגנטי ביחידות גאוסיות יהיו:
+<span>$${\mathcal{L}}={\frac{1}{16\pi c}}F_{\mu\nu}F^{\mu\nu}$$</span>
+כאשר <span>\(F_{\mu\nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu}\)</span>. כדי לפתור את אילר לגרנג' נחשב ראשית את <span>\(\frac{\partial{\mathcal{L}}}{\partial(\partial_{\mu}A_{\lambda})}\)</span>. נקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{16\pi c}\frac{\partial}{\partial(\partial_{\mu}A_{\lambda})}(F_{\alpha\beta}F^{\alpha\beta})$$</span>
+כאשר נשתמש בכלל השרשרת ובזה ש<span>\(F_{\alpha \beta}\)</span> תלוי לינארית ב-<span>\(\partial_{\mu}A_{\nu}\)</span> ונקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{8\pi c}F^{\alpha\beta}\frac{\partial F_{\alpha\beta}}{\partial(\partial_{\mu}A_{\lambda})}$$</span>
+כאשר נזכור כי מתקיים:
+<span>$$\frac{\partial F_{\alpha\beta}}{\partial(\partial_{\mu}A_{\lambda})}=\delta_{\alpha}^{\mu}\delta_{\beta}^{\lambda}-\delta_{\beta}^{\mu}\delta_{\alpha}^{\lambda}$$</span>
+נציב ונקבל:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{8\pi c}(F^{\mu\lambda}-F^{\lambda\mu})$$</span>
+כאשר נשתמש באנטי סימטריות <span>\(F^{\mu \lambda}=-F^{\lambda \mu}\)</span> ולכן:
+<span>$$\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}A_{\lambda})}=\frac{1}{4\pi c}F^{\mu\lambda}$$</span>
+נציב את הביטוי הזה בהגדרה של הטנזור אנרגיה תנע ונקבל:
+<span>$$T^{\mu\nu}={\frac{1}{4\pi c}}F^{\mu\lambda}\partial^{\nu}A_{\lambda}-\eta^{\mu\nu}{\mathcal{L}}$$</span>
+כאשר אם נשתמש באנטי סימטרייה של <span>\(F^{\mu \nu}\)</span> ובכלל המכפלה נקבל:
+<span>$$T^{\mu\nu}={\frac{1}{4\pi c}}F^{\mu\lambda}F_{\lambda}^{\nu}-\eta^{\mu\nu}\left({\frac{1}{16\pi c}}F_{\alpha\beta}F^{\alpha\beta}\right)$$</span>
+ושכחתי מינוס לאורך כל הפיתוח. ולכן קיבלנו מינוס התוצאה המתבקשת.</p>
+</div>
+<div class="proposition"><span class="keyword">הצורה המטריציונית של טנזור המאמץ-אנרגיה-תנע</span><p>בצורה הקונטרה ווריאנטית נקבל:
+<span>$$T^{\mu\nu}=\left(\begin{array}{c c c c}u&amp;{{{\frac{1}{c}}S_{x}}}&amp;{{{\frac{1}{c}}S_{y}}}&amp;{{{\frac{1}{c}}S_{z}}}\\ {{{\frac{1}{c}}S_{x}}}&amp;{{-\sigma_{x x}}}&amp;{{-\sigma_{x y}}}&amp;{{-\sigma_{x z}}}\\ {{{\frac{1}{c}}S_{y}}}&amp;{{-\sigma_{y x}}}&amp;{{-\sigma_{y y}}}&amp;{{-\sigma_{y z}}}\\ {{{\frac{1}{c}}S_{z}}}&amp;{{-\sigma_{z x}}}&amp;{{-\sigma_{z y}}}&amp;{{-\sigma_{z z}}}\end{array}\right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות הטנזור מאמץ</span><p>לטנזור המאמץ יש את התכונות הבאות:</p>
+<ul>
+<li>טנזור סימטרי - <span>\(T^{\mu \nu}=T^{\nu \mu}\)</span></li>
+<li>חסר עקבה - <span>\({T^{\alpha}}_{\alpha}=0\)</span>. זאת כיוון שמתקיים:
+<span>$$\begin{gather}T_{\mu}^{\mu}=\frac{1}{4\pi}\left[F^{\mu\alpha}F_{\mu\alpha}-\delta_{\mu}^{\mu}\frac{1}{4}F^{\alpha\beta}F_{\alpha\beta}\right] =\\=\frac{1}{4\pi}\left[F^{\mu\alpha}F_{\mu\alpha}-F^{\alpha\beta}F_{\alpha\beta}\right]=\frac{1}{4\pi}\left[F^{\alpha\beta}F_{\alpha\beta}-F^{\alpha\beta}F_{\alpha\beta}\right]=0
+\end{gather}$$</span></li>
+<li>צפיפות האנרגיה מקיימת <span>\(T^{00}=u\geq 0\)</span>.</li>
+<li>הדיברגץ יהיה <span>\(\partial_{\nu}T^{\mu\nu}+\eta^{\mu\rho}\,f_{\rho}=0\)</span>, שמפה ניתן לקבל את חוקי השימור הבאים:
+<span>$$\begin{gather}{\frac{\partial u_{\mathrm{em}}}{\partial t}}+\nabla\cdot\vec{S}+\vec{J}\cdot\vec{E}=0 \\{\frac{\partial{\vec p}_{\mathrm{em}}}{\partial t}}-\nabla\cdot\sigma+\rho{\vec E}+{\vec J}\times{\vec B}=0\implies u_{\mathrm{em}}={\frac{\epsilon_{0}}{2}}E^{2}+{\frac{1}{2\mu_{0}}}B^{2} \\\vec{p}_{\mathrm{em}}={\frac{\vec{S}}{c^{2}}}
+\end{gather}$$</span></li>
+</ul>
+</div>
+        </body>
+    </html>
+    

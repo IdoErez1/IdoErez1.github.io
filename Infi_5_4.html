@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>יחסים בין מרחבים מטרים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. אינטגרציה על מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 עקומות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_5_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_5_3`; }});</script>
+        <div class="content">
+        <h1>5.4  יחסים בין מרחבים מטרים</h1>
+    <div class="definition"><span class="keyword">הומאומורפיזם</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> אשר חח"ע ועל ו-<span>\(f\)</span>,<span>\(f^{-1}\)</span> רציפות אז <span>\((X,d)\)</span> ו-<span>\((Y,\rho)\)</span> הם הומאומורפים</p>
+</div>
+<div class="definition"><span class="keyword">שקילות</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> חחע ועל וקיים <span>\(0&lt;C_{1},C_{2}\)</span> כך ש:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(f(x_{1}),f(x_{2}))\leq C_{2}d(x_{1}x_{2})
+$$</span></p>
+</div>
+<div class="remark">
+<p>לא משנה מה מראים ששקול כיוון שניתן לחלק החלק הימיני ב-<span>\(C_{2}\)</span> ואת השמאלי ב-<span>\(C_{1}\)</span> ולקבל:
+<span>$$\frac{1}{C_{2}}\rho(f(x_{1}),f(x_{2}))\leq d(x_{1},x_{2})\leq \frac{1}{C_{1}}\rho(f(x_{1}),f(x_{2}))$$</span></p>
+</div>
+<div class="example">
+<p>נראה כי הקטעים <span>\(\left( 0,\infty \right)\)</span>, <span>\((0,1)\)</span> עם המטריקה המושרת מהמטריקה הסטנדרטית על <span>\(\mathbb{R}\)</span> אינם מרחבים מטרים שקולים. נניח בשלילה כי יש שקילות. לכן קיים פונקציה <span>\(f:(0,1)\to\left( 0,\infty \right)\)</span> המקיימת עבור <span>\(C_{1},C_{2}&gt;0\)</span>:
+<span>$$C_{1}|x-y|\leq|f(x)-f(y)|\leq C_{2}|x-y|$$</span>
+כאשר נשים לב כי <span>\(|x-y|&lt;1\)</span> ולכן <span>\(|f(x)-f(y)|&lt;C_{2}\)</span>. לכל <span>\(x,y\in(0,1)\)</span>. אך <span>\(f\)</span> צריכה להיות על, ובפרט צריכים להיות <span>\(s,t\in(0,1)\)</span> כך ש-<span>\(f(t)=2C_{2}+1,f(s)=1\)</span> ולכן עבור ערכים אלו מהשקילות מתקיים:
+<span>$$|f(s)-f(t)|=|2C_{2}+1-1|=2C_{2}&gt;C_{2}$$</span>
+בסתירה לזה ש-<span>\(|f(x)-f(y)|&lt;C_{2}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מטריקות שקולות</span><p>כאשר שני מטריקות הם שקולות ביחיד עם פונקציית הזהות, המטריקות נקראות מטריקות שקולות. כלומר אם קיימים <span>\(C_{1},C_{2}&gt;0\)</span> כך ש:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(x_{1},x_{2})\leq C_{2}d(x_{1},x_{2})$$</span></p>
+</div>
+<div class="definition"><span class="keyword">איזומטריה</span><p>אם קיימת פונקציה <span>\(f:X\to Y\)</span> אשר חח"ע ועל וגם מתקיים:
+<span>$$\rho(f(x),f(y))=d(x,y)$$</span></p>
+</div>
+<p>כאשר כמו עם שקילות, ניתן להגדיר מטריקות איזומטריות אם הם איזומטריות ביחס לפונקציית הזהות, שזה בפועל אומר שהם אותו הדבר עד כדי שם.</p>
+<div class="proposition">
+<p>איזומטריה <span>\(\impliedby\)</span> שקילות <span>\(\impliedby\)</span> רציפות</p>
+</div>
+<div class="definition"><span class="keyword">פונקציה ליפשיץ\רציפה ליפשיץ</span><p>פונקציה <span>\(f:X_{d}\to Y_{\rho}\)</span> כך שקיים <span>\(L\geq0\)</span> כך ש-<span>\(\rho(f(x),f(y))\leq Ld(x,y)\)</span>. <span>\(L\)</span> נקרא קבוע לפישיץ של <span>\(f\)</span>. מהתנאי אוטומטית נובע רציפות. פונקציה שקילות היא ליפשיצית.</p>
+</div>
+<div class="proposition">
+<p>כל שתי נורמות <span>\(|| \cdot ||\)</span>, <span>\(|| \cdot ||'\)</span> על <span>\(\mathbb{R}^n\)</span> הם שקולות, ובפרט משרות מטריקות שקולות.
+כלומר קיים <span>\(0&lt;C_{1}\leq C_{2}\)</span> כך ש:
+<span>$$C_{1}\|x\|\leq\|x\|^{\prime}\leq C_{2}\|x\|$$</span></p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי כל נורמה שקולה לנורמה <span>\(||\cdot||_{1}\)</span>. יהי <span>\(||\cdot||\)</span> נורמה כלשהי על <span>\(\mathbb{R} ^n\)</span>. מתקיים:
+<span>$$||x||=  \left\lVert  \sum_{i} e_{i}x_{i}  \right\rVert = \sum_{i}\lvert x_{i} \rvert \lVert e_{i} \rVert \leq \sum_{i}\lvert x_{i} \rvert \max \lVert e_{i} \rVert =\max\lVert e_{i} \rVert \sum_{i}\lvert x_{i} \rvert =C_{2}\lVert x \rVert_{1} $$</span>
+כעת נסתכל על הפונקציה <span>\(f:S^{n-1}\to\mathbb{R}\)</span> (כאשר <span>\(S^{n-1}\)</span> זה ספרת היחידה לפי נורמה <span>\(\lVert \cdot \rVert_{1}\)</span>) המוגדרת ע"י <span>\(f(x)=\lVert x \rVert\)</span>. זוהי פונקציה רציפה כצמצום של פונקציה רציפה, וכן <span>\(S^{n-1}\)</span> קומפקטי, לכן פונקציה זו משיגה מינימום ומקסימום. נסמן את במינימום ב-<span>\(m\)</span>. נשים לב כי המינימום אינו נמצא ב-0 כיוון שאם היה נמצא ב-0 הינו מקבלים כי <span>\(\lVert x_{0} \rVert=0\)</span> כלומר <span>\(x_{0}=0\)</span> בסתירה לכך שנמצא על ספרת היחידה. לכן <span>\(m&gt;0\)</span>. כמו כן מתקיים:
+<span>$$\left\|x\right\|=\|x\|_{1}\left\|{\frac{x}{\|x\|_{1}}}\right\|=\|x\|_{1}f{\big(}x/\|x\|_{1}{\big)}\geq\|x\|_{1}f{\big(}x_{0}{\big)}=m\|x\|_{1},$$</span>
+וזה משלים את האי שיוויון השני עבור <span>\(C_{1}=m\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>כל מרחב נורמי נוצר סופית ממימד <span>\(m\)</span> איזומטרית ל-<span>\(\mathbb{R}^m\)</span>  עם נורמה כלשהי.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(a_{i}\)</span> בסיס ל-<span>\(V\)</span>. נסתכל על ההעתקה הלינארית <span>\(T:V\to \mathbb{R}^m\)</span> הנתון ע"י:
+<span>$$T\left(\sum_{i=1}^{m}x_{i}a_{i}\right)=\big(x_{1},\ldots,x_{m}\big)$$</span>
+העתקה זו היא הפיכה ובפרט הומאומורפיזם. עבור <span>\(x \in \mathbb{R}^m\)</span> נגדיר:
+<span>$$\lVert x \rVert ^{\prime}=\|T^{-1}(x)\|.$$</span>
+זוהי נורמה כיוון שבברור <span>\(\lVert x \rVert'\geq 0\)</span>  כאשר יש שיוויון אם"ם <span>\(T^{-1}(x)=x=0\)</span>. מתקיים הומוגניות כיוון ש:
+<span>$$\|\alpha x\|^{\prime}=\|T^{-1}(\alpha x)\|=\|\alpha\,T^{-1}(x)\|=|\alpha|\|T^{-1}(x)\|=|\alpha|\|x\|_{m}.$$</span>
+ולכן קיבלנו ש-<span>\(\lVert \cdot \rVert'\)</span> היא נורמה על <span>\(\mathbb{R}^m\)</span>. כעת <span>\(T\)</span> איזומטרייה כיוון שלכל <span>\(u,v\in V\)</span> מתקיים:
+<span>$$\left\|u- v \right\|=\left\|T^{-1}T(u-v)\right\|=\left\|T(u-v)\right\|^{\prime}=\|T u-Tv\|^{\prime}.$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='prev-page'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

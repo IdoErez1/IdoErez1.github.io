@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הסכם הסכימה של אינשטיין</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  הסכם הסכימה של אינשטיין</h1>
+    <p>הסכם הסכימה של אינשטיין זה נוטצייה כתיבתית אשר מאפשרת לסכום על ווקטורים, מטריצות וטנזורים ללא שימוש בסימן הסכימה. </p>
+<div class="definition"><span class="keyword">חוקי הסכימה של אינשטיין</span><p>אם מופיע אינדקס כפול, כאשר אינדקס אחד הוא אינדקס עליון ואינדקס שני הוא תחתון, סוכמים על האינדקס הזה כאשר גבולות הסכימה הם כל הערכים האפשריים עבור המשתנה הזה.</p>
+</div>
+<p>מסוכמה ביחסות זה שמשתמשים באותיות יווניות עבור החלקים הזמניים או מרחביים(בדרך כלל משתמשים ב-<span>\(\mu,\nu\)</span>) כאשר הערכים האפשריים הם <span>\(0,1,2,3\)</span>.
+כאשר משתמשים באותיות לטיניות רק בשביל החלקים המרחביים(בדרך כלל משתמשים ב-<span>\(i,j\)</span>) כאשר הערכים האפשריים הם <span>\(1,2,3\)</span>.</p>
+<div class="remark">
+<p>ווקטורים עם אינדקס עליון מסמנים איבר במרחב הווקטורי כאשר ווקטורים עם אינדקס תחתון מסמנים איבר במרחב הדואלי. הכפל בין שתי איברים באותו מרחב אינו מוגדר היטב ולכן תמיד נצפה כי בסכימה יהיה אינדקס אחד עליון ואינדקס אחד תחתון.</p>
+</div>
+<div class="example">
+<p>עבור סכימה רגילה ניתן לכתוב:
+<span>$$\sum_{i=1}^{3}c_{i}x^{i}=c_{1}x^{1}+c_{2}x^{2}+c_{3}x^{3}=c_{i}x^i$$</span>
+<span>$$\left\langle  \vec{u},\vec{v}  \right\rangle =\sum_{i=1}^{n}u_{i}v^{i}=u_{i}v^{i}$$</span>
+ונקבל למשל כי עבור איבר בבסיס <span>\(e_{i}\)</span> נקבל:
+<span>$$u\cdot e_{i}=u_{j}e_{j}\cdot e_{i}=u_{j}\delta_{ji}=u_{i}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">סימון לוי צוויטה</span><p>בשלוש מימדים נקבל כי:
+<span>$$\varepsilon_{i j k}={\left\{\begin{array}{l l}{+1}&amp;{{\mathrm{if}}\;(i,j,k)\;{\mathrm{is}}\;(1,2,3),(2,3,1),\;{\mathrm{or}}\;(3,1,2),}\\ {-1}&amp;{{\mathrm{if}}\;(i,j,k)\;{\mathrm{is}}\;(3,2,1),(1,3,2),\;{\mathrm{or}}\;(2,1,3),}\\ {0}&amp;{{\mathrm{if}}\;i=j,\;{\mathrm{or}}\;j=k,\;{\mathrm{or}}\;k=i}\end{array}\right.}$$</span>
+כאשר ב-4 מימדים נקבל:
+<span>$$\varepsilon_{i j k l}={\left\{\begin{array}{l l}{+1}&amp;{{\mathrm{if~}}(i,j,k,l){\mathrm{~is~an~even~permutation~of~}}(1,2,3,4)}\\ {-1}&amp;{{\mathrm{if~}}(i,j,k,l){\mathrm{~is~an~odd~permutation~of~}}(1,2,3,4)}\\ {0}&amp;{{\mathrm{otherwise}}}\end{array}\right.}$$</span></p>
+</div>
+<p>כאשר נזכור כי עם הסכם הסכימה של אינשטיין מתקיים <span>\(\varepsilon_{i j k}\varepsilon^{i m n}\equiv\sum_{i=1,2,3}\varepsilon_{i j k}\varepsilon^{i m n}\)</span>.
+כעת בעזרת סימון לווי ציוויטה ניתן להגדיר דברים נוספים עם הסכם הסכימה.</p>
+<div class="proposition"><span class="keyword">מכפלה ווקטורית</span><p><span>$$\vec{u}\times \vec{v}=\varepsilon_{j k}^{i}u_{j}v_{k}e_{i}$$</span>
+כאשר אין הבדל בין <span>\(\varepsilon_{jk}^i\)</span> ל-<span>\(\varepsilon_{ijk}\)</span> פרט למיקום של האינקס.</p>
+</div>
+<div class="proof">
+<p>נשים לב כי:
+<span>$$\begin{array}{l}{{(u\times v)_{1}=u_{2}v_{3}-u_{3}v_{2}}}\\ {{(u\times v)_{2}=u_{3}v_{1}-u_{1}v_{3}}}\\ {{(u\times v)_{3}=u_{1}v_{3}-u_{3}v_{1}}}\end{array}$$</span>
+כאשר עבור הרכיב ה-<span>\(i\)</span> אנחנו מוסיפים את האיבר עם האינדקס שאינו <span>\(i\)</span>. כלומר רק איברים שהם תמורות של <span>\((1,2,3)\)</span>. וכן אנחנו מוספים את האיברים שהם תמורות זוגיות ומחסירים תמורות אי זוגיות. וזה בדיוק מה שעושה סימון לוי-ציוויטה. כלומר:
+<span>$$(u\times v)_{i}=\sum_{j,k=1}^{3}\varepsilon_{i j k}u_{j}v_{k}\implies \varepsilon_{j k}^{i}u_{j}v_{k}e_{i}$$</span></p>
+</div>
+<p>נרצה להראות איך נראת מכפלת מטריצה בווקטור. נזכור כי מכפלת מטריצה בווקטור באופן כללי יהיה</p>
+<div class="proposition"><span class="keyword">מכפלת מטריצה בווקטור</span><p><span>$$u^{i}={A^{i}}_{j}v^{j}$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי באופן כללי הביטוי לרכיב ה-<span>\(i\)</span> של מכפלה של מטריצה בווקטור הוא:
+ <span>$$\mathbf{u}_{i}=(\mathbf{A}\mathbf{v})_{i}=\sum_{j=1}^{N}A_{i j}v_{j}$$</span>
+ בעזרת ההסכם הסכימה של אינשטיין נקבל:
+<span>$$u^{i}={A^{i}}_{j}v^{j}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">מכפלת מטריצות</span><p><span>$${C^{i}}_{k}={A^{i}}_{j}{B^{j}}_{k}$$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי הנוסחה לאיבר ה-<span>\(ik\)</span> במכלה של מטריצות הוא:
+<span>$$\left(\mathbf{A}\mathbf{B}\right)_{i k}=\sum_{j=1}^{n}A_{i j}B_{j k}\,=A_{i j}B_{j k}$$</span>
+בעזרת הסכם הסכימה של אינשטיין נקבל:
+<span>$${C^{i}}_{k}={A^{i}}_{j}{B^{j}}_{k}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">העלאה והורדה של אינדקס</span><p>אם <span>\(g_{\mu \nu}\)</span> הטנזור המטרי. נקבל:
+<span>$$g_{\mu\sigma}{T^{\sigma}}_{\beta}=T_{\mu\beta}$$</span>
+וכן:
+<span>$$g^{\mu\sigma}T_{\sigma}{}^{\alpha}=T^{\mu\alpha}$$</span></p>
+</div>
+<h2>אופרטורים דיפרנציאלים</h2>
+<p>ניתן לסמן את הנגזרת החלקית לפי הרכיב ה-<span>\(i\)</span> ב-<span>\(\frac{\partial }{\partial x_{i}}\)</span> ואת הנגזרת המלאה ב-<span>\(dx^i\)</span>. זהו צירוף של ווקטור קו-ווראינטי ווקטור קונטרא-ווריאנטי ולכן ניתן לסכום בעזרת הסכם הסכימה של אינשטיין. ניתן לקבל את הפעולות הבאות:</p>
+<ol>
+<li>
+<p>גרדיאנט: 
+<span>$$\bar{\nabla} f = \sum_{i=1}^n \frac{\partial f}{\partial x_{i}} e_{i}\to \bar{\nabla} f=\frac{\partial f}{\partial x_{i}} e_{i}$$</span>
+כאשר אם רוצים לכתוב רק רכיב יחיד לא נדרש סכימה - <span>\(\left( \bar{\nabla}f \right)_{i}=\frac{\partial f}{\partial x_{i}}\)</span></p>
+</li>
+<li>
+<p>דיברגנץ: 
+<span>$$\bar{\nabla} \cdot f = \sum_{i=1}^n \frac{\partial f}{\partial x_{i}} \implies \bar{\nabla} \cdot f=\frac{\partial f}{\partial x_{i}} \delta^i$$</span></p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='prev-page'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חבורות פשוטות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+<li class='parent-page'><a href='./Groups'> תורת החבורות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא לחבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_1_1'>1.1 הגדרה ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_2'>1.2 תתי חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_1_3'>1.3 תמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פעולות על חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_2_1'>2.1 מסלולים ומייצבים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_2_2'>2.2 מחלקות צמידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הומומורפיזמים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_3_1'>3.1 הומומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_2'>3.2 מנות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_3_3'>3.3 משפטי האיזומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פירוק של חבורות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_4_1'>4.1 מכפלה ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_3'>4.3 חבורות פשוטות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סדרות הרכב ופתירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_5_1'>5.1 סדרות הרכב</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_2'>5.2 פתירות</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_5_3'>5.3 נילפוטנטיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משפטי סילו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_6_1'>6.1 חבורות p סילו</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_6_2'>6.2 פתירות חבורות מסדר קטן מ-60</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורות חופשיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Groups_7_1'>7.1 מילים</a></li>
+<li class='parent-page-dropdown'><a href='./Groups_7_2'>7.2 הצגות של חבורות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Groups_4_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Groups_4_2`; }});</script>
+        <div class="content">
+        <h1>4.3  חבורות פשוטות</h1>
+    <p>אם <span>\(G\)</span> חבורה, ו-<span>\(N\trianglelefteq G\)</span> אז רוצים לחשוב על <span>\(G\)</span> כ-"מורכבת" מ-<span>\(N\)</span> ו-<span>\(G/N\)</span>. למשל:
+<span>$$\mathbb{Z} _{3} \cong A_{3}\trianglelefteq S_{3}\qquad S_{3} / A_{3} \cong \mathbb{Z} _{2}$$</span>
+הרעיון:
+אם יש ל-<span>\(G\)</span> תת חבורה נורמלית <span>\(N\neq G,1\)</span>, אפשר לעבור לחקור את <span>\(N\)</span> ו-<span>\(G / N\)</span>. ולהמשיך כך עבורן: אם ל-<span>\(N\)</span> יש תת חבורה <span>\(1\lneq N_{1}\triangleleft N\)</span>, ניתן "לפרק את <span>\(N\)</span>" ל-<span>\(N_{1}\)</span> ו-<span>\(N / N_{1}\)</span>. אם ל-<span>\(G / N\)</span> יש תת חבורה <span>\(1\lneq K \triangleleft G / N\)</span>. ועכשיו ניתן "לפרק את <span>\(G / N\)</span>".</p>
+<div class="definition"><span class="keyword">חבורה פשוטה</span><p>חבורה <span>\(G\)</span> נקראת פשוטה אם <span>\(N\trianglelefteq G\)</span> גורר <span>\(N=G\)</span> או <span>\(N=1\)</span> (ו-<span>\(|G|\neq 1\)</span>)</p>
+</div>
+<div class="definition"><span class="keyword">תוכנית הולדר/Holder</span><p>ב-1892 לודויג אוטו הולדר הגה את המטרות הבאות בתורת החבורות:</p>
+<ol>
+<li>
+<p>למצוא את כל החבורות הסופיות הפשוטות </p>
+</li>
+<li>
+<p>להבין את כל הדרכים להרכיב, בהנתון חבורות סופיות <span>\(H_{1},H_{2}\)</span>. חבורה <span>\(G\)</span> עם תת חבורה <span>\(N\trianglelefteq G\)</span> כך ש-<span>\(N\cong H_{1}\)</span> 
+ ו-<span>\(G / N \cong H_{2}\)</span>.
+ למשל עבור<span>\(H_{1}=\mathbb{Z} _3\)</span>, <span>\(H_{2}=\mathbb{Z} _3\)</span>:
+<span>$$\langle 2\rangle \trianglelefteq \mathbb{Z} _{6}\qquad A_{3}\trianglelefteq S_{3}\implies \langle 2\rangle \cong A_{3}\cong\mathbb{Z} _{3}\quad \mathbb{Z} _{6} / \langle 2\rangle \cong S_{3} / A_{3} \cong \mathbb{Z} _{2}$$</span>
+כיום סימנו את המטרה הראשונה של התוכנית, אשר לקחה כ-100 שנה.</p>
+</li>
+</ol>
+</div>
+<div class="example"><span class="keyword">חבורות פשוטות</span><ol>
+<li>
+<p>החבורה <span>\(\mathbb{Z} _{p}\)</span> ל-<span>\(p\)</span> ראשוני (אם <span>\(G\)</span> סופית פשוטה אזי <span>\(G\cong\mathbb{Z} _p\)</span> ל-<span>\(p\)</span> ראשוני) </p>
+</li>
+<li>
+<p>התמורות הזוגיות <span>\(A_{n}\)</span> ל-<span>\(n\geq 5\)</span>.(כאשר <span>\(A_{4}\)</span> היא חבורה נורמלית הנקראת חבורת קליין) </p>
+</li>
+<li>
+<p>החבורה <span>\(PSL_{n}\left( \mathbb{F}_{p} \right)\)</span> ל-<span>\(n\geq 2\)</span> כאשר <span>\(p\)</span> ראשוני. (למעט <span>\(PSL_{2}(2),PSL_{2}(3)\)</span> ) כאשר <span>\(PSL_{n}\left( \mathbb{F} \right)=SL_{n}\left( \mathbb{F} \right)/Z\)</span> כאשר המרכז 
+ <span>$$Z=\{ \alpha I\in SL_{n}\left( \mathbb{F} \right)\mid \alpha^n=1 \}$$</span>
+ החבורה הכי קטנה תהיה: <span>\(|PSL_{3}\left( \mathbb{F}_{2} \right)|=168\)</span>.</p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Groups_4_4'>4.4 פשטות התמורות הזוגיים</a></li>
+<li class='prev-page'><a href='./Groups_4_2'>4.2 מכפלה חצי ישרה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

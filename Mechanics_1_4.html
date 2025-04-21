@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תנע והתנגשויות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  תנע והתנגשויות</h1>
+    <div class="reminder"><span class="keyword">תנע</span><p>מוגדר בתור המכפלה של המסה במהירות. כלומר:
+<span>$$\vec{p}=m\vec{v}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">חוק שני במונחי תנע</span><p><span>$${\textstyle\sum}{\vec{F}}=m{\frac{d{\vec{v}}}{d t}}={\frac{d}{d t}}\left( m{\vec{v}} \right)=\frac{\mathrm{d} \vec{p}}{\mathrm{d} t} $$</span>
+כאשר ניתן להכניס את המסה לנגזרת כיוון שקבועה.</p>
+</div>
+<div class="definition"><span class="keyword">מתקף</span><p>עבור כוח קבוע, המתקף של מערכת מוגדר על ידי המכפלה של הכוח על ידי משך הזמן שבו פועל. כלומר:
+<span>$$\vec{J}=\left( \sum\vec{F} \right)(t_{2}-t_{1})=\left( \sum\vec{F} \right)\Delta t$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור כוח לא קבוע נקבל:
+<span>$$\vec{J}=\int _{t_{1}}^{t_{2}} \sum\vec{F} \;\mathrm{d} t $$</span>
+ניתן לחלופין לכתוב בעזרת הכוח הממצוע:
+<span>$$\vec{J}=\vec{F}_{\text{avg}}(t_{2}-t_{1})$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט מתקף-תנע</span><p><span>$$\vec{J}=\Delta \vec{p}$$</span></p>
+</div>
+<div class="proof">
+<p>מספיק להוכיח עבור המקרה בו הכוח קבוע. מתקיים:
+<span>$${\textstyle\sum}\vec{F}=\frac{\vec{p}_{2}-\vec{p}_{1}}{t_{2}-t_{1}}\implies \left( {\textstyle\sum}\vec{F} \right)\left( t_{2}\,-\,t_{1} \right)=\vec{p}_{2}-\vec{p}_{1}\implies \vec{J}=\Delta \vec{p}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שימור תנע</span><p>סכום התנעים של המערכת נשאר קבוע</p>
+</div>
+<div class="proof">
+<p>נובע מיידית מהחוק השלישי של ניוטון. כיוון שמתקיים:
+<span>$${\vec{F}}_{B\;\mathrm{on}\;A}+{\vec{F}}_{A\;\mathrm{on}\;B}={\frac{d{\vec{P}}}{d t}}=\mathbf{0}$$</span>
+נקבל:
+<span>$$\vec{P}=\text{const}$$</span></p>
+</div>
+<div class="corollary">
+<p>תנע נשמר גם עבור כל רכיב.</p>
+</div>
+<div class="definition"><span class="keyword">התנגשות אלסטית</span><p>התנגשות בה האנרגיה המכנית נשמרת.</p>
+</div>
+<div class="proposition">
+<p>משוואות שימור האנרגיה והתנע עבור התנגשות חד מימדית יהיו:
+<span>$$\begin{gather}{\frac{1}{2}}m_{A}{v_{A}}_{1}{}^{2}={\frac{1}{2}}m_{A}{v_{A}}_{2}{}^{2}+{\frac{1}{2}}m_{B}{v_{B}}_{2}{}^{2} \\m_{A}v_{A1x}=\,m_{A}v_{A2x}\,+\,m_{B}v_{B2x}
+\end{gather}$$</span></p>
+</div>
+<div class="corollary">
+<p>מתקיים:</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='prev-page'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

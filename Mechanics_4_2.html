@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טרנספורמצייה קנונית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page'><a href='./Mechanics'> מכניקה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מכניקה ניוטונית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_1'>1.1 הגדרות בסיסות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_2'>1.2 חוקי ניוטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_3'>1.3 עבודה ואנרגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_1_4'>1.4 תנע והתנגשויות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חשבון וריאציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_1'>2.1 קורדינטות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_2'>2.2 אוילר לגרנג'</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_3'>2.3 התמרת לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_4'>2.4 סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_2_5'>2.5 סימון לוי צוויטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מכניקת לגרנג'</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_1'>3.1 עקרון המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_2'>3.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_3'>3.3 גוף קשיח</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_4'>3.4 הבעיה הדו גופית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_3_5'>3.5 תנודות קטנות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מכניקת המילטון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_2'>4.2 טרנספורמצייה קנונית</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='parent-page-dropdown'><a href='./Mechanics_4_4'>4.4 המילטון יעקובי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Mechanics_4_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Mechanics_4_1`; }});</script>
+        <div class="content">
+        <h1>4.2  טרנספורמצייה קנונית</h1>
+    <p>ראינו מעבר קורדינטות בקורדינטות מוכללות, כלומר מעבר מקורדינטה מוכללת אחת לאחרת. זה משמר את מרחב הקונפיגורציות. כמו כן ראינו את התמרת לג'נדר אשר מעברה מלגרנג'יאן שתלוייה ב-<span>\(\left( \vec{q},\dot{\vec{q}},t \right)\)</span> להמילטוניאן שתלוייה ב-<span>\(\left( \vec{q},\vec{p},t \right)\)</span>. כעת נסתכל על מעבר קורדינטות במרחב הפאזה <span>\(\left( \vec{q},\vec{p} \right)\)</span> לקורדינטות אחרות <span>\(\left( \vec{P},\vec{Q} \right)\)</span>. מעברי קורדינטות אלו נקראות טרנספורמציות קנוניות. </p>
+<div class="theorem">
+<p>בהנתן קורדיטות <span>\((p,q)\)</span> המגדירות מהילטוניאן <span>\(\mathcal{\mathcal{H}}\)</span> ומעבר קורדינטות <span>\((P,Q)\)</span> המגדירות המילטוניאן <span>\(\mathcal{H}'\)</span> מתקיים:
+<span>$$\sum p_{i}\dot{q}_{i}-\mathcal{H}=\sum P_{i}\,\dot{Q}_{i}-\mathcal{H}'+{\frac{d F}{d t}}$$</span>
+כאשר <span>\(F\)</span> היא פונקציה של המשתנים של המערכת אשר נקראת פונקצייה יוצרת.</p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי ממשוואות התנועה הקנוניות מתקיים:
+<span>$$\dot{q}_{i}=\frac{\partial \mathcal{H}}{\partial p_{i}}\qquad \dot{p}_{i}=-\frac{\partial \mathcal{H}}{\partial q_{i}}\qquad \dot{Q}_{i}=\frac{\partial \mathcal{H}}{\partial P_{i}}\qquad \dot{P}_{i}=-\frac{\partial \mathcal{H}}{\partial Q_{i}}$$</span>
+ממשוואות אלו ניתן לקבל את הלגרנג'יאנים:
+<span>$$\begin{gather}\mathcal{L} _{1}= \sum_{i}p_{i}{\dot{q}}_{i}\,-\,\mathcal{H}\left( q_{i},\,p_{i},\,t \right)\\ \mathcal{L} _{2}= \sum_{i}P_{i}{\dot{Q}}_{i}\,-\,\mathcal{H}'\left( q_{i},\,p_{i},\,t \right) 
+\end{gather}$$</span>
+כיוון שאנו דירושים שמשוואות התנועה לא ישתנו, נדרוש שיהיו שווים עד כדי פונקציה שהיא נגזרת שלמה לפי זמן. כלומר עד כדי הוספה של נגזרת של פונקציה <span>\(F\)</span> בזמן. נקבל:
+<span>$$\sum p_{i}\dot{q}_{i}-\mathcal{H}=\sum P_{i}\,\dot{Q}_{i}-\mathcal{H}'+{\frac{d F}{d t}}$$</span>
+כאשר נשמיט את הסכימה מטעמי נוחות.
+במקרה זה לפני שנשיג ביטוי יותר פשוט יותר נוח להסתכל על פונקציות <span>\(F\)</span> ספציפיות. 
+נסתכל על <span>\(4\)</span> מקרים:
+<span>$$\begin{array}{l}{{F=F_{1}(q_{i},\,Q_{i},\,t)}}\\ {{F=F_{2}(q_{i},\,P_{i},\,t)}}\\ {{F=F_{3}(p_{i},\,Q_{i},\,t)}}\\ {{F=F_{4}(p_{i},\,P_{i},\,t)}}\end{array}$$</span>
+נסתכל לדוגמא על מקרה <span>\(1\)</span>. ניתן לכתוב כעת את המשוואה בעזרת כלל השרשרת בצורה:
+<span>$$p\dot{q}-\mathcal{H}=P\dot{Q}-\mathcal{H}'+{\frac{\partial F_{1}}{\partial q}}\dot{q}+{\frac{\partial F_{1}}{\partial Q}}\dot{Q}+{\frac{\partial F_{1}}{\partial t}}$$</span>
+כאשר לאחר סידור מחדש נקבל:
+<span>$$\left(p-\frac{\partial F_{1}}{\partial q}\right)\dot{q}-\left(P+\frac{\partial F_{1}}{\partial\,Q}\right)\dot{Q}=\mathcal{H}-\mathcal{H}'+\frac{\partial F_{1}}{\partial t}$$</span>
+כאשר נשים לב כי המשוואות יתקיימו אם:
+<span>$$p=\frac{\partial F_{1}}{\partial q}\qquad P=-\frac{\partial F_{1}}{\partial Q}\qquad \mathcal{H}'=\mathcal{H}+\frac{\partial F_{1}}{\partial t}$$</span>
+ולמעשה פתרנו את הבעיה של מעברת קורדינטות. אם יש לנו פונקציה יוצרת <span>\(F_{1}\)</span> אז אנחנו יכולים למצוא <span>\(p=p(q,Q,t)\)</span> לפי מה שמצאנו ומשם לבודד את <span>\(Q\)</span> ולקבל את <span>\(Q=Q(p,q,t)\)</span> ואת <span>\(P=P(p,q,t)\)</span> אשר מקיימים את המשוואות המילטון הקנוניות עם המילטוניאן <span>\(\mathcal{H}'=\mathcal{H}+\frac{\partial F_{1}}{\partial t}\)</span>. 
+עבור <span>\(F_{2}\)</span> אם נבצע תהליך דומה נקבל:
+<span>$$\begin{array}{c}{{p_{i}=\displaystyle\frac{\partial F_{2}}{\partial q_{i}}}}\qquad  {{Q_{i}=\displaystyle\frac{\partial F_{2}}{\partial P_{i}}}}\qquad  {{\mathcal{H}'=\mathcal{H}+\displaystyle\frac{\partial F_{2}}{\partial t}}}\end{array}$$</span>
+וכן עבור <span>\(F_{3}\)</span>:
+<span>$$\begin{array}{c}{{q_{i}=-{\displaystyle\frac{\partial F_{3}}{\partial p_{i}}}}}\qquad  {{P_{i}=-{\displaystyle\frac{\partial F_{3}}{\partial\,Q_{i}}}}}\qquad  {{\mathcal{H}'=\mathcal{H}+{\displaystyle\frac{\partial F_{3}}{\partial t}}}}\end{array}$$</span>
+ועבור <span>\(F_{4}\)</span>:
+<span>$$\begin{array}{c}{{q_{i}=-{\displaystyle\frac{\partial F_{4}}{\partial p_{i}}}}}\qquad  {{Q_{i}={\displaystyle\frac{\partial F_{4}}{\partial P_{i}}}}}\qquad  {{\mathcal{H}'=\mathcal{H}+{\displaystyle\frac{\partial F_{4}}{\partial t}}}}\end{array}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאים שקולים לטרנספורמציה קנונית</span><p>התנאים הבאים שקולים לזה שהעתקה <span>\((p,q)\mapsto(P,Q)\)</span> היא טרנספורמציה קנונית:</p>
+<ol>
+<li>
+<p>קיימת פונקציה יוצרת <span>\(F\)</span> להעתקה </p>
+</li>
+<li>
+<p>המשוואות הקנוניות של ההמילטוניאן נשמרות </p>
+</li>
+<li>
+<p>הסוגרי פואסון נשמרים. כלומר לכל פונקציות <span>\(f,g\)</span> מתקיים <span>\(\{ f,g \}_{p,q}=\{ f,g \}_{P,Q}\)</span>. </p>
+</li>
+</ol>
+</div>
+<p>בפועל עבור תנאי 3 לא צריך להראות על כל הפונקציות, אבל מספיק להראות על <span>\(P_{i},Q_{i}\)</span>:
+<span>$$\begin{array}{l}{{\{P_{i},P_{j}\}_{P,Q}=\left\{P_{i},P_{j}\right\}_{p,q}=0}}\\ {{\{Q_{i},Q_{j}\}_{P,Q}=\left\{Q_{i},Q_{j}\right\}_{p,q}=0}}\\ {{\{P_{i},Q_{j}\}_{P,Q}=\left\{P_{i},Q_{j}\right\}_{p,q}=\delta_{i j}}}\end{array}$$</span>
+כאשר במקרה החד מימדי מספיק לבדוק כי <span>\(\{ P,Q \}=1\)</span>. נשים לב כי:
+<span>$$\left\{{ P},{ Q}\right\}_{p,q}=\frac{\partial{ P}}{\partial p}\frac{\partial{Q}}{\partial q}-\frac{\partial{ P}}{\partial q}\frac{\partial{ Q}}{\partial p}=\operatorname*{det}\begin{pmatrix}\frac{\partial P}{\partial p} &amp; \frac{\partial P}{\partial q} \\\frac{\partial Q}{\partial p} &amp; \frac{\partial Q}{\partial q}
+\end{pmatrix}=|{J}|=1$$</span>
+ונשים לב כי זה מראה שההעתקה <span>\((p,q)\mapsto(P,Q)\)</span> משמרת נפח במרחב הפאזה.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Mechanics_4_3'>4.3 משוואות המילטון בעזרת סוגרי פואסון</a></li>
+<li class='prev-page'><a href='./Mechanics_4_1'>4.1 המשוואות הקנוניות ומרחב הפאזה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סופיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. הרצאות מקוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 הרצאה 1</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 הרצאה 2</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 הרצאה 3</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_4'>4.4 הרצאה 4</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_5'>4.5 הרצאה 5</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_3_6`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_3_4`; }});</script>
+        <div class="content">
+        <h1>3.5  סופיות</h1>
+    <div class="definition"><span class="keyword">מודול נוצר סופית</span><p>מודל שנוצר על ידי איזשהי קבוצה סופית כלשהי:
+<span>$$M=\langle m_{1},\dots,m_{n} \rangle $$</span>
+עבור <span>\(m_{1},\dots ,m_{n}\)</span> כלשהם.</p>
+</div>
+<div class="definition"><span class="keyword">מודול נתרי - Noetherian</span><p>מודול <span>\(M\)</span> נקרא נתרי אם כל תת מודול של <span>\(M\)</span> נוצר סופית.</p>
+</div>
+<div class="example"><span class="keyword">מודול לא נתרי</span><p>המודול <span>\(R=M=\mathbb{F}[x_{1},x_{2},\dots]\)</span> הוא לא נתרי. זאת כיוון שלמרות שהחוג כולו מיוצר על ידי 1 האידיאל:
+<span>$$I=(x_{1},x_{2},\dots)$$</span>
+הוא לא נוצר סופית, כיוון שאם היה אז מספר סופי של פולינומים היה מייצר את כול המונומים, אשר לא אפשרי כי תמיד נתין להוסיף עוד משתנה.</p>
+</div>
+<div class="proposition">
+<p>הפסוקים הבאים שקולים:</p>
+<ol>
+<li>
+<p>המודול <span>\(M\)</span> נתרי. </p>
+</li>
+<li>
+<p>כל סדרה עולה של תתי מודולים של <span>\(M\)</span> מתייצבת, כלומר לא ייתכן: 
+<span>$$M_{1} \lneq M_{2}\lneq \dots \lneq \dots \lneq M$$</span></p>
+</li>
+<li>
+<p>לכל אוסף של תתי מודולים יש איבר מקסימלי. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>מ-2 ל-3 ניתן לעבור מהלמה של צורן.
+אם יש סדרה עולה ממש:
+<span>$$M_{1} \subsetneq M_{2} \subsetneq \dots$$</span>
+ניקח <span>\(N=\bigcup_{i=1}^{\infty}M_{i}\)</span> ונראה שלא נוצר סופית - אם הוא היה ב-<span>\(M_{j}\)</span> כלשהו כל היוצרים כבר מופיעים ולכן הסדרה כבר לא עולה. ואם <span>\(N\leq M\)</span> לא נוצר סופית ניקח <span>\(n_{1},n_{2},n_{3},\dots\)</span> כש-<span>\(n_{j}\not\in \langle n_{1},\dots,n_{j-1} \rangle\)</span> ואז:
+<span>$$N_{j}=\langle n_{1},\dots n_{j} \rangle $$</span>
+עולה ממש.</p>
+</div>
+<div class="example">
+<p>המודול <span>\(\mathbb{Q}\)</span> הוא לא <span>\(\mathbb{Z}\)</span>-מודול נתרי:
+<span>$$\mathbb{Z}\subsetneq \frac{1}{2}\mathbb{Z} \subsetneq \frac{1}{4}\mathbb{Z} \subsetneq \dots$$</span>
+כאשר <span>\(\mathbb{Z}\)</span> כן <span>\(\mathbb{Z}\)</span> מודול נתרי:
+<span>$$m_{1}\mathbb{Z} \subsetneq m_{2}\mathbb{Z} \subseteq \dots $$</span>
+כאשר נדרש <span>\(m_{2}\)</span> כך שמחלק את <span>\(m_{1}\)</span>. בסופו של דבר נתייצב כי כל <span>\(m_{i}\)</span> צריך לחלק את כל ה-m-ים הקודמים.</p>
+</div>
+<div class="definition"><span class="keyword">מודול ארטיני</span><p>מודול נקרא ארטיני אם אין סדרה אינסופית ירדת ממש של תתי מודולים. כלומר כל שרשרת יורדת מתייצבת.</p>
+</div>
+<div class="remark">
+<p>ארטיני זה תנאי חזק. יותר חזק מנתרי, מאוד מגביל (אומנם זה לא פרמלית חזק יותר כי ייתכן נתרי ולא ארטני).</p>
+</div>
+<div class="example">
+<p>למשל <span>\(\mathbb{Z}^{\mathbb{Z}}\)</span> לא ארטיני:
+<span>$$\mathbb{Z}\supset 2\mathbb{Z} \supset 4\mathbb{Z}\supset \dots$$</span></p>
+</div>
+<div class="example">
+<p>נסתכל על <span>\(\mathbb{Z}\left[ \frac{1}{2} \right] / \mathbb{Z}\)</span> כ-<span>\(\mathbb{Z}\)</span> מודול. זה ארטיני ולא נתרי:
+<span>$$\left\langle  \frac{1}{2}  \right\rangle \subset \left\langle  \frac{1}{4}  \right\rangle \subset \left\langle  \frac{1}{8}  \right\rangle \subset \dots$$</span>
+כל תת מודול הוא <span>\(\left\langle  \frac{1}{2^{n}}  \right\rangle\)</span> ל-<span>\(n\)</span> כלשהו. ואז:
+<span>$$\left\langle  \frac{1}{2^{n_{1}}}  \right\rangle \supset \left\langle  \frac{1}{2^{n_{2}}}  \right\rangle\supset $$</span>
+כאשר <span>\(n_{2}&lt; n_{1}\)</span> וזה חייב להעצר. ניתן לבנות דוגמא דומה על נתרי ולא ארטני.</p>
+</div>
+<div class="definition"><span class="keyword">מאורך סופי</span><p>אם <span>\(M\)</span> גם נתרי וגם ארטיני הוא נקרא מאורך סופי.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(M\)</span> מאורך סופי אזי יש סדרה:
+<span>$$0=M_{n}\leq  \dots \lneq M_{2} \lneq  M_{1}=M$$</span>
+כך ש-<span>\(M_{i} / M_{i+1}\)</span> פשוט לכל <span>\(i\)</span>.  זה למעשה סדרת הרכב.</p>
+</div>
+<div class="remark">
+<p>השם מאורך סופי בא מכך שניתן להגדיר אורך:
+<span>$$\mathrm{{length}}\left(M\right)=\operatorname*{sup}\left\{\ell\,|\,0=M_{0}\lneq M_{1}\lneq\ldots\lneq M_{\ell}=M\right\}$$</span>
+ולקבל מהטענה כי סופי אם"ם ארטני וגם נתרי.</p>
+</div>
+<div class="theorem"><span class="keyword">ג'ורדן הולדר</span><p>אם יש ל-<span>\(M\)</span> סדרת הרכב אזי לכל 2 סדרות הרכב יש את אותן מנות(עד כדי סדר ואיזומורפיזם). </p>
+</div>
+<div class="corollary">
+<p>אם <span>\(M\)</span> מאורך סופי אז יש סדרת הרכב.</p>
+</div>
+<div class="example">
+<p><span>$$(0)\overset{C_{2}}{&lt;}(6)\overset{C_{3}}{&lt;}  (2)\overset{C_{2}}{&lt;}   C_{12}$$</span>
+או לחלופין ניתן לבנות:
+<span>$$(0)\overset{C_{2}}{&lt;} (6) \overset{C_{2}}{&lt;} (3)\overset{C_{3}}{&lt;} C_{12}$$</span></p>
+</div>
+<div class="proposition">
+<p>כל מודול נוצר סופית הוא מנה של מודול חופשי עם דרגה סופית.</p>
+</div>
+<div class="proof">
+<p>אם מודול <span>\(M=\langle m_{1},\dots,m_{n} \rangle\)</span> נוצר סופית ניתן להגדיר הומומואפיזם:
+<span>$$f:R^{n}\rightarrow{M},\quad f(r_{1},\ldots,r_{n})=r_{1}m_{1}+\cdot\cdot\cdot+r_{n}m_{n}$$</span>
+כאשר ממשפט האיזומורפיזם הראשון כיוון ש-<span>\(f\)</span> היא על נקבל:
+<span>$$M\cong R^{n}/\ker f$$</span></p>
+</div>
+<div class="lemma">
+<p>אם מודול <span>\(M\)</span> הוא נתרי ו-<span>\(f:M\to M\)</span> הומומורפיזם אז קיים <span>\(n \in \mathbb{N}\)</span> כך ש:
+<span>$$\ker (f^{n})\cap \mathrm{\mathrm{Im}}(f^{n})=\{ 0 \}$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(M\)</span> נתרי ו-<span>\(f:M\to M\)</span> הומומורפיזם על אז <span>\(f\)</span> חח"ע, ובפרט איזומורפיזם.</p>
+</div>
+<div class="proof">
+<p>נובע מכך שאם <span>\(M=\mathrm{Im}(f^{n})\)</span> נקבל <span>\(\ker(f^{n})\cap M=\{ 0 \}\)</span> ולכן <span>\(\ker(f^{n})=\{ 0 \}\)</span>.</p>
+</div>
+<div class="lemma">
+<p>אם מודול <span>\(M\)</span> הוא ארטני ו-<span>\(f:M\to M\)</span> הומומורפיזם אז קיים <span>\(n \in \mathbb{N}\)</span> כך ש:
+<span>$$\ker (f^{n})+\mathrm{Im}(f^{n})=M$$</span></p>
+</div>
+<div class="corollary">
+<p>אם <span>\(M\)</span> נתרי ו-<span>\(f:M\to M\)</span> הומומורפיזם חח"ע אז <span>\(f\)</span> על, ובפרט איזומורפיזם.</p>
+</div>
+<div class="proposition"><span class="keyword">פירוק פיטינג</span><p>אם <span>\(M\)</span> מאורך סופי ו-<span>\(f:M\to M\)</span> הומומורפיזם, אז קיים <span>\(N,I\)</span> כך ש-<span>\(f|_{N}\)</span> יהיה נילפוטנטי(קיים <span>\(n\)</span> כך ש-<span>\(f|_{N}^{n}\)</span> מתאפס) ו-<span>\(f|_{I}\)</span> אוטומורפיזם כך שמתקיים:
+<span>$$N\oplus I = M$$</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(M\)</span> מאורך סופי אז נתרי וגם ארטני ובפרט מתקיים:
+<span>$$\ker (f^{n})\cap \mathrm{\mathrm{Im}}(f^{n})=\{ 0 \}\qquad \ker (f^{n})+\mathrm{Im}(f^{n})=M$$</span>
+כלומר <span>\(\ker (f^{n})\oplus \mathrm{\mathrm{Im}}(f^{n})=M\)</span>. 
+אנו יודעים כי <span>\(f|_{\ker f^{n}}\)</span> הוא נילפוטנטי כיוון ש-<span>\(f|_{\ker f^{k}}^{k}=0\)</span> וכן כדי שאנדומרופיזם <span>\(f|_{\mathrm{Im}f^{k}}\)</span> יהיה אוטומורפיזם נדרש שיהיה הפיך. זה אכן חח"ע כי בסכום ישר עם הגרעין ולכן הגרעין אפס, וכיוון שאנחנו מסתכלים על הצמצום לתמונה נקבל כי על ולכן סה"כ אוטומורפיזם כנדרש.</p>
+</div>
+<div class="definition"><span class="keyword">חוג נתרי/ארטני</span><p>חוג נקרא נתרי / ארטיני אם הוא כזה כמודול מעל עצמו.</p>
+</div>
+<div class="theorem"><span class="keyword">הופקינס לויצקי</span><p>חוג ארטיני הוא נתרי.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(N\leq M\)</span> תת מודול. אזי <span>\(M\)</span> נתרי אם"ם <span>\(N\)</span> ו-<span>\(M / N\)</span> נתרי</p>
+</div>
+<div class="proof">
+<p>אם <span>\(M\)</span> נטרי ו-<span>\(N\leq M\)</span> אז <span>\(N\)</span> נטרי(כי <span>\(L\leq N \leq M\)</span>). כמו כן, <span>\(M / N\)</span> נתרי:
+אם <span>\(L\leq M / N\)</span> אזי ממשפט ההתאמה יש <span>\(\overline{L}\leq M\)</span>(ספציבית <span>\(\overline{L}=\bigcup_{\ell \in L}\ell\)</span>) כך ש-<span>\(L = L / N\)</span>. אזי <span>\(\overline{L}\)</span> נוצר סופית על ידי <span>\(\ell_{1},\dots,\ell_{n}\)</span> ואז <span>\(L=\langle \ell_{1}+N, \dots,\ell_{n}+N \rangle\)</span>.
+אם <span>\(N\)</span> ו-<span>\(M / N\)</span> נטריים:
+עבור <span>\(L\leq M\)</span> נקבל מאיזו 2:
+<span>$$\frac{L+N}{N}\overset{II}{\cong } \frac{L}{N\cap  L}$$</span>
+(כאשר <span>\(\frac{L+N}{N}\)</span> תת מודול של <span>\(\frac{M}{ N}\)</span> לכן נוצר סופית) לכן <span>\(\frac{L}{N \cap L}\)</span> נוצר סופית. כמו כן <span>\(N\cap L\)</span> נוצר סופית(כי <span>\(N\)</span> נטרית) ולכן <span>\(L\)</span> נוצר סופית(על ידי יוצרים של <span>\(N\cap L\)</span> + יוצרים של <span>\(\frac{L}{N\cap L}\)</span>).</p>
+</div>
+<div class="remark">
+<p>נוצרות סופית לא מתנהגת כזה יפה, זה הופך את נתרי לסוג של תיקון של נוצר סופית.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(R\)</span> נתרי(חוג נתרי = חוג כמודול מעל עצמו = כל אידיאל שמאלי נוצר סופית) אז ל-<span>\(R\)</span> מודולים נ"ס = נתרי</p>
+</div>
+<div class="proof">
+<p>תמיד נתרי גורר נוצר סופית. אם <span>\(R\)</span> נתרי גם <span>\(R^{n}\)</span> נתרי לכל <span>\(n\)</span>.
+<span>$$\frac{R\oplus R}{R\oplus 0}\cong R\cong R\oplus 0 \leq  R\oplus R$$</span>
+ואז גם <span>\(R^{n} / N\)</span> נתרי לכל <span>\(N\leq R^{n}\)</span> וכל <span>\(R\)</span> מודול נוצר סופית איזומורפי ל-<span>\(R^{n} / N\)</span> לאיזשהו <span>\(n \in \mathbb{N}\)</span> ו-<span>\(N\leq R^{n}\)</span> כלשהם.</p>
+</div>
+<div class="proposition"><span class="keyword">משפט הבסיס של הילברט</span><p>אם <span>\(R\)</span> חוג נתרי אזי <span>\(R[x]\)</span> נתרי. בפרט <span>\(R[x_{1},\dots,x_{n}]\)</span> נתרי.</p>
+</div>
+<div class="remark">
+<p>היום מה שנקרה בסיסי Grobner זו הדרך הנכונה לעשות את זה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='prev-page'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

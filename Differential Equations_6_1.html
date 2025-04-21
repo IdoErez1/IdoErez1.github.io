@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת החום החד מימדית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_5_3`; }});</script>
+        <div class="content">
+        <h1>6.1  משוואת החום החד מימדית</h1>
+    <div class="definition"><span class="keyword">משוואת החום החד מימדית</span><p><span>$$u_{t}=k u_{x x}.$$</span>
+כאשר <span>\(k\)</span> נקרא קבוע הדיפוזיה. </p>
+</div>
+<div class="remark">
+<p>המשוואה אומרת למעשה שאם פונקציה מקיימת את משוואת החום, אז איך שהיא משתנה בזמן פרופוצינלית לקמירות שלה לפי המקום. </p>
+</div>
+<div class="proposition"><span class="keyword">עקרון המקסימום</span><p>אם <span>\(u(x,t)\)</span> מקיים את משוואת החום בתחום <span>\(0\leq x\leq \ell\)</span> הערך המינימלי או המקסימלי <span>\(u(x,t)\)</span> מושג או בהתחלה או בקצה <span>\(x=0,\ell\)</span>, ולא יופיע באמצע כל עוד <span>\(u\)</span> לא קבועה.</p>
+</div>
+<p>ניתן לנסח את העקרון באופן זהה עבור המינימום:</p>
+<div class="proposition"><span class="keyword">עקרון המינימום</span><p>אם <span>\(u\)</span> מתאורת על ידי משוואה מהצורה <span>\(u_{t}=u_{x x}\)</span> בתחום <span>\(D=\left\{  0\leq x\leq L  \right\}\)</span> אזי עבור <span>\(t\geq 0\)</span> המינימום של <span>\(u(x,t)\)</span> מושג או ב-<span>\(t=0\)</span> או בקצוות <span>\(x=0,L\)</span>. כאשר אם <span>\(u\)</span> קבועה אז המינימום הוא בכל מקום.</p>
+</div>
+<div class="proposition">
+<p>אם יש שתי תנאי שפה(אילוצים מרחביים) ותנאי התחלה(אילוץ זמני) אזי קיים פתרון יחיד.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון משוואת החום מסדר ראשון</span><p>עבור משוואה מהצורה:
+<span>$$u_{x x} = u_{t}$$</span>
+עם התנאי שפה <span>\(u|_{x=0}=0\)</span> ו-<span>\(u|_{x=L}=0\)</span> נקבל כי הפתרון הכללי יהיה:
+<span>$$u=\sum_{n}C_{2}e^{ -\lambda^{2}t }\sin\left( \frac{\pi n}{L}x \right)$$</span>
+כאשר בהנתן תנאי התחלה ניתן למצוא את הקבועים <span>\(C_{2}(n)\)</span> ולקבל יחידות.</p>
+</div>
+<div class="example"><span class="keyword">פתרון בעזרת הפרדת משתנים</span><p>נניח פתרון מהצורה:
+<span>$$u(x,t)=X(x)T(t)$$</span>
+כאשר יש הרבה פתרונות כאלה, ופתרון כללי יהיה צירוף לינארי שלהם, כאשר יהיה קיים צירוף לינארי יחיד אשר מקיים את התנאי שפה והתחלה. נציב במשוואה:
+<span>$$X\frac{\mathrm{d} T}{\mathrm{d} t} =T\frac{\mathrm{d} ^{2}X}{\mathrm{d} x^{2}} \implies  \frac{1}{T}\frac{\mathrm{d} T}{\mathrm{d} t} =\frac{1}{X}\frac{\mathrm{d} ^{2}X}{\mathrm{d} x^{2}} $$</span>
+זה נכון לכל ערך של <span>\(x\)</span> ושל <span>\(t\)</span> ולכן נדרש כי כל אגף שווה לקבוע. נפרק לשלושה מקרים:
+אם הקבוע הוא חיובי, נקבל את המערכת:
+<span>$$\frac{1}{T}\frac{\mathrm{d} T}{\mathrm{d} t} =\frac{1}{X}\frac{\mathrm{d} ^{2}X}{\mathrm{d} x^{2}} = \lambda^{2}$$</span>
+ניתן לפתור כל מדר ולקבל:
+<span>$$u(x,t)=X(x)T(t)=Ae^{ \lambda^{2}t }\left[ B\cosh\left( \lambda x \right)+C\sinh\left( \lambda x \right) \right]$$</span>
+כאשר זהו פתרון מתבדר ולכן ניתן לפסול אותו.
+אם הקבוע הוא אפס נקבל:
+<span>$$\frac{1}{T}\frac{\mathrm{d} T}{\mathrm{d} t} =\frac{1}{X}\frac{\mathrm{d} ^{2}X}{\mathrm{d} x^{2}}=0$$</span>
+וכעת הפתרון יהיה:
+<span>$$u(x,t)=X(x)T(t)=A(Bx+C)$$</span>
+ובעזרת התנאי שפה נקבל כי הפתרון היחיד יהיה <span>\(u=0\)</span>. ולכן מאלימנציה נקבל כי הקבוע הוא שלילי ולכן ניתן לכתוב אותו כ-<span>\(-\lambda^{2}\)</span>. כלומר:
+<span>$$\frac{1}{T}\frac{\mathrm{d} T}{\mathrm{d} t} =\frac{1}{X}\frac{\mathrm{d} ^{2}X}{\mathrm{d} x^{2}}=-\lambda^{2}$$</span>
+נקבל כי הפתרון יהיה:
+<span>$$u=XT= Ae^{ -\lambda^{2} t }\left[ B\cos\left( \lambda x \right)+C\sin\left( \lambda x \right) \right]=e^{ -\lambda^{2}t }\left[ C_{1}\cos\left( \lambda x \right)+C_{2}\sin\left( \lambda x \right) \right]$$</span>
+כאשר אם נציב את התנאי שפה <span>\(u(x=0,t)=0\)</span> נקבל <span>\(C_{1}=0\)</span> ואם נציב את התנאי שפה <span>\(u(x=L,t)=0\)</span> נקבל:
+<span>$$C_{2}e^{ -\lambda^{2}t }\sin\left( \lambda L \right)=0\implies \sin\left( \lambda L \right)=0\implies \lambda L=\pi n\implies \lambda_{n}=\frac{\pi n}{L}$$</span>
+ולכן:
+<span>$$u_{n}=C_{2}e^{ -\lambda^{2}t }\sin\left( \lambda_{n}x \right)\implies u=\sum_{n} u_{n}=\sum_{n}C_{2}e^{ -\lambda^{2}t }\sin\left( \frac{\pi n}{L}x \right)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פתרון כללי של משוואת החום</span><p>עבור משוואת החום מהצורה:
+<span>$$\frac{\partial u}{\partial t} = D\frac{\partial^2 u}{\partial x^2}$$</span>
+נגדיר אופרטור <span>\(Lu=u_{x x}\)</span>. לפי התנאי השפה, נקבל פונקציות עצמיות <span>\(u_{n}\)</span> וערכים עצמיים <span>\(-\lambda_{n}^2\)</span>. כעת משטורם ליוביל נקבל <span>\(u=\sum_{n=0}^{\infty} T(t)u_{n}\)</span>. נציב במשוואה ונקבל:
+<span>$$\sum_{n=0}^{\infty} \left( \dot{T}(t)+D\lambda^2T(t) \right) u_{n}=0\implies T(t)=A_{n}e^{-D\lambda^2t}$$</span>
+ולכן הפתרון הכללי יהיה:
+<span>$$u=\sum_{n=0}^{\infty} A_{n}e^{-D\lambda^2t}u_{n}$$</span>
+כאשר את המקדמים ניתן למצוא מתנאי התחלה, ופונקציות עצמיות <span>\(u_{n}\)</span> ניתן למצוא מהתנאי שפה.</p>
+</div>
+<div class="remark">
+<p>בעזרת דרך זו ניתן גם למצוא את הפתרון כאשר יש גורמים נוספים של הנגזרת המרחבית(למשל יש במשוואה את הגורם <span>\(\frac{d}{dx}u\)</span>).</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון משוואה לא הומוגנית</span><p><strong>דרך 1</strong>
+משוואת חום לא הומוגנית תהיה מהצורה:
+<span>$$\frac{\partial u}{\partial t}-D\frac{\partial ^2u}{\partial x^2}=f(t)$$</span>
+נגדיר אופרטור <span>\(Lu=u_{x x}\)</span> עם התנאי שפה הנתונים ונמצא פונקציות עצמיות. כלומר <span>\(u=\sum T(t)u_{n}\)</span> נציב במשוואה תוך כדי שנבטא את <span>\(f(t)\)</span> בעזרת הפונקציות העצמיות:
+<span>$$\sum \left( \ddot{T}(t)+D\lambda^2 \right) u_{n} =\frac{1}{||u_{n}||}\sum \langle f(t),u_{n}\rangle u_{n}$$</span>
+ונשוואה מקדמים כך שנקבל אינסוף משוואת דיפרנציאליות.
+<strong>דרך 2</strong>
+ננחש פתרון פרטי לבעיה האי הומגנית. כעת מתקיים:
+<span>$$u=u_{h}+u_{p}\implies u_{h}=u-u_{p}$$</span>
+וקיבלנו משוואה הומוגנית עם תנאי שפה חדשים. נפתור עבור <span>\(u_{h}\)</span> ונקבל כי הפתרון עבור <span>\(u\)</span> יהיה <span>\(u=u_{h}+u_{p}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון משוואה עם תנאי שפה לא הומוגניים</span><p>נסתכל על המצב היציב <span>\(u_{ss}\)</span> - פתרון שלא תלוי בזמן. מתקיים:
+<span>$$u(x,t)=u_{ss}(x,t)+u_{h}(x,t)$$</span>
+עבור משוואת החום מהצורה <span>\(\frac{\partial u}{\partial t}=\frac{\partial ^2u}{\partial x^2}\)</span>, עם תנאי התחלה <span>\(u(x,t=0)=\phi(x)\)</span> נקבל:
+- עבור משוואה עם תנאי שפה דירכלה נקבל כי <span>\(u_{ss}\)</span> לינארית ונקבל <span>\(u_{h}\)</span> משוואה הומוגנית עם תנאי שפה הומוגנים
+- עבור משוואה עם תנאי שפה נוימן נקבל כי <span>\(u_{ss}\)</span> ריבועית(כלומר מהצורה <span>\(Ax^2+Bx+C\)</span>) כאשר נשתמש בפרמטר העודף כדי לדרוש שגם המשוואה תהיה הומוגנית. אם הצלחנו להגיע למצב שרק תנאי השפה הומגניים, נקבל משוואה לא הומוגנית עם תנאי שפה הומגני. אשר ניתן לפתור בעזרת פריסה לפונקציות עצמיות.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='prev-page'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

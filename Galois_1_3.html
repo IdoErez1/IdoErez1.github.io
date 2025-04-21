@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שדות סגורים אלגברים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='parent-page'><a href='./Galois'> תורת גלואה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_1_1'>1.1 שדות ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_1_3'>1.3 שדות סגורים אלגברים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. הרחבת גלואה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_2'>2.2 הרחבה ספרבילית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_3'>2.3 שיכונים של שדות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_4'>2.4 הרחבה נורמלית</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_5'>2.5 הרחבת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_2_6'>2.6 דיסקרימיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. המשפט היסודי ושימושיו</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Galois_3_1'>3.1 המשפט היסודי של תורת גלואה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_2'>3.2 שדות ממציין ראשוני</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_3'>3.3 פולינומים ציקלוטומים</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_4'>3.4 בניות סרגל ומחוגה</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_5'>3.5 הרחבות רדיקאליות</a></li>
+<li class='parent-page-dropdown'><a href='./Galois_3_6'>3.6 המשפט היסודי של האלגברה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Galois_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Galois_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  שדות סגורים אלגברים</h1>
+    <div class="definition"><span class="keyword">שדה סגור אלגברית</span><p>שדה <span>\(F\)</span> נקרא סגור אלגברית אם לכל פולינום ממעלה <span>\(1\leq\)</span> ב-<span>\(F[x]\)</span> יש שורש.</p>
+</div>
+<div class="proposition">
+<p>שלושת התנאים הבאים שקולים עבור שדה <span>\(F\)</span>:</p>
+<ol>
+<li>
+<p>השדה <span>\(F\)</span> סגור אלגברית </p>
+</li>
+<li>
+<p>כל פולינום אי פריק ב-<span>\(F[x]\)</span> הוא ממעלה 1. </p>
+</li>
+<li>
+<p>כל פולינום <span>\(f \in F[x]\)</span> ניתן לפרק ל- 
+<span>$$f(x)=a\left( x-\lambda_{1} \right)\cdot\;\!\dots\;\!\cdot\left( x-\lambda_{n} \right)$$</span>
+<strong>משפט</strong> היסודי של האלגברה
+השדה המרוכבים <span>\(\mathbb{C}\)</span> הוא סגור אלגברית.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סגור אלגברי</span><p>הרחבת שדות <span>\(E / F\)</span> נקראת סגור אלגברי של <span>\(F\)</span> אם <span>\(E\)</span> סגור אלגברית. מסומן <span>\(\overline{F}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">המשפט היסודי של תורת השדות</span><p>יהי <span>\(F\)</span> שדה ו-<span>\(p \in F[x]\)</span> פולינום עם מקדמים ב-<span>\(F\)</span>. אזי קיים הרחבת שדה <span>\(E\)</span> של <span>\(F\)</span> כך שלפולינום <span>\(p\)</span> יש שורש. כלומר לכל שדה יש סגור אלגברי <span>\(L\)</span> שמכיל את <span>\(F\)</span>.</p>
+</div>
+<div class="remark">
+<p>הוכחה של משפט זה מניחה את אקסיומת הבחירה, לכן אומנם אנחנו יכולים לדעת שקיים כזה, אין לנו בפועל דרך לדעת מה היא תהיה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Galois_2_1'>2.1 שדה פיצול</a></li>
+<li class='prev-page'><a href='./Galois_1_2'>1.2 הרחבת שדות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

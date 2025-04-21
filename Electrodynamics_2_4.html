@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מערכות דמויי זמן ודמויי מקום</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_3_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  מערכות דמויי זמן ודמויי מקום</h1>
+    <div class="definition"><span class="keyword">מערכת דמויית מרחב</span><p>מערכת שבו האינטרוואל קטנה מ-0. כלומר <span>\(\Delta s&lt;0\)</span></p>
+</div>
+<div class="proposition">
+<p>במערכות דמוי מרחב עבור כל שתי אירועיים במערכת <span>\(S\)</span> קיים מערכת <span>\(S'\)</span> שבו התרכשו באותו זמן.</p>
+</div>
+<div class="proof">
+<p>מתקיים הקשר הבא:
+<span>$$\begin{pmatrix}x'_{A} \\ct'_{A} \end{pmatrix}=\begin{pmatrix}\gamma &amp; \frac{v}{c}\gamma \\\frac{v}{c}\gamma &amp; \gamma\end{pmatrix}\begin{pmatrix}x_{A}  \\ct_{A}\end{pmatrix}\iff \begin{cases}x'=\gamma(x+vt) \\t'=\gamma\left( t+\frac{v}{c^2}x \right)
+\end{cases}$$</span>
+נציב <span>\(t'_{A}=0\)</span>. נקבל:
+<span>$$\begin{gather}t_{A}+\frac{v}{c^2}x_{A}=0 \\v=-\frac{t_{A}}{x_{A}}\cdot c^2 = - \left( \frac{ct_{A}}{x_{A}} \right)\cdot c &lt;c
+\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מערכת דמויית זמן</span><p>מערכת שבה האינטרוואל גדול מ-0. כלומר <span>\(\Delta s&gt;0\)</span></p>
+</div>
+<div class="proposition">
+<p>עבור שני מאורעות דמוי זמן ניתן למצוא מערכת יחס בה מאורעות אלה מתרשים באותו מקום. </p>
+</div>
+<div style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="304.367" height="297.827" viewBox="0 0 304.367 297.827">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 3.328125 -3.015625 C 3.390625 -3.265625 3.625 -4.1875 4.3125 -4.1875 C 4.359375 -4.1875 4.609375 -4.1875 4.8125 -4.0625 C 4.53125 -4 4.34375 -3.765625 4.34375 -3.515625 C 4.34375 -3.359375 4.453125 -3.171875 4.71875 -3.171875 C 4.9375 -3.171875 5.25 -3.34375 5.25 -3.75 C 5.25 -4.265625 4.671875 -4.40625 4.328125 -4.40625 C 3.75 -4.40625 3.40625 -3.875 3.28125 -3.65625 C 3.03125 -4.3125 2.5 -4.40625 2.203125 -4.40625 C 1.171875 -4.40625 0.59375 -3.125 0.59375 -2.875 C 0.59375 -2.765625 0.703125 -2.765625 0.71875 -2.765625 C 0.796875 -2.765625 0.828125 -2.796875 0.84375 -2.875 C 1.1875 -3.9375 1.84375 -4.1875 2.1875 -4.1875 C 2.375 -4.1875 2.71875 -4.09375 2.71875 -3.515625 C 2.71875 -3.203125 2.546875 -2.546875 2.1875 -1.140625 C 2.03125 -0.53125 1.671875 -0.109375 1.234375 -0.109375 C 1.171875 -0.109375 0.953125 -0.109375 0.734375 -0.234375 C 0.984375 -0.296875 1.203125 -0.5 1.203125 -0.78125 C 1.203125 -1.046875 0.984375 -1.125 0.84375 -1.125 C 0.53125 -1.125 0.296875 -0.875 0.296875 -0.546875 C 0.296875 -0.09375 0.78125 0.109375 1.21875 0.109375 C 1.890625 0.109375 2.25 -0.59375 2.265625 -0.640625 C 2.390625 -0.28125 2.75 0.109375 3.34375 0.109375 C 4.375 0.109375 4.9375 -1.171875 4.9375 -1.421875 C 4.9375 -1.53125 4.859375 -1.53125 4.828125 -1.53125 C 4.734375 -1.53125 4.71875 -1.484375 4.6875 -1.421875 C 4.359375 -0.34375 3.6875 -0.109375 3.375 -0.109375 C 2.984375 -0.109375 2.828125 -0.421875 2.828125 -0.765625 C 2.828125 -0.984375 2.875 -1.203125 2.984375 -1.640625 Z M 3.328125 -3.015625 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 2.046875 -3.984375 L 2.984375 -3.984375 C 3.1875 -3.984375 3.296875 -3.984375 3.296875 -4.1875 C 3.296875 -4.296875 3.1875 -4.296875 3.015625 -4.296875 L 2.140625 -4.296875 C 2.5 -5.71875 2.546875 -5.90625 2.546875 -5.96875 C 2.546875 -6.140625 2.421875 -6.234375 2.25 -6.234375 C 2.21875 -6.234375 1.9375 -6.234375 1.859375 -5.875 L 1.46875 -4.296875 L 0.53125 -4.296875 C 0.328125 -4.296875 0.234375 -4.296875 0.234375 -4.109375 C 0.234375 -3.984375 0.3125 -3.984375 0.515625 -3.984375 L 1.390625 -3.984375 C 0.671875 -1.15625 0.625 -0.984375 0.625 -0.8125 C 0.625 -0.265625 1 0.109375 1.546875 0.109375 C 2.5625 0.109375 3.125 -1.34375 3.125 -1.421875 C 3.125 -1.53125 3.046875 -1.53125 3.015625 -1.53125 C 2.921875 -1.53125 2.90625 -1.5 2.859375 -1.390625 C 2.4375 -0.34375 1.90625 -0.109375 1.5625 -0.109375 C 1.359375 -0.109375 1.25 -0.234375 1.25 -0.5625 C 1.25 -0.8125 1.28125 -0.875 1.3125 -1.046875 Z M 2.046875 -3.984375 "/>
+</g>
+</g>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 141 13 L 144 13 L 144 297.828125 L 141 297.828125 Z M 141 13 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 5 L 293 5 L 293 297.828125 L 0 297.828125 Z M 0 5 "/>
+</clipPath>
+</defs>
+<path fill-rule="nonzero" fill="rgb(0%, 0%, 0%)" fill-opacity="0.2" d="M 142.527344 155.296875 L 281.429688 16.398438 L 3.628906 16.398438 L 142.527344 155.296875 L 3.628906 294.195312 L 281.429688 294.195312 L 142.527344 155.296875 "/>
+<path fill="none" stroke-width="0.19925" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(84.999084%, 84.999084%, 84.999084%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 -113.385594 L 138.900688 -113.385594 M -138.900094 -85.041844 L 138.900688 -85.041844 M -138.900094 -56.694187 L 138.900688 -56.694187 M -138.900094 -28.346531 L 138.900688 -28.346531 M -138.900094 0.001125 L 138.900688 0.001125 M -138.900094 28.344875 L 138.900688 28.344875 M -138.900094 56.692531 L 138.900688 56.692531 M -138.900094 85.040188 L 138.900688 85.040188 M -138.900094 113.387844 L 138.900688 113.387844 M -113.388375 -138.897312 L -113.388375 138.899563 M -85.040719 -138.897312 L -85.040719 138.899563 M -56.693062 -138.897312 L -56.693062 138.899563 M -28.345406 -138.897312 L -28.345406 138.899563 M -0.00165625 -138.897312 L -0.00165625 138.899563 M 28.346 -138.897312 L 28.346 138.899563 M 56.693656 -138.897312 L 56.693656 138.899563 M 85.041313 -138.897312 L 85.041313 138.899563 M 113.388969 -138.897312 L 113.388969 138.899563 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -141.732125 0.001125 L 140.529594 0.001125 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.272374 3.028469 C -2.080968 1.89175 0.00106375 0.188625 0.56747 0.001125 C 0.00106375 -0.190281 -2.080968 -1.893406 -2.272374 -3.030125 " transform="matrix(1, 0, 0, -1, 283.05753, 155.298)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="295.353" y="157.442"/>
+</g>
+<g clip-path="url(#clip-0)">
+<path fill="none" stroke-width="1.59404" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00165625 -141.73325 L -0.00165625 140.528469 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+</g>
+<path fill="none" stroke-width="1.27522" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-miterlimit="10" d="M -2.269593 3.029 C -2.082093 1.892281 -0.00006125 0.189156 0.566345 0.00165625 C -0.00006125 -0.18975 -2.082093 -1.892875 -2.269593 -3.029594 " transform="matrix(0, -1, -1, 0, 142.529, 14.76947)"/>
+<g fill="rgb(0%, 0%, 0%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="140.73" y="9.448"/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill="none" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 -138.897312 L 138.900688 138.899563 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+<path fill="none" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(0%, 0%, 0%)" stroke-opacity="1" stroke-dasharray="2.98883 2.98883" stroke-miterlimit="10" d="M -138.900094 138.899563 L 138.900688 -138.897312 " transform="matrix(1, 0, 0, -1, 142.529, 155.298)"/>
+</g>
+</svg>
+</div>
+<p>כאשר האיזור הצבוע נקרא הקונוס אור וזה אוסף כל האירועים אשר הם דמויי זמן. חלקיק יכול להשפיע על האיזורים שנמצאים בקונוס הזמן החיובי ולהיות מושפע מאירועים מהקונוס זמן השלילי.</p>
+<div class="definition"><span class="keyword">אורך</span><p>המרחק בין שתי נקודות כאשר הזמן קבוע.</p>
+</div>
+<div class="definition"><span class="keyword">התקצרות האורך</span><p>במעבר בין מערכות יחוס, האורך מתקצר.</p>
+</div>
+<div class="example"><span class="keyword">התקצרות האורך</span><p>נניח שסרגל באורך <span>\(l_{0}\)</span> במערכת <span>\(S'\)</span> ומודדים את אורך הסרגל במערכת <span>\(S\)</span>. 
+הקשר בין קצוות הסרגל בשתי המערכות נתון ע"י:
+<span>$$x_{1}'=\gamma(x_{1}+vt);x_{2}'=\gamma(x_{2}+vt)$$</span>
+כאשר במערכת <span>\(S\)</span> מקפידים להסתכל על הקצוות באותו רגע זמן(הגדרת המדידה של האורך. נקבל:
+<span>$$l_{0}=|x_{1}'-x_{2}'|=\gamma|\underbrace{ x_{1}-x_{2} }_{ l }|\implies l=\frac{1}{\gamma}l_{0}&lt;l_{0}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">התקצרות הזמן</span><p>הזמן מתקדם בקצב שונה בין מערכות יחוס שונות.</p>
+</div>
+<div class="example">
+<p>עבור חלקיק במנוחה במערכת <span>\(S\)</span>, החלקיקי מתפרק תוך זמן <span>\(d\tau\)</span>. 
+במערכת <span>\(S\)</span> אינטרוואל בין שהי המואורעות(יש/אין חלקיק בראשית) נתון ע"י:
+<span>$$ds^2=(cdt)^2 - { \left( d\vec{x} \right)^2 }=\left( cd\tau \right)^2$$</span>
+במערכת <span>\(S'\)</span> אותו אינטרוול נתון ע"י:
+<span>$$c^2dt^2=ds^2=ds'^2=\left( c\;dt' \right)^2-(cx')^2=c^2dt'^2\left( 1-\left( \frac{dx'}{cdt'} \right)^2 \right)=c^2dt'^2\left( 1-\frac{v^2}{c^2} \right)=c^2 \frac{dt'^2}{\gamma ^2}$$</span>
+ולכן <span>\(dt=\frac{dt'}{\gamma}\)</span> ולכן <span>\(dt'&gt;d\tau\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">קו עולם</span><p>המסלול שחלקיק מסרטט בעולם 4 מימדי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='prev-page'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

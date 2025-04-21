@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קרינה של חלקיק</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page'><a href='./Electrodynamics'> חשמל אנליטי</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_1'>1.1 יחידות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_2'>1.2 הסכם הסכימה של אינשטיין</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_3'>1.3 מושגים בסיסיים באנליזה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_1_4'>1.4 פונקציות מיוחדות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יחסות פרטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_1'>2.1 מערכות ב-3 מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_2'>2.2 טרנספורמציית לורנץ</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_3'>2.3 גדלים שמורים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_2_4'>2.4 מערכות דמויי זמן ודמויי מקום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. אלקטרומגנטיות ויחסות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_1'>3.1 הגדרות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_2'>3.2 הפעולה של התנועה</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_3_3'>3.3 משוואות מקסוול</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מגנטוסטטיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_1'>4.1 פוטנציאל מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_2'>4.2 ביו סבר</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_3'>4.3 פיתוח מולטיפולי</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_4_4'>4.4 מגנטיות בחומר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קרינה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_2'>5.2 קרינה של חלקיק</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='parent-page-dropdown'><a href='./Electrodynamics_5_4'>5.4 טנזור המאמץ האלקטרומגנטי</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Electrodynamics_5_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Electrodynamics_5_1`; }});</script>
+        <div class="content">
+        <h1>5.2  קרינה של חלקיק</h1>
+    <div class="definition"><span class="keyword">קרינה</span><p>ההספק הכולל יהיה האינטגרל המשטחי על ספרה ברדיוס <span>\(r\)</span> של הווקטור פוינטינג. כלומר ההספק הכולל יהיה:
+<span>$$P\left(r,t\right)=\oint\vec{S}\cdot d\vec{a}={\frac{c}{4\pi}}\oint\left( \vec{E}\times\vec{B} \right)\cdot d\vec{a}.$$</span>
+כאשר נגדיר את הקרינה בתור הגבול כאשר הרדיוס שואף לאינסוף:
+<span>$$P_{\mathrm{rad}}(t_{0})=\operatorname*{lim}_{r\to\infty}P\left(r,t_{0}+{\frac{r}{c}}\right)$$</span></p>
+</div>
+<p>הקרינה זה למעשה האנרגיה ליחידת זמן שעוזבת את המערכת ולא חוזרת.</p>
+<div class="remark">
+<p>השטח פנים של ספרה זה <span>\(4\pi r^{2}\)</span>. כדי שקרינה תתרחש, נדרש שהווקטור פוינטינג תקטן בקצב שלא יותר מהיר מ-<span>\(\frac{1}{r^{2}}\)</span>(כלומר אם ילך כמו <span>\(\frac{1}{r^{3}}\)</span> נקבל כי האינטגרל על הווקטור פוינטינג ישאף ל-0, וההספק של הקרינה יהיה 0).  כלומר קרינה זה למעשה מתיחחס לגורמים של השדה האלקטרומגנטי שהאנרגיה שלהם אינה דועכת ל-0 באינסוף.</p>
+</div>
+<div class="definition"><span class="keyword">איזור הקרינה/radiation zone</span><p>האיזור שבו האנרגיה היחידה שנשאר היא הקרינה - כלומר במרחק גדול מהמקור.</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחאת לינרארד-ויכארט</span><p>עבור חלקיק הנע במיקום <span>\(\vec{R}=\vec{r}-\vec{r}_{0}(t)=R(t)\hat{n}(t)\)</span> ו-<span>\(\beta=\frac{v}{c}\)</span> מתקיים:
+<span>$$\Phi(\vec{x},\,t)\,=\,\left[{\frac{q}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}},\qquad\vec{A}(\vec{x},\,t)\,=\,\left[{\frac{q{\vec{\beta}}}{(1\,-\,{\vec{\beta}}\,\cdot\,{\vec{n}})R}}\right]_{\mathrm{ret}}$$</span></p>
+</div>
+<div class="proof">
+<p>אנו יודעים כי הפתרון של הפוטנציאלים יהיו:
+<span>$$\varphi\left( \vec{r},t \right)=\int d^{3}r^{\prime}\,{\frac{\rho\left( \vec{r}^{\prime},t-|\vec{r}-\vec{r}^{\prime}|/c \right)}{|\vec{r}-\vec{r}^{\prime}|}}\qquad \vec{A}(\vec{r},t)={\frac{1}{c}}\int d^{3}r^{\prime}\,{\frac{{\vec{j}(\vec{r}^{\prime},t-|\vec{r}-\vec{r}^{\prime}|/c)}}{|\vec{r}-\vec{r}^{\prime}|}}$$</span>
+(לחלופין בעזרת סימון טנזורי היה אפשר לכתוב <span>\({ A}^{\alpha}(x)\,=\,\frac{4\pi}{c}\int\,d^{4}x^{\prime}\,\,G_{r}(x\,-\,x^{\prime})J^{\alpha}(x^{\prime})\)</span>). כאשר עבור חלקיק מתקיים:
+<span>$$\rho\left( {\vec r},t \right)=q\delta\left( {\vec r}-{\vec r}_{0}(t) \right)\qquad {\vec j}({\vec r},\,t)=q{\vec v}(t)\delta({\vec r}-{\vec r}_{0}(t))$$</span>
+ניתן להציב את הזרם בפוטנציאל ע"י הוספת אינטרגל נוסף:
+<span>$$\varphi(\vec{r},t)={ }\int d^{3}r^{\prime}\int d t^{\prime}{\frac{\rho(\vec{r}^{\prime},t^{\prime})}{|\vec{r}-\vec{r}^{\prime}|}}\delta(t^{\prime}-t+|\vec{r}-\vec{r}^{\prime}|/c)$$</span>
+כאשר כעת נציב את הצפיפות מטען:
+<span>$$\varphi({\vec r},t)=\frac{q}{4\pi\epsilon_{0}}\int d t^{\prime}\frac{\delta(t^{\prime}-t+R(t^{\prime})/c)}{R(t^{\prime})}.$$</span>
+נשתמש בזהות של פונקציית דלתא האומרת:
+<span>$$\delta[g(x)]=\sum_{n}\frac{1}{|g^{\prime}(x_{n})|}\delta(x-x_{n})\quad g(x_{n})=0,\ \ g^{\prime}(x_{n})\ne0$$</span>
+כאשר עבור חלקיק עם מהירות <span>\(v&lt;c\)</span> נקבל כי הארגיומנט של הפונקציית דלתא הוא אפס בזמן יחודי <span>\(t_{\mathrm{ret}}=t-{\frac{R(t_{\mathrm{ret}})}{c}}\)</span>. כעת ניתן לסמן <span>\(\beta=\frac{v}  {c}\)</span> ולכתוב:
+<span>$$g(t^{\prime})={\frac{d}{d t^{\prime}}}\left[t^{\prime}-t+R(t^{\prime})/c\right]=1+{\frac{1}{c}}{\frac{d}{d t^{\prime}}}{\sqrt{\vec{R}(t^{\prime})\cdot\vec{R}(t^{\prime})}}=1-{\vec{\beta}}(t^{\prime})\cdot{\hat{\vec{n}}}(t^{\prime})&gt;0$$</span>
+ולכן נקבל עבור הפוטנציאל הסקלארי:
+<span>$$\varphi(\vec{r},t)={ }\left[{\frac{q}{R(t)g(t)}}\right]_{t=t_{\mathrm{ret}}}={ }\left[{\frac{q}{R-{\vec{\beta}}\cdot\vec{R}}}\right]_{\mathrm{ret}}$$</span>
+כאשר עבור הפוטנציאל הווקטורי נדרש להכפיל ב-<span>\(v\)</span> כדי לקבל זרם ולכן:
+<span>$$\vec{A}(\vec{r},t)={ \frac{1}{c}}\left[{\frac{q\vec{v}(t)}{R(t)g(t)}}\right]_{t=t_{\mathrm{rel}}}={ \frac{1}{c}}\left[{\frac{q\vec{v}}{R-{\vec{\beta}}\cdot\vec{R}}}\right]_{\mathrm{ret}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">שדות לינרארד-ויכארט</span><p>השדות שנוצרות עבור חלקיק נע יהיו:
+<span>$$\begin{gather}\vec{E}(\vec{r},t)=q\left[{\frac{\hat{\vec{n}}}{g R^{2}}}\right]_{\mathrm{ret}}+q{\frac{d}{d t}}\left[{\frac{\hat{\vec{n}}-\beta}{g c R}}\right]_{\mathrm{ret}} \\\vec{B}(\vec{r},t)={\frac{q}{c}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g R^{2}}}\right]_{\mathrm{ret}}+{\frac{q}{c}}{\frac{d}{d t}}\left[{\frac{\vec{v}\times{\hat{\vec{n}}}}{g c R}}\right]_{\mathrm{ret}}
+\end{gather}$$</span></p>
+</div>
+<p>ניתן להראות את זה ע"י שימוש בפוטנציאלים מהטענה הקודמת, או אם אנחנו מרגישים מספיק נוח אם טנזורים, ניתן לחשב את ה-4 פוטנציאל <span>\(A^{\alpha}\)</span> ואז לגזור אותו ולקבל:
+<span>$$\partial^{\alpha}A^{\beta}\,=\,2e\,\int\,d\tau\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}}{V\,\cdot\,(x\,-\,r)}\right]\,\theta[x_{0}\,-\,r_{0}(\tau)]\,\,\delta\{[x\,-\,r(\tau)]^{2}\}\,$$</span>
+כאשר בעזרת זה ניתן לקבל את טנזור השדה האלקטרומגנטי:
+<span>$$F^{\alpha\beta}=\frac{e}{V\cdot\,(x\,-\,r)}\,\frac{d}{d\tau}\left[\frac{(x\,-\,r)^{\alpha}V^{\beta}\,-\,(x\,-\,r)^{\beta}V^{\alpha}}{V\cdot\,(x\,-\,r)}\right]$$</span></p>
+<div class="proposition"><span class="keyword">נוסחאת לאמור</span><p>בגבול שבו <span>\(v\ll c\)</span> נקבל כי ההספק יהיה:
+<span>$$P={\frac{2}{3}}\,{\frac{q^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}$$</span></p>
+</div>
+<div class="proof">
+<p>תחת קירוב זה נקבל כי:
+<span>$$\vec{E}_{a}\,=\,{\frac{e}{c}}\left[{\frac{\vec{n}\,\times\,(\vec{n}\,\times\,{\dot{\vec{\beta}}})}{R}}\right]_{\mathrm{ret}}$$</span>
+כאשר ניתן לקבל את שטף האנרגיה בעזרת ווקטור פוינטינג:
+<span>$${\textbf{S}}={\frac{c}{4\pi}}{\textbf{E}}\times{\textbf{B}}={\frac{c}{4\pi}}\,|{\textbf{E}}_{a}|^{2}{\textbf{n}}$$</span>
+ולכן ההספק ליחידת זווית מרחבית יהיה:
+<span>$$\frac{d P}{d\Omega}=\frac{c}{4\pi}\,|R{\vec E}_{a}|^{2}=\frac{e^{2}}{4\pi c}\,|{\vec n}\,\times\,({\vec n}\,\times\,{\dot{\vec\beta}})|^{2}={\frac{e^{2}}{4\pi c^{3}}}\,\vert{\dot{\vec{v}}}\vert^{2}\,\sin^{2}\!\Theta$$</span>
+כאשר <span>\(\Theta\)</span> זה הזווית בין התאוצה <span>\(\dot{\vec{v}}\)</span> לבין <span>\(\vec{n}\)</span>. אם נבצע אינטגרל על כל הזווית המרחבית נקבל כי <span>\(P={\frac{2}{3}}\,{\frac{e^{2}}{c^{3}}}\,|{\dot{\vec{v}}}|^{2}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">נוסחא להספק של לינרארד</span><p><span>$$P=\frac{2}{3}\,\frac{e^{2}}{c}\,\gamma^{6}[(\dot{\vec\beta})^{2}\,-\,({\vec\beta}\,\times\,\dot{\vec\beta})^{2}]$$</span></p>
+</div>
+<div class="remark">
+<p>בשתי המקרים, ניתן לראות כי אם אין תאוצה - אין קרינה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Electrodynamics_5_3'>5.3 קרינה של דיפול</a></li>
+<li class='prev-page'><a href='./Electrodynamics_5_1'>5.1 גלים אלקטרומגנטיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

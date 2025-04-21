@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מרחבים ווקטורים נוצרים סופית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent-page'><a href='./linear.html'> אלגברה לינארית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. שדות ומרחבים ווקטורים והעתקות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_1_1.html'>1.1 שדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_3.html'>1.3 מרחבים ווקטורים נוצרים סופית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_5.html'>1.5 הרכבה של העתקות והעתקה הופכית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_1_6.html'>1.6 מרחב ההעתקות הלינאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. אלגברת מטריצות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_2_1.html'>2.1 מטריצות - הגדרות וסימונים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_2.html'>2.2 העתקות לינאריות ומכפלת מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_3.html'>2.3 מכפלת מטריצות מ-4 נקודות מבט</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_4.html'>2.4 מטריצות בלוקים ומטריצות אלכסוניות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_2_5.html'>2.5 מרחבים שמקבלים ממטריצה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מערכות משוואות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_3_1.html'>3.1 צורה מדורגת מצומצת</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_2.html'>3.2 מציאת הצגה פרמטרית למערכת משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_3.html'>3.3 שימוש במטריצות הופכיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_3_4.html'>3.4 פירוק למכפלה של מטריצות משולשיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אופרטורים לינאריים ודטרמיננטה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_4_1.html'>4.1 אופרטורים לינארים ומעברי בסיס</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_2.html'>4.2 אופרטורים ומטריצות מיוחדות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_3.html'>4.3 פונקציות נפח</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_4.html'>4.4 חישוב דטרמיננטה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_4_5.html'>4.5 שימושים של דטרמיננטה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. פולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_5_1.html'>5.1 הגדרות בסיסיות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_2.html'>5.2 פולינום מינימלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_5_3.html'>5.3 פולינום אופייני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבים אינוורינטים ונילפוטנטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_6_1.html'>6.1 מרחבים ציקלים ומרחבים אינוורינטיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_2.html'>6.2 אופרטור נילפוטנטי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_6_3.html'>6.3 מטריצת ג'ורדן נילפוטנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. לכסון וצורת ג'ורדן</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_7_1.html'>7.1 ערכים, ווקטורים ומרחבים עצמיים</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_2.html'>7.2 צורת ג'ורדן</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_3.html'>7.3 אקספוננט של מטריצות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_7_4.html'>7.4 לכסון סימולטני</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. תבניות בילינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_8_1.html'>8.1 תבנית בילינארית</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_2.html'>8.2 תבנית בלינאריות סימטריות וליכסון</a></li>
+<li class='parent_page-dropdown'><a href='./linear_8_3.html'>8.3 תבנית ריבועית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מרחבי מכפלה פנימית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_9_1.html'>9.1 מכפלה פנימית ונורמה</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_2.html'>9.2 אורתוגונאליות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_3.html'>9.3 צמוד ואונטרי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_4.html'>9.4 המשפט הספקטרלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_5.html'>9.5 מטריצות חיוביות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_9_6.html'>9.6 פירוק SVD ופירוק שמידט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מרחבים דואלי וטנזורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_10_1.html'>10.1 הדואלי של מרחב מכפלה פנימי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_2.html'>10.2 המרחב הדואלי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_10_3.html'>10.3 מכפלת קרונקר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. פתרון נומרי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./linear_11_1.html'>11.1 פתרון מקורב והמשפט היסודי</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_2.html'>11.2 נורמה אופרטורית ורגישות של מערכות משוואות</a></li>
+<li class='parent_page-dropdown'><a href='./linear_11_3.html'>11.3 שיטת החזקה למציאת ערכים עצמיים</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./linear_1_4.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./linear_1_2.html`;}});</script>
+        <div class="content">
+        <h1>1.3  מרחבים ווקטורים נוצרים סופית</h1>
+    <div class="definition"><span class="keyword">צירוף לינארי</span><p>יהי <span>\(V\)</span> מרחב ווקטורי. עבור אוסף ווקטורים <span>\(v_{1},\dots,v_{n}\in V\)</span> ואיברים בשדה <span>\(a_{1},\dots,a_{n}\in \mathbb{F}\)</span> הווקטור:
+<span>$$v=a_{1}v_{1}+\dots+a_{n}v_{n}$$</span>
+נקרא הצירוף הלינארי של הווקטורים <span>\(v_{1},\dots,v_{n}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פרוש</span><p>יהי <span>\(V\)</span> מרחב ווקטורי ו-<span>\(v_{1},\dots,v_{n}\in V\)</span> אוסף של ווקטורים. אזי הפרוש של <span>\(v_{1},\dots,v_{n}\)</span> יהיה כל הצירופים הלינאריים של הווקטורים <span>\(v_{1},\dots,v_{n}\)</span>. כלומר:
+<span>$$\mathrm{Span}\left( v_{1},\dots,v_{n} \right)=\left\{  a_{1}v_{1}+\dots+a_{n}v_{n}\mid a_{1},\dots,a_{n}\in \mathbb{F}   \right\}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של פרוש</span><p>יהי <span>\(V\)</span> מרחב ווקטורי ו-<span>\(S\subseteq V\)</span> קבוצה של ווקטורים מ-<span>\(V\)</span>. אזי מתקיים:</p>
+</div>
+<ol>
+<li>
+<p>מתקיים <span>\(S\subseteq \mathrm{Span}(S)\)</span> </p>
+</li>
+<li>
+<p>מונוטוניות - אם <span>\(S_{1},S_{2}\subseteq V\)</span> קבוצה של ווקטורים כך ש-<span>\(S_{2}\subseteq S_{1}\)</span> אזי <span>\(\mathrm{Span}(S_{2})\subseteq \mathrm{Span(S_{1})}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(U\)</span> תת מרחב של <span>\(V\)</span> אז <span>\(U=\mathrm{Span}(U)\)</span>. </p>
+</li>
+</ol>
+<div class="definition"><span class="keyword">מרחב ווקטורי נוצר סופית</span><p>אם קיימים אוסף <span>\(v_{1},\dots,v_{n}\)</span> של ווקטורים כך שמתקיים:
+<span>$$V=\mathrm{Span}\left( v_{1},\dots,v_{n} \right)$$</span>
+אזי נקרא ל-<span>\(V\)</span> מרחב ווקטורי נוצר סופית.</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה פורסת של מרחב ווקטורי</span><p>יהי <span>\(V\)</span> מרחב ווקטורים. אזי קבוצה של ווקטורים <span>\(A=\left\{  v_{1},\dots,v_{n}  \right\}\)</span> נקראת קבוצה פורשת של <span>\(V\)</span> אם:
+<span>$$V=\mathrm{Span}(A)=\mathrm{Span}\left\{  v_{1},\dots,v_{n}  \right\}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">קבוצה בלתי תלוייה לינארית של ווקטורים</span><p>תהי <span>\(A=\left\{  v_{1},\dots,v_{n}  \right\}\)</span> קבוצה של ווקטורים במרחב ווקטורי <span>\(V\)</span>. אזי <span>\(A\)</span> קבוצה בלתי תלוייה לינארית(בת"ל) אם הקבוצה הריקה, או שהבחירה היחידה של <span>\(a_{1},\dots,a_{n}\in \mathbb{F}\)</span> כך שמתקיים <span>\(a_{1}v_{1}+\dots+a_{n}v_{n}=0\)</span> יהיה <span>\(a_{1}=a_{2}=\dots=a_{n}\)</span>.</p>
+</div>
+<div class="example">
+<p>יהי <span>\(V\)</span> מרחב ווקטורי של סדרות בגודל 4. נסתכל על הקבוצה:
+<span>$$A=\{ (1,0,0,0),(0,1,0,0),(0,0,1,0) \}$$</span>
+נסתכל על מקדימים <span>\(a_{1},a_{2},a_{3} \in\mathbb{F}\)</span> ונבדוק מתי מתקיים:
+<span>$$a_{1}(1,0,0,0)+a_{2}(0,1,0,0)+a_{3}(0,0,1,0)=(0,0,0,0)$$</span>
+ונקבל:
+<span>$$(a_{1},a_{2},a_{3},0)\,=\,(0,0,0,0)\implies a_{1}=a_{2}=a_{3}=0$$</span>
+ולכן בלתי תלוי לינארית.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>רשימה באורך 1 בלתי תלוייה לינארית אם"ם האיבר היחיד אינו 0. </p>
+</li>
+<li>
+<p>רשימה באורך 2 בלתי תלוייה לינארית אם"ם איבר אחד אינו מכפלה סקלארית של האיבר השני. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">קבוצה תלוייה לינארית של ווקטורים</span><p>קבוצה של ווקטורים <span>\(A=\left\{  v_{1},\dots,v_{n}  \right\}\)</span> נקראת תלוייה לינארית אם אינה בלתי תלוייה לינארית. כלומר קיימים מקדימים <span>\(a_{1},\dots,a_{n}\in \mathbb{F}\)</span> לא כולם אפס כך שמתקיים:
+<span>$$a_{1}v_{1}+\dots+a_{n}v_{n}=0$$</span></p>
+</div>
+<div class="example">
+<p>יהי <span>\(V\)</span> אוסף הסדרות באורך 4. נסתכל על הקבוצה:
+<span>$$V=\{ (1,0,0,0), (0,1,0,0),(1,1,0,0) \}$$</span>
+ונשים לב כי עבור <span>\(a_{1}=1,a_{2}=1,a_{3}=-1\)</span> נקבל כי:
+<span>$$a_{1}(1,0,0,0)+a_{2}(0,1,0,0)+a_{3}(1,1,0,0)=(1,1,0,0)-(1,1,0,0)=(0,0,0,0)=0$$</span>
+ולכן לא בלתי תלוי לינארית ולכן תלוי לינארית.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(A=\left\{  v_{1},\dots,v_{n}  \right\}\)</span> אוסף תלוי לינארית. אז קיים <span>\(1\leq k\leq n\)</span> כך ש- <span>\(v_{k}\in \mathrm{Span}\left( v_{1},\dots ,v_{k-1} \right)\)</span> ומתקיים:
+<span>$$\mathrm{Span}  (A)  =\mathrm{Span}\left( A\setminus \{ v_{k} \} \right)$$</span></p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(A\)</span> תלוייה לינארית, קיימים <span>\(a_{1},\dots,a_{n}\in \mathbb{F}\)</span> לא כולם אפס כך שמתקיים:
+<span>$$a_{1}v_{1}+\cdots+a_{m}v_{m}=0.$$</span>
+יהי <span>\(1\leq k\leq n\)</span> הגדול ביותר כך ש-<span>\(a_{k}\neq 0\)</span>. כעת ניתן להעביר אגפים, לחלק ולקבל:
+<span>$$v_{k}=-{\frac{a_{1}}{a_{k}}}v_{1}-\cdots-{\frac{a_{k-1}}{a_{k}}}v_{k-1}$$</span>
+וקיבלנו כי <span>\(v_{k}\in \mathrm{Span}\left( v_{1},\dots ,v_{k-1} \right)\)</span>. כעת ניתן לבטא את הפרוש:
+<span>$$\begin{gather}\mathrm{Span}(A)=\left\{  b_{1}v_{1}+\dots+b_{k-1}v_{k-1} +b_{k}v_{k}+\dots+b_{n}\mid b_{1},\dots,b_{n}\in \mathbb{F}   \right\} = \\=\left\{  b_{1}v_{1}+\dots+b_{k-1}v_{k-1} +b_{k}\left( -{\frac{a_{1}}{a_{k}}}v_{1}-\cdots-{\frac{a_{k-1}}{a_{k}}}v_{k-1} \right)+\dots+b_{n}\mid b_{1},\dots,b_{n}\in \mathbb{F}   \right\}= \\\left\{  \left( b_{1}-\frac{b_{k}a_{1}}{a_{k}} \right)v_{1}+\dots+\left( b_{k-1}-\frac{b_{k}a_{k-1}}{a_{k}} \right)v_{k-1}+0v_{k}+\dots+\left( b_{n}-\frac{b_{k}a_{n}}{a_{k}} \right)v_{n}\mid b_{1},\dots,b_{n}\in \mathbb{F}     \right\}= \\=\mathrm{Span}\left( A \setminus  \{ v_{k} \} \right)
+\end{gather}$$</span></p>
+</div>
+<h2>בסיס</h2>
+<div class="proposition">
+<p>יהי <span>\(V\)</span> מרחב ווקטורי. אם <span>\(A\)</span> קבוצה בלתי תלוייה לינארית ב-<span>\(V\)</span>, ו-<span>\(B\)</span> קבוצה פורשת של <span>\(V\)</span>. אזי גודל של <span>\(B\)</span> יהיה גדול או שווה לגודל של <span>\(A\)</span>. כלומר <span>\(|B|\geq |A|\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">בסיס</span><p>יהי <span>\(V\)</span> מרחב ווקטורי נוצר סופית. אזי קבוצה של ווקטורים <span>\(\mathcal{A}=\left\{  w_{1},\dots,w_{n}  \right\}\)</span> נקראת בסיס של <span>\(V\)</span> אם קבוצה פורשת וגם קבוצה בלתי תלוייה לינארית.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(V\)</span> מרחב ווקטורי נוצר סופית עם בסיס <span>\(\mathcal{A}=\left\{  w_{1},\dots,w_{n}  \right\}\)</span>. לכל <span>\(v \in V\)</span> קיימים מקדימים <span>\(a_{1},\dots,a_{n}\in \mathbb{F}\)</span> יחידים כך ש:
+<span>$$v=a_{1}w_{1}+\dots+a_{n}w_{n}$$</span></p>
+</div>
+<div class="symbolize">
+<p>כאשר אנחנו כותבים את הווקטור <span>\(v\)</span> בבסיס <span>\(\mathcal{A}=\left\{  w_{1},\dots,w_{n}  \right\}\)</span> נסמן <span>\([v]_{\mathcal{A} }\)</span>.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(V\)</span> מרחב ווקטורי. אזי:</p>
+<ol>
+<li>
+<p>אם <span>\(A\)</span> קבוצה בלתי תלוייה לינארית המוכלת ב-<span>\(V\)</span>. אז ניתן להרחיב אותה לבסיס. כלומר ניתן להוסיף עליה ווקטורים ולקבל בסיס. </p>
+</li>
+<li>
+<p>אם <span>\(A\)</span> קבוצה פורשת של <span>\(V\)</span>, אז מכילה בסיס. כלומר ניתן להוריד מהקבוצה ווקטורים ולקבל בסיס. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>כל שתי בסיסים יהיו באותו הגודל. </p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(V\)</span> נוצרת סופית. יהיו <span>\(B_{1},B_{2}\)</span> שתי בסיסים של <span>\(V\)</span>. אזי <span>\(B_{1}\)</span> בלתי תלוייה לינארית ב-<span>\(V\)</span>, ו-<span>\(B_{2}\)</span> פורשת את <span>\(V\)</span> ולכן מטענה שראינו <span>\(|B_{1}|\leq|B_{2}|\)</span>. באותו אופן, כיוון ש-<span>\(B_{2}\)</span> בלתי תלוייה לינארית ו-<span>\(B_{1}\)</span> קבוצה פורשת נקבל כי <span>\(|B_{2}|\leq|B_{1}|\)</span>. ולכן נקבל סה"כ כי <span>\(|B_{1}|=|B_{2}|\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מימד של מרחב ווקטורי</span><p>יהי <span>\(V\)</span> מרחב ווקטורי. נגדיר את המימד של המרחב הווקטורי להיות גודל הבסיס. </p>
+</div>
+<p>כאשר המימד מוגדר היטב כיוון שלא תלוי בבחירת הבסיס.</p>
+<div class="proposition"><span class="keyword">מימד של סכום של מרחבים</span><p><span>$$\dim(V_{1}+V_{2})=\dim V_{1}+\dim V_{2}-\dim(V_{1}\cap V_{2})$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./linear_1_4.html'>1.4 העתקות לינאריות</a></li>
+<li class='prev-page'><a href='./linear_1_2.html'>1.2 מרחבים ווקטורים ותתי מרחבים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

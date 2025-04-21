@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פתרון בתחום חסום</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations_8_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_7_2`; }});</script>
+        <div class="content">
+        <h1>7.3  פתרון בתחום חסום</h1>
+    <div class="proposition"><span class="keyword">פתרון חד מימדי</span><p>פתרון משוואת לפלס בחד מימד יהיה:
+<span>$$\frac{\partial^2 u}{\partial x^2} =0\implies u=Ax+B$$</span>
+ומוצאים את הפתרון מהתנאי שפה.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון קרטזי דו מימדי</span><p>פתרון משוואת לפלס בקורדינטות קרטזי דו מימדי
+<span>$$ \frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}=0.$$</span>
+נשתמש בהפרדת משתנים מהצורה <span>\(u(x,y)=X(x)Y(y)\)</span> ונקבל:
+<span>$$ X^{\prime\prime}=\lambda^2X,\quad Y^{\prime\prime}=-\lambda^2Y.$$</span>
+כלומר הפתרון הכללי יהיה:
+<span>$$ u(x,y)=(A\cosh\lambda x+B\sinh\lambda x)(C\cos\lambda y+D\sin\lambda y)$$</span>
+או לחלופין:
+<span>$$ u(x,y)=[A\exp\:\lambda x+B\exp(-\lambda x)](C\cos\lambda y+D\sin\lambda y)$$</span></p>
+</div>
+<div class="example"><span class="keyword">משוואת לפלס במלבן</span><p>ראשית נפתור את המקרה שצלע אחת עם תנאי שפה לא הומוגני. כלומר:
+<span>$$u(x=0,y)=u(x=L_{x},y)=u(x,y=0)=0\quad u(x,y=L_{y})=f(x)$$</span>
+נגדיר אופרטור <span>\(Lu=u_{x x}\)</span>. נחפש פונקציות עצמיות מהצורה <span>\(Lu_{n}=-\lambda^2u_{n}\)</span>. מתנאי שפה נקבל <span>\(u_{n}=\sin \left( \lambda_{n} x \right)=\sin\left( \frac{\pi n}{L_{x}}x \right)\)</span>. נסמן <span>\(u=\sum Y(t)u_{n}\)</span> ונקבל את המשוואה:
+<span>$$\begin{gather}\sum \left( \ddot{Y}(y) - \lambda_{n}^2Y(y) \right) u_{n} = 0\implies  \ddot{Y}- \left( \frac{\pi n}{L_{x}} \right)^2Y=0 \\Y(y)=A\cosh\left( \frac{\pi n}{L_{x}}y \right)+B\sinh\left( \frac{\pi n}{L_{x}}y \right)
+\end{gather}$$</span>
+מהתנאי שפה <span>\(u(x,0)=0\)</span> נקבל כי <span>\(A=0\)</span>. כעת מתקיים:
+<span>$$u(x,y)=\sum B_{n}\sinh\left( \frac{\pi n}{L_{x}}y \right)\sin\left( \frac{\pi n}{L_{x}}x \right)$$</span>
+וכעת נותר רק להשתמש בתנאי שפה האחרון <span>\(u(x,y=L_{y})=f(x)\)</span>.
+אחרי שיש לנו את הפתרון הזה. ניתן למצוא כל פתרון בעזרת סופרפוזיציה.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון בקורדינטות פולאריות</span><p>הפתרון הכללי של משוואת לפלס בקורדינטות פולריות יהיה:
+<span>$$\!\!\!u(r,\theta)\!=\!A\!+\!B\ln r\!+\!\sum_{n=1}^\infty\left[A_n\cos(n\theta)\!+\!B_n\sin(n\theta)\right](C_{n}r^{-n}\!+\!D_{n}r^n)$$</span>
+כאשר אם הנגזרת חסומה <span>\(D_{n}=0\)</span>. אם לא מתבדר בראשית, <span>\(C_{n},B=0\)</span>, וכן אם הבעיה פנימית כך שאין התבדרות בראשית נקבל:
+<span>$$ u(r,\theta)=a_0+\sum_{n=1}^{\infty}\left[a_n\cos(n\theta)+b_n\sin(n\theta)\right]r^{n}$$</span>
+ואם הבעיה חיצונית כך שאין התבדרות באינסוף נקבל:
+<span>$$ u(r,\theta)=a_0+\sum_{n=1}^{\infty}\left[a_n\cos(n\theta)+b_n\sin(n\theta)\right]r^{-n}$$</span></p>
+</div>
+<div class="proof">
+<p>משוואת לפלס בקורדינטות פולאריות תהיה מהצורה:
+<span>$$\nabla^{2}u={\frac{1}{r}}{\frac{\partial}{\partial r}}\Big(r{\frac{\partial u}{\partial r}}\Big)+{\frac{1}{r}}{\frac{\partial^{2}u}{\partial\theta^{2}}}=0$$</span>
+כאשר נחפש פתרון בהפרדת משתנים <span>\(u\left( r,\theta \right)=R(t)\Theta\left( \theta \right)\)</span>. נציב במשוואה ונקבל:
+<span>$$R^{\prime\prime}\Theta+\frac{1}{r}R^{\prime}\Theta+\frac{1}{r^{2}}R\Theta^{\prime\prime}=0\implies r^{2}\frac{R^{\prime\prime}}{R}+r\frac{R^{\prime}}{R}=-\frac{\Theta^{\prime\prime}}{\Theta}\equiv\lambda^{2}$$</span>
+הפתרון לחלק הזוויתי יהיה:
+<span>$$\Theta^{\prime\prime}+\lambda^{2}\Theta=0\implies\Theta=c\cos\left( \lambda\theta \right)+d\sin\left( \lambda\theta \right)$$</span>
+הפתרון לחלק המרחבי יהיה:
+<span>$$r^{2}\frac{R^{\prime\prime}}{R}+r\frac{R^{\prime}}{R}-\lambda^{2}=0\implies r^{2}R^{\prime\prime}+r R^{\prime}-\lambda^{2}R=0$$</span>
+כאשר נשים לב כי זוהי משוואת אויילר, אשר נותנת כאשר <span>\(\lambda \neq 0\)</span>:
+<span>$$R(r)=ar^{\lambda}+br^{-\lambda}\implies u_{\lambda}=\bigl(a r^{\lambda}+b r^{-\lambda}\bigr)(c\cos(\lambda\theta)+d\sin(\lambda\theta))$$</span>
+וכאשר <span>\(\lambda=0\)</span> נקבל ריבוי אלגברי ולכן:
+<span>$$R(r)=C_{1}+C_{2}\ln(r)\implies u_{0}=\left( \tilde{C}_{1}+\tilde{C}_{2}\ln(r) \right)$$</span>
+כאשר איחדנו את הקבועים שהתקבלו מהמקדם של <span>\(c\cos(0)=c\)</span> עם המקדמים <span>\(C_{1},C_{2}\)</span>.
+כעת נדרש להציב תנאי שפה. ראשית קיים תנאי שפה מחזורי מהפונקציות הטריגונומטריים, נדרוש כי המחזור יהיה כפולה של <span>\(2\pi\)</span>. אנו יודעים כי:
+<span>$$f=\frac{\lambda}{2\pi}\implies T=\frac{2\pi}{\lambda}$$</span>
+מספיק כי הזמן מחזור יתחלק ב-<span>\(2\pi\)</span>(כי אז בפרט המחזור יהיה <span>\(2\pi\)</span>) כלומר:
+<span>$$T\overset{!}{=}  \frac{2\pi}{n}\implies \frac{2\pi}{\lambda}=\frac{2\pi}{n}\implies n=\lambda$$</span>
+ולכן הפתרון הכללי יהיה הסכום של כל הפתרונות:
+<span>$$\!\!\!u(r,\theta)\!=\!A\!+\!B\ln r\!+\!\sum_{n=1}^\infty\left[A_n\cos(n\theta)\!+\!B_n\sin(n\theta)\right](C_{n}r^{-n}\!+\!D_{n}r^n)$$</span>
+כאשר אם הבעיה היא פנימית כך שאין התבדרות בראשית לא ייתכן כי <span>\(C_{n}\neq 0\)</span> או ש-<span>\(B\neq 0\)</span> כיוון שמקרה זה היה התבדרות בראשית.
+אם הבעיה היא חיצונית כך שאין התברדות באינסוף לא ייתכן כי <span>\(B\neq 0\)</span> או ש-<span>\(D_{n}\neq 0\)</span> כיוון שאז היה התבדרות באינסוף.</p>
+</div>
+<div class="remark">
+<p>פתרון זה יהיה הפתרון גם במקרה של קורדינטות גליליות כך שקיימת סימטרייה להזזה בציר <span>\(z\)</span>. זה כיוון שמקרה זה בפועל שקול למערכת פולארית.</p>
+</div>
+<div class="proposition">
+<p>פתרון משוואת לפלס בקורדינטות גלליות תתן את המשוואה:
+<span>$$ \frac{1}{r }\frac{\partial}{\partial r}\left(r \frac{\partial u}{\partial r }\right)+\frac{1}{ r ^{2}}\frac{\partial^{2}u}{\partial\phi^{2}}+\frac{\partial^{2}u}{\partial z^{2}}=0.$$</span>
+כאשר אם פותרים בהפרדת משתנים <span>\(u=\Theta\left( \theta \right)R(r)Z(z)\)</span>, נקבל:
+<span>$$\begin{gather}  Z(z)=E\exp(-kz)+F\exp kz\\ \Theta\left( \theta \right)=C\cos \left( m\theta \right)+D\sin \left( m\theta \right) \\R(r)=AJ_m(kr)+BY_m(kr)
+\end{gather}$$</span>
+כאשר <span>\(Y_{m}\)</span> היא פונקציית בסל מהסוג השני ומופיע רק אם יש התבדרות בראשית.</p>
+</div>
+<div class="definition"><span class="keyword">סימטריה אזיומטלית</span><p>סימטריה גלילית או סימטרייה מסביב לישר.</p>
+</div>
+<div class="proposition"><span class="keyword">פתרון כדורי עם סימטריה אזימוטלית</span><p>פתרון משוואת לפלס <span>\(\bar{\nabla}^2u=0\)</span> כאשר יש סימטריה אזימוטילית.
+<span>$$ u\left(r,\theta,\varphi\right)=\sum_{\ell=0}^{\infty}\left(A_\ell r^\ell+\frac{B_\ell}{r^{\ell+1}}\right)P_\ell\left(\cos\theta\right)$$</span></p>
+</div>
+<div class="proof">
+<p>משוואת לפלס הכללית תהיה:
+<span>$$0=\nabla^{2}u={\frac{1}{r^{2}}}{\frac{\partial}{\partial r}}\left(r^{2}{\frac{\partial u}{\partial r}}\right)+{\frac{1}{r^{2}\sin\theta}}{\frac{\partial}{\partial\theta}}\left(\sin\theta{\frac{\partial u}{\partial\theta}}\right)+{\frac{1}{r^{2}\sin^{2}\theta}}{\frac{\partial^{2}u}{\partial\varphi^{2}}}$$</span>
+כאשר כיוון שיש סימטריה אזימוטלית מספיק לפתור:
+<span>$$0=\nabla^{2}u={\frac{1}{r^{2}}}{\frac{\partial}{\partial r}}\left(r^{2}{\frac{\partial u}{\partial r}}\right)+{\frac{1}{r^{2}\sin\theta}}{\frac{\partial}{\partial\theta}}\left(\sin\theta{\frac{\partial u}{\partial\theta}}\right)$$</span>
+כאשר ניתן כעת לחפש פתרון בהפרדת משתנים מהצורה <span>\(u\left( r,\theta,\varphi \right)=R(r)\Theta\left( \theta \right)\)</span>. נציב במשוואת לפלס:
+<span>$$0=\frac{\Theta}{r^{2}}\frac{d}{d r}\left(r^{2}\frac{d R}{d r}\right)+\frac{R}{r^{2}\sin\theta}\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)$$</span>
+עבור החלק הזוויתי נקבל:
+<span>$$\frac{1}{\sin\theta}\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)+\Lambda\Theta=0$$</span>
+כאשר נגדיר משתנה חדש <span>\(w=\cos \theta\)</span> כך שמתקיים:
+<span>$${\frac{d}{d\theta}}={\frac{d w}{d\theta}}{\frac{d}{d w}}=-\sin\theta{\frac{d}{d w}}$$</span>
+כאשר נשים לב כי <span>\(\sin ^{2}\theta=1-w^{2}\)</span> ולכן:
+<span>$$\frac{d}{d w}\left((1-w^{2})\frac{d\Theta}{d w}\right)+\Lambda\Theta=0.$$</span>
+כאשר זוהי משוואת לג'נדר כאשר נדרש לפתור אותה בתחום <span>\(-1\leq w\leq 1\)</span> כאשר נדרוש כי לא תהיה התבדרות ב-<span>\(w=\pm 1\)</span>. לכן נקבל <span>\(\Lambda=\ell\left( \ell+1 \right)\)</span> הם הערכים העצמיים כאשר הפונקציות העצמיות המתאימות יהיו פולינומי לג'נדר <span>\(P_{\ell}(w)\)</span>. כעת אם נחזור חזרה למשתנה <span>\(\theta\)</span> נקבל כי הפונקציות העצמיות יהיו <span>\(P_{\ell}\left( \cos\left( \theta \right) \right)\)</span> כאשר מתקיים היחס האורתוגונאליות:
+<span>$$\int_{0}^{\pi}P_{\ell}\left(\cos\theta\right)P_{\ell^{\prime}}\left(\cos\theta\right)\sin\theta d\theta=\frac{2}{2\ell+1}\delta_{\ell\ell^{\prime}}$$</span>
+כעת נפתור עבור החלק הרדיאלי. אחרי פישוט נקבל את המשוואת אוילר הבאה:
+<span>$$r^{2}R^{\prime\prime}+2r R^{\prime}-\ell(\ell+1)R=0$$</span>
+כאשר נזכור כי הפתרון יהיה מהצורה <span>\(r^{\alpha}\)</span> כאשר ניתן למצוא את <span>\(\alpha\)</span> בעזרת הפולינום האופייני:
+<span>$$\alpha\left( \alpha-1 \right)R+2\alpha R-\ell\left( \ell+1 \right)R=0\implies\alpha\left( \alpha+1 \right)=\ell\left( \ell+1 \right)\implies \alpha=\ell,-\left( \ell+1 \right)$$</span>
+ולכן הפתרון הכללי יהיה:
+<span>$$u\left(r,\theta,\varphi\right)=\sum_{\ell=0}^{\infty}\left(A_{\ell}r^{\ell}+\frac{B_{\ell}}{r^{\ell+1}}\right)P_{\ell}\left(\cos\theta\right)$$</span></p>
+</div>
+<div class="reminder">
+<p>פולינומי לג'נדר המוכללים:
+<span>$$P_{\ell}^{m}\left(x\right)=\left(1-x^{2}\right)^{m/2}\frac{d^{m}P_{\ell}(x)}{d x^{m}}$$</span>
+ההרמוניות הספריות:
+<span>$$Y_{\ell}^{m}(\theta,\varphi)=(-1)^{m}\sqrt{\frac{2\ell+1}{4\pi}\cdot\frac{(\ell-m)!}{(\ell+m)!}}P_{\ell}^{m}(\cos\theta)e^{i m\varphi}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פתרון ספרי כללי</span><p>פתרון של משוואת לפלס <span>\(\bar{\nabla}^2u=0\)</span> בקורדינטות ספריות כללית תהיה מהצורה:
+<span>$$u(r,\theta,\phi)=R(r)\Theta(\theta)\Phi(\phi)$$</span>
+כאשר:
+<span>$$ \begin{gather}R(r)=Ar^\ell+Br^{-\left( \ell+1 \right)}\\\Phi\left( \phi \right)= C\cos m\phi+D\sin m\phi = c_{m}e^{im\phi} \\ \Theta\left( \theta \right)= EP_\ell^m\left( \cos\theta \right)+FQ_\ell^m\left( \cos\theta \right)
+\end{gather}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$0=\nabla^{2}u={\frac{1}{r^{2}}}{\frac{\partial}{\partial r}}\left(r^{2}{\frac{\partial u}{\partial r}}\right)+{\frac{1}{r^{2}\sin\theta}}{\frac{\partial}{\partial\theta}}\left(\sin\theta{\frac{\partial u}{\partial\theta}}\right)+{\frac{1}{r^{2}\sin^{2}\theta}}{\frac{\partial^{2}u}{\partial\varphi^{2}}}$$</span>
+כאשר נפריד לחלק הזוויתי והרדיאלי - <span>\(u\left( r,\theta,\varphi \right)=R(r)Y\left( \theta,\varphi \right)\)</span>. נציב את הצורה הזו במשוואת לפלס ונקבל:
+<span>$$0=\frac{Y}{r^{2}}\left(r^{2}R^{\prime}\right)^{\prime}+\frac{R}{r^{2}\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)+\frac{R}{r^{2}\sin^{2}\theta}\frac{\partial^{2}Y}{\partial\varphi^{2}}$$</span>
+כאשר לאחר הפרדת משתנים נקבל:
+<span>$${\frac{1}{R}}\left(r^{2}R^{\prime}\right)^{\prime}=-{\frac{1}{Y\sin\theta}}{\frac{\partial}{\partial\theta}}\left(\sin\theta{\frac{\partial Y}{\partial\theta}}\right)-{\frac{1}{Y\sin^{2}\theta}}{\frac{\partial^{2}Y}{\partial\varphi^{2}}}=c o n s t=\Lambda$$</span>
+עבור החלק הזוויתי ניתן להגדיר <span>\(Y\left( \theta,\varphi \right)=\Theta\left( \theta \right)\Phi\left( \varphi \right)\)</span> ולקבל:
+<span>$$\frac{\sin\theta}{\Theta}\left(\sin\theta\Theta^{\prime}\right)^{\prime}+\Lambda\sin^{2}\theta=-\frac{\Phi^{\prime\prime}}{\Phi}=c o n s t=m^{2}$$</span>
+עבור החלק האזימטלי עבור תנאי שפה מחזוריים נקבל:
+<span>$$\Phi^{\prime\prime}=-m^{2}\Phi\implies \Phi\left( \varphi \right)=a_{m}\cos\left( m\varphi \right)+b_{m}\sin\left( m\varphi \right) \quad  m \in \mathbb{N}\cup \{ 0 \}$$</span>
+כאשר ניתן לכתוב בעזרת אקספוננט מרוכב:
+<span>$$\Phi\left( \varphi \right)=c_{m}e^{i m\varphi}\quad m \in \mathbb{Z}$$</span>
+כאשר עבור החלק הפולארי נקבל:
+<span>$$\frac{1}{\sin\theta}\left(\sin\theta\Theta^{\prime}\right)^{\prime}+\left(\Lambda-\frac{m^{2}}{\sin^{2}\theta}\right)\Theta=0$$</span>
+כאשר לאחר הצבה <span>\(w=\cos\left( \theta \right)\)</span> נקבל:
+<span>$$\frac{d}{d w}\left((1-w^{2})\frac{d\Theta}{d w}\right)+\left(\Lambda-\frac{m^{2}}{1-w^{2}}\right)\Theta=0$$</span>
+כאשר זוהי משוואת לג'נדר המוכללת כאשר הפתרונות שלה הם פונקציות לג'נדר המוכללים כאשר המכפלה של שתי הפתרונות תתן לנו את ההרמוניות הספריות:
+<span>$$Y_{\ell}^{m}(\theta,\varphi)=\Theta_{\ell}^{m}(\theta)\Phi_{m}(\varphi)\propto P_{\ell}^{m}(\cos\theta)e^{i m\varphi}$$</span>
+עבור החלק הרדיאלי הפתרון זהה למקרה עם סימטריה אזימוטלית.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='prev-page'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+</ul></li>
+        </body>
+        </html>
+        

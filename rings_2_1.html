@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פולינומים ופריקות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+<li class='parent-page'><a href='./rings.html'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_1_1.html'>1.1 חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_2.html'>1.2 תת חוג</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_3.html'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_4.html'>1.4 אידיאלים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_2_1.html'>2.1 פולינומים ופריקות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./rings_3_1.html'>3.1 הגדרת ותכונות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_2.html'>3.2 מודולים פשוטים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_3.html'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_4.html'>3.4 מודולים חופשיים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_5.html'>3.5 סופיות</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_6.html'>3.6 אנדומורפיזמים</a></li>
+<li class='parent_page-dropdown'><a href='./rings_3_7.html'>3.7 חוג הפוך</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./rings_2_2.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./rings_1_5.html`;}});</script>
+        <div class="content">
+        <h1>2.1  פולינומים ופריקות</h1>
+    <div class="definition"><span class="keyword">חוג פולינומים</span><p>חוג המסומן ב-<span>\(R[x]\)</span> כאשר 
+<span>$$R[x]=\{a_{n}x^{n}+a_{n-1}x^{n-1}+\cdot\cdot\cdot+a_{1}x+a_{0}\mid a_{i}\in R, x \in \mathbb{F} \} $$</span></p>
+</div>
+<div class="definition"><span class="keyword">פריקות של פולינום</span><p>יהי <span>\(D\)</span> תחום שלמות. פולינום <span>\(f(x)\in D\)</span> שהוא לא פולינום האפס ולכן פולינום היחידה נקרא פריק אם קיימים <span>\(g(x),h(x)\in D\)</span> כך ש-<span>\(deg(g(x)),deg(h(x))&gt;1\)</span> ומקיימים <span>\(f(x)=g(x)h(x)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם יש לפולינום <span>\(f(x)\in \mathbb{F}[x]\)</span> שורש, אז הוא פריק. </p>
+</div>
+<p>כאשר נשים לב כי הכיוון השני בדרך כלל לא נכון.</p>
+<div class="proposition">
+<p>לפולינום <span>\(f(x)\in \mathbb{F}[x]\)</span> מסדר 2 או 3 יש שורש אם"ם הוא פריק.</p>
+</div>
+<h2>מבחני פריקות</h2>
+<div class="proposition"><span class="keyword">הלמה של גאוס</span><p>יהא <span>\(p(x)\in \mathbb{Z}[x]\)</span> פולינום ממעלה חיובית. אז <span>\(p(x)\)</span> אי פריק מעל <span>\(\mathbb{Z}[x]\)</span> אם"ם הוא אי פריק מעל <span>\(\mathbb{Q}\)</span></p>
+</div>
+<div class="proposition"><span class="keyword">קריטריון אייזנשטיין</span><p>יהא <span>\(\mathbb{Z}[x]\ni q(x)=a_{n}x^n+\dots+a_{0}\)</span>, <span>\(n&gt;0\)</span>.
+אם קיים <span>\(p\)</span> ראשוני כך ש:</p>
+<ol>
+<li>
+<p>מתקיים <span>\(p\nmid a_n\)</span> </p>
+</li>
+<li>
+<p>מתקיים <span>\(p\mid a_{i}\)</span> לכל <span>\(0\leq i&lt;n\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(p^2 \nmid a_{0}\)</span> 
+אז <span>\(q(x)\)</span> אי פריק</p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">קרטריון השורש הרציונאלי</span><p>נתון פולינום מהצורה <span>$$p(x)=a_{n}x^{n}+\ldots+a_{0}\in\mathbb{Z}[x]$$</span> אם <span>\(p\left( \frac{a}{b} \right)=0\)</span> ו-<span>\(\frac{a}{b}\in \mathbb{ Q}\)</span> מצומצם אזי <span>\(a\mid a_{0}\)</span> ו-<span>\(b\mid a_{n}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">טרנספורמציה לינארית</span><p>לכל <span>\(a,b \in \mathbb{F}\)</span> כך ש-<span>\(a\neq 0\)</span> אז <span>\(p(x) \in \mathbb{F} [x]\)</span> פריק אם"ם <span>\(f(ax+b)\)</span> פריק.</p>
+</div>
+<h2>תחום ראשי</h2>
+<div class="definition"><span class="keyword">תחום ראשי</span><p>תחום שבו כל אידיאל נוצר ע"י איבר יחיד.</p>
+</div>
+<div class="definition"><span class="keyword">איבר ראשוני</span><p>יהא <span>\(R\)</span> תחום שלמות. איבר <span>\(r\in R\)</span> לא הפיך יקרא ראשוני אם <span>\(r \mid a\cdot b\)</span> גורר <span>\(r \mid a\)</span> או <span>\(r \mid b\)</span>.</p>
+</div>
+<div class="proposition">
+<p>בתחום ראשי <span>\(R\)</span>. איבר הוא ראשוני אם"ם הוא אי פריק. </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./rings_2_2.html'>2.2 תחום שלמות</a></li>
+<li class='prev-page'><a href='./rings_1_5.html'>1.5 תחום שלמות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

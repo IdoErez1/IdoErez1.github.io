@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link rel="stylesheet" href='./styles/main_style.css'>
+        <script type="text/javascript" src="./scripts/dark_mode.js" ></script>
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט הכיסוי של בסיקוביץ</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+<li class='parent-page'><a href='./measure.html'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_1_1.html'>1.1 מבוא טופולוגי</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_2.html'>1.2 סיגמא אלגברה</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_3.html'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_4.html'>1.4 פונקציות מדידות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_1_5.html'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_2_1.html'>2.1 אינטגרציית לבג</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_2.html'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_3.html'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_4.html'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_2_5.html'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_3_1.html'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_2.html'>3.2 רגולאריות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_3.html'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_3_4.html'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_4_1.html'>4.1 קמירות</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_2.html'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_3.html'>4.3 מרחבי הילברט</a></li>
+<li class='parent_page-dropdown'><a href='./measure_4_4.html'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_2.html'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent_page-dropdown'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent_page-dropdown'><a href='./measure_6_1.html'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent_page-dropdown'><a href='./measure_6_2.html'>6.2 קונבולוציה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') {window.location.href = `./measure_5_3.html`;}if (event.key === 'ArrowLeft'){window.location.href = `./measure_5_1.html`;}});</script>
+        <div class="content">
+        <h1>5.2  משפט הכיסוי של בסיקוביץ</h1>
+    <div class="definition"><span class="keyword">כיסוי בסיקוביץ'</span><p>כיסוי <span>\(\mathcal{F}\)</span> של קבוצה <span>\(A\subseteq \mathbb{R}^{d}\)</span> נקרא כיסוי בסיקוביץ'(Besicovitch) אם <span>\(\mathcal{F}\)</span> מורכב מכדורים (אוקלידים) סגורים ולכל <span>\(x \in A\)</span> קיים <span>\(0&lt;r\)</span> כך ש-<span>\(B_{r}(x)\in \mathcal{F}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">הכיסוי של בסיקוביץ</span><p>קיימים קבועים אוניברסליים <span>\(P=P(d)\)</span> ו-<span>\(Q=Q(d)\)</span> עבורם לכל <span>\(A\subseteq \mathbb{R}^{d}\)</span> קבוצה חסומה וכיסוי בסיקוביץ <span>\(\mathcal{F}\)</span> של A. קיים תת כיסוי בן מנייה <span>\(\mathcal{E}\subseteq \mathcal{F}\)</span> מגובה קטן או שווה ל-<span>\(P\)</span>. כלומר:
+<span>$$\mathbb{1} _{A}\leq \sum_{B \in \mathcal{E} }\mathbb{1} _{B}\leq P$$</span>
+יתר על כן ניתן לפצל את <span>\(\mathcal{E}\)</span> לאיחוד של <span>\(m\)</span> תתי אוספים:
+<span>$$\mathcal{E} =\bigcup_{i=1}^{m}\mathcal{E_{i}} $$</span>
+כך שכל <span>\(\mathcal{E}_{i}\)</span> מכיל אוסף של כדורים זרים בזוגות וכן <span>\(m\leq Q\)</span>.</p>
+</div>
+<div class="remark">
+<p>אינטואיטבית, המשפט אומר כי אם יש לנו אוסף של כדורים סגורים שמכסים את קבוצה <span>\(A\)</span> במרחב <span>\(d\)</span> מימדי, אפשר לבחור תת אוסף "דליל" יותר כך שעדיין מכסה את <span>\(A\)</span> ויש לו את התכונות הבאות:</p>
+<ol>
+<li>
+<p>תת כיסוי בן מנייה - צריך רק מספר בין מנייה של כדורים כדי לכסות את <span>\(A\)</span>. </p>
+</li>
+<li>
+<p>חפיפה חסומה - אומנם יש חפיפה בין המעגלים אבל הוא חסום - כל נקודה במרחב מכוסה על ידי לכל היותר <span>\(P\)</span> מהכדורים, כאשר <span>\(P\)</span> תלוי רק ב-<span>\(d\)</span>. </p>
+</li>
+<li>
+<p>פירוק למשפחות זרות - ניתן לחלק את הכדורים שנבחרו ל-<span>\(Q\)</span> קבוצות כך שהגדורים זרים בזוגות, כאשר <span>\(Q\)</span> תלוי רק ב-<span>\(d\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>יהיו <span>\(a,b \in \mathbb{R}^{d}\)</span> וקטורים כלשהם המקיימים
+<span>$$0&lt;\lVert b \rVert &lt;\lVert a-b \rVert \text{ and }0&lt;\lVert a \rVert &lt;\lVert a - b\rVert $$</span>
+אזי הזווית בין <span>\(a\)</span> ל-<span>\(b\)</span> גדולה או שווה מ-<span>\(\frac{\pi}{3}\)</span>. במילים אחרות:
+<span>$$\left\lVert  \frac{a}{\lVert a \rVert }-\frac{b}{\lVert b \rVert }  \right\rVert \geq 1$$</span></p>
+</div>
+<div class="proof">
+<p>כל שני וקטורים ב-<span>\(\mathbb{R}^{d}\)</span> חיים במישור משותף ולכן מספיק להוכיח את הטענה עבור <span>\(\mathbb{R}^{2}\)</span>. נסמן ב-<span>\(L\)</span> את האנך שחוצה את הקטע <span>\([0,a]\)</span>. 
+מאחר ש:
+<span>$$0&lt;\lVert b \rVert &lt;\lVert a-b \rVert $$</span>
+הרי ש-<span>\(b\)</span> נמצא בחצי המישור ששפתו <span>\(L\)</span> ומכיל את 0. מצד שני, מאחר ש-<span>\(\lVert a \rVert&lt;\lVert a-b \rVert\)</span> הרי ש-<span>\(b \not \in B_{\lVert a \rVert}(a)\)</span> ובפרט <span>\(b \not \in \triangle\)</span>(<span>\(b\)</span> לא במשולש).</p>
+</div>
+<div class="proposition"><span class="keyword">תכנות בסיקוביץ החלשה</span><p>קיים מספר טבעי <span>\(N = N(d)\)</span> (התלוי רק בממד המרחב <span>\(d\)</span>) כך שלכל אוסף של כדורים סגורים <span>\(B_{r_1}(x_1), B_{r_2}(x_2), ..., B_{r_k}(x_k)\)</span> המקיימים את שני התנאים הבאים:</p>
+<ol>
+<li>
+<p><strong>חיתוך לא ריק:</strong> <span>\(\bigcap_{i=1}^{k} B_{r_i}(x_i) \neq \varnothing\)</span>. כלומר, יש נקודה משותפת לכל הכדורים באוסף. </p>
+</li>
+<li>
+<p><strong>אי-הכלה:</strong> <span>\(\forall i \neq j, \quad x_i \notin B_{r_j}(x_j)\)</span>. כלומר, מרכזו של אף כדור אינו נמצא בתוך כדור אחר באוסף. 
+אזי, מספר הכדורים באוסף חסום על ידי <span>\(N\)</span>, כלומר <span>\(k \leq N\)</span>.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>בהנתן אוסף כדורים כנ"ל נוכל להעתיקו ע"י הזזה כך ש-<span>\(0 \in \bigcap_{i=1}^{k} B_{r_{i}}(x_{i})\)</span>.
+מאחר ש-<span>\(x_{i}\not \in B_{r}(x_{j})\)</span> לכל <span>\(i \neq j\)</span> הרי ש:
+<span>$$\lVert x_{i}-x_{j} \rVert &gt; r_{j}\geq \lVert x_{j} \rVert &gt; 0$$</span>
+ולכן <span>\(x_{i},x_{j}\)</span> מקיימים את תנאי הלמה. ולכן:
+<span>$$\forall i\neq j\qquad \left\lVert  \frac{x_{i}}{\lVert x_{j} \rVert }-\frac{x_{j}}{\lVert x_{j} \rVert }  \right\rVert &gt; 0$$</span>
+מקופקטיות <span>\(S^{d-1}\)</span> נסיק שקיים <span>\(N\)</span> שהינו המספר המקסימלי של נקודות ב-<span>\(S^{d-1}\)</span> המרוחקות זו מזו מרחק 1.</p>
+</div>
+<div class="remark">
+<p>כבר כאן אפשר לראות שיש משהו מיחוד בכדורים אוקלידיים, כי למשל אם ניקח אליפסות צרות כרצונינו נוכל לייצר זרים גדולים כרצונינו.</p>
+</div>
+<p>כעת נוכל להוכיח את המשפט</p>
+<div class="proof">
+<p>זהו הוכחה קוסטרוקטיבית. נבנה תת כיסוי אשר יקיים את הנדרש.</p>
+<ol>
+<li>
+<p>לכל נקודה <span>\(x\)</span> בקבוצה המקורית בוחרים כדור אחד מהוסף המקורי שמכיל את <span>\(x\)</span>. נסמן את הרדיוס של הכדור הזה ב-<span>\(r(x)\)</span>. </p>
+</li>
+<li>
+<p>נבנה סדרת כדורים באופן הבא: </p>
+</li>
+<li>נמצא את הרדיוס הגדול ביותר, ונקרא לו <span>\(M_{1}\)</span>, כלומר:
+<span>$$0&lt;M_{1}=\sup \left\{  r(x)\mid x \in A  \right\}$$</span></li>
+<li>אם <span>\(M_{1}=\infty\)</span> סיימנו, אחרת נניח <span>\(M_{1}&lt; \infty\)</span>. </li>
+<li>כעת נבחר נקודה <span>\(x_1\)</span> ב-<span>\(A\)</span> שהכדור שנבחר לה יש רדיוס קרוב ל-<span>\(M_1\)</span> (בין <span>\(\frac{M_1}{2}\)</span> ל-<span>\(M_1\)</span>). זה נותן לנו את הכדור הראשון.</li>
+<li>כעת, מסתכלים על החלק של <span>\(A\)</span> שלא מכוסה על ידי הכדורים שבחרנו עד כה. מוצאים את הרדיוס הגדול ביותר בין הנקודות הנותרות (נקרא לו <span>\(M_2\)</span>). כלומר:
+<span>$$0&lt;M_{2}=\sup \left\{  r(x)\mid x \in A \setminus  \bigcup_{i=1}^{k} B_{r(x_{i})}(x_{i})  \right\}$$</span></li>
+<li>בוחרים נקודה <span>\(x_2\)</span> בחלק הלא מכוסה הזה שהכדור שנבחר לה יש רדיוס קרוב ל-<span>\(M_2\)</span> (בין <span>\(\frac{M_2}{2}\)</span> ל-<span>\(M_2\)</span>).</li>
+<li>
+<p>ממשיכים בתהליך הזה. מקבלים סדרת כדורים.</p>
+</li>
+<li>
+<p>אם לעולם לא נכסה את <span>\(A\)</span> לחלוטין במספר סופי של כדורים, זה אומר שאנחנו יוצרים סדרה אינסופית של כדורים עם רדיוסים הולכים וקטנים (<span>\(M_\ell\)</span> שואף ל-0). זה מבטיח שבסופו של דבר, כל נקודה ב-<span>\(A\)</span> תכוסה על ידי כדור כלשהו בסדרה. </p>
+</li>
+<li>
+<p>סדרת הכדורים שבנינו היא תת-האוסף ה"דליל" שאנחנו מחפשים. נקרא לאוסף הזה <span>\(\mathcal{E}\)</span>. </p>
+</li>
+<li>
+<p>להראות שהחפיפה חסומה. נתבונן בכל אוסף של כדורים מ-<span>\(\mathcal{E}\)</span> שיש להם חיתוך לא ריק (כולם חופפים בנקודה כלשהי). אנחנו רוצים להראות שלא יכולים להיות "יותר מדי" כדורים חופפים כאלה. בשביל זה נשתמש בשתי טענות(אשר ההוכחה הריגורוזית שלהם תופיע אחרי ההוכחה): </p>
+</li>
+<li>לכל "שלב" בבנייה (שבו בחרנו כדורים עם רדיוסים קרובים ל-<span>\(M_\ell\)</span>), לא יכולים להיות יותר מדי כדורים באוסף החופף שלנו מאותו שלב. המספר חסום על ידי <span>\(16^d\)</span> (כאשר <span>\(d\)</span> הוא הממד). זה מוכח באמצעות ארגומנט נפח: אם הכדורים חופפים והמרכזים שלהם מופרדים במרחק מסוים, אפשר לארוז רק מספר מוגבל מהם בתוך כדור גדול יותר.</li>
+<li>
+<p>לא יכולים להיות יותר מדי "שלבים" שתורמים כדורים לאוסף החופף שלנו. מספר זה חסום על ידי <span>\(N(d)\)</span>, מספר שתלוי רק בממד. זה משתמש ב"תכונת בסיקוביץ' החלשה" שהוכחנו קודם.</p>
+</li>
+<li>
+<p>הכפלת שני החסמים הללו (<span>\(16^d\)</span> ו-<span>\(N(d)\)</span>) נותנת לנו חסם <span>\(P(d)\)</span> על המספר הכולל של הכדורים החופפים. </p>
+</li>
+<li>
+<p>נרצה כעת להראות שאפשר לחלק את הכדורים שנבחרו למשפחות זרות, באופן הבא: </p>
+</li>
+<li>מסדרים את הכדורים שנבחרו לפי רדיוס יורד.    </li>
+<li>המשפחה הראשונה מכילה את הכדור הראשון בסידור. לאחר מכן, מוסיפים את הכדור הראשון שלא חותך את הכדור הראשון. ממשיכים בתהליך הזה.</li>
+<li>אז, מתחילים משפחה שנייה עם הכדור הראשון שנותר מהרשימה המסודרת. מוסיפים למשפחה הזו את הכדור הראשון שנותר שלא חותך אף אחד מהכדורים שכבר נמצאים במשפחה השנייה.</li>
+<li>
+<p>חוזרים על התהליך הזה עד שכל הכדורים משויכים למשפחה.</p>
+</li>
+<li>
+<p>כעת נוכיח שכל נקודה <span>\(x \in A\)</span> שייכת לכל היותר <span>\(Q(d)\)</span> כדורים מתוך <span>\(\mathcal{E}\)</span>, כאשר <span>\(Q(d)\)</span> תלוי רק ב-<span>\(d\)</span>. נניח בשלילה שקיימת נקודה <span>\(x\)</span> השייכת ל-<span>\(Q(d)+1\)</span> כדורים שונים <span>\(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\)</span>. ללא הגבלת הכלליות נניח <span>\(r_{i_1} \ge r_{i_2} \ge \dots \ge r_{i_{Q(d)+1}}\)</span>. מכיוון שהכדורים באותו אוסף זרים, מרכזי הכדורים <span>\(x_{i_1},...,x_{i_{Q(d)+1}}\)</span> שייכים לכדור <span>\(B_{2r_{i_1}}(x)\)</span>. כמו כן, הכדורים <span>\(B_{r_{i_{Q(d)+1}}/2}(x_{i_j})\)</span> זרים ומוכלים ב <span>\(B_{2r_{i_1}}(x)\)</span>. 
+נפח של כדור ב <span>\(\mathbb{R}^d\)</span> פרופורציוני ל <span>\(r^d\)</span>. לכן, מספר הכדורים הזרים חסום על ידי
+<span>$$ \frac{(2r_{i_1})^d}{(r_{i_{Q(d)+1}}/2)^d} = 4^d (\frac{r_{i_1}}{r_{i_{Q(d)+1}}})^d $$</span>
+אולם, מכיוון שכל הכדורים <span>\(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\)</span> מכילים את <span>\(x\)</span>, ורדיוסיהם לא קטנים מ <span>\(r_{i_{Q(d)+1}}\)</span>, נקבל סתירה אם נבחר <span>\(Q(d)\)</span> גדול מספיק. למעשה, ניתן לבחור <span>\(Q(d) = C^d\)</span> עבור קבוע <span>\(C\)</span> כלשהו.</p>
+</li>
+</ol>
+</div>
+<p>כעת נוכיח את השתי טענות אשר השתמשנו בהם בהוכחה</p>
+<div class="lemma">
+<p>אנו רוצים להראות שאם ניקח אוסף של כדורים <span>\(B_{i_1}, \dots, B_{i_m} \in \mathcal{E}\)</span> בעלי חיתוך לא ריק, אז <span>\(m \leq P\)</span> עבור <span>\(P(d)\)</span> התלוי רק ב-<span>\(d\)</span>. </p>
+</div>
+<div class="proof">
+<p>נסמן <span>\(I = \{i_1, \dots, i_m\}\)</span> ו-<span>\(J_\ell = \mathbb{N} \cap [k_{\ell-1}+1, k_\ell]\)</span>.
+יהי <span>\(i_0 = \min(I \cap J_\ell)\)</span>. לכל <span>\(i_1', i_2' \in I \cap J_\ell\)</span> כך ש-<span>\(i_1' &lt; i_2'\)</span>, מהבנייה <span>\(x_{i_2'} \notin B_{r(x_{i_1'})}(x_{i_1'})\)</span>. כלומר, <span>\(||x_{i_2'} - x_{i_1'}|| &gt; r(x_{i_1'})\)</span>.
+מכיוון ש-<span>\(B_{r(x_{i_1')}}(x_{i_1'}) \cap B_{r(x_{i_2'})}(x_{i_2'}) \neq \varnothing\)</span>, קיים <span>\(z\)</span> כך ש-<span>\(||z - x_{i_1'}|| \leq r(x_{i_1'})\)</span> וגם <span>\(||z - x_{i_2'}|| \leq r(x_{i_2'})\)</span>. לפי אי שוויון המשולש:
+<span>$$ ||x_{i_2'} - x_{i_1'}|| \le ||x_{i_2'} - z|| + ||z - x_{i_1'}|| \le r(x_{i_2'}) + r(x_{i_1'}) $$</span>
+מכיוון ש-<span>\(r(x_{i_1'}), r(x_{i_2'}) \le M_\ell\)</span> וגם <span>\(\frac{M_\ell}{2}&lt; r_{i_{1}'}\)</span> נקבל  <br />
+<span>$$ \frac{M_\ell}{2} &lt; r_{i_1'} &lt; ||x_{i_2'} - x_{i_1'}|| \le 2M_\ell $$</span>
+כמו כן, כל הכדורים <span>\(B_{r(x_i)}(x_i)\)</span> כאשר <span>\(i \in I \cap J_\ell\)</span> מכילים את הכדור <span>\(B_{M_\ell/4}(z)\)</span>. ולכן, הכדורים <span>\(B_{r(x_i)/2}(x_i)\)</span> זרים ומכילים את הכדורים <span>\(B_{M_\ell/8}(x_i)\)</span>. כל הכדורים <span>\(B_{M_\ell/8}(x_i)\)</span> מוכלים בכדור <span>\(B_{2M_\ell}(x_{i_0})\)</span>.
+נפח של כדור ב-<span>\(\mathbb{R}^d\)</span> פרופורציוני ל-<span>\(r^d\)</span>. לכן, מספר הכדורים <span>\(B_{M_\ell/8}(x_i)\)</span> המוכלים ב-<span>\(B_{2M_\ell}(x_{i_0})\)</span> חסום על ידי:
+<span>$$ \frac{(2M_\ell)^d}{(M_\ell/8)^d} = 16^d $$</span>
+ולכן <span>\(|I \cap J_\ell| \leq 16^d\)</span>.</p>
+</div>
+<div class="lemma">
+<p>מתקיים מתכונת בסיקוביץ החלשה:
+<span>$$\#\left\{  \ell \mid I\cap J_{\ell}\neq \varnothing   \right\}\leq N(d)$$</span></p>
+</div>
+<div class="proof">
+<p>ניקח <span>\(n_1, \dots, n_s \in I\)</span> כך שלכל אינדקס <span>\(\ell\)</span>, אם <span>\(n_i, n_j \in I \cap J_\ell\)</span> אז <span>\(i=j\)</span>. כלומר, לכל שלב <span>\(\ell\)</span> יש לכל היותר כדור אחד מ-<span>\(I\)</span>. נניח <span>\(n_1 &lt; n_2 &lt; \dots &lt; n_s\)</span>. מהבנייה <span>\(x_{n_j} \notin B_{r(x_{n_i})}(x_{n_i})\)</span> לכל <span>\(i&lt;j\)</span>. לכן <span>\(||x_{n_j} - x_{n_i}|| &gt; r(x_{n_i})\)</span>.
+מכיוון ש <span>\(r_{n_{j}}\leq \frac{M_{\ell_{n_{i}}}}{2}&lt;r_{n_{i}}\)</span> נקבל <span>\(||x_{n_j} - x_{n_i}|| &gt; r_{n_i} &gt; \frac{M_{\ell_{n_i}}}{2} \ge r_{n_j}\)</span>
+לכן <span>\(||x_{n_j} - x_{n_i}|| &gt; r_{n_j}\)</span> וגם <span>\(||x_{n_j} - x_{n_i}|| &gt; r_{n_i}\)</span>.
+לכן הוקטורים <span>\(x_{n_i}\)</span> מקיימים את תנאי הלמה שהוכחנו קודם, ולכן <span>\(\left\| \frac{x_{n_i}}{||x_{n_i}||} - \frac{x_{n_j}}{||x_{n_j}||} \right\| \geq 1\)</span>.
+כעת, כל הוקטורים <span>\(\frac{x_{n_i}}{||x_{n_i}||}\)</span> נמצאים על הספירה <span>\(S^{d-1}\)</span>, והמרחק בין כל שניים מהם הוא לפחות 1. מתכונת בסיקוביץ' החלשה, מספר הנקודות על הספירה במרחק לפחות 1 זו מזו חסום על ידי <span>\(N(d)\)</span>. לכן <span>\(s \leq N(d)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(\mu\)</span> מידת רדון על <span>\(\mathbb{R}^d\)</span>. תהי <span>\(A \subseteq \mathbb{R}^d\)</span> קבוצה מדידה וחסומה. לכל כיסוי בסיקוביץ' <span>\(\mathcal{F}\)</span> של <span>\(A\)</span>, קיים תת-אוסף סופי <span>\(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{F}\)</span> המורכב מכדורים זרים בזוגות ומקיים:
+<span>$$ \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) \geq \frac{1}{2Q} \mu(A) $$</span>
+כאשר <span>\(Q = Q(d)\)</span> הוא הקבוע ממשפט הכיסוי של בסיקוביץ' (המספר המקסימלי של משפחות זרות שאליהן ניתן לחלק את תת-הכיסוי).</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>ממשפט הכיסוי של בסיקוביץ', עבור הכיסוי <span>\(\mathcal{F}\)</span> של <span>\(A\)</span>, קיים תת-כיסוי בן מנייה <span>\(\mathcal{E} \subseteq \mathcal{F}\)</span> שניתן לחלקו ל-<span>\(Q\)</span> אוספים של כדורים זרים בזוגות: 
+<span>$$ \mathcal{E} = \bigcup_{i=1}^{Q} \mathcal{E}_i $$</span>
+כאשר כל <span>\(\mathcal{E}_i\)</span> מכיל כדורים זרים בזוגות.</p>
+</li>
+<li>
+<p>מכיוון ש-<span>\(\mathcal{E}\)</span> הוא כיסוי של <span>\(A\)</span>, מתקיים: 
+<span>$$ A \subseteq \bigcup_{B \in \mathcal{E}} B = \bigcup_{i=1}^{Q} \bigcup_{B \in \mathcal{E}_i} B $$</span></p>
+</li>
+<li>
+<p>מכיוון ש-<span>\(\mu\)</span> היא מידה, מתקיים: 
+<span>$$ \mu(A) \leq \mu\left( \bigcup_{i=1}^{Q} \bigcup_{B \in \mathcal{E}_i} B \right) \leq \sum_{i=1}^{Q} \mu\left( \bigcup_{B \in \mathcal{E}_i} B \right) $$</span></p>
+</li>
+<li>
+<p>מכיוון שהכדורים בתוך כל <span>\(\mathcal{E}_i\)</span> זרים בזוגות, מתקיים: 
+<span>$$ \mu\left( \bigcup_{B \in \mathcal{E}_i} B \right) = \sum_{B \in \mathcal{E}_i} \mu(B) $$</span></p>
+</li>
+<li>
+<p>לכן: 
+<span>$$ \mu(A) \leq \sum_{i=1}^{Q} \sum_{B \in \mathcal{E}_i} \mu(B) $$</span></p>
+</li>
+<li>
+<p>מכאן נובע שקיים לפחות <span>\(i\)</span> אחד, נניח <span>\(i_0\)</span>, כך ש: 
+<span>$$ \sum_{B \in \mathcal{E}_{i_0}} \mu(B) \geq \frac{1}{Q} \mu(A) $$</span>
+זאת מכיוון שאם זה לא היה נכון, אז סכום כל הסכומים היה קטן מ-<span>\(\mu(A)\)</span>, בסתירה לאי-השוויון הקודם.</p>
+</li>
+<li>
+<p>כעת, מכיוון ש-<span>\(\mu\)</span> היא מידת רדון ו-<span>\(A\)</span> חסומה, <span>\(\mu(A) &lt; \infty\)</span>. לכן, הסכום <span>\(\sum_{B \in \mathcal{E}_{i_0}} \mu(B)\)</span> סופי או אינסופי. אם הוא סופי, אפשר לבחור תת-אוסף סופי <span>\(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{E}_{i_0}\)</span> כך ש: 
+<span>$$ \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) = \sum_{B \in \widetilde{\mathcal{E}}_0} \mu(B) \geq \frac{1}{2} \sum_{B \in \mathcal{E}_{i_0}} \mu(B) \geq \frac{1}{2Q} \mu(A) $$</span>
+אם הסכום אינסופי, מכיוון ש <span>\(\mu(A)\)</span> סופי, קיימת סדרה עולה של תתי קבוצות סופיות של <span>\(\mathcal{E}_{i_0}\)</span>, שאיחודן הוא <span>\(\mathcal{E}_{i_0}\)</span>. לכן ניתן לבחור תת קבוצה סופית <span>\(\widetilde{\mathcal{E}}_0\)</span> כך שהאי שיוויון מתקיים.</p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>תהי <span>\(\mu\)</span> מידת רדון על <span>\(\mathbb{R}^d\)</span> ותהי <span>\(A \subseteq \mathbb{R}^d\)</span> מדידה. בהינתן כיסוי בסיקוביץ' <span>\(\mathcal{F}\)</span> של <span>\(A\)</span> המקיים:
+<span>$$ \forall x \in A \quad \inf\{r &gt; 0 \mid B_r(x) \in \mathcal{F}\} = 0 $$</span>
+קיים תת-אוסף בן מנייה <span>\(\widetilde{\mathcal{E}} \subseteq \mathcal{F}\)</span> המורכב מכדורים זרים בזוגות ומקיים:
+<span>$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}} \right) = 0 $$</span>
+כלומר, כמעט כל <span>\(A\)</span> מכוסה על ידי אוסף של כדורים זרים בזוגות מתוך <span>\(\mathcal{F}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ההוכחה מתחלקת לשני חלקים: תחילה עבור <span>\(A\)</span> חסומה, ולאחר מכן עבור <span>\(A\)</span> כללית.
+<strong>1. המקרה ש-<span>\(A\)</span> חסומה:</strong>
+נניח תחילה ש-<span>\(A \subseteq \mathbb{R}^d\)</span> חסומה ו-<span>\(\mu(A) &gt; 0\)</span>. ניקח קבוצה פתוחה <span>\(\mathcal{U}\)</span> המכילה את <span>\(A\)</span> ומקיימת:
+<span>$$ \mu(\mathcal{U}) &lt; \left(1 + \frac{1}{4Q}\right) \mu(A) $$</span>
+כאשר <span>\(Q\)</span> הוא הקבוע ממשפט הכיסוי של בסיקוביץ'. נסלק מ-<span>\(\mathcal{F}\)</span> את כל הכדורים שאינם מוכלים ב-<span>\(\mathcal{U}\)</span>. <span>\(\mathcal{F}\)</span> עדיין יהיה כיסוי בסיקוביץ' של <span>\(A\)</span>.
+מהטענה הקודמת, קיים תת-אוסף סופי של כדורים זרים בזוגות <span>\(\widetilde{\mathcal{E}}_0 \subseteq \mathcal{F}\)</span> המקיים <span>\(\bigcup \widetilde{\mathcal{E}}_0 \subseteq \mathcal{U}\)</span> וגם:
+<span>$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}}_0 \right) \leq \mu\left( \mathcal{U} \setminus \bigcup \widetilde{\mathcal{E}}_0 \right) = \mu(\mathcal{U}) - \mu\left( \bigcup \widetilde{\mathcal{E}}_0 \right) \leq \mu(\mathcal{U}) - \frac{1}{2Q} \mu(A) &lt; \left(1 - \frac{1}{4Q}\right) \mu(A) $$</span>
+נסמן <span>\(s = 1 - \frac{1}{4Q}\)</span> ו-<span>\(A_1 = A \setminus \bigcup \widetilde{\mathcal{E}}_0\)</span>. ניקח קבוצה פתוחה <span>\(\mathcal{U}_1\)</span> המכילה את <span>\(A_1\)</span> ומקיימת:
+<span>$$ \mu(\mathcal{U}_1) &lt; \left(1 + \frac{1}{4Q}\right) \mu(A_1) $$</span>
+נצמצם שוב את <span>\(\mathcal{F}\)</span> להיות כיסוי של <span>\(A_1\)</span> שכל איבריו מוכלים ב-<span>\(\mathcal{U}_1\)</span>. קיים תת-אוסף <span>\(\widetilde{\mathcal{E}}_1 \subseteq \mathcal{F}\)</span> של כדורים זרים בזוגות עם:
+<span>$$ \mu\left( A_1 \setminus \bigcup \widetilde{\mathcal{E}}_1 \right) &lt; s \cdot \mu(A_1) $$</span>
+נמשיך באותו אופן ונקבל אוסף בן מנייה:
+<span>$$ \mathcal{E} = \bigcup_{n=0}^{\infty} \widetilde{\mathcal{E}}_n $$</span>
+של כדורים זרים בזוגות. מאחר ש-<span>\(s &lt; 1\)</span>, מתקיים:
+<span>$$ \mu\left( A \setminus \bigcup \widetilde{\mathcal{E}} \right) = 0 $$</span>
+<strong>2. המקרה ש-<span>\(A\)</span> אינה חסומה:</strong>
+כאשר <span>\(A \subseteq \mathbb{R}^d\)</span> אינה חסומה, מכיוון ש-<span>\(\mu\)</span> מידת רדון, לכל היותר מספר בן מנייה של ספירות <span>\(\partial B_r(0)\)</span> כאשר <span>\(r &gt; 0\)</span> הן בעלות <span>\(\mu\)</span>-מידה חיובית. אחרת, היה קיים <span>\(0 &lt; R\)</span> כך ש-<span>\(B_R(0)\)</span> מכיל אוסף לא בן מנייה של ספירות ממידה <span>\(\varepsilon &gt; 0\)</span> כלשהי, בסתירה לכך ש-<span>\(\mu(B_R(0)) &lt; \infty\)</span>
+לכן קיימת סדרה עולה של רדיוסים <span>\(r_n \nearrow \infty\)</span> שעבורם:
+<span>$$ \mu\left( \bigcup_{n=0}^{\infty} \partial B_{r_n}(0) \right) = 0 $$</span>
+המשלים של אוסף הספירות הזה:
+<span>$$ \mathbb{R}^d \setminus \bigcup_{n=0}^{\infty} \partial B_{r_n}(0) $$</span>
+הוא אוסף בן מנייה של קבוצות פתוחות, חסומות וזרות <span>\(V_1, V_2, V_3, \dots\)</span>. מאחר ש:
+<span>$$ \mu\left( A \cap \bigcup_{n=0}^{\infty} V_n \right) = \mu(A) $$</span>
+נוכל כעת להפעיל את החלק הראשון של ההוכחה על כל אחת מהקבוצות <span>\(A \cap V_n\)</span>, כאשר נדאג לצמצם את <span>\(\mathcal{F}\)</span> ל-<span>\(V_n\)</span>. בצורה זו, נוכל לכסות כמעט את כל <span>\(A\)</span> על ידי אוסף בן מנייה של כדורים זרים בזוגות.</p>
+</div>
+<div class="reminder">
+<p><span>$$\overline{D}:= \limsup_{ r \nearrow 0 } \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}\qquad \underline{D}:= \liminf_{ r \searrow 0 } \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהיו <span>\(\mu\)</span> ו-<span>\(\lambda\)</span> מידות רדון כלשהן. תהי <span>\(A \subseteq \mathbb{R}^d\)</span> קבוצת בורל ויהי <span>\(0 &lt; t &lt; \infty\)</span> כלשהו:</p>
+<ol>
+<li>
+<p>אם <span>\(\underline{D}(\mu, \lambda, x) \leq t\)</span> לכל <span>\(x \in A\)</span> אז <span>\(\mu(A) \leq t \cdot \lambda(A)\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(\overline{D}(\mu, \lambda, x) \geq t\)</span> לכל <span>\(x \in A\)</span> אז <span>\(\mu(A) \geq t \cdot \lambda(A)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח <span>\(\underline{D}(\mu, \lambda, x) \leq t\)</span>. לפי ההגדרה של הגבול התחתון לכל <span>\(x \in A\)</span> ולכל <span>\(\varepsilon&gt;0\)</span> קיימים סדרה של רדיוסים קטנים כרצונינו כך ש: 
+<span>$$\frac{\mu(B_{r_{n}}(x))}{\lambda(B_{r_{n}}(x))}&lt;t+\varepsilon$$</span>
+כלומר עבור כל <span>\(x \in A\)</span> ניתן למצוא כדורים <span>\(B\)</span> כך ש-<span>\(\mu(B)\leq \left( t+\varepsilon \right)\lambda(B)\)</span>.</p>
+</li>
+<li>
+<p>תהי <span>\(\mathcal{F}\)</span> כיסוי של כדורים כאלה אשר מכסים את <span>\(A\)</span> וגם מקיימים: 
+<span>$$\forall x\in A:\quad\operatorname*{inf}\{r&gt;0\mid B_{r}(x)\in{\mathcal{F}}\}=0$$</span></p>
+</li>
+<li>
+<p>מהמסקנה לעיל, נקבל כי קיים תת אוסף <span>\(\widetilde{\mathcal{E}}\subseteq \mathcal{F}\)</span> של כשל כדורים זרים בזוגות כך שמתקיים: 
+<span>$$\mu{\Big(}A\setminus\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Big)}=0$$</span>
+כלומר עד כדי קבוצה מ-<span>\(\mu\)</span> מידה אפס <span>\(A\)</span> מכוסה על ידי כדורים ב-<span>\(\widetilde{\mathcal{E}}\)</span>.</p>
+</li>
+<li>
+<p>לכל כדור מהבנייה שלנו קיבלנו כי <span>\(\mu(B)\leq \left( t-\varepsilon \right)\lambda(B)\)</span> ולכן כיוון שהכדורים ב-<span>\(\widetilde{\mathcal{E}}\)</span> זרים בזוגות נקבל: 
+<span>$$\mu{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}=\sum_{B\in{\tilde{\mathcal{E}}}}\mu(B)\leq(t+\varepsilon)\sum_{B\in{\tilde{\mathcal{E}}}}\lambda(B)=(t+\varepsilon)\,\lambda{\Bigl(}\bigcup_{B\in{\tilde{\mathcal{E}}}}B{\Bigr)}$$</span>
+כאשר כיוון ש-<span>\(\widetilde{\mathcal{E}}\)</span> מכסה את <span>\(A\)</span> עד כדי קבוצה ממידה אפס נקבל:
+<span>$$\mu(A)=\mu\Big(\bigcup_{B\in\tilde{\mathcal{E}}}B\Big)\implies\mu(A)\leq\left(t+\varepsilon\right)\lambda(A)$$</span></p>
+</li>
+<li>
+<p>כעת עבור החלק השני של הטענה נניח כי <span>\(\overline{D}(\mu, \lambda, x) \geq t\)</span>.  כלומר: 
+<span>$$\overline{{{D}}}\left( \mu,\lambda,x \right)=\operatorname*{lim}_{r\to0}\operatorname*{sup}{\frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}}\geq t\implies \frac{\mu(B_{r}(x))}{\lambda(B_{r}(x))}\geq t\implies\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$</span>
+כאשר ניתן בפרט לקחת את ההגבול התחתון של אגף שמאל ולקבל את הנגזרת התחתונה:
+<span>$$\underline{{{D}}}(\lambda,\mu,x)=\operatorname*{liminf}_{r\to0}\,\frac{\lambda(B_{r}(x))}{\mu(B_{r}(x))}\leq\frac{1}{t}$$</span></p>
+</li>
+<li>
+<p>כעת נשתמש בחלק הראשון של הטענה ונקבל: 
+<span>$$\lambda(A)\leq\frac{1}{t}\,\mu(A)\implies\mu(A)\geq t\,\lambda(A)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>טענה זו היא למעשה השימוש המרכזי במשפט הכיסוי של בסיקוביץ' לצורך גזירה של מידות. היא מקשרת בין הגבולות העליונים והתחתונים של יחסי המידות לבין יחסי המידות של הקבוצות עצמן.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./measure_5_3.html'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+<li class='prev-page'><a href='./measure_5_1.html'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+</ul></li>
+        </body>
+        </html>
+        
