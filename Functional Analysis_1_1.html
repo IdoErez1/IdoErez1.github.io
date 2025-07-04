@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חסימות טוטלית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. התכנסות של סדרת פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורי פורייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_2'>2.2 מערכת אורתונורמלית וטור פורייה כללי</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_4'>2.4 עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Functional Analysis_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Functional Analysis`; }});</script>
+        <div class="content">
+        <h1>1.1  חסימות טוטלית</h1>
+    <div class="proposition"><span class="keyword">בולצנו ווירשטראס</span><p>תהי <span>\((X,\rho)\)</span> מרחב מטרי ויהי <span>\(A\subseteq X\)</span> חסומה. אזי לכל סדרה <span>\((a_{n})\)</span> תהיה תת סדרה קושי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כיוון ש-A חסומה, קיים <span>\(R&gt; 0\)</span> כך ש-<span>\(A\subset [-R,R]\)</span>. נסמן את התחום הזה ב-<span>\(\Delta_{0}=[-R,R]\)</span>. </p>
+</li>
+<li>
+<p>נחלק את <span>\(\Delta_{0}\)</span> לשתי חציים: 
+<span>$$\Delta_{0}^{(1)}=[0,R]\qquad \Delta_{0}^{(2)}=[-R,0]$$</span>
+כאשר כיוון ש-<span>\((a_{n})\)</span> סדרה אינסופית ב-<span>\(A\subseteq \Delta_{0}\)</span> נבחר את אחד מהחציים האלה(למשל את הראשון) ונסמן אותו ב-<span>\(\Delta_{1}\)</span>.</p>
+</li>
+<li>
+<p>נחזור על התהליך - בהנתן <span>\(\Delta_{k}\)</span> נחלק אותו לשתי תתי אינטרוולים שווים, כך שלפחות אחד מהם(אשר יסומן <span>\(\Delta_{k+1}\)</span>) מכיל אינסוף נקודות של <span>\((a_{n})\)</span>. נשים לב כי האורך של <span>\(\Delta_{k}\)</span> הוא: 
+<span>$$\lvert \Delta_{k} \rvert =\frac{2R}{2^{k}}$$</span></p>
+</li>
+<li>
+<p>נבחר נקודה אחד <span>\(a_{n_{k}}\)</span> מ-<span>\(\Delta_{k}\)</span>. כעת לכל <span>\(\ell \geq k\)</span> גם <span>\(a_{n_{k}}\)</span> וגם <span>\(a_{n_{\ell}}\)</span> נמצאים בתוך <span>\(\Delta_{k}\)</span> ולכן: 
+<span>$$\rho\bigl(a_{n_{k}},a_{n_{\ell}}\bigr)\leq\frac{2R}{2^{k}}.$$</span>
+כיוון ש-<span>\(\frac{2R}{2^{k}}\)</span> יכול להיות קטן כרצונינו נקבל כי <span>\((a_{n_{k}})\)</span> קושי.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מרחב נורמי</span><p>יהי <span>\(V\)</span> מרחב ווקטורי מעל <span>\(\mathbb{F}=\mathbb{R},\mathbb{C}\)</span>.  פונקציה <span>\(No\)</span></p>
+</div>
+<div class="definition"><span class="keyword">המרחב <span>\(\ell_{2}\)</span></span><p><span>$$\ell_{2}={\Bigg\{}x=\left(x_{1},x_{2},\dots\right)\mid x_{i}\in\mathbb{R}{\mathrm{~and~}}\sum_{i=1}^{\infty}x_{i}^{2}&lt;\infty{\Bigg\}}$$</span>
+כאשר נגדיר את הנורמה על המרחב הזה על ידי:
+<span>$$\|x\|=\left(\sum_{i=1}^{\infty}x_{i}^{2}\right)^{1/2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חסימות טוטלית</span><p>ניתן לכיסוי על ידי מספר סופי של כדורים.</p>
+</div>
+<div class="theorem"><span class="keyword">האוסדורף - Hausdorff</span><p>נניח <span>\((x,\rho)\)</span> מרחב מטרי כלשהו, ויש לנו קבוצה <span>\(A\subseteq X\)</span> אזי התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הקבוצה <span>\(A\)</span> חסומה טוטלית(עבור כל <span>\(\varepsilon&gt; 0\)</span> קיים מספר סופי של כדורים <span>\(B_{\varepsilon}(x_{1}),\dots,B_{\varepsilon}(x_{N})\)</span> שמכסים, כלומר <span>\(A\subseteq \bigcup_{j=1}^{N}B_{\varepsilon}(x_{j})\)</span>). </p>
+</li>
+<li>
+<p>כל סדרת נקודות ב-<span>\(A\)</span> כוללת תת סדרת קושי. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>נראה 1 גורר 2. נבחר <span>\(\varepsilon=1\)</span>. תהי A חסומה טוטלית. לכן ניתן לכסות הקבוצה <span>\(A\)</span> על ידי מספר סופי של כדורים.
+לכן קיים כדור <span>\(B_{\varepsilon}^{(1)}\)</span> שכולל מספר אינסופי של נקודות בסדרה בסדרה. נגדיר:
+<span>$$V^{(1)}\overset{\text{def}}{=} A\cap  B_{\varepsilon=1}^{(q)} $$</span>
+כך שמתקיים:
+<span>$$\mathrm{Diam}(V^{(1)})=\sup _{x,y \in V^{(1)}}(\rho(x,y))\leq  2$$</span>
+הקבוצה <span>\(V^{(1)}\)</span> כוללת מספר אינסופי של נקודות של <span>\((a_{n})^{\infty}_{n=1}\)</span>. <span>\(V^{(1)}\)</span> חסומה טוטלית. לכן ניתן לכסות אותה על ידי מספר סופי של כדורים בעלי רדיוס <span>\(\varepsilon = \frac{1}{2}\)</span>. נבחר כדור <span>\(B^{(2)}_{\varepsilon=\frac{1}{2}}\)</span> שכולל אינסוף נקודות של הסדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> ונגדיר:
+<span>$$V^{(2)}\overset{\text{def}}{=} V^{(1)}\cap  B_{\varepsilon=\frac{1}{2}}^{(2)}$$</span>
+ניתן להגדיר כי:
+<span>$$\mathrm{Diam}(V^{(2)})\leq  1$$</span>
+אנחנו יודעים כי <span>\(V^{(1)}\)</span> חסומה טוטלית וכן <span>\(V^{(2)}\)</span> מכילה מספר אינסופי של נקודות של <span>\((a_{n})_{n=1}^{\infty}\)</span>.
+כתוצאה מהתהליך הזה נקבל אוסף של קבוצות:
+<span>$$V^{(1)}\supset V^{(2)}\supset \dots \supset V^{(k)}\supset \dots$$</span>
+כך שהקוטר מקיים:
+<span>$$\text{Diam}(V^{(k)})\leq  \frac{2}{k}$$</span>
+וכן כל <span>\(V^{(k)}\)</span> כלל אין סוף נקודות של <span>$$(a_{n})_{n=1}^{\infty}$$</span> כעת נבחר <span>\(a_{n_{1}}\in V^{(1)},a_{n_{2}}\in V^{(2)},\dots\)</span>. נקבל סדרה <span>\((a_{n_{k}})_{k=1}^{\infty}\)</span> כך שמתקיים:
+<span>$$\rho(a_{n_{k}}, a_{n_{k}+\ell})\leq \frac{2}{k}\xrightarrow{k\to \infty} 0$$</span>
+כיוון ש-<span>\(a_{n_{k}},a_{n_{k+\ell}}\in V^{(k)}\)</span>.
+כעת נראה 2 גורר 1. נניח כי <span>\(A\)</span> אינה חסומה טוטלית. מספיק להוכיח כי קיימת סדרה <span>\((a_{n})^{\infty}_{n=1}\)</span> נבחר <span>\(a_{1}\in A\)</span> איכשהו(לא משנה איך). כיוון ש-<span>\(A\)</span> אינה חסומה טוטלית קיים <span>\(\varepsilon&gt;0\)</span> כך שלא ניתן לכסות את <span>\(A\)</span> על ידי מספר סופי של כדורים ברדיוס <span>\(\varepsilon\)</span>. קיימת נקודות <span>\(a_{2}\)</span> כך ש-<span>\(a_{2}\in A\)</span> ומתקיים:
+<span>$$\rho(a_{1},a_{2})\geq  \varepsilon$$</span>
+(כיוון ש-<span>\(A\)</span> אינה חסומה טוטלית). קיימת נקודה <span>\(a_{3}\in A\)</span> כך שמתקיים:
+<span>$$\rho(a_{3},a_{1})\geq \varepsilon \qquad \rho(a_{3},a_{2})\geq \varepsilon$$</span>
+כדי להראות זאת נניח כי לא נכון. אזי מתקיים:
+<span>$$\rho(b,a_{3})\leq  \varepsilon$$</span>
+כאשר <span>\(b=a_{1}\)</span> או <span>\(b=a_{2}\)</span>. 
+<span>$$A=\{ a_{1} \}\cup  \{ a_{2} \}\cup A\setminus \{ a_{1},a_{2} \}$$</span>
+אז היינו מקבלים <span>\(A\)</span> חסומה טוטלית - סתירה.
+אזי כתוצאה מהתהליך הזה נקבל סדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> שעבורה מתקיים:
+<span>$$\forall n\neq m \qquad \rho(a_{n},a_{m})\geq \varepsilon$$</span>
+נקבל כי הסדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> אינה כוללת סדרה קושי - סתירה להנחה בשלילה, ולכן חסומה טוטלית.</p>
+</div>
+<p>נראה את ההוכחה שוב:</p>
+<div class="proof">
+<ol>
+<li>
+<p>נניח חסום לחלוטין. תהי <span>\((a_{n})\)</span> סדרה כלשהי. נבנה סדרה של קבוצות <span>\(\{ V^{(n)} \}_{n=1}^{\infty}\)</span> באופן רקורסיבי. </p>
+</li>
+<li>
+<p>נגדיר את <span>\(V^{(1)}\)</span> באופן הבא. כיוון ש-<span>\(A\)</span> חסומה לחלוטין עבור <span>\(\varepsilon=1\)</span> קיים סדרה סופית של נקודות <span>\(\{ x_{n} \}_{n=1}^{N}\)</span> כך ש: 
+<span>$$A\subseteq \bigcup_{i=1}^{N}B_{1}(x_{i})$$</span></p>
+</li>
+<li>
+<p>כיוון ש-<span>\((a_{n})\)</span> סדרה אינסופית ו-<span>\(\{ x_{i} \}_{i=1}^{N}\)</span> קבוצה סופית קיים איזשהו <span>\(x_{j}\)</span> כך ש-<span>\(B_{1}(x_{j})\)</span> מכיל מספר אינסופי של נקודות. נגדיר: 
+<span>$$V^{(1)}=A\cap  B_{1}(x_{j})$$</span>
+כאשר נשים לב כי:
+<span>$$\mathrm{Diam}(V^{(1)})\leq \mathrm{Diam}(B_{1}(x_{j}))=2$$</span></p>
+</li>
+</ol>
+</div>
+<ol>
+<li>
+<p>נניח כי נתון <span>\(V^{(k)}\)</span>. נגדיר את <span>\(V^{(k+1)}\)</span>. כיוון ש-<span>\(V^{(k)}\)</span> חסום לחלוטין עבור <span>\(\varepsilon= \frac{1}{k}\)</span> נקבל סדרה סופית של נקודות <span>\(\{ x_{n} \}_{n=1}^{N}\)</span> של נקודות כך ש-<span>\(V^{(k)}\subseteq \bigcup_{i=1}^{N}B_{\frac{1}{k}}(x_{i})\)</span>. כמו מקודם קיימת איזשהו <span>\(x_{j}\)</span> כך ש-<span>\(B_{\frac{1}{k}}(x_{j})\)</span> מכיל מספר אינסופי של נקודות של <span>\((a_{n})\)</span>. נגדיר: 
+<span>$$V^{(k+1)}=V^{(k)}\cap  B_{\frac{1}{k}}(x_{j})$$</span>
+כאשר כעת נשים לב כי:
+<span>$$\mathrm{Diam}(V^{(k+1)})\leq \mathrm{Diam}\left( B_{\frac{1}{k}}(x_{j}) \right)=\frac{2}{k}$$</span>
+כלומר כל שתי נקודות ב-<span>\(V^{(k+1)}\)</span> יהיו במרחק של לכל היותר <span>\(\frac{2}{k}\)</span>. וכן מתקיים:
+<span>$$V^{(1)}\supseteq V^{(2)}\supseteq \dots$$</span></p>
+</li>
+<li>
+<p>נבנה תת סדרה באופן הבא. נגדיר <span>\(n_{1}\)</span> בתור האיבר הראשון כך ש-<span>\(a_{n_{1}} \in V^{(1)}\)</span>(קיים כזה כי להיות ב-<span>\(V^{(1)}\)</span> זו תכונה שכיחה). כמו כן נגדיר את <span>\(n_{k}\)</span> להיות בתור האיבר הראשון הגדול מ-<span>\(n_{k-1}\)</span> כך ש-<span>\(a_{n_{k}}\in V^{(k)}\)</span>(שוב קיים כזה כי להיות ב-<span>\(V^{(k)}\)</span> זו תכונה שכיחה).  </p>
+</li>
+<li>
+<p>נראה כי זוהי סדרת קושי. יהי <span>\(\varepsilon&gt; 0\)</span>. נבחר <span>\(N&gt;\frac{2}{\varepsilon}\)</span>. לכל <span>\(k,m&gt; N\)</span> מתקיים: 
+<span>$$\rho(a_{n_{m}},a_{n_{k}})\leq  \mathrm{Diam}\left( V^{(N)} \right)\leq \frac{2}{N}\leq \varepsilon$$</span></p>
+</li>
+<li>
+<p>כעת נראה את הכיוון השני. נניח כי כל סדרת נקודות ב-<span>\(A\)</span> כוללת תת סדרת קושי ונראה כי חסום לחלוטין. זה שקול ללהוכיח כי אם לא חסום לחלוטין אז קיים סדרת נקודות אשר לא כוללת תת סדרת קושי. כיוון שלא חסום לחלוטין קיים איזשהו <span>\(\varepsilon_{0}\)</span> כך שלא ניתן לכסות את <span>\(A\)</span> עם מספר סופי של כדורים ברדיוס <span>\(\varepsilon_{0}\)</span>. </p>
+</li>
+<li>
+<p>נבנה סדרה <span>\((a_{n})\)</span> כזו באופן אינדוקטיבי. יהי <span>\(a_{1} \in A\)</span> נקודה כלשהי. תהי <span>\(a_{2} \in A\)</span> נקודה כך ש: 
+<span>$$\rho(a_{1},a_{2})&gt;\varepsilon_{0}$$</span>
+כאשר קיים כזו אחרת:
+<span>$$A\subseteq B_{\varepsilon_{0}}(a_{1})$$</span>
+בסתירה לזה שלא חסום לחלוטין.</p>
+</li>
+<li>
+<p>כעת אם מוגדרות נקודות <span>\((a_{1},a_{2},\dots,a_{N})\)</span> נגדיר <span>\(a_{N+1}\)</span> על ידי נקודה ב-<span>\(A\)</span> כך שלכל <span>\(1\leq k\leq N\)</span> מתקיים: 
+<span>$$\rho(a_{N+1},a_{k})&gt; \varepsilon_{0}$$</span>
+כאשר קיים כזו כי אחרת <span>\(A\subseteq{ B_{\varepsilon_{0}}(a_{1}) }\cup \dots \cup {  B_{\varepsilon_{0}}(a_{N}) }\)</span> בסתירה לכך שלא חסום במידה לחלוטין.</p>
+</li>
+<li>
+<p>לא קיימת תת סדרת קושי כי עבור <span>\(\frac{\varepsilon_{0}}{2}\)</span> ולכל <span>\(m,n \in a_{N}\)</span> מתקיים: 
+<span>$$\rho(a_{n},a_{m})&gt;\varepsilon_{0}$$</span></p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='prev-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

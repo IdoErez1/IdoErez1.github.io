@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אקסיומות ההפרדה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_3'>1.3 טפולוגיית מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות בין מרחבים טופולוגים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_2_1'>2.1 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הפרדה ומנייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. קשירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_4_1'>4.1 מרחבים קשירים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_2'>4.2 קשירות מסילתית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קומפקטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_5_1'>5.1 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_2'>5.2 קופקטיפיקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. קבוצות סגורות וצפיפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_6_1'>6.1 סגור ופנים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. החבורה היסודית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_7_1'>7.1 הומוטופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_2'>7.2 החבורה היסודית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_3'>7.3 הרמות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_4'>7.4 מרחבי כיסוי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נספחים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_8_1'>8.1 טופולוגיות נוספות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology_3_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_2_2`; }});</script>
+        <div class="content">
+        <h1>3.1  אקסיומות ההפרדה</h1>
+    <p>נניח כי <span>\((X,\mathcal{T})\)</span> מרחב טופולוגי.</p>
+<div class="definition"><span class="keyword">ניתנות להפרדה</span><ol>
+<li>
+<p><strong>תתי קבוצות</strong> <span>\(A,B \subset X\)</span>. אזי <span>\(A,B\)</span> ניתנות להפרדה אם קיימות קבוצות פתוחות <span>\(U,V\)</span> כך ש-<span>\(A\subset U\)</span> ו-<span>\(B \subset V\)</span> ומתקיים <span>\(U \cap V = \varnothing\)</span>. </p>
+</li>
+<li>
+<p><strong>נקודות</strong> <span>\(x,y \in X\)</span> נקראות ניתנות להפרדה אם <span>\(\{ x \}\)</span> ו-<span>\(\{ y \}\)</span> ניתנות להפרדה(בתור תתי קבוצות) </p>
+</li>
+<li>
+<p>תת קבוצה <span>\(A \subset X\)</span> ונקודה <span>\(x \in X\)</span> נקראות ניתנות להפרדה אם הקבוצות <span>\(\{ x \}\)</span> ו-<span>\(A\)</span> ניתנות להפרדה(בתור תתי קבוצות) </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אקסיומת ההפרדה <span>\(T_{0}\)</span></span><p>אם לכל זוג נקודות שונות קיימת קבוצה פתוחה שמכילה אחת מהן ולא את השנייה. כלומר:
+<span>$$\forall x\neq y\in X,\;\exists\,U\in{\mathcal{T}}:{\big(}x\in U,\;y\notin U{\big)}{\mathrm{~or~}}{\big(}y\in U,\;x\notin U{\big)}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת ההפרדה <span>\(T_{1}\)</span></span><p>לכל זוג נקודות שונות קיימת קבוצה פתוחה שמכילה אחת מהן ולא את השנייה, וקיימת קבוצה פתוחה שמכילה את השנייה ולא את הראשונה. כלומר:
+<span>$$\forall x\neq y\in X,\;\exists U\in{\mathcal{T}}\;(x\in U,\;y\notin U)\quad{\mathrm{and}}\quad\exists V\in{\mathcal{T}}\;(y\in V,\;x\notin V)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול לאקסומת ההפרדה <span>\(T_{1}\)</span></span><p>כל יחידון הוא קבוצה סגורה. כלומר לכל <span>\(x \in X\)</span> נקבל <span>\(\{ x \}\)</span> סגורה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(X\)</span> הוא <span>\(T_{1}\)</span>. לכל <span>\(x \in X\)</span> נסתכל על <span>\(X \setminus \{  x \}\)</span>. לכל <span>\(y \neq x\)</span> נקבל מ-<span>\(T_{1}\)</span> קבוצה פתוחה <span>\(V_{y}\)</span> אשר מקיימת <span>\(y \in V_{y}\)</span> ו-<span>\(x \not\in V_{y}\)</span>. כעת <span>\(X\setminus \{ x \}=\bigcup_{y\neq x}B_{y}\)</span> פתוחה בתור איחוד של פתוחה ולכן <span>\(\{ x \}\)</span> סגורה ובפרט כל יחידון סגור. </p>
+</li>
+<li>
+<p>נניח כי כל יחידון סגור. לכן לכל <span>\(x,y \in X\)</span> נקבל <span>\(\{ y \}\)</span> סגור ו-<span>\(U=X\setminus \{  y \}\)</span> פתוח, עם <span>\(x \in U,y\not\in U\)</span>. באופן דומה <span>\(\{ x \}\)</span> סגור ולכן <span>\(V=X\setminus \{ x \}\)</span> פתוח עם <span>\(y\in V,x\not\in V\)</span> ולכן <span>\(X\)</span> היא <span>\(T_{1}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אקסוימת ההפרדה <span>\(T_{2}\)</span> - האוסדורף</span><p>כל זוג נקודות שונות ניתנות להפרדה. כלומר:
+<span>$$\forall x\neq y\in X,\;\exists U,V\in{\mathcal{T}}:\left(x\in U,\;y\in V,\,U\cap V=\varnothing \right)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מרחב רגולרי</span><p>מרחב <span>\(X\)</span> נקרא רגולרי אם לכל <span>\(x \in X\)</span> ו-<span>\(A \subseteq X\)</span> סגורה ואינה מכילה את <span>\(x\)</span> קיימות סביבות שמפרידות ביניהם. כלומר:
+<span>$$\forall x\in X,\,\forall A\subseteq X{\mathrm{~closed}},\;x\notin A,\quad\exists\,U,V\in{\mathcal{T}}:\,x\in U,\;A\subseteq V,\;U\cap V=\varnothing$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסוימת ההפרדה <span>\(T_{3}\)</span></span><p>מרחב מקיים את אקסיומת ההפרדה <span>\(T_{3}\)</span> אם רגולרי ומקיים את <span>\(T_{1}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב נורמלי</span><p>מרחב <span>\(X\)</span> נקרא נורמלי אם שתי תתי קבוצות זרות של <span>\(X\)</span> ניתנות להפרדה. כלומר מתקיים:
+<span>$$\forall A,B\subseteq X{\mathrm{~closed}},\;A\cap B=\varnothing,\quad\exists\,U,V\in{\mathcal{T}}:\,A\subseteq U,\,B\subseteq V,\,U\cap V=\varnothing$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת ההפרדה <span>\(T_{4}\)</span></span><p>אם המרחב <span>\(X\)</span> מקיימת את <span>\(T_{1}\)</span> וגם נורמלי.</p>
+</div>
+<div class="proposition">
+<p><span>$$T_{4}\implies T_{3}\implies T_{2}\implies T_{1}\implies T_{0}$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>הגרירה <span>\(T_{1}\implies T_{0}\)</span> היא מיידית - מופיע בהגדרה. </p>
+</li>
+<li>
+<p>הגדירה <span>\(T_{2}\implies T_{1}\)</span> נובעת מכך שאם <span>\(U\cap V=\varnothing\)</span> עם <span>\(x \in U\)</span> ו-<span>\(u \in V\)</span> אז <span>\(U\)</span> מפרידה <span>\(x\)</span> מ-<span>\(y\)</span> ו-<span>\(V\)</span> מפרידה <span>\(y\)</span> מ-<span>\(x\)</span>. ולכן היחידונים הם סגורים. </p>
+</li>
+<li>
+<p>הגרירה <span>\(T_{3}\implies T_{2}\)</span> מתקבל כמקרה פרטי. </p>
+</li>
+<li>
+<p>הגרירה <span>\(T_{4}\implies T_{3}\)</span> נובע מכך שאם ניתן להפריד כל זוג קבוצות זרות וסגורות, אז ניתן להפריד גם קבוצה סגורה ונקודה. כי מההנחת <span>\(T_{1}\)</span> כל יחידון היא קבוצה סגורה. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>מרחב <span>\(X\)</span> המקיים את <span>\(T_{1}\)</span> הוא נורמלי אם"ם לכל קבוצה סגורה A ולכל קבוצה פתוחה <span>\(U\)</span> עם <span>\(A\subseteq U\)</span> קיימת קבוצה פתוחה <span>\(V\)</span> כך שמתקיים:
+<span>$$A\subseteq V\subseteq \overline{V} \subseteq U$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(X\)</span> נורמלי, תהי <span>\(A\)</span> קבוצה סגורה ו-<span>\(U\)</span> קבוצה פתוחה המכילה את A. לכן <span>\(X\setminus U\)</span> היא קבוצה סגורה הזרה ל-<span>\(A\)</span>. </p>
+</li>
+<li>
+<p>מנורמליות קיימות קבוצות פתוחות זרות <span>\(W\)</span> ו-<span>\(V\)</span> כך ש-<span>\(A \subset V\)</span> ו-<span>\(X \setminus U \subseteq W\)</span>. </p>
+</li>
+<li>
+<p>מ-<span>\(X\setminus U \subseteq W\)</span> נקבל <span>\(X\setminus W\subseteq U\)</span> כאשר כיוון ש-<span>\(W\)</span> היא פתוחה נקבל <span>\(X\setminus W\)</span> היא סגורה. </p>
+</li>
+<li>
+<p>מ-<span>\(V\cap W=\varnothing\)</span> נקבל <span>\(V\subseteq X \setminus W\)</span>, ולכן <span>\(\overline{V}\subseteq X \setminus W\subseteq U\)</span>. </p>
+</li>
+<li>
+<p>כעת עבור הכיוון השני נניח כי הקיום של <span>\(V\)</span> גורר נורמליות. יהיו <span>\(A,B\)</span> קבוצות סגורות זרות, אזי <span>\(X\setminus B\)</span> היא קבוצה פתוחה המכילה את A. מההנחה, קיים <span>\(V\)</span> כך ש-<span>\(A\subseteq V\subseteq \overline{ V}\subseteq X\setminus B\)</span>.  </p>
+</li>
+<li>
+<p>יהי <span>\(U=X \setminus \overline{V}\)</span> אשר קבוצה פתוחה כיוון ש-<span>\(\overline{ V}\)</span> סגורה. מ-<span>\(\overline{V}\subseteq X \setminus B\)</span> נקבל כי <span>\(B\subseteq X\setminus \overline{ V}=U\)</span>. בנוסף <span>\(V\cap U = V\cap(X \setminus \overline{ V})=\varnothing\)</span> כיוון ש-<span>\(V\subseteq \overline{ V}\)</span>. לכן <span>\(V,U\)</span> הם קבוצות זרות פתוחות המפרידות את <span>\(A\)</span> ו-<span>\(B\)</span> ולכן <span>\(X\)</span> נורמלי. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>המרחב <span>\(X\)</span> הוא האוסדורף(<span>\(T_{2}\)</span>) אם ורק אם מתקיים:
+<span>$$X\times X\supseteq \Delta_{X}=\{ (x,x)\mid x \in X \}$$</span>
+תת קבוצה סגורה(כמובן בטופולוגיית המכפלה)</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(X\)</span> הוא האוסדורף ונקרא כי <span>\(\Delta_{X}\)</span> סגורה. מספיק להראות כי <span>\((X\times X)\setminus \Delta_{X}\)</span> פתוחה.  </p>
+</li>
+<li>
+<p>לכל <span>\((x,y)\in (X\times X)\setminus \Delta_{X}\)</span> מכך שאוסדורף קיימות קבוצות פתוחות <span>\(U,V \in X\)</span> עם <span>\(x \in U\)</span> ו-<span>\(y \in V\)</span>. המכפלה <span>\(U\times V\)</span> פתוחה ב=<span>\(X \times X\)</span> ומכילה את <span>\((x,y)\)</span> וזרה מ-<span>\(\Delta X\)</span>(כיוון שאם <span>\((a,a)\in U\times V\)</span> אז <span>\(a \in U \cap V\)</span> בסתירה) ולכן <span>\(X \times X \setminus \Delta _X\)</span> היא פתוחה. </p>
+</li>
+<li>
+<p>עבור הכיוון השני נניח כי <span>\(\Delta X\)</span> סגורה ונראה כי האוסדורף, אנו יודעים כי <span>\((X\times X)\setminus \Delta_{X}\)</span> פתוחה ולכן לכל <span>\((x,y )\in X\times X \setminus \Delta_{X}\)</span> קיים קבוצה פתוחה <span>\(U \times V \subseteq X \times X\)</span> כך ש-<span>\((x,y)\in U \times V\subseteq(X \times X)\setminus \Delta_{X}\)</span> ו-<span>\(U,V\)</span> פתוחות ב-<span>\(X\)</span>. </p>
+</li>
+<li>
+<p>כעת <span>\(x \in U,y \in V\)</span>. מתקיים <span>\(U\cap V=\varnothing\)</span>, זאת כיוון שאם לא ניתן לסמן <span>\(z = U \cap V\)</span> כאשר מתקיים <span>\((z,z )\in U\times V\)</span> אבל <span>\((z,z)\in \Delta _X\)</span> בסתירה לכך ש-<span>\(U\times V\subseteq (X\times X)\setminus \Delta_{X}\)</span>. כלומר <span>\(U\cap V=\varnothing\)</span> והמרחב <span>\(X\)</span> הוא האוסדורף. </p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>עבור <span>\(i \in \{ 1,2,3 \}\)</span> אם <span>\(X\)</span> הוא <span>\(T_{i}\)</span> ו-<span>\(Y\subseteq X\)</span> תת מרחב אזי גם <span>\(Y\)</span> הוא <span>\(T_{i}\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי <span>\(X\)</span> הוא <span>\(T_1\)</span>. לכל <span>\(x \in Y\)</span>, הקבוצה היחידה <span>\(\{x\}\)</span> סגורה ב-<span>\(X\)</span>. הטופולוגיה המושרית על <span>\(Y\)</span> קובעת שקבוצה סגורה ב-<span>\(Y\)</span> אם ורק אם היא חיתוך של קבוצה סגורה ב-<span>\(X\)</span> עם <span>\(Y\)</span>. לכן, <span>\(\{x\} \cap Y = \{x\}\)</span> סגורה ב-<span>\(Y\)</span>. מכיוון שכל סינגלטון ב-<span>\(Y\)</span> סגור, <span>\(Y\)</span> הוא <span>\(T_1\)</span>. </p>
+</li>
+<li>
+<p>נניח כי <span>\(X\)</span> הוא האוסדורף(<span>\(T_{2}\)</span>). יהיו <span>\(x, y \in Y\)</span> כך ש-<span>\(x \neq y\)</span>. מכיוון ש-<span>\(X\)</span> האוסדורף, קיימות קבוצות פתוחות זרות <span>\(U, V\)</span> ב-<span>\(X\)</span> כך ש-<span>\(x \in U\)</span> ו-<span>\(y \in V\)</span>. נתבונן בקבוצות הפתוחות ב-<span>\(Y\)</span>: <span>\(U_Y = U \cap Y\)</span> ו-<span>\(V_Y = V \cap Y\)</span>. מתקיים <span>\(x \in U_Y\)</span>, <span>\(y \in V_Y\)</span>. כמו כן, <span>\(U_Y \cap V_Y = (U \cap Y) \cap (V \cap Y) = (U \cap V) \cap Y = \emptyset \cap Y = \emptyset\)</span>. לכן, <span>\(Y\)</span> הוא האוסדורף. </p>
+</li>
+<li>
+<p>נניח כי <span>\(X\)</span> הוא <span>\(T_3\)</span>, ולכן <span>\(X\)</span> הוא <span>\(T_1\)</span> ורגולרי. כבר הראינו ש-<span>\(Y\)</span> הוא <span>\(T_1\)</span>. עלינו להראות ש-<span>\(Y\)</span> רגולרי. יהי <span>\(x \in Y\)</span> ו-<span>\(A \subseteq Y\)</span> קבוצה סגורה ב-<span>\(Y\)</span> כך ש-<span>\(x \notin A\)</span>. מכיוון ש-<span>\(A\)</span> סגורה ב-<span>\(Y\)</span>, <span>\(A = C \cap Y\)</span> עבור קבוצה סגורה <span>\(C\)</span> ב-<span>\(X\)</span>. מכיוון ש-<span>\(x \notin A\)</span> ו-<span>\(x \in Y\)</span>, נובע ש-<span>\(x \notin C\)</span>. מכיוון ש-<span>\(X\)</span> רגולרי, קיימות קבוצות פתוחות זרות <span>\(U, V\)</span> ב-<span>\(X\)</span> כך ש-<span>\(x \in U\)</span> ו-<span>\(C \subseteq V\)</span>. נתבונן בקבוצות הפתוחות ב-<span>\(Y\)</span>: <span>\(U_Y = U \cap Y\)</span> ו-<span>\(V_Y = V \cap Y\)</span>. מתקיים <span>\(x \in U_Y\)</span> ו-<span>\(A = C \cap Y \subseteq V \cap Y = V_Y\)</span>. כמו כן, <span>\(U_Y \cap V_Y = (U \cap Y) \cap (V \cap Y) = (U \cap V) \cap Y = \emptyset \cap Y = \emptyset\)</span>. לכן, <span>\(Y\)</span> רגולרי. מכיוון ש-<span>\(Y\)</span> הוא <span>\(T_1\)</span> ורגולרי, <span>\(Y\)</span> הוא <span>\(T_3\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">הלמה של אוריסון</span><p>יהי <span>\(X\)</span> מרחב <span>\(T_{4}\)</span>. אזי לכל זוג קבוצות סגורות זרות <span>\(C,D\subseteq X\)</span> יש פונקציה רציפה <span>\(f:X\to[0,1]\)</span> כך ש-<span>\(f|_{C}=0\)</span> ו-<span>\(f|_{B}=1\)</span>.</p>
+</div>
+<div class="summary">
+<ul>
+<li>מרחב נקרא <span>\(T_{0}\)</span> אם עבור כל שתי נקודות לפחות אחת מהם מוכלת בקבוצה אשר לא מכילה את השנייה</li>
+<li>מרחב יהיה <span>\(T_{1}\)</span> אם לכל שתי נקודות כל אחת מהם מוכלת בקבוצה פתוחה שאינה מכילה את השנייה.</li>
+<li>מרחב יהיה <span>\(T_{2}\)</span> אם לכל שתי נקודות קיימות קבוצות פתוחות אשר אינם מכילות את השנייה, והחיתוך שלהם ריק.</li>
+<li>מרחב יהיה <span>\(T_{3}\)</span> אם הוא <span>\(T_{1}\)</span> ולכל נקודה וקבוצה סגורה קיימות קבוצות פתוחות זרות שמפרידות ביניהם(רגולרי).</li>
+<li>מרחב יהיה <span>\(T_{4}\)</span> אם הוא <span>\(T_{1}\)</span> ולכל זוג שתתי קבוצות סגורות זרות קיימות זוג של קבוצות פתוחות זרות המכילות אותם.</li>
+<li>מתקיים ההכלה:
+<span>$$T_{0}\subsetneq T_{1}\subsetneq T_{2}\subsetneq T_{3}\subsetneq T_{4}$$</span></li>
+<li>מרחב <span>\(T_1\)</span> הוא נורמלי אם ורק אם לכל קבוצה סגורה <span>\(A\)</span> וקבוצה פתוחה <span>\(U\)</span> המכילה את <span>\(A\)</span>, קיימת קבוצה פתוחה <span>\(V\)</span> כך ש-<span>\(A \subseteq V \subseteq \overline{V} \subseteq U\)</span>.</li>
+<li>מרחב <span>\(X\)</span> הוא האוסדורף (<span>\(T_2\)</span>) אם ורק אם האלכסון <span>\(\Delta_X = \{(x,x) \mid x \in X\}\)</span> סגור במרחב המכפלה <span>\(X \times X\)</span>.</li>
+<li>אם מרחב הוא <span>\(T_i\)</span> עבור <span>\(i \in \{1, 2, 3\}\)</span>, אז כל תת מרחב שלו הוא גם <span>\(T_i\)</span>.</li>
+<li><strong>הלמה של אוריסון:</strong> במרחב <span>\(T_4\)</span>, לכל שתי קבוצות סגורות זרות <span>\(C, D\)</span>, קיימת פונקציה רציפה <span>\(f: X \to [0,1]\)</span> המפרידה ביניהן (<span>\(f|_C = 0\)</span>, <span>\(f|_D = 1\)</span>).</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='prev-page'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אקסיומות המנייה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_3'>1.3 טפולוגיית מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות בין מרחבים טופולוגים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_2_1'>2.1 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הפרדה ומנייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. קשירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_4_1'>4.1 מרחבים קשירים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_2'>4.2 קשירות מסילתית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קומפקטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_5_1'>5.1 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_2'>5.2 קופקטיפיקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. קבוצות סגורות וצפיפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_6_1'>6.1 סגור ופנים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. החבורה היסודית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_7_1'>7.1 הומוטופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_2'>7.2 החבורה היסודית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_3'>7.3 הרמות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_4'>7.4 מרחבי כיסוי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נספחים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_8_1'>8.1 טופולוגיות נוספות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology_3_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_3_1`; }});</script>
+        <div class="content">
+        <h1>3.2  אקסיומות המנייה</h1>
+    <div class="definition"><span class="keyword">בסיס למערכת סביבות</span><p>אוסף של קבוצות פתוחות <span>\(\{U_i\}_{i \in I}\)</span> המכילות את <span>\(x\)</span> הוא בסיס למערכת סביבות של <span>\(x\)</span>, אם לכל קבוצה פתוחה <span>\(V\)</span> המכילה את <span>\(x\)</span>, קיים <span>\(i \in I\)</span> כך ש- <span>\(x \in U_i \subset V\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב המקיים את אקסיומת המנייה הראשונה</span><p>מרחב טופולוגי <span>\(X\)</span> מקיים את אקסיומת המנייה הראשונה אם לכל <span>\(x \in X\)</span> קיים בסיס בן מנייה למערכת סביבות שלו.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב המקיים את אקסיומת המנייה השנייה</span><p>מרחב טופולוגי <span>\(X\)</span> מקיים את אקסיומת המנייה השנייה אם לטופולוגיה שלו קיים בסיס בן מנייה.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב לינדלוף</span><p>מרחב טופולוגי <span>\(X\)</span> נקרא לינדלוף (Lindelöf) אם לכל כיסוי פתוח של המרחב קיים תת-כיסוי בן מנייה.</p>
+</div>
+<div class="remark">
+<p>לינדלוף זה כמו מקרה כללי יותר של קומפקטיות - קומפקטיות דורש שלכל כיסוי קיים תת כיסוי סופי כאשר לינדלוף דורש שלכל כיסוי קיים תת כיסוי בן מנייה.</p>
+</div>
+<div class="definition"><span class="keyword">מרחב ספרבילי</span><p>מרחב טופולוגי <span>\(X\)</span> נקרא ספרבילי אם קיימת בו קבוצה צפופה שהיא בת מנייה.</p>
+</div>
+<div class="proposition">
+<p>מרחב רגולרי המקיים את אקסיומת המניה השנייה, הוא נורמלי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(X\)</span> מרחב רגולרי המקיים את אקסיומת המנייה השנייה. נניח כי <span>\(B\)</span> בסיס בן מנייה לטופולוגיה על <span>\(X\)</span>, ויהיו <span>\(A, C \subset X\)</span> קבוצות סגורות וזרות. </p>
+</li>
+<li>
+<p>עבור כל <span>\(a \in A\)</span>, <span>\(a \notin C\)</span>. היות ש-<span>\(C\)</span> סגורה, <span>\(X \setminus C\)</span> פתוחה ומכילה את <span>\(a\)</span>. מהיות המרחב רגולרי, קיימת סביבה פתוחה <span>\(U_a\)</span> של <span>\(a\)</span> כך ש-<span>\(\overline{U_a} \subset X \setminus C\)</span>, כלומר <span>\(\overline{U_a} \cap C = \emptyset\)</span>. אוסף הקבוצות הפתוחות <span>\(\{U_a\}_{a \in A}\)</span> מהווה כיסוי פתוח של <span>\(A\)</span>. היות ש-<span>\(X\)</span> מקיים את אקסיומת המנייה השנייה, קיים תת-כיסוי בן מנייה, נסמנו <span>\(\{U_n\}_{n=1}^\infty\)</span>, כך ש-<span>\(A \subset \bigcup_{n=1}^\infty U_n\)</span>. מתקיים כי לכל <span>\(n\)</span>, <span>\(\overline{U_n} \cap C = \emptyset\)</span>. </p>
+</li>
+<li>
+<p>באופן דומה, עבור כל <span>\(c \in C\)</span>, <span>\(c \notin A\)</span>. היות ש-<span>\(A\)</span> סגורה, <span>\(X \setminus A\)</span> פתוחה ומכילה את <span>\(c\)</span>. מהיות המרחב רגולרי, קיימת סביבה פתוחה <span>\(V_c\)</span> של <span>\(c\)</span> כך ש-<span>\(\overline{V_c} \subset X \setminus A\)</span>, כלומר <span>\(\overline{V_c} \cap A = \emptyset\)</span>. אוסף הקבוצות הפתוחות <span>\(\{V_c\}_{c \in C}\)</span> מהווה כיסוי פתוח של <span>\(C\)</span>. היות ש-<span>\(X\)</span> מקיים את אקסיומת המנייה השנייה, קיים תת-כיסוי בן מנייה, נסמנו <span>\(\{V_m\}_{m=1}^\infty\)</span>, כך ש-<span>\(C \subset \bigcup_{m=1}^\infty V_m\)</span>. מתקיים כי לכל <span>\(m\)</span>, <span>\(\overline{V_m} \cap A = \emptyset\)</span>. </p>
+</li>
+<li>
+<p>נגדיר סדרות של קבוצות פתוחות: לכל <span>\(k\)</span> טבעי נגדיר <span>\(S_k = U_k \setminus \bigcup_{i=1}^k \overline{V_i}\)</span> ו-<span>\(T_k = V_k \setminus \bigcup_{j=1}^k \overline{U_j}\)</span>. נגדיר שתי קבוצות פתוחות: <span>\(O = \bigcup_{k=1}^\infty S_k\)</span> ו-<span>\(P = \bigcup_{k=1}^\infty T_k\)</span>. </p>
+</li>
+<li>
+<p>ניתן לראות כי <span>\(A \subset O\)</span> וגם <span>\(C \subset P\)</span>. (הוכחה מפורטת לחלק זה מושמטת בטקסט המקורי). </p>
+</li>
+<li>
+<p>הקבוצות הפתוחות <span>\(O\)</span> ו-<span>\(P\)</span> זרות, כלומר <span>\(O \cap P = \emptyset\)</span>. (הוכחה לחלק זה היא מוסרת כתרגיל). </p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+<li class='prev-page'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

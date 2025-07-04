@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>העתקות טבעיות ואיזומורפיזם טבעי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory_2_2'>2.2 שקילות בין קטגוריות</a></li>
+<li class='parent-page'><a href='./Category Theory'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מושגים בסיסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_1'>1.1 קטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_2'>1.2 יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_3'>1.3 איזומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_4'>1.4 פונקטור</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_5'>1.5 דואליות</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_6'>1.6 דיאגרמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. העתקות טבעיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category Theory_2_1'>2.1 העתקות טבעיות ואיזומורפיזם טבעי</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_2_2'>2.2 שקילות בין קטגוריות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category Theory_1_6'>1.6 דיאגרמות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category Theory_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category Theory_1_6`; }});</script>
+        <div class="content">
+        <h1>2.1  העתקות טבעיות ואיזומורפיזם טבעי</h1>
+    <div class="definition"><span class="keyword">העתקה טבעית</span><p>יהיו <span>\(F,G:\mathcal{C}\to \mathcal{D}\)</span> פונקטורים. העתקה טבעית <span>\(\alpha:F\to G\)</span> ממפה כל אובייקט <span>\(X \in \mathcal{C}\)</span> למורפיזם:
+<span>$$\alpha_{X}:F(X)\to G(X)$$</span>
+כך שלכל מורפיזם <span>\(f:X\to Y\)</span> ב-<span>\(\mathcal{C}\)</span> הדיאגרמה מתחלפת:</p>
+</div>
+<p>כלומר:
+<span>$$\alpha_{X}\circ  G(f)=F(f)\circ  \alpha_{Y}$$</span></p>
+<div class="definition"><span class="keyword">קטגוריית פונקטורים</span><p>בהנתן שתי קטגוריות <span>\(\mathcal{A}\)</span> ו-<span>\(\mathcal{B}\)</span> ניתן להגדיר קטגוריית פונקטורים על ידי <span>\([\mathcal{A},\mathcal{B}]\)</span> כך שהאובייקטים הם הפונקטורים <span>\(F:\mathcal{A}\to \mathcal{B}\)</span> והמורפיזמים הם ההעתקות הטבעיות מ-<span>\(F\)</span> ל-<span>\(G\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">איזומורפיזם טבעי</span><p>איזומורפיזם טבעי בין פונקטורים מ-<span>\(\mathcal{A}\)</span> ל-<span>\(\mathcal{B}\)</span> יהיה איזומורפיזם ב-<span>\([\mathcal{A},\mathcal{B}]\)</span>. כלומר העתקה <span>\(\alpha:F\to G\)</span> כך ש-<span>\(\beta:G\to F\)</span> טבעית, עם <span>\(\beta \circ \alpha = \mathrm{Id}_{F}\)</span> ו-<span>\(\alpha \circ \beta = \mathrm{Id}_{G}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">תנאי שקול לאיזומורפיזם טבעי</span><p>העתקה <span>\(\alpha:F\to G\)</span> טבעית היא איזומורפיזם טבעי אם"ם <span>\(\alpha_{X}:FX\to GX\)</span> היא איזומורפיזם לכל <span>\(A \in \mathcal{A}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פונקטורים איזומורפיים</span><p>פונקטורים שקיים איזומורפיזם טבעי ביניהם.</p>
+</div>
+<div class="remark">
+<ul>
+<li>הדרך הנכונה לחשוב על שתי איברים של קבוצה כאותו דבר זה שיוויון.</li>
+<li>הדרך הנכונה לחשוב על שתי אובייקטים בקטגוריה כאותו דבר הוא איזומורפיזם.</li>
+<li>לכן אם נסתכל על קטגוריית הפונקטורים <span>\([\mathcal{A},\mathcal{B}]\)</span> נקבל כי הדרך הנכונה לחשוב על שיוויון של שתי פונקטורים היא איזומורפיזם טבעי.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory_2_2'>2.2 שקילות בין קטגוריות</a></li>
+<li class='prev-page'><a href='./Category Theory_1_6'>1.6 דיאגרמות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

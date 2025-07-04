@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מומנטיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_10_2'>10.2 הילוך אקראי</a></li>
+<li class='parent-page'><a href='./Thermal'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1'>8.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2'>8.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1'>9.1 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2'>9.2 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_10_1'>10.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_2'>10.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_3'>10.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_4'>10.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_5'>10.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_6'>10.6 תנועה בראונית</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_9_2'>9.2 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_10_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_9_2`; }});</script>
+        <div class="content">
+        <h1>10.1  מומנטיים</h1>
+    <div class="definition"><span class="keyword">פונקציית יוצר מומנטים</span><p>יהי <span>\(X\)</span> משתנה מקרי בעל צפיפות <span>\(P_X(x)\)</span>. נגדיר את פונקציית יוצר המומנטים:
+<span>$$Z(J) \equiv \langle e^{J x}\rangle = \int e^{J x} P_X(x)\,\mathrm{d}x$$</span>
+כאשר <span>\(J\)</span> נקרא המקור (source).</p>
+</div>
+<div class="proposition"><span class="keyword">חישוב מומנט מהפונקציה <span>\(Z(J)\)</span></span><p>המומנט ה-<span>\(n\)</span> של <span>\(X\)</span> ניתן על ידי:
+<span>$$\langle x^n \rangle = \frac{1}{Z(0)} \frac{\mathrm{d}^n}{\mathrm{d}J^n} Z(J) \Big|_{J=0}$$</span></p>
+</div>
+<div class="remark">
+<p>בפיזיקה סטטיסטית משתמשים ב-<span>\(Z\)</span> גם כפונקציית חלוקה (partition function), שכן היא יוצר מומנטים של משתנים אקראיים.</p>
+</div>
+<div class="definition"><span class="keyword">קומיולנט</span><p>נגדיר:
+<span>$$W(J) \equiv \log Z(J)
+$$</span>
+זה אנלוגי לאנרגיה חופשית בלוגריתם של פונקציית החלוקה.</p>
+</div>
+<div class="proposition"><span class="keyword">מומנטים קומיולנטים</span><p>המומנט ה-<span>\(n\)</span> הקומיולנטי הוא:
+<span>$$\langle x^n \rangle_C \equiv \frac{\mathrm{d}^n}{\mathrm{d}J^n} W(J)\Big|_{J=0}
+$$</span>
+ובפרט לגאוסיאן רק הקומיולנט השני אינו אפס.</p>
+</div>
+<div class="example"><span class="keyword">דוגמה חד-ממדית: התפלגות גאוסיאנית</span><p>יהי
+<span>$$P_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\Bigl(-\tfrac{1}{2}\bigl(\tfrac{x-x_0}{\sigma}\bigr)^2\Bigr).
+$$</span>
+חשבנו:
+<span>$$Z(J) = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi\sigma^2}} e^{ - \tfrac{1}{2}(\frac{x-x_0}{\sigma})^2 + Jx }\;\mathrm{d}x= e^{ J x_0 + \tfrac{1}{2}J^2\sigma^2 }.
+$$</span>
+לכן:
+- <span>\(\langle x\rangle = x_0\)</span><br />
+- <span>\(\langle x^2\rangle = x_0^2 + \sigma^2\)</span><br />
+- הקומיולנטים: <span>\(\langle x\rangle_C = x_0\)</span>, <span>\(\langle x^2\rangle_C = \sigma^2\)</span>, ול-<span>\(n&gt;2\)</span> <span>\(\langle x^n\rangle_C=0\)</span>.</p>
+</div>
+<div class="remark"></div>
+<p>עובדה שקומיולנטים מעל השני מתאפסים מאפיינת התפלגות גאוסיאנית.</p>
+<h2>אינטגרלים גאוסיים</h2>
+<div class="proposition"><span class="keyword">טריק אינטגרל גאוסיאני חד-ממדי</span><p>יהי
+<span>$$I(J) = \int_{-\infty}^{\infty} \exp\Bigl\{-\tfrac12 x G^{-1} x + J x\Bigr\}\,\mathrm{d}x,\quad G\in\mathbb{R}.
+$$</span>
+משלימים לריבוע:
+<span>$$I(J) = \int \exp\Bigl\{-\tfrac12 (x - G J) G^{-1} (x - G J) + \tfrac12 G J^2 \Bigr\}\,\mathrm{d}x= e^{\tfrac12 G J^2}\,I(0).
+$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הכללה רב-ממדית</span><p>יהי <span>\(G\)</span> מטריצה סימטרית חיובית. ניקח
+<span>$$I(\mathbf{J}) = \int \exp\Bigl\{ -\tfrac12 \sum_{j,k} x_j (G^{-1})_{jk} x_k + \sum_j J_j x_j \Bigr\} \prod_{j=1}^n \mathrm{d}x_j.
+$$</span>
+בהחלפת בסיס אורתוגונלי <span>\(O^T G O = \mathrm{diag}(w_j)\)</span> ומשתנים חדשים <span>\(\tilde J = O^T J\)</span>, מתקבל:
+<span>$$I(\mathbf{J}) = I(\mathbf{0}) \exp\Bigl\{\tfrac12 \sum_{j,k} J_j G_{jk} J_k \Bigr\}.
+$$</span></p>
+</div>
+<div class="remark">
+<p>התוצאה <span>\(\exp(\tfrac12 J^T G J)\)</span> מצביעה שקומיולנט שני הוא <span>\(G_{jk}\)</span>, ולכן <span>\(G\)</span> מושג כגרין.</p>
+</div>
+<div class="proposition"><span class="keyword">מעבר לגבול הרציף (אינטגרל מסלולי)</span><p>במקרה של משתנה תלוי זמן <span>\(x(t)\)</span> בדיסקרטיזציה <span>\(t_j = j\Delta t\)</span>, לוקחים <span>\(n\to\infty,\;\Delta t\to0\)</span> עם <span>\(n\Delta t=T\)</span> קבוע. הקומיולנט השני בדיסקרט:
+<span>$$\frac{\partial}{\partial J(t_{i_1})}\frac{\partial}{\partial J(t_{i_2})} \Bigl\{\tfrac12 \sum_{i,j} J(t_i) G(t_i, t_j) J(t_j)\Bigr\}= G(t_{i_1},t_{i_2}),
+$$</span>
+ובגבול הרציף מתקבל פונקציית גרין <span>\(G(t_1,t_2)\)</span>.</p>
+</div>
+<div class="remark">
+<p>זה הבסיס לגישת אינטגרל מסלולי מחוץ לשיווי משקל, כאשר ה-<span>\(J\)</span> הם שדות מקור.</p>
+</div>
+<div class="definition"><span class="keyword">רעש לבן גאוסיאני (cumulant)</span><p>יהי <span>\(\eta(t)\)</span> רעש המקיים:
+<span>$$\langle \eta(t)\rangle_C=0,\quad \langle \eta(t_1)\eta(t_2)\rangle_C = \delta(t_1-t_2),
+$$</span>
+ובגלל גאוסיאניות, קומולנטים מעל שניים מתאפסים:
+<span>$$\langle \eta(t_1)\dots \eta(t_N)\rangle_C = 0,\; N&gt;2.
+$$</span></p>
+</div>
+<div class="remark">
+<p>ידיעת קומולנט שני וקיום גאוסיאני קובעים לחלוטין את ההתפלגות, ומשמשים בתיאור סטוכסטי באמצעות אינטגרל מסלולי.</p>
+</div>
+<div class="remark">
+<p>בחישובים סטוכסטיים נוצרים אינטגרלים על מסלולים <span>\(x(t)\)</span> תחת משקל גאוסיאני שנקבע על-פי גרין <span>\(G\)</span>, ומתבססים על הקורלציות ה-<span>\(\delta\)</span> של הרעש לבן.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_10_2'>10.2 הילוך אקראי</a></li>
+<li class='prev-page'><a href='./Thermal_9_2'>9.2 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+</ul></li>
+        </body>
+        </html>
+        

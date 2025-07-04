@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שקילות בין קטגוריות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory'> תורת הקטגוריות</a></li>
+<li class='parent-page'><a href='./Category Theory'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מושגים בסיסיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_1'>1.1 קטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_2'>1.2 יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_3'>1.3 איזומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_4'>1.4 פונקטור</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_5'>1.5 דואליות</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_1_6'>1.6 דיאגרמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. העתקות טבעיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category Theory_2_1'>2.1 העתקות טבעיות ואיזומורפיזם טבעי</a></li>
+<li class='parent-page-dropdown'><a href='./Category Theory_2_2'>2.2 שקילות בין קטגוריות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category Theory_2_1'>2.1 העתקות טבעיות ואיזומורפיזם טבעי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category Theory`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category Theory_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  שקילות בין קטגוריות</h1>
+    <div class="reminder"><span class="keyword">איזומורפיזם בין קטגוריות</span><p>שתי קטגוריות <span>\(\mathcal{C}\)</span> ו-<span>\(\mathcal{D}\)</span> נקראות איזומורפיות אם קיימים פונקטורים <span>\(F:\mathcal{C}\to \mathcal{D}\)</span> ו-<span>\(G:\mathcal{D}\to \mathcal{C}\)</span> כך ש:
+<span>$$G\circ  F=\mathrm{Id}_{\mathcal{C} }\qquad F\circ  G = \mathrm{Id}_{\mathcal{D} }$$</span></p>
+</div>
+<div class="definition"><span class="keyword">שקילות בין קטגוריות</span><p>שתי קטגוריות <span>\(\mathcal{C}\)</span> ו-<span>\(\mathcal{D}\)</span> נקראות שקולות אם קיימים פונקטורים <span>\(F:\mathcal{C}\to \mathcal{D}\)</span> ו-<span>\(G:\mathcal{D}\to \mathcal{C}\)</span> כך ש:
+<span>$$G\circ  F\cong \mathrm{Id}_{\mathcal{C} }\qquad F\circ  G \cong  \mathrm{Id}_{\mathcal{D} }$$</span>
+כלומר אם קיימות איזומורפיזמים טבעיים:
+<span>$$\eta:1_{\mathcal{C} }\to G\circ  F\qquad \varepsilon:F\circ  G\to 1_{\mathcal{D} }$$</span></p>
+</div>
+<div class="symbolize">
+<p>בחלק מהמקומות מסמנים <span>\(\mathcal{C}\cong \mathcal{D}\)</span> בשביל איזומורפים של קטגוריות ו-<span>\(\mathcal{C}\simeq \mathcal{D}\)</span> בשביל שקילות בין קטגוריות. אנחנו נעדיף לציין במילים שהקטגוריות שקולות.</p>
+</div>
+<div class="corollary">
+<p>איזומורפיזם בין קטגוריות גורר שקילות.</p>
+</div>
+<div class="definition"><span class="keyword">פונקטור נאמן</span><p>פונקטור <span>\(F:\mathcal{C}\to \mathcal{D}\)</span> כך שלכל <span>\(A,A' \in \mathcal{C}\)</span> הפונקטור:
+<span>$$\mathcal{C} (A,A')\to \mathcal{D} (F(A),F(A'))\qquad f\mapsto F(f)$$</span>
+הוא חח"ע.</p>
+</div>
+<div class="definition"><span class="keyword">פונקטור מלא</span><p>פונקטור <span>\(F:\mathcal{C}\to \mathcal{D}\)</span> כך שלכל <span>\(A,A' \in \mathcal{C}\)</span> הפונקטור:
+<span>$$\mathcal{C} (A,A')\to \mathcal{D} (F(A),F(A'))\qquad f\mapsto F(f)$$</span>
+הוא על.</p>
+</div>
+<div class="definition"><span class="keyword">פונקטור מהותית על</span><p>פונקטור <span>\(F:\mathcal{C}\to \mathcal{D}\)</span> נקרא מהותית על על אובייקטים אל לכל <span>\(B \in \mathcal{D}\)</span> קיים <span>\(A \in \mathcal{C}\)</span> כך ש-<span>\(F(A)\cong B\)</span>(איזומורפי).</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(F:C\to D\)</span> פונקטור אזי <span>\(F\)</span> שקילות אם"ם <span>\(F\)</span> נאמן, מלא ומהותית על.</p>
+</div>
+<div class="remark">
+<p>אפשר להשוואות את הטענה הזו לטענה של הומומורפיזם הפיך הוא איזומורפיזם.</p>
+</div>
+<div class="corollary">
+<p>יהי <span>\(F:\mathcal{C}\to \mathcal{D}\)</span>. אזי <span>\(\mathcal{C}\)</span> שקול לתת קטגוריה מלאה של <span>\(\mathcal{D}\)</span> אשר האובייקטים שלה הם מהצורה <span>\(F(C)\)</span> עבור <span>\(C \in \mathcal{C}\)</span>.</p>
+</div>
+<div class="proof">
+<p>הפונקטור <span>\(F':\mathcal{C}\to \mathcal{C'}\)</span> המוגדר על ידי <span>\(F'(C)=F(C)\)</span> היא מלאה, נאמנה(כיוון ש-<span>\(F\)</span> נאמנה) ומהותית על על האובייקטים(מההגדרה של <span>\(\mathcal{C'}\)</span>). </p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category Theory'> תורת הקטגוריות</a></li>
+<li class='prev-page'><a href='./Category Theory_2_1'>2.1 העתקות טבעיות ואיזומורפיזם טבעי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

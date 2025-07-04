@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט הקירוב של ווירשטראס וסטון וירשטראס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. התכנסות של סדרת פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורי פורייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_2'>2.2 מערכת אורתונורמלית וטור פורייה כללי</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_4'>2.4 עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Functional Analysis_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Functional Analysis_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  משפט הקירוב של ווירשטראס וסטון וירשטראס</h1>
+    <div class="lemma">
+<p>עבור <span>\(\delta&gt; 0\)</span> מתקיים:
+<span>$$\int_{\delta}^{1} (1-u^{2})^{n} \, \mathrm{d}u\xrightarrow{n\to \infty} 0  $$</span></p>
+</div>
+<p>כיוון ש-<span>\(1-u^{2}\)</span> מונוטונית יורדת מתקיים:
+<span>$$\int_{\delta}^{1} (1-u^{2})^{n} \, \mathrm{d}u\leq  \int_{\delta}^{1} (1-\delta^{2})^{n} \, \mathrm{d}u=(1-\delta^{2})^{n}(1-\delta)\xrightarrow{n\to \infty} 0 $$</span></p>
+<div class="theorem"><span class="keyword">הקירוב של ווירשטראס</span><p>תהי <span>\(f \in C[0,1]\)</span>. אזי קיימת סדרת פולינומים <span>\(\{ p_{n}(x) \}_{n=1}^{\infty}\)</span> אשר מתכנסת במידה שווה ל-<span>\(f\)</span> על <span>\([0,1]\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(f \in C[0,1]\)</span>. נגדיר: 
+<span>$$F(x)={\left\{\begin{array}{l l}{f(x),}&amp;{x\in[0,1],}\\ {0,}&amp;{{\mathrm{otherwise}},}\end{array}\right.}$$</span>
+כאשר נשים לב כי <span>\(f\)</span> רציפה ב-<span>\([0,1]\)</span> ולכן ממשפט קנטור רציפה במ"ש ולכן <span>\(F\)</span> רציפה במ"ש ב-<span>\(\mathbb{R}\)</span>.</p>
+</li>
+<li>
+<p>נגדיר את הגרעין <span>\(Q_{n}(u)=c_{n}{{\bigl(}1-u^{2}{\bigr)}^{n}},\)</span> כאשר <span>\(c_{n}\)</span> הוא כך שמתקיים: 
+<span>$$\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=1$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(n\)</span> נגדיר: 
+<span>$$P_{n}(x)=\int_{-1}^{1}F(x+u)\,Q_{n}(u)\,\mathrm{d}u$$</span>
+ועל ידי ההחלפת משתנים <span>\(t=x+u\)</span> נקבל:
+<span>$$P_{n}(x)=\int_{x-1}^{x+1}F(t)\,Q_{n}(t-x)\,\mathrm{d}t=\int_{0}^{1}F(t)\,Q_{n}(t-x)\,\mathrm{d}t$$</span>
+כאשר זהו פולינום ב-<span>\(x\)</span>. זהו סדרת הפולינומים שלנו. נוצר להראות שמתכנס במ"ש ל-<span>\(F\)</span>.</p>
+</li>
+<li>
+<p>כיוון ש-<span>\(\int_{-1}^{1} Q_{n}(x) \, \mathrm{d}x=1\)</span> נקבל: 
+<span>$$F(x)=F(x)\,\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=\int_{-1}^{1}F(x)\,Q_{n}(u)\,\mathrm{d}u$$</span>
+ולכן:
+<span>$$\left|P_{n}(x)-F(x)\right|=\left|\int_{-1}^{1}\bigl[F(x+u)-F(x)\bigr]Q_{n}(u)\,\mathrm{d}u\right|\leq\int_{-1}^{1}\bigl|F(x+u)-F(x)\bigr|\,Q_{n}(u)\,\mathrm{d}u$$</span></p>
+</li>
+<li>
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. מרציפות במ"ש של <span>\(F\)</span> נקבל <span>\(\delta &gt; 0\)</span> כך לכל <span>\(x\)</span>: 
+<span>$$|u|&lt;\delta\implies|F(x+u)-F(x)|&lt;\epsilon$$</span>
+כעת נפצל את האינטגרל:
+<span>$$\int_{-1}^{1}\!|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u=\int_{|u|&lt;\delta}+\int_{|u|\geq\delta}$$</span></p>
+</li>
+<li>
+<p>עבור החלק <span>\(\lvert u \rvert&lt;\delta\)</span> מתקיים <span>\(\lvert F(x+u)-F(x) \rvert&lt;\varepsilon\)</span> ולכן: 
+<span>$$\int_{|u|&lt;\delta}|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u&lt;\epsilon\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=\epsilon\cdot1=\epsilon.$$</span></p>
+</li>
+<li>
+<p>עבור החלק <span>\(\lvert u \rvert\geq \delta\)</span> אנו יודעים כי <span>\(F\)</span> חסום על ידי איזשהו <span>\(M\)</span>, ולכן: 
+<span>$$|F(x+u)-F(x)|\leq|F(x+u)|+|F(x)|\leq2M.$$</span>
+נקבל:
+<span>$$\int_{|u|\geq\delta}|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u\leq2M\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u.$$</span>
+ומהתכונה <span>\(\operatorname*{lim}_{n\to\infty}\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u=0\)</span> של הגרעין נקבל <span>\(N\)</span> כך שלכל <span>\(n\geq N\)</span> מתקיים:
+<span>$$\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u&lt;{\frac{\epsilon}{2M}}$$</span>
+ולכן:
+<span>$$\int_{|u|\geq\delta}\mid\!F(x+u)-F(x)\!\mid Q_{n}(u)\,\mathrm{d}u\leq2M\cdot\frac{\epsilon}{2M}=\epsilon$$</span></p>
+</li>
+<li>
+<p>סה"כ נקבל: 
+<span>$$|P_{n}(x)-F(x)|\leq\underbrace{\int_{|u|&lt;\delta}\bigl(\dots\bigr)}_{&lt;\epsilon}+\underbrace{\int_{|u|\geq\delta}\bigl(\dots\bigr)}_{&lt;\epsilon}&lt;2\epsilon$$</span>
+ולכן <span>\(\lVert P_{n}-F(x) \rVert_{\infty}\leq \varepsilon\)</span> ומתכנס במ"ש.</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">סטון ווירטראס</span><p>יהי <span>\((X,\rho)\)</span> מרחב מטרי, ותהי <span>\(K\subseteq X\)</span> קומפקטית. תהי <span>\(A\subseteq(C(K),\lVert \cdot \rVert_{\infty})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>אלגברה - כלומר סגורה לחיבור, כפל וכפל בסקלר. </p>
+</li>
+<li>
+<p>מפרידה נקודות - לכל שתי <span>\(x_{1}\neq x_{2}\)</span> קיים <span>\(f \in A\)</span> כך ש-<span>\(f(x)\neq f(y)\)</span>. </p>
+</li>
+<li>
+<p>לא מתאפסת - לכל <span>\(a \in K\)</span> קיים <span>\(f \in A\)</span> כך ש-<span>\(f(a)\neq 0\)</span>. 
+אזי <span>\(A\)</span> צפוף ב-<span>\(C(K)\)</span>(כלומר <span>\(\overline{A}=C(K)\)</span>).</p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>אם <span>\(f \in A\)</span> אז <span>\(\lvert f \rvert\in \overline{A}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(f \in A\)</span>. כיוון ש-<span>\(K\)</span> קומפקטית ו-<span>\(f\)</span> רציפה אז <span>\(f(K)\)</span> קומפקטית בתת תחום <span>\([m,M]\subseteq \mathbb{R}\)</span>.
+נגדיר <span>\(\phi(t)=\lvert t \rvert\)</span>. יהי <span>\(\varepsilon&gt; 0\)</span>. ממשפט הקירוב של ווירשטראס קיים פולינום <span>\(P(t)\)</span> אשר מקיים:
+<span>$$\forall t \in [-M,M]\qquad \lVert \lvert t \rvert -P(t) \rVert &lt;\varepsilon$$</span>
+נסתכל על <span>\(P(f(x))\)</span>. נשים לב כי כיוון שזהו פולינום זהו צירוף לינארי של חזקות של <span>\(f\)</span> וכפל בסקלרים, וכיוון ש-<span>\(f\)</span> אלגברה נקבל <span>\(P(f(x))\in A\)</span>. מתקיים כעת:
+<span>$$|||f(x)|-P(f(x))\rangle||_{\infty}=\operatorname*{sup}_{x\in K}||f(x)|-P(f(x))|\leq\operatorname*{sup}_{t\in[-M,M]}||t|-P(t)|&lt;\epsilon$$</span>
+כיוון ש-<span>\(P(f(x))\in A\)</span> ו-<span>\(P(f(x))\)</span> מקרב את <span>\(\lvert f(x) \rvert\)</span> קרוב כרצונו נקבל כי <span>\(\lvert f \rvert\in \overline{A}\)</span>.</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(f,g \in \overline{A}\)</span> אזי <span>\(\max\{ f,g \},\min\{ f,g \}\in \overline{A}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב:
+<span>$$\operatorname*{max}\{a,b\}={\frac{1}{2}}(a+b+|a-b|)\qquad \operatorname*{min}\{a,b\}={\frac{1}{2}}(a+b-|a-b|)$$</span>
+ולכן אם <span>\(f,g \in \overline{A}\)</span> אזי גם <span>\(f+g \in \overline{A}\)</span> כי הסגור של אלגברה היא אלגברה ומהלמה הקודמת נקבל <span>\(\lvert f-g \rvert\in \overline{A}\)</span> ולכן המקסימום והמינימום גם יהיו ב-<span>\(\overline{A}\)</span>.</p>
+</div>
+<div class="lemma">
+<p>לכל שתי נקודות <span>\(x_{1},x_{2} \in K\)</span> ולכל שתי מספרים ממשיים <span>\(c_{1},c_{2} \in \mathbb{R}\)</span> קיים <span>\(h \in A\)</span> כך ש-<span>\(h(x_{1})=c_{1}\)</span> ו-<span>\(h(x_{2})=c_{2}\)</span>.</p>
+</div>
+<p>כעת נוכיח את המשפט.</p>
+<div class="proof">
+<p>יהי <span>\(f \in C(K)\)</span> ו-<span>\(\varepsilon&gt; 0\)</span>. נרצה למצוא <span>\(\varphi \in \overline{A}\)</span> כך ש-<span>\(\lVert f-\varphi \rVert_{\infty}&lt;\varepsilon\)</span>.</p>
+<ol>
+<li>
+<p>יהי <span>\(x \in K\)</span>. נבנה פונקציה <span>\(g_{x}\in \overline{A}\)</span> כך ש-<span>\(g_{x}=f(x)\)</span> ו-<span>\(g(t)&gt;f(t)-\varepsilon\)</span> לכל <span>\(t \in K\)</span>. לכל <span>\(y\in K\)</span> מהלמה של הפרדת נקודות קיימת פונקציה <span>\(h_{y}\in A\)</span> כך ש: 
+<span>$$h_{y}(x)=f(x)\qquad h_{y}(y)=f(y)$$</span></p>
+</li>
+<li>
+<p>נגדיר את הקבוצה: 
+<span>$$\tau_{y}=\{t\in K\mid h_{y}(t)&gt;f(t)-\epsilon\}$$</span>
+כאשר זוהי קבוצה פתוחה כיוון ש-<span>\(h_{y}-f\)</span> היא פונקציה רציפה ו-<span>\(\tau_{y}\)</span> היא המקור של הסביבה הפתוחה <span>\((-\varepsilon,\infty)\)</span> תחת הפונקציה הרציפה. כמו כן מקיימת <span>\(x ,y \in \tau_{y}\)</span>.</p>
+</li>
+<li>
+<p>האוסף הזה של <span>\(\tau_{y}\)</span> מהווה כיסוי פתוח של <span>\(K\)</span>. ולכן מקומפקטיות קיים עבורו תת כיסוי סופי <span>\(\{ \tau_{y_{1}},\tau_{y_{2}},\dots,\tau_{y_{n}} \}\)</span> אשר מכסים את <span>\(K\)</span>. זה מתאים לאוסף פונקציות סופיות <span>\(\{ h_{y_{1}},\dots,h_{y_{n}} \}\)</span> מ-<span>\(A\)</span>. </p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$$g_{x}(t)=\operatorname*{max}\{h_{y_{1}}(t),h_{y_{2}}(t),\ldots,h_{y_{n}}(t)\}$$</span>
+כאשר זה מקיים <span>\(g_{x}(t)\in \overline{A}\)</span> משימוש חוזר בלמה אשר אומר שהמקסימום של שתי פונקציות נמצא בסגור של האלגברה. כמו כן כיוון שלכל <span>\(h_{y_{i}}\)</span> מתקיים <span>\(h_{y_{i}}(x)=f(x)\)</span> אזי גם <span>\(g_{x}(x)=f(x)\)</span>. ובאותו אופן כיוון שמתקיים לכל <span>\(h_{i}\)</span> נקבל כי גם עבור המקסימום מתקיים:
+<span>$$g_{x}(t)\geq h_{y_{i}}(t)&gt;f(t)-\epsilon$$</span></p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$${\hat{\tau}}_{x}=\{t\in K\mid g_{x}(t)&lt;f(t)+\epsilon\}.$$</span>
+כאשר זוהי קבוצה פתוחה כי <span>\(g_{x}\)</span> ו-<span>\(f\)</span> הם רציפות ו-<span>\(g_{x}-f\)</span> היא רציפה ולכן המקור של <span>\((-\infty,\varepsilon)\)</span> תהיה פתוחה. בנוסף מתקיים <span>\(x \in \hat{\tau}_{x}\)</span> כי <span>\(g_{x}(x)=f(x)\)</span> וגם <span>\(f(x)&lt;f(x)+\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>עבור כל <span>\(x \in K\)</span> נקבל כי <span>\(\hat{\tau}_{x}\)</span> הוא כיסוי פתוח של <span>\(K\)</span>. ולכן מקומפקטיות של <span>\(K\)</span> קיים עבורו תת כיסוי סופי 
+<span>$$\{ \hat{\tau}_{x_{1}},\dots,\hat{\tau}_{x_{m}} \}$$</span>
+אשר מתאים אוסף סופי של פונקציות <span>\(\{ g_{x_{1}},\dots,g_{x_{m}} \}\)</span> מ-<span>\(\overline{A}\)</span>.</p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$$\varphi(t)=\operatorname*{min}\{g_{x_{1}}(t),g_{x_{2}}(t),\ldots,g_{x_{m}}(t)\}$$</span>
+כאשר <span>\(\varphi \in \overline{A}\)</span> משימוש חוזר בלמה עבור המינימום.</p>
+</li>
+<li>
+<p>כיוון שכל <span>\(g_{x}\)</span> מקיים <span>\(g_{x}(t)&gt;f(t)-\varepsilon\)</span> גם <span>\(\varphi\)</span> מקיים את זה וכיוון שכל <span>\(g_{x_{j}}\)</span> מקיים <span>\(g_{x_{j}}(t)&lt;f(t)+\varepsilon\)</span>. לכן נקבל לכל <span>\(t \in K\)</span> כי: 
+<span>$$f(t)-\epsilon&lt;\varphi(t)&lt;f(t)+\epsilon\implies \forall t \in K\quad |f(t)-\varphi(t)|&lt;\varepsilon\implies \lVert f-\varphi \rVert _{\infty}&lt;\varepsilon$$</span></p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='prev-page'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

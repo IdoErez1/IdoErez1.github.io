@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>קווטרניונים של המילטון</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משפט המבנה למודולים מעל PID</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 צורת סמית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 משפט המבנה למודולים נוצרים סופית מעל PID</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 מסקנות ממשפט המיון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. אלגברות חילוק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_5'>5.5 פי אדים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. אלגבראות פשוטות מרכזיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_2'>6.2 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_4'>6.4 חבורת בראוור</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_6'>6.6 משפט המרכז</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורת בראוור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_5_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_5_2`; }});</script>
+        <div class="content">
+        <h1>5.3  קווטרניונים של המילטון</h1>
+    <div class="definition"><span class="keyword">הקווטרניונים של המילטון</span><p><span>$$\mathbb{H} =\{ r+x i + yj+zk\mid r,x,y,z \in \mathbb{R} \}=\mathbb{R}^{\oplus \{ 1,i,j,k \}}$$</span>
+החיבור הוא חיבור קורדינטה קורדינטה ועבור הכפל מספיק להראות איך מכפילים שתי איברי בסיס:
+<span>$$i^{2}=j^{2}=k^{2}=-1\qquad ij=k=-jk\quad jk=i=-kj\quad ki=j=-ik$$</span>
+כאשר <span>\(\mathbb{R}\subseteq Z(\mathbb{H})\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מספיק לכתוב <span>\(i^{2}=j^{2}=k^{2}=ijk=-1\)</span>. עבור <span>\(ij\)</span>:
+<span>$$ij=-ijk^{2}=-k=k$$</span>
+כאשר עבור <span>\(jk=i,ki=j\)</span> וכעת:
+<span>$$ji=j^{2}k=-k$$</span>
+ומזה נובע כל האחרים.</p>
+</div>
+<div class="remark">
+<p>הקושי בחוג הקווטרניונים זה להראות אסוצייטיביות. </p>
+</div>
+<div class="reminder">
+<p>ניתן לחשוב על <span>\(\mathbb{C}\)</span> על ידי:
+<span>$$\mathbb{C}\cong \left\{ \begin{pmatrix}a &amp; b \\-b &amp; a
+\end{pmatrix} \in M_{2}(\mathbb{R})\right\}$$</span>
+ואז אסוצייטיביות ב-<span>\(\mathbb{C}\)</span> נובעת מכך שחוג המטריצות אסוצייטביות. </p>
+</div>
+<p>נרצה לבנות מבנה דומה עבור הקווטרניונים. נכתוב:
+<span>$$\mathbb{H} = \{ r+x i + yj+zk\mid r,x,y,z \in \mathbb{R} \}=\{ \alpha+\beta j\mid \alpha,\beta \in \mathbb{C} \}$$</span>
+זה עובד כי בתור מרוכבים ניתן לכתוב <span>\(\alpha=r+x i,\beta = y+zi\)</span> וכעת <span>\(\beta j=yj+zij=yj+zk\)</span>. <span>\(\mathbb{C}\subseteq \mathbb{H}\)</span> אבל <span>\(\mathbb{H}\)</span> הוא לא <span>\(\mathbb{C}\)</span>-אלגברה כי <span>\(\mathbb{C}\not\subseteq Z(\mathbb{H})\)</span>. מה כן?
+<span>$$\forall \alpha \in \mathbb{C}\quad \alpha j=j\overline{\alpha}$$</span>
+<span>$$(a+bi)j=aj+bk$$</span>
+<span>$$j(a-bi)=aj-bji=aj+bk$$</span>
+<span>$$(\alpha+\beta j)(\gamma+\delta j)=\alpha \gamma+\beta j\gamma+\alpha \delta j+\beta j\delta j=\alpha \gamma+\beta \overline{\gamma } j+\alpha \delta j+\beta \overline{\delta}j^{2}=(\alpha \gamma-\beta \overline{\delta} )+(\beta \overline{\gamma} +\alpha \delta)j $$</span>
+נשכן את <span>\(\mathbb{H}\hookrightarrow M_{2}(\mathbb{C})\)</span>. וזה יראה אסוצייטיביות. צריך להבין איך <span>\(\mathbb{H}\)</span> פועל על <span>\(\mathbb{H}_{\{ i,j \}}\cong \mathbb{C}^{2}\)</span> כטרנספורמטייה לינארית.
+<span>$$\overbrace{ 1 }^{ \begin{pmatrix}1 &amp; 0\end{pmatrix} }\cdot(\alpha+\beta j)=\overbrace{ \alpha+\beta j }^{ \begin{pmatrix}\alpha &amp; \beta
+\end{pmatrix} }$$</span>
+<span>$$\overbrace{ j }^{ \begin{pmatrix}0 &amp; 1\end{pmatrix} }(\alpha+\beta j)=\overbrace{ -\overline{\beta} +\overline{\alpha} j }^{ \begin{pmatrix}-\overline{\beta}  &amp; \overline{\alpha}  
+\end{pmatrix} }$$</span>
+סה"כ <span>\(\mathbb{H}\hookrightarrow M_{2}(\mathbb{C})\)</span> כאשר השיכון מוגדר על ידי:
+<span>$$\alpha+\beta j\mapsto \begin{pmatrix}\alpha &amp; \beta \\-\overline{\beta} &amp; \overline{\alpha} 
+\end{pmatrix}$$</span>
+<span>$$\mathbb{H}' :=\left\{ \begin{pmatrix}\alpha &amp; \beta \\-\overline{\beta} &amp; \overline{\alpha} 
+\end{pmatrix} \mid \alpha,\beta \in \mathbb{C}\right\}$$</span>
+עם חיבור וכפל מטריצות ב-<span>\(M_{2}(\mathbb{C})\)</span>.</p>
+<div class="proposition">
+<p>הבנייה שעשינו <span>\(\mathbb{H}'\)</span> הוא חוג, ומתקיים <span>\(\mathbb{H}\cong\mathbb{H'}\)</span> כחוגים.</p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$r+x i + y j + zk=(r+x i+yj+zk)=(r+x i)+(y+z i)j$$</span>
+ולכן ניתן לכתוב:
+<span>$$\begin{pmatrix}r+x i &amp; y + z i \\-y+zi &amp; r-x i
+\end{pmatrix}$$</span>
+ולכן נקבל:
+<span>$$i'=\begin{pmatrix}i &amp; 0 \\0 &amp; -i\end{pmatrix}\qquad j'=\begin{pmatrix}0 &amp; 1 \\-1 &amp; 0\end{pmatrix}\qquad k'=\begin{pmatrix}0 &amp; i \\i &amp; 0
+\end{pmatrix}$$</span>
+בודקים שמתקיים <span>\(i^{2}=j^{2}=k^{2}=ijk=-1\)</span> ובפרט <span>\(1,i,j,k\)</span> בת"ל.</p>
+</div>
+<div class="definition"><span class="keyword">צמוד</span><p><span>$$\overline{r+x i + yj + zk}=r-x i - yj - zk $$</span></p>
+</div>
+<div class="proposition">
+<p>עבור <span>\(\alpha,\beta \in \mathbb{H}\)</span> מתקיים:
+<span>$$\overline{\alpha+\beta} =\overline{\alpha} +\overline{\beta} \qquad \overline{\alpha \beta} =\overline{\beta} \overline{\alpha} $$</span>
+צמוד ב-<span>\(\mathbb{H}\)</span> הופך לצימוד + שחלוף ב-<span>\(M_{2}(\mathbb{C})\)</span>.</p>
+</div>
+<div class="reminder">
+<p>עבור <span>\(E / F\)</span> גלואה נגדיר <span>\(N_{E / F}: \mathbb{E}^{\times}\to \mathbb{F}^{\times}\)</span> על ידי:
+<span>$$N_{E / F}(\alpha)=\prod_{\sigma \in \mathrm{Gal}(E / F)} \sigma(\alpha)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">נורמה ועקבה</span><p>נורמה:
+<span>$$N(\alpha):= \alpha \overline{\alpha}\qquad \mathrm{Tr}(\alpha)=\alpha+\overline{\alpha}  $$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של נורמה ועקבה</span><p><span>$$\overline{N(\alpha)} =\overline{\alpha \overline{\alpha} } =\alpha \overline{\alpha} =N(\alpha)\implies N(\alpha)\in \mathbb{R}$$</span>
+<span>$$\mathrm{Tr}(r+x i + y j + zk)=2r$$</span>
+<span>$$N(\alpha)=\alpha \overline{\alpha} =\begin{pmatrix}u &amp; w \\ \overline{w}  &amp; \overline{u}  \end{pmatrix}\begin{pmatrix}\overline{u}  &amp; -\overline{w}  \\\overline{w}  &amp; \overline{u} \end{pmatrix}=\begin{pmatrix}u\overline{u} +w\overline{w} &amp; 0  \\0 &amp; u\overline{u}   +w\overline{w}  
+\end{pmatrix}$$</span>
+כלומר:
+<span>$$N(\alpha)=\alpha \overline{\alpha} =\lvert u \rvert_{\mathbb{C}} ^{2}+\lvert w \rvert _{\mathbb{C}}^{2}=r^{2}+x^{2}+y^{2}+z^{2}$$</span></p>
+</div>
+<div class="remark">
+<p>זה לא נורמה במובן של אנליזה כי לא הומוגני.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(\alpha \neq 0\)</span> אז <span>\(N(\alpha)&gt; 0\)</span> ולכן:
+<span>$$\forall \alpha \neq 0\quad \alpha \cdot \frac{\overline{\alpha}}{N(\alpha)}=1 $$</span>
+ולכן <span>\(\mathbb{H}\)</span> חוג חילוק. כאשר:
+<span>$$(r+x i +yj + zk)^{-1}= \frac{r - x i - yj - zk}{r^{2}+x^{2}+y^{2}+z^{2}}$$</span></p>
+</div>
+<p>ראינו <span>\((\mathbb{H},N)\cong(\mathbb{R}^{4},\lVert \cdot \rVert^{2}_{\text{standard}})\)</span>. </p>
+<div class="definition"><span class="keyword">קווטרניונים טהורים</span><p>ניתן כעת להגדיר:
+<span>$$\mathbb{P} =\mathrm{Span}_{\mathbb{R}}(i,j,k)=\{ \alpha \mid \alpha=-\overline{\alpha}  \}=\{ \alpha \mid \mathrm{Tr}(\alpha)=0 \}$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$(\mathbb{P} ,N)\cong (\mathbb{R}^{3},\lVert \cdot \rVert _{\text{standard}})$$</span></p>
+</div>
+<div class="proof">
+<p>נסתכל על <span>\(\mathbb{H}^{\times}\circlearrowright \mathbb{P}\)</span> על ידי הצמדה.
+<span>$$\alpha \in \mathbb{H} ^{\times}= \mathbb{H} \setminus  \{ 0 \}$$</span>
+יהי <span>\(\pi \in \mathbb{P}\)</span>. נראה <span>\(\alpha ^{-1}\pi \alpha \in \mathbb{P}\)</span>. נשים לב ש-<span>\(\overline{\alpha ^{-1}}=\overline{\alpha}^{-1}\)</span>. כעת:
+<span>$$\overline{\alpha ^{-1}  \pi \alpha}=\overline{\frac{\overline{\alpha}}{\alpha \overline{\alpha} } \pi \alpha}= \frac{1}{\alpha \overline{\alpha} }\overline{\overline{\alpha} \pi \alpha} =-\frac{1}{\alpha \overline{\alpha} }\overline{\alpha} \pi \alpha=-\alpha ^{-1}  \pi \alpha$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$Z(\mathbb{H} )= \mathbb{R}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$r\alpha=(r+x i + yj + zk)j=rj+xk-y-zi$$</span>
+כאשר אם נכפיל מהצד השני:
+<span>$$j\alpha=rj-xk-y+zi$$</span></p>
+</div>
+<div class="proposition">
+<p><span>$$\mathbb{H} = \mathbb{R}\oplus \mathbb{P} $$</span></p>
+</div>
+<div class="proof">
+<p>כעת נסתכל על <span>\(\alpha^{2}\)</span>:
+<span>$$\alpha^{2}=\underbrace{ (\dots) }_{ \in \mathbb{R} }+(rx+xr+\cancel{ yz-zy })i+\dots=\underbrace{ (\dots) }_{ \in \mathbb{R} }+2rx i+2ryj+2rzk$$</span>
+וזה אומר כי:
+<span>$$\alpha^{2}\in \mathbb{R} \iff r = 0 \lor x=y=z=0$$</span>
+כלומר:
+<span>$$\mathbb{P} = \{ \alpha \mid \alpha^{2}\in Z(\mathbb{H} )\not\ni \alpha  \}\cup  \{  0 \}$$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$\alpha=r+\pi \qquad \overline{\alpha} =r-\pi$$</span></p>
+</div>
+<div class="corollary">
+<p>ראינו ש-<span>\((\mathbb{H},N)=(\mathbb{R}^{4},\lVert \cdot \rVert_{\text{Euc}}^{2})\)</span>. מתקיים:
+<span>$$\mathbb{H} ^{1}=\{ \alpha \mid N(\alpha)=1 \}=S^{3}$$</span>
+ואנחנו קיבלנו מבנה של חבורה על <span>\(S^{3}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">שיכון הקווטרניונים במטריצות</span><p>ניתן לשכן <span>\(\iota:\mathbb{H}\to M_{2}(\mathbb{C})\)</span> על ידי:
+<span>$$\alpha \in \mathbb{H} ^{1}\mapsto A = \begin{pmatrix}u &amp; w \\-\overline{w}  &amp; \overline{u} 
+\end{pmatrix}$$</span>
+כאשר <span>\(\det A=1\)</span> ו-<span>\(\iota(\overline{\alpha})=A^{*}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">שיכון <span>\(S^{3}\)</span> ב-<span>\(SU(2)\)</span></span><p><span>$$\alpha \in \mathbb{H} ^{1}\to A \in SU(2)=\{ A\mid  A^{*}A=\mathbb{1} ,\det A=\mathbb{1}  \}$$</span>
+כאשר <span>\(\iota\)</span> היא חח"ע ועל, ולכן:
+<span>$$S^{3}\cong  \mathbb{H} ^{1}\cong  SU(2)$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הגאומטריה תלת-ממדית</span><p><span>$$\mathbb{P} =\mathrm{Span}(i,j,k)=\{ \pi=-\overline{\pi}  \}$$</span>
+כאשר <span>\((\mathbb{P} ,N)=(\mathbb{R} ^{3},\lVert \cdot \rVert ^{2}_{\text{Euc}})\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">נורמה ותכונות אורתוגונליות</span><p><span>$$\pi \in \mathbb{P} \qquad N(\pi)=\pi \cdot \overline{\pi} =-\pi^{2}$$</span>
+פולריזציה:
+<span>$$\langle \pi,\xi \rangle =-\frac{1}{2}\{ \pi,\xi \}$$</span>
+בפרט <span>\(\pi \perp \xi\)</span> אם"ם <span>\(\pi \xi=-\xi \pi\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">בסיס אורתונורמלי</span><p>יהיו <span>\(\pi_{1},\pi_{2},\pi_{3}\in \mathbb{P}\)</span> בסיס אורתונורמלי ל-<span>\(\mathbb{P}=\mathbb{R}^{3}\)</span> אם"ם הם מקיימים את חוקי הכפל של <span>\(i,j,k\)</span>:
+<span>$$\pi_{i}\cdot \pi_{j}=\pm \pi_{k}\qquad \pi_{j}^{2}=-1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">הצמדה ופונקציה <span>\(\rho\)</span></span><p>הצמדה <span>\(\mathbb{H}^{\times}\circlearrowright \mathbb{P}\)</span> מוגדרת על ידי:
+<span>$$\rho:\mathbb{H} \to O(3)\qquad \alpha \mapsto \gamma_{\alpha}\qquad \gamma_{\alpha}(\pi)=\alpha   \pi \alpha ^{-1}$$</span><br />
+כאשר <span>\(\rho\)</span> מצטמצמת ל-<span>\(\rho:\mathbb{H}^{1}\to SO(3)\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword"></span><p>הגרעין של <span>\(\rho\)</span> נתון על ידי:
+<span>$$\ker \rho=\{ \pm 1 \}$$</span></p>
+</div>
+<div class="proof">
+<p>מתקיים <span>\(C_{\mathbb{H} }(\mathbb{P} )=\mathbb{R}\)</span>, ולכן <span>\(\rho(\alpha)=1\)</span> אם"ם <span>\(\alpha \in \mathbb{R}\)</span>.  מכיוון ש-<span>\(\mathbb{R}\cap \mathbb{H}^{1}=\{ \pm 1 \}\)</span>, נובע ש-<span>\(\ker \rho=\{ \pm 1 \}\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span>$$SU(2)\cong S^{3}\cong \mathbb{H} ^{1}\xrightarrow{2:1} SO(3)$$</span>
+כאשר יש העתקה נוספת <span>\(S^{3}\xrightarrow{v\sim  -v}\mathbb{R}P^{3}\)</span>, ו-<span>\(\mathbb{R}P^{3}=SO(3)\)</span>.<br />
+באופן כללי, <span>\(SO(n)\)</span> אינו פשוט קשר ויש לו כיסוי כפול פשוט קשר <span>\(\text{Spin}(n)\)</span>, כך ש-<span>\(\text{Spin}(3)=SU(2)\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='prev-page'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

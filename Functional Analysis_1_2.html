@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>רציפות וחסימות במידה אחידה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+<li class='parent-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. התכנסות של סדרת פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורי פורייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_2'>2.2 מערכת אורתונורמלית וטור פורייה כללי</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_4'>2.4 עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Functional Analysis_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Functional Analysis_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  רציפות וחסימות במידה אחידה</h1>
+    <div class="definition"><span class="keyword">קבוצת הפונקציות הרציפות</span><p>נגדיר:
+<span>$$C([a,b])=\{ f\mid [a,b]\to \mathbb{R}, f \text{ is continous} \}$$</span>
+כאשר:
+<span>$$\lVert f \rVert _{\infty} \overset{\text{def}}{=} \max _{x \in [a,b]} \lvert f(x) \rvert $$</span>
+נשים לב כי <span>\((C[a,b],\lVert \cdot \rVert_{a})\)</span> הוא מרחיב נורמי.</p>
+</div>
+<div class="definition"><span class="keyword">חסימות במידה אחידה - Uniformly Bound</span><p><span>$$\Phi \subseteq C[a,b]$$</span>
+נניח שקיים איזשהו פרמטר <span>\(\kappa &gt; 0\)</span> כך שמתקיים:
+<span>$$\forall x \in [a,b]\quad \forall \varphi \in \Phi \quad \lvert \varphi(x) \rvert \leq \kappa$$</span>
+(חשוב: <span>\(\kappa\)</span> אינו תלוי ב-<span>\(x\)</span> ואינו תלוי ב-<span>\(\varphi\)</span>) אזי <span>\(\Phi\)</span> נקראת חסומה במידה אחידה.</p>
+</div>
+<div class="example">
+<p><span>$$\Phi=(\sin(nx))_{n=1}^{\infty}$$</span>
+כאשר נשים לב כי <span>\(\lvert \sin(nx) \rvert\leq 1\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$f_{n}(x)= \frac{x^{2}}{x^{2}+(1-nx)^{2}}\qquad  n \in \mathbb{N}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">רציפות במידה אחידה - equicontinous family of functions</span><p>יהי <span>\(\Phi \subseteq C[a,b]\)</span>. עבור כל <span>\(\varepsilon &gt; 0\)</span> קיים <span>\(\delta=\delta(\varepsilon)\)</span> כך שמתקיים:
+<span>$$\forall x_{1},x_{2} \in [a,b]\quad \lvert x_{1}-x_{2} \rvert \leq  \delta(\varepsilon)\implies \lvert \varphi(x_{1})-\varphi(x_{2}) \rvert \leq  \varepsilon$$</span>
+לכל <span>\(\varphi \in \Phi\)</span>. אזי <span>\(\Phi\)</span> נקראת רציפה במידה אחידה.</p>
+</div>
+<div class="example"><span class="keyword">משפחה לא רציפה במידה אחידה</span><p><span>$$\left\lvert  f_{n}\left( \frac{1}{n} \right)-f_{n}(0)  \right\rvert =1$$</span>
+גורר כי המשפחה אינה רציפה במידה אחידה.</p>
+</div>
+<div class="example">
+<p>סדרה <span>\((f_{n})_{n=1}^{\infty}\)</span> גזירות ב-<span>\((a,b)\)</span> כך ש-<span>\(f_{n}\in C[a,b]\)</span> קיים <span>\(\kappa &gt; 0\)</span> כך שמתקיים:</p>
+<ol>
+<li>
+<p>לכל <span>\(x \in [a,b]\)</span> ולכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(\lvert f_{n}(x) \rvert\leq \kappa\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(\lvert f'_{n}(x)\leq \kappa \rvert\)</span>. 
+אזי משפחה <span>\((f_{n})_{n=1}^{\infty}\)</span> חסומה במידה אחידה, וגם רציפה במידה אחידה.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. 
+<span>$$\lvert f_{n}(x_{1})-f_{n}(x_{2}) \rvert \leq \lvert f'(\xi) \rvert \lvert x_{1}-x_{2} \rvert \leq  \kappa \lvert x_{1}-x_{2} \rvert $$</span>
+ניתן לבחור <span>\(\delta(\varepsilon)=\frac{\varepsilon}{M}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ארצלה</span><p>יהי <span>\(\Phi \subseteq (C[a,b],\lVert \cdot \rVert_{\infty})\)</span>. התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>לכל סדרה <span>\((f_{n})_{n=1}^{\infty}\subset \Phi\)</span> קיימת תת סדרה קושי <span>\((f_{n})_{k}^{\infty}\)</span> קיימת תת סדרת קושי <span>\((f_{n_{k}})_{k=1}^{\infty}\)</span> כך שמתקיים: 
+<span>$$\lVert f_{n_{k}}-f_{n_{k+\ell}} \rVert \xrightarrow{k\to \infty} 0 $$</span>
+עבור ל <span>\(\ell \in \mathbb{N}\)</span>. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(\Phi\)</span> חסומה במידה אחידה וגם <span>\(\Phi\)</span> רציפה במידה אחידה. </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>לכל סדרת פונקציות <span>\((f_{n})\subseteq \Phi\)</span> קיימת סדרת קושי <span>\(\impliedby\)</span> <span>\(\Phi\)</span> רציפה במידה אחידה וחסומה במידה אחידה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי לכל סדרה קיימת תת סדרת קושי. ממשפט האוסדורף <span>\(\Phi\)</span> חסומה לחלוטין. יהי <span>\(\varepsilon&gt;0\)</span>. מחסימות לחלוטין קיימות <span>\(f_{1},\dots,f_{N}\in \Phi\)</span> כך ש: 
+<span>$$\Phi \subseteq \bigcup_{i=1}^{N}B_{\frac{\varepsilon}{3}}(f_{i})$$</span></p>
+</li>
+<li>
+<p>כעת מתקיים: 
+<span>$$\lVert f \rVert _{\infty}=\lVert f-f_{i}+f_{i} \rVert_{\infty} \leq \lVert f-f_{i} \rVert_{\infty} +\lVert f_{i} \rVert _{\infty}\leq \frac{\varepsilon}{3}+\lVert f_{i} \rVert _{\infty}$$</span>
+כאשר ניתן להגדיר <span>\(K=\max_{_{i}}\{ \lVert f_{i} \rVert_{\infty} \}\)</span> וכן <span>\(M=K+\frac{\varepsilon}{3}\)</span> ולקבל <span>\(\lVert f \rVert_{\infty}\leq M\)</span> ולכן חסום במידה אחידה.</p>
+</li>
+<li>
+<p>כעת כיוון ש-<span>\(f \in B_{\frac{\varepsilon}{3}}(f_{i})\)</span> וכיוון ש-<span>\(f_{i}\)</span> רציפה ב-<span>\([a,b]\)</span> אזי רציפה במידה שווה ב-<span>\([a,b]\)</span>. לכן קיים <span>\(\delta_{i}\)</span> כך שאם <span>\(\lvert x-y \rvert&lt;\delta\)</span> מתקיים <span>\(\lvert f_{i}(x)-f_{i}(y) \rvert&lt;\frac{\varepsilon}{3}\)</span>. אם נגדיר <span>\(\delta=\min_{i}\{ \delta_{i} \}\)</span> נקבל שכאשר <span>\(\lvert x-y \rvert&lt;\delta\)</span> ב-<span>\([a,b]\)</span> מתקיים: 
+<span>$$\lvert f(x)-f(y) \rvert =\lvert f(x)-f_{i}(x)-f(y)+f_{i}(y)+f_{i}(x)-f_{i}(y) \rvert \leq \lvert f(x)-f_{i}(x) \rvert +\lvert f(y)-f_{i}(y) \rvert +\lvert f_{i}(x)-f_{i}(y) \rvert \leq 3 \cdot \frac{\varepsilon}{3}=\varepsilon$$</span>
+ולכן <span>\(\Phi\)</span> רציפה במידה אחידה.</p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>אם <span>\(\Phi\)</span> חסומה במידה אחידה ורציפה במידה אחידה אז לכל סדרה <span>\((f_{n})\subseteq \Phi\)</span> קיימת תת סדרת קושי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח חסימות במידה אחידה ורציפות במידה אחידה. יהי <span>\(\varepsilon&gt; 0\)</span>. מרציפות במידה אחידה נקבל <span>\(\delta&gt;0\)</span> כך שלכל <span>\(f \in \Phi\)</span> מתקיים: 
+<span>$$\forall x_{1},x_{2}\in[a,b]\qquad \lvert x_{1}-x_{2} \rvert &lt;\delta\implies \lvert f(x_{1})-f(x_{2}) \rvert \leq  \frac{\varepsilon}{3} $$</span></p>
+</li>
+<li>
+<p>ניקח חלוקה של <span>\([a,b]\)</span> כאשר המרווחים בין כל איברים סמוכים בחלוקה קטנים מ-<span>\(\delta\)</span>. כלומר: 
+<span>$$a = x_0 &lt; x_1 &lt; \dots &lt; x_N = b \quad \text{with}\;\;x_{i+1} - x_i &lt; \delta$$</span></p>
+</li>
+<li>
+<p>מחסימות במידה אחידה של קיים <span>\(K&gt;0\)</span> כך ש-לכל <span>\(f \in \Phi\)</span> מתקיים <span>\(\lVert f \rVert_{\infty}\leq K\)</span> וכעת ניתן לחלק את התחום <span>\([-K,K]\)</span> למרווחים אשר קטנים מ-<span>\(\varepsilon\)</span>. כלומר: 
+<span>$$-K=y_{0}&lt;y_{1}&lt;\cdot\cdot\cdot&lt;y_{M}=K\quad \text{with }y_{i+1}-y_{i}&lt;\frac{\varepsilon}{3}$$</span>
+בפרט לכל <span>\(z \in [-K,K]\)</span> קיים <span>\(y_{j}\)</span> כך ש-<span>\(\lvert z-y_{j} \rvert&lt;\frac{\varepsilon}{3}\)</span>.</p>
+</li>
+<li>
+<p>תהי <span>\(f \in \Phi\)</span>. לכל <span>\(x_{i}\)</span> קיים <span>\(y_{j_{i}}\)</span> כך ש-<span>\(\lvert f(x_{i})-y_{j_{i}} \rvert&lt;\frac{\varepsilon}{3}\)</span>. כעת נגדיר פונקציה מקורבת <span>\(\psi\)</span> על ידי: 
+<span>$$\psi(x_{i})=y_{j_{i}}$$</span>
+וכן לכל נקודות בתחום <span>\(x \in (x_{i},x_{i+1})\)</span> נגדיר את הפונקציה להיות האינטרפולציה הלינארית:
+<span>$$\psi(x)=y_{j_{i}}+(y_{j_{i+1}}-y_{j_{i}})\cdot{\frac{x-x_{i}}{x_{i+1}-x_{i}}}$$</span>
+כך שרציף ולינארי למקוטעין.</p>
+</li>
+<li>
+<p>יהי <span>\(x \in [x_{i},x_{i+1}]\)</span>. אזי: 
+<span>$$|f(x)-\psi(x)|\leq|f(x)-f(x_{i})|+|f(x_{i})-y_{j_{i}}|+|y_{j_{i}}-\psi(x)|&lt;\frac{\varepsilon}{3}\cdot 3 = \varepsilon$$</span></p>
+</li>
+<li>
+<p>כיוון שיש כמות סופית של <span>\(\psi\)</span> שניתן לבנות וכן כל <span>\(f\)</span> מקיים <span>\(f \in B_{\varepsilon}(\psi)\)</span> עבור <span>\(\psi\)</span> כלשהו נקבל כי חסום לחלוטין. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>תת קבוצה של <span>\(C[a,b]\)</span> היא חסומה טוטלית אם"ם היא חסומה במידה אחידה ורציפה במידה אחידה.</p>
+</div>
+<div class="corollary">
+<p>תת קבוצה של <span>\(C[a,b]\)</span> היא קומפקטית אם"ם סגורה, חסומה במידה אחידה, ורציפה במידה אחידה.</p>
+</div>
+<div class="corollary">
+<p>אם תת קבוצה של <span>\(C[a,b]\)</span> היא חסומה במידה אחידה ורציפה במידה אחידה אז לכל סדרה בה יש תת סדרה מתכנסת במידה שווה(כאשר הגבול לאו דווקא שייך לקבוצה).</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(\{ f_{n} \}\)</span> משפחת פונקציות המתכנסות במידה אחידה על <span>\([0,1]\)</span>, ונניח כי <span>\(f:[0,1]\to \mathbb{R}\)</span> הגבול הנקודתי של <span>\(f_{n}(x)\)</span> לכל <span>\(x\)</span>. אזי הסדרה <span>\(f_{n}\)</span> מתכנסת במידה שווה.</p>
+</div>
+<div class="proof">
+<p>להשלים</p>
+</div>
+<div class="theorem"><span class="keyword">ארצלה אסקולי</span><p>תהי <span>\(\{ f_{n} \}_{n=1}^{\infty}\subseteq C^{1}[a,b]\)</span> סדרה חסומה(בנורמה) של פונקציות גזירות ברציפות. כלומר הסדרה <span>\(\{ f_{n} \}_{n=1}^{\infty}\)</span> ו-<span>\(\{ f'_{n} \}_{n=1}^{\infty}\)</span> חסומות במידה אחידה, אזי הסדרה <span>\(\{ f_{n} \}_{n=1}^{\infty}\)</span> חסומה במידה אחידה וגזירה במידה אחידה(ולכן יש לה תת סדרה מתכנסת במידה שווה).</p>
+</div>
+<div class="proof">
+<p>להשלים.</p>
+</div>
+<h2>נגזרות ואינטגרלים</h2>
+<div class="proposition">
+<p>תהי <span>\(K(x,t)\)</span> פונקציה רציפה על ריבוע היחידה <span>\([0,1]\times[0,1]\)</span>. וכן נגדיר <span>\(T_{k}:C[0,1]\to C[0,1]\)</span> על ידי:
+<span>$$.T_{K}f(x)=\!\!\int\limits_{0}^{1}f(t)K(x,t)d t$$</span>
+אזי:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(T_{k}\)</span> מוגדרת היטב. </p>
+</li>
+<li>
+<p>שולח קבוצות חסומות לקבוצות חסומות טוטלית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אופרטור קומפקטי</span><p>יהי <span>\(V,W\)</span> מרחבים נורמלים, ו-<span>\(T:V\to W\)</span> העתקה לינארית. אזי אם לכל קבוצה חסומה <span>\(B\subseteq V\)</span> מתקיים <span>\(\overline{T(B)}\)</span> קומפקטי ב-<span>\(W\)</span> נקרא לאופרטור <span>\(T\)</span> קומפקטי.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+<li class='prev-page'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

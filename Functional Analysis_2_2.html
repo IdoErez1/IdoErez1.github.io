@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מערכת אורתונורמלית וטור פורייה כללי</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. התכנסות של סדרת פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורי פורייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_2'>2.2 מערכת אורתונורמלית וטור פורייה כללי</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_4'>2.4 עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Functional Analysis_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Functional Analysis_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  מערכת אורתונורמלית וטור פורייה כללי</h1>
+    <div class="definition"><span class="keyword">מערכת אורתונורמלית</span><p>יהי <span>\(\left( V,\langle , \rangle \right)\)</span> מרחב מכפלה פנימית. מערכת <span>\(\{ v_{n} \}\subseteq V\)</span> נקראת אורתונורמלית אם לכל <span>\(v_{i},v_{j}\in \{ v_{n} \}\)</span> מתקיים:
+<span>$$\langle v_{i},v_{j} \rangle =\delta_{ij}$$</span></p>
+</div>
+<div class="lemma">
+<p>עבור מערכת אורתונורמלית <span>\(\{ e_{n} \}\)</span> ו-<span>\(v \in V\)</span> מתקיים:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כאשר <span>\(x_{n}=\langle e_{n},v \rangle\)</span>.</p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$\begin{gather}\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =\left\langle v-\sum_{n=1}^{N}\alpha_{n}e_{n},v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\rangle= \\=\left\langle  v,v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle -\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle = \\= \lVert v \rVert^{2}-\left\langle  v, \sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle  -\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},v  \right\rangle+\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle  = \\=\lVert v \rVert ^{2}+\sum_{n=1}^{N}  \overline{\alpha} _{n}\langle v,e_{n} \rangle +\sum_{n=1}^{N} \alpha_{n}\langle e_{n},v \rangle +\sum_{n=1}^{N}\sum_{m=1}^{N}\alpha_{n}\overline{\alpha_{m}} \underbracket{ \langle e_{n},e_{m} \rangle }_{ \delta_{nm} } = \\=\lVert v \rVert ^{2}+\sum_{n=1}^{N} \left[  \overline{a_{n}} \overline{\langle e_{n},v \rangle }  +\alpha_{n}\langle e_{n},v \rangle +\alpha_{n}\overline{\alpha_{n}}   \right]
+\end{gather}$$</span>
+כעת נסמן <span>\(x_{n}=\langle e_{n},v \rangle\)</span> ונשים לב כי:
+<span>$$\left\lvert  x_{n}-\alpha_{n}  \right\rvert ^{2}=\left( x_{n}-\alpha_{n} \right)\left( \overline{x_{n}} -\overline{\alpha_{n}}  \right)=\overbrace{ x_{n}\overline{x_{n}} }^{ \lVert x_{n} \rVert  } -x_{n}\overline{\alpha_{n}} -\alpha_{n}\overline{x_{n}} +\overbrace{ \alpha_{n}\overline{\alpha_{n}} }^{ \left\lVert  \alpha_{n}  \right\rVert  } $$</span>
+ולכן נקבל:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =
+\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון בסל</span><p>יהי <span>\(V\)</span> מרחב הילברט(מרחב מכפלה פנימית שלם). נניח כי <span>\(\{ e_{n} \}\)</span> מערכת אורתונורמלית ב-<span>\(H\)</span>. אזי לכל <span>\(v \in V\)</span> מתקיים:
+<span>$$\sum_{k=1}^{\infty}|\langle v,e_{k}\rangle|^{2}\leq\|v\|^{2}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}{0\leq\left\|v-\sum_{k=1}^{n}\langle x,e_{k}\rangle e_{k}\right\|^{2}=\|v\|^{2}-2\sum_{k=1}^{n}\operatorname{Re}\langle v,\langle v,e_{k}\rangle e_{k}\rangle+\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\\ {=\|v\|^{2}-2\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}+\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\\ {=\|v\|^{2}-\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טור פורייה לפי מערכת אורתוגונלית במרחב מכפלה פנימית</span><p>יהי <span>\((V,\langle \cdot,\cdot \rangle)\)</span> מרחב מרפלה פנימית <span>\(V\)</span> מעל שדה <span>\(\mathbb{C}\)</span>. יהי <span>\((v_{n})^{\infty}_{n=1}\)</span> מערכת אורתונורמלית במרחב <span>\((V,\langle \cdot,\cdot \rangle)\)</span>. אזי הטור:
+<span>$$\sum_{i=1}^{\infty} \frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert ^{2}}v_{n} $$</span>
+נקרא טור פורייה עבור <span>\(v\)</span>. כאשר המקדמים של <span>\(v_{n}\)</span> נקראים מקדמי פורייה</p>
+</div>
+<div class="proposition"><span class="keyword">תכונת הקירוב הטוב ביותר של מקדמי פורייה</span><p>יהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימית. תהי <span>\((v_{n})_{n=1}^{\infty}\)</span> רשימה אורתוגונאלית, יהי <span>\(N \in \mathbb{N}\)</span> ויהי <span>\(v \in V\)</span> אזי:
+<span>$$\min _{d_{1},\dots,d_{n}\in \mathbb{C}}\left\lVert  v-\sum_{n=1}^{N} d_{n}v_{n}  \right\rVert = \left\lVert  v-\sum_{n=1}^{N} \frac{\langle v_{n},v \rangle}{\lVert v_{n}^{2} \rVert }v_{n}   \right\rVert $$</span>
+כלומר המקדמים <span>\(d_{n}\)</span> אשר ממזערים את הנורמה יהיו <span>\(d_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n}^{2} \rVert}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסתכל על הנורמה הבאה:
+<span>$$\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=\left\langle v-\sum_{n=1}^{N}d_{n}v_{n},v-\sum_{m=1}^{N}d_{m}v_{m}\right\rangle$$</span>
+נפתח את המכפלה הפנימית:
+<span>$$=\langle v,v\rangle-\left\langle v,\sum_{m=1}^{N}d_{m}v_{m}\right\rangle-\left\langle\sum_{n=1}^{N}d_{n}v_{n},v\right\rangle+\left\langle\sum_{n=1}^{N}d_{n}v_{n},\sum_{m=1}^{N}d_{m}v_{m}\right\rangle$$</span>
+מהלינאריות של המכפלה הפנימית ניתן להוציא את הסכום, תוך כדי שימוש בתכונה <span>\(\langle x,\alpha y \rangle=\overline{\alpha}\langle x,y \rangle\)</span> נקבל:
+<span>$$=||v||^{2}-\sum_{m=1}^{N}\overline{{{d_{m}}}}\langle v,v_{m}\rangle-\sum_{n=1}^{N}d_{n}\langle v_{n},v\rangle+\sum_{n=1}^{N}\sum_{m=1}^{N}d_{n}\overline{{{d_{m}}}}\langle v_{n},v_{m}\rangle$$</span>
+מאורתוגונאליות נקבל <span>\(\langle v_{n},v_{m} \rangle=\delta_{nm}\lVert v_{n} \rVert^{2}\)</span> ולכן ניתן לפשט את הסכום אחרון:
+<span>$$=||v||^{2}-\sum_{n=1}^{N}\overline{{{d_{n}}}}\langle v,v_{n}\rangle-\sum_{n=1}^{N}d_{n}\langle v_{n},v\rangle+\sum_{n=1}^{N}d_{n}\overline{{{d_{n}}}}||v_{n}||^{2}$$</span>
+נגדיר את המקדם פורייה:
+<span>$$c_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert ^{2}}\implies \langle v_{n},v \rangle =c_{n}\lVert v_{n} \rVert ^{2}\implies \langle v,v_{n} \rangle =\overline{c_{n}} \lVert v_{n} \rVert ^{2}$$</span>
+ונוסיף ונחסיר מהביטוי שלנו <span>\(\sum_{n=1}^{N}\lvert c_{n}\lVert^{2} v_{n} \rVert^{2} \rvert\)</span> כך שנקבל:
+<span>$$=||v||^{2}+\sum_{n=1}^{N}|d_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}d_{n}\big(c_{n}||v_{n}||^{2}\big)-\sum_{n=1}^{N}\overline{{{d_{n}}}}\big(\overline{{{c_{n}}}}||v_{n}||^{2}\big)+\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}\big)$$</span>
+נשים לב כי כל הגורמים בסכום מכילים <span>\(\lVert v_{n} \rVert^{2}\)</span> וניתן לקחת אותו כגורם משותף:
+<span>$$=||v||^{2}+\sum_{n=1}^{N}||v_{n}||^{2}\left(|d_{n}|^{2}-d_{n}c_{n}-\overline{{{d_{n}c_{n}}}}+|c_{n}|^{2}\right)-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+נבחין כי:
+<span>$$|d_{n}|^{2}-d_{n}c_{n}-{\overline{{d_{n}c_{n}}}}+|c_{n}|^{2}=(d_{n}-c_{n})({\overline{{d_{n}}}}-{\overline{{c_{n}}}})=|d_{n}-c_{n}|^{2}$$</span>
+ולכן:
+<span>$$\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=||v||^{2}+\sum_{n=1}^{N}|d_{n}-c_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+כדי למזער את הביטוי נדרש למזער את <span>\(\textstyle\sum_{n=1}^{N}|d_{n}-c_{n}|^{2}||v_{n}||^{2}\)</span>. זה קורה כאשר <span>\(c_{n}=d_{n}\)</span> לכל <span>\(n \in \{ 1,\dots ,N \}\)</span>. נקבל שהערך המינימלי יהיה:
+<span>$$\operatorname*{min}\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=||v||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+כאשר נזכור כי <span>\(c_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert}=d_{n}\)</span> ולכן:
+<span>$$\operatorname*{min}_{d_{1},\ldots,d_{N}\in C}\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|=\left\|v-\sum_{n=1}^{N}{\frac{\langle v_{n},v\rangle}{\|v_{n}\|^{2}}}v_{n}\right\|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מערכת אורתונורמלית שלמה</span><p>הפרוש שלו צפוף במרחב. כלומר אם <span>\(V\)</span> מרחב אז מערכת <span>\(\{ e_{n} \}\)</span> תהיה שלמה אם:
+<span>$$\overline{{{\mathrm{Span}\{e_{n}\}}}}\;=\;V\;$$</span>
+או לחלופין לכל <span>\(v \in V\)</span> ולכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N \in \mathbb{N}\)</span> ומקדמים <span>\(\alpha_{1},\dots,\alpha_{N}\in \mathbb{C}\)</span> כך ש:
+<span>$$\Bigl\|\,v-\sum_{n=1}^{N}\alpha_{n}e_{n}\Bigr\|&lt;\epsilon$$</span></p>
+</div>
+<div class="proposition">
+<p>נניח כי <span>\(\{ e_{n} \}_{n=1}^{\infty}\)</span> מערכת אורונורמלית במרחב מכפלה פנימי <span>\(V\)</span>. התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>המערכת <span>\(\{ e_{n} \}_{n=1}^{\infty}\)</span> שלמה ב-<span>\(V\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(v \in V\)</span> מתקיים שיוויון פרסבל: 
+<span>$$\lVert v \rVert ^{2}=\sum_{n=1}^{\infty}\lvert \langle e_{n},v \rangle  \rvert ^{2}$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(v \in V\)</span> מתקיים: 
+<span>$$v=\sum_{n=1}^{\infty} \langle e_{n},v \rangle e_{n}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p><span>\(2\impliedby 1\)</span></p>
+<ol>
+<li>
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. נניח <span>\(\{ e_{n} \}\)</span> מערכת שלמה ו-<span>\(v \in V\)</span>. לכן: 
+<span>$$\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}&lt;\varepsilon^{2}$$</span></p>
+</li>
+<li>
+<p>נסמן <span>\(x_{n}=\langle e_{n},v \rangle\)</span> ונקבל: 
+<span>$$\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}=\|v\|^{2}+\sum_{n=1}^{N}|x_{n}-\alpha_{n}|^{2}-\sum_{n=1}^{N}|x_{n}|^{2}$$</span>
+כך שמתקיים:
+<span>$$\|v\|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\leq\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}&lt;\varepsilon^{2}$$</span>
+כאשר את הכיוון השני נקבל מאי שיוויון בסל:
+<span>$$\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\geq\lVert v \rVert^{2}-\sum_{n=1}^{\infty}\left|x_{n}\right|^{2}\geq0$$</span>
+כלומר סה"כ:
+<span>$$0\leq\|v\|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\leq\varepsilon^{2}\implies \lVert v \rVert =\sum_{n=1}^{\infty}\left|x_{n}\right|^{2}=\sum_{n=1}^{\infty}\left|\langle e_{n},v\rangle\right|^{2}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p><span>\(3\impliedby 2\)</span>
+נניח כי מתקיים שיוויון פרסבל. מתקיים:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rVert =\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כאשר סימנו <span>\(x_{n}=\langle e_{n},v \rangle\)</span>. בפרט עבור <span>\(x_{n}=\alpha_{n}\)</span> נקבל:
+<span>$$\left\|v-\sum_{n=1}^{N}\left\langle e_{n},v\right\rangle e_{n}\right\|^{2}=\left\langle v-\sum_{n=1}^{N}x_{n}e_{n},v-\sum_{n=1}^{N}x_{n}e_{n}\right\rangle=\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כעת משיוויון פרסבל אנו יודעים כי כאשר <span>\(N\to \infty\)</span> נקבל <span>\(\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\to 0\)</span>. לכן כיוון שהנורמה הולכת לאפס מרציפות הנורמה נקבל:
+<span>$$v=\sum_{n=1}^{N}\left\langle e_{n},v\right\rangle e_{n}$$</span></p>
+</div>
+<div class="proof">
+<p><span>\(1\impliedby 3\)</span>
+כיוון שלכל <span>\(v\)</span> מתקיים <span>\(v=\sum_{n=1}^{\infty}\left\langle e_{n},v\right\rangle e_{n}\)</span> נקבל כי <span>\(v \in\text{Span}\left( \{ e_{n} \} \right)\)</span> ולכן <span>\(V=\overline{\text{Span}\left( \{ e_{n} \} \right)}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרחק</span><p>תהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימית ו-<span>\(U\subseteq V\)</span>. המרחק מוגדר על ידי:
+<span>$$\text{Distance}(f,U)=\inf_{\psi \in U} \lVert f-\psi \rVert $$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימי שלם(מרחב הילברט). תהי <span>\(\varnothing\neq U\subseteq V\)</span> סגורה וקמורה. לכל <span>\(f \in V\)</span> נגדיר. אזי קיים <span>\(g \in U\)</span> יחיד כך ש:
+<span>$$\text{Distance}(f,U)=\lVert f-g \rVert $$</span></p>
+</div>
+<div class="proof">
+<p><strong>קיום:</strong> נגדיר:
+<span>$$d= \text{Distance}(f,U)=\operatorname*{inf}_{\psi\in U}||f-\psi||$$</span>
+מהגדרת האינפימום קיימת סדרת נקודות <span>\(\{ g_{n} \}_{n=1}^{\infty}\)</span> ב-<span>\(U\)</span> כך ש:
+<span>$$\lVert f-g_{n} \rVert \xrightarrow{n\to \infty} d$$</span>
+נרצה להראות כי הסדרה <span>\(\{ g_{n} \}\)</span> היא קושי. מכלל המקבלית אנו יודעים כי לכל <span>\(x,y \in V\)</span> מתקיים:
+<span>$$||x+y||^{2}+||x-y||^{2}=2||x||^{2}+2||y||^{2}$$</span>
+ולכן עבור <span>\(x=f-g_{n}\)</span> ו-<span>\(y=f-g_{m}\)</span> נקבל:
+<span>$$||2f-(g_{n}+g_{m})||^{2}+||g_{m}-g_{n}||^{2}=2||f-g_{n}||^{2}+2||f-g_{m}||^{2}$$</span>
+כלומר:
+<span>$$||g_{m}-g_{n}||^{2}=2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-||2f-\left(g_{n}+g_{m}\right)||^{2}$$</span>
+נסתכל על הגורם <span>\(||2f-\left(g_{n}+g_{m}\right)||^{2}\)</span>. מתקיים:
+<span>$$||2f-(g_{n}+g_{m})||^{2}=\left\|2\left(f-{\frac{g_{n}+g_{m}}{2}}\right)\right\|^{2}=4\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|^{2}$$</span>
+כאשר כיוון ש-<span>\(U\)</span> קמור נקבל <span>\(\frac{g_{n}+g_{m}}{2}\in U\)</span>. ולכן כיוון ש-<span>\(d\)</span> הוא המרק המינימלי נקבל:
+<span>$$\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|\geq d\implies4\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|^{2}\geq4d^{2}\implies||2f-(g_{n}+g_{m})||^{2}\geq4d^{2}$$</span>
+ולכן אם נציב חזרה בשיוויון נקבל:
+<span>$$||g_{m}-g_{n}||^{2}\leq2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-4d^{2}$$</span>
+אנו יודעים כי עבור <span>\(n,m\to \infty\)</span> מתקיים <span>\(\lVert f-g_{n} \rVert\to d\)</span> ו-<span>\(\lVert f-g_{m} \rVert\to d\)</span> כלומר:
+<span>$$2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-4d^{2}\to2d^{2}+2d^{2}-4d^{2}=0$$</span>
+ולכן <span>\(\lVert g_{m}-g_{n} \rVert\to 0\)</span> והסדרה קושי. לכן הסדרה <span>\(\{ g_{n} \}\)</span> מתכנסת לאיזשהו גבול <span>\(g\)</span>. כיוון שהקבוצה סגורה נקבל <span>\(g \in U\)</span> ומרציפות הנורמה נקבל:
+<span>$$||f-g||=\operatorname*{lim}_{n\to\infty}||f-g_{n}||=d$$</span>
+<strong>יחידות:</strong>
+נניח בשלילה שיש <span>\(g_{1},g_{2} \in U\)</span> שמשיגות את המינימום, כלומר:
+<span>$$\lVert f-g_{1} \rVert=d\qquad \lVert f-g_{2} \rVert=d$$</span>
+מכלל המקבילית עבור <span>\(x=f-g_{1}\)</span> ו-<span>\(y=f-g_{2}\)</span> נקבל:
+<span>$$\begin{gather}||(f-g_{1})+(f-g_{2})||^{2}+||(f-g_{1})-(f-g_{2})||^{2}=2||f-g_{1}||^{2}+2||f-g_{2}||^{2}\implies\\\implies||2f-{\big(}g_{1}+g_{2}{\big)}||^{2}+||g_{2}-g_{1}||^{2}=2d^{2}+2d^{2}=4d^{2}\implies \\ \implies ||g_{2}-g_{1}||^{2}=4d^{2}-||2f-(g_{1}+g_{2})||^{2}
+\end{gather}$$</span>
+כאשר נשים לב כי:
+<span>$$||2f-(g_{1}+g_{2})||^{2}=4\,||f-{\textstyle\frac{g_{1}+g_{2}}{2}}||^{2}$$</span>
+וכיוון ש-<span>\(U\)</span> קמור נקבל ש-<span>\(\frac{g_{1}+g_{2}}{2}\in U\)</span> ולכן מהגדרת האינפימום <span>\(\left\|f-{\frac{g_{1}+g_{2}}{2}}\right\|\geq d\)</span>. נציב חזרה במשוואה:
+<span>$$||g_{2}-g_{1}||^{2}=4d^{2}-||2f-(g_{1}+g_{2})||^{2}\leq4d^{2}-4d^{2}=0$$</span>
+וקיבלנו שהמרחק הוא 0, ולכן <span>\(g_{1}=g_{2}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='prev-page'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט המרכז</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משפט המבנה למודולים מעל PID</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 צורת סמית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 משפט המבנה למודולים נוצרים סופית מעל PID</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 מסקנות ממשפט המיון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. אלגברות חילוק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_5'>5.5 פי אדים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. אלגבראות פשוטות מרכזיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_2'>6.2 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_4'>6.4 חבורת בראוור</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_6'>6.6 משפט המרכז</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורת בראוור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_7_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_6_5`; }});</script>
+        <div class="content">
+        <h1>6.6  משפט המרכז</h1>
+    <div class="theorem"><span class="keyword">המרכז</span><p>תהי <span>\(A\)</span> אלגברה פשוטה מרכזית  מעל <span>\(\mathbb{F}\)</span>. לכל תת אלגברה פשוטה <span>\(B\subseteq A\)</span> המרכז <span>\(B'=C_{A}(B)\)</span> מקיים:</p>
+<ol>
+<li>
+<p>מתקיים <span>\(B'\)</span> פשוטה. </p>
+</li>
+<li>
+<p>המרכזים מקיימים <span>\(Z(B')=Z(B)\)</span>. </p>
+</li>
+<li>
+<p>המימדים מקיימים: 
+<span>$$\dim  B\cdot \dim  B'=\dim  A(\implies \dim  B \mid  \dim  A)$$</span></p>
+</li>
+<li>
+<p>מתקיים <span>\(B'' = B\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(B\)</span> היא אלגברה פשוטה מרכזית <span>\(B\otimes_{F}B' \cong A\)</span>. בצורה כללית יותר: 
+<span>$$B'\otimes_{Z(B)}B'\cong  Z(B)$$</span></p>
+</li>
+<li>
+<p>אם <span>\(E\subseteq A\)</span> שדה <span>\(E\otimes_{F}A\cong M_{\text{dim}}(E')\)</span> </p>
+</li>
+<li>
+<p>ל-<span>\(B\subseteq A\)</span> פשוטה: 
+<span>$$Z(B)\otimes_{F}A\cong M_{\text{dim}_{Z(B)}}(B\otimes_{Z(B)} B')$$</span></p>
+</li>
+</ol>
+</div>
+<ol>
+<li>
+<p>נסתכל על <span>\(A\)</span> כ-<span>\(B\)</span>-<span>\(A\)</span> בימודול (כלומר, כמודול מעל <span>\(B \otimes_{F} A^{\text{op}}\)</span>). נטען כי: 
+<span>$$\mathrm{End}_{B-A}(A) \cong B'$$</span>
+לכל <span>\(b \in B'\)</span>, נגדיר <span>\(T_b(x) = bx\)</span>. מתקיים:
+<span>$$T_b(\hat{b} \otimes a)(x) = (\hat{b} \otimes a) T_b(x)$$</span>
+כלומר, <span>\(T_b\)</span> הוא הומומורפיזם של <span>\(B\)</span>-<span>\(A\)</span> בימודולים. כל הומומורפיזם כזה נקבע על ידי <span>\(T(1)\)</span>, ומתקיים <span>\(T(a) = T(1)a\)</span> לכל <span>\(a \in A\)</span>. בנוסף, <span>\(T(1) \in B'\)</span> כי <span>\(b \cdot T(1) = T(b) = T(1) b\)</span> לכל <span>\(b \in B\)</span>. לכן:
+<span>$$    \mathrm{End}_{B-A}(A) \cong B'    $$</span></p>
+</li>
+<li>
+<p>כיוון ש-<span>\(A\)</span> אלגברה פשוטה מרכזית ו-<span>\(B\)</span> פשוטה, גם <span>\(B \otimes_{F} A^{\text{op}}\)</span> פשוטה. לכן <span>\(B'\)</span> אלגברה פשוטה. </p>
+</li>
+<li>
+<p>המרכזים: 
+<span>$$    Z(B') = Z(B \otimes_{F} A^{\text{op}}) = Z(B) \otimes Z(A^{\text{op}})$$</span>
+ובפרט, <span>\(Z(B') = Z(B)\)</span>.</p>
+</li>
+<li>
+<p>ממדים: 
+<span>$$    \dim B' = \frac{\dim A}{\dim B}    $$</span>
+ולכן <span>\(\dim B \cdot \dim B' = \dim A\)</span>.</p>
+</li>
+<li>
+<p>כעת, <span>\(B \subseteq B''\)</span> (הרכז של הרכז). מהסעיף הקודם: 
+<span>$$    \dim B'' = \frac{\dim A}{\dim B'} = \dim B    $$</span>
+ולכן <span>\(B'' = B\)</span>.</p>
+</li>
+<li>
+<p>אם <span>\(B\)</span> אלגברה פשוטה מרכזית (CSA), גם <span>\(B'\)</span> ו-<span>\(B \otimes_{F} B'\)</span> פשוטות. ההכללות <span>\(B, B' \hookrightarrow A\)</span> מתחלפות, ולכן יש שיכון <span>\(B \otimes_{F} B' \to A\)</span>. זה שיכון כי <span>\(B \otimes B'\)</span> פשוטה, ועל פי חישוב הממדים. במקרה הכללי, נסמן <span>\(E = Z(B)\)</span>. אז <span>\(B, B'\)</span> אלגברות פשוטות מרכזיות מעל <span>\(E\)</span>, ונקבל: 
+<span>$$    B \otimes_{E} B' \cong E'    $$</span>
+כנדרש.</p>
+</li>
+<li>
+<p>עבור שדה <span>\(E \subseteq A\)</span>, מתקיים <span>\(E \otimes_{F} A \cong M_{\dim E}(E')\)</span>. <span>\(A\)</span> הוא <span>\(A\)</span>-<span>\(E\)</span> בימודול, והומומורפיזם המבנה הוא: 
+<span>$$    \rho: A \otimes_{F} E^{\text{op}} \to \mathrm{End}_F(A)    $$</span>
+מתקיים <span>\(\mathrm{Im}(\rho) \subseteq \mathrm{End}_{E'^{\text{op}}}(A)\)</span>, כאשר <span>\(A\)</span> מודול ימני מעל <span>\(E'\)</span>. <span>\(\rho\)</span> הוא איזומורפיזם כי <span>\(A \otimes_{F} E\)</span> פשוטה, ולכן <span>\(\rho\)</span> חד-חד ערכית ועל. חישוב ממדים:
+<span>$$
+ \dim \mathrm{End}_{E'^{\text{op}}}(A) = \frac{(\dim A)^2}{\dim E'} = \dim A \cdot \dim E = \dim (A \otimes_{F} E) $$</span>
+לכן:
+<span>$$ \mathrm{End}_{E'^{\text{op}}}(A) \cong M_{\dim E}(E')
+ $$</span></p>
+</li>
+<li>
+<p>סעיף 7 נובע מיידית מסעיפים 5 ו-6. </p>
+</li>
+</ol>
+<div class="proposition">
+<p>אם <span>\(D\)</span> אלגברת חילוק מרכזית ו-<span>\(E\leq D\)</span> תת שדה. הבאים שקולים:</p>
+<ol>
+<li>
+<p>מתקיים <span>\(\dim E = \deg D\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(E=E'\)</span> </p>
+</li>
+<li>
+<p>השדה <span>\(E\)</span> מפצל את <span>\(D\)</span>. </p>
+</li>
+<li>
+<p>השדה <span>\(E\)</span> מקסימלי מבין תתי השות של <span>\(D\)</span> <span>\(\leftarrow\)</span> בהכרח קיים! </p>
+</li>
+</ol>
+</div>
+<p>כעת נוכיח את המשפט העצוב של וודרברן כמו שצריך</p>
+<div class="corollary"><span class="keyword">המשפט העצוב</span><p>אלגברות חילוק סופיות הן שדות.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(D\)</span> אלגברת חילוק מרכזית מעל <span>\(\mathbb{F}=\mathbb{F}_{q}\)</span>. לכל <span>\(d \in D\)</span> יש שדה מקסימלי <span>\(\mathbb{F}[d]\subseteq E_{d}\subseteq D\)</span>. נקבע <span>\(\alpha\)</span> אחד. לכל <span>\(\beta \in D\)</span> מתקיים:
+<span>$$\lvert E_{\alpha} \rvert =\lvert E_{\beta} \rvert=q^{\deg D}$$</span>
+ולכן הם איזומורפיים כשדות, וגם כ-<span>\(\mathbb{F}\)</span> אלגבראות: אם <span>\(\varphi:E_{\alpha}\to E_{\beta}\)</span> אוטומורפיזם של שדות, אז <span>\(\varphi(\mathbb{F})=\mathbb{F}\)</span> כי <span>\(\mathbb{F} / \mathbb{F}_{p}\)</span> נורמליות. האם <span>\(\varphi|_{\mathbb{F}}=\mathrm{id}\)</span>? לא בהכרח. אבל כי אוטומורפיזם של <span>\(\mathbb{F}\)</span> מתרחב לאוטומורפיזם של <span>\(E_{\beta}\)</span> (כיוון שכל הרחבה של שדות סופית היא גלואה) ואז אפשר להרכיב את ההרחבה ל-<span>\(E_{\beta}\)</span> של <span>\((\varphi|_{\mathbb{F}})^{-1}\)</span> ולכן איזו <span>\(E_{\alpha}\to E_{\beta}\)</span> שטריוויאלי על <span>\(\mathbb{F}\)</span>. סה"כ:
+<span>$$E_{\alpha}\xrightarrow[\varphi]{\text{id}}D$$</span>
+שיכונים של <span>\(\mathbb{F}\)</span> אלגבראות. מסקולם נתר הם צמודים. ובפרט:
+<span>$$\exists d \in D^{\times}\qquad dE_{\alpha}d ^{-1}  = E_{\beta}$$</span>
+לכן:
+<span>$$\bigcup_{d \in D^{\times}}d E_{\alpha }d ^{-1} = D^{\times}\implies E_{\alpha}^{\times}= D^{\times}$$</span>
+כאשר הגרירה נובעת מכך שחבורה סופית היא לא איחוד של הצמדות של תת חבורות ממ"ש(לא נכון עבור חבורות אינסופיות, למשל:
+<span>$$\text{GL}_{2}(\mathbb{C})=\bigcup_{A \in \text{GL}_{2}(\mathbb{C})}A\begin{pmatrix}*  &amp;  * \\0 &amp; *
+\end{pmatrix}$$</span>
+)וזה ומר ש-<span>\(D\)</span> קומוטטיבי ולכן <span>\(D=\mathbb{F}\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+<li class='prev-page'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>טפולוגיית מכפלה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_3'>1.3 טפולוגיית מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות בין מרחבים טופולוגים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_2_1'>2.1 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הפרדה ומנייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. קשירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_4_1'>4.1 מרחבים קשירים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_2'>4.2 קשירות מסילתית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קומפקטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_5_1'>5.1 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_2'>5.2 קופקטיפיקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. קבוצות סגורות וצפיפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_6_1'>6.1 סגור ופנים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. החבורה היסודית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_7_1'>7.1 הומוטופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_2'>7.2 החבורה היסודית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_3'>7.3 הרמות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_4'>7.4 מרחבי כיסוי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נספחים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_8_1'>8.1 טופולוגיות נוספות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology_1_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  טפולוגיית מכפלה</h1>
+    <div class="definition"><span class="keyword">טופולוגיית מכפלה</span><p>יהיו <span>\(X,Y\)</span> מרחבים טופולוגיים. אזי הטופולוגיית המכפלה על <span>\(X,Y\)</span> תהיה הטופולוגיה הנוצרת מהבסיס אשר מורכב מכל הקבוצות מהצורה <span>\(U\times V\)</span> כאשר <span>\(U\)</span> קבוצה פתוחה ב-<span>\(X\)</span> ו-<span>\(V\)</span> קבוצה פתוחה ב-<span>\(Y\)</span>.</p>
+</div>
+<div class="lemma">
+<p>טופולוגיית המכפלה אכן טופולוגייה.</p>
+</div>
+<div class="proof">
+<p>מספיק להראות כי הבסיס <span>\(\mathcal{B}\)</span> אשר נוצר מהמהכפלה של הקבוצות הפתוחות הוא אכן בסיס. התנאי הראשון של בסיס טריוויאלי כי <span>\(X\times Y\)</span> בפרט איבר בבסיס. התנאי השני מתקיים כיוון שעבור שתי איברי בסיס <span>\(U_{1}\times V_{1}\)</span> ו-<span>\(U_{2}\times V_{2}\)</span> נקבל:
+<span>$$(U_{1}\times V_{1})\cap(U_{2}\times V_{2})=(U_{1}\cap U_{2})\times(V_{1}\cap V_{2}),$$</span>
+אשר גם איבר בבסיס כי <span>\(U_{1}\cap U_{2}\)</span> ו-<span>\(V_{1}\cap V_{2}\)</span> הם קבוצות פתוחות.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mathcal{B}\)</span> בסיס של הטופולוגיה <span>\(X\)</span> ו-<span>\(\mathcal{C}\)</span> בסיס של הטופולוגיה <span>\(Y\)</span> אזי:
+<span>$${\mathcal{D}}=\{B\times C\mid B\in{\mathcal{B}}\;a n d\,C\in{\mathcal{C}}\}$$</span>
+הוא בסיס של הטופולוגיה <span>\(X\times Y\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">הטלות על מרחבים</span><p>יהי <span>\(X,Y\)</span> טופולוגיית מכפלה. העתקות <span>\(\pi_{1}:X\times Y\to X\)</span> ו-<span>\(\pi_{2}:X\times Y\to Y\)</span> אשר מקיימת:
+<span>$$\pi_{1}(x,y)=x\qquad \pi_{2}(x,y)=y$$</span>
+נקראות ההטלות על המרחבים <span>\(X\)</span> ו-<span>\(Y\)</span> בהתאמה.</p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של הטלות</span><ul>
+<li>הטלות יהיו על(כל עוד אחת הקבוצות לא ריקות).</li>
+<li>אם <span>\(U\)</span> קבוצה פתוחה ב-<span>\(X\)</span> אז <span>\(\pi_{1}^{-1}(U)\)</span> תהיה הקבוצה <span>\(U\times Y\)</span> אשר פתוחה ב-<span>\(X\times Y\)</span>. באופן דומה עבור <span>\(V\)</span> פתוחה ב-<span>\(Y\)</span> נקבל <span>\(\pi_{2}^{-1}(V)\)</span> תהיה פתוחה בטופולוגיית המכפלה.</li>
+<li>ההטלות יהיו פונקציות רציפות.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>האוסף:
+<span>$${\mathcal{S}}=\{{\pi}_{1}^{-1}(U)\mid U\ \text{open in } X\}\cup\{{\pi}_{2}^{-1}(V)\mid V\ \text{open in } Y\}$$</span>
+הוא תת בסיס של טופולוגית המכפלה <span>\(X\times Y\)</span></p>
+</div>
+<h2>טופולוגיית התת מרחב</h2>
+<div class="definition"><span class="keyword">טופולוגיית תת מרחב</span><p>יהי <span>\((X,\tau)\)</span> מרחב טופולוגי ו-<span>\(Y\subseteq X\)</span>. אזי האוסף:
+<span>$$\tau_{Y}=\{ Y\cap  U\mid U \in \tau \}$$</span>
+תקרא טופולוגיית התת מרחב.</p>
+</div>
+<div class="lemma">
+<p>טופולוגיית התת מרחב היא אכן טופולוגיה.</p>
+</div>
+<div class="proof">
+<p>נדרש להראות את שלושת התכונות:
+- נשים לב כי <span>\(\varnothing=Y\cap \varnothing\)</span> ו-<span>\(Y=Y\cap X\)</span>.
+- סגירות לחיתוכים סופיים נובעת מכך שמתקיים:
+<span>$$(U_{1}\cap Y)\cap\cdot\cdot\cdot\cap(U_{n}\cap Y)=(U_{1}\cap\cdot\cdot\cdot\cap U_{n})\cap Y$$</span>
+- סגירות לאיחודים כלשהם נובעת מכך שמתקיים:
+<span>$$\bigcup_{\alpha\in J}(U_{\alpha}\cap Y)=(\bigcup_{\alpha\in J}U_{\alpha})\cap Y$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mathcal{B}\)</span> הוא בסיס של הטופולוגיה <span>\(X\)</span> אזי האוסף:
+<span>$$\mathcal{B} _{Y}=\{ B\cap  Y \mid B \in \mathcal{B}  \}$$</span>
+הוא בסיס של הטופולוגיית התת מרחב.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(Y\)</span> תת מרחב של <span>\(X\)</span>. אם <span>\(U\)</span> פתוח ב-<span>\(Y\)</span> ו-<span>\(Y\)</span> פתוח ב-<span>\(X\)</span> אזי <span>\(U\)</span> פתוח ב-<span>\(X\)</span>.</p>
+</div>
+<div class="proof">
+<p>כיוון ש-<span>\(U\)</span> פתוח ב-<span>\(Y\)</span> מתקיים <span>\(Y=U\cap V\)</span> עבור איזשהו <span>\(V\)</span> פתוח ב-<span>\(X\)</span>. כיוון ש-<span>\(Y\)</span> ו-<span>\(V\)</span> שניהם פתוחים ב-<span>\(X\)</span> גם <span>\(Y \cap V\)</span>.</p>
+</div>
+<h2>טופולוגיית מכפלה אינסופית</h2>
+<p>עבור מרחבים טופולוגיים <span>\(X_{1},X_{2},\dots\)</span> נרצה להגדיר טופולוגיה עבור <span>\(X_{1}\times X_{2}\times\dots\)</span></p>
+<div class="definition"><span class="keyword">טופולוגיית הקופסא</span><p>יהיו <span>\(X_{1},X_{2},X_{3},\dots\)</span> מרחבים טופולוגיים. הטופולוגיה על <span>\(X_{1}\times X_{2}\times X_{3}\times\dots\)</span> הנוצרת על ידי הבסיס:
+<span>$$U_{1}\times U_{2}\times U_{3}\times\dots$$</span>
+כאשר <span>\(U_{i}\)</span> היא קבוצה פתוחה ב-<span>\(X_{i}\)</span> נקראת טופולוגיית הקופסא.</p>
+</div>
+<div class="definition"><span class="keyword">טופולוגיית המכפלה</span><p>יהיו <span>\(X_{1},X_{2},X_{3},\dots\)</span> מרחבים טופולוגיים. עבור כל קבוצה פתוחה <span>\(U_{i}\)</span> של <span>\(X_{i}\)</span> הטופולוגייה הנוצרת על ידי התת בסיס <span>\(\pi_{i}^{-1}(U_{i})\)</span> נקראת טופולוגיית המכפלה.</p>
+</div>
+<div class="remark">
+<p>במקרה של מכפלה סופית של מרחבים טופולוגיים הטופולוגיית מכפלה וטופולוגיית הקופסא יהיו זהות.</p>
+</div>
+<div class="summary">
+<ul>
+<li><strong>טופולוגיית מכפלה (סופית):</strong> מוגדרת על <span>\(X \times Y\)</span> באמצעות בסיס של קבוצות מהצורה <span>\(U \times V\)</span> (<span>\(U\)</span> פתוחה ב-<span>\(X\)</span>, <span>\(V\)</span> פתוחה ב-<span>\(Y\)</span>).</li>
+<li>אם <span>\(\mathcal{B}\)</span> בסיס ל-<span>\(X\)</span> ו-<span>\(\mathcal{C}\)</span> בסיס ל-<span>\(Y\)</span>, אז <span>\(\{B \times C \mid B \in \mathcal{B}, C \in \mathcal{C}\}\)</span> הוא בסיס ל-<span>\(X \times Y\)</span>.</li>
+<li><strong>הטלות (<span>\(\pi_1, \pi_2\)</span>):</strong> העתקות מ-<span>\(X \times Y\)</span> לרכיבים <span>\(X\)</span> ו-<span>\(Y\)</span>.</li>
+<li>הטלות הן רציפות, ומקורות של קבוצות פתוחות תחת הטלות הן קבוצות פתוחות במכפלה.</li>
+<li>אוסף המקורות של קבוצות פתוחות תחת ההטלות מהווה תת בסיס לטופולוגיית המכפלה.</li>
+<li><strong>טופולוגיית תת מרחב:</strong> על תת קבוצה <span>\(Y \subseteq X\)</span>, קבוצה פתוחה היא מהצורה <span>\(Y \cap U\)</span> כאשר <span>\(U\)</span> פתוחה ב-<span>\(X\)</span>.</li>
+<li>אם <span>\(\mathcal{B}\)</span> בסיס לטופולוגיה על <span>\(X\)</span>, אז <span>\(\{B \cap Y \mid B \in \mathcal{B}\}\)</span> הוא בסיס לטופולוגיית התת מרחב על <span>\(Y\)</span>.</li>
+<li>אם קבוצה פתוחה בתת מרחב <span>\(Y\)</span>, ו-<span>\(Y\)</span> עצמו פתוח במרחב המקורי <span>\(X\)</span>, אז הקבוצה פתוחה גם ב-<span>\(X\)</span>.</li>
+<li><strong>טופולוגיית קופסא (מכפלה אינסופית):</strong> נוצרת ע"י בסיס של מכפלות אינסופיות <span>\(U_1 \times U_2 \times \dots\)</span> שכל <span>\(U_i\)</span> פתוחה ברכיב המתאים.</li>
+<li><strong>טופולוגיית מכפלה (מכפלה אינסופית):</strong> נוצרת ע"י תת בסיס של מקורות קבוצות פתוחות תחת כל אחת מההטלות לרכיבים <span>\(\pi_i^{-1}(U_i)\)</span>.</li>
+<li>עבור מכפלה סופית, טופולוגיית הקופסא וטופולוגיית המכפלה זהות.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+<li class='prev-page'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

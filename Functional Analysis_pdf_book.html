@@ -1,0 +1,1207 @@
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --c1: #EEB902;
+  --c2: #F45D01;
+  --symbolize-text: #8377D1;
+  --c4: #7FBC69;
+  --c5: #005C7A;
+  --remark-text: #7EBCED;
+  --definition-text: #2E8A3D;
+  --proposition-text: #E1403D;
+  --theorem-text: #F39237;
+  --iyellow: #F9C762;
+  --idark: #1A535C;
+  --definition-bg: rgba(249, 199, 98, 0.1);
+  --proposition-bg: rgba(225, 64, 61, 0.05);
+  --example-bg: rgba(26, 83, 92, 0.2);
+  --remark-bg: rgba(126, 188, 230, 0.11);
+  --theorem-bg: rgba(228, 147, 82, 0.05);
+  --symbolize-bg: rgba(131, 119, 209, 0.05);
+  --corollary-bg: rgba(255, 195, 0, 0.05); /* Light yellow for corollary */
+  --corollary-text: #FFC300;
+  --reminder-bg: rgba(255, 165, 0, 0.05); /* Light orange for reminder */
+  --reminder-text: #FFA500;
+
+  --lemma-bg: rgba(75, 192, 192, 0.05); /* Soft teal for lemma */
+  --lemma-text: #4BC0C0;
+  --table-even-bg: #f2f2f2;
+  /* --svg-path-color: #111; */
+
+  --table-background: #f5f5f5; /* Light grey for table background */
+  --table-border-color: #cccccc; /* Light border color */
+  --table-header-bg: #e1e1e1; /* Light background for table header */
+  --table-header-text: #2c3e50; /* Darker text for headers */
+  --table-row-bg-odd: #ffffff; /* White for odd rows */
+  --table-row-text: #2c3e50; /* Dark text for rows */
+  --table-disabled-text: #b0b0b0; /* Disabled row text color */
+
+  /* Define light mode colors as CSS variables */
+  --summary-bg-color: #f9f9f9;
+  --summary-label-bg: #4a90e2;
+  --summary-background-color: #4a90e255;
+  --summary-border-color: #e0e0e0;
+  --summary-label-color: white;
+  --summary-text-color: #333;
+
+  direction: rtl;
+}
+
+.reminder {
+  background-color: var(--reminder-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--reminder-text);
+  padding: 10pt;
+}
+
+.reminder::before {
+  font-weight: bold;
+  color: var(--reminder-text);
+  content: "תזכורת";
+}
+
+.reminder::first-line {
+  color: var(--reminder-text);
+}
+
+/* Corollary Block */
+.corollary {
+  background-color: var(--corollary-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--corollary-text);
+  padding: 10pt;
+}
+
+.corollary::before {
+  font-weight: bold;
+  color: var(--corollary-text);
+  content: "מסקנה";
+}
+
+.corollary::first-line {
+  color: var(--corollary-text);
+}
+
+/* Lemma Block */
+.lemma {
+  background-color: var(--lemma-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--lemma-text);
+  padding: 10pt;
+}
+
+.lemma::before {
+  font-weight: bold;
+  color: var(--lemma-text);
+  content: "למה";
+}
+
+.lemma::first-line {
+  color: var(--lemma-text);
+}
+
+/* Your existing styles */
+.definition {
+  display: block;
+  background: var(--definition-bg);
+  text-align: right;
+  border-right: 1.5mm;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-style: solid;
+  border-color: var(--definition-text);
+  padding: 10pt;
+}
+
+h1 {
+  color: var(--remark-text);
+}
+
+.definition::before {
+  font-weight: bold;
+  color: var(--definition-text);
+  content: "הגדרה";
+}
+
+.definition::first-line {
+  color: var(--definition-text);
+}
+
+.proposition {
+  background-color: var(--proposition-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--proposition-text);
+  padding: 10pt;
+}
+
+
+.proposition::before {
+  font-weight: bold;
+  color: var(--proposition-text);
+  content: "טענה";
+}
+
+.proposition::first-line {
+  color: var(--proposition-text);
+}
+
+.proof {
+  padding: 10pt;
+}
+
+.proof::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "הוכחה";
+}
+
+.proof::after {
+  content: "■";
+}
+
+.example {
+  padding: 10pt;
+  background-color: var(--example-bg);
+  border: 2pt solid var(--example-bg);
+}
+
+.example::before {
+  font-weight: bold;
+  color: var(--idark);
+  content: "דוגמא";
+}
+
+.remark::before {
+  font-weight: bold;
+  color: var(--remark-text);
+  content: "הערה";
+}
+
+.remark {
+  padding: 10pt;
+  background-color: var(--remark-bg);
+  border: 0;
+}
+
+.summary {
+  position: relative;
+  border: 2px solid var(--summary-label-bg);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: var(--summary-background-color);
+  margin-top: 15px;
+  color: var(--summary-text-color);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.summary:before {
+  content: 'סיכום';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--summary-label-bg);
+  color: var(--summary-label-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.summary li{
+  padding: 10px 0;
+}
+.theorem {
+  background-color: var(--theorem-bg);
+  border-radius: 5pt;
+  border: 2pt solid var(--theorem-text);
+  padding: 10pt;
+}
+
+.theorem::first-line {
+  color: var(--theorem-text);
+}
+
+.theorem::before {
+  font-weight: bold;
+  color: var(--theorem-text);
+  content: "משפט";
+}
+
+.symbolize {
+  background-color: var(--symbolize-bg);
+  border-radius: 8pt;
+  border: 2pt solid var(--symbolize-text);
+  padding: 10pt;
+}
+
+
+.symbolize::before {
+  font-weight: bold;
+  color: var(--symbolize-text);
+  content: "סימון";
+}
+
+div {
+  margin: 6pt 0;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  background: var(--table-background);
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid var(--table-border-color);
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: var(--table-header-text);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  background-color: var(--table-header-bg);
+}
+
+td {
+  color: var(--table-row-text);
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--table-row-bg-odd);
+}
+
+@page {
+  @bottom-center {
+    /*background: #f1c55675;*/
+    content: counter(page); 
+    display: block;
+  }
+}
+@page :blank {
+  @bottom-center { content: none }
+}
+@page no-chapter {
+  @bottom-center { content: none }
+}
+@page :first {
+  /*background: url(cover.jpg) no-repeat center;*/
+  background-size: cover;
+  margin: 0;
+  @bottom-center{
+    content: none;
+  }
+}
+@page chapter {
+  background: #fbc847;
+  margin: 0;
+  @bottom-center { content: none }
+}
+
+#cover {
+  margin: 0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
+  linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
+  linear-gradient(90deg, transparent 50%, rgba(255,255,255,.19) 50%);
+  background-size: 13px, 29px, 37px, 53px;
+  background-repeat: repeat;
+  padding: 10cm 0;
+width: 100vw;
+  align-content: space-between;
+  height: 29.7cm;
+  text-align: center;
+  color: white;
+  align-items: center;  
+  text-shadow: 15px 15px 20px #0000008c;
+  text-align: center;
+}#cover h1{
+  margin: 0;
+  font-size: 60px;
+  page-break-before: auto;
+}
+#cover h2{
+  font-size: 40px;
+}
+
+h1{
+  page-break-before: always;
+}
+
+#toc_title{
+  align-content: center;
+  text-align: center;
+}
+
+#toc, #toc ul {
+  list-style-type: none;
+}
+
+#toc ul {
+  margin-right: 10pt;
+  padding-left: 10pt;
+}
+
+#toc a{
+  text-decoration: none;
+  color: black;
+}
+
+#toc a::after { 
+  content: leader(".") target-counter(attr(href), page); 
+}
+
+ol,ul {
+  padding-left: 0;
+  list-style-position: inside;
+  list-style-type: hebrew;
+  text-indent: 0;
+}
+div{
+  text-indent: 0;
+}
+/* ol{
+  counter-reset: list-counter 0;
+}
+ol li{
+  counter-increment: list-counter 1;
+} */
+
+ul li p, ol li p {
+  display: inline;
+  text-indent: 0;
+}
+ol li::marker{
+  unicode-bidi: isolate-override;
+  /* content: ". "counter(list-counter); */
+}
+
+div .keyword::before{
+  content: '(';
+}
+
+div .keyword::after{
+  content: ')';
+}
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: gray;
+}
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+.toc-title {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.toc-dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted black;
+  margin: 0 0.5em;
+}
+.toc-page {
+  white-space: nowrap;
+}</style>
+            <script>
+                // MathJax configuration
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+                        displayMath: [["$$", "$$"], ["\[", "\]"]],
+                        processEscapes: true,
+                        packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+                    },
+                    options: {
+                        ignoreHtmlClass: 'tex2jax_ignore',
+                        processHtmlClass: 'tex2jax_process'
+                    },
+                    loader: {
+                        load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+                    }
+                };
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+        </head>
+        <body>
+            <div id='cover' style='background-color: #026873;'>
+                <h1>אנליזה פונקציונאלית</h1>
+                <address>עידו ארז</address>
+            </div>
+            <h1 id='toc_title'>תוכן עיניינים</h1>
+            <h1 id='Functional Analysis_1'>התכנסות של סדרת פונקציות</h1>
+<h2 id='Functional Analysis_1_1'>חסימות טוטלית</h2>
+ <div class="proposition"><span class="keyword">בולצנו ווירשטראס</span><p>תהי <span>\((X,\rho)\)</span> מרחב מטרי ויהי <span>\(A\subseteq X\)</span> חסומה. אזי לכל סדרה <span>\((a_{n})\)</span> תהיה תת סדרה קושי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>כיוון ש-A חסומה, קיים <span>\(R&gt; 0\)</span> כך ש-<span>\(A\subset [-R,R]\)</span>. נסמן את התחום הזה ב-<span>\(\Delta_{0}=[-R,R]\)</span>. </p>
+</li>
+<li>
+<p>נחלק את <span>\(\Delta_{0}\)</span> לשתי חציים: 
+<span>$$\Delta_{0}^{(1)}=[0,R]\qquad \Delta_{0}^{(2)}=[-R,0]$$</span>
+כאשר כיוון ש-<span>\((a_{n})\)</span> סדרה אינסופית ב-<span>\(A\subseteq \Delta_{0}\)</span> נבחר את אחד מהחציים האלה(למשל את הראשון) ונסמן אותו ב-<span>\(\Delta_{1}\)</span>.</p>
+</li>
+<li>
+<p>נחזור על התהליך - בהנתן <span>\(\Delta_{k}\)</span> נחלק אותו לשתי תתי אינטרוולים שווים, כך שלפחות אחד מהם(אשר יסומן <span>\(\Delta_{k+1}\)</span>) מכיל אינסוף נקודות של <span>\((a_{n})\)</span>. נשים לב כי האורך של <span>\(\Delta_{k}\)</span> הוא: 
+<span>$$\lvert \Delta_{k} \rvert =\frac{2R}{2^{k}}$$</span></p>
+</li>
+<li>
+<p>נבחר נקודה אחד <span>\(a_{n_{k}}\)</span> מ-<span>\(\Delta_{k}\)</span>. כעת לכל <span>\(\ell \geq k\)</span> גם <span>\(a_{n_{k}}\)</span> וגם <span>\(a_{n_{\ell}}\)</span> נמצאים בתוך <span>\(\Delta_{k}\)</span> ולכן: 
+<span>$$\rho\bigl(a_{n_{k}},a_{n_{\ell}}\bigr)\leq\frac{2R}{2^{k}}.$$</span>
+כיוון ש-<span>\(\frac{2R}{2^{k}}\)</span> יכול להיות קטן כרצונינו נקבל כי <span>\((a_{n_{k}})\)</span> קושי.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מרחב נורמי</span><p>יהי <span>\(V\)</span> מרחב ווקטורי מעל <span>\(\mathbb{F}=\mathbb{R},\mathbb{C}\)</span>.  פונקציה <span>\(No\)</span></p>
+</div>
+<div class="definition"><span class="keyword">המרחב <span>\(\ell_{2}\)</span></span><p><span>$$\ell_{2}={\Bigg\{}x=\left(x_{1},x_{2},\dots\right)\mid x_{i}\in\mathbb{R}{\mathrm{~and~}}\sum_{i=1}^{\infty}x_{i}^{2}&lt;\infty{\Bigg\}}$$</span>
+כאשר נגדיר את הנורמה על המרחב הזה על ידי:
+<span>$$\|x\|=\left(\sum_{i=1}^{\infty}x_{i}^{2}\right)^{1/2}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">חסימות טוטלית</span><p>ניתן לכיסוי על ידי מספר סופי של כדורים.</p>
+</div>
+<div class="theorem"><span class="keyword">האוסדורף - Hausdorff</span><p>נניח <span>\((x,\rho)\)</span> מרחב מטרי כלשהו, ויש לנו קבוצה <span>\(A\subseteq X\)</span> אזי התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>הקבוצה <span>\(A\)</span> חסומה טוטלית(עבור כל <span>\(\varepsilon&gt; 0\)</span> קיים מספר סופי של כדורים <span>\(B_{\varepsilon}(x_{1}),\dots,B_{\varepsilon}(x_{N})\)</span> שמכסים, כלומר <span>\(A\subseteq \bigcup_{j=1}^{N}B_{\varepsilon}(x_{j})\)</span>). </p>
+</li>
+<li>
+<p>כל סדרת נקודות ב-<span>\(A\)</span> כוללת תת סדרת קושי. </p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>נראה 1 גורר 2. נבחר <span>\(\varepsilon=1\)</span>. תהי A חסומה טוטלית. לכן ניתן לכסות הקבוצה <span>\(A\)</span> על ידי מספר סופי של כדורים.
+לכן קיים כדור <span>\(B_{\varepsilon}^{(1)}\)</span> שכולל מספר אינסופי של נקודות בסדרה בסדרה. נגדיר:
+<span>$$V^{(1)}\overset{\text{def}}{=} A\cap  B_{\varepsilon=1}^{(q)} $$</span>
+כך שמתקיים:
+<span>$$\mathrm{Diam}(V^{(1)})=\sup _{x,y \in V^{(1)}}(\rho(x,y))\leq  2$$</span>
+הקבוצה <span>\(V^{(1)}\)</span> כוללת מספר אינסופי של נקודות של <span>\((a_{n})^{\infty}_{n=1}\)</span>. <span>\(V^{(1)}\)</span> חסומה טוטלית. לכן ניתן לכסות אותה על ידי מספר סופי של כדורים בעלי רדיוס <span>\(\varepsilon = \frac{1}{2}\)</span>. נבחר כדור <span>\(B^{(2)}_{\varepsilon=\frac{1}{2}}\)</span> שכולל אינסוף נקודות של הסדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> ונגדיר:
+<span>$$V^{(2)}\overset{\text{def}}{=} V^{(1)}\cap  B_{\varepsilon=\frac{1}{2}}^{(2)}$$</span>
+ניתן להגדיר כי:
+<span>$$\mathrm{Diam}(V^{(2)})\leq  1$$</span>
+אנחנו יודעים כי <span>\(V^{(1)}\)</span> חסומה טוטלית וכן <span>\(V^{(2)}\)</span> מכילה מספר אינסופי של נקודות של <span>\((a_{n})_{n=1}^{\infty}\)</span>.
+כתוצאה מהתהליך הזה נקבל אוסף של קבוצות:
+<span>$$V^{(1)}\supset V^{(2)}\supset \dots \supset V^{(k)}\supset \dots$$</span>
+כך שהקוטר מקיים:
+<span>$$\text{Diam}(V^{(k)})\leq  \frac{2}{k}$$</span>
+וכן כל <span>\(V^{(k)}\)</span> כלל אין סוף נקודות של <span>$$(a_{n})_{n=1}^{\infty}$$</span> כעת נבחר <span>\(a_{n_{1}}\in V^{(1)},a_{n_{2}}\in V^{(2)},\dots\)</span>. נקבל סדרה <span>\((a_{n_{k}})_{k=1}^{\infty}\)</span> כך שמתקיים:
+<span>$$\rho(a_{n_{k}}, a_{n_{k}+\ell})\leq \frac{2}{k}\xrightarrow{k\to \infty} 0$$</span>
+כיוון ש-<span>\(a_{n_{k}},a_{n_{k+\ell}}\in V^{(k)}\)</span>.
+כעת נראה 2 גורר 1. נניח כי <span>\(A\)</span> אינה חסומה טוטלית. מספיק להוכיח כי קיימת סדרה <span>\((a_{n})^{\infty}_{n=1}\)</span> נבחר <span>\(a_{1}\in A\)</span> איכשהו(לא משנה איך). כיוון ש-<span>\(A\)</span> אינה חסומה טוטלית קיים <span>\(\varepsilon&gt;0\)</span> כך שלא ניתן לכסות את <span>\(A\)</span> על ידי מספר סופי של כדורים ברדיוס <span>\(\varepsilon\)</span>. קיימת נקודות <span>\(a_{2}\)</span> כך ש-<span>\(a_{2}\in A\)</span> ומתקיים:
+<span>$$\rho(a_{1},a_{2})\geq  \varepsilon$$</span>
+(כיוון ש-<span>\(A\)</span> אינה חסומה טוטלית). קיימת נקודה <span>\(a_{3}\in A\)</span> כך שמתקיים:
+<span>$$\rho(a_{3},a_{1})\geq \varepsilon \qquad \rho(a_{3},a_{2})\geq \varepsilon$$</span>
+כדי להראות זאת נניח כי לא נכון. אזי מתקיים:
+<span>$$\rho(b,a_{3})\leq  \varepsilon$$</span>
+כאשר <span>\(b=a_{1}\)</span> או <span>\(b=a_{2}\)</span>. 
+<span>$$A=\{ a_{1} \}\cup  \{ a_{2} \}\cup A\setminus \{ a_{1},a_{2} \}$$</span>
+אז היינו מקבלים <span>\(A\)</span> חסומה טוטלית - סתירה.
+אזי כתוצאה מהתהליך הזה נקבל סדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> שעבורה מתקיים:
+<span>$$\forall n\neq m \qquad \rho(a_{n},a_{m})\geq \varepsilon$$</span>
+נקבל כי הסדרה <span>\((a_{n})_{n=1}^{\infty}\)</span> אינה כוללת סדרה קושי - סתירה להנחה בשלילה, ולכן חסומה טוטלית.</p>
+</div>
+<p>נראה את ההוכחה שוב:</p>
+<div class="proof">
+<ol>
+<li>
+<p>נניח חסום לחלוטין. תהי <span>\((a_{n})\)</span> סדרה כלשהי. נבנה סדרה של קבוצות <span>\(\{ V^{(n)} \}_{n=1}^{\infty}\)</span> באופן רקורסיבי. </p>
+</li>
+<li>
+<p>נגדיר את <span>\(V^{(1)}\)</span> באופן הבא. כיוון ש-<span>\(A\)</span> חסומה לחלוטין עבור <span>\(\varepsilon=1\)</span> קיים סדרה סופית של נקודות <span>\(\{ x_{n} \}_{n=1}^{N}\)</span> כך ש: 
+<span>$$A\subseteq \bigcup_{i=1}^{N}B_{1}(x_{i})$$</span></p>
+</li>
+<li>
+<p>כיוון ש-<span>\((a_{n})\)</span> סדרה אינסופית ו-<span>\(\{ x_{i} \}_{i=1}^{N}\)</span> קבוצה סופית קיים איזשהו <span>\(x_{j}\)</span> כך ש-<span>\(B_{1}(x_{j})\)</span> מכיל מספר אינסופי של נקודות. נגדיר: 
+<span>$$V^{(1)}=A\cap  B_{1}(x_{j})$$</span>
+כאשר נשים לב כי:
+<span>$$\mathrm{Diam}(V^{(1)})\leq \mathrm{Diam}(B_{1}(x_{j}))=2$$</span></p>
+</li>
+</ol>
+</div>
+<ol>
+<li>
+<p>נניח כי נתון <span>\(V^{(k)}\)</span>. נגדיר את <span>\(V^{(k+1)}\)</span>. כיוון ש-<span>\(V^{(k)}\)</span> חסום לחלוטין עבור <span>\(\varepsilon= \frac{1}{k}\)</span> נקבל סדרה סופית של נקודות <span>\(\{ x_{n} \}_{n=1}^{N}\)</span> של נקודות כך ש-<span>\(V^{(k)}\subseteq \bigcup_{i=1}^{N}B_{\frac{1}{k}}(x_{i})\)</span>. כמו מקודם קיימת איזשהו <span>\(x_{j}\)</span> כך ש-<span>\(B_{\frac{1}{k}}(x_{j})\)</span> מכיל מספר אינסופי של נקודות של <span>\((a_{n})\)</span>. נגדיר: 
+<span>$$V^{(k+1)}=V^{(k)}\cap  B_{\frac{1}{k}}(x_{j})$$</span>
+כאשר כעת נשים לב כי:
+<span>$$\mathrm{Diam}(V^{(k+1)})\leq \mathrm{Diam}\left( B_{\frac{1}{k}}(x_{j}) \right)=\frac{2}{k}$$</span>
+כלומר כל שתי נקודות ב-<span>\(V^{(k+1)}\)</span> יהיו במרחק של לכל היותר <span>\(\frac{2}{k}\)</span>. וכן מתקיים:
+<span>$$V^{(1)}\supseteq V^{(2)}\supseteq \dots$$</span></p>
+</li>
+<li>
+<p>נבנה תת סדרה באופן הבא. נגדיר <span>\(n_{1}\)</span> בתור האיבר הראשון כך ש-<span>\(a_{n_{1}} \in V^{(1)}\)</span>(קיים כזה כי להיות ב-<span>\(V^{(1)}\)</span> זו תכונה שכיחה). כמו כן נגדיר את <span>\(n_{k}\)</span> להיות בתור האיבר הראשון הגדול מ-<span>\(n_{k-1}\)</span> כך ש-<span>\(a_{n_{k}}\in V^{(k)}\)</span>(שוב קיים כזה כי להיות ב-<span>\(V^{(k)}\)</span> זו תכונה שכיחה).  </p>
+</li>
+<li>
+<p>נראה כי זוהי סדרת קושי. יהי <span>\(\varepsilon&gt; 0\)</span>. נבחר <span>\(N&gt;\frac{2}{\varepsilon}\)</span>. לכל <span>\(k,m&gt; N\)</span> מתקיים: 
+<span>$$\rho(a_{n_{m}},a_{n_{k}})\leq  \mathrm{Diam}\left( V^{(N)} \right)\leq \frac{2}{N}\leq \varepsilon$$</span></p>
+</li>
+<li>
+<p>כעת נראה את הכיוון השני. נניח כי כל סדרת נקודות ב-<span>\(A\)</span> כוללת תת סדרת קושי ונראה כי חסום לחלוטין. זה שקול ללהוכיח כי אם לא חסום לחלוטין אז קיים סדרת נקודות אשר לא כוללת תת סדרת קושי. כיוון שלא חסום לחלוטין קיים איזשהו <span>\(\varepsilon_{0}\)</span> כך שלא ניתן לכסות את <span>\(A\)</span> עם מספר סופי של כדורים ברדיוס <span>\(\varepsilon_{0}\)</span>. </p>
+</li>
+<li>
+<p>נבנה סדרה <span>\((a_{n})\)</span> כזו באופן אינדוקטיבי. יהי <span>\(a_{1} \in A\)</span> נקודה כלשהי. תהי <span>\(a_{2} \in A\)</span> נקודה כך ש: 
+<span>$$\rho(a_{1},a_{2})&gt;\varepsilon_{0}$$</span>
+כאשר קיים כזו אחרת:
+<span>$$A\subseteq B_{\varepsilon_{0}}(a_{1})$$</span>
+בסתירה לזה שלא חסום לחלוטין.</p>
+</li>
+<li>
+<p>כעת אם מוגדרות נקודות <span>\((a_{1},a_{2},\dots,a_{N})\)</span> נגדיר <span>\(a_{N+1}\)</span> על ידי נקודה ב-<span>\(A\)</span> כך שלכל <span>\(1\leq k\leq N\)</span> מתקיים: 
+<span>$$\rho(a_{N+1},a_{k})&gt; \varepsilon_{0}$$</span>
+כאשר קיים כזו כי אחרת <span>\(A\subseteq{ B_{\varepsilon_{0}}(a_{1}) }\cup \dots \cup {  B_{\varepsilon_{0}}(a_{N}) }\)</span> בסתירה לכך שלא חסום במידה לחלוטין.</p>
+</li>
+<li>
+<p>לא קיימת תת סדרת קושי כי עבור <span>\(\frac{\varepsilon_{0}}{2}\)</span> ולכל <span>\(m,n \in a_{N}\)</span> מתקיים: 
+<span>$$\rho(a_{n},a_{m})&gt;\varepsilon_{0}$$</span></p>
+</li>
+</ol><h2 id='Functional Analysis_1_2'>רציפות וחסימות במידה אחידה</h2>
+ <div class="definition"><span class="keyword">קבוצת הפונקציות הרציפות</span><p>נגדיר:
+<span>$$C([a,b])=\{ f\mid [a,b]\to \mathbb{R}, f \text{ is continous} \}$$</span>
+כאשר:
+<span>$$\lVert f \rVert _{\infty} \overset{\text{def}}{=} \max _{x \in [a,b]} \lvert f(x) \rvert $$</span>
+נשים לב כי <span>\((C[a,b],\lVert \cdot \rVert_{a})\)</span> הוא מרחיב נורמי.</p>
+</div>
+<div class="definition"><span class="keyword">חסימות במידה אחידה - Uniformly Bound</span><p><span>$$\Phi \subseteq C[a,b]$$</span>
+נניח שקיים איזשהו פרמטר <span>\(\kappa &gt; 0\)</span> כך שמתקיים:
+<span>$$\forall x \in [a,b]\quad \forall \varphi \in \Phi \quad \lvert \varphi(x) \rvert \leq \kappa$$</span>
+(חשוב: <span>\(\kappa\)</span> אינו תלוי ב-<span>\(x\)</span> ואינו תלוי ב-<span>\(\varphi\)</span>) אזי <span>\(\Phi\)</span> נקראת חסומה במידה אחידה.</p>
+</div>
+<div class="example">
+<p><span>$$\Phi=(\sin(nx))_{n=1}^{\infty}$$</span>
+כאשר נשים לב כי <span>\(\lvert \sin(nx) \rvert\leq 1\)</span>.</p>
+</div>
+<div class="example">
+<p><span>$$f_{n}(x)= \frac{x^{2}}{x^{2}+(1-nx)^{2}}\qquad  n \in \mathbb{N}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">רציפות במידה אחידה - equicontinous family of functions</span><p>יהי <span>\(\Phi \subseteq C[a,b]\)</span>. עבור כל <span>\(\varepsilon &gt; 0\)</span> קיים <span>\(\delta=\delta(\varepsilon)\)</span> כך שמתקיים:
+<span>$$\forall x_{1},x_{2} \in [a,b]\quad \lvert x_{1}-x_{2} \rvert \leq  \delta(\varepsilon)\implies \lvert \varphi(x_{1})-\varphi(x_{2}) \rvert \leq  \varepsilon$$</span>
+לכל <span>\(\varphi \in \Phi\)</span>. אזי <span>\(\Phi\)</span> נקראת רציפה במידה אחידה.</p>
+</div>
+<div class="example"><span class="keyword">משפחה לא רציפה במידה אחידה</span><p><span>$$\left\lvert  f_{n}\left( \frac{1}{n} \right)-f_{n}(0)  \right\rvert =1$$</span>
+גורר כי המשפחה אינה רציפה במידה אחידה.</p>
+</div>
+<div class="example">
+<p>סדרה <span>\((f_{n})_{n=1}^{\infty}\)</span> גזירות ב-<span>\((a,b)\)</span> כך ש-<span>\(f_{n}\in C[a,b]\)</span> קיים <span>\(\kappa &gt; 0\)</span> כך שמתקיים:</p>
+<ol>
+<li>
+<p>לכל <span>\(x \in [a,b]\)</span> ולכל <span>\(n \in \mathbb{N}\)</span> מתקיים <span>\(\lvert f_{n}(x) \rvert\leq \kappa\)</span>. </p>
+</li>
+<li>
+<p>מתקיים <span>\(\lvert f'_{n}(x)\leq \kappa \rvert\)</span>. 
+אזי משפחה <span>\((f_{n})_{n=1}^{\infty}\)</span> חסומה במידה אחידה, וגם רציפה במידה אחידה.</p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. 
+<span>$$\lvert f_{n}(x_{1})-f_{n}(x_{2}) \rvert \leq \lvert f'(\xi) \rvert \lvert x_{1}-x_{2} \rvert \leq  \kappa \lvert x_{1}-x_{2} \rvert $$</span>
+ניתן לבחור <span>\(\delta(\varepsilon)=\frac{\varepsilon}{M}\)</span>.</p>
+</div>
+<div class="theorem"><span class="keyword">ארצלה</span><p>יהי <span>\(\Phi \subseteq (C[a,b],\lVert \cdot \rVert_{\infty})\)</span>. התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>לכל סדרה <span>\((f_{n})_{n=1}^{\infty}\subset \Phi\)</span> קיימת תת סדרה קושי <span>\((f_{n})_{k}^{\infty}\)</span> קיימת תת סדרת קושי <span>\((f_{n_{k}})_{k=1}^{\infty}\)</span> כך שמתקיים: 
+<span>$$\lVert f_{n_{k}}-f_{n_{k+\ell}} \rVert \xrightarrow{k\to \infty} 0 $$</span>
+עבור ל <span>\(\ell \in \mathbb{N}\)</span>. </p>
+</li>
+<li>
+<p>הקבוצה <span>\(\Phi\)</span> חסומה במידה אחידה וגם <span>\(\Phi\)</span> רציפה במידה אחידה. </p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>לכל סדרת פונקציות <span>\((f_{n})\subseteq \Phi\)</span> קיימת סדרת קושי <span>\(\impliedby\)</span> <span>\(\Phi\)</span> רציפה במידה אחידה וחסומה במידה אחידה.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח כי לכל סדרה קיימת תת סדרת קושי. ממשפט האוסדורף <span>\(\Phi\)</span> חסומה לחלוטין. יהי <span>\(\varepsilon&gt;0\)</span>. מחסימות לחלוטין קיימות <span>\(f_{1},\dots,f_{N}\in \Phi\)</span> כך ש: 
+<span>$$\Phi \subseteq \bigcup_{i=1}^{N}B_{\frac{\varepsilon}{3}}(f_{i})$$</span></p>
+</li>
+<li>
+<p>כעת מתקיים: 
+<span>$$\lVert f \rVert _{\infty}=\lVert f-f_{i}+f_{i} \rVert_{\infty} \leq \lVert f-f_{i} \rVert_{\infty} +\lVert f_{i} \rVert _{\infty}\leq \frac{\varepsilon}{3}+\lVert f_{i} \rVert _{\infty}$$</span>
+כאשר ניתן להגדיר <span>\(K=\max_{_{i}}\{ \lVert f_{i} \rVert_{\infty} \}\)</span> וכן <span>\(M=K+\frac{\varepsilon}{3}\)</span> ולקבל <span>\(\lVert f \rVert_{\infty}\leq M\)</span> ולכן חסום במידה אחידה.</p>
+</li>
+<li>
+<p>כעת כיוון ש-<span>\(f \in B_{\frac{\varepsilon}{3}}(f_{i})\)</span> וכיוון ש-<span>\(f_{i}\)</span> רציפה ב-<span>\([a,b]\)</span> אזי רציפה במידה שווה ב-<span>\([a,b]\)</span>. לכן קיים <span>\(\delta_{i}\)</span> כך שאם <span>\(\lvert x-y \rvert&lt;\delta\)</span> מתקיים <span>\(\lvert f_{i}(x)-f_{i}(y) \rvert&lt;\frac{\varepsilon}{3}\)</span>. אם נגדיר <span>\(\delta=\min_{i}\{ \delta_{i} \}\)</span> נקבל שכאשר <span>\(\lvert x-y \rvert&lt;\delta\)</span> ב-<span>\([a,b]\)</span> מתקיים: 
+<span>$$\lvert f(x)-f(y) \rvert =\lvert f(x)-f_{i}(x)-f(y)+f_{i}(y)+f_{i}(x)-f_{i}(y) \rvert \leq \lvert f(x)-f_{i}(x) \rvert +\lvert f(y)-f_{i}(y) \rvert +\lvert f_{i}(x)-f_{i}(y) \rvert \leq 3 \cdot \frac{\varepsilon}{3}=\varepsilon$$</span>
+ולכן <span>\(\Phi\)</span> רציפה במידה אחידה.</p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>אם <span>\(\Phi\)</span> חסומה במידה אחידה ורציפה במידה אחידה אז לכל סדרה <span>\((f_{n})\subseteq \Phi\)</span> קיימת תת סדרת קושי.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נניח חסימות במידה אחידה ורציפות במידה אחידה. יהי <span>\(\varepsilon&gt; 0\)</span>. מרציפות במידה אחידה נקבל <span>\(\delta&gt;0\)</span> כך שלכל <span>\(f \in \Phi\)</span> מתקיים: 
+<span>$$\forall x_{1},x_{2}\in[a,b]\qquad \lvert x_{1}-x_{2} \rvert &lt;\delta\implies \lvert f(x_{1})-f(x_{2}) \rvert \leq  \frac{\varepsilon}{3} $$</span></p>
+</li>
+<li>
+<p>ניקח חלוקה של <span>\([a,b]\)</span> כאשר המרווחים בין כל איברים סמוכים בחלוקה קטנים מ-<span>\(\delta\)</span>. כלומר: 
+<span>$$a = x_0 &lt; x_1 &lt; \dots &lt; x_N = b \quad \text{with}\;\;x_{i+1} - x_i &lt; \delta$$</span></p>
+</li>
+<li>
+<p>מחסימות במידה אחידה של קיים <span>\(K&gt;0\)</span> כך ש-לכל <span>\(f \in \Phi\)</span> מתקיים <span>\(\lVert f \rVert_{\infty}\leq K\)</span> וכעת ניתן לחלק את התחום <span>\([-K,K]\)</span> למרווחים אשר קטנים מ-<span>\(\varepsilon\)</span>. כלומר: 
+<span>$$-K=y_{0}&lt;y_{1}&lt;\cdot\cdot\cdot&lt;y_{M}=K\quad \text{with }y_{i+1}-y_{i}&lt;\frac{\varepsilon}{3}$$</span>
+בפרט לכל <span>\(z \in [-K,K]\)</span> קיים <span>\(y_{j}\)</span> כך ש-<span>\(\lvert z-y_{j} \rvert&lt;\frac{\varepsilon}{3}\)</span>.</p>
+</li>
+<li>
+<p>תהי <span>\(f \in \Phi\)</span>. לכל <span>\(x_{i}\)</span> קיים <span>\(y_{j_{i}}\)</span> כך ש-<span>\(\lvert f(x_{i})-y_{j_{i}} \rvert&lt;\frac{\varepsilon}{3}\)</span>. כעת נגדיר פונקציה מקורבת <span>\(\psi\)</span> על ידי: 
+<span>$$\psi(x_{i})=y_{j_{i}}$$</span>
+וכן לכל נקודות בתחום <span>\(x \in (x_{i},x_{i+1})\)</span> נגדיר את הפונקציה להיות האינטרפולציה הלינארית:
+<span>$$\psi(x)=y_{j_{i}}+(y_{j_{i+1}}-y_{j_{i}})\cdot{\frac{x-x_{i}}{x_{i+1}-x_{i}}}$$</span>
+כך שרציף ולינארי למקוטעין.</p>
+</li>
+<li>
+<p>יהי <span>\(x \in [x_{i},x_{i+1}]\)</span>. אזי: 
+<span>$$|f(x)-\psi(x)|\leq|f(x)-f(x_{i})|+|f(x_{i})-y_{j_{i}}|+|y_{j_{i}}-\psi(x)|&lt;\frac{\varepsilon}{3}\cdot 3 = \varepsilon$$</span></p>
+</li>
+<li>
+<p>כיוון שיש כמות סופית של <span>\(\psi\)</span> שניתן לבנות וכן כל <span>\(f\)</span> מקיים <span>\(f \in B_{\varepsilon}(\psi)\)</span> עבור <span>\(\psi\)</span> כלשהו נקבל כי חסום לחלוטין. </p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p>תת קבוצה של <span>\(C[a,b]\)</span> היא חסומה טוטלית אם"ם היא חסומה במידה אחידה ורציפה במידה אחידה.</p>
+</div>
+<div class="corollary">
+<p>תת קבוצה של <span>\(C[a,b]\)</span> היא קומפקטית אם"ם סגורה, חסומה במידה אחידה, ורציפה במידה אחידה.</p>
+</div>
+<div class="corollary">
+<p>אם תת קבוצה של <span>\(C[a,b]\)</span> היא חסומה במידה אחידה ורציפה במידה אחידה אז לכל סדרה בה יש תת סדרה מתכנסת במידה שווה(כאשר הגבול לאו דווקא שייך לקבוצה).</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(\{ f_{n} \}\)</span> משפחת פונקציות המתכנסות במידה אחידה על <span>\([0,1]\)</span>, ונניח כי <span>\(f:[0,1]\to \mathbb{R}\)</span> הגבול הנקודתי של <span>\(f_{n}(x)\)</span> לכל <span>\(x\)</span>. אזי הסדרה <span>\(f_{n}\)</span> מתכנסת במידה שווה.</p>
+</div>
+<div class="proof">
+<p>להשלים</p>
+</div>
+<div class="theorem"><span class="keyword">ארצלה אסקולי</span><p>תהי <span>\(\{ f_{n} \}_{n=1}^{\infty}\subseteq C^{1}[a,b]\)</span> סדרה חסומה(בנורמה) של פונקציות גזירות ברציפות. כלומר הסדרה <span>\(\{ f_{n} \}_{n=1}^{\infty}\)</span> ו-<span>\(\{ f'_{n} \}_{n=1}^{\infty}\)</span> חסומות במידה אחידה, אזי הסדרה <span>\(\{ f_{n} \}_{n=1}^{\infty}\)</span> חסומה במידה אחידה וגזירה במידה אחידה(ולכן יש לה תת סדרה מתכנסת במידה שווה).</p>
+</div>
+<div class="proof">
+<p>להשלים.</p>
+</div>
+<h2>נגזרות ואינטגרלים</h2>
+<div class="proposition">
+<p>תהי <span>\(K(x,t)\)</span> פונקציה רציפה על ריבוע היחידה <span>\([0,1]\times[0,1]\)</span>. וכן נגדיר <span>\(T_{k}:C[0,1]\to C[0,1]\)</span> על ידי:
+<span>$$.T_{K}f(x)=\!\!\int\limits_{0}^{1}f(t)K(x,t)d t$$</span>
+אזי:</p>
+<ol>
+<li>
+<p>הפונקציה <span>\(T_{k}\)</span> מוגדרת היטב. </p>
+</li>
+<li>
+<p>שולח קבוצות חסומות לקבוצות חסומות טוטלית. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אופרטור קומפקטי</span><p>יהי <span>\(V,W\)</span> מרחבים נורמלים, ו-<span>\(T:V\to W\)</span> העתקה לינארית. אזי אם לכל קבוצה חסומה <span>\(B\subseteq V\)</span> מתקיים <span>\(\overline{T(B)}\)</span> קומפקטי ב-<span>\(W\)</span> נקרא לאופרטור <span>\(T\)</span> קומפקטי.</p>
+</div><h2 id='Functional Analysis_1_3'>משפט הקירוב של ווירשטראס וסטון וירשטראס</h2>
+ <div class="lemma">
+<p>עבור <span>\(\delta&gt; 0\)</span> מתקיים:
+<span>$$\int_{\delta}^{1} (1-u^{2})^{n} \, \mathrm{d}u\xrightarrow{n\to \infty} 0  $$</span></p>
+</div>
+<p>כיוון ש-<span>\(1-u^{2}\)</span> מונוטונית יורדת מתקיים:
+<span>$$\int_{\delta}^{1} (1-u^{2})^{n} \, \mathrm{d}u\leq  \int_{\delta}^{1} (1-\delta^{2})^{n} \, \mathrm{d}u=(1-\delta^{2})^{n}(1-\delta)\xrightarrow{n\to \infty} 0 $$</span></p>
+<div class="theorem"><span class="keyword">הקירוב של ווירשטראס</span><p>תהי <span>\(f \in C[0,1]\)</span>. אזי קיימת סדרת פולינומים <span>\(\{ p_{n}(x) \}_{n=1}^{\infty}\)</span> אשר מתכנסת במידה שווה ל-<span>\(f\)</span> על <span>\([0,1]\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>יהי <span>\(f \in C[0,1]\)</span>. נגדיר: 
+<span>$$F(x)={\left\{\begin{array}{l l}{f(x),}&amp;{x\in[0,1],}\\ {0,}&amp;{{\mathrm{otherwise}},}\end{array}\right.}$$</span>
+כאשר נשים לב כי <span>\(f\)</span> רציפה ב-<span>\([0,1]\)</span> ולכן ממשפט קנטור רציפה במ"ש ולכן <span>\(F\)</span> רציפה במ"ש ב-<span>\(\mathbb{R}\)</span>.</p>
+</li>
+<li>
+<p>נגדיר את הגרעין <span>\(Q_{n}(u)=c_{n}{{\bigl(}1-u^{2}{\bigr)}^{n}},\)</span> כאשר <span>\(c_{n}\)</span> הוא כך שמתקיים: 
+<span>$$\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=1$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(n\)</span> נגדיר: 
+<span>$$P_{n}(x)=\int_{-1}^{1}F(x+u)\,Q_{n}(u)\,\mathrm{d}u$$</span>
+ועל ידי ההחלפת משתנים <span>\(t=x+u\)</span> נקבל:
+<span>$$P_{n}(x)=\int_{x-1}^{x+1}F(t)\,Q_{n}(t-x)\,\mathrm{d}t=\int_{0}^{1}F(t)\,Q_{n}(t-x)\,\mathrm{d}t$$</span>
+כאשר זהו פולינום ב-<span>\(x\)</span>. זהו סדרת הפולינומים שלנו. נוצר להראות שמתכנס במ"ש ל-<span>\(F\)</span>.</p>
+</li>
+<li>
+<p>כיוון ש-<span>\(\int_{-1}^{1} Q_{n}(x) \, \mathrm{d}x=1\)</span> נקבל: 
+<span>$$F(x)=F(x)\,\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=\int_{-1}^{1}F(x)\,Q_{n}(u)\,\mathrm{d}u$$</span>
+ולכן:
+<span>$$\left|P_{n}(x)-F(x)\right|=\left|\int_{-1}^{1}\bigl[F(x+u)-F(x)\bigr]Q_{n}(u)\,\mathrm{d}u\right|\leq\int_{-1}^{1}\bigl|F(x+u)-F(x)\bigr|\,Q_{n}(u)\,\mathrm{d}u$$</span></p>
+</li>
+<li>
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. מרציפות במ"ש של <span>\(F\)</span> נקבל <span>\(\delta &gt; 0\)</span> כך לכל <span>\(x\)</span>: 
+<span>$$|u|&lt;\delta\implies|F(x+u)-F(x)|&lt;\epsilon$$</span>
+כעת נפצל את האינטגרל:
+<span>$$\int_{-1}^{1}\!|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u=\int_{|u|&lt;\delta}+\int_{|u|\geq\delta}$$</span></p>
+</li>
+<li>
+<p>עבור החלק <span>\(\lvert u \rvert&lt;\delta\)</span> מתקיים <span>\(\lvert F(x+u)-F(x) \rvert&lt;\varepsilon\)</span> ולכן: 
+<span>$$\int_{|u|&lt;\delta}|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u&lt;\epsilon\int_{-1}^{1}Q_{n}(u)\,\mathrm{d}u=\epsilon\cdot1=\epsilon.$$</span></p>
+</li>
+<li>
+<p>עבור החלק <span>\(\lvert u \rvert\geq \delta\)</span> אנו יודעים כי <span>\(F\)</span> חסום על ידי איזשהו <span>\(M\)</span>, ולכן: 
+<span>$$|F(x+u)-F(x)|\leq|F(x+u)|+|F(x)|\leq2M.$$</span>
+נקבל:
+<span>$$\int_{|u|\geq\delta}|F(x+u)-F(x)|\,Q_{n}(u)\,\mathrm{d}u\leq2M\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u.$$</span>
+ומהתכונה <span>\(\operatorname*{lim}_{n\to\infty}\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u=0\)</span> של הגרעין נקבל <span>\(N\)</span> כך שלכל <span>\(n\geq N\)</span> מתקיים:
+<span>$$\int_{|u|\geq\delta}Q_{n}(u)\,\mathrm{d}u&lt;{\frac{\epsilon}{2M}}$$</span>
+ולכן:
+<span>$$\int_{|u|\geq\delta}\mid\!F(x+u)-F(x)\!\mid Q_{n}(u)\,\mathrm{d}u\leq2M\cdot\frac{\epsilon}{2M}=\epsilon$$</span></p>
+</li>
+<li>
+<p>סה"כ נקבל: 
+<span>$$|P_{n}(x)-F(x)|\leq\underbrace{\int_{|u|&lt;\delta}\bigl(\dots\bigr)}_{&lt;\epsilon}+\underbrace{\int_{|u|\geq\delta}\bigl(\dots\bigr)}_{&lt;\epsilon}&lt;2\epsilon$$</span>
+ולכן <span>\(\lVert P_{n}-F(x) \rVert_{\infty}\leq \varepsilon\)</span> ומתכנס במ"ש.</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">סטון ווירטראס</span><p>יהי <span>\((X,\rho)\)</span> מרחב מטרי, ותהי <span>\(K\subseteq X\)</span> קומפקטית. תהי <span>\(A\subseteq(C(K),\lVert \cdot \rVert_{\infty})\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>אלגברה - כלומר סגורה לחיבור, כפל וכפל בסקלר. </p>
+</li>
+<li>
+<p>מפרידה נקודות - לכל שתי <span>\(x_{1}\neq x_{2}\)</span> קיים <span>\(f \in A\)</span> כך ש-<span>\(f(x)\neq f(y)\)</span>. </p>
+</li>
+<li>
+<p>לא מתאפסת - לכל <span>\(a \in K\)</span> קיים <span>\(f \in A\)</span> כך ש-<span>\(f(a)\neq 0\)</span>. 
+אזי <span>\(A\)</span> צפוף ב-<span>\(C(K)\)</span>(כלומר <span>\(\overline{A}=C(K)\)</span>).</p>
+</li>
+</ol>
+</div>
+<div class="lemma">
+<p>אם <span>\(f \in A\)</span> אז <span>\(\lvert f \rvert\in \overline{A}\)</span>.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(f \in A\)</span>. כיוון ש-<span>\(K\)</span> קומפקטית ו-<span>\(f\)</span> רציפה אז <span>\(f(K)\)</span> קומפקטית בתת תחום <span>\([m,M]\subseteq \mathbb{R}\)</span>.
+נגדיר <span>\(\phi(t)=\lvert t \rvert\)</span>. יהי <span>\(\varepsilon&gt; 0\)</span>. ממשפט הקירוב של ווירשטראס קיים פולינום <span>\(P(t)\)</span> אשר מקיים:
+<span>$$\forall t \in [-M,M]\qquad \lVert \lvert t \rvert -P(t) \rVert &lt;\varepsilon$$</span>
+נסתכל על <span>\(P(f(x))\)</span>. נשים לב כי כיוון שזהו פולינום זהו צירוף לינארי של חזקות של <span>\(f\)</span> וכפל בסקלרים, וכיוון ש-<span>\(f\)</span> אלגברה נקבל <span>\(P(f(x))\in A\)</span>. מתקיים כעת:
+<span>$$|||f(x)|-P(f(x))\rangle||_{\infty}=\operatorname*{sup}_{x\in K}||f(x)|-P(f(x))|\leq\operatorname*{sup}_{t\in[-M,M]}||t|-P(t)|&lt;\epsilon$$</span>
+כיוון ש-<span>\(P(f(x))\in A\)</span> ו-<span>\(P(f(x))\)</span> מקרב את <span>\(\lvert f(x) \rvert\)</span> קרוב כרצונו נקבל כי <span>\(\lvert f \rvert\in \overline{A}\)</span>.</p>
+</div>
+<div class="lemma">
+<p>אם <span>\(f,g \in \overline{A}\)</span> אזי <span>\(\max\{ f,g \},\min\{ f,g \}\in \overline{A}\)</span>.</p>
+</div>
+<div class="proof">
+<p>ניתן לכתוב:
+<span>$$\operatorname*{max}\{a,b\}={\frac{1}{2}}(a+b+|a-b|)\qquad \operatorname*{min}\{a,b\}={\frac{1}{2}}(a+b-|a-b|)$$</span>
+ולכן אם <span>\(f,g \in \overline{A}\)</span> אזי גם <span>\(f+g \in \overline{A}\)</span> כי הסגור של אלגברה היא אלגברה ומהלמה הקודמת נקבל <span>\(\lvert f-g \rvert\in \overline{A}\)</span> ולכן המקסימום והמינימום גם יהיו ב-<span>\(\overline{A}\)</span>.</p>
+</div>
+<div class="lemma">
+<p>לכל שתי נקודות <span>\(x_{1},x_{2} \in K\)</span> ולכל שתי מספרים ממשיים <span>\(c_{1},c_{2} \in \mathbb{R}\)</span> קיים <span>\(h \in A\)</span> כך ש-<span>\(h(x_{1})=c_{1}\)</span> ו-<span>\(h(x_{2})=c_{2}\)</span>.</p>
+</div>
+<p>כעת נוכיח את המשפט.</p>
+<div class="proof">
+<p>יהי <span>\(f \in C(K)\)</span> ו-<span>\(\varepsilon&gt; 0\)</span>. נרצה למצוא <span>\(\varphi \in \overline{A}\)</span> כך ש-<span>\(\lVert f-\varphi \rVert_{\infty}&lt;\varepsilon\)</span>.</p>
+<ol>
+<li>
+<p>יהי <span>\(x \in K\)</span>. נבנה פונקציה <span>\(g_{x}\in \overline{A}\)</span> כך ש-<span>\(g_{x}=f(x)\)</span> ו-<span>\(g(t)&gt;f(t)-\varepsilon\)</span> לכל <span>\(t \in K\)</span>. לכל <span>\(y\in K\)</span> מהלמה של הפרדת נקודות קיימת פונקציה <span>\(h_{y}\in A\)</span> כך ש: 
+<span>$$h_{y}(x)=f(x)\qquad h_{y}(y)=f(y)$$</span></p>
+</li>
+<li>
+<p>נגדיר את הקבוצה: 
+<span>$$\tau_{y}=\{t\in K\mid h_{y}(t)&gt;f(t)-\epsilon\}$$</span>
+כאשר זוהי קבוצה פתוחה כיוון ש-<span>\(h_{y}-f\)</span> היא פונקציה רציפה ו-<span>\(\tau_{y}\)</span> היא המקור של הסביבה הפתוחה <span>\((-\varepsilon,\infty)\)</span> תחת הפונקציה הרציפה. כמו כן מקיימת <span>\(x ,y \in \tau_{y}\)</span>.</p>
+</li>
+<li>
+<p>האוסף הזה של <span>\(\tau_{y}\)</span> מהווה כיסוי פתוח של <span>\(K\)</span>. ולכן מקומפקטיות קיים עבורו תת כיסוי סופי <span>\(\{ \tau_{y_{1}},\tau_{y_{2}},\dots,\tau_{y_{n}} \}\)</span> אשר מכסים את <span>\(K\)</span>. זה מתאים לאוסף פונקציות סופיות <span>\(\{ h_{y_{1}},\dots,h_{y_{n}} \}\)</span> מ-<span>\(A\)</span>. </p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$$g_{x}(t)=\operatorname*{max}\{h_{y_{1}}(t),h_{y_{2}}(t),\ldots,h_{y_{n}}(t)\}$$</span>
+כאשר זה מקיים <span>\(g_{x}(t)\in \overline{A}\)</span> משימוש חוזר בלמה אשר אומר שהמקסימום של שתי פונקציות נמצא בסגור של האלגברה. כמו כן כיוון שלכל <span>\(h_{y_{i}}\)</span> מתקיים <span>\(h_{y_{i}}(x)=f(x)\)</span> אזי גם <span>\(g_{x}(x)=f(x)\)</span>. ובאותו אופן כיוון שמתקיים לכל <span>\(h_{i}\)</span> נקבל כי גם עבור המקסימום מתקיים:
+<span>$$g_{x}(t)\geq h_{y_{i}}(t)&gt;f(t)-\epsilon$$</span></p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$${\hat{\tau}}_{x}=\{t\in K\mid g_{x}(t)&lt;f(t)+\epsilon\}.$$</span>
+כאשר זוהי קבוצה פתוחה כי <span>\(g_{x}\)</span> ו-<span>\(f\)</span> הם רציפות ו-<span>\(g_{x}-f\)</span> היא רציפה ולכן המקור של <span>\((-\infty,\varepsilon)\)</span> תהיה פתוחה. בנוסף מתקיים <span>\(x \in \hat{\tau}_{x}\)</span> כי <span>\(g_{x}(x)=f(x)\)</span> וגם <span>\(f(x)&lt;f(x)+\varepsilon\)</span>. </p>
+</li>
+<li>
+<p>עבור כל <span>\(x \in K\)</span> נקבל כי <span>\(\hat{\tau}_{x}\)</span> הוא כיסוי פתוח של <span>\(K\)</span>. ולכן מקומפקטיות של <span>\(K\)</span> קיים עבורו תת כיסוי סופי 
+<span>$$\{ \hat{\tau}_{x_{1}},\dots,\hat{\tau}_{x_{m}} \}$$</span>
+אשר מתאים אוסף סופי של פונקציות <span>\(\{ g_{x_{1}},\dots,g_{x_{m}} \}\)</span> מ-<span>\(\overline{A}\)</span>.</p>
+</li>
+<li>
+<p>כעת נגדיר: 
+<span>$$\varphi(t)=\operatorname*{min}\{g_{x_{1}}(t),g_{x_{2}}(t),\ldots,g_{x_{m}}(t)\}$$</span>
+כאשר <span>\(\varphi \in \overline{A}\)</span> משימוש חוזר בלמה עבור המינימום.</p>
+</li>
+<li>
+<p>כיוון שכל <span>\(g_{x}\)</span> מקיים <span>\(g_{x}(t)&gt;f(t)-\varepsilon\)</span> גם <span>\(\varphi\)</span> מקיים את זה וכיוון שכל <span>\(g_{x_{j}}\)</span> מקיים <span>\(g_{x_{j}}(t)&lt;f(t)+\varepsilon\)</span>. לכן נקבל לכל <span>\(t \in K\)</span> כי: 
+<span>$$f(t)-\epsilon&lt;\varphi(t)&lt;f(t)+\epsilon\implies \forall t \in K\quad |f(t)-\varphi(t)|&lt;\varepsilon\implies \lVert f-\varphi \rVert _{\infty}&lt;\varepsilon$$</span></p>
+</li>
+</ol>
+</div><h1 id='Functional Analysis_2'>טורי פורייה</h1>
+<h2 id='Functional Analysis_2_1'>מרחבי מכפלה פנימית</h2>
+ <div class="definition"><span class="keyword">מכפלה פנימית</span><p>יהי <span>\(V\)</span> מרחב ווקטורי תחת <span>\(\mathbb{F}=\mathbb{C}\)</span> או <span>\(\mathbb{F}=\mathbb{R}\)</span>. פונקציה <span>\(\langle \cdot,\cdot \rangle:V\times V\to \mathbb{F}\)</span> נקראת מכפלה פנימית אם מקיימת:</p>
+<ol>
+<li>
+<p>סימטרייה - לכל <span>\(x,y \in V\)</span> מקיימת: 
+<span>$$\big\langle x,y\big\rangle={\overline{{\big\langle y,x\big\rangle}}}$$</span></p>
+</li>
+<li>
+<p>בילנאריות - לכל <span>\(x,y,z \in V\)</span> ו-<span>\(a \in \mathbb{F}\)</span> מתקיים: 
+<span>$$\left\langle a x,y\right\rangle=a\left\langle x,y\right\rangle\quad \text{and}\quad\left\langle x+y,z\right\rangle=\left\langle x,z\right\rangle+\left\langle y,z\right\rangle$$</span></p>
+</li>
+<li>
+<p>חיוביות - לכל <span>\(x \in V\)</span> מתקיים <span>\(\langle x,x \rangle\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=0\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">מרחב מכפלה פנימית</span><p>מרחב ווקטורי המצוייד במכפלה פנימית.</p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון קושי שוורץ</span><p>יהי <span>\((V,\langle \cdot,\cdot \rangle)\)</span> מרחב מכפלה פנימית. אזי לכל <span>\(x,y \in V\)</span> מתקיים:
+<span>$$\lvert \langle x,y \rangle  \rvert \leq  \lVert x \rVert \lVert y \rVert $$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((V,\langle \cdot,\cdot \rangle)\)</span> מרחב מכפלה פנימית. אזי המכפלה הפנימית היא רציפה ביחס למטריקה המושרת מהנורמה.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(x_{n}\to x\)</span> ו-<span>\(y_{n}\to y\)</span>. אזי:
+<span>$$\left\langle x_{n},y_{n}\right\rangle=\left\langle x,y\right\rangle+\left\langle x_{n}-x,y\right\rangle+\left\langle x_{n},y_{n}-y\right\rangle$$</span>
+כאשר מאי שיוויון קושי שוורץ נקבל:
+<span>$$\big|\left\langle x_{n},y_{n}\right\rangle-\left\langle x,y\right\rangle\big|\leq\big\|x_{n}-x\big\|\big\|y\big\|+\big\|x_{n}\big\|\big\|y_{n}-y\big\|.$$</span>
+כאשר כיוון שנורמה במרחב נורמי היא רציפה, אזי <span>\(\lVert x_{n} \rVert\to \lVert x \rVert\)</span> ולכן מאריתמטיקה של גבולות אגף ימין שואף ל-0.</p>
+</div>
+<div class="proposition">
+<p>נורמה <span>\(\lVert \cdot \rVert\)</span> על מרחב ווקטורי <span>\(V\)</span> היא מושרת ממכפלה פנימית אם"ם מקיימת את תנאי המקבילית:
+<span>$$\left\|x+y\right\|^{2}+\left\|x-y\right\|^{2}=2{\bigl(}\|x\|^{2}+\left\|y\right\|^{2}{\bigr)}$$</span>
+כאשר במקרה זה המכפלה הפנימית נתונה על ידי זהות הפולריזציה:
+<span>$$\left\langle x,y\right\rangle={\frac{1}{2}}\left(\left\|x+y\right\|^{2}-\left\|x\right\|^{2}-\left\|y\right\|^{2}\right)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מרחב מכפלה פנימי שלם</span><p>מרחב מכפלה פנימי אשר שלם ביחס לנורמה המושרת. מרחב כזה נקרא מרחב הילברט.</p>
+</div><h2 id='Functional Analysis_2_2'>מערכת אורתונורמלית וטור פורייה כללי</h2>
+ <div class="definition"><span class="keyword">מערכת אורתונורמלית</span><p>יהי <span>\(\left( V,\langle , \rangle \right)\)</span> מרחב מכפלה פנימית. מערכת <span>\(\{ v_{n} \}\subseteq V\)</span> נקראת אורתונורמלית אם לכל <span>\(v_{i},v_{j}\in \{ v_{n} \}\)</span> מתקיים:
+<span>$$\langle v_{i},v_{j} \rangle =\delta_{ij}$$</span></p>
+</div>
+<div class="lemma">
+<p>עבור מערכת אורתונורמלית <span>\(\{ e_{n} \}\)</span> ו-<span>\(v \in V\)</span> מתקיים:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כאשר <span>\(x_{n}=\langle e_{n},v \rangle\)</span>.</p>
+</div>
+<div class="proof">
+<p>מתקיים:
+<span>$$\begin{gather}\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =\left\langle v-\sum_{n=1}^{N}\alpha_{n}e_{n},v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\rangle= \\=\left\langle  v,v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle -\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle = \\= \lVert v \rVert^{2}-\left\langle  v, \sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle  -\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},v  \right\rangle+\left\langle  \sum_{n=1}^{N} \alpha_{n}e_{n},\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rangle  = \\=\lVert v \rVert ^{2}+\sum_{n=1}^{N}  \overline{\alpha} _{n}\langle v,e_{n} \rangle +\sum_{n=1}^{N} \alpha_{n}\langle e_{n},v \rangle +\sum_{n=1}^{N}\sum_{m=1}^{N}\alpha_{n}\overline{\alpha_{m}} \underbracket{ \langle e_{n},e_{m} \rangle }_{ \delta_{nm} } = \\=\lVert v \rVert ^{2}+\sum_{n=1}^{N} \left[  \overline{a_{n}} \overline{\langle e_{n},v \rangle }  +\alpha_{n}\langle e_{n},v \rangle +\alpha_{n}\overline{\alpha_{n}}   \right]
+\end{gather}$$</span>
+כעת נסמן <span>\(x_{n}=\langle e_{n},v \rangle\)</span> ונשים לב כי:
+<span>$$\left\lvert  x_{n}-\alpha_{n}  \right\rvert ^{2}=\left( x_{n}-\alpha_{n} \right)\left( \overline{x_{n}} -\overline{\alpha_{n}}  \right)=\overbrace{ x_{n}\overline{x_{n}} }^{ \lVert x_{n} \rVert  } -x_{n}\overline{\alpha_{n}} -\alpha_{n}\overline{x_{n}} +\overbrace{ \alpha_{n}\overline{\alpha_{n}} }^{ \left\lVert  \alpha_{n}  \right\rVert  } $$</span>
+ולכן נקבל:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} c_{n}e_{n}  \right\rVert =
+\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">אי שיוויון בסל</span><p>יהי <span>\(V\)</span> מרחב הילברט(מרחב מכפלה פנימית שלם). נניח כי <span>\(\{ e_{n} \}\)</span> מערכת אורתונורמלית ב-<span>\(H\)</span>. אזי לכל <span>\(v \in V\)</span> מתקיים:
+<span>$$\sum_{k=1}^{\infty}|\langle v,e_{k}\rangle|^{2}\leq\|v\|^{2}$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\begin{gather}{0\leq\left\|v-\sum_{k=1}^{n}\langle x,e_{k}\rangle e_{k}\right\|^{2}=\|v\|^{2}-2\sum_{k=1}^{n}\operatorname{Re}\langle v,\langle v,e_{k}\rangle e_{k}\rangle+\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\\ {=\|v\|^{2}-2\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}+\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\\ {=\|v\|^{2}-\sum_{k=1}^{n}|\langle v,e_{k}\rangle|^{2}}\end{gather}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טור פורייה לפי מערכת אורתוגונלית במרחב מכפלה פנימית</span><p>יהי <span>\((V,\langle \cdot,\cdot \rangle)\)</span> מרחב מרפלה פנימית <span>\(V\)</span> מעל שדה <span>\(\mathbb{C}\)</span>. יהי <span>\((v_{n})^{\infty}_{n=1}\)</span> מערכת אורתונורמלית במרחב <span>\((V,\langle \cdot,\cdot \rangle)\)</span>. אזי הטור:
+<span>$$\sum_{i=1}^{\infty} \frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert ^{2}}v_{n} $$</span>
+נקרא טור פורייה עבור <span>\(v\)</span>. כאשר המקדמים של <span>\(v_{n}\)</span> נקראים מקדמי פורייה</p>
+</div>
+<div class="proposition"><span class="keyword">תכונת הקירוב הטוב ביותר של מקדמי פורייה</span><p>יהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימית. תהי <span>\((v_{n})_{n=1}^{\infty}\)</span> רשימה אורתוגונאלית, יהי <span>\(N \in \mathbb{N}\)</span> ויהי <span>\(v \in V\)</span> אזי:
+<span>$$\min _{d_{1},\dots,d_{n}\in \mathbb{C}}\left\lVert  v-\sum_{n=1}^{N} d_{n}v_{n}  \right\rVert = \left\lVert  v-\sum_{n=1}^{N} \frac{\langle v_{n},v \rangle}{\lVert v_{n}^{2} \rVert }v_{n}   \right\rVert $$</span>
+כלומר המקדמים <span>\(d_{n}\)</span> אשר ממזערים את הנורמה יהיו <span>\(d_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n}^{2} \rVert}\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסתכל על הנורמה הבאה:
+<span>$$\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=\left\langle v-\sum_{n=1}^{N}d_{n}v_{n},v-\sum_{m=1}^{N}d_{m}v_{m}\right\rangle$$</span>
+נפתח את המכפלה הפנימית:
+<span>$$=\langle v,v\rangle-\left\langle v,\sum_{m=1}^{N}d_{m}v_{m}\right\rangle-\left\langle\sum_{n=1}^{N}d_{n}v_{n},v\right\rangle+\left\langle\sum_{n=1}^{N}d_{n}v_{n},\sum_{m=1}^{N}d_{m}v_{m}\right\rangle$$</span>
+מהלינאריות של המכפלה הפנימית ניתן להוציא את הסכום, תוך כדי שימוש בתכונה <span>\(\langle x,\alpha y \rangle=\overline{\alpha}\langle x,y \rangle\)</span> נקבל:
+<span>$$=||v||^{2}-\sum_{m=1}^{N}\overline{{{d_{m}}}}\langle v,v_{m}\rangle-\sum_{n=1}^{N}d_{n}\langle v_{n},v\rangle+\sum_{n=1}^{N}\sum_{m=1}^{N}d_{n}\overline{{{d_{m}}}}\langle v_{n},v_{m}\rangle$$</span>
+מאורתוגונאליות נקבל <span>\(\langle v_{n},v_{m} \rangle=\delta_{nm}\lVert v_{n} \rVert^{2}\)</span> ולכן ניתן לפשט את הסכום אחרון:
+<span>$$=||v||^{2}-\sum_{n=1}^{N}\overline{{{d_{n}}}}\langle v,v_{n}\rangle-\sum_{n=1}^{N}d_{n}\langle v_{n},v\rangle+\sum_{n=1}^{N}d_{n}\overline{{{d_{n}}}}||v_{n}||^{2}$$</span>
+נגדיר את המקדם פורייה:
+<span>$$c_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert ^{2}}\implies \langle v_{n},v \rangle =c_{n}\lVert v_{n} \rVert ^{2}\implies \langle v,v_{n} \rangle =\overline{c_{n}} \lVert v_{n} \rVert ^{2}$$</span>
+ונוסיף ונחסיר מהביטוי שלנו <span>\(\sum_{n=1}^{N}\lvert c_{n}\lVert^{2} v_{n} \rVert^{2} \rvert\)</span> כך שנקבל:
+<span>$$=||v||^{2}+\sum_{n=1}^{N}|d_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}d_{n}\big(c_{n}||v_{n}||^{2}\big)-\sum_{n=1}^{N}\overline{{{d_{n}}}}\big(\overline{{{c_{n}}}}||v_{n}||^{2}\big)+\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}\big)$$</span>
+נשים לב כי כל הגורמים בסכום מכילים <span>\(\lVert v_{n} \rVert^{2}\)</span> וניתן לקחת אותו כגורם משותף:
+<span>$$=||v||^{2}+\sum_{n=1}^{N}||v_{n}||^{2}\left(|d_{n}|^{2}-d_{n}c_{n}-\overline{{{d_{n}c_{n}}}}+|c_{n}|^{2}\right)-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+נבחין כי:
+<span>$$|d_{n}|^{2}-d_{n}c_{n}-{\overline{{d_{n}c_{n}}}}+|c_{n}|^{2}=(d_{n}-c_{n})({\overline{{d_{n}}}}-{\overline{{c_{n}}}})=|d_{n}-c_{n}|^{2}$$</span>
+ולכן:
+<span>$$\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=||v||^{2}+\sum_{n=1}^{N}|d_{n}-c_{n}|^{2}||v_{n}||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+כדי למזער את הביטוי נדרש למזער את <span>\(\textstyle\sum_{n=1}^{N}|d_{n}-c_{n}|^{2}||v_{n}||^{2}\)</span>. זה קורה כאשר <span>\(c_{n}=d_{n}\)</span> לכל <span>\(n \in \{ 1,\dots ,N \}\)</span>. נקבל שהערך המינימלי יהיה:
+<span>$$\operatorname*{min}\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|^{2}=||v||^{2}-\sum_{n=1}^{N}|c_{n}|^{2}||v_{n}||^{2}$$</span>
+כאשר נזכור כי <span>\(c_{n}=\frac{\langle v_{n},v \rangle}{\lVert v_{n} \rVert}=d_{n}\)</span> ולכן:
+<span>$$\operatorname*{min}_{d_{1},\ldots,d_{N}\in C}\left\|v-\sum_{n=1}^{N}d_{n}v_{n}\right\|=\left\|v-\sum_{n=1}^{N}{\frac{\langle v_{n},v\rangle}{\|v_{n}\|^{2}}}v_{n}\right\|$$</span></p>
+</div>
+<div class="definition"><span class="keyword">מערכת אורתונורמלית שלמה</span><p>הפרוש שלו צפוף במרחב. כלומר אם <span>\(V\)</span> מרחב אז מערכת <span>\(\{ e_{n} \}\)</span> תהיה שלמה אם:
+<span>$$\overline{{{\mathrm{Span}\{e_{n}\}}}}\;=\;V\;$$</span>
+או לחלופין לכל <span>\(v \in V\)</span> ולכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N \in \mathbb{N}\)</span> ומקדמים <span>\(\alpha_{1},\dots,\alpha_{N}\in \mathbb{C}\)</span> כך ש:
+<span>$$\Bigl\|\,v-\sum_{n=1}^{N}\alpha_{n}e_{n}\Bigr\|&lt;\epsilon$$</span></p>
+</div>
+<div class="proposition">
+<p>נניח כי <span>\(\{ e_{n} \}_{n=1}^{\infty}\)</span> מערכת אורונורמלית במרחב מכפלה פנימי <span>\(V\)</span>. התנאים הבאים שקולים:</p>
+<ol>
+<li>
+<p>המערכת <span>\(\{ e_{n} \}_{n=1}^{\infty}\)</span> שלמה ב-<span>\(V\)</span>. </p>
+</li>
+<li>
+<p>לכל <span>\(v \in V\)</span> מתקיים שיוויון פרסבל: 
+<span>$$\lVert v \rVert ^{2}=\sum_{n=1}^{\infty}\lvert \langle e_{n},v \rangle  \rvert ^{2}$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(v \in V\)</span> מתקיים: 
+<span>$$v=\sum_{n=1}^{\infty} \langle e_{n},v \rangle e_{n}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p><span>\(2\impliedby 1\)</span></p>
+<ol>
+<li>
+<p>יהי <span>\(\varepsilon&gt; 0\)</span>. נניח <span>\(\{ e_{n} \}\)</span> מערכת שלמה ו-<span>\(v \in V\)</span>. לכן: 
+<span>$$\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}&lt;\varepsilon^{2}$$</span></p>
+</li>
+<li>
+<p>נסמן <span>\(x_{n}=\langle e_{n},v \rangle\)</span> ונקבל: 
+<span>$$\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}=\|v\|^{2}+\sum_{n=1}^{N}|x_{n}-\alpha_{n}|^{2}-\sum_{n=1}^{N}|x_{n}|^{2}$$</span>
+כך שמתקיים:
+<span>$$\|v\|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\leq\left\|v-\sum_{n=1}^{N}\alpha_{n}e_{n}\right\|^{2}&lt;\varepsilon^{2}$$</span>
+כאשר את הכיוון השני נקבל מאי שיוויון בסל:
+<span>$$\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\geq\lVert v \rVert^{2}-\sum_{n=1}^{\infty}\left|x_{n}\right|^{2}\geq0$$</span>
+כלומר סה"כ:
+<span>$$0\leq\|v\|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\leq\varepsilon^{2}\implies \lVert v \rVert =\sum_{n=1}^{\infty}\left|x_{n}\right|^{2}=\sum_{n=1}^{\infty}\left|\langle e_{n},v\rangle\right|^{2}$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proof">
+<p><span>\(3\impliedby 2\)</span>
+נניח כי מתקיים שיוויון פרסבל. מתקיים:
+<span>$$\left\lVert  v-\sum_{n=1}^{N} \alpha_{n}e_{n}  \right\rVert =\|v\|^{2}+\sum_{n=1}^{N}\left|x_{n}-\alpha_{n}\right|^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כאשר סימנו <span>\(x_{n}=\langle e_{n},v \rangle\)</span>. בפרט עבור <span>\(x_{n}=\alpha_{n}\)</span> נקבל:
+<span>$$\left\|v-\sum_{n=1}^{N}\left\langle e_{n},v\right\rangle e_{n}\right\|^{2}=\left\langle v-\sum_{n=1}^{N}x_{n}e_{n},v-\sum_{n=1}^{N}x_{n}e_{n}\right\rangle=\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}$$</span>
+כעת משיוויון פרסבל אנו יודעים כי כאשר <span>\(N\to \infty\)</span> נקבל <span>\(\lVert v \rVert^{2}-\sum_{n=1}^{N}\left|x_{n}\right|^{2}\to 0\)</span>. לכן כיוון שהנורמה הולכת לאפס מרציפות הנורמה נקבל:
+<span>$$v=\sum_{n=1}^{N}\left\langle e_{n},v\right\rangle e_{n}$$</span></p>
+</div>
+<div class="proof">
+<p><span>\(1\impliedby 3\)</span>
+כיוון שלכל <span>\(v\)</span> מתקיים <span>\(v=\sum_{n=1}^{\infty}\left\langle e_{n},v\right\rangle e_{n}\)</span> נקבל כי <span>\(v \in\text{Span}\left( \{ e_{n} \} \right)\)</span> ולכן <span>\(V=\overline{\text{Span}\left( \{ e_{n} \} \right)}\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרחק</span><p>תהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימית ו-<span>\(U\subseteq V\)</span>. המרחק מוגדר על ידי:
+<span>$$\text{Distance}(f,U)=\inf_{\psi \in U} \lVert f-\psi \rVert $$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((V,\langle , \rangle)\)</span> מרחב מכפלה פנימי שלם(מרחב הילברט). תהי <span>\(\varnothing\neq U\subseteq V\)</span> סגורה וקמורה. לכל <span>\(f \in V\)</span> נגדיר. אזי קיים <span>\(g \in U\)</span> יחיד כך ש:
+<span>$$\text{Distance}(f,U)=\lVert f-g \rVert $$</span></p>
+</div>
+<div class="proof">
+<p><strong>קיום:</strong> נגדיר:
+<span>$$d= \text{Distance}(f,U)=\operatorname*{inf}_{\psi\in U}||f-\psi||$$</span>
+מהגדרת האינפימום קיימת סדרת נקודות <span>\(\{ g_{n} \}_{n=1}^{\infty}\)</span> ב-<span>\(U\)</span> כך ש:
+<span>$$\lVert f-g_{n} \rVert \xrightarrow{n\to \infty} d$$</span>
+נרצה להראות כי הסדרה <span>\(\{ g_{n} \}\)</span> היא קושי. מכלל המקבלית אנו יודעים כי לכל <span>\(x,y \in V\)</span> מתקיים:
+<span>$$||x+y||^{2}+||x-y||^{2}=2||x||^{2}+2||y||^{2}$$</span>
+ולכן עבור <span>\(x=f-g_{n}\)</span> ו-<span>\(y=f-g_{m}\)</span> נקבל:
+<span>$$||2f-(g_{n}+g_{m})||^{2}+||g_{m}-g_{n}||^{2}=2||f-g_{n}||^{2}+2||f-g_{m}||^{2}$$</span>
+כלומר:
+<span>$$||g_{m}-g_{n}||^{2}=2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-||2f-\left(g_{n}+g_{m}\right)||^{2}$$</span>
+נסתכל על הגורם <span>\(||2f-\left(g_{n}+g_{m}\right)||^{2}\)</span>. מתקיים:
+<span>$$||2f-(g_{n}+g_{m})||^{2}=\left\|2\left(f-{\frac{g_{n}+g_{m}}{2}}\right)\right\|^{2}=4\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|^{2}$$</span>
+כאשר כיוון ש-<span>\(U\)</span> קמור נקבל <span>\(\frac{g_{n}+g_{m}}{2}\in U\)</span>. ולכן כיוון ש-<span>\(d\)</span> הוא המרק המינימלי נקבל:
+<span>$$\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|\geq d\implies4\left\|f-{\frac{g_{n}+g_{m}}{2}}\right\|^{2}\geq4d^{2}\implies||2f-(g_{n}+g_{m})||^{2}\geq4d^{2}$$</span>
+ולכן אם נציב חזרה בשיוויון נקבל:
+<span>$$||g_{m}-g_{n}||^{2}\leq2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-4d^{2}$$</span>
+אנו יודעים כי עבור <span>\(n,m\to \infty\)</span> מתקיים <span>\(\lVert f-g_{n} \rVert\to d\)</span> ו-<span>\(\lVert f-g_{m} \rVert\to d\)</span> כלומר:
+<span>$$2||f-g_{n}||^{2}+2||f-g_{m}||^{2}-4d^{2}\to2d^{2}+2d^{2}-4d^{2}=0$$</span>
+ולכן <span>\(\lVert g_{m}-g_{n} \rVert\to 0\)</span> והסדרה קושי. לכן הסדרה <span>\(\{ g_{n} \}\)</span> מתכנסת לאיזשהו גבול <span>\(g\)</span>. כיוון שהקבוצה סגורה נקבל <span>\(g \in U\)</span> ומרציפות הנורמה נקבל:
+<span>$$||f-g||=\operatorname*{lim}_{n\to\infty}||f-g_{n}||=d$$</span>
+<strong>יחידות:</strong>
+נניח בשלילה שיש <span>\(g_{1},g_{2} \in U\)</span> שמשיגות את המינימום, כלומר:
+<span>$$\lVert f-g_{1} \rVert=d\qquad \lVert f-g_{2} \rVert=d$$</span>
+מכלל המקבילית עבור <span>\(x=f-g_{1}\)</span> ו-<span>\(y=f-g_{2}\)</span> נקבל:
+<span>$$\begin{gather}||(f-g_{1})+(f-g_{2})||^{2}+||(f-g_{1})-(f-g_{2})||^{2}=2||f-g_{1}||^{2}+2||f-g_{2}||^{2}\implies\\\implies||2f-{\big(}g_{1}+g_{2}{\big)}||^{2}+||g_{2}-g_{1}||^{2}=2d^{2}+2d^{2}=4d^{2}\implies \\ \implies ||g_{2}-g_{1}||^{2}=4d^{2}-||2f-(g_{1}+g_{2})||^{2}
+\end{gather}$$</span>
+כאשר נשים לב כי:
+<span>$$||2f-(g_{1}+g_{2})||^{2}=4\,||f-{\textstyle\frac{g_{1}+g_{2}}{2}}||^{2}$$</span>
+וכיוון ש-<span>\(U\)</span> קמור נקבל ש-<span>\(\frac{g_{1}+g_{2}}{2}\in U\)</span> ולכן מהגדרת האינפימום <span>\(\left\|f-{\frac{g_{1}+g_{2}}{2}}\right\|\geq d\)</span>. נציב חזרה במשוואה:
+<span>$$||g_{2}-g_{1}||^{2}=4d^{2}-||2f-(g_{1}+g_{2})||^{2}\leq4d^{2}-4d^{2}=0$$</span>
+וקיבלנו שהמרחק הוא 0, ולכן <span>\(g_{1}=g_{2}\)</span>.</p>
+</div><h2 id='Functional Analysis_2_3'>טור פורייה טריגונומטרי - ממשי ומרוכב</h2>
+ <div class="proposition">
+<p>המערכת <span>\(\{1,\cos(n x),\sin(n x)\}_{n\geq1}\)</span> היא מערכת אורתונואמלית שלמה</p>
+</div><h2 id='Functional Analysis_2_4'>עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</h2>
+ <div class="proposition"><span class="keyword">עקרון הלוקאליות של טור פוריה ביחס למערכת הטריגונומטרית האורתונורמלית</span><p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> אינטגרבילית רימן ב-<span>\([-\pi,\pi]\)</span> ומחזורית עם מחזור <span>\(2\pi\)</span>. נגדיר:
+<span>$$S_{N}(x)=\frac{a_{0}}{2}+\sum_{n=1}^{N} a_{n}\cos(nx)+\sum_{n=1}^{N} b_{n}\sin(nx)$$</span>
+כאשר:
+<span>$$a_{n}=\frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\cos(nt) \, \mathrm{d}t\qquad b_{n}=\frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\sin(nt) \, \mathrm{d}t  $$</span>
+אזי לכל <span>\(0&lt;\delta \leq \pi\)</span> מתקיים:
+<span>$$\lim_{ N \to \infty } \left[ S_{N}(x_{0})-\frac{1}{\pi}\int_{0}^{\delta} (f(x_{0}+u)-f(x_{0}-u))D_{N}(u) \, \mathrm{d}u  \right]=0$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">הלמה של רימן</span><p>עבור <span>\(f\)</span> כנ"ל מתקיים:
+<span>$$\lim_{ \omega \to \infty } \int_{-\pi}^{\pi} f(t)\sin(\omega t) \, \mathrm{d}t=0 $$</span></p>
+</div>
+<p>יש דרכים יותר פשוטות להוכיח את זה אבל לשם החוויה נוכיח עם משפט הקירוב של ווירשטראס.</p>
+<div class="proof">
+<p>ראשית נראה את הטענה עבור פולינומים. יהי <span>\(P(t)\)</span> פולינום מסדר <span>\(n\)</span>. נראה כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}P(t)\sin(x t)d t=0$$</span>
+בעזרת אינדוקציה על דרגת הפולינום. עבור הבסיס של האינטרוקציה נניח כי <span>\(n=0\)</span> ולכן הפולינום יהיה מהצורה <span>\(P(x)=c\)</span>. כעת האינטגרל הנתון יהיה:
+<span>$$\int_{a}^{b}c\sin(x t)d t=c\left[-{\frac{\cos(x t)}{x}}\right]_{a}^{b}=c\left(-{\frac{\cos(x b)}{x}}+{\frac{\cos(x a)}{x}}\right)={\frac{c}{x}}(\cos(x a)-\cos(x b))$$</span>
+כאשר אם ניקח את הגבול <span>\(x\to \infty\)</span> נקבל פונקציה חסומה כפול אפסה ולכן מתאפס והטענה מתקיימת.
+כעת נניח כי מתקיים עבור כל הפולינומים עד דרגה <span>\(k\)</span>. כלומר לכל פולינום <span>\(Q(t)\)</span> מדרגה לכל היותר <span>\(k\)</span> מתקיים:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}Q(t)\sin(x t)d t=0$$</span>
+יהי <span>\(P(t)\)</span> פולינום מדרגה <span>\(k+1\)</span>. ניתן לכתוב <span>\(P(t)=a\cdot t^{k+1}+Q(t)\)</span> כאשר <span>\(a\)</span> זה המקדם המוביל ו-<span>\(Q(t)\)</span> זה פולינום מדרגה של לכל היותר <span>\(k\)</span>. מלינאריות האינטגרל האינטגרל על <span>\(Q(t)\)</span> מתאפס ולכן מספיק להראות כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b} a \cdot t^{k+1}\sin(x t)d t=0 \iff\operatorname*{lim}_{x\to\infty}\int_{a}^{b}t^{k+1}\sin(x t)d t=0$$</span>
+מאינטגרציה בחלקים נקבל:
+<span>$$\begin{gather}\int_{a}^{b}t^{k+1}\sin(x t)d t=\left[-t^{k+1}{\frac{\cos(x t)}{x}}\right]_{a}^{b}-\int_{a}^{b}\left(-{\frac{\cos(x t)}{x}}\right)(k+1)t^{k}d t \\=\left(-{\frac{b^{k+1}\cos(x b)}{x}}+{\frac{a^{k+1}\cos(x a)}{x}}\right)+{\frac{k+1}{x}}\int_{a}^{b}t^{k}\cos(x t)d t
+\end{gather}$$</span>
+נשים לב כי הביטוי האינטגרלי מתאפס מהנחה אינדוקציה, כאשר הגבול:
+<span>$$\operatorname*{lim}_{x\to\infty}\left(-{\frac{b^{k+1}\cos(x b)}{x}}+{\frac{a^{k+1}\cos(x a)}{x}}\right)$$</span>
+מתאפס כיוון שכל אחד מהנסכמים מתאפס מחסומה כפול אפסה. לכן הטענה מתקיימת עבור פולינום כללי.
+כעת נראה נכונות עבור פונקציה כללי. יהי <span>\(\varepsilon&gt; 0\)</span>. ממשפט ווירשטראס ניתן לקרב על ידי פולינום <span>\(P(t)\)</span> במידה שווה, כלומר עבור <span>\(\frac{\varepsilon}{2(b-a)}\)</span> נקבל כי:
+<span>$$||f-P||_{\infty}&lt;\frac{\epsilon}{2(b-a)} \iff \forall t \in [a,b]\quad |f(t)-P(t)|&lt;{\frac{\epsilon}{2(b-a)}}$$</span>
+כעת מתקיים:
+<span>$$\begin{gather}\lvert  \int_{a}^{b}{f(t)\sin(x t)d t} \rvert=\lvert \int_{a}^{b}(f(t)-P(t)+P(t))\sin(x t)d t \rvert \leq  \\\leq \lvert \int_{a}^{b}(f(t)-P(t))\sin(x t)d t \rvert +\lvert \int_{a}^{b}P(t)\sin(x t)d t \rvert
+\end{gather}$$</span>
+כאשר נשים לב כי:
+<span>$$\left|\int_{a}^{b}(f(t)-P(t))\sin(x t)d t\right|\leq\int_{a}^{b}|f(t)-P(t)||\sin(x t)|d t&lt;\int_{a}^{b}{\frac{\epsilon}{2(b-a)}}\cdot1d t={\frac{\epsilon}{2(b-a)}}(b-a)={\frac{\epsilon}{2}}$$</span>
+כאשר עבור <span>\(\lvert \int_{a}^{b}P(t)\sin(x t)d t \rvert\)</span> נקבל מהגדרת הגבול כי קיים מספר ממשי <span>\(X\)</span> כך שלכל <span>\(x&gt; X\)</span> מתקיים:
+<span>$$\left|\int_{a}^{b}P(t)\sin(x t)d t\right|&lt;{\frac{\epsilon}{2}}$$</span>
+ולכן נקבל עבור <span>\(x&gt; X\)</span> כי:
+<span>$$\left|\int_{a}^{b}f(t)\sin(x t)d t\right|\leq\left|\int_{a}^{b}(f(t)-P(t))\sin(x t)d t\right|+\left|\int_{a}^{b}P(t)\sin(x t)d t\right|&lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon$$</span>
+כלומר מהגדרת הגבול קיבלנו כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}f(t)\sin(x t)d t=0$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">נוסחאת דירכלה</span><p><span>$$S_{N}(x)=\frac{1}{\pi}\int_{0}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u $$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x_{0}+u)D_{N}(u)d u$$</span>
+נחלק את האינטגרל לשתי תחומים מ-0 ל-<span>\(\pi\)</span> ומ-<span>\(-\pi\)</span> ל-0:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{-\pi}^{0}f(x_{0}+u)D_{N}(u)d u+\frac{1}{\pi}\int_{0}^{\pi}f(x_{0}+u)D_{N}(u)d u$$</span>
+נבצע החלפת משתנים. נגדיר <span>\(v=-u\)</span> ולכן <span>\(du=-dv\)</span>:
+<span>$$\int_{-\pi}^{0}f(x_{0}+u)D_{N}(u)d u=\int_{\pi}^{0}f(x_{0}-v)D_{N}(-v)(-d v)=\int_{0}^{\pi}f(x_{0}-v)D_{N}(v)d v$$</span>
+כאשר במעבר האחרון השתמשנו בזוגיות של גרעין דריכלה. כלומר סה"כ נקבל:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{0}^{\pi}[f(x_{0}+u)+f(x_{0}-u)]D_{N}(u)d u$$</span></p>
+</div>
+<p>כעת נוכיח את המשפט עצמו.</p>
+<div class="proof">
+<p>מנוסחאת דירכלה מתקיים:
+<span>$$S_{N}(x)=\frac{1}{\pi}\int_{0}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u $$</span>
+ולכן לכל <span>\(0&lt;\delta \leq \pi\)</span> מתקיים:
+<span>$$\begin{gather}S_{N}(x)-\frac{1}{\pi}\int_{0}^{\delta} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u=\\=\frac{1}{\pi}\int_{\delta}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u=\\=\frac{1}{\pi}\int_{\delta}^{\pi} \frac{f(x+u)+f(x-u)}{2\sin\left( \frac{u}{2} \right)}\sin\left( \left( N+\frac{1}{2} \right)u \right) \, \mathrm{d}u   
+\end{gather}$$</span>
+נגדיר <span>\(\varphi:[\delta,\pi]\to \mathbb{R}\)</span> על ידי:
+<span>$$\varphi(u)=\frac{f(x+u)+f(x-u)}{2\sin\left( \frac{u}{2} \right)}$$</span>
+כאשר <span>\(\varphi\)</span> אינטגרבילית ב-<span>\([\delta,\pi]\)</span> ולכן מהלמה של רימן נקבל:
+<span>$$\lim_{ N \to \infty } \frac{1}{\pi}\int_{\delta}^{\pi} \varphi(u)\sin\left( \left( N+\frac{1}{2} \right)u \right) \, \mathrm{d}u =0 $$</span></p>
+</div>
+<div class="lemma">
+<p><span>$$\frac{1}{\pi} \int_{0}^{\pi} D_N(u) du = \frac{1}{2}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור <span>\(f(x)=\frac{1}{2}\)</span> נקבל כי המקדמים של הטור פוריה יהיו <span>\(a_{0}=1,a_{n\geq 1}=b_{n}=0\)</span>. כלומר:
+<span>$$S_{N}(x)={\frac{a_{0}}{2}}+\sum_{n=1}^{N}(a_{n}\cos(n x)+b_{n}\sin(n x))={\frac{1}{2}}+\sum_{n=1}^{N}(0\cdot\cos(n x)+0\cdot\sin(n x))={\frac{1}{2}}+\sum_{n=1}^{N}(0\cdot\cos(n x)+0\cdot\sin(n x))$$</span>
+מהנוסחה של הסכום החלקי נקבל:
+<span>$$S_{N}(0)=\frac{1}{\pi}\int_{-\pi}^{\pi}f(0+u)D_{N}(u)d u\implies\frac{1}{2}=\frac{1}{\pi}\int_{-\pi}^{\pi}\frac{1}{2}D_{N}(u)d u$$</span>
+וכיוון ש-<span>\(D_{N}(u)\)</span> פונקציה זוגית נקבל:
+<span>$$\frac{1}{2}=\frac{1}{\pi}\int_{0}^{\pi}D_{N}(u)d u$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט ההתכנסות הנקודתית של טור פורייה</span><p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> אינטגרבילית רימן ב-<span>\([-\pi,\pi]\)</span> ומחזורית עם מחזור <span>\(2\pi\)</span>. תהי <span>\(x_{0} \in \mathbb{R}\)</span> כך ש-<span>\(f\)</span> מקיימת את תנאי ליפשיץ ב-<span>\(x_{0}\)</span>. כלומר קיימים הגבולות:
+<span>$$\lim_{ x \to x_{0}^{-} } f(x_{0}^{-})=f(x_{0}^{-})\qquad \lim_{ x \to x_{0}^{+} } f(x)=f(x_{0}^{+})$$</span>
+וגם <span>\(C&gt;0\)</span> ו-<span>\(0&lt;\delta \leq \pi\)</span> כך ש לכל <span>\(u \in (0,\delta)\)</span> מתקיים:
+<span>$$\lvert f(x_{0}+u)-f(x_{0}^{+}) \rvert \leq  Cu\qquad \lvert f(x_{0}-u)-f(x_{0}^{-}) \rvert \leq  Cu$$</span>
+אזי:
+<span>$$S_{N}(x_{0})\to \frac{1}{2}[f(x_{0}^{-})+f(x_{0}^{+})]$$</span>
+בפרט אם <span>\(f\)</span> גזירה מימין ומשמאל בנקודה <span>\(x_{0}\)</span> נקבל <span>\(S_{N}(x_{0})\to f(x_{0})\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסתכל על:
+<span>$$S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]=\frac{1}{\pi}\int_{0}^{\pi}\left([f(x_{0}+u)+f(x_{0}-u)]-[f(x_{0}^{+})+f(x_{0}^{-})]\right)D_{N}(u)\mathrm{d} u$$</span>
+כאשר החלפנו את <span>\(\frac{1}{2}\)</span> ב-<span>\(\frac{1}{2}=\frac{1}{\pi}\int_{0}^{\pi}D_{N}(u)d u\)</span>. נגדיר:
+<span>$$\Phi(u) = \frac{f(x_0+u)+f(x_0-u)-f(x_0^{+})-f(x_0^{-})}{2\sin(u/2)}$$</span>
+כך ש:
+<span>$$S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]=\frac{1}{\pi}\int_{0}^{\pi}\Phi(u)\sin\left(\left(N+\frac{1}{2}\right)u\right)d u$$</span>
+נרצה להראות את האינטגרביליות של <span>\(\Phi(u)\)</span> ולשם כך נשתמש בליפשיציות. מתקיים מאי שיוויון המשולש:
+<span>$$|f(x_{0}+u)-f(x_{0}^{+})+f(x_{0}-u)-f(x_{0}^{-})|\leq|f(x_{0}+u)-f(x_{0}^{+})|+|f(x_{0}-u)-f(x_{0}^{-})|\leq C u+C u=2C u$$</span>
+ולכן עבור <span>\(u \in (0,\delta)\)</span> נקבל:
+<span>$$|\Phi(u)|=\left|{\frac{f(x_{0}+u)+f(x_{0}-u)-f(x_{0}^{+})-f(x_{0}^{-})}{2\sin(u/2)}}\right|\leq{\frac{2C u}{2\sin(u/2)}}={\frac{C u}{\sin(u/2)}}$$</span>
+וכיוון ש-<span>\(\frac{u}{\sin\left( \frac{u}{2} \right)}\xrightarrow{u\to 0} 2\)</span> נקבל כי חסום ולכן מוגדר ואינטגרבילי. 
+מהלמה של רימן נקבל:
+<span>$$\operatorname*{lim}_{N\to\infty}\int_{0}^{\pi}\Phi(u)\sin\left(\left(N+\frac{1}{2}\right)u\right)d u=0\implies \operatorname*{lim}_{N\to\infty}\left(S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]\right)=\frac{1}{\pi}\cdot0=0$$</span>
+כלומר כאשר <span>\(N\to \infty\)</span> מתקיים:
+<span>$$S_{N}(x_{0})\to\frac{1}{2}[f(x_{0}^{-})+f(x_{0}^{+})]$$</span></p>
+</div><h2 id='Functional Analysis_2_5'>משפט פייר</h2>
+ <div class="theorem"><span class="keyword">פייר</span><p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> פונקציה אינטגרבילית עם מחזור <span>\(2\pi\)</span> על <span>\([-\pi,\pi]\)</span>. נסמן ב-<span>\(S_{n}(x)\)</span> את הסכום החלקי ה-<span>\(n\)</span> של הטור פורייה. נגדיר:
+<span>$$\sigma_{N}(x)\ {\stackrel{\mathrm{def}}{=}}\ {\frac{1}{N+1}}\sum_{n=0}^{N}S_{n}(x)$$</span>
+אזי:</p>
+<ol>
+<li>
+<p>אם <span>\(f\)</span> רציפה על <span>\(\mathbb{R}\)</span> אז <span>\(\sigma_{N}\to f\)</span> במידה אחידה על <span>\(\mathbb{R}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(f\)</span> רציפה ב-<span>\(x_{0} \in \mathbb{R}\)</span> אזי: 
+<span>$$\lim_{ N \to \infty } \sigma_{N}(x_{0})=f(x_{0})$$</span></p>
+</li>
+</ol>
+</div>
+<p>תהי <span>\(f\)</span> מ-<span>\(R\)</span> ל-<span>\(R\)</span> פונקציה אינטגרבילית עם מחזור <span>\(2\pi\)</span> על הקטע הסגור ממינוס פאי ל-פאי. אזי אם <span>\(f\)</span> רציפה על <span>\(R\)</span> הטור פייר מתכנס במידה שווה על <span>\(R\)</span>.</p>
+<div class="lemma"><span class="keyword">גרעין פייר</span><p>מתקיים:
+<span>$$\sigma_{N}(x)=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x+u)K_{N}(u)d u$$</span>
+כאשר:
+<span>$$K_{N}(u)={\frac{1}{N+1}}{\frac{\sin^{2}\left({\frac{N+1}{2}}u\right)}{2\sin^{2}\left({\frac{u}{2}}\right)}}$$</span>
+ומקיים את התכונות הבאות:</p>
+<ol>
+<li>
+<p>אי שלילי. </p>
+</li>
+<li>
+<p>אינטגרל בתחום <span>\([-\pi,\pi]\)</span> יהיה 1. </p>
+</li>
+<li>
+<p>מרוכז - לכל <span>\(0&lt;\delta\leq \pi\)</span> מקיים: 
+<span>$$\int_{|x|&gt;\delta} K_{N}(x)  \, \mathrm{d}x \xrightarrow{N\to \infty} 0$$</span></p>
+</li>
+</ol>
+</div>
+<p>נוכיח כעת את המשפט</p>
+<div class="proof">
+<p>נראה חלק 2 - התכנסות נקודתית. נסתכל על ההפרש:
+<span>$$\sigma_{N}(x_{0})-f(x_{0})=\frac{1}{\pi}\int_{-\pi}^{\pi}(f(x_{0}+u)-f(x_{0}))K_{N}(u)d u$$</span>
+ולכן מספיק להראות שהאינטגרל מתכנס ל-0. יהי <span>\(\varepsilon&gt; 0\)</span>. כיוון ש-<span>\(f\)</span> רציפה סביב <span>\(x_{0}\)</span>  קיים <span>\(\delta&gt; 0\)</span> כך ש:
+<span>$$\lvert x_{0}-x \rvert &lt;\delta\implies \lvert f(x_{0})-f(x) \rvert &lt;\varepsilon$$</span>
+ולכן:
+<span>$$-\delta+x_{0}&lt;x&lt;\delta+x_{0}\implies \varepsilon -f(x_{0})&lt;f(x)&lt;\varepsilon+f(x_{0})$$</span>
+ולכן:
+<span>$$\int_{x_{0}-\delta}^{x_{0}+\delta}(f(x_{0}+u)-f(x_{0}))K_{N}(u)d u\leq \int_{x_{0}-\delta}^{x_{0}+\delta}(f(x_{0})+\varepsilon-f(x_{0}))K_{N}(u)d u&lt;2\varepsilon \delta$$</span>
+ולכן קטן כרצונינו. כעת נסתכל על:
+<span>$$\int_{|x_{0}-x|&gt;\delta}(f(x_{0}+u)-f(x_{0}))K_{N}(u)d u-$$</span></p>
+</div>
+<p>נחלק את האינטגרל לשתי תחומים - בסביבה <span>\([-\delta,\delta]\)</span> ובסביבת <span>\(x\geq|\delta|\)</span>. עבור <span>\(x \in [-\delta,\delta]\)</span> כיוון ש-<span>\(f\)</span> רציפה</p>
+        </body>
+    </html>
+    

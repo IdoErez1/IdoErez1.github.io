@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אלגבראות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משפט המבנה למודולים מעל PID</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 צורת סמית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 משפט המבנה למודולים נוצרים סופית מעל PID</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 מסקנות ממשפט המיון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. אלגברות חילוק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_5'>5.5 פי אדים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. אלגבראות פשוטות מרכזיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_2'>6.2 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_4'>6.4 חבורת בראוור</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_6'>6.6 משפט המרכז</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורת בראוור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_5_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_5_1`; }});</script>
+        <div class="content">
+        <h1>5.2  אלגבראות</h1>
+    <div class="definition"><span class="keyword">אלגברה</span><p>יהי <span>\(\mathbb{F}\)</span> שדה. <span>\(\mathbb{F}\)</span> אלגברה הוא חוג <span>\(R\)</span> עם <span>\(\mathbb{F} \subseteq Z(R), \mathbb{F} \hookrightarrow Z(R)\)</span>(זה גורר <span>\(R\)</span> גם מרחב ווקטורי מעל <span>\(\mathbb{F}\)</span>). אנחנו גם נדרוש <span>\(\dim_{\mathbb{F}}R&lt;\infty\)</span>.</p>
+</div>
+<div class="remark">
+<p>השיכון <span>\(\varphi : \mathbb{F} \to Z(R)\)</span> מאפשר לנו להגדיר כפל בסקלר בצורה שאנחנו רוצים. כיוון ש-<span>\(\varphi\)</span> הומומורפיזם של חוגים משמר חיבור, כפל, וממפה יחידה <span>\(1_{\mathbb{F}} \mapsto 1_R\)</span>. כיוון שהתמונה היא <span>\(Z(R)\)</span> כל <span>\(\varphi(\lambda)\)</span> מתחלף עם כל האיברים של <span>\(R\)</span>. לכן ניתן להגדיר כפל בסקלר על ידי:
+<span>$$\lambda \cdot r := \varphi\left( \lambda \right)r$$</span></p>
+</div>
+<div class="remark">
+<p>זוהי למעשה הגדרה של אלגברה מעל שדה. קיימת הגדרה כללית יותר של אלגברה מעל חוג כללי - עבור <span>\(S\)</span> חוג, <span>\(S\)</span>-אלגברה הוא חוג <span>\(R\)</span> עם בחירה של הומומורפיזם <span>\(\iota:S\to Z(R)\)</span>. אנחנו לא נשתמש בהגדרה זו - אותנו נתעניין במקרה שבו <span>\(S\)</span> שדה ובמקרה זה הומומורפיזם הוא שיכון.</p>
+</div>
+<div class="example">
+<p>המטריצות הסקלאריות:
+<span>$$\mathbb{F} \subseteq M_{n}(\mathbb{F} )$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">הגדרה שקולה לאלגברה</span><p>אלגברה מעל שדה <span>\(K\)</span> היא זוג <span>\(\left( A,\mu \right)\)</span> כאשר <span>\(A\)</span> הוא מרחב ווקטורי מעל <span>\(K\)</span> ו-<span>\(\mu:A\times A\to A\)</span> היא העתקה <span>\(K\)</span> לינארית אוסצייטיבית אשר נקרא כלל המכפלה. </p>
+</div>
+<div class="proof">
+<p>נראה שהתכונות של אלגברה מקיימות את התכונות של מרחב ווקטורי:</p>
+<ol>
+<li>
+<p>פלוג מעל ווקטורים: 
+<span>$$\lambda\cdot(r+s)=\varphi(\lambda)(r+s)=\varphi(\lambda)r+\varphi(\lambda)s=\lambda\cdot r+\lambda\cdot s$$</span></p>
+</li>
+<li>
+<p>פילוג מעל סקלרים: 
+<span>$$(\lambda+\mu)\cdot r=\varphi(\lambda+\mu)r=(\varphi(\lambda)+\varphi(\mu))r=\varphi(\lambda)r+\varphi(\mu)r=\lambda\cdot r+\mu\cdot r$$</span></p>
+</li>
+<li>
+<p>אסוצייטיביות של מכפלה סקלרית: 
+<span>$$\lambda\cdot(\mu\cdot r)=\varphi(\lambda)(\varphi(\mu)r)=(\varphi(\lambda)\varphi(\mu))r=\varphi(\lambda\mu)r=(\lambda\mu)\cdot r$$</span></p>
+</li>
+<li>
+<p>יחידה כפלית: 
+<span>$$1\cdot r=\varphi(1)r=1_{R}r=r$$</span>
+ולכן נקבל כי <span>\(R\)</span> אכן מרחב ווקטורי. נראה כי מכפלה היא תבנית בילינארית. נשים לב כי:
+<span>$$\mu(\lambda r,s)=(\lambda\cdot r)s=(\varphi(\lambda)r)s=\varphi(\lambda)(r s)=\lambda\cdot(r s)=\lambda\mu(r,s)$$</span>
+כלומר לינארי במשתנה הראשון. וכן:
+<span>$$\mu(r,\lambda s)=r(\lambda\cdot s)=r(\varphi(\lambda)s)=\varphi(\lambda)(r s)=\lambda\cdot(r s)=\lambda\mu(r,s)$$</span>
+ולכן לינארי במשתנה השני.</p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">אלגברה קומוטטיבית</span><p>אלגברה שבו המכפלה המוגדרת היא קומוטטיבית.</p>
+</div>
+<div class="example"><span class="keyword">חוג הפולינומים</span><p>עבור שדה <span>\(K\)</span> החוג <span>\(K[x]\)</span> היא אלגברה קומוטטיבית מעל שדה <span>\(K\)</span>.</p>
+</div>
+<div class="example">
+<p>אם <span>\(L / K\)</span> הרחבת שדות אז <span>\(L\)</span> היא אלגברה קומוטטיבית מעל <span>\(K\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">מרכז של אלגברה</span><p><span>$$Z(A)=\{z\in A\mid a z=z a{\mathrm{~for~all~}}a\in A\}$$</span></p>
+</div>
+<div class="remark">
+<p>כל חוג חילוק הוא אלגברה מעל המרכז שלו, אבל אולי אינסוף מימדית. אנחנו נחקור את הסוף מימדית. לכן כאשר נתייחס לאלגברת חילוק(אלגברה שהיא חוג חילוק) נתכוון למקרה הסוף מימדי.</p>
+</div>
+<div class="example">
+<p>אלגברת המטריצות <span>\(M_{n}(K)\)</span> כאשר <span>\(K\)</span> שדה יהיה עם מרחב <span>\(K\)</span> - כאשר <span>\(K\)</span> מייצג את המטריצות הסקלאריות.</p>
+</div>
+<div class="reminder">
+<p>ווברברן הראה שאין חוגי חילוק סופיים מלבד שדות.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mathbb{F}=\overline{F}\)</span> אז אין אלגבראות חילוק מעל <span>\(\mathbb{F}\)</span> מלבד <span>\(\mathbb{F}\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(D\supsetneq \mathbb{F}\)</span> היא <span>\(\mathbb{F}\)</span> אלגברה וחוג חילוק, ניקח <span>\(x \in D \setminus \mathbb{F}\)</span> ואז <span>\(\mathbb{F}(x)=\mathbb{F}[x]\)</span> שדה כי <span>\(\mathbb{F}\subseteq Z(D)\)</span> וזה סתירה לכך ש-<span>\(\mathbb{F}=\overline{\mathbb{F}}\)</span>. </p>
+</div>
+<div class="definition"><span class="keyword">מורפיזם של אלגבראות</span><p>יהי <span>\(A\)</span> אלגברה מעל שדה <span>\(K\)</span>. העתקה <span>\(K\)</span> לינארית <span>\(f:A\to B\)</span> המקיימת לכל <span>\(a,a' \in A\)</span>:
+<span>$$f(aa')=f(a)f(a')$$</span>
+כלומר העתקה לינארית אשר משמרת גם כפל.</p>
+</div>
+<div class="definition"><span class="keyword">תת אלגברה</span><p>יהי <span>\(A\)</span> אלגברה. תת מרחב ווקטורי <span>\(B\)</span> של <span>\(A\)</span> אשר סגור למכפלה נקראת תת אלגברה.</p>
+</div>
+<div class="proposition">
+<ol>
+<li>
+<p>חיתוך של קבוצה של תתי אלגברות היא תת אלגברה. </p>
+</li>
+<li>
+<p>התמונה של מורפיזם של אלגבראות <span>\(f:A\to B\)</span> היא תת אלגברה. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>עבור אלגברה <span>\(A\)</span> מעל שדה <span>\(K\)</span> מכלל המכפלה מתקיים לכל <span>\(a \in A\)</span> ו-<span>\(\lambda \in K\)</span> כי:
+<span>$$(\lambda{\cdot}1_{A})a=1_{A}(\lambda{\cdot}a)=(\lambda{\cdot}a)1_{A}=a(\lambda{\cdot}1_{A})$$</span>
+ולכן <span>\(K\cdot 1_{A}\subseteq Z(A)\)</span> וכן <span>\(K\cdot 1_{A}\)</span> היא תת אלגברה של <span>\(Z(A)\)</span>. לכן ההעתקה:
+<span>$$K\mapsto Z(A)\qquad \lambda \mapsto \lambda \cdot 1_{A}$$</span>
+היא מורפיזם לא טריוויאלי.</p>
+</div>
+<div class="definition"><span class="keyword">מרכז - centralizer</span><p>תהי <span>\(A\)</span> אלגברה ו-<span>\(B\subseteq A\)</span> תת קבוצה אז המרכז יהיה:
+<span>$$C_{A}(B)=\{a\in A\mid a b=b a{\mathrm{~for~all~}}b\in B\}$$</span>
+כאשר זה תת אלגברה של <span>\(A\)</span> ומקיים <span>\(C_{A}(A)=Z(A)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אלגברת חילוק</span><p>אלגברה אשר החוג בו הוא חוג חילוק - כלומר לכל איבר פרט לאפס יש הופכי כפלי.</p>
+</div>
+<div class="definition"><span class="keyword">אלגברה מתפצלת</span><p>אלגברה נקראת מתפצלת אם איזומורפית לאלגברת מטריצות.</p>
+</div>
+<div class="definition"><span class="keyword">אלגברה הפוכה</span><p>תהי <span>\(A\)</span> אלגברה. ניתן להגדיר את הקבוצה:
+<span>$$A^{o p}=\{a^{o p}\mid a\in A\}$$</span>
+ביחד עם הפעולות:
+<span>$$k\times A^{o p}\longrightarrow A^{o p}\qquad (\lambda,a^{o p})\longmapsto(\lambda{\cdot}a)^{o p}$$</span>
+<span>$$A^{o p}\times A^{o p}\longrightarrow A^{o p}\qquad (a_{1}^{o p},a_{2}^{o p})\longmapsto(a_{1}+a_{2})^{o p}$$</span>
+<span>$$A^{o p}\times A^{o p}\longrightarrow A^{o p}\qquad (a_{1}^{o p},a_{2}^{o p})\longmapsto(a_{2}a_{1})^{o p}$$</span>
+וזה יוצר אלגברה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='prev-page'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+<li class='parent-page'><a href='./Functional Analysis'> אנליזה פונקציונאלית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. התכנסות של סדרת פונקציות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_1'>1.1 חסימות טוטלית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_2'>1.2 רציפות וחסימות במידה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_1_3'>1.3 משפט הקירוב של ווירשטראס וסטון וירשטראס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. טורי פורייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_1'>2.1 מרחבי מכפלה פנימית</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_2'>2.2 מערכת אורתונורמלית וטור פורייה כללי</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_4'>2.4 עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Functional Analysis_2_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Functional Analysis_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  עקרון הלוקאליות והתכנסות נקודתית של טור פורייה</h1>
+    <div class="proposition"><span class="keyword">עקרון הלוקאליות של טור פוריה ביחס למערכת הטריגונומטרית האורתונורמלית</span><p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> אינטגרבילית רימן ב-<span>\([-\pi,\pi]\)</span> ומחזורית עם מחזור <span>\(2\pi\)</span>. נגדיר:
+<span>$$S_{N}(x)=\frac{a_{0}}{2}+\sum_{n=1}^{N} a_{n}\cos(nx)+\sum_{n=1}^{N} b_{n}\sin(nx)$$</span>
+כאשר:
+<span>$$a_{n}=\frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\cos(nt) \, \mathrm{d}t\qquad b_{n}=\frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\sin(nt) \, \mathrm{d}t  $$</span>
+אזי לכל <span>\(0&lt;\delta \leq \pi\)</span> מתקיים:
+<span>$$\lim_{ N \to \infty } \left[ S_{N}(x_{0})-\frac{1}{\pi}\int_{0}^{\delta} (f(x_{0}+u)-f(x_{0}-u))D_{N}(u) \, \mathrm{d}u  \right]=0$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">הלמה של רימן</span><p>עבור <span>\(f\)</span> כנ"ל מתקיים:
+<span>$$\lim_{ \omega \to \infty } \int_{-\pi}^{\pi} f(t)\sin(\omega t) \, \mathrm{d}t=0 $$</span></p>
+</div>
+<p>יש דרכים יותר פשוטות להוכיח את זה אבל לשם החוויה נוכיח עם משפט הקירוב של ווירשטראס.</p>
+<div class="proof">
+<p>ראשית נראה את הטענה עבור פולינומים. יהי <span>\(P(t)\)</span> פולינום מסדר <span>\(n\)</span>. נראה כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}P(t)\sin(x t)d t=0$$</span>
+בעזרת אינדוקציה על דרגת הפולינום. עבור הבסיס של האינטרוקציה נניח כי <span>\(n=0\)</span> ולכן הפולינום יהיה מהצורה <span>\(P(x)=c\)</span>. כעת האינטגרל הנתון יהיה:
+<span>$$\int_{a}^{b}c\sin(x t)d t=c\left[-{\frac{\cos(x t)}{x}}\right]_{a}^{b}=c\left(-{\frac{\cos(x b)}{x}}+{\frac{\cos(x a)}{x}}\right)={\frac{c}{x}}(\cos(x a)-\cos(x b))$$</span>
+כאשר אם ניקח את הגבול <span>\(x\to \infty\)</span> נקבל פונקציה חסומה כפול אפסה ולכן מתאפס והטענה מתקיימת.
+כעת נניח כי מתקיים עבור כל הפולינומים עד דרגה <span>\(k\)</span>. כלומר לכל פולינום <span>\(Q(t)\)</span> מדרגה לכל היותר <span>\(k\)</span> מתקיים:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}Q(t)\sin(x t)d t=0$$</span>
+יהי <span>\(P(t)\)</span> פולינום מדרגה <span>\(k+1\)</span>. ניתן לכתוב <span>\(P(t)=a\cdot t^{k+1}+Q(t)\)</span> כאשר <span>\(a\)</span> זה המקדם המוביל ו-<span>\(Q(t)\)</span> זה פולינום מדרגה של לכל היותר <span>\(k\)</span>. מלינאריות האינטגרל האינטגרל על <span>\(Q(t)\)</span> מתאפס ולכן מספיק להראות כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b} a \cdot t^{k+1}\sin(x t)d t=0 \iff\operatorname*{lim}_{x\to\infty}\int_{a}^{b}t^{k+1}\sin(x t)d t=0$$</span>
+מאינטגרציה בחלקים נקבל:
+<span>$$\begin{gather}\int_{a}^{b}t^{k+1}\sin(x t)d t=\left[-t^{k+1}{\frac{\cos(x t)}{x}}\right]_{a}^{b}-\int_{a}^{b}\left(-{\frac{\cos(x t)}{x}}\right)(k+1)t^{k}d t \\=\left(-{\frac{b^{k+1}\cos(x b)}{x}}+{\frac{a^{k+1}\cos(x a)}{x}}\right)+{\frac{k+1}{x}}\int_{a}^{b}t^{k}\cos(x t)d t
+\end{gather}$$</span>
+נשים לב כי הביטוי האינטגרלי מתאפס מהנחה אינדוקציה, כאשר הגבול:
+<span>$$\operatorname*{lim}_{x\to\infty}\left(-{\frac{b^{k+1}\cos(x b)}{x}}+{\frac{a^{k+1}\cos(x a)}{x}}\right)$$</span>
+מתאפס כיוון שכל אחד מהנסכמים מתאפס מחסומה כפול אפסה. לכן הטענה מתקיימת עבור פולינום כללי.
+כעת נראה נכונות עבור פונקציה כללי. יהי <span>\(\varepsilon&gt; 0\)</span>. ממשפט ווירשטראס ניתן לקרב על ידי פולינום <span>\(P(t)\)</span> במידה שווה, כלומר עבור <span>\(\frac{\varepsilon}{2(b-a)}\)</span> נקבל כי:
+<span>$$||f-P||_{\infty}&lt;\frac{\epsilon}{2(b-a)} \iff \forall t \in [a,b]\quad |f(t)-P(t)|&lt;{\frac{\epsilon}{2(b-a)}}$$</span>
+כעת מתקיים:
+<span>$$\begin{gather}\lvert  \int_{a}^{b}{f(t)\sin(x t)d t} \rvert=\lvert \int_{a}^{b}(f(t)-P(t)+P(t))\sin(x t)d t \rvert \leq  \\\leq \lvert \int_{a}^{b}(f(t)-P(t))\sin(x t)d t \rvert +\lvert \int_{a}^{b}P(t)\sin(x t)d t \rvert
+\end{gather}$$</span>
+כאשר נשים לב כי:
+<span>$$\left|\int_{a}^{b}(f(t)-P(t))\sin(x t)d t\right|\leq\int_{a}^{b}|f(t)-P(t)||\sin(x t)|d t&lt;\int_{a}^{b}{\frac{\epsilon}{2(b-a)}}\cdot1d t={\frac{\epsilon}{2(b-a)}}(b-a)={\frac{\epsilon}{2}}$$</span>
+כאשר עבור <span>\(\lvert \int_{a}^{b}P(t)\sin(x t)d t \rvert\)</span> נקבל מהגדרת הגבול כי קיים מספר ממשי <span>\(X\)</span> כך שלכל <span>\(x&gt; X\)</span> מתקיים:
+<span>$$\left|\int_{a}^{b}P(t)\sin(x t)d t\right|&lt;{\frac{\epsilon}{2}}$$</span>
+ולכן נקבל עבור <span>\(x&gt; X\)</span> כי:
+<span>$$\left|\int_{a}^{b}f(t)\sin(x t)d t\right|\leq\left|\int_{a}^{b}(f(t)-P(t))\sin(x t)d t\right|+\left|\int_{a}^{b}P(t)\sin(x t)d t\right|&lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon$$</span>
+כלומר מהגדרת הגבול קיבלנו כי:
+<span>$$\operatorname*{lim}_{x\to\infty}\int_{a}^{b}f(t)\sin(x t)d t=0$$</span></p>
+</div>
+<div class="lemma"><span class="keyword">נוסחאת דירכלה</span><p><span>$$S_{N}(x)=\frac{1}{\pi}\int_{0}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u $$</span></p>
+</div>
+<div class="proof">
+<p>נזכור כי:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x_{0}+u)D_{N}(u)d u$$</span>
+נחלק את האינטגרל לשתי תחומים מ-0 ל-<span>\(\pi\)</span> ומ-<span>\(-\pi\)</span> ל-0:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{-\pi}^{0}f(x_{0}+u)D_{N}(u)d u+\frac{1}{\pi}\int_{0}^{\pi}f(x_{0}+u)D_{N}(u)d u$$</span>
+נבצע החלפת משתנים. נגדיר <span>\(v=-u\)</span> ולכן <span>\(du=-dv\)</span>:
+<span>$$\int_{-\pi}^{0}f(x_{0}+u)D_{N}(u)d u=\int_{\pi}^{0}f(x_{0}-v)D_{N}(-v)(-d v)=\int_{0}^{\pi}f(x_{0}-v)D_{N}(v)d v$$</span>
+כאשר במעבר האחרון השתמשנו בזוגיות של גרעין דריכלה. כלומר סה"כ נקבל:
+<span>$$S_{N}(x_{0})=\frac{1}{\pi}\int_{0}^{\pi}[f(x_{0}+u)+f(x_{0}-u)]D_{N}(u)d u$$</span></p>
+</div>
+<p>כעת נוכיח את המשפט עצמו.</p>
+<div class="proof">
+<p>מנוסחאת דירכלה מתקיים:
+<span>$$S_{N}(x)=\frac{1}{\pi}\int_{0}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u $$</span>
+ולכן לכל <span>\(0&lt;\delta \leq \pi\)</span> מתקיים:
+<span>$$\begin{gather}S_{N}(x)-\frac{1}{\pi}\int_{0}^{\delta} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u=\\=\frac{1}{\pi}\int_{\delta}^{\pi} [f(x+u)+f(x-u)]D_{N}(u) \, \mathrm{d}u=\\=\frac{1}{\pi}\int_{\delta}^{\pi} \frac{f(x+u)+f(x-u)}{2\sin\left( \frac{u}{2} \right)}\sin\left( \left( N+\frac{1}{2} \right)u \right) \, \mathrm{d}u   
+\end{gather}$$</span>
+נגדיר <span>\(\varphi:[\delta,\pi]\to \mathbb{R}\)</span> על ידי:
+<span>$$\varphi(u)=\frac{f(x+u)+f(x-u)}{2\sin\left( \frac{u}{2} \right)}$$</span>
+כאשר <span>\(\varphi\)</span> אינטגרבילית ב-<span>\([\delta,\pi]\)</span> ולכן מהלמה של רימן נקבל:
+<span>$$\lim_{ N \to \infty } \frac{1}{\pi}\int_{\delta}^{\pi} \varphi(u)\sin\left( \left( N+\frac{1}{2} \right)u \right) \, \mathrm{d}u =0 $$</span></p>
+</div>
+<div class="lemma">
+<p><span>$$\frac{1}{\pi} \int_{0}^{\pi} D_N(u) du = \frac{1}{2}$$</span></p>
+</div>
+<div class="proof">
+<p>עבור <span>\(f(x)=\frac{1}{2}\)</span> נקבל כי המקדמים של הטור פוריה יהיו <span>\(a_{0}=1,a_{n\geq 1}=b_{n}=0\)</span>. כלומר:
+<span>$$S_{N}(x)={\frac{a_{0}}{2}}+\sum_{n=1}^{N}(a_{n}\cos(n x)+b_{n}\sin(n x))={\frac{1}{2}}+\sum_{n=1}^{N}(0\cdot\cos(n x)+0\cdot\sin(n x))={\frac{1}{2}}+\sum_{n=1}^{N}(0\cdot\cos(n x)+0\cdot\sin(n x))$$</span>
+מהנוסחה של הסכום החלקי נקבל:
+<span>$$S_{N}(0)=\frac{1}{\pi}\int_{-\pi}^{\pi}f(0+u)D_{N}(u)d u\implies\frac{1}{2}=\frac{1}{\pi}\int_{-\pi}^{\pi}\frac{1}{2}D_{N}(u)d u$$</span>
+וכיוון ש-<span>\(D_{N}(u)\)</span> פונקציה זוגית נקבל:
+<span>$$\frac{1}{2}=\frac{1}{\pi}\int_{0}^{\pi}D_{N}(u)d u$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">משפט ההתכנסות הנקודתית של טור פורייה</span><p>תהי <span>\(f:\mathbb{R}\to \mathbb{R}\)</span> אינטגרבילית רימן ב-<span>\([-\pi,\pi]\)</span> ומחזורית עם מחזור <span>\(2\pi\)</span>. תהי <span>\(x_{0} \in \mathbb{R}\)</span> כך ש-<span>\(f\)</span> מקיימת את תנאי ליפשיץ ב-<span>\(x_{0}\)</span>. כלומר קיימים הגבולות:
+<span>$$\lim_{ x \to x_{0}^{-} } f(x_{0}^{-})=f(x_{0}^{-})\qquad \lim_{ x \to x_{0}^{+} } f(x)=f(x_{0}^{+})$$</span>
+וגם <span>\(C&gt;0\)</span> ו-<span>\(0&lt;\delta \leq \pi\)</span> כך ש לכל <span>\(u \in (0,\delta)\)</span> מתקיים:
+<span>$$\lvert f(x_{0}+u)-f(x_{0}^{+}) \rvert \leq  Cu\qquad \lvert f(x_{0}-u)-f(x_{0}^{-}) \rvert \leq  Cu$$</span>
+אזי:
+<span>$$S_{N}(x_{0})\to \frac{1}{2}[f(x_{0}^{-})+f(x_{0}^{+})]$$</span>
+בפרט אם <span>\(f\)</span> גזירה מימין ומשמאל בנקודה <span>\(x_{0}\)</span> נקבל <span>\(S_{N}(x_{0})\to f(x_{0})\)</span>.</p>
+</div>
+<div class="proof">
+<p>נסתכל על:
+<span>$$S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]=\frac{1}{\pi}\int_{0}^{\pi}\left([f(x_{0}+u)+f(x_{0}-u)]-[f(x_{0}^{+})+f(x_{0}^{-})]\right)D_{N}(u)\mathrm{d} u$$</span>
+כאשר החלפנו את <span>\(\frac{1}{2}\)</span> ב-<span>\(\frac{1}{2}=\frac{1}{\pi}\int_{0}^{\pi}D_{N}(u)d u\)</span>. נגדיר:
+<span>$$\Phi(u) = \frac{f(x_0+u)+f(x_0-u)-f(x_0^{+})-f(x_0^{-})}{2\sin(u/2)}$$</span>
+כך ש:
+<span>$$S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]=\frac{1}{\pi}\int_{0}^{\pi}\Phi(u)\sin\left(\left(N+\frac{1}{2}\right)u\right)d u$$</span>
+נרצה להראות את האינטגרביליות של <span>\(\Phi(u)\)</span> ולשם כך נשתמש בליפשיציות. מתקיים מאי שיוויון המשולש:
+<span>$$|f(x_{0}+u)-f(x_{0}^{+})+f(x_{0}-u)-f(x_{0}^{-})|\leq|f(x_{0}+u)-f(x_{0}^{+})|+|f(x_{0}-u)-f(x_{0}^{-})|\leq C u+C u=2C u$$</span>
+ולכן עבור <span>\(u \in (0,\delta)\)</span> נקבל:
+<span>$$|\Phi(u)|=\left|{\frac{f(x_{0}+u)+f(x_{0}-u)-f(x_{0}^{+})-f(x_{0}^{-})}{2\sin(u/2)}}\right|\leq{\frac{2C u}{2\sin(u/2)}}={\frac{C u}{\sin(u/2)}}$$</span>
+וכיוון ש-<span>\(\frac{u}{\sin\left( \frac{u}{2} \right)}\xrightarrow{u\to 0} 2\)</span> נקבל כי חסום ולכן מוגדר ואינטגרבילי. 
+מהלמה של רימן נקבל:
+<span>$$\operatorname*{lim}_{N\to\infty}\int_{0}^{\pi}\Phi(u)\sin\left(\left(N+\frac{1}{2}\right)u\right)d u=0\implies \operatorname*{lim}_{N\to\infty}\left(S_{N}(x_{0})-\frac{1}{2}[f(x_{0}^{+})+f(x_{0}^{-})]\right)=\frac{1}{\pi}\cdot0=0$$</span>
+כלומר כאשר <span>\(N\to \infty\)</span> מתקיים:
+<span>$$S_{N}(x_{0})\to\frac{1}{2}[f(x_{0}^{-})+f(x_{0}^{+})]$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Functional Analysis_2_5'>2.5 משפט פייר</a></li>
+<li class='prev-page'><a href='./Functional Analysis_2_3'>2.3 טור פורייה טריגונומטרי - ממשי ומרוכב</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>חבורת בראוור</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משפט המבנה למודולים מעל PID</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 צורת סמית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 משפט המבנה למודולים נוצרים סופית מעל PID</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 מסקנות ממשפט המיון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. אלגברות חילוק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_5'>5.5 פי אדים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. אלגבראות פשוטות מרכזיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_2'>6.2 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_4'>6.4 חבורת בראוור</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_6'>6.6 משפט המרכז</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורת בראוור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_6_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_6_3`; }});</script>
+        <div class="content">
+        <h1>6.4  חבורת בראוור</h1>
+    <div class="definition"><span class="keyword">שקילות בראוור</span><p>יהי <span>\(F\)</span> שדה. נגדיר <span>\(\sim\)</span> על כל ה-<span>\(F\)</span> CSA בצורה הבאה:
+<span>$$A\sim  B$$</span>
+אם
+<span>$$M_{n}(A)\sim  M_{m}(B)$$</span>
+ל-<span>\(m,n\)</span> כלשהם.</p>
+</div>
+<div class="example">
+<p>לכל אלגברת חילוק מרכזית <span>\(D\)</span> נקבל
+<span>$$D\sim  M_{2}(D)\sim  M_{3}(D)\sim \dots$$</span>
+זה אומר שמחלקות השקילות של <span>\(\sim\)</span> הם טיפוסי האיזומורפיזם של אלגבראות חילוק מרכזיות.</p>
+</div>
+<div class="definition"><span class="keyword">חבורת בראוור</span><p>חברת בראוור של <span>\(F\)</span> היא מחלקות השקילות של CSA מעל <span>\(F\)</span> עם הפעולה <span>\(\otimes_{F}\)</span>. מסומן <span>\(\text{Br}(F)\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(A\sim A'\)</span> אז <span>\(A\otimes B\sim A'\otimes B\)</span>.</p>
+</div>
+<div class="corollary">
+<p><span>$$M_{n}(A\otimes B)\cong  M_{n}(A)\otimes B\cong  M_{m}(A')\otimes B\cong M_{m}(A'\otimes B)$$</span></p>
+</div>
+<p>אסוצייטיביות נובע מאסוצייטיביות של <span>\(\otimes\)</span>. כדי למצוא הופכי ראשית נדרש למצוא יחידה:
+<span>$$F\otimes_{F}A\cong  A$$</span>
+ולכן <span>\(F\)</span> הוא איבר היחידה. כעת ההופכי יהיה:
+<span>$$A\otimes _{F}A^{\text{op}}\cong  \mathrm{End} _{F}(A)\cong M_{\dim A}(F)\sim  F$$</span></p>
+<div class="example">
+<p><span>$$\text{Br}(\mathbb{R})=\{ \mathbb{R},\mathbb{H}  \}\cong  \mathbb{Z} / 2$$</span>
+<span>$$\mathrm{Br}(\mathbb{F} _{p})=1=\mathrm{Br}(\mathbb{C})$$</span>
+<span>$$\mathrm{Br}(\mathbb{Q} _{p})\cong \mathbb{Q} / \mathbb{Z}$$</span></p>
+</div>
+<div class="example">
+<p>לגבי <span>\(\mathrm{Br}(\mathbb{Q})\)</span> יש את משפט אלברט הסה-נתר-בראוור אשר אם כי אם <span>\(E / F\)</span> ו-<span>\(A\)</span> היא CSA מעל <span>\(F\)</span> אז:
+<span>$$E\otimes _{F}A=A\uparrow^{E}$$</span>
+היא CSA מעל E
+<span>$$\mathrm{Br}(F)\to \mathrm{Br}(E)\qquad A\mapsto E\otimes_{F}A$$</span>
+<span>$$\mathrm{Br}(\mathbb{Q} )\to \prod_{p\leq  \infty} \mathrm{Br}(\mathbb{Q} _{p})$$</span>
+<span>$$1\xrightarrow{\text{ABHS}}\mathrm{Br}(\mathbb{Q} )\hookrightarrow \oplus_{p\leq  \infty}\mathrm{ Br}(\mathbb{Q} _{p})\cong (\bigoplus_{p&lt;\infty} \mathbb{Q} / \mathbb{Z}) \oplus \frac{\left[ 0,\frac{1}{2} \right]}{\mathbb{Z}}\xrightarrow{(a_{2},a_{3},a_{5},\dots, a_{\infty})} \mathbb{Q} / \mathbb{Z} \to 0$$</span>
+ממשפט אלברט ברוואר הסה נתר
+<span>$$A\mapsto(\mathbb{Q}_{2}\otimes A,\mathbb{Q} _{3}\otimes A, \dots,\mathbb{R}\otimes A)$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='prev-page'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

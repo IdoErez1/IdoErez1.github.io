@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>סגור ופנים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_3'>1.3 טפולוגיית מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_4'>1.4 מרחבי מנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות בין מרחבים טופולוגים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_2_1'>2.1 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הפרדה ומנייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. קשירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_4_1'>4.1 מרחבים קשירים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_2'>4.2 קשירות מסילתית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קומפקטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_5_1'>5.1 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_2'>5.2 קופקטיפיקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. קבוצות סגורות וצפיפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_6_1'>6.1 סגור ופנים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. החבורה היסודית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_7_1'>7.1 הומוטופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_2'>7.2 החבורה היסודית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_3'>7.3 הרמות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_4'>7.4 מרחבי כיסוי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נספחים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_8_1'>8.1 טופולוגיות נוספות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology_6_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_5_3`; }});</script>
+        <div class="content">
+        <h1>6.1  סגור ופנים</h1>
+    <div class="definition"><span class="keyword">סגור של קבוצה</span><p>תהי <span>\((X,\tau)\)</span> מרחב טופולוגי. תהי <span>\(A\subseteq X\)</span> תת קבוצה. <span>\(\overline{A}\)</span> הסגור של A היא הקבוצה הסגורה הקטנה ביותר המכילה את A. כלומר:
+<span>$$\overline{A} := \bigcap_{A\subseteq F\subseteq X} F=\bigcap\left\{ C\supseteq A\mid C{\mathrm{~is~closed}} \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>יהי <span>\((X,\tau)\)</span> מרחב טופולוגי. תהי <span>\(A\subseteq X\)</span> תת קבוצה. אזי:
+<span>$$x\in \overline{A} \iff \forall U \in \tau \quad x \in U \implies U\cap  A\neq \varnothing $$</span>
+כלומר איבר נמצא בסגור אם"ם החיתוך של כל קבוצה פתוחה שמוכל בה עם הקבוצה היא ריקה.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(x \in X\)</span> וקיימת <span>\(U\)</span> פתוחה כך ש-<span>\(x \in U\)</span> וגם:
+<span>$$A\cap  U = \varnothing \implies A\subseteq \underbrace{ X \setminus  U }_{ \text{Closed} } \not\ni x$$</span>
+לכן <span>\(\overline{A} \subseteq X \setminus U\)</span> ולכן <span>\(x \not\in \overline{ A}\)</span>.
+כעת נניח <span>\(x \not\in \overline{A}\)</span>. לכן קיימת. אזי ניקח <span>\(U= X \setminus \overline{A}\)</span>. זו פתוחה כך ש-<span>\(x \in U\)</span> ו-<span>\(U\cap A = \varnothing\)</span>.</p>
+</div>
+<div class="corollary">
+<p>אם <span>\(\mathcal{ B}\)</span> בסיס אז <span>\(x \in \overline{A}\)</span> אם"ם לכל <span>\(B \in \mathcal{B}\)</span> כך ש-<span>\(x \in B\)</span> נקבל <span>\(B\cap A \neq \varnothing\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">פנים של קבוצה</span><p>הפנים של קבוצה A מסומן על ידי:
+<span>$$A^{\circ }=\bigcup_{U\subseteq A \text{ open}}U$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לחשוב על זה גם על ידי אוסף כל הנקודות הפנימיות, כאשר נקודה פנימית זה נקודה שמוכלת בקבוצה פתוחה שמוכלת בקטע.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(\mathcal{B}\)</span> בסיס של המרחב אז <span>\(x \in A^{\circ}\)</span> אם"ם קיים <span>\(B \in \mathcal{B}\)</span> כך ש-<span>\(x \in B\subseteq A\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span>$$A^{\circ }\subseteq A\subseteq \overline{A} $$</span></p>
+</div>
+<div class="definition"><span class="keyword">שפה של קבוצה</span><p><span>$$\partial A=\overline{A} \setminus  A^{\circ }$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תכונות של פנים ושפה</span><p>יהי <span>\((X,\tau)\)</span> מרחב טופולוגי. אזי:</p>
+<ol>
+<li>
+<p>לכל <span>\(A,B \subseteq X\)</span> מתקיים: 
+<span>$$(A\cap  B)^{\circ }=A^{\circ }\cap  B^{\circ }$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(A\subseteq X\)</span> מתקיים: 
+<span>$$A^{\circ }\cup  (A^{c})^{\circ }=(\partial A)^{\circ }$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(A\subseteq X\)</span> מתקיים <span>\(\partial A \supseteq \overline{\partial A}\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">סביבה של נקודה</span><p>נאמר ש-<span>\(L\subseteq X\)</span> היא סביבה של <span>\(x\)</span> אם קיימת קבוצה פתוחה <span>\(x \in U \subseteq L\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">נקודת הצטברות/נקודת גבול</span><p>יהי <span>\(A \subseteq B\)</span> תת קבוצה. נאמר ש-<span>\(x \in X\)</span> היא נקודת הצטברות של <span>\(A\)</span> אם כל סביבה של <span>\(x\)</span> מכילה נקודה מ-<span>\(A\)</span> שונה מ-<span>\(x\)</span>. נסמן ב-<span>\(A'\)</span> את קבוצת נקודות ההצטברות של <span>\(A\)</span>.</p>
+</div>
+<div class="remark">
+<p>ניתן לקחת במקום סביבה כללית, סביבה פתוחה, זה שקול.</p>
+</div>
+<div class="proposition">
+<p>הסגור של קבוצה תהיה האיחוד של הקבוצה עם נקודות ההצטברות. כלומר:
+<span>$$\overline{A} =A\cup  A'$$</span></p>
+</div>
+<div class="proof">
+<p>זו הוכחה ישירה של לפתוח הגדרות.
+ראשית נניח <span>\(x \in A\cup A'\)</span>. נראה ש-<span>\(x \in \overline{A}\)</span> שקול ללהראות שלכל קבוצה <span>\(x \in U\)</span> פתוחה <span>\(U\cap A\neq \varnothing\)</span>.
+אם <span>\(x \in A\)</span> אזי <span>\(U\cap A = \varnothing\)</span> מתקיים.
+אם <span>\(x \in A'\)</span> אזי כל <span>\(U\)</span> פתוחה המכילה את <span>\(x\)</span> מקיימת:
+<span>$$U\cap  A \supseteq U\cap  (A\setminus  \{ x \})$$</span>
+וקיבלנו <span>\(A\cap A'\subseteq \overline{A}\)</span>.
+כעת נראה את הכיוון השני. אם <span>\(x \in \overline{A}\)</span> אזי לכל <span>\(U\)</span> פתוחה כך ש-<span>\(x \in U\)</span>, <span>\(U\cap A \neq \varnothing\)</span>.
+אם <span>\(x \in A\)</span> אזי <span>\(x \in A\cup A'\)</span>.
+אם <span>\(x \not\in A\)</span> נקבל <span>\(U\cap A \neq \varnothing\)</span> גורר <span>\(\varnothing \neq U \cap (A \setminus \{  x \})\)</span> ולכן <span>\(x \in A'\)</span>. כלומר <span>\(\overline{A}\subseteq A\cup A'\)</span> ונקבל סה"כ <span>\(\overline{A}=A\cup A'\)</span></p>
+</div>
+<div class="corollary">
+<p>קבוצה היא סגורה אם"ם מכילה את כל הנקודות הצטברות שלה.</p>
+</div>
+<div class="proposition">
+<p>יהי <span>\(Y\)</span> תת מרחב טופולוגיה של <span>\(X\)</span>. וכן יהי <span>\(A\subseteq Y\)</span> תת קבוצה. אזי אם <span>\(\overline{A}\)</span> הוא הסגור של A ב-<span>\(X\)</span> הסגור של <span>\(A\)</span> ב-<span>\(Y\)</span> יהיה:
+<span>$$\overline{A} \cap  Y$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_6_2'>6.2 דלילות ומשפט הקטגוריה</a></li>
+<li class='prev-page'><a href='./Topology_5_3'>5.3 מסננים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

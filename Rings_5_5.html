@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פי אדים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page'><a href='./Rings'> תורת חוגים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרת החוג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_1_1'>1.1 חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_2'>1.2 תת חוג</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_3'>1.3 הומומורפיזם של חוגים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_4'>1.4 אידיאלים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_1_5'>1.5 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוג הפולינומים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_2_1'>2.1 פולינומים ופריקות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_2_2'>2.2 תחום שלמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. מודולים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_3_1'>3.1 הגדרת ותכונות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_2'>3.2 מודולים פשוטים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_3'>3.3 מודולים ומרחבים ווקטורים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_4'>3.4 מודולים חופשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_5'>3.5 סופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_6'>3.6 אנדומורפיזמים</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_3_7'>3.7 חוג הפוך</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משפט המבנה למודולים מעל PID</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_4_1'>4.1 צורת סמית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_2'>4.2 משפט המבנה למודולים נוצרים סופית מעל PID</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_4_3'>4.3 מסקנות ממשפט המיון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. אלגברות חילוק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_5_1'>5.1 חוגי חילוק</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_2'>5.2 אלגבראות</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_3'>5.3 קווטרניונים של המילטון</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_5_5'>5.5 פי אדים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. אלגבראות פשוטות מרכזיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_2'>6.2 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_3'>6.3 אלגברה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_4'>6.4 חבורת בראוור</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_5'>6.5 משפט סקולם נתר</a></li>
+<li class='parent-page-dropdown'><a href='./Rings_6_6'>6.6 משפט המרכז</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. חבורת בראוור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Rings_7_1'>7.1 Untitled</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Rings_6_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Rings_5_4`; }});</script>
+        <div class="content">
+        <h1>5.5  פי אדים</h1>
+    <div class="definition"><span class="keyword">חוג המספרים הp אדים</span><p>לכל ראשוני <span>\(p\)</span> מגדירים את חוג המספרים ה-<span>\(p\)</span>-אדיים <span>\(\mathbb{Z}_p\)</span> בתור השלמת <span>\(\mathbb{Z}\)</span> ביחס לנורמת <span>\(p\)</span>-אדית:
+<span>$$|x|_p = p^{-v_p(x)},$$</span>
+כאשר <span>\(v_p(x)\)</span> הוא המעריך של <span>\(p\)</span> בפירוק של <span>\(x\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">פיתוח <span>\(p\)</span> אדי</span><p>כל <span>\(x \in \mathbb{Z}_p\)</span> ניתן לכתיבה בצורה:
+<span>$$x = a_0 + a_1 p + a_2 p^2 + \dots,$$</span>
+כאשר <span>\(a_i \in \{0,1,\dots,p-1\}\)</span>.</p>
+</div>
+<div class="example">
+<p><span>\(5\)</span> ב-<span>\(7\)</span>-אדי: 
+<span>$$5 = 5 + 0\cdot 7 + 0\cdot 7^2 + \dots$$</span>
+<span>\(-1\)</span> ב-<span>\(3\)</span>-אדי: 
+<span>$$-1 = 2 + 2\cdot 3 + 2\cdot 3^2 + \dots$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ולואציה</span><p>לכל <span>\(x \in \mathbb{Q}_p^{\times}\)</span>, אפשר לכתוב <span>\(x = p^n u\)</span> כאשר <span>\(u \in \mathbb{Z}_p^{\times}\)</span> הפיך, ומגדירים:
+<span>$$v_p(x) = n$$</span></p>
+</div>
+<div class="proposition">
+<p>החוג המספרים ה-<span>\(p\)</span> אדים <span>\(\mathbb{Z}_p\)</span> הוא תחום ראשי, מקומי, שלם.</p>
+</div>
+<div class="definition"><span class="keyword">שדה המספרים ה-<span>\(p\)</span> אדים</span><p>ההשלמה <span>\(\mathbb{Q}_p\)</span> הוא שדה המספרים ה-<span>\(p\)</span>-אדיים, כלומר השלמת <span>\(\mathbb{Q}\)</span> ביחס לנורמה <span>\(p\)</span>-אדית.</p>
+</div>
+<div class="proposition">
+<p>ההשלמה <span>\(\mathbb{Q}_{p}\)</span> היא אכן שדה.</p>
+</div>
+<div class="proposition">
+<p>החוג <span>\(\mathbb{Z}_p\)</span> הוא תת-חוג קומפקטי של <span>\(\mathbb{Q}_p\)</span>.</p>
+</div>
+<div class="definition">
+<p>איבר <span>\(a \in \mathbb{Q}_p^{\times}\)</span> נקרא ריבוע אם קיים <span>\(x \in \mathbb{Q}_p^{\times}\)</span> כך ש-<span>\(x^2 = a\)</span>.</p>
+</div>
+<div class="proposition">
+<p><span>\(-1\)</span> הוא ריבוע ב-<span>\(\mathbb{Q}_p\)</span> אם ורק אם <span>\(p \equiv 1 \pmod{4}\)</span> או <span>\(p=2\)</span>.</p>
+</div>
+<div class="proof">
+<p>ב-<span>\(\mathbb{F}_p\)</span>, <span>\(-1\)</span> הוא ריבוע אם ורק אם <span>\(p \equiv 1 \pmod{4}\)</span> או <span>\(p=2\)</span> (משפט האיבר הפרימיטיבי). לכן, גם ב-<span>\(\mathbb{Q}_p\)</span> מתקיים אותו תנאי.</p>
+</div>
+<div class="proposition">
+<p>האלגברת קווטרניונים <span>\(\left(\frac{-1,-1}{\mathbb{Q}_p}\right)\)</span> היא אלגברת חילוק אם ורק אם <span>\(p=2\)</span>. עבור <span>\(p \neq 2\)</span>, האלגברה מתפצלת: 
+<span>$$\left(\frac{-1,-1}{\mathbb{Q}_p}\right) \cong M_2(\mathbb{Q}_p)$$</span></p>
+</div>
+<div class="proposition">
+<p>אם <span>\(-1\)</span> הוא ריבוע ב-<span>\(\mathbb{Q}_p\)</span>, אז <span>\(\left(\frac{-1,-1}{\mathbb{Q}_p}\right)\)</span> מתפצלת, כאשר אם <span>\(-1\)</span> אינו ריבוע ב-<span>\(\mathbb{Q}_p\)</span>, אז <span>\(\left(\frac{-1,-1}{\mathbb{Q}_p}\right)\)</span> היא חילוק.</p>
+</div>
+<div class="proposition">
+<p>עבור <span>\(p \neq 2\)</span>, אם <span>\(a \in \mathbb{F}_p \setminus (\mathbb{F}_p^2)\)</span> (כלומר <span>\(a\)</span> אינו ריבוע בשדה השאריות), אז <span>\(\mathbb{Q}_p[\sqrt{a}]\)</span> היא הרחבת שדה של <span>\(\mathbb{Q}_p\)</span>.</p>
+</div>
+<div class="proposition">
+<p>האלגברה <span>\(\left(\frac{a,b}{\mathbb{Q}_p}\right)\)</span> היא חילוק אם ורק אם <span>\(b\)</span> אינו נורמה מההרחבה <span>\(\mathbb{Q}_p[\sqrt{a}]\)</span>. בפרט, אם <span>\(a \notin \mathbb{F}_p^2\)</span>, אז <span>\(\left(\frac{a,p}{\mathbb{Q}_p}\right)\)</span> היא אלגברת חילוק.</p>
+</div>
+<div class="corollary">
+<p>יש בדיוק שתי אלגברות קווטרניונים מעל <span>\(\mathbb{Q}_p\)</span> (עד כדי איזומורפיזם): אלגברת חילוק ו-<span>\(M_2(\mathbb{Q}_p)\)</span> (המתפצלת).</p>
+</div>
+<h2>ההרחבת שדות <span>\(\mathbb{Q}_{p}[i]\)</span></h2>
+<div class="reminder">
+<p>עבור שדה <span>\(F\)</span> ההרחבה <span>\(F[x]\)</span> זו ההוספה של <span>\(x\)</span> לשדה וכל הצירופים הלינארים שלו(חיבור וכפל)</p>
+</div>
+<div class="proposition">
+<p>ההרחבה <span>\(\mathbb{Q}_p[i]\)</span> היא הרחבה ריבועית של <span>\(\mathbb{Q}_p\)</span> אם ורק אם <span>\(-1\)</span> אינו ריבוע ב-<span>\(\mathbb{Q}_p\)</span>.</p>
+</div>
+<div class="proposition">
+<p>כל איבר ב-<span>\(\mathbb{Q}_p[i]\)</span> ניתן לכתיבה יחידה כ-<span>\(a + b i\)</span> עם <span>\(a, b \in \mathbb{Q}_p\)</span>. כלומר:
+<span>$$\mathbb{Q}_p[i] = \mathbb{Q}_p \oplus i\mathbb{Q}_p$$</span></p>
+</div>
+<div class="definition">
+<p>חוג השלמים של ההרחבה הוא 
+<span>$$\mathbb{Z}_p[i] = \{ \alpha \in \mathbb{Q}_p[i] \mid \mathrm{val}(\alpha) \geq 0 \}$$</span></p>
+</div>
+<div class="proposition">
+<p>איברי היחידה של חוג השלמים הם 
+<span>$$\mathbb{Z}_p[i]^{\times} = \{ \alpha \in \mathbb{Q}_p[i] \mid \mathrm{val}(\alpha) = 0 \}$$</span></p>
+</div>
+<div class="proposition">
+<p>חבורת האיברים ההפיכים של <span>\(\mathbb{Q}_p[i]\)</span> היא <span>$$\mathbb{Q}_p[i]^{\times} = p^{\mathbb{Z}} \times \mathbb{Z}_p[i]^{\times}$$</span>
+
+שדה השאריות הוא <span>\(\mathbb{F}_p[i]\)</span>, שהוא שדה מדרגה <span>\(2\)</span> מעל <span>\(\mathbb{F}_p\)</span> אם <span>\(-1\)</span> אינו ריבוע ב-<span>\(\mathbb{F}_p\)</span> (כלומר <span>\(\mathbb{F}_p[i] = \mathbb{F}_{p^2}\)</span>).</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Rings_6_1'>6.1 אלגברה פשוטה מרכזית</a></li>
+<li class='prev-page'><a href='./Rings_5_4'>5.4 אלגברה קווטרניונית</a></li>
+</ul></li>
+        </body>
+        </html>
+        
