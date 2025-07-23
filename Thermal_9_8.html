@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת פוקר פלאנק</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a></li>
+<li class='parent-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1.html'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2.html'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3.html'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1.html'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2.html'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3.html'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4.html'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5.html'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1.html'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2.html'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1.html'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2.html'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1.html'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2.html'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3.html'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4.html'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5.html'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6.html'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7.html'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1.html'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2.html'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3.html'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4.html'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5.html'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1.html'>7.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2.html'>7.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1.html'>8.1 קירוב שדה ממוצע</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2.html'>8.2 מודל איזינג חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_4.html'>8.4 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1.html'>9.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_3.html'>9.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_6.html'>9.6 תנועה בראונית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_8.html'>9.8 משוואת פוקר פלאנק</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal.html`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_9_7.html`; }});</script>
+        <div class="content">
+        <h1>9.8  משוואת פוקר פלאנק</h1>
+    <p>עבור משוואת לנג'וון מהצורה:
+<span>$$\gamma\frac{d x}{d t}=F\left(x\right)+\eta\left(t\right)$$</span>
+כאשר <span>\(\eta(t)\)</span> רעש לבן המקיים:
+<span>$$\left\langle\eta\left(t\right)\right\rangle=0\qquad\left\langle\eta\left(t\right)\eta\left(t^{\prime}\right)\right\rangle=\Lambda\delta\left(t-t^{\prime}\right)$$</span>
+משוואת הפוקר פלאנק המתאימה תהיה:
+<span>$$\frac{\partial}{\partial t}P\left(x,t\right)=\frac{1}{2}\frac{\Lambda}{\gamma^{2}}\frac{\partial^{2}}{\partial x^{2}}P\left(x,t\right)-\frac{1}{\gamma}\frac{\partial}{\partial x}\left[P\left(x,t\right)F\left(x\right)\right]$$</span></p>
+<p>עבור <span>\(N\)</span> דרגות חופש נקבל:
+<span>$$\gamma_{i}\frac{d x_{i}}{d t}=F_{i}\left(\vec{x}\right)+\eta_{i}\left(t\right)$$</span>
+כאשר <span>\(\vec{x}=\left( x_{1},x_{2},\dots,x_{N} \right)\)</span> ומקיים את היחס:
+<span>$$\left\langle\eta_{i}\left(t\right)\right\rangle=0\qquad\left\langle\eta_{i}\left(t\right)\eta_{j}\left(t^{\prime}\right)\right\rangle=\Lambda_{i}\delta_{i,j}\delta\left(t-t^{\prime}\right)$$</span>
+נקבל את המשוואות:
+<span>$$\frac{\partial}{\partial t}P\left(\vec{x},t\right)=\sum_{i=1}^{N}\left(\frac{1}{2}\frac{\Lambda_{i}}{\gamma_{i}^{2}}\frac{\partial^{2}}{\partial x_{i}^{2}}P\left(\vec{x},t\right)-\frac{1}{\gamma_{i}}\frac{\partial}{\partial x_{i}}\left[F_{i}\left(\vec{x}\right)P\left(\vec{x},t\right)\right]\right)$$</span></p>
+<div class="example">
+<p>עבור המשוואה <span>\(\gamma{\frac{d x}{d t}}=\eta\left(t\right)\)</span> ללא פוטנציאל חיצוני נקבל:
+<span>$${\frac{\partial}{\partial t}}P\left(x,t\right)=D{\frac{\partial^{2}}{\partial x^{2}}}P\left(x,t\right)$$</span>
+כאשר אם נגדיר <span>\(D=\frac{1}{2}\frac{\Lambda}{\gamma^{2}}\)</span> הפתרון שלה הוא משוואת החום:
+<span>$$P\left(x,t\right)={\frac{1}{\sqrt{4\pi D t}}}e^{-{\frac{(x-x_{0})^{2}}{4D t}}}$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">פתרונות סטציונאריים</span></div>
+<div class="proof">
+<p>נתחיל מהמשוואה:
+<span>$$\frac{\partial}{\partial t}P\left(x,t\right)=\frac{1}{2}\frac{\Lambda}{\gamma^{2}}\frac{\partial^{2}}{\partial x^{2}}P\left(x,t\right)-\frac{1}{\gamma}\frac{\partial}{\partial x}\left[P\left(x,t\right)F\left(x\right)\right]$$</span>
+הפתרונות הסטציונארים מקיימים:
+<span>$$0=\frac12\frac{\Lambda}{\gamma^{2}}\frac{d^{2}}{d x^{2}}P\left(x\right)-\frac1{\gamma}\frac d{d x}\left[P\left(x\right)F\left(x\right)\right]$$</span>
+נסדר מחדש:
+<span>$${\frac{d}{d x}}\left[P\left(x\right)F\left(x\right)\right]={\frac{1}{2}}{\frac{\Lambda}{\gamma}}{\frac{d^{2}}{d x^{2}}}P\left(x\right)$$</span>
+ניקח אינטגרל:
+<span>$$P\left(x\right)F\left(x\right)=\frac{1}{2}\frac{\Lambda}{\gamma}\frac{d}{d x}P\left(x\right)+C$$</span>
+כיוון ש-<span>\(P(x)\xrightarrow{x\to \pm \infty}0\)</span> ו-<span>\(P'(x)\xrightarrow{x\to \pm \infty}0\)</span> נקבל כי הקבוע צריך להתאפס ונקבל:
+<span>$$P\left(x\right)F\left(x\right)=\frac{1}{2}\frac{\Lambda}{\gamma}\frac{d P}{d x}$$</span>
+זוהי משוואה ספרבילית ולכן:
+<span>$$\int F\left(x\right)d x=\frac{1}{2}\frac{\Lambda}{\gamma}\int\frac{1}{P}d P=\frac{1}{2}\frac{\Lambda}{\gamma}\ln\left(Z P\right)$$</span>
+נסדר מחדש:
+<span>$$P\left(x\right)=\frac{1}{Z}e^{\frac{1}{\Lambda/\left(2\gamma\right)}}\int d x\,F(x)$$</span>
+אם הכוח מגיע מפוטנציאל נקבל <span>\(F=-\frac{\partial U}{\partial x}\)</span> ולכן:
+<span>$$P\left(x\right)=\frac{1}{Z}e^{-\frac{1}{\Lambda/\left(2\gamma\right)}}U(x)$$</span>
+שזה כמובן התפלגות בולצמן תחת הזיהוי:
+<span>$${\frac{\Lambda}{2\gamma}}=k_{B}T$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">ממוצעים על התפלגות</span><p>יהי <span>\(A(x)\)</span> איזשהו גודל שאנחנו מתעניינים בו, כך ש:
+<span>$$\left\langle A\left(x\right)\right\rangle=\int d x\,A\left(x\right)P\left(x,t\right)$$</span>
+אזי:
+<span>$$\frac{\partial}{\partial t}\left\langle A\left(x\right)\right\rangle=\frac{1}{2}\frac{\Lambda}{\gamma^{2}}\left\langle\frac{\partial^{2}A}{\partial x^{2}}\right\rangle+\frac{1}{\gamma}\left\langle\frac{\partial A}{\partial x}F\right\rangle$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a></li>
+<li class='prev-page'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

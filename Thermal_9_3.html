@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת לנג'וון</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1.html'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2.html'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3.html'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1.html'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2.html'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3.html'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4.html'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5.html'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1.html'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2.html'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1.html'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2.html'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1.html'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2.html'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3.html'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4.html'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5.html'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6.html'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7.html'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1.html'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2.html'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3.html'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4.html'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5.html'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1.html'>7.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2.html'>7.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1.html'>8.1 קירוב שדה ממוצע</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2.html'>8.2 מודל איזינג חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_4.html'>8.4 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1.html'>9.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_3.html'>9.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_6.html'>9.6 תנועה בראונית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_8.html'>9.8 משוואת פוקר פלאנק</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_9_4.html`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_9_2.html`; }});</script>
+        <div class="content">
+        <h1>9.3  משוואת לנג'וון</h1>
+    <div class="definition"><span class="keyword">תנועה בראונית</span><p>תנועה אקראית של חלקיק קטן המוקף בהרבה חלקיקים קטנים יותר אשר מתנגשים בו.</p>
+</div>
+<div class="remark">
+<p>היסטורית משומש לתאר מערכות עם חליקים קטנים בקוטר של בערך מיקרון בתוך נוזל(אשר לפי המודל האטומי מורכב מחלקיקים). למעשה התחזיות של תנועה בראינית עיששו את המודל החלקיקי.</p>
+</div>
+<div class="proposition">
+<p>ניתן לחלק את הכוח של תנועה בראונית לשתי רכיבית
+- כוח חיכוח - כוח הפועל על החלקיק על ידי בחלקיקים בסביבה שלו. באופן כללי פרופרציונאלי למהירות של החלקיק <span>\(-\gamma v(t)\)</span>.
+- כוח אקראי - מסומן על ידי <span>\(\eta(t)\)</span>.  זה מושפע מהאפקט של </p>
+</div>
+<div class="proposition"><span class="keyword">משוואת לנג'וון</span><p>משוואת לנג'וון של חלקיק חופשי אשר נמצא באיזשהו נוזל המכיל החלקיקים קטנים יותר  נתון על ידי:
+<span>$$ m\dot{v} = -\gamma v + g\eta(t) $$</span></p>
+</div>
+<div class="proof">
+<p>מהחוק השני של ניוטון ניתן לכתוב:
+<span>$$ m\frac{dv_t}{dt} = F_{friction} + F_{random} $$</span>
+כעת נסתכל על המקרה שנתון גם פוטנציאל חיצוני מהצורה:
+<span>$$ F_{pot}(x) = -\frac{dU(x)}{dx} $$</span>
+עבור פוטנציאל שקרוב למינימום שלו ניתן לקרב את הכוח לאוסצילטור הרמוני כאשר <span>\(F_{\text{pot}}=-Kx\)</span> ו-<span>\(K=U''\left( x_{\text{min}} \right)\)</span>. נוסיף את המשוואה למשוואת לנג'וון ונקבל:
+<span>$$ \begin{cases} \dot{x} = v \\ m\dot{v} = -\gamma v - F_{pot}(x) + g\eta(t) \end{cases} $$</span></p>
+</div>
+<p>אם נסתכל על המקרה הפרטי של חלקיק מרונסן(overdamped) ניתן לפשט את המשוואה, נניח <span>\(m\ddot{x} \approx 0\)</span> ונקבל:
+<span>$$ \gamma\dot{x} = -Kx + g\eta(t) $$</span>
+סידור מחדש נותן את משוואת Smoluchowski:
+<span>$$ \dot{x} = -\frac{K}{\gamma}x + \frac{g}{\gamma}\eta(t) $$</span></p>
+<div class="proposition">
+<p>הפתרון של משוואת לנג'וון נתון על ידי:
+<span>$$v\left(t\right)=e^{-\frac t{\tau_{B}}}v\left(0\right)+\frac g m\int\limits_{0}^{t}d s e^{-\frac{t-s}{\tau_{B}}}\eta\left(s\right)$$</span>
+כאשר קבוע הדעיכה של הבעיה בזמן הוא <span>\(\tau_{B}=\frac{m}{\gamma}\)</span>.</p>
+</div>
+<div class="corollary">
+<p>התוחלת תהיה:
+<span>$$\left\langle v\left(t\right)\right\rangle=e^{-\frac t{\tau_{B}}}v\left(0\right)+\frac g m\int\limits_{0}^{t}d s e^{-\frac{t-s}{\tau_{B}}}\left\langle\eta\left(s\right)\right\rangle$$</span>
+כאשר בפרט מתאפסת ב-<span>\(t\to 0\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">קורולציה של המהירות</span><p>הקורלוציה נתונה על ידי:
+<span>$$\left\langle v\left(t_{1}\right)v\left(t_{2}\right)\right\rangle=\left(v^{2}\left(0\right)-\frac{g^{2}\tau_{B}}{2m^{2}}\right)e^{-\frac{t_{1}+t_{2}}{\tau_{B}}}+\frac{g^{2}\tau_{B}}{2m^{2}}e^{-\lvert t_{1}-t_{2} \rvert }$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$\left\langle v\left(t_{1}\right)v\left(t_{2}\right)\right\rangle=e^{-{\frac{t_{1}+t_{2}}{\tau_{B}}}}v^{2}\left(0\right)+{\frac{g^{2}}{m^{2}}}\int\limits_{0}^{t_{1}}d s_{1}\int\limits_{0}^{t_{2}}d s_{2}e^{-{\frac{t_{1}+t_{2}-s_{1}-s_{2}}{\tau_{B}}}}\underbrace{\left\langle\eta\left(s_{1}\right)\eta\left(s_{2}\right)\right\rangle}_{\delta\left(s_{1}-s_{2}\right)}$$</span>
+כאשר עבור <span>\(t_{2}&lt;t_{1}\)</span> או <span>\(t_{2}&lt;t_{1}\)</span> אין תרומה כיוון שהפונקציית דלתא מאפסת באיזור שאין חפיפה. לכן נסמן <span>\(t_{\min}=\min\{ t_{1},t_{2} \}\)</span> ונקבל:
+<span>$$\begin{gather}\left\langle v\left(t_{1}\right)v\left(t_{2}\right)\right\rangle=e^{-{\frac{t_{1}+t_{2}}{T_{B}}}}v^{2}\left(0\right)+{\frac{g^{2}}{m^{2}}}\int\limits_{0}^{t_{\mathrm{min}}}\!d s_{1}\int\limits_{0}^{t_{\mathrm{min}}}\!d s_{2}e^{-{\frac{t_{1}+t_{2}-s_{1}-s_{2}}{T_{B}}}}\delta\left(s_{1}-s_{2}\right) = \\=e^{-\frac{t_{1}+t_{2}}{\tau_{B}}}v^{2}\left(0\right)+\frac{g^{2}}{m^{2}}\int\limits_{0}^{t_{\mathrm{min}}}d s e^{-\frac{t_{1}+t_{2}-2s}{\tau_{B}}}= \\=\left(v^{2}\left(0\right)-\frac{g^{2}\tau_{B}}{2m^{2}}\right)e^{-\frac{t_{1}+t_{2}}{\tau_{B}}}+\frac{g^{2}\tau_{B}}{2m^{2}}e^{\frac{2t_{\mathrm{min}}-t_{1}-t_{2}}{\tau_{B}}}
+\end{gather}$$</span>
+כאשר הזמן במערכיך יהיה:
+<span>$$2t_{\mathrm{min}}-t_{1}-t_{2}=t_{\min }-\left( t_{1}+t_{2}-t_{\min } \right)=t_{\mathrm{min}}-t_{\mathrm{max}}=-\left|t_{1}-t_{2}\right|$$</span></p>
+</div>
+<div class="corollary">
+<p>בזמנים ארוכים:
+<span>$$\langle v(t_{1})v(t_{2}) \rangle \xrightarrow{t_{1},t_{2}\to \infty}\frac{g^{2}\tau_{B}}{2m^{2}}e^{-\frac{\left|t_{1}-t_{2}\right|}{\tau_{B}}}$$</span>
+ובפרט עבור <span>\(t_{1}=t_{2}\equiv t\to \infty\)</span> נקבל:
+<span>$$\left\langle v^{2}\left(t\right)\right\rangle=\frac{g^{2}\tau_{B}}{2m^{2}}$$</span></p>
+</div>
+<div class="corollary">
+<p>כדי שיתאים לחוק החלוקה השווה נקבל בשיווי משקל:
+<span>$$m\left\langle v^{2}\left(t\right)\right\rangle=k_{B}T=\frac{1}{\beta}\implies g^{2}={\frac{2m}{\beta\tau_{B}}}={\frac{2\gamma}{\beta}}$$</span>
+ואכן מתקיים:
+<span>$$\left\langle{\frac{1}{2}}m v^{2}\right\rangle={\frac{1}{2}}k_{B}T$$</span></p>
+</div>
+<div class="remark">
+<p>ניתן לראות כי הגודל של הרעש הגאוסי במשוואה(אשר מייצג על ידי גודל המקדם שלו <span>\(g\)</span>) גדל עם הטמפרטורה.</p>
+</div>
+<h2>פיתוח משוואת הדיפוזיה</h2>
+<p>נניח כי יש לנו תנועה בראונית בבור פוטנציאל. נגדיר:
+<span>$$\Delta x\left(t\right)\equiv x\left(t\right)-x\left(0\right)=\int_{0}^{t}v\left(t^{\prime}\right)d t^{\prime}$$</span>
+ונקבל:
+<span>$$\left\langle\Delta x\left(t_{1}\right)\Delta x\left(t_{2}\right)\right\rangle=\left(v^{2}\left(0\right)-g^{2}\frac{\tau_{B}}{2m^{2}}\right)\tau_{B}^{2}\left(e^{-\frac{t_{1}}{t_{B}}}-1\right)\left(e^{-\frac{t_{2}}{t_{B}}}-1\right)+\frac{g^{2}\tau_{B}}{2m^{2}}\int\limits_{0}^{t_{1}}d t_{1}^{\prime}\int\limits_{0}^{t_{2}}d t_{2}^{\prime}e^{\frac{-\left|t_{1}^{\prime}-t_{2}^{\prime}\right|}{t_{B}}}\,d t_{1}^{\prime}\int d t_{2}^{\prime}e^{\frac{-\left|t_{2}^{\prime}-t_{2}^{\prime}\right|}{t_{B}}}$$</span>
+מה שמאפיין את התנועה הבראונית תהיה השונות. השונות תהיה:
+<span>$$\left\langle\Delta x^{2}\left(t\right)\right\rangle=\left(v^{2}\left(0\right)-g^{2}\frac{\tau_{B}}{2m^{2}}\right)\tau_{B}^{2}\left(e^{-\frac{t}{\tau_{B}}}-1\right)^{2}+\frac{g^{2}\tau_{B}}{2m^{2}}\underset{I(t)}{\underbrace{\int_{0}^{t}d t_{1}^{\prime}\int_{0}^{t}d t_{2}^{\prime}e^{\frac{-\left|t_{1}^{\prime}-t_{2}^{\prime}\right|}{\tau_{B}}}}}$$</span></p>
+<div class="lemma">
+<p><span>$$I(t)=2\tau_{B}\left(t+\tau_{B}\left(e^{-{\frac{t}{\tau_{B}}}}-1\right)\right)$$</span></p>
+</div>
+<div class="proof">
+<p><span>$$I\left(t\right)=\int\limits_{0}^{t}{d t_{1}^{\prime}}\int\limits_{0}^{t_{1}^{\prime}}{d t_{2}^{\prime}}e^{-\frac{t_{1}^{\prime}-t_{2}^{\prime}}{\tau_{B}}}+\int\limits_{0}^{t}{d t_{2}^{\prime}}\int\limits_{0}^{t_{2}^{\prime}}{d t_{1}^{\prime}}e^{-\frac{t_{2}^{\prime}-t_{1}^{\prime}}{\tau_{B}}}=2\tau_{B}\left(t+\tau_{B}\left(e^{-{\frac{t}{\tau_{B}}}}-1\right)\right)$$</span>
+כאשר זה למעשה שתי עותקים של אותו אינטרגל בחילופי שמות עבור <span>\(t'_{1},t'_{2}\)</span>:
+<span>$$=2\int_{0}^{t}d t_{1}^{\prime}\int_{0}^{t_{1}^{\prime}}d t_{2}^{\prime}e^{-\frac{t_{1}^{\prime}-t_{2}^{\prime}}{\tau_{B}}}=2\tau_{B}\int_{0}^{t}d t_{1}^{\prime}e^{-\frac{t_{1}^{\prime}}{\tau_{B}}}\left(e^{-\frac{t_{1}^{\prime}}{\tau_{B}}}-1\right)=2\tau_{B}\left(t+\tau_{B}\left(e^{-{\frac{t}{\tau_{B}}}}-1\right)\right)$$</span></p>
+</div>
+<p>ולכן נקבל כי:
+<span>$$\left\langle\Delta x^{2}\left(t\right)\right\rangle=\left(v^{2}\left(0\right)-g^{2}\frac{\tau_{B}}{2m^{2}}\right)\tau_{B}^{2}\left(e^{-\frac{t}{\tau_{B}}}-1\right)^{2}+\frac{g^{2}\tau_{B}^{2}}{m^{2}}\left(t+\tau_{B}\left(e^{-\frac{t}{\tau_{B}}}-1\right)\right)$$</span></p>
+<p>כך שעבור <span>\(t\ll \tau_{B}\)</span> נקבל תנועה בליסטית:
+<span>$$\left\langle\Delta x^{2}\left(t\right)\right\rangle\approx v^{2}\left(0\right)t^{2}$$</span>
+ועבור <span>\(t\gg \tau_{B}\)</span> נקבל תנועה דיפוסיבית:
+<span>$$\left\langle\Delta x^{2}\left(t\right)\right\rangle=2\underbrace{\frac{g^{2}\tau_{B}^{2}}{2m^{2}}}_{D}t$$</span></p>
+<p>המקדם של הזמן הוא קבוע הדיפוזיה ולכן נקבל את יחס אינשטיין:
+<span>$$g^{2}=\frac{2m}{\beta\tau_{B}}=\frac{2\gamma}{\beta}\implies D=\frac{\tau_{B}}{\beta m}=\frac{1}{\beta\gamma}$$</span></p>
+<h2>ממשוואת סמולצ'בסקי</h2>
+<div class="proposition">
+<p>המשוואה המתקבלת מחלקיק הנמצא בתנועה אקראית קרוב לבור פוטנציאל תהיה מהצורה:
+<span>$$m{\ddot{x}}+\gamma{\dot{x}}=-k x+g\eta$$</span>
+כאשר זהו מד"ר סטוכסטי מסדר שני.</p>
+</div>
+<div class="proof">
+<p>עבור חלקיק נמצא בבור פוטנציאל נקבל כי הפוטנציאל הוא בקירוב הרמוני, לכן נקרב את הפוטנציאל על ידי:
+<span>$$U\left(x\right)\sim U_{\mathrm{min}}+{\frac{k}{2}}x^{2}\implies F=-k x$$</span>
+ונקבל את המשוואת לנג'וון:
+<span>$$m{\dot{v}}=-\gamma v+g\eta-k x$$</span>
+נציב <span>\(\dot{x}=v\)</span> ונקבל:
+<span>$$m{\ddot{x}}+\gamma{\dot{x}}=-k x+g\eta$$</span></p>
+</div>
+<div class="definition"><span class="keyword">משוואת סמולצ'בסקי</span><p>המשוואה של חלקיק בסמוך לבור פוטנציאל במערכת מאוד מרוסנת:
+<span>$$\dot{x}=-{\frac{k}{\gamma}}x+{\frac{g}{\gamma}}\eta$$</span></p>
+</div>
+<div class="remark">
+<p>משוואת סמולצ'בסקי זהה למשוואת לנג'וון תחת ההחלפות הבאות:
+<span>$$v\mapsto x\qquad m\mapsto \gamma \qquad \gamma \mapsto k\qquad g\mapsto g$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='prev-page'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+</ul></li>
+        </body>
+        </html>
+        

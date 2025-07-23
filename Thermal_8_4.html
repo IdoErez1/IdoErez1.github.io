@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פיתוח בטמפרטורות גבוהות - cluster expansion</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+<li class='parent-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1.html'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2.html'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3.html'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1.html'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2.html'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3.html'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4.html'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5.html'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1.html'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2.html'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1.html'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2.html'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1.html'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2.html'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3.html'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4.html'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5.html'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6.html'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7.html'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1.html'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2.html'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3.html'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4.html'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5.html'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1.html'>7.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2.html'>7.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1.html'>8.1 קירוב שדה ממוצע</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2.html'>8.2 מודל איזינג חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_4.html'>8.4 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1.html'>9.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_3.html'>9.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_6.html'>9.6 תנועה בראונית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_8.html'>9.8 משוואת פוקר פלאנק</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_8_5.html`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_8_3.html`; }});</script>
+        <div class="content">
+        <h1>8.4  פיתוח בטמפרטורות גבוהות - cluster expansion</h1>
+    <div class="proposition">
+<p>עבור גז של <span>\(N\)</span> חלקיקים לא מובחנים בנפח <span>\(V\)</span>, טמפרטורה <span>\(T\)</span> ופוטנציאל אינטראקציה של בין כל שתי החלקיקים הנתון על ידי: <span>\(u_{ij}=u(\lvert r_{i}-r_{j} \rvert)\)</span> פונקציית החלוקה תהיה:
+<span>$$Z_{N}=\frac{1}{N!\lambda^{3N}}Q_{N}$$</span>
+כאשר:
+<span>$$\lambda=\frac{h}{\sqrt{ 2\pi mk_{B}T }}\qquad Q_{N}=\int_{V^{N}}\prod_{1\leq i&lt;j\leq N}e^{-\beta u\left( \mathbf{r}_{i}-\mathbf{r}_{j} \right)}d^{3}\mathbf{r}_{1}\cdot\cdot\cdot d^{3}\mathbf{r}_{N}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציית מייר - Mayer</span><p>מוגדר על ידי:
+<span>$$f_{i j}:=e^{-\beta u_{i j}}-1$$</span>
+כאשר הרעיון זה שזה שואף לאפס כאשר <span>\(\beta\to 0\)</span> כלומר בטמפרטורות גבוהות.</p>
+</div>
+<div class="corollary">
+<p>מתקיים:
+<span>$$\prod_{i&lt;j}e^{-\beta u_{i j}}=\prod_{i&lt;j}(1+f_{i j})$$</span>
+כאשר נשים לב כי המכפלה הזו מכילה <span>\({N\choose 2}\)</span> גורמים ולכן ניתן לכתוב כעת את <span>\(Q_{N}\)</span> על ידי:
+<span>$$Q_{N}=\int_{V^{N}}\prod_{i&lt;j}(1+f_{i j})d^{3N}{\bf r}$$</span></p>
+</div>
+<div class="lemma">
+<p>במקום לסכום על כל הקשרים <span>\(i&lt;j\)</span> ניתן לסכום על כל הגרפים <span>\(G\)</span> של <span>\(N\)</span> קודקודים (המייצגים חלקיקים) והחיבורים שלהם(המייצגים <span>\(f_{ij}\)</span>) כלשהו כך שנקבל:
+<span>$$\prod_{i&lt;j}(1+f_{i j})=\sum_{G}\prod_{(i,j)\in G}f_{i j}$$</span></p>
+</div>
+<div class="proof">
+<p>אם פותחים את המכפלה <span>\(\prod_{i&lt;j}(1+f_{i j})\)</span> נקבל סכום של כל שילוב אפשרי של מכפלות של <span>\(f_{ij}\)</span> של חלקיקים שונים <span>\(f_{ij}\)</span>. אם נייצג את המכפלה על ידי חיבור של הקודקודים בגרף נקבל סכום של כל גרף אפשרי, כאשר עבור כל גרף אנחנו סוכמים על כל הצלעות.</p>
+</div>
+<div class="corollary">
+<p>ניתן לכתוב את <span>\(\prod_{i&lt;j}(1+f_{ij})\)</span> בתור סכום על גרף <span>\(G\)</span> עם <span>\(N\)</span> קודקודים המתאימים ל-<span>\(f_{ij}\)</span> מתאים. הקודקודים מייצגים את החלקיקים והקצוות מייצגות <span>\(f_{ij}\)</span>. כלומר:
+<span>$$Q_{N}=\sum_{G}\int_{V^{N}}\prod_{(i,j)\in G}f_{i j}\,d^{3N}\mathbf{r}$$</span>
+כאשר סכימה על גרף זה סכימה על כל הדרכים שבהם ניתן לבחור איזה <span>\(f_{ij}\)</span> להכליל.</p>
+</div>
+<div class="definition"><span class="keyword">גוש קשיר</span><p>גוש קשיר הוא הסכום של כל הדרכים לחבר <span>\(s\)</span> נקודות בצורה קשירה.</p>
+</div>
+<div class="definition"><span class="keyword">מקדמי קשירות גושיים</span><p>מקדם הקשירות <span>\(b_{k}\)</span> מייצג את התרומה לפונקציית החלוקה של אוסף של <span>\(k\)</span> חלקיקים. בצורה מפורשת ניתן להגדיר:
+<span>$$b_{k}:=\frac{1}{k!V}\int_{V^{k}}\left(\sum_{G\in{\mathcal{C}}_{k}}\prod_{(i,j)\in G}f_{i j}\right)d^{3k}{\bf r}$$</span>
+כאשר <span>\(\mathcal{C}_{k}\)</span> זה קבוצת הגרפים הקשירים עם <span>\(k\)</span> קודקודים, ו-<span>\(V\)</span> זה נפח.</p>
+</div>
+<div class="remark">
+<p>כיוון שתלוי בפונקציית מייר הגודל <span>\(b_{k}\)</span> תלוי בפוטנציאל אינטראקציה <span>\(u_{ij}\)</span> ובטמפרטורה.</p>
+</div>
+<div class="example"><span class="keyword">חישוב המקדמים עבור ספרה קשיחה</span><p>ספרה קשיחה היא עם קוטר <span>\(\sigma\)</span> כך שמחוץ לספרה הפוטנציאל מתאפס ובפנים הוא אינסופי. כלומר:
+<span>$$u(r)=\left\{{\begin{array}{l l}{\infty}&amp;{r&lt;\sigma}\\ {0}&amp;{r\geq\sigma}\end{array}}\right.\implies f(r)=e^{-\beta u(r)}-1={\left\{\begin{array}{l l}{-1}&amp;{r&lt;\sigma}\\ {0}&amp;{r\geq\sigma}\end{array}\right.}$$</span></p>
+</div>
+<div class="symbolize">
+<p>מספר הדרכים שניתן לפרק <span>\(N\)</span> חלקיקים ל-<span>\(i\)</span> גושים מסומן ב-<span>\(n_{i}\)</span>.</p>
+</div>
+<div class="corollary">
+<p><span>$$\sum_{k=1}^{N}k n_{k}=N$$</span></p>
+</div>
+<div class="corollary">
+<p>מספר הדרכים לחלק <span>\(N\)</span> חלקיקים לגושים בגדלים נתונים נתון על ידי:
+<span>$$\Omega^{N}(n_{1},...,n_{N})=\frac{N!}{\prod_{k=1}^{N}(k!)^{n_{k}}n_{k}!}$$</span></p>
+</div>
+<div class="example">
+<ol>
+<li>
+<p>עבור <span>\(\Omega^{3}(1,1,0)\)</span> נקבל גוש 1 מגודל 1 וגוש 1 מודל 2. אכן יש <span>\(3=1+2\)</span> חלקיקים ולכן הביטוי מתקמפל. נציב בנוסחא: 
+<span>$$\Omega^{3}(1,1,0)=\frac{3!}{(1!)^{1}\cdot1!\cdot(2!)^{1}\cdot1!}=\frac{6}{1\cdot1\cdot2\cdot1}=\frac{6}{2}=3$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(\Omega^{4}(0,2,0,0)\)</span> נקבל 2 גושים מוגדל 2. ואכן מתקיים <span>\(4=2+2\)</span> ונקבל: 
+<span>$$\Omega^{4}(0,2,0,0)=\frac{4!}{(2!)^{2}\cdot2!}=\frac{24}{4\cdot2}=\frac{24}{8}=3$$</span></p>
+</li>
+<li>
+<p>עבור <span>\(\Omega^{5}(2,0,1,0,0)\)</span> נקבל 2 גושים מודל 1, וגוש 1 מודל 3. אכן <span>\(3+2\cdot 1 = 5\)</span>. לכן נקבל: 
+<span>$$\Omega^{5}(2,0,1,0,0)=\frac{5!}{(1!)^{2}\cdot2!\cdot(3!)^{1}\cdot1!}=\frac{120}{1\cdot2\cdot6\cdot1}=\frac{120}{12}=10$$</span></p>
+</li>
+</ol>
+</div>
+<div class="corollary">
+<p><span>$$Q_{N}=\sum_{\mathrm{partitions}}\Omega^{N}(n_{1},...,n_{N})\prod_{k=1}^{N}(k!b_{k})^{n_{k}}$$</span></p>
+</div>
+<div class="proof">
+<p>נתחיל מהביטוי:
+<span>$$Q_{N}=\sum_{G}\int_{V^{N}}\prod_{(i,j)\in G}f_{i j}\,d^{3N}\mathbf{r}$$</span>
+נחלק את הגרף לרכיבי הקשירות <span>\(G\cong G_{1}\sqcup G_{2}\sqcup\cdot\cdot\cdot\sqcup G_{m}\)</span> כאשר כל גרף הוא רכיב קשירות על הקודקודים <span>\(S_{j}\subseteq \{ 1,\dots,N \}\)</span> ו-<span>\(S_{j}\)</span> זרות. כעת:
+<span>$$\prod_{(i,j)\in G}f_{i j}=\prod_{j=1}^{m}\left(\prod_{(i,j)\in G_{j}}f_{i j}\right)$$</span>
+ולכן:
+<span>$$\int_{V^{N}}\prod_{(i,j)\in G}f_{i j}\,d^{3N}\mathbf{r}=\prod_{j=1}^{m}\left(\int_{V^{|S_{j}|}}\prod_{(i,j)\in G_{j}}f_{i j}\,d^{3|S_{j}|}\mathbf{r}\right)$$</span>
+כאשר נשים לב כי אם הגרף קשיר מתקיים:
+<span>$$b_{k}\cdot k!\cdot V =\int_{V^{|S_{j}|}}\prod_{(i,j)\in G_{j}}f_{i j}\,d^{3|S_{j}|}\mathbf{r}$$</span>
+כאשר כיוון שיש <span>\(n_{k}\)</span> גושים כאלה, וניתן להתחשב הדרכים השונות לסדר אותם כך שנקבל:
+<span>$$Q_{N}=\sum_{\stackrel{n_{1},\ldots,n_{N}}{\sum k n_{k}=N}}\Omega^{N}(n_{1},\ldots,n_{N})\prod_{k=1}^{N}(k!b_{k})^{n_{k}}$$</span></p>
+</div>
+<div class="example">
+<p>נרצה לחשב את <span>\(Q_{5}\)</span>. נמנה את כל הדרכים שניתן לחלק 5 חלקיקים ונחשב את הריבוי שלהם:
+<span>$$\begin{gather}\Omega_{(0,0,0,0,1)}^5 = 1\qquad \Omega_{(1,0,0,1,0)}^5 = 5\qquad \Omega_{(0,1,1,0,0)}^5 = 10 \qquad\Omega_{(2,0,1,0,0)}^5 = 10 \\ \Omega_{(3,1,0,0,0)}^5 = 10 \qquad\Omega_{(1,2,0,0,0)}^5 = 15 \qquad\Omega_{(5,0,0,0,0)}^5 = 1 
+\end{gather}$$</span>
+וכעת ניתן לחשב:
+<span>$$\begin{gather}Q_5 = \Omega_{(0,0,0,0,1)}^5 (5!b_5) + \Omega_{(1,0,0,1,0)}^5 (1!b_1)(4!b_4) + \Omega_{(0,1,1,0,0)}^5 (2!b_2)(3!b_3) + \Omega_{(2,0,1,0,0)}^5 (1!b_1)^2 (3!b_3) + \\+\Omega_{(3,1,0,0,0)}^5 (1!b_1)^3 (2!b_2) + \Omega_{(1,2,0,0,0)}^5 (1!b_1)(2!b_2)^2 + \Omega_{(5,0,0,0,0)}^5 (1!b_1)^5 
+\end{gather}$$</span>
+ולאחר הצבה של הריבויים ופישוט נקבל:
+<span>$$Q_{5}=120b_{5}+120b_{1}b_{4}+120b_{2}b_{3}+60b_{1}^{2}b_{3}+20b_{1}^{3}b_{2}+60b_{1}b_{2}^{2}+b_{1}^{5}$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור מערכת של <span>\(N\)</span> חלקיקים עם אינטרקציה המפעילה פוטנציאל על זוגות <span>\(v_{ij}\)</span> פונקציית החלוקה <span>\(Z\)</span> נתונה על ידי:
+<span>$$Z=\frac{1}{N!}\left(\frac{2\pi m}{\beta h^{2}}\right)^{3N/2}\int\cdot\cdot\cdot\int\prod_{i&lt;j}(1+f_{i j})\,d x_{1}\cdot\cdot\cdot d x_{N}$$</span>
+כאשר <span>\(f_{ij}=e^{ -\beta v_{ij} }-1\)</span>.</p>
+</div>
+<div class="summary">
+<ul>
+<li>עבור מערכת עם אינטראקציה, כאשר האינטראקציה בין החלקיק ה-<span>\(i\)</span> ל-<span>\(j\)</span> נתון על ידי <span>\(u_{ij}=u(\lvert r_{i}-r_{j} \rvert)\)</span> פונקציית החלוקה תהיה:
+<span>$$Z_{N}=\frac{1}{N!\lambda^{3N}}Q_{N}$$</span>
+כאשר:
+<span>$$\lambda=\frac{h}{\sqrt{ 2\pi mk_{B}T }} \qquad Q_{N}=\int_{V^{N}}\prod_{1\leq i&lt;j\leq N}e^{-\beta u\left( \mathbf{r}_{i}-\mathbf{r}_{j} \right)}d^{3}\mathbf{r}_{1}\cdot\cdot\cdot d^{3}\mathbf{r}_{N}$$</span></li>
+<li>נגדיר פונקציית מייר <span>\(f_{i j}:=e^{-\beta u_{i j}}-1\)</span> אשר קטן בטמפרטורות גובההות. בעזרתו ניתן לכתוב את <span>\(Q_{N}\)</span> על ידי סכום על גרפים עם <span>\(N\)</span> קודקודים:
+<span>$$Q_{N}=\sum_{G}\int_{V^{N}}\prod_{(i,j)\in G}f_{i j}\,\mathrm{d}^{3N}\mathbf{r}$$</span></li>
+<li>ניתן לחלק את הסכימה לרכיבים קשירים ולכתוב את <span>\(Q_{N}\)</span> על ידי:
+<span>$$Q_{N}=\sum_{\mathrm{partitions}}\Omega^{N}(n_{1},...,n_{N})\prod_{k=1}^{N}(k!b_{k})^{n_{k}}$$</span>
+כאשר <span>\(b_{k}\)</span> נקראים מקדמי הקשירות הגושיים ונתון על ידי סכימה על כל הגרפים הקשירים עם <span>\(k\)</span> חלקיקים.
+<span>$$b_{k}:=\frac{1}{k!V}\int_{V^{k}}\left(\sum_{G\in{\mathcal{C}}_{k}}\prod_{(i,j)\in G}f_{i j}\right)d^{3k}{\bf r}$$</span>
+וכן הגודל <span>\(\Omega^{N}(n_{1},n_{2},\ldots,n_{N})\)</span> מייצג את מספר הדרכים לסדר <span>\(N\)</span> חלקיקים לגושים בגדלים שונים. אם <span>\(n_{k}\)</span> זה מספר הגושים בגודל <span>\(k\)</span>(כך שמתקיים <span>\(kn_{k}=N\)</span>) אז נקבל:
+<span>$$\Omega^{N}(n_{1},n_{2},\ldots,n_{N})=\frac{N!}{\prod_{k=1}^{N}(k!)^{n_{k}}n_{k}!}$$</span></li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+<li class='prev-page'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

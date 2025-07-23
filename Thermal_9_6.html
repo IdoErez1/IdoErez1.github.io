@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תנועה בראונית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1.html'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2.html'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3.html'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1.html'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2.html'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3.html'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4.html'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5.html'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1.html'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2.html'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1.html'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2.html'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1.html'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2.html'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3.html'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4.html'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5.html'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6.html'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7.html'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1.html'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2.html'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3.html'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4.html'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5.html'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1.html'>7.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2.html'>7.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1.html'>8.1 קירוב שדה ממוצע</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2.html'>8.2 מודל איזינג חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_3.html'>8.3 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_4.html'>8.4 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_5.html'>8.5 הפיתוח הויראלי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1.html'>9.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2.html'>9.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_3.html'>9.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_4.html'>9.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_6.html'>9.6 תנועה בראונית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_8.html'>9.8 משוואת פוקר פלאנק</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_9_7.html`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_9_5.html`; }});</script>
+        <div class="content">
+        <h1>9.6  תנועה בראונית</h1>
+    <div class="definition"><span class="keyword">תנועה בראונית</span><p>תנועה אקראית של חלקיק קטן המוקף בהרבה חלקיקים קטנים יותר אשר מתנגשים בו.</p>
+</div>
+<div class="remark">
+<p>היסטורית משומש לתאר מערכות עם חליקים קטנים בקוטר של בערך מיקרון בתוך נוזל(אשר לפי המודל האטומי מורכב מחלקיקים). למעשה התחזיות של תנועה בראינית עיששו את המודל החלקיקי.</p>
+</div>
+<div class="definition"><span class="keyword">היררכיית סדרי זמן  </span><p>הזמנים מוגדרים כך ש-<br />
+<span>$$\tau_{\text{mol}} \ll \tau_{B} \ll \tau_{\text{diffusion}}$$</span>
+כאשר <span>\(\tau_{\text{mol}}\)</span> הוא זמן בין התנגשות מולקולרית, <span>\(\tau_{B}\)</span> הוא הזמן להגיע למהירות הטרמינלית</p>
+</div>
+<div class="definition"><span class="keyword">משוואת לנג'וון  </span><p>משוואת סטוכסטית לתנועה של חלקיק ב-1D תחת חיכוך ורעש:<br />
+<span>$$m\dot{v}(t) = -\gamma v(t) + g\,\eta(t)$$</span><br />
+כאשר <span>\(\eta(t)\)</span> הוא רעש לבן גאוסיאני, ו-<span>\(\tau_{B} = \frac{m}{\gamma}\)</span> זמן אופייני</p>
+</div>
+<div class="definition"><span class="keyword">רעש לבן גאוסיאני (GWN)  </span><p>משתנה מקרי <span>\(\eta(t)\)</span> המקיים<br />
+<span>$$\left\langle  \eta(t)  \right\rangle = 0\left\langle  \eta(t_{1})\qquad  \eta(t_{2})  \right\rangle = \delta(t_{1} - t_{2})$$</span>
+ונקרא לבן כי בתורת פורייה הקורולציה היא קבוע  </p>
+</div>
+<div class="proposition"><span class="keyword">פתרון משוואת לנג'וון לתרדמה מתחילת זמן  </span><p>הפתרון הכללי עבור תנאי התחלה <span>\(v(0)\)</span> הוא:<br />
+<span>$$v(t) = e^{-t / \tau_{B}}\,v(0) + \frac{g}{m} \int_{0}^{t} e^{-(t - s)/\tau_{B}} \,\eta(s)\,\mathbb{d}s$$</span></p>
+</div>
+<div class="proposition"><span class="keyword">תוחלת ומהוות קורלציה של מהירות  </span><ul>
+<li>תוחלת:<br />
+<span>$$\langle v(t) \rangle = 0$$</span>  </li>
+<li>קורלציית מהירויות:<br />
+<span>$$\langle v(t_{1}) v(t_{2}) \rangle = \left( v^{2}(0) - \frac{g^{2}\tau_{B}}{2m^{2}} \right) e^{-(t_{1}+t_{2})/\tau_{B}} + \frac{g^{2}\tau_{B}}{2m^{2}}\,e^{-|t_{1} - t_{2}|/\tau_{B}}$$</span>  </li>
+</ul>
+</div>
+<div class="proposition"><span class="keyword">מצב שיווי משקל של מהירות  </span><p>כאשר <span>\(t \to \infty\)</span>, מתקיים<br />
+<span>$$\langle v^{2}(t) \rangle \to \frac{g^{2}\tau_{B}}{2m^{2}} \equiv \frac{1}{\beta m}$$</span><br />
+כאשר <span>\(\beta = \tfrac{1}{k_{B}T}\)</span> לפי עקרון החלוקה השווה:<br />
+<span>$$\left\langle \tfrac{1}{2} m v^{2} \right\rangle = \tfrac{1}{2} k_{B}T$$</span>  </p>
+</div>
+<div class="proposition"><span class="keyword">קביעת עוצמת הרעש  </span><p>מעקרון שיווי המשקל:<br />
+<span>$$g^{2} = \frac{2m}{\beta \tau_{B}} = \frac{2\gamma}{\beta}$$</span>  </p>
+</div>
+<div class="definition"><span class="keyword">תזוזת חלקיק ומיקום  </span><p>הפרש המיקום מתחילת הזמן:<br />
+<span>$$\Delta x(t) = x(t) - x(0) = \int_{0}^{t} v(t') \,\mathbb{d}t'$$</span>
+בזמנים ארוכים מצפה להתנהגות דיפוזיבית</p>
+</div>
+<div class="proposition"><span class="keyword">קורלציית הזזת חלקיק  </span><p>לזמנים <span>\(t_{1}, t_{2}\)</span>:<br />
+<span>$$\langle \Delta x(t_{1}) \Delta x(t_{2}) \rangle = \int_{0}^{t_{1}} \mathbb{d}t_{1}' \int_{0}^{t_{2}} \mathbb{d}t_{2}' \langle v(t_{1}') v(t_{2}') \rangle$$</span>
+ובחישוב מפורט מניב בביטוי הכולל אקספוננציאליים</p>
+</div>
+<div class="proposition"><span class="keyword">סטיית ריבועית ממוצעת של מיקום  </span><p>במקרה <span>\(t_{1}=t_{2}=t\)</span> ו-<span>\(t \to \infty\)</span>:<br />
+<span>$$\langle \Delta x^{2}(t) \rangle = \tau_{B}^{2}\left( v^{2}(0) - \frac{g^{2}\tau_{B}}{2m^{2}} \right)\left(e^{-t/\tau_{B}} - 1\right)^{2} + \frac{g^{2}\tau_{B}^{2}}{m}\left(t + \tau_{B}(e^{-t/\tau_{B}} - 1)\right)$$</span>  </p>
+</div>
+<div class="proposition"><span class="keyword">מצבי יחסיים:  </span><ul>
+<li><strong>מקרה בליסטי</strong> (<span>\(t \ll \tau_{B}\)</span>):<br />
+<span>$$\langle \Delta x^{2}(t) \rangle \approx v^{2}(0)\,t^{2}$$</span>  </li>
+<li><strong>מקרה דיפוזי</strong> (<span>\(t \gg \tau_{B}\)</span>):<br />
+<span>$$\langle \Delta x^{2}(t) \rangle \approx \frac{2g^{2}\tau_{B}^{2}}{2m^{2}}\,t$$</span>  </li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">מקדם הדיפוזיה ויחס אינשטיין  </span><p>מגדירים:<br />
+<span>$$D = \frac{g^{2}\tau_{B}^{2}}{2m^{2}}$$</span><br />
+ובאמצעות <span>\(g^{2} = \tfrac{2m}{\beta \tau_{B}}\)</span> נקבל:<br />
+<span>$$D = \frac{\tau_{B}}{\beta m} = \frac{1}{\beta \gamma}$$</span>  </p>
+</div>
+<div class="proposition"><span class="keyword">התפלגות שיווי משקל של מהירות  </span><p>בהסתמך על שאר הקומולנטים נעלמים עבור <span>\(N&gt;2\)</span>, מהירות בשיווי משקל היא גאוסיאנית:<br />
+<span>$$P(v) = \sqrt{\frac{\beta m}{2\pi}} \exp\Bigl(-\tfrac{\beta m}{2} v^{2}\Bigr)$$</span><br />
+ומכאן אנרגיה פנימית מפולגת בקטגוריה בולצמן:<br />
+<span>$$P(E) \propto e^{-\beta E}$$</span>  </p>
+</div>
+<div class="remark">
+<p>היחס <span>\(\tau_{\text{mol}} \ll \tau_{B} \ll \tau_{\text{diffusion}}\)</span> מבטיח שהמשוואת לנג'וון מתאימה לתיאור התאוצה הממוצעת בין התנגשות למעבר דיפוזיבי  </p>
+</div>
+<div class="remark">
+<p>בזמנים קצרים (בליסטיים) התנועה דומיננטית על ידי המהירות ההתחלתית; בזמנים ארוכים (דיפוזיביים) שואפת סטיית הריבועית של המיקום לגדול ליניארית עם הזמן.</p>
+</div>
+<div class="remark">
+<p>יחס אינשטיין <span>\(D = \tfrac{1}{\beta \gamma}\)</span> מקשר בין חיכוך, טמפרטורה ודיפוזיה בסביבה תרמית  </p>
+</div>
+<div class="remark">
+<p>ההתפלגות הגאוסיאנית של מהירות נובעת מאי-תלות קומולנטים מעל ריבעיים, המאפיין התנהגות סטוקסטית לינארית עם רעש גאוסיאני  </p>
+</div>
+<div class="remark">
+<p>גזירת הפתרון והקורלציות נשענת על אינטגרלים של אקספוננציאלים תוך שימוש בקורולציית <span>\(\delta\)</span> של הרעש.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת לנג'וון בפוטנציאל כללי</span><p>משוואת תנועה סטוכסטית של חלקיק תחת פוטנציאל <span>\(V(x)\)</span>, חיכוך ורעש לבן גאוסיאני:
+<span>$$m\dot v(t) = -\frac{\partial V}{\partial x}(x(t)) - \gamma v(t) + g\,\eta(t)
+$$</span>
+כאשר <span>\(\eta(t)\)</span> הוא רעש לבן גאוסיאני המקיים <span>\(\langle \eta(t)\rangle=0,\;\langle \eta(t_1)\eta(t_2)\rangle=\delta(t_1-t_2)\)</span> ו<span>\(\tau_B = \tfrac{m}{\gamma}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">משוואת (Kramers-Chandrasekhar)</span><p>צפיפות ההסתברות <span>\(P(x,p,t)\)</span> בפאזת מיקום <span>\(x\)</span> ותנע <span>\(p=m v\)</span> מקיימת משוואת Fokker-Planck מסוג Kramers:
+<span>$$\frac{\partial P}{\partial t} + \frac{p}{m}\frac{\partial P}{\partial x} - \frac{\partial V}{\partial x}\frac{\partial P}{\partial p}= \gamma \frac{\partial}{\partial p}\bigl(p P\bigr) + \frac{g^{2}}{2}\frac{\partial^{2}P}{\partial p^{2}}
+$$</span>
+כאשר המונחים בצד ימין מתארים חיכוך ודיפוזיה בתנע.</p>
+</div>
+<div class="remark">
+<p>משוואת Kramers היא הכללה של משוואת לנג'וון לפוטנציאל כללי, ומשמשת לתיאור האבולוציה של צפיפות ההסתברות מחוץ לשיווי משקל.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_9_7.html'>9.7 אינטגרליים מסלוליים</a></li>
+<li class='prev-page'><a href='./Thermal_9_5.html'>9.5 משוואת המסטר</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אינטגרליים מסלוליים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_10_8.html'>10.8 משוואת פוקר פלאנק</a></li>
+<li class='parent-page'><a href='./Thermal.html'> פיזיקה תרמית וסטטיסטית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. הגדרות בסיסיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_1_1.html'>1.1 פונקציות מצב ומסלול</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_2.html'>1.2 משאוות מצב</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_1_3.html'>1.3 חוק האפס של תרמודינמיקה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. חוקי התרמודינמיקה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_2_1.html'>2.1 חוק ראשון של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_2.html'>2.2 חוק שני של תרמודינמיקה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_3.html'>2.3 פוטנצילים תרמודינמים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_4.html'>2.4 החוק השלישי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_2_5.html'>2.5 משטחים תרמודימים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. תהליכים ומנועים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_3_1.html'>3.1 סיווג תהליכים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_3_2.html'>3.2 מנועים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פוטנציאל כימי ומעברי פאזה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_4_1.html'>4.1 פוטנציאל כימי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_4_2.html'>4.2 מעברי פאזה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. הגישה הסטטיסטית - צברים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_5_1.html'>5.1 אנטרופיה סטטיסטית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_2.html'>5.2 המערכת המבודדת - הצבר המיקרוקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_3.html'>5.3 המערכת הסגורה - הצבר הקנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_4.html'>5.4 פיסיקה סטטיסטית של גזים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_5.html'>5.5 המערכת הפתוחה - הצבר הגאנד קנוני</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_6.html'>5.6 משוואת סאהא</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_5_7.html'>5.7 צבר גיבס</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. פיזיקה סטטיטית קוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_6_1.html'>6.1 חילוף חלקיקים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_2.html'>6.2 פרמיונים ובוזונים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_3.html'>6.3 גז קוונטי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_4.html'>6.4 גז פרמי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_6_5.html'>6.5 גז בוזונים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. מודל איזינג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_7_1.html'>7.1 אינטראקציה אחידה</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_2.html'>7.2 שכנים קרובים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_7_3.html'>7.3 שרשרת איזינג</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. הגישה הסטטיסטית - גיבס שאנון</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_8_1.html'>8.1 התפלגות הסתברות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_8_2.html'>8.2 אנטרופיית שאנון</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. מערכות עם אינטראקציה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_9_1.html'>9.1 קירוב שדה ממוצע</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_2.html'>9.2 מודל איזינג חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_3.html'>9.3 פיתוח טמפרטורות נמוכות</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_4.html'>9.4 פיתוח בטמפרטורות גבוהות - cluster expansion</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_9_5.html'>9.5 הפיתוח הויראלי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. מערכות מחוץ לשיווי משקל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Thermal_10_1.html'>10.1 מומנטיים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_2.html'>10.2 הילוך אקראי</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_3.html'>10.3 משוואת לנג'וון</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_4.html'>10.4 משאוות לנג'וון כללית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_5.html'>10.5 משוואת המסטר</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_6.html'>10.6 תנועה בראונית</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_7.html'>10.7 אינטגרליים מסלוליים</a></li>
+<li class='parent-page-dropdown'><a href='./Thermal_10_8.html'>10.8 משוואת פוקר פלאנק</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Thermal_10_6.html'>10.6 תנועה בראונית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Thermal_10_8.html`; }if (event.key === 'ArrowLeft') { window.location.href = `./Thermal_10_6.html`; }});</script>
+        <div class="content">
+        <h1>10.7  אינטגרליים מסלוליים</h1>
+    <h2>מבוא מתמטי</h2>
+<div class="definition"><span class="keyword">פונקציה יוצרת מומנטיים</span><p>יהי <span>\(X\)</span> משתנה מקרי עם התפלגות הסתברות <span>\(P_{X}\)</span>. הפונקציה היוצרת של המומנטים נתונה על ידי:
+<span>$$Z\left(J\right)\equiv\left\langle e^{J x}\right\rangle=\int e^{J x}P_{X}\left(x\right)d x$$</span>
+כאשר <span>\(J\)</span> נקרא המקור. למעשה זהו התמרת לפלס של <span>\(P_{X}(x)\)</span>. </p>
+</div>
+<div class="proposition">
+<p>המומנט מסדר <span>\(n\)</span> נתון על ידי:
+<span>$$\langle X^{n}\rangle=\frac{1}{Z\left[0\right]}\left.\frac{d^{n}}{d J^{n}}\left\{Z\left(J\right)\right\}\right|_{J=0}$$</span></p>
+</div>
+<div class="definition"><span class="keyword">פונקציה יוצרת קיומולנטיים</span><p>מוגדר על ידי:
+<span>$$W\left(J\right)\equiv\log Z\left(J\right)$$</span>
+כך שמקיימת:
+<span>$$\left\langle X^{n}\right\rangle_{c}=\left.{\frac{d^{n}}{d J^{n}}}\left\{W\left(J\right)\right\}\right|_{J=0}$$</span></p>
+</div>
+<div class="remark">
+<p>זה אנלוגי לאנרגיה החופשית.</p>
+</div>
+<div class="example"><span class="keyword">פונקציות יוצרות של גאוסיאן</span><p>יהי
+<span>$$P_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\Bigl(-\tfrac{1}{2}\bigl(\tfrac{x-x_0}{\sigma}\bigr)^2\Bigr).
+$$</span>
+חשבנו:
+<span>$$Z(J) = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi\sigma^2}} e^{ - \tfrac{1}{2}(\frac{x-x_0}{\sigma})^2 + Jx }\;\mathrm{d}x= e^{ J x_0 + \tfrac{1}{2}J^2\sigma^2 }.
+$$</span>
+לכן:
+<span>$$\left\langle X\right\rangle=\frac{1}{Z\left(0\right)}\left.\frac{d}{d J}Z\left(J\right)\right|_{J=0}=x_{0}$$</span>
+<span>$$\left\langle X^{2}\right\rangle=\frac{1}{Z\left(0\right)}\left.\frac{d^{2}}{d J^{2}}Z\left(J\right)\right|_{J=0}=\left.\frac{d}{d J}\left[\left(x_{0}+\frac{J\sigma^{2}}{2}\right)e^{J\left(x_{0}+\frac{J\sigma^{2}}{2}\right)}\right]\right|_{J=0}=\sigma^{2}+x_{0}^{2}$$</span>
+כאשר השנות של הגאוסיאן אכן <span>\(\sigma^{2}\)</span>:
+<span>$$\left\langle X^{2}\right\rangle_{c}=\left\langle X^{2}\right\rangle-\left\langle X\right\rangle^{2}=\sigma^{2}$$</span>
+ניתן גם להראות את זה באמצעות <span>\(W(J)\)</span>. נקבל:
+<span>$$W\left(J\right)=\log Z\left(J\right)=J x_{0}+{\frac{J^{2}\sigma^{2}}{2}}$$</span>
+ולכן:
+<span>$$\langle X\rangle_{c}=\left.\frac{d}{d J}W\left(J\right)\right|_{J=0}=x_{0}$$</span>
+<span>$$\left\langle X^{2}\right\rangle_{c}=\left.\frac{d^{2}}{d J^{2}}W\left(J\right)\right|_{J=0}=\sigma^{2}$$</span>
+<span>$$\left\langle X^{n&gt;2}\right\rangle_{c}=\left.\frac{d^{n}}{d J^{n}}W\left(J\right)\right|_{J=0}=0$$</span></p>
+</div>
+<div class="remark">
+<p>קומיולנטים מעל השני מתאפסים מאפיינת התפלגות גאוסיאנית.</p>
+</div>
+<h3>טריק כללי עבור גאוסיאנים</h3>
+<div class="proposition">
+<p>עבור אינטגרלים מהצורה:
+<span>$$I\left(J\right)\equiv\int\limits_{-\infty}^{\infty}d x\exp\left[-\frac12x G^{-1}x+J x\right]$$</span>
+כאשר <span>\(G\)</span> הוא מספר מתקיים:
+<span>$$I(J)=e^{ \frac{1}{2}GJ^{2} }I(0)$$</span></p>
+</div>
+<div class="proof">
+<p>הדבר הסטנדרטי לעשות זה להשלים לריבוע:
+<span>$$I(J)=\int_{-\infty}^{\infty} \exp \left\{  -\frac{1}{2}(x-GJ) G^{-1}  (x-GJ)-\frac{GJ^{2}}{2} \right\} \, \mathrm{d}x $$</span>
+ניתן להגדיר <span>\(a=x-GJ\)</span> ולקבל:
+<span>$$I(J)=e^{ \frac{1}{2} GJ^{2} }\int_{-\infty}^{\infty} \exp \left\{  -\frac{1}{2}aG^{-1}  a  \right\} \, \mathrm{d}a =e^{ \frac{1}{2} GJ^{2} }I(J=0)$$</span></p>
+</div>
+<div class="proposition">
+<p>עבור האינטגרל:
+<span>$$I(J_{1},\dots,J_{n})=\int_{-\infty}^{\infty}  \, \mathrm{d}x_{1} \dots \int_{-\infty}^{\infty}  \, \mathrm{d}x_{n}  \exp \left\{  -\frac{1}{2}\sum_{j,k}x_{j}(G^{-1} )_{jk}x_{k} + \sum_{j} J_{j}x_{j}  \right\}$$</span>
+כאשר ניתן לבחור את <span>\(G\)</span> כך שסימטרית נקבל:
+<span>$$I\left( J_{1},\dots,J_{n} \right)=I\left(J_{1}=0,\ldots,J_{n}=0\right)\exp\left[\frac{1}{2}\sum_{j k}J_{j}G_{j k}J_{k}\right]$$</span></p>
+</div>
+<div class="proof">
+<p>נתון האינטגרל:
+<span>$$I(J_{1},\dots,J_{n})=\int_{-\infty}^{\infty}  \, \mathrm{d}x_{1} \dots \int_{-\infty}^{\infty}  \, \mathrm{d}x_{n}  \exp \left\{  -\frac{1}{2}\sum_{j,k}x_{j}(G^{-1} )_{jk}x_{k} + \sum_{j} J_{j}x_{j}  \right\}$$</span>
+כאשר כיוון ש-<span>\(G\)</span> סימטרית קיים מטריצה <span>\(O\)</span> כך ש-<span>\(O^{T}GO=D=\mathrm{diag}\left( w_{1},\dots,w_{n} \right)\)</span>.
+נעשה המעבר לבסיס אורתוגונאלית:
+<span>$$\mathbf{X}=O\mathbf{V}=\mathbf{V}O^{T}$$</span>
+כאשר נשים לב כי כיוון ש-<span>\(O\)</span> אורתוגונאלית היעקוביאן הוא יחידה. לכן:
+<span>$$O^{T}G^{-1} O=\text{diag}(w_{1}^{-1} ,\dots w_{n}^{-1} )$$</span>
+נגדיר <span>\(\tilde{\mathbf{J}}=\mathbf{J}O\)</span> ונקבל:
+<span>$$I(J_{1},\dots,J_{n})=\int_{-\infty}^{\infty}  \, \mathrm{d}v_{1}\dots \int_{-\infty}^{\infty}  \, \mathrm{d}v_{n}\exp \left\{  -\frac{1}{2}\sum_{j} v_{j}w_{j}^{-1} v_{j}+\sum_{j} \tilde{j}_{j}v_{j}  \right\}  $$</span>
+כאשר כיוון שהבסיס אורתוגונאלי נקבל <span>\(v_{i}\cdot v_{j}=\delta_{ij}\)</span>. כעת:
+<span>$$I(J_{1},\dots,J_{n})=I(J_{1}=0,\dots,J_{n}=0)\prod_{j=1}^{n} e^{ \frac{1}{2 \tilde{J}_{j}}w_{j}\tilde{J}_{j}}=I(J_{1}=0,\dots,J_{n}=0)\exp \left\{  \frac{1}{2}\sum_{jn}J_{i}G_{jn}J_{n}  \right\}$$</span></p>
+</div>
+<div class="proposition">
+<p>בגבול הרצף נקבל אינטגרל מסלולי:
+<span>$$I[J]=I[0]\cdot\exp\left({\frac{1}{2}}\int_{0}^{T}\int_{0}^{T}J(t)G(t,s)J(s)\,\mathrm{d}t\,\mathrm{d}s\right)$$</span></p>
+</div>
+<div class="proof">
+<p>עבור זמן כולל <span>\(T\)</span> נגדיר צעד זמן בתור <span>\(\Delta t=\frac{T}{n}\)</span> ונקודות ביניים <span>\(t_{j}=j\Delta t\)</span>.  כמו כן נסמן <span>\(J_{j}=J(t_{j})\Delta t\)</span> ו-<span>\(G_{jk}=G(t_{j},t_{k})\)</span> כאשר זהו גרעין רציף. זה נותן:
+<span>$$\sum_{j,k}J_{j}G_{j k}J_{k}=\sum_{j,k}J(t_{j})\Delta t\cdot G(t_{j},t_{k})\cdot J(t_{k})\Delta t=\Delta t^{2}\sum_{j,k=1}^{n}J(t_{j})G(t_{j},t_{k})J(t_{k})$$</span>
+כך שנקבל:
+<span>$$I(J_{1},\ldots,J_{n})=I(0)\cdot\exp\left[{\frac{1}{2}}\Delta t^{2}\sum_{j,k=1}^{n}J(t_{j})G(t_{j},t_{k})J(t_{k})\right]$$</span>
+עד כה זה היה רק סימונים. כעת ניקח את הגבול <span>\(n\to \infty\)</span> ו-<span>\(\Delta t\to 0\)</span>. נשים לב כי <span>\(\sum_{j,k}\Delta t^{2}\to\int_{0}^{T} \int_{0}^{T}  \, dt \, ds\)</span> ולכן:
+<span>$$\sum_{j,k=1}^{n}J(t_{j})G(t_{j},t_{k})J(t_{k})\Delta t^{2}\to\int_{0}^{T}\int_{0}^{T}J(t)G(t,s)J(s)\,\mathrm{d}t\mathrm{d}s$$</span>
+ולכן בגבול נקבל:
+<span>$$I[J]=\operatorname*{lim}_{n\to\infty}I(J_{1},\ldots,J_{n})=I[0]\cdot\exp\left[{\frac{1}{2}}\int_{0}^{T}\int_{0}^{T}J(t)G(t,s)J(s)\,\mathrm{d}t\mathrm{d}s\right]$$</span></p>
+</div>
+<div class="remark">
+<p>במקרה הזה נקבל כי <span>\(G\)</span> היא פונקציית גרין.</p>
+</div>
+<div class="symbolize"><span class="keyword">Path integral measure</span><p><span>$$\int Dx(t):= \lim_{ n \to \infty } \int_{-\infty}^{\infty}   \, dx_{1}\dots \int_{-\infty}^{\infty}  \, dx_{n} $$</span>
+כך שנקבל כי אם <span>\(Z\)</span> הוא פונקציואל לינארי גאוסי מוגדר על ידי:
+<span>$$Z[J]:=\int{\mathcal{D}}x(t)\,\exp\left(-{\frac{1}{2}}\int x G^{-1}x+\int J x\right)=Z[0]\cdot\exp\left({\frac{1}{2}}\int_{0}^{T}\!\!\int_{0}^{T}J(t)G(t,s)J(s)\,\mathrm{d}t\,\mathrm{d}s\right)$$</span></p>
+</div>
+<div class="proposition">
+<p>המומנטים של הפונקציונאל הלינארי הגאוסי <span>\(Z[J(t)]\)</span> יהיו:
+<span>$$\langle x(t) \rangle =0\qquad \langle x(t_{1},t_{2}) \rangle =G(t_{1},t_{2})\qquad \left\langle  x(t_{1})x(t_{2})\dots x(t_{n})  \right\rangle _{c}=0$$</span></p>
+</div>
+<div class="proof">
+<p>כדי למצוא את המומנטים של הפונקציונאל הלינארי הגאוסי <span>\(Z[J(t)]\)</span> נשתמש בפונקצייה יוצרת מומנטים:
+<span>$$\langle x(t) \rangle =\frac{1}{Z[0]} \frac{\delta}{\delta J}Z[J]|_{J=0}=0$$</span>
+ובאופן דומה:
+<span>$$\langle x(t_{1})x(t_{2}) \rangle =\frac{\delta}{\delta J(t_{1})} \frac{\delta}{\delta J(t_{2})}\log Z[J]|_{J=0}=\frac{\partial}{\partial J\left(t_{1}\right)}\frac{\partial}{\partial J\left(t_{2}\right)}\;\frac{1}{2}\int_{0}^{T}d t\int_{0}^{T}d s\left[J\left(t\right)\left(t,s\right)J\left(s\right)\right]\Biggr|_{J=0}=G(t_{1},t_{2})$$</span></p>
+</div>
+<h2>פתרון מדר סטוכסטי עם אינטגרל מסלולי</h2>
+<div class="definition"><span class="keyword">הפעולה של רעש לבן גאוסי</span><p><span>$$S_{\eta}\equiv \frac{1}{2}\int_{0}^{T} \eta^{2}(t) \, \mathrm{d}t $$</span></p>
+</div>
+<div class="corollary">
+<p><span>$$Z_{\eta}\left[ J_{\eta }(t) \right]=\int D\eta(t)e^{ -S_{\eta} }\exp \left\{  \int_{0}^{T} J_{\eta}(t)\eta(t) \, dx   \right\}  $$</span></p>
+</div>
+<p>נניח כי:
+<span>$${\dot{v}}\left(t\right)=f\left(v\left(t\right),t\right)+g\left(v\left(t\right),t\right)\eta\left(t\right)$$</span>
+כדי לייצר אינטגרל מסלולי נסתכל על כל האפשרויות של <span>\(\eta(t)\)</span> עם משקל <span>\(\exp\left( -S_{\eta} \right)\)</span> כאשר <span>\(v(t)\)</span> משומש כאילוץ. כלומר:
+<span>$$Z_{v}=\int _{v(t_{0})=v_{0}}Dv(t)P_{v}[v(t)]  \qquad P_{v}[v(t)]=\int D\eta(t)\; \delta\left( \dot{v}-f-g\eta \right)e^{ -S_{\eta} } $$</span>
+ואם נשמתמש בתצוגה הספקטרלית של <span>\(\delta\)</span> כך שלכל <span>\(a(t)\)</span> מתקיים:
+<span>$$\delta[a(t)]=\int D\lambda(t)\exp\left( -\int_{0}^{T} \lambda(t)a(t) \, dt  \right)$$</span>
+ונקבל:</p>
+<p>פיתוח להשלים
+<strong>טענה</strong>
+<span>$$P_{v}\left[v\left(t\right)\right]=Z_{\eta}\left[J_{\eta}=0\right]Z_{\lambda}\left[J_{\lambda}=0\right]\cdot\exp\left(\int\limits_{0}^{T}\frac{\left({\dot{v}}-f\right)^{2}}{2g^{2}}d t\right)$$</span></p>
+<div class="proof">
+<p>להשלים</p>
+</div>
+<div class="example">
+<p>עבור המקרה הספציפי של תנועה בראונית נקבל:
+<span>$$P_{v}\left[v\left(t\right)\right]\sim\exp\left\{-\int\limits_{0}^{T}d t\frac{\left(\dot{v}-\frac{\gamma v}{m}\right)^{2}}{2\gamma}\beta m^{2}\right\}$$</span>
+ואם נרצה לדמות את המערכת בזמנים ארוכים נניח <span>\(\dot{v}=0\)</span> וניקח את הזמן האופייני להיות הזמן ההאטה של המערכת <span>\(T=\tau_{B}=\frac{m}{\gamma}\)</span> ונקבל:
+<span>$$P_{v}\left[v\left(t\right)\right]\sim\exp\left\{-{\frac{1}{2}}\beta m v^{2}\right\}=P_{\mathrm{Maxwell}}\left(v\right)$$</span></p>
+</div>
+<div class="summary">
+<ul>
+<li>עבור משוואה דיפרנציאלית מהצורה:
+<span>$${\dot{v}}(t)=f(v(t),t)+g(v(t),t)\eta(t)$$</span>
+ניתן למצוא את ההתפלגות הסתברות על ידי:
+<span>$$P_{v}[v(t)]=Z_{\eta}[J_{\eta}=0]Z_{\lambda}[J_{\lambda}=0]\cdot\exp\left(-\int_{0}^{T}{\frac{(\dot{v}-f)^{2}}{2g^{2}}}\mathrm{d}t\right)$$</span></li>
+<li>הגורם של האקספוננט נובע מכך שההסתברות של המסלול <span>\(\eta(t)\)</span> יהיה:
+<span>$$P[\eta(t)]\propto\exp\left(-\frac{1}{2}\int_{0}^{T}\eta(t)^{2}\mathrm{d}t\right)$$</span>
+וכן אם נבודד את <span>\(\eta(t)\)</span>:
+<span>$$\eta(t)={\frac{\dot{v}(t)-f(t,v)}{g(t,v)}}$$</span>
+נציב ונקבל:
+<span>$$P_{v}[v(t)]\propto\exp\left(-\frac{1}{2}\int_{0}^{T}\frac{(\dot{v}(t)-f(t,v))^{2}}{g^{2}(t,v)}\,\mathrm{d}t\right)$$</span></li>
+<li>הקבועים <span>\(Z_{\eta}\left[ J_{\eta}=0 \right],Z_{\lambda}\left[ J_{\lambda}=0 \right]\)</span> הם קבועי נרמול(או פונקציונאלים יוצרים). באופן כללי:
+<span>$$Z_{\eta}[J_{\eta}]=\int{\mathcal{D}}\eta\,\exp\left(-{\frac{1}{2}}\int\eta^{2}(t)\mathrm{d}t+\int J_{\eta}(t)\eta(t)\mathrm{d}t\right)$$</span>
+כאשר אם אין מקור - <span>\(J_{\eta}=0\)</span> נקבל:
+<span>$$Z_{\eta}[0]=\int{\mathcal{D}}\eta\,\exp\left(-{\frac{1}{2}}\int\eta^{2}(t)\mathrm{d}t\right)$$</span>
+כאשר זה לא תלוי ב-<span>\(v(t)\)</span>. זה מבטיח כי ההסתברות הכוללת היא 1.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Thermal_10_8.html'>10.8 משוואת פוקר פלאנק</a></li>
+<li class='prev-page'><a href='./Thermal_10_6.html'>10.6 תנועה בראונית</a></li>
+</ul></li>
+        </body>
+        </html>
+        
