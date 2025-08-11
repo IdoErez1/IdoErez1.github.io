@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת לפלס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_9_7'>9.7 פונקציית גרין</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_1'>9.1 התמרות פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_2'>9.2 חשבון וריאציות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_3'>9.3 משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_4'>9.4 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_6'>9.6 משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_7'>9.7 פונקציית גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations_9_7`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_9_5`; }});</script>
+        <div class="content">
+        <h1>9.6  משוואת לפלס</h1>
+    <p><span>$$u\left( r=R,\theta \right)=3\sin\left( 12\theta \right)\quad u\left( r,\theta=0 \right)=u\left( r,\theta=\alpha \right)=0$$</span>
+יש למצוא פונקציות הרמוניות בגזרה זו כאשר <span>\(\alpha=\frac{\pi}{6}\)</span>.
+?
+נפריד משתנים:
+<span>$$u\left( r,\theta \right)=R(r)\Theta\left( \theta \right)$$</span>
+ולכן נקבל את המשוואה:
+<span>$$\frac{\partial ^2 R}{\partial r^2}\Theta +\frac{\Theta}{r}\frac{\partial R}{\partial r}+\frac{R}{r^2}\frac{\partial ^2\Theta}{\partial \theta^2}=0$$</span>
+ולאחר פישוט נקבל:
+<span>$$\frac{r^2}{R}R'' + \frac{r}{R}R'=-\frac{1}{\Theta}\frac{\partial ^2\Theta }{\partial \theta^2}=k^2$$</span>
+כאשר דרשנו שיהיה שווה ל-<span>\(k^2\)</span> כיוון שדורשים שהפתרון עבור <span>\(\Theta\)</span> יהיה מחזורי. מהחלק הזוויתי נקבל:
+<span>$$\Theta''\left( \theta \right)=-k^2 \Theta\left( \theta \right)\implies \Theta\left( \theta \right)={ A\cos\left( k\theta \right) }+B\sin\left( k\theta \right)$$</span>
+מתקיים:
+<span>$$u\left( r,\theta=0 \right)=R(r)\cdot \Theta(0)=0\implies \Theta(0)=0$$</span>
+כיוון שנכון לכל <span>\(r\)</span>, ובאופן דומה מתקיים <span>\(\Theta\left( \alpha \right)=0\)</span>. מהתנאי שפה השני נקבל <span>\(k\alpha=n\pi\)</span> ולכן <span>\(k=\frac{n\pi}{\alpha}=6n\)</span>.
+עבור החלק הרדיאלי:
+<span>$$r^2R''(r)+rR'(r)-k^2R(r)=0\quad R(r)=r^{\lambda}$$</span>
+ונקבל מהצבה <span>\(\lambda=\pm k\)</span> כאשר הפתרון השלילי נפסל כי יתבדר בראשית. לכן <span>\(R(r)=r^{k}=r^{6n}\)</span> ונקבל:
+<span>$$u\left( r,\theta \right)=\sum_{n}a_{n}\sin\left( 6n\theta \right)r^{6n}$$</span>
+נציב תנאי התחלה:
+<span>$$u\left( R,\theta \right)=\sum_{n}a_{n}\sin\left( 6n\theta \right)R^{6n}=3\sin\left( 12\theta \right)$$</span>
+וזוהי פונקצייה עצמית. לכן <span>\(a_{2}=3R^{-12}\)</span> וכן <span>\(a_{n\neq 2}=0\)</span>. כלומר:
+<span>$$u\left( R,\theta \right)=3\left( \frac{r}{R} \right)^{12}\sin\left( 12\theta \right)$$</span></p>
+<p>מצאו פונקציה הרמונית בתחום <span>\(x^2+y^2&gt;1\)</span> שמקיימת על העקום <span>\(x^2+y^2=1\)</span> את התנאי <span>\(u(x,y)=\cos^2\theta-\sin^2\theta-1\)</span> כאשר <span>\(\theta\)</span> היא הזווית הקוטבית.
+?
+נחפש פונקצייה המקיימת <span>\(\vec{\nabla} ^2u=0\)</span>. נעביר לקוטביות. תנאי השפה יהיה:
+<span>$$u\left( r=1,\theta \right)=\cos^2\theta-\sin^2\theta-1$$</span>
+בקורדינטות קוטביות הפתרון בבעיה חיצונית יהיה:
+<span>$$u\left( r,\theta \right)=a+\sum_{n=1}^\infty r^{-n}\left( a_{n}\cos\left( n\theta \right)+b_{n}\sin\left( n\theta \right) \right)$$</span>
+או לחלופין נפתור בהפרדת משתנים <span>\(u=R(r)\Theta\left( \theta \right)\)</span> כאשר הלפלסיאן בקוטביות יהיה:
+<span>$$\vec{\nabla} ^2u=\frac{1}{r}\frac{\partial }{\partial r}\left( r\frac{\partial u}{\partial r} \right)+\frac{1}{r^2}\frac{\partial ^2u}{\partial \theta^2}=0$$</span>
+ונקבל עבור החלק הזוויתי:
+<span>$$\frac{\Theta''\left( \theta \right)}{\Theta\left( \theta \right)}=-n^2\qquad \Theta\left( \theta+2\pi \right)=\Theta\left( \theta \right)$$</span>
+ונקבל פונקציות עצמיות:
+<span>$$\Theta_{n}\left( \theta \right)=a_{n}\cos\left( n\theta \right)+b_{n}\sin\left( n\theta \right)$$</span>
+כאשר החלק הרדיאלי יקיים:
+<span>$$\frac{1}{r}\left( \frac{rR'}{R} \right)'-\frac{n^2}{r^2}=0\implies r^2R''+rR'-n^2R=0$$</span>
+ונקבל:
+<span>$$R=A_{n}r^{n}+B_{n}r^{-n}$$</span>
+ונקבל:
+<span>$$u\left( 1,\theta \right)=\cos\left( 2\theta \right)-1=a_{0}+\sum_{n=1}^\infty a_{n}\cos\left( n\theta \right)+b_{n}\sin\left( n\theta \right)$$</span>
+ונקבל מהתנאי התחלה:
+<span>$$u\left( r,\theta \right)=-1+r^{-2}\cos\left( 2\theta \right)$$</span></p>
+<p>יש למצוא פונקציה הרמונית בתוך האיזור <span>\(x&gt;0,y&gt;0\)</span> של המישור <span>\(x,y\)</span> תחת תנאי השפה:
+<span>$$u(x,y=0)=1,\quad u(x=0,y)=0$$</span>
+?
+<strong>דרך 1</strong>
+נדרוש שיקיים את משוואת לפלס. נעבור לקורדינטות פולאריות. כעת תחום ההגדרה יהיה <span>\(0\leq \theta \leq \frac{\pi}{2}\)</span>, ו-<span>\(r\geq 0\)</span>. תנאי השפה הופכים ל:
+<span>$$ \begin{aligned}u\left(r,\theta=0\right)=1,\quad\quad u\left(r,\theta=\frac{\pi}{2}\right)=0\end{aligned}$$</span>
+כיוון שתנאי השפה לא תלויים ב-<span>\(r\)</span>, נחפש פתרון שתלוי רק ב-<span>\(\theta\)</span>. בצבה בנוסחה ללפלסיאן הקורדינטות פולאריות נקבל:
+<span>$$ \frac{\partial^2u}{\partial\theta^2}=0\implies u=A\theta+B$$</span>
+מהתנאי שפה נמצא את <span>\(A,B\)</span> ונקבל:
+<span>$$u\left(r,\theta\right)=1-\frac{2\theta}{\pi}$$</span>
+נמיר לקרטזיות ונקבל:
+<span>$$ u\left(x,y\right)=1-\frac2\pi{\arctan\left(\frac yx\right)}=\frac2\pi{\arctan\left(\frac xy\right)}$$</span>
+<strong>דרך 2:</strong>
+נעבוד בקורדינטות קרטזיות. נרחיב את הבעיה לכל החצי מישור העליון <span>\(y\geq 0\)</span> ע"י שיקוף אנטי סימטרי סביב ציר ה-<span>\(y\)</span>. כלומר נחפש פונקציה הרמונית <span>\(\tilde{u}\)</span> בתחום <span>\(y\geq 0\)</span> המקיימת את תנאי השפה:
+<span>$$ \tilde{u}\left(x,y\right)=f\left(x\right)=\begin{cases}1&amp;x&gt;0\\-1&amp;x&lt;0\end{cases}$$</span>
+ונמצא את <span>\(\tilde{u}\)</span> ע"י אינטגרציה עם פונקציית גרין של בעיה זו:
+<span>$$ \begin{array}{rcl}\tilde{u}\left(x,y\right)&amp;=&amp;\displaystyle\int_{-\infty}^{\infty}f\left(\xi\right)G\left(x,\xi,y\right)d\xi=-\int_{-\infty}^{0}\frac{1}{\pi}\frac{y}{\left(x-\xi\right)^{2}+y^{2}}d\xi+\int_{0}^{\infty}\frac{y}{\pi}\frac{y}{\left(x-\xi\right)^{2}+y^{2}}d\xi=\\&amp;=&amp;\displaystyle\frac{1}{\pi}\left[\left.-\arctan\left(\frac{\xi-x}{y}\right)\right|_{\xi=-\infty}^{\xi=0}+\left.\arctan\left(\frac{\xi-x}{y}\right)\right|_{\xi=0}^{\xi=\infty}\right]=\cdots=\frac{2}{\pi}\arctan\left(\frac{x}{y}\right)\end{array}$$</span>
+נשים לב שמתקיים <span>\(\tilde{u}(x=0,y)=0\)</span> ולכן הצמצום של <span>\(u\)</span> ל-<span>\(x\geq 0\)</span> נותנת את הפתרון הרצוי.
+<span>$$\begin{gather}\tilde{u}\left(x,y\right)=\displaystyle\int_{-\infty}^{\infty}f\left(\xi\right)G\left(x,\xi,y\right)d\xi= \\-\int_{-\infty}^{0}\frac{1}{\pi}\frac{y}{\left(x-\xi\right)^{2}+y^{2}}d\xi+\int_{0}^{\infty}\frac{y}{\pi}\frac{y}{\left(x-\xi\right)^{2}+y^{2}}d\xi= \\=\dots=\frac{2}{\pi}\arctan\left(\frac{x}{y}\right)
+\end{gather}$$</span></p>
+<p>יש למצוא פונקציה הרמונית בתוך חלק של גזרה המוגדר ע"י <span>\(0\leq \theta \leq \alpha\)</span> ו-<span>\(R_{1}\leq r\leq R_{2}\)</span>. תנאי השפה הם:
+<span>$$ u(r,\theta=\alpha)=3\sin\left(\frac{2\pi\ln\frac r{R_1}}{\mathrm{ln}\frac{R_2}{R_1}}\right),\:u(r,\theta=0)=u(r=R_1,\theta)=u(r=R_2,\theta)=0$$</span>
+?
+נחפש פתרון בהפרדת משתנים, כלומר מהצורה
+<span>$$u\left( r,\theta \right)=u\left( r,\theta=\alpha \right)\cdot\Theta\left( \theta \right)=3\sin\left(2\pi\frac{\ln\frac{r}{R_{1}}}{\ln\frac{R_{2}}{R_{1}}}\right)\cdot\Theta\left(\theta\right)$$</span>
+כאשר נבחר את <span>\(\Theta\)</span> כך שהתנאי שפה וגם משוואת לפלס תעבוד. מהתנאי שפה נקבל עבור <span>\(\theta=0\)</span> וכן <span>\(\theta=\alpha\)</span> את הדרישה:
+<span>$$\Theta\left( \theta=0 \right)=0\qquad \Theta\left( \theta=\alpha \right)=1$$</span>
+וכן מזה יקיים את משוואת לפלס נקבל את הדרישה:
+<span>$$ \Theta(\theta)\frac{1}{r}\frac{\partial}{\partial r}\left[r\frac{\partial}{\partial r}3\sin\left(2\pi\frac{\ln\frac{r}{R_{1}}}{\ln\frac{R_{2}}{R_{1}}}\right)\right]+\frac{3\sin\left(2\pi\frac{\ln\frac{r}{R_{1}}}{\ln\frac{R_{2}}{R_{1}}}\right)}{r^{2}}\frac{\partial^{2}}{\partial\theta^{2}}\Theta\left(\theta\right)=0$$</span>
+ולבסוף נקבל:
+<span>$$ \Theta''\left(\theta\right)=\left(\frac{2\pi}{\ln\frac{R_{2}}{R_{1}}}\right)^{2}\Theta\left(\theta\right).$$</span>
+כאשר הפתרון תחת התנאי שפה נותן:
+<span>$$ \Theta\left(\theta\right)=\frac{\sinh\left(\frac{2\pi\theta}{\ln\frac{\pi\alpha}{\pi_2}}\right)}{\sinh\left(\frac{2\pi\alpha}{\ln\frac{\pi\alpha}{\pi_2}}\right)}.$$</span>
+ולכן הפתרון המלא יהיה פונקציה הרמונית שמקיימת את כל התנאי שפה:
+<span>$$ u(r,\theta)=3\sin\left(2\pi\frac{\ln\frac{r}{R_1}}{\ln\frac{R_2}{R_1}}\right)\times\frac{\sinh\left(\frac{2\pi\theta}{\ln\frac{R_2}{R_1}}\right)}{\sinh\left(\frac{2\pi\alpha}{\ln\frac{R_2}{R_1}}\right)}$$</span></p>
+<p>פתרו את משוואת לפלס <span>\(\vec{\nabla} ^2u=0\)</span> בגאומטריה מחוץ לכדור ברדיוס <span>\(R=1\)</span> כאשר הפוטנציאל סופי באינסוף ותנאי השפה על המעטפת הוא:
+<span>$$ \phi(r=R,\theta,\varphi)=\begin{Bmatrix}V&amp;&amp;\theta&lt;\pi/3\\-V&amp;&amp;\frac{\pi}{3}&lt;\theta&lt;2\pi/3\\V&amp;&amp;\theta&gt;2\pi/3\end{Bmatrix}$$</span>
+?
+הבעיה היא עם סימטריה איזמוטלית, לכן הפתרון הכללי לבעיה תהיה:
+<span>$$u\left(r,\theta,\varphi\right)=\sum_{\ell=0}^{\infty}\frac{B_{\ell}}{r^{\ell+1}}P_{\ell}\left(\cos\theta\right)$$</span>
+כאשר את המקדמים נבצע מכפלה פנימית ונקבל:
+<span>$$\begin{gather}B_{\ell}=\frac{2\ell+1}{2}R^{\ell+1}\int_{0}^{\pi}\phi\left( r=R,\theta \right)P_{\ell}\left(\cos\theta\right)\sin\theta d\theta= \\=\frac{\left( 2\ell+1 \right)VR^{\ell+1}}{2}\left[ \int_{0}^{\pi/3} P_{\ell}\left( \cos \theta \right)\sin\left( \theta \right) \, \mathrm{d}\theta -\int_{\pi / 3}^{2\pi/3} P_{\ell}\left( \cos \theta \right)\sin\left( \theta \right) \, \mathrm{d}\theta+\int_{2\pi / 3}^{\pi} P_{\ell}\left( \cos \theta \right)\sin\left( \theta \right) \, \mathrm{d}\theta\right] = \\=\frac{\left( 2\ell-1 \right)VR^{\ell+1}}{2}\left[ \int _{\frac{1}{2}}^1 P_{\ell}(x) \, \mathrm{d}x - \int _{\frac{1}{2}}^1 P_{\ell}(x) \, \mathrm{d}x\right]= \\\begin{cases}\left( 2\ell+1 \right)VR^{\ell+1}\left[ \displaystyle\int_{1 / 2}^{1} P_{\ell}(x)\, \mathrm{d}x -\displaystyle\int_{0}^{1 / 2} P_{\ell}(x)\, \mathrm{d}x \right] &amp; \ell \text{ is even } \\0 &amp; \ell \text{ is odd } \end{cases}
+\end{gather}$$</span>
+ולכן נקבל:
+<span>$$u\left( r,\theta \right)=\sum_{\ell=0}^\infty \left( 4\ell+1 \right)V\left( \frac{R}{r} \right)^{2\ell+1}\left[ \int _{1 / 2} ^1 P_{2\ell}(x)\, \mathrm{d}x -\int _{0} ^{1 / 2} P_{2\ell}(x)\, \mathrm{d}x  \right]P_{\ell}\left( \cos\left( \theta \right) \right)$$</span></p>
+<p>פתרון את משוואת לפלס <span>\(\bar{\nabla}^2u=0\)</span> בתוך גזרת מעגל בעלת זווית של <span>\(60^\circ\)</span> ורדיוס <span>\(R\)</span>. כאשר נתונים תנאי שפה <span>\(\frac{\partial u}{\partial \theta}\left( r,\theta=0 \right)=u\left( r,\theta=\frac{\pi}{3} \right)=0\)</span> ו-<span>\(u\left( r=R,\theta \right)=0\)</span>.
+?
+<span>$$\bar{\nabla}^2 u={\frac{\partial^{2}u}{\partial r^{2}}}+{\frac{1}{r}}{\frac{\partial u}{\partial r}}+{\frac{1}{r^{2}}}{\frac{\partial^{2}u}{\partial\theta^{2}}}=0$$</span>
+נחפש פתרון בהפרדת משתנים <span>\(u\left( r,\theta \right)=R(r)\Theta\left( \theta \right)\)</span>. נציב ונקבל:
+<span>$$r^{2}\frac{R^{\prime\prime}}{R}+r\frac{R^{\prime}}{R}=-\frac{\Theta^{\prime\prime}}{\Theta}=\lambda^2$$</span>
+נשים לב כי בכל אגף מופיע פונקציות של משתנים שונים. לכן כל אגף שווה לקבוע <span>\(\lambda^2\)</span> כאשר דרשנו שיהיה חיובי כי נדרוש שהפתרון עבור <span>\(\Theta\left( \theta \right)\)</span> יהיה מחזורי. עבור החלק הזוויתי נקבל:
+<span>$$\Theta''\left( \theta \right)=-\lambda^2\Theta\left( \theta \right)\implies \Theta=A\cos\left( \lambda\theta \right)+B\sin\left( \lambda \theta \right)$$</span>
+כאשר נציב את תנאי השפה ונקבל:
+<span>$$\begin{gather} \frac{\partial }{\partial \theta} u\left( r,\theta=0 \right)\!=\!R(r)\Theta'(0)\!=\!0\!\!\implies \!\!\Theta'(0)\!=\!0\!\implies\!\! -A\lambda\sin\left( 0 \right)+B\lambda \cos\left( 0 \right)\!=\!0\!\!\implies\!\! B=0  \\ u\left( r,\theta\!=\!\frac{\pi}{3} \right)\!=\!R(r)\Theta\left( \frac{\pi}{3} \right)\!=\!0\!\!\implies\!\! A\cos\left( \frac{\lambda \pi}{3} \right)\!=\!0\!\!\implies\!\! \frac{\lambda \pi}{3}\!=\!\frac{\pi}{2}+\pi n\!\!\implies\!\! \lambda\!=\!3\left( \frac{1}{2}+n \right)
+\end{gather}$$</span>
+עבור החלק הרדיאלי נקבל:
+<span>$$r^{2}R^{\prime\prime}\left(r\right)+r R^{\prime}\left(r\right)-\lambda^{2}R\left(r\right)=0$$</span>
+זוהי משוואת אויילר והפתרון שלה הוא <span>\(R(r)=Ar^\lambda+Br^{-\lambda}\)</span>. נניח שלא מתבדר בראשית לכן <span>\(B=0\)</span>. נקבל כעת מהתנאי שפה האחרונים:
+<span>$$u\left( r=R,\theta \right)=\sum_{n=0}^\infty R_{n}(R)\Theta_{n}\left( \theta \right)=\sum_{n=0}^{\infty} A_{n}r^{\lambda}\cos\left( \lambda \theta \right)=\theta$$</span>
+נפרוש את <span>\(\theta\)</span> בעזרת הפונקציות העצמיות <span>\(\cos\left( \lambda \theta \right)\)</span>. כלומר נחפש את ה-<span>\(B_{n}\)</span> אשר מקיימים <span>\(\theta=\sum B_{n}\cos\left( \lambda_{n}\theta \right)\)</span>. בעזרת מכפלה פנימית <span>\(\langle f, g \rangle=\int_{0}^{\pi/3}fg\)</span> נקבל:
+<span>$$\begin{gather} B_{n}=\frac{\left\langle  \theta, \cos \left( 3\left( n+\frac{1}{2} \right)\theta \right)  \right\rangle }{\left\lVert   \cos \left( 3\left( n+\frac{1}{2} \right)\theta  \right)  \right\rVert }= \frac{6}{\pi}\int_{0}^{\pi/3}\theta \cos\left( \lambda_{n}\theta \right)d\theta= \frac{6}{\pi}\left[ \frac{\cos\left( \lambda_{n} \theta \right)}{\lambda_{n}^2}+\frac{\theta \sin\left( \lambda_{n} \theta \right)}{\lambda_{n}} \right]_{0}^{\pi/3} \\=\frac{6}{\pi}\left[ \frac{\cos \frac{\lambda_{n}\pi}{3}}{\lambda_{n}^2}+\frac{\theta \sin\left( \frac{\lambda_{n}\pi}{3} \right)}{\lambda_{n}} -\frac{1}{\lambda_{n^2}}\right]=  \frac{6}{\pi}\left[ \frac{\cancelto{ 0 }{ \cos\left( \left( n+\frac{1}{2} \right)\pi \theta \right) }-1}{9\left(n+\frac{1}{2} \right)^2}-\frac{\sin\left( \pi\left( n+\frac{1}{2} \right) \right)}{3\left( n+\frac{1}{2} \right)} \right]= \\
+=\frac{2}{\pi}\left[ -\frac{1}{3\left( n+\frac{1}{2} \right)^2}-\frac{(-1)^n}{\left( n+\frac{1}{2} \right)}  \right]\implies R^\lambda A_{n}=B_{n}\implies A_{n}=\frac{2}{\pi R^\lambda}\left[ -\frac{1}{3\left( n+\frac{1}{2} \right)^2}-\frac{(-1)^n}{\left( n+\frac{1}{2} \right)}  \right]\end{gather}$$</span>
+ולכן הפתרון הסופי יהיה:
+<span>$$u\left(r,\theta\right)=\sum_{n=0}^{\infty}{\frac{2}{3\left(n+{\frac{1}{2}}\right)}}\left(\left(-1\right)^{n}-{\frac{1}{\pi\left(n+{\frac{1}{2}}\right)}}\right)\left({\frac{r}{R}}\right)^{3\left(n+{\frac{1}{2}}\right)}\cos\left(3\left(n+{\frac{1}{2}}\right)\theta\right)$$</span></p>
+<p>יש למצוא פונקציה הרמונית בתחום <span>\(x^2+y^2+z^2&gt;R\)</span> כאשר תנאי השפה על המשטח <span>\(x^2+y^2+z^2=R^2\)</span> יהיה <span>\(u(x,y,z)=x+y\)</span>.
+?
+<strong>דרך 1 - טריק</strong>
+ראשית נשים לב כי ניתן לפתור בנפרד עבור תנאי שפה <span>\(u(r=R)=x\)</span> ועבור <span>\(u(r=R)=y\)</span> ולסכום את הפתרונות. נמיר לכדוריות. אומנם אין פה סימטרייה אזימוטלית, אבל אם נחפש פתרון עבור <span>\(u(r=R)=z=R\cos\left( \theta \right)\)</span> נקבל כי זוהי בעיה עם סמטריה אזימוטלית ולכן יותר קל למצוא אותה. זוהי בעיה חיצונית לכן 
+<span>$$u\left( r,\theta,\varphi \right)=\sum_{\ell=0}^\infty \frac{B_{\ell}}{r^{\ell+1}}P_{\ell}\left( \cos\left( \theta \right) \right)\implies u\left( R,\theta,\varphi \right)=\sum_{\ell=0}^\infty \frac{B_{\ell}}{R^{\ell+1}}P_{\ell}\left( \cos\left( \theta \right) \right)=R\cos\left( \theta \right)$$</span>
+ונשים לב כי עבור <span>\(\ell=1\)</span>  ו-<span>\(B_{1}=R^3\)</span> נקבל פתרון. ומיחידות הטור של שטרום ליוביל זה הפתרון היחיד. כלומר <span>\(u\left( r,\theta,\varphi \right)=\frac{R^3}{r^2}\cos\left( \theta \right)\)</span>. נחזיר לקרטזיות ונקבל:
+<span>$$u\left( r,\theta,\varphi \right)= \frac{R^3}{r^2}\cos\left( \theta \right)=\frac{R^3}{x^2+y^2+z^2} \frac{z}{r}=\frac{R^3z}{(x^2+y^2+z^2)^{3/2}}$$</span>
+ומטעמי סמטריה הפתרון של המשוואה של <span>\(x\)</span> ושל <span>\(y\)</span> יהיו אותו דבר עד כדי החלפת שמות. לכן:
+<span>$$u\left( r,\theta,\varphi \right)=u_{x}\left( r,\theta,\varphi \right)+u_{y}\left( r,\theta,\varphi \right)= \frac{R^3x+R^3y}{(x^2+y^2+z^2)^{3/2}}= \frac{R^3}{r^2}\sin\left( \theta \right)\left( \cos \varphi +\sin \varphi\right)$$</span>
+<strong>דרך 2 - ישיר</strong>
+נמיר לכדוריות ונקבל שהתנאי שפה יהיה <span>\(u\left( r=R, \theta,\varphi \right)=r\sin\left( \theta \right)\left[ \cos\left( \varphi \right)+\sin\left( \varphi \right) \right]\)</span>. זוהי בעיה חיצונית לכן הפתרון יהיה:
+<span>$$u\left( r,\theta,\varphi \right)=\sum^\infty_{\ell=0}\sum_{m=-\ell}^\ell \frac{B_{\ell m}}{r^{\ell+1}} Y_{\ell}^m\left( \theta,\varphi \right)$$</span>
+נפתור עבור כל איבר בסכום בנפרד(כלומר עבור <span>\(x\)</span> ועבור <span>\(y\)</span> בנפרד) ונקבל:
+<span>$$\begin{gather}u\left( R,\theta,\varphi \right)=\sum^\infty_{\ell=0}\sum_{m=-\ell}^\ell \frac{B_{\ell m}}{R^{\ell+1}} Y_{\ell}^m\left( \theta,\varphi \right)=R\sin\left( \theta  \right)\cos\left( \varphi \right)=R \sin\left( \theta \right)\cdot \frac{ e^{i\varphi}+e^{-i\varphi} }{2}= \\={{\frac{R}{2}}}\sqrt{ \frac{3}{8\pi} }\left(-\left( -{\sqrt{{\frac{8\pi}{3}}}}\sin\left( \theta \right)e^{i\varphi} \right)+{\sqrt{{\frac{8\pi}{3}}}}\sin\left( \theta \right)e^{-i\varphi}\right)=\frac{R}{2}\sqrt{ \frac{3}{8\pi} }(-Y_{1}^1+Y^{-1}_{1})
+\end{gather}$$</span>
+וכעת ניתן למצוא את <span>\(B_{1,1},B_{1,-1}\)</span> וכל השאר יתאפס:
+<span>$$\begin{gather}\frac{B_{1,1}}{R^2}Y_{1}^1=-\frac{R}{2}\sqrt{ \frac{3}{8\pi} }Y_{1}^1\implies B_{1,1}=-\frac{R^3}{2}\sqrt{ \frac{3}{8\pi} }  \\\frac{B_{1,-1}}{R^2}Y_{1}^{-1}= \frac{R}{2}\sqrt{ \frac{3}{8\pi} }Y_{1}^{-1}\implies B_{1,-1}=\frac{R^3}{2}\sqrt{ \frac{3}{8\pi} }
+\end{gather}$$</span>
+ונקבל כי הפתרון הכללי עבור <span>\(x\)</span> יהיה:
+<span>$$u^x\left( r,\theta,\varphi \right)=\frac{R^3}{2r^2}\sqrt{ \frac{3}{8\pi} }(-Y_{1}^1+Y_{1}^{-1})$$</span>
+נמצא את הפתרון הכללי עבור <span>\(y\)</span>. נקבל בפתרון זהה לחלוטין חוץ מזה שמחברים את <span>\(Y_{1}^1\)</span> במקום להחסיר אותו. כלומר:
+<span>$$u^y\left( r,\theta,\varphi \right)=\frac{R^3}{2r^2}\sqrt{ \frac{3}{8\pi} }(Y_{1}^1+Y_{1}^{-1})\implies u=u^x+u^y=\frac{R^3}{r^2}\sqrt{ \frac{3}{8\pi} }Y_{1}^{-1}$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_9_7'>9.7 פונקציית גרין</a></li>
+<li class='prev-page'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+</ul></li>
+        </body>
+        </html>
+        

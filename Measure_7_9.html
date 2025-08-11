@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שאלות - מידת לבג</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_4'>7.4 מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_6'>7.6 מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_9'>7.9 שאלות - מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_11'>7.11 שאלות - מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_12'>7.12 שאלות - משפט ההצגה של ריס</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_7_10`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_7_8`; }});</script>
+        <div class="content">
+        <h1>7.9  שאלות - מידת לבג</h1>
+    
+      <script>
+    const tsvFileName = 'Measure_7.tsv';
+
+    let cards = [];
+    let quizOrder = [];
+    let currentIndex = 0;
+
+    // 1) Fetch and parse TSV
+fetch(tsvFileName)
+  .then(r => {
+    if (!r.ok) throw new Error('Failed to load ' + tsvFileName);
+    return r.text();
+  })
+  .then(text => {
+    cards = parseTSV(text);
+    renderList(cards);
+
+    // ⬇ After you’ve rendered the full Q&A list, re-typeset MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise()
+        .catch(err => console.error('MathJax typeset failed: ' + err.message));
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    //document.body.innerHTML =  '<p style="color:red">Error loading questions: '+err.message+'</p>';
+  });
+
+    // 2) TSV → [{front,back,tags},…]
+    function parseTSV(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        // "" inside quoted field -> literal "
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        // closing quote
+        inQuotes = false;
+      } else {
+        field += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;                // opening quote
+      } else if (ch === '\t') {
+        row.push(field); field = '';    // field separator
+      } else if (ch === '\r') {
+        // ignore; handle \n as newline
+      } else if (ch === '\n') {
+        row.push(field); rows.push(row);
+        row = []; field = '';           // record separator
+      } else {
+        field += ch;
+      }
+    }
+  }
+  // flush last field/row if file didn't end with newline
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
+
+  // map to objects (Front, Back, Tags)
+  return rows.map(cols => ({
+    front: cols[0] || '',
+    back:  cols[1] || '',
+    tags:  cols[2] || ''
+  }));
+}
+// 3) Render full Q&A list + “Start Quiz” button
+function renderList(cards) {
+  const listDiv = document.getElementById('qa-list');
+  const container = listDiv.querySelector('.cards');
+  container.innerHTML = '';
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const q = document.createElement('div');
+    q.className = 'question';
+    q.textContent = c.front;   // <- no replace, real \n already in the string
+
+    const a = document.createElement('div');
+    a.className = 'answer';
+    a.textContent = c.back;    // <- no replace
+
+    card.appendChild(q);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
+
+  // Re-typeset MathJax for the newly added nodes
+  if (window.MathJax) {
+    MathJax.typesetPromise([container]).catch(err => console.error(err));
+  }
+}
+  </script>
+    <div id="qa-list">
+      <div class="cards"></div>
+    </div>
+    
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='prev-page'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

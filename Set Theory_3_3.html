@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>תורת הקבוצות הנאייבית</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory'> תורת הקבוצות</a></li>
+<li class='parent-page'><a href='./Set Theory'> תורת הקבוצות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. תורת הקבוצות הנאייבית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_1'>1.1 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_3'>1.3 יחסי סדר</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_4'>1.4 בנייה של קבוצות ידועות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_1_5'>1.5 עוצמות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. תורת הקבוצות האקסיומטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_1'>2.1 מחלקות וקבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_2'>2.2 המערכת ZF</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_3'>2.3 טענות ובניות בסיסיות</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_4'>2.4 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_2_5'>2.5 אקסיומת הבחירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Set Theory_3_1'>3.1 סודרים ומונים</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_3_2'>3.2 תורת הקבוצות האקסיומטית</a></li>
+<li class='parent-page-dropdown'><a href='./Set Theory_3_3'>3.3 תורת הקבוצות הנאייבית</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Set Theory_3_2'>3.2 תורת הקבוצות האקסיומטית</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Set Theory`; }if (event.key === 'ArrowLeft') { window.location.href = `./Set Theory_3_2`; }});</script>
+        <div class="content">
+        <h1>3.3  תורת הקבוצות הנאייבית</h1>
+    <p>מהו יחס?
+?
+יחס בין <span>\(A\)</span> ל-<span>\(B\)</span> הוא תת קבוצה <span>\(R\subseteq A\times B\)</span>.</p>
+<p>מהו יחס רפלקסיבי?
+?
+יחס <span>\(R\)</span> על <span>\(A\)</span> יקרא רפלסקסיבי אם לכל <span>\(x \in A\)</span> מתקיים <span>\(xRx\)</span>. או בשפה פורמלית:
+<span>$$\varphi(x)=\forall x \in A\quad xRx$$</span></p>
+<p>מהו יחס סימטרי?
+אם לכל <span>\(x,y \in A\)</span> מתקיים אם <span>\(xRy\)</span> אז <span>\(yRx\)</span>.
+<span>$$\varphi_{1}(x)=\forall x,y \in A\quad xRy\implies yRx$$</span></p>
+<p>מהו יחס טרנזיטיבי?
+אם לכל <span>\(x,y,z \in A\)</span> אם <span>\(xRy\)</span> ו-<span>\(yRz\)</span> אז מתקיים <span>\(xRz\)</span>. או בשפה פורמלית:
+<span>$$\varphi(x)=\forall x,y,z \in A\quad xRy\land yRz\implies xRz$$</span></p>
+<p>מהו יחס שקילות?
+?
+יחס סימטרי, רפלקסיבי וטרנזטיבי</p>
+<p>מהו מחלקת שקילות? מהו אוסף של כל המחלקות שקילות?
+?
+מחלקת שקילות זה קבוצה של כל האיברים שהם נמצאים היחס שקילות ביחד אחד עם השני:
+<span>$$[a]_{E}=\{b\in A\mid a E b\}$$</span>
+האוסף של כל הקבוצות האלה נקרא אוסף מחלקות השקילות: <span>$$A/E=\{[a]_{E}\mid a\in A\}$$</span></p>
+<p>מהי חלוקה של קבוצה?
+?
+אם <span>\(A\)</span> קבוצה לא ריקה, <span>\(P\subseteq \mathcal{P}(A)\)</span> תקרא חלוקה אם <span>\(\varnothing \not\in P\)</span>, איברי <span>\(P\)</span> זרים בזוגות(כלומר אם <span>\(x,y \in P\)</span>) אז <span>\(x \cap y = \varnothing\)</span>. ו-<span>\(\cup_{X \in P} X=A\)</span>. כלומר אוסף של תתי קבוצות זרות אשר האיחוד שלהם זה הקבוצה כולה.</p>
+<p>מהי פעולה על מחלקת שקילות? מתי היא מוגדרת היטב?
+?
+יחס <span>\(*\)</span> הפועל על קבוצה <span>\(X\)</span> יהיה מוגדר על המחלקת שקילות <span>\(X / E\)</span> אם מתקיים:
+<span>$$\forall (x_{1},x_{2})\in E\quad \forall(y_{1},y_{2})\in E\quad (x_{1}*y_{1},x_{2}*y_{2})\in E$$</span>
+כלומר לכל 2 איברים שנמצאים באותה מחלקת שקילות המכפלה שלהם גם תהיה באותה מחלקת שקילות.</p>
+<p>מהי פונקציה?
+?
+פונקציה <span>\(F:A\to B\)</span> הוא יחס <span>\(F\subseteq A\times B\)</span> המקיים כי:
+<span>$$\forall a \in A\quad \exists! b\in B\quad \langle a, b \rangle \in F$$</span>
+כאשר נזכור כי <span>\(\exists!\)</span> אומר קיים ויחיד.</p>
+<p>מה ההגדרה של תחום וטווח?
+?
+יהי <span>\(R\subseteq A\times B\)</span> יחס. נגדיר את התחום של <span>\(R\)</span>:
+<span>$$\operatorname{dom}\left(R\right)=\left\{a\in A\mid\exists b\in B\quad\left\langle a,b\right\rangle\in R\right\}$$</span>
+יהי <span>\(R\subseteq A\times B\)</span> יחס. נגדיר את הטווח של <span>\(R\)</span>:
+<span>$$\operatorname{rng}\left(R\right)=\left\{b\in B\mid\exists a\in A\quad\langle a,b\rangle\in R\right\}$$</span>
+אם <span>\(R\subseteq A\times B\)</span> היא פונקציה מ-<span>\(A\)</span> ל-<span>\(B\)</span>, אז <span>\(\mathrm{dom}(R)=A\)</span> ו-<span>\(\mathrm{rng}(R)\subseteq B\)</span>.</p>
+<p>מהו ההגדרה של הרכבה של יחסים?
+?
+נניח <span>\(A,B,C\)</span> קבוצות, <span>\(R\subseteq A\times B\)</span> ו-<span>\(S\subseteq B\times C\)</span>. נגדיר יחס <span>\(S\circ R\subseteq A\times C\)</span> ע"י:
+<span>$$S\circ R = \left\{  \langle a, c \rangle \mid a\in A\quad c\in C \quad \exists b \in B\quad \langle a, b \rangle \in R\quad \langle b, c \rangle \in S \right\}$$</span></p>
+<p>מהו יחס סדר חלקי?
+?
+יחס <span>\(\leq\)</span> על קבוצה <span>\(S\)</span> יקרא יחס סדר חלקי אם מקיים:</p>
+<ol>
+<li>
+<p>רפלקיביות - לכל <span>\(a \in S\)</span> מתקיים <span>\(a \leq a\)</span>. </p>
+</li>
+<li>
+<p>אנטי סימטרייה - לכל <span>\(a,b \in S\)</span> אם <span>\(a\leq b\)</span> וגם <span>\(b\leq a\)</span> אז <span>\(a=b\)</span>. </p>
+</li>
+<li>
+<p>טרנזטיביות - לכל <span>\(a,b,c \in S\)</span> אם <span>\(a\leq b\)</span> וגם <span>\(b\leq c\)</span> אז <span>\(a\leq c\)</span>. </p>
+</li>
+</ol>
+<p>מהו יחס סדר חלקי חד?
+?
+יחס &gt; על קבוצה <span>\(S\)</span> יקרא סדר חלקי חד אם מקיים:</p>
+<ol>
+<li>
+<p>אירפלקסיבי - לכל <span>\(a \in S\)</span> לא מתקיים <span>\(a&lt; a\)</span>. </p>
+</li>
+<li>
+<p>אסימטרי - לכל <span>\(a,b \in S\)</span> אם <span>\(a&lt; b\)</span> אז לא מתקיים <span>\(b &lt; a\)</span>. </p>
+</li>
+<li>
+<p>טרנזטיבי - לכל <span>\(a,b,c\)</span> אם <span>\(a&lt;b\)</span> וגם <span>\(b&lt;c\)</span> אז <span>\(a&lt; c\)</span>. </p>
+</li>
+</ol>
+<p>מהו התנאי כדי שקבוצה סדורה חלקית תהיה מבוססת היטב?
+?
+תהי <span>\(\left\langle  A,\leq  \right\rangle\)</span> קבוצה סדורה חלקית. נאמר ש-<span>\(A\)</span> מבוססת היטב עם היחס <span>\(\leq\)</span> אם לכל תת קבוצה לא ריקה <span>\(\varnothing \neq B \subseteq A\)</span> יש איבר מינימלי ב-<span>\(B\)</span>.</p>
+<p>מהו שיכון של סדרים?
+?
+אם <span>\(\left\langle  A,\leq_{A}  \right\rangle\)</span> ו-<span>\(\left\langle  B,\leq_{B}  \right\rangle\)</span> הם קבוצות סדרות חלקית, אז שיכון הוא פונקציה <span>\(F:A\to B\)</span> כך ש:
+<span>$$F(a)\leq_{A}F(a')\iff a \leq_{A}a'$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Set Theory'> תורת הקבוצות</a></li>
+<li class='prev-page'><a href='./Set Theory_3_2'>3.2 תורת הקבוצות האקסיומטית</a></li>
+</ul></li>
+        </body>
+        </html>
+        

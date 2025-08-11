@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>דוגמאות נגד</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_10_1'>10.1 קשירות</a></li>
+<li class='parent-page'><a href='./Topology'> טופולוגיה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים טופולוגיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_1_1'>1.1 מרחבים טופולוגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_2'>1.2 בסיס של טופולוגיה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_3'>1.3 טפולוגיית מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_1_4'>1.4 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות בין מרחבים טופולוגים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_2_1'>2.1 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_2'>2.2 הומאומורפיזם</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_3'>2.3 מרחבי מנה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_2_4'>2.4 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הפרדה ומנייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_3_1'>3.1 אקסיומות ההפרדה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_2'>3.2 אקסיומות המנייה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_3'>3.3 מטריזביליות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_3_4'>3.4 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. קשירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_4_1'>4.1 מרחבים קשירים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_2'>4.2 קשירות מסילתית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_4_3'>4.3 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. קומפקטיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_5_1'>5.1 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_2'>5.2 משפט טיכונוב</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_3'>5.3 קופקטיפיקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_4'>5.4 מסננים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_5_5'>5.5 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. קבוצות סגורות וצפיפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_6_1'>6.1 סגור ופנים</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_2'>6.2 דלילות ומרחבי בייר</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_6_3'>6.3 משפט הקטגוריה של בייר</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. החבורה היסודית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_7_1'>7.1 הומוטופיות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_2'>7.2 החבורה היסודית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_3'>7.3 העתקה מושרת</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_4'>7.4 משפט ואן קמפן</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_7_5'>7.5 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מרחבי כיסוי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_8_1'>8.1 מרחבי כיסוי</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_8_2'>8.2 הרמות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_8_3'>8.3 שימושים של החבורה היסודית של מעגל</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_8_4'>8.4 רטרקציות ושקילות הומוטופית</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_8_5'>8.5 שאלות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. נספחים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_9_1'>9.1 טופולוגיות נוספות</a></li>
+<li class='parent-page-dropdown'><a href='./Topology_9_2'>9.2 דוגמאות נגד</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Topology_10_1'>10.1 קשירות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Topology_9_1'>9.1 טופולוגיות נוספות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Topology_10_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Topology_9_1`; }});</script>
+        <div class="content">
+        <h1>9.2  דוגמאות נגד</h1>
+    <div class="example"><span class="keyword">קשיר ולא קשיר מסליתית - topologist's sin curve</span><p><span>$$S=\{(x,\sin(1/x))\mid x&gt;0\}\cup\{(0,0)\}$$</span>
+קשיר כי אין הפרדה. לא קשיר מסילתית כי אין מסילה רציפה ב-<span>\((0,0)\)</span> לכל נקודה אחרת על העקומה.</p>
+</div>
+<div class="example"><span class="keyword">תת מרחב של נורמלי לא נורמלי</span><p>נסתכל על הישר הממשי <span>\(\mathbb{R}\)</span> שהוא נורמלי והתת מרחב <span>\(\mathbb{Q}\)</span>. נשים לב כי <span>\(\mathbb{Q}\)</span> לא נורמלי כי לא ניתן להפריד סביבות כל קבוצה סגורה על ידי סביבה פתוחה. למשל יחידונים רציונאלים.</p>
+</div>
+<div class="example"><span class="keyword">פונקציה הפיכה רציפה שלא הומאומורפיזם</span><p>נגדיר:
+<span>$$f: [0,1) \to S^1 \subset \mathbb{R}^2\qquad x\mapsto\left( \cos 2\pi x,\sin 2\pi x \right)$$</span>
+כאשר <span>\(f\)</span> העתקה רציפה והפיכה.</p>
+</div>
+<div class="example"><span class="keyword">קומפקטי אבל לא קומפקטי סדרתית</span><p>הקבוצה <span>\(X=\{ 0,1 \}^{[0,1]}\)</span> היא קומפקטית אך לא קומפקטית סדרתית. קומפקטיות נובע מטיכונוב, כאשר </p>
+</div>
+<div class="example"><span class="keyword">האוסדורף ולא רגולרי</span><p>נסתכל על הטופולוגיה הסטנדרטית על <span>\(\mathbb{R}\)</span> נגדיר:
+<span>$$K = \{1/n \mid n\in\mathbb{N}\} \subset \mathbb{R}$$</span>
+כאשר נגדיר את הבסיס של הקבוצות הפתוחות להיות הקטעים הפתוחים והקבוצות מהצורה <span>\((a,b)\setminus K\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">מרחב קופקטי שלא מטריזבילי</span><p>נסתכל על טופולוגיית המכפלה:
+<span>$$X=[0,1]^{[0,1]}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Topology_10_1'>10.1 קשירות</a></li>
+<li class='prev-page'><a href='./Topology_9_1'>9.1 טופולוגיות נוספות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הוכחות טענות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_4'>7.4 מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_6'>7.6 מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_9'>7.9 שאלות - מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_11'>7.11 שאלות - מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_12'>7.12 שאלות - משפט ההצגה של ריס</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_7_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_6_2`; }});</script>
+        <div class="content">
+        <h1>7.1  הוכחות טענות</h1>
+    <div class="lemma">
+<p>יהיו <span>\(f,g:X\to\left[ 0,\infty \right]\)</span> מדידות. אזי:
+<span>$$\int (f+g) \;\mathrm{d} \mu = \int f \;\mathrm{d} \mu+\int  g \;\mathrm{d} \mu   $$</span>
+?
+האסטרטגיה תהיה להוכיח את הטענה עבור פונקציות פשוטות ומשם להסיק את הטענה לכל פונקציה מדידה בעזרת משפט ההתכנסות המונוטונית.
+יהיו <span>\(s,t :X\to \left[ 0,\infty \right)\)</span> פונקציות פשוטות כלשהן. נגדיר:
+<span>$$t=\sum_{j=1}^{m} B_{j}\mathbb{1} _{B_{j}}\qquad s=\sum_{i=1}^{n} \alpha_{i}\mathbb{1} _{A_{i}}$$</span>
+כש-<span>\(\{ A_{i} \}\)</span> ו-<span>\(\{ B_{i} \}\)</span> חלוקות של <span>\(X\)</span>. כעת כיוון שהסכום <span>\(s+t\)</span> פונקצייה פשוטה נקבל:
+<span>$$\int (s+t) \;\mathrm{d} \mu = \sum_{i,j} \left( \alpha_{i}+\beta_{j} \right)\cdot\left( A_{i}\cap B_{j} \right)=\sum_{i}\alpha_{i}\overbrace{ \sum_{j}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(A_{i}) }  +\sum_{j}B_{j}\overbrace{ \sum_{i}\mu\left( A_{i}\cap B_{j} \right) }^{ =\mu(B_{j}) }=\int s \;\mathrm{d} \mu +\int t \;\mathrm{d} \mu $$</span>
+יהיו <span>\(f,g\)</span> מדידות יהיו <span>\(s_{n}\to f\)</span> ו-<span>\(t_{n}\to g\)</span> סדרות עולות של פונקציות פשוטות, אזי <span>\(s_{n}+t_{n}\to f+g\)</span> וממשפט ההתכנסות המונוטונית:
+<span>$$\int (f+g) \;\mathrm{d} \mu = \lim_{n\to \infty} \int  s_{n}\;\mathrm{d}\mu + \int t \;\mathrm{d} \mu =\int f \;\mathrm{d} \mu+\int g \;\mathrm{d} \mu  $$</span></p>
+</div>
+<p>לכל פונקציה מדידה <span>\(f:X\to \left[ 0,\infty \right]\)</span> קיימת סדרת פונקציות פשוטות <span>\(s_{n}:X\to \left[ 0,\infty \right)\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>זוהי סדרה עולה של פונקציות פשוטות: 
+<span>$$0\leq s_{1} \leq s_{2} \leq \dots \leq f$$</span></p>
+</li>
+<li>
+<p>לכל <span>\(x \in X\)</span> נקבל: 
+<span>$$\lim_{ n \to \infty } s_{n}(x)=f(x)$$</span>
+?
+<strong>דוגמא</strong>
+נסתכל על <span>\(\varphi_{n}:\left[ 0,\infty \right)\to\left[ 0,\infty \right)\)</span> המוגדרת על ידי:
+<span>$$\varphi_{n}=\begin{cases}n  &amp; x\geq n \\2^{-n}\cdot \left\lfloor  2^{n}\cdot x  \right\rfloor  &amp; 0\leq x &lt; n
+\end{cases}$$</span>
+כאשר זוהי סדרה של פונקציות פשוטות כך ש:
+<span>$$s_{n}=\varphi_{n}\circ  f$$</span></p>
+</li>
+</ol>
+<div class="proposition">
+<p>תהי <span>\(f \in L^{1}\left( \mu \right)\)</span> אזי:
+<span>$$\left\lvert  \int f \;\mathrm{d} \mu   \right\rvert \leq \int \lvert f \rvert  \;\mathrm{d} \mu $$</span>
+?
+אנו יודעים כי <span>\(\int f \;\mathrm{d} \mu \in \mathbb{C}\)</span>. ולכן קיים <span>\(\alpha \in \mathbb{C}\)</span> עם <span>\(\left\lvert  \alpha  \right\rvert=1\)</span> שעבורו:
+<span>$$\alpha \int f \;\mathrm{d} \mu = \left\lvert  \int f \;\mathrm{d} \mu   \right\rvert  $$</span>
+ולכן:
+<span>$$\left\lvert  \int f \;\mathrm{d} \mu   \right\rvert =\alpha \int f \;\mathrm{d} \mu = \overbrace{ \int \alpha f\;\mathrm{d} \mu }^{ \text{Real} }  =\int \mathrm{Re}\left( \alpha \cdot f \right) \;\mathrm{d} \mu + i \int \mathrm{Im}\left( \alpha \cdot f \right) \;\mathrm{d} \mu  $$</span>
+וכיוון שיש לנו פונקציה ממשית שמוצגת על ידי צירוף לינארי של מספר ממשי ומרוכב, נדרש שהחלק המרוכב מתאפס, ולכן:
+<span>$$\int \mathrm{Im}\left( \alpha \cdot f \right) \;\mathrm{d} \mu=0 $$</span>
+כאשר:
+<span>$$\int \mathrm{Re}\left( \alpha \cdot f \right) \;\mathrm{d} \mu \leq \int \left\lvert  \mathrm{Re}\left( \alpha \cdot f \right)  \right\rvert  \;\mathrm{d} \mu \leq \int  \left\lvert  \alpha \cdot f  \right\rvert  \;\mathrm{d} \mu = \int \lvert f \rvert  \;\mathrm{d} \mu   $$</span>
+כאשר השתמשנו בזה ש-<span>\(\left\lvert  \alpha  \right\rvert=1\)</span></p>
+</div>
+<div class="proposition">
+<p>נניח ש-<span>\(\infty&gt; \mu(X)\)</span> ותהי <span>\(f:X\to \mathbb{C}\)</span> ב-<span>\(L^{1}\left( \mu \right)\)</span>. נגדיר את הממוצע של <span>\(f\)</span> על קבוצה מדידה  <span>\(E \in \mathcal{A}\)</span> עם <span>\(\mu(E)&gt; 0\)</span> להיות:
+<span>$$A_{E}(f)=\frac{1}{\mu(E)}\int _E f \;\mathrm{d} \mu $$</span>
+אם <span>\(\Omega\)</span> קבוצה סגורה ולכל <span>\(E \in \mathcal{A}\)</span> מתקיים ש-
+<span>$$A_{E}(f)\in \Omega$$</span>
+אזי <span>\(f(x) \in \Omega\)</span> עבור <span>\(\mu\)</span> כמעט תמיד.
+?
+נסמן ב-<span>\(\overline{B}_{\alpha}\left( \alpha \right)\subseteq \mathbb{C}\)</span> את הכדור הסגור ברדיוס <span>\(r\)</span> סביב <span>\(\alpha\)</span> ב-<span>\(\mathbb{C}\)</span>. מאחר ש-<span>\(\Omega^{c}\)</span> פתוחה, הרי שהינה איחוד בן מנייה של כדורים סגורים. לכן מספיק להראות שעבור כל <span>\(\overline{B}_{r}\left( \alpha \right)\subseteq \Omega^{c}\)</span>:
+<span>$$\mu\left( f^{-1}\left( \overline{B} _{r}\left( \alpha  \right) \right) \right)=0$$</span>
+נניח בשלילה שקיים <span>\(\Omega^{c}\supseteq \overline{B}_{r}\left( \alpha \right)\)</span> עם <span>\(E=f^{-1}\left( \overline{B}_{r}\left( \alpha \right) \right)\)</span> ממידה חיובית. אזי:
+<span>$$\left\lvert  A_{\varepsilon}(f)-\alpha  \right\rvert =\left\lvert  \frac{1}{\mu(E)}\int _{E}f \;\mathrm{d} \mu -\frac{1}{\mu(E)}\int _{E}\alpha \;\mathrm{d} \mu \right\rvert=\frac{1}{\mu(E)}   \left\lvert  \int f-\alpha \;\mathrm{d} \mu   \right\rvert \leq \frac{1}{\mu(E)}\int _{E}\left\lvert  f-\alpha  \right\rvert  \;\mathrm{d} \mu \leq r$$</span>
+ולכן <span>\(A_{E}(f)\in \overline{B}_{r}\left( \alpha \right) \subseteq \Omega^{c}\)</span> בסתירה להנחה.</p>
+</div>
+<div class="proposition">
+<p>תהי <span>\(f_{n}:X\to \mathbb{C}\)</span> סדרה של פונקציות מדודות המגדרות כמעט-תמיד עם:
+<span>$$\sum_{i=1}^{\infty} \int  \lvert f_{n} \rvert  \;\mathrm{d} \mu &lt; \infty $$</span>
+אזי:
+<span>$$f(x)=\sum_{i=1}^{\infty} f_{n}(x)$$</span>
+מוגדרת כמעט תמיד וב-<span>\(L^{1}\left( \mu \right)\)</span> מתקיים:
+<span>$$\int f \;\mathrm{d} \mu = \sum_{i=1}^{\infty} \int f_{n} \;\mathrm{d} \mu  $$</span>
+?
+ראשית נניח ש-<span>\(f_{n}\)</span> מוגדרת על <span>\(X\supseteq S_{n}\)</span> כך ש-<span>\(\mu(S_{n}^{c})=0\)</span> אזי <span>\(\varphi=\sum_{i=1}^{\infty}\lvert f_{n} \rvert\)</span> מוגדרת על <span>\(S=\bigcap_{n}S_{n}\)</span> כך ש-<span>\(\mu(S^{c})=\mu\left( \bigcup_{n}S_{n}^{c} \right)=0\)</span>. מהטענה שהוכחנו עבור פונקציות אי שלליות:
+<span>$$\int \varphi \;\mathrm{d} \mu =\sum_{i=1}^{\infty} \int \lvert f_{n} \rvert  \;\mathrm{d} \mu &lt; \infty $$</span>
+בפרט <span>\(\varphi&lt; \infty\)</span> מתקיים <span>\(\mu\)</span>- כמעט תמיד וכן <span>\(\varphi \in L^{1}\left( \mu \right)\)</span>. ולכן מתקיים <span>\(\mu\)</span>-כמעט תמיד שלכל <span>\(x \in X\)</span> מתקיים <span>\(\sum_{i=1}^{\infty}f_{n}(x)\)</span> מתכנס בהחלט. ולכן מתכנס ב-<span>\(\mathbb{C}\)</span> ולכן <span>\(f\)</span> מוגדרת <span>\(\mu\)</span>-כמעט תמיד. נסמן <span>\(g_{k}=\sum_{i=1}^{k}f_{n}\)</span> ונבחין כי:
+<span>$$\lvert g_{k} \rvert \leq \sum_{i=1}^{k} \lvert f_{n} \rvert \leq \varphi$$</span>
+ממשפט ההתכנסות הנשלטת. עבור <span>\(g_{k}\to f\)</span> נסיק כי <span>\(f \in L^{1}\left( \mu \right)\)</span> ו-
+<span>$$\int f \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu=\lim_{ n \to \infty } \sum_{n=1}^{k} \int  f_{n} \;\mathrm{d} \mu = \sum_{n=1}^{N} \int f_{n} \;\mathrm{d} \mu    $$</span></p>
+</div>
+<div class="lemma">
+<ol>
+<li>
+<p>פונקציה <span>\(f:X\to\left[ 0,\infty \right]\)</span> מדידה אם: 
+<span>$$\int f \;\mathrm{d} \mu=0 \implies f\underset{\mu}{=} 0$$</span></p>
+</li>
+<li>
+<p>אם <span>\(f:X\to \mathbb{C}\)</span> מדידה ולכל <span>\(E \in \mathcal{A}\)</span> אשר מקיים <span>\(\int _{E}f \;\mathrm{d} \mu=0\)</span> אזי <span>\(f\underset{\mu}{=} 0\)</span>. 
+?</p>
+</li>
+<li>
+<p>ההנחה <span>\(\int  f  \;\mathrm{d} \mu=0\)</span> גוררת ש: 
+<span>$$\mu\left( \left\{  x \in X\quad f(x)\geq \frac{1}{n}  \right\} \right)=0$$</span>
+ולכל <span>\(n\)</span> מתקיים <span>\(f=0\)</span> כמעט תמיד.</p>
+</li>
+<li>
+<p>נסמן <span>\(f=a^{+}-a^{-}+iv^{+}-iv^{-}\)</span> נתבונן ב: 
+<span>$$E=\left\{  u^{+}&gt; 0  \right\}$$</span>
+ונשים לב כי:
+<span>$$0=\mathrm{Re}\int_{E} f \;\mathrm{d} \mu  = \int _{E}u \;\mathrm{d} \mu = \int _{X}u^{+} \;\mathrm{d} \mu  $$</span>
+כאשר השיוון הראשון נובע מההנחה ש-<span>\(\int _{E}f \;\mathrm{d} \mu=0\)</span> לכל <span>\(E \in \mathcal{A}\)</span>. לען מסעיף א נקבל:
+<span>$$u^{+}=u^{-}=v^{+}=v^{-}=0$$</span></p>
+</li>
+</ol>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='prev-page'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

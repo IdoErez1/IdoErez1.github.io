@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שיווי משקל נאש</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_2_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_2_2`; }});</script>
+        <div class="content">
+        <h1>2.3  שיווי משקל נאש</h1>
+    <div class="definition"><span class="keyword">שיווי משקל נאש טהור</span><p>בהינתן משחק אסטרטגי שילוב של אסטרטגיות שאופטימליות גם לשחקן הראשון וגם לשחקן השני נקרא שיווי משקל נאש. כלומר זהו שילוב של אסטרטגיות <span>\((x^{*},y^{*})\in S_{1} \times S_{2}\)</span> כך שלכל <span>\(x \in S_{1}\)</span> מתקיים:
+<span>$$u_{1}(x^{*},y^{*})\geq u_{1}(x,y^{*})$$</span>
+ולכל <span>\(y \in S_{2}\)</span> מתקיים:
+<span>$$u_{2}(x^{*},y^{*})\geq u_{2}(x^{*},y)$$</span></p>
+</div>
+<div class="remark">
+<p>אם מסתכלים על הטבלה זה הערך שבו הערך של שחקן 1 הכי גבוה באותה עמודה(כיוון שעבור <span>\(y^{*}\)</span> מקובע לשנות את השורה זה להסתכל על הערכים בעמודה) והתועלת של שחקן 2 זה הערך הכי גבוה באותה שורה.</p>
+</div>
+<div class="definition"><span class="keyword">שיווי משקל נאש מעורב</span><p>זהו שילוב של אסטרטגיות <span>\((x^{*},y^{*})\in \Delta_{S_{1}} \times \Delta_{S_{2}}\)</span> כך שלכל <span>\(x \in \Delta _{S_{1}}\)</span> מתקיים:
+<span>$$u_{1}(x^{*},y^{*})\geq u_{1}(x,y^{*})$$</span>
+ולכל <span>\(y \in\Delta_{S_{2}}\)</span> מתקיים:
+<span>$$u_{2}(x^{*},y^{*})\geq u_{2}(x^{*},y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">תומך של אסטרטגיה מעורבת</span><p>עבור אסטרטגיה מעורבת ה קבוצה של אסטרטגיות טהורות עבורה השחקן נותן הסתברות חיובית.</p>
+</div>
+<div class="example">
+<p>אם לשחקן 1 יש 4 אסטרטגיות טהורות <span>\(S_{1}=\{ s_{1},s_{2},s_{3},s_{4} \}\)</span> אז אסטרטגיה מעורבת אחת יכולה להיות:
+<span>$$x=(0.5,0.5,0,0)$$</span>
+כאשר התומך שלה יהיה <span>\(\{ s_{1},s_{2} \}\)</span>.</p>
+</div>
+<div class="proposition"><span class="keyword">עקרון העדישות</span><p>כל נקודות שיווי משקל נאש של אסטרטגיה מעורבת הם בעלות הסתברות שווה(עדישות) לכל אחד מהאסטרטגיות הטהורות בתמוך שלהם.</p>
+</div>
+<div class="remark">
+<p>למעשה ניתן להסתכל על כל הזוגות תומכים האפשריים ולמצוא מתי עדישים. אבל נשים לב שאם מסתכים על תומכים יחידונים זו תהיה אסטרטגיה טהורה והשיווי משקל המתקבל יהיה טהור.</p>
+</div>
+<div class="example">
+<p>נסתכל על המשחק של האם זוג צריך ללכת לאופרה או לכדורגל:
+<span>$$\begin{array}{c|c|c} &amp; O &amp; F \\ \hlineO &amp; (2,1) &amp; (0,0) \\ \hlineF &amp; (0,0) &amp; (1,2)
+\end{array}$$</span>
+השיווי משקל נאש הטהורים הם <span>\((2,1)\)</span> ו-<span>\((1,2)\)</span>. כעת לפי עקרון העדישות נקבל עוד שייוי משקל אם שני השחקנים עדישים לגבי הבחירה שלהם. נניח כי לשחקן 1 יש אסטרטגיה מעורבת <span>\(\vec{x}=(p,1-p)\)</span> ונקבל כי התגמול הממוצע יהיה:
+<span>$$u_{1}\left( \vec{x},O \right)=2p+0\cdot(1-p)=2p\qquad u_{1}\left( \vec{x},F \right)=0\cdot p+1\cdot(1-p)=1-q$$</span>
+ונהיה עדישים במקרה של שיוויון:
+<span>$$u_{1}\left( \vec{x},O \right)\overset{!}{=} u_{1}\left( \vec{x},F \right)\implies 2p\overset{!}{=}  1-p\implies p=\frac{1}{3}$$</span>
+ואם נניח כי עבור השחקן השני יש אסטרטגיה מעורבת <span>\(\vec{y}=(q,1-q)\)</span> נקבל:
+<span>$$u_{2}\left( O,\vec{y} \right)=1\cdot q+0\cdot(1-q)=q\qquad u_{2}\left( F,\vec{y} \right)=0\cdot q+2(1-q)=2-2q$$</span>
+ואם נדרוש עדישות נקבל:
+<span>$$u_{2}\left( O,\vec{y} \right)\overset{!}{=} u_{2}\left( F,\vec{y} \right)\implies q=2-2q\implies q=\frac{2}{3}$$</span>
+ולכן נקבל כי <span>\(\left( \left( \frac{2}{3},\frac{1}{3} \right),\left( \frac{1}{3},\frac{2}{3} \right)  \right)\)</span> היא אסטרטגיה מעורבת.</p>
+</div>
+<div class="example">
+<p>נרצה למצוא את השיווי משקל נאש של המשחק:
+<span>$$\begin{array}{c|c|c} &amp; X &amp; Y \\ \hlineA &amp; (7,5) &amp; (1,3) \\ \hlineB &amp; (4,4) &amp; (7,7) \\ \hlineC &amp; (5,2) &amp; (4,5) 
+\end{array}$$</span>
+נשים לב מיידית כי <span>\((7,7)\)</span> ו-<span>\((7,5)\)</span> הם אסטרטגיות טהורות שולטות. כעת נסתכל על כל הזוגות תומכים:
+<span>$$\left( \{ A,B \},\{ X,Y \} \right),\quad \left( \{ B,C \},\{ X,Y \} \right),\quad \left( \{ A,C \},\{ X,Y \} \right),\quad \left( \{ A,B,C \},\{ X,Y \} \right)$$</span>
+עבור הזוג הראשון נגדיר <span>\(\vec{x}=(p,1-p)\)</span> ו-<span>\(\vec{y}=(q,1-q)\)</span>. נדרוש עבור השחקן הראשון:
+<span>$$u_{1}\left( A,\vec{y} \right)=7\cdot q+(1-q)\cdot 1=6q+1\qquad u_{1}\left( B,\vec{y} \right)=4q+7(1-q)=-3q+7$$</span>
+נדרוש שיוויון:
+<span>$$6q+1=-3q+7\implies 9q=6\implies q=\frac{2}{3}$$</span>
+כעת עבור השחקן השני:
+<span>$$u_{2}\left( \vec{x},X \right)=5\cdot p+4\cdot(1-p)=p+4\qquad u_{2}\left( \vec{x},Y \right)=3\cdot p+7\cdot(1-p)=-4p+7$$</span>
+נדרוש שיוויון:
+<span>$$p+4=-4p+7\implies 5p=3\implies p=\frac{3}{5}$$</span>
+ולכן <span>\(\left( \left( \frac{2}{3},\frac{1}{3} \right),\left( \frac{3}{5},\frac{2}{5} \right) \right)\)</span> אסטרטגיה מעורבת. ניתן לעשות באופן דומה על הזוגות ונראה על הזוג עם התמוך באורך 3. נגדיר עבור שחקן 1:
+<span>$$p_{1},p_{2},p_{3}\ge0,\quad p_{1}+p_{2}+p_{3}=1$$</span>
+כך ש-<span>\(\vec{x}=(p_{1},p_{2},p_{3})\)</span> ועבור שחקן 2 נגדיר <span>\(\vec{y}=(q,1-q)\)</span>. עבור השחקן הראשון נדרש:
+<span>$$u_{1}\left( A,\vec{y} \right)=u_{1}\left( B,\vec{y} \right)=u_{1}\left( C,\vec{y} \right)$$</span>
+ולמעשה מספיק לנו למצוא בעזרת שתי משוואות את הערך של <span>\(q\)</span>, המשוואה השלישית מאפשרת לנו לפסול את הפתרון. נקבל:
+<span>$$\begin{gather}u_{1}\left( A,\vec{y} \right)=7q+1(1-q)=7q+1-q=6q+1  \\u_{2}\left( B,\vec{y} \right)=4q+7(1-q)=4q+7-7q=-3q+7 \\u_{3}\left( C,\vec{y} \right)=5q+4(1-q)=5q+4-4q=q+4
+\end{gather}$$</span>
+כלומר נקבל את המשוואות:
+<span>$$6q+1=-3q+7\quad\mathrm{and}\quad6q+1=q+4$$</span>
+מהמשוואה הראשונה נקבל <span>\(q=\frac{2}{3}\)</span> כאשר מהמשוואה השנייה נקבל <span>\(q=\frac{3}{5}\)</span> בסתירה, ולכן לא קיים שיווי משקל נאש.</p>
+</div>
+<div class="summary">
+<ul>
+<li>אוסף של אסטרטגיות הוא שיווי משקל נאש אם לכל שחקן בהנתן המהלך של השחקנים האחרים האסטרטגיה שלו היא הטובה ביותר.</li>
+<li>עבור מקרה של שתי שחקנים, זה אומר עבור השחקן הראשון בהנתן שהשחקן השני בחר עמודה, אז מה השורה הטובה ביותר שיכול להיות.</li>
+<li>תמיד קיימת לפחות נקודת שיווי משקל נאש אחת מעורבת.</li>
+<li>ניתן למצוא את שיווי המשקל נאש על ידי חיפוש של זוגות תומכים, כאשר עבור כל זוג נדרוש שיוויון בין התועלות של השחקנים(עקרון העדישות).</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+<li class='prev-page'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+</ul></li>
+        </body>
+        </html>
+        

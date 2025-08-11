@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גנבת אסטרטגיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_1_3'>1.3 נים</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_1_1'>1.1 גרפים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_1_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_1_1`; }});</script>
+        <div class="content">
+        <h1>1.2  גנבת אסטרטגיות</h1>
+    <div class="definition"><span class="keyword">גניבת אסטרטגיות</span><p>גניבת אסטרטגיות היא דרך להפרכת אסטרטגיות מנצחות של אחד השחקנים. הרעיון הוא שאם מניחים בשלילה שלשחקן השני יש אסטרטגיה מנצחת, אז מראים שהשחקן הראשון יכול לבנות אסטרטגיה מנצחת מתוך האסטרטגיה המנצחת של השחקן השני, וזה יוכיח שלשחקן השני אין אסטרטגיה מנצחת.</p>
+</div>
+<div class="example"><span class="keyword">Chomp</span><p>במשחק Chomp יש גריד עם משבצת "רעילה". בכל תור שחקן בוחר משבצת, כך שכל המשבצות מעליה ומימין אליה יוצאות מהמשחק (ובתורות הבאים כבר אי אפשר לבחור בהם). השחקן שצריך לקחת את המשבצת הרעילה מפסיד. במשחק זה תמיד יש מצב מנצח או מפסיד.</p>
+</div>
+<div class="example"><span class="keyword">Hex</span><p>במשחק Hex יש גריד של משושים, כך שכל שני צדדים מקבילים בגריד באותו צבע (אדום וכחול). בכל תור שחקן בוחר משבצת אותה הוא ממלא לפי הצבע שלו. המטרה היא לחבר אותם. במשחק זה לא ייתכן תיקו.</p>
+</div>
+<div class="proposition">
+<p>במשחק Chomp לשחקן הראשון תמיד יש אסטרטגיה מנצחת.</p>
+</div>
+<div class="proof">
+<p>ההוכחה מבוססת על הנחה בשלילה שלשחקן 2 יש אסטרטגיה מנצחת. אם שחקן 2 מנצח לא משנה מה שחקן 1 יעשה, אז בפרט יש לו אסטרטגיה מנצחת גם אם שחקן 1 בוחר את המשבצת העליונה-ימנית <span>\((m,n)\)</span> בתור הראשון. קיימים <span>\(k^*, l^*\)</span> כך שבחירה של <span>\((k^*, l^*)\)</span> על ידי שחקן 2 מובילה לניצחון. שחקן 1 בונה אסטרטגיה מנצחת בכך שהוא בוחר <span>\((k^*, l^*)\)</span> בתור הראשון. קבוצת המשבצות שתישאר היא בדיוק אותה קבוצה שהייתה נשארת אם שחקן 1 היה בוחר <span>\((m,n)\)</span> ושחקן 2 היה בוחר <span>\((k^*, l^*)\)</span>. מכיוון שבמצב זה לשחקן 2 הייתה אסטרטגיה מנצחת (בהנחה השלילה), כעת שחקן 1 יבצע את המהלכים ששחקן 2 היה מבצע, וזה יוביל לניצחון של שחקן 1. מכאן שלשחקן 1 יש אסטרטגיה מנצחת, בסתירה לכך שרק לאחד מהשחקנים יש אסטרטגיה מנצחת. לכן לשחקן 2 לא יכולה להיות אסטרטגיה מנצחת, ובהכרח לשחקן 1 יש אסטרטגיה מנצחת.</p>
+</div>
+<div class="proposition">
+<p>במשחק Hex לשחקן הראשון תמיד יש אסטרטגיה מנצחת.</p>
+</div>
+<div class="proof">
+<p>ההוכחה מבוססת על הנחה בשלילה שלשחקן 2 יש אסטרטגיה מנצחת. אם יש אסטרטגיה מנצחת בלוח במצב מסוים, אז יש אסטרטגיה מנצחת גם באותו לוח עם תא נוסף הצבוע בצבע שלנו. שחקן 1 בוחר בתור הראשון תא אקראי כלשהו. לאחר מכן שחקן 1 מחקה את מה ששחקן 2 היה עושה, כחלק מהאסטרטגיה המנצחת שלו, אם מצב הלוח היה זהה, למעט זה שכל הצבעים היו הפוכים, והתא הרנדומלי שבחר השחקן הראשון בהתחלה לא היה צבוע. אם שחקן 2 בוחר לצבוע את התא הרנדומלי, שחקן 1 פשוט יצבע תא רנדומלי אחר. כיוון ששחקן 1 למעשה מחקה את אסטרטגיית הניצחון של שחקן 2 (בהיפוך), והוספת תא צבוע לא פוגעת באסטרטגיה מנצחת, שחקן 1 יכול לבנות אסטרטגיה מנצחת.</p>
+</div>
+<div class="definition"><span class="keyword">פעולת ה-xor (או NIM-SUM)</span><p>פעולת ה-xor מסומנת ב- <span>\(\oplus\)</span> ומוגדרת עבור סדרת מספרים טבעיים <span>\(\{x_n\}_{k=1}^N\)</span> כ-:
+<span>$$x_1 \oplus x_2 \oplus \dots \oplus x_N = \sum_{k=0}^{\infty} \left[ \left( \sum_{n=1}^{N} x_n^k \right) \mod 2 \right] 2^k$$</span>
+כאשר <span>\(x_n^k\)</span> הוא הביט ה-<span>\(k\)</span> של <span>\(x_n\)</span> בייצוג בינארי.</p>
+</div>
+<div class="remark">
+<p>פעולת xor
+אינטואיטיבית, את <span>\(\oplus\)</span> ניתן להגדיר באמצעות <span>\(1 \oplus 0 = 0 \oplus 1 = 1\)</span> ו- <span>\(0 \oplus 0 = 1 \oplus 1 = 0\)</span>. עבור מספרים בינאריים גדולים יותר, הפעולה פועלת ספרה-ספרה, לדוגמה: <span>\(1001 \oplus 0101 = 1100\)</span>. פעולת ה-xor היא אסוציאטיבית, קומוטטיבית ואינבולוציה (הפוכה לעצמה).</p>
+</div>
+<div class="proposition">
+<p>במשחק NIM השחקן הנוכחי בעל אסטרטגיה מנצחת אם ורק אם יש מהלך כך שלאחר שהשחקן משחק, מתקיים כי <span>\(s = x_1 \oplus x_2 \oplus \dots \oplus x_N = 0\)</span>.</p>
+</div>
+<div class="proof">
+<p>שלב ראשון: נניח כי <span>\(s=0\)</span> בתחילת התור. אם שחקן כלשהו מבצע מהלך, ה-NIM-SUM לאחר המהלך לא יהיה אפס.
+<span>$$s' = x_1 \oplus x_2 \oplus \dots \oplus y_n \oplus \dots \oplus x_N$$</span>
+<span>$$= x_1 \oplus x_2 \oplus \dots \oplus y_n \oplus \dots \oplus x_N \oplus (x_n \oplus x_n)$$</span>
+<span>$$= x_1 \oplus x_2 \oplus \dots \oplus x_n \oplus \dots \oplus x_N \oplus (y_n \oplus x_n)$$</span>
+<span>$$= s \oplus x_n \oplus y_n$$</span>
+<span>$$= 0 \oplus x_n \oplus y_n \neq 0$$</span>
+שלב שני: עתה נוכיח שאם <span>\(s \neq 0\)</span> אז אפשר להגיע לסכום-נים אפס. יהי <span>\(k^*\)</span> כך ש-<span>\(2^{k^*} \le s &lt; 2^{k^*+1}\)</span>. קיים <span>\(x_n\)</span> כך ש-<span>\(2^{k^*} \le x_n\)</span> וגם הביט ה-<span>\(k^*\)</span> של <span>\(x_n\)</span> הוא 1. נגדיר <span>\(y_n = x_n \oplus s\)</span>. מתקיים <span>\(y_n &lt; x_n\)</span>. כמו כן, <span>\(s' = s \oplus x_n \oplus y_n = s \oplus x_n \oplus (x_n \oplus s) = 0\)</span>.
+משני השלבים נובע שבכל תור של שחקן 1, הוא יכול לבחור מהלך כך שסכום-נים <span>\(s\)</span> יהיה 0, ולכן כל מהלך ששחקן 2 יבצע יוביל לכך ש-<span>\(s \neq 0\)</span>. היות ובשלב מסוים הגפרורים ייגמרו, ובמצב זה סכום-נים הוא 0, אנו מסיקים כי מי שיוביל לכך יהיה שחקן 1, ולכן לא ייתכן ששחקן 2 ינצח. מכאן בהכרח שחקן 1 ינצח לפי אסטרטגיה זו.</p>
+</div>
+<div class="theorem"><span class="keyword">Sprague-Grundy</span><p>כל משחק אובייקטיבי שקול למשחק של NIM עם ערימה אחת.</p>
+</div>
+<div class="summary">
+<ul>
+<li>גניבת אסטרטגיות היא דרך להפרכת אסטרטגיות מנצחות של אחד השחקנים.</li>
+<li>דוגמאות למשחקים בהם ניתן לגנוב אסטרטגיות הן Chomp ו-Hex.</li>
+<li>במשחק NIM השחקן הנוכחי בעל אסטרטגיה מנצחת אם ורק אם יש מהלך כך שלאחר שהשחקן משחק, מתקיים כי <span>\(s = x_1 \oplus x_2 \oplus \dots \oplus x_N = 0\)</span>.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_1_3'>1.3 נים</a></li>
+<li class='prev-page'><a href='./Game_1_1'>1.1 גרפים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משפט המינימקס</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_2_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_2_1`; }});</script>
+        <div class="content">
+        <h1>2.2  משפט המינימקס</h1>
+    <div class="proposition">
+<p>עבור כל משחק מתקיים:
+<span>$$\operatorname*{max}_{x\in\Delta_{m}}\operatorname*{min}_{y\in\Delta_{n}}x^{T}A y\leq\operatorname*{min}_{y\in\Delta_{n}}\operatorname*{max}_{x\in\Delta_{m}}x^{T}A y$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נבחר אסטרטגיה מעורבת כלשהי <span>\(x \in \Delta _m\)</span> ו-<span>\(y \in \Delta_{n}\)</span>. </p>
+</li>
+<li>
+<p>מההגדרה של מינימום ומקסימום: 
+<span>$$\min _{y'}x^{T}Ay'\leq x^{T}Ay\leq \max _{x'}(x')^{T}Ay$$</span></p>
+</li>
+<li>
+<p>כיוון שזה נכון לכל <span>\(x,y\)</span> זה זה בפרט נכון עבור ה-<span>\(y\)</span> הקטן ביותר עבור אגף ימין ועבור ה-<span>\(x\)</span> הגדול ביותר עבור אגף שמאל: 
+<span>$$\operatorname*{max}_{x}\operatorname*{min}_{y}x^{T}A y\leq\operatorname*{min}_{y}\operatorname*{max}_{x}x^{T}A y.$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">משפט המישור העל המפריד</span><p>יהי <span>\(C\)</span> קבוצה סגורה וקמורה כך ש-<span>\(0 \not \in C\)</span>. אזי קיים על מישור מפריד, כלומר קיימים ווקטורים <span>\(\vec{a},\vec{b}\in \mathbb{R}^{n}\)</span> כך שלכל <span>\(x \in C\)</span> מתקיים:
+<span>$$\langle a,x \rangle &gt; b &gt; 0$$</span></p>
+</div>
+<div class="proof">
+<p>אם <span>\(C\)</span> ריק אז הטענה מתקיימת טריוויאלית. לכן נניח כי <span>\(C\)</span> לא ריקה. נבחר <span>\(r&gt; 0\)</span> כך ש:
+<span>$$C\cap B_{r}(0)\neq \varnothing $$</span>
+כאשר זוהי קבוצה סגורה כחיתוך של שתי קבוצות סגורות. כיוון ש-<span>\(\lVert x \rVert\leq r\)</span> לכל <span>\(x\)</span> בקבוצה נקבל כי קומפקטי כי סגור וחסום(מהיינה בורל). לכן הפונקציה הרציפה <span>\(\lVert \cdot \rVert^{2}\)</span> משיגה את המינימום בקבוצה. נסמן את המינימום ב-<span>\(\vec{a}\)</span>.
+כעת אם <span>\(x \in C\setminus B_{r}(0)\)</span> נקבל:
+<span>$$\left\lVert  \vec{a}  \right\rVert \leq r^{2}\leq\left\lVert  \vec{x}  \right\rVert $$</span>
+נגדיר כעת את הפונקציה:
+<span>$$g_{x}(t)=\left\lVert  t\vec{x}+(1-t)\vec{a}  \right\rVert ^{2}$$</span>
+זוהי פונקציה רציפה כהרכבה של רציפות, אשר משיגה את המינימום שלה ב-<span>\(t=0\)</span>. נזכור כי הנגזרת של נורמה נתונה על ידי:
+<span>$${\frac{d}{d t}}\|\mathbf{v}(t)\|^{2}={\frac{d}{d t}}\langle\mathbf{v}(t),\mathbf{v}(t)\rangle=\langle\mathbf{v}^{\prime}(t),\mathbf{v}(t)\rangle+\langle\mathbf{v}(t),\mathbf{v}^{\prime}(t)\rangle=2\langle\mathbf{v}(t),\mathbf{v}^{\prime}(t)\rangle$$</span>
+ולכן אם נגזור את הפונקציה לפי <span>\(t\)</span> נקבל:
+<span>$$g_{x}'(t)=2\left\langle  t\vec{x}+(1-t)\vec{a},\vec{x}-\vec{a}  \right\rangle$$</span>
+ועבור <span>\(t=0\)</span> נקבל מינימום(אשר על השפה) לכן:
+<span>$$g'_{x}(0)=2\left\langle  \vec{a},x-\vec{a}  \right\rangle \geq 0$$</span>
+ולכן:
+<span>$$\left\langle  \vec{a},\vec{x}  \right\rangle -\left\langle  \vec{a},\vec{a}  \right\rangle \geq 0\implies \left\langle  \vec{a},\vec{x}  \right\rangle \geq \left\langle  \vec{a},\vec{a}  \right\rangle \geq 0$$</span>
+ובפרט עבור אם נגדיר <span>\(b:=\|a\|^{2}&gt;0\)</span> נקבל:
+<span>$$0\leq b\leq \left\langle  \vec{a},\vec{x}  \right\rangle $$</span>
+וקיבלנו כי העל מישור <span>\(\left\{  y\mid \langle a,y \rangle=b  \right\}\)</span> הוא על מישור מפריד.</p>
+</div>
+<div class="theorem"><span class="keyword">מינימקס</span><p>עבור משחק סכום אפס סופי של שתי שחקנים נקבל:
+<span>$$\operatorname*{max}_{x\in\Delta(S_{1})}\operatorname*{min}_{y\in\Delta(S_{2})}u(x,y)=\operatorname*{min}_{y\in\Delta(S_{2})}\operatorname*{max}_{x\in\Delta(S_{1})}u(x,y)$$</span>
+כלומר אם <span>\(A\)</span> זה מטריצת התגמול של שחקן 1 נקבל:
+<span>$$\operatorname*{max}_{x\in\Delta(A_{1})}\operatorname*{min}_{y\in\Delta(A_{2})}x^{T}A y=\operatorname*{min}_{y\in\Delta(A_{2})}\operatorname*{max}_{x\in\Delta(A_{1})}x^{T}A y$$</span></p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>הכיוון <span>\(\operatorname*{max}_{x\in\Delta_{m}}\operatorname*{min}_{y\in\Delta_{n}}x^{T}A y\leq\operatorname*{min}_{y\in\Delta_{n}}\operatorname*{max}_{x\in\Delta_{m}}x^{T}A y\)</span> נכון גם עבור משחק שהוא לא סכום אפס מהטענה לעיל. נראה את הכיוון השני. </p>
+</li>
+<li>
+<p>נניח בשלילה שלא מתקיים האי שיוון בכיוון השני. כלומר מתקיים: 
+<span>$$\operatorname*{max}_{x}\operatorname*{min}_{y}x^{T}A y&lt;\operatorname*{min}_{y}\operatorname*{max}_{x}x^{T}A y$$</span>
+ובפרט קיים איזשהו <span>\(\lambda \in \mathbb{R}\)</span> כך ש:
+<span>$$\operatorname*{max}_{x}\operatorname*{min}_{y}x^{T}A y&lt;\lambda&lt;\operatorname*{min}_{y}\operatorname*{max}_{x}x^{T}A y$$</span>
+הסתירה שנרצה להראות היא שלכל <span>\(x\)</span> מתקיים <span>\(\operatorname*{min}_{y}x^{T}A y\leq\lambda\)</span>.</p>
+</li>
+<li>
+<p>נגדיר מתריצת תגמול מוזזת <span>\(\hat{A}=A-\lambda \cdot \mathbb{1}\)</span> כאשר <span>\(\mathbb{1}\)</span> זה המטריצה שכל הערכים של 1, כלומר ערכי המטריצה יהיו <span>\(\hat{a}_{ij}=a_{ij}-\lambda\)</span>. </p>
+</li>
+<li>
+<p>נגדיר את הקבוצה: 
+<span>$$K=\{\hat{A}y+v\mid y\in\Delta_{n},v\geq0\},$$</span>
+כאשר <span>\(v\geq 0\)</span> אומר שגדול מ-0 בכל קורדינטה. כלומר זהו אוסף של כל הווקטורים אשר שולטים על איזשהו ווקטור <span>\(\hat{A}y\)</span>.</p>
+</li>
+<li>
+<p>נשים לב כי <span>\(K\)</span> קמורה בתור העתקה לינארית על קבוצה קמורה וכן סגורה באופן דומה, לכן ניתן להפעיל את משפט ההפרדה של העל מישור ונקבל <span>\(z \in \mathbb{R}^{m}\)</span> וסקלר <span>\(c&gt; 0\)</span> כך ש לכל <span>\(w \in K\)</span> מתקיים: 
+<span>$$z^{T}w&gt;c&gt; 0 \qquad  z^{T}0=0&lt;c$$</span></p>
+</li>
+<li>
+<p>נגדיר את <span>\(x\)</span> להיות הנרמול של <span>\(x\)</span> כדי שייצג הסתברות(כלומר שסכום הרכיבים שלו יהיה 1): 
+<span>$$s \equiv \sum_{i=1}^{m} z_{i}\qquad x=\frac{z}{s}\in \Delta_{m}$$</span></p>
+</li>
+<li>
+<p>כעת: 
+<span>$$x^{T}\hat{A}y=\frac{z^{T}\hat{A}y}{s}&gt;\frac{c}{s}&gt;0\implies \operatorname*{min}_{y\in\Delta_{n}}x^{T}{\hat{A}}y&gt;0$$</span>
+וכיוון ש-<span>\(\hat{A}=A-\lambda \mathbb{1}\)</span> נקבל:
+<span>$$\operatorname*{min}_{y}x^{T}A y-\lambda&gt;0\implies\operatorname*{min}_{y}x^{T}A y&gt;\lambda$$</span>
+וזה סותר את ההנחה שאין <span>\(x\)</span> שמקיים <span>\(\min_{y}x^{T}Ay&gt; 0\)</span> ולכן מתקיים האי שיוויון בכיוון השני והטענה מתקיימת.</p>
+</li>
+</ol>
+</div>
+<div class="summary">
+<ul>
+<li>משפט המינימקס טוען כי עבור משחק סכום אפס תמיד קיים ערך של המשחק, כלומר תמיד קיים אסטרטגיה אופטימלית טהורה או מעורבת עבור השחקן הראשון והשני:
+<span>$$\operatorname*{max}_{x\in\Delta(S_{1})}\operatorname*{min}_{y\in\Delta(S_{2})}u(x,y)=\operatorname*{min}_{y\in\Delta(S_{2})}\operatorname*{max}_{x\in\Delta(S_{1})}u(x,y)$$</span></li>
+<li>ניתן למצוא את הערך של המשחק על ידי הגדרה של <span>\((p,1-p)\)</span> עבור ההסתברויות לבחור משחק, ומספיק להשוואות לאסטרטגיות הטהורות מקמירות.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='prev-page'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -3390,6 +3390,26 @@ $${\frac{\partial F_{i}}{\partial x_{j}}}={\frac{\partial{\frac{\partial\phi}{\p
 $$\frac{\partial F_{i}}{\partial x_{j}} =\frac{\partial F_{j}}{\partial x_{i}} $$
 
 \end{definition}
+\textbf{דוגמה} שדה משמר מקומית שאינו משמר גלובלית
+נגדיר את השדה הווקטורי \(\mathbf{F}(x, y) = \left( \frac{-y}{x^2 + y^2}, \frac{x}{x^2 + y^2} \right)\) על \(U = \mathbb{R}^2 \setminus \{(0,0)\}\).
+נחשב את הנגזרות החלקיות:
+\begin{gather*}\frac{\partial F_1}{\partial y} = \frac{\partial}{\partial y} \left( \frac{-y}{x^2 + y^2} \right) = \frac{-1 \cdot (x^2 + y^2) - (-y) \cdot 2y}{(x^2 + y^2)^2} = \frac{-x^2 - y^2 + 2y^2}{(x^2 + y^2)^2} = \frac{-x^2 + y^2}{(x^2 + y^2)^2}\\\frac{\partial F_2}{\partial x} = \frac{\partial}{\partial x} \left( \frac{x}{x^2 + y^2} \right) = \frac{1 \cdot (x^2 + y^2) - x \cdot 2x}{(x^2 + y^2)^2} = \frac{x^2 + y^2 - 2x^2}{(x^2 + y^2)^2} = \frac{-x^2 + y^2}{(x^2 + y^2)^2} \end{gather}
+$$
+לכן \(\frac{\partial F_1}{\partial y} = \frac{\partial F_2}{\partial x}\) בכל נקודה ב-\(U\), כלומר השדה משמר מקומית.
+עם זאת, השדה אינו משמר גלובלית. לדוגמה, נחשב את האינטגרל לאורך מעגל יחידה \(\gamma(t) = (\cos t, \sin t),\; t \in [0, 2\pi]\):
+$$\int_{\gamma} \mathbf{F} \cdot d\vec{\ell} = \int_0^{2\pi} \mathbf{F}(\cos t, \sin t) \cdot (-\sin t, \cos t) dt
+$$
+נחשב:
+$$\mathbf{F}(\cos t, \sin t) = \left( \frac{-\sin t}{1}, \frac{\cos t}{1} \right) = (-\sin t, \cos t)
+$$
+ולכן:
+$$(-\sin t, \cos t) \cdot (-\sin t, \cos t) = \sin^2 t + \cos^2 t = 1
+$$
+ולכן:
+$$\int_0^{2\pi} 1 dt = 2\pi
+$$
+האינטגרל לאורך מסילה סגורה אינו אפס, ולכן השדה אינו משמר גלובלית.
+
 \begin{definition}[שדה משמר]
 ווקטורי \(\mathbf{F}\) נקרא משמר על קבוצה \(U\subseteq \mathbb{R}^{n}\) אם לכל \(\gamma_{1},\gamma_{2}:[a,b]\to U\) עם \(\gamma_{1}(a)=\gamma_{2}(a)\) וגם \(\gamma_{1}(b)=\gamma_{2}(b)\) מתקיים:
 $$\int_{\gamma_{1}}\,\vec{F}d\vec{\ell}=\int_{\gamma_{2}}\,\vec{F}d\vec{\ell}$$
@@ -3458,6 +3478,17 @@ $$T_{x_{0}}(X)=\mathrm{Im}(D\phi|_{x_{0}})$$
 המרחב המשיק אינווריאנטי תחת צמצום ורה פרמטריזציה.
 
 \end{proposition}
+\section{פונקציות בין יריעות פרמטריות}
+
+\begin{definition}[פונקציות בין יריעות פרמטריות]
+יהי \(\left( M,\varphi \right)\) ו-\(\left( N,\psi \right)\) יריעות פרמטריות מדרגה \(n\) ו-\(m\) בהתאמה. פונקציה בין יריעה פרמטרית תהיה \(f:M\to N\).
+
+\end{definition}
+\includegraphics[width=0.8\textwidth]{diagrams/svg_1.svg}
+\begin{corollary}
+הפונקציה \(\psi \circ f \circ \varphi ^{-1}:\mathbb{R}^{n}\to \mathbb{R}^{m}\) היא הפונקציה המתאימה ל-\(f\) עבור הפרמטריזציות.
+
+\end{corollary}
 \section{אינטגרציה על יריעה פרמטרית}
 
 \begin{definition}[עיוות נפח \(k\) מימידי עבור העתקה לינארית]
@@ -3485,17 +3516,17 @@ $$V(T)=\sqrt{ \det(T^{t}T) }=\sqrt{ \det (T^{t})\det(T) }=\sqrt{ \det(T)^{2} }=\
 \end{corollary}
 \begin{definition}[אינטגרל על פרמטריזציה על יריעה פרמטרית]
 יהי \((X,\phi:U\to \mathbb{R}^{n})\) יריעה פרמטרית \(k\) מימדית כאשר \(U\subseteq \mathbb{R}^{k}\) פתוחה ו-\(\phi\) חלקה. בהנתן פונקציה \(f:X\to \mathbb{R}\) האינטגרל של \(f\) ביחס לאלמנט נפח \(k\) מימידי על \(X\) נתון על ידי:
-$$\int_{X}f d V o l_{k}:=\int_{U}f{\big(}\phi{\big(}x{\big)}{\big)}V{\big(}D\phi|_{x}{\big)}d x$$
+$$\int_{X}f d V o l_{k}:=\int_{U}f{\big(}\phi{\big(}x{\big)}{\big)}V{\big(}D\phi|_{x}{\big)}\mathrm{d}x$$
 
 \end{definition}
 \begin{remark}
 הנפח של היריעה הפרמטרית ה-\(k\) מימדית מתקבל במקרה המיוחד של \(f(p)=1\) לכל \(p \in X\) על ידי:
-$$\text{Vol}_{k}(X)=\int_{U}V{\big(}D\phi|_{x}{\big)}d x$$
+$$\text{Vol}_{k}(X)=\int_{U}V{\big(}D\phi|_{x}{\big)}\mathrm{d}x$$
 
 \end{remark}
 \begin{lemma}[אינווריאנטיות לרה פרמטריזציה]
 האינטגרל על יריעה פרמטרית לא תלוי בפרמטריזציה, כלומר עבור יריעה פרמטרית \(k\) מימדית \((X,\phi)\) ו-\(\psi:V\to U\) דיפאומורפיזם בין קבוצות פתוחות \(V,U \in \mathbb{R}^{k}\), מתקיים עבור פונקציה רציפה \(f:X\to \mathbb{R}\):
-$$\int_{U}f{\big(}\phi{\big(}x{\big)}{\big)}V{\big(}D\phi|_{x}{\big)}d x=\int_{V}f{\big(}\phi{\big(}\psi(y){\big)}{\big)}V{\big(}D{\big(}\phi\circ\psi)|_{y}{\big)}d y$$
+$$\int_{U}f{\big(}\phi{\big(}x{\big)}{\big)}V{\big(}D\phi|_{x}{\big)}\mathrm{d}x=\int_{V}f{\big(}\phi{\big(}\psi(y){\big)}{\big)}V{\big(}D{\big(}\phi\circ\psi)|_{y}{\big)}\mathrm{d}y$$
 
 \end{lemma}
 \begin{proof}
@@ -3509,11 +3540,11 @@ $$\sqrt{\operatorname*{det}(D\psi|_{y})^{2}}=|\operatorname*{det}\bigl(D\psi|_{y
 כלומר נקבל סה"כ:
 $${ V}\bigl({ D}\bigl(\phi\circ\psi\bigr)|_{y}\bigr)=|\operatorname*{det}\bigl({ D}\psi|_{y}\bigr)|{ V}\bigl({ D}\phi|_{\psi(y)}\bigr)$$
 כעת נסתכל על האינטגרל של הרה-פרמטריזציה:
-$$\int_{V}f{\big(}\phi(\psi(y){\big)}V{\big(}D(\phi\circ\psi)|_{y}{\big)}d y=\int_{V}f{\big(}\phi(\psi(y)){\big)}|\operatorname*{det}\!{\big(}D\psi|_{y}{\big)}|V{\big(}D\phi|_{\psi(y)}{\big)}d y$$
-נגדיר \(x=\psi(y)\). כיוון ש-\(\psi:V\to U\) דיפאומורפיזם זה החלפת משתנים לגיטימית. מנוחסאת החלפת משתנה נקבל:
-$$dx=\lvert \det(D\psi|_{y}) \rvert dy$$
+$$\int_{V}f{\big(}\phi(\psi(y){\big)}V{\big(}D(\phi\circ\psi)|_{y}{\big)}\mathrm{d}y=\int_{V}f{\big(}\phi(\psi(y)){\big)}|\operatorname*{det}\!{\big(}D\psi|_{y}{\big)}|V{\big(}D\phi|_{\psi(y)}{\big)}\mathrm{d}y$$
+נגדיר \(x=\psi(y)\). כיוון ש-\(\psi:V\to U\) דיפאומורפיזם זה החלפת משתנים לגיטימית. מנוסחת החלפת משתנה נקבל:
+$$\mathrm{d}x=\lvert \det(D\psi|_{y}) \rvert \mathrm{d}y$$
 ולכן נקבל:
-$$\int_{U}f{\big(}\phi(x){\big)}V{\big(}D\phi|_{x}{\big)}d x$$
+$$\int_{U}f{\big(}\phi(x){\big)}V{\big(}D\phi|_{x}{\big)}\mathrm{d}x$$
 
 \end{proof}
 \section{יריעה פרמטרית רגולרית}
@@ -3719,4 +3750,766 @@ $$\alpha(x_{1},\dots,x_{n},t)=(x_{1},\dots,x_{n},U(x_{1},\dots,x_{n})+t)$$
 תהי \(M^{k}\subseteq \mathbb{R}^{n}\) יריעה עם שפה. נאמר שנקודה \(p \in M\) היא נקודת שפה של \(M\) אם קיימת פרמטריזציה \(\alpha:U\subseteq \mathbb{H}^{k}\to W\) בסביבת \(p\) כך ש-\(\alpha ^{-1}(p)\in \partial \mathbb{H}\). אוסף נקודות השפה של \(M\) נקרא השפה של \(M\) ומסומן ב-\(\partial M\) כאשר \(M \setminus \partial M\) נקרא הפנים של \(M\).
 
 \end{definition}
+\chapter{משפט הדיבגנץ}
+
+\section{זרימות}
+
+\begin{definition}[זרימה]
+יהי \(X\) שדה ווקטורי חלק ו-\(U\subseteq \mathbb{R}^{n}\). הזרימה של \(X\) על \(U\) היא משפחת פונקציות \(\left\{  \varphi_{t}(p)  \right\}\) המוגדרת על ידי הפתרון למד"ר עבור כל \(p \in U\):
+$$\frac{d}{d t}\gamma_{p}(t)=X(\gamma_{p}(t)),\quad\gamma_{p}(0)=p$$
+כאשר נסמן \(\varphi_{t}(p)=\gamma_{p}(t)\).
+
+\end{definition}
+\begin{remark}
+דרך טובה לחשוב על זה זה איך כל נקודה משתמנה בזמן בעזרת השדה הווקטורי. 
+
+\end{remark}
+\begin{corollary}
+בפרט הזרימה מקיימת:
+$$\frac{d}{d t}\varphi_{t}(x)=X(\varphi_{t}(x))$$
+
+\end{corollary}
+\begin{corollary}
+עבור יריעה \(M\) נקבל כי \(\varphi_{t}(M)\) היא יריעה.
+
+\end{corollary}
+\begin{proposition}[נוסחאת הווריאציה הראשונה]
+$$\left.\frac{d}{d t}{\mathrm{Vol}}(\varphi_{t}(M))\right|_{t=0}=\int_{M}\mathrm{div}_{M}\,X\,d{\mathrm{Vol}}.$$
+
+\end{proposition}
+\begin{enumerate}
+  \item נכתוב את אלמנט הנפח כאינטגרל על \(M\): 
+$$\mathrm{Vol}(\varphi_{t}(M))=\int_{M}V(D\varphi_{t}|_{x})\,d\mathrm{Vol}(x),$$
+
+
+  \item נגזור לפי \(t\) כאשר כיוון שחלק ניתן לגזור תחת האינטגרל: 
+$$\left.\frac{d}{d t}\mathrm{Vol}(\varphi_{t}(M))\right|_{t=0}=\int_{M}\frac{d}{d t}V(D\varphi_{t}|_{x})\biggr|_{t=0}\,d\mathrm{Vol}(x)$$
+
+
+  \item נרצה כעת לחשב את \({\frac{d}{d t}}V(D\varphi_{t}|_{x})\bigg|_{t=0}\). נזכור כי: 
+$$V\left( D\varphi_{t}|_{x} \right)=\sqrt{\operatorname*{det}{(A(t))}},\qquad A(t)=\left(\langle D\varphi_{t}|_{x}(e_{i}),D\varphi_{t}|_{x}(e_{j})\rangle\right)_{i,j=1}^{k}$$
+
+
+  \item נזכור כי ב-\(t=0\) נקבל \(\varphi_{0}=\mathrm{Id}\) ולכן \(D\varphi_{0}=\mathrm{Id}\) ו-\(A(0)=\mathrm{Id}\). לכן מכלל השרשרת: 
+$$\left.{\frac{d}{d t}}\sqrt{\operatorname*{det}A(t)}\right|_{t=0}={\frac{1}{2}}(\operatorname*{det}A(0))^{-1/2}\cdot\left.{\frac{d}{d t}}\operatorname*{det}A(t)\right|_{t=0}={\frac{1}{2}}\cdot\left.{\frac{d}{d t}}\operatorname*{det}A(t)\right|_{t=0}$$
+כיוון ש-\(\det\left( \mathrm{Id}_{k} \right)=1\).
+
+
+  \item נשתמש בזהות \(\left.\frac{d}{d t}\operatorname*{det}A(t)\right|_{t=0}=\mathrm{tr}(A^{\prime}(0))\). לכן נגזור את הרכיבים של \(A_{ij}(t)\) ב-\(t=0\). 
+$$A_{i j}(t)=\langle D\varphi_{t}|_{x}(e_{i}),D\varphi_{t}|_{x}(e_{j})\rangle\implies A_{i j}^{\prime}(0)=\left\langle\frac{d}{d t}D\varphi_{t}|_{x}(e_{i})\biggl|_{t=0},e_{j}\right\rangle+\left\langle e_{i},\frac{d}{d t}D\varphi_{t}|_{x}(e_{j})\biggl|_{t=0}\right\rangle$$
+וכיוון ש-\(A(t)\) סימטרי נקבל כי שתי הגורמים זהים ולכן:
+$$\mathrm{tr}(A^{\prime}(0))=2\sum_{i=1}^{k}\left\langle{\frac{d}{d t}}D\varphi_{t}|_{x}(e_{i})\Big|_{t=0},e_{i}\right\rangle$$
+
+
+  \item נזכור כי הזרימה מקיימת: 
+$$\frac{d}{d t}\varphi_{t}(x)=X(\varphi_{t}(x))$$
+נגזור את זה לפי \(x\) ב-\(t=0\) ונקבל:
+$$\frac{d}{d t}D\varphi_{t}|_{x}(v)\bigg|_{t=0}=D X|_{x}(v)$$
+ולכן:
+$$\frac{d}{d t}D\varphi_{t}|_{x}(e_{i})\bigg|_{t=0}=D X|_{x}(e_{i})=D_{e_{i}}X|_{x}$$
+
+
+  \item סה"כ קיבלנו: 
+$$\frac{d}{d t}V(D\varphi_{t}|_{x})\bigg|_{t=0}=\frac{1}{2}\,\mathrm{tr}(A^{\prime}(0))=\sum_{i=1}^{k}\langle D_{e_{i}}X|_{x},e_{i}\rangle=\mathrm{div}_{M}\,X(x)$$
+ואם נציב חזרה באינטגרל נקבל:
+$$\left.\frac{d}{d t}\mathrm{Vol}(\varphi_{t}(M))\right|_{t=0}=\int_{M}\mathrm{div}_{M}\,X(x)\,d\mathrm{Vol}(x)$$
+
+
+\end{enumerate}
+\begin{proposition}[משפט הדיוורנץ]
+תהי \(M\) יריעה קומפקטית עם שפה \(\partial M\), שדה ווקטורי \(X\) חלק משיק ל-\(M\), ו-\(\nu\) נורמל חיצוני לשפה. אזי מתקיים:
+$$\int_{M}\mathrm{div}_{M}\,X\,d\mathrm{Vol}=\int_{\partial M}\langle X,\nu\rangle\,d\mathrm{Vol}_{\partial{M}},$$
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item נניח בלי הגבלת הכלליות על \(\partial M\) כי \(\left\langle  X,\nu  \right\rangle<0\). ניתן לעשות זאת כי בהנתן כל שדה ווקטורי \(X\) משיק ל-\(M\) ניתן לסמן \(C=\operatorname*{sup}_{q\in\partial{\cal M}}\langle X(q),\nu(q)\rangle\) ולהגדיר \(Y(q)=-2C\nu\) כך שלכל לכל \(q \in \partial M\) מתקיים: 
+$$\left\langle  Y(q) ,\nu(q) \right\rangle\leq 0 \qquad \left\langle  X(q)-Y(q),\nu \right\rangle\leq 0 $$
+ונכתוב כעת:
+$$X=(X-Y)+Y$$
+כך שמשפט הדיוורגנץ מתקיים על \(X\) מלינאריות:
+$$\int_{M}\mathrm{div}_{M}X\,\mathrm{dVol}=\int_{M}\mathrm{div}_{M}\bigl(X-Y\bigr)\,\mathrm{dVol}+\int_{M}\mathrm{div}_{M}Y\,\mathrm{dVol}$$
+וגם:
+$$\int_{\partial M}\langle X,\nu\rangle\,\mathrm{dVol}_{\partial M}=\int_{\partial M}\langle X-Y,\nu\rangle\,\mathrm{dVol}_{\partial M}+\int_{\partial M}\langle Y,\nu\rangle\,\mathrm{dVol}_{\partial M}$$
+
+
+    \item נגדיר: 
+$$N_{t}:=\varphi{\big(}[0,t]\times\partial M{\big)}=\{\varphi_{s}(q)\mid q\in\partial M,\,s\in[0,t]\}$$
+כאשר כיוון ש-\(\left\langle  X,\nu  \right\rangle<0\) על השפה ניתן להניח כי \(t\) קטן מספיק כך ש-\(N_{t}\subseteq M\). כמו כן ראינו כי זרימה של יריעה עם שפה היא יריעה עם שפה כאשר השפה תהיה האיחוד של השפה ב-0 וב-\(t\):
+$$\partial N_{t}=\partial M\cup\varphi_{t}(\partial M)$$
+
+
+    \item ניתן לכתוב את \(M\) בתור האיחוד של הזרימה של היריעה בזמן \(t\) עם הזרימה של השפה עד זמן \(t\). כלומר: 
+$$M=\varphi_{t}(M)\cup N_{t}$$
+זאת כיוון שאם ניקח \(x \in M\) נסתכל על המקרה שבו \(\varphi_{-t}(x)\in M\) כאשר כעת:
+$$x=\varphi_{t}(\varphi_{-t}(x))\in\varphi_{t}(M)$$
+ועל המקרה \(\varphi_{-t}(x)\not \in M\) כאשר נדרש שעבור את השפה באיזשהו זמן \(s \in [0,t]\) כך ש-\(\varphi_{-s}(x)=q\in \partial M\) ולכן:
+$$x=\varphi_{s}(q)\in N_{t}\implies M\subseteq\varphi_{t}(M)\cup N_{t}$$
+כאשר ההכלה בכיוון השני מיידית כי מההנחה על הזמן \(t\) אנו יודעים כי \(\varphi_{t}(M)\subseteq M\)(אחרת היה חותך את השפה ומוכל ב-\(N_{t}\)) וכן \(N_{t}\subseteq M\) מההנחה על \(t\).
+
+
+  \end{enumerate}
+\end{proof}
+באופן דומה החיתוך של הזרימה של היריעה בזמן \(t\) עם הזרימה של השפה עד זמן \(t\) זה הזרימה של השפה בזמן \(t\):
+$$\varphi_{t}(M)\cap N_{t}=\varphi_{t}(\partial M)$$
+יהי \(x \in \varphi_{t}(M)\cap N_{t}\) אזי קיימים \(p \in M\) עם \(x=\varphi_{t}(p)\) וגם \(q \in \partial M\) עם \(s \in [0,t]\) כך ש-\(x=\varphi_{s}(q)\). כעת:
+$$\varphi_{t}(p)=\varphi_{s}(q)\implies \varphi_{-s}\circ \varphi_{t}(p)=\varphi_{-s}\circ \varphi_{s}(q)\implies\varphi_{t-s}(p)=q$$
+וכיוון ש-\(s<t\) והזרימה עד זמן \(t\) היא כלפי פנים נקבל \(t-s=0\) כלומר \(t=s\) ולכן מהיחידות של קווי הזרימה(נובע מיחידות הפתרון של המד"ר) נקבל:
+$$q=p\implies p \in \partial M\implies x \in \varphi_{t}\left( \partial M \right)\implies \varphi_{t}(M)\cap N_{t}\subseteq\varphi_{t}(\partial M)$$
+כאשר ההכלה בכיוון השני מיידית כי \(\varphi_{t}\left( \partial M \right)\subseteq \varphi_{t}(M)\) וגם \(\varphi_{t}\left( \partial M \right)\subseteq N_{t}\) כי \(N_{t}\) מכיל את כל הזרימה עד זמן \(t\) ולכן בפרט מכיל את הזרימה בזמן \(t\). לכן נקבל שיוויון.
+
+\begin{enumerate}
+  \item ראינו כי \(\varphi_{t}(M)\cap N_{t}=\varphi_{t}(\partial M)\) כאשר השפה היא ממידה אפס ו-\(\varphi_{t}\) היא דיפאומורפיזם ולכן \(\varphi_{t}\) היא ממידה אפס והנפח של \(M=\varphi_{t}(M)\cup N_{t}\) יהיה סכום הנפחים. כלומר: 
+$$\mathrm{{Vol}}_{k}(M)=\mathrm{{Vol}}_{k}(\varphi_{t}(M))+\mathrm{{Vol}}_{k}(N_{t})$$
+\end{enumerate}
+\begin{lemma}
+$$\int_{ M}\mathrm{div}_{ M}\,X\,d\mathrm{Vol}=-\frac{d}{d t}\mathrm{Vol}(N_{t})\biggl|_{t=0}$$
+
+\end{lemma}
+\begin{proof}
+ראינו כי:
+$$\mathrm{Vol}(M)=\mathrm{Vol}(\varphi_{t}(M))+\mathrm{Vol}(N_{t})$$
+כיוון ש-\(M\) לא תלוי ב-\(t\) הנפח היא קבועה. לכן אם נגזור לפי \(t\) נקבל:
+$$0=\frac{d}{d t}{\mathrm{Vol}}(\varphi_{t}(M))\bigg|_{t=0}+\frac{d}{d t}{\mathrm{Vol}}(N_{t})\bigg|_{t=0}$$
+נפעיל כעת את נוסחאת הוריאציה הראשונה על \(\varphi_{t}(M)\) ונקבל:
+$$\frac{d}{d t}{ V o l}(\varphi_{t}(M))\bigg|_{t=0}=\int_{M}\mathrm{d}{\bf v}_{M}\,X\,d\mathrm{Vol}$$
+כלומר:
+$$\int_{ M}\mathrm{div}_{ M}\,X\,d\mathrm{Vol}=-\frac{d}{d t}\mathrm{Vol}(N_{t})\biggl|_{t=0}$$
+
+\end{proof}
+\begin{lemma}
+$$\left.\frac{d}{d t}\mathrm{Vol}(N_{t})\right|_{t=0}=\int_{\partial M}-\langle X,\nu\rangle\,d\mathrm{Vol}_{\partial{\cal M}}$$
+
+\end{lemma}
+\begin{proof}
+נזכור כי:
+$$\mathrm{{Vol}}(N_{t})=\int_{[0,t]\times\partial M}V\left( D\varphi_{(s,x)} \right)\,d s\,d\mathrm{{Vol}}_{\partial M}(x)\overset{\text{fubini}}{=} \int_{0}^{t}\int_{\partial M}V\left( D\varphi_{(s,x)} \right)\,d s\,d\mathrm{{Vol}}_{\partial M}(x)$$
+כאשר \(s \in [0,t]\) ו-\(x \in \partial M\). כעת נגזור לפי \(t\) ומהמשפט היסודי של האינפי נקבל:
+$${\frac{d}{d t}}\mathrm{Vol}(N_{t})={\frac{d}{d t}}\int_{0}^{t}\int_{\partial M}V(D\varphi_{(s,x)})\,d\mathrm{Vol}_{\partial M}(x)d s=\int_{\partial M}V(D\varphi_{(t,x)})\,d\mathrm{Vol}_{\partial M}(x)$$
+ועבור \(t=0\) נקבל:
+$$\left.\frac{d}{d t}\mathrm{Vol}(N_{t})\right|_{t=0}=\int_{\partial M}V\big(D\varphi_{(0,x)}\big)\,d\mathrm{Vol}_{\partial M}(x)$$
+ונדרש לחשב רק את \(V\left( D\varphi_{(0,x)} \right)\). נבחר בסיס \(\left\{  e_{1},e_{2},\dots,e_{k}  \right\}\) כך ש-\(\left\{  e_{2},\dots,e_{k}  \right\}\) זה בסיס אורתונואמלי ל-\(\partial M\) ו-\(e_{1}=\nu(x)\) הוא הנורמל החיצוני. בבסיס הזה ניתן לכתוב:
+$$X(x)=\langle X(x),\nu(x)\rangle\nu(x)+\sum_{j=2}^{k}\langle X(x),e_{j}\rangle e_{j}$$
+אם נגזור ונציג כמטריצה נקבל תחת הבסיס הזה:
+$$D\varphi_{(0,x)}\begin{pmatrix}\left\langle  X(x),\nu(x)  \right\rangle  & 0 & \dots & 0 \\\langle X(x),e_{2} \rangle  & 1 & \dots & 0 \\\vdots  &\vdots & \ddots  & \vdots \\\langle X(x),e_{k} \rangle  & 0 & \dots & 1 
+\end{pmatrix}$$
+כאשר אם נחשב עם מינורים פרט לרכיב הראשון הכל מתאפס, ונקבל:
+$$\operatorname*{det}(A^{T}A)=\left(\left\langle  X(x),\nu(x) \right\rangle\right)^{2}\implies V\left( D\varphi_{(0,x)} \right)=\sqrt{ \det(A^{T}A) }=|\left\langle  X(x),\nu(x) \right\rangle|$$
+וכיוון ש-\(\langle X(x),\nu(x)\rangle<0\) הסימן יהיה שלילי ולכן השינוי בנפח המסומן יהיה:
+$$V(D\varphi_{(0,x)})=-\langle X(x),\nu(x)\rangle$$
+כך שנקבל:
+$$\left.\frac{d}{d t}\mathrm{Vol}(N_{t})\right|_{t=0}=-\int_{\partial{ M}}\langle X,\nu\rangle\,d\mathrm{Vol}_{\partial{ M}}$$
+
+\end{proof}
+\begin{corollary}
+אם נשלב את שתי הלמות הקודמות נקבל:
+$$\int_{M}\mathrm{div}_{M}\,X\,d\mathrm{Vol}=\int_{\partial M}\langle X,\nu\rangle\,d\mathrm{Vol}_{\partial{ M}}$$
+כאשר זה משפט הדיוורגנץ
+
+\end{corollary}
+\chapter{שאלות}
+
+\section{אינטגרליים רב מימדיים}
+
+מהי תיבה? איך מגדירים את הנפח שלו ואת הרוחב שלו?
+?
+תיבה היא קבוצה מהצורה:
+$$A=[a_{1},b_{1}]\times[a_{2},b_{2}]\times\dots\times[a_{k},b_{k}],$$
+כאשר הנפח שלו מוגדר:
+$$V(A)=\prod_{i=1}^{k}(b_{i}-a_{i}).$$
+כאשר הרוחב של \(A\):
+$$\max_{1\leq i\leq k}(b_{i}-a_{i})$$
+
+מהי חלוקה של תיבה?
+?
+תהא \(A=[a_{1},b_{1}]\times\dots \times[a_{k},b_{k}]\) תיבה. חלוקה \(P\) של \(A\) היא \(P=P_{1}\times P_{2}\times\dots \times P_{k}\)
+כאשר \(P_{j}\) היא חלוקה של הקטע \([a_{j},b_{j}]\). כלומר:
+$$P_{j}=\left\{  t_{j}^0,\dots,t_{j}^{m_{j}}  \right\}$$
+כאשר $$a_{j}=t_{j}^{0}<t_{j}^{1}<\cdots<t_{j}^{m_{j}}=b_{j}.$$ חלוקה כזו משרה חלוקה של התיבה \(A\) לתיבות:
+$$C_{i_{1},\dots,i_{k}}=[t_{1}^{i_{1}-1},t_{1}^{i_{1}}]\times\cdots\times[t_{k}^{i_{k}-1},t_{k}^{i_{k}}].$$
+כאשר הנפח המקורי \(A\) מקיים:
+$$V(A)=\sum_{i_{1},...,i_{k}}V(C_{i_{1},...,i_{k}}).$$
+
+מהו סכום תחתון? מהו סכום עליון?
+?
+\textbf{הגדרה} סכום תחתון
+בהנתן פונקציה \(f\) וחלוקה \(P=A_{1}\times\dots \times A_{r}\). נגדיר \(m_{i}=\inf_{x \in A_{i}}f(x)\). הסכום התחתון של \(f\) ביחס ל-\(P\) יהיה:
+$$s(f,P)=\sum_{i=1}^{r}m_{i}\,V(A_{i})$$\textbf{הגדרה} סכום עליון
+בהנתן פונקציה \(f\) וחלוקה \(P=A_{1}\times\dots \times A_{r}\). נגדיר \(M_{i}=\sup_{x \in A_{i}}f(x)\). הסכום התחתון של \(f\) ביחס ל-\(P\) יהיה:
+$$S(f,P)=\sum_{i=1}^{r}M_{i}\,V(A_{i})$$
+
+מהו עידון של חלוקה? מה אנחנו יודעים על היחס של הסכומים העליונים והתחתונים של העידון?
+?
+חלוקה \(P'\) המקיימת \(P\subseteq P'\) נקראת עידון.
+אם \(P'\) עידון של חלוקה מתקיים:
+$$s(f,P)\leq s(f,P^{\prime})\leq S\left(f,P^{\prime}\right)\leq S\left(f,P\right).$$
+
+מהו אינטגרל עליון? מהו אינטגרל תחתון?
+?
+\textbf{הגדרה} אינטגרל תחתון
+$$\underline{\int}_{A}f(x) \;\mathrm{d}x=\operatorname*{sup}\left\{s(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$\textbf{הגדרה} אינטגרל עליון
+$${\overline{{\int}_{A}}}f(x)\,\mathrm{d} x=\operatorname*{inf}\left\{S(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$
+
+איך מוגדר אינטגרביליות לפי רימן לפונקציות חסומות?
+?
+פונקציה שהאינטגרל העליון שווה לאינטגרל התחתון נקראת אינטגרבילית רימן, כלומר אם:
+$$\underline{\int_{A}} f(x)\;\mathrm{d}x=\overline{\int}_{A}f(x)\mathrm{d}x$$
+ובמקרה זה נקרא לביטוי זה האינטגרל ונסמן:
+$$\int_{A}f(x)\,d x\quad \text{או}\quad\int_{A}f\left( x_{1},\ldots,x_{k} \right)\,d x_{1}d x_{2}\ldots d x_{k}.$$
+
+ציין כמה שיותר דברים שגוררים אינטגרביליות.
+?
+
+\begin{enumerate}
+  \item רציפות 
+
+
+  \item נקודות האי רציפות בעלות מידה אפס. 
+
+
+\end{enumerate}
+איך מוכיחים רציפות גורר אינטגרביליות?
+?
+כיוון ש-\(A\) קומפקטית, פונקציה \(f\) היא חסומה ורציפה במידה שווה ב-\(A\).
+יהי \(\varepsilon>0\). מרציפות במידה שווה נקבל \(\delta>0\) כך ש:
+$$\|x-y\|\leq\delta\implies|f(x)-f(y)|\leq{\frac{\varepsilon}{V(A)}}.$$
+יהי \(P\) חלוקה של \(A\) כך שקוטר החלוקה של כל תת תיבא קטן מ-\(\delta\). לכן:
+$$S\left(f,P\right)-s(f,P)=\sum_{i}(M_{i}-m_{i})\,V(A_{i})\leq \sum_{i}\delta V(A)=\varepsilon$$
+וכעת נקבל:
+$${\overline{{\int_{A}}}}f\,d x-\underline{\int}_{A}f\,d x\leq\varepsilon$$
+ולכן אינטגרבילי.
+
+מהי קבוצה ממידה אפס?
+?
+קבוצה \(A\subseteq \mathbb{R}^k\) נקראת ממידה אפס אם לכל \(\varepsilon>0\) קיימים אוסף בן מנייה של תיבות \((B_{i})_{i\in\mathbb{N}}\)  כך ש-\(A\subseteq \bigcup_{i}B_{i}\) ו-\(\sum_{i}V(B_{i})<\varepsilon\).
+כלומר בצורה פשוטה, ניתן לכסות את הקבוצה ע"י תיבות, וניתן להקטין את התיבות כך שהנפח יקטן ככל שנרצה.
+
+מה אומר משפט לבג-ויטאלי על אינטגרביליות ומידה אפס?
+?
+יהי \(A\subseteq \mathbb{R}^k\) תיבה כך ש-\(f:A\to\mathbb{R}\) פונקציה חסומה. \(f\) תהיה אינטגרבילית אם"ם נקודות האי רציפות הם ממידה אפס.
+\textbf{הערה}
+זה אומר כי אם קבוצה היא לא ממידה אפס, אז מכילה נקודות רציפות.
+ניסוח שקול למשפט לבג:
+עבור \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה, פונקציה \(f:A\to\mathbb{R}\) חסומה היא אינטגרבילית אם"ם \(F_{\frac{1}{n}}\) ממידה אפס לכל \(n\).
+
+מהו נפח של קבוצה? מה זה קבוצה בעלת נפח.
+?
+הנפח של קבוצה \(S\) תהיה:
+$$V(S)=\int_{A}\!\chi_{S}(x)\,d x$$
+כאשר \(\chi_{S}(x)\) הפונקציה המציינת - 1 אם \(x \in S\) ו-0 אחרת. אם האינטגרל הזה מוגדר הקבוצה נקראת בעלת נפח.
+
+מהו תנאי שקול ללהיות בעלת נפח? איך מוכיחים אותו?
+?
+קבוצה \(A\) בעלת נפח אם"ם \(\partial A\) ממידה אפס.
+נזכור כי \(1_{A}\) אינטגרבילית אם"ם קבוצת נקודות האי רציפות הם ממידה אפס. נקודות האי רציפות של \(1_{A}\) הן בדיוק הערכים שבהן מחליפה בין 0 ל-1, כלומר השפה של \(A\). לכן \(A\) בעלת נפח אם"ם \(\partial A\) ממידה אפס.
+
+מהי הטענה על גרפים של פונקציה ומידה אפס?
+?
+תהי \(S\subseteq \mathbb{R}^k\) קבוצה קומפקטית, ו-\(f\in C\left( S;\mathbb{R} \right)\)(גזיר ברציפות ב-\(S\) ורציף ב-\(\mathbb{R}\)), אזי הגרף של \(f\):
+$$\left\{\left(x,f\left(x\right)\right):x\in S\right\}\subset\mathbb{R}^{k+1}$$
+הוא ממידה 0 ב-\(\mathbb{R}^{k+1}\).
+
+ציין שלושה פונקציות אשר כאשר מקבלות קבוצה ממידה אפס מחזירות קבוצה ממידה אפס.
+?
+
+\begin{enumerate}
+  \item תהי \(f:\mathbb{R}^k\to\mathbb{R}^k\) פונקציה לינארית. אם \(N\subseteq \mathbb{R}^k\) ממידה 0 אזי \(f(N)\) ממידה אפס. 
+
+
+  \item תהי \(f:\mathbb{R}^k\to\mathbb{R}^k\) פונקציה ליפשיצית. אם \(N\subseteq \mathbb{R}^k\) ממידה אפס, אזי \(f(N)\) ממידה אפס. 
+
+
+  \item תהי \(f:\mathbb{R}^k\to\mathbb{R}^k\) פונקציה גזירה ברציפות. אם \(K\subseteq \mathbb{R}^n\) קבוצה קומפקטית ממידה אפס, \(f(K)\) תהיה ממידה אפס. 
+
+
+\end{enumerate}
+בהנתן קבוצה \(A\) מה הקשר בין האינטגרביליות של \(A^\circ, \overline{A},A\)?
+?
+קבוצה \(A\subseteq \mathbb{R}^n\) בעלת נפח ו-\(f:\bar{A}\to \mathbb{R}\) חסומה. אזי \(f\) אינטגרבילית על \(\bar{A}\) אם"ם \(f\) אינטגרבילית על \(A\) אם"ם \(f\) אינטגרבילית על \(A^\circ\) ומתקיים:
+$$\int_{A^\circ }f(x)=\int_{A}f(x)=\int_{\bar{A}}f(x)$$
+
+מה אומר משפט פוביני?
+?
+יהיו \(A\subseteq \mathbb{R}^k,B\subseteq \mathbb{R}^m\) תיבות סגורות ו-\(f:A\times B\to\mathbb{R}\) פונקציה אינטגרבילית. לכל \(x  \in A\) ו-\(y\in B\) נגדיר:
+$$f_{x}(y)\equiv f(x,y)\quad f_{y}(x)\equiv f(x,y)$$
+אם לכל \(x \in A,y \in B\) האינטגרלים$$\int_{B}f_{x}(y)d y,\;\int_{A}f_{y}(x)d x$$
+קיימים אז:
+$$\int_{A\times B}f(x,y)d x d y=\int_{A}\left( \int_{B}f_{x}(y)d y \right)d x=\int_{A}\left( \int_{B}f_{y}(x)d x \right)d y$$
+
+זה מאפשר לנו לבצע אינטגרציה לכל משתנה בנפרד, ולהחליף סדר אינטגרציה.
+
+מה אומר משפט חילוף משתנה הרב מימדי?
+?
+תהא \(U\subseteq \mathbb{R}^k\) פתוחה, \(g\in C^1\left( U,\mathbb{R} \right)\) חח"ע, \(0\neq J(g(x))=\det(Dg)_{x}\) לכל \(x \in U\).
+תהא \(\mathcal{U}\) פונקציית בעלת נפח וקומפקטית. אזי \(f:A\to\mathbb{R}\) אינטגרבילית כך ש-\(f\circ g\) אינטגרבילית. מתקיים:
+$$\int_{A} f(x)dx=\int_{g^{-1}(A)}\left( f\circ g \right)(y)|Jg(y)|dy$$\textbf{הערות}
+
+\begin{enumerate}
+  \item אם \(f\) רציפה, אז \(f\) אינטגרבילית, \(f\circ g\) אינטגרבלית 
+
+
+  \item בפרט נובע אם \(A\) מבעלת נפח אז \(g^{-1}(A)\) בעלת נפח 
+
+
+  \item ממשפט ההעתקה הפתוחה, \(g(U)=V\) היא פתוח. כלומר בעצם \(g:U\to V\) חח"ע ועל ו- 
+\textbf{משפט זה נכון גם עבור קבוצה פתוחה:}
+תהא \(U\subseteq \mathbb{R}^k\) פתוחה, \(g\in C^1\left( U,\mathbb{R}^k \right)\) חד-חד ערכית כך ש-\(Jg(x)\neq_{0}\) ב-\(U\). אזי לכל \(f:U\to \mathbb{R}\) אינטגרבילית כך ש-\(f\circ g\) אינטגרבילית, מתקיים:
+$$\int_{U}f(x)d x=\int_{g^{-1}(U)}f\circ g|J g(y)|d y$$
+
+
+\end{enumerate}
+איך מוגדר אינטגרל לא אמיתי של פונקציה חיובית? איך מוגדר עבור פונקציה כללית?
+?
+\textbf{הגדרה} אינטגרל לא אמיתי של פונקציה חיובית
+תהא \(A\subseteq \mathbb{R}^k\) קבוצה עם שפה ממידה אפס ותהא \(f:A\to\left[ 0,\infty \right]\) פונקציה שקבוצת נקודות האי רציפות שלה ממידה אפס. נאמר ש-\(f\) אינטגרבילית על \(A\) אם:
+$$c=\operatorname*{sup}\left\lbrace\int_{K}f:K\in U\quad {\text{compact and has volume }}\right\rbrace $$
+סופי. ובמקרה זה האינטגרל שווה ל-\(c\).
+\textbf{הגדרה} אינטגרל לא אמיתי של פונקציה כללית
+עבור פונקציה \(f:\mathbb{R}\to A\) כללית, נגדיר \(f_{+}=\max\{ f,0 \}\) ו-\(f_{-}=\max\{ -f,0 \}\) כאשר הפונקציה אינטגרבילית אם"ם \(f_{-},f_{+}\) אינטגרביליות, והאינטגרל יהיה שווה ל:
+$$\int_{A}f=\int_{A}f_{+}-\int_{A}f_{-}$$
+
+מהי סידרת מיצוי? מהי הטענה המרכזית לגביהם?
+?
+נאמר כי \(A_{n}\subset A\) סדרה ממצה אם \(A_{1}\subset A_{2} \subset \dots \subset A\) ולכל קבוצה \(B\subset A\) קומפקטית, נקבל \(B \subset A_{n}\) החל ממקום מסוים.
+\textbf{טענה}
+יהי \((A_{n})\) סדרה ממצה. אם \(f:A\to \mathbb{R}\) אינטגרבילי במובן אינטגרל לא אמיתי, אז:
+$$\lim_{ n \to \infty } \int_{A_{n}}f(x)\;\mathrm{d}x=\int_{A} \;f(x)\;\mathrm{d}x$$\textbf{טענה}
+פונקציה \(f\) אינטגרבילית על תחום \(A\) אם"ם קיים מיצוי קומפקטי \(D_{n}\) של \(A\) כך ש-
+$$\operatorname*{lim}_{n\to\infty}\int_{D_{n}}|f|=L\in\mathbb{R}$$
+
+\section{מרחבים מטרים}
+
+הגדרה של מטריקה
+?
+עבור קבוצה לא ריקה \(X\) פונקציה \(d:X\times X\to \mathbb{R}\) נקראת מטריקה אם מקיימת:
+
+\begin{enumerate}
+  \item סימטרייה - \(d(x,y)=d(y,x)\)
+
+
+  \item חיוביות - \(d(x,y)\geq 0\) כאשר יש שיוויון אם"ם \(x=y\). 
+
+
+  \item אי שיוויון המשולש. לכל \(x,y,z\in X\) מתקיים: 
+$$d(x,z)\leq d(x,y)+d(y,z)$$
+
+
+\end{enumerate}
+מרחב נורמי
+?
+מרחב וקטורי \(X\) אשר מעל \(\mathbb{R}\) או \(\mathbb{C}\) נקרא מרחב נורמי אם קיים נורמה \(||\cdot||:X\to \mathbb{R}\) המקיימת:
+
+\begin{enumerate}
+  \item חיוביות - \(||x||\geq 0\) כאשר יש שיוויון אם"ם \(x=0\). 
+
+
+  \item הומוגניות - לכל \(x \in X\) ו-\(a\in \mathbb{R}\) מתקיים \(||ax||=a||x||\). 
+
+
+  \item אי שיוויון המשולש - \(||x+y||\leq||x||+||y||\). 
+
+
+\end{enumerate}
+3 הגדרות שקולות לפונקציות רציפות 
+?
+
+\begin{enumerate}
+  \item פונקציה \(f:X\to Y\) נקראת רציפה ב-\(x \in X\) אם לכל \(\varepsilon>0\) קיים \(\delta>0\) כך שלכל \(z\in B_{\delta}(x)\) מתקיים \(f(z)\in B_{\varepsilon}(f(x))\). 
+
+
+  \item פונקציה \(f:(X,d)\to\left( Y,\rho \right)\) רציפה אם לכל סדרה \(x_{n}\in X\) מתקיים: 
+$$\operatorname*{lim}_{n\to\infty}x_{n}=a\implies\operatorname*{lim}_{n\to\infty}f(x_{n})=f(a)$$
+
+
+  \item יהיו \((X,d),\left( Y,\rho \right)\) מרחבים מטרים. תהי פונקציה \(f:(X,d)\to\left( Y,\rho \right)\). מתקיים 
+
+
+  \item פונקציה \(f\) רציפה אם"ם לכל \(U\subseteq Y\) פתוחה, \(f^{-1}(U)\subseteq X\) פתוחה.
+  \item פונקציה \(f\) רציפה אם"ם לכל \(U\subseteq Y\) סגורה, \(f^{-1}(U)\subseteq X\) סגורה.
+\end{enumerate}
+נקודה פנימית
+?
+יהי \(A\subseteq X\), \(a\in A\) אזי \(a\) נקראת נקודה פנימית ב-\(A\) אם קיים \(r>0\) כך ש-\(\mathcal{B}_{r}(a)\subseteq A\).
+
+נקודה חיצונית
+?
+נקודה \(x \in X\) נקראת נקודה חיצונית ל-\(A\) אם קיים \(r>0\) כך ש-\(\mathcal{B}_{r}(x)\subseteq A^c\).
+
+קבוצה פתוחה
+?
+קבוצה שבה כל נקודה היא פנימית או הקבוצה ריקה.
+
+איחוד כלשהו(גם אינסופי) של קבוצות פתוחות הוא:
+?
+קבוצה פתוחה
+
+חיתוך כלשהו(גם אינסופי) של קבוצות סגורות הוא
+?
+קבוצה סגורה
+
+פנים של קבוצה
+?
+איחוד של כל התתי הקבוצות הפתוחות:
+$$A^\circ=\bigcup\left\{ U\mid \text{ \(U\) is open and }U\subset A \right\}$$
+זוהי קבוצה פתוחה כיוון שאיחוד כלשהו של קבוצות פתוחות היא קבוצה פתוחה
+
+סגור של קבוצה
+?
+חיתוך של כל הקבוצות הסגורות שמכילות את \(A\):
+$$\overline{A}=\bigcap\left\{ C\mid \text{C is closed and }A\subset C \right\}$$
+זהו קבוצה סגורה כיוון שחיתוך כלשהו של קבוצות סגורות תהיה תמיד קבוצה סגורה. באופן שקול זה אוסף כל נקודת הגבול של הקבוצה.
+
+שפה של קבוצה
+?
+מה שנמצא בסגור ולא בפנים:
+$$\partial A=\overline{A}\smallsetminus A^{\circ}$$
+לחלופין ניתן לחשוב על זה כקבוצה שבה כל כדור מכילה נקודה בפנים של \(A\) וגם נקודה שאינה בפנים של \(A\)(כלומר ב-\(A^c\)).
+
+ציין כמה שיותר תכונות של הפנים, סגור והשפה של קבוצה
+?
+
+\begin{enumerate}
+  \item הפנים של קבוצה היא אוסף כל הנקודות הפנימיות שלה 
+
+
+  \item הסגור של קבוצה היא אוסף כך הנקודות שלא חיצוניות 
+
+
+  \item הפנים של קבוצה פתוחה שווה לקבוצה 
+
+
+  \item הסגור של קבוצה סגורה שווה לקבוצה 
+
+
+  \item מתקיים \(A^{\circ}\subset A\subset\overline{A}\)
+
+
+  \item מתקיים \((A^{\circ})^{\circ}=A^{\circ}\quad \quad\overline{\overline{A}}=\overline{A}.\)
+
+
+  \item מתקיים: \(\bigl(A^\circ\bigr)^c=\overline{A^c}\quad\quad\bigl(A^c\bigr)^\circ=\bigl(\overline{A}\bigr)^c\)
+
+
+  \item הסגור זה אוסף כל נקודות הגבול של קבוצה 
+
+
+  \item השפה היא קבוצה סגורה 
+
+
+  \item קבוצה סגורה פחות קבוצה פתוחה היא סוגרה 
+
+
+  \item קבוצה פתוחה פחות קבוצה סגורה היא פתוחה 
+
+
+  \item השפה של קבוצה היא קבוצה סגורה 
+
+
+\end{enumerate}
+קבוצה סגורה פחות קבוצה פתוחה היא:
+?
+סוגרה
+
+השפה של קבוצה תהיה קבוצה
+?
+סגורה
+
+קבוצה פתוחה פחות קבוצה סגורה היא תהיה:
+?
+פתוחה
+
+מהי קבוצה צפופה
+?
+קבוצה \(A\subseteq X\) תקרא צפופה אם לכל \(x \in X\) ולכל \(\varepsilon>0\) קיימים \(a\in A\) כך ש-\(d(a,x)<\varepsilon\), כלומר ניתן להתקרב לכל נקודה ב-\(X\) בעזרת נקודות מ-\(A\).
+באופן שקול:
+קבוצה \(A\subseteq X\) תקרא צפופה אם \(\overline{A}=X\).
+
+במרחב נורמי מתקיים
+
+\begin{enumerate}
+  \item הסגור של כדור פתוח הוא{{ כדור סגור - \({{\bar{B}_{r}\left(x\right)=\hat{B}_{r}\left(x\right)\,}}\)}} 
+
+
+  \item הפנים של כדור סגור הוא {{כדור פתוח - \(\left(\hat{B}_{r}\left(x\right)\right)^{\circ}=B_{r}\left(x\right)\)}} 
+
+
+  \item השפה של כדור סגור שווה לשפה של {{הכדור הפתוח - \(\partial B_{r}\left(x\right)=\partial\hat{B}_{r}\left(x\right)=S_{r}\left(x\right)\)}} 
+
+
+\end{enumerate}
+מהי קומפקטיות סדרתית?
+?
+מרחב מטרי \((X,d)\) יקרא קומפקטי אם לכל סדרה יש תת סדרה מתכנסת לאיבר בקבוצה.
+
+ציין כמה שיותר תכונות על מרחבים קומפקטים
+?
+
+\begin{enumerate}
+  \item סגורות וחסומות 
+
+
+  \item תת מרחב סגור וחסום של מרחב מטרי קומפקטי הוא קומפקטי 
+
+
+  \item איחוד סופי של קבוצות קומפקטיות הוא קומפקטי 
+
+
+\end{enumerate}
+ציין כמה שיותר תכונות של פונקציות רציפות ממרחב קומפקטי
+?
+
+\begin{enumerate}
+  \item כל פונקציה רציפה ממרחב מטרי קומפקטי משיגה מינימום ומקסימום 
+
+
+  \item פונקציות רציפות הפועלות על תתי מרחבים מטרים קומפקטים הולכות לתתי מרחבים קומפקטים. כלומר אם \(K\subseteq X\) קומפקטי ו-\(f:X\to Y\) אז \(f(K)\) קומפקטי. 
+
+
+\end{enumerate}
+מהי רציפות במידה שווה
+?
+יהיו \((X,d), \left( Y,\rho \right)\) מרחבים מטרים. פונקציה \(f:(X,d)\to \left( Y,\rho \right)\) נקרא רציף במידה שווה אם לכל \(\varepsilon>0\) קיים \(\delta>0\) כך שלכל \(x,y\in X\) מתקיים:
+$$d(x,y)<\delta\implies \rho(f(x),f(y))<\varepsilon$$
+
+מה הדרישות כדי שרציפות יגרור רציפות במידה שווה
+?
+נדרישה העיקרית היא קומפקטיות. המשפט אומר: יהיו \((X,d),\left( Y,\rho \right)\) מרחבים מטרים כאשר \((X,d)\)  קומפקטי, אז אם \(f: X\to Y\) רציף אז רציף במידה שווה
+
+מהי פונקציה לפשיצית? ומה האיפיון החשוב עבור פונקציות אלו?
+?
+פונקציה \(f:X_{d}\to Y_{\rho}\) כך שקיים \(L\geq0\) כך ש-\(\rho(f(x),f(y))\leq Ld(x,y)\). \(L\) נקרא קבוע לפישיץ של \(f\). מהתנאי אוטומטית נובע רציפות. פונקציה שקילות היא ליפשיצית.
+
+קבוצה \(V\) במרחב נורמי אשר סגורה וחסומה תהיה:
+?
+קומפקטית
+
+מהי סדרת קושי
+?
+סדרה שבה האיברים מתקרבים אחד לשני יותר ויותר. כלומר עבור \((X,d)\) מרחב מטרי, הסדרה \(\{ x_n\}_{n=0}^{\infty}\)  נקראת סדרת קושי אם לכל \(\varepsilon>0\) קיים \(N\) כך שלכל \(n,m>N\) מתקיים \(d(x_{n},x_{m})<\varepsilon\) .
+
+מרחב מטרי שלם
+?
+מקיים שכל סדרת קושי מתכנס לאיבר במרחב מטרי.
+
+מה מהם מרחבים מטרים שקולים?
+?
+מרחבים מטרים \(X\) ו-\(Y\) נקראים שקולים אם קיימת פונקציה \(f:X\to Y\) חחע ועל וקיים \(0<C_{1},C_{2}\) כך ש:
+$$C_{1}d(x_{1},x_{2})\leq \rho(f(x_{1}),f(x_{2}))\leq C_{2}d(x_{1},x_{2})
+$$
+
+הראה כי הקטעים \((0,1),\left( 0,\infty \right)\) עם המטריקה המושרת מהמטריקה הסטנדרטית אינם שקולים
+?
+נניח בשלילה כי יש שקילות. לכן קיים פונקציה \(f:(0,1)\to\left( 0,\infty \right)\) המקיימת עבור \(C_{1},C_{2}>0\):
+$$C_{1}|x-y|\leq|f(x)-f(y)|\leq C_{2}|x-y|$$
+כאשר נשים לב כי \(|x-y|<1\) ולכן \(|f(x)-f(y)|<C_{2}\). לכל \(x,y\in(0,1)\). אך \(f\) צריכה להיות על, ובפרט צריכים להיות \(s,t\in(0,1)\) כך ש-\(f(t)=2C_{2}+1,f(s)=1\) ולכן עבור ערכים אלו מהשקילות מתקיים:
+$$|f(s)-f(t)|=|2C_{2}+1-1|=2C_{2}>C_{2}$$
+בסתירה לזה ש-\(|f(x)-f(y)|<C_{2}\).
+
+מהם מטריקות שקולות?
+?
+אם יש שתי מטריקות \(d,\rho\) על אותו מרחב מטרי \(X\), אז נקרא למטריקות שקולות אם המרחבים המטרים שקולים ביחיד עם פונקציית הזהות. כלומר:
+$$C_{1}d(x_{1},x_{2})\leq \rho(x_{1},x_{2})\leq C_{2}d(x_{1},x_{2})$$
+היתרון העיקרי במטריקות שקולות זה שזה משמר רציפות/התכנסות. אם סדרה מסויימת מתכנסת תחת מטריקה אחת, היא תתכנסת גם תחת המטריקה השנייה.
+
+מה אומר משפט ההעתקה המכווצת?
+?
+יהא \((X,d)\) מרחב מטרי שלם. ותהא \(f:X\to X\) מכווצת, כלומר קיים \(0\leq \lambda<1\) כך שלכל \(x,y\):
+$$d(f(x),f(y))\leq \lambda d(x,y)$$
+ אזי יש ל-\(f\) נקודת שבת יחידה. כלומר יש \(x \in X\) יחיד כך ש-\(f(x)=x\).
+
+מהם השלבים העיקריים בהוכחה של משפט ההעתקה המכווצת?
+?
+
+\begin{enumerate}
+  \item מגדירים סדרה בצורה רקורסיבית מהצורה \(x_{n+1}=f(x_{n})\). 
+
+
+  \item מראים כי \(d(f(x_{n+1}),f(x_{n}))\leq \lambda d(x_{n},x_{n-1})\) ולכן מאינדוקציה \(d(f(x_{n+1}),f(x_{n}))\leq \lambda^nd(x_{1},x_{0})\). 
+
+
+  \item מראים מאי שיוויון המשולש: 
+$${{d(x_{n},x_{m})\leq\displaystyle\sum_{k=m}^{n-1}d(x_{k+1},x_{k})\leq\displaystyle\sum_{k=m}^{n-1}\lambda^{k}d(x_{1},x_{0})}}{{\leq\displaystyle\sum_{k=N}^{\infty}\lambda^{k}d(x_{1},x_{0})=\displaystyle\frac{\lambda^{N}}{1-\lambda}d(x_{1},x_{0}).}}$$
+
+
+  \item נשים כי כיוון שהערך מימין שואף ל-0 המרחק בין שתי איברים בסדרה שואף ל-0. ולכן זהו סדרת קושי. 
+
+
+  \item משלמות סדרה זו היא סדרה מתכנסת, ונסמן את הגבול ב-\(x\). 
+
+
+  \item נשים לב כי \(f\) פונקציה רציפה בתור פונקציה ליפשיצית, וכן המטריקה היא תמיד רציפה, ולכן \(d(x_{n},x_{m})\) פונקציה רציפה, לכן מאפיון היינה: 
+$$d(x_{n},f(x_{n}))\xrightarrow{n\to \infty}d(x,f(x))=0\implies f(x)=x$$
+
+
+  \item כדי להראות יחידות נניח בשלילה שיש שתי נקודות שבת \(x,y\) ונקבל: 
+$$d(x,y)=d(f(x),f(y))\leq\lambda\,d(x,y)\implies d(x,y)\left( 1-\lambda \right)\leq 0$$
+
+
+\end{enumerate}
+איך מוצאים נורמה אופרטורית כשנתון מטריצה?
+?
+אנחנו מחפשים את \(\max_{||v||=1}\lVert Av \rVert\). מתקיים:
+$$\lVert Av \rVert ^2=\langle Av, Av \rangle =\langle A^*Av, v \rangle $$
+כאשר \(A^*A\) אופרטור צמוד לעצמו/הרמיטי. כעת מאי שיוויון קושי שוורץ נקבל:
+$$\langle A^*Av, v \rangle\leq \sqrt{ \lVert A^*Av \rVert \lVert v \rVert } $$
+כאשר אנחנו רוצים למצוא את הערך המקסימלי. כאשר \(\lVert v \rVert=1\). נזכור כי באי שיוויון קושי שוורץ יש שיוויון אם"ם תלויים לינארים. כלומר אם \(A^*Av=\lambda v\). זוהי בעיית ערכים עצמיים. כאשר נמצא את הערך עצמי המקסימלי \(\lambda\) נקבל כי:
+$$\max_{||v||=1}\lVert Av \rVert=\sqrt{ \lVert A^*Av \rVert \lVert v \rVert  }=\sqrt{ \lVert A^*Av \rVert } =\sqrt{ \left\lVert  \lambda v  \right\rVert } =\sqrt{ \lambda \lVert v \rVert } =\sqrt{ \lambda }$$
+
+מהי ההגדרה הטופולוגית לקומפקטיות?
+?
+יהי \((X,d)\) מרחב מטרי, אז \(A\subseteq X\) קומפקטי אם"ם לכל אוסף של קבוצות פתוחות \(\left\{  U_{\alpha}  \right\}_{\alpha \in I}\) כך ש-\(A\subseteq \bigcup_{\alpha \in I}U_{\alpha}\) קיים אוסף סופי של \(U_{\alpha_{1}},\dots,U_{\alpha_{m}}\) כך ש-\(A\subseteq \bigcup_{i=1}^mU_{\alpha_{i}}\).
+
+\section{נגזרת רב מימדית}
+
+?
+פונקציה \(f:\mathbb{R}^k\to\mathbb{R}^m\) נקראת גזירה/דיפרציאבלית ב-\(a\) אם קיימת העתקה הלינארית \(T:\mathbb{R}^k\to\mathbb{R}^m\) המקיימת:
+$$\operatorname*{lim}_{v\to0}{\frac{f(a+v)-f(a)-T(v)}{||v||}}=0_{\mathbb{R}^m}$$
+
+ציין כמה שיותר תכונות של פונקציית הנגזרת
+?
+
+\begin{enumerate}
+  \item אם פונקציה היא גזירה בנקודה, היא גם רציפה בה. 
+
+
+  \item הפונקציה היא יחידה 
+
+
+  \item הנגזרת בנקודה היא העתקה לינארית. 
+
+
+\end{enumerate}
+מה מייצג הנורמה האופרטורית של הנגזרת?
+?
+הנורמה האופרטורית זה הערך המקסימלי שווקטור עם נורמה 1 יכול להמתח עליה.
+
+מה אומר תנאי מספיק לדיפרנציאביליות?
+?
+אם \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה ו-\(f:A\to\mathbb{R}^m\), אז אם כל ה-\(k\) נגזרות הכיווניות של \(f\) קיימות בסביבה של \(x \in\mathbb{R}^k\) וגם רציפות ב-\(x\), אז \(f\) גזיר ב-\(x\).
+
+הגדר פונקציה גזירה ברציפות
+?
+אם \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה ו-\(f:A\to\mathbb{R}^m\) פונקציה גזירה ב-\(A\). פונקציה \(f\) היא גזירה ברציפות ב-\(x\) אם ההעתקה \(Df:A\to \mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)\) רציף ב-\(x\). פונקציה היא גזירה ברציפות אם בכל נקודה היא גזירה ברציפות.
+נזכור כי העתקה לינארית היא רציפה אם"ם היא חסומה, לכן כדי להראות שפונקציה גזירה נדרש להראות שחסום בכל נקודה, כלומר נדרש שכל הנגזרות הכיווניות יהיו רציפות(אם נגזרת כיוונית כלשהי לא רציפה בנקודה אז לא חסומה)
+
+מה אומר כלל השרשרת?
+?
+אם \(A\subseteq \mathbb{R}^k\) ו-\(B\subseteq \mathbb{R}^m\) תחומים פתוחים ו-\(f:A\to B,g:B\to\mathbb{R}^n\), כאשר \(f\) גזירה ב-\(x \in A\) ו-\(g\) גזיר ב-\(f(x)\in B\) אז \(g\circ f\) גזיר ב-\(x\) והנגזרת נתונה ע"י:
+$$\underbrace{(D(g\circ f))_{x}}_{\mathbb{R}^{k}\to\mathbb{R}^{n}}=\underbrace{(D g)_{f(x)}}_{\mathbb{R}^{m}\to\mathbb{R}^{n}}\circ\underbrace{(D f)_{x}}_{\mathbb{R}^{k}\to\mathbb{R}^{m}}$$
+
+איך מחשבים נגזרת של מכפלה פנימית?
+?
+בהנתן פונקציות גזירות \(f:\mathbb{R}^m\to \mathbb{R}^n\) ו-\(g:\mathbb{R}^k\to\mathbb{R}^n\), נקבל:
+$$D(\langle f,g\rangle)_{(\underline{{a}},\underline{{b}})}(\underline{{v}}_{1},\underline{{v}}_{2})=\langle g(\underline{{b}}),D f_{\underline{{a}}}(\underline{{v}}_{1})\rangle+\langle f({\underline{{a}}}),D g_{\underline{{b}}}(\underline{{v}}_{2})\rangle.$$
+
+אם הפונקציה \(f\) הפיכה מה הביטוי לנגזרת של הפונקציה ההופכית? איך מפתחים את הביטוי?
+?
+תהי \(f:\mathbb{R}^k\to\mathbb{R}^k\) פונקציה הפיכה. יהי \(a\in \mathbb{R}^k\) כך ש-\(f\) גזירה ב-\(a\), ו-\(f^{-1}\) גזירה ב-\(b=f(a)\). מתקיים:
+$$\left(D f\right)_{a}^{-1}=\left(D\left(f^{-1}\right)\right)_{b}$$\textbf{הוכחה}
+אנו יודעים כי \(f\circ f^{-1}=Id\) ולכן מכלל השרשרת נקבל:
+$$(Df^{-1})_{f(a)}\circ Df_{a}=D(Id)_{a}=Id$$
+כאשר השתמשנו בזה ש-\(D(Id)_{a}=Id\)(נובע ישירות מההגדרה) וכעת כיוון שזהו כפל מטריצות ניתן להכפיל במטריצה ההופכית ולקבל:
+$$D(f^{-1})_{f(a)}=(D f_{a})^{-1}$$
+
+מה אומר משפט הערך הממוצע הרב מימדי?
+?
+יהי \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה, \(a,b\in A\) כך שהקטע המחבר ביניהם הוא:
+$$[a,b]\equiv\left\{ a+t(b-a)\mid t\in[0,1] \right\}\subset A.$$
+אם \(f:A\to\mathbb{R}\) גזירה, קיים \(\theta \in(0,1)\) כך ש:
+$$f(b)-f(a)=(D f)_{a+\theta(b-a)}(b-a).$$
+
+מהו הגרדיאנט
+?
+מוגדר עבור פונקציה סקלרית \(f:\mathbb{R}^k\to\mathbb{R}\). הווקטור היחיד שמקיים \(Df_{x}(v)=\left\langle  \bar{\nabla}f, v  \right\rangle\) לכל \(v \in \mathbb{R}^k\).
+
+מה אומר משפט ערך הממוצע עבור פונקציות סקלאריות רב מימדיות
+?
+יהי \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה, \(a,b\in A\) כך שהקטע המחבר ביניהם הוא:
+$$[a,b]\equiv\left\{ a+t(b-a)\mid t\in[0,1] \right\}\subset A.$$
+אם \(f:A\to\mathbb{R}\) גזירה, קיים \(\theta \in(0,1)\) כך ש:
+$$f(b)-f(a)=(D f)_{a+\theta(b-a)}(b-a).$$
+
+מהי נקודה קריטית?
+?
+נקודה שמאפסת את הנגזרת. כלומר נקודה \(x\) המקיימת \((Df)_{x}=0\).
+
+אם יש לי נקודה קריטית, מה אנחנו יודעים על הנגזרת השנייה? מה התנאי על הנגזרת השנייה עדי שנוכל להשתמש בזה?
+?
+יהי \(f:A\to \mathbb{R}\) כאשר \(A\subseteq \mathbb{R}^k\) פתוחה, וגזירה פעמיים ברציפות. תהי \(A\) נקודה קריטית, אזי אם \(D^2f\) רציפה ב-\(x\), מתקיים:
+
+\begin{enumerate}
+  \item אם \((D^2f)_{x}\) חיובית בהחלט אז \(x\) נקודת מינימום. 
+
+
+  \item אם \(x\) נקודת מינימום אז \((D^2f)_{x}\) חיובית למחצה. 
+
+
+  \item אם \((D^2f)_{x}\) שלילית בהחלט אז \(x\) נקודת מקסימום. 
+
+
+  \item אם \(x\) נקודת מקסימום אז \((D^2f)_{x}\) שלילית למחצה. 
+
+
+\end{enumerate}
+מהם התנאים שאיתם ניתן לסווג את נקודות הקיצון בעזרת מבחן הנגזרת השנייה?
+?
+
+\begin{enumerate}
+  \item הנגזרת השנייה גזירה ברציפות. כלומר כל הנגזרות החלקיות קיימות ורציפות בנקודה. 
+
+
+  \item אין ערך עצמי אפס. 
+
+
+\end{enumerate}
+מה ההגדרה של גזיר פעמיים?
+?
+$$ \lim\limits_{ v \to0}\frac{(Df)_{x+ v }-(Df)_x-(D^2f)_x\left(  v  \right)}{\| v \|_{\mathbb{R}^k}}=0_{\mathrm{Hom}\left( \mathbb{R}^k,\mathbb{R}^m \right)}$$
+
+מהי העתקה פתוחה?
+?
+יהיו \((X,d_{x}),(Y,d_{Y})\) מרחבים מטרים. העתקה \(f:X\to Y\) נקראת העתקה פתוחה
+אם \(A\subseteq X\) פתוח ב-\(X\) גורר \(f(A)\) פתוח ב-\(Y\).
+
+מה אומר משפט ההעתקה הפתוחה?
+?
+יהי \(m\leq k\), \(A\subseteq \mathbb{R}^k\) קבוצה פתוחה, ו-\(f\in C^1\left( A;\mathbb{R}^m \right)\) כך ש-\((Df)_{x}\) מדרגה מלאה לכל \(x \in A\). אזי \(f\) העתקה פתוחה.
+
+מה אומר משפט הפונקציה ההפוכה?
+?
+תהי \(U\subseteq \mathbb{R}^n\) ו-\(f:U\to\mathbb{R}^n\) פונקציה גזירה ותהי \(a\in U\) כך ש-\(\det(Df(a))\neq 0\) אז:
+
+\begin{enumerate}
+  \item קיימת סביבה \(V\subseteq U\) של \(a\) וסביבה \(W\) של \(f(a)\)
+
+
+  \item קיימת פונקציה \(f:W\to V\) כך ש: 
+$$\forall x \in V\quad g(f(x))=x\qquad \forall y\in W\quad f(g(y))=y$$
+
+
+  \item הפונקציה \(g\) גזירה ומקיימת: 
+$$Dg(f(a))=[Df(a)]^{-1}$$
+
+
+\end{enumerate}
+מה אומר משפט קלרו על הנגזרות השניות?
+?
+אם הנגזרות השנייה רציפה, אז הנגזרת השנייה תבנית בילינארית סימטרית. במקרה הפרטי של פונקציה \(f:\mathbb{R}^2 \to \mathbb{R}\) נקבל \(f_{xy}\) ו-\(f_{yx}\) רציפות אז \(f_{xy}=f_{yx}\).
+
+מה אומר משפט כופלי לגרנג'?
+?
+תהי \(B\subseteq \mathbb{R}^k\) פתוחה. \(n+1\leq k\).
+$$\begin{array}{c}{{f,g_{1},\ldots,g_{n}\in C^{1}{\bigl(}B;\mathbb{R}{\bigr)},}}\\ {{{}}}\\ {{A=\left\{x\in B:\ g_{1}{\bigl(}x{\bigr)}=\cdots=g_{n}{\bigl(}x{\bigr)}=0\right\}.}}\end{array}$$
+נגדיר \(F:B\to\mathbb{R}^{n+1}\) ע"י:
+$$F(x)=\left(\begin{array}{c}{{g_{1}\left(x\right)}}\\ {{\vdots}}\\ {{g_{n}\left(x\right)}}\\ {{f(x)}}\end{array}\right).$$
+כעת, אם \(x_{0}\in A\) קיצון מקומי של \(f|_{A}\) אזי \((DF)_{x_{0}}\) הוא לא מדרגה מלאה(כלומר מדרגה קטנה מ-\(n+1\)). כלומר \((Dg_{1})_{x_{0}},\dots,(Dg_{n})_{x_{0}},(Df)_{x_{0}}\) הם תלויים לינארית, וקיימים \(\lambda_{1},\dots,\lambda_{n}\) כך ש:
+$$\left(D f\right)_{x_{0}}=\sum_{i=1}^{n}\lambda_{i}\left(D g_{i}\right)_{x_{0}}$$
+
+איך מוכיחים את משפט כופלי לגרנג'?
+?
+נניח בלי הגבלת הכלליות \(x_{0}\) היא נקודת מקסימום מקומית. כלומר קיימת סביבה \(U\subseteq B\) של \(x_{0}\) כך ש:
+$$f(x_{0})=\max _{x \in A \cap U} f(x)$$
+אנחנו רוצים להוכיח שהדרגה של \((DF(x))_{x_{0}}\) קטנה מ-\(n+1\). נניח בשלילה שמדרגה \(n+1\). לכן ממשפט ההעתקה הפתוחה קיים סביבה פתוחה \(U\subseteq B\) של \(x_{0}\) כך ש:
+$$F(x_{0})=(0,\ldots,0,f(x_{0}))^{T}$$
+תהיה נקודה פנימית של \(F(U)\) ב-\(\mathbb{R}^{n+1}\). במקרה זה קיים \(\varepsilon>0\) כך ש-\(\left( 0,\dots,0,f(x_{0})+\varepsilon \right)^T \in F(U)\). כלומר קיים \(x_{+}\in U\) כך ש-\(F(x_{+})=\left( 0,\dots,0,f(x_{0})+\varepsilon \right)^T\). מזה נקבל ש \(x_{+}\in U \cap A\) וגם \(f(x_{+})=f(x_{0})+\varepsilon\), בסתירה לכך ש-\(x_{0}\) מקסימום מקומי.
 \end{document}

@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משוואת הגלים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_1'>9.1 התמרות פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_2'>9.2 חשבון וריאציות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_3'>9.3 משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_4'>9.4 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_6'>9.6 משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_7'>9.7 פונקציית גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_9_3'>9.3 משוואות דיפרנציאליות חלקיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations_9_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_9_3`; }});</script>
+        <div class="content">
+        <h1>9.4  משוואת הגלים</h1>
+    <p><span>$$\frac{\partial ^2 u}{\partial t^2}-c^2 \frac{\partial ^2u}{\partial x^2}=\varepsilon e^{-t/\tau} \delta(x)$$</span>
+עם התנאי התחלה <span>\(u(-L,t)=u(L,t)=0\)</span>.
+?
+נבצע הזזה <span>\(x\to x+L\)</span> ונגדיר <span>\(L'=\frac{L}{2}\)</span> ונקבל:
+<span>$$\frac{\partial ^2u}{\partial t^2}-c^2\frac{\partial ^2u}{\partial x^2}=\varepsilon e^{-t/\tau}\delta(x-L)$$</span>
+ונקבל את המשוואה:
+<span>$$\sum_{n}\left( \ddot{T}_{n}(t)+\left( \frac{\pi nc}{L} \right)^2T_{n}(t) \right)\sin\left( \frac{\pi n}{L}x \right)=\sum_{n} \frac{2}{L}\sin\left( \frac{\pi n}{L} \right)\varepsilon e^{-t/\tau}\sin\left( \frac{\pi n}{L}x \right)$$</span>
+ולכן מהשוואת מקדמים:
+<span>$$\ddot{T}_{n}(t)+\left( \frac{\pi nc}{L} \right)^2T_{n}(t) = \frac{2}{L}\sin\left( \frac{\pi n}{L} \right)\varepsilon e^{-t/\tau}$$</span>
+ונקבל:
+<span>$$\begin{gather}T_{n}^H=a_{n}\sin\left( \frac{n\pi c}{L}t \right)+b_{n}\cos\left( \frac{n\pi c}{L}t \right) \\T_{n}^p=Ae^{-t/\tau}
+\end{gather}$$</span>
+כאשר:
+<span>$$A=\frac{\frac{2}{L}\sin\left( \frac{n\pi}{L} \right)}{\frac{1}{\tau}+\left( \frac{n\pi c}{L} \right)^2}\quad u_{p}=\frac{2}{L}\sum_{n}\frac{2\varepsilon\sin\left(  \frac{\pi n}{L}\right)e^{-t/\tau}}{\frac{1}{\tau}+(\frac{n\pi c}{L})^2}$$</span></p>
+<p>פתרו את בעיית קושי עבור המשוואה:
+<span>$$ \frac{\partial^2u}{\partial t^2}-\frac{\partial^2u}{\partial x^2}=6$$</span>
+כאשר תנאי ההתחלה הם:
+<span>$$ u\left(x,t=0\right)=x^{2},\:\partial u/\partial t\left(x,t=0\right)=4x,\:-\infty&lt;x&lt;\infty $$</span>
+?
+זוהי משוואת גלים אי הומוגנית. נרצה לנחש פתרון פרטי. ננסה למצוא פתרון פרטי שלא תלוי הזמן. ונראה כי <span>\(u_{p}=-3x^2\)</span> מקיים את המשוואה. נוכל כעת לרשום את הפתרון בצורה:
+<span>$$u(x,t)=u_{p}(x)+u_{h}(x,t)\implies \frac{\partial^2 u_{h}}{\partial t^2}-\frac{\partial ^2u_{h}}{\partial x^2}=0$$</span>
+כאשר התנאי התחלה יהיה:
+<span>$$ \begin{array}{rcl}u^{h}\left(x,t=0\right)&amp;=&amp;u\left(x,t=0\right)-u^{p}\left(x\right)=4x^{2}\equiv u_{0}\left(x\right)\\\partial u^{h}/\partial t\left(x,t=0\right)&amp;=&amp;\partial u/\partial t\left(x,t=0\right)=4x\equiv v_{0}\left(x\right)\end{array}$$</span>
+מהפתרון של דלמבר עם המהירות <span>\(c=1\)</span> נקבל:
+<span>$$ u^{h}\left(x,t\right)=\frac{u_{0}\left(x+ct\right)+u_{0}\left(x-ct\right)}{2}+\frac{\Phi\left(x+ct\right)-\Phi\left(x-ct\right)}{2}$$</span>
+כאשר הגדרנו את <span>\(\Phi\)</span> ע"י <span>\(\Phi(x)=2x^2\impliedby \Phi'(x)=v_{0}(x)\)</span>. נציב ונקבל:
+<span>$$ \begin{array}{rcl}u^h\left(x,t\right)&amp;=&amp;\frac{4\left(x+t\right)^2+4\left(x-t\right)^2}{2}+\frac{2\left(x+t\right)^2-2\left(x-t\right)^2}{2}=\\&amp;=&amp;3\left(x+t\right)^2+\left(x-t\right)^2\end{array}$$</span>
+והפתרון של הבעיה המקורית תהיה:
+<span>$$ \begin{array}{rcl}u\left(x,t\right)&amp;=&amp;u^p\left(x\right)+u^h\left(x,t\right)=3\left(x+t\right)^2+\left(x-t\right)^2-3x^2=\\&amp;=&amp;x^2+4xt+4t^2=\left(x+2t\right)^2\end{array}$$</span></p>
+<p>נתונה משוואה של מיתר מרוסן מאולץ הקשור שתי קצוותיו <span>\(x=\pi,0\)</span>. 
+<span>$$ \frac{\partial^{2}u}{\partial t^{2}}+2h\frac{\partial u}{\partial t}-c^{2}\frac{\partial^{2}u}{\partial x^{2}}=\varepsilon\sin(x)\cos(\omega t),\quad0&lt;x&lt;\pi,\quad t&gt;0,\quad h&gt;0$$</span>
+יש למצוא את התנודות המאולצות בזמנים ארוכים
+?
+נפרוש את הפתרון  על גבי פונקציות עצמיות של האופרטור המרחבי ונקבל:
+<span>$$ u\left(x,t\right)=\sum_{n=1}^{\infty}T_{n}\left(t\right)\sin\left(nx\right)$$</span>
+נציב במשוואה:
+<span>$$ \begin{aligned}\sum_{n=1}^{\infty}\left[\bar{T}_{n}\left(t\right)+2h\dot{T}_{n}\left(t\right)+c^{2}n^{2}T_{n}\left(t\right)\right]\sin\left(nx\right)&amp;=\epsilon\cos\left(\omega t\right)\sin\left(x\right)+0\cdot\sin\left(2x\right)+0\cdot\sin\left(3x\right)+\ldots\end{aligned}$$</span></p>
+<p>כעת לכל <span>\(n\)</span> נשוואה את המקדמים של <span>\(\sin(nx)\)</span> בשני האגפים. לכל <span>\(n\neq 1\)</span> נקבל את המדר:
+<span>$$ \ddot{T}_n+2h\dot{T}_n+c^2n^2T_n=0$$</span>
+זהו אוסצילטור מרוסן שפתרונותיו דועכים בזמנים ארוכים ואין צורך למצוא אותם.
+עבור במקרה <span>\(n=1\)</span> נקבל:
+<span>$$ \ddot{T}_1+2h\dot{T}_1+e^2T_1=\epsilon\cos{(\omega t)}$$</span>
+נציב במשוואה בפתרון פרטי מהצורה <span>\(T^P=A\cos\left( \omega t \right)+B\sin\left( \omega t \right)\)</span> ונקבל: 
+<span>$$ -\omega^2A\cos{(\omega t)}-\omega^2B\sin{(\omega t)}-2h\omega A\sin{(\omega t)}+2h\omega B\cos{(\omega t)}+c^2A\cos{(\omega t)}+c^2B\sin{(\omega t)}=\epsilon\cos{(\omega t)}$$</span>
+כאשר נפתור עבור המקדמים של הקוסינוסים והסינוסים בנפדר:
+<span>$$ \begin{array}{rcl}-\omega^2B-2h\omega A+c^2B&amp;=&amp;0\\-\omega^2A+2h\omega B+c^2A&amp;=&amp;\epsilon\end{array}$$</span>
+כאשר נקבל:
+<span>$$ A=\frac{c^{2}-\omega^{2}}{2h\omega}\qquad B=\frac{c^{2}-\omega^{2}}{\left(2h\omega\right)^{2}+\left(c^{2}-\omega^{2}\right)^{2}}\epsilon $$</span>
+ולכן הפתרון הפרטי יהיה:
+<span>$$ T_{1}^P=\frac{\epsilon}{\left(2h\omega\right)^{2}+\left(c^{2}-\omega^{2}\right)^{2}}\left[\left(c^{2}-\omega^{2}\right)\cos\left(\omega t\right)+2h\omega\sin\left(\omega t\right)\right]$$</span>
+בזמנים ארוכים, כל החלקים ההומוגנים ידעכו, ונשאר רק עם החלק הפתרון הפרטי שמצאנו. לכן <span>\(u\left(x,t\right)\simeq T_{1}^{P}\left(t\right)\sin\left(x\right)\)</span></p>
+<p>נתון משוואה מהצורה <span>\(u_{x x}-u_{yy}=f_{0}\)</span> בתחום <span>\(0&lt;x&lt;1\)</span>, <span>\(0&lt;y&lt;\infty\)</span> והתנאי שפה <span>\(u(x=0,y)=u(x=1,y)=0\)</span>, ותנאי קושי <span>\(u(x,y=0)=0, \frac{\partial u(x,y=0)}{\partial y}=0\)</span>. 
+?
+זוהי משוואת גלים עם אילוץ קבוע. נחפש פתרון פרטי כדי להפוך את המשוואה להומוגנית. נחפש פתרון שלא תלוי ב-<span>\(y\)</span> ונקבל <span>\(u^p=\frac{1}{2}f_{0}x^2+Cx+D\)</span> כאשר מהצבת תנאי שפה נקבל <span>\(u^p=\frac{1}{2}f_{0}x(x-1)\)</span>. נשים לב כי שהפתרון מקיים את המשוואה ואת התנאי שפה. כעת <span>\(u^h=u-u^p\)</span> פתרון הומוגני ומקיים:
+<span>$$u_{yy}^h- u_{x x}^h=0\quad u^h(x,0)=-\frac{1}{2}f_{0}x(x-1)\quad u^h_{y}|_{y=0}=0$$</span>
+הפתרון למשוואה הלא הומוגית עם תהיה:
+<span>$$u^h=\sum_{u=1}^\infty \sin\left( \pi nx \right)\left[ a_{n}\cos\left( \pi ny \right)+b_{n}\sin\left( \pi ny \right) \right]$$</span>
+מתנאי ההתחלה נקבל:
+<span>$$\begin{gather} u_{y}^h|_{y=0}=0\implies \forall n\in\mathbb{N}\quad  b_{n}=0  \\u^h(x,0)=\sum a_{n}\sin\left( \pi nx \right)=-\frac{1}{2}f_{0}x(x-1)\implies a_{n}=\begin{cases}0 &amp; n \text{ even} \\\frac{4f_{0}}{n^3\pi^3} &amp; n \text{ odd}
+\end{cases} \end{gather}$$</span>
+ולכן נקבל שהתוצאה הסופית תהיה:
+<span>$$u(x,y)=\frac{1}{2}f_{0}x(x-1)+\frac{4f_{0}}{\pi^3}\sum_{n=0}^{\infty} \frac{1}{(2k+1)^3}\sin\left( (2k+1)\pi x \right)\cos\left( (2k+1)\pi y \right)$$</span></p>
+<p>פתרו את משוואת הגלים <span>\(\frac{\partial ^2u}{\partial t^2}=\bar{\nabla}^2u\)</span> בגאומטריה דו ריבועים מלבנית <span>\(0\leq x\leq \pi,0\leq y\leq \pi\)</span>. נתונים תנאי השפה <span>\(\frac{\partial u}{\partial x}(x=L,y,t)=0,u(x=0,y,t)=0\)</span> ו-<span>\(u(x,y=0,t)=u_{1},u\left( x,y=\pi,t \right)=u_{2}\)</span> כאשר <span>\(u_{1},u_{2}\neq 0\)</span>. כמו כן נתון תנאי התחלה <span>\(u(x,y,t=0)=\frac{\partial u}{\partial t}(x,y,t=0)=0\)</span>.
+?
+נחפש פתרון פרטי שיאפס את התנאי שפה. נחפש פתרון שאינו תלוי בזמן(כלומר נקבל משוואת לפלס) מהצורה <span>\(u(x,y)=X(x)Y(y)\)</span>. עבור <span>\(X\)</span> ננחש ביטוי מהצורה <span>\(X(x)=Ax^2+Bx+C\)</span> ונקבל מהתנאי שפה:
+<span>$$\begin{gather} \frac{\partial u}{\partial x} (x=0,y)=X'(0)Y(y)=0\implies X'(0)=0\implies 2A\cdot 0+B=0\implies B=0 \\ \frac{\partial u}{\partial x} \left( x=\pi,y \right)=0\implies X'\left( \pi \right)Y(y)=0\implies X'\left( \pi \right)=0\implies 2\cdot A\cdot \pi =0\implies A=0
+ \end{gather}$$</span>
+ ולכן <span>\(X(x)=C\)</span> מקיים את התנאי שפה עם ציר <span>\(x\)</span>. כיוון שאנחנו מתעניין בפתרון פרטי נבחר <span>\(C=1\)</span> ולכן נקבל <span>\(X(x)=1\)</span>. נמצא את הרכיב ה-<span>\(y\)</span>. כיוון שזה תנאי שפה דירכלה ננחש פתרון מהצורה <span>\(Y(y)=Ax+B\)</span>. נציב תנאי שפה ונקבל:
+ <span>$$\begin{gather}   u(x,y=0)=X(x)Y(0)=Y(0)=u_{1}\implies B=u_{1} \\u\left( x,y=\pi \right) =X(x)Y\left( \pi \right)=Y\left( \pi \right)=u_{2}\implies A\cdot \pi + u_{1}=u_{2}\implies A=\frac{u_{2} -u_{1}}{\pi}
+ \end{gather}$$</span>
+ונקבל סה"כ שהפתרון הפרטי יהיה:
+<span>$$u^p=\frac{u_{2}-u_{1}}{\pi}x+u_{1}$$</span>
+ולכן נקבל כי <span>\(u^h=u-u^p\)</span> פתרון עם תנאי שפה הומוגני. נקבל כעת כי:
+<span>$$u^h|_{t=0}=u|_{t=0}-u_{p}=\frac{u_{1}-u_{2}}{\pi}x-u_{1}\quad \frac{\partial u^h}{\partial t}=\frac{\partial u}{\partial t} -\frac{\partial u_{p}}{\partial t} =0 -0=0$$</span>
+כעת הותר לפתור את המשוואה ההומוגנית. נפתור בהפרדת משתנים. נניח <span>\(u^h(x,y,t)=X(x)Y(y)T(t)\)</span> ונקבל:
+<span>$$X Y{\ddot{T}}=X^{\prime\prime}Y T+X Y^{\prime\prime}T\Rightarrow{\frac{\ddot{T}}{T}}={\frac{X^{\prime\prime}}{X}}+{\frac{Y^{\prime\prime}}{Y}}\stackrel{!}{=}-k^{2}$$</span>
+עבור החלק המרחבי נקבל:
+<span>$$\frac{X''}{X}+\frac{Y''}{Y}=-k^2\implies \frac{X''}{X}=-k^2-\frac{Y''}{Y}=-k_{x}^2\implies \frac{Y''}{Y}=k^2-k_{x}^2\equiv -k_{y}^2$$</span>
+ונקבל סה"כ:
+<span>$$X^{\prime\prime}+k_{x}^{2}X=0;\,Y^{\prime\prime}+k_{y}^{2}Y=0;\,\ddot{T}+\left(k_{x}^{2}+k_{y}^{2}\right)T=0$$</span>
+כיוון שכעת התנאי שפה הם הומוגנים נקבל:
+<span>$$X^{\prime}\left(0\right)=X^{\prime}\left(\pi\right)=0;\;Y\left(0\right)=Y\left(\pi\right)=0\implies X(x)=\cos(mx)\quad Y(y)=\sin(ny)$$</span>
+כאשר נשים לב כי <span>\(m=0\)</span> אפשר. כעת <span>\(k_{x,m}=m,k_{y,n}=n\)</span> ולכן <span>\(k_{mn}=\sqrt{ k_{x,m}^2+k_{y,n}^2 }=\sqrt{ m^2+n^2 }\)</span>. ונקבל כי הפתרון הזמני יהיה:
+<span>$$T_{m n}\left(t\right)=A_{m n}\cos\left(k_{m n}t\right)+B_{m n}\sin\left(k_{m n}t\right)$$</span>
+והפתרון הכללי יהיה:
+<span>$$u^h\left(x,y,t\right)\!=\!\sum_{m=0}^{\infty}\sum_{n=1}^{\infty}X_{m}\left(x\right)Y_{n}\left(y\right)T_{m n}\left(t\right)\!=\!\!\sum_{m=0}^{\infty}\sum_{n=1}^{\infty}\left(A_{m n}\cos\left(k_{m n}t\right)\!+\!B_{m n}\sin\left(k_{m n}t\right)\right)\cos\left(m x\right)\sin\left(n y\right)$$</span>
+נציב את התנאי התחלה:
+<span>$$0=\left.\frac{\partial u^h}{\partial t}\right|_{t=0}=\sum_{m=0}^{\infty}\sum_{n=1}^{\infty}B_{m n}k_{m n}\cos\left(m x\right)\sin\left(n y\right)$$</span>
+כיוון ש-<span>\(B_{mn}=0\)</span> הוא פתרון. מיחידות הפריסה של הפונקציות העצמיות זה הפתרון היחיד. ונציב את התנאי התחלה השני:
+<span>$${\frac{u_{1}-u_{2}}{\pi}}y-u_{1}=u\left(x,y,t=0\right)=\sum_{m=0}^{\infty}\sum_{n=1}^{\infty}A_{m n}\cos\left(k_{m n}t\right)\cos\left(m x\right)\sin\left(n y\right)$$</span>
+ונדרש לפרוש את אגף שמאל ע"י פונקציות עצמיות עם המכפלה הפנימית המוגדרת ע"י:
+<span>$$\langle f, g \rangle =\iint_{\left[ 0,\pi \right]^2}f\cdot g\;\mathrm{d}x\mathrm{d}y$$</span>
+כאשר נפרוש על הפונקציות העצמיות <span>\(y_{mn}=\cos(mx)\sin(ny)\)</span>. המקדמים ניתנים ע"י:
+<span>$$u^p=\frac{u_{1}-u_{2}}{\pi}y-u_{1}=\sum A_{n}y_{mn}\implies A_{n}=\frac{1}{\lVert y_{mn} \rVert }\left\langle  u^{p},  y_{mn} \right\rangle $$</span>
+כאשר:
+<span>$$\begin{gather}||y_{0n}||=\iint_{\left[ 0,\pi \right]^2} \cos^2(0x)\cdot \sin^2(ny)\;\mathrm{d}x\mathrm{d}y=\iint_{\left[ 0,\pi \right]^2} \sin^2(ny) \;\mathrm{d}x\mathrm{d}y= [x]_{x=0}^\pi \cdot \left[ \frac{y}{2} \right]_{y=0}^\pi = \frac{\pi^2}{2} \\\lVert y_{mn} \rVert =\iint_{\left[ 0,\pi \right]^2}\cos^2(mx)\sin^2(ny)\;\mathrm{d}x\mathrm{d}y=\left[ \frac{x}{2}  \right]_{x=0}^\pi \cdot\left[ \frac{y}{2} \right]_{x=0}^\pi = \frac{\pi^2}{4}
+\end{gather}$$</span>
+ולכן נקבל:
+<span>$$\begin{gather}A_{0n}= \frac{2}{\pi^2}\iint_{\left[ 0,\pi^2 \right]}\left( \frac{u_{1}-u_{2}}{\pi}y-u_{1} \right)\cos(0x)\sin(ny)=\frac{2}{\pi^2}[x]_{x=0}^\pi \int_{0}^\pi \left( \frac{u_{1}-u_{2}}{\pi}y-u_{1} \right)\sin(ny)\mathrm{dy}  \\=\frac{2}{\pi}\frac{u_{1}-u_{2}}{\pi}\int_{0}^\pi y\sin(ny)\;\mathrm{d}y-\frac{2u_{1}}{\pi}\int_{0}^\pi \sin(ny)\;\mathrm{d}y = \frac{2}{\pi n}(u_{2}(-1)^n-u_{1}) \\A_{mn}=\frac{4}{\pi}\iint_{\left[ 0,\pi \right]^2} \left( \frac{u_{1}-u_{2}}{\pi}y-u_{1} \right)\cos(mx)\sin\left( ny \right)\;\mathrm{d}x\mathrm{d}y=2\int_{0}^\pi \cos(nx )\;\mathrm{d}x A_{0m}=0
+\end{gather}$$</span>
+ונקבל שרק הפתרון של <span>\(A_{0n}\)</span> נשאר. נקבל כעת:
+<span>$$u^h\left(x,y,t\right)=\sum_{n=1}^{\infty}A_{0n}\cos\left(k_{0n}t\right)\cos\left(0x\right)\sin\left(n y\right)=\sum_{n=1}^{\infty}{\frac{2}{\pi n}}\left(u_{2}\left(-1\right)^{n}-u_{1}\right)\cos\left(k_{0n}t\right)\sin\left(n y\right)$$</span>
+כאשר <span>\(k_{0n}=\sqrt{ 0^2+n^2 }=n\)</span>. נמצא את <span>\(u\)</span>:
+<span>$$u\left(x,y,t\right)=u^h+u^p = u_{1}+{\frac{u_{2}-u_{1}}{\pi}}y+\sum_{n=1}^{\infty}{\frac{2}{\pi n}}\left(u_{2}\left(-1\right)^{n}-u_{1}\right)\cos\left(n t\right)\sin\left(n y\right)$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+<li class='prev-page'><a href='./Differential Equations_9_3'>9.3 משוואות דיפרנציאליות חלקיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

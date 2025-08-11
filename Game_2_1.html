@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משחקים אסטרטגיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_2_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_1_3`; }});</script>
+        <div class="content">
+        <h1>2.1  משחקים אסטרטגיים</h1>
+    <div class="definition"><span class="keyword">משחק אסטרטגי</span><p>שלושה <span>\((N,(S_{i})_{i\in N},(u_{i})_{i\in N})\)</span> כאשר <span>\(N\)</span> זה אוסף של שחקנים, <span>\(S_{i}\)</span> זה אוסף סופי של אסטרטגיות עבור השחקן ה-<span>\(i\)</span>, ו-<span>\(u_{i}:S_{1}\times\dots \times S_{N}\to \mathbb{R}\)</span> זה פונקציית תגמול של השחקן ה-<span>\(i\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">משחק סכום אפס</span><p>משחק אסטרטגי אשר מקיים:
+<span>$$\sum_{i=1}^{N} u_{i} = 0$$</span></p>
+</div>
+<div class="corollary"><span class="keyword">משחק אסטרטגי דו משתתפי</span><p>עבור שתי שחקנים משחק אסטרטגי עם שתי משתתפים הוא אוסף של אסטרטגיות <span>\(S_{1},S_{2}\)</span> ופונקציות <span>\(u_{1},u_{2}:S_{1}\times S_{2}\to \mathbb{R}\)</span>. המשחק יהיה סכום אפס אם:
+<span>$$u_{1}(s_{1},s_{2})+u_{2}(s_{1},s_{2})=0\,$$</span></p>
+</div>
+<div class="definition"><span class="keyword">טבלת תגמול</span><p>טבלה אשר השורות שלה מייצגות את האסטרטגיות <span>\(s_{1} \in S_{1}\)</span> והעמודות שלה מייצגות את האסטרטגיות <span>\(s_{2} \in S_{2}\)</span>. הערכים במשבצות יהיו <span>\((u_{1}(s_{1},s_{2}),u_{2}(s_{1},s_{2}))\)</span> כאשר עבור משחק סכום אפס כיוון שתגמול של אחד זה הפסד של השני מספיק לציין את <span>\(u_{1}(s_{1},s_{2})\)</span>. לעיתים נקרא גם מטריצת תגמול.</p>
+</div>
+<div class="definition"><span class="keyword">אסטרטגיה מעורבת</span><p>לעיתים יעיל להכניס הסתברות לאסטרטגיה. תהי <span>\(S_{1}=\left\{  s_{1},\dots,s_{n}  \right\}\)</span> קבוצת אסטרטגיות סופית של שחקן 1. אסטרטגיה מעורבת של שחקן 1 תהיה התפלגות הסתברות מעל <span>\(S_{1}\)</span>. כלומר אוסף <span>\(x=\left( x_{1},\dots,x_{n} \right)\)</span> כך ש-<span>\(\sum_{i=1}^{n}x_{i}=1\)</span>.</p>
+</div>
+<div class="remark">
+<p>אוסף כל האסטרטגיות המעורבות יהיה הסימפלקס הסתברות <span>\(\Delta(S_{1})\subseteq\mathbb{R}^{n}\)</span> מסומן גם <span>\(\Delta _{S_{1}}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">אבן נייר ומספריים</span><p>מתואר על ידי הטבלה:
+<span>$$\begin{array}{c|c|c|c}  &amp; R &amp; P &amp; S \\ \hlineR &amp; 0 &amp; -1 &amp; 1 \\ \hlineP &amp; 1 &amp; 0 &amp; -1 \\ \hlineS  &amp; -1 &amp;1 &amp; 0 
+\end{array}$$</span>
+לכל אסטרטגיה טהורה קיימת איזשהי אסטרטגיה שמנצחת אותה. לעומת זאת עבור האסטרטגיה המעורבת <span>\(\left( \frac{1}{3},\frac{1}{3},\frac{1}{3} \right)\)</span> לא קיים אסטרגיה ששולטת עליה.</p>
+</div>
+<div class="definition"><span class="keyword">תוחלת של אסטרטגיה מעורבת</span><p>נניח כי לשחקן 1 יש אסטרטגיה מעורבת המתוארת על ידי ווקטור <span>\(\vec{x}\)</span> ולשחקן 2 יש אסטרטגיה מעורבת המתוארת על ידי <span>\(\vec{y}\)</span>. אזי עבור מטריצת תגמול <span>\(A\)</span> התוחלת של האסטרטגיה המעורבת תהיה:
+<span>$$u_{1}(x,y)=x^{T}A y$$</span></p>
+</div>
+<div class="example">
+<p>נניח כי נתונה המטריצת תגמול והאסטרטגיות המעורבות הבאות:
+<span>$$A=\begin{pmatrix}2 &amp; 0 \\1 &amp; 3\end{pmatrix}\qquad \vec{x}=\begin{pmatrix}0.4 \\ 0.6\end{pmatrix}\qquad \vec{y}=\begin{pmatrix}0.5 &amp; 0.5
+\end{pmatrix}$$</span>
+אזי התוחלת של האסטרטגיות יהיה:
+<span>$$u_{1}(x,y)=\begin{pmatrix}0.4&amp;0.6\end{pmatrix}\left( \begin{pmatrix}2 &amp; 0 \\1 &amp; 3\end{pmatrix} \begin{pmatrix}0.5\\0.5\end{pmatrix}\right)=\begin{pmatrix}0.4 &amp; 0.6\end{pmatrix}\begin{pmatrix}1\\2
+\end{pmatrix}=0.4+1.2=1.6$$</span></p>
+</div>
+<div class="definition"><span class="keyword">אסטרטגיה אופטימלית טהורה</span><p>אסטרטגיה <span>\(x \in S_{1}\)</span> של שחקן 1 נקראת אופטימלית אם לכל <span>\(x_{i}\in S_{1}\)</span> מתקיים:
+<span>$$\min _{y \in S_{2}}u(x,y)\geq \min _{y \in S_{2}}u(x_{i},y)$$</span></p>
+</div>
+<div class="remark">
+<p>זה אומר שאם אנחנו מסתכלים בטבלה, אנחנו מסתכלים על השורות ולוקחים את הערך המינימלי של כל שורה. האסטרטגיה האופטימלית הטהורה תהיה הערך הכי גדול מבין כל הערכים האלה.</p>
+</div>
+<div class="corollary"><span class="keyword">אסטרטגיית maximin</span><p>התועלת המקסימלית תהיה:
+<span>$$\max _{x \in S_{1}}\min _{y\in S_{2}}u(x,y)$$</span>
+כאשר האסטרטגיה האופטימלית תהיה ה-<span>\(x\)</span> שעבורו יהיה מקסימלי.</p>
+</div>
+<div class="remark">
+<p>אינטואיטיבית זה זה המהלך האופטימלי אומר שאנחנו לוקחים את הדבר שמגדלי את התועלת הכי הרבה בהנתן שהשחקן השני לוקח את הדבר שהכי פוגע בנו.</p>
+</div>
+<div class="proposition">
+<p>עבור השחקן השני אסטרטגיה <span>\(y \in S_{2}\)</span> נקראת אופטימלית אם לכל <span>\(y_{i}\in S_{2}\)</span> מתקיים:
+<span>$$\max _{x \in S_{1}} u(x,y)\leq \max_{x \in S_{1}}  u(x, y_{i})$$</span></p>
+</div>
+<div class="proof">
+<p>בגלל שהמשחק הוא סכום אפס אז נקבל כי התועלת של השחקן השני היא מינוס התועלת של הפונקציית תועלת. לכן כדי להפטר מהמינוס ניתן להפוך את המינימום למקסימום ולהפוך את סימן האי שיוויון.</p>
+</div>
+<div class="corollary"><span class="keyword">אסטרטגיית minimax</span><p>עבור השחקן השני התועלת המקסימלית תהיה:
+<span>$$\min _{y \in S_{2}}\max _{x \in S_{1}}u(x,y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ערך של משחק טהור</span><p>אם:
+<span>$$\min_{y \in S_{2}} \max _{x \in S_{1}}u(x,y)=\max_{x \in S_{1}}\min _{y \in S_{2}} u(x,y)$$</span>
+נאמר כי ערכים אלו הם הערך של המשחק. זה יהיה המהלך האופטימלי עבור שתי השחקנים.</p>
+</div>
+<div class="remark">
+<p>עבור אסטרטגיות טהורות לא תמיד קיים ערך כזה. במקרה זה לכל אסטרטגיה שיש לשחקן אחד יש איזשהי אסטרטגיה של השחקן השני אשר יכול לסתור אותה. במקרה זה אין שיווי משקל והדבר הכי טוב יהיה אסטרטגיה מעורבת.</p>
+</div>
+<div class="definition"><span class="keyword">אסטרטגיה אופטימלית מעורבת</span><p>אסטרטגיה <span>\(\vec{x} \in \Delta _{S_{1}}\)</span> נקראת אומפטימלית עבור שחקן 1 אם לכל <span>\(\vec{x}_{i}\in \Delta _{S_{1}}\)</span> מתקיים:
+<span>$$\min _{y \in \Delta_{S_{2}}}u(x,y)\geq \min _{y \in \Delta_{S_{2}}}u(x_{i},y)$$</span>
+כאשר אסטרטגיה <span>\(\vec{y} \in \Delta_{S_{2}}\)</span> נקראת אופטימלית עבור שחקן 2 אם לכל <span>\(\vec{y}_{i}\in \Delta_{S_{2}}\)</span> מתקיים:
+<span>$$\max _{x \in \Delta_{S_{1}}}u(x,y)\leq \max _{x \in \Delta_{S_{1}}}u(x,y_{i})$$</span></p>
+</div>
+<div class="corollary">
+<p>עבור משחק מעורב האסטרטגיה האופטימלית של השחקן הראשון נתונה על ידי:
+<span>$$\max_{x \in \Delta_{S_{1}}}\min _{y \in \Delta_{S_{2}}} u(x,y)$$</span>
+כאשר עבור השחקן השני:
+<span>$$\min_{y \in \Delta_{S_{2}}} \max _{x \in \Delta_{S_{1}}}u(x,y)$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ערך של משחק מעורב</span><p>כאשר:
+<span>$$\min_{y \in \Delta_{S_{2}}} \max _{x \in \Delta_{S_{1}}}u(x,y)=\max_{x \in \Delta_{S_{1}}}\min _{y \in \Delta_{S_{2}}} u(x,y)$$</span>
+אז ערך זה נקרא ערך של המשחק.</p>
+</div>
+<div class="remark">
+<p>תמיד קיים ערך של משחק מעורב עבור משחק סכום אפס. זה נובע ממשפט המינימקס. </p>
+</div>
+<div class="example">
+<p>נסתכל על המשחק:</p>
+<p><span>$$\begin{array}{c|c|c}  &amp; L &amp; R\\ \hline  U &amp; 2 &amp; 4\\ \hline D &amp; 3 &amp; 1\\ \hline
+\end{array}$$</span>
+נגדיר אסטרטגיה מעורבת כללית <span>\(\vec{x}=(p,1-p)\)</span> המינימאקס התועלת של אסטרטגיה זו תהיה:
+<span>$$u(x,L)=2\cdot p+3\cdot(1-p)=3-p\qquad u(x,R)=4\cdot p +1\cdot(1-p)=1+3p$$</span>
+ונדרש למצוא:
+<span>$$\max _{p}\min \{ 3-p,1+3p \}$$</span>
+כאשר המקסימום של המינימום מתקבל בחיתוך, כלומר כאשר <span>\(3-p=1+3p\)</span> או <span>\(p=\frac{1}{2}\)</span> ובמקרה זה התועלת הממוצעת תהיה:
+<span>$$\min_{p} (3-p,1+3p)=\frac{1}{2}+\frac{3}{2}=2.5$$</span>
+ולכן האסטרטגיה המעורבת הכי טובה של שחקן 1 יהיה לבחור כל אופציה בהסתברות <span>\(\frac{1}{2}\)</span>, כאשר התועלת הממוצעת במקרה זה יהיה <span>\(2.5\)</span>.
+עבור השחקן השני באופן דומה נסתכל על המקסימום של העמודות. נגדיר <span>\(\vec{y}=(q,1-q)\)</span> ונקבל:
+<span>$$u(U,y)=2q+4(1-q)=4-2q\qquad u(L,y)=3q+1-q=2q+1$$</span>
+וכדי למצוא את המקסימום נקבל:
+<span>$$\operatorname*{min}_{q}\operatorname*{max}\{4-2q,2q+1\}$$</span>
+וכיוון שיש לנו שתי פונקציות לינאריות מונוטוניות המינימום של המקסימום מתקבל בחיתוך, כלומר כאשר <span>\(4-2q=2q+1\)</span> או <span>\(q=\frac{3}{4}\)</span> כאשר התועלת הממוצעת תהיה <span>\(2.5\)</span> ואכן הערכים הם אותו הדבר!</p>
+</div>
+<div class="remark">
+<p>בדוגמא הזאת זה נראה כאילו לא התייחסנו לזה שהשחקן השני משחק גם אסטרטגיה מעורבת, אך כיוון שבפונקציות לינאריות מעל קבוצות קמורותהנקודות קיצון הם תמיד על השפה, ניתן להניח כאילו עושים אסטרטגיות טהורות ולקבל את אותה התוצאה.</p>
+</div>
+<div class="example"><span class="keyword">מציאת אסטרטגיה אופטימלית בעזרת גזירה</span><p>נניח כי נתון המשחק סכום אפס הבא:
+<span>$$\begin{array}{c|c|c}  &amp; L &amp; R\\ \hline  U &amp; 2 &amp; 0\\ \hline D &amp; 0 &amp; 1\\ \hline
+\end{array}$$</span>
+כאשר השחקן הראשון בוחר <span>\(U\)</span> או <span>\(D\)</span> והשחקן השני בוחר <span>\(L\)</span> או <span>\(R\)</span>. נסמן את ההסתברות של השחקן הראשון לבחור <span>\(U\)</span> ב-<span>\(p\)</span> ושל השחקן השני לבחור <span>\(L\)</span> ב-<span>\(q\)</span>. כעת התוחלת של השחקן הראשון תהיה:
+<span>$$E(p,q)=2\cdot P(U,L)+0\cdot P(U,R)+0\cdot P(D,L)+1 \cdot P(D,R)=2pq+(1-p)(1-q)=1-p-q+3pq$$</span>
+כעת נדרוש כי עבור התוחלת האופטימלית:
+<span>$$\operatorname*{max}_{p\in[0,1]}\operatorname*{min}_{q\in[0,1]}E(p,q)=\operatorname*{min}_{q\in[0,1]}\operatorname*{max}_{p\in[0,1]}E(p,q)$$</span>
+נמצא את המינימום והמקסימום בעזרת גזירה חלקית:
+<span>$$\frac{\partial E}{\partial p} =-1+3q\overset{!}{=} 0\implies q=\frac{1}{3}\qquad \frac{\partial E}{\partial q} =-1+3p\overset{!}{=}  0\implies q=\frac{1}{3}$$</span>
+ולכן הנקודה הקריטית ב-<span>\((p,q)=\left( \frac{1}{3},\frac{1}{3} \right)\)</span>. לכן זוהי נקודת האוכף של הפונקציה <span>\(E(p,q)\)</span> אשר מבטיחה שלשחקן הראשון ולשני יהיה תוחלת של <span>\(\frac{1}{3}\)</span>.</p>
+</div>
+<div class="summary">
+<ul>
+<li>משחק אסטרטגי הוא משחק שבו לכל שחקן יש אסטרטגיות שונות המסומנות ב-<span>\(S_{i}\)</span> והוא בוחר אסטרטגיה אחת. יש פונקציית תועלת אשר מחזירה מספר ממשי מתאים לכל השילוב של האסטרטגיות של השחקנים.</li>
+<li>משחק סכום אפס הוא משחק אסטרטגי שבו סכום התועלות של השחקנים הוא אפס.</li>
+<li>אסטרטגיה אופטימלית טהורה של השחקן הראשון היא האסטרטגיה עם התועלת הכי גבוהה בהנתן שהשחקן השני בוחר את המהלך שיביא את התועלת הכי נמוכה. הערך של התועלת תהיה:
+<span>$$\max _{x \in S_{1}}\min _{y \in S_{2}}u(x,y)$$</span></li>
+<li>באותו אופן האסטרטגיה האופטימלית הטהורה של השחקן השני היא האסטרטגיה עם התועלת הכי נמוכה בהנחה שהשחקן הראשון בוחר את האסטרטגיה עם התועלת הכי גבוהה. הערך של התועלות האלו יהיה:
+<span>$$\min _{y \in S_{2}}\max _{x \in S_{1}}u(x,y)$$</span></li>
+<li>אסטרטגיה מעורבת זה אסטרטגיה הסתברותית, לוקחים בהסתברות כלשהי את אחת האסטרטגיות הטהורות. זה יהיה איבר בסימפלקס הסתברות <span>\(\Delta_{S_{1}}\)</span> עבור השחקן הראשון ו-<span>\(\Delta_{S_{2}}\)</span> עבור השחקן השני.</li>
+<li>ערך של משחק הוא התועלת הממוצעת של השחקן הראשון כאשר שני השחקנים משחקים את האסטרטגיה האופטימלית שלהם.</li>
+<li>משפט המינימקס טוען כי עבור משחק סכום אפס תמיד קיים ערך של המשחק, כלומר תמיד קיים אסטרטגיה אופטימלית טהורה או מעורבת עבור השחקן הראשון והשני.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='prev-page'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

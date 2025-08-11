@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>פונקציית גרין</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a></li>
+<li class='parent-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משוואות דיפרנציאליות רגילות לינאריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_1'>1.1 מושגים כללים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_2'>1.2 משוואת מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_3'>1.3 מערכת של משוואות לינאריות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_1_4'>1.4 משוואות מסדר גבוה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פתרון באמצעות טור ושטרום ליוביל</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_1'>2.1 טורי חזקות ופונקציות אנליטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_2'>2.2 פתרון בעזרת טור חזקות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_3'>2.3 פתרון באמצעות טור</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_4'>2.4 משוואת לג'נדר ופולינומי לג'נדר</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_5'>2.5 משוואת לג'נדר המוכללת</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_2_6'>2.6 שטרום ליוביל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. התמרות אינטגרליות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_1'>3.1 פונקציות מוכללות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_2'>3.2 התמרת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_3'>3.3 לפלס - פתרון משוואות וקונבולוציה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_4'>3.4 התמרת פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_3_5'>3.5 פונקציית גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. משוואות דיפרנציאליות חלקיות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_1'>4.1 סיווג משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_2'>4.2 תנאי שפה ותנאי התחלה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_3'>4.3 משוואות מסדר ראשון</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_4'>4.4 משוואות מסדר שני</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_4_5'>4.5 פתרון משוואות לא הומוגניות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. משוואת הגלים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_1'>5.1 תכונות של משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_2'>5.2 בעיה חד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_5_3'>5.3 בעיה רב מימדית לא חסומה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. משוואת החום</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_1'>6.1 משוואת החום החד מימדית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_2'>6.2 פתרון בתחום אינסופי חד מימדי</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_3'>6.3 משוואת החום הרב מימית</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_6_4'>6.4 פתרון בתחום לא חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. משוואת לפלס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_1'>7.1 תכונות של משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_2'>7.2 משוואת לפלס בתחום לא חסום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_7_3'>7.3 פתרון בתחום חסום</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. נושאים מתקדמים של פונקציית גרין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_1'>8.1 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_8_2'>8.2 נוסחאות גרין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_1'>9.1 התמרות פורייה</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_2'>9.2 חשבון וריאציות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_3'>9.3 משוואות דיפרנציאליות חלקיות</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_4'>9.4 משוואת הגלים</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_5'>9.5 משוואת החום</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_6'>9.6 משוואת לפלס</a></li>
+<li class='parent-page-dropdown'><a href='./Differential Equations_9_7'>9.7 פונקציית גרין</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Differential Equations_9_6'>9.6 משוואת לפלס</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Differential Equations`; }if (event.key === 'ArrowLeft') { window.location.href = `./Differential Equations_9_6`; }});</script>
+        <div class="content">
+        <h1>9.7  פונקציית גרין</h1>
+    <p>?
+נחפש פונקציה כך ש:
+<span>$$LG(x,s)=\delta(x-s)\implies -x^2\frac{\partial^2 G}{\partial x^2}-x\frac{\partial G}{\partial x}+\lambda^2G=\delta(x-x_{0})$$</span>
+זוהי משוואת אויילר עם פולינום אופייני <span>\(-\alpha\left( \alpha-1 \right)-\alpha+\lambda^2\stackrel{!}{=} 0\)</span> ונקבל <span>\(\alpha=\pm \lambda\)</span> ולכן:
+<span>$$ G\left(x,x_0\right)=\begin{cases}Ax^{\lambda}+Bx^{-\lambda}&amp;0&lt;x&lt;x_{0}\\Cx^{\lambda}+Dx^{-\lambda}&amp;x_{0}&lt;x&lt;1\end{cases}$$</span>
+נמצא את המקדמים בעזרת תנאי השפה:
+<span>$$\begin{gather} G(0,x_{0}) = Ax^\lambda+Bx^{-\lambda}\stackrel{!}{&lt;}\infty\implies B=0 \\G(1,x_{0})= Cx^\lambda + Dx^{-\lambda}=0\implies D=-C 
+\end{gather}$$</span>
+ונציב את התנאי של רציפות הפונקציה ובקפיצה בנגזרת:
+<span>$$\begin{gather}G(x_{0}^-,x_{0})=G(x_{0}^+,x_{0})\implies Ax_{0}^\lambda\stackrel{!}{=} C\left( x^\lambda-x^{-\lambda} \right) \\\frac{\partial }{\partial x}G(x_{0}^+,x_{0})-\frac{\partial }{\partial x}G(x_{0}^-,x_{0})=C\left( \lambda x^{\lambda-1}+\lambda x^{-\lambda-1} \right)-A\lambda x^{\lambda-1}\stackrel{!}{=} \frac{1}{x^2}
+\end{gather}$$</span>
+ונקבל סה"כ:
+<span>$$ G\left(x,x_0\right)=\begin{cases}-\frac{x_0^{\lambda-1}-x_0^{-\lambda-1}}{2\lambda}x^{\lambda}&amp;0&lt;x&lt;x_0\\-\frac{x_0^{\lambda-1}}{2\lambda}\left(x^{\lambda}-x^{-\lambda}\right)&amp;x_0&lt;x&lt;1\end{cases}$$</span></p>
+<p>פתרו את המשוואה:
+<span>$$e^{-2x}y''(x)-2e^{-2x}y'(x)-\mu\left( \mu+2 \right)e^{-2x}y(x)=\delta(x-x')$$</span>
+על הקטע <span>\(x \in [0,1]\)</span> עבור <span>\(\mu&gt;0\)</span> עם תנאי שפה <span>\(y(0)=y(1)=0\)</span>. 
+?
+אנו יודעים כי באופן כללי עבור אופרטור צמוד לעצמו מהצורה <span>\(\frac{d}{dx}\left( p(x) \frac{dy}{dx} \right)\)</span> הפונקציית גרין תהיה:
+<span>$$G\left(x,x^{\prime}\right)={\left\{\begin{array}{l l}{{\frac{y_{1}\left(x\right)y_{2}\left(x^{\prime}\right)}{W\left(x^{\prime}\right)p\left(x^{\prime}\right)}}}&amp;{a\leq x&lt;x^{\prime}}\\ {{\frac{y_{1}\left(x^{\prime}\right)y_{2}\left(x\right)}{W\left(x^{\prime}\right)p\left(x^{\prime}\right)}}}&amp;{x^{\prime}&lt;x\leq b}\end{array}\right.}$$</span>
+כאשר <span>\(y_{1},y_{2}\)</span> פתרונות למד"ר ההומוגני בקטעים <span>\([a,x')\)</span> ו-<span>\((x',b]\)</span>. במקרה שלנו <span>\(a=0,b=1\)</span>. כאשר <span>\(p(x)\)</span> מוגדרת לפי הצורה הצמודה של האופרטור, ו-<span>\(W=y_{1}y_{2}'-y_{1}'y_{2}\)</span> זה הוורונסקיאן. ונשים לב כי האופרטור של אגף שמאל יהיה <span>\(\frac{d}{dx}\left( e^{-2x} \frac{dy}{dx} \right)\)</span>. ולכן <span>\(p(x)=e^{-2x}\)</span>. נצפה כי <span>\(W(x'),p(x')\)</span> יהיו קבועים.
+המד"ר ההומוגני יהיה:
+<span>$$\begin{array}{c}{{e^{-2x}y^{\prime\prime}\left(x\right)-2e^{-2x}y^{\prime}\left(x\right)-\mu\left(\mu+2\right)e^{-2x}y\left(x\right)=0}}\\ {{y^{\prime\prime}\left(x\right)-2y^{\prime}\left(x\right)-\mu\left(\mu+2\right)y\left(x\right)=0}}\end{array}$$</span>
+ננחש פתרון מהצורה <span>\(e^{-\lambda x}\)</span> ונציב במשוואה:
+<span>$$\begin{array}{c}{{\lambda^{2}e^{-\lambda x}-2\left(-\lambda\right)e^{-\lambda x}-\mu\left(\mu+2\right)e^{-\lambda x}=0}}\\ {{\lambda^{2}+2\lambda-\mu\left(\mu+2\right)=0}}\\ {{\lambda\left(\lambda+2\right)=\mu\left(\mu+2\right)}}\\ {{\lambda=\mu,\;\lambda=-\mu-2}}\end{array}$$</span>
+ולכן הפתרון למדר ההומוגני יהיה:
+<span>$$y_{h o m}\left(x\right)=C_{1}e^{-\mu x}+C_{2}e^{\left(\mu+2\right)x}$$</span>
+ולכן נקבל:
+<span>$$y_{1}=A e^{-\mu x}+B e^{(\mu+2)x};\;y_{2}=C e^{-\mu x}+D e^{(\mu+2)x}$$</span>
+תנאי השפה <span>\(y(0)=y(1)=0\)</span> מ-<span>\(y(0)=0\)</span> נקבל <span>\(y_{1}(0)=0\)</span> ולכן נקבל <span>\(A=-B\)</span>. כלומר:
+<span>$$y_{1}=A\left(e^{-\mu x}-e^{(\mu+2)x}\right)=A e^{x}\left(e^{-(\mu+1)x}-e^{(\mu+1)x}\right)=-2A e^{x}\sinh\left(\left(\mu+1\right)x\right)$$</span>
+מהתנאי שפה <span>\(y_{2}(1)=0\)</span> נקבל <span>\(D=-Ce^{-2\mu-2}\)</span> ולכן:
+<span>$$\begin{array}{l l}{{y_{2}=}C\left(e^{-\mu x}-e^{-2\mu-2}e^{\left(\mu+2\right)x}\right)=C e^{x-\mu-1}\left(e^{-\mu x-x+\mu+1}-e^{-\mu-1}e^{\left(\mu+1\right)x}\right)=}\\ {{=}C e^{x-\mu-1}\left(e^{-x\left(\mu+1\right)+\mu+1}-e^{-\left(\mu+1\right)+\left(\mu+1\right)x}\right)=}\\ {{=}C e^{x-\mu-1}\left(e^{-\left(\mu+1\right)\left(x-1\right)}-e^{\left(\mu+1\right)\left(x-1\right)}\right)=-2C e^{x-\mu-1}\sinh\left(\left(\mu+1\right)\left(x-1\right)\right)}\end{array}$$</span>
+נוכל להתעלם מהקבועים, שיעלמו בכל זאת כשנחלק בוורונסקיאן:
+<span>$$y_{1}=e^{x}\sinh\left(\left(\mu+1\right)x\right);\;y_{2}=e^{x-\mu-1}\sinh\left(\left(\mu+1\right)\left(x-1\right)\right)$$</span>
+נחשב את הוורונסקיאן ונקבל:
+<span>$$W=y_{1}y_{2}'-y_{1}'y_{2}=\!e^{2x-\mu-1}\left(\mu+1\right)\sinh\left[\left(\mu+1\right)x-\left(\mu+1\right)\left(x-1\right)\right]=e^{2x-\mu-1}\left(\mu+1\right)\sinh\left(\mu+1\right)$$</span>
+כעת נקבל:
+<span>$$W\left(x\right)p\left(x\right)=e^{-2x}e^{2x-\mu-1}\left(\mu+1\right)\sinh\left(\mu+1\right)=e^{-\mu-1}\left(\mu+1\right)\sinh\left(\mu+1\right)=\frac{\mu+1}{e^{\mu+1}}\sinh\left(\mu+1\right)$$</span>
+ולכן פונקציית הגרין תהיה:
+<span>$$G\left(x,x^{\prime}\right)={\frac{\mu+1}{e^{\mu+1}}}\sinh\left(\mu+1\right)\left\{{\begin{array}{l l}{e^{x}\sinh\left(\left(\mu+1\right)x\right)e^{x^{\prime}-\mu-1}\sinh\left(\left(\mu+1\right)\left(x^{\prime}-1\right)\right)}&amp;{0\leq x&lt;x^{\prime}}\\ {e^{x^{\prime}}\sinh\left(\left(\mu+1\right)x^{\prime}\right)e^{x^{\prime}-\mu-1}\sinh\left(\left(\mu+1\right)\left(x-1\right)\right)}&amp;{x^{\prime}&lt;x\leq1}\end{array}}\right.$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Differential Equations'> משוואות דיפרנציאליות</a></li>
+<li class='prev-page'><a href='./Differential Equations_9_6'>9.6 משוואת לפלס</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מרחבים מטרים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_11_3'>11.3 נגזרת רב מימדית</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 פרמטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_2'>8.2 אורך של מסילה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_3'>8.3 אינטגרל קווי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_4'>8.4 שדות משמרים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. יריעות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_9_1'>9.1 יריעה פרמטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_9_2'>9.2 יריעה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_9_3'>9.3 יריעות עם שפה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. משפט הדיבגנץ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_10_1'>10.1 זרימות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_11_1'>11.1 אינטגרליים רב מימדיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_11_2'>11.2 מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_11_3'>11.3 נגזרת רב מימדית</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_11_1'>11.1 אינטגרליים רב מימדיים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_11_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_11_1`; }});</script>
+        <div class="content">
+        <h1>11.2  מרחבים מטרים</h1>
+    <p>הגדרה של מטריקה
+?
+עבור קבוצה לא ריקה <span>\(X\)</span> פונקציה <span>\(d:X\times X\to \mathbb{R}\)</span> נקראת מטריקה אם מקיימת:</p>
+<ol>
+<li>
+<p>סימטרייה - <span>\(d(x,y)=d(y,x)\)</span> </p>
+</li>
+<li>
+<p>חיוביות - <span>\(d(x,y)\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=y\)</span>. </p>
+</li>
+<li>
+<p>אי שיוויון המשולש. לכל <span>\(x,y,z\in X\)</span> מתקיים: 
+<span>$$d(x,z)\leq d(x,y)+d(y,z)$$</span></p>
+</li>
+</ol>
+<p>מרחב נורמי
+?
+מרחב וקטורי <span>\(X\)</span> אשר מעל <span>\(\mathbb{R}\)</span> או <span>\(\mathbb{C}\)</span> נקרא מרחב נורמי אם קיים נורמה <span>\(||\cdot||:X\to \mathbb{R}\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>חיוביות - <span>\(||x||\geq 0\)</span> כאשר יש שיוויון אם"ם <span>\(x=0\)</span>. </p>
+</li>
+<li>
+<p>הומוגניות - לכל <span>\(x \in X\)</span> ו-<span>\(a\in \mathbb{R}\)</span> מתקיים <span>\(||ax||=a||x||\)</span>. </p>
+</li>
+<li>
+<p>אי שיוויון המשולש - <span>\(||x+y||\leq||x||+||y||\)</span>. </p>
+</li>
+</ol>
+<p>3 הגדרות שקולות לפונקציות רציפות 
+?</p>
+<ol>
+<li>
+<p>פונקציה <span>\(f:X\to Y\)</span> נקראת רציפה ב-<span>\(x \in X\)</span> אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt;0\)</span> כך שלכל <span>\(z\in B_{\delta}(x)\)</span> מתקיים <span>\(f(z)\in B_{\varepsilon}(f(x))\)</span>. </p>
+</li>
+<li>
+<p>פונקציה <span>\(f:(X,d)\to\left( Y,\rho \right)\)</span> רציפה אם לכל סדרה <span>\(x_{n}\in X\)</span> מתקיים: 
+<span>$$\operatorname*{lim}_{n\to\infty}x_{n}=a\implies\operatorname*{lim}_{n\to\infty}f(x_{n})=f(a)$$</span></p>
+</li>
+<li>
+<p>יהיו <span>\((X,d),\left( Y,\rho \right)\)</span> מרחבים מטרים. תהי פונקציה <span>\(f:(X,d)\to\left( Y,\rho \right)\)</span>. מתקיים </p>
+</li>
+<li>פונקציה <span>\(f\)</span> רציפה אם"ם לכל <span>\(U\subseteq Y\)</span> פתוחה, <span>\(f^{-1}(U)\subseteq X\)</span> פתוחה.</li>
+<li>פונקציה <span>\(f\)</span> רציפה אם"ם לכל <span>\(U\subseteq Y\)</span> סגורה, <span>\(f^{-1}(U)\subseteq X\)</span> סגורה.</li>
+</ol>
+<p>נקודה פנימית
+?
+יהי <span>\(A\subseteq X\)</span>, <span>\(a\in A\)</span> אזי <span>\(a\)</span> נקראת נקודה פנימית ב-<span>\(A\)</span> אם קיים <span>\(r&gt;0\)</span> כך ש-<span>\(\mathcal{B}_{r}(a)\subseteq A\)</span>.</p>
+<p>נקודה חיצונית
+?
+נקודה <span>\(x \in X\)</span> נקראת נקודה חיצונית ל-<span>\(A\)</span> אם קיים <span>\(r&gt;0\)</span> כך ש-<span>\(\mathcal{B}_{r}(x)\subseteq A^c\)</span>.</p>
+<p>קבוצה פתוחה
+?
+קבוצה שבה כל נקודה היא פנימית או הקבוצה ריקה.</p>
+<p>איחוד כלשהו(גם אינסופי) של קבוצות פתוחות הוא:
+?
+קבוצה פתוחה</p>
+<p>חיתוך כלשהו(גם אינסופי) של קבוצות סגורות הוא
+?
+קבוצה סגורה</p>
+<p>פנים של קבוצה
+?
+איחוד של כל התתי הקבוצות הפתוחות:
+<span>$$A^\circ=\bigcup\left\{ U\mid \text{ <span>\(U\)</span> is open and }U\subset A \right\}$$</span>
+זוהי קבוצה פתוחה כיוון שאיחוד כלשהו של קבוצות פתוחות היא קבוצה פתוחה</p>
+<p>סגור של קבוצה
+?
+חיתוך של כל הקבוצות הסגורות שמכילות את <span>\(A\)</span>:
+<span>$$\overline{A}=\bigcap\left\{ C\mid \text{C is closed and }A\subset C \right\}$$</span>
+זהו קבוצה סגורה כיוון שחיתוך כלשהו של קבוצות סגורות תהיה תמיד קבוצה סגורה. באופן שקול זה אוסף כל נקודת הגבול של הקבוצה.</p>
+<p>שפה של קבוצה
+?
+מה שנמצא בסגור ולא בפנים:
+<span>$$\partial A=\overline{A}\smallsetminus A^{\circ}$$</span>
+לחלופין ניתן לחשוב על זה כקבוצה שבה כל כדור מכילה נקודה בפנים של <span>\(A\)</span> וגם נקודה שאינה בפנים של <span>\(A\)</span>(כלומר ב-<span>\(A^c\)</span>).</p>
+<p>ציין כמה שיותר תכונות של הפנים, סגור והשפה של קבוצה
+?</p>
+<ol>
+<li>
+<p>הפנים של קבוצה היא אוסף כל הנקודות הפנימיות שלה </p>
+</li>
+<li>
+<p>הסגור של קבוצה היא אוסף כך הנקודות שלא חיצוניות </p>
+</li>
+<li>
+<p>הפנים של קבוצה פתוחה שווה לקבוצה </p>
+</li>
+<li>
+<p>הסגור של קבוצה סגורה שווה לקבוצה </p>
+</li>
+<li>
+<p>מתקיים <span>\(A^{\circ}\subset A\subset\overline{A}\)</span> </p>
+</li>
+<li>
+<p>מתקיים <span>\((A^{\circ})^{\circ}=A^{\circ}\quad \quad\overline{\overline{A}}=\overline{A}.\)</span> </p>
+</li>
+<li>
+<p>מתקיים: <span>\(\bigl(A^\circ\bigr)^c=\overline{A^c}\quad\quad\bigl(A^c\bigr)^\circ=\bigl(\overline{A}\bigr)^c\)</span> </p>
+</li>
+<li>
+<p>הסגור זה אוסף כל נקודות הגבול של קבוצה </p>
+</li>
+<li>
+<p>השפה היא קבוצה סגורה </p>
+</li>
+<li>
+<p>קבוצה סגורה פחות קבוצה פתוחה היא סוגרה </p>
+</li>
+<li>
+<p>קבוצה פתוחה פחות קבוצה סגורה היא פתוחה </p>
+</li>
+<li>
+<p>השפה של קבוצה היא קבוצה סגורה </p>
+</li>
+</ol>
+<p>קבוצה סגורה פחות קבוצה פתוחה היא:
+?
+סוגרה</p>
+<p>השפה של קבוצה תהיה קבוצה
+?
+סגורה</p>
+<p>קבוצה פתוחה פחות קבוצה סגורה היא תהיה:
+?
+פתוחה</p>
+<p>מהי קבוצה צפופה
+?
+קבוצה <span>\(A\subseteq X\)</span> תקרא צפופה אם לכל <span>\(x \in X\)</span> ולכל <span>\(\varepsilon&gt;0\)</span> קיימים <span>\(a\in A\)</span> כך ש-<span>\(d(a,x)&lt;\varepsilon\)</span>, כלומר ניתן להתקרב לכל נקודה ב-<span>\(X\)</span> בעזרת נקודות מ-<span>\(A\)</span>.
+באופן שקול:
+קבוצה <span>\(A\subseteq X\)</span> תקרא צפופה אם <span>\(\overline{A}=X\)</span>.</p>
+<p>במרחב נורמי מתקיים</p>
+<ol>
+<li>
+<p>הסגור של כדור פתוח הוא{{ כדור סגור - <span>\({{\bar{B}_{r}\left(x\right)=\hat{B}_{r}\left(x\right)\,}}\)</span>}} </p>
+</li>
+<li>
+<p>הפנים של כדור סגור הוא {{כדור פתוח - <span>\(\left(\hat{B}_{r}\left(x\right)\right)^{\circ}=B_{r}\left(x\right)\)</span>}} </p>
+</li>
+<li>
+<p>השפה של כדור סגור שווה לשפה של {{הכדור הפתוח - <span>\(\partial B_{r}\left(x\right)=\partial\hat{B}_{r}\left(x\right)=S_{r}\left(x\right)\)</span>}} </p>
+</li>
+</ol>
+<p>מהי קומפקטיות סדרתית?
+?
+מרחב מטרי <span>\((X,d)\)</span> יקרא קומפקטי אם לכל סדרה יש תת סדרה מתכנסת לאיבר בקבוצה.</p>
+<p>ציין כמה שיותר תכונות על מרחבים קומפקטים
+?</p>
+<ol>
+<li>
+<p>סגורות וחסומות </p>
+</li>
+<li>
+<p>תת מרחב סגור וחסום של מרחב מטרי קומפקטי הוא קומפקטי </p>
+</li>
+<li>
+<p>איחוד סופי של קבוצות קומפקטיות הוא קומפקטי </p>
+</li>
+</ol>
+<p>ציין כמה שיותר תכונות של פונקציות רציפות ממרחב קומפקטי
+?</p>
+<ol>
+<li>
+<p>כל פונקציה רציפה ממרחב מטרי קומפקטי משיגה מינימום ומקסימום </p>
+</li>
+<li>
+<p>פונקציות רציפות הפועלות על תתי מרחבים מטרים קומפקטים הולכות לתתי מרחבים קומפקטים. כלומר אם <span>\(K\subseteq X\)</span> קומפקטי ו-<span>\(f:X\to Y\)</span> אז <span>\(f(K)\)</span> קומפקטי. </p>
+</li>
+</ol>
+<p>מהי רציפות במידה שווה
+?
+יהיו <span>\((X,d), \left( Y,\rho \right)\)</span> מרחבים מטרים. פונקציה <span>\(f:(X,d)\to \left( Y,\rho \right)\)</span> נקרא רציף במידה שווה אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(\delta&gt;0\)</span> כך שלכל <span>\(x,y\in X\)</span> מתקיים:
+<span>$$d(x,y)&lt;\delta\implies \rho(f(x),f(y))&lt;\varepsilon$$</span></p>
+<p>מה הדרישות כדי שרציפות יגרור רציפות במידה שווה
+?
+נדרישה העיקרית היא קומפקטיות. המשפט אומר: יהיו <span>\((X,d),\left( Y,\rho \right)\)</span> מרחבים מטרים כאשר <span>\((X,d)\)</span>  קומפקטי, אז אם <span>\(f: X\to Y\)</span> רציף אז רציף במידה שווה</p>
+<p>מהי פונקציה לפשיצית? ומה האיפיון החשוב עבור פונקציות אלו?
+?
+פונקציה <span>\(f:X_{d}\to Y_{\rho}\)</span> כך שקיים <span>\(L\geq0\)</span> כך ש-<span>\(\rho(f(x),f(y))\leq Ld(x,y)\)</span>. <span>\(L\)</span> נקרא קבוע לפישיץ של <span>\(f\)</span>. מהתנאי אוטומטית נובע רציפות. פונקציה שקילות היא ליפשיצית.</p>
+<p>קבוצה <span>\(V\)</span> במרחב נורמי אשר סגורה וחסומה תהיה:
+?
+קומפקטית</p>
+<p>מהי סדרת קושי
+?
+סדרה שבה האיברים מתקרבים אחד לשני יותר ויותר. כלומר עבור <span>\((X,d)\)</span> מרחב מטרי, הסדרה <span>\(\{ x_n\}_{n=0}^{\infty}\)</span>  נקראת סדרת קושי אם לכל <span>\(\varepsilon&gt;0\)</span> קיים <span>\(N\)</span> כך שלכל <span>\(n,m&gt;N\)</span> מתקיים <span>\(d(x_{n},x_{m})&lt;\varepsilon\)</span> .</p>
+<p>מרחב מטרי שלם
+?
+מקיים שכל סדרת קושי מתכנס לאיבר במרחב מטרי.</p>
+<p>מה מהם מרחבים מטרים שקולים?
+?
+מרחבים מטרים <span>\(X\)</span> ו-<span>\(Y\)</span> נקראים שקולים אם קיימת פונקציה <span>\(f:X\to Y\)</span> חחע ועל וקיים <span>\(0&lt;C_{1},C_{2}\)</span> כך ש:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(f(x_{1}),f(x_{2}))\leq C_{2}d(x_{1},x_{2})
+$$</span></p>
+<p>הראה כי הקטעים <span>\((0,1),\left( 0,\infty \right)\)</span> עם המטריקה המושרת מהמטריקה הסטנדרטית אינם שקולים
+?
+נניח בשלילה כי יש שקילות. לכן קיים פונקציה <span>\(f:(0,1)\to\left( 0,\infty \right)\)</span> המקיימת עבור <span>\(C_{1},C_{2}&gt;0\)</span>:
+<span>$$C_{1}|x-y|\leq|f(x)-f(y)|\leq C_{2}|x-y|$$</span>
+כאשר נשים לב כי <span>\(|x-y|&lt;1\)</span> ולכן <span>\(|f(x)-f(y)|&lt;C_{2}\)</span>. לכל <span>\(x,y\in(0,1)\)</span>. אך <span>\(f\)</span> צריכה להיות על, ובפרט צריכים להיות <span>\(s,t\in(0,1)\)</span> כך ש-<span>\(f(t)=2C_{2}+1,f(s)=1\)</span> ולכן עבור ערכים אלו מהשקילות מתקיים:
+<span>$$|f(s)-f(t)|=|2C_{2}+1-1|=2C_{2}&gt;C_{2}$$</span>
+בסתירה לזה ש-<span>\(|f(x)-f(y)|&lt;C_{2}\)</span>.</p>
+<p>מהם מטריקות שקולות?
+?
+אם יש שתי מטריקות <span>\(d,\rho\)</span> על אותו מרחב מטרי <span>\(X\)</span>, אז נקרא למטריקות שקולות אם המרחבים המטרים שקולים ביחיד עם פונקציית הזהות. כלומר:
+<span>$$C_{1}d(x_{1},x_{2})\leq \rho(x_{1},x_{2})\leq C_{2}d(x_{1},x_{2})$$</span>
+היתרון העיקרי במטריקות שקולות זה שזה משמר רציפות/התכנסות. אם סדרה מסויימת מתכנסת תחת מטריקה אחת, היא תתכנסת גם תחת המטריקה השנייה.</p>
+<p>מה אומר משפט ההעתקה המכווצת?
+?
+יהא <span>\((X,d)\)</span> מרחב מטרי שלם. ותהא <span>\(f:X\to X\)</span> מכווצת, כלומר קיים <span>\(0\leq \lambda&lt;1\)</span> כך שלכל <span>\(x,y\)</span>:
+<span>$$d(f(x),f(y))\leq \lambda d(x,y)$$</span>
+ אזי יש ל-<span>\(f\)</span> נקודת שבת יחידה. כלומר יש <span>\(x \in X\)</span> יחיד כך ש-<span>\(f(x)=x\)</span>.</p>
+<p>מהם השלבים העיקריים בהוכחה של משפט ההעתקה המכווצת?
+?</p>
+<ol>
+<li>
+<p>מגדירים סדרה בצורה רקורסיבית מהצורה <span>\(x_{n+1}=f(x_{n})\)</span>. </p>
+</li>
+<li>
+<p>מראים כי <span>\(d(f(x_{n+1}),f(x_{n}))\leq \lambda d(x_{n},x_{n-1})\)</span> ולכן מאינדוקציה <span>\(d(f(x_{n+1}),f(x_{n}))\leq \lambda^nd(x_{1},x_{0})\)</span>. </p>
+</li>
+<li>
+<p>מראים מאי שיוויון המשולש: 
+<span>$${{d(x_{n},x_{m})\leq\displaystyle\sum_{k=m}^{n-1}d(x_{k+1},x_{k})\leq\displaystyle\sum_{k=m}^{n-1}\lambda^{k}d(x_{1},x_{0})}}{{\leq\displaystyle\sum_{k=N}^{\infty}\lambda^{k}d(x_{1},x_{0})=\displaystyle\frac{\lambda^{N}}{1-\lambda}d(x_{1},x_{0}).}}$$</span></p>
+</li>
+<li>
+<p>נשים כי כיוון שהערך מימין שואף ל-0 המרחק בין שתי איברים בסדרה שואף ל-0. ולכן זהו סדרת קושי. </p>
+</li>
+<li>
+<p>משלמות סדרה זו היא סדרה מתכנסת, ונסמן את הגבול ב-<span>\(x\)</span>. </p>
+</li>
+<li>
+<p>נשים לב כי <span>\(f\)</span> פונקציה רציפה בתור פונקציה ליפשיצית, וכן המטריקה היא תמיד רציפה, ולכן <span>\(d(x_{n},x_{m})\)</span> פונקציה רציפה, לכן מאפיון היינה: 
+<span>$$d(x_{n},f(x_{n}))\xrightarrow{n\to \infty}d(x,f(x))=0\implies f(x)=x$$</span></p>
+</li>
+<li>
+<p>כדי להראות יחידות נניח בשלילה שיש שתי נקודות שבת <span>\(x,y\)</span> ונקבל: 
+<span>$$d(x,y)=d(f(x),f(y))\leq\lambda\,d(x,y)\implies d(x,y)\left( 1-\lambda \right)\leq 0$$</span></p>
+</li>
+</ol>
+<p>איך מוצאים נורמה אופרטורית כשנתון מטריצה?
+?
+אנחנו מחפשים את <span>\(\max_{||v||=1}\lVert Av \rVert\)</span>. מתקיים:
+<span>$$\lVert Av \rVert ^2=\langle Av, Av \rangle =\langle A^*Av, v \rangle $$</span>
+כאשר <span>\(A^*A\)</span> אופרטור צמוד לעצמו/הרמיטי. כעת מאי שיוויון קושי שוורץ נקבל:
+<span>$$\langle A^*Av, v \rangle\leq \sqrt{ \lVert A^*Av \rVert \lVert v \rVert } $$</span>
+כאשר אנחנו רוצים למצוא את הערך המקסימלי. כאשר <span>\(\lVert v \rVert=1\)</span>. נזכור כי באי שיוויון קושי שוורץ יש שיוויון אם"ם תלויים לינארים. כלומר אם <span>\(A^*Av=\lambda v\)</span>. זוהי בעיית ערכים עצמיים. כאשר נמצא את הערך עצמי המקסימלי <span>\(\lambda\)</span> נקבל כי:
+<span>$$\max_{||v||=1}\lVert Av \rVert=\sqrt{ \lVert A^*Av \rVert \lVert v \rVert  }=\sqrt{ \lVert A^*Av \rVert } =\sqrt{ \left\lVert  \lambda v  \right\rVert } =\sqrt{ \lambda \lVert v \rVert } =\sqrt{ \lambda }$$</span></p>
+<p>מהי ההגדרה הטופולוגית לקומפקטיות?
+?
+יהי <span>\((X,d)\)</span> מרחב מטרי, אז <span>\(A\subseteq X\)</span> קומפקטי אם"ם לכל אוסף של קבוצות פתוחות <span>\(\left\{  U_{\alpha}  \right\}_{\alpha \in I}\)</span> כך ש-<span>\(A\subseteq \bigcup_{\alpha \in I}U_{\alpha}\)</span> קיים אוסף סופי של <span>\(U_{\alpha_{1}},\dots,U_{\alpha_{m}}\)</span> כך ש-<span>\(A\subseteq \bigcup_{i=1}^mU_{\alpha_{i}}\)</span>.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_11_3'>11.3 נגזרת רב מימדית</a></li>
+<li class='prev-page'><a href='./Infi_11_1'>11.1 אינטגרליים רב מימדיים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

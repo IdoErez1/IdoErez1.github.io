@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>דואליות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_1_5'>1.5 איזומורפיזם של אובייקטים</a></li>
+<li class='parent-page'><a href='./Category'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. קטגוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_1_1'>1.1 בסיס קבוצתי - יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_2'>1.2 הגדרת הקטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_3'>1.3 דוגמאות לקטגוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_4'>1.4 דואליות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_5'>1.5 איזומורפיזם של אובייקטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקטורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_2_1'>2.1 שיכונים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_2'>2.2 הפונקטור</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_3'>2.3 העתקות טבעיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הלמה של יונדה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_3_1'>3.1 ייצוג וקו יצוג</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_2'>3.2 הלמה של יונדה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_3'>3.3 שיכון יונדה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פונקטורים צמודים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_4_1'>4.1 הגדרה של פונקטורים צמודים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_4_2'>4.2 יחידה וקו יחידה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category_1_3'>1.3 דוגמאות לקטגוריות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category_1_5`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category_1_3`; }});</script>
+        <div class="content">
+        <h1>1.4  דואליות</h1>
+    <div class="definition"><span class="keyword">הקטגוריה ההפוכה</span><p>תהי <span>\(\mathcal{C}\)</span> קטגוריה. אזי הקטגוריה ההפוכה תהיה הקטגוריה <span>\(\mathcal{C}^{\text{op}}\)</span> אשר מקיימת:
+- אובייקטיים זהים -<span>\(\text{Ob}(\mathcal{C})=\text{Ob}(\mathcal{C}^{\text{op}})\)</span>.
+- לכל <span>\(X,Y\in \mathcal{C}\)</span> נגדיר:
+<span>$$\hom_{{\mathcal{C}}^{o p}}\left(X,Y\right)=\hom_{{\mathcal{C}}}\left(Y,X\right)$$</span>
+- לכל מורפיזם <span>\(f:X\to Y\)</span> ב-<span>\(\mathcal{C}\)</span> נסמן <span>\(f^{\text{op}}:Y\to X\)</span> את המורפיזם המתאים ב-<span>\(\mathcal{C}^{\text{op}}\)</span> כך שמקיים את כלל ההרכבה:
+<span>$$.f^{o p}\circ g^{o p}=(g\circ f)^{o p}$$</span>
+- נגדיר את הזהות של <span>\(X \in \mathrm{Ob}(\mathcal{C}^{\text{op}})=\mathrm{Ob}(\mathcal{C})\)</span> להיות <span>\((\mathrm{Id}_{X})^{\text{op}}\)</span>.</p>
+</div>
+<div class="example"><span class="keyword">הקטגוריה <span>\(\text{Mat}_{R}^{\text{op}}\)</span></span><ul>
+<li>עבור <span>\(\text{Mat}_{R}\)</span> האובייקטים היו המספרים הטבעיים, ולכן האובייקטים של <span>\(\text{Mat}_{R}^{\text{op}}\)</span> הם גם כן המספרים הטבעיים.</li>
+<li>עבור <span>\(\text{Mat}_{R}\)</span> המורפיזמים בין <span>\(m\)</span> ל-<span>\(n\)</span> היו המטריצות ה-<span>\(m\times n\)</span>. כעת ב-<span>\(\text{Mat}_{R}^{\text{op}}\)</span> המורפיזמים בין <span>\(m\)</span> ל-<span>\(n\)</span> יהיו המורפיזמים בין <span>\(n\)</span> ל-<span>\(m\)</span> ב-<span>\(\mathrm{Mat}_{R}\)</span>, כלומר המטריצות ה-<span>\(n \times m\)</span>. ההרכבה הופכת את הסדר.</li>
+</ul>
+</div>
+<div class="definition"><span class="keyword">פונקטור קונטרא וריאנטי</span><p>יהיו <span>\(\mathcal{C},\mathcal{D}\)</span> קטגוריות. פונטקטור קונטרא וריאנטי הוא פונקטור <span>\(\mathcal{C}^{\text{op}}\to \mathcal{D}\)</span>.</p>
+</div>
+<div class="remark">
+<p>לכל פונקטור <span>\(\mathcal{C}\to \mathcal{D}\)</span> קיים פונקטור <span>\(\mathcal{C}^{\text{op}}\to \mathcal{D}^{op}\)</span>. וכל קטגוריה מקיימת <span>\((\mathcal{C}^{\text{op}})^{\text{op}}=\mathcal{C}\)</span>. לכן ניתן לתאר פונקטור קונטרא וריאנטי על ידי פונקטור <span>\(\mathcal{C}\to \mathcal{D}^{\text{op}}\)</span>.</p>
+</div>
+<div class="remark">
+<p>פונקטור <span>\(\mathcal{C}\to \mathcal{D}\)</span> לעיתים נקרא פונקטור קו וריאנטי כדי להדגיש.</p>
+</div>
+<div class="example">
+<p>יהי שדה <span>\(k\)</span>. לכל שתי מרחביים וקטורים <span>\(V,W\)</span> מעל <span>\(k\)</span> קיים מרחב ווקטורי:
+<span>$$\mathrm{Hom}(V,W)=\{ \text{linear maps }V \to W\}$$</span>
+כעת נקבע ווקטור <span>\(W\)</span>, כל העתקה לינארית <span>\(f:V\to V'\)</span> משרה העתקה לינארית:
+<span>$$f^{*}:\mathrm{Hom}(V',W)\to \mathrm{Hom}(V,W)$$</span>
+המוגדר ב-<span>\(q \in \mathrm{Hom}\)</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_1_5'>1.5 איזומורפיזם של אובייקטים</a></li>
+<li class='prev-page'><a href='./Category_1_3'>1.3 דוגמאות לקטגוריות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

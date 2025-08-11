@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>בסיס קבוצתי - יקום</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_1_2'>1.2 הגדרת הקטגוריה</a></li>
+<li class='parent-page'><a href='./Category'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. קטגוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_1_1'>1.1 בסיס קבוצתי - יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_2'>1.2 הגדרת הקטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_3'>1.3 דוגמאות לקטגוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_4'>1.4 דואליות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_5'>1.5 איזומורפיזם של אובייקטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקטורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_2_1'>2.1 שיכונים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_2'>2.2 הפונקטור</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_3'>2.3 העתקות טבעיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הלמה של יונדה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_3_1'>3.1 ייצוג וקו יצוג</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_2'>3.2 הלמה של יונדה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_3'>3.3 שיכון יונדה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פונקטורים צמודים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_4_1'>4.1 הגדרה של פונקטורים צמודים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_4_2'>4.2 יחידה וקו יחידה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category'> תורת הקטגוריות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category`; }});</script>
+        <div class="content">
+        <h1>1.1  בסיס קבוצתי - יקום</h1>
+    <div class="definition"><span class="keyword">יקום</span><p>קבוצה <span>\(U\)</span> אשר מקיימת את התכונות הבאות:</p>
+<ol>
+<li>
+<p>טרנזטיביות - אם <span>\(X \in U\)</span> וגם <span>\(Y \in X\)</span> אזי <span>\(U \in U\)</span>. זה מבטיח כי האיברים של איברים הם גם ביקום. </p>
+</li>
+<li>
+<p>סגירות לזוגות - אם <span>\(X,Y\in U\)</span> אזי גם <span>\(\{ X,Y \}\in U\)</span>. </p>
+</li>
+<li>
+<p>סגירות לאיחודים - אם <span>\(X \in U\)</span> אזי גם <span>\(\bigcup_{Y \in X}Y \in U\)</span>.  </p>
+</li>
+<li>
+<p>קבוצת חזקה - אם <span>\(X \in U\)</span> אז הקבוצת חזקה <span>\(\mathcal{P}(X)\in U\)</span>. </p>
+</li>
+<li>
+<p>מכיל את הטבעיים. כלומר <span>\(\mathbb{N} \in U\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="remark">
+<p>התכונות האלה הופכות את היקום להיות מודל טוב של תורת הקבוצות, אשר סגור להרכבות סטנדרטיות של קבוצות. זה מאפשר לנו להמנע מפרדוקסים כמו פרדוקס ראסל. זה למעשה המטרה של היקום - מאפשר לנו להסתכל על אוספים גדולים במספיק אך לא גדולים מידי אשר אינם קבוצה(וגורמים לפרדוקסים).</p>
+</div>
+<div class="definition"><span class="keyword">אקסיומת היקום של גרותנדיק</span><p>לכל קבוצה <span>\(X\)</span> יש יקום <span>\(U\)</span> עם <span>\(X \in U\)</span>. כלומר לא משנה איזה קבוצה יש לנו, יש יקום שמכיל אותה.</p>
+</div>
+<div class="corollary">
+<p>בפרט אם <span>\(U\)</span> יקום אינו יכול להכיל את עצמו, אך לכל יקום קיים יקום גדול יותר <span>\(V\)</span> אשר מכיל אותו(<span>\(U \in V\)</span>).</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה קטנה</span><p>נקבע יקום <span>\(U\)</span> ונקרא לקבוצה קטנה אם הוא איבר ב-<span>\(U\)</span>(כלומר <span>\(X \in U\)</span>).</p>
+</div>
+<div class="definition"><span class="keyword">קבוצה גדולה</span><p>נקבע יקום גדול יותר <span>\(V\)</span> אשר מכיל את <span>\(U\)</span>. נקרא לקבוצה <span>\(X\)</span> גדולה אם <span>\(X \in V\)</span>.</p>
+</div>
+<div class="remark">
+<p>נשים לב כי בפרט כל קבוצה קטנה היא גדולה. אנחנו נתייחס לכל הקבוצות כאילו הם גדולות. </p>
+</div>
+<div class="definition"><span class="keyword">קטגוריה קטנה מקומית</span><p>נקרה לקטגוריה <span>\(C\)</span> קטנה מקומית אם לכל זוג <span>\(X,Y \in C\)</span> קבוצת ההומומוריזמים <span>\(\mathrm{Hom}_{C}(X,Y)\)</span> היא קטנה.</p>
+</div>
+<div class="definition"><span class="keyword">קטגוריה קטנה</span><p>קטגוריה נקראת קטנה אם קטנה מקומית ובנוסף אוסף האובייקטים <span>\(\mathrm{Ob}(C)\)</span> היא קבוצה קטנה.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_1_2'>1.2 הגדרת הקטגוריה</a></li>
+<li class='prev-page'><a href='./Category'> תורת הקטגוריות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

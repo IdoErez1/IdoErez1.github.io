@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>שליטה וסימטרייה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_3_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_2_3`; }});</script>
+        <div class="content">
+        <h1>2.4  שליטה וסימטרייה</h1>
+    <div class="definition"><span class="keyword">משחק סימטרי</span><p>משחק של שתי שחקנים נקרא סימטרי אם המהלכים זההים עבור שתי השחקנים (כלומר <span>\(S_{1}=S_{2}\)</span>) וגם הפונקציות תועלת מקיימות לכל <span>\(i,j \in S_{1}\)</span>
+<span>$$u_{1}(i,j)=u_{2}(j,i)$$</span>
+ובפרט כל אסטרטגיה מנצחת של שחקן 1 תהיה אסטרטגיה מנצחת של שחקן 2.</p>
+</div>
+<div class="corollary">
+<p>עבור משחק סכום אפס כיוון ש-<span>\(u_{1}=-u_{2}\)</span> נקבל כי מטריצת התגמול היא אנטי סימטרית(כלומר <span>\(A^{t}=A\)</span>).</p>
+</div>
+<div class="proposition">
+<p>הערך של משחק סכום אפס סימטרי הוא אפס.</p>
+</div>
+<div class="proposition"><span class="keyword">סימטרייה תחת תמורות</span><p>אם קיים מטריצת תמורה <span>\(P\)</span> כך שהמטריצת תגמול מקיימת <span>\(A=P^{T}AP\)</span> אזי גם האסטרטגיות המעורבות מקיימות <span>\(x \in \Delta _{S_{1}}\)</span> ו-<span>\(\vec{y}=\Delta_{S_{2}}\)</span> מקיימות <span>\(\vec{x}=P\vec{x}\)</span> ו-<span>\(\vec{y} = P\vec{y}\)</span>.</p>
+</div>
+<div class="proof">
+<p>אם <span>\(A=P^{T}AP\)</span> אזי:
+<span>$$\vec{x}^{T}A\vec{y}=\vec{x}^{T}P^{T}AP\vec{y}=\left( P\vec{x} \right)^{T}A\left( P\vec{y} \right)$$</span>
+וכעת נקבל <span>\(P\vec{x}=\vec{x}\)</span> ו-<span>\(P\vec{y} = \vec{y}\)</span>.</p>
+</div>
+<div class="example">
+<p>עבור מטריצת התועלת:
+<span>$$A=\begin{pmatrix}5 &amp; 4 &amp; -1 \\3 &amp; 2 &amp; 3 \\-1 &amp; 4 &amp; 5
+\end{pmatrix}$$</span>
+נשים לב כי:
+<span>$$\begin{pmatrix}5 &amp; 4 &amp; -1 \\3 &amp; 2 &amp; 3 \\-1 &amp; 4 &amp; 5\end{pmatrix}\xrightarrow{R_{1}\leftrightarrow  R_{3}}\begin{pmatrix}-1 &amp; 4 &amp; 5 \\3 &amp; 2 &amp; 3 \\5 &amp; 4 &amp; -1\end{pmatrix}\xrightarrow{C_{1}\leftrightarrow  C_{3}}\begin{pmatrix}5 &amp; 4 &amp; -1 \\3 &amp; 2 &amp; 3 \\-1 &amp; 4 &amp; 5
+\end{pmatrix}$$</span>
+כלומר קיבלנו את אותה מטריצה. כאשר זוהי למעשה אומר אינווריאנטיות תחת המטריצה:
+<span>$$P=\begin{pmatrix}0 &amp; 0 &amp; 1 \\0 &amp; 1 &amp; 0 \\1 &amp; 0 &amp; 0
+\end{pmatrix}$$</span>
+כאשר נזכור כי המטריצה המתאימה להחלפה של שורות היא כפל בימין ב-<span>\(P^{T}\)</span>(אשר במקרה שלנו שווה ל-<span>\(P\)</span>) והמטריצה המתאימה להחלפה של עמודה מתאימה לכפל בשמאל ב-<span>\(P\)</span>. לכן אם נגדיר <span>\(\vec{x}=(p_{1},p_{2},p_{3})\)</span> נקבל <span>\(\vec{x}=P\vec{x}\)</span> כלומר <span>\(p_{1}=p_{3}\)</span>. באופן דומה עבור <span>\(\vec{y}=(q_{1},q_{2},q_{3})\)</span> נקבל <span>\(q_{1}=q_{3}\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על המשחק סכום אפס הבא:
+<span>$$\begin{array}{c|c|c|c} &amp; D &amp; E &amp; F  \\ \hline A &amp; 0 &amp; -1 &amp; -2 \\ \hline B &amp; 1 &amp; 0 &amp; -1  \\ \hlineC &amp; -2 &amp; 1 &amp; 0 
+\end{array}$$</span>
+כאשר כיוון שזהו משחק סימטרי הערך של המשחק יהיה 0. נרצה למצוא אסטרטגיה מנצחת <span>\(x^{*}=(x_{1},x_{2},x_{3})\)</span> עבור שחקן <span>\(1\)</span>. מתקיים:
+<span>$$0=\operatorname*{min}_{y\in\Delta_{3}}U(x^{*},y)=\operatorname*{min}_{1\leq i\leq3}U(x^{*},e_{i})=\operatorname*{min}_{1\leq i\leq3}(x^{*})^{T}A e_{i}=\operatorname*{min}(x_{2}-2x_{3},-x_{1}+x_{3},2x_{1}-x_{2})$$</span>
+תחת האילוץ <span>\(x_{1}+x_{2}+x_{3}=1\)</span>. זה נותן את המערכת אי שוויונות:
+<span>$$2x_{3}\leq x_{2}\qquad x_{1}\leq x_{3}\qquad 2x_{1}\geq x_{2}$$</span>
+וניתן לקבל מזה את השרשרת אי שוויונות:
+<span>$$2x_{3}\leq x_{2}\leq {2}x_{1}\leq {2}x_{3}\implies 2x_{1}=2x_{3}=x_{2}$$</span>
+ומהאילוץ <span>\(x_{1}+x_{2}+x_{3}=1\)</span> נקבל <span>\(x^{*}=\left( \frac{1}{4},\frac{1}{2},\frac{1}{4} \right)\)</span>. כיוון שהמשחק סימטרי נקבל <span>\(y^{*}=\left( \frac{1}{4},\frac{1}{2},\frac{1}{4} \right)\)</span>.</p>
+</div>
+<div class="definition"><span class="keyword">אסטרטגיה מעורבת שולטת</span><p>יהיו <span>\(x,x' \in \Delta_{n}\)</span> אסטרטגיות מעורבות של השחקן ה-<span>\(i\)</span>.</p>
+<ol>
+<li>
+<p>האסטרטגיה <span>\(x\)</span> שולטת חזק על <span>\(x'\)</span> אם לכל <span>\(y \in \Delta_{m}\)</span> מתקיים: 
+<span>$$u_{i}(x,y)&gt; u_{i}(x',y)$$</span></p>
+</li>
+<li>
+<p>אסטרטגיה <span>\(x\)</span> שולטת חלש על <span>\(x'\)</span> אם לכל <span>\(y \in \Delta_{m}\)</span> מתקיים: 
+<span>$$u_{i}(x,y)\geq u_{i}(x',y)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="proposition">
+<p>אם אסטרטגיה <span>\(e_{i}\)</span> נשלטת חזק, אז באסטרטגיה האופטימלית <span>\(x^{*}_{i}=0\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח <span>\(\sigma_{i}\)</span> אסטרטגיה שולטת חזק של שחקן 1. כלומר לכל </p>
+</div>
+<div class="proposition">
+<p>אם אסטרטגיה <span>\(e_{i}\)</span> נשלטת חלש במשחק סכום אפס <span>\(A\)</span>, אז הסרה של האסטרטגיה יוצרת משחק חדש <span>\(A'\)</span> כך ש:</p>
+<ol>
+<li>
+<p>הערך של <span>\(A'\)</span> זהה לערך של <span>\(A\)</span>. </p>
+</li>
+<li>
+<p>כל אסטרטגיה אופטימלית של <span>\(A'\)</span> תהיה אסטרטגיה אופטימלית של <span>\(A\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>נתחיל מהמשחק הבא:
+<span>$$\begin{pmatrix}7,5 &amp; 5,2 &amp; 1,1 &amp; 1,3 \\4,4 &amp; 2,6 &amp; 0,1 &amp; 7,7 \\5,2 &amp; 3,0 &amp; 2,3 &amp; 4,5 \\0,4 &amp; 4,8 &amp; 5,6 &amp; 0,6
+\end{pmatrix}$$</span>
+נשים לב כי העמודה הרביעית שולטת(חלש) על העמודה השלישית, לכן ניתן להסתכל על המשחק המצומצם:
+<span>$$\begin{pmatrix}7,5 &amp; 5,2 &amp;  1,3 \\4,4 &amp; 2,6 &amp;  7,7 \\5,2 &amp; 3,0 &amp;  4,5 \\0,4 &amp; 4,8 &amp;  0,6
+\end{pmatrix}$$</span>
+וכעת השורה הראשונה שולטת על השורה הרביעית:
+<span>$$\begin{pmatrix}7,5 &amp; 5,2 &amp;  1,3 \\4,4 &amp; 2,6 &amp;  7,7 \\5,2 &amp; 3,0 &amp;  4,5 \\
+\end{pmatrix}$$</span>
+וכעת העמודה השלישית שולטת על העמודה השנייה:
+<span>$$\begin{pmatrix}7,5 &amp;  1,3 \\4,4 &amp;   7,7 \\5,2 &amp;   4,5 \\
+\end{pmatrix}$$</span>
+ולא נראה שיש מכאן אף אסטרטגיה שולטת טהורה. ולכן מספיק לפתור את המשחק הזה, אשר עשינו בעבר.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='prev-page'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>אינטגרליים רב מימדיים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_11_2'>11.2 מרחבים מטרים</a></li>
+<li class='parent-page'><a href='./Infi'> אנליזה ממשית</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. פונקציות של משתנה ממשי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_1_1'>1.1 תכונות של מספרים ממשיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_2'>1.2 פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_1_3'>1.3 גבולות של פונקציות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקציות רציפות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_2_1'>2.1 הגדרה של פונקציה רציפה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_2'>2.2 משפטים על פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_3'>2.3 תכונות של פונקציות רציפות ומונטוניות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_2_4'>2.4 רציפות במידה שווה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. נגזרת של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_3_1'>3.1 הגדרת הנגזרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_2'>3.2 חוקי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_3'>3.3 משפטי גזירה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_4'>3.4 משפט טיילור וקירובים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_3_5'>3.5 משפט להופיטל</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. אינטגרל של פונקציה במשתנה אחד</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_4_1'>4.1 אינטגרל לפי דרבו ורימן</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_2'>4.2 תכונות האינטגרל המסויים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_3'>4.3 המשפט היסודי של האינפי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_4'>4.4 שיטות אינטגרציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_4_5'>4.5 אינטגרלים לא אמיתיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. מרחבים מטרים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_5_1'>5.1 הגדרה של מרחב מטרי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_2'>5.2 גבולות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_3'>5.3 כדורים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_4'>5.4 יחסים בין מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_5'>5.5 פונקציות רציפות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_6'>5.6 קומפקטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_7'>5.7 שלמות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_5_8'>5.8 אוסף מטריקות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. נגזרות של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_6_1'>6.1 נגזרות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_2'>6.2 פונקציות רב מימדיות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_3'>6.3 נגזרות מסדר גבוה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_4'>6.4 כלל השרשרת</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_5'>6.5 משפט ההעתקה הפתוחה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_6_6'>6.6 פונקציות קמורות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. אינטגרל של פונקציה מרובת משתנים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_7_1'>7.1 אינטגרציה על תיבות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_2'>7.2 מידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_3'>7.3 נפח של קבוצות</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_4'>7.4 אינטגרלים לא אמיתיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_5'>7.5 משפט פוביני</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_7_6'>7.6 משפט חילוף משתנה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. מסילות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_8_1'>8.1 פרמטריזציה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_2'>8.2 אורך של מסילה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_3'>8.3 אינטגרל קווי</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_8_4'>8.4 שדות משמרים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. יריעות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_9_1'>9.1 יריעה פרמטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_9_2'>9.2 יריעה</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_9_3'>9.3 יריעות עם שפה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. משפט הדיבגנץ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_10_1'>10.1 זרימות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Infi_11_1'>11.1 אינטגרליים רב מימדיים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_11_2'>11.2 מרחבים מטרים</a></li>
+<li class='parent-page-dropdown'><a href='./Infi_11_3'>11.3 נגזרת רב מימדית</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Infi_10_1'>10.1 זרימות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Infi_11_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Infi_10_1`; }});</script>
+        <div class="content">
+        <h1>11.1  אינטגרליים רב מימדיים</h1>
+    <p>מהי תיבה? איך מגדירים את הנפח שלו ואת הרוחב שלו?
+?
+תיבה היא קבוצה מהצורה:
+<span>$$A=[a_{1},b_{1}]\times[a_{2},b_{2}]\times\dots\times[a_{k},b_{k}],$$</span>
+כאשר הנפח שלו מוגדר:
+<span>$$V(A)=\prod_{i=1}^{k}(b_{i}-a_{i}).$$</span>
+כאשר הרוחב של <span>\(A\)</span>:
+<span>$$\max_{1\leq i\leq k}(b_{i}-a_{i})$$</span></p>
+<p>מהי חלוקה של תיבה?
+?
+תהא <span>\(A=[a_{1},b_{1}]\times\dots \times[a_{k},b_{k}]\)</span> תיבה. חלוקה <span>\(P\)</span> של <span>\(A\)</span> היא <span>\(P=P_{1}\times P_{2}\times\dots \times P_{k}\)</span>
+כאשר <span>\(P_{j}\)</span> היא חלוקה של הקטע <span>\([a_{j},b_{j}]\)</span>. כלומר:
+<span>$$P_{j}=\left\{  t_{j}^0,\dots,t_{j}^{m_{j}}  \right\}$$</span>
+כאשר <span>$$a_{j}=t_{j}^{0}&lt;t_{j}^{1}&lt;\cdots&lt;t_{j}^{m_{j}}=b_{j}.$$</span> חלוקה כזו משרה חלוקה של התיבה <span>\(A\)</span> לתיבות:
+<span>$$C_{i_{1},\dots,i_{k}}=[t_{1}^{i_{1}-1},t_{1}^{i_{1}}]\times\cdots\times[t_{k}^{i_{k}-1},t_{k}^{i_{k}}].$$</span>
+כאשר הנפח המקורי <span>\(A\)</span> מקיים:
+<span>$$V(A)=\sum_{i_{1},...,i_{k}}V(C_{i_{1},...,i_{k}}).$$</span></p>
+<p>מהו סכום תחתון? מהו סכום עליון?
+?
+<strong>הגדרה</strong> סכום תחתון
+בהנתן פונקציה <span>\(f\)</span> וחלוקה <span>\(P=A_{1}\times\dots \times A_{r}\)</span>. נגדיר <span>\(m_{i}=\inf_{x \in A_{i}}f(x)\)</span>. הסכום התחתון של <span>\(f\)</span> ביחס ל-<span>\(P\)</span> יהיה:
+<span>$$s(f,P)=\sum_{i=1}^{r}m_{i}\,V(A_{i})$$</span>
+<strong>הגדרה</strong> סכום עליון
+בהנתן פונקציה <span>\(f\)</span> וחלוקה <span>\(P=A_{1}\times\dots \times A_{r}\)</span>. נגדיר <span>\(M_{i}=\sup_{x \in A_{i}}f(x)\)</span>. הסכום התחתון של <span>\(f\)</span> ביחס ל-<span>\(P\)</span> יהיה:
+<span>$$S(f,P)=\sum_{i=1}^{r}M_{i}\,V(A_{i})$$</span></p>
+<p>מהו עידון של חלוקה? מה אנחנו יודעים על היחס של הסכומים העליונים והתחתונים של העידון?
+?
+חלוקה <span>\(P'\)</span> המקיימת <span>\(P\subseteq P'\)</span> נקראת עידון.
+אם <span>\(P'\)</span> עידון של חלוקה מתקיים:
+<span>$$s(f,P)\leq s(f,P^{\prime})\leq S\left(f,P^{\prime}\right)\leq S\left(f,P\right).$$</span></p>
+<p>מהו אינטגרל עליון? מהו אינטגרל תחתון?
+?
+<strong>הגדרה</strong> אינטגרל תחתון
+<span>$$\underline{\int}_{A}f(x) \;\mathrm{d}x=\operatorname*{sup}\left\{s(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</span>
+<strong>הגדרה</strong> אינטגרל עליון
+<span>$${\overline{{\int}_{A}}}f(x)\,\mathrm{d} x=\operatorname*{inf}\left\{S(f,P):\,a l l\,p a r t i t i o n s\,P\right\}.$$</span></p>
+<p>איך מוגדר אינטגרביליות לפי רימן לפונקציות חסומות?
+?
+פונקציה שהאינטגרל העליון שווה לאינטגרל התחתון נקראת אינטגרבילית רימן, כלומר אם:
+<span>$$\underline{\int_{A}} f(x)\;\mathrm{d}x=\overline{\int}_{A}f(x)\mathrm{d}x$$</span>
+ובמקרה זה נקרא לביטוי זה האינטגרל ונסמן:
+<span>$$\int_{A}f(x)\,d x\quad \text{או}\quad\int_{A}f\left( x_{1},\ldots,x_{k} \right)\,d x_{1}d x_{2}\ldots d x_{k}.$$</span></p>
+<p>ציין כמה שיותר דברים שגוררים אינטגרביליות.
+?</p>
+<ol>
+<li>
+<p>רציפות </p>
+</li>
+<li>
+<p>נקודות האי רציפות בעלות מידה אפס. </p>
+</li>
+</ol>
+<p>איך מוכיחים רציפות גורר אינטגרביליות?
+?
+כיוון ש-<span>\(A\)</span> קומפקטית, פונקציה <span>\(f\)</span> היא חסומה ורציפה במידה שווה ב-<span>\(A\)</span>.
+יהי <span>\(\varepsilon&gt;0\)</span>. מרציפות במידה שווה נקבל <span>\(\delta&gt;0\)</span> כך ש:
+<span>$$\|x-y\|\leq\delta\implies|f(x)-f(y)|\leq{\frac{\varepsilon}{V(A)}}.$$</span>
+יהי <span>\(P\)</span> חלוקה של <span>\(A\)</span> כך שקוטר החלוקה של כל תת תיבא קטן מ-<span>\(\delta\)</span>. לכן:
+<span>$$S\left(f,P\right)-s(f,P)=\sum_{i}(M_{i}-m_{i})\,V(A_{i})\leq \sum_{i}\delta V(A)=\varepsilon$$</span>
+וכעת נקבל:
+<span>$${\overline{{\int_{A}}}}f\,d x-\underline{\int}_{A}f\,d x\leq\varepsilon$$</span>
+ולכן אינטגרבילי.</p>
+<p>מהי קבוצה ממידה אפס?
+?
+קבוצה <span>\(A\subseteq \mathbb{R}^k\)</span> נקראת ממידה אפס אם לכל <span>\(\varepsilon&gt;0\)</span> קיימים אוסף בן מנייה של תיבות <span>\((B_{i})_{i\in\mathbb{N}}\)</span>  כך ש-<span>\(A\subseteq \bigcup_{i}B_{i}\)</span> ו-<span>\(\sum_{i}V(B_{i})&lt;\varepsilon\)</span>.
+כלומר בצורה פשוטה, ניתן לכסות את הקבוצה ע"י תיבות, וניתן להקטין את התיבות כך שהנפח יקטן ככל שנרצה.</p>
+<p>מה אומר משפט לבג-ויטאלי על אינטגרביליות ומידה אפס?
+?
+יהי <span>\(A\subseteq \mathbb{R}^k\)</span> תיבה כך ש-<span>\(f:A\to\mathbb{R}\)</span> פונקציה חסומה. <span>\(f\)</span> תהיה אינטגרבילית אם"ם נקודות האי רציפות הם ממידה אפס.
+<strong>הערה</strong>
+זה אומר כי אם קבוצה היא לא ממידה אפס, אז מכילה נקודות רציפות.
+ניסוח שקול למשפט לבג:
+עבור <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה פתוחה, פונקציה <span>\(f:A\to\mathbb{R}\)</span> חסומה היא אינטגרבילית אם"ם <span>\(F_{\frac{1}{n}}\)</span> ממידה אפס לכל <span>\(n\)</span>.</p>
+<p>מהו נפח של קבוצה? מה זה קבוצה בעלת נפח.
+?
+הנפח של קבוצה <span>\(S\)</span> תהיה:
+<span>$$V(S)=\int_{A}\!\chi_{S}(x)\,d x$$</span>
+כאשר <span>\(\chi_{S}(x)\)</span> הפונקציה המציינת - 1 אם <span>\(x \in S\)</span> ו-0 אחרת. אם האינטגרל הזה מוגדר הקבוצה נקראת בעלת נפח.</p>
+<p>מהו תנאי שקול ללהיות בעלת נפח? איך מוכיחים אותו?
+?
+קבוצה <span>\(A\)</span> בעלת נפח אם"ם <span>\(\partial A\)</span> ממידה אפס.
+נזכור כי <span>\(1_{A}\)</span> אינטגרבילית אם"ם קבוצת נקודות האי רציפות הם ממידה אפס. נקודות האי רציפות של <span>\(1_{A}\)</span> הן בדיוק הערכים שבהן מחליפה בין 0 ל-1, כלומר השפה של <span>\(A\)</span>. לכן <span>\(A\)</span> בעלת נפח אם"ם <span>\(\partial A\)</span> ממידה אפס.</p>
+<p>מהי הטענה על גרפים של פונקציה ומידה אפס?
+?
+תהי <span>\(S\subseteq \mathbb{R}^k\)</span> קבוצה קומפקטית, ו-<span>\(f\in C\left( S;\mathbb{R} \right)\)</span>(גזיר ברציפות ב-<span>\(S\)</span> ורציף ב-<span>\(\mathbb{R}\)</span>), אזי הגרף של <span>\(f\)</span>:
+<span>$$\left\{\left(x,f\left(x\right)\right):x\in S\right\}\subset\mathbb{R}^{k+1}$$</span>
+הוא ממידה 0 ב-<span>\(\mathbb{R}^{k+1}\)</span>.</p>
+<p>ציין שלושה פונקציות אשר כאשר מקבלות קבוצה ממידה אפס מחזירות קבוצה ממידה אפס.
+?</p>
+<ol>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה לינארית. אם <span>\(N\subseteq \mathbb{R}^k\)</span> ממידה 0 אזי <span>\(f(N)\)</span> ממידה אפס. </p>
+</li>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה ליפשיצית. אם <span>\(N\subseteq \mathbb{R}^k\)</span> ממידה אפס, אזי <span>\(f(N)\)</span> ממידה אפס. </p>
+</li>
+<li>
+<p>תהי <span>\(f:\mathbb{R}^k\to\mathbb{R}^k\)</span> פונקציה גזירה ברציפות. אם <span>\(K\subseteq \mathbb{R}^n\)</span> קבוצה קומפקטית ממידה אפס, <span>\(f(K)\)</span> תהיה ממידה אפס. </p>
+</li>
+</ol>
+<p>בהנתן קבוצה <span>\(A\)</span> מה הקשר בין האינטגרביליות של <span>\(A^\circ, \overline{A},A\)</span>?
+?
+קבוצה <span>\(A\subseteq \mathbb{R}^n\)</span> בעלת נפח ו-<span>\(f:\bar{A}\to \mathbb{R}\)</span> חסומה. אזי <span>\(f\)</span> אינטגרבילית על <span>\(\bar{A}\)</span> אם"ם <span>\(f\)</span> אינטגרבילית על <span>\(A\)</span> אם"ם <span>\(f\)</span> אינטגרבילית על <span>\(A^\circ\)</span> ומתקיים:
+<span>$$\int_{A^\circ }f(x)=\int_{A}f(x)=\int_{\bar{A}}f(x)$$</span></p>
+<p>מה אומר משפט פוביני?
+?
+יהיו <span>\(A\subseteq \mathbb{R}^k,B\subseteq \mathbb{R}^m\)</span> תיבות סגורות ו-<span>\(f:A\times B\to\mathbb{R}\)</span> פונקציה אינטגרבילית. לכל <span>\(x  \in A\)</span> ו-<span>\(y\in B\)</span> נגדיר:
+<span>$$f_{x}(y)\equiv f(x,y)\quad f_{y}(x)\equiv f(x,y)$$</span>
+אם לכל <span>\(x \in A,y \in B\)</span> האינטגרלים<span>$$\int_{B}f_{x}(y)d y,\;\int_{A}f_{y}(x)d x$$</span>
+קיימים אז:
+<span>$$\int_{A\times B}f(x,y)d x d y=\int_{A}\left( \int_{B}f_{x}(y)d y \right)d x=\int_{A}\left( \int_{B}f_{y}(x)d x \right)d y$$</span></p>
+<p>זה מאפשר לנו לבצע אינטגרציה לכל משתנה בנפרד, ולהחליף סדר אינטגרציה.</p>
+<p>מה אומר משפט חילוף משתנה הרב מימדי?
+?
+תהא <span>\(U\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(g\in C^1\left( U,\mathbb{R} \right)\)</span> חח"ע, <span>\(0\neq J(g(x))=\det(Dg)_{x}\)</span> לכל <span>\(x \in U\)</span>.
+תהא <span>\(\mathcal{U}\)</span> פונקציית בעלת נפח וקומפקטית. אזי <span>\(f:A\to\mathbb{R}\)</span> אינטגרבילית כך ש-<span>\(f\circ g\)</span> אינטגרבילית. מתקיים:
+<span>$$\int_{A} f(x)dx=\int_{g^{-1}(A)}\left( f\circ g \right)(y)|Jg(y)|dy$$</span>
+<strong>הערות</strong></p>
+<ol>
+<li>
+<p>אם <span>\(f\)</span> רציפה, אז <span>\(f\)</span> אינטגרבילית, <span>\(f\circ g\)</span> אינטגרבלית </p>
+</li>
+<li>
+<p>בפרט נובע אם <span>\(A\)</span> מבעלת נפח אז <span>\(g^{-1}(A)\)</span> בעלת נפח </p>
+</li>
+<li>
+<p>ממשפט ההעתקה הפתוחה, <span>\(g(U)=V\)</span> היא פתוח. כלומר בעצם <span>\(g:U\to V\)</span> חח"ע ועל ו- 
+<strong>משפט זה נכון גם עבור קבוצה פתוחה:</strong>
+תהא <span>\(U\subseteq \mathbb{R}^k\)</span> פתוחה, <span>\(g\in C^1\left( U,\mathbb{R}^k \right)\)</span> חד-חד ערכית כך ש-<span>\(Jg(x)\neq_{0}\)</span> ב-<span>\(U\)</span>. אזי לכל <span>\(f:U\to \mathbb{R}\)</span> אינטגרבילית כך ש-<span>\(f\circ g\)</span> אינטגרבילית, מתקיים:
+<span>$$\int_{U}f(x)d x=\int_{g^{-1}(U)}f\circ g|J g(y)|d y$$</span></p>
+</li>
+</ol>
+<p>איך מוגדר אינטגרל לא אמיתי של פונקציה חיובית? איך מוגדר עבור פונקציה כללית?
+?
+<strong>הגדרה</strong> אינטגרל לא אמיתי של פונקציה חיובית
+תהא <span>\(A\subseteq \mathbb{R}^k\)</span> קבוצה עם שפה ממידה אפס ותהא <span>\(f:A\to\left[ 0,\infty \right]\)</span> פונקציה שקבוצת נקודות האי רציפות שלה ממידה אפס. נאמר ש-<span>\(f\)</span> אינטגרבילית על <span>\(A\)</span> אם:
+<span>$$c=\operatorname*{sup}\left\lbrace\int_{K}f:K\in U\quad {\text{compact and has volume }}\right\rbrace $$</span>
+סופי. ובמקרה זה האינטגרל שווה ל-<span>\(c\)</span>.
+<strong>הגדרה</strong> אינטגרל לא אמיתי של פונקציה כללית
+עבור פונקציה <span>\(f:\mathbb{R}\to A\)</span> כללית, נגדיר <span>\(f_{+}=\max\{ f,0 \}\)</span> ו-<span>\(f_{-}=\max\{ -f,0 \}\)</span> כאשר הפונקציה אינטגרבילית אם"ם <span>\(f_{-},f_{+}\)</span> אינטגרביליות, והאינטגרל יהיה שווה ל:
+<span>$$\int_{A}f=\int_{A}f_{+}-\int_{A}f_{-}$$</span></p>
+<p>מהי סידרת מיצוי? מהי הטענה המרכזית לגביהם?
+?
+נאמר כי <span>\(A_{n}\subset A\)</span> סדרה ממצה אם <span>\(A_{1}\subset A_{2} \subset \dots \subset A\)</span> ולכל קבוצה <span>\(B\subset A\)</span> קומפקטית, נקבל <span>\(B \subset A_{n}\)</span> החל ממקום מסוים.
+<strong>טענה</strong>
+יהי <span>\((A_{n})\)</span> סדרה ממצה. אם <span>\(f:A\to \mathbb{R}\)</span> אינטגרבילי במובן אינטגרל לא אמיתי, אז:
+<span>$$\lim_{ n \to \infty } \int_{A_{n}}f(x)\;\mathrm{d}x=\int_{A} \;f(x)\;\mathrm{d}x$$</span>
+<strong>טענה</strong>
+פונקציה <span>\(f\)</span> אינטגרבילית על תחום <span>\(A\)</span> אם"ם קיים מיצוי קומפקטי <span>\(D_{n}\)</span> של <span>\(A\)</span> כך ש-
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{D_{n}}|f|=L\in\mathbb{R}$$</span></p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Infi_11_2'>11.2 מרחבים מטרים</a></li>
+<li class='prev-page'><a href='./Infi_10_1'>10.1 זרימות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

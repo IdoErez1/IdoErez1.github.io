@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הגדרות - פתרונות מיחדות של שרדינגר</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_12_4'>12.4 הגדרות - תנע זוויתי</a></li>
+<li class='parent-page'><a href='./Quantum'> תורת הקוונטים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מבוא</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_1_1'>1.1 חזרה - אלגברה לינארית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_2'>1.2 קומוטטור</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_3'>1.3 יחס פלנק ויחס דה ברויי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_4'>1.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_1_5'>1.5 מרחבים רציפים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. יסודות הפיזיקה הקוונטית</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_2_1'>2.1 מצבים קוונטים וגדלים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_2'>2.2 מערכות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_3'>2.3 קידום בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_4'>2.4 עקרון אי וודאות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_5'>2.5 אופרטור המיקום והתנע</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_2_6'>2.6 קוונטיזציה קנונית ראשונה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. פתרונות מיוחדים של משוואת שרדינגר</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_3_1'>3.1 עוד על משוואת שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_2'>3.2 חלקיק חופשי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_3'>3.3 בור פוטנציאל אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_4'>3.4 פוטנציאל מדרגה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_5'>3.5 בור פוטנציאל סופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_6'>3.6 פוטנציאל דלתא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_3_7'>3.7 אוסצילטור הרמוני קוונטי</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. ריבוי דרגות חופש</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_4_1'>4.1 מכפלה טנזורית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_2'>4.2 חלקיק בשלוש מימדים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_4_3'>4.3 אופרטור הצפיפות ושזירה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. סימטרייה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_5_1'>5.1 מבוא לתורת ההצגות של חבורות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_2'>5.2 סימטריות</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_3'>5.3 וריאציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_4'>5.4 היפוך במקום</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_5_5'>5.5 היפוך בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. תנע זוויתי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_6_1'>6.1 חבורת הסיבובים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_2'>6.2 אלמנטי מטריצת הסיבוב</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_3'>6.3 תנע זוויתי אורביטלי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_6_4'>6.4 בעיית אטום המימן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שדה חשמלי ומגנטי</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_7_1'>7.1 טרנספורמציית כיול</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_2'>7.2 בעיית לנדאו ואהרונוב-בוהם</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_3'>7.3 פאזה גאומטרית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_4'>7.4 אטום מימן בשדה מגנטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_7_5'>7.5 תהודה מגנטית</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>8. ספין</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_8_1'>8.1 חיבור תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_2'>8.2 מציאת מקדמי קלבש גורדן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_3'>8.3 סימון 3j</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_4'>8.4 ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_5'>8.5 אופרטורים טנזוריים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_8_6'>8.6 וויגנר-אקארט</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>9. תורת ההפרעות והמבנה הדק</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_9_1'>9.1 לא מנוון לא תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_2'>9.2 מנוונת שאינו תלוי בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_3'>9.3 המבנה הדק</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_4'>9.4 תמונת האינטרקציה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_5'>9.5 תורת ההפרעות התלויה בזמן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_9_6'>9.6 שימושים של תורת ההפרעות התלויה בזמן</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>10. חלקיקים זההים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_10_1'>10.1 זוגות של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_2'>10.2 אוסף כללי של חלקיקים זהים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_10_3'>10.3 צימוד ספין</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>11. תורת הפיזור</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_11_1'>11.1 תורת פיזור קלאסית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_2'>11.2 תורת פיזור קוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_3'>11.3 פיזור במרחב אינסופי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_4'>11.4 אופרטור T והקירוב האופטי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_5'>11.5 קירוב בורן</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_11_6'>11.6 גלים חלקיים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>12. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Quantum_12_1'>12.1 הגדרות - יסודות הקוונטים</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_2'>12.2 הגדרות - ספין</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_3'>12.3 הגדרות - פתרונות מיחדות של שרדינגר</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_4'>12.4 הגדרות - תנע זוויתי</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_5'>12.5 הגדרות ריבוי דרגות חופש</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_6'>12.6 יסודות הפיסיקה הקוונטית</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_7'>12.7 מבוא</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_8'>12.8 סימטרייה</a></li>
+<li class='parent-page-dropdown'><a href='./Quantum_12_9'>12.9 שאלות - תורת ההפרעות</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Quantum_12_2'>12.2 הגדרות - ספין</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Quantum_12_4`; }if (event.key === 'ArrowLeft') { window.location.href = `./Quantum_12_2`; }});</script>
+        <div class="content">
+        <h1>12.3  הגדרות - פתרונות מיחדות של שרדינגר</h1>
+    <p>?
+פוטנציאל מהצורה:
+<span>$$V(x)={\frac{1}{2}}m\omega^{2}X^{2}$$</span></p>
+<p>מה ההגדרה של אוסצילטור הרמוני קוונטי?
+?
+מערכת שבה יש פוטנציאל הרמוני, כלומר מערכת שההמילטוניאן שלה יהיה:
+<span>$$H={\frac{p^{2}}{2m}}+{\frac{m\omega^{2}x^{2}}{2}}$$</span></p>
+<p>מה ההגדרה של אופרטורי העלה והורדה?
+?
+<span>$$a=\left( \hat{X}+i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x+\frac{i p}{m\omega}\right)\quad a^{\dagger}=\left( \hat{X}-i\hat{P} \right)=\sqrt{\frac{m\omega}{2\hbar}}\left(x-\frac{i p}{m\omega}\right)$$</span>
+לעיתים אופרטור הורדה <span>\(a\)</span> נקרא אופרטור השמדה ואופרטור העלה <span>\(a^{\dagger}\)</span> נקרא אופרטור יצירה.</p>
+<p>מה ההגדרה של אופרטור המספר?
+?
+<span>$$N=a^{\dagger}a=\left(\frac{m\omega}{2\hbar}\right)\left(x^{2}+\frac{p^{2}}{m^{2}\omega^{2}}\right)+\left(\frac{i}{2\hbar}\right)[x,p]=\frac{H}{\hbar \omega}-\frac{1}{2}$$</span></p>
+<p>מה ההגדרה של מצב קוהרנטי?
+?
+זהו מצב קוונטי <span>\(\ket{\alpha}\)</span> שמוגדר בתור המצב עצמי הייחודי של אופרטור ההשמדה <span>\(a\)</span>. נשים לב כי כיוון ש-<span>\(a\)</span> לא הרמיטי, המצב הקוהרנטי ולא בהכרח ממשי, וקיים לו אמפליטודה ופאזה מרוכבת.</p>
+<p>מה ההגדרה של חלקיק חופשי?
+?
+חלקיק שבו הפוטנציאל הוא אפס. כלומר ההמילטוניאן מקיים:
+<span>$$\mathcal{H}= \frac{P^{2}}{2m}$$</span></p>
+<p>מה ההגדרה של פוטנציאל דלתא?
+?
+עבור קבוע ממשי <span>\(\alpha\)</span> פוטנציאל דלתא יהיה פוטנציאל מהצורה:
+<span>$$V(x)=-\alpha \delta(x)$$</span>
+ולכן משוואת שרדינגר תהיה
+<span>$$-\;\frac{\hbar^{2}}{2m}\frac{d^{2}\psi}{d x^{2}}-\alpha\delta(x)\;\psi=E\psi$$</span></p>
+<p>מה ההגדרה של פוטנציאל מדרגה?
+?
+פוטנציאל מהצורה:
+<span>$$V(x)=\left\{{0\quad x\leq0}\atop{U\quad x&gt;0}\right.$$</span>
+כאשר <span>\(U&gt;0\)</span> זה קבוע.</p>
+<p>מה ההגדרה של נרמול?
+?
+אנו דורשים שסך ההסתברות שחלקיק נמצא איפשהו יהיה 1:
+<span>$$\int_{-\infty}^{+\infty}|\Psi(x,t)|^{2}\;d x=1$$</span></p>
+<p>מה ההגדרה של מצב קשור?
+?
+כאשר האנרגיה של החלקיק קטן מהפוטנציאל באיסוף, כלומר כאשר <span>\(E&lt;V\left( -\infty \right),V\left( \infty \right)\)</span>. במצב זה החלקיק תקוע בתוך איזור ולא יכול להתפזר לאינסוף.</p>
+<p>מה ההגדרה של מצב חופשי/מצב פיזור?
+?
+כאשר האנרגיה של החלקיק גדולה מהוטנציאל באינסוף, כלומר <span>\(E&gt;V\left( -\infty \right),V\left( \infty \right)\)</span>. במקרה זה נקבל כי תמיד קיים הסתברות שהחלקיק יברח לאינסוף.</p>
+<p>מה ההגדרה של צפיפות הסתברות?
+?
+נסמן את צפיפות ההסתברות ב-<span>\(x\)</span> בזמן <span>\(t\)</span> ע"י:
+<span>$$\rho\left(x,t\right)\equiv\left|\psi\left(x,t\right)\right|^{2}$$</span></p>
+<p>מה ההגדרה של זרם הסתברות?
+?
+<span>$$j\left(x\right)=\frac\hbar{2i m}\left(\overline{{{\psi}}}\frac{\partial\psi}{\partial x}-\psi\frac{\partial\overline{{{\psi}}}}{\partial x}\right)=\frac\hbar m\mathrm{Im}\left(\overline{{{\psi}}}\frac{\partial\psi}{\partial x}\right)$$</span></p>
+<p>מה ההגדרה של בור בפוטנציאל אינסופי?
+?
+מערכת עם פוטנציאל מהצורה:
+<span>$$V(x)=\left\{{\begin{array}{l l}{{0}}&amp;{{{0\leq x\leq a}}}\\ {{\infty,}}&amp;{{\mathrm{otherwise}}}\end{array}}\right.$$</span></p>
+<p>מה ההגדרה של בור בפוטנציאל סופי?
+?
+מערכת עם פוטנציאל מהצורה:
+<span>$$V(x)=\left\{\begin{array}{l l}{{-V_{0},}}&amp;{{-a\le x\le a,}}\\ {{0,}}&amp;{{\vert x\vert&gt;a,}}\end{array}\right.$$</span>
+כאשר <span>\(V_{0}\)</span> קבוע חיובי.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Quantum_12_4'>12.4 הגדרות - תנע זוויתי</a></li>
+<li class='prev-page'><a href='./Quantum_12_2'>12.2 הגדרות - ספין</a></li>
+</ul></li>
+        </body>
+        </html>
+        

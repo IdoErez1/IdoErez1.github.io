@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>נים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_1_2`; }});</script>
+        <div class="content">
+        <h1>1.3  נים</h1>
+    <div class="definition"><span class="keyword">משחק חיסור</span><p>נניח כי יש לנו אוסף של <span>\(n\)</span> מטבעות. כל תור שחקן יכול לקחת <span>\(\left\{  a_{1},\dots,a_{n}  \right\}\)</span> מטבעות כאשר <span>\(a_{i}\in [n]\)</span>. השחקן שלוקח את המטבע האחרון מנצח.</p>
+</div>
+<div class="example">
+<p>נניח כי נאפשר לקחת רק 1-2 מטבעות. כעת:
+<span>$$\begin{array}{c|c|c}n &amp; \text{possible moves} &amp; \text{winner} \\ \hline 1 &amp; 0 &amp; \checkmark \\ \hline2 &amp; 1,0 &amp; \checkmark  \\\hline3 &amp; 2,1 &amp; \mathsf{X} \\ \hline4 &amp; 3,2 &amp; \checkmark \\ \hline5 &amp; 4,3 &amp; \checkmark
+\end{array}$$</span>
+ונשים לב כי השחקן הראשון מנצח אם רק אם <span>\(n\nmid 3\)</span>. הרעיון לאיך שמנצחים עבור <span>\(n=4,5\)</span> זה שמעבירים את המצב למצב שבו <span>\(n=3\)</span> והתור של השחקן השני, ולכן השחקן השני מפסיד.</p>
+</div>
+<div class="definition"><span class="keyword">מספר נימבר</span><p>נגדיר עבור הערך הטרמינאלי <span>\(G(0)=0\)</span> בתור הערך שעבורו מספידים. כעת נגדיר באופן רקורסיבי, אם אנחנו ב-<span>\(n\)</span> וניתן להגיע ל-<span>\(\left\{  a_{1},\dots,a_{n}  \right\}\)</span> אזי נגדיר:
+<span>$$G(n)=\mathrm{mex}\left\{  G(a_{1}),\dots G(a_{n})  \right\}:= \min \left\{  \mathbb{N}\setminus \left\{  G(a_{1}),\dots,G(a_{n})  \right\}  \right\}$$</span>
+כאשר <span>\(\mathrm{mex}\)</span> מוגדר בתור המספר הטבעי(כולל אפס) הקטן ביותר שלא מופיע ברשימה.</p>
+</div>
+<div class="example">
+<p>אם ניתן לקחת <span>\(1-2\)</span> מטבעות נקבל:
+<span>$$\begin{array}{c|c|c}n &amp; \text{possible moves} &amp;\text{Nimber}&amp; \text{winner} \\ \hline 1 &amp; 0 &amp; G(1)=\text{mex}(G(0))=\text{mex}\{ 0 \}=1&amp;\checkmark \\ \hline2 &amp; 1,0 &amp;  G(2)=\mathrm{mex}\{ G(1),G(0) \}=\text{mex}\{ 0,1 \}=2&amp; \checkmark  \\\hline3 &amp; 2,1 &amp;  G(3)=\text{mex}\{ 1,2 \}=0&amp; \mathsf{X} \\ \hline4 &amp; 3,2 &amp; G(4)=\text{mex}\{ 0,2 \}= 1&amp; \checkmark \\ \hline5 &amp; 4,3 &amp; G(5)=\text{mex}\{ 0,1 \}=2&amp;  \checkmark
+\end{array}$$</span></p>
+</div>
+<div class="proposition">
+<p>שחקן 1 יכול לנצח אם"ם <span>\(G(n)\neq 0\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(G(n)=0\)</span>. לפי הגדרת מספר נימבר, כל מהלך אפשרי מוביל למצב שבו <span>\(G(a_{i})\neq 0\)</span>. כלומר, כל תור של השחקן הראשון יוביל למצב שבו השחקן השני נמצא במצב מנצח (<span>\(G(a_{i})\neq 0\)</span>). השחקן השני יוכל תמיד להחזיר את המצב ל-<span>\(G=0\)</span> בתורו, ולכן השחקן הראשון יפסיד.
+לעומת זאת, אם <span>\(G(n)\neq 0\)</span>, השחקן הראשון יכול לבחור מהלך שמוביל למצב שבו <span>\(G(a_{i})=0\)</span> (קיים <span>\(a_{i}\)</span> כזה לפי הגדרת <span>\(\mathrm{mex}\)</span>). כך בכל תור, השחקן הראשון יכול להחזיר את המצב ל-<span>\(G=0\)</span> בתורו של השחקן השני, עד שינצח.
+לכן, השחקן הראשון מנצח אם ורק אם <span>\(G(n)\neq 0\)</span>.</p>
+</div>
+<div class="proposition">
+<p>מהעקרון של גנבת אסטרטגיה נקבל כי הנימר הוא לא אפס לכל קבוצה סדורה חלקית שיש לה סופרמום.</p>
+</div>
+<div class="definition"><span class="keyword">סכום של משחקים</span><p>ניתן לאחד מספר משחקים בלתי תלויים ולשחק מאחד המשחקים כל תור. אם <span>\(G_{1},G_{2},\dots,G_{n}\)</span> משחקים אזי הסכום מסומן על ידי:
+<span>$$G=G_{1}+G_{2}+\cdot\cdot\cdot+G_{n}$$</span></p>
+</div>
+<div class="proposition">
+<p>אם משחק <span>\(G=G_{1}+G_{2}+\cdot\cdot\cdot+G_{n}\)</span>  הוא סכום של משחקים כך שלכל משחק <span>\(G_{i}\)</span> יש נימר <span>\(g_{i}\)</span> נקבל כי הנימר של הסכום יהיה:
+<span>$$G(G_{1}+\cdot\cdot\cdot+G_{n})=g_{1}\oplus g_{2}\oplus\cdot\cdot\cdot\oplus g_{n}$$</span>
+כאשר <span>\(\oplus\)</span> מייצג <span>\(\text{XOR}\)</span> בינארי. </p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(G_{1},\dots,G_{n}\)</span> הם משחקים קומבינטוריים בלתי תלויים עם נימרים <span>\(g_{1},\dots,g_{n}\)</span>. בכל תור, השחקן יכול לבחור משחק אחד ולבצע בו מהלך חוקי. נרצה להראות כי הנימר של הסכום הוא <span>\(g_{1}\oplus g_{2}\oplus\cdots\oplus g_{n}\)</span>.
+נשתמש באינדוקציה על מספר המשחקים <span>\(n\)</span>.
+<strong>בסיס האינדוקציה (<span>\(n=1\)</span>):</strong> ברור כי <span>\(G(G_{1})=g_{1}\)</span>.
+<strong>צעד האינדוקציה:</strong> נניח כי הטענה נכונה עבור <span>\(n-1\)</span> משחקים. נוסיף משחק נוסף <span>\(G_{n}\)</span> עם נימר <span>\(g_{n}\)</span>. מצב המשחק הוא <span>\((g_{1},\dots,g_{n})\)</span>. כל מהלך אפשרי הוא שינוי אחד מהערכים <span>\(g_{i}\)</span> לערך אחר <span>\(g_{i}'\)</span> (בהתאם למהלך חוקי במשחק <span>\(G_{i}\)</span>).
+הנימר של מצב <span>\((g_{1},\dots,g_{n})\)</span> מוגדר להיות <span>\(\mathrm{mex}\)</span> של כל הנימרים האפשריים שמתקבלים ממהלכים אפשריים:
+<span>$$G(g_{1},\dots,g_{n}) = \mathrm{mex}\left\{ G(g_{1},\dots,g_{i}',\dots,g_{n}) \mid g_{i}' \text{ מתקבל ממהלך חוקי ב-} G_{i} \right\}
+$$</span>
+לפי הגדרת הנימר, עבור כל <span>\(i\)</span>, כל מהלך במשחק <span>\(G_{i}\)</span> משנה את <span>\(g_{i}\)</span> לערך <span>\(g_{i}'\)</span> אפשרי. הנימר של המצב החדש הוא <span>\(g_{1}\oplus\cdots\oplus g_{i}'\oplus\cdots\oplus g_{n}\)</span>.
+המספר הקטן ביותר שלא מתקבל על ידי אף מהלך כזה הוא בדיוק <span>\(g_{1}\oplus\cdots\oplus g_{n}\)</span>, כי כל ערך אחר מתקבל על ידי שינוי אחד מה-<span>\(g_{i}\)</span> לערך קטן יותר (לפי הגדרת הנימר של משחק חיסור).
+לכן, הנימר של הסכום הוא <span>\(g_{1}\oplus g_{2}\oplus\cdots\oplus g_{n}\)</span>.</p>
+</div>
+<div class="example">
+<p>נסתכל על משחק של שתי משחקי חיסור, משחק <span>\(A\)</span> עם <span>\(n=3\)</span> ומשחק <span>\(B\)</span> עם <span>\(n=4\)</span>. כך שניתן להחסיר כל מספר של מטבעות מכל ערימה. אזי:
+<span>$$G(A)=3\qquad  G(B)=4$$</span>
+ולכן:
+<span>$$G(A+B)=3\oplus 4= 11_{\mathbb{F}  _{2}}\oplus 100_{\mathbb{F}_{2} }=111_{\mathbb{F_{2}} }=7$$</span>
+וכיוון שזהו שונה מ-0 נקבל כי יש אסטרטגיה מנצחת! כדי למצוא את האסטרטגיה המנצחת נדרש למצוא את המהלך שהופך את הנימר ל-0(כלומר שיריב בוודאות יפסיד בתור שלו). כיוון שמספר <span>\(\text{XOR}\)</span> עם עצמו הוא תמיד אפס ניתן להוריד מטבע אחד ממשחק <span>\(B\)</span> ולכן:
+<span>$$G(A+B)=3\oplus 3 = 0$$</span>
+ולכן זה המהלך המנצח.</p>
+</div>
+<div class="summary">
+<ul>
+<li>משחק חיסור הוא משחק קומבינטורי שבו שחקן יכול לקחת מספר מטבעות מהערימה בכל תור.</li>
+<li>נימר של משחק חיסור מוגדר באופן רקורסיבי, כאשר <span>\(G(0)=0\)</span> והנימר של מצב <span>\(n\)</span> הוא <span>\(\mathrm{mex}\)</span> של הנימרים של כל המהלכים האפשריים.</li>
+<li>סכום של משחקים הוא סכום של נימרים של המשחקים, כאשר הנימר של הסכום הוא <span>\(\oplus\)</span> של כל הנימרים של המשחקים.</li>
+<li>שחקן 1 יכול לנצח אם ורק אם הנימר של המשחק הראשוני שונה מ-0.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='prev-page'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

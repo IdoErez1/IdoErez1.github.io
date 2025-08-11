@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>משחקים קואליציונים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_3_2'>3.2 ליבה</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_3_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_2_4`; }});</script>
+        <div class="content">
+        <h1>3.1  משחקים קואליציונים</h1>
+    <div class="definition"><span class="keyword">קואליציה</span><p>תהי <span>\(N\)</span> קבוצה שחקנים. תת קבוצה <span>\(S\subseteq N\)</span> נקראת קואליציה. כאשר <span>\(S=N\)</span> נאמר כי על קאליציה(grand coalition)</p>
+</div>
+<div class="definition"><span class="keyword">משחק קואליציוני</span><p>זוג <span>\(G=(N,V)\)</span> כאשר <span>\(N\)</span> היא קבוצת השחקנים, ו-<span>\(V\)</span> היא פונקציה <span>\(V:2^{N}\to \mathbb{R}\)</span> המקיימים <span>\(V\left( \varnothing \right)=0\)</span>.</p>
+</div>
+<div class="remark">
+<p>ה-<span>\(2^{N}\)</span> זה כמות הדרכים לקבל שילוב של שחקנים אפשריים בקואליציה(עבור כל שחקן או שנמצא, או שלא נמצא) ולכן זה למעשה פונקציה שמקבלת קואליציה אפשרית ותחזיר את התועלת אם ישתפו פעולה.</p>
+</div>
+<div class="example">
+<p>נניח כי שלושה חברות <span>\(A,B,C\)</span> רוצות לשצף פעולה, כך שכל חברה לבד מפיקה את התועלת:
+<span>$$v\left( \{A\} \right)=2,\quad v\left( \{B\} \right)=3,\quad v\left( \{C\} \right)=1$$</span>
+ועם משתפים פעולה יקבלנו יותר תועלת:
+<span>$$v\left( \{A,B\} \right)=7,\quad v\left( \{B,C\} \right)=5,\quad v\left( \{A,C\} \right)=4$$</span>
+כך שאם שלושתם משתפים פעולה יקבלנו אפילו יותר תועלת:
+<span>$$v\left( \{ A,B,C \} \right)=10$$</span></p>
+</div>
+<div class="example"><span class="keyword">משחק הכפפות</span><p>נניח שיש לנו 3 כפפות, מתוכם שתים הם שמליות, <span>\(\left( \{ L_{1},L_{2} \} \right)\)</span> וכפפה אחת היא ימנית (<span>\(\{ R_{1} \}\)</span>). ערך של קואליציה היא מספר הזוגות שניתן ללבוש(זוג זרים). אזי:
+<span>$$V\left(\varnothing\right)=V\left(L_{1}\right)=V\left(L_{1},L_{2}\right)=0,\qquad\qquad V\left(L_{1},R_{1}\right)=V\left(L_{2},R_{1}\right)=V\left(L_{1},L_{2},R_{1}\right)=1$$</span></p>
+</div>
+<div class="definition"><span class="keyword">ווקטור תשלומים - Imputation</span><p>דרך לחלק את כל התועלת של הקואליציה <span>\(v(N)\)</span> בין השחקנים. זהו ווקטור <span>\(\vec{x} \in \mathbb{R}^{n}\)</span> אשר כל רכיב <span>\(x_{i}\)</span> בווקטור מייצג כמה השחקן ה-<span>\(i\)</span> מקיים. כלומר זהו ווקטור אשר מקיים:
+<span>$$\sum_{i=1}^{n}x_{i}=v{\big(}N{\big)}\quad{\mathrm{and}}\quad x_{i}\geq v(\{i\})\,{\mathrm{for~all}}\,i.$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_3_2'>3.2 ליבה</a></li>
+<li class='prev-page'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+        </body>
+        </html>
+        

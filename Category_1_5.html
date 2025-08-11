@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>איזומורפיזם של אובייקטים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_2_1'>2.1 שיכונים</a></li>
+<li class='parent-page'><a href='./Category'> תורת הקטגוריות</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. קטגוריות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_1_1'>1.1 בסיס קבוצתי - יקום</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_2'>1.2 הגדרת הקטגוריה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_3'>1.3 דוגמאות לקטגוריות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_4'>1.4 דואליות</a></li>
+<li class='parent-page-dropdown'><a href='./Category_1_5'>1.5 איזומורפיזם של אובייקטים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. פונקטורים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_2_1'>2.1 שיכונים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_2'>2.2 הפונקטור</a></li>
+<li class='parent-page-dropdown'><a href='./Category_2_3'>2.3 העתקות טבעיות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. הלמה של יונדה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_3_1'>3.1 ייצוג וקו יצוג</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_2'>3.2 הלמה של יונדה</a></li>
+<li class='parent-page-dropdown'><a href='./Category_3_3'>3.3 שיכון יונדה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. פונקטורים צמודים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Category_4_1'>4.1 הגדרה של פונקטורים צמודים</a></li>
+<li class='parent-page-dropdown'><a href='./Category_4_2'>4.2 יחידה וקו יחידה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Category_1_4'>1.4 דואליות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Category_2_1`; }if (event.key === 'ArrowLeft') { window.location.href = `./Category_1_4`; }});</script>
+        <div class="content">
+        <h1>1.5  איזומורפיזם של אובייקטים</h1>
+    <div class="definition"><span class="keyword">איזומורפיזם של אובייקטים</span><p>יהיו <span>\(A,B \in \mathrm{Ob}(\mathcal{C})\)</span>. מורפיזם <span>\(f:A\to B\)</span> נקרא איזומורפיזם אם קיים מורפיזם <span>\(g:B\to A\)</span> כך ש:
+<span>$$f\circ  g = \mathrm{Id}_{B}\qquad \text{and}\qquad g \circ  f = \mathrm{Id}_{A}$$</span></p>
+</div>
+<div class="example">
+<p>הזהות <span>\(\mathrm{Id}\)</span> הוא איזומורפיזם. אנו יודעים כי:
+<span>$$\mathrm{Id_{X}\circ Id_{X}=Id_{X}}$$</span>
+לכן כל אובייקט <span>\(X\)</span> איזומורפי לעצמו.</p>
+</div>
+<div class="example">
+<ul>
+<li>עבור הקטגוריה <span>\(\text{Sets}\)</span> האיזומורפיזמים הם בדיוק הפונקציות אשר חח"ע ועל. </li>
+<li>עבור <span>\(\text{Grp, Ring, Field}\)</span> האיזומורפיזמים הם בדיוק הומומורפיזמים החח"ע ועל.</li>
+<li>עבור <span>\(\text{Top}\)</span> האיזומורפיזמים הם ההומאומורפיזמים, כלומר הפונקציות הרציפות עם הופכי רציף.</li>
+<li>עבור קבוצות סדורות חלקית <span>\(\left( P,\leq \right)\)</span> מהאקסיומה של האנטי סימטריה נקבל כי <span>\(x\leq y\)</span> ו-<span>\(y\leq x\)</span> לכן האיזומופיזמים היחידים הם הזהות.</li>
+</ul>
+</div>
+<div class="proposition">
+<p>עבור <span>\(f:X\to Y\)</span> אם קיימים <span>\(g,h:Y\to X\)</span> כך שמקיימים:
+<span>$$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}$$</span>
+אז <span>\(g=h\)</span> וגם <span>\(f\)</span> איזומורפיזם. כלומר עבור איזומורפיזם קיים הופכי.</p>
+</div>
+<div class="proof">
+<p>נתחיל מ-<span>\(g\)</span>. נשים לב כי <span>\(g=g\circ\mathrm{Id}_{Y}\)</span>. כיוון ש-<span>\(\mathrm{Id}_{Y}=f\circ h\)</span> ניתן להציב ולקבל:
+<span>$$g=g\circ(f\circ h)$$</span>
+מאסוצייטביות ההרכבה נקבל <span>\(g\circ(f\circ h)=(g\circ f)\circ h.\)</span> אבל <span>\(g \circ f = \mathrm{Id}_{X}\)</span> מההנחה ולכן:
+<span>$$(g\circ f)\circ h=\operatorname{Id}_{X}\circ h=h$$</span>
+כלומר קיבלנו <span>\(g=h\)</span>. העובדה שאיזומורפיזם נובע ישירות כיוון ששווים, כיוון שכעת יש פונקציה <span>\(g\)</span> אשר מקיימת <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g = \mathrm{Id}_{Y}\)</span>.</p>
+</div>
+<div class="proposition">
+<p>אם <span>\(f:X\to Y\)</span> הוא איזומורפיזם אז ההופכי <span>\(g\)</span>(אשר מקיים <span>\(g\circ f = \mathrm{Id}_{X}\)</span> וגם <span>\(f\circ g=\mathrm{Id}_{Y}\)</span>) הוא יחיד, וניתן לסמן אותו ב-<span>\(f^{-1}:Y\to X\)</span>.</p>
+</div>
+<div class="proof">
+<p>נניח כי <span>\(g\)</span> ו-<span>\(h\)</span> שתיהם הופכיים של <span>\(f\)</span>, כלומר:
+<span>$$\begin{gather}g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{Id}_{Y} \\h\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ h=\operatorname{Id}_{Y}
+\end{gather}$$</span>
+כעת נקבל כמו בטענה הקודמת:
+<span>$$g=g\circ{\mathrm{Id}}_{Y}=g\circ(f\circ h)=(g\circ f)\circ h={\mathrm{Id}}_{X}\circ h=h$$</span>
+ולכן ההופכי יחיד.</p>
+</div>
+<div class="definition"><span class="keyword">אנדומורפיזם</span><p>מורפיזם שהתחום זהם לטווח.</p>
+</div>
+<div class="definition"><span class="keyword">אוטומורפיזם</span><p>אנדומורפיזם שהוא איזומורפיזם.</p>
+</div>
+<div class="definition"><span class="keyword">גרופויד</span><p>קטגוריה שכל מורפיזם הוא איזומורפיזם.</p>
+</div>
+<div class="example">
+<p>חבורה היא גרופאיד עם אובייקט יחיד(אפשר אפילו להגדיר ככה חבורה).</p>
+</div>
+<div class="example"><span class="keyword">הגרופיד היסודי</span><p>יהי <span>\(X\)</span> מרחב טופולוגי נגדיר קטגוריה חדשה בצורה הבאה:
+- אובייקטיים: איברים במרחב הטופולוגי <span>\(x \in X\)</span>.
+- מורפיזימיים: מחלקות הומוטפייה של מסילות - <span>\(\left[ \gamma \right]:x\to y\)</span>.
+הרכבה - שרשור של מסילות.
+זהות - המסילה הקבועה.
+הופכי - המסילה ההפוכה <span>\(\left[ \gamma ^{-1} \right]\)</span>.
+נקבל לבסוף את הגרופאיד היסודי <span>\(\Pi_{1}(X)\)</span> אשר מכליל את החבורה היסודית <span>\(\pi_{1}(X,x)\)</span>.</p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Category_2_1'>2.1 שיכונים</a></li>
+<li class='prev-page'><a href='./Category_1_4'>1.4 דואליות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

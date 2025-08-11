@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>ליבה</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game'> תורת המשחקים</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game_3_1`; }});</script>
+        <div class="content">
+        <h1>3.2  ליבה</h1>
+    <div class="definition"><span class="keyword">ליבה - core</span><p>אוסף ווקטורי תשלומים כך שלאף קואליציה <span>\(S\)</span> אין תמריץ לעזוב. כלומר זוהי קבוצת הווקטורים <span>\(x=\left( x_{1},\dots,x_{n} \right)\)</span> אשר מקיימים:</p>
+<ol>
+<li>
+<p>יעילות - <span>\(\sum_{i\in N}x_{i}=v(N)\)</span> </p>
+</li>
+<li>
+<p>רציונאליות קואליציונית - לכל קואליציה <span>\(S\subseteq N\)</span> מתקיים: 
+<span>$$\sum_{i\in S}x_{i}\geq v(S)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="definition"><span class="keyword">משחק קמור</span><p>משחק שיתופי <span>\((N,V)\)</span> נקרא קמור אם לכל קואליציונת <span>\(S,T\subseteq N\)</span> מתקיים:
+<span>$$V(S)+V(T)\;\leq\;V(S\cup T)+V(S\cap T)$$</span></p>
+</div>
+<p>עבור המשחק עם המשתתפים <span>\(N=\{ 1,2,3 \}\)</span> והפונקציית:
+<span>$$V\left( \{ 1 \} \right)=1\qquad V\left( \{ 2 \} \right)=2\qquad V\left( \{ 3 \} \right)=3$$</span>
+<span>$$V\left( \{ 1,2 \} \right)=4\qquad V\left( \{ 2,3 \} \right)=6\qquad V\left( \{ 1,3 \} \right)=5\qquad V\left( \{ 1,2,3 \} \right)=10$$</span>
+נקבל כי המשחק קמור. ניתן לבדוק ידנית:
+<span>$$V\left( \{ 1 \} \right)+V\left( \{ 2 \} \right)=3 \leq 4=V\left( \{ 1,2 \} \right)+V\left( \varnothing  \right)$$</span></p>
+<div class="proposition"><span class="keyword">marginal vector theorem</span><p>יהי <span>\((N,V)\)</span> משחק שיתופי קמור. כל תמורה <span>\(\pi\)</span> של השחקנים יוצר את הווקטור:
+<span>$$m^{\pi}=\left( m_{1}^{\pi},\dots,m_{n}^{\pi} \right)$$</span>
+כאשר לשכל שחקן <span>\(i\)</span> נגדיר:
+<span>$$m_{i}^{\pi}=V\left( P_{i}^{\pi}\cup \{ i \} \right)-V\left( P_{i}^{\pi} \right)$$</span>
+כאשר <span>\(P_{i}^{\pi}\)</span> זה אוסף הקודמים ל-<span>\(i\)</span> בסדר של <span>\(\pi\)</span>. אזי:
+<span>$$\mathrm{Core}(N,V)=\mathrm{conv}\{\,m^{\pi}:\pi\mathrm{~a~permutation~of}\,N\}.$$</span>
+כלומר הסגור הקומור של הווקטורים <span>\(m^{\pi}\)</span>.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נראה כי הווקטורים האלו נמצאים בליבה. יהי <span>\(\pi\)</span> תמורה. נקבל: 
+<span>$$\sum_{k=1}^{n}m_{\pi(k)}^{\pi}=\sum_{k=1}^{n}\left(v(\{\pi(1),\ldots,\pi(k)\})-v(\{\pi(1),\ldots,\pi(k-1)\})\right)=v(N)$$</span>
+עבור כל קואליציה <span>\(S\subseteq N\)</span> נסתכל על השחקנים של <span>\(S\)</span> מסודרים לפי <span>\(\pi\)</span>:
+<span>$$S=\{\pi(i_{1}),\pi(i_{2}),\ldots,\pi(i_{k})\},\quad i_{1}&lt;i_{2}&lt;\cdots&lt;i_{k}$$</span>
+נרצה כעת להראות כי <span>\(\sum_{j=1}^{k}m_{\pi(i_{j})}^{\pi}\geq v(S)\)</span>. מהקמירות של המשחק נקבל:
+<span>$$v(A\cup\{j\})-v(A)\leq v(B\cup\{j\})-v(B)\quad\mathrm{for~}A\subseteq B\subseteq N\setminus\{j\}$$</span>
+לכן ניתן להסתכל על שרשרת האי שיוויונות:
+<span>$$\sum_{j=1}^{k}m_{\pi(i_{j})}^{\pi}=\sum_{j=1}^{k}\left(v\left(\bigcup_{l=1}^{i_{j}}\{\pi(l)\}\right)-v\left(\bigcup_{l=1}^{i_{j}-1}\{\pi(l)\}\right)\right)$$</span>
+כיוון שהקבוצה <span>\(A_{j}:=\bigcup_{l=1}^{i_{j}-1}\{\pi(l)\}\)</span> מוכלת ב-<span>\(A_{j+1}\)</span> ו-<span>\(\{\pi(i_{j})\}\notin A_{j}\)</span> ולכן:
+<span>$$\sum_{j=1}^{k}m_{\pi(i_{j})}^{\pi}\geq v(S)\implies m^{\pi}\in \mathrm{Core}(v)$$</span></p>
+</li>
+<li>
+<p>נזכור כי מההגדרה הליבה היא קבוצה קמורה בתור חיתוך של אי שיוויונות לינאריות. לכן  </p>
+</li>
+</ol>
+</div>
+<div class="example">
+<p>עבור המשחק מהדוגמא הקודמת נקבל:</p>
+<table>
+<thead>
+<tr>
+<th><span>\(\pi\)</span></th>
+<th><span>\(m_1^\pi\)</span></th>
+<th><span>\(m_2^\pi\)</span></th>
+<th><span>\(m_3^\pi\)</span></th>
+<th>vector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>\((1 2 3)\)</span></td>
+<td><span>\(V({1})-V(\varnothing)=1\)</span></td>
+<td><span>\(V({1,2})-V({1})=3\)</span></td>
+<td><span>\(V(N)-V({1,2})=6\)</span></td>
+<td><span>\((1,3,6)\)</span></td>
+</tr>
+<tr>
+<td><span>\((1 3 2)\)</span></td>
+<td><span>\(1\)</span></td>
+<td><span>\(V(N)-V({1,3})=5\)</span></td>
+<td><span>\(V({1,3})-V({1})=4\)</span></td>
+<td><span>\((1,5,4)\)</span></td>
+</tr>
+<tr>
+<td><span>\((2 1 3)\)</span></td>
+<td><span>\(V({2,1})-V({2})=2\)</span></td>
+<td><span>\(2\)</span></td>
+<td><span>\(V(N)-V({1,2})=6\)</span></td>
+<td><span>\((2,2,6)\)</span></td>
+</tr>
+<tr>
+<td><span>\((2 3 1)\)</span></td>
+<td><span>\(V(N)-V({2,3})=4\)</span></td>
+<td><span>\(2\)</span></td>
+<td><span>\(V({2,3})-V({2})=4\)</span></td>
+<td><span>\((4,2,4)\)</span></td>
+</tr>
+<tr>
+<td><span>\((3 1 2)\)</span></td>
+<td><span>\(V({3,1})-V({3})=2\)</span></td>
+<td><span>\(V(N)-V({1,3})=5\)</span></td>
+<td><span>\(3\)</span></td>
+<td><span>\((2,5,3)\)</span></td>
+</tr>
+<tr>
+<td><span>\((3 2 1)\)</span></td>
+<td><span>\(V(N)-V({2,3})=4\)</span></td>
+<td><span>\(V({2,3})-V({3})=3\)</span></td>
+<td><span>\(3\)</span></td>
+<td><span>\((4,3,3)\)</span></td>
+</tr>
+<tr>
+<td>וכעת:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>$$\operatorname{Core}(N,V)=\operatorname{conv}\bigl\{(1,3,6),(1,5,4),(2,2,6),(4,2,4),(2,5,3),(4,3,3)\bigr\}.$$</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>כאשר זהו משושה אשר נמצא במישור:</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><span>$$x_{1}+x_{2}+x_{3}=10$$</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="corollary">
+<p>עבור משחק קמור הליבה לא ריקה.</p>
+</div>
+<div class="example"><span class="keyword">משחק לא קמור - כפפות</span><p>נניח כי נתון אוסף של כפפות שמאליות <span>\(L=\left\{  L_{1},\dots,L_{m}  \right\}\)</span> וכפפות ימניות <span>\(R=\left\{  R_{1},\dots,R_{m}  \right\}\)</span> כך שהערך של כל קואליציה היא כמות הזוגות התקינות(כפפה ימינית + שמאלית) שניתן להרכיב. כלומר עבור <span>\(S\subseteq L\cup R\)</span> נקבל:
+<span>$$v(S)=\min \left( \left\lvert  S\cap L  \right\rvert ,\left\lvert  S\cap R  \right\rvert  
+\right)$$</span>
+הווקטור התשלומים יהיה ווקטור מהצורה <span>\(x=\left(x_{L_{1}},...\,,x_{L_{m}},x_{R_{1}},...\,,x_{R_{m}}\right)\)</span> המקיים:
+<span>$$\sum_{i=1}^{m}x_{L_{i}}+\sum_{j=1}^{m}x_{R_{j}}=m\qquad \forall i,j\quad x_{L i}\geq0,\ x_{R_{j}}\geq0$$</span>
+כדי לתאר את הליבה, ניקח קואליציה כללית <span>\(S\)</span> עם:
+<span>$$\ell=|S\cap L|,\qquad r=|S\cap R|,\qquad k=\operatorname*{min}(\ell,r)=v(S)$$</span>
+כיוון ש-<span>\(k\leq \ell\)</span> ו-<span>\(k\leq r\)</span> ניתן לבחור <span>\(k\)</span> זוגות זרות של כפפו ימניות ושמאליות ב-<span>\(S\)</span>. מתקיים:
+<span>$$\sum_{p=1}^{k}\left(x_{L_{i_{p}}}+x_{R_{j_{p}}}\right)\geq k=v(S)$$</span>
+וכיוון שלכל הגורמים האחרים בקואליציה יש תשלום אי שלילי נקבל:
+<span>$$\sum_{u\in S}x_{u}\geq v(S)$$</span>
+ולכן אף קואליציה לא יכולה לשפר את <span>\(x\)</span>, והליבה תהיה:
+<span>$$\mathcal{C} =\left\{  x \in \mathbb{R}^{2m}\mid \sum_{i=1}^{m}x_{L_{i}}+\sum_{j=1}^{m} x_{R_{j}}=m\qquad \forall i,j\quad x_{L_{i}},x_{R_{j}}\geq 0\quad  x_{L_{i}}+x_{R_{j}}\geq 1 \right\}$$</span></p>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game'> תורת המשחקים</a></li>
+<li class='prev-page'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+</ul></li>
+        </body>
+        </html>
+        

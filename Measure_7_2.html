@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>הוכחות מרכזיות</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_4'>7.4 מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_6'>7.6 מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_9'>7.9 שאלות - מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_11'>7.11 שאלות - מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_12'>7.12 שאלות - משפט ההצגה של ריס</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_7_3`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_7_1`; }});</script>
+        <div class="content">
+        <h1>7.2  הוכחות מרכזיות</h1>
+    <div class="theorem"><span class="keyword">הלמה של בורל קנטלי</span><p>יהי <span>\(\left( X,\mathcal{B},\mu \right)\)</span> מרחב מידה. אזי אם <span>\(\{ A_{n} \}_{n=1}^{\infty}\subseteq \mathcal{B}\)</span> מקיים:
+<span>$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$</span>
+אזי:
+<span>$$\mu\left(\limsup_{n\to\infty}A_{n}\right)=\mu\left( \bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k} \right)=0$$</span></p>
+</div>
+<div class="proof">
+<p>יהי <span>\(\left( X,\mathcal{B} , \mu \right)\)</span> מרחב מידה. נניח <span>\(\{ A_{n} \}\subseteq B\)</span> כך שמתקיים:
+<span>$$\sum_{n=1}^{\infty}\mu\left(A_{n}\right)&lt;\infty$$</span>
+מספיק להראות כי הקבוצה המתוארת על ידי התכונה "<span>\(X\)</span> שייך למספר אינסופי של <span>\(A_{n}\)</span>" היא קבוצה ממידה אפס כלומר שהקבוצה <span>\(B\subseteq X\)</span> המוגדרת על ידי:
+<span>$$E=\left\{x\in X:x\in A_{n}{\mathrm{~for~infinitely~many}}\,n\right\}$$</span>
+תקיים <span>\(\mu(E)=0\)</span>. כאשר בהתאם להדרכה, מתקיים:
+<span>$$E=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</span></p>
+</div>
+<p>כאשר זה כמו שאנחנו רוצים, מבטא את החיתוך של כל האיברים שנמצאים בכמות אינסופית של <span>\(\{ A_{n} \}\)</span>(כדי שאיבר יהיה ב-<span>\(E\)</span> נדרש שיהיה שלכל <span>\(n \in \mathbb{N}\)</span> קיים <span>\(N&gt;n\)</span> כך ש-<span>\(x \in A_{N}\)</span>). כעת לכל <span>\(n \in \mathbb{N}\)</span> נגדיר:
+<span>$$E_{n}=\bigcup_{k=n}^{\infty}A_{k}$$</span>
+כאשר לפי ההגדרה: 
+<span>$$E=\bigcap_{n=1}^{\infty}E_{n}$$</span>
+נשים לב כי הסדרה <span>\(\{ E_{n} \}\)</span> היא סדרה יורדת תחת היחס <span>\(\subseteq\)</span>:
+<span>$$E_{1}\supseteq E_{2}\supseteq E_{3}\supseteq\cdots$$</span>
+כאשר מרציפות המידה של סדרות יורדות נקבל:
+<span>$$\mu(E)=\mu\left(\bigcap_{n=1}^{\infty}E_{n}\right)=\operatorname*{lim}_{n\to\infty}\mu(E_{n}).$$</span>
+וכן מאדטיביות המידה מתקיים:
+<span>$$\mu(E_{n})=\mu\left(\bigcup_{k=n}^{\infty}A_{k}\right)\leq\sum_{k=n}^{\infty}\mu(A_{k})$$</span>
+יהי <span>\(\varepsilon&gt; 0\)</span>. מההנחה מתקיים:
+<span>$$\lim_{ n \to \infty } \sum_{k=n}^{\infty} \mu(A_{k})=0$$</span>
+ולכן מהגדרה הגבול קיים <span>\(N \in \mathbb{N}\)</span> כך שעבורו לכל <span>\(n &gt; N\)</span> מתקיים:
+<span>$$\sum_{k=n}^{\infty}\mu(A_{k})&lt;\epsilon$$</span>
+ולכן:
+<span>$$\mu(E)\leq \varepsilon\implies \mu(E)=0$$</span></p>
+<div class="theorem"><span class="keyword">ההתכנסות המונוטונית</span><p>תהי <span>\(\left\{  f_{n}:X\to \left[ 0,\infty \right]  \right\}\)</span> סדרה עולה:
+<span>$$0\leq f_{1} \leq f_{2} \leq \dots$$</span>
+של פונקציות מדידות. אזי:
+<span>$$f=\lim_{ n \to \infty } f_{n}\quad \left( =\sup _{n}f_{n} \right)$$</span>
+מקיימת:
+<span>$$\int_{A}f \;\mathrm{d}\mu = \lim_{ n \to \infty } \int_{A}f_{n}\;\mathrm{d}\mu$$</span>
+?
+<strong>הוכחה</strong>
+נסמן <span>\(\alpha=\int _{A} f_{n} \;\mathrm{d} \mu\)</span>. נוכיח כי <span>\(\alpha\)</span> שווה ל-<span>\(\int _{A}f \;\mathrm{d} \mu\)</span> על ידי להראות שתי אי שיוויונות חלשים.</p>
+<ol>
+<li>
+<p>נראה <span>\(\alpha \leq \int_{A} f \;\mathrm{d} \mu\)</span> בצורה הבאה: 
+לכל <span>\(n\in \mathbb{N}\)</span> נשים לב כי:
+<span>$$f_{n}\leq \sup _{n}f_{n}=f$$</span>
+ולכן ממונוטוניות האינטגרל:
+<span>$$\int f_{n} \;\mathrm{d} \mu \leq \int f \;\mathrm{d} \mu $$</span>
+וכעת משימור אי שיוויון חלש בין גבולות נקבל:
+<span>$$\lim_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu=\alpha \leq \int f \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>נגדיר את הקבוצה: 
+<span>$$E_{n}=\left\{  x \in X\mid f_{n}(x)\geq c\cdot s(x)  \right\}$$</span>
+כאשר נשים לב כי כל <span>\(E_{n}\)</span> יהיה מדיד.</p>
+</li>
+<li>
+<p>נשים לב כי מתקיים: 
+<span>$$E_{1} \subseteq E_{2} \subseteq E_{3} \subseteq\dots \qquad X=\bigcup_{n}E_{n}$$</span>
+כדי לראות זאת נניח <span>\(x \in X\)</span>. מספיק להראות כי קיים <span>\(n \in \mathbb{N}\)</span> כך ש-<span>\(x \in E_{n}\)</span>.
+אם <span>\(f(x)=0\)</span> אזי <span>\(x \in E_{1}\)</span>. אם <span>\(f(x)&gt; 0\)</span> אזי כיוון ש-<span>\(c&lt;1\)</span>:
+<span>$$cs(x)&lt;f(x)=\sup_{n} f_{n}(x)\implies \forall \varepsilon&gt;0 \quad \exists n \quad f(x)-f_{n}(x)&lt;\varepsilon$$</span>
+ובפרט עבור <span>\(\varepsilon=f(x)-cs(x)&gt;0\)</span> נקבל <span>\(n \in \mathbb{N}\)</span> כך ש:
+<span>$$f(x)-f_{n}(x)&lt;f(x)-cs(x)\implies cs(x)&gt; f_{n}(x)$$</span>
+ולכן <span>\(x \in E_{n}\)</span> עבור <span>\(n\)</span> מספיק גדול.</p>
+</li>
+<li>
+<p>כיוון שלכל <span>\(E_{n}\)</span> נקבל <span>\(E_{n}\subseteq  X\)</span>: 
+<span>$$\int_{E_{n}}  c s(x) \;\mathrm{d} \mu \leq\int_{E_{n}} f_{n} \;\mathrm{d} \mu \leq \int _{X} f_{n}\;\mathrm{d} x  $$</span>
+כאשר השתמשנו בכך שבתחום <span>\(E_{n}\)</span> מתקיים <span>\(cs(x)\leq f_{n}\)</span> ומונוטוניות האינטגרל.</p>
+</li>
+<li>
+<p>אם ניקח את הגבול <span>\(n\to \infty\)</span> נקבל משימור אי שיוויון חלש בין גבולות: 
+<span>$$\alpha = \lim_{ n \to \infty } \int _{X}f_{n} \;\mathrm{d} \mu \geq \lim_{ n \to \infty } \int _{E_{n}}f_{n} \;\mathrm{d} \mu \geq \lim_{ n \to \infty } \int _{E_{n}}c\cdot s \;\mathrm{d} \mu=c\cdot \lim_{ n \to \infty } \int _{E_{n}}s \;\mathrm{d} \mu   $$</span></p>
+</li>
+<li>
+<p>נראה <span>\(\lim_{ n \to \infty }\int _{E_{n}}s \;\mathrm{d} \mu=\int _{X}s \;\mathrm{d} \mu\)</span> בצורה הבאה: 
+נסמן <span>\(s=\sum_{i=1}^{k}\alpha_{i}\mathbb{1}_{A_{i}}\)</span> כש-<span>\(\left\{  A_{1},\dots,A_{k}  \right\}\)</span> חלוקה של <span>\(X\)</span>. כאשר כעת מתקיים:
+<span>$$\int _{E_{n}}s \;\mathrm{d} \mu = \sum_{i=1}^{k}  \alpha_{i}\mu\left( A_{i}\cap E_{n} \right) $$</span>
+מאחר שלכל <span>\(1\leq i \leq k\)</span> נקבל:
+<span>$$A_{i}\cap E_{1}\subseteq A_{i}\cap E_{2}\subseteq A_{i}\cap E_{3}\subseteq \dots$$</span>
+כאשר נקבל:
+<span>$$\bigcup_{n}A_{i}\cap E_{n}=A_{i}$$</span>
+ולכן מרציפות של מידה של סדרות עולות נקבל:
+<span>$$\mu\left( A_{i}\cap E_{n} \right)\xrightarrow{n\to \infty} \mu(A_{i})$$</span>
+ולכן:
+<span>$$\int _{E_{n}} s\;\mathrm{d} \mu \xrightarrow{n\to\infty } \sum_{i=1}^{k}\alpha_{i}\mu(A_{i})=\int _{X}s \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>משלבים 5 ו-6 נסיק כי: 
+<span>$$\alpha \geq c \cdot \int _{X} s  \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>מאחר ש-<span>\(0\leq s\leq f\)</span> פשוטה שרירותית ו-<span>\(0&lt; c &lt; 1\)</span> שרירותי נסיק ש: 
+<span>$$\alpha \geq \sup_{n}  \int_{X} s \;\mathrm{d} \mu =\int _{X}f \;\mathrm{d} \mu$$</span>
+וכיוון שיש לנו אי שוייונות בשתי כיוונים הוכחנו את הטענה.</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">הלמה של פאטו - Fatou</span><p>תהי <span>\(f_{n}:X\to \left[ 0,\infty \right]\)</span> סדרה של פונקציות מדידות. אזי:
+<span>$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$</span>
+?
+<strong>הוכחה</strong></p>
+<ol>
+<li>
+<p>נגדיר סדרה חדשה <span>\(\{ g_{k} \}_{k=1}^{\infty}\)</span> על ידי <span>\(g_{k}=\inf_{n\geq k}f_{n}\)</span>. </p>
+</li>
+<li>
+<p>נשים לב כי הסדרה <span>\(g_{k}\)</span> היא מונוטונית עולה. זאת כיוון שכל איבר בסדרה יהיה אינפומום של קבוצה קטנה יותר. </p>
+</li>
+<li>
+<p>נשים לב כי הגבול של הסדרה <span>\(\{ g_{k} \}\)</span> הוא בדיוק ההגדרה של הגבול התחתון של הסדרה המקורית: 
+<span>$$\lim_{ k \to \infty } g_{k}=\liminf_{ n \to \infty } f_{n} $$</span></p>
+</li>
+<li>
+<p>כעת ממשפט ההתכנסות המונוטונית נקבל: 
+<span>$$\int \liminf_{ n \to \infty } f_{n} \;\mathrm{d} \mu = \lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu  $$</span></p>
+</li>
+<li>
+<p>מצד שני לכל <span>\(k\)</span> נקבל <span>\(g_{k}\leq f_{k}\)</span> ולכן <span>\(\int g_{k} \;\mathrm{d} \mu \leq \int f_{k} \;\mathrm{d} \mu\)</span> וזה גורר כי: 
+<span>$$\lim_{ k \to \infty } \int g_{k} \;\mathrm{d} \mu \leq \liminf_{ k \to \infty }   \int f_{k} \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>אם נשלב את התוצאות נקבל: 
+<span>$$\int \liminf_{ n \to \infty }  f_{n}\;\mathrm{d} \mu \leq \liminf_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu   $$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">ההתכנסות הנשלטת - Dominated Convergence</span><p>תהי <span>\(f_{n}:X\to \mathbb{C}\)</span> סדרה של פונקציות מדידות נניח שקיימת פונקציה <span>\(g \in L^{1}\left( \mu \right)\)</span> כך שלכל <span>\(n\)</span> מתקיים:
+<span>$$\lvert f_{n} \rvert \leq g$$</span>
+(כאשר זה יהיה הנשלטות - <span>\(g\)</span> שולטת על <span>\(f_{n}\)</span>). וכן נניח כי <span>\(f_{n}\to f\)</span> נקודתית. אזי:
+<span>$$\int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu \xrightarrow{} 0 $$</span>
+ובפרט:
+<span>$$\int f \;\mathrm{d} \mu = \lim_{ n \to \infty } \int f_{n} \;\mathrm{d} \mu  $$</span>
+?
+<strong>הוכחה</strong></p>
+<ol>
+<li>
+<p>נבחין כי <span>\(\lvert f \rvert\leq g\)</span> ולכן <span>\(f \in L^{1}\left( \mu \right)\)</span>. כמו כן: 
+<span>$$\lvert f-f_{n} \rvert \leq \lvert f \rvert +\lvert f_{n} \rvert \leq g+g = 2g$$</span></p>
+</li>
+<li>
+<p>נגדיר: 
+<span>$$h_{n}=2g-\lvert f-f_{n} \rvert $$</span>
+כאשר נשים לב כי <span>\(h_{n}\)</span> מתכנסת נקודתית ל-<span>\(2g\)</span>.</p>
+</li>
+<li>
+<p>בפרט מתקיים: 
+<span>$$\liminf_{ n \to \infty } h_{n}(x)=2g(x) $$</span></p>
+</li>
+<li>
+<p>מהלמה של פאטו עבור <span>\(h_{n}(x)\)</span> נקבל: 
+<span>$$\int2g\,\mathrm{d}\mu=\int\operatorname*{lim}_{n\to\infty}\operatorname*{inf}h_{n}(x)\operatorname{d}\!\mu\leq\operatorname*{lim}_{n\to\infty}\operatorname*{inf}\int h_{n}(x)\operatorname{d}\!\mu$$</span></p>
+</li>
+<li>
+<p>בעזרת הזהות <span>\(\liminf(-a_{n})=-\limsup(a_{n})\)</span> נקבל: 
+<span>$$\int 2g \;\mathrm{d} \mu \leq \liminf_{ n \to \infty }  \int\left( 2g-\lvert f-f_{n} \rvert  \right)\;\mathrm{d}\mu=\int 2g \;\mathrm{d} \mu - \limsup_{ n \to \infty }  \int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu $$</span></p>
+</li>
+<li>
+<p>בגלל ש-<span>\(g \in L^{1}\left( \mu \right)\)</span> אי שלילית הרי ש-<span>\(\int 2g \;\mathrm{d} \mu&lt; \infty\)</span> ולכן ניתן להחסירו ולקבל: 
+<span>$$\limsup_{ n \to \infty }\int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu =0  $$</span></p>
+</li>
+<li>
+<p>כיוון ש-<span>\(\int\lvert f-f_{n} \rvert\mathrm{d}\mu\to 0\)</span> בפרט מתקיים: 
+<span>$$\left\lvert  \int f \;\mathrm{d} \mu -\int f_{n} \;\mathrm{d} \mu   \right\rvert =\left\lvert  \int f-f_{n} \;\mathrm{d} \mu   \right\rvert \leq \int \lvert f-f_{n} \rvert  \;\mathrm{d} \mu \xrightarrow{n\to \infty} 0 $$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">ההצגה של Frechet-Riesz</span><p>ההעתקה <span>\(\Phi:\mathcal{H}\to \mathcal{H}^{*}\)</span> שולחת כל <span>\(h \in \mathcal{H}\)</span> לפונקציונאל <span>\(\phi_{h}(z)=\langle z,h \rangle\)</span> אז העתקה זו הינה איזומורפיזם צמוד לינארי ואיזומטריה בין <span>\(\mathcal{H} \cong \mathcal{H}^{*}\)</span>. כלומר <span>\(\phi\)</span> תתקיים:</p>
+<ol>
+<li>
+<p>משמר אדטיביות - לכל <span>\(h_{1},h_{2} \in \mathcal{H}\)</span> מתקיים <span>\(\phi(h_{1}+h_{2})=\phi(h_{1})+\phi(h_{2})\)</span>. </p>
+</li>
+<li>
+<p>הומוגניות למחצה - לכל <span>\(h \in \mathcal{H}\)</span> ולכל <span>\(\lambda \in \mathbb{C}\)</span> מתקיים <span>\(\phi\left( \lambda h \right)=\overline{\lambda}\phi(h)\)</span>. </p>
+</li>
+<li>
+<p>משמר נורמה - <span>\(\left\lVert  \phi(h)  \right\rVert_{\mathrm{op}}=\left\lVert  \phi_{h}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\)</span>. </p>
+</li>
+<li>
+<p>הפיכה. 
+?
+<strong>הוכחה</strong>
+ראשית מאקסיומת המכפלה הפנימית <span>\(\Phi\)</span> היא צמוד לינארית. יהי <span>\(h \in \mathcal{H}\)</span> כלשהו. מאי שיוויון קושי שוורץ נקבל שלכל <span>\(x \in \mathcal{H}\)</span> מתקיים:
+<span>$$\left\lvert  \phi_{h}(x)  \right\rvert =\left\lvert  \langle x,h \rangle   \right\rvert \leq \lVert h \rVert \cdot \lVert x \rVert $$</span>
+ומזה כבר מקבלים כי הנורמה האופרטורית חסומה - <span>\(\left\lVert  \phi_{h}  \right\rVert\leq \lVert h \rVert\)</span>. כאשר למעשה יש שיוויון ממש. מספיק להראות כי קיים ווקטור אשר מקיים את השיוויון הזה. 
+<span>$$\left\lvert  \phi_{n}(h)  \right\rvert =\lVert h \rVert ^{2}$$</span>
+ולכן <span>\(\left\lVert  \phi_{n}  \right\rVert_{\mathrm{op}}=\lVert h \rVert\)</span>. בפרט <span>\(\phi_{h}\in \mathcal{H}^{*}\)</span> ו-<span>\(\Phi\)</span> הינה איזומטרייה. נותר להראות כי <span>\(\Phi\)</span> היא על. 
+יהי <span>\(\ell \in \mathcal{H}^{*}\)</span>. נסמן <span>\(v=\ker\left( \ell \right)\)</span>. אם <span>\(v = \mathcal{H}\)</span> אז <span>\(\ell=0\)</span> ו-<span>\(\ell=\phi_{0}\)</span> אחרת <span>\(V\subsetneq \mathcal{H}\)</span> ומאחר ש-<span>\(\ell\)</span> רציף(כי חסום) נסיק כי <span>\(V= \ell^{-1}\left( \{ 0 \} \right)\)</span> סגור.
+מהמסקנה ממשפט ההטלה נסיק כי <span>\(V^{\perp}\neq \{ 0 \}\)</span>. ולכן קיים <span>\(0\neq z \in V^{\perp}\)</span>. נסמן:
+<span>$$w=\frac{\overline{\ell(z)}}{\lVert z \rVert ^{2}}\cdot z $$</span>
+כעת נראה שניתן להציג את <span>\(\ell\)</span> על ידי <span>\(\ell=\phi_{W}\)</span>. אכן לכל <span>\(x \in \mathcal{H}\)</span> ניתן לנסתכל על <span>\(\ell(x)z-\ell(z)x\)</span>. אם נפעיל על זה את <span>\(\ell\)</span> נקבל:
+<span>$$\ell\left( \ell(x)z-\ell(z)x \right)=\ell(x)\ell(z)-\ell(z)\ell(x)=0$$</span>
+במילים אחרות:
+<span>$$\ell(x)z-\ell(z)x \in \ker \left( \ell \right)=V$$</span>
+ולכן מאחר ש-<span>\(z \in V^{\perp}\)</span> נסיק ש:
+<span>$$0=\left\langle  \ell(x)z-\ell(z)x,z  \right\rangle =\ell(x)\cdot \lVert z \rVert ^{2}-\ell(z)\langle x,z \rangle $$</span>
+וכעת:
+<span>$$\ell(x)= \frac{1}{\lVert z \rVert ^{2}}\ell(z)\langle x,z \rangle =\langle x,w \rangle =\phi(x)$$</span></p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">Lebesgue-Radon-Nikodym</span><p>אם <span>\(\mu\)</span> ו-<span>\(\nu\)</span> מידות <span>\(\sigma\)</span> סופיות על <span>\(\left( X,\mathcal{A} \right)\)</span> אזי:</p>
+<ol>
+<li>קיים צמד מידות יחיד <span>\(\nu_{a},\nu_{s}\)</span> המקיים: </li>
+<li><span>\(\nu=\nu_{a}+\nu_{s}\)</span></li>
+<li><span>\(\nu_{a}\ll \mu\)</span></li>
+<li>
+<p><span>\(\nu_{s} \perp \mu\)</span></p>
+</li>
+<li>
+<p>קיים פונקציה מדידה <span>\(h:X\to\left[ 0,\infty \right)\)</span> אשר נקראת הנגזרת רדון ניקודין ומקיימת: </p>
+</li>
+<li><span>\(\mathrm{d}\nu_{a}=h\mathrm{d}\mu\)</span></li>
+<li>
+<p>אם <span>\(X=\bigcup_{n}A_{n}\)</span> כך ש-<span>\(\nu(A_{n})&lt;\infty\)</span> לכל <span>\(n\)</span> נקבל <span>\(h\cdot \mathbb{1}_{A_{n}}\in L^{1}\)</span> כלומר פונקציה ממידה סופית.
+?
+<strong>הוכחה</strong></p>
+</li>
+<li>
+<p>ראשית נעשה רדוקציה למקרה של מידה סופית. נניח <span>\(\nu\)</span> היא <span>\(\sigma\)</span> סופית. לכן ניתן לכתוב <span>\(\nu=\sum_{n}\nu_{n}\)</span> כאשר כל <span>\(\nu_{n}\)</span> היא סופית. כעת: 
+<span>$$\nu_{a}=\sum_{n} \nu_{n,a}\qquad \nu_{s}=\sum_{n}\nu_{n,s}$$</span>
+ולכן אם הטענה נכונה עבור מידות סופית תהיה נכונה עבור מידות <span>\(\sigma\)</span> סופיות ומספיק להוכיח עבור מקרה זה.</p>
+</li>
+<li>
+<p>מהלמה קיים <span>\(w:X\to (0,1]\)</span> כך ש-<span>\(w\mathrm{d}\mu\)</span> היא סופית ושקולה ל-<span>\(\mu\)</span>. נגדיר כעת <span>\(\lambda=\nu+w\mathrm{d}\mu\)</span> כך ש-<span>\(\lambda\)</span> תהיה מידה סופית. מתקיים בפרט: 
+<span>$$\nu(E)\leq\lambda(E),\quad\mu(E)\leq\frac{1}{\operatorname*{inf}w}\lambda(E).$$</span></p>
+</li>
+</ol>
+<p>3.תהי <span>\(f \in L^{2}\left( \lambda \right)\)</span>. אזי: 
+<span>$$\left\lvert  \int f \;\mathrm{d} \nu   \right\rvert \leq \int \lvert f \rvert  \;\mathrm{d} \nu \leq \int \lvert f \rvert  \;\mathrm{d} \lambda =\int |f|\cdot 1 \;\mathrm{d} \lambda \overset{*}{\leq}  \left[ \int \lvert f \rvert ^{2} \;\mathrm{d} \lambda  \right]^{1/2}\cdot\left[ \int 1 \;\mathrm{d} \lambda  \right]^{1/2}=\left( \lambda(x) \right)^{1/2}\cdot \lVert f \rVert _{2} &lt; \infty$$</span>
+כאשר המעבר ב-<span>\((*)\)</span> תהיה שימוש בקושי שוורץ עם המכפלה של <span>\(|f|\cdot 1\)</span>. </p>
+<ol>
+<li>
+<p>נגדיר <span>\(\phi:L^{2}\left( \lambda \right)\to \mathbb{C}\)</span> על ידי <span>\(\phi(f)=\int f \;\mathrm{d} \nu\)</span>. מאי שיוויון קושי שוורץ נקבל: 
+<span>$$|\phi(f)|\leq\int|f|\,d\nu\leq\int|f|\,d\lambda\leq\sqrt{\lambda(X)}||f||$$</span>
+ולכן חסום על <span>\(L^{2}\left( \lambda \right)\)</span>. נזכור כי במקרה זה <span>\(\phi(f)\)</span> לפי המסקנה ממשפט ההצגה של פרשה-ריס:
+<span>$$\left( \triangle \right) \qquad \int f \;\mathrm{d} \nu = \int f \cdot g \;\mathrm{d} \lambda $$</span></p>
+</li>
+<li>
+<p>נשים לב שלכל <span>\(E\in \mathcal{A}\)</span> עם <span>\(\lambda(E)&gt;0\)</span> מתקיים: 
+<span>$$0\leq\overbrace{ \frac{1}{\lambda(E)}\cdot \int _{E}g \;\mathrm{d} \lambda }^{(1) } = \frac{\nu(E)}{\lambda(E)} \leq 1$$</span>
+כאשר <span>\((1)\)</span> זה למעשה הממוצע של <span>\(g\)</span> ביחס ל-<span>\(\lambda\)</span> על <span>\(E\)</span>. ולכן מלמה שהוכחנו מזמן העובדה הנ"ל גוררת ש-<span>\(0\leq g \leq 1\)</span> מתקיים <span>\(\lambda\)</span> כמעט תמיד.</p>
+</li>
+<li>
+<p>נסמן: 
+<span>$$A=\left\{  x\mid 0\leq g(x)&lt;1  \right\}\qquad B=\left\{  x\mid g(x)=1  \right\}$$</span>
+וכן נגדיר <span>\(\nu_{a}=\nu|_{A}\)</span> ו-<span>\(\nu_{s}=\nu|_{B}\)</span>.</p>
+</li>
+</ol>
+<p>7.כעת נרצה להוכיח <span>\(\nu_{s}\perp \mu\)</span>. מספיק להראות כי <span>\(\mu(B)=0\)</span> כי כעת <span>\(B \sqcup B^{c}\)</span> הפירוק המתאים. נשים לב כי ניתן לכתוב את <span>\(\triangle\)</span> בצורה הבאה: 
+<span>$$\int f \;\mathrm{d} \nu =\int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \lambda = \int f\cdot g \;\mathrm{d} \nu+\int f\cdot g\cdot w \;\mathrm{d} \mu    $$</span>
+ולכן:
+<span>$$(*)\quad \int f\cdot g\cdot w \;\mathrm{d} \mu = \int f(1-g) \;\mathrm{d} \nu  $$</span>
+על ידי הצבה של <span>\(f=\mathbb{1}_{B}\)</span> ב-<span>\((*)\)</span> נקבל ש:
+<span>$$\int_{B} \cancelto{ 1 }{ g } \;\mathrm{d} \mu = \int_{B} \cancelto{ 0 }{ (1-g) } \;\mathrm{d} \nu  =0$$</span>
+ולכן <span>\(\mu(B)=0\)</span> כי <span>\(0&lt;w\)</span> תמיד ולכן <span>\(\nu_{s}\perp \mu\)</span> (עם <span>\(B\cap B^{c}=\varnothing\)</span> הפירוק המתאים).</p>
+<ol>
+<li>
+<p>נרצה כעת להראות כי <span>\(\nu_{a}\ll \mu\)</span>. נגדיר את הסדרה: 
+<span>$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$</span>
+נציב ב-<span>\((*)\)</span> ונקבל:
+<span>$$f_{n}=\left( 1+g+g^{2}+\dots+ g^{n} \right)\cdot \mathbb{1} _{A}$$</span>
+וכן:
+<span>$$\int_{A}\left(1+g+\cdots+g^{n}\right)\cdot g\cdot w\,d\mu=\int_{A}\left(1+g+\cdots+g^{n}\right)\left(1-g\right)d\nu.$$</span>
+כאשר ניתן לפשט את אגף ימין בעזרת סכום טלסקופי ולקבל:
+<span>$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)\left(1-g\right)d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu=\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}$$</span>
+כאשר ניתן לפשט את אגף שמאל על ידי זיהוי טור גאומטרי:
+<span>$$\int_{A}\left(1+g+\cdot\cdot\cdot+g^{n}\right)g\cdot w\,d\mu=\int_{A}\left(g+g^{2}+\cdots+g^{n+1}\right)w\,d\mu$$</span>
+אם ניקח את הגבול <span>\(n\to \infty\)</span> נקבל עבור אגף ימין כי <span>\(g^{n+1}\to 0\)</span> ולכן:
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1-g^{n+1}\right)\,d\nu_{a}=\int_{A}1\,d\nu_{a}=\nu_{a}(E).$$</span>
+ועבור אגף שמאל נקבל:
+<span>$$\operatorname*{lim}_{n\to\infty}\int_{A}\left(1+g+\cdots+g^{n}\right)g\cdot w\,d\mu=\int_{A}{\frac{g}{1-g}}\cdot w\,d\mu.$$</span></p>
+</li>
+<li>
+<p>אם נשוואה את שתי האגפים נקבל: 
+<span>$$\nu_{a}(E)=\int_{E}\underbrace{\frac{g\cdot w}{1-g}}_{h}\,d\mu\quad\mathrm{for~all~}E\in\mathcal{A}.$$</span></p>
+</li>
+<li>
+<p>מאחר ש-<span>\(\nu_{a}\)</span> מידה סופית נסיק ש-<span>\(h \in L^{1}\left( \mu \right)\)</span>. </p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">הכיסוי של בסיקוביץ</span><p>קיימים קבועים אוניברסליים <span>\(P=P(d)\)</span> ו-<span>\(Q=Q(d)\)</span> עבורם לכל <span>\(A\subseteq \mathbb{R}^{d}\)</span> קבוצה חסומה וכיסוי בסיקוביץ <span>\(\mathcal{F}\)</span> של A. קיים תת כיסוי בן מנייה <span>\(\mathcal{E}\subseteq \mathcal{F}\)</span> מגובה קטן או שווה ל-<span>\(P\)</span>. כלומר:
+<span>$$\mathbb{1} _{A}\leq \sum_{B \in \mathcal{E} }\mathbb{1} _{B}\leq P$$</span>
+יתר על כן ניתן לפצל את <span>\(\mathcal{E}\)</span> לאיחוד של <span>\(m\)</span> תתי אוספים:
+<span>$$\mathcal{E} =\bigcup_{i=1}^{m}\mathcal{E_{i}} $$</span>
+כך שכל <span>\(\mathcal{E}_{i}\)</span> מכיל אוסף של כדורים זרים בזוגות וכן <span>\(m\leq Q\)</span>.
+?
+<strong>הוכחה</strong>
+זהו הוכחה קוסטרוקטיבית. נבנה תת כיסוי אשר יקיים את הנדרש.</p>
+<ol>
+<li>
+<p>לכל נקודה <span>\(x\)</span> בקבוצה המקורית בוחרים כדור אחד מהוסף המקורי שמכיל את <span>\(x\)</span>. נסמן את הרדיוס של הכדור הזה ב-<span>\(r(x)\)</span>. </p>
+</li>
+<li>
+<p>נבנה סדרת כדורים באופן הבא: </p>
+</li>
+<li>נמצא את הרדיוס הגדול ביותר, ונקרא לו <span>\(M_{1}\)</span>, כלומר:
+<span>$$0&lt;M_{1}=\sup \left\{  r(x)\mid x \in A  \right\}$$</span></li>
+<li>אם <span>\(M_{1}=\infty\)</span> סיימנו, אחרת נניח <span>\(M_{1}&lt; \infty\)</span>. </li>
+<li>כעת נבחר נקודה <span>\(x_1\)</span> ב-<span>\(A\)</span> שהכדור שנבחר לה יש רדיוס קרוב ל-<span>\(M_1\)</span> (בין <span>\(\frac{M_1}{2}\)</span> ל-<span>\(M_1\)</span>). זה נותן לנו את הכדור הראשון.</li>
+<li>כעת, מסתכלים על החלק של <span>\(A\)</span> שלא מכוסה על ידי הכדורים שבחרנו עד כה. מוצאים את הרדיוס הגדול ביותר בין הנקודות הנותרות (נקרא לו <span>\(M_2\)</span>). כלומר:
+<span>$$0&lt;M_{2}=\sup \left\{  r(x)\mid x \in A \setminus  \bigcup_{i=1}^{k} B_{r(x_{i})}(x_{i})  \right\}$$</span></li>
+<li>בוחרים נקודה <span>\(x_2\)</span> בחלק הלא מכוסה הזה שהכדור שנבחר לה יש רדיוס קרוב ל-<span>\(M_2\)</span> (בין <span>\(\frac{M_2}{2}\)</span> ל-<span>\(M_2\)</span>).</li>
+<li>
+<p>ממשיכים בתהליך הזה. מקבלים סדרת כדורים.</p>
+</li>
+<li>
+<p>אם לעולם לא נכסה את <span>\(A\)</span> לחלוטין במספר סופי של כדורים, זה אומר שאנחנו יוצרים סדרה אינסופית של כדורים עם רדיוסים הולכים וקטנים (<span>\(M_\ell\)</span> שואף ל-0). זה מבטיח שבסופו של דבר, כל נקודה ב-<span>\(A\)</span> תכוסה על ידי כדור כלשהו בסדרה. </p>
+</li>
+<li>
+<p>סדרת הכדורים שבנינו היא תת-האוסף ה"דליל" שאנחנו מחפשים. נקרא לאוסף הזה <span>\(\mathcal{E}\)</span>. </p>
+</li>
+<li>
+<p>להראות שהחפיפה חסומה. נתבונן בכל אוסף של כדורים מ-<span>\(\mathcal{E}\)</span> שיש להם חיתוך לא ריק (כולם חופפים בנקודה כלשהי). אנחנו רוצים להראות שלא יכולים להיות "יותר מדי" כדורים חופפים כאלה. בשביל זה נשתמש בשתי טענות(אשר ההוכחה הריגורוזית שלהם תופיע אחרי ההוכחה): </p>
+</li>
+<li>לכל "שלב" בבנייה (שבו בחרנו כדורים עם רדיוסים קרובים ל-<span>\(M_\ell\)</span>), לא יכולים להיות יותר מדי כדורים באוסף החופף שלנו מאותו שלב. המספר חסום על ידי <span>\(16^d\)</span> (כאשר <span>\(d\)</span> הוא הממד). זה מוכח באמצעות ארגומנט נפח: אם הכדורים חופפים והמרכזים שלהם מופרדים במרחק מסוים, אפשר לארוז רק מספר מוגבל מהם בתוך כדור גדול יותר.</li>
+<li>
+<p>לא יכולים להיות יותר מדי "שלבים" שתורמים כדורים לאוסף החופף שלנו. מספר זה חסום על ידי <span>\(N(d)\)</span>, מספר שתלוי רק בממד. זה משתמש ב"תכונת בסיקוביץ' החלשה" שהוכחנו קודם.</p>
+</li>
+<li>
+<p>הכפלת שני החסמים הללו (<span>\(16^d\)</span> ו-<span>\(N(d)\)</span>) נותנת לנו חסם <span>\(P(d)\)</span> על המספר הכולל של הכדורים החופפים. </p>
+</li>
+<li>
+<p>נרצה כעת להראות שאפשר לחלק את הכדורים שנבחרו למשפחות זרות, באופן הבא: </p>
+</li>
+<li>מסדרים את הכדורים שנבחרו לפי רדיוס יורד.    </li>
+<li>המשפחה הראשונה מכילה את הכדור הראשון בסידור. לאחר מכן, מוסיפים את הכדור הראשון שלא חותך את הכדור הראשון. ממשיכים בתהליך הזה.</li>
+<li>אז, מתחילים משפחה שנייה עם הכדור הראשון שנותר מהרשימה המסודרת. מוסיפים למשפחה הזו את הכדור הראשון שנותר שלא חותך אף אחד מהכדורים שכבר נמצאים במשפחה השנייה.</li>
+<li>
+<p>חוזרים על התהליך הזה עד שכל הכדורים משויכים למשפחה.</p>
+</li>
+<li>
+<p>כעת נוכיח שכל נקודה <span>\(x \in A\)</span> שייכת לכל היותר <span>\(Q(d)\)</span> כדורים מתוך <span>\(\mathcal{E}\)</span>, כאשר <span>\(Q(d)\)</span> תלוי רק ב-<span>\(d\)</span>. נניח בשלילה שקיימת נקודה <span>\(x\)</span> השייכת ל-<span>\(Q(d)+1\)</span> כדורים שונים <span>\(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\)</span>. ללא הגבלת הכלליות נניח <span>\(r_{i_1} \ge r_{i_2} \ge \dots \ge r_{i_{Q(d)+1}}\)</span>. מכיוון שהכדורים באותו אוסף זרים, מרכזי הכדורים <span>\(x_{i_1},...,x_{i_{Q(d)+1}}\)</span> שייכים לכדור <span>\(B_{2r_{i_1}}(x)\)</span>. כמו כן, הכדורים <span>\(B_{r_{i_{Q(d)+1}}/2}(x_{i_j})\)</span> זרים ומוכלים ב <span>\(B_{2r_{i_1}}(x)\)</span>. 
+נפח של כדור ב <span>\(\mathbb{R}^d\)</span> פרופורציוני ל <span>\(r^d\)</span>. לכן, מספר הכדורים הזרים חסום על ידי
+<span>$$ \frac{(2r_{i_1})^d}{(r_{i_{Q(d)+1}}/2)^d} = 4^d (\frac{r_{i_1}}{r_{i_{Q(d)+1}}})^d $$</span>
+אולם, מכיוון שכל הכדורים <span>\(\mathcal{E}_{i_1},\dots,\mathcal{E}_{i_{Q(d)+1}}\)</span> מכילים את <span>\(x\)</span>, ורדיוסיהם לא קטנים מ <span>\(r_{i_{Q(d)+1}}\)</span>, נקבל סתירה אם נבחר <span>\(Q(d)\)</span> גדול מספיק. למעשה, ניתן לבחור <span>\(Q(d) = C^d\)</span> עבור קבוע <span>\(C\)</span> כלשהו.</p>
+</li>
+</ol>
+</div>
+<div class="theorem"><span class="keyword">הגזירה של לבג-בסיקוביץ'</span><p>יהיו <span>\(\lambda\)</span> ו-<span>\(\mu\)</span> מידות רדון על <span>\(\mathbb{R}^d\)</span>.</p>
+<ol>
+<li>
+<p>הנגזרת <span>\(D(\mu, \lambda, x)\)</span> קיימת וסופית עבור <span>\(\lambda\)</span> כמעט תמיד. </p>
+</li>
+<li>
+<p>לכל קבוצה מדידת בורל <span>\(B \subseteq \mathbb{R}^d\)</span> מתקיים: 
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$</span>
+עם שוויון כאשר <span>\(\mu \ll \lambda\)</span> (כלומר, כאשר <span>\(\mu \ll \lambda\)</span> אז <span>\(D(\mu, \lambda, \cdot) = \frac{d\mu}{d\lambda}\)</span>).</p>
+</li>
+<li>
+<p>מתקיים <span>\(\mu \ll \lambda\)</span> אם ורק אם <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> עבור <span>\(\mu\)</span> כמעט תמיד <span>\(x\)</span>. 
+?
+<strong>הוכחה</strong></p>
+</li>
+<li>
+<p><strong>קיום הנגזרת:</strong> 
+יהיו <span>\(r &gt; 0\)</span> ו-<span>\(0 &lt; s &lt; t &lt; \infty\)</span> כלשהם. נסמן:
+<span>$$ A_{s,t,r} := \{x \in B_r(0) \mid \underline{D}(\mu, \lambda, x) \leq s &lt; t \leq \overline{D}(\mu, \lambda, x)\} $$</span>
+וכן נסמן:
+<span>$$ A_{n,r} := \{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) \geq n\} $$</span>
+מהטענה הקודמת נסיק:
+<span>$$ \mu(A_{s,t,r}) \geq t \cdot \lambda(A_{s,t,r}) \quad \text{ and }\quad  \mu(A_{s,t,r}) \leq s \cdot \lambda(A_{s,t,r}) $$</span></p>
+</li>
+</ol>
+</div>
+<p>מאחר ש-<span>\(\lambda(A_{s,t,r}) &lt; \infty\)</span> (קבוצה חסומה) ו-<span>\(s &lt; t\)</span>, נסיק כי <span>\(\lambda(A_{s,t,r}) = 0\)</span>. עבור <span>\(A_{n,r}\)</span> מתקיים:
+<span>$$ \lambda(A_{n,r}) \leq \frac{1}{n} \mu(A_{n,r}) \leq \frac{1}{n} \mu(B_r(0)) &lt; \infty $$</span>
+ולכן:
+<span>$$ \lambda(\{x \in B_r(0) \mid \overline{D}(\mu, \lambda, x) = \infty\}) = \lambda\left( \bigcap_{n=1}^\infty A_{n,r} \right) = \lim_{n \to \infty} \lambda(A_{n,r}) \leq \lim_{n \to \infty} \frac{1}{n} \mu(B_r(0)) = 0 $$</span>
+נבחין כי המשלים של <span>\(\{x \in \mathbb{R}^d \mid \exists D(\mu, \lambda, x) &lt; \infty\}\)</span> שווה ל:
+<span>$$ \bigcup_{k \in \mathbb{N}} \left( \bigcap_{n \in \mathbb{N}} A_{n,k} \cup \bigcup_{\substack{s &lt; t \\ s,t \in \mathbb{Q}}} A_{s,t,k} \right) $$</span>
+שהוא איחוד בן מנייה של קבוצות מ-<span>\(\lambda\)</span> מידה 0 ומכאן נובע שקבוצת הנקודות בהן הנגזרת סופית היא בעלת מידה מלאה.</p>
+<ol>
+<li>
+<p><strong>אינטגרל הנגזרת:</strong> 
+תהי <span>\(B\)</span> מדידה וניקח <span>\(1 &lt; t &lt; \infty\)</span>. לכל <span>\(p \in \mathbb{Z}\)</span> נגדיר:
+<span>$$ B_p = \{x \in B \mid t^p \leq D(\mu, \lambda, x) &lt; t^{p+1}\} $$</span>
+אזי מ-1 נסיק כי:
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda $$</span>
+כי <span>\(B \setminus \bigcup_p B_p\)</span> מכיל רק את הנקודות בהן <span>\(D = \infty\)</span> (קבוצה ממידה אפס) או בהן <span>\(D=0\)</span> ואז האינטגרנד שווה ל-0. מכאן:
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda = \sum_{p \in \mathbb{Z}} \int_{B_p} D(\mu, \lambda, x) \, d\lambda \leq \sum_{p \in \mathbb{Z}} t^{p+1} \lambda(B_p) \leq \sum_{p \in \mathbb{Z}} t \mu(B_p) = t \cdot \mu\left( \bigcup_p B_p \right) \leq t \cdot \mu(B) $$</span>
+מאחר ש-<span>\(t\)</span> שרירותי, נסיק כי:
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda \leq \mu(B) $$</span>
+אם <span>\(\mu \ll \lambda\)</span>, אז <span>\(D\)</span> קיים וסופי <span>\(\mu\)</span> כמעט תמיד. נבחין כי <span>\(0 &lt; D(\lambda, \mu, x) = (D(\mu, \lambda, x))^{-1}\)</span>. נוכל להריץ שרשרת אי-שוויונים דומה כדי להסיק:
+<span>$$ \int_B D(\mu, \lambda, x) \, d\lambda \geq \mu(B) $$</span>
+ולכן במקרה זה מתקיים שוויון.</p>
+</li>
+<li>
+<p><strong>אפיון רציפות מוחלטת:</strong> 
+מ-1 נובע שאם <span>\(\mu \ll \lambda\)</span> אז <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> <span>\(\mu\)</span> כמעט תמיד. תהי <span>\(C \subseteq \mathbb{R}^d\)</span> עם <span>\(\lambda(C) = 0\)</span>. נרצה להראות ש-<span>\(\mu(C) = 0\)</span>. נבחין כי <span>\(C = \bigcup_{n \in \mathbb{N}} C_n\)</span> כאשר:
+<span>$$ C_n = \{x \in C \mid \underline{D}(\mu, \lambda, x) \leq n\} $$</span>
+מכאן:
+<span>$$ \mu(C_n) \leq n \cdot \lambda(C_n) \leq n \cdot \lambda(C) = 0 $$</span>
+ולכן:
+<span>$$ \mu(C) \leq \sum_{n \in \mathbb{N}} \mu(C_n) = 0 $$</span>
+ולכן <span>\(\mu(C) = 0\)</span>. בכיוון ההפוך, אם <span>\(\underline{D}(\mu, \lambda, x) &lt; \infty\)</span> <span>\(\mu\)</span> כמעט תמיד אז נשתמש בחלק 2 של המשפט כדי להראות <span>\(\mu \ll \lambda\)</span>.</p>
+</li>
+</ol>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='prev-page'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+</ul></li>
+        </body>
+        </html>
+        

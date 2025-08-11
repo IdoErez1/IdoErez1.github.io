@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>מרחבים מדידים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='parent-page'><a href='./Measure'> תורת המידה</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. מרחבים מדידים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_1_1'>1.1 מבוא טופולוגי</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_2'>1.2 סיגמא אלגברה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_3'>1.3 סיגמא אלגברה בורל</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_4'>1.4 פונקציות מדידות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_1_5'>1.5 מידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. מידת לבג</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_2_1'>2.1 אינטגרציית לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_2'>2.2 התכנסויות אינטגרלית של סדרות פונקציות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_3'>2.3 אינטגרציה מרוכבת</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_4'>2.4 קבוצות ממידה אפס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_2_5'>2.5 התכנסות במידה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משפט ההצגה של ריס</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_3_1'>3.1 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_2'>3.2 רגולאריות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_3'>3.3 מידות אינווריאנטיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_3_4'>3.4 רציפות של פונקציות מדידות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>4. מרחבי Lᵖ</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_4_1'>4.1 קמירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_2'>4.2 נורמות ומרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_3'>4.3 מרחבי הילברט</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_4_4'>4.4 רציפות בהחלט וסינגולאריות</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>5. גזירות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_5_1'>5.1 גזירה של מידות רדון ב-ℝᵈ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_2'>5.2 משפט הכיסוי של בסיקוביץ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_5_3'>5.3 משפט הגזירה של בסיקוביץ</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>6. מרחבי מכפלה</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_6_1'>6.1 מידת מכפלה סופית</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_6_2'>6.2 קונבולוציה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>7. שאלות</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Measure_7_1'>7.1 הוכחות טענות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_2'>7.2 הוכחות מרכזיות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_3'>7.3 מידות מכפלה</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_4'>7.4 מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_6'>7.6 מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_8'>7.8 שאלות - גזירות</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_9'>7.9 שאלות - מידת לבג</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_10'>7.10 שאלות - מרחבי Lᵖ</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_11'>7.11 שאלות - מרחבים מדידים</a></li>
+<li class='parent-page-dropdown'><a href='./Measure_7_12'>7.12 שאלות - משפט ההצגה של ריס</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Measure_7_7`; }if (event.key === 'ArrowLeft') { window.location.href = `./Measure_7_5`; }});</script>
+        <div class="content">
+        <h1>7.6  מרחבים מדידים</h1>
+    <p>?
+מידה על מרחב מדיד <span>\(\left( X,\mathcal{A} \right)\)</span> הינה פונקציה <span>\(\mu:A\to \left[ 0,\infty \right]\)</span> אשר <span>\(\sigma\)</span>-אדיטיבית. כלומר לכל סדרת קבוצות זרות ומדידות <span>\(A_{1},A_{2},\dots \in \mathcal{A}\)</span> כך ש
+<span>$$\mu\left( \bigsqcup_{n} A_{n} \right)=\sum_{n=1}^{\infty}\mu(A_{n})$$</span>
+בנוסף נניח ש-<span>\(\mu\)</span> איננה קבועה <span>\(\infty\)</span> (כלומר קיימת איזשהי <span>\(A \in \mathcal{ A}\)</span> כך ש-<span>\(\mu(A)&lt; \infty\)</span>).</p>
+<p>מה ההגדרה של מידה שלמה?
+?
+מידה <span>\(\mu\)</span> היא שלמה אם לכל <span>\(\mu(N)=0\)</span> נקבל:
+<span>$$\mathcal{P}\left( N \right) \subseteq \mathrm{dom}\left( \mu \right) $$</span>
+כלומר עבור כל קבוצה ממידה אפס כל התתי קבוצות שלה גם מדידות(ולכן ממונוטוניות יהיו גם ממידה אפס).</p>
+<p>מה ההגדרה של <span>\(\sigma\)</span> אלגברה?
+?
+יהי <span>\(X\)</span> קבוצה. <span>\(\sigma\)</span>-אלגברה מעל <span>\(X\)</span> הינו אוסף <span>\(\mathcal{A}\subseteq \mathcal{P}(X)\)</span> של תתי קבוצות של <span>\(X\)</span> המקיימת:</p>
+<ol>
+<li>
+<p>הקבוצה כולה נמצאת - <span>\(X \in \mathcal{A}\)</span>. </p>
+</li>
+<li>
+<p>אם <span>\(E \in \mathcal{A}\)</span> אזי <span>\(E^{c} \in \mathcal{A}\)</span>. </p>
+</li>
+<li>
+<p>בהנתן אוסף <u>בן מנייה</u> <span>\(E_{1}, E_{2},\dots, \in \mathcal{A}\)</span> אזי: 
+<span>$$\bigcup_{n}E_{n}\in \mathcal{A}$$</span></p>
+</li>
+</ol>
+<p>מה ההגדרה של מרחב מדיד וקבוצות מדידות?
+?
+הצמד <span>\((X,\mathcal{A})\)</span> נקרא <u>מרחב מדיד</u> כאשר קבוצות <span>\(E \in \mathcal{A}\)</span> נקראות <u>קבוצות מדידות</u>.</p>
+<p>מה ההגדרה של אלגברה?
+?
+אוסף המקיים את <span>\(1,2\)</span> וסגור תחת איחודים סופיים נקרא אלגברה. כלומר הסיגמא מציין איחוד בן מנייה. לכן <span>\(\sigma\)</span> אלגברה היא בפרט אלגברה.</p>
+<p>מה ההגדרה של העתקות מדידות?
+?
+בהנתן שני מרחבים מדידים <span>\((X,\mathcal{A})\)</span> ו-<span>\(\left( Y,\mathcal{C} \right)\)</span> פונקציה <span>\(f:X\to Y\)</span> תקרא מדידה אם המקום של כל קבוצה מדידה הוא מדיד. כלומר:
+<span>$$\forall E \in \mathcal{C} \qquad f^{-1}(E)\in \mathcal{A}$$</span></p>
+<p>מה ההגדרה של פונקציה מדידה?
+?
+בהנתן שני מרחבים מדידים <span>\((X,\mathcal{A})\)</span> ו-<span>\((Y,e)\)</span> פונקציה <span>\(f:X\to Y\)</span> נקראת מדידה אם לכל <span>\(E \in e\)</span> מקיימת:
+<span>$$f^{-1} (E) \in \mathcal{A}$$</span></p>
+<p>מה ההגדרה של גבול עליון ותחתון של סדרת קבוצות?
+?
+יהי <span>\((A_{n})\subseteq \Sigma\)</span> סדרה של קבוצות במרחב מידה <span>\(\left( X,\Sigma,\mu \right)\)</span>. </p>
+<ol>
+<li>
+<p>נגדיר את הגבול העליון של הסדרה להיות: 
+<span>$$\operatorname*{lim}\operatorname*{sup}A_{n}=\bigcap_{n=1}^{\infty}\bigcup_{k=n}^{\infty}A_{k}$$</span>
+כאשר זה למעשה מייצג את כל האיברים שמופיעים באינסוף קבוצות בסדרה.</p>
+</li>
+<li>
+<p>נגדיר את הגבול התחתון של סדרה להיות: 
+<span>$$\operatorname*{lim}\operatorname*{inf}A_{n}=\bigcup_{n=1}^{\infty}\bigcap_{k=n}^{\infty}A_{k}$$</span>
+כאשר זה למעשה מייצג את כל האיברים שבסופו של דבר מופיעים בכל הקבוצות בסדרה.</p>
+</li>
+</ol>
+<p>מה ההגדרה של פונקציית מדידת בורל?
+?
+יהי <span>\(X\subseteq \mathbb{R}\)</span> פונקציה <span>\(f:X\to \mathbb{R}\)</span> נקראת מדידת בורל אם <span>\(f^{-1}(B)\)</span> היא קבוצת בורל לכל קבוצת בורל <span>\(B\subseteq \mathbb{R}\)</span>.</p>
+<p>מה ההגדרה של טופולוגיה?
+?
+טופולוגיה על קבוצה <span>\(X\)</span> זה אוסף של תתי קבוצות <span>\(\tau \subseteq 2^{X}\)</span> המקיים:</p>
+<ol>
+<li>
+<p>הקבוצה הריקה והקבוצה כולה בפנים </p>
+</li>
+<li>
+<p>לכל אוסף <span>\(\left\{  U_{\alpha}  \right\}_{\alpha}\subseteq \tau\)</span> גם <span>\(\cup_{\alpha}U_{\alpha}\in \tau\)</span>. </p>
+</li>
+<li>
+<p>לכל אוסף סופי <span>\(U_{1},U_{2},\dots,U_{n}\in \tau\)</span> גם <span>\(\cap_{i=1}^{N}U_{i}\)</span>. 
+הצמד <span>\(\left( X,\tau \right)\)</span> נקרא מרחב טופולוגי וקבוצות <span>\(U \in \tau\)</span> נקראות פתוחות.</p>
+</li>
+</ol>
+<p>מה ההגדרה של קבוצה סגורה?
+?
+קבוצה שהמשלים שלה פתוחה.</p>
+<p>מה ההגדרה של סגור של קבוצה?
+?
+יהי <span>\(A\subseteq X\)</span> קבוצה. נגדיר את הסגור שלה להיות:
+<span>$$\overline{A} = \left\{   x \in X \mid \forall x \in U \in \tau \quad U \cap A \neq \varnothing  \right\}$$</span>
+באופן שקול <span>\(\overline{A}\)</span> הינה הקבוצה הסגורה הקטנה ביותר המכילה את <span>\(A\)</span>.</p>
+<p>מה ההגדרה של רציפות?
+?
+בהינתן שני מרחבים טופולוגיים <span>\(\left( X,\tau_{X} \right)\)</span> ו-<span>\(\left( Y,\tau_{Y} \right)\)</span> פונקציה <span>\(f:X\to Y\)</span> תקרא רציפה אם המקור של כל קבוצה פתוחה ב-<span>\(Y\)</span> הוא פתוח ב-<span>\(X\)</span>. או בסימנים:
+<span>$$f^{-1} (U) \in \tau_{X}$$</span>
+לכל <span>\(U \in \tau_{Y}\)</span></p>
+<p>מה ההגדרה של הומאומורפיזם?
+?
+שני מרחבים יקראו הומאומורפיים אם קיימת פונקציה <span>\(\varphi:X\to Y\)</span> רציפה חח"ע ועל ובעלת הופכי רציף.</p>
+<p>מה ההגדרה של קומפקטיות?
+?
+לכל כיסוי בפתוח קיים כיסוי סופי.</p>
+<p>מה ההגדרה של קבוצה צפופה?
+?
+קבוצה <span>\(D\leq X\)</span> נקראת צפופה(ב-<span>\(X\)</span>) אם <span>\(\overline{D}=X\)</span>.</p>
+<p>מה ההגדרה של ספרבילי?
+?
+מרחב נקרא ספרבילי אם קיימת בו תת קבוצה בת מנייה צפופה.</p>
+<p>מה ההגדרה של בסיס לטופולוגיה?
+?
+בסיס לטופולוגיה <span>\(\tau\)</span> הינו אוסף <span>\(\varepsilon \subseteq \tau\)</span> כך שכל קבוצה פתוחה ב-<span>\(\tau\)</span> היא איחוד(כלשהו) של איברי <span>\(\varepsilon\)</span>.</p>
+<p>מה ההגדרה של אקסיומת המנייה השנייה?
+?
+מרחב טופולוגי מקיים את אקסיומת המנייה השנייה אם יש לו בסיס בן מנייה.</p>
+<p>מה ההגדרה של מרחב האוסדורף?
+?
+מרחב טופולוגי נקרא האוסדורף אם לכל <span>\(x,y \in X\)</span> שונות קיימות <span>\(U,V \in \tau\)</span> כך ש-<span>\(x \in U\)</span>, <span>\(y \in U\)</span>, <span>\(U\cap V = \varnothing\)</span>.</p>
+<p>מה ההגדרה של קומפקטי מקומי?
+?
+מרחב נקרא קומפקטי מקומית אם לכל <span>\(x \in X\)</span> קיים <span>\(x \in V \in \tau\)</span> כך ש-<span>\(\overline{V}\)</span> קופמקטי.</p>
+<p>מה ההגדרה של סיגמה קומפקטי?
+?
+מרחב נקרא <span>\(\sigma\)</span>-קומפקטי אם <span>\(X\)</span> הוא איחוד בן מנייה של קומפקטיות.</p>
+<p>מה אומר משפט המטריזציה של Urysohn?
+?
+אם <span>\(X\)</span> מרחב האוסדורף קומפקטי מקומי ובעל אקסיומת המנייה השנייה אזי הוא מטריזבילי כלומר קיימת מטריקה על <span>\(X\)</span> כך שהטפולוגיה היא בדיוק הקבוצות הפתוחות.</p>
+<p>מה ההגדרה של סיגמא אלגברה בורל?
+?
+יהי <span>\(\left( X,\tau \right)\)</span> מרחב טופולוגי. ה-<span>\(\sigma\)</span> אלגברה בורל על <span>\(\left( X,\tau \right)\)</span> הינה <span>\(\sigma\left( \tau \right)\)</span>. כלומר האוסף ה<span>\(\sigma\)</span>-אלגברה הקטן ביותר אשר מכיל את <span>\(X\)</span>. איבר ב-<span>\(\sigma\left( \tau \right)\)</span> לעיתים נקרא קבוצת בורל.</p>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Measure_7_7'>7.7 משפט ההצגה של ריס</a></li>
+<li class='prev-page'><a href='./Measure_7_5'>7.5 מרחבי Lᵖ</a></li>
+</ul></li>
+        </body>
+        </html>
+        

@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main_style.css">
+    <script type="text/javascript" src="./scripts/dark_mode.js"></script>
+
+        <link rel="stylesheet" href='./styles/style.css'>
+        <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [["$", "$"], ["\\(", "\\)"]],
+    displayMath: [["$$", "$$"], ["\[", "\]"]],
+    processEscapes: true,
+    packages: ['base', 'ams', 'cancel', 'braket', 'mathtools', 'boldsymbol']
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process',
+    renderActions: {
+      findScript: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+
+  },
+  loader: {
+    load: ['[tex]/cancel', '[tex]/braket', '[tex]/mathtools', '[tex]/boldsymbol']
+  }
+};
+window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'item' parameter
+    const item = urlParams.get('item'); 
+    keywords = document.getElementsByClassName("keyword"); 
+    for(let i = 0; i< keywords.length; i++){
+    if(item==keywords[i].innerText){
+    keywords[i].scrollIntoView();}} 
+
+    const divs = document.querySelectorAll('div.content > div'); //:has(span):has(p)
+    console.log(divs);
+    divs.forEach(div => {
+        div.addEventListener('mouseup', (event) => {
+            // Check if it's middle button (button 1)
+            console.log(div);
+            if (event.button === 1) {
+                console.log('Middle click detected');
+                            // Get both paragraphs and lists
+            const paragraphs = div.getElementsByTagName('p');
+            const lists = div.querySelectorAll('ul, ol'); // Get both unordered and ordered lists
+            
+            console.log(paragraphs);
+            console.log(lists);
+            
+            // Toggle each paragraph's visibility
+            Array.from(paragraphs).forEach(paragraph => {
+                if (paragraph.classList.contains('paragraph-hidden')) {
+                    // Show paragraph
+                    paragraph.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+                    console.log('Showing paragraph');
+                } else {
+                    // Hide paragraph
+                    paragraph.classList.add('paragraph-hidden');
+                    console.log('Hiding paragraph');
+                }
+            });
+            
+            // Toggle each list's visibility
+            Array.from(lists).forEach(list => {
+                if (list.classList.contains('paragraph-hidden')) {
+                    // Show list (using the same class for consistency)
+                    list.classList.remove('paragraph-hidden');
+                    // Update max-height to match content
+                    list.style.maxHeight = list.scrollHeight + 'px';
+                    console.log('Showing list');
+                } else {
+                    // Hide list
+                    list.classList.add('paragraph-hidden');
+                    console.log('Hiding list');
+                }
+            });
+                // Prevent default middle-click behavior
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent the default middle-click scrolling behavior
+        div.addEventListener('mousedown', (event) => {
+            if (event.button === 1) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>    <script type='text/javascript' src='./scripts/main_script.js'></script>
+            <title>גרפים</title>
+        </head>
+        <body>
+        <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page'><a href='./Game'> תורת המשחקים</a><ul class='parent-dropdown'>
+<li class='parent-page-dropdown'><div class='dropdown-div'>1. משחקים קומבינטוריים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_1_1'>1.1 גרפים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='parent-page-dropdown'><a href='./Game_1_3'>1.3 נים</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>2. משחקי Normal Form</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_2_1'>2.1 משחקים אסטרטגיים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_2'>2.2 משפט המינימקס</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_3'>2.3 שיווי משקל נאש</a></li>
+<li class='parent-page-dropdown'><a href='./Game_2_4'>2.4 שליטה וסימטרייה</a></li>
+</ul></li>
+<li class='parent-page-dropdown'><div class='dropdown-div'>3. משחקים שיתופיים</div><ul class='parent-dropdown-dropdown'>
+<li class='parent-page-dropdown'><a href='./Game_3_1'>3.1 משחקים קואליציונים</a></li>
+<li class='parent-page-dropdown'><a href='./Game_3_2'>3.2 ליבה</a></li>
+</ul></li>
+</ul></li>
+<li class='prev-page'><a href='./Game'> תורת המשחקים</a></li>
+</ul></li><script>document.addEventListener('keydown', function(event){if (event.key === 'ArrowRight') { window.location.href = `./Game_1_2`; }if (event.key === 'ArrowLeft') { window.location.href = `./Game`; }});</script>
+        <div class="content">
+        <h1>1.1  גרפים</h1>
+    <div class="definition"><span class="keyword">משחק קומבינטורי</span><p>2 שחקנים, שחקן אחד מנצח והשחקן השני מפסיד. אינפורמציה מלאה. </p>
+</div>
+<div class="proposition">
+<p>עבור משחקים קומבינטורים ניתן לתאר את המשחק בעזרת גרף מכווין א-ציקלי כאשר:
+- אוסף הקודקודים זה המצבים האפשריים - מסומן ב-<span>\(\mathcal{N}\)</span> - Nodes.
+- הענפים זה המהלכים האפשריים - מסומן ב- <span>\(\mathcal{B}\)</span> - Branches.
+- הקודקוד הראשי יהיה המצב ההתחלתי של המשחק. מסומן - <span>\(R\)</span> - Root.
+- הקודקודים ללא מוצא נקראים עלים. מוסומנים ב-<span>\(\mathcal{L}\)</span> - Leaves.</p>
+</div>
+<div class="definition"><span class="keyword">אסטרטגיה</span><p>העתקה <span>\(\sigma_{i}:\mathcal{N}\to \mathcal{B}_{N}\)</span>. כלומר בפרט אם אנחנו בקודקוד <span>\(N\)</span> זה אומר לנו לאיזה ענף <span>\(B\)</span> ללכת עליו. למעשה אומר מה שחקן <span>\(i\)</span> צריך לעשות במצב נתון.</p>
+</div>
+<div class="symbolize">
+<p>ניתן לתת לקודקוד שבהם לשחקן הראשון יש אסטרטגיה מנצחת ערך 1 ולקודקוד שבהם יש לשחקן השני אסטרטגיה מנצחת <span>\(-1\)</span>. בעזרת סימון זה אפשר להגדיד שהערך של קודקוד בתור של שחקן אחד </p>
+</div>
+<div class="proposition"><span class="keyword">זרמלו Zermelo</span><p>בכל משחק קומבינטורי או שלשחקן 1 יש אסטרטגיה מנצחת או שלשחקן 2 יש.</p>
+</div>
+<div class="proof">
+<p>יהי <span>\(t_{max}\)</span> המספר המקסימלי של תורות שהוא לא טריוויאלי(כלומר לא עולה).
+השחקן ב-<span>\(i\)</span> ב-<span>\(t_{\max}\)</span> מחליט להלן:</p>
+<ol>
+<li>
+<p>אם קיים <span>\(B_{N}\)</span> כך שהקודקוד העוקב(כלומר מ-<span>\((N,B_{N})\)</span>) הוא מנצח, אז לבחור את את <span>\(B_{N}\)</span>. </p>
+</li>
+<li>
+<p>אחרת, לא משנה מה השחקן <span>\(i\)</span> מפסיד. 
+כעת נוכיח בצורה אינדוטיבית. נסמן עבור כל קודקוד האם מנצח או מפסיד בהתאים לשלבים לעיל. ב-<span>\(t\)</span> נשתמש באותה שיטה:</p>
+</li>
+<li>
+<p>אם <span>\(\exists B_{N_{t}}\)</span> כך ש-<span>\((N_{t},B_{N_{t}})\)</span> מנצח, נבחר ענף כזה. </p>
+</li>
+<li>
+<p>אחרת לא משנה מה <span>\(i\)</span> מפסיד. </p>
+</li>
+</ol>
+</div>
+<div class="proposition"><span class="keyword">זרמלו עם תיקו</span><p>בכל משחק קומבינטורי לאחד השחקנים יש אסטרטגיה מנצחת או ששניהם יכולים לכפות תיקו.</p>
+</div>
+<div class="proof">
+<ol>
+<li>
+<p>נגדיר את הערך של כל קודקוד <span>\(w(N)\)</span> באופן רקורסיבי. </p>
+</li>
+<li>
+<p><strong>מקרה בסיס</strong> - נתחיל מהעלים, נגדיק לכל <span>\(L\in \mathcal{L}\)</span> את הערך <span>\(w(L)=1\)</span> אם ניצחון, <span>\(w(L)=-1\)</span> אם הפסד של השחקן הראשון ו-<span>\(w(L)=0\)</span> אם תיקו. </p>
+</li>
+<li>
+<p><strong>צעד אינדוקטיבי</strong> - אם <span>\(N\)</span> הוא הקודקוד בתור של שחקן 1 נגדיר: 
+<span>$$w(N)=\operatorname*{max}\{w(N^{\prime})\mid N^{\prime}{\mathrm{~is~a~legal~move~from~}}N\}$$</span>
+כלומר השחקן הראשון בוחר את האופציה הטובה ביותר בשבילו, ואם <span>\(N\)</span> הוא קודקוד בתור של שחקן 2 נגדיר:
+<span>$$w(N)=\operatorname*{min}\{w(N^{\prime})\mid N^{\prime}{\mathrm{~is~a~legal~move~from~}}N\}$$</span></p>
+</li>
+<li>
+<p>הגדרנו פונקציה <span>\(w:\mathcal{N}\to\{ -1,0,1 \}\)</span> על כל הקודקודים, אשר מכריע האם המצב מנצח לשחקן 1, מנצח לשחקן 2 או תיקו בהנחה שבכל תור כל שחקן משחק את המהלך הטוב ביותר עבורו. בפרט מוגדר עבור השורש <span>\(R\)</span> של העץ. אם <span>\(w(R)=1\)</span> השחקן הראשון מנצח, אם <span>\(w(R)=-1\)</span> השחקן השני מנצח כאשר אם <span>\(w(R)=0\)</span> שתי השחקנים יכולים לכפות תיקו. </p>
+</li>
+</ol>
+</div>
+<div class="summary">
+<ul>
+<li>משחק קומבינטורי ניתן לתאר בעזרת גרף מכווין א-ציקלי. הקוקודים זה מצבים אפשריים של המשחק, הענפים ההמהלכים האפשריים, השורש זה המצב ההתחלתי והעלים הם המצבים הסופיים.</li>
+<li>ניתן לתת לעלה ערך של <span>\(+1\)</span> אם זה מצב של ניצחון של שחקן הראשון ו-<span>\(-1\)</span> אם זה מהלך של נצחון של השחקן השני. כעת ניתן להגדיר באופן אידוקטיבי את הערך של הקודקוד ברמה ה-<span>\(i\)</span> להיות הערך המקסימלי של הקודקודים שמחוברים עליו ברמה ה-<span>\(i+1\)</span> אם זה התור של השחקן הראשון והקודקוד המינימלי אם זה המהלך של השחקן השני.</li>
+<li>משפט זרמלו טוען שלשחקן 1 יש אסטרטגיה מנצחת או לשחקן 2 יש אסטרטגיה מנצחת.</li>
+<li>זרמלו עם תיקו טוען שלשחקן 1 יש אסטרטגיה מנצחת או ששני השחקנים יכולים לכפות תיקו.</li>
+</ul>
+</div>
+    </div>
+    <ul class='top-navigation'>
+<li class='next-page'><a href='./Game_1_2'>1.2 גנבת אסטרטגיות</a></li>
+<li class='prev-page'><a href='./Game'> תורת המשחקים</a></li>
+</ul></li>
+        </body>
+        </html>
+        
