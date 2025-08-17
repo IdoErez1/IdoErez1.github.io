@@ -93,7 +93,7 @@ $$\circ :\mathrm{Hom}(B,C)\times \mathrm{Hom}(A,B)\to \mathrm{Hom}(A,C)$$
 אשר מקיים את התכונות:
 
 \begin{enumerate}
-  \item הפונקציית הרכבה היא אסוצייטיבית - אם \(f:A\to B,g:B\to C\)  ו-\(h:C\to D\) נקבל: 
+  \item פונקציית ההרכבה היא אסוציאטיבית - אם \(f:A\to B,g:B\to C\)  ו-\(h:C\to D\) נקבל: 
 $$h\circ (g\circ  f)=(h\circ  g)\circ  f$$
 
 
@@ -103,11 +103,11 @@ $$\mathrm{Id}_{B}\circ  f=f \circ  \mathrm{Id}_{A}=f$$
 
 \end{enumerate}
 \begin{definition}[אובייקט תחילי]
-אובייקט הוא תחילי אם יש בדיוק מורפיזם אחד ממנו לכל אובייקט אחר.
+אובייקט הוא תחילי אם יש בדיוק מורפיזם אחד ממנו לכל אובייקט אחר. כלומר לכל \(Y \in \mathcal{C}\) מתקיים \(\left\lvert  \mathrm{Hom}_{\mathcal{C}}(X,Y)  \right\rvert=1\).
 
 \end{definition}
 \begin{definition}[אובייקט סופי]
-אובייקט הוא סופי אם יש בדיוק מורפיזם אחד עליו מכל אובייקט אחר.
+אובייקט הוא סופי אם יש בדיוק מורפיזם אחד עליו מכל אובייקט אחר. כלומר לכל \(Y \in \mathcal{C}\) מתקיים \(\left\lvert  \mathrm{Hom}_{\mathcal{C}}(Y,X)  \right\rvert=1\).
 
 \end{definition}
 \begin{example}
@@ -269,8 +269,6 @@ $$\operatorname{Hom}_{\operatorname{Sub}_{x}}(Y,Z)={\left\{\begin{array}{l l}{\{
 - \textbf{מורפיזמים:} המורפיזמים בין \(m\) ל-\(n\) הם המטריצות \(m\times n\) עם איברים ב-\(R\).
 
 \end{definition}
-\section{דואליות}
-
 \begin{definition}[הקטגוריה ההפוכה]
 תהי \(\mathcal{C}\) קטגוריה. אזי הקטגוריה ההפוכה תהיה הקטגוריה \(\mathcal{C}^{\text{op}}\) אשר מקיימת:
 - אובייקטיים זהים -\(\text{Ob}(\mathcal{C})=\text{Ob}(\mathcal{C}^{\text{op}})\).
@@ -304,7 +302,7 @@ $$.f^{o p}\circ g^{o p}=(g\circ f)^{o p}$$
 $$\mathrm{Hom}(V,W)=\{ \text{linear maps }V \to W\}$$
 כעת נקבע ווקטור \(W\), כל העתקה לינארית \(f:V\to V'\) משרה העתקה לינארית:
 $$f^{*}:\mathrm{Hom}(V',W)\to \mathrm{Hom}(V,W)$$
-המוגדר ב-\(q \in \mathrm{Hom}\)
+המוגדר ב-\(q \in \mathrm{Hom}\).
 
 \end{example}
 \section{איזומורפיזם של אובייקטים}
@@ -381,51 +379,114 @@ $$g=g\circ{\mathrm{Id}}_{Y}=g\circ(f\circ h)=(g\circ f)\circ h={\mathrm{Id}}_{X}
 נקבל לבסוף את הגרופאיד היסודי \(\Pi_{1}(X)\) אשר מכליל את החבורה היסודית \(\pi_{1}(X,x)\).
 
 \end{example}
-\chapter{פונקטורים}
+\section{שאלות}
 
-\section{שיכונים}
 
-פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא נאמן(faithful) אם לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
-$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
-הוא חח"ע.
+    const tsvFileName = 'Category_1.tsv';
 
-\begin{definition}[פונקטור מלא]
-פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא מלא(full) אם לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
-$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
-היא על.
+    let cards = [];
+    let quizOrder = [];
+    let currentIndex = 0;
 
-\end{definition}
-\begin{example}
-\end{example}
-עבור פונקטור המקיים \(F(f_{1})=h,F(f_{2})=h\) נקבל כי לא נאמן כי \(F(f_{1})=F(f_{2})\) לא נותן \(f_{1}=f_{2}\). עבור פונקטור מהצורה \(G(h)=f_{1}\) נקבל כי לא מלא כי לא על.
+    // 1) Fetch and parse TSV
+fetch(tsvFileName)
+  .then(r => {
+    if (!r.ok) throw new Error('Failed to load ' + tsvFileName);
+    return r.text();
+  })
+  .then(text => {
+    cards = parseTSV(text);
+    renderList(cards);
 
-\begin{definition}[שיכון]
-פונקטור שהוא נאמן ומלא. כלומר לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
-$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
-היא חח"ע ועל.
+    // ⬇ After you’ve rendered the full Q&A list, re-typeset MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise()
+        .catch(err => console.error('MathJax typeset failed: ' + err.message));
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    //document.body.innerHTML =  '<p style="color:red">Error loading questions: '+err.message+'</p>';
+  });
 
-\end{definition}
-\begin{proposition}
-יהי \(F\) שיכון, ו-\(f\) מורפיזם אזי \(F(f)\) איזומורפיזם גורר ש-\(f\) איזומורפיזם. כלומר יש גם גרירה בכיוון ההפוך.
+    // 2) TSV → [{front,back,tags},…]
+    function parseTSV(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
 
-\end{proposition}
-\begin{reminder}[תת קטגוריה]
-יהי \(\mathcal{C}\) קטגוריה. \(\mathcal{S}\) נקרא תת קטגוריה של \(\mathcal{C}\) אם \(\mathrm{Ob}(\mathcal{S})\subseteq \mathrm{Ob}(\mathcal{C})\) וגם לכל אובייקטים \(X,Y \in \mathrm{Ob}(\mathcal{D})\) המורפיזמים מוכלים במורפיזמים של \(\mathrm{Hom}_{\mathcal{D}}(X,Y)\subseteq \mathrm{Hom}_{\mathcal{C}}(X,Y)\) כך שמהווה כקטגוריה בפני עצמה, כלומר מכיל את המורפיזמי יחידה וסגור להרכבות. תת קטגוריה תהיה מלאה אם כל המורפיזמים "מורשים" ל-\(\mathcal{D}\). כלומר \(\mathrm{Hom}_{\mathcal{D}}(X,Y)= \mathrm{Hom}_{\mathcal{C}}(X,Y)\).
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
 
-\end{reminder}
-\begin{proposition}[פונקטור ההכלה]
-יהי \(\mathcal{D}\subseteq \mathcal{C}\) תת קטגוריה. אזי הפונקטור \(F:\mathcal{D}\to \mathcal{C}\) במוגדר על ידי הזהות יהיה נאמן.
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        // "" inside quoted field -> literal "
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        // closing quote
+        inQuotes = false;
+      } else {
+        field += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;                // opening quote
+      } else if (ch === '\t') {
+        row.push(field); field = '';    // field separator
+      } else if (ch === '\r') {
+        // ignore; handle \n as newline
+      } else if (ch === '\n') {
+        row.push(field); rows.push(row);
+        row = []; field = '';           // record separator
+      } else {
+        field += ch;
+      }
+    }
+  }
+  // flush last field/row if file didn't end with newline
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
 
-\end{proposition}
-\begin{proof}
-פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא נאמן אם לכל \(X,Y \in \mathcal{C}\) המורפיזמים \(\mathrm{Hom}_C(X, Y) \to \mathrm{Hom}_D(F(X), F(Y))\) הוא חח"ע. 
-יהיו \(f\)
+  // map to objects (Front, Back, Tags)
+  return rows.map(cols => ({
+    front: cols[0] || '',
+    back:  cols[1] || '',
+    tags:  cols[2] || ''
+  }));
+}
+// 3) Render full Q&A list + “Start Quiz” button
+function renderList(cards) {
+  const listDiv = document.getElementById('qa-list');
+  const container = listDiv.querySelector('.cards');
+  container.innerHTML = '';
 
-\end{proof}
-\begin{proposition}
-יהי \(\mathcal{D}\subseteq \mathcal{C}\) תת קטגוריה. אזי פונקטור ההכלה יהיה מלא אם"ם התת קטגוריה מלאה.
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-\end{proposition}
+    const q = document.createElement('div');
+    q.className = 'question';
+    q.textContent = c.front;   // <- no replace, real \n already in the string
+
+    const a = document.createElement('div');
+    a.className = 'answer';
+    a.textContent = c.back;    // <- no replace
+
+    card.appendChild(q);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
+
+  // Re-typeset MathJax for the newly added nodes
+  if (window.MathJax) {
+    MathJax.typesetPromise([container]).catch(err => console.error(err));
+  }
+}
+  \chapter{פונקטורים}
+
 \section{הפונקטור}
 
 \begin{definition}[פונקטור]
@@ -483,7 +544,7 @@ $${\mathcal{P}}\left( g\circ f \right)(A)={\mathcal{P}}(g)\left( {\mathcal{P}}(f
 \end{example}
 \begin{proposition}
 הרכבה של פונקטורים נותן פונקטור. כלומר בהנתן שתי פונקטורים:
-$$F:C\to D\quad{\mathrm{and}}\quad G:D\to E,$$
+$$F:C\to D\quad{\mathrm{and}}\quad G:D\to E$$
 נגדיר את ההרכבה שלהם \(G\circ F:C\to E\) על ידי:
 
   \begin{enumerate}
@@ -569,11 +630,52 @@ $$g\circ f=\operatorname{Id}_{X}\quad{\mathrm{and}}\quad f\circ g=\operatorname{
 \includegraphics[width=0.8\textwidth]{diagrams/svg_1.svg}
 וכדי שיתנהג יפה נרצה שהדיאגרמה תתחלף. ניתן לצמצם את זה לכך שיתחלף רק בחלק הצבוע.
 
+\begin{definition}[העתקה טבעית]
+יהיו \(F,G:\mathcal{C}\to \mathcal{D}\) פונקטורים. העתקה טבעית \(\alpha:F\to G\)  היא משפחה של העתקות \(\{ \alpha_{X}:F(X)\to G(X) \}_{X \in \mathrm{Ob}_{\mathcal{C}}}\) המקיימות שלכל מורפיזם \(f:A\to B\) ב-\(\mathcal{C}\) הדיאגרמה מתחלפת:
+$$\begin{CD}F(A)@>f>>F(B)\\ @V\alpha_{A}VV @VV\alpha_{B}V \\ G(A) @>>G(f)> G(B) \end{CD}$$
+
+\end{definition}
 \includegraphics[width=0.8\textwidth]{diagrams/svg_2.svg}
 כלומר:
 $$\alpha_{A}\circ  G(f)=F(f)\circ  \alpha_{B}$$
-האיברים \(\alpha_{X}\) נקראים רכיבים.
+האיברים \(\alpha_{X}\) נקראים רכיבים. לעיתים מסומן \(\alpha:F\Rightarrow G\).
 
+\begin{remark}
+התנאי החילופיות הזאת נקראת הטבעיות של ההעתקה.
+
+\end{remark}
+\begin{proposition}[הפעלה של פונקטור משמאל על העתקה טבעית]
+נניח \(H,K:\mathcal{C}\to \mathcal{D}\) פונקטורים כך ש-\(\eta\) היא העתקה טבעית ביניהם. נניח כי נתון פונקטור \(F:\mathcal{D}\to \mathcal{E}\). אזי:
+$$F\eta:F\circ H\Rightarrow F\circ K$$
+עם רכיבים:
+$$(F\eta)_{A}:=F(\eta_{A}):F(H(A))\to F(K(A)).$$
+הוא עדיין טבעי.
+
+\end{proposition}
+\begin{proof}
+מיידית מכך שפונקטורים משמרים הרכבה. כיוון ש-\(\eta\) העתקה טבעית מתקיים לכל \(f:A\to B\):
+$$K(f)\circ\eta_{A}=\eta_{B}\circ H(f)$$
+וכעת אם נפעיל את \(F\) נקבל:
+$$F(K(f))\circ F(\eta_{A})=F(\eta_{B})\circ F(H(f))$$
+שזה בדיוק התנאי טבעיות על \(F\left( \eta \right)\).
+
+\end{proof}
+\begin{proposition}
+הפעלה של פונקטור מימין על העתקה טבעית
+נניח \(\eta:H\Rightarrow K\) העתקה טבעית בין הפונקטורים \(H,K:\mathcal{D}\to \mathcal{E}\). וכן נניח כי נתון פונקטור \(G:\mathcal{C}\to \mathcal{D}\). אזי:
+$$\eta G:H\circ G\Rightarrow K\circ G$$
+עם רכיבים:
+$$(\eta G)_{A}:=\eta_{G(A)}:H(G(A))\to K(G(A)).$$
+
+\end{proposition}
+\begin{proof}
+ראשית כיוון ש-\(\eta\) העתקה טבעית מתקיים:
+$$K(f)\circ\eta_{X}=\eta_{Y}\circ H(f)$$
+לכל \(f:X\to Y\) ב-\(\mathcal{D}\) אז עבור \(g:A\to B\) ב-\(\mathcal{C}\) ובפרט עבור \(X=G(A),Y=G(B)\) ו- \(f=G(g)\) מתקיים:
+$$K(G(g))\circ\eta_{G(A)}=\eta_{G(B)}\circ H(G(g))$$
+שזה בדיוק תנאי הטבעיות עבור \(\eta_{G}\).
+
+\end{proof}
 \begin{definition}[קטגוריית פונקטורים]
 בהנתן שתי קטגוריות \(\mathcal{A}\) ו-\(\mathcal{B}\) ניתן להגדיר קטגוריית פונקטורים על ידי \([\mathcal{A},\mathcal{B}]\) כך שהאובייקטים הם הפונקטורים \(F:\mathcal{A}\to \mathcal{B}\) והמורפיזמים הם ההעתקות הטבעיות מ-\(F\) ל-\(G\).
 
@@ -591,7 +693,7 @@ $$\alpha_{A}\circ  G(f)=F(f)\circ  \alpha_{B}$$
 לכל מורפיזם \(f:A\to B\) מתקיים:
 $$\beta_B \circ G(f) = \alpha_B^{-1} \circ G(f)
 $$
-מצד שני,
+מצד שני:
 $$F(f) \circ \beta_A = F(f) \circ \alpha_A^{-1}
 $$
 הטבעיות של \(\alpha\) נותנת:
@@ -620,6 +722,85 @@ $$
     \item לכן אם נסתכל על קטגוריית הפונקטורים \([\mathcal{A},\mathcal{B}]\) נקבל כי הדרך הנכונה לחשוב על שיוויון של שתי פונקטורים היא איזומורפיזם טבעי.
   \end{itemize}
 \end{remark}
+\section{שיכונים}
+
+פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא נאמן(faithful) אם לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
+$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
+הוא חח"ע.
+
+\begin{definition}[פונקטור מלא]
+פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא מלא(full) אם לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
+$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
+היא על.
+
+\end{definition}
+\begin{example}
+\end{example}
+עבור פונקטור המקיים \(F(f_{1})=h,F(f_{2})=h\) נקבל כי לא נאמן כי \(F(f_{1})=F(f_{2})\) לא נותן \(f_{1}=f_{2}\). עבור פונקטור מהצורה \(G(h)=f_{1}\) נקבל כי לא מלא כי לא על.
+
+\begin{definition}[שיכון]
+פונקטור שהוא נאמן ומלא. כלומר לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
+$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
+היא חח"ע ועל.
+
+\end{definition}
+\begin{proposition}
+יהי \(F\) שיכון, ו-\(f\) מורפיזם אזי \(F(f)\) איזומורפיזם גורר ש-\(f\) איזומורפיזם. כלומר יש גם גרירה בכיוון ההפוך.
+
+\end{proposition}
+\begin{reminder}[תת קטגוריה]
+יהי \(\mathcal{C}\) קטגוריה. \(\mathcal{S}\) נקרא תת קטגוריה של \(\mathcal{C}\) אם \(\mathrm{Ob}(\mathcal{S})\subseteq \mathrm{Ob}(\mathcal{C})\) וגם לכל אובייקטים \(X,Y \in \mathrm{Ob}(\mathcal{D})\) המורפיזמים מוכלים במורפיזמים של \(\mathrm{Hom}_{\mathcal{D}}(X,Y)\subseteq \mathrm{Hom}_{\mathcal{C}}(X,Y)\) כך שמהווה כקטגוריה בפני עצמה, כלומר מכיל את המורפיזמי יחידה וסגור להרכבות. תת קטגוריה תהיה מלאה אם כל המורפיזמים "מורשים" ל-\(\mathcal{D}\). כלומר \(\mathrm{Hom}_{\mathcal{D}}(X,Y)= \mathrm{Hom}_{\mathcal{C}}(X,Y)\).
+
+\end{reminder}
+\begin{proposition}[פונקטור ההכלה]
+יהי \(\mathcal{D}\subseteq \mathcal{C}\) תת קטגוריה. אזי הפונקטור \(F:\mathcal{D}\to \mathcal{C}\) במוגדר על ידי הזהות יהיה נאמן.
+
+\end{proposition}
+\begin{proof}
+פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא נאמן אם לכל \(X,Y \in \mathcal{C}\) המורפיזמים \(\mathrm{Hom}_C(X, Y) \to \mathrm{Hom}_D(F(X), F(Y))\) הוא חח"ע. 
+
+\end{proof}
+\begin{proposition}
+יהי \(\mathcal{D}\subseteq \mathcal{C}\) תת קטגוריה. אזי פונקטור ההכלה יהיה מלא אם"ם התת קטגוריה מלאה.
+
+\end{proposition}
+\begin{definition}[מרכז של קטגוריה]
+תהי \(\mathcal{C}\) קטגוריה. המרכז \(Z\left( \mathcal{C} \right)\) תהיה המונאויד:
+$$Z\left( {\mathcal{C}} \right)=\operatorname{Nat}\left( \operatorname{Id}_{{\mathcal{C}}},\operatorname{Id}_{{\mathcal{C}}} \right):= \mathrm{Hom}_{\mathrm{Fun}\left( \mathcal{C} ,\mathcal{C}  \right)}\left( \mathrm{id}_{\mathcal{C} },\mathrm{id}_{\mathcal{C} }) \right)$$
+כלומר אובייקט ב-\(Z\left( \mathcal{C} \right)\) הוא משפחה \(\left\{  \alpha_{X}:X \to X \right\}_{X \in \mathrm{Ob}\left( \mathcal{C} \right)}\) של מורפיזמים ב-\(\mathcal{C}\) כך שלכל מורפיזם \(f\in \mathrm{Hom}(X,Y)\) נקבל כי מתקיים תנאי הטבעיות:
+$$\alpha_{X}\circ  f=f\circ  \alpha_{Y}$$
+וכן ההרכבה ב-\(Z\left( \mathcal{C} \right)\) נתונה על ידי \((\beta \circ \alpha)_X = \beta_X \circ \alpha_X\).
+
+\end{definition}
+\begin{proposition}
+המרכז של קטגוריה היא מונואיד קומוטטיבי תחת הרכבה.
+
+\end{proposition}
+\begin{proof}
+אסוצייטיביות מתקיים כי לכל \(X\) מתקיים:
+$$\left( \left( \gamma\circ\beta \right)\circ\alpha \right)_{X}=\left( \gamma_{X}\circ\beta_{X} \right)\circ\alpha_{X}=\gamma_{X}\circ\left( \beta_{X}\circ\alpha_{X} \right)=\left( \gamma\circ\left( \beta\circ\alpha \right)_{X} \right)=\left( \gamma \circ \left( \beta \circ  \alpha \right) \right)_{X}$$
+ואיבר הזהות הוא איבר הזהות של העתקות  טביעיות \(\left( \mathrm{id} \right)_{X}=\mathrm{id}_{X}\). לכן מונואיד. כדי להראות קומוטטיביות נניח \(\alpha,\beta \in Z\left( \mathcal{C} \right)\). עבור אובייקטים \(X\) הטבעיות של \(\beta\) ביחס למורפיזם \(\alpha_{X}:X\to X\) נותן:
+$$\beta_{X}\circ\alpha_{X}=\alpha_{X}\circ\beta_{X}$$
+ולכן לכל \(X\) מתקיים:
+$$\left( \beta \circ \alpha \right)_{X}=\left( \alpha \circ \beta \right)_{X}$$
+ולכן \(\beta \circ \alpha=\alpha \circ \beta\).
+
+\end{proof}
+\begin{example}
+תהי \(G\) קטגוריה. נחשב את המרכז \(\mathsf{B}G\)(הקטגוריה עם אובייקט אחד \(\{ * \}\) כאשר המורפיזמים הם האיברים של החבורה). העתקה טבעית \(\alpha:\mathrm{Id}_{\mathsf{B}G}\Rightarrow\mathrm{Id}_{\mathsf{B}G}\) נקבעת על ידי איבר יחיד \(\{ * \}\)(כלומר אין לנו משפחה של מורפיזמים) מהצורה \(\alpha_{*}:*\to *\), כאשר מורפיזם זה למעשה הוא איבר בחבורה, וניתן לסמן אותו ב-\(z \in G\). מהטבעיות נקבל כי לכל \(g \in G\) מתקיים:
+$$\alpha_{*}\circ g=g\circ\alpha_{*}$$
+כאשר כיוון שמורפיזם הוא איבר בחבורה נקבל:
+$$zg=gz$$
+ולכן \(z \in Z(G)\) עם ההגדרה של מרכז של חבורות. בכיוון השני כל \(z \in Z(G)\) מגדיר אנדומורפיזם טבעי. לכן:
+$$Z\left( \mathsf{B}G \right)\cong  Z(G)$$
+
+\end{example}
+\begin{example}[מרכזים נוספים של קטגוריות]
+$$Z\left( \mathsf{Sets} \right)=Z\left( \mathsf{Top} \right)=\left\{  \mathrm{Id}  \right\}$$$$Z\left( \mathsf{Grp} \right)=Z\left( \mathsf{Top}_{*} \right)=Z\left( \mathsf{Sets}_{*} \right)=\{ 1,0 \}$$$$Z\left( \mathsf{Vect}_{\mathbb{F} } \right)=Z\left( \mathsf{Ab} \right)=\left( \mathbb{Z},\cdot \right)$$
+
+\end{example}
+\section{שקילות בין קטגוריות}
+
 \begin{definition}[שקילות בין קטגוריות]
 קטגוריות \(\mathcal{C},\mathcal{D}\) נקראות שקולות אם קיים זוג של של פונקטורים \(F:\mathcal{C}\to \mathcal{D},G:\mathcal{D}\to \mathcal{C}\) כך ש:
 $$\eta:\mathrm{Id}_{\mathcal{C} }\to G\circ  F\qquad \varepsilon:F\circ G\to \mathrm{Id}_{\mathcal{D} }$$
@@ -631,6 +812,12 @@ $$\eta:\mathrm{Id}_{\mathcal{C} }\to G\circ  F\qquad \varepsilon:F\circ G\to \ma
 $$F(A)\cong  B$$
 
 \end{definition}
+\begin{reminder}
+פונקטור \(F:\mathcal{C}\to \mathcal{D}\) נקרא נאמן אם לכל \(A,A' \in \mathrm{Ob}(\mathcal{C})\) ההעתקה:
+$$F:\mathrm{Hom}_{\mathcal{C}}(A,A')\to \mathrm{Hom}_{\mathcal{D} }(F(A),F(A'))$$
+הוא חח"ע, ומלא אם היא על.
+
+\end{reminder}
 \begin{proposition}
 אם קיים פונקטור \(F:\mathcal{C}\to \mathcal{D}\) כך ש-\(F\) נאמן, מלא ומהותית על אזי \(\mathcal{C,D}\) קטגוריות שקולות.
 
@@ -643,95 +830,134 @@ $$F(A)\cong  B$$
 הפונקטור \(F':\mathcal{C}\to \mathcal{D'}\) הוא מלא ונאמן(כי \(F\) כזה), ומהותית על לפי ההגדרה של \(\mathcal{D'}\).
 
 \end{proof}
-\chapter{הלמה של יונדה}
+\section{שאלות}
 
-\section{ייצוג וקו יצוג}
 
-\begin{definition}[פוקטור הום הקו וריאנטי]
-יהי \(A \in \mathcal{C}\). אזי ניתן להגדיר את הפונקטור הקו וריאנטי על ידי:
-$$h_{A}=\operatorname{Hom}(A,-)\colon{\mathcal{C}}\to\mathbf{Set}$$
-זה שולח כל אוביקט \(X\) לקבוצת המורפיזמים \(\mathcal{C}(A,X)\) וכל מורפיזם \(f:X\to Y\) לפונקציה:
-$$\mathrm{Hom}(A,f)\colon{\mathcal{C}}(A,X)\to{\mathcal{C}}(A,Y),\quad g\mapsto f\circ g$$
+    const tsvFileName = 'Category_2.tsv';
 
-\end{definition}
-\begin{definition}[פונקטור הום קונטרה וריאנטי]
-יהי \(B \in \mathcal{C}\). אזי הפונקטור Hom הקונטרא וריאנטי(לעיתים נקרא presheaf) הוא:
-$$h^{B}=\mathrm{Hom}(-,B)\colon C^{\mathrm{op}}\to\mathbf{Set}$$
-כאשר על אובייקטים פעול על ידי \(X\mapsto \mathcal{C}(X,B)\) ועל מורפיזמים עבור מורפיזם \(h:X\to Y\) מפועל על ידי:
-$$\mathrm{Hom}(h,B)\colon{\mathcal{C}}(Y,B)\to{\mathcal{C}}(X,B),\quad g\mapsto g\circ h$$
+    let cards = [];
+    let quizOrder = [];
+    let currentIndex = 0;
 
-\end{definition}
-\begin{definition}[פונקטור מיוצג]
-כל פונקטור אשר קיים איזומומרפיזם טבעי ל-\(h_{A}\) נקרא מיוצג על ידי האובייקט \(A\).
+    // 1) Fetch and parse TSV
+fetch(tsvFileName)
+  .then(r => {
+    if (!r.ok) throw new Error('Failed to load ' + tsvFileName);
+    return r.text();
+  })
+  .then(text => {
+    cards = parseTSV(text);
+    renderList(cards);
 
-\end{definition}
-\begin{definition}[פונקטור קו מיוצג]
-כל פונקטור אשר קיים איזומורפיזם טבעי ל-\(h^{A}\) נקרא קו מיוצג על ידי אובייקט \(A\).
+    // ⬇ After you’ve rendered the full Q&A list, re-typeset MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise()
+        .catch(err => console.error('MathJax typeset failed: ' + err.message));
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    //document.body.innerHTML =  '<p style="color:red">Error loading questions: '+err.message+'</p>';
+  });
 
-\end{definition}
-\begin{example}
-נסתכל על הפנקטור הקונטרה וריאנטי \(P:\mathsf{Sets}^{\mathrm{op}}\to \mathsf{Sets}\) כך שעל אובייקטים פועל על ידי קבוצת החזקה ועל מורפיזמים שולח את \(f:X\to Y\) ל:
-$$P(f):{\mathcal{P}}(Y)\to{\mathcal{P}}(X),\quad S\mapsto f^{-1}(S)$$
-נטען כי זה פונקטור מיוצג, כלומר קיים \(A\) ואיזומורפיזם טבעי \(\mathcal{P}(-)\cong \mathrm{Hom}(-,A)\). נבחר את \(A=\{ 0,1 \}\). נגדיר את האיזומורפיזם:
-$$\Phi_{X}\colon\operatorname{Hom}(X,A)\longrightarrow{\mathcal{P}}(X)\qquad \Phi_{X}(f)=f^{-1}(\{1\})$$
-כלומר כל פונקציה \(f:X\to \{ 0,1 \}\) בוחרת תת קבוצה של \(X\). מתת קבוצה \(S\subseteq X\) ניתן לשחזר את \(f\) על ידי:
-$$f=\begin{cases}1 & x \in S \\0 & x \not \in S
-\end{cases}$$
-זה משרה איזומורפיזם טבעי ב-\(X\):
-$${\mathrm{Hom}}(X,A)\cong{\mathcal{P}}(X)$$
-ולכן \(P\) מיוצג על ידי \(\left( \{ 0,1 \},\{ 1 \} \right)\)
+    // 2) TSV → [{front,back,tags},…]
+    function parseTSV(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
 
-\end{example}
-\begin{proposition}
-אם יש שתי יצוגים לאותו פונקטור אז הם איזומורפיים.
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
 
-\end{proposition}
-\section{הלמה של יונדה}
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        // "" inside quoted field -> literal "
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        // closing quote
+        inQuotes = false;
+      } else {
+        field += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;                // opening quote
+      } else if (ch === '\t') {
+        row.push(field); field = '';    // field separator
+      } else if (ch === '\r') {
+        // ignore; handle \n as newline
+      } else if (ch === '\n') {
+        row.push(field); rows.push(row);
+        row = []; field = '';           // record separator
+      } else {
+        field += ch;
+      }
+    }
+  }
+  // flush last field/row if file didn't end with newline
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
 
-\begin{reminder}
-הסימון \(\mathsf{Set}^{\mathcal{C}}\) מייצג את הקטגוריות הפונקטורים מ-\(\mathcal{C}\) ל-\(\mathsf{Set}\).
+  // map to objects (Front, Back, Tags)
+  return rows.map(cols => ({
+    front: cols[0] || '',
+    back:  cols[1] || '',
+    tags:  cols[2] || ''
+  }));
+}
+// 3) Render full Q&A list + “Start Quiz” button
+function renderList(cards) {
+  const listDiv = document.getElementById('qa-list');
+  const container = listDiv.querySelector('.cards');
+  container.innerHTML = '';
 
-\end{reminder}
-\begin{definition}[פונקטור ההעתקות הטבעיות]
-$$\mathrm{{Nat}}(h_{A},F)\equiv\mathrm{{Hom}}(\mathrm{{Hom}}(A,-),F)$$
-כאשר זהו פונקטור מ-\(\mathcal{C}\times \mathsf{Set}^{\mathcal{C}}\to\mathsf{Set}\).
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
 
-\end{definition}
-\begin{proposition}[הלמה של יונדה]
-יהי \(F\) פונקטור מקטוריה קטנה מקומית \(\mathcal{C}\) ל-\(\mathsf{Sets}\). אזי קיים האיזומורפיזם הטבעי:
-$$\mathrm{Nat}(h_{A},F)\cong F(A)$$
+    const q = document.createElement('div');
+    q.className = 'question';
+    q.textContent = c.front;   // <- no replace, real \n already in the string
 
-\end{proposition}
-אזי לכל אובייקט \(A \in \mathrm{Ob}\left( \mathcal{C} \right)\) ההעקתקות הטבעיות  בהתאמה חח"ע ועל עם האיברים של \(F(A)\).
+    const a = document.createElement('div');
+    a.className = 'answer';
+    a.textContent = c.back;    // <- no replace
 
-\begin{proposition}[הלמה של יונדה - גרסה קונטרא וריאנטית]
-יהי \(\mathcal{C}\) קטגוריה קטנה מקומית. נסתכל על הקו יצוג \(h^{A}:=\mathrm{Hom}_{C}(-,A):{\mathcal C}^{\mathrm{op}}\to\mathbf{Set}\). יהי \(F: \mathcal{C}^{\mathrm{op}} \to \mathbf{Set}\) פונקטור. אזי יש איזומורפיזם טבעי:
-$$\mathrm{Nat}(h^{A},F)\cong F(A)$$
+    card.appendChild(q);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
 
-\end{proposition}
-\section{שיכון יונדה}
-
-\begin{definition}[שיכון יונדה]
-יהי \(\mathcal{C}\) קטגוריה קטנה מקומית. שיכון יונדה הקו וריאנטי ומגדר על ידי:
-$$y:C\longrightarrow\left[ C^{\mathrm{op}},\mathbf{Set} \right]\qquad y(A):=h^{A}:=\operatorname{Hom}_{C}(-,A)$$
-כאשר שיכון יונדה הקונטרא וריאטנטי מוגדר על ידי:
-$$y:{\mathcal{C}}^{\mathrm{op}}\longrightarrow\left[ {\mathcal{C}},\mathbf{Set} \right]\qquad y(A):=h_{A}:=\operatorname{Hom}_{C}(A,-)$$
-
-\end{definition}
-\begin{proposition}
-שיכון יונדה הוא שיכון, כלומר נאמן ומלא. 
-
-\end{proposition}
-\begin{proof}
-נשים לב כי מהלמה של יונדה
-$$\forall A,B\in{\mathcal{C}},\quad\mathrm{{Nat}}(h^{A},h^{B})\cong\mathrm{Hom}_{{\mathcal{C}}}(A,B)$$
-באופן טבעי וזה בדיוק הדרישה שיהיה שיכון - נאמן ומלא.
-
-\end{proof}
-\chapter{פונקטורים צמודים}
+  // Re-typeset MathJax for the newly added nodes
+  if (window.MathJax) {
+    MathJax.typesetPromise([container]).catch(err => console.error(err));
+  }
+}
+  \chapter{פונקטורים צמודים}
 
 \section{הגדרה של פונקטורים צמודים}
 
+\begin{definition}[ביפונקטור Hom]
+לכל קטגוריה \(\mathcal{C}\) נגדיר:
+$$\mathrm{Hom}_{\mathcal{C}}(-,-):\mathcal{C} ^{\text{op}}\times \mathcal{C} \to \mathsf{Sets}$$
+זהו פונקטור קוונטרא וריאנטי ברכיב הראשון וקו וריאנטי ברכיב השני. עבור אובייקטים \((A,B)\) נגדיר:
+$$\mathrm{Hom}_{C}(-,-)(A,B)=\mathrm{Hom}_{C}(A,B)$$
+עבור מורפיזם \(\left( f:A'\to A,g:B\to B' \right)\):
+$$\mathrm{Hom}_{C}(f,g):\mathrm{Hom}_{C}(A,B)\to\mathrm{Hom}_{C}(A^{\prime},B^{\prime}),\quad h\mapsto g\circ h\circ f$$
+
+\end{definition}
+\begin{remark}
+דרך אחרת לחשוב על זה זה להגדיר לכל \(u:A'\to A\) ולכל \(B \in \mathcal{C}\) נקבל:
+$$u^{*}:{\mathrm{Hom}}_{\mathcal{C} }(A,B)\to{\mathrm{Hom}}_{\mathcal{C} }\left( A^{\prime},B \right),\quad h\mapsto h\circ u$$
+ולכל \(v:B\to B'\) ולכל \(A \in \mathcal{C}\) נקבל:
+$$v_{*}:\mathrm{Hom}_{\mathcal{C} }(A,B)\to\mathrm{Hom}_{\mathcal{C} }\left( A,B^{\prime} \right),\quad h\mapsto v\circ h$$
+וכעת:
+$$\mathrm{Hom}_{\mathcal{C} }(f,g)=g_{*}\circ f^{*}:h\mapsto g\circ h\circ f$$
+
+\end{remark}
 \begin{definition}[צמוד]
 פונקטור \(F: \mathcal{C} \to \mathcal{D}\) נקרא צמדו שמאלי לפונקטור \(G: \mathcal{D} \to \mathcal{C}\) (מסומן \(F \dashv G\)) אם לכל אובייקט \(A \in \mathrm{Ob}(\mathcal{C})\) ולכל אובייקט \(B \in \mathrm{Ob}(\mathcal{D})\) קיים איזומורפיזם טבעי:
 $$\mathrm{Hom}_{\mathcal{D} }(F(A),B)\cong  \mathrm{Hom}_{\mathcal{C} }(A,G(B))$$
@@ -789,12 +1015,422 @@ $$G(\varepsilon_{B})\circ\eta_{G(B)}=\mathrm{id}_{G(B)}$$
   \end{enumerate}
 \end{proof}
 \includegraphics[width=0.8\textwidth]{diagrams/svg_4.svg}
+\begin{proposition}
+כמו שהאיזומורפיזם \(\Phi\) קובע את היחידה והקו יחידה ניתן גם לקבל את האיזומורפיזם \(\Phi\) ע"י היחידה והקו יחידה. באופן הבא:
+\begin{gather*}{{\forall W\in \mathcal{D} \,\;\;\forall Y\in \mathcal{C} \,\;\;\forall u:L W\rightarrow Y\quad\Phi_{Y}^{W}(u)=R u\circ\eta_{W}}}\\ {{\forall W\in \mathcal{D} \,\;\;\forall Y\in \mathcal{C} \,\;\;\forall v:W\rightarrow R Y\quad\left(\Phi_{Y}^{W}\right)^{-1}(v)=\epsilon_{Y}\circ L v}}\end{gather*}
+
+\end{proposition}
+\begin{proof}
+נראה עבור הזהות הראשונה, עבור הזהות השנייה הרעיון זהה. נגדיר \(u:LW\to Y\). יהי \(W \in \mathcal{D}\). אנו יודעים כי:
+$$\Phi_{Y}^{W}(u)\in \mathrm{Hom}(W,RY)$$
+ולכן ניתן לראות כי \(\Phi^{W}_{Y}(u)(W)=RY\). ניתן גם לעבור דרך היחידה. אנו יודעים כי אם נפעיל את \(\eta_{W}=\Phi_{W}^{LW}\left( \mathrm{Id_{L(W)}} \right)\in\mathrm{Hom}(W,RL(W))\) נקבל:
+$$\eta_{W}(W)=RL(W)$$
+וכעת אם נפעיל את \(Ru\) נקבל את \(R(Y)\) ולכן לכל \(W\) נקבל:
+$$Ru\circ \eta_{W}(W)=RY$$
+כלומר סה"כ נקבל:
+$$\Phi_{Y}^{W}(u)=Ru\circ  \eta_{W}$$
+
+\end{proof}
+\begin{remark}
+דרך לזכור - \(u \in \mathrm{Hom}_{\mathcal{D}}(LW,Y)\) נקבל \(\Phi_{Y}^{W}(u)\in \mathrm{Hom}_{\mathcal{C}}(W,RY)\) ולכן אם נתחיל אם האובייקט \(W\) ניתן מצד אחד להפעיל את \(\Phi_{Y}^{W}(u)\) כדי לקבל את \(RY\) או מצד שני להעפיל את היחידה על \(W\) ולקבל \(RLW\) ואז להפעיל את \(Ru\) כדי לקבל \(RY\). באופן דומה עבור הגרסה השנייה. נזכור \(v \in \mathrm{Hom}_{\mathcal{C}}(W,RY)\) ולכן \(\left( \Phi^{W}_{Y} \right)^{-1}(v)\in\mathrm{Hom}_{\mathcal{D}}(LW,Y)\) ולכן נתחיל עם \(LW\). מצד אחד נקבל \(Y\) ומצד שני על ידי הפעלה של \(LV\) לקבלת \(LRY\) ואז הפעלה של \(\varepsilon_{Y}\) נקבל את \(Y\) שוב.
+
+\end{remark}
+\section{שאלות}
+
+
+    const tsvFileName = 'Category_3.tsv';
+
+    let cards = [];
+    let quizOrder = [];
+    let currentIndex = 0;
+
+    // 1) Fetch and parse TSV
+fetch(tsvFileName)
+  .then(r => {
+    if (!r.ok) throw new Error('Failed to load ' + tsvFileName);
+    return r.text();
+  })
+  .then(text => {
+    cards = parseTSV(text);
+    renderList(cards);
+
+    // ⬇ After you’ve rendered the full Q&A list, re-typeset MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise()
+        .catch(err => console.error('MathJax typeset failed: ' + err.message));
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    //document.body.innerHTML =  '<p style="color:red">Error loading questions: '+err.message+'</p>';
+  });
+
+    // 2) TSV → [{front,back,tags},…]
+    function parseTSV(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        // "" inside quoted field -> literal "
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        // closing quote
+        inQuotes = false;
+      } else {
+        field += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;                // opening quote
+      } else if (ch === '\t') {
+        row.push(field); field = '';    // field separator
+      } else if (ch === '\r') {
+        // ignore; handle \n as newline
+      } else if (ch === '\n') {
+        row.push(field); rows.push(row);
+        row = []; field = '';           // record separator
+      } else {
+        field += ch;
+      }
+    }
+  }
+  // flush last field/row if file didn't end with newline
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
+
+  // map to objects (Front, Back, Tags)
+  return rows.map(cols => ({
+    front: cols[0] || '',
+    back:  cols[1] || '',
+    tags:  cols[2] || ''
+  }));
+}
+// 3) Render full Q&A list + “Start Quiz” button
+function renderList(cards) {
+  const listDiv = document.getElementById('qa-list');
+  const container = listDiv.querySelector('.cards');
+  container.innerHTML = '';
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const q = document.createElement('div');
+    q.className = 'question';
+    q.textContent = c.front;   // <- no replace, real \n already in the string
+
+    const a = document.createElement('div');
+    a.className = 'answer';
+    a.textContent = c.back;    // <- no replace
+
+    card.appendChild(q);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
+
+  // Re-typeset MathJax for the newly added nodes
+  if (window.MathJax) {
+    MathJax.typesetPromise([container]).catch(err => console.error(err));
+  }
+}
+  \chapter{הלמה של יונדה}
+
+\section{ייצוג וקו יצוג}
+
+\begin{definition}[פוקטור הום הקו וריאנטי]
+יהי \(A \in \mathcal{C}\). אזי ניתן להגדיר את הפונקטור הקו וריאנטי על ידי:
+$$h_{A}=\operatorname{Hom}(A,-)\colon{\mathcal{C}}\to\mathsf{Sets}$$
+כך שעל אובייקט \(X\) יחזיר את קבוצת המורפיזמים מ-\(A\) ל-\(X\):
+$$h_{A}(X)=\mathrm{Hom}_{\mathcal{C} }(A,X)$$
+ועל מורפיזם \(f:X\to Y\in \mathrm{Hom}_{\mathcal{C}}(X,Y)\) יחזיר לנו פונקציה:
+$$h_{A}(f):\mathrm{Hom}_{\mathcal{C} }(A,X)\to \mathrm{Hom}_{\mathcal{C} }(A,Y)$$
+כאשר עבור אובייקטים יחזיר לנו אובייקט אחר(קבוצה של מורפיזמים) ועבור מורפיזם אחר יחזיר את ההרכבה:
+$$h_{A}(f)(g)=f\circ g$$
+
+\end{definition}
+\begin{proposition}
+הפונקטור \(h_{A}=\mathrm{Hom}_{\mathcal{C}}(A,-)\) אכן פונקטור.
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item מעביר יחידה - לכל אובייקט \(X\) נדרש להראות כי \(h_{A}(\mathrm{id}_{X})=\mathrm{id}_{\mathrm{Hom}_{C}}(A,X)\). נקבל לכל מורפיזם \(g:A\to X\) כי מתקיים: 
+$$h_{A}(\mathrm{id}_{X})(g)=\mathrm{id}_{X}\circ g=g$$
+וכיוון שהפונקציה מקבלת את \(g\) ומחזירה \(g\) לכל מורפיזם, נקבל כי זאת הזהות.
+
+
+    \item מכבדת הרכבה - נניח \(f:X\to Y\) ו-\(k:Y\to Z\). נרצה להראות כי \(h_{A}(k\circ f)=h_{A}(k)\circ h_{A}(f)\). יהי \(g:A\to X\). עבור אגף שמאל נקבל: 
+$$h_{A}\left( k\circ f \right)(g)=\left( k\circ f \right)\circ g=k\circ \left( f\circ  g \right)$$
+כאשר עבור אגף ימין נקבל:
+$$h_{A}(f)(g)=f\circ g\implies h_{A}(k)\circ h_{A}(f)(g)=h_{A}(k)\left( f\circ g \right)=k\circ \left( f\circ g \right)$$
+ושני הביטיים שווים.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{definition}[פונקטור הום קונטרה וריאנטי]
+יהי \(B \in \mathcal{C}\). אזי הפונקטור Hom הקונטרא וריאנטי(לעיתים נקרא presheaf) הוא פונקטור שהופך את הכיוונים של מורפיזמים:
+$$h^{B}=\mathrm{Hom}(-,B)\colon{\mathcal C}^{\mathrm{op}}\to\mathrm{Sets}$$
+עבור אובייקט \(X \in \mathrm{Ob}\left( \mathcal{C} \right)\) מחזיר את קבוצת המורפיזמים מ-\(X\) ל-\(B\):
+$${h^{B}}(X)=\mathrm{Hom}_{\mathcal{C}}(X,B)$$
+על מורפיזם \(f\in \mathrm{Hom}_{\mathcal{C}}(X,Y)\) הפונקטור לוקח אותו לפונקציה בכיוון ההפוך(כך שהפונקטור המתאים יהיה \(f^{\text{op}}\in \mathrm{Hom}_{\mathcal{C}}(Y,X)\)):
+$${h^{B}}(f):{\mathrm{Hom}}_{C}(Y,B)\to{\mathrm{Hom}}_{C}(X,B)$$
+כך שעבור מורפיזם \(g:Y\to B\) נקבל:
+$$h^{B}(f)(g)=g\circ f$$
+
+\end{definition}
+\begin{definition}[פונקטור מיוצג]
+כל פונקטור אשר קיים איזומומרפיזם טבעי ל-\(h_{A}\) נקרא מיוצג על ידי האובייקט \(A\).
+
+\end{definition}
+\begin{definition}[פונקטור קו מיוצג]
+כל פונקטור אשר קיים איזומורפיזם טבעי ל-\(h^{A}\) נקרא קו מיוצג על ידי אובייקט \(A\).
+
+\end{definition}
 \begin{example}
-אם \(F:\mathcal{C}\to \mathcal{D}\) פונקטור מלא ונאמן, וצמוד לאיזשהו \(G:\mathcal{D}\to \mathcal{C}\), אזי קיים קו יחידה:
-$$\varepsilon:F\circ  G\to\mathrm{Id}_{\mathcal{C} }$$
-כאשר נזכור כי זהו איזומורפיזם טבעי. לכן כל הרכיבים שלו איזומורפיזמים(מורפיזמים הפיכים). בפרט \(\varepsilon_{B}\) איזומורפיזם. לכן מקיים:
-$$\left( F\circ G(B) \right)\xrightarrow{\varepsilon_{B}} B$$
-באופן איזומורפי ולכן \(F(G(B))\cong B\) ומהותית על ולכן \(\mathcal{C}\) ו-\(\mathcal{D}\) שקולים.
+נסתכל על הפנקטור הקונטרה וריאנטי \(P:\mathsf{Sets}^{\mathrm{op}}\to \mathsf{Sets}\) כך שעל אובייקטים פועל על ידי קבוצת החזקה ועל מורפיזמים שולח את \(f:X\to Y\) ל:
+$$P(f):{\mathcal{P}}(Y)\to{\mathcal{P}}(X),\quad S\mapsto f^{-1}(S)$$
+נטען כי זה פונקטור מיוצג, כלומר קיים \(A\) ואיזומורפיזם טבעי \(\mathcal{P}(-)\cong \mathrm{Hom}(-,A)\). נבחר את \(A=\{ 0,1 \}\). נגדיר את האיזומורפיזם:
+$$\Phi_{X}\colon\operatorname{Hom}(X,A)\longrightarrow{\mathcal{P}}(X)\qquad \Phi_{X}(f)=f^{-1}(\{1\})$$
+כלומר כל פונקציה \(f:X\to \{ 0,1 \}\) בוחרת תת קבוצה של \(X\). מתת קבוצה \(S\subseteq X\) ניתן לשחזר את \(f\) על ידי:
+$$f=\begin{cases}1 & x \in S \\0 & x \not \in S
+\end{cases}$$
+זה משרה איזומורפיזם טבעי ב-\(X\):
+$${\mathrm{Hom}}(X,A)\cong{\mathcal{P}}(X)$$
+ולכן \(P\) מיוצג על ידי \(\left( \{ 0,1 \},\{ 1 \} \right)\)
 
 \end{example}
+\begin{proposition}
+אם יש שתי יצוגים לאותו פונקטור אז הם איזומורפיים.
+
+\end{proposition}
+\begin{proposition}
+כל פונקטור \(G:\mathcal{C}\to \mathsf{Sets}\) עם צמוד שמאלי הוא מיוצג
+
+\end{proposition}
+\begin{proof}
+תהי \(G:\mathcal{C}\to \mathrm{Sets}\) פונקטור עם צמוד שמאלי \(F\). 
+
+\end{proof}
+\begin{definition}[פונקטור ההעתקות הטבעיות]
+\end{definition}
+\section{הלמה של יונדה}
+
+\begin{reminder}
+הסימון \(\mathsf{Set}^{\mathcal{C}}\) מייצג את הקטגוריות הפונקטורים מ-\(\mathcal{C}\) ל-\(\mathsf{Set}\).
+
+\end{reminder}
+\begin{definition}[פונקטור ההעתקות הטבעיות]
+$$\mathrm{{Nat}}(h_{A},F):=\mathrm{{Hom}}(\mathrm{{Hom}}(A,-),F(-))$$
+כאשר זהו פונקטור מ-\(\mathcal{C}\times \mathsf{Sets}^{\mathcal{C}}\to\mathsf{Sets}\). 
+
+\end{definition}
+\begin{proposition}[הלמה של יונדה]
+יהי \(F\) פונקטור מקטוריה קטנה מקומית \(\mathcal{C}\) ל-\(\mathsf{Sets}\). אזי קיים האיזומורפיזם הטבעי:
+$$\mathrm{Nat}(h_{A},F)\cong F(A)$$
+
+\end{proposition}
+אזי לכל אובייקט \(A \in \mathrm{Ob}\left( \mathcal{C} \right)\) ההעקתקות הטבעיות  בהתאמה חח"ע ועל עם האיברים של \(F(A)\). 
+
+\begin{enumerate}
+  \item נגדיר האיזומורפיזם נתון על ידי: 
+$$\Phi:\mathrm{Nat}(h_{A},F)\to F(A)\qquad \Phi\left( \eta \right)=\eta_{A}\left( \mathrm{id}_{A} \right)$$
+
+
+  \item כדי להוכיח שזה איזומורפיזם נבנה העתקה הופכית. לכל \(x \in F(A)\) נגדיר העתקה טבעית \(\eta^{x}:h_{A}\Rightarrow F\) על ידי הרכיבים: 
+$$\forall C\in{\mathcal{C}},\quad\eta_{C}^{x}:{\mathrm{Hom}}(A,C)\to F(C),\qquad\eta_{C}^{x}(f)=F(f)(x)$$
+
+
+  \item נראה כי העתקה זו היא העתקה טבעית. לכל \(g:C\to D\) ולכל \(f:A\to C\) נקבל: 
+$$\bigl(F(g)\circ\eta_{C}^{x}\bigr)(f)=F(g)\bigl(\eta_{C}^{x}(f)\bigr)=F(g)\bigl(F(f)(x)\bigr)=F(g\circ f)(x)$$
+וכן:
+$$\bigl(\eta_{D}^{x}\circ h^{A}(g)\bigr)(f)=\eta_{D}^{x}\bigl(g\circ f\bigr)=F(g\circ f)(x)$$
+לכן \(F(g)\circ \eta^x_C=\eta^x_D\circ h^A(g)\) וההעתקה טבעית. ונקבל פונקציה:
+$$\Psi:F(A)\rightarrow\mathrm{{Nat}}(h^{A},F),\qquad\Psi(x)=\eta^{x}$$
+
+
+  \item נראה כי \(\Psi\) ו-\(\Psi\) הופכיים. לכל \(x \in F(A)\) מתקיים: 
+$$\Phi{\bigl(}\Psi(x){\bigr)}=\Phi{\bigl(}\eta^{x}{\bigr)}=\eta_{A}^{x}{\bigl(}{\mathrm{id}}_{A}{\bigr)}=F(\mathrm{id}_{A})(x)=x$$
+וכן לכל \(\eta \in \mathrm{Nat}(h^{A},F)\) ולכל \(C\) עם \(f:A\to C\) נקבל:
+$$F(f){\big(}\eta_{A}(\mathrm{id}_{A}){\big)}=\eta_{C}{\big(}h^{A}(f)(\mathrm{id}_{A}){\big)}=\eta_{C}(f)$$
+ולכן:
+$$\eta_C(f)=F(f)\big(\eta_A(\mathrm{id}_A)\big)=\eta^{\Phi(\eta)}_C(f)\implies\eta=\eta^{\Phi(\eta)}$$
+
+
+\end{enumerate}
+ראשית נראה כי חח"על. נניח כי \(\eta,\theta:h_{A}\to F\) כך ש-\(\Phi\left( \eta \right)=\Phi\left( \theta \right)\). זה אומר כי:
+$$\eta_{A}\left( \mathrm{id}_{A} \right)=\theta_{A}\left( \mathrm{id}_{A} \right)$$
+
+$$\begin{CD} h_A(A) @>{\eta_A}>> F(A) \\ @V{h_A(g)}VV @VV{F(g)}V \\ h_A(X) @>>{\eta_X}> F(X) \end{CD} $$
+
+\begin{proposition}[הלמה של יונדה - גרסה קונטרא וריאנטית]
+יהי \(\mathcal{C}\) קטגוריה קטנה מקומית. נסתכל על הקו יצוג \(h^{A}:=\mathrm{Hom}_{C}(-,A):{\mathcal C}^{\mathrm{op}}\to\mathbf{Set}\). יהי \(F: \mathcal{C}^{\mathrm{op}} \to \mathbf{Set}\) פונקטור. אזי יש איזומורפיזם טבעי:
+$$\mathrm{Nat}(h^{A},F)\cong F(A)$$
+
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}
+    \item תהי \(\alpha:\mathrm{Hom}(-,X)\Rightarrow F\) העתקה טבעית. נגדיר: 
+$$\Phi(\alpha)\;:=\;\alpha_{X}(\mathrm{id}_{X})\;\in\;F(X)$$
+
+
+    \item בהנתן \(x \in F(X)\) נגדיר את ההעתקה \(\alpha^{x}:\mathrm{Hom}(-,X)\Rightarrow F\) על ידי: 
+$$\alpha_{W}^{x}:\mathrm{Hom}(W,X)\to F(W),\,\,\,\alpha_{W}^{x}(h)\,:=\,F(h)(x)$$
+ונראה שזה טבעי. אם נחשב על רכיב \(g:W\to X\) נקבל:
+$$\alpha_{Z}^{x}(g\circ f)\:=\:F(g\circ f)(x)\:=\:F(f)\bigl(F(g)(x)\bigr)\:=\:F(f)\bigl(\alpha_{W}^{x}(g)\bigr)$$
+ולכן טבעי.
+
+
+    \item נראה כי \(\Phi\) ו-\(\Psi\) המוגדר על ידי \(\Psi(x)=\alpha^{x}\) הופכיים אחד של השני. ראשית נשים לב כי: 
+$$\Phi(\alpha^{x})\;=\;\alpha_{X}^{x}(\mathrm{id}_{X})\;=\;F(\mathrm{id}_{X})(x)\;=\;x$$
+ולכן \(\Phi \circ \Psi=\mathrm{Id}_{F(X)}\). עבור הכיוון השני נתחיל מ-\(\alpha \in \mathrm{Nat}\left( \mathrm{Hom}(-,X),F \right)\) ונגדיר \(x:= \Phi\left( \alpha \right)=\alpha_{X}\left( \mathrm{Id}_{X} \right)\). נדרש להראות ש-\(\alpha=\alpha_{X}\) לכל \(W\) ו-\(h:W\to X\). נשתמש בטבעיות של \(\alpha\) עבור \(h:W\to X\). מהטבעיות של \(\alpha\) עם \(h\) נקבל:
+$$\alpha_{W}(h)\:=\:F(h)\big(\alpha_{X}(\mathrm{id}_{X})\big)\:=\:F(h)(x)\:=\:\alpha_{W}^{x}(h)$$
+ולכן \(\alpha=\alpha^{x}\) וההעתקה הפיכה.
+
+
+  \end{enumerate}
+\end{proof}
+\begin{proposition}
+אם \(h_{A}\cong h_{B}\) כפונקטורים \(\mathcal{C}^{\text{op}}\to \mathsf{Sets}\) אזי \(A\cong B\).
+
+\end{proposition}
+\begin{proof}
+אם \(h_{A}\cong h_{B}\) אזי קיים איזומורפיזם טבעי \(\eta:h_{A}\Rightarrow h_{B}\). אם נפעיל את הלמה של יונדה עם \(F=h_{B}\) ו-\(A\) בתור האובייקט המיוצג נקבל:
+$$\mathrm{Nat}(h_{A},h_{B})\cong h_{B}(A)=\mathrm{Hom}_{\mathcal{C} }(A,B)$$
+האיזומורפיזם הטבעי \(\eta\) מתאים לאיזשהו \(f:A\to B\) ובאופן דומה האיזומורפיזם ההופכי \(\eta ^{-1}\) מתאים ל-\(g:B\to A\). הטבעיות מבטיחה \(g \circ f=\mathrm{Id}_{A}\) ו-\(f \circ g=\mathrm{Id}_{B}\). ולכן \(A\cong B\).
+
+\end{proof}
+\section{שיכון יונדה}
+
+\begin{definition}[שיכון יונדה]
+יהי \(\mathcal{C}\) קטגוריה קטנה מקומית. שיכון יונדה הקו וריאנטי ומגדר על ידי:
+$$y:C\longrightarrow\left[ \mathcal{C} ^{\mathrm{op}},\mathbf{Set} \right]\qquad y(A):=h^{A}:=\operatorname{Hom}_{\mathcal{C} }(-,A)$$
+כאשר שיכון יונדה הקונטרא וריאטנטי מוגדר על ידי:
+$$y:{\mathcal{C}}^{\mathrm{op}}\longrightarrow\left[ {\mathcal{C}},\mathbf{Set} \right]\qquad y(A):=h_{A}:=\operatorname{Hom}_{C}(A,-)$$
+
+\end{definition}
+\begin{proposition}
+שיכון יונדה הוא שיכון, כלומר נאמן ומלא. 
+
+\end{proposition}
+\begin{proof}
+נשים לב כי מהלמה של יונדה
+$$\forall A,B\in{\mathcal{C}},\quad\mathrm{{Nat}}(h^{A},h^{B})\cong\mathrm{Hom}_{{\mathcal{C}}}(A,B)$$
+באופן טבעי וזה בדיוק הדרישה שיהיה שיכון - נאמן ומלא.
+
+\end{proof}
+\section{שאלות}
+
+
+    const tsvFileName = 'Category_4.tsv';
+
+    let cards = [];
+    let quizOrder = [];
+    let currentIndex = 0;
+
+    // 1) Fetch and parse TSV
+fetch(tsvFileName)
+  .then(r => {
+    if (!r.ok) throw new Error('Failed to load ' + tsvFileName);
+    return r.text();
+  })
+  .then(text => {
+    cards = parseTSV(text);
+    renderList(cards);
+
+    // ⬇ After you’ve rendered the full Q&A list, re-typeset MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise()
+        .catch(err => console.error('MathJax typeset failed: ' + err.message));
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    //document.body.innerHTML =  '<p style="color:red">Error loading questions: '+err.message+'</p>';
+  });
+
+    // 2) TSV → [{front,back,tags},…]
+    function parseTSV(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        // "" inside quoted field -> literal "
+        field += '"';
+        i++;
+      } else if (ch === '"') {
+        // closing quote
+        inQuotes = false;
+      } else {
+        field += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;                // opening quote
+      } else if (ch === '\t') {
+        row.push(field); field = '';    // field separator
+      } else if (ch === '\r') {
+        // ignore; handle \n as newline
+      } else if (ch === '\n') {
+        row.push(field); rows.push(row);
+        row = []; field = '';           // record separator
+      } else {
+        field += ch;
+      }
+    }
+  }
+  // flush last field/row if file didn't end with newline
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
+
+  // map to objects (Front, Back, Tags)
+  return rows.map(cols => ({
+    front: cols[0] || '',
+    back:  cols[1] || '',
+    tags:  cols[2] || ''
+  }));
+}
+// 3) Render full Q&A list + “Start Quiz” button
+function renderList(cards) {
+  const listDiv = document.getElementById('qa-list');
+  const container = listDiv.querySelector('.cards');
+  container.innerHTML = '';
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const q = document.createElement('div');
+    q.className = 'question';
+    q.textContent = c.front;   // <- no replace, real \n already in the string
+
+    const a = document.createElement('div');
+    a.className = 'answer';
+    a.textContent = c.back;    // <- no replace
+
+    card.appendChild(q);
+    card.appendChild(a);
+    container.appendChild(card);
+  });
+
+  // Re-typeset MathJax for the newly added nodes
+  if (window.MathJax) {
+    MathJax.typesetPromise([container]).catch(err => console.error(err));
+  }
+}
 \end{document}
